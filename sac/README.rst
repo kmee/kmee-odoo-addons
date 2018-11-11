@@ -43,10 +43,9 @@ To use this module, you need to:
 Known issues / Roadmap
 ======================
 
-* Default Kanban stages
-* Sequence
-* Default email templates
-* Security and user permission
+* Translate
+* ZIP search
+* Improve readme with photos
 
 Bug Tracker
 ===========
