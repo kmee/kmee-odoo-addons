@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+    <record id="sac_reason_elogio" model="sac.reason">
+        <field name="name">Elogio</field>
+    </record>
+
+    <record id="sac_reason_reclamacao" model="sac.reason">
+        <field name="name">Reclamação</field>
+    </record>
+
+    <record id="sac_reason_sugestao" model="sac.reason">
+        <field name="name">Sugestao</field>
+    </record>
+
+    <record id="sac_reason_outros" model="sac.reason">
+        <field name="name">Outros</field>
+    </record>
+
+</odoo>

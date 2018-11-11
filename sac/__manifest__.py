@@ -24,6 +24,7 @@
         'views/sac.xml',
         'views/sac_type.xml',
         'views/sac_reason.xml',
+        'data/sac_reason.xml',
         # 'security/sac_type.xml',
         # 'security/sac_reason.xml',
         # 'security/sac.xml',
