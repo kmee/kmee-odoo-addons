@@ -35,6 +35,12 @@ class Sac(models.Model):
         readonly=True,
         default=True,
     )
+    company_id = fields.Many2one(
+        comodel_name='res.company',
+        string='Company',
+        index=True,
+        default=lambda self: self.env.user.company_id.id
+    )
     name = fields.Char(
         string='Order Reference',
         required=True,
@@ -162,7 +168,7 @@ class Sac(models.Model):
         ],
         track_visibility='onchange',
     )
-    trackinig_code = fields.Char(
+    tracking_code = fields.Char(
         string='Tracking Code',
         track_visibility='onchange',
     )
