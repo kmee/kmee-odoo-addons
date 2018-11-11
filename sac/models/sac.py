@@ -201,6 +201,19 @@ class Sac(models.Model):
         string='Mensagem',
     )
 
+    @api.model
+    def create(self, vals):
+        if vals.get('name', _('New')) == _('New'):
+            if 'company_id' in vals:
+                vals['name'] = self.env['ir.sequence'].with_context(
+                    force_company=vals['company_id']
+                ).next_by_code('sac') or _('New')
+            else:
+                vals['name'] = \
+                    self.env['ir.sequence'].next_by_code('sac') or _('New')
+        result = super(Sac, self).create(vals)
+        return result
+
     @api.multi
     def _track_template(self, tracking):
         res = super(Sac, self)._track_template(tracking)
