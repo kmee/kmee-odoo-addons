@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+        <!-- Email templates -->
+        <record id="mail_template_sac_receive" model="mail.template">
+            <field name="name">[SAC] Recebido</field>
+            <field name="subject">[SAC] ${object.company_id.name} ref ${object.name or 'N/A'}</field>
+            <field name="model_id" ref="sac.model_sac"/>
+            <field name="use_default_to" eval="True"/>
+            <field name="body_html"><![CDATA[
+<p>Olá ${object.customer_name or ''},</p>
+<br />
+<p>Nós recebemos o seu chamado ele esta sendo analisado pelos nossos colaboradores. Entraremos em contato em breve<br/></p>
+<p>Se você tiver alguma dúvida, por favor entre em contato e infome o número deste chamado: ${object.name}</p>
+<br />
+<p>Tudo de bom.</p>]]></field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="mail_template_sac_troca_realizada" model="mail.template">
+            <field name="name">[SAC] Troca enviada</field>
+            <field name="subject">[SAC] ${object.company_id.name} ref ${object.name or 'N/A'}</field>
+            <field name="model_id" ref="sac.model_sac"/>
+            <field name="use_default_to" eval="True"/>
+            <field name="body_html"><![CDATA[
+<p>Olá ${object.customer_name or ''},</p>
+<br />
+<p>A troca do seu produto foi enviada.</p>
+<br/></br>
+<p>Seu código de rastreamento é o : ${object.tracking_code or ''}<br/></p>
+<p>Veja todos os detalhes da postagem no link abaixo inserindo o código acima.
+https://www2.correios.com.br/sistemas/rastreamento/
+<br/>
+<p>Se você ainda tiver alguma dúvida, não exite em entrar em contato.</p>
+<br />
+<p>Muito obrigado.</p>]]></field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="mail_template_sac_complete" model="mail.template">
+            <field name="name"></field>
+            <field name="subject">[SAC] ${object.company_id.name} ref ${object.name or 'N/A'}</field>
+            <field name="model_id" ref="sac.model_sac"/>
+            <field name="use_default_to" eval="True"/>
+            <field name="body_html"><![CDATA[
+<p>Olá ${object.customer_name or ''},</p>
+<br />
+<p>O chamado nº ${object.name} foi considerado concluido.</p>
+<br/>
+<p>Agradeçemos o contato. Sua opinião é muito importante para melhorarmos nossos produtos.<br/></p>
+<br/>
+<p>Se você ainda tiver alguma dúvida, por favor entre em contato.</p>
+<br/>
+<p>Atenciosamente.</p>]]></field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+</odoo>

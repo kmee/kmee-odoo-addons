@@ -16,6 +16,7 @@
         <field name="res_model_id" ref="sac.model_sac"/>
         <field name="sequence">10</field>
         <field name="description">Chamados analisados</field>
+        <field name="mail_template_id" ref="sac.mail_template_sac_receive"/>
     </record>
 
     <record id="sac_kanban_troca" model="base.kanban.stage">
@@ -23,13 +24,31 @@
         <field name="res_model_id" ref="sac.model_sac"/>
         <field name="sequence">50</field>
         <field name="description">Troca realizada</field>
+        <field name="mail_template_id" ref="sac.mail_template_sac_troca_realizada"/>
     </record>
+
+    <!--<record id="sac_kanban_bank" model="base.kanban.stage">-->
+        <!--<field name="name">Depósito bancário realizado</field>-->
+        <!--<field name="res_model_id" ref="sac.model_sac"/>-->
+        <!--<field name="sequence">60</field>-->
+        <!--<field name="description">Deposito bancário realizada</field>-->
+        <!--<field name="mail_template_id" ref="sac.mail_template_sac_bank"/>-->
+    <!--</record>-->
 
     <record id="sac_kanban_solucionado" model="base.kanban.stage">
         <field name="name">Solucionado</field>
         <field name="res_model_id" ref="sac.model_sac"/>
         <field name="sequence">90</field>
+        <field name="fold">True</field>
         <field name="description">Chamados solucionado</field>
+        <field name="mail_template_id" ref="sac.mail_template_sac_complete"/>
     </record>
 
+    <record id="sac_kanban_nao_solucionado" model="base.kanban.stage">
+        <field name="name">Não Solucionado</field>
+        <field name="res_model_id" ref="sac.model_sac"/>
+        <field name="sequence">999</field>
+        <field name="fold">True</field>
+        <field name="description">Chamados não solucionados</field>
+    </record>
 </odoo>
