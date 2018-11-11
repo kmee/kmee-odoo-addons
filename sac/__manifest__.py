@@ -25,6 +25,7 @@
         'views/sac_type.xml',
         'views/sac_reason.xml',
         'data/sac_reason.xml',
+        'data/base_kanban_stage.xml',
         # 'security/sac_type.xml',
         # 'security/sac_reason.xml',
         # 'security/sac.xml',

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="1">
+
+    <record id="sac_kanban_new" model="base.kanban.stage">
+        <field name="name">Novo</field>
+        <field name="res_model_id" ref="sac.model_sac"/>
+        <field name="sequence">1</field>
+        <field name="description">Novos chamados abertos no SAC</field>
+    </record>
+
+    <record id="sac_kanban_analisado" model="base.kanban.stage">
+        <field name="name">Em analise</field>
+        <field name="res_model_id" ref="sac.model_sac"/>
+        <field name="sequence">10</field>
+        <field name="description">Chamados analisados</field>
+    </record>
+
+    <record id="sac_kanban_troca" model="base.kanban.stage">
+        <field name="name">Troca realizada</field>
+        <field name="res_model_id" ref="sac.model_sac"/>
+        <field name="sequence">50</field>
+        <field name="description">Troca realizada</field>
+    </record>
+
+    <record id="sac_kanban_solucionado" model="base.kanban.stage">
+        <field name="name">Solucionado</field>
+        <field name="res_model_id" ref="sac.model_sac"/>
+        <field name="sequence">90</field>
+        <field name="description">Chamados solucionado</field>
+    </record>
+
+</odoo>
