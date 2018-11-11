@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+   <record model="ir.ui.menu" id="sac_base">
+        <field name="name">Sac</field>
+        <field name="sequence" eval="16"/>
+    </record>
+
+    <record model="ir.ui.menu" id="sac_submenu_sac">
+        <field name="name">Sac</field>
+        <field name="parent_id" ref="sac_base"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+    <record model="ir.ui.menu" id="sac_submenu_config">
+        <field name="name">Configurações</field>
+        <field name="parent_id" ref="sac_base"/>
+        <field name="sequence" eval="99"/>
+    </record>
+
+</odoo>

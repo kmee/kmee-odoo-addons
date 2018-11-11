@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="sac_reason_form_view">
+        <field name="name">sac.reason.form (in sac)</field>
+        <field name="model">sac.reason</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_reason_search_view">
+        <field name="name">sac.reason.search (in sac)</field>
+        <field name="model">sac.reason</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_reason_tree_view">
+        <field name="name">sac.reason.tree (in sac)</field>
+        <field name="model">sac.reason</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sac_reason_act_window">
+        <field name="name">Motivo SAC</field>
+        <field name="res_model">sac.reason</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="sac_reason_menu">
+        <field name="name">Motivo</field>
+        <field name="parent_id" ref="sac_submenu_config"/>
+        <field name="action" ref="sac_reason_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</odoo>

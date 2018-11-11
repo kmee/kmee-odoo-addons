@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="sac_form_kanban" model="ir.ui.view">
+        <field name="name">sac.kanban (in sac)</field>
+        <field name="model">sac</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="base_kanban_stage.base_kanban_abstract_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='card_header']">
+                <field name="customer_name" />
+
+            </xpath>
+            <xpath expr="//div[@name='card_body']">
+                <div>
+                    <field name="reason_id" />
+                </div>
+                <div>
+                    <field name="type_id" />
+                </div>
+                <div>
+                    <strong><field name="product_id" /></strong>
+                </div>
+                <field name="create_date_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_form_view">
+        <field name="name">sac.form (in sac)</field>
+        <field name="model">sac</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="stage_id" widget="statusbar" clickable="True"
+                            options="{'fold_field': 'fold'}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_right">
+                        <field name="kanban_status" class="oe_inline" widget="kanban_state_selection"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="kanban_priority" widget="priority" string="Prioridade"/>
+                            <field name="reason_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="user_id" string="Responsável" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="create_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <h2>
+                        <field name="customer_name" placeholder="Nome completo"/>
+                    </h2>
+
+                    <group>
+                        <group string="Contato">
+                                <field name="cnpj_cpf"/>
+                                <field name="phone"/>
+                                <field name="phone2"/>
+                                <field name="email_from"/>
+                                <field name="source_id" string="Origem"/>
+                        </group>
+                        <group string="Informações do produto">
+                            <field name="product_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="qty"/>
+                            <field name="type_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="lot"/>
+                            <field name="due_date"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Endereço">
+                            <field name="zip"/>
+                            <field name="street"/>
+                            <field name="number"/>
+                            <field name="district"/>
+                            <field name="street2"/>
+                            <!--<field name="country_id" options="{'no_open': True, 'no_create': True}"/>-->
+                            <field name="state_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="l10n_br_city_id" options="{'no_open': True, 'no_create': True}"/>
+                        </group>
+                        <group string="Informações do retorno">
+                            <field name="trackinig_code"/>
+                            <field name="send_date"/>
+                            <field name="rating"/>
+                        </group>
+                        <group string="Dados Bancarios">
+                            <field name="bank_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="bank_branch"/>
+                            <field name="bank_type"/>
+                            <field name="bank_account"/>
+                        </group>
+                    </group>
+                    <label for="message" string="Mensagem"/>
+                    <field name="message" nolabel="1"/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_search_view">
+        <field name="name">sac.search (in sac)</field>
+        <field name="model">sac</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="customer_name"/>
+                <field name="cnpj_cpf"/>
+                <field name="email_from"/>
+                <field name="product_id"/>
+                <field name="lot"/>
+                <field name="type_id"/>
+                <field name="reason_id"/>
+                <field name="trackinig_code"/>
+                <field name="rating"/>
+                 <separator />
+                    <filter string="Meus atendimentos"
+                            name="assigned_to_me"
+                            domain="[('user_id','=',uid)]"
+                            help="Leads that are assigned to me"/>
+                    <filter string="Sem responsável" name="unassigned"
+                            domain="[('user_id','=', False)]"
+                            help="Sem usuário responsável"/>
+                    <separator />
+                    <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/>
+                    <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                    <separator />
+                    <group expand="0" string="Group By">
+                        <filter string="Responsável" name="groupby_user" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter name="customer" string="Customer" help="CNPJ/CPF" domain="[]" context="{'group_by':'cnpj_cpf'}"/>
+                        <filter name="lot" string="Lote" help="CNPJ/CPF" domain="[]" context="{'group_by':'lot'}"/>
+                        <!--<filter string="Campanha" name="groupby_campaign"  domain="[]" context="{'group_by':'campaign_id'}"/>-->
+                        <filter string="Origem" name="groupby_source" domain="[]" context="{'group_by':'source_id'}"/>
+                        <!--<filter string="Midia" name="groupby_channel" domain="[]" context="{'group_by':'medium_id'}"/>-->
+                        <filter string="Mês de criação" name="groupby_createmonth" domain="[]" context="{'group_by':'create_date'}"/>
+                    </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_tree_view">
+        <field name="name">sac.tree (in sac)</field>
+        <field name="model">sac</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="customer_name"/>
+                <field name="cnpj_cpf"/>
+                <field name="reason_id"/>
+                <field name="product_id"/>
+                <field name="lot"/>
+                <field name="type_id"/>
+                <field name="stage_id" string="Situação"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sac_act_window">
+        <field name="name">Sac - Serviço de atendimento ao consumidor</field>
+        <field name="res_model">sac</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="sac_menu">
+        <field name="name">Sac</field>
+        <field name="parent_id" ref="sac_submenu_sac"/>
+        <field name="action" ref="sac_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="sac_type_form_view">
+        <field name="name">sac.type.form (in sac)</field>
+        <field name="model">sac.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"></div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_type_search_view">
+        <field name="name">sac.type.search (in sac)</field>
+        <field name="model">sac.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sac_type_tree_view">
+        <field name="name">sac.type.tree (in sac)</field>
+        <field name="model">sac.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="sac_type_act_window">
+        <field name="name">Tipo de reclamação</field>
+        <field name="res_model">sac.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="sac_type_menu">
+        <field name="name">Tipo de reclamação</field>
+        <field name="parent_id" ref="sac_submenu_config"/>
+        <field name="action" ref="sac_type_act_window"/>
+        <field name="sequence" eval="30"/>
+    </record>
+
+</odoo>
