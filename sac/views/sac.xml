@@ -43,9 +43,12 @@
                     <div class="oe_right">
                         <field name="kanban_status" class="oe_inline" widget="kanban_state_selection"/>
                     </div>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
                     <group>
                         <group>
-                            <field name="name"/>
+                            <field name="company_id"  groups="base.group_multi_company" />
                             <field name="kanban_priority" widget="priority" string="Prioridade"/>
                             <field name="reason_id" options="{'no_open': True, 'no_create': True}"/>
                         </group>
@@ -87,7 +90,7 @@
                             <field name="l10n_br_city_id" options="{'no_open': True, 'no_create': True}"/>
                         </group>
                         <group string="Informações do retorno">
-                            <field name="trackinig_code"/>
+                            <field name="tracking_code"/>
                             <field name="send_date"/>
                             <field name="rating"/>
                         </group>
@@ -114,6 +117,7 @@
         <field name="model">sac</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name" string="Código"/>
                 <field name="customer_name"/>
                 <field name="cnpj_cpf"/>
                 <field name="email_from"/>
@@ -121,7 +125,7 @@
                 <field name="lot"/>
                 <field name="type_id"/>
                 <field name="reason_id"/>
-                <field name="trackinig_code"/>
+                <field name="tracking_code"/>
                 <field name="rating"/>
                  <separator />
                     <filter string="Meus atendimentos"
@@ -165,10 +169,32 @@
         </field>
     </record>
 
+    <record id="sac_pivot_view" model="ir.ui.view">
+        <field name="name">sac.pivot</field>
+        <field name="model">sac</field>
+        <field name="arch" type="xml">
+            <pivot string="SAC" display_quantity="true">
+                <field name="product_id" type="row"/>
+                <field name="stage_id" string="Stuação" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="sac_graph_view" model="ir.ui.view">
+        <field name="name">sac.graph</field>
+        <field name="model">sac</field>
+        <field name="arch" type="xml">
+            <graph string="SAC" type="bar">
+                <field name="product_id" type="row"/>
+                <field name="stage_id" string="Stuação" type="col"/>
+            </graph>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id="sac_act_window">
         <field name="name">Sac - Serviço de atendimento ao consumidor</field>
         <field name="res_model">sac</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,tree,graph,pivot,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

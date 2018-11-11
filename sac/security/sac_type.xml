@@ -4,9 +4,9 @@
 
 <odoo noupdate="True">
 
-    <record model="ir.model.access" id="access_sac_reason_read">
+    <record model="ir.model.access" id="access_sac_type_read">
         <field name="name">SAC (somente leitura)</field>
-        <field name="model_id" ref="model_sac_reason"/>
+        <field name="model_id" ref="model_sac_type"/>
         <field name="group_id" ref="sac.GROUP_SAC_READ"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_create" eval="0"/>
@@ -14,9 +14,9 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
-    <record model="ir.model.access" id="access_sac_reason_general">
+    <record model="ir.model.access" id="access_sac_type_general">
         <field name="name">SAC (geral)</field>
-        <field name="model_id" ref="model_sac_reason"/>
+        <field name="model_id" ref="model_sac_type"/>
         <field name="group_id" ref="sac.GROUP_SAC_GENERAL"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_create" eval="1"/>
@@ -24,9 +24,9 @@
         <field name="perm_unlink" eval="0"/>
     </record>
 
-    <record model="ir.model.access" id="access_sac_reason_general">
+    <record model="ir.model.access" id="access_sac_type_general">
         <field name="name">SAC (gerente)</field>
-        <field name="model_id" ref="model_sac_reason"/>
+        <field name="model_id" ref="model_sac_type"/>
         <field name="group_id" ref="sac.GROUP_SAC_MANAGER"/>
         <field name="perm_read" eval="1"/>
         <field name="perm_create" eval="1"/>

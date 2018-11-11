@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo noupdate="True">
+
+    <record id="MODULE_CATEGORY_SAC" model="ir.module.category">
+        <field name="name">SAC</field>
+        <field name="description">Serviço de atendimento ao consumidor</field>
+        <field name="sequence">-100</field>
+    </record>
+
+    <record id="GROUP_SAC_READ" model="res.groups">
+        <field name="name">SAC (somente leitura)</field>
+        <field name="category_id" ref="sac.MODULE_CATEGORY_SAC"/>
+    </record>
+
+    <record id="GROUP_SAC_GENERAL" model="res.groups">
+        <field name="name">SAC (geral)</field>
+        <field name="category_id" ref="sac.MODULE_CATEGORY_SAC"/>
+        <field name="implied_ids" eval="[(4, ref('GROUP_SAC_READ'))]"/>
+    </record>
+
+    <record id="GROUP_SAC_MANAGER" model="res.groups">
+        <field name="name">SAC (gerente)</field>
+        <field name="category_id" ref="sac.MODULE_CATEGORY_SAC"/>
+        <field name="implied_ids" eval="[(4, ref('GROUP_SAC_GENERAL'))]"/>
+    </record>
+
+    <record model="ir.model.access" id="access_sac_read">
+        <field name="name">SAC (somente leitura)</field>
+        <field name="model_id" ref="model_sac"/>
+        <field name="group_id" ref="sac.GROUP_SAC_READ"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record model="ir.model.access" id="access_sac_general">
+        <field name="name">SAC (geral)</field>
+        <field name="model_id" ref="model_sac"/>
+        <field name="group_id" ref="sac.GROUP_SAC_GENERAL"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <record model="ir.model.access" id="access_sac_general">
+        <field name="name">SAC (gerente)</field>
+        <field name="model_id" ref="model_sac"/>
+        <field name="group_id" ref="sac.GROUP_SAC_MANAGER"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+</odoo>

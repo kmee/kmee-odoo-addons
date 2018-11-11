@@ -7,6 +7,7 @@
    <record model="ir.ui.menu" id="sac_base">
         <field name="name">Sac</field>
         <field name="sequence" eval="16"/>
+       <field name="groups_id" eval="[(6,0, [ref('sac.GROUP_SAC_READ')])]"/>
     </record>
 
     <record model="ir.ui.menu" id="sac_submenu_sac">
@@ -19,6 +20,7 @@
         <field name="name">Configurações</field>
         <field name="parent_id" ref="sac_base"/>
         <field name="sequence" eval="99"/>
+       <field name="groups_id" eval="[(6,0, [ref('sac.GROUP_SAC_GENERAL')])]"/>
     </record>
 
 </odoo>
