@@ -18,22 +18,19 @@
                         <span class='oe_kanban_mail_new' title='Mensagens não lidas'><i class='fa fa-comments'/><t t-raw="record.message_needaction_counter.raw_value"/></span>
                 </t>
             </field>
-
             <xpath expr="//div[@name='card_header']">
                 <field name="customer_name" />
-
             </xpath>
             <xpath expr="//div[@name='card_body']">
-                <div>
+                <div><field name="create_date_date"/> 
                     <field name="reason_id" />
-                </div>
-                <div>
-                    <field name="type_id" />
                 </div>
                 <div>
                     <strong><field name="product_id" /></strong>
                 </div>
-                <field name="create_date_date"/>
+                <div>
+                    <field name="type_id" />
+                </div>
             </xpath>
         </field>
     </record>

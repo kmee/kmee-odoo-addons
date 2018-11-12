@@ -36,7 +36,7 @@ class Sac(models.Model):
     def _compute_display_name(self):
         for r in self:
             if r.customer_name:
-                r.display_name = '[%s] %s' % (r.name, r.customer_name)
+                r.display_name = '%s - %s' % (r.name, r.customer_name)
             else:
                 r.display_name = r.name
 
