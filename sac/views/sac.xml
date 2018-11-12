@@ -10,6 +10,15 @@
         <field name="mode">primary</field>
         <field name="inherit_id" ref="base_kanban_stage.base_kanban_abstract_view_kanban"/>
         <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                 <field name="message_needaction_counter"/>
+            </field>
+            <field name="kanban_priority" position="after">
+                 <t t-if="record.message_needaction_counter.raw_value">
+                        <span class='oe_kanban_mail_new' title='Mensagens não lidas'><i class='fa fa-comments'/><t t-raw="record.message_needaction_counter.raw_value"/></span>
+                </t>
+            </field>
+
             <xpath expr="//div[@name='card_header']">
                 <field name="customer_name" />
 
@@ -156,7 +165,7 @@
         <field name="name">sac.tree (in sac)</field>
         <field name="model">sac</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="SAC" decoration-bf="message_needaction==True">
                 <field name="name"/>
                 <field name="customer_name"/>
                 <field name="cnpj_cpf"/>
@@ -165,6 +174,7 @@
                 <field name="lot"/>
                 <field name="type_id"/>
                 <field name="stage_id" string="Situação"/>
+                <field name="message_needaction" invisible="1"/>
             </tree>
         </field>
     </record>

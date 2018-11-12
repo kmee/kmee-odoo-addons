@@ -31,6 +31,21 @@ class Sac(models.Model):
             # TODO: Tratar o fuso horário
             record.create_date_date = record.create_date
 
+    @api.multi
+    @api.depends('name', 'customer_name')
+    def _compute_display_name(self):
+        for r in self:
+            if r.customer_name:
+                r.display_name = '[%s] %s' % (r.name, r.customer_name)
+            else:
+                r.display_name = r.name
+
+    display_name = fields.Char(
+        "Name",
+        compute="_compute_display_name",
+        readonly=True,
+        store=True
+    )
     active = fields.Boolean(
         readonly=True,
         default=True,
