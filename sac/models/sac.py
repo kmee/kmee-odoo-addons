@@ -5,7 +5,11 @@
 from __future__ import (division, print_function, unicode_literals,
                         absolute_import)
 
+import re
+
 from odoo import api, fields, models, _
+from odoo.tools.mail import html2plaintext
+
 
 
 AVAILABLE_RATING = [
@@ -203,14 +207,13 @@ class Sac(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('name', _('New')) == _('New'):
-            if 'company_id' in vals:
-                vals['name'] = self.env['ir.sequence'].with_context(
-                    force_company=vals['company_id']
-                ).next_by_code('sac') or _('New')
-            else:
-                vals['name'] = \
-                    self.env['ir.sequence'].next_by_code('sac') or _('New')
+        if 'company_id' in vals:
+            vals['name'] = self.env['ir.sequence'].with_context(
+                force_company=vals['company_id']
+            ).next_by_code('sac') or _('New')
+        else:
+            vals['name'] = \
+                self.env['ir.sequence'].next_by_code('sac') or _('New')
         result = super(Sac, self).create(vals)
         return result
 
@@ -243,12 +246,33 @@ class Sac(models.Model):
         # found.
         self = self.with_context(default_user_id=False)
 
+        subject = msg_dict.get('subject') or _("Sem assunto")
+
+        desc = 'Assunto do email: \n\n' +\
+               subject + \
+               '\n\n-------------\nCorpo do email:\n\n' +\
+               html2plaintext(
+                   msg_dict.get('body')
+               ) if msg_dict.get('body') else ''
+
+        regex = '(?:"?([^"]*)"?\s)?(?:<?(.+@[^>]+)>?)'
+
+        match = re.search(regex, msg_dict.get('from', ''))
+
+        if match:
+            customer_name = match.group(1)
+            email_from = match.group(2)
+        else:
+            customer_name = subject
+            email_from = msg_dict.get('from')
+
         if custom_values is None:
             custom_values = {}
         defaults = {
-            'customer_name':  msg_dict.get('subject') or _("Sem assunto"),
-            'email_from': msg_dict.get('from'),
+            'customer_name':  customer_name,
+            'email_from': email_from,
             'email_cc': msg_dict.get('cc'),
+            'message': desc,
             # 'partner_id': msg_dict.get('author_id', False),
         }
         # if msg_dict.get('author_id'):
