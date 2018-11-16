@@ -11,11 +11,6 @@
        <field name="web_icon">sac,static/description/icon.png</field>
     </record>
 
-    <record model="ir.ui.menu" id="sac_submenu_sac">
-        <field name="name">Sac</field>
-        <field name="parent_id" ref="sac_base"/>
-        <field name="sequence" eval="16"/>
-    </record>
 
     <record model="ir.ui.menu" id="sac_submenu_config">
         <field name="name">Configurações</field>

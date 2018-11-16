@@ -16,4 +16,11 @@
             </div>
         </field>
     </record>
+
+    <record model="ir.ui.menu" id="sac_product_menu">
+        <field name="name">Produtos</field>
+        <field name="parent_id" ref="sac_submenu_config"/>
+        <field name="action" ref="product.product_template_action"/>
+        <field name="sequence" eval="6"/>
+    </record>
 </odoo>

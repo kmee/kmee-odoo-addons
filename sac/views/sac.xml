@@ -202,18 +202,11 @@
         <field name="context">{}</field>
     </record>
 
-    <record model="ir.ui.menu" id="sac_menu">
+    <record model="ir.ui.menu" id="sac_submenu_sac">
         <field name="name">Sac</field>
-        <field name="parent_id" ref="sac_submenu_sac"/>
+        <field name="parent_id" ref="sac_base"/>
         <field name="action" ref="sac_act_window"/>
         <field name="sequence" eval="16"/>
-    </record>
-
-    <record model="ir.ui.menu" id="sac_product_menu">
-        <field name="name">Produtos</field>
-        <field name="parent_id" ref="sac_submenu_sac"/>
-        <field name="action" ref="product.product_template_action"/>
-        <field name="sequence" eval="26"/>
     </record>
 
 </odoo>
