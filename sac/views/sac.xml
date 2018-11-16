@@ -76,7 +76,7 @@
                                 <field name="phone"/>
                                 <field name="phone2"/>
                                 <field name="email_from"/>
-                                <field name="source_id" string="Origem"/>
+                                <field name="medium_id" string="Origem do contato"/>
                         </group>
                         <group string="Informações do produto">
                             <field name="product_id" options="{'no_open': True, 'no_create': True}"/>
