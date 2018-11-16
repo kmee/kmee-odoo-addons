@@ -204,6 +204,13 @@ class Sac(models.Model):
         store=True,
         index=True,
     )
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Responsável',
+        index=True,
+        track_visibility='onchange',
+        default=lambda self: self.env.user
+    )
 
     @api.model
     def create(self, vals):
