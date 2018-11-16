@@ -10,6 +10,8 @@
         <field name="mode">primary</field>
         <field name="inherit_id" ref="base_kanban_stage.base_kanban_abstract_view_kanban"/>
         <field name="arch" type="xml">
+            <xpath expr="//li/ul[@class='oe_kanban_colorpicker']" position="replace">
+            </xpath>
             <field name="user_id" position="after">
                  <field name="message_needaction_counter"/>
             </field>

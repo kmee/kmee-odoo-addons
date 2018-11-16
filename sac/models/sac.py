@@ -194,6 +194,12 @@ class Sac(models.Model):
     message = fields.Text(
         string='Mensagem',
     )
+    kanban_color = fields.Selection(
+        related='reason_id.kanban_color',
+        readonly=True,
+        store=True,
+        index=True,
+    )
 
     @api.model
     def create(self, vals):
