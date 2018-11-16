@@ -100,12 +100,6 @@
                             <field name="send_date"/>
                             <field name="rating"/>
                         </group>
-                        <group string="Dados Bancarios">
-                            <field name="bank_id" options="{'no_open': True, 'no_create': True}"/>
-                            <field name="bank_branch"/>
-                            <field name="bank_type"/>
-                            <field name="bank_account"/>
-                        </group>
                     </group>
                     <label for="message" string="Mensagem"/>
                     <field name="message" nolabel="1"/>

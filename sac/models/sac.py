@@ -162,27 +162,6 @@ class Sac(models.Model):
         string='Tipo de reclamação',
         track_visibility='onchange',
     )
-    bank_id = fields.Many2one(
-        string='Banco',
-        comodel_name='res.bank',
-        track_visibility='onchange',
-    )
-    bank_branch = fields.Char(
-        string='Ag c/ digito',
-        track_visibility='onchange',
-    )
-    bank_account = fields.Char(
-        string='Conta c/ digito',
-        track_visibility='onchange',
-    )
-    bank_type = fields.Selection(
-        string='Tipo',
-        selection=[
-            ('poupanca', 'Poupança'),
-            ('conta_corrente', 'Conta corrente'),
-        ],
-        track_visibility='onchange',
-    )
     tracking_code = fields.Char(
         string='Tracking Code',
         track_visibility='onchange',
