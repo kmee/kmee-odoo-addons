@@ -243,7 +243,10 @@ class Sac(models.Model):
     @api.multi
     def email_split(self, msg):
         return tools.email_split(
-            (msg.get('to') or '') + ',' + (msg.get('cc') or ''))
+            (msg.get('to') or '') + ',' +
+            (msg.get('cc') or '') + ',' +
+            (msg.get('from') or '')
+        )
 
     @api.model
     def message_new(self, msg_dict, custom_values=None):
