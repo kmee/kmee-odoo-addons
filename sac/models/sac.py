@@ -7,8 +7,9 @@ from __future__ import (division, print_function, unicode_literals,
 
 import re
 
-from odoo import api, fields, models, _
+from odoo import api, fields, models, tools, _
 from odoo.tools.mail import html2plaintext
+from odoo.exceptions import UserError, AccessError
 
 
 
@@ -239,6 +240,11 @@ class Sac(models.Model):
             )
         return res
 
+    @api.multi
+    def email_split(self, msg):
+        return tools.email_split(
+            (msg.get('to') or '') + ',' + (msg.get('cc') or ''))
+
     @api.model
     def message_new(self, msg_dict, custom_values=None):
         """ Overrides mail_thread message_new that is called by the
@@ -288,9 +294,22 @@ class Sac(models.Model):
         # if msg_dict.get('priority') in dict(crm_stage.AVAILABLE_PRIORITIES):
         #     defaults['priority'] = msg_dict.get('priority')
         defaults.update(custom_values)
-        return super(Sac, self).message_new(msg_dict, custom_values=defaults)
+        res_id = super(Sac, self).message_new(msg_dict, custom_values=defaults)
+        sac = self.browse(res_id)
+        email_list = sac.email_split(msg_dict)
+        partner_ids = filter(None, sac._find_partner_from_emails(email_list))
+        sac.message_subscribe(partner_ids)
+        return res_id
 
-    #
+    @api.multi
+    def message_update(self, msg, update_vals=None):
+        """ Override to update the issue according to the email. """
+        email_list = self.email_split(msg)
+        partner_ids = filter(None, self._find_partner_from_emails(email_list))
+        self.message_subscribe(partner_ids)
+        return super(Sac, self).message_update(msg, update_vals=update_vals)
+
+
     # @api.multi
     # def message_update(self, msg_dict, update_vals=None):
     #     """ Overrides mail_thread message_update that is called by
@@ -330,3 +349,19 @@ class Sac(models.Model):
     # '%s <%s>' % (self.partner_name or self.contact_name, email)
     #                 break
     #     return result
+
+    @api.multi
+    def message_get_suggested_recipients(self):
+        recipients = super(Sac, self).message_get_suggested_recipients()
+        try:
+            for record in self:
+                if record.email_from:
+                    record._message_add_suggested_recipient(
+                        recipients,
+                        email=record.email_from,
+                        reason=_('Customer Email')
+                    )
+        except AccessError:
+            pass
+        return recipients
+
