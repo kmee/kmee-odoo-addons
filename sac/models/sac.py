@@ -297,7 +297,8 @@ class Sac(models.Model):
         res_id = super(Sac, self).message_new(msg_dict, custom_values=defaults)
         sac = self.browse(res_id)
         email_list = sac.email_split(msg_dict)
-        partner_ids = filter(None, sac._find_partner_from_emails(email_list))
+        partner_ids = filter(None, sac._find_partner_from_emails(
+            email_list, force_create=True))
         sac.message_subscribe(partner_ids)
         return res_id
 
@@ -305,7 +306,8 @@ class Sac(models.Model):
     def message_update(self, msg, update_vals=None):
         """ Override to update the issue according to the email. """
         email_list = self.email_split(msg)
-        partner_ids = filter(None, self._find_partner_from_emails(email_list))
+        partner_ids = filter(None, self._find_partner_from_emails(
+            email_list, force_create=True))
         self.message_subscribe(partner_ids)
         return super(Sac, self).message_update(msg, update_vals=update_vals)
 
