@@ -19,6 +19,13 @@
         <field name="mail_template_id" ref="sac.mail_template_sac_receive"/>
     </record>
 
+    <record id="sac_kanban_aguardando_envio" model="base.kanban.stage">
+        <field name="name">Arguardando envio</field>
+        <field name="res_model_id" ref="sac.model_sac"/>
+        <field name="sequence">20</field>
+        <field name="description">Aguardando Envio</field>
+    </record>
+
     <record id="sac_kanban_troca" model="base.kanban.stage">
         <field name="name">Troca realizada</field>
         <field name="res_model_id" ref="sac.model_sac"/>
