@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="report_sac_correios" model="ir.actions.report.xml">
+      <field name="name">Declaração de Conteúdo</field>
+      <field name="type">ir.actions.report.xml</field>
+      <field name="model">sac</field>
+      <field name="report_name">sac.sac_declaracao_conteudo</field>
+      <field name="report_type">py3o</field>
+      <field name="py3o_filetype">pdf</field>
+      <field name="module">sac</field>
+      <field name="py3o_template_fallback">reports/sac_correios.odt</field>
+    </record>
+
+    <record id="report_sac_correios_print_action" model="ir.values">
+      <field eval="'action'" name="key" />
+      <field eval="'client_print_multi'" name="key2" />
+      <field name="model">sac</field>
+      <field name="name">Declaração de Conteúdo</field>
+      <field eval="'ir.actions.report.xml,'+str(report_sac_correios)" name="value" />
+    </record>
+
+</odoo>

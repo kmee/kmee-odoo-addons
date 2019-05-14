@@ -17,21 +17,27 @@
         'document',
         'l10n_br_zip',
         'base_kanban_stage',
+        'report_py3o',
     ],
     'data': [
         'security/sac.xml',
         'security/sac_type.xml',
         'security/sac_reason.xml',
+        'views/sac_menu.xml',
         'views/base_kanban_stage.xml',
         'views/product_template.xml',
-        'views/sac_menu.xml',
         'views/sac.xml',
         'views/sac_type.xml',
         'views/sac_reason.xml',
+
+        'wizards/sac_print.xml',
+
         'data/sac_reason.xml',
         'data/mail_template.xml',
         'data/base_kanban_stage.xml',
         'data/ir_sequence_data.xml',
+
+        'reports/sac_correios.xml',
     ],
     'demo': [
         # 'demo/sac_type.xml',

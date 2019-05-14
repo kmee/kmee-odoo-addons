@@ -45,6 +45,12 @@ class Sac(models.Model):
             else:
                 r.display_name = r.name
 
+    @api.multi
+    @api.depends('price', 'qty')
+    def _compute_price_total(self):
+        for record in self:
+            record.price_total = record.price * record.qty
+
     display_name = fields.Char(
         "Name",
         compute="_compute_display_name",
@@ -157,6 +163,14 @@ class Sac(models.Model):
         track_visibility='onchange',
         default=1,
     )
+    price = fields.Float(
+        string='Preço',
+        related='product_id.list_price',
+        readonly=True,
+    )
+    price_total = fields.Float(
+        compute='_compute_price_total',
+    )
     reason_id = fields.Many2one(
         comodel_name='sac.reason',
         string='Motivo',
@@ -211,6 +225,9 @@ class Sac(models.Model):
         index=True,
         track_visibility='onchange',
         default=lambda self: self.env.user
+    )
+    is_printed = fields.Boolean(
+        string='Impresso',
     )
 
     @api.model
