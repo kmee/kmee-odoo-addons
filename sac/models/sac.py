@@ -176,7 +176,7 @@ class Sac(models.Model):
         string='Motivo',
         track_visibility='onchange',
     )
-    type_id = fields.Many2one(
+    type_id = fields.Many2many(
         comodel_name='sac.type',
         string='Tipo de reclamação',
         track_visibility='onchange',
@@ -331,6 +331,17 @@ class Sac(models.Model):
         self.message_subscribe(partner_ids)
         return super(Sac, self).message_update(msg, update_vals=update_vals)
 
+    @api.onchange('zip')
+    def onchange_zip(self):
+        if self.zip:
+
+            zip = self.env['l10n_br.zip'].zip_search_multi(
+                zip_code=self.zip
+            )
+            self.street = zip.street
+            self.district = zip.district
+            self.state_id = zip.state_id
+            self.l10n_br_city_id = zip.l10n_br_city_id
 
     # @api.multi
     # def message_update(self, msg_dict, update_vals=None):

@@ -15,7 +15,7 @@
         'mail',
         'product',
         'document',
-        'l10n_br_zip',
+        'l10n_br_zip_correios',
         'base_kanban_stage',
         'report_py3o',
     ],

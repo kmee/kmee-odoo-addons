@@ -30,9 +30,6 @@
                 <div>
                     <strong><field name="product_id" /></strong>
                 </div>
-                <div>
-                    <field name="type_id" />
-                </div>
             </xpath>
         </field>
     </record>
@@ -81,7 +78,7 @@
                         <group string="Informações do produto">
                             <field name="product_id" options="{'no_open': True, 'no_create': True}"/>
                             <field name="qty"/>
-                            <field name="type_id" options="{'no_open': True, 'no_create': True}"/>
+                            <field name="type_id" widget="many2many_tags" options="{'no_create_edit': True}"/>
                             <field name="lot"/>
                             <field name="due_date"/>
                         </group>
@@ -125,7 +122,7 @@
                 <field name="email_from"/>
                 <field name="product_id"/>
                 <field name="lot"/>
-                <field name="type_id"/>
+                <field name="type_id" filter_domain="[('tag_ids', 'ilike', self)]"/>
                 <field name="reason_id"/>
                 <field name="tracking_code"/>
                 <field name="rating"/>
