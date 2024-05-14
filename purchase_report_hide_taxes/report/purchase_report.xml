@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <template
+        id="purchase_report_hide_taxes"
+        name="purchase_hide_taxes"
+        inherit_id="purchase.report_purchaseorder_document"
+    >
+
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+        </xpath>
+
+        <xpath expr="//td[@name='td_taxes']" position="replace">
+        </xpath>
+
+        <xpath
+            expr="//div[@id='total']/div/table/tr/td[@name='td_taxes_label']"
+            position="replace"
+        >
+        </xpath>
+    </template>
+</odoo>
