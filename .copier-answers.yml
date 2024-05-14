@@ -12,8 +12,8 @@ github_enable_stale_action: true
 github_enforce_dev_status_compatibility: true
 include_wkhtmltopdf: true
 odoo_test_flavor: OCB
-odoo_version: 14.0
-org_name: KMEE, Odoo Community Association (OCA)
+odoo_version: 16.0
+org_name: KMEE
 org_slug: KMEE
 rebel_module_groups: []
 repo_description: Welcome to our repository, dedicated to incubating OCA modules developed
