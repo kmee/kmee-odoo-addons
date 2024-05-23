@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="product_lot_fiscal_comment" model="l10n_br_fiscal.comment">
+        <field name="name">Lote</field>
+        <field name="comment">LOTE: ${ lot }</field>
+        <field name="comment_type">fiscal</field>
+        <field name="object">l10n_br_fiscal.document.line.mixin</field>
+    </record>
+</odoo>
