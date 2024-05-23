@@ -1,5 +1,3 @@
-
-
 [MASTER]
 load-plugins=pylint_odoo
 score=n
@@ -10,7 +8,7 @@ manifest_required_authors=KMEE
 manifest_required_keys=license
 manifest_deprecated_keys=description,active
 license_allowed=LGPL-3
-valid_odoo_versions=14.0
+valid_odoo_versions=15.0
 
 [MESSAGES CONTROL]
 disable=all
