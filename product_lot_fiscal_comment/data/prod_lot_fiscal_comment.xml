@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="product_lot_fiscal_comment" model="l10n_br_fiscal.comment">
         <field name="name">Lote</field>
