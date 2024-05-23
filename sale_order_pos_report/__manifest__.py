@@ -8,7 +8,7 @@
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
-        "sale",
+        "sale_management",
     ],
     "data": [
         "report/report_saleorder_compact.xml",
