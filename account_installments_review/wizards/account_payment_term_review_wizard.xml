@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_payment_term_review_wizard_form_view">
+        <field name="model">account.payment.term.review.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Account Payment Term Review Wizard">
+                <!-- TODO -->
+                <group>
+                    <group>
+                        <field name="account_move_id" />
+                        <field name="payment_mode_id" />
+                    </group>
+                    <group>
+                        <field name="date_reference" />
+                        <field name="invoice_payment_term_id" />
+                    </group>
+                    <field name="line_ids">
+                        <tree editable="bottom">
+                                <field name="date_maturity" />
+                                <field name="amount" />
+                                <field
+                                name="account_move_line_id"
+                                invisible="1"
+                                force_save="1"
+                            />
+                                <field name="currency_id" invisible="1" />
+                                <field
+                                name="account_payment_term_review_id"
+                                invisible="1"
+                            />
+                        </tree>
+                    </field>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="amount_tax" invisible="1" />
+                        <field
+                            name="amount_untaxed"
+                            attrs="{'invisible': [('amount_tax', '=', 0)]}"
+                        />
+                        <field
+                            name="amount_by_group"
+                            widget="tax-group-custom-field"
+                            nolabel="1"
+                            colspan="2"
+                            attrs="{'invisible': [('amount_tax', '=', 0)]}"
+                        />
+                        <field
+                            name="amount_total"
+                            attrs="{'invisible': [('amount_tax', '!=', 0)]}"
+                        />
+                        <field
+                            name="amount_total"
+                            class="oe_subtotal_footer_separator"
+                            attrs="{'invisible': [('amount_tax', '=', 0)]}"
+                        />
+                        <field
+                            name="invoice_payments_widget"
+                            colspan="2"
+                            nolabel="1"
+                            widget="payment"
+                        />
+                        <field
+                            name="amount_residual"
+                            class="oe_subtotal_footer_separator"
+                        />
+                    </group>
+                </group>
+                <footer>
+                    <button name="doit" string="OK" class="btn-primary" type="object" />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        model="ir.actions.act_window"
+        id="account_payment_term_review_wizard_act_window"
+    >
+        <field name="name">Account Payment Term Review Wizard</field> <!-- TODO -->
+        <field name="res_model">account.payment.term.review.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>
