@@ -5,4 +5,4 @@ To configure this module, you need to:
 
 - Go to ...
 
-![alternative description]()../static/description/image.png)
+![alternative description](../static/description/icon.png)
