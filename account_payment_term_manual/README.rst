@@ -73,10 +73,9 @@ To configure this module, you need to:
 
 -  Go to ...
 
-|alternative description|../static/description/image.png)
+|alternative description|
 
-https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/.https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/.https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/|https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ahttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/lhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/thttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/rhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/nhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ahttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/thttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/vhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/dhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/shttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/chttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/rhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/phttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/thttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ohttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/nhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/|https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/mhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ahttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ghttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/:https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/:https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/
-https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/
+.. |alternative description| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual/static/description/icon.png
 
 Usage
 =====
@@ -99,8 +98,6 @@ Known issues / Roadmap
 mostly intended for end-users, and can also help potential new
 contributors discovering new features to implement. ]
 
--  ...
-
 Changelog
 =========
 
@@ -114,18 +111,10 @@ This file may contain ONE level of section titles, underlined with the ~
 break the structure of the README.rst or other documents where this
 fragment is included. ]
 
-11.0.x.y.z (YYYY-MM-DD)
+14.0.1.0.0 (2024-05-26)
 -----------------------
 
--  [BREAKING] Breaking changes come first.
-   (`#70 <https://github.com/OCA/repo/issues/70>`__)
--  [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
--  [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
-
-11.0.x.y.z (YYYY-MM-DD)
------------------------
-
--  ...
+-  Initial commit
 
 Bug Tracker
 ===========
