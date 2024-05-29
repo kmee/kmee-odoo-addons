@@ -4,7 +4,8 @@
 {
     "name": "Sale Payment Term Manual",
     "summary": """
-        Review the payment term installments before confirm the sale order and copy the due date to the invoice.""",
+        Review the payment term installments before confirm the sale order and copy
+        the due date to the invoice.""",
     "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
