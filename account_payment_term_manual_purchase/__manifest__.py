@@ -2,9 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Sale Payment Term Manual",
+    "name": "Purchase Payment Term Manual",
     "summary": """
-        Review the payment term installments before confirm the sale order and copy the due date to the invoice.""",
+        Review the payment term installments before confirm the purchase order and copy
+        the due date to the invoice.""",
     "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
