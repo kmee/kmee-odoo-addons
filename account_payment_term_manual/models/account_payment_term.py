@@ -11,5 +11,8 @@ class AccountPaymentTerm(models.Model):
         manual_payment_term_ids = self.env.context.get("manual_payment_term_ids")
         if manual_payment_term_ids:
             sign = -1 if value < 0 else 1
-            return [(line[0], sign * line[1]) for line in manual_payment_term_ids]
+            return [
+                (line.date_maturity, sign * line.amount)
+                for line in manual_payment_term_ids
+            ]
         return super().compute(value, date_ref=date_ref, currency=currency)

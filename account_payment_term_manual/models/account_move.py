@@ -22,22 +22,27 @@ class AccountMove(models.Model):
         "invoice_vendor_bill_id",
     )
     def _onchange_recompute_dynamic_lines(self):
-        super(AccountMove, self)._onchange_recompute_dynamic_lines()
-
         if self.manual_payment_term_ids:
             self.manual_payment_term_ids.unlink()
-        manual_payment_term_lines = self.invoice_payment_term_id.compute(
-            self.amount_total, self.invoice_date_due, self.currency_id
-        )
-        for line in manual_payment_term_lines:
-            if line[1]:
-                self.manual_payment_term_ids.create(
-                    {
-                        "account_move_id": self.id,
-                        "date_maturity": line[0],
-                        "amount": line[1],
-                    }
-                )
+            self.manual_payment_term_ids = False
+
+        super(AccountMove, self)._onchange_recompute_dynamic_lines()
+
+        if self.invoice_payment_term_id:
+            manual_payment_term_lines = self.invoice_payment_term_id.compute(
+                self.amount_total, self.invoice_date, self.currency_id
+            )
+            for line in manual_payment_term_lines:
+                if line[1] > 0:
+                    self.manual_payment_term_ids += self.env[
+                        "account.move.payment.term"
+                    ].create(
+                        {
+                            "account_move_id": self.id,
+                            "date_maturity": line[0],
+                            "amount": abs(line[1]),
+                        }
+                    )
 
     def _recompute_payment_terms_lines(self):
         return super(
