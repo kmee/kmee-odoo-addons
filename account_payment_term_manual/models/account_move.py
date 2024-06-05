@@ -25,6 +25,8 @@ class AccountMove(models.Model):
         if self.manual_payment_term_ids:
             self.manual_payment_term_ids = False
 
+        super(AccountMove, self)._onchange_recompute_dynamic_lines()
+
         if self.invoice_payment_term_id:
             manual_payment_term_lines = self.invoice_payment_term_id.compute(
                 self.amount_total, self.invoice_date, self.currency_id
@@ -40,8 +42,6 @@ class AccountMove(models.Model):
                             "amount": abs(line[1]),
                         }
                     )
-
-        super(AccountMove, self)._onchange_recompute_dynamic_lines()
 
     def _recompute_payment_terms_lines(self):
         return super(
