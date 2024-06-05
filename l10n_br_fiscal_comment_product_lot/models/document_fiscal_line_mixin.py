@@ -9,4 +9,13 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
         res["lot"] = ", ".join(
             self.account_line_ids.mapped("prod_lot_ids").mapped("name")
         )
+        res["lot_product_uom"] = ", ".join(
+            self.account_line_ids.mapped("prod_lot_ids")
+            .mapped("product_uom_id")
+            .mapped("code")
+        )
+        res["lot_qty"] = ", ".join(
+            map(str, self.account_line_ids.mapped("prod_lot_ids").mapped("product_qty"))
+        )
+
         return res
