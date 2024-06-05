@@ -12,6 +12,7 @@ class AccountMove(models.Model):
         "account.move.payment.term",
         "account_move_id",
         string="Manual Payment Terms",
+        copy=False,
     )
 
     @api.onchange(
