@@ -10,7 +10,7 @@
                 expr="//page[@name='receivable_move_line_tab']/field[@name='financial_move_line_ids']"
                 position="before"
             >
-                <field name="manual_payment_term_ids">
+                <field name="manual_payment_term_line_ids">
                     <tree editable="bottom">
                             <field name="date_maturity" />
                             <field name="amount" />
@@ -27,7 +27,7 @@
                 expr="//page[@name='payable_move_line_tab']/field[@name='financial_move_line_ids']"
                 position="before"
             >
-                <field name="manual_payment_term_ids">
+                <field name="manual_payment_term_line_ids">
                     <tree editable="bottom">
                             <field name="date_maturity" />
                             <field name="amount" />
