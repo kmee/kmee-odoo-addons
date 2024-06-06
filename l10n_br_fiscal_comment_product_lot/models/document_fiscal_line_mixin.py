@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from odoo import models
 
 
@@ -7,20 +9,23 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
     def __document_comment_vals(self):
         res = super(FiscalDocumentLineMixinMethods, self).__document_comment_vals()
 
-        lots = self.account_line_ids.mapped("prod_lot_ids")
         lot_info = []
+        lot_quantities = defaultdict(float)
+        lot_uom = {}
 
-        for lot in lots:
-            lot_name = lot.name
-            lot_product_uom = lot.product_uom_id.code if lot.product_uom_id else ""
-            lot_qtys = (
-                self.document_id.move_ids.mapped("picking_ids")
-                .mapped("move_line_ids_without_package")
-                .filtered(lambda line: line.lot_id == lot)
-                .mapped("qty_done")
-            )
-            lot_qty = sum(lot_qtys)
-            lot_info.append(f"{lot_name}, {lot_qty}, {lot_product_uom}")
+        for line in self.account_line_ids:
+            line_lot_quantities = line.lots_grouped_by_quantity()
+            for lot_name, qty in line_lot_quantities.items():
+                lot_quantities[lot_name] += qty
+
+                if lot_name not in lot_uom:
+                    lot_uom[lot_name] = (
+                        line.product_uom_id.code if line.product_uom_id else ""
+                    )
+
+        for lot_name, qty in lot_quantities.items():
+            lot_product_uom = lot_uom.get(lot_name, "")
+            lot_info.append(f"{lot_name}, {qty}, {lot_product_uom}")
 
         if lot_info:
             res["lot"] = "LOTE(S): " + "; ".join(lot_info)
