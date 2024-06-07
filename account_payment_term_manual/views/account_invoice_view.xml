@@ -10,16 +10,22 @@
                 expr="//page[@name='receivable_move_line_tab']/field[@name='financial_move_line_ids']"
                 position="before"
             >
-                <field name="manual_payment_term_line_ids">
+                <group>
+                    <group>
+                        <field name="manual_payment_term_id" />
+                    </group>
+                </group>
+                <field name="manual_payment_term_line_ids" class="oe_read_only">
                     <tree editable="bottom">
-                            <field name="date_maturity" />
-                            <field name="amount" />
-                            <field
-                            name="account_move_id"
-                            invisible="1"
-                            force_save="1"
+                        <field name="sequence" widget="handle" />
+                        <field name="value" string="Due Type" />
+                        <field
+                            name="value_amount"
+                            attrs="{'readonly':[('value','=','balance')]}"
                         />
-                            <field name="currency_id" invisible="1" />
+                        <field name="days" />
+                        <field name="option" string="" />
+                        <field name="day_of_the_month" string="Day of the month" />
                     </tree>
                 </field>
             </xpath>
@@ -27,16 +33,22 @@
                 expr="//page[@name='payable_move_line_tab']/field[@name='financial_move_line_ids']"
                 position="before"
             >
-                <field name="manual_payment_term_line_ids">
-                    <tree editable="bottom">
-                            <field name="date_maturity" />
-                            <field name="amount" />
-                            <field
-                            name="account_move_id"
-                            invisible="1"
-                            force_save="1"
+                <group>
+                    <group>
+                        <field name="manual_payment_term_id" />
+                    </group>
+                </group>
+                <field name="manual_payment_term_line_ids" class="oe_read_only">
+                    <tree>
+                        <field name="sequence" widget="handle" />
+                        <field name="value" string="Due Type" />
+                        <field
+                            name="value_amount"
+                            attrs="{'readonly':[('value','=','balance')]}"
                         />
-                            <field name="currency_id" invisible="1" />
+                        <field name="days" />
+                        <field name="option" string="" />
+                        <field name="day_of_the_month" string="Day of the month" />
                     </tree>
                 </field>
             </xpath>

@@ -15,7 +15,7 @@
         "base_sparse_field",
     ],
     "data": [
-        "security/account_payment_term_manual.xml",
         "views/account_invoice_view.xml",
+        "views/account_payment_term.xml",
     ],
 }
