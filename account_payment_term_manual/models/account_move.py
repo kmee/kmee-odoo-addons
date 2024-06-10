@@ -9,14 +9,13 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     manual_payment_term_id = fields.Many2one(
-        comodel_name="account.payment.term",
-        inverse_name="account_move_id",
+        comodel_name="account.payment.term.manual",
         string="Manual Payment Term",
         copy=False,
     )
 
     manual_payment_term_line_ids = fields.One2many(
-        comodel_name="account.payment.term.line",
+        comodel_name="account.payment.term.line.manual",
         related="manual_payment_term_id.line_ids",
         string="Manual Payment Term Lines",
     )
@@ -40,12 +39,20 @@ class AccountMove(models.Model):
         new_manual_term["origin_term_id"] = self.invoice_payment_term_id.id
         new_manual_term["active"] = False
         new_manual_term["note"] = ""
-        for line in new_manual_term.get("line_ids", []):
-            line[2].pop("payment_id", None)
+        # Split creation for term and term.lines
+        new_line_ids = new_manual_term.pop("line_ids")
+        new_manual_term["line_ids"] = False
+
         # DO NOT MOVE THIS UNLINK
+        self.manual_payment_term_id.line_ids.unlink()
         self.manual_payment_term_id.unlink()
         # DO NOT MOVE THIS CREATE
         manual_term_id = self.manual_payment_term_id.create(new_manual_term)
+        for line in new_line_ids:
+            line[2]["manual_payment_id"] = manual_term_id.id
+        manual_term_id.line_ids = manual_term_id.line_ids.create(
+            nl[2] for nl in new_line_ids
+        )
         self.manual_payment_term_id = manual_term_id
 
         # END OF THE METHOD -> ensure term_id gets set to user defined value
