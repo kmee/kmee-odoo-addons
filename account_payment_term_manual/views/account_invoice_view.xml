@@ -6,6 +6,19 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="l10n_br_account_due_list.invoice_form" />
         <field name="arch" type="xml">
+
+            <xpath
+                expr="//field[@name='invoice_payment_term_id']"
+                position="attributes"
+            >
+                <attribute name="context">
+                    {
+                    'skip_manual_term_onchange': True,
+                    'payment_term_id_view_onchange': True,
+                    }
+                </attribute>
+            </xpath>
+
             <xpath
                 expr="//page[@name='receivable_move_line_tab']/field[@name='financial_move_line_ids']"
                 position="before"
@@ -29,6 +42,7 @@
                     </tree>
                 </field>
             </xpath>
+
             <xpath
                 expr="//page[@name='payable_move_line_tab']/field[@name='financial_move_line_ids']"
                 position="before"
@@ -52,6 +66,7 @@
                     </tree>
                 </field>
             </xpath>
+
         </field>
     </record>
 
