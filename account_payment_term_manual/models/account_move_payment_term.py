@@ -60,3 +60,9 @@ class AccountPaymentTermLineManual(models.Model):
     has_manual_lines = fields.Boolean(
         help="Technical field to keep track of manual lines",
     )
+
+    payment_id = fields.Many2one(
+        "account.payment.term",
+        string="Payment Terms",
+        required=False,
+    )
