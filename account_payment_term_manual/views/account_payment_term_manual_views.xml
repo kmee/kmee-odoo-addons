@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_payment_term_line_manual_tree" model="ir.ui.view">
+            <field name="name">account.payment.term.line.manual.tree</field>
+            <field name="model">account.payment.term.line.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_tree" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="value" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payment_term_line_manual_form" model="ir.ui.view">
+            <field name="name">account.payment.term.line.manual.form</field>
+            <field name="model">account.payment.term.line.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_form" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="value" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payment_term_manual_search" model="ir.ui.view">
+            <field name="name">account.payment.term.manual.search</field>
+            <field name="model">account.payment.term.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_search" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payment_term_manual_form" model="ir.ui.view">
+            <field name="name">account.payment.term.manual.form</field>
+            <field name="model">account.payment.term.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_form" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//widget[@name='web_ribbon']" position="after">
+                    <field name="origin_term_id" invisible="1" />
+                </xpath>
+
+                <xpath expr="//widget[@name='web_ribbon']" position="attributes">
+                    <attribute name="attrs">{
+                        'invisible': ['|', ('active', '=', True),('origin_term_id','!=',False)]
+                        }</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_payment_term_manual_form" model="ir.actions.act_window">
+            <field name="name">Payment Terms</field>
+            <field name="res_model">account.payment.term.manual</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_payment_term_manual_search" />
+        </record>
+
+    </data>
+</odoo>
