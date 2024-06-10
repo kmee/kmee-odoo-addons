@@ -12,7 +12,7 @@
             >
                 <group>
                     <group>
-                        <field name="manual_payment_term_id" />
+                        <field name="manual_payment_term_id" class="oe_edit_only" />
                     </group>
                 </group>
                 <field name="manual_payment_term_line_ids" class="oe_read_only">
@@ -35,7 +35,7 @@
             >
                 <group>
                     <group>
-                        <field name="manual_payment_term_id" />
+                        <field name="manual_payment_term_id" class="oe_edit_only" />
                     </group>
                 </group>
                 <field name="manual_payment_term_line_ids" class="oe_read_only">
