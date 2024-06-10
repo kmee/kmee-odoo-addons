@@ -17,7 +17,7 @@
         "account_payment_term_manual",
     ],
     "data": [
-        "security/sale_payment_term_manual.xml",
+        # "security/sale_payment_term_manual.xml",
         "views/sale_order.xml",
     ],
     "demo": [

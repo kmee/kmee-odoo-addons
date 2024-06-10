@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2024 KMEE
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
     <record id="view_order_form" model="ir.ui.view">
@@ -8,18 +8,34 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                <attribute name="context">
+                    {
+                    'skip_manual_term_onchange': True,
+                    'payment_term_id_view_onchange': True,
+                    }
+                </attribute>
+            </xpath>
+
             <notebook position="inside">
                 <page string="Payment Terms" groups="account.group_account_invoice">
-                    <field name="manual_payment_term_ids">
+                    <group>
+                        <group>
+                            <field name="manual_payment_term_id" class="oe_edit_only" />
+                        </group>
+                    </group>
+                    <field name="manual_payment_term_line_ids" class="oe_read_only">
                         <tree editable="bottom">
-                                <field name="date_maturity" />
-                                <field name="amount" />
-                                <field
-                                name="sale_order_id"
-                                invisible="1"
-                                force_save="1"
+                            <field name="sequence" widget="handle" />
+                            <field name="value" string="Due Type" />
+                            <field
+                                name="value_amount"
+                                attrs="{'readonly':[('value','=','balance')]}"
                             />
-                                <field name="currency_id" invisible="1" />
+                            <field name="days" />
+                            <field name="option" string="" />
+                            <field name="day_of_the_month" string="Day of the month" />
                         </tree>
                     </field>
                 </page>
