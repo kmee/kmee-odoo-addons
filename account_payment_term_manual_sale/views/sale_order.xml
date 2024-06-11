@@ -12,7 +12,6 @@
             <xpath expr="//field[@name='payment_term_id']" position="attributes">
                 <attribute name="context">
                     {
-                    'skip_manual_term_onchange': True,
                     'payment_term_id_view_onchange': True,
                     }
                 </attribute>
