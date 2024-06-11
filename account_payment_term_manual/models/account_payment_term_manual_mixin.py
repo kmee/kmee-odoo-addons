@@ -1,7 +1,7 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountPaymentTermManualMixin(models.AbstractModel):
@@ -50,17 +50,3 @@ class AccountPaymentTermManualMixin(models.AbstractModel):
         self.with_context(
             skip_manual_term_onchange=True
         ).manual_payment_term_id = manual_term_id
-
-    @api.onchange("manual_payment_term_id")
-    def _onchange_manual_payment_term_id(self):
-        # Do nothing if new manual term was just duplicated from term_id
-        if self.env.context.get("payment_term_id_view_onchange"):
-            return
-
-        # Append (edited) to manual term name if it was manually edited
-        if (
-            self.manual_payment_term_id
-            and not self.manual_payment_term_id.has_manual_lines
-        ):
-            self.manual_payment_term_id.has_manual_lines = True
-            self.manual_payment_term_id.name += " (edited)"

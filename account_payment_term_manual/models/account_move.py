@@ -20,8 +20,15 @@ class AccountMove(models.Model):
         "invoice_vendor_bill_id",
     )
     def _onchange_recompute_dynamic_lines(self):
-        # Replace manual lines if invoice term has changed
-        if self.env.context.get("payment_term_id_view_onchange"):
+        if not self.invoice_payment_term_id:
+            return super(AccountMove, self)._onchange_recompute_dynamic_lines()
+        # Replace manual lines if:
+        # 1. invoice term has changed directly
+        # 2. invoice term has changed indirectly but no current manual term is set
+        if (
+            self.env.context.get("payment_term_id_view_onchange")
+            or not self.manual_payment_term_id
+        ):
             # Unlink and create seem to reset invoice_payment_term_id, here we store it
             # in a variable to set the term_id again at the END OF THE METHOD
             new_inv_term_id = self.invoice_payment_term_id
@@ -42,11 +49,4 @@ class AccountMove(models.Model):
 
     @api.onchange("manual_payment_term_id")
     def _onchange_manual_payment_term_id(self):
-        """Inherit mixins onchange to add invoice line recomputes"""
-        res = super()._onchange_manual_payment_term_id()
-
-        # Recompute with context
-        # self = self.with_context(skip_manual_term_generation=True)
         self._onchange_recompute_dynamic_lines()
-
-        return res
