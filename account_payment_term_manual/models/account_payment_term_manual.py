@@ -1,7 +1,7 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountPaymentTermManual(models.Model):
@@ -44,6 +44,15 @@ class AccountPaymentTermManual(models.Model):
     def unlink(self):
         return super(models.Model, self).unlink()
 
+    def set_as_edited(self):
+        if self.has_manual_lines:
+            return
+        if self.env.context.get("skip_manual_term_onchange"):
+            return
+
+        self.has_manual_lines = True
+        self.name += " (edited)"
+
 
 class AccountPaymentTermLineManual(models.Model):
     _name = "account.payment.term.line.manual"
@@ -57,12 +66,14 @@ class AccountPaymentTermLineManual(models.Model):
         ondelete="cascade",
     )
 
-    has_manual_lines = fields.Boolean(
-        help="Technical field to keep track of manual lines",
-    )
-
     payment_id = fields.Many2one(
         "account.payment.term",
         string="Payment Terms",
         required=False,
     )
+
+    @api.constrains(
+        "value", "value_amount", "days", "option", "day_of_the_month", "sequence"
+    )
+    def _check_manual_payment_term_id(self):
+        self.manual_payment_id.set_as_edited()
