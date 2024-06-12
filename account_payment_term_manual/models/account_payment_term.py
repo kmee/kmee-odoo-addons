@@ -10,7 +10,11 @@ class AccountPaymentTerm(models.Model):
     def compute(self, value, date_ref=False, currency=None):
         """Inherit compute to use manual term id if set."""
         manual_payment_term_id = self.env.context.get("manual_payment_term_id")
-        if manual_payment_term_id and self is not manual_payment_term_id:
+        if (
+            manual_payment_term_id
+            and manual_payment_term_id.has_manual_lines
+            and self is not manual_payment_term_id
+        ):
             return manual_payment_term_id.compute(
                 value, date_ref=date_ref, currency=currency
             )
