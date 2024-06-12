@@ -27,11 +27,16 @@ class SaleOrder(models.Model):
             self._update_manual_payment_term_id(self.payment_term_id)
             self.payment_term_id = new_term_id
 
+    ####################################
+    # INVOICE DIRECTLY FROM SALE ORDER #
+    ####################################
+
     def _prepare_invoice(self):
         """
         Invoicing from SO:
         Add prepare manual_term_id
         """
+        self = self.with_context(skip_manual_term_onchange=True)
         res = super()._prepare_invoice()
 
         if self.manual_payment_term_id:
@@ -44,6 +49,7 @@ class SaleOrder(models.Model):
         Invoicing from SO:
         Trigger manual term recompute lines
         """
+        self = self.with_context(skip_manual_term_onchange=True)
         invoice_ids = super()._create_invoices(grouped=grouped, final=final, date=date)
         for inv in invoice_ids:
             if inv.manual_payment_term_id:
