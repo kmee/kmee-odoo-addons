@@ -50,3 +50,6 @@ class AccountMove(models.Model):
     @api.onchange("manual_payment_term_id")
     def _onchange_manual_payment_term_id(self):
         self._onchange_recompute_dynamic_lines()
+
+    def recompute_payment_lines(self):
+        self._onchange_recompute_dynamic_lines()
