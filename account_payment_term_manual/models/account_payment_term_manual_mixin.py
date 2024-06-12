@@ -20,6 +20,10 @@ class AccountPaymentTermManualMixin(models.AbstractModel):
         string="Manual Payment Term Lines",
     )
 
+    has_manual_lines = fields.Boolean(
+        related="manual_payment_term_id.has_manual_lines",
+    )
+
     def _update_manual_payment_term_id(self, term_id):
         """Check if invoice term has changed and replace manual term if needed."""
         if self.manual_payment_term_id.mapped("origin_term_id") == term_id:
