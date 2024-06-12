@@ -26,3 +26,15 @@ class PurchaseOrder(models.Model):
             new_term_id = self.payment_term_id
             self._update_manual_payment_term_id(self.payment_term_id)
             self.payment_term_id = new_term_id
+
+    def _prepare_invoice(self):
+        """
+        Invoicing from PO:
+        Add prepare manual_term_id
+        """
+        res = super()._prepare_invoice()
+
+        if self.manual_payment_term_id:
+            res["manual_payment_term_id"] = self.manual_payment_term_id.copy().id
+
+        return res
