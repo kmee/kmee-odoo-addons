@@ -77,6 +77,14 @@ class AccountPaymentTermLineManual(models.Model):
         copy=False,
     )
 
+    option = fields.Selection(
+        selection_add=[("custom", "Custom")],
+        ondelete={
+            "custom": "set default",
+        },
+        default="day_after_invoice_date",
+    )
+
     @api.constrains(
         "value",
         "value_amount",
@@ -87,4 +95,13 @@ class AccountPaymentTermLineManual(models.Model):
         "fixed_date",
     )
     def _check_manual_payment_term_id(self):
+        for record in self:
+            if record.fixed_date and record.option != "custom":
+                record.option = "custom"
         self.manual_payment_id.set_as_edited()
+
+    @api.onchange("fixed_date")
+    def _onchange_fixed_date(self):
+        for record in self:
+            if record.fixed_date:
+                record.option = "custom"
