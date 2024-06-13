@@ -9,8 +9,8 @@
             <field name="inherit_id" ref="account.view_payment_term_line_tree" />
             <field name="mode">primary</field>
             <field name="arch" type="xml">
-                <field name="value" position="attributes">
-                    <attribute name="invisible">0</attribute>
+                <field name="option" position="after">
+                    <field name="fixed_date" />
                 </field>
             </field>
         </record>
