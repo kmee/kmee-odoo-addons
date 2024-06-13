@@ -72,8 +72,19 @@ class AccountPaymentTermLineManual(models.Model):
         required=False,
     )
 
+    fixed_date = fields.Date(
+        string="Fixed Date",
+        copy=False,
+    )
+
     @api.constrains(
-        "value", "value_amount", "days", "option", "day_of_the_month", "sequence"
+        "value",
+        "value_amount",
+        "days",
+        "option",
+        "day_of_the_month",
+        "sequence",
+        "fixed_date",
     )
     def _check_manual_payment_term_id(self):
         self.manual_payment_id.set_as_edited()
