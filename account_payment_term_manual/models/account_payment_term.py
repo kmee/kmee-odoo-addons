@@ -8,7 +8,14 @@ class AccountPaymentTerm(models.Model):
     _inherit = "account.payment.term"
 
     def compute(self, value, date_ref=False, currency=None):
-        """Inherit compute to use manual term id if set."""
+        """
+        Inherit compute to use manual term id if set.
+
+        manual_payment_term_id must be set
+        manual_payment_term_id must have manual lines (else just use normal term_id)
+        if self == manual_payment_term_id there's no need to override this method
+
+        """
         manual_payment_term_id = self.env.context.get("manual_payment_term_id")
         if (
             manual_payment_term_id
