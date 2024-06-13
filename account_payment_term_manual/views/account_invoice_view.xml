@@ -46,6 +46,7 @@
                         />
                         <field name="days" />
                         <field name="option" string="" />
+                        <field name="fixed_date" />
                         <field name="day_of_the_month" string="Day of the month" />
                     </tree>
                 </field>
@@ -79,6 +80,7 @@
                         />
                         <field name="days" />
                         <field name="option" string="" />
+                        <field name="fixed_date" />
                         <field name="day_of_the_month" string="Day of the month" />
                     </tree>
                 </field>
