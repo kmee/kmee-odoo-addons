@@ -13,7 +13,7 @@
         <field name="margin_right">3</field>
         <field name="header_line" eval="False" />
         <field name="header_spacing">3</field>
-        <field name="dpi">80</field>
+        <field name="dpi">180</field>
     </record>
 
     <record id="action_report_saleorder_compact" model="ir.actions.report">
