@@ -11,6 +11,7 @@
         "sale",
     ],
     "data": [
+        "views/res_config_settings.xml",
         "report/report_saleorder_compact.xml",
         "report/sale_report.xml",
     ],
