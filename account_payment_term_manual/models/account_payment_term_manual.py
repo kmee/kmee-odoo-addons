@@ -74,7 +74,6 @@ class AccountPaymentTermLineManual(models.Model):
 
     fixed_date = fields.Date(
         string="Fixed Date",
-        copy=False,
     )
 
     option = fields.Selection(
