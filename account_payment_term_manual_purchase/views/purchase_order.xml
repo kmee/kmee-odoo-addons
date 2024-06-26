@@ -21,7 +21,11 @@
                 <page string="Payment Terms" groups="account.group_account_invoice">
                     <group>
                         <group>
-                            <field name="manual_payment_term_id" class="oe_edit_only" />
+                            <field
+                                name="manual_payment_term_id"
+                                class="oe_edit_only"
+                                options="{'no_create_edit': True}"
+                            />
                             <field
                                 name="has_manual_lines"
                                 class="oe_edit_only"
