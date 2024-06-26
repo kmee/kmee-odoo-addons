@@ -20,15 +20,19 @@ class StockInvoiceOnshipping(models.TransientModel):
         if hasattr(pick, "sale_id") and hasattr(pick.sale_id, "payment_mode_id"):
             term_id = pick.sale_id.payment_term_id.id
             values["invoice_payment_term_id"] = term_id
-            manual_term_id = pick.sale_id.manual_payment_term_id.copy().id
-            values["manual_payment_term_id"] = manual_term_id
+            # Use manual lines from SO
+            if pick.sale_id.manual_payment_term_id:
+                manual_term_id = pick.sale_id.manual_payment_term_id.copy().id
+                values["manual_payment_term_id"] = manual_term_id
         elif hasattr(pick, "purchase_id") and hasattr(
             pick.purchase_id, "payment_mode_id"
         ):
             term_id = pick.purchase_id.payment_term_id.id
             values["invoice_payment_term_id"] = term_id
-            manual_term_id = pick.purchase_id.manual_payment_term_id.copy().id
-            values["manual_payment_term_id"] = manual_term_id
+            # Use manual lines from PO
+            if pick.purchase_id.manual_payment_term_id:
+                manual_term_id = pick.purchase_id.manual_payment_term_id.copy().id
+                values["manual_payment_term_id"] = manual_term_id
 
         return invoice, values
 
