@@ -1,2 +1,2 @@
 l10n-brazil
-bank-statement-import https://github.com/kmee/bank-statement-import PROVISORIO-footer-skip-and-empty-balance
+bank-statement-import https://github.com/kmee/bank-statement-import 14.0-develop
