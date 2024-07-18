@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="l10n_br_di_adicao_form_view">
+        <field name="model">l10n_br_di.adicao</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="declaracao_id" />
+                            <field name="numero_di" />
+                            <field name="numero_adicao" />
+                        </group>
+                        <group>
+                            <field name="numero_li" />
+                            <field name="sequencial_retificacao" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="mercadoria" string="Mercadoria">
+                            <field name="di_adicao_mercadoria_ids" />
+                            <group>
+                                <group>
+                                    <field name="dados_mercadoria_aplicacao" />
+                                    <field name="dados_mercadoria_codigo_naladi_ncca" />
+                                    <field name="dados_mercadoria_codigo_naladi_sh" />
+                                    <field name="dados_mercadoria_codigo_ncm" />
+                                    <field name="dados_mercadoria_condicao" />
+                                    <field
+                                        name="dados_mercadoria_medida_estatistica_quantidade"
+                                    />
+                                    <field
+                                        name="dados_mercadoria_medida_estatistica_unidade"
+                                    />
+                                    <field name="dados_mercadoria_nome_ncm" />
+                                    <field name="dados_mercadoria_peso_liquido" />
+                                </group>
+                                <group>
+                                    <field name="dados_carga_pais_procedencia_codigo" />
+                                    <field name="dados_carga_urf_entrada_codigo" />
+                                    <field name="dados_carga_via_transporte_codigo" />
+                                    <field name="vinculo_comprador_vendedor" />
+                                    <field name="pais_aquisicao_mercadoria_codigo" />
+                                    <field name="pais_aquisicao_mercadoria_nome" />
+                                    <field name="pais_origem_mercadoria_codigo" />
+                                    <field name="pais_origem_mercadoria_nome" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="valores" string="Valores">
+                            <field name="di_adicao_valor_ids" />
+                            <group>
+                                <group>
+                                    <field name="valor_multa_arecolher" />
+                                    <field name="valor_multa_arecolher_ajustado" />
+                                    <field name="valor_reais_frete_internacional" />
+                                    <field name="valor_reais_seguro_internacional" />
+                                    <field name="valor_total_condicao_venda" />
+                                </group>
+                                <group>
+                                    <field name="seguro_moeda_negociada_codigo" />
+                                    <field name="seguro_valor_moeda_negociada" />
+                                    <field name="seguro_valor_reais" />
+                                </group>
+                                <group>
+                                    <field name="frete_moeda_negociada_codigo" />
+                                    <field name="frete_valor_moeda_negociada" />
+                                    <field name="frete_valor_reais" />
+                                </group>
+                                <group>
+                                    <field
+                                        name="pis_cofins_base_calculo_aliquota_icms"
+                                    />
+                                    <field
+                                        name="pis_cofins_base_calculo_fundamento_legal_codigo"
+                                    />
+                                    <field
+                                        name="pis_cofins_base_calculo_percentual_reducao"
+                                    />
+                                    <field name="pis_cofins_base_calculo_valor" />
+                                    <field
+                                        name="pis_cofins_fundamento_legal_reducao_codigo"
+                                    />
+                                    <field name="pis_cofins_regime_tributacao_codigo" />
+                                    <field name="pis_cofins_regime_tributacao_nome" />
+                                    <field name="pis_pasep_aliquota_ad_valorem" />
+                                    <field
+                                        name="pis_pasep_aliquota_especifica_quantidade_unidade"
+                                    />
+                                    <field name="pis_pasep_aliquota_especifica_valor" />
+                                    <field name="pis_pasep_aliquota_reduzida" />
+                                    <field name="pis_pasep_aliquota_valor_devido" />
+                                    <field name="pis_pasep_aliquota_valor_recolher" />
+                                </group>
+                                <group>
+                                    <field name="cofins_aliquota_ad_valorem" />
+                                    <field
+                                        name="cofins_aliquota_especifica_quantidade_unidade"
+                                    />
+                                    <field name="cofins_aliquota_especifica_valor" />
+                                    <field name="cofins_aliquota_reduzida" />
+                                    <field name="cofins_aliquota_valor_devido" />
+                                    <field name="cofins_aliquota_valor_recolher" />
+                                </group>
+                                <group>
+                                    <field name="ipi_aliquota_ad_valorem" />
+                                    <field
+                                        name="ipi_aliquota_especifica_capacidade_recipciente"
+                                    />
+                                    <field
+                                        name="ipi_aliquota_especifica_quantidade_unidade_medida"
+                                    />
+                                    <field
+                                        name="ipi_aliquota_especifica_tipo_recipiente_codigo"
+                                    />
+                                    <field
+                                        name="ipi_aliquota_especifica_valor_unidade_medida"
+                                    />
+                                    <field name="ipi_aliquota_nota_complementar_tipi" />
+                                    <field name="ipi_aliquota_reduzida" />
+                                    <field name="ipi_aliquota_valor_devido" />
+                                    <field name="ipi_aliquota_valor_recolher" />
+                                    <field name="ipi_regime_tributacao_codigo" />
+                                    <field name="ipi_regime_tributacao_nome" />
+                                </group>
+                                <group>
+                                    <field name="ii_acordo_tarifario_aladi_codigo" />
+                                    <field name="ii_acordo_tarifario_aladi_nome" />
+                                    <field name="ii_acordo_tarifario_ato_legal_ano" />
+                                    <field
+                                        name="ii_acordo_tarifario_ato_legal_codigo"
+                                    />
+                                    <field name="ii_acordo_tarifario_ato_legal_ex" />
+                                    <field
+                                        name="ii_acordo_tarifario_ato_legal_numero"
+                                    />
+                                    <field
+                                        name="ii_acordo_tarifario_ato_legal_orgao_emissor"
+                                    />
+                                    <field name="ii_acordo_tarifario_tipo_codigo" />
+                                    <field name="ii_acordo_tarifario_tipo_nome" />
+                                    <field name="ii_aliquota_acordo" />
+                                    <field name="ii_aliquota_ad_valorem" />
+                                    <field name="ii_aliquota_percentual_reducao" />
+                                    <field name="ii_aliquota_reduzida" />
+                                    <field name="ii_aliquota_valor_calculado" />
+                                    <field name="ii_aliquota_valor_devido" />
+                                    <field name="ii_aliquota_valor_recolher" />
+                                    <field name="ii_aliquota_valor_reduzido" />
+                                    <field name="ii_base_calculo" />
+                                    <field name="ii_fundamento_legal_codigo" />
+                                    <field
+                                        name="ii_motivo_admissao_temporaria_codigo"
+                                    />
+                                    <field name="ii_regime_tributacao_codigo" />
+                                    <field name="ii_regime_tributacao_nome" />
+                                </group>
+                                <group>
+                                    <field name="cide_valor_aliquota_especifica" />
+                                    <field name="cide_valor_devido" />
+                                    <field name="cide_valor_recolher" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="fabricante" string="Fabricante">
+                            <group>
+                                <field name="fabricante_cidade" />
+                                <field name="fabricante_estado" />
+                                <field name="fabricante_logradouro" />
+                                <field name="fabricante_nome" />
+                                <field name="fabricante_numero" />
+                                <field name="relacao_comprador_vendedor" />
+                                <field name="codigo_relacao_comprador_vendedor" />
+                                <field name="codigo_vinculo_comprador_vendedor" />
+                            </group>
+                        </page>
+                        <page name="fornecedor" string="Fornecedor">
+                            <group>
+                                <field name="fornecedor_cidade" />
+                                <field name="fornecedor_complemento" />
+                                <field name="fornecedor_estado" />
+                                <field name="fornecedor_logradouro" />
+                                <field name="fornecedor_nome" />
+                                <field name="fornecedor_numero" />
+                            </group>
+                        </page>
+                        <page name="dcr" string="DCR">
+                            <group>
+                                <field name="dcr_coeficiente_reducao" />
+                                <field name="dcr_identificacao" />
+                                <field name="dcr_valor_devido" />
+                                <field name="dcr_valor_dolar" />
+                                <field name="dcr_valor_real" />
+                                <field name="dcr_valor_recolher" />
+                            </group>
+                        </page>
+                        <page name="cambio" string="Cambio">
+                            <group>
+                                    <group>
+                                        <field name="condicao_venda_incoterm" />
+                                    <field name="condicao_venda_local" />
+                                    <field
+                                        name="condicao_venda_metodo_valoracao_codigo"
+                                    />
+                                    <field
+                                        name="condicao_venda_metodo_valoracao_nome"
+                                    />
+                                    <field name="condicao_venda_moeda_codigo" />
+                                    <field name="condicao_venda_moeda_nome" />
+                                    <field name="condicao_venda_valor_moeda" />
+                                    <field name="condicao_venda_valor_reais" />
+                                </group>
+                                <group>
+                                    <field
+                                        name="dados_cambiais_cobertura_cambial_codigo"
+                                    />
+                                    <field
+                                        name="dados_cambiais_cobertura_cambial_nome"
+                                    />
+                                    <field
+                                        name="dados_cambiais_instituicao_financiadora_codigo"
+                                    />
+                                    <field
+                                        name="dados_cambiais_instituicao_financiadora_nome"
+                                    />
+                                    <field
+                                        name="dados_cambiais_motivo_sem_cobertura_codigo"
+                                    />
+                                    <field
+                                        name="dados_cambiais_motivo_sem_cobertura_nome"
+                                    />
+                                    <field name="dados_cambiais_valor_real_cambio" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="l10n_br_di_adicao_tree_view">
+        <field name="model">l10n_br_di.adicao</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="declaracao_id" />
+                <field name="numero_adicao" />
+                <field name="numero_di" />
+                <field name="numero_li" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

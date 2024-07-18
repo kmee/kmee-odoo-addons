@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="l10n_br_di_mercadoria_tree_view">
+        <field name="model">l10n_br_di.mercadoria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="declaracao_id" invisible="1" />
+                <field name="descricao_mercadoria" />
+                <field name="numero_sequencial_item" />
+                <field name="quantidade" />
+                <field name="unidade_medida" />
+                <field name="valor_unitario" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

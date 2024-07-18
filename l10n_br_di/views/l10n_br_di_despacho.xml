@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="l10n_br_di_despacho_tree_view">
+        <field name="model">l10n_br_di.despacho</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="declaracao_id" invisible="1" />
+                <field name="codigo_tipo_documento_despacho" />
+                <field name="nome_documento_despacho" />
+                <field name="numero_documento_despacho" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>
