@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="l10n_br_di_declaracao_form_view">
+        <field name="model">l10n_br_di.declaracao</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="importa_declaracao" string="Importar" type="object" />
+                    <button name="gerar_fatura" string="Gerar Fatura" type="object" />
+                    <button
+                        name="calcular_declaracao"
+                        string="Calcular"
+                        type="object"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <field name="currency_id" invisible="1" />
+                    <field name="dolar_currency_id" invisible="1" />
+                    <field name="insurance_currency_id" invisible="1" />
+                    <field name="freight_currency_id" invisible="1" />
+                    <!-- TODO -->
+                    <group>
+                        <group>
+                            <field name="numero_di" />
+                            <field name="account_move_id" />
+                            <!-- <field name="caracterizacao_operacao_codigo_tipo" string="Código Op."/> -->
+                            <field
+                                name="caracterizacao_operacao_descricao_tipo"
+                                string="Operação"
+                            />
+                            <field
+                                name="tipo_declaracao_nome"
+                                string="Tipo Declaração"
+                            />
+                        </group>
+                        <group>
+                            <field name="data_registro" />
+                            <field name="situacao_entrega_carga" />
+                            <field name="tipo_declaracao_codigo" />
+                            <field name="operacao_fundap" />
+                            <!-- <field name="total_adicoes"/> -->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="adicoes" string="Adições">
+                            <field name="di_adicao_ids" nolabel="1" />
+                        </page>
+                        <page name="geral" string="Geral">
+                            <notebook>
+                                <page name="geral_geral" string="Geral">
+                                    <group>
+                                        <group>
+                                            <field name="urf_despacho_codigo" />
+                                            <field name="urf_despacho_nome" />
+                                            <!-- <field name="modalidade_despacho_codigo"/> -->
+                                            <field name="modalidade_despacho_nome" />
+                                        </group>
+                                        <group>
+                                            <field name="carga_urf_entrada_codigo" />
+                                            <field name="carga_urf_entrada_nome" />
+                                            <!-- <field name="documento_chegada_carga_codigo_tipo"/> -->
+                                            <field
+                                                name="documento_chegada_carga_nome"
+                                            />
+                                            <field
+                                                name="documento_chegada_carga_numero"
+                                            />
+                                        </group>
+                                    </group>
+                                </page>
+                                <page name="armazenamento" string="Armazenamento">
+                                    <group>
+                                        <field
+                                            name="armazenamento_recinto_aduaneiro_codigo"
+                                        />
+                                        <field
+                                            name="armazenamento_recinto_aduaneiro_nome"
+                                        />
+                                        <field name="armazenamento_setor" />
+                                    </group>
+                                </page>
+                                <page name="carga" string="Carga">
+                                    <group>
+                                        <group>
+                                            <field name="carga_data_chegada" />
+                                            <field name="carga_numero_agente" />
+                                            <field name="carga_peso_bruto" />
+                                            <field name="carga_peso_liquido" />
+                                        </group>
+                                        <group>
+                                            <field
+                                                name="carga_pais_procedencia_codigo"
+                                            />
+                                            <field name="carga_pais_procedencia_nome" />
+                                        </group>
+                                    </group>
+                                </page>
+                                <page name="conhecimento" string="Conhecimento">
+                                    <group>
+                                        <group>
+                                            <field
+                                                name="conhecimento_carga_embarque_data"
+                                            />
+                                            <field
+                                                name="conhecimento_carga_embarque_local"
+                                            />
+                                            <field name="conhecimento_carga_id" />
+                                        </group>
+                                        <group>
+                                            <field
+                                                name="conhecimento_carga_tipo_codigo"
+                                            />
+                                            <field
+                                                name="conhecimento_carga_tipo_nome"
+                                            />
+                                            <field
+                                                name="conhecimento_carga_utilizacao"
+                                            />
+                                            <field
+                                                name="conhecimento_carga_utilizacao_nome"
+                                            />
+                                        </group>
+                                    </group>
+                                </page>
+                                <page name="importador" string="Importador">
+                                    <group>
+                                        <group>
+                                            <field name="importador_nome" />
+                                            <field
+                                                name="importador_nome_representante_legal"
+                                            />
+                                            <field name="importador_numero" />
+                                            <field name="importador_codigo_tipo" />
+                                            <field
+                                                name="importador_cpf_representante_legal"
+                                            />
+                                        </group>
+                                        <group>
+                                            <field
+                                                name="importador_endereco_municipio"
+                                            />
+                                            <field name="importador_endereco_uf" />
+                                            <field
+                                                name="importador_endereco_logradouro"
+                                            />
+                                            <field name="importador_endereco_numero" />
+                                            <field name="importador_endereco_bairro" />
+                                            <field
+                                                name="importador_endereco_complemento"
+                                            />
+                                            <field name="importador_endereco_cep" />
+                                            <field name="importador_numero_telefone" />
+                                        </group>
+                                    </group>
+                                </page>
+                                <page name="via_transporte" string="Via Transporte">
+                                    <group>
+                                        <group>
+                                            <field name="via_transporte_codigo" />
+                                            <field name="via_transporte_multimodal" />
+                                            <field name="via_transporte_nome" />
+                                        </group>
+                                        <group>
+                                            <field
+                                                name="via_transporte_nome_transportador"
+                                            />
+                                            <field
+                                                name="via_transporte_numero_veiculo"
+                                            />
+                                            <field
+                                                name="via_transporte_pais_transportador_codigo"
+                                            />
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </page>
+                        <page name="totais" string="Totais">
+                            <group>
+                                <group name='local_descarga' string="Local Descarga">
+                                    <field name="local_descarga_total_dolares" />
+                                    <field name="local_descarga_total_reais" />
+                                </group>
+                                <group name='local_embarque' string="Local Embarque">
+                                    <field name="local_embarque_total_dolares" />
+                                    <field name="local_embarque_total_reais" />
+                                </group>
+
+                                <group name='frete' string="Frete">
+                                    <field name="frete_moeda_negociada_codigo" />
+                                    <field name="frete_moeda_negociada_nome" />
+                                    <field name="frete_collect" />
+                                    <field name="frete_em_territorio_nacional" />
+                                    <field name="frete_prepaid" />
+                                    <field name="frete_total_dolares" />
+                                    <field name="frete_total_moeda" />
+                                    <field name="frete_total_reais" />
+                                </group>
+
+                                <group name='seguro' string="Seguro">
+                                    <field name="seguro_moeda_negociada_codigo" />
+                                    <field name="seguro_moeda_negociada_nome" />
+                                    <field name="seguro_total_dolares" />
+                                    <field name="seguro_total_moeda_negociada" />
+                                    <field name="seguro_total_reais" />
+                                </group>
+
+                                <group name='totais_outros' string="Outros">
+                                    <field name="icms" />
+                                    <field
+                                        name="valor_total_multa_arecolher_ajustado"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="mercadorias" string="Mercadorias">
+                            <field name="di_mercadoria_ids" nolabel="1" />
+                        </page>
+                        <page name="valores" string="Valores">
+                            <field name="di_valor_ids" nolabel="1" />
+                        </page>
+                        <page name="pagamentos" string="Pagamentos">
+                            <field name="di_pagamento_ids" nolabel="1" />
+                        </page>
+                        <page name="despacho" string="Despachos">
+                            <field name="di_despacho_ids" nolabel="1" />
+                        </page>
+
+                        <page
+                            name="informacao_complementar"
+                            string="Informação Complementar"
+                        >
+                            <field name="informacao_complementar" />
+                        </page>
+                        <page name="outros" string="Outros">
+                            <group>
+                                <group>
+                                    <field name="sequencial_retificacao" />
+                                    <field name="canal_selecao_parametrizada" />
+                                </group>
+                                <group>
+                                    <field name="arquivo_declaracao" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field
+                        name="message_follower_ids"
+                        widget="mail_followers"
+                        groups="base.group_user"
+                    />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="l10n_br_di_declaracao_search_view">
+        <field name="model">l10n_br_di.declaracao</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="numero_di" />
+                <field name="carga_data_chegada" />
+                <field name="data_registro" />
+                <field name="conhecimento_carga_embarque_data" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="l10n_br_di_declaracao_tree_view">
+        <field name="model">l10n_br_di.declaracao</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="data_registro" />
+                <field name="numero_di" />
+                <field name="carga_data_chegada" />
+                <field name="conhecimento_carga_embarque_data" />
+                <field name="state" widget="badge" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="l10n_br_di_declaracao_act_window">
+        <field name="name">Declaração de Importação</field>
+        <field name="res_model">l10n_br_di.declaracao</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="l10n_br_di_declaracao_menu">
+        <field name="name">Declaração de Importação</field>
+        <field name="parent_id" ref="account.menu_finance_payables" />
+        <field name="sequence" eval="990" />
+    </record>
+
+    <record model="ir.ui.menu" id="l10n_br_di_declaracoes_menu">
+        <field name="name">Declarações</field>
+        <field name="parent_id" ref="l10n_br_di.l10n_br_di_declaracao_menu" />
+        <field name="action" ref="l10n_br_di_declaracao_act_window" />
+        <field name="sequence" eval="991" />
+    </record>
+
+
+</odoo>

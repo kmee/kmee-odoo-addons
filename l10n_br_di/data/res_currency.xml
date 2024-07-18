@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="True">
+
+    <record id="base.USD" model="res.currency">
+        <field name="siscomex_code">220</field>
+    </record>
+
+</odoo>
