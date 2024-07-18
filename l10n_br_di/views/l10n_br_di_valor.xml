@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="l10n_br_di_valor_tree_view">
+        <field name="model">l10n_br_di.valor</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="declaracao_id" invisible="1" />
+                <field name="codigo" />
+                <field name="denominacao" />
+                <!-- <field name="moeda_negociada_codigo" /> -->
+                <!-- <field name="moeda_negociada_nome" /> -->
+                <field name="moeda_negociada_id" />
+                <field name="moeda_empresa_id" />
+                <field name="moeda_taxa" />
+                <field name="valor_moeda_negociada" sum="Valor Estrangeiro" />
+                <field name="valor" sum="Valor BRL" />
+            </tree>
+        </field>
+    </record>
+
+
+</odoo>
