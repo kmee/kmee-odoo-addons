@@ -372,6 +372,7 @@ class L10nBrDiDeclaracao(models.Model):
                 line_form.quantity = mercadoria.quantidade
                 line_form.price_unit = mercadoria.final_price_unit
                 line_form.other_value = mercadoria.amount_other
+                line_form.di_mercadoria_ids.add(mercadoria)
 
         invoice = move_form.save()
         self.write({"account_move_id": invoice.id, "state": "locked"})
