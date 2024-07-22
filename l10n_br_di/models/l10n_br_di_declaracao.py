@@ -40,8 +40,7 @@ class L10nBrDiDeclaracao(models.Model):
 
     @api.model
     def _default_fiscal_operation(self):
-        # return self.env.company.import_declaration_fiscal_operation_id
-        return self.env.ref("l10n_br_fiscal.fo_compras")
+        return self.env.company.import_trade_fiscal_operation_id
 
     @api.model
     def _fiscal_operation_domain(self):

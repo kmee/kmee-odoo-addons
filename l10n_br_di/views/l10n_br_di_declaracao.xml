@@ -26,6 +26,7 @@
                     <group>
                         <group>
                             <field name="numero_di" />
+                            <field name="account_move_id" />
                             <!-- <field name="caracterizacao_operacao_codigo_tipo" string="Código Op."/> -->
                             <field
                                 name="caracterizacao_operacao_descricao_tipo"

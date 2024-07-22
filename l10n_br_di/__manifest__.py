@@ -21,13 +21,14 @@
         "views/l10n_br_di_mercadoria.xml",
         "views/l10n_br_di_adicao.xml",
         "views/l10n_br_di_declaracao.xml",
+        "views/res_currency.xml",
         #
         "views/account_move_view.xml",
         "views/nfe_adi_view.xml",
         "views/nfe_di_view.xml",
         "views/nfe_document_view.xml",
+        "views/res_company.xml",
         #
-        "views/res_currency.xml",
         "data/res_currency.xml",
         #
         "wizards/l10n_br_di_importa_di_wizard.xml",
