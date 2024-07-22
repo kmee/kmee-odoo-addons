@@ -7,7 +7,11 @@
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["mail", "l10n_br_account"],
+    "depends": [
+        "mail",
+        "l10n_br_account",
+        "l10n_br_nfe",
+    ],
     "data": [
         "security/ir.model.access.csv",
         #
@@ -17,7 +21,11 @@
         "views/l10n_br_di_mercadoria.xml",
         "views/l10n_br_di_adicao.xml",
         "views/l10n_br_di_declaracao.xml",
-        "views/l10n_br_di_declaracao.xml",
+        #
+        "views/account_move_view.xml",
+        "views/nfe_adi_view.xml",
+        "views/nfe_di_view.xml",
+        "views/nfe_document_view.xml",
         #
         "views/res_currency.xml",
         "data/res_currency.xml",
