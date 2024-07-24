@@ -17,7 +17,7 @@ L10n Br Account Statement Import Txt Xlsx
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/14.0/l10n_br_account_statement_import_txt_xlsx
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_account_statement_import_txt_xlsx
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
@@ -73,7 +73,10 @@ To configure this module, you need to:
 
 -  Go to ...
 
-||../static/description/image.png)
+|alternative description|../static/description/image.png)
+
+https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/.https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/.https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/|https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ahttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/lhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/thttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/rhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/nhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ahttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/thttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/vhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/dhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/shttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/chttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/rhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/phttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/thttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ohttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/nhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/|https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ihttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/mhttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ahttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ghttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ehttps://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/:https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/:https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/ https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/
+https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/16.0/l10n_br_account_statement_import_txt_xlsx/
 
 Usage
 =====
@@ -96,7 +99,7 @@ Known issues / Roadmap
 mostly intended for end-users, and can also help potential new
 contributors discovering new features to implement. ]
 
-...
+-  ...
 
 Changelog
 =========
@@ -119,6 +122,12 @@ fragment is included. ]
 -  [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
 -  [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
 
+.. _x.y.z-yyyy-mm-dd-1:
+
+11.0.x.y.z (YYYY-MM-DD)
+-----------------------
+
+-  ...
 
 Bug Tracker
 ===========
@@ -126,7 +135,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_account_statement_import_txt_xlsx%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_account_statement_import_txt_xlsx%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -160,6 +169,6 @@ The development of this module has been financially supported by:
 Maintainers
 -----------
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/l10n_br_account_statement_import_txt_xlsx>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_account_statement_import_txt_xlsx>`_ project on GitHub.
 
 You are welcome to contribute.
