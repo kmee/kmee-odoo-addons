@@ -29,39 +29,62 @@
         id="banco_santander_statement_map"
         model="account.statement.import.sheet.mapping"
     >
-    <field name="name">SANTANDER BRL [XLS]</field>
-    <field name="float_thousands_sep">dot</field>
-    <field name="float_decimal_sep">comma</field>
-    <field name="delimiter">comma</field>
-    <field name="quotechar">"</field>
-    <field name="timestamp_format">%d/%m/%Y</field>
-    <field name="offset_row">2</field>
-    <field name="timestamp_column">Data</field>
-    <field name="amount_column">Valor (R$)</field>
-    <field name="balance_column">Saldo (R$)</field>
-    <field name="original_currency_column" />
-    <field name="original_amount_column" />
-    <field name="description_column">Histórico,Documento</field>
-    <field name="partner_name_column" />
-    <field name="bank_account_column" />
-</record>
+        <field name="name">SANTANDER BRL [XLS]</field>
+        <field name="float_thousands_sep">dot</field>
+        <field name="float_decimal_sep">comma</field>
+        <field name="delimiter">comma</field>
+        <field name="quotechar">"</field>
+        <field name="timestamp_format">%d/%m/%Y</field>
+        <field name="offset_row">2</field>
+        <field name="timestamp_column">Data</field>
+        <field name="amount_column">Valor (R$)</field>
+        <field name="balance_column">Saldo (R$)</field>
+        <field name="original_currency_column" />
+        <field name="original_amount_column" />
+        <field name="description_column">Histórico,Documento</field>
+        <field name="partner_name_column" />
+        <field name="bank_account_column" />
+    </record>
 
-<record id="banco_sicred_statement_map" model="account.statement.import.sheet.mapping">
-<field name="name">SICRED BRL [XLS]</field>
-<field name="float_thousands_sep">dot</field>
-<field name="float_decimal_sep">comma</field>
-<field name="delimiter">comma</field>
-<field name="quotechar">"</field>
-<field name="timestamp_format">%d/%m/%Y</field>
-<field name="offset_row">8</field>
-<field name="offset_footer">17</field>
-<field name="timestamp_column">Data</field>
-<field name="amount_column">Valor (R$)</field>
-<field name="balance_column">Saldo (R$)</field>
-<field name="original_currency_column" />
-<field name="original_amount_column" />
-<field name="description_column">Descrição,Documento</field>
-<field name="partner_name_column" />
-<field name="bank_account_column" />
-</record>
+    <record
+        id="banco_sicred_statement_map"
+        model="account.statement.import.sheet.mapping"
+    >
+        <field name="name">SICRED BRL [XLS]</field>
+        <field name="float_thousands_sep">dot</field>
+        <field name="float_decimal_sep">comma</field>
+        <field name="delimiter">comma</field>
+        <field name="quotechar">"</field>
+        <field name="timestamp_format">%d/%m/%Y</field>
+        <field name="offset_row">8</field>
+        <field name="offset_footer">17</field>
+        <field name="timestamp_column">Data</field>
+        <field name="amount_column">Valor (R$)</field>
+        <field name="balance_column">Saldo (R$)</field>
+        <field name="original_currency_column" />
+        <field name="original_amount_column" />
+        <field name="description_column">Descrição,Documento</field>
+        <field name="partner_name_column" />
+        <field name="bank_account_column" />
+    </record>
+
+    <record id="banco_btg_statement_map" model="account.statement.import.sheet.mapping">
+        <field name="name">BTG BRL [XLS]</field>
+        <field name="float_thousands_sep">dot</field>
+        <field name="float_decimal_sep">comma</field>
+        <field name="delimiter">comma</field>
+        <field name="quotechar">"</field>
+        <field name="timestamp_format">%d/%m/%Y</field>
+        <field name="offset_row">12</field>
+        <field name="offset_footer">0</field>
+        <field name="timestamp_column">Data de lançamento</field>
+        <field name="amount_column">Entradas / Saídas (R$)</field>
+        <field name="balance_column">Saldo (R$)</field>
+        <field name="original_currency_column" />
+        <field name="original_amount_column" />
+        <field name="description_column">Descrição do lançamento</field>
+        <field name="partner_name_column" />
+        <field name="bank_account_column" />
+    </record>
+
 </odoo>
