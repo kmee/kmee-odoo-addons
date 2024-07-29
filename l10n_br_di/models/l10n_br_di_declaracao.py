@@ -391,3 +391,34 @@ class L10nBrDiDeclaracao(models.Model):
         action = self.env.ref("account.action_move_in_invoice_type").read([])[0]
         action["domain"] = [("id", "=", invoice.id)]
         return action
+
+    def action_view_invoice(self):
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "account.action_move_out_invoice_type"
+        )
+        form_view = [(self.env.ref("account.view_move_form").id, "form")]
+
+        action["views"] = form_view
+        action["res_id"] = self.account_move_id.id
+        return action
+
+    def action_view_de_para(self):
+        if self.state not in ["draft", "open"]:
+            return
+
+        action = (
+            self.env.ref("l10n_br_di.l10n_br_di_mercadoria_de_para_act_window")
+            .sudo()
+            .read([])[0]
+        )
+        tree_view = [
+            (
+                self.env.ref("l10n_br_di.l10n_br_di_mercadoria_tree_de_para_view").id,
+                "tree",
+            )
+        ]
+
+        action["views"] = tree_view
+        domain = [("declaracao_id", "=", self.id)]
+        action["domain"] = domain
+        return action

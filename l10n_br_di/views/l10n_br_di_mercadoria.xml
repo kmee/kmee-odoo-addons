@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2024 KMEE
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
     <record model="ir.ui.view" id="l10n_br_di_mercadoria_tree_view">
@@ -30,6 +30,32 @@
                 <field name="amount_afrmm" sum="vAFRMM" />
             </tree>
         </field>
+    </record>
+
+    <record model="ir.ui.view" id="l10n_br_di_mercadoria_tree_de_para_view">
+        <field name="model">l10n_br_di.mercadoria</field>
+        <field name="arch" type="xml">
+            <tree
+                editable="bottom"
+                create="false"
+                decoration-danger="product_id==False"
+            >
+                <field name="numero_sequencial_item" readonly="1" />
+                <field name="descricao_mercadoria" readonly="1" />
+                <field name="product_id" />
+                <field name="quantidade" readonly="1" />
+                <field name="valor_unitario" readonly="1" />
+                <field name="price_unit" readonly="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="l10n_br_di_mercadoria_de_para_act_window">
+        <field name="name">De Para</field>
+        <field name="res_model">l10n_br_di.mercadoria</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
     </record>
 
 </odoo>
