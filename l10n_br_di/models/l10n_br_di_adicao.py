@@ -24,8 +24,8 @@ class L10nBrDiAdicao(models.Model):
             else:
                 record.amount_add_ded_brl = (
                     adicao
-                    + record.valor_reais_frete_internacional
-                    + record.valor_reais_seguro_internacional
+                    # + record.valor_reais_frete_internacional
+                    # + record.valor_reais_seguro_internacional
                 )
 
     declaracao_id = fields.Many2one(
