@@ -22,7 +22,10 @@
                 <field name="price_unit" sum="vUnCom" />
                 <field name="amount_subtotal_brl" sum="Subtotal BRL" />
 
-                <field name="unit_addition_deduction" />
+                <field
+                    name="unit_addition_deduction"
+                    help="Equals to the sum of all di_valor_ids.valor divided by the sum of di_mercadoria_ids.quantidade"
+                />
                 <field name="final_price_unit" />
 
                 <field name="amount_other" sum="vOutro" />
