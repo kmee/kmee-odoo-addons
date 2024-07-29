@@ -79,6 +79,9 @@
                         </group>
                     </group>
                     <notebook>
+                        <page name="mercadorias" string="Mercadorias">
+                            <field name="di_mercadoria_ids" nolabel="1" />
+                        </page>
                         <page name="adicoes" string="Adições">
                             <field name="di_adicao_ids" nolabel="1" />
                         </page>
@@ -249,9 +252,6 @@
                                     />
                                 </group>
                             </group>
-                        </page>
-                        <page name="mercadorias" string="Mercadorias">
-                            <field name="di_mercadoria_ids" nolabel="1" />
                         </page>
                         <page name="valores" string="Valores">
                             <field name="di_valor_ids" nolabel="1" />
