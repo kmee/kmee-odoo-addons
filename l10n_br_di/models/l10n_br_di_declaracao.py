@@ -219,9 +219,13 @@ class L10nBrDiDeclaracao(models.Model):
             self.di_despacho_ids.unlink()
             self.di_pagamento_ids.unlink()
             self.update(vals)
+            self.calcular_declaracao()
         else:
             vals["arquivo_declaracao"] = arquivo
-            return self.create(vals)
+            res = self.create(vals)
+            res.calcular_declaracao()
+
+            return res
 
     def _importa_declaracao(self, declaracoes):
         if not declaracoes.declaracao_importacao:
