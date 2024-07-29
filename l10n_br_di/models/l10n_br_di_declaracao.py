@@ -254,12 +254,12 @@ class L10nBrDiDeclaracao(models.Model):
             "di_despacho_ids": [(0, 0, x) for x in despachos],
             "di_pagamento_ids": [(0, 0, x) for x in pagamentos],
             #
-            "insurance_currency_id": insurance_currency_id.id
-            if insurance_currency_id
-            else False,
-            "freight_currency_id": freight_currency_id.id
-            if freight_currency_id
-            else False,
+            "insurance_currency_id": (
+                insurance_currency_id.id if insurance_currency_id else False
+            ),
+            "freight_currency_id": (
+                freight_currency_id.id if freight_currency_id else False
+            ),
             "numero_di": di.numero_di,
             "data_registro": c_data(di.data_registro),
             "carga_data_chegada": c_data(di.carga_data_chegada),
@@ -349,9 +349,16 @@ class L10nBrDiDeclaracao(models.Model):
 
     def gerar_fatura(self):
         self.ensure_one()
+        self._validate_invoice_fields()
         # if self.state != "open":
         #     raise UserError(_("Only open declarations can generate invoices."))
         return self._generate_invoice()
+
+    def _validate_invoice_fields(self):
+        if not any(self.di_mercadoria_ids):
+            raise UserError(_("Imported document must have at least one line."))
+        if any(not line_id.product_id for line_id in self.di_mercadoria_ids):
+            raise UserError(_("One or more import lines is missing a product ID."))
 
     def _generate_invoice(self):
         move_form = Form(
