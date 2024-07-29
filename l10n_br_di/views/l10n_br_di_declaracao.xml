@@ -8,7 +8,12 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="importa_declaracao" string="Importar" type="object" />
+                    <button
+                        name="importa_declaracao"
+                        string="Importar"
+                        type="object"
+                        groups="base.group_no_one"
+                    />
                     <button name="gerar_fatura" string="Gerar Fatura" type="object" />
                     <button
                         name="calcular_declaracao"
