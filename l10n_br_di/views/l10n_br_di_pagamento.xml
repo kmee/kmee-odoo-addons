@@ -17,9 +17,24 @@
                 <field name="data_pagamento" />
                 <field name="nome_tipo_pagamento" />
                 <field name="numero_retificacao" />
-                <field name="valor_juros_encargos" sum="Juros" />
-                <field name="valor_multa" sum="Multa" />
-                <field name="valor_receita" sum="Receita" />
+                <field
+                    name="valor_juros_encargos"
+                    sum="Juros"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
+                <field
+                    name="valor_multa"
+                    sum="Multa"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
+                <field
+                    name="valor_receita"
+                    sum="Receita"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
             </tree>
         </field>
     </record>

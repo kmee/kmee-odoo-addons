@@ -29,9 +29,9 @@ class L10nBrDiPagamento(models.Model):
     data_pagamento = fields.Date()
     nome_tipo_pagamento = fields.Char()
     numero_retificacao = fields.Char()
-    valor_juros_encargos = fields.Monetary()
-    valor_multa = fields.Monetary()
-    valor_receita = fields.Monetary()
+    valor_juros_encargos = fields.Float()
+    valor_multa = fields.Float()
+    valor_receita = fields.Float()
 
     def _importa_declaracao(self, pagamento):
         return {
