@@ -18,10 +18,26 @@
                             <field name="sequencial_retificacao" />
                         </group>
                         <group>
-                            <field name="valor_taxa_siscomex" />
-                            <field name="valor_taxa_afrmm" />
-                            <field name="valor_taxa_capatazia" />
-                            <field name="valor_outros" />
+                            <field
+                                name="valor_taxa_siscomex"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id'}"
+                            />
+                            <field
+                                name="valor_taxa_afrmm"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id'}"
+                            />
+                            <field
+                                name="valor_taxa_capatazia"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id'}"
+                            />
+                            <field
+                                name="valor_outros"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id'}"
+                            />
                         </group>
                     </group>
                     <notebook>
@@ -58,15 +74,39 @@
                         <page name="valores" string="Valores">
                             <field name="di_adicao_valor_ids" />
                             <group>
-                                <field name="amount_add_ded_brl" />
+                                <field
+                                    name="amount_add_ded_brl"
+                                    widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                />
                             </group>
                             <group>
                                 <group>
-                                    <field name="valor_multa_arecolher" />
-                                    <field name="valor_multa_arecolher_ajustado" />
-                                    <field name="valor_reais_frete_internacional" />
-                                    <field name="valor_reais_seguro_internacional" />
-                                    <field name="valor_total_condicao_venda" />
+                                    <field
+                                        name="valor_multa_arecolher"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="valor_multa_arecolher_ajustado"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="valor_reais_frete_internacional"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="valor_reais_seguro_internacional"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="valor_total_condicao_venda"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                                 <group>
                                     <field name="moeda_seguro_id" />
@@ -76,9 +116,21 @@
                                 </group>
                                 <group>
                                     <field name="moeda_frete_id" />
-                                    <field name="frete_moeda_negociada_codigo" />
-                                    <field name="frete_valor_moeda_negociada" />
-                                    <field name="frete_valor_reais" />
+                                    <field
+                                        name="frete_moeda_negociada_codigo"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="frete_valor_moeda_negociada"
+                                        widget="monetary"
+                                        options="{'currency_field': 'moeda_frete_id'}"
+                                    />
+                                    <field
+                                        name="frete_valor_reais"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                                 <group>
                                     <field
@@ -90,38 +142,84 @@
                                     <field
                                         name="pis_cofins_base_calculo_percentual_reducao"
                                     />
-                                    <field name="pis_cofins_base_calculo_valor" />
+                                    <field
+                                        name="pis_cofins_base_calculo_valor"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field
                                         name="pis_cofins_fundamento_legal_reducao_codigo"
                                     />
                                     <field name="pis_cofins_regime_tributacao_codigo" />
                                     <field name="pis_cofins_regime_tributacao_nome" />
-                                    <field name="pis_pasep_aliquota_ad_valorem" />
+                                    <field
+                                        name="pis_pasep_aliquota_ad_valorem"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field
                                         name="pis_pasep_aliquota_especifica_quantidade_unidade"
                                     />
-                                    <field name="pis_pasep_aliquota_especifica_valor" />
-                                    <field name="pis_pasep_aliquota_reduzida" />
-                                    <field name="pis_pasep_aliquota_valor_devido" />
-                                    <field name="pis_pasep_aliquota_valor_recolher" />
+                                    <field
+                                        name="pis_pasep_aliquota_especifica_valor"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="pis_pasep_aliquota_reduzida"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="pis_pasep_aliquota_valor_devido"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="pis_pasep_aliquota_valor_recolher"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                                 <group>
-                                    <field name="cofins_aliquota_ad_valorem" />
+                                    <field
+                                        name="cofins_aliquota_ad_valorem"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field
                                         name="cofins_aliquota_especifica_quantidade_unidade"
                                     />
-                                    <field name="cofins_aliquota_especifica_valor" />
+                                    <field
+                                        name="cofins_aliquota_especifica_valor"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field name="cofins_aliquota_reduzida" />
-                                    <field name="cofins_aliquota_valor_devido" />
-                                    <field name="cofins_aliquota_valor_recolher" />
+                                    <field
+                                        name="cofins_aliquota_valor_devido"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="cofins_aliquota_valor_recolher"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                                 <group>
-                                    <field name="ipi_aliquota_ad_valorem" />
+                                    <field
+                                        name="ipi_aliquota_ad_valorem"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field
                                         name="ipi_aliquota_especifica_capacidade_recipciente"
                                     />
                                     <field
                                         name="ipi_aliquota_especifica_quantidade_unidade_medida"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
                                     />
                                     <field
                                         name="ipi_aliquota_especifica_tipo_recipiente_codigo"
@@ -131,8 +229,16 @@
                                     />
                                     <field name="ipi_aliquota_nota_complementar_tipi" />
                                     <field name="ipi_aliquota_reduzida" />
-                                    <field name="ipi_aliquota_valor_devido" />
-                                    <field name="ipi_aliquota_valor_recolher" />
+                                    <field
+                                        name="ipi_aliquota_valor_devido"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="ipi_aliquota_valor_recolher"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field name="ipi_regime_tributacao_codigo" />
                                     <field name="ipi_regime_tributacao_nome" />
                                 </group>
@@ -153,13 +259,33 @@
                                     <field name="ii_acordo_tarifario_tipo_codigo" />
                                     <field name="ii_acordo_tarifario_tipo_nome" />
                                     <field name="ii_aliquota_acordo" />
-                                    <field name="ii_aliquota_ad_valorem" />
+                                    <field
+                                        name="ii_aliquota_ad_valorem"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field name="ii_aliquota_percentual_reducao" />
                                     <field name="ii_aliquota_reduzida" />
-                                    <field name="ii_aliquota_valor_calculado" />
-                                    <field name="ii_aliquota_valor_devido" />
-                                    <field name="ii_aliquota_valor_recolher" />
-                                    <field name="ii_aliquota_valor_reduzido" />
+                                    <field
+                                        name="ii_aliquota_valor_calculado"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="ii_aliquota_valor_devido"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="ii_aliquota_valor_recolher"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="ii_aliquota_valor_reduzido"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                     <field name="ii_base_calculo" />
                                     <field name="ii_fundamento_legal_codigo" />
                                     <field
@@ -169,9 +295,21 @@
                                     <field name="ii_regime_tributacao_nome" />
                                 </group>
                                 <group>
-                                    <field name="cide_valor_aliquota_especifica" />
-                                    <field name="cide_valor_devido" />
-                                    <field name="cide_valor_recolher" />
+                                    <field
+                                        name="cide_valor_aliquota_especifica"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="cide_valor_devido"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
+                                    <field
+                                        name="cide_valor_recolher"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                             </group>
                         </page>
@@ -203,10 +341,26 @@
                             <group>
                                 <field name="dcr_coeficiente_reducao" />
                                 <field name="dcr_identificacao" />
-                                <field name="dcr_valor_devido" />
-                                <field name="dcr_valor_dolar" />
-                                <field name="dcr_valor_real" />
-                                <field name="dcr_valor_recolher" />
+                                <field
+                                    name="dcr_valor_devido"
+                                    widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                />
+                                <field
+                                    name="dcr_valor_dolar"
+                                    widget="monetary"
+                                    options="{'currency_field': 'dolar_currency_id'}"
+                                />
+                                <field
+                                    name="dcr_valor_real"
+                                    widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                />
+                                <field
+                                    name="dcr_valor_recolher"
+                                    widget="monetary"
+                                    options="{'currency_field': 'currency_id'}"
+                                />
                             </group>
                         </page>
                         <page name="cambio" string="Cambio">
@@ -223,8 +377,16 @@
                                     <field name="moeda_venda_id" />
                                     <field name="condicao_venda_moeda_codigo" />
                                     <field name="condicao_venda_moeda_nome" />
-                                    <field name="condicao_venda_valor_moeda" />
-                                    <field name="condicao_venda_valor_reais" />
+                                    <field
+                                        name="condicao_venda_valor_moeda"
+                                        widget="monetary"
+                                        options="{'currency_field': 'moeda_venda_id'}"
+                                    />
+                                    <field
+                                        name="condicao_venda_valor_reais"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                                 <group>
                                     <field
@@ -245,7 +407,11 @@
                                     <field
                                         name="dados_cambiais_motivo_sem_cobertura_nome"
                                     />
-                                    <field name="dados_cambiais_valor_real_cambio" />
+                                    <field
+                                        name="dados_cambiais_valor_real_cambio"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id'}"
+                                    />
                                 </group>
                             </group>
                         </page>
@@ -263,10 +429,31 @@
                 <field name="numero_adicao" />
                 <field name="numero_di" />
                 <field name="numero_li" />
-                <field name="valor_taxa_siscomex" sum="Siscomex" />
-                <field name="valor_taxa_afrmm" sum="AFRMM" />
-                <field name="valor_taxa_capatazia" sum="Capatazia" />
-                <field name="valor_outros" sum="Outros" />
+                <field name="currency_id" invisible="1" />
+                <field
+                    name="valor_taxa_siscomex"
+                    sum="Siscomex"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
+                <field
+                    name="valor_taxa_afrmm"
+                    sum="AFRMM"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
+                <field
+                    name="valor_taxa_capatazia"
+                    sum="Capatazia"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
+                <field
+                    name="valor_outros"
+                    sum="Outros"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
             </tree>
         </field>
     </record>

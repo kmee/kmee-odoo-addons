@@ -68,8 +68,7 @@ class L10nBrDiMercadoria(models.Model):
     descricao_mercadoria = fields.Char(string="Descrição")
     quantidade = fields.Float(string="Qty")
     unidade_medida = fields.Char(string="Uom")
-    valor_unitario = fields.Monetary(
-        currency_field="moeda_venda_id",
+    valor_unitario = fields.Float(
         string="vUnMoeda",
         digits=(12, 8),
     )
@@ -83,17 +82,16 @@ class L10nBrDiMercadoria(models.Model):
 
     uom_id = fields.Many2one("uom.uom", string="Unit of Measure")
 
-    price_unit = fields.Monetary(
+    price_unit = fields.Float(
         string="vUnBRL",
         digits=(12, 8),
     )
 
-    amount_subtotal = fields.Monetary(
+    amount_subtotal = fields.Float(
         string="Subtotal (Moeda)",
         digits=(12, 8),
-        currency_field="moeda_venda_id",
     )
-    amount_subtotal_brl = fields.Monetary(string="Subtotal (BRL)", digits=(12, 8))
+    amount_subtotal_brl = fields.Float()
 
     unit_addition_deduction = fields.Monetary(
         string="+/-",
@@ -102,13 +100,13 @@ class L10nBrDiMercadoria(models.Model):
         "di_mercadoria_ids.quantidade",
     )
 
-    final_price_unit = fields.Monetary(string="vUnBRL Final", digits=(12, 8))
+    final_price_unit = fields.Float()
 
-    amount_other = fields.Monetary(string="vOutro")
+    amount_other = fields.Float()
 
-    amount_total = fields.Monetary(string="Total")
+    amount_total = fields.Float()
 
-    amount_afrmm = fields.Monetary(string="vAFRMM")
+    amount_afrmm = fields.Float()
 
     def _importa_declaracao(self, mercadoria):
         vals = {

@@ -142,13 +142,13 @@ class L10nBrDiDeclaracao(models.Model):
     documento_chegada_carga_numero = fields.Char()
 
     frete_collect = fields.Float()
-    frete_em_territorio_nacional = fields.Monetary(currency_field="dolar_currency_id")
+    frete_em_territorio_nacional = fields.Float()
     frete_moeda_negociada_codigo = fields.Char()
     frete_moeda_negociada_nome = fields.Char()
-    frete_prepaid = fields.Monetary(currency_field="dolar_currency_id")
-    frete_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    frete_total_moeda = fields.Monetary(currency_field="freight_currency_id")
-    frete_total_reais = fields.Monetary()
+    frete_prepaid = fields.Float()
+    frete_total_dolares = fields.Float()
+    frete_total_moeda = fields.Float()
+    frete_total_reais = fields.Float()
 
     icms = fields.Char()
 
@@ -166,10 +166,10 @@ class L10nBrDiDeclaracao(models.Model):
     importador_numero = fields.Char()
     importador_numero_telefone = fields.Char()
 
-    local_descarga_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    local_descarga_total_reais = fields.Monetary()
-    local_embarque_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    local_embarque_total_reais = fields.Monetary()
+    local_descarga_total_dolares = fields.Float()
+    local_descarga_total_reais = fields.Float()
+    local_embarque_total_dolares = fields.Float()
+    local_embarque_total_reais = fields.Float()
 
     modalidade_despacho_codigo = fields.Char()
     modalidade_despacho_nome = fields.Char()
@@ -178,11 +178,9 @@ class L10nBrDiDeclaracao(models.Model):
 
     seguro_moeda_negociada_codigo = fields.Char()
     seguro_moeda_negociada_nome = fields.Char()
-    seguro_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    seguro_total_moeda_negociada = fields.Monetary(
-        currency_field="insurance_currency_id"
-    )
-    seguro_total_reais = fields.Monetary()
+    seguro_total_dolares = fields.Float()
+    seguro_total_moeda_negociada = fields.Float()
+    seguro_total_reais = fields.Float()
 
     situacao_entrega_carga = fields.Char()
     tipo_declaracao_codigo = fields.Char()
