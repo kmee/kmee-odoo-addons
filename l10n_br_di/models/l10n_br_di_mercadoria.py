@@ -95,7 +95,12 @@ class L10nBrDiMercadoria(models.Model):
     )
     amount_subtotal_brl = fields.Monetary(string="Subtotal (BRL)", digits=(12, 8))
 
-    unit_addition_deduction = fields.Monetary(string="+/-", digits=(12, 8))
+    unit_addition_deduction = fields.Monetary(
+        string="+/-",
+        digits=(12, 8),
+        help="Equals to the sum of all di_valor_ids.valor divided by the sum of "
+        "di_mercadoria_ids.quantidade",
+    )
 
     final_price_unit = fields.Monetary(string="vUnBRL Final", digits=(12, 8))
 
