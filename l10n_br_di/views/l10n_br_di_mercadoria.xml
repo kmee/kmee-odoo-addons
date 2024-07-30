@@ -30,7 +30,7 @@
 
                 <field name="amount_other" sum="vOutro" />
                 <field name="amount_total" sum="Total" />
-                <field name="amount_afrmm" sum="vAFRMM" />
+                <field name="amount_afrmm" sum="vAFRMM" optional="hide" />
             </tree>
         </field>
     </record>
