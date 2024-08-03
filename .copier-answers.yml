@@ -1,0 +1,25 @@
+# Do NOT update manually; changes here will be overwritten by Copier
+_commit: v1.24
+_src_path: https://github.com/OCA/oca-addons-repo-template.git
+ci: GitHub
+convert_readme_fragments_to_markdown: true
+generate_requirements_txt: true
+github_check_license: true
+github_ci_extra_env: {}
+github_enable_codecov: false
+github_enable_makepot: true
+github_enable_stale_action: true
+github_enforce_dev_status_compatibility: true
+include_wkhtmltopdf: true
+odoo_test_flavor: OCB
+odoo_version: 16.0
+org_name: KMEE
+org_slug: KMEE
+rebel_module_groups: []
+repo_description: Private Addons
+repo_name: Private Kmee Addons
+repo_slug: kmee-private-addons
+repo_website: https://github.com/KMEE/kmee-private-addons
+use_pyproject_toml: false
+use_ruff: false
+
