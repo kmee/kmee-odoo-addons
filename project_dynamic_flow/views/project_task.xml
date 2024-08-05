@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="project_task_wip_notebook" model="ir.ui.view">
+        <field name="name">project.task.wip</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[last()]" position="after">
+                <page name="wip_page" string="Metrics">
+                    <field name="wip_ids" readonly="1">
+                        <tree>
+                            <field name="state" />
+                            <field name="date_hour_start" />
+                            <field name="date_hour_stop" />
+                            <field name="lead_time" />
+                            <field name="state" />
+                            <field name="user_id" />
+                        </tree>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="reaction_time" />
+                            <field name="lead_time" />
+                        </group>
+                        <group>
+                            <field name="cycle_time" />
+                            <field name="logged_time" />
+                        </group>
+                        <group>
+                            <field name="flow_efficience" widget="percentage" />
+                            <field name="rating_avg" string="NPS" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_task_wip_tree" model="ir.ui.view">
+        <field name="name">project.task.wip</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="reaction_time" optional="hide" />
+                <field name="lead_time" optional="hide" />
+                <field name="cycle_time" optional="hide" />
+                <field name="logged_time" optional="hide" />
+                <field name="flow_efficience" optional="hide" />
+                <field name="rating_avg" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_task_search_view">
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[1]" position="after">
+                <searchpanel>
+                    <field
+                        name="priority"
+                        string="Priority"
+                        icon="fa-star"
+                        select="multi"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="tag_ids"
+                        string="Tags"
+                        icon="fa-tags"
+                        select="multi"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="type_id"
+                        string="Type"
+                        select="multi"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="milestone_id"
+                        string="Milestone"
+                        icon="fa-date"
+                        select="multi"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="state"
+                        string="State"
+                        icon="fa-rocket"
+                        select="multi"
+                        enable_counters="1"
+                    />
+                    <field name="project_id" string="Project" />
+                </searchpanel>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="project_task_act_window">
+        <field name="name">All Tasks</field>
+        <field name="res_model">project.task</field>
+        <field
+            name="view_mode"
+        >kanban,tree,form,timeline,calendar,pivot,graph,activity</field>
+        <field name="domain">[('is_private', '=', False)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="project_task_menu">
+        <field name="name">All Taks</field>
+        <field name="parent_id" ref="project.menu_main_pm" />
+        <field name="action" ref="project_task_act_window" />
+        <field name="sequence" eval="0" />
+    </record>
+
+</odoo>
