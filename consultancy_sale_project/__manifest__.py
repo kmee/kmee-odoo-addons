@@ -17,7 +17,24 @@
         "contract_payment_mode",
         "product_contract",
         "subscription_oca",
+        "contract_timesheet_invoice_type",
     ],
-    "data": [],
-    "demo": [],
+    "data": [
+        "views/account_analytic_line.xml",
+        "views/account_move_line.xml",
+        "views/account_move.xml",
+        "wizards/contract_create_project_wizard.xml",
+        # 'security/contract_line.xml',
+        # 'security/contract_contract.xml',
+        #
+        "security/ir.model.access.csv",
+        #
+        "views/contract_line.xml",
+        "views/contract_contract.xml",
+    ],
+    "demo": [
+        "demo/account_analytic_line.xml",
+        "demo/contract_line.xml",
+        "demo/contract_contract.xml",
+    ],
 }
