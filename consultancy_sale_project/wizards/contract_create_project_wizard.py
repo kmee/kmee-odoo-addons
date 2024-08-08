@@ -46,8 +46,8 @@ class ContractCreateProjectWizard(models.TransientModel):
             }
 
             if wizard.project_template_id:
-                wizard.project_template_id.copy()
-                projec.update(vals)
+                project = wizard.project_template_id.copy()
+                project.update(vals)
             else:
                 self.env["project.project"].create(vals)
 
