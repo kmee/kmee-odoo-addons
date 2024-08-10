@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<record id="view_move_form_inherit" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_br_account.invoice_form" />
+        <field name="arch" type="xml">
+        <xpath
+                expr="//field[@name='invoice_line_ids']/form//page[@name='fiscal_line_extra_info']"
+                position="after"
+            >
+            <page name="additions" string="Additions">
+                <field name="di_mercadoria_ids">
+                    <tree>
+                        <field name="currency_id" invisible="1" />
+                        <field name="moeda_venda_id" invisible="1" />
+                        <field name="declaracao_id" />
+                        <field name="adicao_id" />
+                        <field name="numero_sequencial_item" />
+                        <field name="descricao_mercadoria" />
+                        <field name="unidade_medida" />
+                        <field name="quantidade" />
+                        <field name="valor_unitario" />
+                        <field name="final_price_unit" />
+                        <field name="amount_other" sum="vOutro" />
+                        <field name="amount_total" sum="Total" />
+                        <field name="amount_afrmm" sum="vAFRMM" />
+                    </tree>
+                </field>
+            </page>
+        </xpath>
+        <!-- For ensuring the storage of these fields -->
+        <xpath expr="//field[@name='line_ids']/tree" position="inside">
+            <field name="di_mercadoria_ids" invisible="1" />
+    </xpath>
+    </field>
+</record>
+</odoo>

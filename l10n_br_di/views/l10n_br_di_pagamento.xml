@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="l10n_br_di_pagamento_tree_view">
+        <field name="model">l10n_br_di.pagamento</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="declaracao_id" invisible="1" />
+                <field name="currency_id" invisible="1" />
+                <field name="agencia_pagamento" />
+                <field name="banco_pagamento" />
+                <field name="codigo_receita" />
+                <field name="codigo_tipo_pagamento" />
+                <field name="conta_pagamento" />
+                <field name="data_pagamento" />
+                <field name="nome_tipo_pagamento" />
+                <field name="numero_retificacao" />
+                <field name="valor_juros_encargos" sum="Juros" />
+                <field name="valor_multa" sum="Multa" />
+                <field name="valor_receita" sum="Receita" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

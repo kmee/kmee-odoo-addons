@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+a1,a1,model_l10n_br_di_adicao,account.group_account_invoice,1,1,1,1
+a2,a2,model_l10n_br_di_declaracao,account.group_account_invoice,1,1,1,1
+a3,a3,model_l10n_br_di_despacho,account.group_account_invoice,1,1,1,1
+a4,a4,model_l10n_br_di_mercadoria,account.group_account_invoice,1,1,1,1
+a5,a5,model_l10n_br_di_pagamento,account.group_account_invoice,1,1,1,1
+a6,a6,model_l10n_br_di_valor,account.group_account_invoice,1,1,1,1
+a7,a7,model_l10n_br_di_importa_di_wizard,account.group_account_invoice,1,1,1,1
