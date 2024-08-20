@@ -8,8 +8,8 @@
         <field name="py3o_filetype">pdf</field>
         <field name="module">l10n_br_stock_report_py3o</field>
         <field name="py3o_template_fallback">report/delivery.odt</field>
-        <field name="report_name">stock.report_deliveryslip</field>
-        <field name="report_file">stock.report_deliveryslip</field>
+        <field name="report_name">l10n_br_stock_report_py3o.report_deliveryslip</field>
+        <!-- <field name="report_file">stock.report_deliveryslip</field> -->
         <field
             name="print_report_name"
         >'Delivery Slip - %s - %s' % (object.partner_id.name or '',
@@ -26,8 +26,8 @@
         <field name="py3o_filetype">pdf</field>
         <field name="module">l10n_br_stock_report_py3o</field>
         <field name="py3o_template_fallback">report/picking.odt</field>
-        <field name="report_name">stock.report_picking</field>
-        <field name="report_file">stock.report_picking_operations</field>
+        <field name="report_name">l10n_br_stock_report_py3o.report_picking</field>
+        <!-- <field name="report_file">stock.report_picking_operations</field> -->
         <field name="print_report_name">
 'Pick-' + object.name.replace('/', '_')+'-'+(object.partner_id and object.partner_id.commercial_partner_id.name.replace(' ', '_') or '')+'.pdf'
         </field>
