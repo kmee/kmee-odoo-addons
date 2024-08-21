@@ -57,7 +57,7 @@
         <field name="quotechar">"</field>
         <field name="timestamp_format">%d/%m/%Y</field>
         <field name="offset_row">8</field>
-        <field name="offset_footer">17</field>
+        <!-- <field name="offset_footer">17</field> -->
         <field name="timestamp_column">Data</field>
         <field name="amount_column">Valor (R$)</field>
         <field name="balance_column">Saldo (R$)</field>
@@ -76,7 +76,7 @@
         <field name="quotechar">"</field>
         <field name="timestamp_format">%d/%m/%Y</field>
         <field name="offset_row">12</field>
-        <field name="offset_footer">0</field>
+        <!-- <field name="offset_footer">0</field> -->
         <field name="timestamp_column">Data de lançamento</field>
         <field name="amount_column">Entradas / Saídas (R$)</field>
         <field name="balance_column">Saldo (R$)</field>
