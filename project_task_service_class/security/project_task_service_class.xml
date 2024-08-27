@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record
+        model="ir.model.access"
+        id="project_task_service_class_access_name"
+    > <!-- TODO acl id -->
+        <field
+            name="name"
+        >project.task.service.class access name</field> <!-- TODO acl name -->
+        <field name="model_id" ref="model_project_task_service_class" />
+        <!-- TODO review and adapt -->
+        <field name="group_id" ref="base.group_user" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+    </record>
+
+</odoo>
