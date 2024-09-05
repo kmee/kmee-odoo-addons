@@ -16,6 +16,8 @@
         "product_contract",
         "subscription_oca",
         "contract_timesheet_invoice_type",
+        "hr_contract",
+        "product_contract_variable_quantity",
     ],
     "data": [
         "views/account_analytic_line.xml",
@@ -29,6 +31,9 @@
         #
         "views/contract_line.xml",
         "views/contract_contract.xml",
+        "views/hr_employee.xml",
+        "views/product_template.xml",
+        "views/project_project.xml",
     ],
     "demo": [
         "demo/account_analytic_line.xml",
