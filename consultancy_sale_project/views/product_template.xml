@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record model="ir.ui.view" id="product_template_employee">
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="product_contract.product_template_form_contract_view"
+        />
+        <field name="arch" type="xml">
+                <field name="is_auto_renew" position="after">
+                    <field name="employee_line_ids" widget="many2many_tags" />
+                </field>
+        </field>
+    </record>
+</odoo>

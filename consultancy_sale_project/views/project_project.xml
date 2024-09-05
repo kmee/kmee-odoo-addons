@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="project_project_update_button">
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="sale_timesheet.project_project_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='billing_employee_rate']//field[@name='sale_line_employee_ids']/tree/field[@name='sale_line_id']"
+                position="attributes"
+            >
+                <attribute name="attrs">{'required': False}</attribute>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='sale_line_employee_ids']/tree/field[@name='employee_id']"
+                position="after"
+            >
+                <field name="product_id" />
+            </xpath>
+            <field name="contract_id" position="after">
+                    <button
+                    name="action_update_project_lines"
+                    string="Atualizar linhas"
+                    class="oe_highlight"
+                    type="object"
+                    aria-label="Atualizar linhas"
+                    title="Atualizar linhas"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

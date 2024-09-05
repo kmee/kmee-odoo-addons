@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_contract_create_project_wizard,access_contract_create_project_wizard,model_contract_create_project_wizard,project.group_project_user,1,1,1,1
+access_hr_employee_product_line,access_hr_employee_product_line,model_hr_employee_product_line,hr.group_hr_user,1,1,1,1
