@@ -51,6 +51,8 @@ class ContractCreateProjectWizard(models.TransientModel):
                 project = wizard.project_template_id.copy()
                 project.update(vals)
             else:
-                self.env["project.project"].create(vals)
+                project = self.env["project.project"].create(vals)
+
+            project.action_update_project_lines()
 
         return self.contract_id.action_view_projects()
