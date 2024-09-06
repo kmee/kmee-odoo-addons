@@ -9,7 +9,7 @@
                 position="attributes"
             >
                 <attribute name="attrs">{'required': False}</attribute>
-                <attribute name="invisible">1</attribute>
+                <attribute name="optional">hide</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='sale_line_employee_ids']/tree/field[@name='employee_id']"
