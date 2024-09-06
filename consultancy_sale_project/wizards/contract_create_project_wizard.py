@@ -26,6 +26,8 @@ class ContractCreateProjectWizard(models.TransientModel):
 
     default_contract_line_id = fields.Many2one(
         "contract.line",
+        domain="[('contract_id', '=', contract_id)]",
+        required=True,
     )
 
     allow_billable = fields.Boolean(default=True)
