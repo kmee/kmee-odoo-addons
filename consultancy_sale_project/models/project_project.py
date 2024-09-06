@@ -11,9 +11,11 @@ class ProjectProject(models.Model):
         for employee in self.env["hr.employee"].search([]):
             for product_line in employee.product_line_ids:
                 product = product_line.product_tmpl_id.product_variant_id
+
                 if (
                     product in contract_products
-                    and employee in product_line.employee_id
+                    and employee in product_line.product_tmpl_id.employee_line_ids
+                    and product_line.product_tmpl_id == product.product_tmpl_id
                 ):
                     existing_line = self.sale_line_employee_ids.filtered(
                         lambda line: line.product_id == product
