@@ -7,9 +7,11 @@
             ref="product_contract.product_template_form_contract_view"
         />
         <field name="arch" type="xml">
-                <field name="is_auto_renew" position="after">
-                    <field name="employee_line_ids" widget="many2many_tags" />
-                </field>
+            <xpath expr="//notebook" position="inside">
+                <page name="employees" string="Employees" groups="hr.group_hr_user">
+                    <field name="employee_line_ids" />
+                </page>
+            </xpath>
         </field>
     </record>
 </odoo>
