@@ -11,7 +11,9 @@ class ProjectProject(models.Model):
         for employee in self.env["hr.employee"].search([]):
             for product_line in employee.product_line_ids:
                 product = product_line.product_tmpl_id.product_variant_id
-
+                contract_line = contract.contract_line_fixed_ids.filtered(
+                    lambda line: line.product_id == product
+                )
                 if (
                     product in contract_products
                     and employee in product_line.product_tmpl_id.employee_line_ids
@@ -36,6 +38,8 @@ class ProjectProject(models.Model):
                                         0,
                                         {
                                             "product_id": product.id,
+                                            "contract_line_id": contract_line.id,
+                                            "contract_id": contract.id,
                                             "price_unit": product.lst_price,
                                             "employee_id": employee.id,
                                         },
