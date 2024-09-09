@@ -41,10 +41,7 @@
                     options="{'currency_field': 'currency_id'}"
                 />
 
-                <field
-                    name="unit_addition_deduction"
-                    help="Equals to the sum of all di_valor_ids.valor divided by the sum of di_mercadoria_ids.quantidade"
-                />
+                <field name="unit_addition_deduction" />
                 <field
                     name="final_price_unit"
                     widget="monetary"
