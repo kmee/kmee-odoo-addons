@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="project_task_form_view">
+        <field name="name">project.task.form (in project_tech_lead)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field name="tech_lead_id" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_task_search_form">
+        <field name="name">project.task.search (in project_tech_lead)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_create_date']" position="after">
+                <filter
+                    string="Tech Lead"
+                    name="group_tech_lead"
+                    context="{'group_by': 'tech_lead_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
