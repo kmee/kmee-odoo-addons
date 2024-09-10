@@ -9,24 +9,21 @@ class ProjectProject(models.Model):
         contract_products = contract.mapped("contract_line_fixed_ids.product_id")
 
         for employee in self.env["hr.employee"].search([]):
-            for product_line in employee.product_line_ids:
-                product = product_line.product_tmpl_id.product_variant_id
+            for product_template in employee.product_line_ids:
+                product_variant = product_template.product_variant_id
                 contract_line = contract.contract_line_fixed_ids.filtered(
-                    lambda line: line.product_id == product
-                )
-                if (
-                    product in contract_products
-                    and employee in product_line.product_tmpl_id.employee_line_ids
-                    and product_line.product_tmpl_id == product.product_tmpl_id
-                ):
+                    lambda line: line.product_id == product_variant
+                )[:1]
+
+                if product_variant in contract_products:
                     existing_line = self.sale_line_employee_ids.filtered(
-                        lambda line: line.product_id == product
+                        lambda line: line.product_id == product_variant
                         and line.employee_id == employee
                     )
                     if existing_line:
                         existing_line.write(
                             {
-                                "price_unit": product.lst_price,
+                                "price_unit": product_variant.lst_price,
                             }
                         )
                     else:
@@ -37,10 +34,10 @@ class ProjectProject(models.Model):
                                         0,
                                         0,
                                         {
-                                            "product_id": product.id,
+                                            "product_id": product_variant.id,
                                             "contract_line_id": contract_line.id,
                                             "contract_id": contract.id,
-                                            "price_unit": product.lst_price,
+                                            "price_unit": product_variant.lst_price,
                                             "employee_id": employee.id,
                                         },
                                     )
