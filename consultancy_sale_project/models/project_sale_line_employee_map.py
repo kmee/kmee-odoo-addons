@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class ProjectProductEmployeeMap(models.Model):
     _inherit = "project.sale.line.employee.map"
+    _order = "sequence,id"
     _sql_constraints = [
         ("uniqueness_employee", "check(1=1)", "No error"),
     ]
@@ -11,6 +12,8 @@ class ProjectProductEmployeeMap(models.Model):
         string="Product",
         comodel_name="product.product",
     )
+
+    sequence = fields.Integer()
 
     @api.depends("sale_line_id.price_unit")
     def _compute_price_unit(self):
