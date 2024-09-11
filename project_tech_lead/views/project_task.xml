@@ -3,6 +3,17 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+    <record model="ir.ui.view" id="quick_create_task_form">
+        <field name="name">quick.create.task.form (in project_tech_lead)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form" />
+        <field name="arch" type="xml">
+            <field name="project_id" position="after">
+                <field name="tech_lead_id" force_save="1" invisible="1" />
+            </field>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="project_task_form_view">
         <field name="name">project.task.form (in project_tech_lead)</field>
         <field name="model">project.task</field>
