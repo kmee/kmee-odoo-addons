@@ -4,19 +4,36 @@
         <!-- <t t-call="web.html_container"> -->
             <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="picking">
-                <t t-foreach="range(picking.number_of_volumes)" t-as="volume">
-                        <div class="page" style="page-break-after: always; border: 0 solid black; height: 61mm;" >
-                            <div style="font-size: 15px; padding: 0; border: 0 solid black; height: 41mm;">
-                                <p><span t-field="picking.partner_id.legal_name" style="margin: 0;" /></p>
+                <t
+                    t-set="number_of_volumes"
+                    t-value="picking.last_volume - picking.first_volume + 1"
+                />
+                <t t-foreach="range(number_of_volumes)" t-as="volume">
+                        <div
+                        class="page"
+                        style="page-break-after: always; border: 0 solid black; height: 61mm;"
+                    >
+                            <div
+                            style="font-size: 15px; padding: 0; border: 0 solid black; height: 41mm;"
+                        >
+                                <p><span
+                                    t-field="picking.partner_id.legal_name"
+                                    style="margin: 0;"
+                                /></p>
                             </div>
-                            <p>NF-E <span
-                                t-field="picking.document_serie"
-                            /> <span t-field="picking.document_number" /></p>
-                            <t t-set="volume_display" t-value="volume + 1" />
-                            <p style="text-align: right;"><span t-esc="volume_display" />/<span
-                                t-field="picking.number_of_volumes"
+                            <p>NF-E <span t-field="picking.document_serie" /> <span
+                                t-field="picking.document_number"
                             /></p>
-                            <p style="text-align: right;"><span t-field="picking.carrier_id" /></p>
+                            <t
+                            t-set="volume_display"
+                            t-value="volume + picking.first_volume"
+                        />
+                            <p style="text-align: right;"><span
+                                t-esc="volume_display"
+                            />/<span t-field="picking.number_of_volumes" /></p>
+                            <p style="text-align: right;"><span
+                                t-field="picking.carrier_id"
+                            /></p>
                         </div>
                 </t>
             </t>

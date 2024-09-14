@@ -12,6 +12,9 @@
         "l10n_br_delivery_nfe",
     ],
     "data": [
+        "security/ir.model.access.csv",
+        "views/stock_picking.xml",
+        "wizards/delivery_picking_label_wizard.xml",
         "report/report_delivery_picking_label.xml",
         "data/paperformat.xml",
         "data/report_delivery_picking_label.xml",
