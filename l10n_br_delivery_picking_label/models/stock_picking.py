@@ -8,8 +8,8 @@ class StockPicking(models.Model):
 
     _inherit = "stock.picking"
 
-    first_volume = fields.Integer()
-    last_volume = fields.Integer()
+    first_volume = fields.Integer(default=1)
+    last_volume = fields.Integer(default=0)
     number_of_volumes = fields.Integer(
         string="Number of Volumes",
         default=0,
@@ -26,3 +26,10 @@ class StockPicking(models.Model):
             "target": "new",
         }
         return action
+
+    def write(self, vals):
+        if not self.last_volume:
+            if "number_of_volumes" in vals:
+                vals["last_volume"] = vals["number_of_volumes"]
+        res = super().write(vals)
+        return res

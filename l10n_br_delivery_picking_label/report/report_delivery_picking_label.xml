@@ -31,9 +31,6 @@
                             <p style="text-align: right;"><span
                                 t-esc="volume_display"
                             />/<span t-field="picking.number_of_volumes" /></p>
-                            <p style="text-align: right;"><span
-                                t-field="picking.carrier_id"
-                            /></p>
                         </div>
                 </t>
             </t>
