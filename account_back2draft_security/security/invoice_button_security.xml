@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.module.category" id="hide_button_module_category">
+        <field name="name">Hide invoice back to draft button</field>
+    </record>
+
+    <record model="res.groups" id="group_user_hide_back_to_draft_button">
+        <field name="name">Hide</field>
+        <field name="category_id" ref="hide_button_module_category" />
+        <field name="users" eval="[(4, ref('base.user_root'))]" />
+    </record>
+</odoo>
