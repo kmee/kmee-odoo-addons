@@ -29,6 +29,7 @@ class DeliveryPickingLabelWizard(models.TransientModel):
     @api.onchange("picking_id")
     def _onchange_picking_id(self):
         self.last_volume = self.picking_id.number_of_volumes
+        self.first_volume = 1
 
     @api.onchange("first_volume")
     def _onchange_first_volume(self):
