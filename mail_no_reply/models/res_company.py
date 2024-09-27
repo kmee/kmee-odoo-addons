@@ -6,5 +6,4 @@ class ResCompany(models.Model):
 
     email_no_reply = fields.Char(
         string="No-Reply Email",
-        default="no-reply@empresa.com.br",
     )
