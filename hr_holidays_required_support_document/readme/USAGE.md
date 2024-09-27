@@ -1,0 +1,1 @@
+After checking the 'force_support_document', you can't approve the day off if it does not have the supported document attached.
