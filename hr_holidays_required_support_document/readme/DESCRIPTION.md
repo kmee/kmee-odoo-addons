@@ -1,0 +1,1 @@
+It adds an boolean that forces the supported document when approving the day off.
