@@ -14,6 +14,7 @@
     ],
     "data": [
         "views/mail_compose_message.xml",
+        "views/mail_template.xml",
         "views/res_company.xml",
         "views/res_config.xml",
     ],
