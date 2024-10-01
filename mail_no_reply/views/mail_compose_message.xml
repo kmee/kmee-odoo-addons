@@ -1,10 +1,10 @@
 <odoo>
-    <record id="mail_no_reply" model="ir.ui.view">
+    <record id="mail_no_reply_compose_message" model="ir.ui.view">
         <field name="name">mail compose message form mail no reply</field>
-        <field name="model">mail.template</field>
-        <field name="inherit_id" ref="mail.email_template_form" />
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='email_from']" position="after">
+            <xpath expr="//field[@name='subject']" position="after">
                 <field name="active_no_reply" widget="boolean_toggle" />
             </xpath>
         </field>
