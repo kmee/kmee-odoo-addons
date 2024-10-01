@@ -1,0 +1,1 @@
+Follow the steps in stock_intercompany_bidirectional readme.
