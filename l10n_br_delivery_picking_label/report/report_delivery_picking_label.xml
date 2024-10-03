@@ -1,41 +1,86 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_delivery_picking_label_view">
-        <!-- <t t-call="web.html_container"> -->
-            <t t-call="web.basic_layout">
+        <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="picking">
                 <t
                     t-set="number_of_volumes"
                     t-value="picking.last_volume - picking.first_volume + 1"
                 />
+                <t
+                    t-set="partner_id_legal_name"
+                    t-value="picking.partner_id.legal_name[:51].rstrip()"
+                />
+                <t
+                    t-set="carrier_id_legal_name"
+                    t-value="picking.carrier_id.partner_id.legal_name and picking.carrier_id.partner_id.legal_name[:51].rstrip() or ''"
+                />
+
                 <t t-foreach="range(number_of_volumes)" t-as="volume">
-                        <div
+                    <t t-set="volume_display" t-value="volume + picking.first_volume" />
+
+                    <div
                         class="page"
                         style="page-break-after: always; border: 0 solid black; height: 61mm;"
                     >
+
+                        <t t-if="carrier_id_legal_name">
                             <div
-                            style="font-size: 15px; padding: 0; border: 0 solid black; height: 41mm;"
-                        >
-                                <p><span
-                                    t-field="picking.partner_id.legal_name"
-                                    style="margin: 0;"
-                                /></p>
+                                style="font-size: 15px; padding: 0; border: 0 solid black; height: 25mm; margin:0;"
+                            >
+                                <p>
+                                    <span
+                                        t-esc="partner_id_legal_name"
+                                        style="margin: 0; padding: 0;"
+                                    />
+                                </p>
                             </div>
-                            <p>NF-E <span t-field="picking.document_serie" /> <span
-                                t-field="picking.document_number"
-                            /></p>
-                            <t
-                            t-set="volume_display"
-                            t-value="volume + picking.first_volume"
-                        />
-                            <p style="text-align: right;"><span
-                                t-esc="volume_display"
-                            />/<span t-field="picking.number_of_volumes" /></p>
-                        </div>
+                            <p
+                                style="text-align: left; border: 0 solid red; margin:0;"
+                            >NF-E <span t-field="picking.document_serie" />
+                                <span t-field="picking.document_number" />
+                            </p>
+                            <p style="text-align: left; border: 0 solid red; margin:0;">
+                                <span t-esc="volume_display" />/<span
+                                    t-field="picking.number_of_volumes"
+                                    style="text-align: right;"
+                                />
+                            </p>
+                            <p>
+                                <span
+                                    t-esc="carrier_id_legal_name"
+                                    style="vertical-align: top; margin:0;"
+                                />
+                            </p>
+                        </t>
+
+                        <t t-if="not carrier_id_legal_name">
+                            <div
+                                style="font-size: 15px; padding: 0; border: 0 solid black; height: 50mm; margin:0;"
+                            >
+                                <p>
+                                    <span
+                                        t-esc="partner_id_legal_name"
+                                        style="margin: 0; padding: 0;"
+                                    />
+                                </p>
+                            </div>
+                            <p
+                                style="text-align: left; border: 0 solid red; margin:0;"
+                            >NF-E <span t-field="picking.document_serie" />
+                                <span t-field="picking.document_number" />
+                            </p>
+                            <p style="text-align: left; border: 0 solid red; margin:0;">
+                                <span t-esc="volume_display" />/<span
+                                    t-field="picking.number_of_volumes"
+                                    style="text-align: right;"
+                                />
+                            </p>
+                        </t>
+                    </div>
                 </t>
             </t>
         </t>
-
     </template>
 
 </odoo>
