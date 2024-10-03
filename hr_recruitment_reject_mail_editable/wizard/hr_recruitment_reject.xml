@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_applicant_reject_mail_editable" model="ir.ui.view">
+        <field name="name">hr applicant reject mail editable</field>
+        <field name="model">applicant.get.refuse.reason</field>
+        <field name="priority">100</field>
+        <field
+            name="inherit_id"
+            ref="hr_recruitment.applicant_get_refuse_reason_view_form"
+        />
+        <field name="arch" type="xml">
+            <button name="action_refuse_reason_apply" position="replace">
+                <button
+                    name="action_open_selected_mail_template"
+                    string="Refuse"
+                    type="object"
+                    class="btn-primary"
+                    attrs="{'invisible': [('send_mail', '=', False)]}"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>
