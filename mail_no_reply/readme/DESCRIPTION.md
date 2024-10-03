@@ -1,0 +1,1 @@
+it adds two fields: an email in the reply in the company configuration and a boolean in the mail template that adds this email in the reply as sending and as a reply email.

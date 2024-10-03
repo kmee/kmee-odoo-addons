@@ -1,0 +1,1 @@
+After checking the 'Use no-reply mail' in mail template, the email will be sent as the no reply defined in the company configuration.
