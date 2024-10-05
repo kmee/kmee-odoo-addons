@@ -122,8 +122,6 @@ fragment is included. ]
 -  [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
 -  [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
 
-.. _x.y.z-yyyy-mm-dd-1:
-
 11.0.x.y.z (YYYY-MM-DD)
 -----------------------
 
