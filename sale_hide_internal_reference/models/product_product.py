@@ -8,7 +8,7 @@ class ProductTemplate(models.Model):
 
     _inherit = "product.template"
 
-    hide_internal_reference = fields.Boolean("Hide Internal Reference")
+    hide_internal_reference = fields.Boolean()
 
 
 class ProductProduct(models.Model):
