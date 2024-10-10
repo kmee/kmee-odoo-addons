@@ -26,4 +26,23 @@
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="l10n_br_sale_stock_order_form">
+        <field name="name">sale.order.form (in sale_partial_lock)</field>
+        <field name="model">sale.order</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_sale_stock.l10n_br_sale_stock_order_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]"
+                position="attributes"
+            >
+                <attribute name="attrs">{'invisible': True}</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
 </odoo>
