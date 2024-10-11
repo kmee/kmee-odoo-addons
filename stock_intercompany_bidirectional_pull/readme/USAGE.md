@@ -1,0 +1,1 @@
+Create a receipt transfer and check if at the other company a delivery transfer was created.

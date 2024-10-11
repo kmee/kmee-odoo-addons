@@ -1,0 +1,1 @@
+When an inbound transfer is created, "Marked as To Do" and the contact is a multi-company company, in that company, a outbound transfer is created.
