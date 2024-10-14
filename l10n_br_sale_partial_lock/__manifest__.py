@@ -9,6 +9,7 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "sale",
+        "l10n_br_sale_stock",
     ],
     "data": [
         "views/sale_order.xml",
