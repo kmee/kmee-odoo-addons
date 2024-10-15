@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- <record id="view_move_form_inherit" model="ir.ui.view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="l10n_br_account.invoice_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_line_ids']/form//page[@name='fiscal_line_extra_info']" position="after">
+                    <page name="med" string="Medicamento">
+                        <group >
+                            <field name="nfe40_med"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']/tree" position="inside">
+                    <field name="nfe40_med" invisible="1" />
+                </xpath>
+            </field>
+    </record> -->
+
+
+    <record model="ir.ui.view" id="document_line_form">
+        <field name="model">l10n_br_fiscal.document.line</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.document_line_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='fiscal_line_extra_info']" position="after">
+                <page name="med" string="Medicamento">
+                    <group>
+                        <field name="nfe40_med" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="document_fiscal_line_mixin_form">
+        <field name="model">l10n_br_fiscal.document.line</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.document_fiscal_line_mixin_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='fiscal_line_extra_info']" position="after">
+                <page name="med" string="Medicamento">
+                    <group >
+                        <field name="nfe40_med"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record> -->
+
+</odoo>
