@@ -11,6 +11,6 @@ class MailTemplate(models.Model):
         if self.active_no_reply and self.env.user.company_id.email_no_reply:
             self.email_from = self.env.user.company_id.email_no_reply
             self.reply_to = self.env.user.company_id.email_no_reply
-        if not self.active_no_reply:
+        else:
             self.email_from = False
             self.reply_to = False
