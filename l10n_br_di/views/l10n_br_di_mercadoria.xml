@@ -16,7 +16,7 @@
                 <field name="unidade_medida" />
                 <field name="product_id" />
                 <field name="uom_id" />
-                <field name="quantidade" />
+                <field name="quantidade" sum="Qty" />
                 <field
                     name="valor_unitario"
                     widget="monetary"
