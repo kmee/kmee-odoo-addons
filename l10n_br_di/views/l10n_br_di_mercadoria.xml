@@ -16,23 +16,33 @@
                 <field name="unidade_medida" />
                 <field name="product_id" />
                 <field name="uom_id" />
-                <field name="quantidade" sum="Qty" />
+                <field name="quantidade" sum="Qty" class="oe_inline font-weight-bold" />
+
+                <!-- Unit prices/costs/additions -->
                 <field
                     name="valor_unitario"
                     widget="monetary"
                     options="{'currency_field': 'moeda_venda_id'}"
                 />
                 <field
-                    name="amount_subtotal"
-                    sum="Subtotal"
+                    name="price_unit"
                     widget="monetary"
                     options="{'currency_field': 'currency_id'}"
                 />
+                <field name="unit_addition_deduction" string="+/-" />
                 <field
-                    name="price_unit"
-                    sum="vUnCom"
+                    name="final_price_unit"
                     widget="monetary"
                     options="{'currency_field': 'currency_id'}"
+                    class="oe_inline font-weight-bold"
+                />
+
+                <!-- Total prices/costs/additions -->
+                <field
+                    name="amount_subtotal"
+                    sum="Subtotal"
+                    widget="monetary"
+                    options="{'currency_field': 'moeda_venda_id'}"
                 />
                 <field
                     name="amount_subtotal_brl"
@@ -40,16 +50,15 @@
                     widget="monetary"
                     options="{'currency_field': 'currency_id'}"
                 />
-
-                <field name="unit_addition_deduction" />
-                <field
-                    name="final_price_unit"
-                    widget="monetary"
-                    options="{'currency_field': 'currency_id'}"
-                />
+                <field name="addition_deduction" sum="Valores" string="+/-" />
                 <field name="amount_other" sum="vOutro" />
-                <field name="amount_total" sum="Total" />
                 <field name="amount_afrmm" sum="vAFRMM" />
+                <field
+                    name="amount_total"
+                    sum="Total"
+                    class="oe_inline font-weight-bold"
+                />
+
             </tree>
         </field>
     </record>
