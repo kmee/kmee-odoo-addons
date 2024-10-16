@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2024 KMEE
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
     <record model="ir.ui.view" id="l10n_br_di_adicao_form_view">
@@ -165,11 +165,7 @@
                                         widget="monetary"
                                         options="{'currency_field': 'currency_id'}"
                                     />
-                                    <field
-                                        name="pis_pasep_aliquota_reduzida"
-                                        widget="monetary"
-                                        options="{'currency_field': 'currency_id'}"
-                                    />
+                                    <field name="pis_pasep_aliquota_reduzida" />
                                     <field
                                         name="pis_pasep_aliquota_valor_devido"
                                         widget="monetary"
@@ -365,8 +361,8 @@
                         </page>
                         <page name="cambio" string="Cambio">
                             <group>
-                                    <group>
-                                        <field name="condicao_venda_incoterm" />
+                                <group>
+                                    <field name="condicao_venda_incoterm" />
                                     <field name="condicao_venda_local" />
                                     <field
                                         name="condicao_venda_metodo_valoracao_codigo"
