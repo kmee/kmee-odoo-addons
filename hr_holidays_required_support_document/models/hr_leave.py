@@ -1,17 +1,21 @@
-from odoo import _, models
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
 class HolidaysRequest(models.Model):
     _inherit = "hr.leave"
 
-    def action_approve(self):
-        for record in self:
+    @api.model_create_multi
+    def create(self, vals_list):
+        holidays = super(HolidaysRequest, self).create(vals_list)
+        for holiday in holidays:
             if (
-                record.holiday_status_id.required_support_document
-                and not record.supported_attachment_ids
+                holiday.holiday_status_id.required_support_document
+                and not holiday.supported_attachment_ids
             ):
                 raise ValidationError(
-                    _("Unable to approve, supporting document was not attached")
+                    _(
+                        "É necessário anexar um documento de suporte para este tipo de folga."
+                    )
                 )
-        return super(HolidaysRequest, self).action_approve()
+        return holidays
