@@ -348,8 +348,10 @@ class L10nBrDiDeclaracao(models.Model):
     def gerar_fatura(self):
         self.ensure_one()
         self._validate_invoice_fields()
-        # if self.state != "open":
-        #     raise UserError(_("Only open declarations can generate invoices."))
+
+        if not self.fiscal_operation_id:
+            raise UserError(_("Invoicing requires a fiscal operation"))
+
         return self._generate_invoice()
 
     def _validate_invoice_fields(self):
