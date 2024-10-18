@@ -378,6 +378,9 @@ class L10nBrDiDeclaracao(models.Model):
         move_form.issuer = "company"
         move_form.fiscal_operation_id = self.fiscal_operation_id
 
+        if self.fiscal_operation_id.state != "approved":
+            raise UserError(_("A operação fiscal selecionada não está aprovada."))
+
         for mercadoria in self.di_mercadoria_ids:
             with move_form.invoice_line_ids.new() as line_form:
                 line_form.product_id = mercadoria.product_id
