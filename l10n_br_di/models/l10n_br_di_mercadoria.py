@@ -18,11 +18,13 @@ class L10nBrDiMercadoria(models.Model):
             line.amount_subtotal = line.quantidade * line.valor_unitario
             line.amount_subtotal_brl = line.quantidade * line.price_unit
 
-            line.unit_addition_deduction = (
+            line.addition_deduction = (
                 line.adicao_id.amount_add_ded_brl
                 * line.amount_subtotal_brl
                 / line.adicao_id.condicao_venda_valor_reais
-            ) / line.quantidade
+            )
+
+            line.unit_addition_deduction = line.addition_deduction / line.quantidade
 
             line.amount_other = (
                 line.adicao_id.valor_outros
@@ -68,8 +70,7 @@ class L10nBrDiMercadoria(models.Model):
     descricao_mercadoria = fields.Char(string="Descrição")
     quantidade = fields.Float(string="Qty")
     unidade_medida = fields.Char(string="Uom")
-    valor_unitario = fields.Monetary(
-        currency_field="moeda_venda_id",
+    valor_unitario = fields.Float(
         string="vUnMoeda",
         digits=(12, 8),
     )
@@ -83,32 +84,36 @@ class L10nBrDiMercadoria(models.Model):
 
     uom_id = fields.Many2one("uom.uom", string="Unit of Measure")
 
-    price_unit = fields.Monetary(
+    price_unit = fields.Float(
         string="vUnBRL",
         digits=(12, 8),
     )
 
-    amount_subtotal = fields.Monetary(
+    amount_subtotal = fields.Float(
         string="Subtotal (Moeda)",
         digits=(12, 8),
-        currency_field="moeda_venda_id",
     )
-    amount_subtotal_brl = fields.Monetary(string="Subtotal (BRL)", digits=(12, 8))
+    amount_subtotal_brl = fields.Float()
 
     unit_addition_deduction = fields.Monetary(
-        string="+/-",
+        string="Valor +/- (Unitário)",
         digits=(12, 8),
-        help="Equals to the sum of all di_valor_ids.valor divided by the sum of "
-        "di_mercadoria_ids.quantidade",
+        help="Equals to the sum of Valores divided by the sum of Mercadorias.Qty",
     )
 
-    final_price_unit = fields.Monetary(string="vUnBRL Final", digits=(12, 8))
+    addition_deduction = fields.Monetary(
+        string="Valores +/-",
+        digits=(12, 8),
+        help="Equals to the sum of all Valores",
+    )
 
-    amount_other = fields.Monetary(string="vOutro")
+    final_price_unit = fields.Float()
 
-    amount_total = fields.Monetary(string="Total")
+    amount_other = fields.Float()
 
-    amount_afrmm = fields.Monetary(string="vAFRMM")
+    amount_total = fields.Float()
+
+    amount_afrmm = fields.Float()
 
     def _importa_declaracao(self, mercadoria):
         vals = {

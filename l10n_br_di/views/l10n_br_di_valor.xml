@@ -15,8 +15,18 @@
                 <field name="moeda_negociada_id" />
                 <field name="moeda_empresa_id" />
                 <field name="moeda_taxa" />
-                <field name="valor_moeda_negociada" sum="Valor Estrangeiro" />
-                <field name="valor" sum="Valor BRL" />
+                <field
+                    name="valor_moeda_negociada"
+                    sum="Valor Estrangeiro"
+                    widget="monetary"
+                    options="{'currency_field': 'moeda_negociada_id'}"
+                />
+                <field
+                    name="valor"
+                    sum="Valor BRL"
+                    widget="monetary"
+                    options="{'currency_field': 'moeda_empresa_id'}"
+                />
             </tree>
         </field>
     </record>
