@@ -51,7 +51,7 @@ class L10nBrDiDeclaracao(models.Model):
         selection=[
             ("draft", "Draft"),
             ("open", "Open"),
-            ("locked", "Loked"),
+            ("locked", "Locked"),
             ("canceled", "Canceled"),
         ],
         default="draft",
