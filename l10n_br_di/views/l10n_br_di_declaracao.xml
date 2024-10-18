@@ -13,6 +13,7 @@
                         string="Importar"
                         type="object"
                         groups="base.group_no_one"
+                        confirm="Reimportar a declaração irá resetar seu estado para rascunho. Confirma?"
                     />
                     <button name="gerar_fatura" string="Gerar Fatura" type="object" />
                     <button

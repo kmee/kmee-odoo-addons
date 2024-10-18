@@ -213,6 +213,7 @@ class L10nBrDiDeclaracao(models.Model):
         vals = self._importa_declaracao(declaration_list)
 
         if self:
+            self.state = "draft"
             self.di_adicao_ids.unlink()
             self.di_despacho_ids.unlink()
             self.di_pagamento_ids.unlink()
