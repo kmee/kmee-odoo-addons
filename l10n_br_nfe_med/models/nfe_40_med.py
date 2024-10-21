@@ -1,7 +1,7 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class Nfe40Med(models.AbstractModel):
@@ -12,6 +12,12 @@ class Nfe40Med(models.AbstractModel):
     @api.depends("nfe40_cProdANVISA", "nfe40_xMotivoIsencao", "nfe40_vPMC")
     def _compute_display_name(self):
         super()._compute_display_name()
+
+    display_name = fields.Char(
+        string="name",
+        compute="_compute_display_name",
+        store=True,
+    )
 
     def name_get(self):
         res = []
