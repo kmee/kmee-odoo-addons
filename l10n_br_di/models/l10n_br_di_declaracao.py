@@ -51,7 +51,7 @@ class L10nBrDiDeclaracao(models.Model):
         selection=[
             ("draft", "Draft"),
             ("open", "Open"),
-            ("locked", "Loked"),
+            ("locked", "Locked"),
             ("canceled", "Canceled"),
         ],
         default="draft",
@@ -142,13 +142,13 @@ class L10nBrDiDeclaracao(models.Model):
     documento_chegada_carga_numero = fields.Char()
 
     frete_collect = fields.Float()
-    frete_em_territorio_nacional = fields.Monetary(currency_field="dolar_currency_id")
+    frete_em_territorio_nacional = fields.Float()
     frete_moeda_negociada_codigo = fields.Char()
     frete_moeda_negociada_nome = fields.Char()
-    frete_prepaid = fields.Monetary(currency_field="dolar_currency_id")
-    frete_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    frete_total_moeda = fields.Monetary(currency_field="freight_currency_id")
-    frete_total_reais = fields.Monetary()
+    frete_prepaid = fields.Float()
+    frete_total_dolares = fields.Float()
+    frete_total_moeda = fields.Float()
+    frete_total_reais = fields.Float()
 
     icms = fields.Char()
 
@@ -166,10 +166,10 @@ class L10nBrDiDeclaracao(models.Model):
     importador_numero = fields.Char()
     importador_numero_telefone = fields.Char()
 
-    local_descarga_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    local_descarga_total_reais = fields.Monetary()
-    local_embarque_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    local_embarque_total_reais = fields.Monetary()
+    local_descarga_total_dolares = fields.Float()
+    local_descarga_total_reais = fields.Float()
+    local_embarque_total_dolares = fields.Float()
+    local_embarque_total_reais = fields.Float()
 
     modalidade_despacho_codigo = fields.Char()
     modalidade_despacho_nome = fields.Char()
@@ -178,11 +178,9 @@ class L10nBrDiDeclaracao(models.Model):
 
     seguro_moeda_negociada_codigo = fields.Char()
     seguro_moeda_negociada_nome = fields.Char()
-    seguro_total_dolares = fields.Monetary(currency_field="dolar_currency_id")
-    seguro_total_moeda_negociada = fields.Monetary(
-        currency_field="insurance_currency_id"
-    )
-    seguro_total_reais = fields.Monetary()
+    seguro_total_dolares = fields.Float()
+    seguro_total_moeda_negociada = fields.Float()
+    seguro_total_reais = fields.Float()
 
     situacao_entrega_carga = fields.Char()
     tipo_declaracao_codigo = fields.Char()
@@ -215,6 +213,7 @@ class L10nBrDiDeclaracao(models.Model):
         vals = self._importa_declaracao(declaration_list)
 
         if self:
+            self.state = "draft"
             self.di_adicao_ids.unlink()
             self.di_despacho_ids.unlink()
             self.di_pagamento_ids.unlink()
@@ -350,8 +349,10 @@ class L10nBrDiDeclaracao(models.Model):
     def gerar_fatura(self):
         self.ensure_one()
         self._validate_invoice_fields()
-        # if self.state != "open":
-        #     raise UserError(_("Only open declarations can generate invoices."))
+
+        if not self.fiscal_operation_id:
+            raise UserError(_("Invoicing requires a fiscal operation"))
+
         return self._generate_invoice()
 
     def _validate_invoice_fields(self):
@@ -376,6 +377,9 @@ class L10nBrDiDeclaracao(models.Model):
         move_form.document_serie_id = self.env.ref("l10n_br_fiscal.document_55_serie_1")
         move_form.issuer = "company"
         move_form.fiscal_operation_id = self.fiscal_operation_id
+
+        if self.fiscal_operation_id.state != "approved":
+            raise UserError(_("A operação fiscal selecionada não está aprovada."))
 
         for mercadoria in self.di_mercadoria_ids:
             with move_form.invoice_line_ids.new() as line_form:

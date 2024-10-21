@@ -25,8 +25,8 @@ class L10nBrDiValor(models.Model):
     denominacao = fields.Char()
     moeda_negociada_codigo = fields.Char()
     moeda_negociada_nome = fields.Char()
-    valor_moeda_negociada = fields.Monetary(currency_field="moeda_negociada_id")
-    valor = fields.Monetary(currency_field="moeda_empresa_id")
+    valor_moeda_negociada = fields.Float()
+    valor = fields.Float()
 
     moeda_negociada_id = fields.Many2one("res.currency")
     moeda_empresa_id = fields.Many2one(
