@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_hr_job_form_inherit_access_token" model="ir.ui.view">
+        <field name="name">hr.job.form.inherit.access.token</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_job_survey" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="action_share_job"
+                    type="object"
+                    string="Compartilhar Vaga"
+                    class="btn-primary"
+                    icon="fa-share-alt"
+                />
+            </div>
+        </field>
+    </record>
+</odoo>
