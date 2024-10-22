@@ -49,7 +49,7 @@ class MailComposer(models.TransientModel):
             auto_commit=auto_commit
         )
         for mail in result_mails_su:
-            if mail.mail_template_id and mail.mail_template_id.active_no_reply:
+            if mail.template_id and mail.template_id.active_no_reply:
                 no_reply_email = self.env.user.company_id.email_no_reply
                 if no_reply_email:
                     mail.write(
