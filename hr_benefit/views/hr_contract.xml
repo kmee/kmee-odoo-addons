@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_contract_benefit" model="ir.ui.view">
+        <field name="name">hr contract benefit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <page name="other" position="inside">
+                <field name="contract_attachment_ids" widget="many2many_binary" />
+            </page>
+            <group name="salary_info" position="after">
+                <group>
+                    <label for="employee_cost" />
+                    <div class="o_row mw-50" name="cost">
+                        <field
+                            name="employee_cost"
+                            class="oe_inline o_hr_narrow_field"
+                            nolabel="1"
+                        />
+                    </div>
+                    <label for="employee_net_salary" />
+                    <div class="o_row mw-50" name="net_salary">
+                        <field
+                            name="employee_net_salary"
+                            class="oe_inline o_hr_narrow_field"
+                            nolabel="1"
+                        />
+                    </div>
+                </group>
+            </group>
+            <notebook position="inside">
+                <page name="benefits" string="Informações dos benefícios">
+                    <group name="employee_benefits">
+                        <group colspan="4">
+                            <field name="benefit_type_ids" string=''>
+                                <tree editable="bottom">
+                                    <field name="benefit_type_id" />
+                                    <field name="beneficiary_id" />
+                                    <field name="dependent_ids" widget="many2many_tags"/>
+                                    <field name="company_percentage" groups="hr_contract.group_hr_contract_manager"/>
+                                    <field name="employee_percentage" />
+                                    <field name="dependent_payment_quantity" />
+                                    <field name="benefit_fixed_value" sum="Total"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="hr_contract_benefit_type_form" model="ir.ui.view">
+        <field name="name">hr.benefit.type.form</field>
+        <field name="model">hr.benefit.type</field>
+        <field name="arch" type="xml">
+            <form string="Benefit Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="max_dependents" />
+                        </group>
+                        <group>
+                            <field name="benefit_fixed_value" />
+                            <field name="company_percentage" />
+                            <field name="employee_percentage" />
+                            <field name="dependent_payment_quantity" />
+                        </group>
+                        <field name="currency_id" invisible="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
