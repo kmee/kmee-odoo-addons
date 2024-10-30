@@ -1,0 +1,1 @@
+It allows the user to share details of a job that has not been published on the site yet
