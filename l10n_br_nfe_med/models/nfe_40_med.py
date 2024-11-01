@@ -22,10 +22,12 @@ class Nfe40Med(models.AbstractModel):
     def name_get(self):
         res = []
         for record in self:
-            name = record.nfe40_cProdANVISA
+            name = ""
+            if record.nfe40_cProdANVISA:
+                name += record.nfe40_cProdANVISA
             if record.nfe40_xMotivoIsencao:
                 name += " - " + record.nfe40_xMotivoIsencao
-            if record.nfe40_vPMC:
+            if record.nfe40_vPMC > 0:
                 name += " - " + record.nfe40_vPMC
             res.append((record.id, name))
         return res
