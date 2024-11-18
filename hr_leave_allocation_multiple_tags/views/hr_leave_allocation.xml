@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="hr_leave_allocation_form_view">
+        <field name="model">hr.leave.allocation</field>
+        <field
+            name="inherit_id"
+            ref="hr_holidays.hr_leave_allocation_view_form_manager"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field
+                    name="category_ids"
+                    widget="many2many_tags"
+                    string="Employee Tags"
+                    attrs="{'required': [('holiday_type', 'in', ('category_and', 'category_or'))], 'invisible': [('holiday_type', 'not in', ('category_and', 'category_or'))]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
