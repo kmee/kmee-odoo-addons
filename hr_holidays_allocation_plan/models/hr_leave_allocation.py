@@ -154,6 +154,18 @@ class HrLeaveAllocationPlan(models.Model):
         "\n- By Employee Tag: all employees of the specific employee group category",
     )
 
+    allocation_type = fields.Selection([
+            ('regular', 'Regular / Fixed'),
+            ("accrual", "Accrual"),
+            ('recurrent', 'Recurrent Allocation'),
+        ],
+        string="Allocation Type",
+        required=True,
+        default="accrual",
+        readonly=True,
+        states={"draft": [("readonly", False)], "check": [("readonly", False)]},
+    )
+
     mode_company_id = fields.Many2one(
         "res.company",
         compute="_compute_from_holiday_type",
@@ -225,6 +237,11 @@ class HrLeaveAllocationPlan(models.Model):
 
     def action_recompute_plan(self):
         for record in self:
+
+            if record.date_to and record.date_to < fields.Date.today():
+                record.state = "cancel"
+                continue
+
             if record.state == "draft":
                 record.state = "check"
             if record.holiday_type == "employee":
@@ -253,6 +270,9 @@ class HrLeaveAllocationPlan(models.Model):
         for record in self:
             if record.state == "check":
                 record.state = "running"
+
+            if record.state == "cancel":
+                continue
 
             for employee in record.plan_employee_ids:
 
