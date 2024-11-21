@@ -8,6 +8,21 @@ from dateutil.relativedelta import relativedelta
 from odoo import fields, models
 
 
+class HrLeaveAllocation(models.Model):
+
+    _inherit = "hr.leave.allocation"
+
+    def _end_of_year_accrual(self):
+        today = fields.Date.today()
+        first_day_this_year = today + relativedelta(month=1, day=1)
+        for allocation in self:
+            current_level = allocation._get_current_accrual_plan_level_id(first_day_this_year)[0]
+            if current_level and current_level.frequency == 'next_year':
+                continue
+            else:
+                super(HrLeaveAllocation, allocation)._end_of_year_accrual()
+
+
 class HrLeaveAccrualPlan(models.Model):
 
     _inherit = "hr.leave.accrual.level"
@@ -44,7 +59,7 @@ class HrLeaveAccrualPlan(models.Model):
             if last_call >= year_date:
                 result = year_date
             else:
-                result = last_call + relativedelta(years=-1)
+                result = last_call + relativedelta(years=-2)
 
         return result
 
