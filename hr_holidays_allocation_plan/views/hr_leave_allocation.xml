@@ -45,7 +45,11 @@
                                 name="holiday_status_id"
                                 options="{'always_reload': True}"
                             />
-                            <field name="accrual_plan_id" />
+                            <field
+                                name="allocation_type"
+                                options="{'always_reload': True}"
+                                widget="radio"
+                            />
                             <div class="o_td_label" name="validity_label">
                                 <label for="date_from" string="Start Date" />
                             </div>
@@ -92,6 +96,19 @@
                     </group>
                     <field name="notes" nolabel="1" placeholder="Add a reason..." />
                     <notebook>
+                        <page name="allocation" string="Allocation Type">
+                            <group>
+                                <group name="accrual" string="Accrual">
+                                    <field name="accrual_plan_id" />
+                                </group>
+                                <group name="regular" string="Regular">
+                                    <field name="allocation_type" />
+                                </group>
+                                <group name="recurrent" string="Recurrent">
+                                    <field name="allocation_type" />
+                                </group>
+                            </group>
+                        </page>
                         <page name="employees" string="Employess">
                             <field name="plan_employee_ids" nolabel="1" />
                         </page>
