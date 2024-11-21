@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
+from dateutil.relativedelta import relativedelta
 
 
 class HrLeaveAllocation(models.Model):
@@ -235,6 +236,20 @@ class HrLeaveAllocationPlan(models.Model):
         readonly=True,
     )
 
+    recurring_renewal_frequency = fields.Integer(
+        string="Recurring Renewal Frequency",
+        default=1,
+    )
+
+    number_of_days = fields.Float(
+        string="Number of Days",
+    )
+
+    immediate_allocation = fields.Boolean(
+        string="Immediate Allocation",
+        default=False,
+    )
+
     def action_recompute_plan(self):
         for record in self:
 
@@ -276,11 +291,53 @@ class HrLeaveAllocationPlan(models.Model):
 
             for employee in record.plan_employee_ids:
 
-                if record.allocation_ids.filtered(lambda r: r.employee_id == employee):
+                employee_allocation = record.allocation_ids.filtered(
+                    lambda r: r.employee_id == employee
+                )
+                if employee_allocation:
+                    if record.allocation_type != "recurrent":
+                        continue
+
+                    allocations_to_renew = employee_allocation.filtered(
+                        lambda r: r.date_to < fields.Date.today()
+                    )
+                    if not allocations_to_renew:
+                        continue
+
+                running_contracts = self.env["hr.contract"].search(
+                    [
+                        ("employee_id", "=", employee.id),
+                        ("state", "=", "open"),
+                    ],
+                ).mapped("date_start")
+
+                if not running_contracts:
                     continue
 
-                if not employee.contract_id:
-                    continue
+                oldest_running_contract = min(running_contracts)
+
+                if record.allocation_type == "recurrent":
+                    if (
+                        fields.Date.today() - relativedelta(years=1)
+                        < oldest_running_contract
+                        and not record.immediate_allocation
+                    ):
+                        continue
+
+                allocation_type = record.allocation_type
+                date_to = record.date_to
+
+                number_of_days = record.number_of_days
+                if allocation_type == "accrual":
+                    number_of_days = 0
+
+                date_from = max([record.date_from, oldest_running_contract])
+                if allocation_type == "recurrent":
+                    allocation_type = "regular"
+                    date_from = oldest_running_contract.replace(year=fields.Date.today().year)
+                    date_to = date_from + relativedelta(
+                        years=record.recurring_renewal_frequency
+                    )
 
                 allocation = self.env["hr.leave.allocation"].create(
                     {
@@ -288,15 +345,13 @@ class HrLeaveAllocationPlan(models.Model):
                         "holiday_type": "employee",
                         "holiday_status_id": record.holiday_status_id.id,
                         "notes": record.notes,
-                        "number_of_days": 0,
+                        "number_of_days": number_of_days,
                         "employee_id": employee.id,
                         "employee_ids": [(6, 0, [employee.id])],
                         "state": "confirm",
-                        "allocation_type": "accrual",
-                        "date_from": max(
-                            [record.date_from, employee.first_contract_date]
-                        ),
-                        "date_to": record.date_to,
+                        "allocation_type": allocation_type,
+                        "date_from": date_from,
+                        "date_to": date_to,
                         "accrual_plan_id": record.accrual_plan_id.id,
                         "allocation_plan_id": record.id,
                     }
