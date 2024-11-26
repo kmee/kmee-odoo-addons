@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="contract_contract_form_view">
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_customer_form_view" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="%(consultancy_sale_project.contract_create_project_wizard_act_window)d"
+                    type="action"
+                    string="Create Project"
+                    class="oe_highlight"
+                    context="{'default_analytic_account_id': group_id}"
+                />
+            </header>
+            <xpath expr="//notebook" position="inside">
+                <page name="custom_settings" string="Settings">
+                    <group>
+                        <field name="timesheet_report_id" />
+                        <field name="timesheet_email_aproval_template" />
+                    </group>
+                    <field name="contract_config_line_ids">
+                        <tree create="0" delete="0" editable="top">
+                            <field name="product_id" readonly="1" />
+                            <field name="name" readonly="1" />
+                            <field name="analytic_distribution" />
+                            <field name="timesheet_invoice_workflow" />
+                            <field name="timesheet_report_type" />
+                            <field name="timesheet_report_detais" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+        </record>
+    <!--
+
+    <record model="ir.ui.view" id="contract_contract_search_view">
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="TODO othermodule.search_view"/>
+        <field name="arch" type="xml">
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="contract_contract_tree_view">
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
+        <field name="arch" type="xml">
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="contract_contract_act_window">
+        <field name="name">Contract Contract</field>
+        <field name="res_model">contract.contract</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="contract_contract_menu">
+        <field name="name">Contract Contract</field>
+        <field name="parent_id" ref="xmlid of parent menu"/>
+        <field name="action" ref="contract_contract_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record> -->
+
+</odoo>
