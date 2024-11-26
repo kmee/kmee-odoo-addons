@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="hr_attendance_overtime_tree_view">
+        <field name="model">hr.attendance.overtime</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_overtime_tree"/>
+        <field name="arch" type="xml">
+            <field name="duration" position="before">
+                <field name="extra_hours_withou_multiplier"/>
+                <field name="applied_multiplier"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_hr_overtime_list" model="ir.actions.act_window">
+        <field name="name">Extra hours</field>
+        <field name="res_model">hr.attendance.overtime</field>
+        <field name="view_mode">tree</field>
+        <field name="help">View and manage overtime records for employees</field>
+    </record>
+
+
+    <menuitem id="hr_overtime_menu"
+        name="Extra hours"
+        parent="hr_attendance.menu_hr_attendance_root"
+        action="action_hr_overtime_list"/>
+
+</odoo>
