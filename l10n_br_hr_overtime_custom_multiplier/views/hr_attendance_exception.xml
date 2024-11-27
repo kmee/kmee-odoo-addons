@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="hr_attendance_exception_form_view">
+        <field name="model">hr.attendance.exception</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_id" />
+                        <field name="date" />
+                        <field name="day_of_week_override" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_attendance_exception_search_view">
+        <field name="model">hr.attendance.exception</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" />
+                <field name="date" />
+                <field name="day_of_week_override" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_attendance_exception_tree_view">
+        <field name="model">hr.attendance.exception</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="date" />
+                <field name="day_of_week_override" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_attendance_exception_act_window">
+        <field name="name">Exception</field>
+        <field name="res_model">hr.attendance.exception</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <menuitem
+        id="hr_attendance_exception_menu"
+        name="Attendance Exception"
+        parent="hr_attendance_overtime_config"
+        action="hr_attendance_exception_act_window"
+        sequence="16"
+    />
+
+</odoo>

@@ -3,30 +3,122 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
+    <record model="ir.ui.view" id="hr_attendance_overtime_form_view">
+        <field name="model">hr.attendance.overtime</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="date" />
+                        <field
+                            name="employee_id"
+                            modifiers="{&quot;required&quot;: true}"
+                            can_create="true"
+                            can_write="true"
+                        />
+                        <field
+                            name="duration"
+                            widget="float_time"
+                            modifiers="{&quot;required&quot;: true}"
+                        />
+                        <field
+                            name="duration_real"
+                            widget="float_time"
+                            modifiers="{&quot;required&quot;: true}"
+                        />
+                    </group>
+                    <group>
+                        <field name="attendance_id" />
+                        <field name="adjustment_overtime_id" />
+                        <field name="adjustment" />
+                        <field name="extra_hours_without_multiplier" force_save="1" />
+                        <field name="applied_multiplier" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
     <record model="ir.ui.view" id="hr_attendance_overtime_tree_view">
         <field name="model">hr.attendance.overtime</field>
-        <field name="inherit_id" ref="hr_attendance.view_attendance_overtime_tree" />
         <field name="arch" type="xml">
-            <field name="duration" position="before">
-                <field name="extra_hours_withou_multiplier" />
-                <field name="applied_multiplier" />
-            </field>
+            <tree>
+                <field name="date" />
+                <field
+                    name="employee_id"
+                    modifiers="{&quot;required&quot;: true}"
+                    can_create="true"
+                    can_write="true"
+                />
+                <field
+                    name="extra_hours_without_multiplier"
+                    widget="float_time"
+                    modifiers="{&quot;required&quot;: true}"
+                />
+                <field name="overtime_range_id" />
+                <field
+                    name="applied_multiplier"
+                    widget="float_time"
+                    modifiers="{&quot;required&quot;: true}"
+                />
+                <field
+                    name="duration"
+                    widget="float_time"
+                    modifiers="{&quot;required&quot;: true}"
+                />
+                <field name="adjustment" readonly="1" />
+            </tree>
         </field>
     </record>
 
     <record id="action_hr_overtime_list" model="ir.actions.act_window">
         <field name="name">Extra hours</field>
         <field name="res_model">hr.attendance.overtime</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form,pivot</field>
+        <field name="context">{'default_adjustment': True}</field>
+
         <field name="help">View and manage overtime records for employees</field>
     </record>
 
+    <record id="action_invoice_out_view1" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="hr_attendance_overtime_tree_view" />
+        <field name="act_window_id" ref="action_hr_overtime_list" />
+    </record>
 
     <menuitem
         id="hr_overtime_menu"
         name="Extra hours"
         parent="hr_attendance.menu_hr_attendance_root"
+    />
+
+    <menuitem
+        id="hr_overtime_menu_item"
+        name="Extra hours"
+        parent="hr_overtime_menu"
         action="action_hr_overtime_list"
+    />
+
+    <menuitem
+        id="hr_attendance_menu_config"
+        name="Configurações"
+        parent="hr_attendance.menu_hr_attendance_root"
+        sequence="999"
+    />
+
+    <menuitem
+        id="hr_attendance.menu_hr_attendance_settings"
+        parent="hr_attendance_menu_config"
+        name="Configurações"
+    />
+
+    <menuitem
+        id="hr_attendance_overtime_config"
+        name="Overtime"
+        parent="hr_attendance_menu_config"
+        sequence="9999"
     />
 
 </odoo>
