@@ -162,7 +162,6 @@ class HrLeaveAllocationPlan(models.Model):
             ("accrual", "Accrual"),
             ("recurrent", "Recurrent Allocation"),
         ],
-        string="Allocation Type",
         required=True,
         default="accrual",
         readonly=True,
@@ -239,7 +238,6 @@ class HrLeaveAllocationPlan(models.Model):
     )
 
     recurring_renewal_frequency = fields.Integer(
-        string="Recurring Renewal Frequency",
         default=1,
     )
 
@@ -248,7 +246,6 @@ class HrLeaveAllocationPlan(models.Model):
     )
 
     immediate_allocation = fields.Boolean(
-        string="Immediate Allocation",
         default=False,
     )
 
