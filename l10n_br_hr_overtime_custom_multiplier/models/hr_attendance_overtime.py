@@ -12,4 +12,4 @@ class HrAttendanceOvertime(models.Model):
         string="Extra Hours without Multiplier"
     )
 
-    applied_multiplier = fields.Float(string="Applied Multiplier", default=1.0)
+    applied_multiplier = fields.Float(default=1.0)
