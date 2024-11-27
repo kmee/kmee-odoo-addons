@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="hr_leave_allocation_form_view">
+        <field name="model">hr.leave.allocation.plan</field>
+        <field name="arch" type="xml">
+            <form string="Allocation Plan">
+                <header>
+                    <button
+                        string="Re/Compute Employees"
+                        name="action_recompute_plan"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button
+                        string="Run/Update"
+                        name="action_run_update"
+                        type="object"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,check,running"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div id="title" class="oe_title">
+                        <h2>
+                            <field
+                                name="name"
+                                class="w-100"
+                                placeholder="e.g. Time Off type (From validity start to validity end / no limit)"
+                                attrs="{'invisible': [('state', 'not in', ('draft', 'confirm'))]}"
+                                required="1"
+                            />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="holiday_status_id"
+                                options="{'always_reload': True}"
+                            />
+                            <field
+                                name="allocation_type"
+                                options="{'always_reload': True}"
+                                widget="radio"
+                            />
+                            <div class="o_td_label" name="validity_label">
+                                <label for="date_from" string="Start Date" />
+                            </div>
+                            <div class="o_row" name="validity">
+                                <field name="date_from" widget="date" nolabel="1" />
+                                <i
+                                    class="fa fa-long-arrow-right mx-2"
+                                    aria-label="Arrow icon"
+                                    title="Arrow"
+                                />
+                                <label class="mx-2" for="date_to" string="Run until" />
+                                <field
+                                    name="date_to"
+                                    widget="date"
+                                    nolabel="1"
+                                    placeholder="No Limit"
+                                />
+                                <div
+                                    id="no_limit_label"
+                                    class="oe_read_only"
+                                >No limit</div>
+                            </div>
+                        </group>
+                        <group name="alloc_right_col">
+                            <field name="auto_run" widget="boolean_toggle" />
+                            <field name="holiday_type" widget="radio" />
+                            <field
+                                name="mode_company_id"
+                                attrs="{'required': [('holiday_type', '=', 'company')], 'invisible': [('holiday_type', '!=', 'company')]}"
+                            />
+                            <field
+                                name="category_id"
+                                attrs="{'required': [('holiday_type', '=', 'category')], 'invisible': [('holiday_type', '!=', 'category')]}"
+                            />
+                            <field
+                                name="category_ids"
+                                attrs="{'required': [('holiday_type', 'in', ('category_and', 'category_or'))], 'invisible': [('holiday_type', 'not in', ('category_and', 'category_or'))]}"
+                            />
+                            <field
+                                name="department_id"
+                                attrs="{'required': [('holiday_type', '=', 'department')], 'invisible': [('holiday_type', '!=', 'department')]}"
+                            />
+                        </group>
+                    </group>
+                    <field name="notes" nolabel="1" placeholder="Add a reason..." />
+                    <notebook>
+                        <page name="allocation" string="Allocation Type">
+                            <group>
+                                <group name="accrual" string="Accrual" attrs="{'invisible': [('allocation_type', '!=', 'accrual')]}">
+                                    <field name="accrual_plan_id" />
+                                </group>
+                                <group name="regular" string="Regular" attrs="{'invisible': [('allocation_type', '!=', 'regular')]}">
+                                    <field name="number_of_days" />
+                                </group>
+                                <group name="recurrent" string="Recurrent" attrs="{'invisible': [('allocation_type', '!=', 'recurrent')]}">
+                                    <field name="recurring_renewal_frequency" />
+                                    <field name="number_of_days" />
+                                    <field name="immediate_allocation" />
+                                </group>
+                            </group>
+                        </page>
+                        <page name="employees" string="Employess">
+                            <field name="plan_employee_ids" nolabel="1" />
+                        </page>
+                        <page name="allocations" string="Allocations">
+                            <field name="allocation_ids" nolabel="1">
+                                <tree>
+                                    <field name="create_date" />
+                                    <field name="employee_id" />
+                                    <field name="holiday_status_id" />
+                                    <field name="name" />
+                                    <field name="date_from" />
+                                    <field name="date_to" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-info="state == 'draft'"
+                                        decoration-warning="state == 'confirm'"
+                                        decoration-success="state == 'validate'"
+                                    />
+                                    <field
+                                        name="activity_exception_decoration"
+                                        widget="activity_exception"
+                                    />
+                                    <button
+                                        name="action_open_record"
+                                        type="object"
+                                        string="Go to"
+                                        class="btn-primary"
+                                    />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_leave_allocation_act_window">
+        <field name="name">Allocation Plan</field>
+        <field name="res_model">hr.leave.allocation.plan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="hr_leave_allocation_menu">
+        <field name="name">Allocation Plan</field>
+        <field name="parent_id" ref="hr_holidays.menu_hr_holidays_configuration" />
+        <field name="action" ref="hr_leave_allocation_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>
