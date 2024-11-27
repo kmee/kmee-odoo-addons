@@ -1,8 +1,9 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
 from dateutil.relativedelta import relativedelta
+
+from odoo import fields, models
 
 
 class HrLeaveAllocation(models.Model):
@@ -155,12 +156,12 @@ class HrLeaveAllocationPlan(models.Model):
         "\n- By Employee Tag: all employees of the specific employee group category",
     )
 
-    allocation_type = fields.Selection([
-            ('regular', 'Regular / Fixed'),
+    allocation_type = fields.Selection(
+        [
+            ("regular", "Regular / Fixed"),
             ("accrual", "Accrual"),
-            ('recurrent', 'Recurrent Allocation'),
+            ("recurrent", "Recurrent Allocation"),
         ],
-        string="Allocation Type",
         required=True,
         default="accrual",
         readonly=True,
@@ -237,7 +238,6 @@ class HrLeaveAllocationPlan(models.Model):
     )
 
     recurring_renewal_frequency = fields.Integer(
-        string="Recurring Renewal Frequency",
         default=1,
     )
 
@@ -246,7 +246,6 @@ class HrLeaveAllocationPlan(models.Model):
     )
 
     immediate_allocation = fields.Boolean(
-        string="Immediate Allocation",
         default=False,
     )
 
@@ -304,12 +303,16 @@ class HrLeaveAllocationPlan(models.Model):
                     if not allocations_to_renew:
                         continue
 
-                running_contracts = self.env["hr.contract"].search(
-                    [
-                        ("employee_id", "=", employee.id),
-                        ("state", "=", "open"),
-                    ],
-                ).mapped("date_start")
+                running_contracts = (
+                    self.env["hr.contract"]
+                    .search(
+                        [
+                            ("employee_id", "=", employee.id),
+                            ("state", "=", "open"),
+                        ],
+                    )
+                    .mapped("date_start")
+                )
 
                 if not running_contracts:
                     continue
@@ -334,7 +337,9 @@ class HrLeaveAllocationPlan(models.Model):
                 date_from = max([record.date_from, oldest_running_contract])
                 if allocation_type == "recurrent":
                     allocation_type = "regular"
-                    date_from = oldest_running_contract.replace(year=fields.Date.today().year)
+                    date_from = oldest_running_contract.replace(
+                        year=fields.Date.today().year
+                    )
                     date_to = date_from + relativedelta(
                         years=record.recurring_renewal_frequency
                     )

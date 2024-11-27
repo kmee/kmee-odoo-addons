@@ -1,39 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
-
 <odoo>
 
     <record model="ir.ui.view" id="res_config_settings_form_view">
-        <field name="name">res.config.settings.form (in l10n_br_hr_overtime_custom_multiplier)</field>
+        <field
+            name="name"
+        >res.config.settings.form (in l10n_br_hr_overtime_custom_multiplier)</field>
         <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form"/>
+        <field name="inherit_id" ref="hr_attendance.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='overtime_settings']" position="inside">
                 <div class="col-12 col-lg-6 o_setting_box">
                     <div class="o_setting_right_pane">
-                        <label for="saturday_overtime_multiplier"/>
+                        <label for="saturday_overtime_multiplier" />
                         <div class="text-muted">
-                            <field name="saturday_overtime_multiplier"/>
+                            <field name="saturday_overtime_multiplier" />
                         </div>
 
-                        <label for="sunday_holidays_overtime_multiplier"/>
+                        <label for="sunday_holidays_overtime_multiplier" />
                         <div class="text-muted">
-                            <field name="sunday_holidays_overtime_multiplier"/>
+                            <field name="sunday_holidays_overtime_multiplier" />
                         </div>
 
-                        <label for="business_days_over_2_hours_overtime_multiplier"/>
+                        <label for="business_days_over_2_hours_overtime_multiplier" />
                         <div class="text-muted">
-                            <field name="business_days_over_2_hours_overtime_multiplier"/>
+                            <field
+                                name="business_days_over_2_hours_overtime_multiplier"
+                            />
                         </div>
-                        
-                        <label for="business_days_under_2_hours_overtime_multiplier"/>
+
+                        <label for="business_days_under_2_hours_overtime_multiplier" />
                         <div class="text-muted">
-                            <field name="business_days_under_2_hours_overtime_multiplier"/>
+                            <field
+                                name="business_days_under_2_hours_overtime_multiplier"
+                            />
                         </div>
                     </div>
                 </div>
- 
+
             </xpath>
         </field>
     </record>

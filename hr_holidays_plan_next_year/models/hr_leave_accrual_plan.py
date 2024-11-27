@@ -1,7 +1,6 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import logging
 
 from dateutil.relativedelta import relativedelta
 
@@ -16,11 +15,13 @@ class HrLeaveAllocation(models.Model):
         today = fields.Date.today()
         first_day_this_year = today + relativedelta(month=1, day=1)
         for allocation in self:
-            current_level = allocation._get_current_accrual_plan_level_id(first_day_this_year)[0]
-            if current_level and current_level.frequency == 'next_year':
+            current_level = allocation._get_current_accrual_plan_level_id(
+                first_day_this_year
+            )[0]
+            if current_level and current_level.frequency == "next_year":
                 continue
             else:
-                super(HrLeaveAllocation, allocation)._end_of_year_accrual()
+                return super(HrLeaveAllocation, allocation)._end_of_year_accrual()
 
 
 class HrLeaveAccrualPlan(models.Model):

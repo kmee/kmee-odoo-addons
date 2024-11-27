@@ -98,13 +98,25 @@
                     <notebook>
                         <page name="allocation" string="Allocation Type">
                             <group>
-                                <group name="accrual" string="Accrual" attrs="{'invisible': [('allocation_type', '!=', 'accrual')]}">
+                                <group
+                                    name="accrual"
+                                    string="Accrual"
+                                    attrs="{'invisible': [('allocation_type', '!=', 'accrual')]}"
+                                >
                                     <field name="accrual_plan_id" />
                                 </group>
-                                <group name="regular" string="Regular" attrs="{'invisible': [('allocation_type', '!=', 'regular')]}">
+                                <group
+                                    name="regular"
+                                    string="Regular"
+                                    attrs="{'invisible': [('allocation_type', '!=', 'regular')]}"
+                                >
                                     <field name="number_of_days" />
                                 </group>
-                                <group name="recurrent" string="Recurrent" attrs="{'invisible': [('allocation_type', '!=', 'recurrent')]}">
+                                <group
+                                    name="recurrent"
+                                    string="Recurrent"
+                                    attrs="{'invisible': [('allocation_type', '!=', 'recurrent')]}"
+                                >
                                     <field name="recurring_renewal_frequency" />
                                     <field name="number_of_days" />
                                     <field name="immediate_allocation" />

@@ -4,6 +4,7 @@
         id="job_detail_custom"
         inherit_id="website_hr_recruitment.detail"
         name="Job Detail Customization"
+        priority="999"
     >
         <xpath
             expr="//a[@role='button' and contains(@class, 'btn-primary')]"
