@@ -12,8 +12,11 @@
         "l10n_br_resource",
     ],
     "data": [
+        "security/hr_attendance_exception.xml",
+        "security/hr_overtime_multiplier_range.xml",
+        #
         "views/hr_attendance_overtime.xml",
-        "views/res_config_settings.xml",
+        "views/hr_overtime_multiplier_range.xml",
+        "views/hr_attendance_exception.xml",
     ],
-    "demo": [],
 }
