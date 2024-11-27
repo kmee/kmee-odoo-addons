@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class HrLeaveAllocation(models.Model):
@@ -33,11 +34,12 @@ class HrLeaveAllocation(models.Model):
 
     @api.depends("holiday_type")
     def _compute_from_holiday_type(self):
-        super()._compute_from_holiday_type()
+        res = super()._compute_from_holiday_type()
         for allocation in self:
             if allocation.holiday_type in ["category_and", "category_or"]:
                 allocation.employee_ids = False
                 allocation.mode_company_id = False
+        return res
 
     def _action_validate_create_childs(self):
         childs = super(HrLeaveAllocation, self)._action_validate_create_childs()
@@ -91,14 +93,16 @@ class HrLeaveAllocation(models.Model):
                 if not allocation.category_ids:
                     raise ValidationError(
                         _(
-                            "At least one employee tag must be specified for 'Category AND/OR' type allocation."
+                            """At least one employee tag must be specified for
+                            'Category AND/OR' type allocation."""
                         )
                     )
             elif allocation.holiday_type == "department":
                 if not allocation.department_id:
                     raise ValidationError(
                         _(
-                            "The department must be specified for 'Department' type allocation."
+                            """The department must be specified for
+                             'Department' type allocation."""
                         )
                     )
             elif allocation.holiday_type == "company":
@@ -113,11 +117,13 @@ class HrLeaveAllocation(models.Model):
         (
             "type_value",
             "CHECK(1=1)",
-            "The employee, department, company, or employee category of this request is missing. Please make sure that your user login is linked to an employee.",
+            """The employee, department, company, or employee category of this request is
+             missing. Please make sure that your user login is linked to an employee.""",
         ),
         (
             "duration_check",
-            "CHECK( (number_of_days > 0 AND allocation_type='regular') or (allocation_type != 'regular'))",
+            """CHECK( (number_of_days > 0 AND allocation_type='regular') or
+             (allocation_type != 'regular'))""",
             "The duration must be greater than 0.",
         ),
     ]
