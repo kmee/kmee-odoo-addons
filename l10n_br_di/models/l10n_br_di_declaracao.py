@@ -32,7 +32,7 @@ class L10nBrDiDeclaracao(models.Model):
 
     _rec_name = "numero_di"
 
-    # Campos Extras
+    # Campos Extras -
 
     arquivo_declaracao = fields.Binary(
         attachment=True,
