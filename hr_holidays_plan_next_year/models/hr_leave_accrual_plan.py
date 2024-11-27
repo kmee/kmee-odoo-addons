@@ -21,7 +21,7 @@ class HrLeaveAllocation(models.Model):
             if current_level and current_level.frequency == "next_year":
                 continue
             else:
-                super(HrLeaveAllocation, allocation)._end_of_year_accrual()
+                return super(HrLeaveAllocation, allocation)._end_of_year_accrual()
 
 
 class HrLeaveAccrualPlan(models.Model):
