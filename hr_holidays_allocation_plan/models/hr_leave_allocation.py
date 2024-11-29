@@ -102,12 +102,6 @@ class HrLeaveAllocationPlan(models.Model):
         "End Date",
         copy=False,
         tracking=True,
-        states={
-            "cancel": [("readonly", True)],
-            "refuse": [("readonly", True)],
-            "running1": [("readonly", True)],
-            "running": [("readonly", True)],
-        },
     )
     holiday_status_id = fields.Many2one(
         "hr.leave.type",
@@ -249,6 +243,12 @@ class HrLeaveAllocationPlan(models.Model):
         default=False,
     )
 
+    validity_period = fields.Integer(
+        string="Validity Period (years)",
+        default=1,
+        help="Defines how long the allocated leave is valid from the allocation date.",
+    )
+
     def action_recompute_plan(self):
         for record in self:
 
@@ -280,6 +280,104 @@ class HrLeaveAllocationPlan(models.Model):
     def _recompute_plans(self, employees):
         self.plan_employee_ids |= employees
 
+    def _get_running_contracts(self, employee):
+        running_contracts = (
+            self.env["hr.contract"]
+            .search(
+                [
+                    ("employee_id", "=", employee.id),
+                    ("state", "=", "open"),
+                ],
+            )
+            .mapped("date_start")
+        )
+        return running_contracts
+
+    def _create_recurrent(self, employee, running_contracts):
+        oldest_running_contract = min(running_contracts)
+        current_date = (
+            oldest_running_contract  # Start allocation from contract start date
+        )
+
+        while current_date < fields.Date.today():
+            date_from = current_date
+            date_to = date_from + relativedelta(years=self.validity_period)
+
+            allocation = self.env["hr.leave.allocation"].create(
+                {
+                    "name": self.name,
+                    "holiday_type": "employee",
+                    "holiday_status_id": self.holiday_status_id.id,
+                    "notes": self.notes,
+                    "number_of_days": self.number_of_days,
+                    "employee_id": employee.id,
+                    "employee_ids": [(6, 0, [employee.id])],
+                    "state": "confirm",
+                    "allocation_type": "regular",
+                    "date_from": date_from,
+                    "date_to": date_to,
+                    "accrual_plan_id": self.accrual_plan_id.id,
+                    "allocation_plan_id": self.id,
+                }
+            )
+            allocation.action_validate()
+
+            # Increment to the next year after the first allocation
+            current_date += relativedelta(years=1)
+
+    def _create_regular(self):
+        """Aloca somente uma vez de forma fixa"""
+        date_from = self.date_from
+        date_to = self.date_to
+
+        for employee in self.plan_employee_ids:
+            allocation = self.env["hr.leave.allocation"].create(
+                {
+                    "name": self.name,
+                    "holiday_type": "employee",
+                    "holiday_status_id": self.holiday_status_id.id,
+                    "notes": self.notes,
+                    "number_of_days": self.number_of_days,
+                    "employee_id": employee.id,
+                    "employee_ids": [(6, 0, [employee.id])],
+                    "state": "confirm",
+                    "allocation_type": "regular",
+                    "date_from": date_from,
+                    "date_to": date_to,
+                    "accrual_plan_id": self.accrual_plan_id.id,
+                    "allocation_plan_id": self.id,
+                }
+            )
+            allocation.action_validate()
+
+    def _create_accrual(self, employee, running_contracts):
+        """
+        Cria alocações de folga conforme o plano de acumulação definido.
+        Este método cria uma alocação que é válida até o final do período definido.
+        """
+        oldest_running_contract = min(running_contracts)
+        date_from = oldest_running_contract
+        date_to = self.date_to
+
+        allocation = self.env["hr.leave.allocation"].create(
+            {
+                "name": self.name,
+                "holiday_type": "employee",
+                "holiday_status_id": self.holiday_status_id.id,
+                "notes": self.notes,
+                "number_of_days": self.number_of_days,
+                "employee_id": employee.id,
+                "employee_ids": [(6, 0, [employee.id])],
+                "state": "confirm",
+                "allocation_type": "accrual",
+                "date_from": date_from,
+                "date_to": date_to,
+                "accrual_plan_id": self.accrual_plan_id.id,
+                "allocation_plan_id": self.id,
+            }
+        )
+        allocation.action_validate()
+
     def action_run_update(self):
         for record in self:
             if record.state == "check":
@@ -289,76 +387,33 @@ class HrLeaveAllocationPlan(models.Model):
                 continue
 
             for employee in record.plan_employee_ids:
-
-                employee_allocation = record.allocation_ids.filtered(
-                    lambda r: r.employee_id == employee
-                )
-                if employee_allocation:
-                    if record.allocation_type != "recurrent":
-                        continue
-
-                    allocations_to_renew = employee_allocation.filtered(
-                        lambda r: r.date_to < fields.Date.today()
-                    )
-                    if not allocations_to_renew:
-                        continue
-
-                running_contracts = (
-                    self.env["hr.contract"]
-                    .search(
-                        [
-                            ("employee_id", "=", employee.id),
-                            ("state", "=", "open"),
-                        ],
-                    )
-                    .mapped("date_start")
-                )
-
+                running_contracts = self._get_running_contracts(employee)
                 if not running_contracts:
                     continue
 
-                oldest_running_contract = min(running_contracts)
-
                 if record.allocation_type == "recurrent":
-                    if (
-                        fields.Date.today() - relativedelta(years=1)
-                        < oldest_running_contract
-                        and not record.immediate_allocation
-                    ):
-                        continue
-
-                allocation_type = record.allocation_type
-                date_to = record.date_to
-
-                number_of_days = record.number_of_days
-                if allocation_type == "accrual":
-                    number_of_days = 0
-
-                date_from = max([record.date_from, oldest_running_contract])
-                if allocation_type == "recurrent":
-                    allocation_type = "regular"
-                    date_from = oldest_running_contract.replace(
-                        year=fields.Date.today().year
+                    self._create_recurrent(
+                        employee=employee, running_contracts=running_contracts
                     )
-                    date_to = date_from + relativedelta(
-                        years=record.recurring_renewal_frequency
+                elif record.allocation_type == "regular":
+                    self._create_regular()
+                elif record.allocation_type == "accrual":
+                    self._create_accrual(
+                        employee=employee, running_contracts=running_contracts
                     )
 
-                allocation = self.env["hr.leave.allocation"].create(
-                    {
-                        "name": record.name,
-                        "holiday_type": "employee",
-                        "holiday_status_id": record.holiday_status_id.id,
-                        "notes": record.notes,
-                        "number_of_days": number_of_days,
-                        "employee_id": employee.id,
-                        "employee_ids": [(6, 0, [employee.id])],
-                        "state": "confirm",
-                        "allocation_type": allocation_type,
-                        "date_from": date_from,
-                        "date_to": date_to,
-                        "accrual_plan_id": record.accrual_plan_id.id,
-                        "allocation_plan_id": record.id,
-                    }
-                )
-                allocation.action_validate()
+    def action_cancel(self):
+        for record in self:
+            record.state = "cancel"
+
+    def action_allocation_refuse(self):
+        for record in self:
+            record.allocation_ids.action_refuse()
+
+    def action_allocation_draft(self):
+        for record in self:
+            record.allocation_ids.action_draft()
+
+    def action_allocation_confirm(self):
+        for record in self:
+            record.allocation_ids.action_confirm()

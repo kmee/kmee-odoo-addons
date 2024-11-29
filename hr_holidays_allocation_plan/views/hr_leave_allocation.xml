@@ -19,6 +19,7 @@
                         name="action_run_update"
                         type="object"
                     />
+                    <button string="Cancel" name="action_cancel" type="object" />
                     <field
                         name="state"
                         widget="statusbar"
@@ -120,6 +121,7 @@
                                     <field name="recurring_renewal_frequency" />
                                     <field name="number_of_days" />
                                     <field name="immediate_allocation" />
+                                    <field name="validity_period" />
                                 </group>
                             </group>
                         </page>
@@ -127,6 +129,21 @@
                             <field name="plan_employee_ids" nolabel="1" />
                         </page>
                         <page name="allocations" string="Allocations">
+                            <button
+                                string="Allocation Confirm"
+                                name="action_allocation_confirm"
+                                type="object"
+                            />
+                            <button
+                                string="Allocation Refuse"
+                                name="action_allocation_refuse"
+                                type="object"
+                            />
+                            <button
+                                string="Allocation Draft"
+                                name="action_allocation_draft"
+                                type="object"
+                            />
                             <field name="allocation_ids" nolabel="1">
                                 <tree>
                                     <field name="create_date" />
