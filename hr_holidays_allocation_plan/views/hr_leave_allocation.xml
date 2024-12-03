@@ -20,6 +20,11 @@
                         type="object"
                     />
                     <button string="Cancel" name="action_cancel" type="object" />
+                    <button
+                        string="Back to Draft"
+                        name="action_back2draft"
+                        type="object"
+                    />
                     <field
                         name="state"
                         widget="statusbar"
@@ -142,6 +147,11 @@
                             <button
                                 string="Allocation Draft"
                                 name="action_allocation_draft"
+                                type="object"
+                            />
+                            <button
+                                string="Allocation Delete"
+                                name="action_allocation_unlink"
                                 type="object"
                             />
                             <field name="allocation_ids" nolabel="1">

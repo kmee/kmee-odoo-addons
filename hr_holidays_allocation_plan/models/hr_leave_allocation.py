@@ -286,7 +286,7 @@ class HrLeaveAllocationPlan(models.Model):
             .search(
                 [
                     ("employee_id", "=", employee.id),
-                    ("state", "=", "open"),
+                    ("state", "in", ("open", "close")),
                 ],
             )
             .mapped("date_start")
@@ -298,8 +298,14 @@ class HrLeaveAllocationPlan(models.Model):
         current_date = (
             oldest_running_contract  # Start allocation from contract start date
         )
+        jump = False
 
         while current_date < fields.Date.today():
+
+            if self.immediate_allocation and not jump:
+                current_date += relativedelta(years=self.recurring_renewal_frequency)
+                jump = True
+
             date_from = current_date
             date_to = date_from + relativedelta(years=self.validity_period)
 
@@ -406,6 +412,14 @@ class HrLeaveAllocationPlan(models.Model):
         for record in self:
             record.state = "cancel"
 
+    def action_back2draft(self):
+        for record in self:
+            if record.state == "cancel":
+                record.state = "draft"
+                record.action_allocation_refuse()
+                record.action_allocation_draft()
+                record.action_allocation_unlink()
+
     def action_allocation_refuse(self):
         for record in self:
             record.allocation_ids.action_refuse()
@@ -413,6 +427,10 @@ class HrLeaveAllocationPlan(models.Model):
     def action_allocation_draft(self):
         for record in self:
             record.allocation_ids.action_draft()
+
+    def action_allocation_unlink(self):
+        for record in self:
+            record.allocation_ids.unlink()
 
     def action_allocation_confirm(self):
         for record in self:
