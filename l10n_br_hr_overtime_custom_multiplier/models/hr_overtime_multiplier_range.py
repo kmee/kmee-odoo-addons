@@ -1,6 +1,8 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import date, datetime
+
 from odoo import api, fields, models
 
 
@@ -32,18 +34,19 @@ class HrOvertimeMultiplierRange(models.Model):
     total_hours = fields.Float(compute="_compute_total_hours", store=True)
 
     @api.model
-    def _search_overtime_range(self, date, employee_id=None):
-        if not date:
+    def _search_overtime_range(self, attendance_date, employee_id=None):
+        if not attendance_date:
             return self
 
         exception_id = self.env["hr.attendance.exception"]
 
-        day_name = fields.Date.from_string(date).strftime("%A").lower()
+        day_name = fields.Date.from_string(attendance_date).strftime("%A").lower()
         domain = []
 
         if employee_id:
             exception_id = exception_id.search(
-                [("employee_id", "=", employee_id.id), ("date", "=", date)], limit=1
+                [("employee_id", "=", employee_id.id), ("date", "=", attendance_date)],
+                limit=1,
             )
 
             if exception_id:
@@ -66,7 +69,15 @@ class HrOvertimeMultiplierRange(models.Model):
             elif day_name == "sunday":
                 domain.append(("sunday", "=", True))
 
-            if employee_id and employee_id.resource_calendar_id.data_eh_feriado(date):
+            # Convert attendance_date to a datetime object if it is a date object
+            if isinstance(attendance_date, date) and not isinstance(
+                attendance_date, datetime
+            ):
+                attendance_date = datetime.combine(attendance_date, datetime.min.time())
+
+            if employee_id and employee_id.resource_calendar_id.data_eh_feriado(
+                attendance_date
+            ):
                 domain.append(("holiday", "=", True))
 
         overtime_ranges = self.search(domain)
