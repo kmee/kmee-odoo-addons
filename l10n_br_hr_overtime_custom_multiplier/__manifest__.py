@@ -9,7 +9,7 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "hr_attendance",
-        "l10n_br_resource",
+        "l10n_br_hr_holidays_public",
     ],
     "data": [
         "security/hr_attendance_exception.xml",
