@@ -307,7 +307,7 @@ class HrLeaveAllocationPlan(models.Model):
                 jump = True
 
             date_from = current_date
-            date_to = date_from + relativedelta(years=self.validity_period)
+            date_to = date_from + relativedelta(years=self.validity_period, days=-1)
 
             allocation = self.env["hr.leave.allocation"].create(
                 {
