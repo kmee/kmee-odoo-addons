@@ -3,7 +3,7 @@
     <template id="store_ticket_document_page">
         <pre id="test">
 =========================================
-<span t-esc="o.company_id.name" />
+<!-- <span t-esc="o.company_id.name" /> -->
 PEDIDO DE VENDA
 Data de Emissao: <span t-esc="o.date_order.strftime('%d/%m/%Y %H:%M')" />
 Cliente : <span t-esc="o.partner_id.name" />
