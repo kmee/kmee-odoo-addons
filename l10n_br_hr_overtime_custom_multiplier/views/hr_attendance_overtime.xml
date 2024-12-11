@@ -30,9 +30,10 @@
                     <group>
                         <field name="attendance_id" />
                         <field name="adjustment_overtime_id" />
-                        <field name="adjustment" />
                         <field name="extra_hours_without_multiplier" force_save="1" />
                         <field name="applied_multiplier" />
+                        <field name="adjustment" readonly="1" force_save="1" />
+                        <field name="note" />
                     </group>
                 </group>
             </form>
@@ -67,7 +68,8 @@
                     widget="float_time"
                     modifiers="{&quot;required&quot;: true}"
                 />
-                <field name="adjustment" readonly="1" />
+                <field name="adjustment" readonly="1" invisible="1" force_save="1" />
+                <field name="note" />
             </tree>
         </field>
     </record>
@@ -76,8 +78,9 @@
         <field name="name">Extra hours</field>
         <field name="res_model">hr.attendance.overtime</field>
         <field name="view_mode">tree,form,pivot</field>
-        <field name="context">{'default_adjustment': True}</field>
-
+        <field
+            name="context"
+        >{'default_adjustment': True, "note": "Ajuste Manual"}</field>
         <field name="help">View and manage overtime records for employees</field>
     </record>
 

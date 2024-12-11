@@ -8,6 +8,8 @@ class HrAttendanceOvertime(models.Model):
 
     _inherit = "hr.attendance.overtime"
 
+    note = fields.Text()
+
     extra_hours_without_multiplier = fields.Float(
         string="Extra Hours without Multiplier", readonly="1"
     )
