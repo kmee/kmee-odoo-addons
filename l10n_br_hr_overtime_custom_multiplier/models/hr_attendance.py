@@ -16,6 +16,14 @@ class HrAttendance(models.Model):
             HrAttendance, self.with_context(attendance_ids=self.ids)
         )._update_overtime(employee_attendance_dates)
 
+        overtime_ids = self.env["hr.attendance.overtime"].search(
+            [("attendance_id", "in", self.ids)]
+        )
+        if overtime_ids:
+            overtime_ids.write(
+                {"note": "Automaticamente gerado com base no registro de horas."}
+            )  # noqa
+
         return res
 
 
