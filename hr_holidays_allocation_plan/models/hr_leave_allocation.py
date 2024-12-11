@@ -309,27 +309,35 @@ class HrLeaveAllocationPlan(models.Model):
             date_from = current_date
             date_to = date_from + relativedelta(years=self.validity_period, days=-1)
 
-            allocation = self.env["hr.leave.allocation"].create(
-                {
-                    "name": self.name,
-                    "holiday_type": "employee",
-                    "holiday_status_id": self.holiday_status_id.id,
-                    "notes": self.notes,
-                    "number_of_days": self.number_of_days,
-                    "employee_id": employee.id,
-                    "employee_ids": [(6, 0, [employee.id])],
-                    "state": "confirm",
-                    "allocation_type": "regular",
-                    "date_from": date_from,
-                    "date_to": date_to,
-                    "accrual_plan_id": self.accrual_plan_id.id,
-                    "allocation_plan_id": self.id,
-                }
-            )
-            allocation.action_validate()
+            if not self.env["hr.leave.allocation"].search_count(
+                [
+                    ("employee_id", "=", employee.id),
+                    ("date_from", "<=", date_to),
+                    ("date_to", ">=", date_from),
+                    ("allocation_plan_id", "=", self.id),
+                ]
+            ):
+                allocation = self.env["hr.leave.allocation"].create(
+                    {
+                        "name": self.name,
+                        "holiday_type": "employee",
+                        "holiday_status_id": self.holiday_status_id.id,
+                        "notes": self.notes,
+                        "number_of_days": self.number_of_days,
+                        "employee_id": employee.id,
+                        "employee_ids": [(6, 0, [employee.id])],
+                        "state": "confirm",
+                        "allocation_type": "regular",
+                        "date_from": date_from,
+                        "date_to": date_to,
+                        "accrual_plan_id": self.accrual_plan_id.id,
+                        "allocation_plan_id": self.id,
+                    }
+                )
+                allocation.action_validate()
 
-            # Increment to the next year after the first allocation
-            current_date += relativedelta(years=1)
+                # Increment to the next year after the first allocation
+                current_date += relativedelta(years=1)
 
     def _create_regular(self):
         """Aloca somente uma vez de forma fixa"""
