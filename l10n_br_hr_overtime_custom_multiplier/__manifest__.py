@@ -8,6 +8,7 @@
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
+        "hr",
         "hr_attendance",
         "l10n_br_hr_holidays_public",
     ],
@@ -18,5 +19,7 @@
         "views/hr_attendance_overtime.xml",
         "views/hr_overtime_multiplier_range.xml",
         "views/hr_attendance_exception.xml",
+        #
+        "wizards/hr_attendance_overtime_payment_wizard.xml",
     ],
 }
