@@ -16,4 +16,6 @@ class SaleOrderLine(models.Model):
             self.name = self.product_id.display_name.replace(
                 self.product_id.availability_text_get(), ""
             )
+            if self.product_id.description_sale:
+                self.name += "\n" + self.product_id.description_sale
         return res
