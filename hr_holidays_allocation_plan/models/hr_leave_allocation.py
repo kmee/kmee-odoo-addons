@@ -251,7 +251,8 @@ class HrLeaveAllocationPlan(models.Model):
 
     def action_recompute_plan(self):
         for record in self:
-
+            employees = self.env["hr.employee"]
+            
             if record.date_to and record.date_to < fields.Date.today():
                 record.state = "cancel"
                 continue
