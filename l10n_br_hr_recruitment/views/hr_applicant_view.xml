@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_l10n_br_hr_applicant_recruitment_form" model="ir.ui.view">
+        <field name="name">l10n_br_hr_recruitment.applicant.form</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="personal_information"
+                    string="Private Information"
+                    groups="hr.group_hr_user"
+                >
+                    <group>
+                        <group string="Private Contact">
+                            <field
+                                name="address_home_id"
+                                context="{
+                                    'show_address': 1,
+                                    'default_type': 'private',
+                                    'form_view_ref': 'base.res_partner_view_form_private'}"
+                                options='{"always_reload": True, "highlight_first_line": True}'
+                            />
+                            <field
+                                name="bank_account_id"
+                                context="{'default_partner_id': address_home_id}"
+                            />
+                            <field name="address_proof_file" />
+                        </group>
+
+                        <group string="Education">
+                            <field name="certificate" />
+                            <field name="study_field" />
+                            <field name="study_school" />
+                            <field name="study_proof_file" />
+                        </group>
+
+                        <group string="Citizenship">
+                            <field name="cpf" />
+                            <field
+                                name="nationality_id"
+                                options='{"no_open": True, "no_create": True}'
+                            />
+                            <field name="birthday" />
+                        </group>
+
+                        <group name="characteristics" string="Characteristics">
+                            <field
+                                name="ethnicity"
+                                options="{'no_create': True, 'no_open': True}"
+                            />
+                        </group>
+                    </group>
+                </page>
+
+                <page
+                    name="documents"
+                    string="Documents"
+                    groups="hr.group_hr_manager,hr.group_hr_user"
+                >
+                    <group>
+                        <group name="identidade" string="Identity">
+                            <field name="rg" string="Number" />
+                            <field name="rg_file" />
+                        </group>
+                        <group name="reservist" string="Reservist">
+                            <field name="creservist" string="Number" />
+                            <field name="reservist_file" />
+                        </group>
+                        <group name="vote_registration" string="Voter Registration">
+                            <field name="voter_title" string="Number" />
+                            <field name="voter_zone" />
+                            <field name="voter_section" />
+                            <field name="voter_title_file" />
+                        </group>
+                        <group name="diver_license" string="Driver License">
+                            <field name="driver_license" string="Number" />
+                            <field
+                                name="driver_categ"
+                                attrs="{'required': [('driver_license', '!=', False)]}"
+                            />
+                            <field
+                                name="expiration_date"
+                                attrs="{'required': [('driver_license', '!=', False)]}"
+                            />
+                            <field name="cnh_file" />
+                        </group>
+                        <group name="pis_pasep" string="PIS/PASEP">
+                            <field name="pis_pasep" placeholder="XXX.XXXXX.XX-X" />
+                            <field name="pis_file" />
+                        </group>
+                        <group name="parents_name" string="Parents names">
+                            <field name="father_name" />
+                            <field name="mother_name" />
+                        </group>
+                    </group>
+                </page>
+
+                <page string="Dependents" groups="hr.group_hr_user">
+                    <field name="dependent_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="name" />
+                            <field name="date_of_birth" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
