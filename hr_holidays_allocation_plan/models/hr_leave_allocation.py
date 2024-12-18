@@ -252,7 +252,7 @@ class HrLeaveAllocationPlan(models.Model):
     def action_recompute_plan(self):
         for record in self:
             employees = self.env["hr.employee"]
-            
+
             if record.date_to and record.date_to < fields.Date.today():
                 record.state = "cancel"
                 continue
@@ -303,7 +303,7 @@ class HrLeaveAllocationPlan(models.Model):
 
         while current_date < fields.Date.today():
 
-            if self.immediate_allocation and not jump:
+            if not self.immediate_allocation and not jump:
                 current_date += relativedelta(years=self.recurring_renewal_frequency)
                 jump = True
 
@@ -337,8 +337,8 @@ class HrLeaveAllocationPlan(models.Model):
                 )
                 allocation.action_validate()
 
-                # Increment to the next year after the first allocation
-                current_date += relativedelta(years=1)
+            # Increment to the next year after the first allocation
+            current_date += relativedelta(years=1)
 
     def _create_regular(self):
         """Aloca somente uma vez de forma fixa"""
