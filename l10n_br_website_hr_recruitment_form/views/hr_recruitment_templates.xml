@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="hr_application_form_portal_template"
+        name="HR Application Portal Template"
+        inherit_id="portal.portal_sidebar"
+        primary="True"
+    >
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row mt16">
+                <div id="quote_content" class="col-12 col-lg justify-content-end">
+                    <div class="o_hr_application container mt-4">
+                        <h1 class="mb-4">Applicant Data</h1>
+                        <form class="form o_application_form pt-3">
+                            <input
+                                type="hidden"
+                                name="applicant_id"
+                                t-att-value="applicant.id"
+                            />
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                t-att-value="request.csrf_token()"
+                            />
+                            <h3>Personal Information</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="name"
+                                        name="name"
+                                        required="1"
+                                        t-att-value="applicant.partner_name"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="date_of_birth"
+                                        class="form-label"
+                                    >Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        id="date_of_birth"
+                                        name="date_of_birth"
+                                        required="1"
+                                        t-att-value="applicant.birthday"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="rg" class="form-label">RG</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="rg"
+                                        name="rg"
+                                        required="1"
+                                        t-att-value="applicant.rg"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cpf" class="form-label">CPF</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="cpf"
+                                        name="cpf"
+                                        required="1"
+                                        t-att-value="applicant.cpf"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="ethnicity"
+                                        class="form-label"
+                                    >Ethnicity</label>
+                                    <select
+                                        class="form-select"
+                                        id="ethnicity"
+                                        name="ethnicity"
+                                    >
+                                        <option value="0">Select a ethnicity</option>
+                                        <t t-foreach="ethnicities" t-as="ethnicity">
+                                            <option
+                                                t-att-value="ethnicity.id"
+                                                t-att-selected="applicant.ethnicity.id == ethnicity.id"
+                                                t-out="ethnicity.name"
+                                            />
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="nationality"
+                                        class="form-label"
+                                    >Nationality</label>
+                                    <select
+                                        class="form-select"
+                                        id="nationality"
+                                        name="nationality"
+                                    >
+                                        <option value="0">Select a nationality</option>
+                                        <t t-foreach="countries" t-as="country">
+                                            <option
+                                                t-att-value="country.id"
+                                                t-att-selected="applicant.nationality_id.id == country.id"
+                                                t-out="country.name"
+                                            />
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="phone"
+                                        name="phone"
+                                        required="1"
+                                        t-att-value="applicant.partner_phone"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="email"
+                                        name="email"
+                                        required="1"
+                                        t-att-value="applicant.email_from"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="father_name"
+                                        class="form-label"
+                                    >Father's name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="father_name"
+                                        name="father_name"
+                                        t-att-value="applicant.father_name"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="mother_name"
+                                        class="form-label"
+                                    >Mother's name</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="mother_name"
+                                        name="mother_name"
+                                        required="1"
+                                        t-att-value="applicant.mother_name"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="reservist"
+                                        class="form-label"
+                                    >Reservist</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="reservist"
+                                        name="reservist"
+                                        t-att-value="applicant.creservist"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="reservist_file"
+                                        class="form-label"
+                                    >Attach Reservist Proof</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="reservist_file"
+                                        name="reservist_file"
+                                        required="1"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="pis" class="form-label">PIS</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="pis"
+                                        name="pis"
+                                        required="1"
+                                        t-att-value="applicant.pis_pasep"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="pis_file"
+                                        class="form-label"
+                                    >Attach PIS</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="pis_file"
+                                        name="pis_file"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                        required="1"
+                                    />
+                                </div>
+                            </div>
+
+                            <h3 class="mt-3">Address</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="street"
+                                        class="form-label"
+                                    >Street</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="street"
+                                        name="street"
+                                        t-att-value="applicant.address_home_id.street"
+                                    />
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <label
+                                        for="street_number"
+                                        class="form-label"
+                                    >Street Number</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="street_number"
+                                        name="street_number"
+                                        t-att-value="applicant.address_home_id.street_number"
+                                    />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label
+                                        for="street_2"
+                                        class="form-label"
+                                    >Street 2</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="street_2"
+                                        name="street_2"
+                                        t-att-value="applicant.address_home_id.street2"
+                                    />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label
+                                        for="district"
+                                        class="form-label"
+                                    >District</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="district"
+                                        name="district"
+                                        t-att-value="applicant.address_home_id.district"
+                                    />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="cep" class="form-label">CEP</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="cep"
+                                        name="cep"
+                                        t-att-value="applicant.address_home_id.zip"
+                                    />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="city" class="form-label">City</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="city"
+                                        name="city"
+                                        t-att-value="applicant.address_home_id.city_id and applicant.address_home_id.city_id.name or ''"
+                                    />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="state" class="form-label">State</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="state"
+                                        name="state"
+                                        t-att-value="applicant.address_home_id.state_id and applicant.address_home_id.state_id.name or ''"
+                                    />
+                                </div>
+                                <div class="col-md-8 mb-3">
+                                    <label
+                                        for="address_proof_file"
+                                        class="form-label"
+                                    >Attach Address Proof</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="address_proof_file"
+                                        name="address_proof_file"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                        required="1"
+                                    />
+                                </div>
+                            </div>
+
+                            <h3 class="mt-3">Education</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="education"
+                                        class="form-label"
+                                    >Education</label>
+                                    <select
+                                        class="form-select"
+                                        id="education"
+                                        name="education"
+                                    >
+                                        <t
+                                            t-foreach="dict(applicant._fields['certificate'].selection).items()"
+                                            t-as="item"
+                                        >
+                                            <option
+                                                t-att-value="item[0]"
+                                                t-out="item[1]"
+                                                t-att-selected="item[0] == applicant.certificate"
+                                            />
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="study_proof_file"
+                                        class="form-label"
+                                    >Attach Study Proof</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="study_proof_file"
+                                        name="study_proof_file"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                        required="1"
+                                    />
+                                </div>
+                            </div>
+
+                            <h3 class="mt-3">Voter Data</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="voter_title"
+                                        class="form-label"
+                                    >Title Number</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="voter_title"
+                                        name="voter_title"
+                                        required="1"
+                                        t-att-value="applicant.voter_title"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="voter_zone"
+                                        class="form-label"
+                                    >Zone</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="voter_zone"
+                                        name="voter_zone"
+                                        required="1"
+                                        t-att-value="applicant.voter_zone"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="voter_section"
+                                        class="form-label"
+                                    >Section</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="voter_section"
+                                        name="voter_section"
+                                        required="1"
+                                        t-att-value="applicant.voter_section"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="voter_title_file"
+                                        class="form-label"
+                                    >Attach Voter Title</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="voter_title_file"
+                                        name="voter_title_file"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                        required="1"
+                                    />
+                                </div>
+                            </div>
+
+                            <h3 class="mt-3">Bank Data</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="bank" class="form-label">Bank</label>
+                                    <select class="form-select" id="bank" name="bank">
+                                        <option value="0">Select a bank</option>
+                                        <t t-foreach="banks" t-as="bank">
+                                            <option
+                                                t-att-value="bank.id"
+                                                t-att-selected="applicant.bank_account_id.bank_id == bank"
+                                                t-out="bank.name"
+                                            />
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="agency"
+                                        class="form-label"
+                                    >Agency</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="agency"
+                                        name="agency"
+                                        required="1"
+                                        t-att-value="applicant.bank_account_id.bra_number"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label
+                                        for="account"
+                                        class="form-label"
+                                    >Account</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="account"
+                                        name="account"
+                                        required="1"
+                                        t-att-value="applicant.bank_account_id.acc_number"
+                                    />
+                                </div>
+                            </div>
+
+                            <h3 class="mt-3">Documents</h3>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="rg_file" class="form-label">RG</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="rg_file"
+                                        name="rg_file"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                        required="1"
+                                    />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cnh_file" class="form-label">CNH</label>
+                                    <input
+                                        type="file"
+                                        class="form-control"
+                                        id="cnh_file"
+                                        name="cnh_file"
+                                        accept=".pdf, .jpg, .jpeg, .png"
+                                        required="1"
+                                    />
+                                </div>
+                            </div>
+
+                            <h3 class="mt-3">Dependents</h3>
+                            <div class="mb-3 o_dependents_container">
+                                <t t-set="count" t-value="1" />
+                                <t t-foreach="applicant.dependent_ids" t-as="dependent">
+                                    <div class="dependent mb-3 p-3 border rounded">
+                                        <h6>Dependente <t t-out="count" /></h6>
+
+                                        <div class="row">
+                                            <div class="col-6 mb-2">
+                                                <label
+                                                    for="dependent_name"
+                                                    class="form-label"
+                                                >Name</label>
+                                                <input
+                                                    type="text"
+                                                    class="form-control dependent_name"
+                                                    required="1"
+                                                    t-att-value="dependent.name"
+                                                />
+                                            </div>
+                                            <div class="col-6 mb-2">
+                                                <label
+                                                    for="dependent_date_of_birth"
+                                                    class="form-label"
+                                                >Date of Birth</label>
+                                                <input
+                                                    type="date"
+                                                    class="form-control dependent_date_of_birth"
+                                                    required="1"
+                                                    t-att-value="dependent.date_of_birth"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            class="btn btn-danger btn-sm o_application_remove_dependent"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                    <t t-set="count" t-value="count + 1" />
+                                </t>
+                            </div>
+                            <button
+                                type="button"
+                                class="btn btn-success o_application_add_dependent"
+                            >Add Dependent</button>
+
+                            <div class="row mt-4">
+                                <div class="col-md-12 text-end">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-success o_submit_application_form"
+                                    >Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
