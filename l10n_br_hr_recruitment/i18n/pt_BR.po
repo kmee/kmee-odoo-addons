@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 20:14+0000\n"
-"PO-Revision-Date: 2024-12-17 20:14+0000\n"
+"POT-Creation-Date: 2024-12-20 14:12+0000\n"
+"PO-Revision-Date: 2024-12-20 14:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,36 +16,271 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__address_home_id
+msgid "Address"
+msgstr "Endereço"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__address_proof_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__address_proof_file
 msgid "Address Proof File"
 msgstr "Comprovante de Endereço"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model,name:l10n_br_hr_recruitment.model_hr_applicant
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__applicant_id
+msgid "Applicant"
+msgstr "Candidato"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__bachelor
+msgid "Bachelor"
+msgstr "Baicharelado"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__bank_account_id
+msgid "Bank Account Number"
+msgstr "Número da Conta Bancária"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__cnh_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__cnh_file
 msgid "CNH File"
 msgstr "Arquivo da Carteira de Motorista"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__cpf
+msgid "CPF"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__certificate
+msgid "Certificate Level"
+msgstr "Nível do Certificado"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Characteristics"
+msgstr "Caracteristicas"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Citizenship"
+msgstr "Cidadania"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__date_of_birth
+msgid "Date Of Birth"
+msgstr "Data de Nascimento"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__birthday
+msgid "Date of Birth"
+msgstr "Data de Nascimento"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__dependent_ids
+msgid "Dependent"
+msgstr "Dependente"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Dependents"
+msgstr "Dependentes"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__display_name
+msgid "Display Name"
+msgstr "Nome"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__doctor
+msgid "Doctor"
+msgstr "Doutorado"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Documents"
+msgstr "Documentos"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Driver License"
+msgstr "Carteira de Motorista"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__driver_categ
+msgid "Driver license category"
+msgstr "Categoria da Carteira de Motorista"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__driver_license
+msgid "Driver license number"
+msgstr "Número da carteira de motorista"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Education"
+msgstr "Educação"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model,name:l10n_br_hr_recruitment.model_hr_employee
+msgid "Employee"
+msgstr "Funcionário"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,help:l10n_br_hr_recruitment.field_hr_applicant__address_home_id
+msgid "Enter here the private address of the applicant"
+msgstr "Insira aqui o endereço privado do candidato"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__ethnicity
+msgid "Ethnicity"
+msgstr "Etnia"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__expiration_date
+msgid "Expiration Date"
+msgstr "Data de Expiração"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__father_name
+msgid "Father Name"
+msgstr "Nome do Pai"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__study_field
+msgid "Field of Study"
+msgstr "Campo de Estudo"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__graduate
+msgid "Graduate"
+msgstr "Graduado"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Identity"
+msgstr "Identidade"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__master
+msgid "Master"
+msgstr "Mestrado"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__creservist
+msgid "Military service status certificate"
+msgstr "Certificado de status de serviço militar"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__mother_name
+msgid "Mother Name"
+msgstr "Nome da Mãe"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__nationality_id
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__nationality_id
 msgid "Nationality"
 msgstr "Nacionalidade"
 
 #. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Number"
+msgstr "Número"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__other
+msgid "Other"
+msgstr "Outros"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__pis_pasep
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "PIS/PASEP"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Parents names"
+msgstr "Nome dos Pais"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__pis_file
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__pis_file
+msgid "Pis File"
+msgstr "Arquivo PIS"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Private Contact"
+msgstr "Contatos Privados"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Private Information"
+msgstr "Informações Privadas"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__rg
+msgid "RG"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__rg_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__rg_file
 msgid "RG File"
 msgstr "Arquivo da Identidade"
 
 #. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Reservist"
+msgstr "Reservista"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__reservist_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__reservist_file
 msgid "Reservist File"
 msgstr "Arquivo de Reservista"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__study_school
+msgid "School"
+msgstr "Escola"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__study_proof_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__study_proof_file
 msgid "Study Proof File"
 msgstr "Comprovante de Escolaridade"
 
 #. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Voter Registration"
+msgstr "Registro do Eleitor"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__voter_section
+msgid "Voter Section"
+msgstr "Seção do Eleitor"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__voter_title
+msgid "Voter Title"
+msgstr "Título de Eleitor"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__voter_title_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__voter_title_file
 msgid "Voter Title File"
 msgstr "Arquivo do Título de Eleitor"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__voter_zone
+msgid "Voter Zone"
+msgstr "Zona do Eleitor"
