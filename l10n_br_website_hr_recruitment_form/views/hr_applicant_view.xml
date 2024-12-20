@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_l10n_br_website_hr_recruitment_form_form" model="ir.ui.view">
+        <field name="name">l10n_br_website_hr_recruitment_form.applicant.form</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_share_applicant_form"
+                    type="object"
+                    string="Share Applicant Form"
+                    class="btn-primary"
+                    icon="fa-share-alt"
+                    attrs="{'invisible': [('date_closed', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
