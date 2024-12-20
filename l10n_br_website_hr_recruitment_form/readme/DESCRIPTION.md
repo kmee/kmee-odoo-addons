@@ -1,0 +1,1 @@
+This module adds an public application form on the website
