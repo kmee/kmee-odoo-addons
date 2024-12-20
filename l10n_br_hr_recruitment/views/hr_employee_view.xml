@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="view_l10n_br_hr_employee_recruitment_form" model="ir.ui.view">
+        <field name="name">l10n_br_hr_recruitment.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="l10n_br_hr.view_l10n_br_hr_employee_form" />
+        <field name="priority">999</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='gender']" position="after">
+                <field name="nationality_id" />
+            </xpath>
+
+            <xpath expr="//field[@name='identity_city_id']" position="after">
+                <field name="rg_file" />
+            </xpath>
+
+            <xpath expr="//field[@name='cresv_categ']" position="after">
+                <field name="reservist_file" />
+            </xpath>
+
+            <xpath expr="//field[@name='voter_section']" position="after">
+                <field name="voter_title_file" />
+            </xpath>
+
+            <xpath expr="//field[@name='expiration_date']" position="after">
+                <field name="cnh_file" />
+            </xpath>
+
+            <xpath expr="//div[@name='div_km_home_work']" position="after">
+                <field name="address_proof_file" />
+            </xpath>
+
+            <xpath expr="//field[@name='study_school']" position="after">
+                <field name="study_proof_file" />
+            </xpath>
+
+            <xpath expr="//field[@name='pis_pasep_date']" position="after">
+                <field name="pis_file" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
