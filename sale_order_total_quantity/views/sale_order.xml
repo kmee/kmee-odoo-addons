@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_order_agent_form_inherit">
+        <field name="model">sale.order</field>
+        <field name="name">sale.agent.order.inherit.form</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+        <field name="tax_totals_json" position="after">
+                <field name="total_units" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
