@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_contract_benefit" model="ir.ui.view">
+        <field name="name">hr contract benefit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <page name="other" position="inside">
+                <field name="contract_attachment_ids" widget="many2many_binary" />
+            </page>
+            <notebook position="inside">
+                <page name="benefits" string="Informações dos benefícios">
+                    <group name="employee_benefits">
+                        <group colspan="4">
+                            <field name="benefit_type_ids" string=''>
+                                <tree editable="bottom">
+                                    <field name="currency_id" invisible="1" />
+                                    <field name="benefit_type_id" string="Tipo" />
+                                    <field
+                                        name="beneficiary_id"
+                                        string="Beneficiário"
+                                    />
+                                    <field
+                                        name="dependent_payment_value"
+                                        string="Vlr. p/ Dependente"
+                                    />
+
+                                    <field
+                                        name="dependent_ids"
+                                        widget="many2many_tags"
+                                        string="Dependentes"
+                                    />
+                                    <field
+                                        name="employee_percentage"
+                                        string="% Empregado"
+                                    />
+
+                                    <field
+                                        name="employee_payment_value"
+                                        string="Vlr. Funcionário"
+                                        sum="Funcionário"
+                                    />
+                                    <field
+                                        name="company_percentage"
+                                        string="% Empresa"
+                                    />
+
+                                    <field
+                                        name="company_payment_value"
+                                        string="Vlr. Empresa"
+                                        sum="Empresa"
+                                    />
+
+                                    <field
+                                        name="benefit_fixed_value"
+                                        sum="Fixed"
+                                        optional="hide"
+                                    />
+                                    <field
+                                        name="total_benefit_value"
+                                        sum="Total"
+                                        optional="hide"
+                                    />
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="hr_contract_benefit_type_form" model="ir.ui.view">
+        <field name="name">hr.benefit.type.form</field>
+        <field name="model">hr.benefit.type</field>
+        <field name="arch" type="xml">
+            <form string="Benefit Type">
+                <sheet>
+                    <group>
+                        <group name="basic_info" string="Informações básicas">
+                            <field name="name" />
+                            <field name="benefit_fixed_value" />
+                            <field name="company_percentage" />
+                            <field name="employee_percentage" />
+                        </group>
+                        <group name="dependents" string="Dependentes">
+                            <field name="max_dependents" />
+                            <field name="dependent_company_percentage" />
+                            <field name="dependent_employee_percentage" />
+                            <field name="dependent_payment_value" />
+                        </group>
+                        <field name="currency_id" invisible="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

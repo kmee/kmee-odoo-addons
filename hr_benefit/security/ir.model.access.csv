@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_benefit_type_user,access.hr.benefit.type.user,model_hr_benefit_type,hr_contract.group_hr_contract_employee_manager,1,1,1,1
+access_hr_benefit_type_manager,access.hr.benefit.type.manager,model_hr_benefit_type,hr_contract.group_hr_contract_manager,1,1,1,1
+access_hr_benefit_line_user,access.hr.benefit.line.user,model_hr_benefit_line,hr_contract.group_hr_contract_employee_manager,1,1,1,1
+access_hr_benefit_line_manager,access.hr.benefit.line.manager,model_hr_benefit_line,hr_contract.group_hr_contract_manager,1,1,1,1
