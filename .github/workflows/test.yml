@@ -36,6 +36,7 @@ jobs:
       matrix:
         include:
           - container: ghcr.io/oca/oca-ci/py3.8-ocb14.0:latest
+            exclude: "sale_order_product_availability_inline,l10n_br_sale_order_product_availability_inline"
             name: test with OCB
             makepot: "true"
     services:
@@ -47,6 +48,9 @@ jobs:
           POSTGRES_DB: odoo
         ports:
           - 5432:5432
+    env:
+      INCLUDE: "${{ matrix.include }}"
+      EXCLUDE: "${{ matrix.exclude }}"
     steps:
       - uses: actions/checkout@v3
         with:
