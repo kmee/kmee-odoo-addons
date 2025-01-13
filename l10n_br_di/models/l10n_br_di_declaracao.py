@@ -98,6 +98,12 @@ class L10nBrDiDeclaracao(models.Model):
         "res.currency",
     )
 
+    fornecedor_partner_id = fields.Many2one(
+        "res.partner",
+        string="Fornecedor",
+        ondelete="restrict",
+    )
+
     # Relacionais XML
 
     di_adicao_ids = fields.One2many("l10n_br_di.adicao", "declaracao_id")
@@ -345,6 +351,11 @@ class L10nBrDiDeclaracao(models.Model):
     def calcular_declaracao(self):
         for record in self:
             record.di_adicao_ids.calcular_declaracao()
+
+            if record.di_adicao_ids.mapped("fornecedor_partner_id"):
+                record.fornecedor_partner_id = record.di_adicao_ids.mapped(
+                    "fornecedor_partner_id"
+                )[0]
 
     def gerar_fatura(self):
         self.ensure_one()
