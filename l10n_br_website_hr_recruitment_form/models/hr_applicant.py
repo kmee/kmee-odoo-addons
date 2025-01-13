@@ -31,18 +31,10 @@ class HrApplicant(models.Model):
 
     def action_share_applicant_form(self):
         self.ensure_one()
-
         template_id = self.env.ref(
             "l10n_br_website_hr_recruitment_form.send_applicant_form"
         )
-        email_values = {
-            "email_cc": False,
-            "auto_delete": True,
-            "message_type": "comment",
-            "recipient_ids": [],
-            "partner_ids": [],
-            "scheduled_date": False,
-        }
-        template_id.send_mail(
-            self.id, force_send=True, raise_exception=True, email_values=email_values
+        return self.with_context(force_send=True).message_post_with_template(
+            template_id.id,
+            composition_mode="comment",
         )
