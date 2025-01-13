@@ -38,7 +38,7 @@ Addon | Description
 [project_tech_lead](project_tech_lead) | Creates the Tech Lead field for tasks and projects.
 [sale_crm_auto_won](sale_crm_auto_won) | Assigns the opportunity stage to "Won" when this opportunity has generated a sale.
 [sale_hide_internal_reference](sale_hide_internal_reference) | Allows you to hide the internal reference of the product.
-[sale_partial_lock](sale_partial_lock) | Partially blocks the sale order.
+[sale_partial_lock](sale_partial_lock) | Allows you to create invoices even when a sale order is locked.
 [stock_intercompany_bidirectional_pull](stock_intercompany_bidirectional_pull) | When an inbound transfer is created, "Marked as To Do" and the contact is a multi-company company, in that company, a outbound transfer is created.
 [website_hr_recruitment_display_description](website_hr_recruitment_display_description) | This module inserts the job description on the website, just below the location.
 
