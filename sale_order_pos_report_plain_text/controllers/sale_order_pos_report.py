@@ -17,7 +17,7 @@ class SaleOrderPosController(http.Controller):
             "sale_order_pos_report_plain_text.action_report_saleorder_compact"
         )._render_qweb_pdf(sale_order.ids)[0]
         response = request.make_response(pdf)
-        response.headers["Content-Type"] = "application/pdf"
+        response.headers["Content-Type"] = "application/pdf;"
         response.headers[
             "Content-Disposition"
         ] = f'inline; filename="sale_order_{sale_order_id}.pdf"'
