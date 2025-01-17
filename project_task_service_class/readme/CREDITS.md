@@ -1,3 +1,4 @@
 The development of this module has been financially supported by:
 
-- KMEE
+- [KMEE](https://kmee.com.br/)
+
