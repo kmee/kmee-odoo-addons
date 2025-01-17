@@ -77,6 +77,13 @@ Contributors
 
 -  Tiago Amaral tiago.amaral@kmee.com.br
 
+Other credits
+-------------
+
+The development of this module has been financially supported by:
+
+-  `KMEE <https://kmee.com.br/>`__
+
 Maintainers
 -----------
 
