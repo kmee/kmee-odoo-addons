@@ -22,12 +22,26 @@ Hr Holiday No Mail
 
 |badge1| |badge2| |badge3|
 
-Hr Holiday No Mail
+This module customizes the behavior of vacation allocation models and
+vacation records by disabling the automatic sending of email
+notifications when a new record is created or when an existing record is
+created or changed.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Usage
+=====
+
+When a new vacation allocation is created, the system will not send
+automatic email notifications to the user or any other party involved.
+
+Similarly, when updating an existing vacation allocation, the system
+disables automatic email notification.
+
+The same behavior applies when a vacation request is created or changed.
 
 Bug Tracker
 ===========
@@ -53,6 +67,13 @@ Contributors
 -  ``KMEE <https://www.kmee.com.br>``\ \_:
 
    -  Luis Miléo
+
+Other credits
+-------------
+
+The development of this module has been financially supported by:
+
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
