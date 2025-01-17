@@ -1,7 +1,2 @@
-[ This file must be max 2-3 paragraphs, and is required.
+This Odoo module adds advanced vacation day management functionality, allowing the use of accrual plans that can be configured to occur at the end of the year or for the next year. With this functionality, companies can set up a more flexible vacation policy, adjusting the attribution period as needed.
 
-The goal of this document is to explain quickly the features of this module: “what” this module does and “what” it is for. ]
-
-Example:
-
-This module extends the functionality of ... to support ... and to allow users to ...

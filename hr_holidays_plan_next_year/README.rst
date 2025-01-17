@@ -16,83 +16,27 @@ Hr Holidays Plan Next Year
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/OCA/kmee-odoo-addons/tree/16.0/hr_holidays_plan_next_year
-    :alt: OCA/kmee-odoo-addons
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/kmee-odoo-addons-16-0/kmee-odoo-addons-16-0-hr_holidays_plan_next_year
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/kmee-odoo-addons&target_branch=16.0
-    :alt: Try me on Runboat
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/hr_holidays_plan_next_year
+    :alt: KMEE/kmee-odoo-addons
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required.
-
-The goal of this document is to explain quickly the features of this
-module: “what” this module does and “what” it is for. ]
-
-Example:
-
-This module extends the functionality of ... to support ... and to allow
-users to ...
+This Odoo module adds advanced vacation day management functionality,
+allowing the use of accrual plans that can be configured to occur at the
+end of the year or for the next year. With this functionality, companies
+can set up a more flexible vacation policy, adjusting the attribution
+period as needed.
 
 **Table of contents**
 
 .. contents::
    :local:
 
-Use Cases / Context
-===================
-
-[ This file is optional but strongly suggested to allow end-users to
-evaluate the module's usefulness in their context. ]
-
-BUSINESS NEED: It should explain the “why” of the module:
-
--  what is the business requirement that generated the need to develop
-   this module
--  in which context or use cases this module can be useful (practical
-   examples are welcome!).
-
-APPROACH: It could also explain the approach to address the mentioned
-need.
-
-USEFUL INFORMATION: It can also inform on related modules:
-
--  modules it depends on and their features
--  other modules that can work well together with this one
--  suggested setups where the module is useful (eg: multicompany,
-   multi-website)
-
-Installation
-============
-
-[ This file must only be present if there are very specific installation
-instructions, such as installing non-python dependencies. The audience
-is systems administrators. ]
-
-To install this module, you need to:
-
-1. Do this ...
-
 Configuration
 =============
 
-[ This file is not always required; it should explain **how to configure
-the module before using it**; it is aimed at users with administration
-privileges.
 
-Please be detailed on the path to configuration (eg: do you need to
-activate developer mode?), describe step by step configurations and the
-use of screenshots is strongly recommended.]
-
-To configure this module, you need to:
-
--  Go to *App* > Menu > Menu item
--  Activate boolean… > save
--  …
 
 Usage
 =====
@@ -122,48 +66,13 @@ To use this module, you need to:
 
    *insert screenshot!*
 
-Known issues / Roadmap
-======================
-
-[ Enumerate known caveats and future potential improvements. It is
-mostly intended for end-users, and can also help potential new
-contributors discovering new features to implement. ]
-
--  ...
-
-Changelog
-=========
-
-[ The change log. The goal of this file is to help readers understand
-changes between version. The primary audience is end users and
-integrators. Purely technical changes such as code refactoring must not
-be mentioned here.
-
-This file may contain ONE level of section titles, underlined with the ~
-(tilde) character. Other section markers are forbidden and will likely
-break the structure of the README.rst or other documents where this
-fragment is included. ]
-
-11.0.x.y.z (YYYY-MM-DD)
------------------------
-
--  [BREAKING] Breaking changes come first.
-   (`#70 <https://github.com/OCA/repo/issues/70>`__)
--  [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
--  [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
-
-11.0.x.y.z (YYYY-MM-DD)
------------------------
-
--  ...
-
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/kmee-odoo-addons/issues/new?body=module:%20hr_holidays_plan_next_year%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20hr_holidays_plan_next_year%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -178,35 +87,20 @@ Authors
 Contributors
 ------------
 
--  Firstname Lastname email.address@example.org (optional company
-   website url)
--  Second Person second.person@example.org (optional company website
-   url)
+-  ``KMEE <https://www.kmee.com.br>``\ \_:
+
+   -  Luis Miléo
 
 Other credits
 -------------
 
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
 The development of this module has been financially supported by:
 
--  Company 1 name
--  Company 2 name
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
 
-This module is maintained by the OCA.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/hr_holidays_plan_next_year>`_ project on GitHub.
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
-
-This module is part of the `OCA/kmee-odoo-addons <https://github.com/OCA/kmee-odoo-addons/tree/16.0/hr_holidays_plan_next_year>`_ project on GitHub.
-
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.
