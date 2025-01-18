@@ -29,13 +29,19 @@ POS report in a new browser tab.
 .. contents::
    :local:
 
+Use Cases / Context
+===================
+
+When printing a sales order report, some users prefer the PDF file to be
+opened in a separate tab for greater productivity.
+
 Usage
 =====
 
 To use this module, you need to:
 
-#. Go to *Sales > Orders > Quotation*. #. Within a sales order. Click
-the To **Print button**.
+1. Go to *Sales > Orders > Quotation*.
+2. Within a sales order. Click the To **Print button**.
 
 Bug Tracker
 ===========
@@ -61,6 +67,13 @@ Contributors
 -  ``KMEE <https://www.kmee.com.br>``\ \_:
 
    -  Tiago Amaral
+
+Other credits
+-------------
+
+The development of this module has been financially supported by:
+
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
