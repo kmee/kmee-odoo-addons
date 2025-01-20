@@ -22,11 +22,6 @@ Sale Enforce Commercial Partner
 
 |badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required.
-
-The goal of this document is to explain quickly the features of this
-module: “what” this module does and “what” it is for. ]
-
 This module changes the behavior of the onchange function in the sales
 module to always search for B2B contacts in the delivery and billing
 addresses, even if the user selects a contact from a company.
@@ -38,10 +33,6 @@ addresses, even if the user selects a contact from a company.
 
 Configuration
 =============
-
-[ This file is not always required; it should explain **how to configure
-the module before using it**; it is aimed at users with administration
-privileges.
 
 To configure this module, you need to do nothing
 
@@ -71,12 +62,9 @@ Contributors
 Other credits
 -------------
 
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
 The development of this module has been financially supported by:
 
--  KMEE
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
