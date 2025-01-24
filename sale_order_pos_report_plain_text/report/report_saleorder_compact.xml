@@ -8,7 +8,7 @@
 =========================================
 <!-- <span t-esc="o.company_id.name" /> -->
 PEDIDO DE VENDA
-Data de Emissao: <span t-esc="o.date_order.strftime('%m/%d/%Y %H:%M')" />
+Data de Emissao: <span t-esc="o.date_order" t-options='{"widget": "datetime"}' />
 Cliente : <span t-esc="o.partner_id.name" />
 Endereco: OZ
 CNPJ: <span t-esc="o.partner_id.vat" />
