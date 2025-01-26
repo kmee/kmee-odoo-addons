@@ -16,91 +16,38 @@ Account Payment Currency Rate
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/OCA/kmee-odoo-addons/tree/16.0/account_payment_currency_rate
-    :alt: OCA/kmee-odoo-addons
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/kmee-odoo-addons-16-0/kmee-odoo-addons-16-0-account_payment_currency_rate
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/kmee-odoo-addons&target_branch=16.0
-    :alt: Try me on Runboat
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/account_payment_currency_rate
+    :alt: KMEE/kmee-odoo-addons
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required. ]
+The module allows users to adjust the amount of a payment based on
+exchange rate fluctuations, ensuring that exchange rate differences are
+correctly recorded as profit or loss and automatically reconciled. This
+improves accounting accuracy in international transactions, where
+exchange rates may vary between the time of invoice and the time of
+payment.
 
 **Table of contents**
 
 .. contents::
    :local:
 
-Use Cases / Context
-===================
-
-[ This file is optional but strongly suggested to allow end-users to
-evaluate the module's usefulness in their context. ]
-
-Installation
-============
-
-[ This file must only be present if there are very specific installation
-instructions, such as installing non-python dependencies. The audience
-is systems administrators. ]
-
-To install this module, you need to:
-
-1. Do nothing
-
-Configuration
-=============
-
-[ This file is optional, it should explain how to configure the module
-before using it; it is aimed at advanced users. ]
-
-To configure this module, you need to:
-
-1. Do nothing
-
 Usage
 =====
-
-[ This file must be present and contains the usage instructions for
-end-users. As all other rst files included in the README, it MUST NOT
-contain reStructuredText sections only body text (paragraphs, lists,
-tables, etc). Should you need a more elaborate structure to explain the
-addon, please create a Sphinx documentation (which may include this file
-as a "quick start" section). ]
 
 To use this module, you need to:
 
 1. Go to Invoice Payment Wizard and change the rate.
 
-Changelog
-=========
-
-[ The change log. The goal of this file is to help readers understand
-changes between version. The primary audience is end users and
-integrators. Purely technical changes such as code refactoring must not
-be mentioned here.
-
-This file may contain ONE level of section titles, underlined with the ~
-(tilde) character. Other section markers are forbidden and will likely
-break the structure of the README.rst or other documents where this
-fragment is included. ]
-
-16.0.1.0.0 (2024-05-20)
------------------------
-
--  First Release
-
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/kmee-odoo-addons/issues/new?body=module:%20account_payment_currency_rate%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20account_payment_currency_rate%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -120,26 +67,13 @@ Contributors
 Other credits
 -------------
 
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
 The development of this module has been financially supported by:
 
--  KMEE
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
 
-This module is maintained by the OCA.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/account_payment_currency_rate>`_ project on GitHub.
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
-
-This module is part of the `OCA/kmee-odoo-addons <https://github.com/OCA/kmee-odoo-addons/tree/16.0/account_payment_currency_rate>`_ project on GitHub.
-
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.
