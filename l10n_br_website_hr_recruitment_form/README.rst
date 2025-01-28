@@ -16,19 +16,22 @@ Brazilian Localization Website Hr Recruitment Form
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/OCA/kmee-odoo-addons/tree/16.0-l10n_br_hr_recruitment_and_form/l10n_br_website_hr_recruitment_form
-    :alt: OCA/kmee-odoo-addons
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/kmee-odoo-addons-16-0-l10n_br_hr_recruitment_and_form/kmee-odoo-addons-16-0-l10n_br_hr_recruitment_and_form-l10n_br_website_hr_recruitment_form
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/kmee-odoo-addons&target_branch=16.0-l10n_br_hr_recruitment_and_form
-    :alt: Try me on Runboat
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_website_hr_recruitment_form
+    :alt: KMEE/kmee-odoo-addons
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3|
 
-This module adds an public application form on the website
+This module expands Odoo's recruitment functionality, allowing
+candidates to share and fill personalized forms online. When a candidate
+is registered in the system, a unique access token is generated, which
+is used to generate a link to a specific application form. This link is
+sent to the candidate by email, and the form can be filled out on the
+website portal. Through this form, the candidate can provide data such
+as banking information, ethnicity, dependents and other details, which
+are automatically registered in the Odoo system, associating them with
+the candidate. The Odoo interface has also been changed to include a
+button that makes it easier to send the form link to the candidate.
 
 **Table of contents**
 
@@ -38,10 +41,10 @@ This module adds an public application form on the website
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/kmee-odoo-addons/issues/new?body=module:%20l10n_br_website_hr_recruitment_form%0Aversion:%2016.0-l10n_br_hr_recruitment_and_form%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_website_hr_recruitment_form%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -56,23 +59,20 @@ Authors
 Contributors
 ------------
 
-- ``KMEE <https://www.kmee.com.br>``\ \_:
+-  ``KMEE <https://www.kmee.com.br>``\ \_:
 
-  - Felipe Zago <felipe.zago@kmee.com.br>
+   -  Felipe Zago <felipe.zago@kmee.com.br>
+
+Other credits
+-------------
+
+The development of this module has been financially supported by:
+
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
 
-This module is maintained by the OCA.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_website_hr_recruitment_form>`_ project on GitHub.
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
-
-This module is part of the `OCA/kmee-odoo-addons <https://github.com/OCA/kmee-odoo-addons/tree/16.0-l10n_br_hr_recruitment_and_form/l10n_br_website_hr_recruitment_form>`_ project on GitHub.
-
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.
