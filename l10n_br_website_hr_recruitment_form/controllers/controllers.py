@@ -51,7 +51,7 @@ class HRApplicationController(http.Controller):
         application_data = self.parse_form_data_to_application_data(kwargs)
         if "address" in application_data:
             if not applicant_sudo.address_home_id:
-                applicant_sudo.address_home_id = request.env["res.partner"].create(
+                applicant_sudo.address_home_id = request.env["res.partner"].sudo().create(
                     {"name": applicant_sudo.partner_name}
                 )
             applicant_sudo.address_home_id.sudo().write(application_data["address"])
@@ -59,7 +59,7 @@ class HRApplicationController(http.Controller):
 
         if "bank" in application_data:
             if not applicant_sudo.bank_account_id:
-                applicant_sudo.bank_account_id = request.env["res.partner.bank"].create(
+                applicant_sudo.bank_account_id = request.env["res.partner.bank"].sudo().create(
                     {"partner_id": applicant_sudo.address_home_id.id}
                 )
             application_data["bank"]["bank_id"] = int(
