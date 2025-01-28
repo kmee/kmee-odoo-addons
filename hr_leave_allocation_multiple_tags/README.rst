@@ -16,65 +16,36 @@ Hr Leave Allocation Multiple Tags
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/OCA/kmee-odoo-addons/tree/16.0/hr_leave_allocation_multiple_tags
-    :alt: OCA/kmee-odoo-addons
-.. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/kmee-odoo-addons-16-0/kmee-odoo-addons-16-0-hr_leave_allocation_multiple_tags
-    :alt: Translate me on Weblate
-.. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/kmee-odoo-addons&target_branch=16.0
-    :alt: Try me on Runboat
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/hr_leave_allocation_multiple_tags
+    :alt: KMEE/kmee-odoo-addons
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required.
-
-The goal of this document is to explain quickly the features of this
-module: “what” this module does and “what” it is for. ]
-
-hr.leave.allocation with multiple tags
+This module extends Odoo's hr.leave.allocation model to add new vacation
+allocation functionality based on employee categories, allowing you to
+select employee tags with "AND" or "OR" logic (through the holiday_type
+fields with values ​​" category_and" or "category_or"). The category_ids
+field is introduced to allow the selection of employee tags, and the
+allocation calculation is adapted according to the type of category
+selected. Additionally, validations are added to ensure the correct
+fields are populated based on the chosen allocation type, such as
+employee, category, department, or company. The module also changes the
+user interface of the vacation allocation form to include and control
+the category_ids field depending on the allocation type selected.
 
 **Table of contents**
 
 .. contents::
    :local:
 
-Usage
-=====
-
-[ This file is required and contains the instructions on **“how”** to
-use the module for end-users.
-
-If the module does not have a visible impact on the user interface, just
-add the following sentence:
-
-   This module does not impact the user interface.
-
-If that’s not the case, please make sure that every usage step is
-covered and remember that images speak more than words!]
-
-To use this module, you need to:
-
--  Go to *App* > Menu > Menu item
-
-   *insert screenshot!*
-
--  In “Contact” form, add a value to field *xyz* > save
-
-   *insert screenshot!*
-
--  The value of *xyz* is now displayed in the list view.
-
-   *insert screenshot!*
-
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/kmee-odoo-addons/issues/new?body=module:%20hr_leave_allocation_multiple_tags%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20hr_leave_allocation_multiple_tags%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -94,9 +65,6 @@ Contributors
 Other credits
 -------------
 
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
 The development of this module has been financially supported by:
 
 -  KMEE
@@ -104,16 +72,6 @@ The development of this module has been financially supported by:
 Maintainers
 -----------
 
-This module is maintained by the OCA.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/hr_leave_allocation_multiple_tags>`_ project on GitHub.
 
-.. image:: https://odoo-community.org/logo.png
-   :alt: Odoo Community Association
-   :target: https://odoo-community.org
-
-OCA, or the Odoo Community Association, is a nonprofit organization whose
-mission is to support the collaborative development of Odoo features and
-promote its widespread use.
-
-This module is part of the `OCA/kmee-odoo-addons <https://github.com/OCA/kmee-odoo-addons/tree/16.0/hr_leave_allocation_multiple_tags>`_ project on GitHub.
-
-You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
+You are welcome to contribute.
