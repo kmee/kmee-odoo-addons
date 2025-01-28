@@ -470,3 +470,43 @@ msgstr "Adicionar Dependente"
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Submit"
 msgstr "Enviar"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Document Type"
+msgstr "Tipo de Documento"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Document"
+msgstr "Documento"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "<option value=\"0\">Select a bank</option>"
+msgstr "<option value=\"0\">Selecione um banco</option>"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "<option value=\"0\">Select a ethnicity</option>"
+msgstr "<option value=\"0\">Selecione uma etnia</option>"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "<option value=\"0\">Select a nationality</option>"
+msgstr "<option value=\"0\">Selecione uma nacionalidade</option>"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid ""
+"<select class=\"form-select\" id=\"document_type\" name=\"document_type\" required=\"1\">\n"
+"                                        <option value=\"\">Select a document type</option>\n"
+"                                        <option value=\"rg\">RG</option>\n"
+"                                        <option value=\"cnh\">CNH</option>\n"
+"                                    </select>"
+msgstr ""
+"<select class=\"form-select\" id=\"document_type\" name=\"document_type\" required=\"1\">\n"
+"                                        <option value=\"\">Selecione um tipo de documento</option>\n"
+"                                        <option value=\"rg\">RG</option>\n"
+"                                        <option value=\"cnh\">CNH</option>\n"
+"  
