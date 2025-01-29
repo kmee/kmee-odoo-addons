@@ -162,6 +162,14 @@ odoo.define("guep_sale.ApplicationForm", function (require) {
          * @returns {Promise<Object>} Serialized form data
          */
         _getSerializedFormData: async function () {
+            const documentType = this.$("select#document_type").val();
+            let cnh_file, rg_file;
+            if (documentType == "cnh") {
+                cnh_file = await this._getFileBase64(this.$("#document_file")[0].files[0]);
+            } else {
+                rg_file = await this._getFileBase64(this.$("#document_file")[0].files[0]);
+            }
+
             const formData = {
                 name: this.$("input#name").val(),
                 birthday: this.$("input#date_of_birth").val(),
@@ -179,8 +187,8 @@ odoo.define("guep_sale.ApplicationForm", function (require) {
                 voter_title: this.$("input#voter_title").val(),
                 voter_zone: this.$("input#voter_zone").val(),
                 voter_section: this.$("input#voter_section").val(),
-                rg_file: await this._getFileBase64(this.$("#rg_file")[0].files[0]),
-                cnh_file: await this._getFileBase64(this.$("#cnh_file")[0].files[0]),
+                rg_file: rg_file,
+                cnh_file: cnh_file,
                 voter_title_file: await this._getFileBase64(
                     this.$("#voter_title_file")[0].files[0]
                 ),

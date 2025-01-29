@@ -183,7 +183,6 @@
                                         class="form-control"
                                         id="reservist_file"
                                         name="reservist_file"
-                                        required="1"
                                         accept=".pdf, .jpg, .jpeg, .png"
                                     />
                                 </div>
@@ -459,26 +458,27 @@
                                 </div>
                             </div>
 
-                            <h3 class="mt-3">Documents</h3>
-                            <div class="row">
+                            <div class="row mt-3">
                                 <div class="col-md-6 mb-3">
-                                    <label for="rg_file" class="form-label">RG</label>
-                                    <input
-                                        type="file"
-                                        class="form-control"
-                                        id="rg_file"
-                                        name="rg_file"
-                                        accept=".pdf, .jpg, .jpeg, .png"
+                                    <label for="document_type" class="form-label">Document Type</label>
+                                    <select
+                                        class="form-select"
+                                        id="document_type"
+                                        name="document_type"
                                         required="1"
-                                    />
+                                    >
+                                        <option value="">Select a document type</option>
+                                        <option value="rg">RG</option>
+                                        <option value="cnh">CNH</option>
+                                    </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="cnh_file" class="form-label">CNH</label>
+                                    <label for="document_file" class="form-label">Document</label>
                                     <input
                                         type="file"
                                         class="form-control"
-                                        id="cnh_file"
-                                        name="cnh_file"
+                                        id="document_file"
+                                        name="document_file"
                                         accept=".pdf, .jpg, .jpeg, .png"
                                         required="1"
                                     />
