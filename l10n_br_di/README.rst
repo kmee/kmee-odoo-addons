@@ -22,8 +22,8 @@ Declaração de Importação
 
 |badge1| |badge2| |badge3|
 
-Esse modulo permite a importação do XML SISCOMEX da DI e a posterior
-geração da NF-e.
+This module allows the import of the SISCOMEX XML from the DI and the
+subsequent generation of the NF-e.
 
 **Table of contents**
 
@@ -33,19 +33,19 @@ geração da NF-e.
 Configuration
 =============
 
-Acesse o cadastro da empresa e configure a operação fiscal padrão para
-geração das DIs.
+Access the company's registration and configure the standard tax
+operation for generating DIs.
 
 Usage
 =====
 
-Para usar esse módulo você precisa:
+To use this module you need:
 
 ::
 
-   1. Importar ou criar uma DI manualmente;
-   2. Gerar uma fatura em rascunho;
-   3. Revisar a transmiti-la.
+   1. Import or create a DI manually;
+   2. Generate a draft invoice;
+   3. Review and transmit it.
 
 Bug Tracker
 ===========

@@ -1,5 +1,1 @@
-[ This file must be max 2-3 paragraphs, and is required. ]
-
-This module extends the functionality of ... to support ...
-and to allow you to ...
-
+This module customizes the process of creating invoices from product deliveries, adjusting payment terms based on the sale or purchase associated with the delivery. It checks whether there is a specific payment term in the related transaction and, if so, applies that term to the invoice. Additionally, if manual payment terms are defined, these are also copied to the invoice. The module also ensures that when generating invoices, financial lines are updated appropriately, removing any financial lines associated with manual terms when necessary and recalculating them correctly. In short, personalization seeks to ensure that payment terms and financial conditions of transactions are accurately reflected in generated invoices.

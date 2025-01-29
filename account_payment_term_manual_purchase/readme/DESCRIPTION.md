@@ -1,5 +1,1 @@
-[ This file must be max 2-3 paragraphs, and is required. ]
-
-This module extends the functionality of ... to support ...
-and to allow you to ...
-
+This module customizes the payment terms management behavior in Odoo Purchase Orders. It extends purchase order functionality to allow the use of manual payment terms related to the invoicing process. When the payment term is changed on the purchase order, the module automatically updates the associated manual payment term. Additionally, when creating or viewing an invoice from the purchase order, it ensures that manual payment terms are correctly set up by creating or updating payment lines as needed. The module also adds a "Payment Terms" tab to the purchase order form, where you can view and edit these manual terms.

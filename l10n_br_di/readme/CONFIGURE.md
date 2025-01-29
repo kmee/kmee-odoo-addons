@@ -1,1 +1,1 @@
-Acesse o cadastro da empresa e configure a operação fiscal padrão para geração das DIs.
+Access the company's registration and configure the standard tax operation for generating DIs.

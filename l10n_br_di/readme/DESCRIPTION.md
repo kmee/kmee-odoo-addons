@@ -1,1 +1,1 @@
-Esse modulo permite a importação do XML SISCOMEX da DI e a posterior geração da NF-e.
+This module allows the import of the SISCOMEX XML from the DI and the subsequent generation of the NF-e.

@@ -78,6 +78,13 @@ Contributors
 
    -  Bruno Corredato Botti
 
+Other credits
+-------------
+
+The development of this module has been financially supported by:
+
+-  `KMEE <https://kmee.com.br/>`__
+
 Maintainers
 -----------
 

@@ -1,5 +1,1 @@
-[ This file must be max 2-3 paragraphs, and is required. ]
-
-This module extends the functionality of ... to support ...
-and to allow you to ...
-
+The module extends the standard sales order functionality in Odoo by incorporating the ability to manage manual payment terms. It allows the "Payment Terms" field to be changed and, in doing so, automatically adjusts the manual terms associated with the sales order, creating and updating payment lines as needed. Additionally, when generating invoices directly from the sales order, the module ensures that manual payment terms are correctly copied to the invoice, and reprocesses payment lines to reflect changes in terms. It also makes it possible to view and edit manual payment terms within the sales order interface, giving you additional control over payment processing.

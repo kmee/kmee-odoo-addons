@@ -11,7 +11,8 @@ class Settlement(models.Model):
     def action_invoice(self):
         raise UserError(
             _(
-                "Automatic invoice generation is disabled. Create invoices manually and mark settlements as invoiced."
+                """Automatic invoice generation is disabled.
+                Create invoices manually and mark settlements as invoiced."""
             )
         )
 

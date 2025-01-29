@@ -22,99 +22,22 @@ Account Invoice Manual Payment Term Stock Picking
 
 |badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required. ]
-
-This module extends the functionality of ... to support ... and to allow
-you to ...
+This module customizes the process of creating invoices from product
+deliveries, adjusting payment terms based on the sale or purchase
+associated with the delivery. It checks whether there is a specific
+payment term in the related transaction and, if so, applies that term to
+the invoice. Additionally, if manual payment terms are defined, these
+are also copied to the invoice. The module also ensures that when
+generating invoices, financial lines are updated appropriately, removing
+any financial lines associated with manual terms when necessary and
+recalculating them correctly. In short, personalization seeks to ensure
+that payment terms and financial conditions of transactions are
+accurately reflected in generated invoices.
 
 **Table of contents**
 
 .. contents::
    :local:
-
-Use Cases / Context
-===================
-
-[ This file is optional but strongly suggested to allow end-users to
-evaluate the module's usefulness in their context. ]
-
-It should explain the “why” of the module:
-
--  in which context or use cases this module can be useful (practical
-   examples are welcome!).
--  what is the business requirement that generated the need to develop
-   this module
-
-It can also inform on related modules:
-
--  modules it depends on and their features
--  other modules that can work well together with this one
--  suggested setups where the module is useful (eg: multicompany,
-   multi-website)
-
-Installation
-============
-
-[ This file must only be present if there are very specific installation
-instructions, such as installing non-python dependencies. The audience
-is systems administrators. ]
-
-To install this module, you need to:
-
-1. Do this ...
-
-Configuration
-=============
-
-[ This file is optional, it should explain how to configure the module
-before using it; it is aimed at advanced users. ]
-
-To configure this module, you need to:
-
--  Go to ...
-
-|alternative description|
-
-.. |alternative description| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual_stock_picking/static/description/icon.png
-
-Usage
-=====
-
-[ This file must be present and contains the usage instructions for
-end-users. As all other rst files included in the README, it MUST NOT
-contain reStructuredText sections only body text (paragraphs, lists,
-tables, etc). Should you need a more elaborate structure to explain the
-addon, please create a Sphinx documentation (which may include this file
-as a "quick start" section). ]
-
-To use this module, you need to:
-
-1. Go to ...
-
-Known issues / Roadmap
-======================
-
-[ Enumerate known caveats and future potential improvements. It is
-mostly intended for end-users, and can also help potential new
-contributors discovering new features to implement. ]
-
-Changelog
-=========
-
-[ The change log. The goal of this file is to help readers understand
-changes between version. The primary audience is end users and
-integrators. Purely technical changes such as code refactoring must not
-be mentioned here.
-
-This file may contain ONE level of section titles, underlined with the ~
-(tilde) character. Other section markers are forbidden and will likely
-break the structure of the README.rst or other documents where this
-fragment is included. ]
-
-14.0.1.0.0 (2024-05-26)
------------------------
-
--  Initial commit
 
 Bug Tracker
 ===========
@@ -137,21 +60,16 @@ Authors
 Contributors
 ------------
 
--  Firstname Lastname email.address@example.org (optional company
-   website url)
--  Second Person second.person@example.org (optional company website
-   url)
+-  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+
+   -  Diego Paradeda diego.paradeda@kmee.com.br
 
 Other credits
 -------------
 
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
 The development of this module has been financially supported by:
 
--  Company 1 name
--  Company 2 name
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------

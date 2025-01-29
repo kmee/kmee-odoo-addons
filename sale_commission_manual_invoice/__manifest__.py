@@ -3,8 +3,6 @@
 
 {
     "name": "Sale Commission Manual Invoice",
-    "description": """
-        Sale Commission Manual Invoice""",
     "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",

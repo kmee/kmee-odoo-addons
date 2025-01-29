@@ -22,99 +22,20 @@ Purchase Payment Term Manual
 
 |badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required. ]
-
-This module extends the functionality of ... to support ... and to allow
-you to ...
+This module customizes the payment terms management behavior in Odoo
+Purchase Orders. It extends purchase order functionality to allow the
+use of manual payment terms related to the invoicing process. When the
+payment term is changed on the purchase order, the module automatically
+updates the associated manual payment term. Additionally, when creating
+or viewing an invoice from the purchase order, it ensures that manual
+payment terms are correctly set up by creating or updating payment lines
+as needed. The module also adds a "Payment Terms" tab to the purchase
+order form, where you can view and edit these manual terms.
 
 **Table of contents**
 
 .. contents::
    :local:
-
-Use Cases / Context
-===================
-
-[ This file is optional but strongly suggested to allow end-users to
-evaluate the module's usefulness in their context. ]
-
-It should explain the “why” of the module:
-
--  in which context or use cases this module can be useful (practical
-   examples are welcome!).
--  what is the business requirement that generated the need to develop
-   this module
-
-It can also inform on related modules:
-
--  modules it depends on and their features
--  other modules that can work well together with this one
--  suggested setups where the module is useful (eg: multicompany,
-   multi-website)
-
-Installation
-============
-
-[ This file must only be present if there are very specific installation
-instructions, such as installing non-python dependencies. The audience
-is systems administrators. ]
-
-To install this module, you need to:
-
-1. Do this ...
-
-Configuration
-=============
-
-[ This file is optional, it should explain how to configure the module
-before using it; it is aimed at advanced users. ]
-
-To configure this module, you need to:
-
--  Go to ...
-
-|alternative description|
-
-.. |alternative description| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/14.0/account_payment_term_manual_purchase/static/description/icon.png
-
-Usage
-=====
-
-[ This file must be present and contains the usage instructions for
-end-users. As all other rst files included in the README, it MUST NOT
-contain reStructuredText sections only body text (paragraphs, lists,
-tables, etc). Should you need a more elaborate structure to explain the
-addon, please create a Sphinx documentation (which may include this file
-as a "quick start" section). ]
-
-To use this module, you need to:
-
-1. Go to ...
-
-Known issues / Roadmap
-======================
-
-[ Enumerate known caveats and future potential improvements. It is
-mostly intended for end-users, and can also help potential new
-contributors discovering new features to implement. ]
-
-Changelog
-=========
-
-[ The change log. The goal of this file is to help readers understand
-changes between version. The primary audience is end users and
-integrators. Purely technical changes such as code refactoring must not
-be mentioned here.
-
-This file may contain ONE level of section titles, underlined with the ~
-(tilde) character. Other section markers are forbidden and will likely
-break the structure of the README.rst or other documents where this
-fragment is included. ]
-
-14.0.1.0.0 (2024-05-26)
------------------------
-
--  Initial commit
 
 Bug Tracker
 ===========
@@ -137,21 +58,14 @@ Authors
 Contributors
 ------------
 
--  Firstname Lastname email.address@example.org (optional company
-   website url)
--  Second Person second.person@example.org (optional company website
-   url)
+-  Luis Felipe Mileo mileo@kmee.com.br (https://kmee.com.br)
 
 Other credits
 -------------
 
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
 The development of this module has been financially supported by:
 
--  Company 1 name
--  Company 2 name
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
