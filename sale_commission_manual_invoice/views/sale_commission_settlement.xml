@@ -6,6 +6,7 @@
         <field name="name">sale.commission.settlement.form.inherit</field>
         <field name="model">sale.commission.settlement</field>
         <field name="inherit_id" ref="sale_commission.view_settlement_form" />
+        <field name="priority">100</field>
         <field name="arch" type="xml">
             <!-- Remove the original 'Make Invoice' button -->
             <xpath expr="//button[@name='action_invoice']" position="replace" />
