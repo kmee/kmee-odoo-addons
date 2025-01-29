@@ -6,6 +6,6 @@ from odoo import models
 
 class CrmTeamAgent(models.Model):
 
-    _name = 'crm.team.agent'
-    _inherit = 'sale.commission.team.mixin'
-    _description = 'Team Agent'
+    _name = "crm.team.agent"
+    _inherit = "sale.commission.team.mixin"
+    _description = "Team Agent"

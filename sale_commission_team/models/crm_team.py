@@ -6,9 +6,9 @@ from odoo import fields, models
 
 class CrmTeam(models.Model):
 
-    _inherit = 'crm.team'
+    _inherit = "crm.team"
 
     agent_ids = fields.One2many(
-        comodel_name='crm.team.agent',
-        inverse_name='team_id',
+        comodel_name="crm.team.agent",
+        inverse_name="team_id",
     )

@@ -5,7 +5,7 @@ from odoo import models
 
 
 class AccountInvoiceLine(models.Model):
-    _inherit = 'account.move.line'
+    _inherit = "account.move.line"
 
     def _prepare_agents_vals_partner(self, partner_id):
         """Add salesman agent if configured so and no other commission
@@ -14,7 +14,5 @@ class AccountInvoiceLine(models.Model):
         res = super()._prepare_agents_vals_partner(partner_id)
         if not res:
             if partner_id and self.team_id:
-                return self._prepare_agents_team_vals_partner(
-                    partner_id, self.team_id
-                )
+                return self._prepare_agents_team_vals_partner(partner_id, self.team_id)
         return res

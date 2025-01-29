@@ -6,21 +6,21 @@ from odoo import fields, models
 
 class SaleCommissionTeamMixin(models.AbstractModel):
 
-    _name = 'sale.commission.team.mixin'
-    _description = 'Agent Team Mixin'
+    _name = "sale.commission.team.mixin"
+    _description = "Agent Team Mixin"
 
     sequence = fields.Integer(
         string="Sequence",
     )
 
     team_id = fields.Many2one(
-        comodel_name='crm.team',
-        string='Sales Team',
+        comodel_name="crm.team",
+        string="Sales Team",
     )
 
     agent_id = fields.Many2one(
-        comodel_name='res.partner',
-        string='Agent',
+        comodel_name="res.partner",
+        string="Agent",
         domain="[('agent', '=', True)]",
     )
 
@@ -28,6 +28,6 @@ class SaleCommissionTeamMixin(models.AbstractModel):
         comodel_name="sale.commission",
         string="Commission",
         help="This is the default commission used in the sales where this "
-             "agent is assigned. It can be changed on each operation if "
-             "needed."
+        "agent is assigned. It can be changed on each operation if "
+        "needed.",
     )

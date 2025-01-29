@@ -6,9 +6,9 @@ from odoo import fields, models
 
 class ResPartner(models.Model):
 
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     agent_team_ids = fields.One2many(
-        comodel_name='res.partner.agent.team',
-        inverse_name='partner_id',
+        comodel_name="res.partner.agent.team",
+        inverse_name="partner_id",
     )
