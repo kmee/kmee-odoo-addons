@@ -6,7 +6,7 @@
         <field name="name">l10n.br.nfe.di.tree</field>
         <field name="model">nfe.40.di</field>
         <field name="arch" type="xml">
-            <tree string="DI">
+            <tree string="DI" delete="0" create="0">
                 <field name="brl_currency_id" invisible="1" />
                 <field name="nfe40_nDI" string="Número" />
                 <field name="nfe40_dDI" string="Data de Registro" />
@@ -22,15 +22,15 @@
         <field name="model">nfe.40.di</field>
         <field name="arch" type="xml">
             <form string="Documento de Importação">
-             <sheet>
+                <sheet>
                     <!-- Invisible Fields-->
                     <field name="nfe40_DI_prod_id" invisible="1" />
                     <field name="brl_currency_id" invisible="1" />
-                <group col="4">
+                    <group col="4">
                         <field name="nfe40_nDI" />
                         <field name="nfe40_dDI" />
-                        <field name="nfe40_xLocDesemb" />
-                        <field name="nfe40_UFDesemb" />
+                        <field name="nfe40_xLocDesemb" readonly="0" />
+                        <field name="nfe40_UFDesemb" readonly="0" />
                         <field name="nfe40_dDesemb" />
                         <field name="nfe40_tpViaTransp" />
                         <field name="nfe40_vAFRMM" />
@@ -38,9 +38,9 @@
                         <field name="nfe40_CNPJ" />
                         <field name="nfe40_UFTerceiro" />
                         <field name="nfe40_cExportador" />
-                </group>
-                <field name="nfe40_adi" />
-            </sheet>
+                    </group>
+                    <field name="nfe40_adi" />
+                </sheet>
             </form>
         </field>
     </record>
