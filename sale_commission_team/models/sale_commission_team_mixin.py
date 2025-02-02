@@ -15,17 +15,20 @@ class SaleCommissionTeamMixin(models.AbstractModel):
 
     team_id = fields.Many2one(
         comodel_name="crm.team",
+        required=True,
         string="Sales Team",
     )
 
     agent_id = fields.Many2one(
         comodel_name="res.partner",
+        required=True,
         string="Agent",
         domain="[('agent', '=', True)]",
     )
 
-    commission = fields.Many2one(
+    commission_id = fields.Many2one(
         comodel_name="sale.commission",
+        required=True,
         string="Commission",
         help="This is the default commission used in the sales where this "
         "agent is assigned. It can be changed on each operation if "
