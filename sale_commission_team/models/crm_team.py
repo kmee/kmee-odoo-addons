@@ -8,6 +8,8 @@ class CrmTeam(models.Model):
 
     _inherit = "crm.team"
 
+    only_team_agents = fields.Boolean()
+
     agent_ids = fields.One2many(
         comodel_name="crm.team.agent",
         inverse_name="team_id",
