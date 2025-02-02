@@ -8,11 +8,8 @@ class SaleOrdeLine(models.Model):
     _inherit = "sale.order.line"
 
     def _prepare_agents_vals_partner(self, partner_id):
-        """Add salesman agent if configured so and no other commission
-        already populated.
-        """
-        res = super()._prepare_agents_vals_partner(partner_id)
-        if not res:
-            if partner_id and self.team_id:
-                return self._prepare_agents_team_vals_partner(partner_id, self.team_id)
-        return res
+        """Add salesman agent if configured so and no other commission already populated."""
+        base_agents = super()._prepare_agents_vals_partner(partner_id) or []
+        return self._compute_agents_with_team(
+            self.order_id.team_id, partner_id, base_agents
+        )

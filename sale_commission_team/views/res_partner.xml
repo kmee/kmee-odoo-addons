@@ -24,7 +24,7 @@
                             <field name="partner_id" invisible="1" />
                             <field name="team_id" />
                             <field name="agent_id" />
-                            <field name="commission" />
+                            <field name="commission_id" />
                         </tree>
                     </field>
                 </page>
