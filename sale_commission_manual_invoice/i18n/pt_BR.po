@@ -1,0 +1,19 @@
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_inherit
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_inherit
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_inherit
+msgid "Set to Settled"
+msgstr "Marcar como Aberto"
+
+#. module: sale_commission
+#: model:ir.model.fields.selection,name:sale_commission.selection__sale_commission_settlement__state__settled
+msgid "Open"
+msgstr "Aberto"
