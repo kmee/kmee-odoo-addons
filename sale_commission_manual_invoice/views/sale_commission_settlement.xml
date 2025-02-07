@@ -8,14 +8,21 @@
         <field name="inherit_id" ref="sale_commission.view_settlement_form" />
         <field name="priority">100</field>
         <field name="arch" type="xml">
+            <field name="state" position="replace">
+                <field
+                    name="state"
+                    widget="statusbar"
+                    statusbar_visible="settled,paid,cancel"
+                />
+            </field>
             <!-- Remove the original 'Make Invoice' button -->
             <xpath expr="//button[@name='action_invoice']" position="replace" />
             <xpath expr="//button[@name='action_cancel']" position="replace" />
             <!-- Add 'Mark as Invoiced' button -->
             <xpath expr="//field[@name='state']" position="after">
                 <button
-                    name="action_mark_invoiced"
-                    string="Mark as Invoiced"
+                    name="action_confirm"
+                    string="Confirm"
                     type="object"
                     class="btn-primary"
                     groups="base.group_user"
@@ -28,13 +35,6 @@
                     groups="base.group_user"
                 />
                 <button
-                    name="action_except_invoice"
-                    string="Set to Exception"
-                    type="object"
-                    class="btn-warning"
-                    groups="base.group_user"
-                />
-                <button
                     name="action_settle"
                     string="Set to Settled"
                     type="object"
@@ -43,5 +43,9 @@
                 />
             </xpath>
         </field>
+    </record>
+
+    <record id="sale_commission.menu_commission_make_invoices" model="ir.ui.menu">
+        <field name="active">False</field>
     </record>
 </odoo>

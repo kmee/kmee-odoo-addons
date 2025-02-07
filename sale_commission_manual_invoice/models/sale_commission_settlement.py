@@ -1,12 +1,25 @@
 # Copyright 2025 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 
 
 class Settlement(models.Model):
     _inherit = "sale.commission.settlement"
+
+    state = fields.Selection(
+        selection=[
+            ("settled", "Open"),
+            ("paid", "Paid"),
+            ("invoiced", "Invoiced"),
+            ("cancel", "Canceled"),
+            ("except_invoice", "Invoice exception"),
+        ],
+        string="State",
+        readonly=True,
+        default="settled",
+    )
 
     def action_invoice(self):
         raise UserError(
@@ -15,6 +28,10 @@ class Settlement(models.Model):
                 Create invoices manually and mark settlements as invoiced."""
             )
         )
+
+    def action_confirm(self):
+        for settlement in self:
+            settlement.write({"state": "paid"})
 
     def action_mark_invoiced(self):
         for settlement in self:
