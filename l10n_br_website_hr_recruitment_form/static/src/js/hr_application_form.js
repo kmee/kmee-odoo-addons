@@ -18,6 +18,7 @@ odoo.define("guep_sale.ApplicationForm", function (require) {
         start: function () {
             this._super.apply(this, arguments);
 
+            this.isCompany = this.$el.find(".hr_company_application_form").length > 0;
             this.applicationId = this.$el.find('input[name="applicant_id"]').val();
         },
 
@@ -157,24 +158,58 @@ odoo.define("guep_sale.ApplicationForm", function (require) {
             };
         },
 
+        _getSerializedFormData: async function () {
+            return (await this.isCompany)
+                ? this._getSerializedCompanyFormData()
+                : this._getSerializedRegularFormData();
+        },
+
+        /**
+         * Serializes the company form data into a structured object.
+         * @returns {Promise<Object>} Serialized company form data
+         */
+        _getSerializedCompanyFormData: async function () {
+            return {
+                name: this.$("input#name").val(),
+                partner_legal_name: this.$("input#partner_legal_name").val(),
+                cnpj_cpf: this.$("input#cnpj_cpf").val(),
+                start_date: this.$("input#start_date").val(),
+                notes: this.$("textarea#notes").val(),
+                company_responsible_document: await this._getFileBase64(
+                    this.$("#company_responsible_document")[0].files[0]
+                ),
+                latest_social_contract: await this._getFileBase64(
+                    this.$("#latest_social_contract")[0].files[0]
+                ),
+                address: this._getAddressData(),
+                bank: this._getBankData(),
+            };
+        },
+
         /**
          * Serializes the form data into a structured object.
          * @returns {Promise<Object>} Serialized form data
          */
-        _getSerializedFormData: async function () {
+        _getSerializedRegularFormData: async function () {
             const documentType = this.$("select#document_type").val();
-            let cnh_file, rg_file;
-            if (documentType == "cnh") {
-                cnh_file = await this._getFileBase64(this.$("#document_file")[0].files[0]);
+            let cnh_file = null;
+            let rg_file = null;
+
+            if (documentType === "cnh") {
+                cnh_file = await this._getFileBase64(
+                    this.$("#document_file")[0].files[0]
+                );
             } else {
-                rg_file = await this._getFileBase64(this.$("#document_file")[0].files[0]);
+                rg_file = await this._getFileBase64(
+                    this.$("#document_file")[0].files[0]
+                );
             }
 
             const formData = {
                 name: this.$("input#name").val(),
                 birthday: this.$("input#date_of_birth").val(),
                 rg: this.$("input#rg").val(),
-                cpf: this.$("input#cpf").val(),
+                cnpj_cpf: this.$("input#cnpj_cpf").val(),
                 ethnicity: parseInt(this.$("select#ethnicity").val(), 10),
                 nationality_id: parseInt(this.$("select#nationality").val(), 10),
                 partner_phone: this.$("input#phone").val(),
