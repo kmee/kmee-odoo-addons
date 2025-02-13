@@ -36,7 +36,7 @@
                         </group>
 
                         <group string="Citizenship">
-                            <field name="cpf" />
+                            <field name="cnpj_cpf" />
                             <field
                                 name="nationality_id"
                                 options='{"no_open": True, "no_create": True}'
@@ -49,6 +49,14 @@
                                 name="ethnicity"
                                 options="{'no_create': True, 'no_open': True}"
                             />
+                        </group>
+
+                        <group string="Company">
+                            <field name="partner_legal_name" />
+                            <field name="company_responsible_document" />
+                            <field name="latest_social_contract" />
+                            <field name="start_date" />
+                            <field name="notes" />
                         </group>
                     </group>
                 </page>
