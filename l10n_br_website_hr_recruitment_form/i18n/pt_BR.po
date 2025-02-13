@@ -227,6 +227,7 @@ msgid "Applicant"
 msgstr "Candidato"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Applicant Data"
 msgstr "Informações do Candidato"
@@ -357,36 +358,43 @@ msgid "Attach PIS"
 msgstr "Anexar PIS"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Address"
 msgstr "Endereço"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Street"
 msgstr "Rua"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Street Number"
 msgstr "Número"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Street 2"
 msgstr "Complemento"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "District"
 msgstr "Bairro"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "State"
 msgstr "Estado"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "City"
 msgstr "Cidade"
@@ -432,21 +440,25 @@ msgid "Attach Voter Title"
 msgstr "Anexar Título de Eleitor"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Bank Data"
 msgstr "Dados Bancários"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Bank"
 msgstr "Banco"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Agency"
 msgstr "Agencia"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Account"
 msgstr "Conta"
@@ -467,6 +479,7 @@ msgid "Add Dependent"
 msgstr "Adicionar Dependente"
 
 #. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Submit"
 msgstr "Enviar"
@@ -509,4 +522,39 @@ msgstr ""
 "                                        <option value=\"\">Selecione um tipo de documento</option>\n"
 "                                        <option value=\"rg\">RG</option>\n"
 "                                        <option value=\"cnh\">CNH</option>\n"
-"  
+"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Additional Info"
+msgstr "Informações Adicionais"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Company Information"
+msgstr "Dados da Empresa"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Latest Social Contract"
+msgstr "Última alteração do Contrato Social consolidada"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Legal Name"
+msgstr "Razão Social"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Legal Responsible RG or CNH"
+msgstr "RG ou CNH do Responsável Legal"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Notes"
+msgstr "Observações"
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Start date"
+msgstr "Data de Entrada/Início da prestação de Serviços"

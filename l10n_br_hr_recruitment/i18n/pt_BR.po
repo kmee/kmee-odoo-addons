@@ -284,3 +284,33 @@ msgstr "Arquivo do Título de Eleitor"
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__voter_zone
 msgid "Voter Zone"
 msgstr "Zona do Eleitor"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Company"
+msgstr "Empresa"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__company_responsible_document
+msgid "Company Responsible Document"
+msgstr "Documento do responsável da empresa"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__latest_social_contract
+msgid "Latest Social Contract"
+msgstr "Última alteração do Contrato Social consolidada"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__notes
+msgid "Notes"
+msgstr "Observações"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__partner_legal_name
+msgid "Partner Legal Name"
+msgstr "Razão Social"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__start_date
+msgid "Start Date"
+msgstr "Data de Entrada/Início da prestação de Serviços"

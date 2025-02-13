@@ -47,7 +47,7 @@ class HrApplicant(models.Model):
         groups="hr.group_hr_user",
     )
 
-    cpf = fields.Char(
+    cnpj_cpf = fields.Char(
         string="CPF",
         store=True,
         related="address_home_id.cnpj_cpf",
@@ -122,6 +122,17 @@ class HrApplicant(models.Model):
         comodel_name="hr.applicant.dependent",
         inverse_name="applicant_id",
     )
+
+    # specific company applicant data
+    partner_legal_name = fields.Char()
+
+    company_responsible_document = fields.Binary()
+
+    latest_social_contract = fields.Binary()
+
+    start_date = fields.Date()
+
+    notes = fields.Text()
 
     def create_employee_from_applicant(self):
         res = super().create_employee_from_applicant()
