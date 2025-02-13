@@ -25,6 +25,17 @@ class HRApplicationController(http.Controller):
             return request.render("website.page_404")
 
         banks = request.env["res.bank"].sudo().search([])
+        if applicant_sudo.job_id.contract_type_id.regime == "PJ":
+            return request.render(
+                "l10n_br_website_hr_recruitment_form"
+                ".hr_application_company_form_portal_template",
+                {
+                    "applicant": applicant_sudo,
+                    "banks": banks,
+                    "access_token": access_token,
+                },
+            )
+
         countries = request.env["res.country"].sudo().search([])
         ethnicities = request.env["hr.ethnicity"].sudo().search([])
         return request.render(
@@ -51,16 +62,20 @@ class HRApplicationController(http.Controller):
         application_data = self.parse_form_data_to_application_data(kwargs)
         if "address" in application_data:
             if not applicant_sudo.address_home_id:
-                applicant_sudo.address_home_id = request.env["res.partner"].sudo().create(
-                    {"name": applicant_sudo.partner_name}
+                applicant_sudo.address_home_id = (
+                    request.env["res.partner"]
+                    .sudo()
+                    .create({"name": applicant_sudo.partner_name})
                 )
             applicant_sudo.address_home_id.sudo().write(application_data["address"])
             del application_data["address"]
 
         if "bank" in application_data:
             if not applicant_sudo.bank_account_id:
-                applicant_sudo.bank_account_id = request.env["res.partner.bank"].sudo().create(
-                    {"partner_id": applicant_sudo.address_home_id.id}
+                applicant_sudo.bank_account_id = (
+                    request.env["res.partner.bank"]
+                    .sudo()
+                    .create({"partner_id": applicant_sudo.address_home_id.id})
                 )
             application_data["bank"]["bank_id"] = int(
                 application_data["bank"]["bank_id"]
