@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_l10n_br_hr_recruitment_contract_type_tree" model="ir.ui.view">
+        <field name="name">l10n_br_hr_recruitment.contract_type.tree</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="hr.hr_contract_type_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="regime" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
