@@ -30,13 +30,14 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
         sheet.write(row + 1, 2, settlement.date_to.isoformat(), bold)
 
         sheet.write(row + 3, 0, _("Invoice Date"), bold)
-        sheet.write(row + 3, 1, _("Invoice"), bold)
-        sheet.write(row + 3, 2, _("Invoice Line"), bold)
-        sheet.write(row + 3, 3, _("Amount Invoice"), bold)
-        sheet.write(row + 3, 4, _("Commission"), bold)
-        sheet.write(row + 3, 5, _("Amount Settled"), bold)
+        sheet.write(row + 1, 1, _("Invoice"), bold)
+        sheet.write(row + 3, 2, _("Customer"), bold)
+        sheet.write(row + 3, 3, _("Invoice Line"), bold)
+        sheet.write(row + 3, 4, _("Amount Invoice"), bold)
+        sheet.write(row + 3, 5, _("Commission"), bold)
+        sheet.write(row + 3, 6, _("Amount Settled"), bold)
 
-    def _generate_footer(self, workbook, sheet, row, cols, bold, settlement):
+    def _generate_footer(self, workbook, sheet, row, cols, bold, settlement, total_commission):
         currency_format = workbook.add_format(
             {
                 "bold": True,
@@ -44,7 +45,9 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
                 "num_format": settlement.currency_id.symbol + "#,##0.00",
             }
         )
-        sheet.write(row + 1, 5, settlement.total, currency_format)
+        sheet.write(row + 1, 6, settlement.total, currency_format)
+        sheet.write(row + 3, 5, _("Total Commissions"), bold)
+        sheet.write(row + 3, 6, total_commission, currency_format)
 
     def _adjust_column_width(self, sheet, data, headers):
         """Automatically adjust column widths based on content."""
@@ -66,12 +69,14 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
         headers = [
             "Invoice Date",
             "Invoice",
+            "Customer",
             "Invoice Line",
             "Amount Invoice",
             "Commission",
             "Amount Settled",
         ]
         data_rows = []
+        total_commission = 0
 
         for settlement in settlements:
             # Generate headers
@@ -82,18 +87,17 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
                 row_data = [
                     line.date.isoformat(),
                     line.invoice_line_id.move_id.name,
+                    line.invoice_line_id.move_id.partner_id.display_name,  # Customer name
                     line.invoice_line_id.name,
                     line.invoice_line_id.price_total,
                     line.commission_id.display_name,
                     line.settled_amount,
                 ]
                 data_rows.append(row_data)
+                total_commission += line.settled_amount
                 row += 1
                 for col_num, cell_value in enumerate(row_data):
-                    if col_num in [
-                        3,
-                        5,
-                    ]:  # Format currency for Amount Invoice and Amount Settled
+                    if col_num in [4, 6]:  # Format currency for Amount Invoice and Amount Settled
                         currency_format = workbook.add_format(
                             {
                                 "num_format": line.currency_id.symbol + "#,##0.00",
@@ -104,7 +108,7 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
                     else:
                         sheet.write(row, col_num, cell_value, no_bold)
 
-            self._generate_footer(workbook, sheet, row, cols, bold, settlement)
+            self._generate_footer(workbook, sheet, row, cols, bold, settlement, total_commission)
             row += 2
 
         # Adjust column widths to fit content
