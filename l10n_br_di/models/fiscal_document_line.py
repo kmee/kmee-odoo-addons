@@ -58,9 +58,9 @@ class FiscalDocumentLine(models.Model):
 
                 # Prepare the nfe40_nAdicao dicts
                 nfe40_nAdicao_dict = {
-                    "nfe40_nAdicao": add.numero_adicao,
+                    "nfe40_nAdicao": add.numero_adicao.lstrip("0"),
                     "nfe40_nSeqAdic": index + 1,
-                    "nfe40_cFabricante": add.fabricante_partner_id.id,
+                    "nfe40_cFabricante": di_mercadoria.codigo_do_fabricante,
                     # "nfe40_vDescDI": add.discount_value,
                     # "nfe40_nDraw": add.drawback,
                 }
@@ -72,18 +72,14 @@ class FiscalDocumentLine(models.Model):
                     "nfe40_nDI": di.numero_di,
                     "nfe40_dDI": di.data_registro,
                     "nfe40_xLocDesemb": di.carga_urf_entrada_nome,
-                    # "nfe40_UFDesemb": di.customs_clearance_state_id.code,
+                    "nfe40_UFDesemb": di.uf_desembaraco_code,
                     "nfe40_dDesemb": di.carga_data_chegada,
                     "nfe40_vAFRMM": di_mercadoria.amount_afrmm,
-                    # "nfe40_tpViaTransp": map_transportation_type[
-                    #     di.transportation_type
-                    # ],
-                    # "nfe40_tpIntermedio": map_intermediary_type[
-                    #     di.intermediary_type
-                    # ],
+                    "nfe40_tpViaTransp": di.via_transporte_codigo.lstrip("0"),
+                    "nfe40_tpIntermedio": di.caracterizacao_operacao_codigo_tipo,
                     # "nfe40_CNPJ": di.third_party_partner_id.cnpj_cpf,
                     # "nfe40_UFTerceiro": di.third_party_partner_id.state_id.code,
-                    # "nfe40_cExportador": di.exporting_partner_id.id,
+                    "nfe40_cExportador": di_mercadoria.codigo_do_fabricante,
                     "nfe40_adi": nfe40_nAdicao_dicts,  # Link to the nfe40_nAdicao records
                 }
 
