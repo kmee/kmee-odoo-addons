@@ -115,6 +115,15 @@ class L10nBrDiMercadoria(models.Model):
 
     amount_afrmm = fields.Float()
 
+    codigo_do_fabricante = fields.Char(
+        string="Código do Fabricante",
+        help="A ser preenchido com o código do produto no fabricante.",
+    )
+    codigo_do_exportador = fields.Char(
+        string="Código do Exportador",
+        help="A ser preenchido com o código do produto no exportador.",
+    )
+
     def _importa_declaracao(self, mercadoria):
         vals = {
             "numero_sequencial_item": int(mercadoria.numero_sequencial_item),

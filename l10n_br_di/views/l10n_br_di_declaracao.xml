@@ -82,6 +82,7 @@
                             <field name="situacao_entrega_carga" />
                             <field name="tipo_declaracao_codigo" />
                             <field name="operacao_fundap" />
+                            <field name="uf_desembaraco_code" required="1" />
                             <!-- <field name="total_adicoes"/> -->
                         </group>
                     </group>

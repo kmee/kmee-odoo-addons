@@ -11,6 +11,8 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tests.common import Form
 
+from odoo.addons.l10n_br_nfe_spec.models.v4_0.leiaute_nfe_v4_00 import TUFEMI
+
 from ..utils.lista_declaracoes import ListaDeclaracoes
 
 D7 = 10**7
@@ -134,6 +136,11 @@ class L10nBrDiDeclaracao(models.Model):
     carga_peso_liquido = fields.Float(digits=(12, 7))
     carga_urf_entrada_codigo = fields.Char()
     carga_urf_entrada_nome = fields.Char()
+
+    uf_desembaraco_code = fields.Selection(
+        selection=TUFEMI,
+        string="UF onde ocorreu o desembaraço aduaneiro",
+    )
 
     conhecimento_carga_embarque_data = fields.Date()
     conhecimento_carga_embarque_local = fields.Char()
