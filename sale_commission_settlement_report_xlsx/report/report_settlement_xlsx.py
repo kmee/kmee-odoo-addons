@@ -30,14 +30,16 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
         sheet.write(row + 1, 2, settlement.date_to.isoformat(), bold)
 
         sheet.write(row + 3, 0, _("Invoice Date"), bold)
-        sheet.write(row + 1, 1, _("Invoice"), bold)
+        sheet.write(row + 3, 1, _("Invoice"), bold)
         sheet.write(row + 3, 2, _("Customer"), bold)
         sheet.write(row + 3, 3, _("Invoice Line"), bold)
         sheet.write(row + 3, 4, _("Amount Invoice"), bold)
         sheet.write(row + 3, 5, _("Commission"), bold)
         sheet.write(row + 3, 6, _("Amount Settled"), bold)
 
-    def _generate_footer(self, workbook, sheet, row, cols, bold, settlement, total_commission):
+    def _generate_footer(
+        self, workbook, sheet, row, cols, bold, settlement, total_commission
+    ):
         currency_format = workbook.add_format(
             {
                 "bold": True,
@@ -97,7 +99,10 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
                 total_commission += line.settled_amount
                 row += 1
                 for col_num, cell_value in enumerate(row_data):
-                    if col_num in [4, 6]:  # Format currency for Amount Invoice and Amount Settled
+                    if col_num in [
+                        4,
+                        6,
+                    ]:  # Format currency for Amount Invoice and Amount Settled
                         currency_format = workbook.add_format(
                             {
                                 "num_format": line.currency_id.symbol + "#,##0.00",
@@ -108,7 +113,9 @@ class ReportCommissionSettlementXlsx(models.AbstractModel):
                     else:
                         sheet.write(row, col_num, cell_value, no_bold)
 
-            self._generate_footer(workbook, sheet, row, cols, bold, settlement, total_commission)
+            self._generate_footer(
+                workbook, sheet, row, cols, bold, settlement, total_commission
+            )
             row += 2
 
         # Adjust column widths to fit content
