@@ -16,6 +16,7 @@
                             <field name="agent_type" />
                             <field name="commission_id" />
                             <field name="settlement" />
+                            <field name="salesman_as_agent" />
                         </group>
                     </group>
                 </page>
