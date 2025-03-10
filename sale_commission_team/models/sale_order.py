@@ -11,5 +11,8 @@ class SaleOrdeLine(models.Model):
         """Add salesman agent if configured so and no other commission already populated."""
         base_agents = super()._prepare_agents_vals_partner(partner_id) or []
         return self._compute_agents_with_team(
-            self.order_id.team_id, partner_id, base_agents
+            team_id=self.order_id.team_id,
+            partner_id=partner_id,
+            user_id=self.user_id.partner_id,
+            base_agents=base_agents,
         )
