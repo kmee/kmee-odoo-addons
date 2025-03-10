@@ -30,9 +30,16 @@ class SaleCommissionMixin(models.AbstractModel):
             for agent in agent_team_ids
         ]
 
-    def _compute_agents_with_team(self, team, partner_id, base_agents):
+    def _compute_agents_with_team(self, team, partner_id, user_id, base_agents):
         """Generalized method for merging agents from sales/invoice teams."""
-        if not (partner_id and team):
+        if not partner_id:
+            return base_agents
+
+        # Handle salesman as agent first
+        if user_id and user_id.agent and user_id.salesman_as_agent and not base_agents:
+            base_agents = [(0, 0, self._prepare_agent_vals(user_id))]
+
+        if not team:
             return base_agents
 
         team_agents = self._prepare_agents_team_vals_partner(partner_id, team)
