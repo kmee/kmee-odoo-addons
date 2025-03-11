@@ -2,23 +2,5 @@ vcrpy  # Needed by payment_pagseguro
 odoo-test-helper  # Needed by spec_driven_model
 xmldiff
 
-brazilcep
-email-validator
-erpbrasil.assinatura
-erpbrasil.base>=2.3.1
-erpbrasil.edoc.pdf>=1.2.1
-erpbrasil.edoc>=2.5.2
-erpbrasil.transmissao
-nfelib>=2.0.7
-nfselib.barueri
-nfselib.ginfes
-nfselib.paulistana
-num2words
-phonenumbers
-pyyaml
-satcomum
-unidecode
-workalendar
-
 cryptography>=43.0.3
 pyOpenSSL>=24.2.1
