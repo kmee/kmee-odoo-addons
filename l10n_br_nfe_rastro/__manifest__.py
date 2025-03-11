@@ -10,7 +10,6 @@
     "depends": [
         "product_expiry",
         "stock_lot_production_date",
-        "l10n_br_account_nfe",
         "l10n_br_stock_account",
     ],
     "data": [],
