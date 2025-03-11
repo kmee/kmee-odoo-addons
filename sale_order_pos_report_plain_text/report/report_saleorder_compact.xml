@@ -6,32 +6,38 @@
         </head>
         <pre id="test">
 =========================================
-<!-- <span t-esc="o.company_id.name" /> -->
+            <!-- <span t-esc="o.company_id.name" /> -->
 PEDIDO DE VENDA
-Data de Emissao: <span t-esc="o.date_order" t-options='{"widget": "datetime"}' />
+Data de Emissao:            <span
+                t-esc="o.date_order"
+                t-options='{"widget": "datetime"}'
+            />
 Cliente : <span t-esc="o.partner_id.name" />
 Endereco: OZ
 CNPJ: <span t-esc="o.partner_id.vat" />
 Usuario : <span t-esc="o.user_id.name" />
-Numero : <span t-esc="o.name.ljust(18, ' ')" /> Op : 01
+Numero : <span t-esc="o.name.ljust(18, ' ')" />
+ Op : 01
 <!-- Deposito : <span t-esc="o.warehouse_id.name"/> -->
 =========================================
 Qtd            Preco             Total
 -----------------------------------------
 <t t-foreach="o.order_line" t-as="line">
-<span t-esc="line.product_id.default_code" /> <span t-esc="line.product_id.name" />
- <span t-esc="str(line.product_uom_qty).ljust(13, ' ')" /> <span
+<span t-esc="line.product_id.default_code" />
+<span t-esc="line.product_id.name" />
+<span t-esc="str(line.product_uom_qty).ljust(13, ' ')" />
+<span
                     t-out="line.price_unit"
                     t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                /> <span
+                />
+<span
                     t-out="line.price_subtotal"
                     t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                 />
 </t>
 -----------------------------------------
- Total: <span
-                t-esc="str(sum(o.order_line.mapped('product_uom_qty'))).ljust(12, ' ')"
-            /> Items: <span t-esc="len(o.order_line)" />
+ Total: <span t-esc="str(sum(o.order_line.mapped('product_uom_qty'))).ljust(12, ' ')" />
+ Items: <span t-esc="len(o.order_line)" />
 -----------------------------------------
  Subtotal: <span
                 t-out="o.amount_undiscounted"
@@ -52,15 +58,26 @@ Qtd            Preco             Total
 ACEITAMOS RECLAMACOES POSTERIORES ###
 Nota para simples controle de estoque,
 sem valor fiscal.
-        </pre>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    </template>
+</pre>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</template>
 
-    <template id="store_ticket_document">
-            <head>
-                <meta charset="UTF-8" />
-            </head>
-            <style>
+<template id="store_ticket_document">
+<head>
+<meta charset="UTF-8" />
+</head>
+<style>
                 @media print
                 {
                     pre {page-break-after:always}
@@ -73,23 +90,23 @@ sem valor fiscal.
                     word-wrap: break-word;
                 }
 
-            </style>
-            <main>
-                <div id="ticketDiv">
-                    <t
+</style>
+<main>
+<div id="ticketDiv">
+<t
                     t-call="sale_order_pos_report_plain_text.store_ticket_document_page"
                     t-lang="o.partner_id.lang"
                 />
-                </div>
-                <div id="ticketDiv2">
-                    <t
+</div>
+<div id="ticketDiv2">
+<t
                     t-call="sale_order_pos_report_plain_text.store_ticket_document_page"
                     t-lang="o.partner_id.lang"
                 />
-                </div>
-            </main>
-            <!-- Open print dialog when content loaded -->
-            <script type="text/javascript">
+</div>
+</main>
+<!-- Open print dialog when content loaded -->
+<script type="text/javascript">
 
                 let height = document.getElementById("test").offsetHeight;
                 let width = document.getElementById("test").offsetWidth;
@@ -107,17 +124,76 @@ sem valor fiscal.
                 window.onload = function() {
                     window.print();
                 }
-            </script>
+</script>
 
-    </template>
+</template>
 
-    <template id="store_ticket_report_template">
-        <t t-foreach="docs" t-as="o">
-            <t
+<template id="store_ticket_document_a_copy">
+<head>
+<meta charset="UTF-8" />
+</head>
+<style>
+                @media print
+                {
+                    pre {page-break-after:always}
+
+                }
+                pre {
+                    width: 222pt;
+                    white-space: -moz-pre-wrap;
+                    white-space: break-spaces;
+                    word-wrap: break-word;
+                }
+
+</style>
+<main>
+<div id="ticketDiv">
+<t
+                    t-call="sale_order_pos_report_plain_text.store_ticket_document_page"
+                    t-lang="o.partner_id.lang"
+                />
+</div>
+
+</main>
+<!-- Open print dialog when content loaded -->
+<script type="text/javascript">
+
+                let height = document.getElementById("test").offsetHeight;
+                let width = document.getElementById("test").offsetWidth;
+
+                const printPageMedia = `
+                @media print {
+                    @page {
+                        size: ${width}px ${height}px;
+                        margin: 0;
+                    }
+                }`;
+
+                document.querySelector('style').innerHTML += printPageMedia;
+
+                window.onload = function() {
+                    window.print();
+                }
+</script>
+
+</template>
+
+<template id="store_ticket_report_template">
+<t t-foreach="docs" t-as="o">
+<t
                 t-call="sale_order_pos_report_plain_text.store_ticket_document"
                 t-lang="o.partner_id.lang"
             />
-        </t>
-    </template>
+</t>
+</template>
+
+<template id="store_ticket_report_template_a_copy">
+<t t-foreach="docs" t-as="o">
+<t
+                t-call="sale_order_pos_report_plain_text.store_ticket_document_a_copy"
+                t-lang="o.partner_id.lang"
+            />
+</t>
+</template>
 
 </odoo>

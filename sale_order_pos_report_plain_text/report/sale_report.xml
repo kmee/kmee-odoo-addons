@@ -34,6 +34,24 @@
         <field name="paperformat_id" ref="paperformat_compact" />
     </record>
 
+    <record id="action_report_saleorder_compact_a_copy" model="ir.actions.report">
+        <field name="name">Quotation / Order (80mm)</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >sale_order_pos_report_plain_text.store_ticket_report_template_a_copy</field>
+        <field
+            name="report_file"
+        >sale_order_pos_report_plain_text.store_ticket_report_template_a_copy</field>
+        <field
+            name="print_report_name"
+        >(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="sale.model_sale_order" />
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_compact" />
+    </record>
+
     <record id="store_ticket_report" model="ir.actions.report">
         <field name="name">Store Ticket</field>
         <field name="model">sale.order</field>
