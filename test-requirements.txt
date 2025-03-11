@@ -1,4 +1,7 @@
-# generated from manifests external_dependencies
+vcrpy  # Needed by payment_pagseguro
+odoo-test-helper  # Needed by spec_driven_model
+xmldiff
+
 brazilcep
 email-validator
 erpbrasil.assinatura
@@ -17,5 +20,5 @@ satcomum
 unidecode
 workalendar
 
-cryptography==43.0.3
-pyOpenSSL==24.2.1
+cryptography>=43.0.3
+pyOpenSSL>=24.2.1
