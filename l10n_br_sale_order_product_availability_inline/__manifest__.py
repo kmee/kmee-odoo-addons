@@ -10,5 +10,5 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "maintainers": ["KMEE"],
     "license": "AGPL-3",
-    "depends": ["sale_order_product_availability_inline", "l10n_br_sale"],
+    "depends": ["l10n_br_sale"],
 }
