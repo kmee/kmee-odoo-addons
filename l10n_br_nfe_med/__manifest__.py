@@ -7,9 +7,7 @@
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": [
-        "l10n_br_account_nfe",
-    ],
+    "depends": [],
     "data": [
         "views/product_template.xml",
         "views/document_line.xml",
