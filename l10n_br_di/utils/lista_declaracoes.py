@@ -740,6 +740,13 @@ class Adicao:
             "required": True,
         },
     )
+    fabricante_complemento: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "fabricanteComplemento",
+            "type": "Element",
+        },
+    )
     fabricante_estado: Optional[str] = field(
         default=None,
         metadata={
