@@ -1,6 +1,7 @@
 vcrpy  # Needed by payment_pagseguro
 odoo-test-helper  # Needed by spec_driven_model
 xmldiff
+signxml<3.1.0
 
 cryptography>=43.0.3
 pyOpenSSL>=24.2.1
