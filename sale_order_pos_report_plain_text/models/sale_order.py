@@ -10,8 +10,9 @@ class SaleOrder(models.Model):
 
     def action_pos_report(self):
         self.ensure_one()
+        qty_copy = self.env.context.get("qty_copy")
         return {
             "type": "ir.actions.act_url",
-            "url": f"/sale_order_pos_report_plain_text/{self.id}",
+            "url": f"/sale_order_pos_report_plain_text/{self.id}/{qty_copy}",
             "target": "new",
         }

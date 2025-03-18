@@ -14,6 +14,15 @@
                     type="object"
                     class="oe_highlight"
                     attrs="{'invisible': [('state', 'not in', ('sale', 'done'))]}"
+                    context="{'qty_copy': 'two-copy'}"
+                />
+                <button
+                    name="action_pos_report"
+                    string="POS Print A Copy"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': [('state', 'not in', ('sale', 'done'))]}"
+                    context="{'qty_copy': 'one-copy'}"
                 />
             </xpath>
         </field>
