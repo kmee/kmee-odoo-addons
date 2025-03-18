@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Adicionar campos de período à visualização de formulário da linha de venda -->
+    <record id="view_order_form_inherit_periods" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.periods</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="product_contract.view_order_form" />
+        <field name="arch" type="xml">
+
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']"
+                position="before"
+            >
+                <field name="period_qty" string="Qtd/Per." />
+                <field name="period_count" string="Nº Per." />
+                <field name="recurring_rule_type" string="Tipo" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                position="before"
+            >
+                <field name="period_amount" string="Período" />
+            </xpath>
+
+            <!-- Add period fields to order line form -->
+            <xpath
+                expr="//field[@name='order_line']/form//label[@for='product_uom_qty']"
+                position="before"
+            >
+
+                <field name="period_qty" />
+                <field name="period_count" />
+                <field name="recurring_rule_type" />
+
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='date_end']"
+                position="after"
+            >
+
+                <field name="period_amount" />
+                <field name="price_subtotal" />
+                <field name="price_tax" />
+                <field name="price_total" />
+                <separator />
+
+            </xpath>
+
+            <!-- Add contract summary fields -->
+            <xpath expr="//group[@name='sale_total']" position="inside">
+                <field name="period_contract_value" widget="monetary" />
+                <field name="contract_periods" />
+                <field name="contract_average_value" widget="monetary" />
+                <field name="contract_period_details" />
+            </xpath>
+
+
+        </field>
+    </record>
+
+</odoo>
