@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Adicionar campos de período na visualização da linha de contrato -->
+    <record id="contract_line_form_inherit_period" model="ir.ui.view">
+        <field name="name">contract.line.form.inherit.period</field>
+        <field name="model">contract.line</field>
+        <field name="inherit_id" ref="contract.contract_line_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='quantity']" position="before">
+                <field name="period_qty" />
+                <field name="period_count" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Adicionar campos de período à visualização de árvore da linha de contrato -->
+    <record id="contract_line_tree_inherit_period" model="ir.ui.view">
+        <field name="name">contract.line.tree.inherit.period</field>
+        <field name="model">contract.line</field>
+        <field name="inherit_id" ref="contract.contract_line_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='quantity']" position="before">
+                <field name="period_qty" />
+                <field name="period_count" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Adicionar resumo de valores de período ao relatório de contrato -->
+    <!-- <template id="report_contract_document_inherit_period" inherit_id="contract.report_contract_document">
+        <xpath expr="//table[@class='table table-sm o_main_table']/thead/tr" position="inside">
+            <th class="text-right">Qtd/Período</th>
+            <th class="text-right">Num. Períodos</th>
+        </xpath>
+        <xpath expr="//table[@class='table table-sm o_main_table']/tbody/t/tr/td[2]" position="after">
+            <td class="text-right">
+                <span t-field="line.period_qty"/>
+            </td>
+            <td class="text-right">
+                <span t-field="line.period_count"/>
+            </td>
+        </xpath>
+    </template> -->
+
+    <record id="contract_period_contract_form_view" model="ir.ui.view">
+        <field name="name">contract.period.contract.form</field>
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_form_view" />
+        <field name="arch" type="xml">
+            <!-- Adiciona os campos monetários em uma nova página -->
+            <xpath expr="//field[@name='note']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='note']" position="after">
+                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                    <group colspan="4">
+                        <field
+                            colspan="2"
+                            name="note"
+                            nolabel="1"
+                            placeholder="Terms and conditions..."
+                        />
+                    </group>
+                    <group
+                        class="oe_subtotal_footer oe_right"
+                        colspan="2"
+                        name="sale_total"
+                    >
+                        <field name="monthly_value" />
+                        <field name="annual_value" />
+                        <field name="total_contract_value" />
+                        <field name="current_month_value" />
+                    </group>
+                    <div class="clearfix" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!-- Extend Product Template Form View -->
+    <record id="product_template_form_view_inherit_sale_period" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.period</field>
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="product_contract.product_template_form_contract_view"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//group[@name='recurrence_info']//field[@name='recurring_invoicing_type']"
+                position="before"
+            >
+                <field name="default_period_qty" />
+                <field name="default_period_count" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
