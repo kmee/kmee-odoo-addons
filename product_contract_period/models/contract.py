@@ -85,7 +85,10 @@ class ContractContract(models.Model):
             # Calcular valor do mês corrente usando a data da próxima fatura
             next_invoice_date = contract.recurring_next_date
             current_month_lines = active_lines.filtered(
-                lambda line: line.date_start <= next_invoice_date <= line.date_end
+                lambda line: line.date_start
+                and line.date_end
+                and next_invoice_date
+                and line.date_start <= next_invoice_date <= line.date_end
             )
 
             current_month_value = sum(
