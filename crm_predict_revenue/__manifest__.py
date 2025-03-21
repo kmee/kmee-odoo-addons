@@ -1,0 +1,27 @@
+{
+    "name": "CRM Predictable Revenue",
+    "version": "16.0.1.0.0",
+    "category": "Sales/CRM",
+    "author": "KMEE, Odoo Community Association (OCA)",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "license": "AGPL-3",
+    "depends": ["crm", "sales_team", "mail", "automation_oca"],
+    "data": [
+        "data/ir_action_server_data.xml",
+        "data/mail_activity_type_data.xml",
+        "data/mail_template_data.xml",
+        "data/automation_tag_data.xml",
+        "data/automation_filter_data.xml",
+        "data/automation_config_data.xml",
+        "data/crm_tag_data.xml",
+        "data/crm_team_data.xml",
+        # 'data/mail_report_data.xml',
+        "views/crm_lead_views.xml",
+    ],
+    "demo": [
+        # 'demo/crm_team_demo.xml',
+    ],
+    "installable": True,
+    "application": False,
+    "auto_install": False,
+}

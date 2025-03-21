@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Tags para Budget (Orçamento) -->
+        <record id="tag_budget_defined" model="crm.tag">
+            <field name="name">Orçamento Definido</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="tag_budget_pending" model="crm.tag">
+            <field name="name">Orçamento Pendente</field>
+            <field name="color">3</field>
+        </record>
+
+        <!-- Tags para Authority (Autoridade) -->
+        <record id="tag_authority_decision_maker" model="crm.tag">
+            <field name="name">Decisor</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="tag_authority_influencer" model="crm.tag">
+            <field name="name">Influenciador</field>
+            <field name="color">3</field>
+        </record>
+
+        <!-- Tags para Need (Necessidade) -->
+        <record id="tag_need_identified" model="crm.tag">
+            <field name="name">Necessidade Identificada</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="tag_need_developing" model="crm.tag">
+            <field name="name">Necessidade em Desenvolvimento</field>
+            <field name="color">3</field>
+        </record>
+
+        <!-- Tags para Timeline (Prazo) -->
+        <record id="tag_timeline_urgent" model="crm.tag">
+            <field name="name">Prazo Urgente</field>
+            <field name="color">1</field>
+        </record>
+
+        <record id="tag_timeline_3_months" model="crm.tag">
+            <field name="name">Prazo até 3 meses</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="tag_timeline_6_months" model="crm.tag">
+            <field name="name">Prazo até 6 meses</field>
+            <field name="color">3</field>
+        </record>
+
+</odoo>

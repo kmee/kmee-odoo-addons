@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Filtro para leads novos -->
+        <record id="filter_new_leads" model="automation.filter">
+            <field name="name">Leads Novos</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'lead'), ('stage_id', '=', ref('stage_lead_new'))]</field>
+        </record>
+
+        <!-- Filtro para leads qualificados -->
+        <record id="filter_qualified_leads" model="automation.filter">
+            <field name="name">Leads Qualificados</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'lead'), ('stage_id', '=', ref('stage_lead_qualified'))]</field>
+        </record>
+
+        <!-- Filtro para oportunidades na fase de descoberta -->
+        <record id="filter_discovery_opportunities" model="automation.filter">
+            <field name="name">Oportunidades em Descoberta</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_discovery'))]</field>
+        </record>
+
+        <!-- Filtro para oportunidades na fase de apresentação -->
+        <record id="filter_presentation_opportunities" model="automation.filter">
+            <field name="name">Oportunidades em Apresentação</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_presentation'))]</field>
+        </record>
+
+        <!-- Filtro para oportunidades na fase de proposta -->
+        <record id="filter_proposal_opportunities" model="automation.filter">
+            <field name="name">Oportunidades com Proposta</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_proposal'))]</field>
+        </record>
+
+        <!-- Filtro para oportunidades na fase de negociação -->
+        <record id="filter_negotiation_opportunities" model="automation.filter">
+            <field name="name">Oportunidades em Negociação</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_negotiation'))]</field>
+        </record>
+</odoo>

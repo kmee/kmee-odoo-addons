@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- views/bant_dashboard_views.xml -->
+<odoo>
+    <!-- BANT Dashboard View -->
+
+    <!-- BANT Qualification Graph View -->
+    <record id="bant_qualification_graph" model="ir.ui.view">
+        <field name="name">crm.lead.bant.qualification.graph</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <graph string="BANT Qualification" type="bar" stacked="True">
+                <field name="bant_qualification_status" type="row" />
+                <field name="team_id" type="col" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- BANT Qualification Pivot View -->
+    <record id="bant_qualification_pivot" model="ir.ui.view">
+        <field name="name">crm.lead.bant.qualification.pivot</field>
+        <field name="model">crm.lead</field>
+        <field name="arch" type="xml">
+            <pivot string="BANT Qualification" display_quantity="true">
+                <field name="team_id" type="row" />
+                <field name="bant_qualification_status" type="col" />
+                <field name="expected_revenue" type="measure" />
+                <field name="bant_total_score" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- BANT Dashboard Action -->
+    <record id="action_bant_dashboard" model="ir.actions.act_window">
+        <field name="name">BANT Qualification</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{'search_default_type': 'opportunity'}</field>
+        <field name="domain">[('type', '=', 'opportunity')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No opportunities found
+            </p>
+            <p>
+                Create opportunities to track your BANT qualification process.
+            </p>
+        </field>
+    </record>
+
+    <!-- Link Graph View to Action -->
+    <record id="action_bant_dashboard_view_graph" model="ir.actions.act_window.view">
+        <field eval="1" name="sequence" />
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="bant_qualification_graph" />
+        <field name="act_window_id" ref="action_bant_dashboard" />
+    </record>
+
+    <!-- Link Pivot View to Action -->
+    <record id="action_bant_dashboard_view_pivot" model="ir.actions.act_window.view">
+        <field eval="2" name="sequence" />
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="bant_qualification_pivot" />
+        <field name="act_window_id" ref="action_bant_dashboard" />
+    </record>
+
+    <!-- Add BANT Dashboard to CRM menu -->
+    <menuitem
+        id="menu_bant_dashboard"
+        name="BANT"
+        parent="crm.crm_menu_report"
+        action="action_bant_dashboard"
+        sequence="5"
+    />
+</odoo>

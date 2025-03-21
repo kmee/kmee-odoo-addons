@@ -1,0 +1,1 @@
+It allows you to reverse transactions from debit to credit and vice versa, and also ignore the balance.
