@@ -53,7 +53,7 @@ class BaseWip(models.Model):
         index=True,
     )
 
-    state = fields.Selection(
+    wip_state = fields.Selection(
         # string="State",
         selection=[
             ("running", "Running"),
@@ -132,17 +132,17 @@ class BaseWip(models.Model):
             blocktime.lead_time_seconds = diff.total_seconds()
 
     def stop(self):
-        for record in self.filtered(lambda o: o.state == "running"):
+        for record in self.filtered(lambda o: o.wip_state == "running"):
             record.write(
                 {
-                    "state": "closed",
+                    "wip_state": "closed",
                     "date_hour_stop": fields.Datetime.now(),
                     "date_stop": fields.Date.context_today(self),
                 }
             )
 
     def start(self, model_id, res_id, state="draft"):
-        if state != "cancelled":
+        if state not in ["cancelled", "done"]:
             self.env["base.wip"].create(
                 {
                     "model_id": self.env["ir.model"]
