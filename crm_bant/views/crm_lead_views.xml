@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- views/crm_lead_views.xml -->
+<odoo>
+    <!-- BANT Form View for Leads and Opportunities -->
+    <record id="crm_case_form_view_oppor_bant" model="ir.ui.view">
+        <field name="name">crm.lead.form.opportunity.bant</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="BANT" name="bant_qualification">
+                    <group>
+                        <group string="BANT Status" name="bant_status">
+                            <field name="bant_total_score" />
+                            <field name="bant_progress" widget="progressbar" />
+                        </group>
+                        <group>
+                            <!-- <button name="action_set_bant_qualified" string="Mark as BANT Qualified"
+                                    type="object" class="oe_highlight"
+                                    attrs="{'invisible': [('bant_qualification_status', 'not in', ['qualified', 'fully_qualified'])]}"/> -->
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Budget" name="bant_budget">
+                            <field name="bant_budget_status" />
+                            <field
+                                name="bant_budget_amount"
+                                attrs="{'invisible': [('bant_budget_status', 'in', ['undefined', 'no_budget'])]}"
+                            />
+                            <field
+                                name="bant_budget_timeframe"
+                                attrs="{'invisible': [('bant_budget_status', 'in', ['undefined', 'no_budget'])]}"
+                            />
+                            <field name="bant_budget_score" widget="badge" />
+                        </group>
+                        <group string="Authority" name="bant_authority">
+                            <field name="bant_authority_status" />
+                            <field
+                                name="bant_authority_contact"
+                                attrs="{'invisible': [('bant_authority_status', '=', 'undefined')]}"
+                            />
+                            <field
+                                name="bant_authority_role"
+                                attrs="{'invisible': [('bant_authority_status', '=', 'undefined')]}"
+                            />
+                            <field name="bant_authority_score" widget="badge" />
+                        </group>
+                        <group string="Need" name="bant_need">
+                            <field name="bant_need_status" />
+                            <field
+                                name="bant_need_description"
+                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                            />
+                            <field
+                                name="bant_need_pain_points"
+                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                            />
+                            <field
+                                name="bant_need_success_criteria"
+                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                            />
+                            <field name="bant_need_score" widget="badge" />
+                        </group>
+                        <group string="Timeline" name="bant_timeline">
+                            <field name="bant_timeline_status" />
+                            <field
+                                name="bant_timeline_date"
+                                attrs="{'invisible': [('bant_timeline_status', 'in', ['undefined', 'no_timeline'])]}"
+                            />
+                            <field
+                                name="bant_timeline_reason"
+                                attrs="{'invisible': [('bant_timeline_status', 'in', ['undefined', 'no_timeline'])]}"
+                            />
+                            <field name="bant_timeline_score" widget="badge" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- Add a summary field in the opportunity form -->
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field
+                    name="bant_qualification_status"
+                    widget="badge"
+                    decoration-success="bant_qualification_status == 'fully_qualified'"
+                    decoration-info="bant_qualification_status == 'qualified'"
+                    decoration-warning="bant_qualification_status == 'partially_qualified'"
+                    decoration-danger="bant_qualification_status == 'unqualified'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- BANT Kanban View for Opportunities -->
+    <record id="crm_case_kanban_view_leads_bant" model="ir.ui.view">
+        <field name="name">crm.lead.kanban.bant</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
+                <field
+                    name="bant_qualification_status"
+                    widget="label_selection"
+                    options="{'classes': {
+                    'unqualified': 'danger',
+                    'partially_qualified': 'warning',
+                    'qualified': 'info',
+                    'fully_qualified': 'success'}}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- BANT List View for Opportunities -->
+    <record id="crm_case_tree_view_oppor_bant" model="ir.ui.view">
+        <field name="name">crm.lead.tree.opportunity.bant</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='probability']" position="after">
+                <field
+                    name="bant_qualification_status"
+                    widget="badge"
+                    decoration-success="bant_qualification_status == 'fully_qualified'"
+                    decoration-info="bant_qualification_status == 'qualified'"
+                    decoration-warning="bant_qualification_status == 'partially_qualified'"
+                    decoration-danger="bant_qualification_status == 'unqualified'"
+                    optional="show"
+                />
+                <field name="bant_total_score" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- BANT Search View for Opportunities -->
+    <record id="view_crm_case_opportunities_filter_bant" model="ir.ui.view">
+        <field name="name">crm.lead.search.opportunity.bant</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='won']" position="before">
+                <filter
+                    string="BANT Qualified"
+                    name="bant_qualified"
+                    domain="[('bant_qualification_status', 'in', ['qualified', 'fully_qualified'])]"
+                />
+                <filter
+                    string="BANT Unqualified"
+                    name="bant_unqualified"
+                    domain="[('bant_qualification_status', 'in', ['unqualified', 'partially_qualified'])]"
+                />
+                <separator />
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter
+                    string="BANT Status"
+                    name="groupby_bant_status"
+                    context="{'group_by': 'bant_qualification_status'}"
+                />
+                <filter
+                    string="Budget Status"
+                    name="groupby_budget_status"
+                    context="{'group_by': 'bant_budget_status'}"
+                />
+                <filter
+                    string="Authority Status"
+                    name="groupby_authority_status"
+                    context="{'group_by': 'bant_authority_status'}"
+                />
+                <filter
+                    string="Need Status"
+                    name="groupby_need_status"
+                    context="{'group_by': 'bant_need_status'}"
+                />
+                <filter
+                    string="Timeline Status"
+                    name="groupby_timeline_status"
+                    context="{'group_by': 'bant_timeline_status'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
