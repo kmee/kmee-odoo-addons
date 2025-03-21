@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="crm_lead_wip_form" model="ir.ui.view">
+        <field name="name">crm.lead.wip.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="wip_page" string="WIP">
+                    <field name="wip_ids" readonly="1">
+                        <tree>
+                            <field name="state" />
+                            <field name="date_hour_start" />
+                            <field name="date_hour_stop" />
+                            <field name="lead_time" />
+                            <field name="state" />
+                            <field name="user_id" />
+                        </tree>
+                    </field>
+                    <group>
+                        <group>
+                            <field name="reaction_time" />
+                            <field name="lead_time" />
+                        </group>
+                        <group>
+                            <field name="cycle_time" />
+                            <field name="logged_time" />
+                        </group>
+                        <group>
+                            <field name="flow_efficience" widget="percentage" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_wip_tree" model="ir.ui.view">
+        <field name="name">crm.lead.wip.tree</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_leads" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="reaction_time" optional="hide" />
+                <field name="lead_time" optional="hide" />
+                <field name="cycle_time" optional="hide" />
+                <field name="logged_time" optional="hide" />
+                <field name="flow_efficience" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
