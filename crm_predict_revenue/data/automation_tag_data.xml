@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <record id="automation_tag_lead_processing" model="automation.tag">
+            <field name="name">Processamento de Leads</field>
+            <field name="color">2</field>
+        </record>
+
+        <record id="automation_tag_lead_convert" model="automation.tag">
+            <field name="name">Conversão de Leads</field>
+            <field name="color">3</field>
+        </record>
+
+        <record id="automation_tag_opportunity_follow" model="automation.tag">
+            <field name="name">Acompanhamento de Oportunidades</field>
+            <field name="color">4</field>
+        </record>
+
+</odoo>
