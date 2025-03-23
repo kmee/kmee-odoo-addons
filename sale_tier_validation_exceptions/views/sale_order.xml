@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="sale_order_form_view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_exception.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_ignore_exceptions']"
+                position="attributes"
+            >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
