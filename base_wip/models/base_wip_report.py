@@ -6,8 +6,6 @@ from odoo import api, fields, models, tools
 
 from .base_wip import display_time
 
-# from odoo.osv.orm import setup_modifiers
-
 
 class BaseWipReport(models.Model):
     _name = "base.wip.report"
