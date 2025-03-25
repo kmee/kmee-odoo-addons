@@ -13,35 +13,6 @@ class BaseWipAbstract(models.AbstractModel):
     _name = "base.wip.abstract"
     _description = "Base Wip Abstract"
 
-    @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
-        model_view = super(BaseWipAbstract, self).fields_view_get(
-            view_id, view_type, toolbar, submenu
-        )
-
-        # if view_type == "form":
-        #     try:
-        #         wip_view = self.env.ref("base_wip.base_wip_abstract_form_view")
-        #         wip_arch = etree.fromstring(wip_view["arch"])
-
-        #         page_node = wip_arch.xpath("//page[@name='wip_page']")[0]
-
-        #         doc = etree.fromstring(model_view.get("arch"))
-
-        #         # Replace page
-        #         doc_page_node = doc.xpath("//notebook")[0]
-        #         for n in page_node.getiterator():
-        #             setup_modifiers(n)
-
-        #         doc_page_node.append(page_node)
-        #         model_view["arch"] = etree.tostring(doc, encoding="unicode")
-        #     except Exception:
-        #         return model_view
-
-        return model_view
-
     @api.depends("wip_ids")
     def _compute_time(self):
         for record in self:
@@ -130,9 +101,9 @@ class BaseWipAbstract(models.AbstractModel):
     # @api.model
     @api.model_create_multi
     def create(self, vals_list):
-        result = self.env["project.task"]
+        result = self.env[self._name]
         for vals in vals_list:
-            result |= super(BaseWipAbstract, self).create(vals)
+            result |= super().create(vals)
             result.wip_ids.start(
                 model_id=self._name,
                 res_id=result.id,
@@ -142,7 +113,7 @@ class BaseWipAbstract(models.AbstractModel):
 
     def write(self, vals):
         previus_state = self.state
-        result = super(BaseWipAbstract, self).write(vals)
+        result = super().write(vals)
         if previus_state != self.state:
             self.wip_ids.stop()
             self.wip_ids.start(model_id=self._name, res_id=self.id, state=self.state)
