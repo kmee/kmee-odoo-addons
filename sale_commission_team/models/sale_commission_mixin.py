@@ -13,7 +13,7 @@ class SaleCommissionMixin(models.AbstractModel):
         agent_team_ids = partner_id.agent_team_ids.filtered_domain(
             [("team_id", "=", team_id.id)]
         )
-        if not agent_team_ids:
+        if not agent_team_ids and team_id:
             agent_team_ids = self.env["crm.team.agent"].search(
                 [("team_id", "=", team_id.id)]
             )
@@ -30,25 +30,74 @@ class SaleCommissionMixin(models.AbstractModel):
             for agent in agent_team_ids
         ]
 
-    def _compute_agents_with_team(self, team, partner_id, base_agents):
-        """Generalized method for merging agents from sales/invoice teams."""
-        if not (partner_id and team):
+    def _get_partner_agents(self, partner_id):
+        """Get base partner agents without team logic."""
+        return super()._prepare_agents_vals_partner(partner_id) or []
+
+    def _compute_agents_with_team(self, team, partner_id, user_id, base_agents):
+        """Compute agents based on configured rules sequence."""
+        if not team or not partner_id:
             return base_agents
 
-        team_agents = self._prepare_agents_team_vals_partner(partner_id, team)
+        final_agents = []
+        rules = team.commission_rule_ids.sorted("sequence")
+        seen_agents = {}  # Para controlar agentes já processados
 
-        if team.only_team_agents:
-            return team_agents
+        # If no rules defined, return empty list
+        if not rules:
+            return []
 
-        existing_agents = {agent[2]["agent_id"]: agent for agent in base_agents}
+        for rule in rules:
+            current_agents = []
 
-        for team_agent in team_agents:
-            agent_id = team_agent[2]["agent_id"]
-            if agent_id in existing_agents:
-                existing_agents[agent_id][2]["commission_id"] = team_agent[2][
-                    "commission_id"
-                ]
-            else:
-                base_agents.append(team_agent)
+            if rule.code == "team":
+                current_agents = self._get_team_agents(team)
 
-        return base_agents
+            elif rule.code == "team_partner":
+                current_agents = self._get_team_partner_agents(team, partner_id)
+
+            elif rule.code == "partner":
+                current_agents = self._get_partner_agents(partner_id)
+
+            elif rule.code == "salesman" and user_id:
+                if user_id.agent and user_id.salesman_as_agent:
+                    current_agents = [(0, 0, self._prepare_agent_vals(user_id))]
+
+            for agent in current_agents:
+                agent_id = agent[2]["agent_id"]
+                if agent_id not in seen_agents:
+                    final_agents.append(agent)
+                    seen_agents[agent_id] = True
+
+        return final_agents if final_agents else base_agents
+
+    def _get_team_agents(self, team):
+        """Get agents configured directly in the team."""
+        return [
+            (
+                0,
+                0,
+                {
+                    "agent_id": agent.agent_id.id,
+                    "commission_id": agent.commission_id.id,
+                },
+            )
+            for agent in team.agent_ids
+        ]
+
+    def _get_team_partner_agents(self, team, partner_id):
+        """Get agents configured for the specific team and partner combination."""
+        agent_team_ids = partner_id.agent_team_ids.filtered_domain(
+            [("team_id", "=", team.id)]
+        )
+        return [
+            (
+                0,
+                0,
+                {
+                    "agent_id": agent.agent_id.id,
+                    "commission_id": agent.commission_id.id,
+                },
+            )
+            for agent in agent_team_ids
+        ]
