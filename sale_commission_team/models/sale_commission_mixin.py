@@ -41,52 +41,35 @@ class SaleCommissionMixin(models.AbstractModel):
 
         final_agents = []
         rules = team.commission_rule_ids.sorted("sequence")
+        seen_agents = {}  # Para controlar agentes já processados
 
-        # If no rules defined, fallback to default behavior
+        # If no rules defined, return empty list
         if not rules:
-            return self._compute_agents_legacy(team, partner_id, user_id, base_agents)
+            return []
 
         for rule in rules:
+            current_agents = []
+
             if rule.code == "team":
-                team_agents = self._get_team_agents(team)
-                final_agents.extend(team_agents)
+                current_agents = self._get_team_agents(team)
 
             elif rule.code == "team_partner":
-                team_partner_agents = self._get_team_partner_agents(team, partner_id)
-                final_agents.extend(team_partner_agents)
+                current_agents = self._get_team_partner_agents(team, partner_id)
 
             elif rule.code == "partner":
-                partner_agents = self._get_partner_agents(partner_id)
-                final_agents.extend(partner_agents)
+                current_agents = self._get_partner_agents(partner_id)
 
             elif rule.code == "salesman" and user_id:
                 if user_id.agent and user_id.salesman_as_agent:
-                    final_agents.append((0, 0, self._prepare_agent_vals(user_id)))
+                    current_agents = [(0, 0, self._prepare_agent_vals(user_id))]
+
+            for agent in current_agents:
+                agent_id = agent[2]["agent_id"]
+                if agent_id not in seen_agents:
+                    final_agents.append(agent)
+                    seen_agents[agent_id] = True
 
         return final_agents if final_agents else base_agents
-
-    def _compute_agents_legacy(self, team, partner_id, user_id, base_agents):
-        """Legacy method for backward compatibility."""
-        if user_id and user_id.agent and user_id.salesman_as_agent and not base_agents:
-            base_agents = [(0, 0, self._prepare_agent_vals(user_id))]
-
-        team_agents = self._prepare_agents_team_vals_partner(partner_id, team)
-
-        if team.only_team_agents:
-            return team_agents
-
-        existing_agents = {agent[2]["agent_id"]: agent for agent in base_agents}
-
-        for team_agent in team_agents:
-            agent_id = team_agent[2]["agent_id"]
-            if agent_id in existing_agents:
-                existing_agents[agent_id][2]["commission_id"] = team_agent[2][
-                    "commission_id"
-                ]
-            else:
-                base_agents.append(team_agent)
-
-        return base_agents
 
     def _get_team_agents(self, team):
         """Get agents configured directly in the team."""
