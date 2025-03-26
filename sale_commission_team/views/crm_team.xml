@@ -10,9 +10,15 @@
         <field name="arch" type="xml">
             <page name="members" position="before">
                 <page name="team_agents" string="Agents">
-                    <group>
-                        <field name="only_team_agents" />
-                    </group>
+                    <field name="commission_rule_ids">
+                        <tree editable="top">
+                            <field name="sequence" widget="handle" />
+                            <field name="name" />
+                            <field name="code" />
+                            <field name="active" />
+                        </tree>
+                    </field>
+
                     <field name="agent_ids">
                         <tree editable="top">
                             <field name="sequence" widget="handle" />

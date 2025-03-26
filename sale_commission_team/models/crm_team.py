@@ -8,6 +8,16 @@ class CrmTeam(models.Model):
 
     _inherit = "crm.team"
 
+    commission_rule_ids = fields.Many2many(
+        "commission.rule",
+        "crm_team_commission_rule_rel",
+        "team_id",
+        "rule_id",
+        string="Commission Rules",
+        domain=[("active", "=", True)],
+    )
+
+    # Deprecated field
     only_team_agents = fields.Boolean()
 
     agent_ids = fields.One2many(
