@@ -6,3 +6,4 @@ from . import crm_team_agent
 from . import sale_commission_mixin
 from . import sale_order
 from . import account_invoice
+from . import commission_rule
