@@ -28,23 +28,21 @@ class Sac(models.Model):
     @api.depends('create_date')
     def _compute_create_date(self):
         for record in self:
-            # No need for fields.Datetime.from_string in v12
-            record.create_date_date = record.create_date
+            record.create_date_date = record.create_date or False
 
-    @api.multi
     @api.depends('name', 'customer_name')
     def _compute_display_name(self):
         for r in self:
+            r.display_name = r.name
             if r.customer_name:
                 r.display_name = '%s - %s' % (r.name, r.customer_name)
-            else:
-                r.display_name = r.name
 
-    @api.multi
     @api.depends('price', 'qty')
     def _compute_price_total(self):
         for record in self:
-            record.price_total = record.price * record.qty
+            record.price_total = 0.0
+            if record.price and record.qty:
+                record.price_total = record.price * record.qty
 
     display_name = fields.Char(
         "Name",
@@ -89,28 +87,28 @@ class Sac(models.Model):
     customer_name = fields.Char(
         string='Customer Name',
         required=True,
-        track_visibility='onchange',
+        tracking=True,
     )
     cnpj_cpf = fields.Char(
         string='CNPJ/CPF',
         size=14,
-        track_visibility='onchange',
+        tracking=True,
     )
     email_from = fields.Char(
         string='Email',
-        track_visibility='onchange',
+        tracking=True,
     )
     email_cc = fields.Char(
         string='Email CC',
-        track_visibility='onchange',
+        tracking=True,
     )
     phone = fields.Char(
         string='Phone',
-        track_visibility='onchange',
+        tracking=True,
     )
     phone2 = fields.Char(
         string='Phone 2',
-        track_visibility='onchange',
+        tracking=True,
     )
     zip = fields.Char(
         string='Zip',
@@ -238,7 +236,7 @@ class Sac(models.Model):
         result = super(Sac, self).create(vals_list)
         return result
 
-    @api.multi
+    @api.depends('create_date')
     def _track_template(self, tracking):
         res = super(Sac, self)._track_template(tracking)
         test_record = self[0]
@@ -253,7 +251,7 @@ class Sac(models.Model):
             )
         return res
 
-    @api.multi
+    @api.depends('name', 'customer_name')
     def email_split(self, msg):
         return tools.email_split(
             (msg.get('to') or '') + ',' +
@@ -318,16 +316,7 @@ class Sac(models.Model):
         sac.message_subscribe(partner_ids)
         return res_id
 
-    @api.multi
-    def message_update(self, msg, update_vals=None):
-        """ Override to update the issue according to the email. """
-        email_list = self.email_split(msg)
-        partner_ids = list([_f for _f in self._find_partner_from_emails(
-            email_list, force_create=True) if _f])
-        self.message_subscribe(partner_ids)
-        return super(Sac, self).message_update(msg, update_vals=update_vals)
-
-    @api.onchange('zip')
+    @api.depends('zip')
     def onchange_zip(self):
         if self.zip:
 
@@ -338,46 +327,6 @@ class Sac(models.Model):
             self.district = zip.district
             self.state_id = zip.state_id
             self.l10n_br_city_id = zip.l10n_br_city_id
-
-    # @api.multi
-    # def message_update(self, msg_dict, update_vals=None):
-    #     """ Overrides mail_thread message_update that is called by
-    #  the mailgateway
-    #         through message_process.
-    #         This method updates the document according to the email.
-    #     """
-    #     if update_vals is None:
-    #         update_vals = {}
-    #     if msg_dict.get('priority') in dict(crm_stage.AVAILABLE_PRIORITIES):
-    #         update_vals['priority'] = msg_dict.get('priority')
-    #     maps = {
-    #         'revenue': 'planned_revenue',
-    #         'probability': 'probability',
-    #     }
-    #     for line in msg_dict.get('body', '').split('\n'):
-    #         line = line.strip()
-    #         res = tools.command_re.match(line)
-    #         if res and maps.get(res.group(1).lower()):
-    #             key = maps.get(res.group(1).lower())
-    #             update_vals[key] = res.group(2).lower()
-    #     return super(Lead, self).message_update(msg_dict,
-    #  update_vals=update_vals)
-    #
-    # @api.multi
-    # def message_partner_info_from_emails(self, emails, link_mail=False):
-    #     result = super(Lead, self).message_partner_info_from_emails(
-    # emails, link_mail=link_mail)
-    #     for partner_info in result:
-    #         if not partner_info.get('partner_id') and (
-    # self.partner_name or self.contact_name):
-    #             emails = email_re.findall(partner_info['full_name'] or '')
-    #             email = emails and emails[0] or ''
-    #             if email and self.email_from and email.lower() ==
-    # self.email_from.lower():
-    #                 partner_info['full_name'] =
-    # '%s <%s>' % (self.partner_name or self.contact_name, email)
-    #                 break
-    #     return result
 
     @api.multi
     def message_get_suggested_recipients(self):

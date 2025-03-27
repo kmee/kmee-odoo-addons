@@ -45,6 +45,7 @@
                     />
                 </header>
                 <sheet>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                     <div class="oe_right">
                         <field name="kanban_status" class="oe_inline" widget="state_selection"/>
                     </div>
