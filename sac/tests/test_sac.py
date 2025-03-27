@@ -1,7 +1,7 @@
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import BaseCommon
 
 
-class TestSac(TransactionCase):
+class TestSac(BaseCommon):
 
     @classmethod
     def setUpClass(cls):

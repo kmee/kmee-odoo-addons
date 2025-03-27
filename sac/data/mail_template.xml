@@ -7,16 +7,19 @@
         <!-- Email templates -->
         <record id="mail_template_sac_receive" model="mail.template">
             <field name="name">[SAC] Recebido</field>
-            <field name="subject">[SAC] ${object.company_id.name} ref ${object.name or 'N/A'}</field>
+            <field name="subject">[SAC] {{ object.company_id.name }} ref {{ object.name or 'N/A' }}</field>
             <field name="model_id" ref="sac.model_sac"/>
             <field name="use_default_to" eval="True"/>
-            <field name="body_html"><![CDATA[
-<p>Olá ${object.customer_name or ''},</p>
-<br />
-<p>Nós recebemos o seu chamado ele esta sendo analisado pelos nossos colaboradores. Entraremos em contato em breve<br/></p>
-<p>Se você tiver alguma dúvida, por favor entre em contato e infome o número deste chamado: ${object.name}</p>
-<br />
-<p>Tudo de bom.</p>]]></field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Olá <t t-out="object.customer_name or ''"/>,</p>
+                    <br />
+                    <p>Nós recebemos o seu chamado ele esta sendo analisado pelos nossos colaboradores. Entraremos em contato em breve<br/></p>
+                    <p>Se você tiver alguma dúvida, por favor entre em contato e infome o número deste chamado: <t t-out="object.name"/></p>
+                    <br />
+                    <p>Tudo de bom.</p>
+                </div>
+            </field>
             <field name="auto_delete" eval="True"/>
         </record>
 

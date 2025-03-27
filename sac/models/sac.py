@@ -24,20 +24,12 @@ class Sac(models.Model):
     _name = 'sac'
     _description = 'Serviço de atendimento ao consumidor'
     _inherit = ['mail.thread', 'utm.mixin', 'base.kanban.abstract']
+    _rec_names_search = ['name', 'customer_name']
 
     @api.depends('create_date')
     def _compute_create_date(self):
         for record in self:
             record.create_date_date = record.create_date or False
-
-    @api.model
-    def name_search(self, name='', args=None, operator='ilike', limit=100):
-        args = args or []
-        domain = []
-        if name:
-            domain = ['|', ('name', operator, name),
-                     ('customer_name', operator, name)]
-        return self._search(domain + args, limit=limit)
 
     def name_get(self):
         result = []
@@ -67,7 +59,7 @@ class Sac(models.Model):
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
-        index=True,
+        index='btree',
         default=lambda self: self.env.user.company_id.id
     )
     name = fields.Char(
@@ -75,14 +67,13 @@ class Sac(models.Model):
         required=True,
         copy=False,
         readonly=True,
-        # states={'draft': [('readonly', False)]},
-        index=True,
+        index='btree',
         default=lambda self: _('New')
     )
     create_date = fields.Datetime(
         string='Creation Date',
         readonly=True,
-        index=True,
+        index='btree',
         help="Date on which sac is created."
     )
     create_date_date = fields.Date(
@@ -189,13 +180,13 @@ class Sac(models.Model):
     )
     send_date = fields.Datetime(
         string='Send date',
-        index=True,
+        index='btree',
         track_visibility='onchange',
     )
     end_date = fields.Datetime(
         string='End Date',
         readonly=True,
-        index=True,
+        index='btree',
         track_visibility='onchange',
     )
     lot = fields.Char(
@@ -208,7 +199,7 @@ class Sac(models.Model):
     rating = fields.Selection(
         selection=AVAILABLE_RATING,
         string='Feedback',
-        index=True,
+        index='btree',
         default=AVAILABLE_RATING[0][0],
         tracking=True,
         ondelete={'0': 'set default', '1': 'set default', '2': 'set default',
@@ -221,12 +212,12 @@ class Sac(models.Model):
         related='reason_id.kanban_color',
         readonly=True,
         store=True,
-        index=True,
+        index='btree',
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
         string='Responsável',
-        index=True,
+        index='btree',
         track_visibility='onchange',
         default=lambda self: self.env.user
     )
