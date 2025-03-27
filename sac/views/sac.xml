@@ -61,7 +61,7 @@
                         <group>
                             <field name="user_id" string="Responsável" options="{'no_open': True, 'no_create': True}"/>
                             <field name="create_date"/>
-                            <field name="end_date"/>
+                            <field name="end_date" attrs="{'readonly': [('1', '=', 1)]}"/>
                         </group>
                     </group>
                     <h2>
@@ -164,7 +164,7 @@
             <tree string="SAC" decoration-bf="message_needaction==True">
                 <button name="action_view_details"
                         type="object"
-                        string="View Details"
+                        title="View Details"
                         icon="fa-eye"/>
                 <field name="name"/>
                 <field name="customer_name"/>
@@ -174,7 +174,7 @@
                 <field name="lot"/>
                 <field name="type_id"/>
                 <field name="stage_id" string="Situação"/>
-                <field name="message_needaction" invisible="1"/>
+                <field name="message_needaction" attrs="{'invisible': [('1', '=', 1)]}"/>
             </tree>
         </field>
     </record>

@@ -30,12 +30,23 @@ class Sac(models.Model):
         for record in self:
             record.create_date_date = record.create_date or False
 
-    @api.depends('name', 'customer_name')
-    def _compute_display_name(self):
-        for r in self:
-            r.display_name = r.name
-            if r.customer_name:
-                r.display_name = '%s - %s' % (r.name, r.customer_name)
+    @api.model
+    def name_search(self, name='', args=None, operator='ilike', limit=100):
+        args = args or []
+        domain = []
+        if name:
+            domain = ['|', ('name', operator, name),
+                     ('customer_name', operator, name)]
+        return self._search(domain + args, limit=limit)
+
+    def name_get(self):
+        result = []
+        for record in self:
+            name = record.name
+            if record.customer_name:
+                name = '%s - %s' % (name, record.customer_name)
+            result.append((record.id, name))
+        return result
 
     @api.depends('price', 'qty')
     def _compute_price_total(self):
@@ -46,7 +57,6 @@ class Sac(models.Model):
 
     display_name = fields.Char(
         "Name",
-        compute="_compute_display_name",
         readonly=True,
         store=True
     )
@@ -91,7 +101,6 @@ class Sac(models.Model):
     )
     cnpj_cpf = fields.Char(
         string='CNPJ/CPF',
-        size=14,
         tracking=True,
     )
     email_from = fields.Char(
@@ -201,7 +210,9 @@ class Sac(models.Model):
         string='Feedback',
         index=True,
         default=AVAILABLE_RATING[0][0],
-        track_visibility='onchange',
+        tracking=True,
+        ondelete={'0': 'set default', '1': 'set default', '2': 'set default',
+                  '3': 'set default', '4': 'set default', '5': 'set default'},
     )
     message = fields.Text(
         string='Mensagem',
@@ -227,8 +238,8 @@ class Sac(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if 'company_id' in vals:
-                vals['name'] = self.env['ir.sequence'].with_context(
-                    force_company=vals['company_id']
+                vals['name'] = self.env['ir.sequence'].with_company(
+                    vals['company_id']
                 ).next_by_code('sac') or _('New')
             else:
                 vals['name'] = \
