@@ -6,7 +6,7 @@
     'name': 'Sac',
     'summary': """
         Serviço de Atendimento ao Consumidor""",
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'KMEE INFORMATICA LTDA,Odoo Community Association (OCA)',
     'website': 'www.kmee.com.br',

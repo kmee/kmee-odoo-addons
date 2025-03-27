@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 KMEE INFORMATICA LTDA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-from __future__ import (division, print_function, unicode_literals,
-                        absolute_import)
 
 import re
 
@@ -25,10 +21,9 @@ AVAILABLE_RATING = [
 
 class Sac(models.Model):
 
-    _name = b'sac'
+    _name = 'sac'
     _description = 'Serviço de atendimento ao consumidor'
-    _inherit = ['mail.thread', 'ir.needaction_mixin',
-                'utm.mixin', 'base.kanban.abstract']
+    _inherit = ['mail.thread', 'utm.mixin', 'base.kanban.abstract']
 
     @api.depends('create_date')
     def _compute_create_date(self):
@@ -317,8 +312,8 @@ class Sac(models.Model):
         res_id = super(Sac, self).message_new(msg_dict, custom_values=defaults)
         sac = self.browse(res_id)
         email_list = sac.email_split(msg_dict)
-        partner_ids = filter(None, sac._find_partner_from_emails(
-            email_list, force_create=True))
+        partner_ids = list([_f for _f in sac._find_partner_from_emails(
+            email_list, force_create=True) if _f])
         sac.message_subscribe(partner_ids)
         return res_id
 
@@ -326,8 +321,8 @@ class Sac(models.Model):
     def message_update(self, msg, update_vals=None):
         """ Override to update the issue according to the email. """
         email_list = self.email_split(msg)
-        partner_ids = filter(None, self._find_partner_from_emails(
-            email_list, force_create=True))
+        partner_ids = list([_f for _f in self._find_partner_from_emails(
+            email_list, force_create=True) if _f])
         self.message_subscribe(partner_ids)
         return super(Sac, self).message_update(msg, update_vals=update_vals)
 

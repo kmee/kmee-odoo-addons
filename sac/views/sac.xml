@@ -24,7 +24,7 @@
                 <field name="customer_name" />
             </xpath>
             <xpath expr="//div[@name='card_body']">
-                <div><field name="create_date_date"/> 
+                <div><field name="create_date_date"/>
                     <field name="reason_id" />
                 </div>
                 <div>
@@ -46,7 +46,7 @@
                 </header>
                 <sheet>
                     <div class="oe_right">
-                        <field name="kanban_status" class="oe_inline" widget="kanban_state_selection"/>
+                        <field name="kanban_status" class="oe_inline" widget="state_selection"/>
                     </div>
                     <h1>
                         <field name="name"/>
