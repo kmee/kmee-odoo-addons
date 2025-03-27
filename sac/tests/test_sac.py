@@ -3,11 +3,12 @@ from odoo.tests.common import TransactionCase
 
 class TestSac(TransactionCase):
 
-    def setUp(self):
-        super(TestSac, self).setUp()
-        self.sac_model = self.env['sac']
-        self.reason_model = self.env['sac.reason']
-        self.type_model = self.env['sac.type']
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.sac_model = cls.env['sac']
+        cls.reason_model = cls.env['sac.reason']
+        cls.type_model = cls.env['sac.type']
 
     def test_create_sac(self):
         """Test SAC creation"""

@@ -354,3 +354,9 @@ class Sac(models.Model):
             pass
         return recipients
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_not_done(self):
+        """Prevent deletion of SAC records that are in done state"""
+        if any(record.stage_id.done for record in self):
+            raise UserError(_("You cannot delete a SAC record that is in done state."))
+
