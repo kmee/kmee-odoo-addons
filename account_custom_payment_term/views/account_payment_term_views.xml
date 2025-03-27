@@ -1,0 +1,17 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_account_payment_term_form_custom" model="ir.ui.view">
+        <field name="name">account.payment.term.form.custom</field>
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_custom" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

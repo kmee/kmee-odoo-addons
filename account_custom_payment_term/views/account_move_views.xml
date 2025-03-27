@@ -1,0 +1,17 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="action_copy_term_as_custom" model="ir.actions.server">
+        <field name="name">Copy Term as Custom</field>
+        <field name="model_id" ref="account.model_account_move" />
+        <field name="binding_model_id" ref="account.model_account_move" />
+        <field name="state">code</field>
+        <field
+            name="code"
+        >action = records.action_new_custom_term_from_current()</field>
+    </record>
+
+</odoo>
