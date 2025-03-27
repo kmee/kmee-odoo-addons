@@ -128,15 +128,20 @@
                 <field name="rating"/>
                  <separator />
                     <filter string="Meus atendimentos"
-                            name="assigned_to_me"
+                            name="my_sac"
                             domain="[('user_id','=',uid)]"
                             help="Leads that are assigned to me"/>
-                    <filter string="Sem responsável" name="unassigned"
+                    <filter string="Sem responsável"
+                            name="unassigned"
                             domain="[('user_id','=', False)]"
                             help="Sem usuário responsável"/>
                     <separator />
-                    <filter string="Unread Messages" name="message_needaction" domain="[('message_needaction','=',True)]"/>
-                    <filter string="Archived" name="archived" domain="[('active', '=', False)]"/>
+                    <filter string="Unread Messages"
+                            name="message_needaction"
+                            domain="[('message_needaction','=',True)]"/>
+                    <filter string="Archived"
+                            name="archived"
+                            domain="[('active', '=', False)]"/>
                     <separator />
                     <group expand="0" string="Group By">
                         <filter string="Responsável" name="groupby_user" domain="[]" context="{'group_by':'user_id'}"/>
@@ -156,6 +161,10 @@
         <field name="model">sac</field>
         <field name="arch" type="xml">
             <tree string="SAC" decoration-bf="message_needaction==True">
+                <button name="action_view_details"
+                        type="object"
+                        string="View Details"
+                        icon="fa-eye"/>
                 <field name="name"/>
                 <field name="customer_name"/>
                 <field name="cnpj_cpf"/>

@@ -3,44 +3,27 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Sac',
-    'summary': """
-        Serviço de Atendimento ao Consumidor""",
-    'version': '11.0.1.0.0',
+    'name': 'SAC',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
-    'author': 'KMEE INFORMATICA LTDA,Odoo Community Association (OCA)',
-    'website': 'www.kmee.com.br',
+    'author': 'KMEE INFORMATICA LTDA',
+    'website': 'https://www.kmee.com.br',
     'depends': [
-        'utm',
+        'base',
         'mail',
-        'product',
-        'document',
-        'l10n_br_zip_correios',
+        'utm',
         'base_kanban_stage',
-        'report_py3o',
+        'l10n_br_base',
     ],
     'data': [
-        'security/sac.xml',
-        'security/sac_type.xml',
-        'security/sac_reason.xml',
-        'views/sac_menu.xml',
-        'views/base_kanban_stage.xml',
-        'views/product_template.xml',
         'views/sac.xml',
-        'views/sac_type.xml',
+        'views/sac_menu.xml',
         'views/sac_reason.xml',
-
-        'wizards/sac_print.xml',
-
-        'data/sac_reason.xml',
-        'data/mail_template.xml',
-        'data/base_kanban_stage.xml',
-        'data/ir_sequence_data.xml',
-
-        'reports/sac_correios.xml',
+        'views/sac_type.xml',
+        'views/product_template.xml',
+        'views/base_kanban_stage.xml',
     ],
-    'demo': [
-        # 'demo/sac_type.xml',
-        # 'demo/sac.xml',
-    ],
+    'demo': [],
+    'installable': True,
+    'application': True,
 }

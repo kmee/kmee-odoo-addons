@@ -28,7 +28,7 @@ class Sac(models.Model):
     @api.depends('create_date')
     def _compute_create_date(self):
         for record in self:
-            # TODO: Tratar o fuso horário
+            # No need for fields.Datetime.from_string in v12
             record.create_date_date = record.create_date
 
     @api.multi
@@ -225,16 +225,17 @@ class Sac(models.Model):
         string='Impresso',
     )
 
-    @api.model
-    def create(self, vals):
-        if 'company_id' in vals:
-            vals['name'] = self.env['ir.sequence'].with_context(
-                force_company=vals['company_id']
-            ).next_by_code('sac') or _('New')
-        else:
-            vals['name'] = \
-                self.env['ir.sequence'].next_by_code('sac') or _('New')
-        result = super(Sac, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if 'company_id' in vals:
+                vals['name'] = self.env['ir.sequence'].with_context(
+                    force_company=vals['company_id']
+                ).next_by_code('sac') or _('New')
+            else:
+                vals['name'] = \
+                    self.env['ir.sequence'].next_by_code('sac') or _('New')
+        result = super(Sac, self).create(vals_list)
         return result
 
     @api.multi
