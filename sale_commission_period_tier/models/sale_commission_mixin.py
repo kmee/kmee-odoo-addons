@@ -17,7 +17,11 @@ class SaleCommissionLineMixin(models.AbstractModel):
         if commission.commission_type == "period_section":
             # For period-based commission, get the date from the invoice or order
             if self.env.context.get("period_commission_recalculation"):
-                return self.env.context.get("period_commission_recalculation")
+                return (
+                    self.env.context.get("period_commission_recalculation")
+                    * subtotal
+                    / 100
+                )
 
             if hasattr(self, "move_id"):
                 # Invoice line
