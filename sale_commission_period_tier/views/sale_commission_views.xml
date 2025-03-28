@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend commission form view -->
+    <record id="sale_commission_form_period" model="ir.ui.view">
+        <field name="name">sale.commission.form.period</field>
+        <field name="model">sale.commission</field>
+        <field name="inherit_id" ref="sale_commission.sale_commission_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='section_ids']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('commission_type', 'not in', ['section', 'period_section'])]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend settlement form view -->
+    <record id="view_settlement_form_period" model="ir.ui.view">
+        <field name="name">sale.commission.settlement.form.period</field>
+        <field name="model">sale.commission.settlement</field>
+        <field name="inherit_id" ref="sale_commission.view_settlement_form" />
+        <field name="arch" type="xml">
+            <button name="action_cancel" position="before">
+                <button
+                    string="Recalculate Period Commission"
+                    name="action_recalculate_period_commission"
+                    type="object"
+                    class="oe_highlight"
+                />
+            </button>
+        </field>
+    </record>
+
+</odoo>
