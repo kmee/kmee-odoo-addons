@@ -22,6 +22,11 @@ class SaleOrder(models.Model):
         self.action_ignore_exceptions()
         return True
 
+    def restart_validation(self):
+        super(SaleOrder, self).restart_validation()
+        self.write({"ignore_exception": False})
+        return True
+
     def _get_validation_exceptions(self, extra_domain=None, add_base_exceptions=True):
         exception_fields = super(SaleOrder, self)._get_validation_exceptions(
             extra_domain, add_base_exceptions
