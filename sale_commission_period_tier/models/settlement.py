@@ -37,9 +37,7 @@ class Settlement(models.Model):
         total_amount = self._get_period_total()
 
         # Get applicable percentage
-        percentage = self.agent_id.commission_id.calculate_period_section(
-            self.agent_id, self.date_from, self.date_to, total_amount
-        )
+        percentage = self.agent_id.commission_id.calculate_period_section(total_amount)
 
         # Update commission lines with context to bypass validation
         with self.env.cr.savepoint():
