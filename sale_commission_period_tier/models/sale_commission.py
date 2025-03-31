@@ -13,7 +13,7 @@ class SaleCommission(models.Model):
         ondelete={"period_section": "cascade"},
     )
 
-    def calculate_period_section(self, agent, date_from, date_to, total_amount=None):
+    def calculate_period_section(self, total_amount=None):
         """Calculate commission percentage based on total amount for the period
         If total_amount is not provided, returns the first section percentage
         """
