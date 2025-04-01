@@ -7,27 +7,29 @@ from odoo import api, fields, models
 class ContractContract(models.Model):
     _inherit = "contract.contract"
 
-    # Campos de resumo para valores por período
-    monthly_value = fields.Monetary(
-        string="Valor Mensal",
-        compute="_compute_period_values",
-        store=True,
-        help="Valor médio mensal do contrato",
-    )
-    annual_value = fields.Monetary(
-        string="Valor Anual",
-        compute="_compute_period_values",
-        store=True,
-        help="Valor anual estimado do contrato",
-    )
+    # Renomear e reorganizar campos para maior clareza
     total_contract_value = fields.Monetary(
-        string="Valor Total do Contrato", compute="_compute_period_values", store=True
-    )
-    current_month_value = fields.Monetary(
-        string="Valor do Mês Atual",
+        string="Valor Total do Contrato",
         compute="_compute_period_values",
         store=True,
-        help="Valor total das linhas ativas no mês corrente",
+        help="Valor total para todo o período contratado",
+        sequence=10,  # Mostrar primeiro
+    )
+
+    current_month_value = fields.Monetary(
+        string="Valor do Período Atual",
+        compute="_compute_period_values",
+        store=True,
+        help="Valor do período atual do contrato",
+        sequence=20,
+    )
+
+    monthly_value = fields.Monetary(
+        string="Valor Médio por Período",
+        compute="_compute_period_values",
+        store=True,
+        help="Valor médio por período do contrato",
+        sequence=30,
     )
 
     @api.depends(
@@ -50,7 +52,7 @@ class ContractContract(models.Model):
                 line.total_amount for line in active_lines
             )
 
-            # Cálculo do valor mensal (média ponderada por período)
+            # Cálculo do valor médio por período
             total_months = 0
             total_weighted_value = 0.0
 
@@ -74,28 +76,23 @@ class ContractContract(models.Model):
                 total_months += months
                 total_weighted_value += line.total_amount
 
-            # Calcular valor mensal médio
-            if total_months:
-                contract.monthly_value = total_weighted_value / total_months
-                contract.annual_value = contract.monthly_value * 12
-            else:
-                contract.monthly_value = 0
-                contract.annual_value = 0
+            # Calcular valor médio por período
+            contract.monthly_value = (
+                total_weighted_value / total_months if total_months else 0
+            )
 
-            # Calcular valor do mês corrente usando a data da próxima fatura
+            # Calcular valor do período atual
             next_invoice_date = contract.recurring_next_date
-            current_month_lines = active_lines.filtered(
+            current_period_lines = active_lines.filtered(
                 lambda line: line.date_start
                 and line.date_end
                 and next_invoice_date
                 and line.date_start <= next_invoice_date <= line.date_end
             )
 
-            current_month_value = sum(
-                line.period_amount for line in current_month_lines
+            contract.current_month_value = sum(
+                line.period_amount for line in current_period_lines
             )
-
-            contract.current_month_value = current_month_value
 
     # Relatório de distribuição de valor por período
     def generate_period_distribution_report(self):
@@ -107,7 +104,6 @@ class ContractContract(models.Model):
             "name": self.name,
             "partner_id": self.partner_id.id,
             "monthly_value": self.monthly_value,
-            "annual_value": self.annual_value,
             "total_value": self.total_contract_value,
             "line_details": [],
         }

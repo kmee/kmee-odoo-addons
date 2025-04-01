@@ -49,7 +49,6 @@
         <field name="model">contract.contract</field>
         <field name="inherit_id" ref="contract.contract_contract_form_view" />
         <field name="arch" type="xml">
-            <!-- Adiciona os campos monetários em uma nova página -->
             <xpath expr="//field[@name='note']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
@@ -66,12 +65,33 @@
                     <group
                         class="oe_subtotal_footer oe_right"
                         colspan="2"
-                        name="sale_total"
+                        name="contract_total"
                     >
-                        <field name="monthly_value" />
-                        <field name="annual_value" />
-                        <field name="total_contract_value" />
-                        <field name="current_month_value" />
+                        <field
+                            name="total_contract_value"
+                            class="oe_subtotal_footer_separator"
+                            widget="monetary"
+                            options="{'currency_field': 'currency_id'}"
+                        />
+                        <label
+                            for="current_month_value"
+                            string="Valor do Período Atual"
+                        />
+                        <div class="d-flex">
+                            <field
+                                name="current_month_value"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id'}"
+                            />
+                        </div>
+                        <label for="monthly_value" string="Valor Médio por Período" />
+                        <div class="d-flex">
+                            <field
+                                name="monthly_value"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id'}"
+                            />
+                        </div>
                     </group>
                     <div class="clearfix" />
                 </group>
