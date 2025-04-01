@@ -32,15 +32,11 @@ class SaleOrderLine(models.Model):
         values = super(SaleOrderLine, self)._prepare_contract_line_values(
             contract, predecessor_contract_line_id
         )
-        # Ajusta o preço unitário e quantidade para refletir valores do período
         values.update(
             {
                 "period_qty": self.period_qty,
                 "period_count": self.period_count,
                 "quantity": self.period_qty,  # Quantidade por período
-                "price_unit": self.period_amount / self.period_qty
-                if self.period_qty
-                else 0.0,  # Preço unitário por período
             }
         )
         return values
