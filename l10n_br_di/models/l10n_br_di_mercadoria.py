@@ -107,13 +107,13 @@ class L10nBrDiMercadoria(models.Model):
         help="Equals to the sum of all Valores",
     )
 
-    final_price_unit = fields.Float()
+    final_price_unit = fields.Float(digits=(12, 8))
 
-    amount_other = fields.Float()
+    amount_other = fields.Float(digits=(12, 8))
 
-    amount_total = fields.Float()
+    amount_total = fields.Float(digits=(12, 8))
 
-    amount_afrmm = fields.Float()
+    amount_afrmm = fields.Float(digits=(12, 8))
 
     codigo_do_fabricante = fields.Char(
         string="Código do Fabricante",
