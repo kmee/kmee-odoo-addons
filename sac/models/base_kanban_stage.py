@@ -6,12 +6,12 @@ from odoo import fields, models
 
 class BaseKanbanStage(models.Model):
 
-    _inherit = 'base.kanban.stage'
+    _inherit = "base.kanban.stage"
 
     mail_template_id = fields.Many2one(
-        comodel_name='mail.template',
-        string='Email Template',
+        comodel_name="mail.template",
+        string="Email Template",
         # domain="[('res_model_id', '=', 'model_id')]",
         help="If set an email will be sent to the customer "
-             "when the sac reaches this step."
+        "when the sac reaches this step.",
     )
