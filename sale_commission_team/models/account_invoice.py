@@ -24,7 +24,7 @@ class AccountInvoiceLine(models.Model):
             lambda x: x.move_id.partner_id and x.move_id.move_type[:3] == "out"
         ):
             record.agent_ids = False
-            if record.move_id.partner_id:
+            if not record.commission_free and record.product_id:
                 record.agent_ids = record._prepare_agents_vals_partner(
                     record.move_id.partner_id
                 )
