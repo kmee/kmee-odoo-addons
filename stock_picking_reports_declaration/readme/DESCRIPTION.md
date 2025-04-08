@@ -1,0 +1,1 @@
+This module allows you to configure a custom declaration text for the Picking Operations and Delivery Slip reports.
