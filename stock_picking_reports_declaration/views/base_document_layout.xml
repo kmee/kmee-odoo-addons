@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_base_document_layout">
+        <field name="model">base.document.layout</field>
+        <field name="inherit_id" ref="web.view_base_document_layout" />
+        <field name="arch" type="xml">
+            <field name="report_footer" position="after">
+                <field
+                    name="declaration_receipt"
+                    string="Declaration of Receipt"
+                    options="{'resizable': false}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
