@@ -1,0 +1,20 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_product_category_form_inherit_price_control" model="ir.ui.view">
+        <field name="name">product.category.form.inherit.price.control</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="stock_account.view_category_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_valuation']" position="after">
+                <field
+                    name="price_control_option"
+                    groups="account.group_account_readonly,stock.group_stock_manager"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
