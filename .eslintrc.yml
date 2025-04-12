@@ -9,6 +9,7 @@ parserOptions:
 overrides:
   - files:
       - "**/*.esm.js"
+      - "**/static/src/js/remove_odoo_title.js"
     parserOptions:
       sourceType: module
 

@@ -1,0 +1,1 @@
+This module removes the "About" section from Settings and the word Odoo from the title.
