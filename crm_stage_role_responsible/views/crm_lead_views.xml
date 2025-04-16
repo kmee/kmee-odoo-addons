@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_role" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.role</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="bdr_id" widget="many2one_avatar_user" />
+                <field name="sdr_id" widget="many2one_avatar_user" />
+                <field name="closer_id" widget="many2one_avatar_user" />
+            </field>
+        </field>
+    </record>
+</odoo>
