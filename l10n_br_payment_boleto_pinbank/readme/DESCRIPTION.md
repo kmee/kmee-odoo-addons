@@ -1,0 +1,1 @@
+This module inherits from l10n_br_payment_boleto and implements the payment provider integration with Pinbank for boleto generation.
