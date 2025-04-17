@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="payment_provider_form_pinbank" model="ir.ui.view">
+        <field name="name">Pinbank Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form" />
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position='inside'>
+                <group
+                    name="pinbank_credentials"
+                    attrs="{'invisible': [('code', '!=', 'boleto_pinbank')]}"
+                >
+                    <field
+                        name="pinbank_user"
+                        attrs="{'required': [('code', '=', 'boleto_pinbank'), ('state', '!=', 'disabled')]}"
+                    />
+                    <field
+                        name="pinbank_secret"
+                        attrs="{'required': [('code', '=', 'boleto_pinbank'), ('state', '!=', 'disabled')]}"
+                        password="True"
+                    />
+                    <field
+                        name="pinbank_channel"
+                        attrs="{'required': [('code', '=', 'boleto_pinbank'), ('state', '!=', 'disabled')]}"
+                    />
+                    <field
+                        name="pinbank_client"
+                        attrs="{'required': [('code', '=', 'boleto_pinbank'), ('state', '!=', 'disabled')]}"
+                    />
+                    <field
+                        name="pinbank_request_origin"
+                        attrs="{'required': [('code', '=', 'boleto_pinbank'), ('state', '!=', 'disabled')]}"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+
+</odoo>
