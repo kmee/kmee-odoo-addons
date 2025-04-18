@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+    <template id="report_picking_declaration" inherit_id="stock.report_picking">
+        <xpath expr="//p[@t-field='o.note']" position="before">
+            <p t-field="o.company_id.declaration_receipt" />
+        </xpath>
+    </template>
+    <template
+        id="report_delivery_document_declaration"
+        inherit_id="stock.report_delivery_document"
+    >
+        <xpath expr="//t[@t-if='o.backorder_ids and backorders']" position="after">
+            <p t-field="o.company_id.declaration_receipt" />
+        </xpath>
+    </template>
+</data>
