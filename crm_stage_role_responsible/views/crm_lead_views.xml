@@ -10,6 +10,11 @@
                 <field name="sdr_id" widget="many2one_avatar_user" />
                 <field name="closer_id" widget="many2one_avatar_user" />
             </field>
+            <field name="team_id" position="before">
+                <field name="bdr_id" widget="many2one_avatar_user" />
+                <field name="sdr_id" widget="many2one_avatar_user" />
+                <field name="closer_id" widget="many2one_avatar_user" />
+            </field>
         </field>
     </record>
 </odoo>
