@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_linkedin" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.linkedin</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="linkedin_url" widget="url" />
+            </xpath>
+            <xpath
+                expr="//page[@name='lead']//field[@name='function']"
+                position="after"
+            >
+                <field name="linkedin_url" widget="url" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
