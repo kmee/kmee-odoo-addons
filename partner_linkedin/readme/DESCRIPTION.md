@@ -1,0 +1,1 @@
+Add linkdin url on partner form
