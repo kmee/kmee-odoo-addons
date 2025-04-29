@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.ui.view" id="sale_isolated_quotatJion.view_order_form">
+    <record model="ir.ui.view" id="sale_isolated_quotation.view_order_form">
         <field name="active">False</field>
     </record>
     <record id="view_order_form" model="ir.ui.view">
@@ -19,11 +19,6 @@
                     class="btn-primary"
                     attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('isolated_blanket_order_id', '!=', False)]}"
                 />
-                <!-- <button name="%(action_open_sale_blanket_order_wizard_confirm)d"
-                    string="Open Confirm Wizard"
-                    type="action"
-                    class="btn-primary"
-                    context="{}"/> -->
             </xpath>
             <field name="sale_order_template_id" position="after">
                 <field
