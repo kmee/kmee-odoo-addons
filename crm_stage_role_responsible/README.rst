@@ -24,9 +24,9 @@ CRM Stage Role Responsible
 
 This module extends CRM stages to include role responsibilities. It allows you to:
 
-* Assign specific roles (BDR, SDR, Closer) to CRM stages
+* Assign specific roles (BDR, SDR, Hunter, Closer, Farmer) to CRM stages
 * Automatically update the responsible user based on stage roles
-* Track BDR, SDR, and Closer assignments throughout the sales process
+* Track BDR, SDR, Hunter, Closer, and Farmer assignments throughout the sales process
 * Transfer role information to sales orders when converting opportunities
 
 **Table of contents**
@@ -40,7 +40,7 @@ Configuration
 To configure this module, you need to:
 
 * Go to CRM > Configuration > Stages
-* For each stage, set the appropriate role responsible (BDR, SDR, Closer, or Default)
+* For each stage, set the appropriate role responsible (BDR, SDR, Hunter, Closer, Farmer, or Default)
 
 Usage
 =====
@@ -48,7 +48,7 @@ Usage
 To use this module, you need to:
 
 1. Configure role responsibilities for each CRM stage
-2. Assign BDR, SDR, and Closer users to leads/opportunities
+2. Assign BDR, SDR, Farmer, Closer and Hunter users to leads/opportunities
 3. Move leads through stages - the responsible user will be automatically updated
 4. When converting to opportunity, role information will be transferred to the sales order
 
