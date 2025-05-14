@@ -8,7 +8,9 @@
             <field name="user_id" position="after">
                 <field name="bdr_id" widget="many2one_avatar_user" />
                 <field name="sdr_id" widget="many2one_avatar_user" />
+                <field name="hunter_id" widget="many2one_avatar_user" />
                 <field name="closer_id" widget="many2one_avatar_user" />
+                <field name="farmer_id" widget="many2one_avatar_user" />
             </field>
         </field>
     </record>

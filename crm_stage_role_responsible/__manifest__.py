@@ -10,6 +10,7 @@
         "sale_crm",
     ],
     "data": [
+        "views/crm_team.xml",
         "views/crm_stage_views.xml",
         "views/crm_lead_views.xml",
         "views/sale_order_views.xml",

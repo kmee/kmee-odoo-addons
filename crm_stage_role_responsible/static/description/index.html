@@ -372,9 +372,9 @@ ul.auto-toc {
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/crm_stage_role_responsible"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
 <p>This module extends CRM stages to include role responsibilities. It allows you to:</p>
 <ul class="simple">
-<li>Assign specific roles (BDR, SDR, Closer) to CRM stages</li>
+<li>Assign specific roles (BDR, SDR, Hunter, Closer, Farmer) to CRM stages</li>
 <li>Automatically update the responsible user based on stage roles</li>
-<li>Track BDR, SDR, and Closer assignments throughout the sales process</li>
+<li>Track BDR, SDR, Hunter, Closer, and Farmer assignments throughout the sales process</li>
 <li>Transfer role information to sales orders when converting opportunities</li>
 </ul>
 <p><strong>Table of contents</strong></p>
@@ -401,7 +401,7 @@ ul.auto-toc {
 <p>To configure this module, you need to:</p>
 <ul class="simple">
 <li>Go to CRM &gt; Configuration &gt; Stages</li>
-<li>For each stage, set the appropriate role responsible (BDR, SDR, Closer, or Default)</li>
+<li>For each stage, set the appropriate role responsible (BDR, SDR, Hunter, Closer, Farmer, or Default)</li>
 </ul>
 </div>
 <div class="section" id="usage">
@@ -409,7 +409,7 @@ ul.auto-toc {
 <p>To use this module, you need to:</p>
 <ol class="arabic simple">
 <li>Configure role responsibilities for each CRM stage</li>
-<li>Assign BDR, SDR, and Closer users to leads/opportunities</li>
+<li>Assign BDR, SDR, Farmer, Closer and Hunter users to leads/opportunities</li>
 <li>Move leads through stages - the responsible user will be automatically updated</li>
 <li>When converting to opportunity, role information will be transferred to the sales order</li>
 </ol>

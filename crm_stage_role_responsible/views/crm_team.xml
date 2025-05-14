@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="crm_team_form_view">
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Roles">
+                    <group>
+                        <group>
+                            <field name="hide_bdr" />
+                            <field name="hide_sdr" />
+                            <field name="hide_hunter" />
+                        </group>
+                        <group>
+                            <field name="hide_closer" />
+                            <field name="hide_farmer" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
