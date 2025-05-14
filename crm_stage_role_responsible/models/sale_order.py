@@ -6,7 +6,9 @@ class SaleOrder(models.Model):
 
     bdr_id = fields.Many2one("res.users", string="BDR")
     sdr_id = fields.Many2one("res.users", string="SDR")
+    hunter_id = fields.Many2one("res.users", string="Hunter")
     closer_id = fields.Many2one("res.users", string="Closer")
+    farmer_id = fields.Many2one("res.users", string="Farmer")
 
     @api.model
     def create(self, vals):

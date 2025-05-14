@@ -5,15 +5,66 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form" />
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="hide_bdr" invisible="1" />
+                <field name="hide_sdr" invisible="1" />
+                <field name="hide_hunter" invisible="1" />
+                <field name="hide_closer" invisible="1" />
+                <field name="hide_farmer" invisible="1" />
+            </xpath>
             <field name="user_id" position="after">
-                <field name="bdr_id" widget="many2one_avatar_user" />
-                <field name="sdr_id" widget="many2one_avatar_user" />
-                <field name="closer_id" widget="many2one_avatar_user" />
+                <field
+                    name="bdr_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_bdr', '=', True)]}"
+                />
+                <field
+                    name="sdr_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_sdr', '=', True)]}"
+                />
+                <field
+                    name="hunter_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_hunter', '=', True)]}"
+                />
+                <field
+                    name="closer_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_closer', '=', True)]}"
+                />
+                <field
+                    name="farmer_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_farmer', '=', True)]}"
+                />
             </field>
             <field name="team_id" position="before">
-                <field name="bdr_id" widget="many2one_avatar_user" />
-                <field name="sdr_id" widget="many2one_avatar_user" />
-                <field name="closer_id" widget="many2one_avatar_user" />
+                <field
+                    name="bdr_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_bdr', '=', True)]}"
+                />
+                <field
+                    name="sdr_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_sdr', '=', True)]}"
+                />
+                <field
+                    name="hunter_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_hunter', '=', True)]}"
+                />
+                <field
+                    name="closer_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_closer', '=', True)]}"
+                />
+                <field
+                    name="farmer_id"
+                    widget="many2one_avatar_user"
+                    attrs="{'invisible': [('hide_farmer', '=', True)]}"
+                />
             </field>
         </field>
     </record>

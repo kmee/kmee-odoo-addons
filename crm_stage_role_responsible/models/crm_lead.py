@@ -1,37 +1,70 @@
 from odoo import _, api, exceptions, fields, models
 
+ROLES = ["bdr", "sdr", "hunter", "closer", "farmer"]
+
 
 class CrmLead(models.Model):
     _inherit = "crm.lead"
 
-    bdr_id = fields.Many2one("res.users", string="BDR")
-    sdr_id = fields.Many2one("res.users", string="SDR")
-    closer_id = fields.Many2one("res.users", string="Closer")
+    bdr_id = fields.Many2one(
+        "res.users",
+        string="BDR",
+        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
+    )
+    sdr_id = fields.Many2one(
+        "res.users",
+        string="SDR",
+        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
+    )
+    hunter_id = fields.Many2one(
+        "res.users",
+        string="Hunter",
+        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
+    )
+    closer_id = fields.Many2one(
+        "res.users",
+        string="Closer",
+        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
+    )
+    farmer_id = fields.Many2one(
+        "res.users",
+        string="Farmer",
+        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
+    )
+    user_id = fields.Many2one(
+        "res.users",
+        string="Responsável",
+        default=lambda self: self.env.user,
+        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
+        check_company=True,
+        index=True,
+        tracking=True,
+    )
+    hide_bdr = fields.Boolean(string="Hide BDR", related="team_id.hide_bdr", store=True)
+    hide_sdr = fields.Boolean(string="Hide SDR", related="team_id.hide_sdr", store=True)
+    hide_hunter = fields.Boolean(
+        string="Hide Hunter", related="team_id.hide_hunter", store=True
+    )
+    hide_closer = fields.Boolean(
+        string="Hide Closer", related="team_id.hide_closer", store=True
+    )
+    hide_farmer = fields.Boolean(
+        string="Hide Farmer", related="team_id.hide_farmer", store=True
+    )
 
     def _assign_user_from_role(self):
         for lead in self:
             role = lead.stage_id.role_responsible
-            if role == "bdr":
-                if lead.bdr_id:
-                    lead.user_id = lead.bdr_id
-                else:
-                    raise exceptions.UserError(
-                        _("Current stage requires a BDR assignment.")
-                    )
-            elif role == "sdr":
-                if lead.sdr_id:
-                    lead.user_id = lead.sdr_id
-                else:
-                    raise exceptions.UserError(
-                        _("Current stage requires a SDR assignment.")
-                    )
-            elif role == "closer":
-                if lead.closer_id:
-                    lead.user_id = lead.closer_id
-                else:
-                    raise exceptions.UserError(
-                        _("Current stage requires a Closer assignment.")
-                    )
+            for r in ROLES:
+                if role == r:
+                    field_name = f"{role}_id"
+                    user = getattr(lead, field_name, False)
+                    if user:
+                        lead.user_id = user
+                    else:
+                        raise exceptions.UserError(
+                            _(f"Current stage requires a {role.upper()} assignment.")
+                        )
 
     @api.model
     def create(self, vals):
@@ -41,7 +74,7 @@ class CrmLead(models.Model):
 
     def write(self, vals):
         res = super().write(vals)
-        if "stage_id" in vals:
+        if "stage_id" in vals or "type" in vals:
             self._assign_user_from_role()
         return res
 
@@ -51,7 +84,9 @@ class CrmLead(models.Model):
             {
                 "default_bdr_id": self.bdr_id.id if self.bdr_id else False,
                 "default_sdr_id": self.sdr_id.id if self.sdr_id else False,
+                "default_hunter_id": self.hunter_id.id if self.hunter_id else False,
                 "default_closer_id": self.closer_id.id if self.closer_id else False,
+                "default_farmer_id": self.farmer_id.id if self.farmer_id else False,
             }
         )
         return quotation_context
