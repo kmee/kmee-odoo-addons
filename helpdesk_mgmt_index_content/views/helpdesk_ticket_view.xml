@@ -1,0 +1,12 @@
+<odoo>
+    <record id="helpdesk_mgmt_index_content_ticket_view_search" model="ir.ui.view">
+        <field name="name">helpdesk_mgmt_index_content.ticket.view.search</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.helpdesk_ticket_view_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="attachment_index_content" />
+            </field>
+        </field>
+    </record>
+</odoo>
