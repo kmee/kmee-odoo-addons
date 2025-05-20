@@ -11,22 +11,43 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
-                <button
-                    name="action_convert_to_blanket_order"
-                    type="object"
-                    string="Convert to Blanket Order"
-                    class="btn-primary"
-                    attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('isolated_blanket_order_id', '!=', False)]}"
-                />
-            </xpath>
-            <field name="sale_order_template_id" position="after">
+            <field name="sale_order_template_id" position="before">
+                <field name="blanket_order_type" widget="radio" />
                 <field
-                    name="isolated_blanket_order_id"
-                    attrs="{'invisible': [('isolated_blanket_order_id', '=', False)]}"
+                    name="blanket_order_id"
+                    attrs="{'invisible': [('blanket_order_type', '=', 'none')],
+                              'required': [('blanket_order_type', '!=', 'none')]}"
                 />
             </field>
 
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']"
+                position="before"
+            >
+                <field name="blanket_order_line_id" invisible="1" />
+                <field
+                    name="original_bo_qty"
+                    attrs="{'column_invisible': [('parent.blanket_order_type', '=', 'none')]}"
+                />
+                <field
+                    name="available_bo_qty"
+                    attrs="{'column_invisible': [('parent.blanket_order_type', '=', 'none')]}"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_uom_qty']"
+                position="before"
+            >
+                <field name="blanket_order_line_id" invisible="1" />
+                <field
+                    name="original_bo_qty"
+                    attrs="{'invisible': [('parent.blanket_order_type', '=', 'none')]}"
+                />
+                <field
+                    name="available_bo_qty"
+                    attrs="{'invisible': [('parent.blanket_order_type', '=', 'none')]}"
+                />
+            </xpath>
         </field>
     </record>
 

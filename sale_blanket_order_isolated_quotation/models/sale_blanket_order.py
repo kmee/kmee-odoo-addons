@@ -12,7 +12,6 @@ class SaleBlanketOrder(models.Model):
 
     isolated_quotation_id = fields.Many2one(
         comodel_name="sale.order",
-        inverse_name="isolated_blanket_order_id",
         readonly=True,
         copy=False,
         string="Quotation",
@@ -36,3 +35,32 @@ class SaleBlanketOrder(models.Model):
                 sale_order.action_confirm()
 
         return action_result
+
+    def action_create_increment_quotation(self):
+        """Create a new quotation for incrementing the blanket order."""
+        self.ensure_one()
+
+        # Create sale order with lines from blanket order
+        vals = {
+            "partner_id": self.partner_id.id,
+            "is_blanket_order_increment": True,
+            "blanket_order_id": self.id,
+            "blanket_order_type": "amendment",  # Forçar tipo amendment
+        }
+
+        sale_order = self.env["sale.order"].create(vals)
+
+        # Create sale order lines
+        for line in self.line_ids:
+            vals = sale_order._prepare_blanket_order_line_values(line)
+            vals["order_id"] = sale_order.id
+            self.env["sale.order.line"].create(vals)
+
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Increment Quotation",
+            "res_model": "sale.order",
+            "view_mode": "form",
+            "res_id": sale_order.id,
+            "target": "current",
+        }

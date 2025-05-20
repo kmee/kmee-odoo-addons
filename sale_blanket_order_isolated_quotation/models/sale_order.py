@@ -1,90 +1,152 @@
 # Copyright 2025 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import datetime
 
-from odoo import fields, models
+from odoo import _, api, exceptions, fields, models
 
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    isolated_blanket_order_id = fields.Many2one(
-        comodel_name="sale.blanket.order",
-        inverse_name="isolated_quotation_id",
-        readonly=True,
-        ondelete="restrict",
-        copy=False,
-        string="Blanket Order",
+    blanket_order_type = fields.Selection(
+        [
+            ("none", "Normal Order"),
+            ("reference", "B.O. Reference"),
+            ("amendment", "B.O. Amendment"),
+        ],
+        string="B.O. Operation Type",
+        default="none",
     )
 
-    def action_convert_to_blanket_order(self):
+    is_blanket_order_increment = fields.Boolean(
+        readonly=True,
+        copy=False,
+    )
+
+    blanket_order_id = fields.Many2one(
+        comodel_name="sale.blanket.order",
+        string="Related Blanket Order",
+        states={"draft": [("readonly", False)]},
+        copy=False,
+    )
+
+    def action_confirm(self):
+        """Override to handle blanket order operations"""
         self.ensure_one()
-        sale_order_fields = self.env["sale.order"]._fields
-        blanket_order_fields = self.env["sale.blanket.order"]._fields
-        common_fields = set(sale_order_fields.keys()) & set(blanket_order_fields.keys())
-        not_common_fields = set(sale_order_fields.keys()) - common_fields
-        common_vals = {}
-        skip_fields = [
-            "message_follower_ids",
-            "message_ids",
-            "__last_update",
-            "message_partner_ids",
-            "date_order",
-            "expected_date",
-            "name",
-            "state",
-            "display_type",
-            "display_name",
-            "access_url",
-        ]
-        quotation_data_json = {
-            name_field: value
-            for name_field, value in self.read(not_common_fields)[0].items()
-            if name_field not in skip_fields and value
-        }
-        for field in quotation_data_json:
-            if isinstance(quotation_data_json[field], datetime.datetime):
-                quotation_data_json[field] = quotation_data_json[field].isoformat()
-        for field in common_fields:
-            if field not in skip_fields:
-                value = getattr(self, field)
-                common_vals[field] = value.id if hasattr(value, "id") else value
+        if self.blanket_order_type == "reference":
+            return self._confirm_blanket_order_reference()
+        elif self.blanket_order_type == "amendment":
+            return self._confirm_blanket_order_increment()
+        elif not self.order_sequence:  # É um orçamento
+            return {
+                "name": _("Confirm Sale Order"),
+                "type": "ir.actions.act_window",
+                "res_model": "sale.order.confirm",
+                "view_mode": "form",
+                "target": "new",
+                "context": {
+                    "default_sale_id": self.id,
+                },
+            }
+        return super().action_confirm()
 
-        blanket_order_line_fields = self.env["sale.blanket.order.line"]._fields
-        sale_order_line_fields = self.env["sale.order.line"]._fields
-        line_common_fields = set(blanket_order_line_fields.keys()) & set(
-            sale_order_line_fields.keys()
-        )
-        map_values = {}
-        map_values["original_uom_qty"] = "product_uom_qty"
-        line_vals = []
+    def _confirm_blanket_order_reference(self):
+        """Create sale order from B.O. reference and consume quantities"""
+        self.ensure_one()
+        self._validate_bo_quantities()
+        return self._create_sale_from_reference()
+
+    def _validate_bo_quantities(self):
         for line in self.order_line:
-            vals = {"order_id": False}  # será associado automaticamente
-            for field in line_common_fields:
-                value = getattr(line, field)
-                vals[field] = value.id if hasattr(value, "id") else value
-            for field in map_values:
-                value = getattr(line, map_values[field])
-                vals[field] = value.id if hasattr(value, "id") else value
-            line_vals.append((0, 0, vals))
+            if not line.blanket_order_line_id:
+                continue
+            available = line.blanket_order_line_id.remaining_qty
+            if line.product_uom_qty > available:
+                raise exceptions.ValidationError(
+                    _(
+                        "Requested quantity %s exceeds available balance %s for product %s"
+                    )
+                    % (line.product_uom_qty, available, line.product_id.name)
+                )
 
-        blanket_order_vals = {}
-        blanket_order_vals.update(common_vals)
-        blanket_order_vals["isolated_quotation_id"] = self.id
-        blanket_order_vals["line_ids"] = line_vals
-        blanket_order_vals["quotation_data_json"] = quotation_data_json
-        bo = self.env["sale.blanket.order"].create(blanket_order_vals)
-        bo.action_confirm()
-        self.isolated_blanket_order_id = bo.id
+    def _create_sale_from_reference(self):
+        sale_order = self.blanket_order_id.create_sale_order()
+        sale_order_id = self.env["sale.order"].browse(
+            sale_order.get("domain", [])[0][2][0]
+        )
+
+        # Update quantities based on reference
+        for line in sale_order_id.order_line:
+            ref_line = self.order_line.filtered(
+                lambda line_item: line_item.blanket_order_line_id
+                == line.blanket_order_line_id
+            )
+            if ref_line:
+                line.product_uom_qty = ref_line.product_uom_qty
+
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Sales Order",
+            "res_model": "sale.order",
+            "view_mode": "form",
+            "res_id": sale_order_id.id,
+            "target": "current",
+        }
+
+    def _confirm_blanket_order_increment(self):
+        self.ensure_one()
+        blanket_order = self.blanket_order_id
+        blanket_order.state = "draft"
+        self._update_bo_quantities()
+        blanket_order.action_confirm()
+        return self._get_bo_action()
+
+    def _update_bo_quantities(self):
+        for line in self.order_line:
+            bo_line = line.blanket_order_line_id
+            if bo_line:
+                new_qty = bo_line.original_uom_qty + line.product_uom_qty
+                if new_qty < 0:
+                    raise exceptions.ValidationError(
+                        _("Cannot decrease quantity below zero for product %s")
+                        % line.product_id.name
+                    )
+                bo_line.original_uom_qty = new_qty
+
+    def _get_bo_action(self):
         return {
             "type": "ir.actions.act_window",
             "name": "Blanket Order",
             "res_model": "sale.blanket.order",
             "view_mode": "form",
-            "res_id": bo.id,
+            "res_id": self.blanket_order_id.id,
             "target": "current",
         }
+
+    def _prepare_blanket_order_line_values(self, bo_line):
+        """Prepare values for creating sale order line from blanket order line."""
+        return {
+            "product_id": bo_line.product_id.id,
+            "product_uom": bo_line.product_uom.id,
+            "price_unit": bo_line.price_unit,
+            "original_bo_qty": bo_line.original_uom_qty,
+            "product_uom_qty": 0.0,  # Default to 0
+            "blanket_order_line_id": bo_line.id,
+        }
+
+    @api.onchange("blanket_order_id")
+    def _onchange_blanket_order_id(self):
+        """Fill order lines when blanket order is selected"""
+        if self.blanket_order_id:
+            # Clear existing lines
+            self.order_line = [(5, 0, 0)]
+
+            # Create new lines from blanket order
+            lines = []
+            for bo_line in self.blanket_order_id.line_ids:
+                vals = self._prepare_blanket_order_line_values(bo_line)
+                lines.append((0, 0, vals))
+            self.order_line = lines
 
 
 # order_id = fields.Many2one(
@@ -95,3 +157,61 @@ class SaleOrder(models.Model):
 #         copy=False,
 #         help="For Quotation, this field references to its Sales Order",
 #     )
+
+
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    original_bo_qty = fields.Float(
+        string="B.O. Original Qty",
+        readonly=True,
+    )
+
+    available_bo_qty = fields.Float(
+        string="B.O. Available Qty",
+        compute="_compute_bo_quantities",
+    )
+
+    blanket_order_line_id = fields.Many2one(
+        comodel_name="sale.blanket.order.line",
+        string="Blanket Order Line",
+        copy=False,
+    )
+
+    @api.depends("blanket_order_line_id", "product_uom_qty")
+    def _compute_bo_quantities(self):
+        for line in self:
+            if line.blanket_order_line_id:
+                line.original_bo_qty = line.blanket_order_line_id.original_uom_qty
+                line.available_bo_qty = line.blanket_order_line_id.remaining_qty
+            else:
+                line.original_bo_qty = 0.0
+                line.available_bo_qty = 0.0
+
+    @api.onchange("product_id", "order_id.blanket_order_id")
+    def _onchange_product_blanket_order(self):
+        if self.order_id.blanket_order_id and self.product_id:
+            bo_line = self.order_id.blanket_order_id.line_ids.filtered(
+                lambda line_item: line_item.product_id == self.product_id
+            )
+            if bo_line:
+                self.blanket_order_line_id = bo_line[0].id
+                self.product_uom = bo_line[0].product_uom.id
+                self.price_unit = bo_line[0].price_unit
+
+    @api.onchange("product_uom_qty", "blanket_order_line_id")
+    def _onchange_qty_blanket_order(self):
+        if self.order_id.blanket_order_type == "reference":
+            if (
+                self.blanket_order_line_id
+                and self.product_uom_qty > self.available_bo_qty
+            ):
+                return {
+                    "warning": {
+                        "title": _("Warning"),
+                        "message": _(
+                            "Requested quantity %s exceeds available balance %s"
+                        )
+                        % (self.product_uom_qty, self.available_bo_qty),
+                    }
+                }
