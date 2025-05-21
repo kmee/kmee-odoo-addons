@@ -1,22 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_helpdesk_sla_form_inherit_formula" model="ir.ui.view">
         <field name="name">helpdesk.sla.form.inherit.formula</field>
         <field name="model">helpdesk.sla</field>
-        <field name="inherit_id" ref="helpdesk_mgmt_sla.helpdesk_sla_form"/>
+        <field name="inherit_id" ref="helpdesk_mgmt_sla.helpdesk_ticket_sla_form" />
         <field name="arch" type="xml">
             <field name="hours" position="after">
-                <field name="use_formula"/>
-                <field name="sla_deadline_formula"
-                       attrs="{'invisible': [('use_formula', '=', False)],
-                              'required': [('use_formula', '=', True)]}"
-                       widget="ace"/>
+                <field name="use_formula" />
+                <field
+                    name="sla_deadline_formula"
+                    attrs="{
+                        'invisible': [('use_formula', '=', False)],
+                        'required': [('use_formula', '=', True)]}"
+                    widget="ace"
+                />
             </field>
             <field name="days" position="attributes">
-                <attribute name="attrs">{'invisible': [('use_formula', '=', True)]}</attribute>
+                <attribute
+                    name="attrs"
+                >{'invisible': [('use_formula', '=', True)]}</attribute>
             </field>
             <field name="hours" position="attributes">
-                <attribute name="attrs">{'invisible': [('use_formula', '=', True)]}</attribute>
+                <attribute
+                    name="attrs"
+                >{'invisible': [('use_formula', '=', True)]}</attribute>
             </field>
         </field>
     </record>

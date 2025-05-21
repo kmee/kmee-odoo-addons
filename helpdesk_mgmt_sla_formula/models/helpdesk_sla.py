@@ -1,38 +1,41 @@
-from odoo import models, fields, api, _
-from odoo.exceptions import ValidationError
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 import ast
 import logging
+from datetime import datetime, timedelta
+
+from dateutil.relativedelta import relativedelta
+
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
+
 class HelpdeskSLAFormula(models.Model):
-    _inherit = 'helpdesk.sla'
+    _inherit = "helpdesk.sla"
 
     use_formula = fields.Boolean(
-        'Usar Fórmula Python',
-        help='Se marcado, a fórmula Python será usada ao invés do delay padrão'
+        "Usar Fórmula Python",
+        help="Se marcado, a fórmula Python será usada ao invés do delay padrão",
     )
     sla_deadline_formula = fields.Text(
-        'Fórmula Python para Deadline',
+        "Fórmula Python para Deadline",
         help="Permite definir a data de deadline usando Python.\n"
-             "Use 'record' como a instância do ticket.\n"
-             "O valor retornado deve ser uma data (datetime ou date).\n"
-             "Exemplo: record.create_date + timedelta(days=2)"
+        "Use 'record' como a instância do ticket.\n"
+        "O valor retornado deve ser uma data (datetime ou date).\n"
+        "Exemplo: record.create_date + timedelta(days=2)",
     )
 
-    @api.constrains('sla_deadline_formula')
+    @api.constrains("sla_deadline_formula")
     def _check_formula_syntax(self):
-        for rule in self.filtered('use_formula'):
+        for rule in self.filtered("use_formula"):
             if not rule.sla_deadline_formula:
                 continue
             try:
                 ast.parse(rule.sla_deadline_formula)
             except Exception as e:
-                raise ValidationError(_(
-                    'Erro de sintaxe na fórmula Python: %s', str(e)
-                ))
+                raise ValidationError(
+                    _("Erro de sintaxe na fórmula Python: %s", str(e))
+                )
 
     def check_ticket_sla(self, tickets):
         self.ensure_one()
@@ -42,16 +45,14 @@ class HelpdeskSLAFormula(models.Model):
         for ticket in tickets:
             try:
                 safe_dict = {
-                    'datetime': datetime,
-                    'timedelta': timedelta,
-                    'relativedelta': relativedelta,
-                    'record': ticket,
+                    "datetime": datetime,
+                    "timedelta": timedelta,
+                    "relativedelta": relativedelta,
+                    "record": ticket,
                 }
 
                 deadline = eval(
-                    self.sla_deadline_formula,
-                    {"__builtins__": {}},
-                    safe_dict
+                    self.sla_deadline_formula, {"__builtins__": {}}, safe_dict
                 )
 
                 ticket.sla_deadline = deadline
@@ -60,5 +61,7 @@ class HelpdeskSLAFormula(models.Model):
             except Exception as e:
                 _logger.error(
                     "Erro ao calcular deadline SLA %s para ticket %s: %s",
-                    self.name, ticket.id, str(e)
+                    self.name,
+                    ticket.id,
+                    str(e),
                 )
