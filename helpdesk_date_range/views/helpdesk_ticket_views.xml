@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_helpdesk_ticket_form_inherit_date_range" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.inherit.date.range</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
+        <field name="arch" type="xml">
+            <field name="create_date" position="after">
+                <field name="date_range_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_helpdesk_ticket_search_inherit_date_range" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search.inherit.date.range</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.helpdesk_ticket_view_search" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="date_range_id" />
+            </field>
+            <filter name="group_partner" position="after">
+                <filter
+                    string="Reference Period"
+                    name="date_range_id"
+                    context="{'group_by': 'date_range_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
