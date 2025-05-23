@@ -28,6 +28,13 @@ class SaleOrder(models.Model):
         string="Related Blanket Order",
         states={"draft": [("readonly", False)]},
         copy=False,
+        related="",
+    )
+    blanket_order_referenced_id = fields.Many2one(
+        comodel_name="sale.blanket.order",
+        string="Related Blanket Order",
+        states={"draft": [("readonly", False)]},
+        copy=False,
     )
 
     def action_confirm(self):
@@ -64,41 +71,46 @@ class SaleOrder(models.Model):
             if line.product_uom_qty > available:
                 raise exceptions.ValidationError(
                     _(
-                        "Requested quantity %s exceeds available balance %s for product %s"
+                        "Requested quantity %(requested_qty)s exceeds available balance "
+                        "%(available_qty)s for product %(product)s"
                     )
-                    % (line.product_uom_qty, available, line.product_id.name)
+                    % {
+                        "requested_qty": line.product_uom_qty,
+                        "available_qty": available,
+                        "product": line.product_id.name,
+                    }
                 )
 
     def _create_sale_from_reference(self):
-        sale_order = self.blanket_order_id.create_sale_order()
-        sale_order_id = self.env["sale.order"].browse(
-            sale_order.get("domain", [])[0][2][0]
-        )
+        return self.blanket_order_id.create_sale_order_from_wizard(self.order_line)
+        # sale_order_id = self.env["sale.order"].browse(
+        #     sale_order.get("domain", [])[0][2][0]
+        # )
 
-        # Update quantities based on reference
-        for line in sale_order_id.order_line:
-            ref_line = self.order_line.filtered(
-                lambda line_item: line_item.blanket_order_line_id
-                == line.blanket_order_line_id
-            )
-            if ref_line:
-                line.product_uom_qty = ref_line.product_uom_qty
+        # # Update quantities based on reference
+        # for line in sale_order_id.order_line:
+        #     ref_line = self.order_line.filtered(
+        #         lambda line_item: line_item.blanket_order_line_id
+        #         == line.blanket_order_line_id
+        #     )
+        #     if ref_line:
+        #         line.product_uom_qty = ref_line.product_uom_qty
 
-        return {
-            "type": "ir.actions.act_window",
-            "name": "Sales Order",
-            "res_model": "sale.order",
-            "view_mode": "form",
-            "res_id": sale_order_id.id,
-            "target": "current",
-        }
+        # return {
+        #     "type": "ir.actions.act_window",
+        #     "name": "Sales Order",
+        #     "res_model": "sale.order",
+        #     "view_mode": "form",
+        #     "res_id": sale_order_id.id,
+        #     "target": "current",
+        # }
 
     def _confirm_blanket_order_increment(self):
         self.ensure_one()
-        blanket_order = self.blanket_order_id
-        blanket_order.state = "draft"
+        # self.blanket_order_id
+        # blanket_order.state = "draft"
         self._update_bo_quantities()
-        blanket_order.action_confirm()
+        # blanket_order.action_confirm()
         return self._get_bo_action()
 
     def _update_bo_quantities(self):
@@ -157,61 +169,3 @@ class SaleOrder(models.Model):
 #         copy=False,
 #         help="For Quotation, this field references to its Sales Order",
 #     )
-
-
-class SaleOrderLine(models.Model):
-    _inherit = "sale.order.line"
-
-    original_bo_qty = fields.Float(
-        string="B.O. Original Qty",
-        readonly=True,
-    )
-
-    available_bo_qty = fields.Float(
-        string="B.O. Available Qty",
-        compute="_compute_bo_quantities",
-    )
-
-    blanket_order_line_id = fields.Many2one(
-        comodel_name="sale.blanket.order.line",
-        string="Blanket Order Line",
-        copy=False,
-    )
-
-    @api.depends("blanket_order_line_id", "product_uom_qty")
-    def _compute_bo_quantities(self):
-        for line in self:
-            if line.blanket_order_line_id:
-                line.original_bo_qty = line.blanket_order_line_id.original_uom_qty
-                line.available_bo_qty = line.blanket_order_line_id.remaining_qty
-            else:
-                line.original_bo_qty = 0.0
-                line.available_bo_qty = 0.0
-
-    @api.onchange("product_id", "order_id.blanket_order_id")
-    def _onchange_product_blanket_order(self):
-        if self.order_id.blanket_order_id and self.product_id:
-            bo_line = self.order_id.blanket_order_id.line_ids.filtered(
-                lambda line_item: line_item.product_id == self.product_id
-            )
-            if bo_line:
-                self.blanket_order_line_id = bo_line[0].id
-                self.product_uom = bo_line[0].product_uom.id
-                self.price_unit = bo_line[0].price_unit
-
-    @api.onchange("product_uom_qty", "blanket_order_line_id")
-    def _onchange_qty_blanket_order(self):
-        if self.order_id.blanket_order_type == "reference":
-            if (
-                self.blanket_order_line_id
-                and self.product_uom_qty > self.available_bo_qty
-            ):
-                return {
-                    "warning": {
-                        "title": _("Warning"),
-                        "message": _(
-                            "Requested quantity %s exceeds available balance %s"
-                        )
-                        % (self.product_uom_qty, self.available_bo_qty),
-                    }
-                }

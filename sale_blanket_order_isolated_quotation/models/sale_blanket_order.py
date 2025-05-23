@@ -25,16 +25,19 @@ class SaleBlanketOrder(models.Model):
             else:
                 order.state = "open"
 
-    def create_sale_order(self):
-        action_result = super().create_sale_order()
-
-        sale_order_ids = action_result.get("domain", [])[0][2]
-        if sale_order_ids:
-            sale_orders = self.env["sale.order"].browse(sale_order_ids)
-            for sale_order in sale_orders:
-                sale_order.action_confirm()
-
-        return action_result
+    def create_sale_order_from_wizard(self, sale_order_lines):
+        wizard = (
+            self.env["sale.blanket.order.wizard"]
+            .with_context(active_ids=self.line_ids.ids, active_id=self.id)
+            .create({})
+        )
+        for line in wizard.line_ids:
+            matched_line = sale_order_lines.filtered(
+                lambda sale_line: sale_line.blanket_order_line_id
+                == line.blanket_line_id
+            )
+            line.qty = matched_line.product_uom_qty
+        return wizard.create_sale_order()
 
     def action_create_increment_quotation(self):
         """Create a new quotation for incrementing the blanket order."""

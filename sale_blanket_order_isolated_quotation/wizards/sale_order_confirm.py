@@ -29,6 +29,7 @@ class SaleOrderConfirm(models.TransientModel):
         vals = self._prepare_bo_values()
         bo = self.env["sale.blanket.order"].create(vals)
         self.sale_id.blanket_order_id = bo.id
+        bo.action_confirm()
         return self._get_bo_action(bo)
 
     def _prepare_bo_values(self):
