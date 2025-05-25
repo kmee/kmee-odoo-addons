@@ -1,0 +1,332 @@
+# Copyright 2018 KMEE INFORMATICA LTDA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+
+from odoo import _, api, fields, models, tools
+from odoo.exceptions import AccessError, UserError
+
+AVAILABLE_RATING = [
+    ("0", "0"),
+    ("1", "1"),
+    ("2", "2"),
+    ("3", "3"),
+    ("4", "4"),
+    ("5", "5 "),
+]
+
+
+class Sac(models.Model):
+
+    _name = "sac"
+    _description = "Serviço de atendimento ao consumidor"
+    _inherit = ["mail.thread", "utm.mixin", "base.kanban.abstract"]
+    _rec_names_search = ["name", "customer_name"]
+
+    @api.depends("create_date")
+    def _compute_create_date(self):
+        for record in self:
+            record.create_date_date = record.create_date or False
+
+    def name_get(self):
+        result = []
+        for record in self:
+            name = record.name
+            if record.customer_name:
+                name = "%s - %s" % (name, record.customer_name)
+            result.append((record.id, name))
+        return result
+
+    @api.depends("price", "qty")
+    def _compute_price_total(self):
+        for record in self:
+            record.price_total = 0.0
+            if record.price and record.qty:
+                record.price_total = record.price * record.qty
+
+    display_name = fields.Char("Name", readonly=True, store=True)
+    active = fields.Boolean(
+        readonly=True,
+        default=True,
+    )
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        index="btree",
+        default=lambda self: self.env.user.company_id.id,
+    )
+    name = fields.Char(
+        string="Order Reference",
+        required=True,
+        copy=False,
+        readonly=True,
+        index="btree",
+        default=lambda self: _("New"),
+    )
+    create_date = fields.Datetime(
+        string="Creation Date",
+        readonly=True,
+        index="btree",
+        help="Date on which sac is created.",
+    )
+    create_date_date = fields.Date(
+        compute="_compute_create_date",
+    )
+    # create_date_hour = fields.Datetime(
+    #     string='Creation Date',
+    #     readonly=True,
+    #     index=True,
+    #     help="Date on which sac is created."
+    # )
+    customer_name = fields.Char(
+        required=True,
+        tracking=True,
+    )
+    cnpj_cpf = fields.Char(
+        string="CNPJ/CPF",
+        tracking=True,
+    )
+    email_from = fields.Char(
+        string="Email",
+        tracking=True,
+    )
+    email_cc = fields.Char(
+        string="Email CC",
+        tracking=True,
+    )
+    phone = fields.Char(
+        tracking=True,
+    )
+    phone2 = fields.Char(
+        string="Phone 2",
+        tracking=True,
+    )
+    zip_code = fields.Char(
+        string="Zip",
+    )
+    street = fields.Char(
+        tracking=True,
+    )
+    number = fields.Char(
+        string="Nº",
+        tracking=True,
+    )
+    district = fields.Char(
+        string="Bairro",
+        tracking=True,
+    )
+    street2 = fields.Char(
+        string="Complemento",
+    )
+    # country_id = fields.Many2one(
+    #     string='Pais',
+    #     comodel_name='res.country',
+    #     default=lambda self: self.env.ref('base.br'),
+    # )
+    state_id = fields.Many2one(
+        string="Estado",
+        comodel_name="res.country.state",
+        domain=lambda self: [("country_id", "=", self.env.ref("base.br").id)],
+    )
+    l10n_br_city_id = fields.Many2one(
+        comodel_name="res.city",
+        string="Municipio",
+        domain="[('state_id','=',state_id)]",
+    )
+    product_id = fields.Many2one(
+        string="Produto",
+        comodel_name="product.product",
+        tracking=True,
+        domain="[('sale_ok', '=', True),('sac_ok', '=', True)]",
+    )
+    qty = fields.Integer(
+        string="Quantidade",
+        tracking=True,
+        default=1,
+    )
+    price = fields.Float(
+        string="Preço",
+        related="product_id.list_price",
+        readonly=True,
+    )
+    price_total = fields.Float(
+        compute="_compute_price_total",
+    )
+    reason_id = fields.Many2one(
+        comodel_name="sac.reason",
+        string="Motivo",
+        tracking=True,
+    )
+    type_id = fields.Many2many(
+        comodel_name="sac.type",
+        string="Tipo de reclamação",
+        tracking=True,
+    )
+    tracking_code = fields.Char(
+        tracking=True,
+    )
+    send_date = fields.Datetime(
+        index="btree",
+        tracking=True,
+    )
+    end_date = fields.Datetime(
+        readonly=True,
+        index="btree",
+        tracking=True,
+    )
+    lot = fields.Char(
+        string="Lote",
+        tracking=True,
+    )
+    due_date = fields.Date(string="Data de validade")
+    rating = fields.Selection(
+        selection=AVAILABLE_RATING,
+        string="Feedback",
+        index="btree",
+        default=AVAILABLE_RATING[0][0],
+        tracking=True,
+        ondelete={
+            "0": "set default",
+            "1": "set default",
+            "2": "set default",
+            "3": "set default",
+            "4": "set default",
+            "5": "set default",
+        },
+    )
+    message = fields.Text(
+        string="Mensagem",
+    )
+    kanban_color = fields.Selection(
+        related="reason_id.kanban_color",
+        readonly=True,
+        store=True,
+        index="btree",
+    )
+    user_id = fields.Many2one(
+        comodel_name="res.users",
+        string="Responsável",
+        index="btree",
+        tracking=True,
+        default=lambda self: self.env.user,
+    )
+    is_printed = fields.Boolean(
+        string="Impresso",
+    )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if "company_id" in vals:
+                vals["name"] = self.env["ir.sequence"].with_company(
+                    vals["company_id"]
+                ).next_by_code("sac") or _("New")
+            else:
+                vals["name"] = self.env["ir.sequence"].next_by_code("sac") or _("New")
+        result = super(Sac, self).create(vals_list)
+        return result
+
+    @api.depends("create_date")
+    def _track_template(self, tracking):
+        res = super(Sac, self)._track_template(tracking)
+        test_record = self[0]
+        changes, tracking_value_ids = tracking[test_record.id]
+        if "stage_id" in changes and test_record.stage_id.mail_template_id:
+            res["stage_id"] = (
+                test_record.stage_id.mail_template_id,
+                {"composition_mode": "mass_mail"},
+            )
+        return res
+
+    @api.depends("name", "customer_name")
+    def email_split(self, msg):
+        return tools.email_split(
+            (msg.get("to") or "")
+            + ","
+            + (msg.get("cc") or "")
+            + ","
+            + (msg.get("from") or "")
+        )
+
+    # @api.model
+    # def message_new(self, msg_dict, custom_values=None):
+    #     """ Overrides mail_thread message_new that is called by the
+    #     mailgateway
+    #         through message_process.
+    #         This override updates the document according to the email.
+    #     """
+    #     # remove default author when going through the mail gateway.
+    #     # Indeed we do not want to explicitly set user_id to False;
+    #     # however we do not want the gateway user to be responsible
+    #     # if no other responsible is
+    #     # found.
+    #     self = self.with_context(default_user_id=False)
+
+    #     subject = msg_dict.get('subject') or _("Sem assunto")
+
+    #     desc = 'Assunto do email: \n\n' +\
+    #            subject + \
+    #            '\n\n-------------\nCorpo do email:\n\n' +\
+    #            html2plaintext(
+    #                msg_dict.get('body')
+    #            ) if msg_dict.get('body') else ''
+
+    #     regex = '(?:"?([^"]*)"?\s)?(?:<?(.+@[^>]+)>?)'
+
+    #     match = re.search(regex, msg_dict.get('from', ''))
+
+    #     if match:
+    #         customer_name = match.group(1)
+    #         email_from = match.group(2)
+    #     else:
+    #         customer_name = subject
+    #         email_from = msg_dict.get('from')
+
+    #     if custom_values is None:
+    #         custom_values = {}
+    #     defaults = {
+    #         'customer_name':  customer_name,
+    #         'email_from': email_from,
+    #         'email_cc': msg_dict.get('cc'),
+    #         'message': desc,
+    #         # 'partner_id': msg_dict.get('author_id', False),
+    #     }
+    #     # if msg_dict.get('author_id'):
+    #     #     defaults.update(self._onchange_partner_id_values(
+    #     #     msg_dict.get('author_id')))
+    #     # if msg_dict.get('priority') in dict(crm_stage.AVAILABLE_PRIORITIES):
+    #     #     defaults['priority'] = msg_dict.get('priority')
+    #     defaults.update(custom_values)
+    #     res_id = super(Sac, self).message_new(msg_dict, custom_values=defaults)
+    #     sac = self.browse(res_id)
+    #     email_list = sac.email_split(msg_dict)
+    #     partner_ids = list([_f for _f in sac._find_partner_from_emails(
+    #         email_list, force_create=True) if _f])
+    #     sac.message_subscribe(partner_ids)
+    #     return res_id
+
+    @api.depends("zip_code")
+    def onchange_zip(self):
+        if self.zip_code:
+            zip_code = self.env["l10n_br.zip"].zip_search_multi(zip_code=self.zip_code)
+            self.street = zip_code.street
+            self.district = zip_code.district
+            self.state_id = zip_code.state_id
+            self.l10n_br_city_id = zip_code.l10n_br_city_id
+
+    def message_get_suggested_recipients(self):
+        recipients = super(Sac, self).message_get_suggested_recipients()
+        try:
+            for record in self:
+                if record.email_from:
+                    record._message_add_suggested_recipient(
+                        recipients, email=record.email_from, reason=_("Customer Email")
+                    )
+        except AccessError as err:
+            raise UserError(_("You do not have access to this email.")) from err
+        return recipients
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_not_done(self):
+        """Prevent deletion of SAC records that are in done state"""
+        if any(record.stage_id.done for record in self):
+            raise UserError(_("You cannot delete a SAC record that is in done state."))
