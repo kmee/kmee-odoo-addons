@@ -12,7 +12,6 @@ class SaleBlanketOrder(models.Model):
 
     isolated_quotation_id = fields.Many2one(
         comodel_name="sale.order",
-        inverse_name="isolated_blanket_order_id",
         readonly=True,
         copy=False,
         string="Quotation",
@@ -26,13 +25,45 @@ class SaleBlanketOrder(models.Model):
             else:
                 order.state = "open"
 
-    def create_sale_order(self):
-        action_result = super().create_sale_order()
+    def create_sale_order_from_wizard(self, sale_order_lines):
+        wizard = (
+            self.env["sale.blanket.order.wizard"]
+            .with_context(active_ids=self.line_ids.ids, active_id=self.id)
+            .create({})
+        )
+        for line in wizard.line_ids:
+            matched_line = sale_order_lines.filtered(
+                lambda sale_line: sale_line.blanket_order_line_id
+                == line.blanket_line_id
+            )
+            line.qty = matched_line.product_uom_qty
+        return wizard.create_sale_order()
 
-        sale_order_ids = action_result.get("domain", [])[0][2]
-        if sale_order_ids:
-            sale_orders = self.env["sale.order"].browse(sale_order_ids)
-            for sale_order in sale_orders:
-                sale_order.action_confirm()
+    def action_create_increment_quotation(self):
+        """Create a new quotation for incrementing the blanket order."""
+        self.ensure_one()
 
-        return action_result
+        # Create sale order with lines from blanket order
+        vals = {
+            "partner_id": self.partner_id.id,
+            "is_blanket_order_increment": True,
+            "blanket_order_id": self.id,
+            "blanket_order_type": "amendment",  # Forçar tipo amendment
+        }
+
+        sale_order = self.env["sale.order"].create(vals)
+
+        # Create sale order lines
+        for line in self.line_ids:
+            vals = sale_order._prepare_blanket_order_line_values(line)
+            vals["order_id"] = sale_order.id
+            self.env["sale.order.line"].create(vals)
+
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Increment Quotation",
+            "res_model": "sale.order",
+            "view_mode": "form",
+            "res_id": sale_order.id,
+            "target": "current",
+        }

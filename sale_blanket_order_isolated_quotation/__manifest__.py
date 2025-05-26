@@ -13,8 +13,8 @@
         "sale_isolated_quotation",
     ],
     "data": [
-        # "security/ir.model.access.csv",
-        # "wizards/sale_blanket_order_wizard_confirm.xml",
+        "security/ir.model.access.csv",
+        "wizards/sale_order_confirm.xml",
         "views/sale_blanket_order.xml",
         "views/sale_order.xml",
     ],

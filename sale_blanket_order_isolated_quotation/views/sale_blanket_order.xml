@@ -7,6 +7,15 @@
         <field name="model">sale.blanket.order</field>
         <field name="inherit_id" ref="sale_blanket_order.view_blanket_order_form" />
         <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="action_create_increment_quotation"
+                    string="Increment"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': [('state', 'not in', ['open'])]}"
+                />
+            </header>
             <field name="validity_date" position="after">
                 <field name="isolated_quotation_id" />
             </field>
