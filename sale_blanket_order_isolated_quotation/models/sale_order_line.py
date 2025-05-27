@@ -26,8 +26,6 @@ class SaleOrderLine(models.Model):
 
     @api.onchange("product_id", "order_partner_id")
     def onchange_product_id(self):
-        # if self.product_id and self.order_id.blanket_order_type != "none":
-        #     return self.get_assigned_bo_line()
         return
 
     @api.onchange("product_uom", "product_uom_qty")

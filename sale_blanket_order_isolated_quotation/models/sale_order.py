@@ -82,35 +82,26 @@ class SaleOrder(models.Model):
                 )
 
     def _create_sale_from_reference(self):
-        return self.blanket_order_id.create_sale_order_from_wizard(self.order_line)
-        # sale_order_id = self.env["sale.order"].browse(
-        #     sale_order.get("domain", [])[0][2][0]
-        # )
+        sale_order = self.blanket_order_id.create_sale_order_from_wizard(
+            self.order_line
+        )
+        sale_order_id = self.env["sale.order"].browse(
+            sale_order.get("domain", [])[0][2][0]
+        )
+        sale_order_id.write(self._prepare_order_from_quotation())
 
-        # # Update quantities based on reference
-        # for line in sale_order_id.order_line:
-        #     ref_line = self.order_line.filtered(
-        #         lambda line_item: line_item.blanket_order_line_id
-        #         == line.blanket_order_line_id
-        #     )
-        #     if ref_line:
-        #         line.product_uom_qty = ref_line.product_uom_qty
-
-        # return {
-        #     "type": "ir.actions.act_window",
-        #     "name": "Sales Order",
-        #     "res_model": "sale.order",
-        #     "view_mode": "form",
-        #     "res_id": sale_order_id.id,
-        #     "target": "current",
-        # }
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Sales Order",
+            "res_model": "sale.order",
+            "view_mode": "form",
+            "res_id": sale_order_id.id,
+            "target": "current",
+        }
 
     def _confirm_blanket_order_increment(self):
         self.ensure_one()
-        # self.blanket_order_id
-        # blanket_order.state = "draft"
         self._update_bo_quantities()
-        # blanket_order.action_confirm()
         return self._get_bo_action()
 
     def _update_bo_quantities(self):
@@ -159,13 +150,3 @@ class SaleOrder(models.Model):
                 vals = self._prepare_blanket_order_line_values(bo_line)
                 lines.append((0, 0, vals))
             self.order_line = lines
-
-
-# order_id = fields.Many2one(
-#         comodel_name="sale.order",
-#         string="Order",
-#         readonly=True,
-#         ondelete="restrict",
-#         copy=False,
-#         help="For Quotation, this field references to its Sales Order",
-#     )
