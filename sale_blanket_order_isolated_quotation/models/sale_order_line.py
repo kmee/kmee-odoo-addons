@@ -24,13 +24,13 @@ class SaleOrderLine(models.Model):
         copy=False,
     )
 
-    @api.onchange("product_id", "order_partner_id")
-    def onchange_product_id(self):
-        return
+    # @api.onchange("product_id", "order_partner_id")
+    # def onchange_product_id(self):
+    #     return
 
-    @api.onchange("product_uom", "product_uom_qty")
-    def product_uom_change(self):
-        return
+    # @api.onchange("product_uom", "product_uom_qty")
+    # def product_uom_change(self):
+    #     return
 
     @api.depends("blanket_order_line_id", "product_uom_qty")
     def _compute_bo_quantities(self):
