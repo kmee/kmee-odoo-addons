@@ -67,3 +67,30 @@ class SaleBlanketOrder(models.Model):
             "res_id": sale_order.id,
             "target": "current",
         }
+
+    def action_create_reference_quotation(self):
+        self.ensure_one()
+
+        # Create sale order with lines from blanket order
+        vals = {
+            "partner_id": self.partner_id.id,
+            "blanket_order_id": self.id,
+            "blanket_order_type": "reference",
+        }
+
+        sale_order = self.env["sale.order"].create(vals)
+
+        # Create sale order lines
+        for line in self.line_ids:
+            vals = sale_order._prepare_blanket_order_line_values(line)
+            vals["order_id"] = sale_order.id
+            self.env["sale.order.line"].create(vals)
+
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Reference Quotation",
+            "res_model": "sale.order",
+            "view_mode": "form",
+            "res_id": sale_order.id,
+            "target": "current",
+        }
