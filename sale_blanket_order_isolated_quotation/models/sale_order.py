@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
         [
             ("none", "Normal Order"),
             ("reference", "B.O. Reference"),
-            ("amendment", "B.O. Amendment"),
+            ("amendment", "B.O. Increment"),
         ],
         string="B.O. Operation Type",
         default="none",
