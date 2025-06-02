@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record id="action_sale_report_basic" model="ir.actions.report">
+        <field name="name">Relatório Básico</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sale_report_basic.sale_report_basic_template</field>
+        <field name="report_file">sale_report_basic.sale_report_basic_template</field>
+        <field name="print_report_name">'Sale Order - %s' % object.name</field>
+        <field name="binding_model_id" ref="sale.model_sale_order" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Template principal que chama o template herdado -->
+    <template id="sale_report_basic_template" name="Sale Report Basic Template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-call="sale_report_basic.sale_report_basic"
+                    t-lang="doc.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+
+
+    <template
+        id="sale_report_basic"
+        name="Sale Report Basic"
+        inherit_id="sale.report_saleorder_document"
+        primary="True"
+        priority="100"
+    >
+        <xpath expr="//th[@name='th_quantity']" position="attributes">
+            <attribute name="class">text-center</attribute>
+        </xpath>
+        <xpath expr="//td[@name='td_quantity']" position="attributes">
+            <attribute name="class">text-center</attribute>
+        </xpath>
+        <xpath expr="//th[@name='th_priceunit']" position="replace" />
+
+        <xpath expr="//td[@name='td_priceunit']" position="replace" />
+
+        <xpath expr="//th[@name='th_taxes']" position="replace" />
+
+        <xpath expr="//td[@name='td_taxes']" position="replace" />
+
+        <xpath expr="//th[@name='th_subtotal']" position="replace" />
+
+        <xpath expr="//td[@name='td_subtotal']" position="replace" />
+
+        <xpath expr="//td[@name='td_amount_untaxed_label']" position="replace" />
+        <xpath expr="//td[@name='td_amount_untaxed']" position="replace" />
+
+        <xpath expr="//td[@name='td_amount_total_label']" position="replace" />
+        <xpath expr="//td[@name='td_amount_total']" position="replace" />
+
+        <xpath expr="//t[@t-as='amount_by_group']" position="replace" />
+    </template>
+</odoo>
