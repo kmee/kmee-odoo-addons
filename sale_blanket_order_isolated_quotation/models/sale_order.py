@@ -12,7 +12,7 @@ class SaleOrder(models.Model):
         [
             ("none", "Normal Order"),
             ("reference", "B.O. Reference"),
-            ("amendment", "B.O. Amendment"),
+            ("amendment", "B.O. Increment"),
         ],
         string="B.O. Operation Type",
         default="none",
@@ -90,6 +90,7 @@ class SaleOrder(models.Model):
             sale_order.get("domain", [])[0][2][0]
         )
         sale_order_id.write(self._prepare_order_from_quotation())
+        sale_order_id.action_confirm()
 
         return {
             "type": "ir.actions.act_window",

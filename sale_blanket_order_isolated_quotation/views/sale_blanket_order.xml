@@ -10,9 +10,9 @@
             <button name="action_cancel" position="before">
                 <button
                     name="action_create_reference_quotation"
-                    string="Create Blanket Order"
+                    string="Create Sale Order"
                     type="object"
-                    class="oe_highlight"
+                    class="oe_highlight o_auto_width"
                     attrs="{'invisible': [('state', 'not in', ['open'])]}"
                 />
                 <button

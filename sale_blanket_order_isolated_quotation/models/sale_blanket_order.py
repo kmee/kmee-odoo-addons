@@ -71,20 +71,24 @@ class SaleBlanketOrder(models.Model):
     def action_create_reference_quotation(self):
         self.ensure_one()
 
-        # Create sale order with lines from blanket order
+        blanket_order_fields = set(self.env["sale.blanket.order"].fields_get().keys())
+        sale_order_fields = set(self.env["sale.order"].fields_get().keys())
+        common_fields = blanket_order_fields.intersection(sale_order_fields)
         vals = {
-            "partner_id": self.partner_id.id,
             "blanket_order_id": self.id,
             "blanket_order_type": "reference",
         }
-
+        skip_fields = self._get_skip_fields()
+        for field in common_fields:
+            if field not in skip_fields:
+                value = getattr(self, field)
+                vals[field] = value.id if hasattr(value, "id") else value
         sale_order = self.env["sale.order"].create(vals)
 
-        # Create sale order lines
         for line in self.line_ids:
-            vals = sale_order._prepare_blanket_order_line_values(line)
-            vals["order_id"] = sale_order.id
-            self.env["sale.order.line"].create(vals)
+            line_vals = sale_order._prepare_blanket_order_line_values(line)
+            line_vals["order_id"] = sale_order.id
+            self.env["sale.order.line"].create(line_vals)
 
         return {
             "type": "ir.actions.act_window",
@@ -94,3 +98,20 @@ class SaleBlanketOrder(models.Model):
             "res_id": sale_order.id,
             "target": "current",
         }
+
+    @classmethod
+    def _get_skip_fields(self):
+        return [
+            "message_follower_ids",
+            "message_ids",
+            "__last_update",
+            "message_partner_ids",
+            "date_order",
+            "expected_date",
+            "name",
+            "state",
+            "display_type",
+            "display_name",
+            "access_url",
+            "id",
+        ]

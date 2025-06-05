@@ -86,19 +86,7 @@ class SaleOrderConfirm(models.TransientModel):
         return line_vals
 
     def _get_skip_fields(self):
-        return {
-            "message_follower_ids",
-            "message_ids",
-            "__last_update",
-            "message_partner_ids",
-            "date_order",
-            "expected_date",
-            "name",
-            "state",
-            "display_type",
-            "display_name",
-            "access_url",
-        }
+        return self.env["sale.blanket.order"]._get_skip_fields()
 
     def _get_bo_action(self, bo):
         return {
