@@ -100,7 +100,7 @@ class SaleBlanketOrder(models.Model):
         }
 
     @classmethod
-    def _get_skip_fields(self):
+    def _get_skip_fields(cls):
         return [
             "message_follower_ids",
             "message_ids",
