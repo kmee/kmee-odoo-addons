@@ -29,7 +29,7 @@ class SaleOrder(models.Model):
         states={"draft": [("readonly", False)]},
         copy=False,
         related="",
-        compute="",
+        compute="",  # pylint: disable=C8108
     )
     blanket_order_referenced_id = fields.Many2one(
         comodel_name="sale.blanket.order",
@@ -46,6 +46,7 @@ class SaleOrder(models.Model):
         elif self.blanket_order_type == "amendment":
             return self._confirm_blanket_order_increment()
         elif not self.order_sequence:  # É um orçamento
+            self.action_done()
             return {
                 "name": _("Confirm Sale Order"),
                 "type": "ir.actions.act_window",
@@ -103,6 +104,7 @@ class SaleOrder(models.Model):
 
     def _confirm_blanket_order_increment(self):
         self.ensure_one()
+        self._update_blanket_order_lines()
         self._update_bo_quantities()
         return self._get_bo_action()
 
@@ -152,3 +154,9 @@ class SaleOrder(models.Model):
                 vals = self._prepare_blanket_order_line_values(bo_line)
                 lines.append((0, 0, vals))
             self.order_line = lines
+
+    def _update_blanket_order_lines(self):
+        if self.blanket_order_id:
+            for line in self.order_line:
+                if not line.blanket_order_line_id:
+                    line.create_blanket_order_line()

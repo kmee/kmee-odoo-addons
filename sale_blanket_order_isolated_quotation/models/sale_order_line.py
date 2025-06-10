@@ -72,3 +72,25 @@ class SaleOrderLine(models.Model):
                         },
                     }
                 }
+
+    def create_blanket_order_line(self):
+        bo_line = self.env["sale.blanket.order.line"].create(
+            self._prepare_sale_order_line_values()
+        )
+        blanket_order_id = self.order_id.blanket_order_id.id
+        self.env["sale.blanket.order"].browse(blanket_order_id).write(
+            {
+                "line_ids": [(4, bo_line.id)],
+            }
+        )
+
+    def _prepare_sale_order_line_values(self):
+        """Prepare values for creating blanket order line from sale order line."""
+        return {
+            "product_id": self.product_id.id,
+            "name": self.name,
+            "product_uom": self.product_uom.id,
+            "price_unit": self.price_unit,
+            "original_uom_qty": self.product_uom_qty,
+            "order_id": self.order_id.blanket_order_id.id,
+        }
