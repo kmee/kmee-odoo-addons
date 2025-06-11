@@ -18,7 +18,7 @@ class CrmLead(models.Model):
         for lead in self:
             if not lead.lost_reason_id:
                 raise UserError(
-                    _("_(Please, select a lost reason before mark lead as lost.)")
+                    _("Please, select a lost reason before mark lead as lost.")
                 )
             lead._apply_lost_reason_transition()
         return res

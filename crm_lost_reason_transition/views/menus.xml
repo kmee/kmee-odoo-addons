@@ -14,8 +14,8 @@
     <menuitem
         id="menu_crm_lost_reason_transition"
         name="Lost Lead Transitions"
-        parent="crm.crm_menu_config"
-        sequence="60"
+        parent="crm.menu_crm_config_lead"
+        sequence="7"
         action="action_crm_lost_reason_transition"
     />
 
