@@ -6,6 +6,11 @@
         <field name="arch" type="xml">
             <form string="Transition by Reason of Loss">
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
                     <group>
                         <field name="lost_reason_id" />
                         <field name="source_stage_id" />
@@ -22,6 +27,7 @@
         <field name="model">crm.lost.reason.transition</field>
         <field name="arch" type="xml">
             <tree string="Loss Reason Transitions">
+                <field name="name" readonly="1" />
                 <field name="lost_reason_id" />
                 <field name="source_stage_id" />
                 <field name="team_id" />
