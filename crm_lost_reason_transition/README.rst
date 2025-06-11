@@ -22,12 +22,45 @@ CRM Lost Reason Transition
 
 |badge1| |badge2| |badge3|
 
+This Odoo module enhances the CRM app by introducing configurable
+transitions for lost leads. It allows sales managers to define
+redirection rules based on the loss reason and the current stage of the
+lead.
 
+When a lead is marked as lost, the system automatically:
+
+- Redirects it to a specific sales team
+- Moves it to a specific recovery stage (pipeline column)
+
+This ensures that each loss reason is handled by the appropriate
+recovery workflow.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+To configure this module, you need to:
+
+1. Go to **CRM > Configuration > Lost Lead Transitions**
+2. Click **Create** to add a new transition rule
+3. Fill in the following fields:
+
+   - **Loss Reason**: The reason selected when the lead is marked as
+     lost
+   - **Source Stage**: The current stage of the lead
+   - **Target Team**: The sales team that will handle the recovery
+   - **Target Stage**: The stage where the lead should be placed in the
+     recovery team
+
+4. Save the rule
+
+Once configured, the system will automatically redirect lost leads to
+the defined team and stage, based on the selected loss reason and
+current pipeline stage.
 
 Bug Tracker
 ===========
@@ -55,7 +88,9 @@ Contributors
 Other credits
 -------------
 
+The development of this module has been financially supported by:
 
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
