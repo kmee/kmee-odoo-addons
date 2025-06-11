@@ -6,6 +6,10 @@
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "summary": """
+        Automatically route lost leads to specific teams and stages based on
+        the loss reason and current stage.
+    """,
     "depends": [
         "crm",
     ],
