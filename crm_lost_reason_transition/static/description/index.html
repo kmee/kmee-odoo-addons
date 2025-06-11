@@ -370,21 +370,54 @@ ul.auto-toc {
 !! source digest: sha256:07ef8da4fb821dbc615c50dd750fd56904fe6bef31ce7f04afd0eae39e269134
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/crm_lost_reason_transition"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
+<p>This Odoo module enhances the CRM app by introducing configurable
+transitions for lost leads. It allows sales managers to define
+redirection rules based on the loss reason and the current stage of the
+lead.</p>
+<p>When a lead is marked as lost, the system automatically:</p>
+<ul class="simple">
+<li>Redirects it to a specific sales team</li>
+<li>Moves it to a specific recovery stage (pipeline column)</li>
+</ul>
+<p>This ensures that each loss reason is handled by the appropriate
+recovery workflow.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-1">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-2">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-3">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-4">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="toc-entry-5">Other credits</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-6">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-2">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-3">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-4">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-5">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="toc-entry-6">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-7">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
+<p>To configure this module, you need to:</p>
+<ol class="arabic simple">
+<li>Go to <strong>CRM &gt; Configuration &gt; Lost Lead Transitions</strong></li>
+<li>Click <strong>Create</strong> to add a new transition rule</li>
+<li>Fill in the following fields:<ul>
+<li><strong>Loss Reason</strong>: The reason selected when the lead is marked as
+lost</li>
+<li><strong>Source Stage</strong>: The current stage of the lead</li>
+<li><strong>Target Team</strong>: The sales team that will handle the recovery</li>
+<li><strong>Target Stage</strong>: The stage where the lead should be placed in the
+recovery team</li>
+</ul>
+</li>
+<li>Save the rule</li>
+</ol>
+<p>Once configured, the system will automatically redirect lost leads to
+the defined team and stage, based on the selected loss reason and
+current pipeline stage.</p>
+</div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -392,21 +425,25 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-2">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-3">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-3">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-4">Authors</a></h2>
 <ul class="simple">
 <li>KMEE</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-4">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-5">Contributors</a></h2>
 </div>
 <div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#toc-entry-5">Other credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-6">Other credits</a></h2>
+<p>The development of this module has been financially supported by:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://kmee.com.br/">KMEE</a></li>
+</ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-6">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-7">Maintainers</a></h2>
 <p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/crm_lost_reason_transition">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
 </div>
