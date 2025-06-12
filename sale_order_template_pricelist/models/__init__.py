@@ -1,2 +1,2 @@
 from . import sale_order_template
-from . import saler_order
+from . import sale_order
