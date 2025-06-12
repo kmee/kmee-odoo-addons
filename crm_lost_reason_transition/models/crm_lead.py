@@ -30,7 +30,6 @@ class CrmLead(models.Model):
             transition = self.env["crm.lost.reason.transition"].search(
                 [
                     ("lost_reason_id", "=", lead.lost_reason_id.id),
-                    ("source_stage_id", "=", lead.stage_id.id),
                 ],
                 limit=1,
             )

@@ -13,7 +13,6 @@
                     </div>
                     <group>
                         <field name="lost_reason_id" />
-                        <field name="source_stage_id" />
                         <field name="team_id" />
                         <field name="target_stage_id" />
                     </group>
@@ -29,7 +28,6 @@
             <tree string="Loss Reason Transitions">
                 <field name="name" readonly="1" />
                 <field name="lost_reason_id" />
-                <field name="source_stage_id" />
                 <field name="team_id" />
                 <field name="target_stage_id" />
             </tree>
