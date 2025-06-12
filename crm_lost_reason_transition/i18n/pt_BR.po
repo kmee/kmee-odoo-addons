@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-11 20:42+0000\n"
-"PO-Revision-Date: 2025-06-11 20:42+0000\n"
+"POT-Creation-Date: 2025-06-12 21:40+0000\n"
+"PO-Revision-Date: 2025-06-12 21:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,8 +20,9 @@ msgstr ""
 msgid ""
 "Configure where lost leads should be redirected, based on their reason and "
 "current stage."
-msgstr "Configure para onde os leads perdidos devem ser redirecionados, com "
-"base no motivo e estágio atual."
+msgstr ""
+"Configure para onde os leads perdidos devem ser redirecionados, com base no "
+"motivo e estágio atual."
 
 #. module: crm_lost_reason_transition
 #: model:ir.model.fields,field_description:crm_lost_reason_transition.field_crm_lost_reason_transition__create_uid
@@ -85,9 +86,12 @@ msgid "Name"
 msgstr "Nome"
 
 #. module: crm_lost_reason_transition
-#: model:ir.model.fields,field_description:crm_lost_reason_transition.field_crm_lost_reason_transition__source_stage_id
-msgid "Source Stage"
-msgstr "Estado de Origem"
+#. odoo-python
+#: code:addons/crm_lost_reason_transition/models/crm_lead.py:0
+#, python-format
+msgid "Please, select a lost reason before mark lead as lost."
+msgstr ""
+"Por favor, selecione um motivo de perda antes de marcar o lead como perdido."
 
 #. module: crm_lost_reason_transition
 #: model:ir.model.fields,field_description:crm_lost_reason_transition.field_crm_lost_reason_transition__target_stage_id
@@ -100,6 +104,15 @@ msgid "Target Team"
 msgstr "Time de Destino"
 
 #. module: crm_lost_reason_transition
+#: model:ir.model.constraint,message:crm_lost_reason_transition.constraint_crm_lost_reason_transition_unique_reason_stage
+msgid ""
+"There is already a transition configured for this loss reason and target "
+"stage."
+msgstr ""
+"Já existe uma transição configurada para esse motivo de perda e estágio de "
+"destino."
+
+#. module: crm_lost_reason_transition
 #: model_terms:ir.ui.view,arch_db:crm_lost_reason_transition.view_crm_lost_reason_transition_form
 msgid "Transition by Reason of Loss"
 msgstr "Transição por Motivo de Perda"
@@ -108,19 +121,3 @@ msgstr "Transição por Motivo de Perda"
 #: model:ir.model,name:crm_lost_reason_transition.model_crm_lost_reason_transition
 msgid "Transitioning Lost Leads by Reason and Stage"
 msgstr "Transição de leads perdidos por motivo e estágio"
-
-#. module: crm_lost_reason_transition
-#. odoo-python
-#: code:addons/crm_lost_reason_transition/models/crm_lead.py:0
-#, python-format
-msgid "Please, select a lost reason before mark lead as lost."
-msgstr "Por favor, selecione um motivo de perda antes de marcar o lead como "
-"perdido."
-
-#. module: crm_lost_reason_transition
-#: model:ir.model.constraint,message:crm_lost_reason_transition.constraint_crm_lost_reason_transition_unique_reason_stage
-msgid ""
-"There is already a transition configured for this loss reason and source "
-"stage."
-msgstr "Já existe uma transição configurada para esse motivo de perda e estágio "
-"de origem."
