@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_partner_form_custom" model="ir.ui.view">
+        <field name="name">res.partner.form.customer.rating</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="customer_rating_id" options="{'no_open': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_custom" model="ir.ui.view">
+        <field name="name">res.partner.tree.customer.rating</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="customer_rating_id" options="{'no_open': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="view_partner_search_customer_rating" model="ir.ui.view">
+        <field name="name">res.partner.search.customer.rating</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='customer']" position="after">
+                <filter string="Satisfação" name="customer_rating" context="{}" domain="[]">
+                    <field name="customer_rating_id"/>
+                </filter>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>
