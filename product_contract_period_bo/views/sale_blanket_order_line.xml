@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="sale_blanket_order_line_form_view">
+        <field name="model">sale.blanket.order</field>
+        <field name="inherit_id" ref="sale_blanket_order.view_blanket_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='original_uom_qty']" position="after">
+                <field name="period_qty" string="Qtd/Per." />
+                <field name="period_count" string="N° Per." />
+                <field name="recurring_rule_type" string="Tipo" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record model="ir.ui.view" id="sale_blanket_order_line_search_view">
+        <field name="model">sale.blanket.order.line</field>
+        <field name="inherit_id" ref="TODO othermodule.search_view"/>
+        <field name="arch" type="xml">
+        </field>
+    </record> -->
+
+    <!-- <record model="ir.ui.view" id="sale_blanket_order_line_tree_view">
+        <field name="model">sale.blanket.order.line</field>
+        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
+        <field name="arch" type="xml">
+        </field>
+    </record> -->
+
+</odoo>
