@@ -36,8 +36,11 @@ class SaleBlanketOrder(models.Model):
                 lambda sale_line: sale_line.blanket_order_line_id
                 == line.blanket_line_id
             )
-            line.qty = matched_line.product_uom_qty
+            self._prepare_lines_to_sale_order_line(line, matched_line)
         return wizard.create_sale_order()
+
+    def _prepare_lines_to_sale_order_line(self, line, matched_line):
+        line.qty = matched_line.product_uom_qty
 
     def action_create_increment_quotation(self):
         """Create a new quotation for incrementing the blanket order."""

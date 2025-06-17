@@ -42,7 +42,9 @@ class SaleOrder(models.Model):
         """Override to handle blanket order operations"""
         self.ensure_one()
         if self.blanket_order_type == "reference":
-            return self._confirm_blanket_order_reference()
+            return self.with_context(
+                so_reference_id=self.id
+            )._confirm_blanket_order_reference()
         elif self.blanket_order_type == "amendment":
             return self._confirm_blanket_order_increment()
         elif not self.order_sequence:  # É um orçamento
