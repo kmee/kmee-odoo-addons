@@ -38,5 +38,6 @@ class CrmLead(models.Model):
                     {
                         "team_id": transition.team_id.id,
                         "stage_id": transition.target_stage_id.id,
+                        "active": True,
                     }
                 )
