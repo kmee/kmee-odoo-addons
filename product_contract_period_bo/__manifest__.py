@@ -17,7 +17,6 @@
     "data": [
         "views/uom_uom.xml",
         "views/sale_order.xml",
-        "views/sale_order_line.xml",
         "views/sale_blanket_order_line.xml",
     ],
     "demo": [],

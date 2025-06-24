@@ -11,5 +11,5 @@ class UomUom(models.Model):
     use_period_quantity = fields.Boolean(
         "Use Period-Based Calculation",
         default=False,
-        help="Changes the field visibility depending on whether the period-based calculation is enabled.",
+        help="Adjusts field visibility based on period calculation.",
     )

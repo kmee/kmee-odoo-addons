@@ -12,6 +12,7 @@
         <field name="arch" type="xml">
             <field name="period_qty" position="after">
                 <field name="use_period_quantity" invisible="1" />
+                <field name="blanket_order_line_id" string="ID BL" />
             </field>
             <field name="period_qty" position="attributes">
                 <attribute
@@ -23,15 +24,10 @@
                     name="attrs"
                 >{'invisible':[('use_period_quantity','=', False)]}</attribute>
             </field>
-            <field name="recurring_rule_type" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'readonly':[('use_period_quantity','=', True)]}</attribute>
-            </field>
         </field>
     </record>
 
-    <record model="ir.ui.view" id="sale_order_form_view">
+    <record model="ir.ui.view" id="sale_order_form_view_product_uom_qty">
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
@@ -45,22 +41,11 @@
                 expr="//field[@name='order_line']/form//field[@name='product_uom_qty']"
                 position="attributes"
             >
-                <attribute name="readonly">1</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly': [('use_period_quantity', '=', True)], 'required': [('use_period_quantity', '=', False)]}</attribute>
             </xpath>
         </field>
     </record>
-    <!-- <record model="ir.ui.view" id="sale_order_search_view">
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="TODO othermodule.search_view"/>
-        <field name="arch" type="xml">
-        </field>
-    </record> -->
-
-    <!-- <record model="ir.ui.view" id="sale_order_tree_view">
-        <field name="model">sale.order</field>
-        <field name="inherit_id" ref="TODO othermodule.tree_view"/>
-        <field name="arch" type="xml">
-        </field>
-    </record> -->
 
 </odoo>
