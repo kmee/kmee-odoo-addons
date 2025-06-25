@@ -3,6 +3,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
+import typing
+import xml.etree.ElementTree as ET
+from dataclasses import is_dataclass
 from datetime import datetime
 
 from xsdata.formats.dataclass.parsers import XmlParser
@@ -214,15 +217,21 @@ class L10nBrDiDeclaracao(models.Model):
 
     informacao_complementar = fields.Text()
 
-    def importa_declaracao(self, arquivo=False):
+    def importa_declaracao(self, arquivo=False, detect_unmapped=False):
         if self.arquivo_declaracao:
             arquivo = self.arquivo_declaracao
 
         file_content = base64.b64decode(arquivo)
+        allowed_tags = collect_allowed_tags(ListaDeclaracoes)
+        xml_clean, unmapped = clean_unmapped_tags(
+            file_content.decode("utf-8"), allowed_tags
+        )
+
         parser = XmlParser()
         declaration_list = parser.from_string(
-            file_content.decode("utf-8"), ListaDeclaracoes
+            xml_clean.decode("utf-8"), ListaDeclaracoes
         )
+
         vals = self._importa_declaracao(declaration_list)
 
         if self:
@@ -232,12 +241,15 @@ class L10nBrDiDeclaracao(models.Model):
             self.di_pagamento_ids.unlink()
             self.update(vals)
             self.calcular_declaracao()
+            result = self
         else:
             vals["arquivo_declaracao"] = arquivo
-            res = self.create(vals)
-            res.calcular_declaracao()
+            result = self.create(vals)
+            result.calcular_declaracao()
 
-            return res
+        if detect_unmapped:
+            return result, unmapped
+        return result, []
 
     def _importa_declaracao(self, declaracoes):
         if not declaracoes.declaracao_importacao:
@@ -444,3 +456,47 @@ class L10nBrDiDeclaracao(models.Model):
         domain = [("declaracao_id", "=", self.id)]
         action["domain"] = domain
         return action
+
+
+def clean_unmapped_tags(xml_content, allowed_tags):
+    """
+    Remove tags não mapeadas do XML e retorna o novo XML e a lista de tags removidas.
+    """
+    tree = ET.fromstring(xml_content)
+    unmapped = set()
+
+    def recursive_clean(elem):
+        for child in list(elem):
+            if child.tag not in allowed_tags:
+                unmapped.add(child.tag)
+                elem.remove(child)
+            else:
+                recursive_clean(child)
+
+    recursive_clean(tree)
+    return ET.tostring(tree, encoding="utf-8"), list(unmapped)
+
+
+def collect_allowed_tags(cls, collected=None):
+    """
+    Coleta recursivamente todos os nomes de campos (tags) dos dataclasses xsdata.
+    """
+    if collected is None:
+        collected = set()
+    if not hasattr(cls, "__dataclass_fields__"):
+        return collected
+    for f in cls.__dataclass_fields__.values():
+        tag_name = f.metadata.get("name", f.name)
+        collected.add(tag_name)
+        typ = f.type
+        origin = getattr(typ, "__origin__", None)
+        if origin in (list, typing.List):
+            typ = typ.__args__[0]
+
+        if getattr(typ, "__origin__", None) is typing.Union:
+            args = [a for a in typ.__args__ if a is not type(None)]
+            if args:
+                typ = args[0]
+        if is_dataclass(typ):
+            collect_allowed_tags(typ, collected)
+    return collected
