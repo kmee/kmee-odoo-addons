@@ -7,15 +7,42 @@
         <field name="model">l10n_br_di.importa_di.wizard</field>
         <field name="arch" type="xml">
             <form string="Importa DI Wizard">
+                <div
+                    class="alert alert-warning"
+                    attrs="{'invisible': [('unmapped_tags', '=', False)]}"
+                >
+                        <h3><strong
+                        >⚠️ Atenção: As Tags abaixo não seguem o padrão do XML e não serão importadas</strong></h3>
+                        <p>
+                            <field
+                            name="unmapped_tags"
+                            attrs="{'invisible': [('unmapped_tags','=',False)]}"
+                            readonly="1"
+                            nolabel="1"
+                        />
+                        </p>
+                    </div>
                 <group>
                     <field name="arquivo_declaracao" />
+                    <field
+                        name="confirm_ignore_unmapped"
+                        attrs="{'invisible': [('unmapped_tags','=',False)]}"
+                    />
                 </group>
                 <footer>
+                    <button
+                        name="check_unmapped_tags"
+                        string="Checar Tags Inválidas"
+                        class="btn-primary"
+                        type="object"
+                        attrs="{'invisible': [('unmapped_tags','!=',False)]}"
+                    />
                     <button
                         name="doit"
                         string="Importar"
                         class="btn-primary"
                         type="object"
+                        attrs="{'invisible': [('confirm_ignore_unmapped','=',False)]}"
                     />
                     <button string="Cancel" class="btn-default" special="cancel" />
                 </footer>
