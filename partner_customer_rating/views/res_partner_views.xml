@@ -27,13 +27,49 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='phone']" position="after">
+            <xpath expr="//field[@name='translated_display_name']" position="before">
                 <field
                     name="image_rating"
                     widget="image"
                     class="customer-rating-icon"
                 />
-                <field name="customer_rating_id" options="{'no_open': True}" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_kanban_view" model="ir.ui.view">
+        <field name="name">res.partner.kanban.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[hasclass('oe_kanban_partner_categories')]"
+                position="inside"
+            >
+                <span>
+                    <field
+                        name="image_rating"
+                        widget="image"
+                        class="customer-rating-icon"
+                    />
+                </span>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_view_search" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_by']" position="inside">
+                <filter
+                    name="customer_rating_id"
+                    string="Customer Rating"
+                    domain="[]"
+                    context="{'group_by' : 'customer_rating_id'}"
+                />
+                <separator />
             </xpath>
         </field>
     </record>
