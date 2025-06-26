@@ -5,11 +5,11 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     customer_rating_id = fields.Many2one(
-        "customer.rating", string="Satisfação do Cliente", tracking=True
+        "customer.rating", string="Customer Rating Satisfaction", tracking=True
     )
 
     image_rating = fields.Binary(
-        string="Satisfação",
+        string="Customer Rating Satisfaction Icon",
         compute="_compute_image_rating",
     )
 
