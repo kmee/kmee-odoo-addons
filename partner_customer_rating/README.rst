@@ -22,7 +22,24 @@ Customer Satisfaction Thermometer
 
 |badge1| |badge2| |badge3|
 
+This Odoo module enhances the Contacts app by introducing a visual and
+configurable Customer Satisfaction rating system. It allows companies to
+associate each partner with a satisfaction level using intuitive icons
+and structured data.
 
+Each satisfaction level:
+
+- Is represented by a colored icon (e.g., thermometer or emoticon)
+- Is linked via a ``Many2one`` field on the contact form
+- Is visible and editable in form, kanban, and list views
+- Can be used for filtering, grouping, and reporting
+
+All changes are tracked in the chatter to ensure transparency and
+historical context.
+
+This ensures that customer feedback and relationship quality are clearly
+visible across the platform, supporting better decision-making and
+client engagement.
 
 **Table of contents**
 
@@ -32,7 +49,25 @@ Customer Satisfaction Thermometer
 Configuration
 =============
 
+Configuration Guide
+-------------------
 
+To configure the Customer Satisfaction module, follow these steps:
+
+1. Navigate to **Contacts > Configuration > Satisfaction Levels**.
+2. Click **Create** to add a new satisfaction level.
+3. Fill in the following fields:
+
+   - **Customer Rating Description**: A label to identify the
+     satisfaction level.
+   - **Rating Icon**: An image that visually represents the satisfaction
+     level across views.
+
+4. Click **Save**.
+
+Once configured, the selected satisfaction level and its corresponding
+icon will automatically appear in the contact's form, list, and kanban
+views, based on the selected value.
 
 Bug Tracker
 ===========
@@ -51,6 +86,11 @@ Authors
 -------
 
 * KMEE
+
+Contributors
+------------
+
+
 
 Other credits
 -------------
