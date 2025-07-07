@@ -8,14 +8,14 @@
                 <p>Choose how to proceed with this quotation:</p>
                 <footer>
                     <button
-                        name="create_normal_order"
-                        string="Create Sale Order"
+                        name="create_blanket_order"
+                        string="Create Blanket Order"
                         type="object"
                         class="btn-primary"
                     />
                     <button
-                        name="create_blanket_order"
-                        string="Create Blanket Order"
+                        name="create_normal_order"
+                        string="Create Sale Order"
                         type="object"
                         class="btn-primary"
                     />
