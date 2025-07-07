@@ -48,7 +48,6 @@ class SaleOrder(models.Model):
         elif self.blanket_order_type == "amendment":
             return self._confirm_blanket_order_increment()
         elif not self.order_sequence:  # É um orçamento
-            self.action_done()
             return {
                 "name": _("Confirm Sale Order"),
                 "type": "ir.actions.act_window",

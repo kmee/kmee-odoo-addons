@@ -23,6 +23,7 @@ class SaleOrderConfirm(models.TransientModel):
     def create_blanket_order(self):
         """Create blanket order from quotation"""
         self.ensure_one()
+        self.sale_id.action_done()
         return self._prepare_and_create_bo()
 
     def _prepare_and_create_bo(self):
