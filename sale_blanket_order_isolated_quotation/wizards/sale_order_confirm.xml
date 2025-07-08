@@ -4,18 +4,18 @@
         <field name="name">sale.order.confirm.form</field>
         <field name="model">sale.order.confirm</field>
         <field name="arch" type="xml">
-            <form string="Confirm Sale Order">
-                <p>Choose how to proceed with this quotation:</p>
+            <form string="Confirm">
+                <p>Escolha como prosseguir com esta cotação:</p>
                 <footer>
                     <button
-                        name="create_normal_order"
-                        string="Create Sale Order"
+                        name="create_blanket_order"
+                        string="Create Blanket Order"
                         type="object"
                         class="btn-primary"
                     />
                     <button
-                        name="create_blanket_order"
-                        string="Create Blanket Order"
+                        name="create_normal_order"
+                        string="Create Sale Order"
                         type="object"
                         class="btn-primary"
                     />
