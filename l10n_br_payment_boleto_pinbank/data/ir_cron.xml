@@ -1,0 +1,24 @@
+<odoo>
+    <!-- Cron job to check boleto status every 30 minutes -->
+    <record id="ir_cron_check_for_authorized_boletos" model="ir.cron">
+        <field name="name">Pinbank: Check for Authorized Boletos</field>
+        <field name="model_id" ref="model_payment_transaction" />
+        <field name="state">code</field>
+        <field name="code">model.cron_check_for_authorized_boletos()</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_check_for_paid_boletos" model="ir.cron">
+        <field name="name">Pinbank: Check for Paid Boletos</field>
+        <field name="model_id" ref="model_payment_transaction" />
+        <field name="state">code</field>
+        <field name="code">model.cron_check_for_paid_boletos()</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>
