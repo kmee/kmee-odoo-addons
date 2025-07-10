@@ -46,4 +46,19 @@ class SaleOrderLine(models.Model):
                 period_qty = vals.get("period_qty", record.period_qty)
                 period_count = vals.get("period_count", record.period_count)
                 vals["product_uom_qty"] = period_qty * period_count
-        return super().write(vals)
+        return super(SaleOrderLine, self.with_context(check_qty_unprotect=vals)).write(
+            vals
+        )
+
+    def _get_protected_fields(self):
+        fields = super()._get_protected_fields()
+        ctx = self.env.context.get("check_qty_unprotect")
+        if (
+            ctx
+            and all(k in ctx for k in ("product_uom_qty", "original_bo_qty"))
+            and ctx["original_bo_qty"] == 0
+        ):
+            fields = [
+                f for f in fields if f not in ["product_uom_qty", "original_bo_qty"]
+            ]
+        return fields
