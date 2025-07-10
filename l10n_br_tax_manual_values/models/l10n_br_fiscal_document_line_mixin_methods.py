@@ -40,3 +40,6 @@ class FiscalDocumentLineMixinMethods(models.AbstractModel):
                 manual_tax_dict[attr_name] = getattr(self, attr_name)
 
         return manual_tax_dict
+
+    def _compute_taxes(self, taxes, cst=None):
+        pass
