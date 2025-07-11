@@ -41,14 +41,18 @@ class SaleOrderLine(models.Model):
 
     def write(self, vals):
         for record in self:
-            use_period = vals.get("use_period_quantity", record.use_period_quantity)
+            this_vals = dict(vals)
+            use_period = this_vals.get(
+                "use_period_quantity", record.use_period_quantity
+            )
             if use_period:
-                period_qty = vals.get("period_qty", record.period_qty)
-                period_count = vals.get("period_count", record.period_count)
-                vals["product_uom_qty"] = period_qty * period_count
-        return super(SaleOrderLine, self.with_context(check_qty_unprotect=vals)).write(
-            vals
-        )
+                period_qty = this_vals.get("period_qty", record.period_qty)
+                period_count = this_vals.get("period_count", record.period_count)
+                this_vals["product_uom_qty"] = period_qty * period_count
+            super(
+                SaleOrderLine, record.with_context(check_qty_unprotect=this_vals)
+            ).write(this_vals)
+        return True
 
     def _get_protected_fields(self):
         fields = super()._get_protected_fields()
