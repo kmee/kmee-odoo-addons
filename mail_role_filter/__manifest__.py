@@ -1,0 +1,16 @@
+# Copyright 2025 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Mail Filter By Role",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "KMEE",
+    "website": "https://kmee.com.br/",
+    "depends": ["mail", "base"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/mail_filter_role.xml",
+    ],
+    "demo": [],
+}
