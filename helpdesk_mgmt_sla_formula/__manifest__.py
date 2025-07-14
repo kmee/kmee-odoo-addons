@@ -1,12 +1,12 @@
 {
-    'name': 'Helpdesk Management SLA Formula',
-    'version': '16.0.1.0.0',
-    'category': 'Helpdesk',
-    'summary': 'Adiciona suporte a fórmulas Python para cálculo de SLA',
-    'depends': ['helpdesk_mgmt_sla'],
-    'data': [
-        'views/helpdesk_sla_views.xml',
+    "name": "Helpdesk Management SLA Formula",
+    "version": "16.0.1.0.0",
+    "category": "Helpdesk",
+    "summary": "Adiciona suporte a fórmulas Python para cálculo de SLA",
+    "depends": ["helpdesk_mgmt_sla"],
+    "data": [
+        "views/helpdesk_sla_views.xml",
     ],
-    'license': 'AGPL-3',
-    'installable': True,
+    "license": "AGPL-3",
+    "installable": True,
 }
