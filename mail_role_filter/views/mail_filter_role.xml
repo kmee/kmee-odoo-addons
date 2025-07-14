@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_mail_block_role_form" model="ir.ui.view">
+        <field name="name">mail.role.filter.form</field>
+        <field name="model">mail.role.filter</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="role_id" />
+                    <field name="model_id" />
+                    <field name="active" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mail_block_role_tree" model="ir.ui.view">
+        <field name="name">mail.role.filter.tree</field>
+        <field name="model">mail.role.filter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="role_id" />
+                <field name="model_id" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mail_role_filter" model="ir.actions.act_window">
+        <field name="name">Filter Email by Role</field>
+        <field name="res_model">mail.role.filter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <menuitem id="menu_mail_filter_role_root" name="Mail Filter Rules" parent="base.menu_administration"/> -->
+    <menuitem
+        id="menu_mail_filter_role"
+        name="Filter Email by Role"
+        parent="mail.mail_menu_technical"
+        action="action_mail_role_filter"
+    />
+
+</odoo>
