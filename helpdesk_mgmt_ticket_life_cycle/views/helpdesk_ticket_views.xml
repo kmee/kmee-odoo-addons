@@ -1,0 +1,66 @@
+<odoo>
+    <record id="view_helpdesk_ticket_form_inherit_life_cicle" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.stage.duration</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Stage Durations" name="stage_durations">
+                    <field
+                        name="stage_duration_ids"
+                        context="{'default_ticket_id': active_id}"
+                        nolabel="1"
+                    >
+                        <tree>
+                            <field name="stage_id" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field
+                                name="duration_seconds"
+                                string="Duration (seconds)"
+                            />
+                            <field
+                                name="duration_display"
+                                string="Duration (formatted)"
+                            />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- List view for tickets with current stage duration
+    <record id="view_helpdesk_ticket_list_with_duration" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.list.with.duration</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <field name="current_stage_duration_display" string="Current Stage Duration" />
+            </xpath>
+        </field>
+    </record> -->
+
+    <!-- Kanban view for tickets with current stage duration -->
+    <record id="view_helpdesk_ticket_kanban_with_duration" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.kanban.with.duration</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk_mgmt.view_helpdesk_ticket_kanban" />
+        <field name="arch" type="xml">
+        <xpath expr="//kanban" position="inside">
+            <field name="current_stage_total_duration" />
+        </xpath>
+        <xpath expr="//div[@class='o_kanban_record_top']" position="after">
+                <div class="row mt-2 text-muted small">
+                    <div class="col-6">
+                        <div><i class="fa fa-clock-o" aria-hidden="true" /> <t
+                                t-esc="record.current_stage_total_duration.raw_value"
+                            /></div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
