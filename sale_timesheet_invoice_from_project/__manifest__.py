@@ -8,7 +8,7 @@
     "category": "Project",
     "license": "AGPL-3",
     "author": "KMEE",
-    "website": "https://kmee.com.br/",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "project",
         "sale_timesheet",
