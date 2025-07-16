@@ -4,7 +4,7 @@
     "version": "14.0.1.0.0",
     "category": "After-Sales",
     "author": "Your Company",
-    "website": "https://yourcompany.com",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": ["helpdesk_mgmt_sla"],
     "data": [
