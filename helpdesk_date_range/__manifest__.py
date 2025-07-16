@@ -4,7 +4,7 @@
     "category": "Helpdesk",
     "summary": "Add date range support to helpdesk tickets",
     "author": "Akretion",
-    "website": "https://github.com/OCA/helpdesk",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": [
         "helpdesk_mgmt",
