@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="hr_leave_abono_form_view">
+        <field name="model">hr.leave.abono</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                    <button
+                        class="oe_highlight"
+                        name="action_confirm"
+                        string="Confirm"
+                        type="object"
+                        attrs="{'invisible': [('state','!=', 'draft')]}"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <field
+                            name="name"
+                            attrs="{'readonly': [('state', '=', 'paid')]}"
+                        />
+                        <field
+                            name="employee_id"
+                            attrs="{'readonly': [('state', '=', 'paid')]}"
+                        />
+                        <field
+                            name="holiday_allocation_id"
+                            attrs="{'readonly': [('state', '=', 'paid')]}"
+                        />
+                        <field
+                            name="date"
+                            attrs="{'readonly': [('state', '=', 'paid')]}"
+                        />
+                        <field
+                            name="days_sold"
+                            attrs="{'readonly': [('state', '=', 'paid')]}"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_leave_abono_tree_view">
+        <field name="model">hr.leave.abono</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="employee_id" />
+                <field name="holiday_allocation_id" />
+                <field name="date" />
+                <field name="days_sold" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+</odoo>
