@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_employee_form_leave_inherit">
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_holidays.view_employee_form_leave_inherit" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_time_off_dashboard'][@icon='fa-calendar']"
+                position="after"
+            >
+                <button
+                    name="action_sale_of_days_off"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-dollar"
+                    context="{'search_default_employee_ids': active_id}"
+                    groups="hr_holidays.group_hr_holidays_user"
+                    help="Vacation days sold"
+                >
+                    <div
+                        class="o_field_widget o_stat_info"
+                        attrs="{'invisible': [('allocation_display', '=', '0')]}"
+                    >
+                        <span class="o_stat_value">
+                            <field name="days_off_sold_display" /> Days Sold
+                        </span>
+                        <span class="o_stat_text">
+                            Holiday Sale
+                        </span>
+                    </div>
+                </button>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
