@@ -7,7 +7,7 @@
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",
-    "website": "https://kmee.com.br/",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["hr_holidays"],
     "data": [],
     "demo": [],
