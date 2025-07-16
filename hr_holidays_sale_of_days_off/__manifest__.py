@@ -1,0 +1,22 @@
+# Copyright 2025 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Hr Holidays Sale Of Days Off",
+    "summary": """hr_holidays_sale_of_days_off""",
+    "version": "16.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "KMEE",
+    "website": "http://kmee.com.br",
+    "depends": [
+        "hr_holidays",
+    ],
+    "data": [
+        "views/hr_leave_allocation.xml",
+        "security/hr_leave_abono.xml",
+        "views/hr_leave_abono.xml",
+        "views/hr_employee.xml",
+    ],
+    "demo": [],
+    "installable": True,
+}
