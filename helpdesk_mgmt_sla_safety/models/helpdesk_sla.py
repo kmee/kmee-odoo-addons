@@ -15,7 +15,7 @@ class HelpdeskSla(models.Model):
         help="Number of hours before the deadline for safety alert",
     )
 
-    def check_ticket_sla(self, tickets):
+    def check_ticket_sla(self, tickets):  # pylint: disable=missing-return
         # Chama o método original primeiro
         super().check_ticket_sla(tickets)
 
