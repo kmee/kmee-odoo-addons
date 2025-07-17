@@ -51,7 +51,7 @@ class HelpdeskSLAFormula(models.Model):
                     "record": ticket,
                 }
 
-                deadline = eval(
+                deadline = eval(  # pylint: disable=eval-used
                     self.sla_deadline_formula, {"__builtins__": {}}, safe_dict
                 )
 
