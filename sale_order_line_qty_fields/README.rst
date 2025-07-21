@@ -22,8 +22,7 @@ Sale Order Line Qty Fields
 
 |badge1| |badge2| |badge3|
 
-This module makes it possible to display fields related to product
-quantities in stock on sale order lines.
+This module makes it possible to display fields related to product quantities in stock on sale order lines.
 
 **Table of contents**
 
@@ -35,16 +34,14 @@ Configuration
 
 To configure this module you must:
 
--  Go to **Sales > Configuration > Settings**;
--  In the section *Quantity Fields*, mark the fields that will appear on
-   the sale order line. The fields are "Qty Available Today", "Free Qty
-   Today" and "Free Qty".
+* Go to **Sales > Configuration > Settings**;
+* In the section *Quantity Fields*, mark the fields that will appear on the sale order line. The fields are "Qty Available Today", "Free Qty Today" and "Free Qty".
 
 Usage
 =====
 
-Now in a sale order line you can see the fields "Qty Available Today",
-"Free Qty Today" and "Free Qty".
+Now in a sale order line you can see the fields "Qty Available Today", "Free Qty Today" and "Free Qty".
+g
 
 Bug Tracker
 ===========
@@ -60,21 +57,20 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  
+  * - Tiago Amaral <tiago.amaral@kmee.com.br>
 
-      -  Tiago Amaral tiago.amaral@kmee.com.br
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/sale_order_line_qty_fields>`_ project on GitHub.
 
