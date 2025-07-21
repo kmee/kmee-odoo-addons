@@ -22,8 +22,7 @@ Declaração de Importação
 
 |badge1| |badge2| |badge3|
 
-This module allows the import of the SISCOMEX XML from the DI and the
-subsequent generation of the NF-e.
+This module allows the import of the SISCOMEX XML from the DI and the subsequent generation of the NF-e.
 
 **Table of contents**
 
@@ -33,19 +32,16 @@ subsequent generation of the NF-e.
 Configuration
 =============
 
-Access the company's registration and configure the standard tax
-operation for generating DIs.
+Access the company's registration and configure the standard tax operation for generating DIs.
 
 Usage
 =====
 
 To use this module you need:
 
-::
-
-   1. Import or create a DI manually;
-   2. Generate a draft invoice;
-   3. Review and transmit it.
+    1. Import or create a DI manually;
+    2. Generate a draft invoice;
+    3. Review and transmit it.
 
 Bug Tracker
 ===========
@@ -61,23 +57,23 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  Luis Felipe Mileo mileo@kmee.com.br
+  * Luis Felipe Mileo <mileo@kmee.com.br>
 
--  ``Engenere <https://engenere.one>``\ \_\_:
+* `Engenere <https://engenere.one>`__:
 
-   -  Antônio Neto neto@engenere.one
+  * Antônio Neto <neto@engenere.one>
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/l10n_br_di>`_ project on GitHub.
 
