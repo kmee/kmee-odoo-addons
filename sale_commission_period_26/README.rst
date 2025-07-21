@@ -43,27 +43,29 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  Luis Felipe Mileo <mileo@kmee.com.br (https://kmee.com.br)
+- Luis Felipe Mileo <mileo@kmee.com.br (https://kmee.com.br)
+
 
 Other credits
--------------
+~~~~~~~~~~~~~
 
 [ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
+  authors, contributors, and maintainers. ]
 
 The development of this module has been financially supported by:
 
--  KMEE
+- KMEE
+
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/sale_commission_period_26>`_ project on GitHub.
 
