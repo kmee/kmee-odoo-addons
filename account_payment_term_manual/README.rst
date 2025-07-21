@@ -22,16 +22,7 @@ Account Invoice Manual Payment Term
 
 |badge1| |badge2| |badge3|
 
-This module extends and customizes the calculation of payment terms for
-invoices, allowing the use of manual payment terms. It introduces the
-possibility of associating a manual payment line with an invoice, which
-can be configured with options such as fixed dates, percentages or
-remaining balance. When the invoice payment term changes, the module
-automatically updates the associated manual payment lines, managing the
-creation, change, and removal of manual terms as needed. Additionally,
-when calculating payment terms, the module checks whether a manual term
-has been defined and uses it to calculate invoice installments in a
-personalized way, replacing the default behavior of Odoo payment terms.
+This module extends and customizes the calculation of payment terms for invoices, allowing the use of manual payment terms. It introduces the possibility of associating a manual payment line with an invoice, which can be configured with options such as fixed dates, percentages or remaining balance. When the invoice payment term changes, the module automatically updates the associated manual payment lines, managing the creation, change, and removal of manual terms as needed. Additionally, when calculating payment terms, the module checks whether a manual term has been defined and uses it to calculate invoice installments in a personalized way, replacing the default behavior of Odoo payment terms.
 
 **Table of contents**
 
@@ -52,27 +43,28 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  Luis Felipe Mileo mileo@kmee.com.br (https://kmee.com.br)
-   -  Diego Paradeda diego.paradeda@kmee.com.br
+  * Luis Felipe Mileo <mileo@kmee.com.br> (https://kmee.com.br)
+
+  * Diego Paradeda <diego.paradeda@kmee.com.br>
 
 Other credits
--------------
+~~~~~~~~~~~~~
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- [KMEE](https://kmee.com.br/)
 
 Maintainers
------------
+~~~~~~~~~~~
 
 .. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
     :target: https://github.com/mileo

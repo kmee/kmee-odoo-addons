@@ -22,16 +22,7 @@ Informação de Medicamentos na NF-e
 
 |badge1| |badge2| |badge3|
 
-This module extends functionalities related to controlling tax documents
-in Odoo, specifically in the context of products regulated by ANVISA in
-Brazil. It introduces the association of an nfe40_med field in the
-product.template model, allowing each product to have a link with
-information from an ANVISA record. The Nfe40Med class is responsible for
-storing ANVISA-specific data, such as product code, exemption reason and
-PMC value, and displays this data in a concatenated form in its name.
-The DocumentLine model is extended to reflect the nfe40_med field in tax
-document line records, providing more robust integration between the
-product and related tax information.
+This module extends functionalities related to controlling tax documents in Odoo, specifically in the context of products regulated by ANVISA in Brazil. It introduces the association of an nfe40_med field in the product.template model, allowing each product to have a link with information from an ANVISA record. The Nfe40Med class is responsible for storing ANVISA-specific data, such as product code, exemption reason and PMC value, and displays this data in a concatenated form in its name. The DocumentLine model is extended to reflect the nfe40_med field in tax document line records, providing more robust integration between the product and related tax information.
 
 **Table of contents**
 
@@ -52,26 +43,26 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  Luis Felipe Mileo mileo@kmee.com.br
+  * Luis Felipe Mileo <mileo@kmee.com.br>
 
 Other credits
--------------
+~~~~~~~~~~~~~
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- [KMEE](https://kmee.com.br/)
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/l10n_br_nfe_med>`_ project on GitHub.
 

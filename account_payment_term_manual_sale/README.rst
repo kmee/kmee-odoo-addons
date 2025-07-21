@@ -22,16 +22,7 @@ Sale Payment Term Manual
 
 |badge1| |badge2| |badge3|
 
-The module extends the standard sales order functionality in Odoo by
-incorporating the ability to manage manual payment terms. It allows the
-"Payment Terms" field to be changed and, in doing so, automatically
-adjusts the manual terms associated with the sales order, creating and
-updating payment lines as needed. Additionally, when generating invoices
-directly from the sales order, the module ensures that manual payment
-terms are correctly copied to the invoice, and reprocesses payment lines
-to reflect changes in terms. It also makes it possible to view and edit
-manual payment terms within the sales order interface, giving you
-additional control over payment processing.
+The module extends the standard sales order functionality in Odoo by incorporating the ability to manage manual payment terms. It allows the "Payment Terms" field to be changed and, in doing so, automatically adjusts the manual terms associated with the sales order, creating and updating payment lines as needed. Additionally, when generating invoices directly from the sales order, the module ensures that manual payment terms are correctly copied to the invoice, and reprocesses payment lines to reflect changes in terms. It also makes it possible to view and edit manual payment terms within the sales order interface, giving you additional control over payment processing.
 
 **Table of contents**
 
@@ -52,28 +43,28 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  Luis Felipe Mileo mileo@kmee.com.br
+  * Luis Felipe Mileo <mileo@kmee.com.br>
 
-   -  Diego Paradeda diego.paradeda@kmee.com.br
+  * Diego Paradeda <diego.paradeda@kmee.com.br>
 
 Other credits
--------------
+~~~~~~~~~~~~~
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- [KMEE](https://kmee.com.br/)
 
 Maintainers
------------
+~~~~~~~~~~~
 
 .. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
     :target: https://github.com/mileo

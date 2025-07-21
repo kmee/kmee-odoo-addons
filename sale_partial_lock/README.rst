@@ -35,8 +35,7 @@ Configuration
 To configure this module, you need to:
 
 1. Go to *Sales > Configuration > Settings*.
-2. In the "Quotations & Orders" section, check the "Lock Confirmed
-   Sales" option.
+2. In the "Quotations & Orders" section, check the "Lock Confirmed Sales" option.
 
 Usage
 =====
@@ -57,19 +56,19 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://kmee.com.br/>``\ \_:
+* `KMEE <https://kmee.com.br/>`_:
 
-   -  Tiago Amaral tiago.amaral@kmee.com.br
+  * Tiago Amaral <tiago.amaral@kmee.com.br>
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/sale_partial_lock>`_ project on GitHub.
 
