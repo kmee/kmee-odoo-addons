@@ -1,1 +1,0 @@
-Users who are not in the "Can Edit The Price in Purchase" group cannot edit the "Price Unit" field.
