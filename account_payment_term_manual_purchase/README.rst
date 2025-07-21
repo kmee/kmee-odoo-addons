@@ -22,15 +22,7 @@ Purchase Payment Term Manual
 
 |badge1| |badge2| |badge3|
 
-This module customizes the payment terms management behavior in Odoo
-Purchase Orders. It extends purchase order functionality to allow the
-use of manual payment terms related to the invoicing process. When the
-payment term is changed on the purchase order, the module automatically
-updates the associated manual payment term. Additionally, when creating
-or viewing an invoice from the purchase order, it ensures that manual
-payment terms are correctly set up by creating or updating payment lines
-as needed. The module also adds a "Payment Terms" tab to the purchase
-order form, where you can view and edit these manual terms.
+This module customizes the payment terms management behavior in Odoo Purchase Orders. It extends purchase order functionality to allow the use of manual payment terms related to the invoicing process. When the payment term is changed on the purchase order, the module automatically updates the associated manual payment term. Additionally, when creating or viewing an invoice from the purchase order, it ensures that manual payment terms are correctly set up by creating or updating payment lines as needed. The module also adds a "Payment Terms" tab to the purchase order form, where you can view and edit these manual terms.
 
 **Table of contents**
 
@@ -51,24 +43,24 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  Luis Felipe Mileo mileo@kmee.com.br (https://kmee.com.br)
+- Luis Felipe Mileo <mileo@kmee.com.br> (https://kmee.com.br)
 
 Other credits
--------------
+~~~~~~~~~~~~~
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- [KMEE](https://kmee.com.br/)
 
 Maintainers
------------
+~~~~~~~~~~~
 
 .. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
     :target: https://github.com/mileo
