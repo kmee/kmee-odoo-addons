@@ -22,10 +22,7 @@ Purchase Order Price Security
 
 |badge1| |badge2| |badge3|
 
-This Odoo module controls unit price editing permission on purchase
-order lines, allowing only users belonging to a "Can Edit The Price in
-Purchase" group to modify prices. For other users, the price is
-displayed as read-only.
+This Odoo module controls unit price editing permission on purchase order lines, allowing only users belonging to a "Can Edit The Price in Purchase" group to modify prices. For other users, the price is displayed as read-only.
 
 **Table of contents**
 
@@ -35,14 +32,12 @@ displayed as read-only.
 Configuration
 =============
 
-Add the user who can edit the price in the "Can Edit The Price in
-Purchase" group.
+Add the user who can edit the price in the "Can Edit The Price in Purchase" group.
 
 Usage
 =====
 
-Users who are not in the "Can Edit The Price in Purchase" group cannot
-edit the "Price Unit" field.
+Users who are not in the "Can Edit The Price in Purchase" group cannot edit the "Price Unit" field.
 
 Bug Tracker
 ===========
@@ -58,21 +53,20 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  
+  * - Tiago Amaral <tiago.amaral@kmee.com.br>
 
-      -  Tiago Amaral tiago.amaral@kmee.com.br
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/purchase_order_price_security>`_ project on GitHub.
 
