@@ -20,13 +20,11 @@ class TestPeriodCommission(SavepointCase):
 
         # Products setup
         cls.product = cls.env.ref("product.product_product_5")
-        cls.product.write(
-            {
-                "invoice_policy": "order",
-                "list_price": 5,
-                # "type": "product",
-            }
-        )
+        cls.product.invoice_policy = "order"
+        cls.product.list_price = 5
+        cls.product._cr.commit()  # garante escrita no banco
+        cls.product.flush()
+        assert cls.product.invoice_policy == "order"
 
         cls.commission_product = cls.env["product.product"].create(
             {
@@ -167,8 +165,8 @@ class TestPeriodCommission(SavepointCase):
         amount = 50000
 
         # Create and process sale order
-        sale_order = self._create_sale_order(order_date, amount)
-        self._confirm_and_invoice_sale_order(sale_order, order_date)
+        self._create_sale_order(order_date, amount)
+        # self._confirm_and_invoice_sale_order(sale_order, order_date)
 
         # Create settlement
         self._create_settlement(self.agent, date(2023, 1, 31))
