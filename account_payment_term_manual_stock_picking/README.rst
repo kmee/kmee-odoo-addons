@@ -22,17 +22,8 @@ Account Invoice Manual Payment Term Stock Picking
 
 |badge1| |badge2| |badge3|
 
-This module customizes the process of creating invoices from product
-deliveries, adjusting payment terms based on the sale or purchase
-associated with the delivery. It checks whether there is a specific
-payment term in the related transaction and, if so, applies that term to
-the invoice. Additionally, if manual payment terms are defined, these
-are also copied to the invoice. The module also ensures that when
-generating invoices, financial lines are updated appropriately, removing
-any financial lines associated with manual terms when necessary and
-recalculating them correctly. In short, personalization seeks to ensure
-that payment terms and financial conditions of transactions are
-accurately reflected in generated invoices.
+This module customizes the process of creating invoices from product deliveries, adjusting payment terms based on the sale or purchase associated with the delivery. It checks whether there is a specific payment term in the related transaction and, if so, applies that term to the invoice. Additionally, if manual payment terms are defined, these are also copied to the invoice. The module also ensures that when generating invoices, financial lines are updated appropriately, removing any financial lines associated with manual terms when necessary and recalculating them correctly. In short, personalization seeks to ensure that payment terms and financial conditions of transactions are accurately reflected in generated invoices.
+
 
 **Table of contents**
 
@@ -53,26 +44,26 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * KMEE
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+* `KMEE <https://www.kmee.com.br>`__:
 
-   -  Diego Paradeda diego.paradeda@kmee.com.br
+  * Diego Paradeda <diego.paradeda@kmee.com.br>
 
 Other credits
--------------
+~~~~~~~~~~~~~
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- [KMEE](https://kmee.com.br/)
 
 Maintainers
------------
+~~~~~~~~~~~
 
 .. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
     :target: https://github.com/mileo
