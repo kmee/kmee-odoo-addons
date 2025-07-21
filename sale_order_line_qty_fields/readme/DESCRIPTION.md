@@ -1,1 +1,0 @@
-This module makes it possible to display fields related to product quantities in stock on sale order lines.
