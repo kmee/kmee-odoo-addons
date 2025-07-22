@@ -23,7 +23,7 @@
         <field name="name">customer.rating.tree</field>
         <field name="model">customer.rating</field>
         <field name="arch" type="xml">
-            <tree string="Customer Ratings">
+            <tree>
                 <field name="name" />
                 <field
                     name="image"
