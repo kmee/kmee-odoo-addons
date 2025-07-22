@@ -58,4 +58,24 @@
             </tree>
         </field>
     </record>
+
+    <record id="action_hr_leave_abono" model="ir.actions.act_window">
+        <field name="name">Holiday Sales</field>
+        <field name="res_model">hr.leave.abono</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create the vacation sale record.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_hr_leave_abono"
+        name="Holiday Sales"
+        parent="hr_holidays.menu_hr_holidays_approvals"
+        action="action_hr_leave_abono"
+        sequence="10"
+    />
+
 </odoo>
