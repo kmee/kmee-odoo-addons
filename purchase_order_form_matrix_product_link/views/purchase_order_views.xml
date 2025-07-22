@@ -1,0 +1,20 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="purchase_order_form_matrix_product_link" model="ir.ui.view">
+        <field name="name">purchase.order.form.matrix.product.link</field>
+        <field name="model">purchase.order</field>
+        <field
+            name="inherit_id"
+            ref="purchase_product_matrix.purchase_order_form_matrix"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_template_id']" position="attributes">
+                <attribute name="options">{'no_open': False}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
