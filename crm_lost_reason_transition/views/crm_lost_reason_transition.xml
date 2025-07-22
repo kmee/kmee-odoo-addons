@@ -25,7 +25,7 @@
         <field name="name">crm.lost.reason.transition.tree</field>
         <field name="model">crm.lost.reason.transition</field>
         <field name="arch" type="xml">
-            <tree string="Loss Reason Transitions">
+            <tree>
                 <field name="name" readonly="1" />
                 <field name="lost_reason_id" />
                 <field name="team_id" />
