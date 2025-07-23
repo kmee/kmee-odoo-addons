@@ -38,7 +38,7 @@ class L10nBrCnpjSearchWebserviceAbstract(models.AbstractModel):
             "district": self.get_data(data, "bairro", title=True),
             "street_number": self.get_data(data, "numero"),
             "zip": self.get_data(data, "cep"),
-            "legal_nature": self.get_data(data, "natureza_juridica"),
+            "legal_nature_id": self.get_data(data, "natureza_juridica"),
             "phone": self.get_data(data, "ddd_telefone_1"),
             "mobile": self.get_data(data, "ddd_telefone_2"),
             "state_id": state_id,
