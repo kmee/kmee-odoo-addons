@@ -5,7 +5,7 @@
         <field name="name">sale.order.cover.pdf.tree</field>
         <field name="model">sale.order.cover.pdf</field>
         <field name="arch" type="xml">
-            <tree string="PDF Cover">
+            <tree>
                 <field name="display_name" />
                 <field name="cover_pdf_filename" />
                 <field name="active" />
