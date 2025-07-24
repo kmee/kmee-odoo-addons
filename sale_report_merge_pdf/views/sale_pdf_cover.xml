@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+
+    <record id="view_sale_order_cover_pdf_tree" model="ir.ui.view">
+        <field name="name">sale.order.cover.pdf.tree</field>
+        <field name="model">sale.order.cover.pdf</field>
+        <field name="arch" type="xml">
+            <tree string="PDF Cover">
+                <field name="display_name" />
+                <field name="cover_pdf_filename" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sale_order_cover_pdf_form" model="ir.ui.view">
+            <field name="name">sale.order.cover.pdf.form</field>
+            <field name="model">sale.order.cover.pdf</field>
+            <field name="arch" type="xml">
+                <form string="PDF Cover">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                                <field
+                                name="active"
+                                widget="boolean_button"
+                                options='{"terminology": "archive"}'
+                            />
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="display_name" readonly="1" />
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="cover_pdf" filename="cover_pdf_filename" />
+                                <field name="cover_pdf_filename" invisible="1" />
+                            </group>
+                        </group>
+                        <div
+                        class="alert alert-info"
+                        role="alert"
+                        style="margin-top: 20px;"
+                    >
+                            <strong>Importante:</strong>
+                            <ul>
+                                <li>Apenas um registro pode estar ativo por vez</li>
+                                <li
+                            >Este PDF será usado como capa em todos os pedidos de venda com "Print with Cover" marcado</li>
+                                <li>O arquivo deve estar no formato PDF</li>
+                            </ul>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    <record id="action_sale_order_cover_pdf" model="ir.actions.act_window">
+        <field name="name">PDF Cover</field>
+        <field name="res_model">sale.order.cover.pdf</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Configure o PDF de capa para pedidos de venda
+            </p>
+            <p>
+                Aqui você pode definir um PDF que será usado como capa em todos os
+                relatórios de pedidos de venda que tiverem a opção "Print with Cover" marcada.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_sale_order_cover_pdf"
+        name="PDF Cover"
+        action="action_sale_order_cover_pdf"
+        parent="sale.sale_order_menu"
+        sequence="50"
+    />
+
+</odoo>
