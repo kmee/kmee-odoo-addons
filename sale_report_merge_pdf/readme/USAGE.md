@@ -1,0 +1,1 @@
+If you wish to print only the core sale order report, uncheck the 'Print with Cover' option in the 'Other Info' tab of the sale order.
