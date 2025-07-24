@@ -27,8 +27,8 @@ class IrActionsReport(models.Model):
                         and report.model == "sale.order"
                     ):
                         return True
-                except Exception:
-                    pass
+                except Exception as e:
+                    _logger.error(f"Erro ao buscar relatório {report_ref}: {e}")
 
             if res_ids:
                 first_id = res_ids[0] if isinstance(res_ids, list) else res_ids
@@ -36,8 +36,8 @@ class IrActionsReport(models.Model):
                     sale_order = self.env["sale.order"].browse(first_id)
                     if sale_order.exists():
                         return True
-                except Exception:
-                    pass
+                except Exception as e:
+                    _logger.error(f"Erro ao buscar sale.order com ID {first_id}: {e}")
 
             if hasattr(self, "model") and self.model == "sale.order":
                 return True
