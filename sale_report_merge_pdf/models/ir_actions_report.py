@@ -8,9 +8,11 @@ _logger = logging.getLogger(__name__)
 class IrActionsReport(models.Model):
     _inherit = "ir.actions.report"
 
-    def _render_qweb_pdf_prepare_streams(self, data, res_ids):
-        return super(IrActionsReport, self)._render_qweb_pdf_prepare_streams(
-            data, res_ids
+    def _render_qweb_pdf_prepare_streams(self, report_ref, data, res_ids):
+        return super()._render_qweb_pdf_prepare_streams(
+            report_ref=report_ref,
+            data=data,
+            res_ids=res_ids
         )
 
     def _is_sale_order_report(self, report_ref, res_ids):
@@ -74,14 +76,14 @@ class IrActionsReport(models.Model):
 
         return pdf_content
 
-    def _render_qweb_pdf(self, res_ids, data=None):
+    def _render_qweb_pdf(self, report_ref, res_ids, data=None):
         pdf_content, report_format = super(IrActionsReport, self)._render_qweb_pdf(
-            res_ids, data
+            report_ref, res_ids=res_ids, data=data
         )
-        if hasattr(self, "model") and self.model == "sale.order" and res_ids:
-            merged_pdf = self._apply_pdf_merge(res_ids, pdf_content)
-            if merged_pdf != pdf_content:
-                pdf_content = merged_pdf
+
+        merged_pdf = self._apply_pdf_merge(res_ids, pdf_content)
+        if merged_pdf != pdf_content:
+            pdf_content = merged_pdf
 
         return pdf_content, report_format
 
