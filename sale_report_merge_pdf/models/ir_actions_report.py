@@ -10,9 +10,7 @@ class IrActionsReport(models.Model):
 
     def _render_qweb_pdf_prepare_streams(self, report_ref, data, res_ids):
         return super()._render_qweb_pdf_prepare_streams(
-            report_ref=report_ref,
-            data=data,
-            res_ids=res_ids
+            report_ref=report_ref, data=data, res_ids=res_ids
         )
 
     def _is_sale_order_report(self, report_ref, res_ids):
