@@ -38,7 +38,7 @@ class L10nBrCnpjSearchWebserviceAbstract(models.AbstractModel):
             "district": self.get_data(data, "bairro", title=True),
             "street_number": self.get_data(data, "numero"),
             "zip": self.get_data(data, "cep"),
-            "legal_nature_id": self.get_data(data, "natureza_juridica"),
+            "legal_nature_id": self._minhareceita_get_legal_nature(data),
             "phone": self.get_data(data, "ddd_telefone_1"),
             "mobile": self.get_data(data, "ddd_telefone_2"),
             "state_id": state_id,
@@ -64,3 +64,10 @@ class L10nBrCnpjSearchWebserviceAbstract(models.AbstractModel):
             if self._get_cnae(str(code or "")):
                 cnae_secondary.append(self._get_cnae(str(code or "")))
         return cnae_secondary
+
+    @api.model
+    def _minhareceita_get_legal_nature(self, data):
+        legal_nature = data.get("codigo_natureza_juridica", False)
+        if legal_nature:
+            return self._get_legal_nature(str(legal_nature))
+        return False
