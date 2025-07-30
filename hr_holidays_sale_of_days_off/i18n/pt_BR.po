@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_holidays_sale_of_days_off
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-16 17:47+0000\n"
+"PO-Revision-Date: 2025-07-16 17:47+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_holidays_sale_of_days_off
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.hr_leave_allocation_form_view
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.view_employee_form_leave_inherit
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"                            Holiday Sale\n"
+"                        </span>"
+msgstr ""
+"<span class=\"o_stat_text\">\n"
+"                            Venda de Férias\n"
+"                        </span>"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__holiday_allocation_id
+msgid "Allocation"
+msgstr "Alocação"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,help:hr_holidays_sale_of_days_off.field_hr_leave_abono__employee_id
+msgid "Choose the employee"
+msgstr "Escolha o funcionário"
+
+#. module: hr_holidays_sale_of_days_off
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.hr_leave_abono_form_view
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__date
+#: model:ir.model.fields,help:hr_holidays_sale_of_days_off.field_hr_leave_abono__date
+msgid "Date"
+msgstr "Data"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_employee__days_off_sold_display
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_allocation__days_off_sold_display
+msgid "Days Off Sold Display"
+msgstr "Exibição de dias de folga vendidos"
+
+#. module: hr_holidays_sale_of_days_off
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.hr_leave_allocation_form_view
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.view_employee_form_leave_inherit
+msgid "Days Sold"
+msgstr "Dias Vendidos"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__days_sold
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_allocation__number_of_days_sold
+#: model:ir.model.fields,help:hr_holidays_sale_of_days_off.field_hr_leave_abono__days_sold
+#: model:ir.model.fields,help:hr_holidays_sale_of_days_off.field_hr_leave_allocation__number_of_days_sold
+msgid "Days sold"
+msgstr "Dias Vendidos"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields.selection,name:hr_holidays_sale_of_days_off.selection__hr_leave_abono__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_employee
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__employee_id
+msgid "Employee"
+msgstr "Funcionário"
+
+#. module: hr_holidays_sale_of_days_off
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.hr_leave_allocation_form_view
+msgid "Holiday Sale"
+msgstr "Venda de Férias"
+
+#. module: hr_holidays_sale_of_days_off
+#. odoo-python
+#: code:addons/hr_holidays_sale_of_days_off/models/hr_employee.py:0
+#: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_allocation.py:0
+#, python-format
+msgid "Holiday Sales"
+msgstr "Vendas de Férias"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_leave_abono
+msgid "Hr Leave Abono"
+msgstr ""
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono____last_update
+msgid "Last Modified on"
+msgstr "Última modificação em"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields.selection,name:hr_holidays_sale_of_days_off.selection__hr_leave_abono__state__paid
+msgid "Paid"
+msgstr "Pago"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__state
+msgid "State"
+msgstr "Estado"
+
+#. module: hr_holidays_sale_of_days_off
+#. odoo-python
+#: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_abono.py:0
+#, python-format
+msgid "The requested number of days sold cannot be 0."
+msgstr "O número solicitado de dias vendidos não pode ser 0."
+
+#. module: hr_holidays_sale_of_days_off
+#. odoo-python
+#: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_abono.py:0
+#: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_abono.py:0
+#, python-format
+msgid "The requested quantity is not available for sale."
+msgstr "A quantidade solicitada não está disponível para venda."
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_leave_allocation
+msgid "Time Off Allocation"
+msgstr "Alocação de Folga"
+
+#. module: hr_holidays_sale_of_days_off
+#: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.view_employee_form_leave_inherit
+msgid "Vacation days sold"
+msgstr "Dias de férias vendidos"

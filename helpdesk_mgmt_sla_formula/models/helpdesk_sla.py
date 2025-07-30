@@ -35,7 +35,7 @@ class HelpdeskSLAFormula(models.Model):
             except Exception as e:
                 raise ValidationError(
                     _("Erro de sintaxe na fórmula Python: %s", str(e))
-                )
+                ) from e
 
     def check_ticket_sla(self, tickets):
         self.ensure_one()
@@ -51,7 +51,7 @@ class HelpdeskSLAFormula(models.Model):
                     "record": ticket,
                 }
 
-                deadline = eval(
+                deadline = eval(  # pylint: disable=eval-used
                     self.sla_deadline_formula, {"__builtins__": {}}, safe_dict
                 )
 

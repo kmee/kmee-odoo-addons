@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="sale_order_portal_content"
+        inherit_id="sale.sale_order_portal_content"
+    >
+        <xpath
+            expr="//t[@t-set='current_subtotal'][@t-value='current_subtotal + line.price_total']"
+            position="after"
+        >
+            <t
+                t-set="period_qty"
+                t-value="any(l.period_qty for l in lines_to_report)"
+            />
+            <t
+                t-set="period_count"
+                t-value="any(l.period_count for l in lines_to_report)"
+            />
+            <t
+                t-set="date_start"
+                t-value="any(l.date_start for l in lines_to_report)"
+            />
+            <t t-set="date_end" t-value="any(l.date_end for l in lines_to_report)" />
+        </xpath>
+        <xpath expr="//th[@id='product_name_header']" position="after">
+            <th
+                class="text-end"
+                t-if="date_start"
+                id="date_start_header"
+            >Date Start</th>
+            <th class="text-end" t-if="date_end" id="date_end_header">Date End</th>
+            <th class="text-end" t-if="period_qty" id="period_qty_header">Qtd/Per.</th>
+            <th
+                class="text-end"
+                t-if="period_count"
+                id="period_count_header"
+            >N° Per.</th>
+        </xpath>
+        <xpath expr="//td[@id='product_name']" position="after">
+            <td id="date_start" class="text-end" t-if="date_start">
+                <span t-field="line.date_start" />
+            </td>
+            <td id="date_end" class="text-end" t-if="date_end">
+                <span t-field="line.date_end" />
+            </td>
+            <td id="period_qty" class="text-end" t-if="period_qty">
+                <span t-field="line.period_qty" />
+            </td>
+            <td id="period_count" class="text-end" t-if="period_count">
+                <span t-field="line.period_count" />
+            </td>
+        </xpath>
+    </template>
+</odoo>

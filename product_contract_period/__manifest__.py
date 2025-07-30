@@ -9,6 +9,8 @@
         "views/sale_views.xml",
         "views/contract_views.xml",
         "views/product_views.xml",
+        "views/sale_portal_templates.xml",
+        "report/ir_actions_report_templates.xml",
     ],
     "installable": True,
     "application": False,

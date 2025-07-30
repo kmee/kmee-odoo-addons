@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="hr_leave_allocation_form_view">
+        <field name="model">hr.leave.allocation</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@name='button_box']/button[@name='%(hr_holidays.hr_leave_action_holiday_allocation_id)d']"
+                position="after"
+            >
+                <button
+                    class="oe_stat_button"
+                    icon="fa-dollar"
+                    type="object"
+                    name="action_sale_of_days_off"
+                    help="Holiday Sale"
+                    groups="hr_holidays.group_hr_holidays_user"
+                >
+                    <div class="o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="days_off_sold_display" /> Days Sold
+                        </span>
+                        <span class="o_stat_text">
+                            Holiday Sale
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -7,17 +7,15 @@ class HelpdeskSla(models.Model):
     _inherit = "helpdesk.sla"
 
     safety_days = fields.Integer(
-        string="Safety Days",
         default=0,
         help="Number of days before the deadline for safety alert",
     )
     safety_hours = fields.Integer(
-        string="Safety Hours",
         default=0,
         help="Number of hours before the deadline for safety alert",
     )
 
-    def check_ticket_sla(self, tickets):
+    def check_ticket_sla(self, tickets):  # pylint: disable=missing-return
         # Chama o método original primeiro
         super().check_ticket_sla(tickets)
 
