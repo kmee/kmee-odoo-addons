@@ -42,6 +42,7 @@ class HelpdeskTicketTrack(models.Model):
                     {
                         "ticket_id": ticket.id,
                         "stage_id": ticket.stage_id.id,
+                        "team_id": ticket.team_id.id,
                         "start_date": fields.Datetime.now(),
                     }
                 )
@@ -60,6 +61,7 @@ class HelpdeskTicketTrack(models.Model):
                     {
                         "ticket_id": ticket.id,
                         "stage_id": vals["stage_id"],
+                        "team_id": ticket.team_id.id,
                         "start_date": fields.Datetime.now(),
                     }
                 )
@@ -103,6 +105,7 @@ class HelpdeskTicketTrackStageDuration(models.Model):
         "helpdesk.ticket", string="ticket", required=True, ondelete="cascade"
     )
     stage_id = fields.Many2one("helpdesk.ticket.stage", string="Stage", required=True)
+    team_id = fields.Many2one("helpdesk.ticket.team", string="Team", required=True)
     start_date = fields.Datetime(required=True)
     end_date = fields.Datetime()
 
