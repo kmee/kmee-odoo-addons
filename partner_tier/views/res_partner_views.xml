@@ -6,7 +6,39 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='vat']" position="after">
-                <field name="tier_id" options="{'no_create': True}" />
+                <field
+                    name="tier_id"
+                    options="{'no_create': True}"
+                    attrs="{'readonly': [('parent_id', '!=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_custom" model="ir.ui.view">
+        <field name="name">res.partner.tree.customer.tier</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='translated_display_name']" position="after">
+                <field name="tier_id" />
+            </xpath>
+        </field>
+    </record>
+
+        <record id="res_partner_view_search" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_by']" position="inside">
+                <filter
+                    name="tier_id"
+                    string="Customer Tier"
+                    domain="[]"
+                    context="{'group_by' : 'tier_id'}"
+                />
+                <separator />
             </xpath>
         </field>
     </record>
