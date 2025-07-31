@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="view_helpdesk_ticket_stage_duration_report_tree" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.stage.duration.report.tree</field>
+            <field name="model">helpdesk.ticket.stage.duration.report</field>
+            <field name="arch" type="xml">
+                <tree string="Stage Duration Report" create="false" edit="false">
+                    <field name="team_id"/>
+                    <field name="stage_id"/>
+                    <field name="ticket_count"/>
+                    <field name="avg_duration_display"/>
+                    <field name="min_duration_seconds" widget="float_time"/>
+                    <field name="max_duration_seconds" widget="float_time"/>
+                    <field name="completed_tickets"/>
+                    <field name="active_tickets"/>
+                    <field name="completion_rate" widget="percentage"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Graph View -->
+        <record id="view_helpdesk_ticket_stage_duration_report_graph" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.stage.duration.report.graph</field>
+            <field name="model">helpdesk.ticket.stage.duration.report</field>
+            <field name="arch" type="xml">
+                <graph string="Stage Duration Analysis" type="bar">
+                    <field name="team_id"/>
+                    <field name="stage_id"/>
+                    <field name="avg_duration_seconds" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Pivot View -->
+        <record id="view_helpdesk_ticket_stage_duration_report_pivot" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.stage.duration.report.pivot</field>
+            <field name="model">helpdesk.ticket.stage.duration.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Stage Duration Analysis">
+                    <field name="team_id" type="row"/>
+                    <field name="stage_id" type="row"/>
+                    <field name="avg_duration_seconds" type="measure"/>
+                    <field name="ticket_count" type="measure"/>
+                    <field name="completion_rate" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_helpdesk_ticket_stage_duration_report_search" model="ir.ui.view">
+            <field name="name">helpdesk.ticket.stage.duration.report.search</field>
+            <field name="model">helpdesk.ticket.stage.duration.report</field>
+            <field name="arch" type="xml">
+                <search string="Stage Duration Report">
+                    <field name="team_id"/>
+                    <field name="stage_id"/>
+                    <filter string="High Duration" name="high_duration"
+                            domain="[('avg_duration_seconds', '&gt;', 86400)]"/>
+                    <filter string="Low Completion Rate" name="low_completion"
+                            domain="[('completion_rate', '&lt;', 50)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Team" name="group_team" context="{'group_by': 'team_id'}"/>
+                        <filter string="Stage" name="group_stage" context="{'group_by': 'stage_id'}"/>
+                        <filter string="Team and Stage" name="group_team_stage"
+                                context="{'group_by': 'team_id,stage_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_helpdesk_ticket_stage_duration_report" model="ir.actions.act_window">
+            <field name="name">Stage Duration Report</field>
+            <field name="res_model">helpdesk.ticket.stage.duration.report</field>
+            <field name="view_mode">tree,graph,pivot</field>
+            <field name="view_id" ref="view_helpdesk_ticket_stage_duration_report_tree"/>
+            <field name="search_view_id" ref="view_helpdesk_ticket_stage_duration_report_search"/>
+            <field name="context">{'search_default_group_team': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No stage duration data available.
+                </p>
+                <p>
+                    This report shows how long tickets stay in each stage by team.
+                    Use it to identify bottlenecks and improve team performance.
+                </p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_helpdesk_ticket_stage_duration_report"
+                  name="Stage Duration Report"
+                  parent="helpdesk.menu_helpdesk_root"
+                  action="action_helpdesk_ticket_stage_duration_report"
+                  sequence="50"/>
+    </data>
+</odoo>
