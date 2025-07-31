@@ -10,6 +10,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/helpdesk_ticket_views.xml",
+        "views/helpdesk_ticket_stage_duration_report_views.xml",
     ],
     "installable": True,
     "application": False,
