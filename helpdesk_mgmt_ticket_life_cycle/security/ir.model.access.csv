@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_helpdesk_ticket_stage_duration_user,access_helpdesk_ticket_stage_duration_user,model_helpdesk_ticket_stage_duration,,1,1,1,1
+access_helpdesk_ticket_stage_duration_report_user,access_helpdesk_ticket_stage_duration_report_user,model_helpdesk_ticket_stage_duration_report,,1,0,0,0
