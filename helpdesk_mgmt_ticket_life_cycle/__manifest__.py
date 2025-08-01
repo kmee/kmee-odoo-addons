@@ -1,6 +1,6 @@
 {
     "name": "Help Desk Ticket  Stage Duration",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.2",
     "summary": "Shows the duration each ticket spent in each stage",
     "category": "helpdesk",
     "author": "Ananias, KMEE",
