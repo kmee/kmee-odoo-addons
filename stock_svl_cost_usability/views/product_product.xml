@@ -1,0 +1,55 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="product_form_view_slv" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="action_open_stock_valuation_layer"
+                    string="Inventory Valuation"
+                    icon="fa-usd"
+                    type="object"
+                    attrs="{'invisible': [('type', '!=', 'product')]}"
+                >
+                </button>
+            </div>
+
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Cost History"
+                    name="stock_valuation_layers"
+                    attrs="{'invisible': [('type', '!=', 'product')]}"
+                >
+                    <group colspan="4">
+                        <field
+                            name="valuation_layer_json_text"
+                            nolabel="1"
+                            widget="json_graph"
+                        />
+                    </group>
+                    <group string="SVLs" colspan="4">
+                        <field name="stock_valuation_layer_ids" nolabel="1">
+                            <tree editable="false" create="false" delete="false">
+                                <field name="create_date" decoration-bf="1" />
+                                <field name="display_name" optional="show" />
+                                <field name="quantity" optional="show" />
+                                <field name="uom_id" optional="show" />
+                                <field name="value" optional="hide" />
+                                <field name="unit_cost" decoration-bf="1" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
