@@ -47,7 +47,7 @@ class ProductProduct(models.Model):
                     "yAxes": [
                         {
                             "ticks": {"beginAtZero": False, "stacked": False},
-                            "scaleLabel": {"display": True, "labelString": "Quantity"},
+                            "scaleLabel": {"display": True, "labelString": "Cost"},
                         }
                     ],
                     "xAxes": [
