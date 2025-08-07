@@ -3,8 +3,13 @@ import io
 import logging
 
 from pypdf import PdfReader, PdfWriter
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import mm
+from bs4 import BeautifulSoup
 
 from odoo import fields, models
+from odoo.tools import html2plaintext
 
 _logger = logging.getLogger(__name__)
 
@@ -19,29 +24,60 @@ class SaleOrder(models.Model):
     )
 
     def merge_with_cover_pdf(self, report_pdf):
+        writer = PdfWriter()
 
-        if not self.merge_pdf:
-            return report_pdf
-
-        cover_record = self.env["sale.order.cover.pdf"].get_active_cover()
-        if not cover_record:
-            return report_pdf
+        if self.merge_pdf:
+            cover_record = self.env["sale.order.cover.pdf"].get_active_cover()
+            if cover_record:
+                try:
+                    capa_bytes = base64.b64decode(cover_record.cover_pdf)
+                    capa_reader = PdfReader(io.BytesIO(capa_bytes))
+                    for page in capa_reader.pages:
+                        writer.add_page(page)
+                except Exception as e:
+                    _logger.error(f"[{self.name}] Erro ao adicionar capa: {e}")
 
         try:
-            writer = PdfWriter()
-
-            capa_bytes = base64.b64decode(cover_record.cover_pdf)
-            capa_reader = PdfReader(io.BytesIO(capa_bytes))
-            for page in capa_reader.pages:
-                writer.add_page(page)
             report_reader = PdfReader(io.BytesIO(report_pdf))
             for page in report_reader.pages:
                 writer.add_page(page)
+        except Exception as e:
+            _logger.error(f"[{self.name}] Erro ao adicionar relatório principal: {e}")
+            return report_pdf
 
-            output = io.BytesIO()
-            writer.write(output)
-            return output.getvalue()
+        try:
+            company = self.env.company
+            if company.terms_type == 'html':
+                default_terms_text = html2plaintext(company.invoice_terms_html)
+
+            if default_terms_text:
+                soup = BeautifulSoup(default_terms_text, "html.parser")
+                default_terms_text = soup.get_text().strip()
+
+                buffer = io.BytesIO()
+                c = canvas.Canvas(buffer, pagesize=A4)
+                width, height = A4
+
+                c.setFont("Helvetica-Bold", 16)
+                c.drawString(20 * mm, height - 30 * mm, "Termos e Condições")
+
+                c.setFont("Helvetica", 10)
+                textobject = c.beginText(20 * mm, height - 40 * mm)
+                for line in default_terms_text.splitlines():
+                    textobject.textLine(line.strip())
+                c.drawText(textobject)
+
+                c.showPage()
+                c.save()
+
+                buffer.seek(0)
+                terms_generated = PdfReader(buffer)
+                for page in terms_generated.pages:
+                    writer.add_page(page)
 
         except Exception as e:
-            _logger.error(f"Erro ao mesclar PDF da capa para {self.name}: {e}")
-            return report_pdf
+            _logger.error(f"[{self.name}] Erro ao adicionar termos padrão do sistema: {e}")
+
+        output = io.BytesIO()
+        writer.write(output)
+        return output.getvalue()
