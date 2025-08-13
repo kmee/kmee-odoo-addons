@@ -21,9 +21,9 @@
 
         <!-- Graph View -->
         <record
-            id="view_helpdesk_ticket_stage_duration_report_graph"
-            model="ir.ui.view"
-        >
+        id="view_helpdesk_ticket_stage_duration_report_graph"
+        model="ir.ui.view"
+    >
             <field name="name">helpdesk.ticket.stage.duration.report.graph</field>
             <field name="model">helpdesk.ticket.stage.duration.report</field>
             <field name="arch" type="xml">
@@ -37,9 +37,9 @@
 
         <!-- Pivot View -->
         <record
-            id="view_helpdesk_ticket_stage_duration_report_pivot"
-            model="ir.ui.view"
-        >
+        id="view_helpdesk_ticket_stage_duration_report_pivot"
+        model="ir.ui.view"
+    >
             <field name="name">helpdesk.ticket.stage.duration.report.pivot</field>
             <field name="model">helpdesk.ticket.stage.duration.report</field>
             <field name="arch" type="xml">
@@ -55,18 +55,18 @@
 
         <!-- Kanban View -->
         <record
-            id="view_helpdesk_ticket_stage_duration_report_kanban"
-            model="ir.ui.view"
-        >
+        id="view_helpdesk_ticket_stage_duration_report_kanban"
+        model="ir.ui.view"
+    >
             <field name="name">helpdesk.ticket.stage.duration.report.kanban</field>
             <field name="model">helpdesk.ticket.stage.duration.report</field>
             <field name="arch" type="xml">
                 <kanban
-                    string="Stage Duration Report"
-                    create="false"
-                    edit="false"
-                    class="o_kanban_small_column"
-                >
+                string="Stage Duration Report"
+                create="false"
+                edit="false"
+                class="o_kanban_small_column"
+            >
                     <field name="team_id" />
                     <field name="stage_id" />
                     <field name="ticket_count" />
@@ -95,27 +95,29 @@
                                                 <div class="o_kanban_primary_left">
                                                     <div class="o_kanban_text_left">
                                                         <strong>Tickets:</strong> <field
-                                                            name="ticket_count"
-                                                        />
+                                                        name="ticket_count"
+                                                    />
                                                     </div>
                                                     <div class="o_kanban_text_left">
-                                                        <strong>Avg Duration:</strong> <field
-                                                            name="avg_duration_display"
-                                                        />
+                                                        <strong
+                                                    >Avg Duration:</strong> <field
+                                                        name="avg_duration_display"
+                                                    />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="o_kanban_primary_right">
                                                     <div class="o_kanban_text_right">
-                                                        <strong>Completed:</strong> <field
-                                                            name="completed_tickets"
-                                                        />
+                                                        <strong
+                                                    >Completed:</strong> <field
+                                                        name="completed_tickets"
+                                                    />
                                                     </div>
                                                     <div class="o_kanban_text_right">
                                                         <strong>Active:</strong> <field
-                                                            name="active_tickets"
-                                                        />
+                                                        name="active_tickets"
+                                                    />
                                                     </div>
                                                 </div>
                                             </div>
@@ -124,16 +126,16 @@
                                             <div class="col-12">
                                                 <div class="progress">
                                                     <div
-                                                        class="progress-bar"
-                                                        role="progressbar"
-                                                        t-attf-style="width: #{record.completion_rate.value}%"
-                                                        t-attf-aria-valuenow="#{record.completion_rate.value}"
-                                                        aria-valuemin="0"
-                                                        aria-valuemax="100"
-                                                    >
+                                                    class="progress-bar"
+                                                    role="progressbar"
+                                                    t-attf-style="width: #{record.completion_rate.value}%"
+                                                    t-attf-aria-valuenow="#{record.completion_rate.value}"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100"
+                                                >
                                                         <field
-                                                            name="completion_rate"
-                                                        />%
+                                                        name="completion_rate"
+                                                    />%
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,9 +151,9 @@
 
         <!-- Search View -->
         <record
-            id="view_helpdesk_ticket_stage_duration_report_search"
-            model="ir.ui.view"
-        >
+        id="view_helpdesk_ticket_stage_duration_report_search"
+        model="ir.ui.view"
+    >
             <field name="name">helpdesk.ticket.stage.duration.report.search</field>
             <field name="model">helpdesk.ticket.stage.duration.report</field>
             <field name="arch" type="xml">
@@ -159,31 +161,31 @@
                     <field name="team_id" />
                     <field name="stage_id" />
                     <filter
-                        string="High Duration"
-                        name="high_duration"
-                        domain="[('avg_duration_seconds', '&gt;', 86400)]"
-                    />
+                    string="High Duration"
+                    name="high_duration"
+                    domain="[('avg_duration_seconds', '&gt;', 86400)]"
+                />
                     <filter
-                        string="Low Completion Rate"
-                        name="low_completion"
-                        domain="[('completion_rate', '&lt;', 50)]"
-                    />
+                    string="Low Completion Rate"
+                    name="low_completion"
+                    domain="[('completion_rate', '&lt;', 50)]"
+                />
                     <group expand="0" string="Group By">
                         <filter
-                            string="Team"
-                            name="group_team"
-                            context="{'group_by': 'team_id'}"
-                        />
+                        string="Team"
+                        name="group_team"
+                        context="{'group_by': 'team_id'}"
+                    />
                         <filter
-                            string="Stage"
-                            name="group_stage"
-                            context="{'group_by': 'stage_id'}"
-                        />
+                        string="Stage"
+                        name="group_stage"
+                        context="{'group_by': 'stage_id'}"
+                    />
                         <filter
-                            string="Team and Stage"
-                            name="group_team_stage"
-                            context="{'group_by': 'team_id:asc,stage_id:asc'}"
-                        />
+                        string="Team and Stage"
+                        name="group_team_stage"
+                        context="{'group_by': 'team_id:asc,stage_id:asc'}"
+                    />
                     </group>
                 </search>
             </field>
@@ -191,20 +193,20 @@
 
         <!-- Action -->
         <record
-            id="action_helpdesk_ticket_stage_duration_report"
-            model="ir.actions.act_window"
-        >
+        id="action_helpdesk_ticket_stage_duration_report"
+        model="ir.actions.act_window"
+    >
             <field name="name">Stage Duration Report</field>
             <field name="res_model">helpdesk.ticket.stage.duration.report</field>
             <field name="view_mode">graph,kanban,pivot,tree</field>
             <field
-                name="view_id"
-                ref="view_helpdesk_ticket_stage_duration_report_kanban"
-            />
+            name="view_id"
+            ref="view_helpdesk_ticket_stage_duration_report_kanban"
+        />
             <field
-                name="search_view_id"
-                ref="view_helpdesk_ticket_stage_duration_report_search"
-            />
+            name="search_view_id"
+            ref="view_helpdesk_ticket_stage_duration_report_search"
+        />
             <field name="context">{'search_default_group_team': 1}</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -219,11 +221,11 @@
 
         <!-- Menu Item -->
         <menuitem
-            id="menu_helpdesk_ticket_stage_duration_report"
-            name="Stage Duration Report"
-            parent="helpdesk_mgmt.helpdesk_ticket_main_menu"
-            action="action_helpdesk_ticket_stage_duration_report"
-            sequence="30"
-            groups="helpdesk_mgmt.group_helpdesk_manager"
-        />
+        id="menu_helpdesk_ticket_stage_duration_report"
+        name="Stage Duration Report"
+        parent="helpdesk_mgmt.helpdesk_ticket_main_menu"
+        action="action_helpdesk_ticket_stage_duration_report"
+        sequence="30"
+        groups="helpdesk_mgmt.group_helpdesk_manager"
+    />
 </odoo>

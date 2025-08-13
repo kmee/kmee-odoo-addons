@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_overtime_document">
+        <t t-call="web.external_layout">
+            <main>
+                <div class="page">
+                    <h2>Relatório de Horas Extras</h2>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Funcionário</th>
+                                <th>Horas Extras</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="docs" t-as="overtime">
+                                <tr>
+                                    <td style="text-align: right;">
+                                        <span t-esc="overtime.date" />
+                                    </td>
+                                    <td style="text-align: left;">
+                                        <span t-esc="overtime.employee_id.name or ''" />
+                                    </td>
+                                    <td style="text-align: right;">
+                                        <span
+                                            t-esc="overtime.extra_hours_without_multiplier or 0"
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </t>
+    </template>
+    <report
+        id="action_report_overtime"
+        model="hr.attendance.overtime"
+        string="Overtime Report"
+        report_type="qweb-pdf"
+        name="hr_overtime_report_action_pdf.report_overtime_document"
+        file="hr_overtime_report_action_pdf.report_overtime_document"
+        attachment_use="False"
+    />
+</odoo>

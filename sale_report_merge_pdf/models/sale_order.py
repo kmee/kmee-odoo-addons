@@ -2,11 +2,11 @@ import base64
 import io
 import logging
 
+from bs4 import BeautifulSoup
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
 from reportlab.lib.units import mm
-from bs4 import BeautifulSoup
+from reportlab.pdfgen import canvas
 
 from odoo import fields, models
 from odoo.tools import html2plaintext
@@ -47,7 +47,7 @@ class SaleOrder(models.Model):
 
         try:
             company = self.env.company
-            if company.terms_type == 'html':
+            if company.terms_type == "html":
                 default_terms_text = html2plaintext(company.invoice_terms_html)
 
             if default_terms_text:
@@ -76,7 +76,9 @@ class SaleOrder(models.Model):
                     writer.add_page(page)
 
         except Exception as e:
-            _logger.error(f"[{self.name}] Erro ao adicionar termos padrão do sistema: {e}")
+            _logger.error(
+                f"[{self.name}] Erro ao adicionar termos padrão do sistema: {e}"
+            )
 
         output = io.BytesIO()
         writer.write(output)
