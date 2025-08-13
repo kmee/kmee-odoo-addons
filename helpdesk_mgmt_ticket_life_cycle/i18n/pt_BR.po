@@ -191,5 +191,3 @@ msgid "Shows the duration each ticket spent in each stage"
 msgstr "Mostra a duração que cada ticket permaneceu em cada estágio"
 
 # End of translation file
-
- 
