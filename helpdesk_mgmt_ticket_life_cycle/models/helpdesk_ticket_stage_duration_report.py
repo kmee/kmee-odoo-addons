@@ -75,12 +75,10 @@ class HelpdeskTicketStageDurationReport(models.Model):
 
     # Additional metrics
     completed_tickets = fields.Integer(
-        string="Completed Tickets",
         readonly=True,
     )
 
     active_tickets = fields.Integer(
-        string="Active Tickets",
         readonly=True,
     )
 
