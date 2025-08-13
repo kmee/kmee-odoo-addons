@@ -5,6 +5,7 @@
     "author": "Seu Nome",
     "category": "Human Resources",
     "license": "AGPL-3",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["hr", "hr_attendance", "web", "l10n_br_hr_overtime_custom_multiplier"],
     "data": [
         "security/ir.model.access.csv",
