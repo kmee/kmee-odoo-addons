@@ -18,9 +18,7 @@ class HrLeaveAbono(models.Model):
         "hr.leave.allocation",
         string="Allocation",
         domain="""[
-            ('employee_id', '=', employee_id),
-            ('date_from',  '<', context_today().strftime('%Y-%m-%d')),
-            ('date_to', '>', context_today().strftime('%Y-%m-%d'))]""",
+            ('employee_id', '=', employee_id)]""",
         required=True,
     )
     date = fields.Date(help="Date", required=True)
