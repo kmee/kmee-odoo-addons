@@ -12,6 +12,9 @@ class HrLeaveAllocation(models.Model):
 
     number_of_days_sold = fields.Float(string="Days sold", help="Days sold", default=0)
     days_off_sold_display = fields.Char(compute="_compute_days_off_sold_display")
+    hr_holidays_sale_of_days_off = fields.Boolean(
+        related="holiday_status_id.hr_holidays_sale_of_days_off"
+    )
 
     def sell_days(self, days):
         self.ensure_one()
