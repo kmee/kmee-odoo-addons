@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 19:33+0000\n"
-"PO-Revision-Date: 2025-07-22 19:33+0000\n"
+"POT-Creation-Date: 2025-08-14 14:14+0000\n"
+"PO-Revision-Date: 2025-08-14 14:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -100,6 +100,11 @@ msgid "Employee"
 msgstr "Funcionário"
 
 #. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__holiday_allocation_period
+msgid "Holiday Allocation Period"
+msgstr "Período"
+
+#. module: hr_holidays_sale_of_days_off
 #: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.hr_leave_allocation_form_view
 msgid "Holiday Sale"
 msgstr "Venda de Férias"
@@ -115,9 +120,15 @@ msgid "Holiday Sales"
 msgstr "Vendas de Férias"
 
 #. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_allocation__hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_type__hr_holidays_sale_of_days_off
+msgid "Hr Holidays Sale Of Days Off"
+msgstr "Permitir Venda de Férias"
+
+#. module: hr_holidays_sale_of_days_off
 #: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_leave_abono
 msgid "Hr Leave Abono"
-msgstr ""
+msgstr "Venda de Férias"
 
 #. module: hr_holidays_sale_of_days_off
 #: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__id
@@ -173,6 +184,11 @@ msgstr "A quantidade solicitada não está disponível para venda."
 #: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_leave_allocation
 msgid "Time Off Allocation"
 msgstr "Alocação de Folga"
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_leave_type
+msgid "Time Off Type"
+msgstr "Tipo de Folga"
 
 #. module: hr_holidays_sale_of_days_off
 #: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.view_employee_form_leave_inherit
