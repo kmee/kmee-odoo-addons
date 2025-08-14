@@ -12,6 +12,7 @@
         "hr_holidays",
     ],
     "data": [
+        "views/hr_leave_type.xml",
         "views/hr_leave_allocation.xml",
         "security/hr_leave_abono.xml",
         "views/hr_leave_abono.xml",
