@@ -18,8 +18,12 @@ class HrLeaveAbono(models.Model):
         "hr.leave.allocation",
         string="Allocation",
         domain="""[
-            ('employee_id', '=', employee_id)]""",
+            ('employee_id', '=', employee_id),
+            ('hr_holidays_sale_of_days_off', '=', True)]""",
         required=True,
+    )
+    holiday_allocation_period = fields.Char(
+        compute="_compute_holiday_allocation_period"
     )
     date = fields.Date(help="Date", required=True)
     days_sold = fields.Float(string="Days sold", help="Days sold", required=True)
@@ -54,3 +58,12 @@ class HrLeaveAbono(models.Model):
                 )
             abono.holiday_allocation_id.sell_days(abono.days_sold)
             abono.state = "paid"
+
+    @api.depends("holiday_allocation_id")
+    def _compute_holiday_allocation_period(self):
+        for record in self:
+            record.holiday_allocation_period = False
+            if record.holiday_allocation_id:
+                date_from = record.holiday_allocation_id.date_from
+                date_to = record.holiday_allocation_id.date_to
+                record.holiday_allocation_period = ("%s - %s") % (date_from, date_to)
