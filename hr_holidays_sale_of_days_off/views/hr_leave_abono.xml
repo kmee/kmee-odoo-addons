@@ -31,6 +31,7 @@
                             name="holiday_allocation_id"
                             attrs="{'readonly': [('state', '=', 'paid')]}"
                         />
+                        <field name="holiday_allocation_period" />
                         <field
                             name="date"
                             attrs="{'readonly': [('state', '=', 'paid')]}"
@@ -52,6 +53,7 @@
                 <field name="name" />
                 <field name="employee_id" />
                 <field name="holiday_allocation_id" />
+                <field name="holiday_allocation_period" />
                 <field name="date" />
                 <field name="days_sold" />
                 <field name="state" />
