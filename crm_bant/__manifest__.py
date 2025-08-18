@@ -12,7 +12,7 @@
         "views/crm_lead_views.xml",
         "views/dashboard_view.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
     "auto_install": False,
     "license": "LGPL-3",
