@@ -12,7 +12,7 @@
         "views/sale_portal_templates.xml",
         "report/ir_actions_report_templates.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
     "auto_install": False,
     "license": "AGPL-3",
