@@ -15,4 +15,5 @@
     ],
     "data": ["views/project_menus.xml"],
     "demo": [],
+    'installable': False,
 }
