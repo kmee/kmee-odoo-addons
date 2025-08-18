@@ -8,4 +8,5 @@
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["hr_holidays"],
+    'installable': False,
 }
