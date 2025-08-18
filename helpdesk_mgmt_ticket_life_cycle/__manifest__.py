@@ -12,6 +12,6 @@
         "views/helpdesk_ticket_views.xml",
         "views/helpdesk_ticket_stage_duration_report_views.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
 }
