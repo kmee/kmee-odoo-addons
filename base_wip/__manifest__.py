@@ -20,4 +20,5 @@
         "views/base_wip.xml",
     ],
     "demo": [],
+    'installable': False,
 }

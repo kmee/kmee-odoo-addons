@@ -15,4 +15,5 @@
         "views/account_journal.xml",
     ],
     "demo": [],
+    'installable': False,
 }

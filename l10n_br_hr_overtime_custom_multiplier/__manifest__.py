@@ -22,4 +22,5 @@
         #
         "wizards/hr_attendance_overtime_payment_wizard.xml",
     ],
+    'installable': False,
 }

@@ -14,4 +14,5 @@
         "views/report_stockpicking_operations.xml",
     ],
     "demo": [],
+    'installable': False,
 }

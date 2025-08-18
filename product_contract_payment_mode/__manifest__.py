@@ -11,4 +11,5 @@
     "depends": ["product_contract", "contract_payment_mode", "account_payment_sale"],
     "data": [],
     "demo": [],
+    'installable': False,
 }

@@ -14,4 +14,5 @@
         "views/hr_job.xml",
         "views/website_hr_job.xml",
     ],
+    'installable': False,
 }

@@ -19,5 +19,5 @@
         "views/hr_employee.xml",
     ],
     "demo": [],
-    "installable": True,
+    'installable': False,
 }

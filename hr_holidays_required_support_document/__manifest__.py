@@ -16,4 +16,5 @@
         "views/hr_leave_type.xml",
     ],
     "demo": [],
+    'installable': False,
 }

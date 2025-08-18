@@ -13,4 +13,5 @@
     ],
     "data": [],
     "demo": [],
+    'installable': False,
 }

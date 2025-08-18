@@ -13,4 +13,5 @@
         "views/mail_filter_role.xml",
     ],
     "demo": [],
+    'installable': False,
 }

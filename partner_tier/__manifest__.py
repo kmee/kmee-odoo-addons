@@ -16,7 +16,7 @@
     "demo": [
         "demo/res_partner_tier_demo.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
     "auto_install": False,
 }

@@ -20,4 +20,5 @@
         "views/sale_blanket_order_line.xml",
     ],
     "demo": [],
+    'installable': False,
 }

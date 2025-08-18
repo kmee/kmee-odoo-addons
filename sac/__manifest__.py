@@ -35,6 +35,6 @@
         "data/sac_reason.xml",
     ],
     "demo": [],
-    "installable": True,
+    'installable': False,
     "application": True,
 }

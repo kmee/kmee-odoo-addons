@@ -19,7 +19,7 @@
         "views/hr_contract_type_view.xml",
     ],
     "test": [],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
     "license": "AGPL-3",
 }

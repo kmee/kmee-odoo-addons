@@ -20,4 +20,5 @@
         "views/payment_transaction.xml",
     ],
     "demo": [],
+    'installable': False,
 }

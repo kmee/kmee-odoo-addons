@@ -12,7 +12,7 @@
         "views/hr_attendance_overtime_view_inherit.xml",
         "reports/overtime_report_template.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
     "auto_install": False,
 }

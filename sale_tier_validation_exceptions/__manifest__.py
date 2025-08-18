@@ -20,4 +20,5 @@
         "views/exception_rule.xml",
     ],
     "demo": [],
+    'installable': False,
 }

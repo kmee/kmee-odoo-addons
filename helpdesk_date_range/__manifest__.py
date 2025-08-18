@@ -13,6 +13,6 @@
     "data": [
         "views/helpdesk_ticket_views.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

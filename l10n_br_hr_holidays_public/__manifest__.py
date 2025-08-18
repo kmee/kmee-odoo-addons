@@ -16,4 +16,5 @@
         "security/ir.model.access.csv",
         "wizards/l10n_br_public_holidays_wizard.xml",
     ],
+    'installable': False,
 }

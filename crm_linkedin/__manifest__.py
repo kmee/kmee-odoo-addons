@@ -10,6 +10,6 @@
     "data": [
         "views/crm_lead_views.xml",
     ],
-    "installable": True,
+    'installable': False,
     "auto_install": False,
 }

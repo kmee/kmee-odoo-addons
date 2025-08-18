@@ -8,7 +8,7 @@
     "maintainers": ["mileo"],
     "license": "LGPL-3",
     "application": False,
-    "installable": True,
+    'installable': False,
     "depends": ["base"],
     "data": [
         "views/res_partner_views.xml",

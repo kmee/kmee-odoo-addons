@@ -13,4 +13,5 @@
     "data": [
         "wizards/account_payment_register.xml",
     ],
+    'installable': False,
 }
