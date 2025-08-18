@@ -1,8 +1,8 @@
 
 <!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
-[![Pre-commit Status](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/pre-commit.yml/badge.svg?branch=17.0)](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/pre-commit.yml?query=branch%3A17.0)
-[![Build Status](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/test.yml/badge.svg?branch=17.0)](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/test.yml?query=branch%3A17.0)
-[![codecov](https://codecov.io/gh/KMEE/kmee-odoo-addons/branch/17.0/graph/badge.svg)](https://codecov.io/gh/KMEE/kmee-odoo-addons)
+[![Pre-commit Status](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/pre-commit.yml/badge.svg?branch=18.0)](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/pre-commit.yml?query=branch%3A18.0)
+[![Build Status](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/test.yml/badge.svg?branch=18.0)](https://github.com/KMEE/kmee-odoo-addons/actions/workflows/test.yml?query=branch%3A18.0)
+[![codecov](https://codecov.io/gh/KMEE/kmee-odoo-addons/branch/18.0/graph/badge.svg)](https://codecov.io/gh/KMEE/kmee-odoo-addons)
 <!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 
 <!-- /!\ do not modify above this line -->
