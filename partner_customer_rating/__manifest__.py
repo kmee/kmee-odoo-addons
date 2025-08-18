@@ -19,7 +19,7 @@
             "partner_customer_rating/static/src/css/customer_rating_styles.css",
         ],
     },
-    "installable": True,
+    'installable': False,
     "auto_install": False,
     "demo": [],
 }
