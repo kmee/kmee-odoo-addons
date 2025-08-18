@@ -15,7 +15,7 @@
         "views/crm_lead_views.xml",
         "views/sale_order_views.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
     "auto_install": False,
     "license": "LGPL-3",
