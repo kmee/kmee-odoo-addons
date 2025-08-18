@@ -11,6 +11,6 @@
         "views/helpdesk_ticket_views.xml",
         "views/helpdesk_sla_views.xml",
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
 }
