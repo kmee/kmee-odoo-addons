@@ -11,4 +11,5 @@
     "depends": ["hr_holidays"],
     "data": [],
     "demo": [],
+    'installable': False,
 }
