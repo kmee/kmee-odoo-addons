@@ -18,4 +18,5 @@
         "views/website_hr_recruitment_templates.xml",
         "wizards/job_share.xml",
     ],
+    'installable': False,
 }
