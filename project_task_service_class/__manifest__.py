@@ -14,4 +14,5 @@
         "views/project_task.xml",
     ],
     "demo": [],
+    'installable': False,
 }
