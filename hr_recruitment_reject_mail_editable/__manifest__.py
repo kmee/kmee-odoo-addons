@@ -16,4 +16,5 @@
         "wizard/hr_recruitment_reject.xml",
     ],
     "demo": [],
+    'installable': False,
 }
