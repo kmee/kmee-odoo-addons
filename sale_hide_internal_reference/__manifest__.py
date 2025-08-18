@@ -14,4 +14,5 @@
         "views/product_template.xml",
     ],
     "demo": [],
+    'installable': False,
 }
