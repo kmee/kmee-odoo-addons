@@ -10,4 +10,5 @@
     "depends": [
         "hr_holidays",
     ],
+    'installable': False,
 }
