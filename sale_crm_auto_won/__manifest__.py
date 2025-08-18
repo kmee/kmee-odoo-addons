@@ -9,4 +9,5 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["sale_crm"],
+    'installable': False,
 }
