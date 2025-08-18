@@ -2,42 +2,41 @@
 <!-- Copyright 2018 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
-    <record id="sac_kanban_new" model="base.kanban.stage">
+    <record id="sac_kanban_new" model="sac.kanban.stage">
         <field name="name">Novo</field>
         <field name="sequence">1</field>
         <field name="description">Novos chamados abertos no SAC</field>
     </record>
 
-    <record id="sac_kanban_analisado" model="base.kanban.stage">
+    <record id="sac_kanban_analisado" model="sac.kanban.stage">
         <field name="name">Em analise</field>
         <field name="sequence">10</field>
         <field name="description">Chamados analisados</field>
         <field name="mail_template_id" ref="sac.mail_template_sac_receive" />
     </record>
 
-    <record id="sac_kanban_aguardando_envio" model="base.kanban.stage">
+    <record id="sac_kanban_aguardando_envio" model="sac.kanban.stage">
         <field name="name">Arguardando envio</field>
         <field name="sequence">20</field>
         <field name="description">Aguardando Envio</field>
     </record>
 
-    <record id="sac_kanban_troca" model="base.kanban.stage">
+    <record id="sac_kanban_troca" model="sac.kanban.stage">
         <field name="name">Troca realizada</field>
         <field name="sequence">50</field>
         <field name="description">Troca realizada</field>
         <field name="mail_template_id" ref="sac.mail_template_sac_troca_realizada" />
     </record>
 
-    <!--<record id="sac_kanban_bank" model="base.kanban.stage">-->
-        <!--<field name="name">Depósito bancário realizado</field>-->
-        <!--<field name="res_model_id" ref="sac.model_sac"/>-->
-        <!--<field name="sequence">60</field>-->
-        <!--<field name="description">Deposito bancário realizada</field>-->
-        <!--<field name="mail_template_id" ref="sac.mail_template_sac_bank"/>-->
+    <!--<record id="sac_kanban_bank" model="sac.kanban.stage">-->
+    <!--<field name="name">Depósito bancário realizado</field>-->
+    <!--<field name="res_model_id" ref="sac.model_sac"/>-->
+    <!--<field name="sequence">60</field>-->
+    <!--<field name="description">Deposito bancário realizada</field>-->
+    <!--<field name="mail_template_id" ref="sac.mail_template_sac_bank"/>-->
     <!--</record>-->
 
-    <record id="sac_kanban_solucionado" model="base.kanban.stage">
+    <record id="sac_kanban_solucionado" model="sac.kanban.stage">
         <field name="name">Solucionado</field>
         <field name="sequence">90</field>
         <field name="fold">True</field>
@@ -45,7 +44,7 @@
         <field name="mail_template_id" ref="sac.mail_template_sac_complete" />
     </record>
 
-    <record id="sac_kanban_nao_solucionado" model="base.kanban.stage">
+    <record id="sac_kanban_nao_solucionado" model="sac.kanban.stage">
         <field name="name">Não Solucionado</field>
         <field name="sequence">999</field>
         <field name="fold">True</field>

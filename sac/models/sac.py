@@ -23,9 +23,9 @@ class Sac(models.Model):
     _rec_names_search = ["name", "customer_name"]
 
     _order = "kanban_priority desc, kanban_sequence"
-    _group_by_full = {
-        "stage_id": lambda s, *a, **k: s._read_group_stage_ids(*a, **k),
-    }
+    # _group_by_full = {
+    #     "stage_id": lambda s, *a, **k: s._read_group_stage_ids(*a, **k),
+    # }
 
     @api.model
     def _default_stage_id(self):
@@ -111,11 +111,15 @@ class Sac(models.Model):
     )
 
     def _valid_field_parameter(self, field, name):
-        # allow tracking on models inheriting from 'base.kanban.stage'
+        # allow tracking on models inheriting from 'sac.kanban.stage'
         return name == "tracking" or super()._valid_field_parameter(field, name)
 
-    def _read_group_stage_ids(self, stages, domain, order):
-        return stages.search(domain, order=order)
+    @api.model
+    def _read_group_stage_ids(self, stages, domain):
+        search_domain = [
+            ("id", "in", stages.ids),
+        ]
+        return stages.search(search_domain)
 
     @api.depends("create_date")
     def _compute_create_date(self):

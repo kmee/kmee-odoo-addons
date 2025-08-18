@@ -2,7 +2,6 @@
 <!-- Copyright 2018 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <record id="MODULE_CATEGORY_SAC" model="ir.module.category">
         <field name="name">SAC</field>
         <field name="description">Serviço de atendimento ao consumidor</field>
@@ -55,5 +54,4 @@
         <field name="perm_write" eval="1" />
         <field name="perm_unlink" eval="1" />
     </record>
-
 </odoo>

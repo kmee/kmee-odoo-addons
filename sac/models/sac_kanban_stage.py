@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class SacKanbanStage(models.Model):
-    _order = "res_model_id, sequence"
+    _order = "sequence"
     _name = "sac.kanban.stage"
 
     mail_template_id = fields.Many2one(
