@@ -21,7 +21,7 @@
     "demo": [
         # 'demo/crm_team_demo.xml',
     ],
-    "installable": True,
+    'installable': False,
     "application": False,
     "auto_install": False,
 }
