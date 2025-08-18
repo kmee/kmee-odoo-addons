@@ -15,4 +15,5 @@
         "views/project_project.xml",
     ],
     "demo": [],
+    'installable': False,
 }
