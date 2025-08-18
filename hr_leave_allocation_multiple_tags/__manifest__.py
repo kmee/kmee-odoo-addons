@@ -12,4 +12,5 @@
         "views/hr_leave_allocation.xml",
     ],
     "demo": [],
+    'installable': False,
 }
