@@ -15,4 +15,5 @@
     "data": [
         "data/map_data.xml",
     ],
+    'installable': False,
 }
