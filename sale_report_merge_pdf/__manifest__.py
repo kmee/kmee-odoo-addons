@@ -17,6 +17,8 @@
     "external_dependencies": {
         "python": [
             "pypdf",
-        ]
-    },
+        ],
+    'installable': False,
+},
+    'installable': False,
 }
