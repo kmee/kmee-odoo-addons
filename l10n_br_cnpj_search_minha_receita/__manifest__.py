@@ -15,4 +15,5 @@
         "views/res_config_settings.xml",
     ],
     "demo": [],
+    'installable': False,
 }
