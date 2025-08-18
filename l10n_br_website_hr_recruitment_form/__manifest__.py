@@ -18,6 +18,8 @@
     "assets": {
         "web.assets_frontend": [
             "l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js",
-        ]
-    },
+        ],
+    'installable': False,
+},
+    'installable': False,
 }
