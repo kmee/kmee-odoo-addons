@@ -18,4 +18,5 @@
         "views/hr_leave_allocation.xml",
         "security/ir.model.access.csv",
     ],
+    'installable': False,
 }
