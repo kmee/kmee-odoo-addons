@@ -15,4 +15,5 @@
         "data/report.xml",
     ],
     "demo": [],
+    'installable': False,
 }
