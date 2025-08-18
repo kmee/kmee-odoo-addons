@@ -15,5 +15,5 @@
         "views/crm_stage_views.xml",
     ],
     "demo": [],
-    "installable": True,
+    'installable': False,
 }
