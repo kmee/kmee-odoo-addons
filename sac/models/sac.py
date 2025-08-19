@@ -324,15 +324,21 @@ class Sac(models.Model):
         result = super(Sac, self).create(vals_list)
         return result
 
-    @api.depends("create_date")
     def _track_template(self, tracking):
-        res = super(Sac, self)._track_template(tracking)
-        test_record = self[0]
-        changes, tracking_value_ids = tracking[test_record.id]
-        if "stage_id" in changes and test_record.stage_id.mail_template_id:
+        res = super()._track_template(tracking)
+        sac = self[0]
+        if "stage_id" in tracking and sac.stage_id.mail_template_id:
             res["stage_id"] = (
-                test_record.stage_id.mail_template_id,
-                {"composition_mode": "mass_mail"},
+                sac.stage_id.mail_template_id,
+                {
+                    # Need to set mass_mail so that the email will always be sent
+                    "composition_mode": "mass_mail",
+                    "auto_delete_keep_log": False,
+                    "subtype_id": self.env["ir.model.data"]._xmlid_to_res_id(
+                        "mail.mt_note"
+                    ),
+                    "email_layout_xmlid": "mail.mail_notification_light",
+                },
             )
         return res
 

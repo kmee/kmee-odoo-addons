@@ -87,8 +87,7 @@
                     <field
                         name="stage_id"
                         widget="statusbar"
-                        clickable="True"
-                        options="{'fold_field': 'fold'}"
+                        options="{'clickable': 1, 'fold_field': 'fold'}"
                     />
                     <field name="active" invisible="1" />
                 </header>
