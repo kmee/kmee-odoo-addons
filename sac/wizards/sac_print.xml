@@ -2,7 +2,6 @@
 <!-- Copyright 2019 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="sac_print_form_view">
         <field name="name">sac.print.form (in sac)</field>
         <field name="model">sac.print</field>
@@ -10,17 +9,17 @@
             <form string="Sac Print">
                 Deseja imprimir todos os chamados prontos para envio?
                 <group>
-                    <field name="name" invisible="1" />
-                </group>
+                <field name="name" invisible="1" />
+            </group>
                 <footer>
-                    <button
-                        name="doit"
-                        string="Imprimir"
-                        class="btn-primary"
-                        type="object"
-                    />
-                    <button string="Cancelar" class="btn-default" special="cancel" />
-                </footer>
+                <button
+                    name="doit"
+                    string="Imprimir"
+                    class="btn-primary"
+                    type="object"
+                />
+                <button string="Cancelar" class="btn-default" special="cancel" />
+            </footer>
             </form>
         </field>
     </record>
@@ -34,10 +33,10 @@
     </record>
 
     <!--<record model="ir.values" id="sac_print_act_multi">-->
-        <!--<field name="name">Sac Print</field> &lt;!&ndash; TODO &ndash;&gt;-->
-        <!--<field name="key2">client_action_multi</field>-->
-        <!--<field name="value" eval="'ir.actions.act_window,' +str(ref('sac_print_act_window'))" />-->
-        <!--<field name="model">source.model</field> &lt;!&ndash; TODO &ndash;&gt;-->
+    <!--<field name="name">Sac Print</field> &lt;!&ndash; TODO &ndash;&gt;-->
+    <!--<field name="key2">client_action_multi</field>-->
+    <!--<field name="value" eval="'ir.actions.act_window,' +str(ref('sac_print_act_window'))" />-->
+    <!--<field name="model">source.model</field> &lt;!&ndash; TODO &ndash;&gt;-->
     <!--</record>-->
 
     <record model="ir.ui.menu" id="sac_print_menu">

@@ -2,20 +2,17 @@
 <!-- Copyright 2018 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
-   <record model="ir.ui.menu" id="sac_base">
+    <record model="ir.ui.menu" id="sac_base">
         <field name="name">Sac</field>
         <field name="sequence" eval="16" />
-       <field name="groups_id" eval="[(6,0, [ref('sac.GROUP_SAC_READ')])]" />
-       <field name="web_icon">sac,static/description/icon.png</field>
+        <field name="groups_id" eval="[(6,0, [ref('sac.GROUP_SAC_READ')])]" />
+        <field name="web_icon">sac,static/description/icon.png</field>
     </record>
-
 
     <record model="ir.ui.menu" id="sac_submenu_config">
         <field name="name">Configurações</field>
         <field name="parent_id" ref="sac_base" />
         <field name="sequence" eval="99" />
-       <field name="groups_id" eval="[(6,0, [ref('sac.GROUP_SAC_GENERAL')])]" />
+        <field name="groups_id" eval="[(6,0, [ref('sac.GROUP_SAC_GENERAL')])]" />
     </record>
-
 </odoo>

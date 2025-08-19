@@ -19,8 +19,107 @@ class Sac(models.Model):
 
     _name = "sac"
     _description = "Serviço de atendimento ao consumidor"
-    _inherit = ["mail.thread", "utm.mixin", "base.kanban.abstract"]
+    _inherit = ["mail.thread", "utm.mixin"]
     _rec_names_search = ["name", "customer_name"]
+
+    _order = "kanban_priority desc, kanban_sequence"
+    # _group_by_full = {
+    #     "stage_id": lambda s, *a, **k: s._read_group_stage_ids(*a, **k),
+    # }
+
+    @api.model
+    def _default_stage_id(self):
+        return self.env["sac.kanban.stage"].search([], limit=1)
+
+    kanban_sequence = fields.Integer(
+        default=10,
+        index=True,
+        help="Order of record in relation to other records in the same Kanban"
+        " stage and with the same priority",
+    )
+    kanban_priority = fields.Selection(
+        selection=[("0", "Normal"), ("1", "Medium"), ("2", "High")],
+        index=True,
+        default="0",
+        help="The priority of the record (shown as stars in Kanban views)",
+    )
+    stage_id = fields.Many2one(
+        string="Kanban Stage",
+        comodel_name="sac.kanban.stage",
+        tracking=True,
+        index=True,
+        copy=False,
+        help="The Kanban stage that this record is currently in",
+        default=lambda s: s._default_stage_id(),
+        group_expand="_read_group_stage_ids",
+    )
+    user_id = fields.Many2one(
+        string="Assigned To",
+        comodel_name="res.users",
+        index=True,
+        tracking=True,
+        help="User that the record is currently assigned to",
+    )
+    kanban_color = fields.Integer(
+        string="Kanban Color Index",
+        help="Color index to be used for the record's Kanban card",
+    )
+    kanban_legend_priority = fields.Text(
+        string="Priority Explanation",
+        related="stage_id.legend_priority",
+        help="Explanation text to help users understand how the priority/star"
+        " mechanism applies to this record (depends on current stage)",
+    )
+    kanban_legend_blocked = fields.Text(
+        string="Special Handling Explanation",
+        related="stage_id.legend_blocked",
+        help="Explanation text to help users understand how the special"
+        " handling status applies to this record (depends on current"
+        " stage)",
+    )
+    kanban_legend_done = fields.Text(
+        string="Ready Explanation",
+        related="stage_id.legend_done",
+        help="Explanation text to help users understand how the ready"
+        " status applies to this record (depends on current stage)",
+    )
+    kanban_legend_normal = fields.Text(
+        string="Normal Handling Explanation",
+        related="stage_id.legend_normal",
+        help="Explanation text to help users understand how the normal"
+        " handling status applies to this record (depends on current"
+        " stage)",
+    )
+    kanban_status = fields.Selection(
+        selection=[
+            ("normal", "Normal Handling"),
+            ("done", "Ready"),
+            ("blocked", "Special Handling"),
+        ],
+        default="normal",
+        tracking=True,
+        required=True,
+        copy=False,
+        help="A record can have one of several Kanban statuses, which are used"
+        " to indicate whether there are any special situations affecting"
+        " it. The exact meaning of each status is allowed to vary based"
+        " on the stage the record is in but they are roughly as follow:\n"
+        "* Normal Handling: Default status, no special situations\n"
+        "* Ready: Ready to transition to the next stage\n"
+        "* Special Handling: Blocked in some way (e.g. must be handled by"
+        " a specific user)\n",
+    )
+
+    def _valid_field_parameter(self, field, name):
+        # allow tracking on models inheriting from 'sac.kanban.stage'
+        return name == "tracking" or super()._valid_field_parameter(field, name)
+
+    @api.model
+    def _read_group_stage_ids(self, stages, domain):
+        search_domain = [
+            ("id", "in", stages.ids),
+        ]
+        return stages.search(search_domain)
 
     @api.depends("create_date")
     def _compute_create_date(self):
@@ -225,15 +324,21 @@ class Sac(models.Model):
         result = super(Sac, self).create(vals_list)
         return result
 
-    @api.depends("create_date")
     def _track_template(self, tracking):
-        res = super(Sac, self)._track_template(tracking)
-        test_record = self[0]
-        changes, tracking_value_ids = tracking[test_record.id]
-        if "stage_id" in changes and test_record.stage_id.mail_template_id:
+        res = super()._track_template(tracking)
+        sac = self[0]
+        if "stage_id" in tracking and sac.stage_id.mail_template_id:
             res["stage_id"] = (
-                test_record.stage_id.mail_template_id,
-                {"composition_mode": "mass_mail"},
+                sac.stage_id.mail_template_id,
+                {
+                    # Need to set mass_mail so that the email will always be sent
+                    "composition_mode": "mass_mail",
+                    "auto_delete_keep_log": False,
+                    "subtype_id": self.env["ir.model.data"]._xmlid_to_res_id(
+                        "mail.mt_note"
+                    ),
+                    "email_layout_xmlid": "mail.mail_notification_light",
+                },
             )
         return res
 

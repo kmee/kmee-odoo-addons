@@ -2,38 +2,79 @@
 <!-- Copyright 2018 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="sac_form_kanban" model="ir.ui.view">
         <field name="name">sac.kanban (in sac)</field>
         <field name="model">sac</field>
-        <field name="mode">primary</field>
-        <field
-            name="inherit_id"
-            ref="base_kanban_stage.base_kanban_abstract_view_kanban"
-        />
         <field name="arch" type="xml">
-            <field name="user_id" position="after">
-                 <field name="message_needaction_counter" />
-            </field>
-            <field name="kanban_priority" position="after">
-                 <t t-if="record.message_needaction_counter.raw_value">
-                        <span class='oe_kanban_mail_new' title='Mensagens não lidas'>
-                            <i class='fa fa-comments' />
-                            <t t-out="record.message_needaction_counter.raw_value" />
-                        </span>
-                </t>
-            </field>
-            <xpath expr="//div[@name='card_header']">
+            <kanban class="o_kanban_mobile" default_group_by="stage_id">
+                <field name="kanban_color" />
+                <field name="kanban_priority" widget="priority" />
+                <field name="stage_id" />
+                <field name="kanban_sequence" />
+                <field name="kanban_legend_blocked" />
+                <field name="kanban_legend_normal" />
+                <field name="kanban_legend_done" />
+                <field name="user_id" />
                 <field name="customer_name" />
-            </xpath>
-            <xpath expr="//div[@name='card_body']">
-                <div><field name="create_date_date" />
-                    <field name="reason_id" />
-                </div>
-                <div>
-                    <strong><field name="product_id" /></strong>
-                </div>
-            </xpath>
+                <field name="create_date_date" />
+                <field name="reason_id" />
+                <field name="product_id" />
+                <field name="kanban_status" />
+                <field name="message_needaction_counter" />
+                <templates>
+                    <t t-name="menu">
+                        <t t-if="widget.editable">
+                            <a
+                                role="menuitem"
+                                type="open"
+                                class="dropdown-item"
+                            >Edit</a>
+                        </t>
+                        <t t-if="widget.deletable">
+                            <a
+                                role="menuitem"
+                                type="delete"
+                                class="dropdown-item"
+                            >Delete</a>
+                        </t>
+                        <field name="kanban_color" widget="kanban_color_picker" />
+                    </t>
+                    <t t-name="card">
+                        <field class="fw-bold fs-5" name="customer_name" />
+                        <field name="product_id" class="text-muted" />
+                        <field name="create_date_date" class="text-truncate" />
+                        <small class="o_kanban_record_subtitle text-muted">
+                            <field name="reason_id" />
+                        </small>
+                        <field name="kanban_status" widget="state_selection" />
+                        <footer class="pt-1">
+                            <div class="d-flex mt-auto align-items-center">
+                                <field
+                                    name="kanban_priority"
+                                    widget="priority"
+                                    class="me-2"
+                                />
+                                <t t-if="record.message_needaction_counter.raw_value">
+                                    <span
+                                        class='oe_kanban_mail_new'
+                                        title='Mensagens não lidas'
+                                    >
+                                        <i class='fa fa-comments' />
+                                        <t
+                                            t-out="record.message_needaction_counter.raw_value"
+                                        />
+                                    </span>
+                                </t>
+                            </div>
+                            <field
+                                name="user_id"
+                                widget="many2one_avatar_user"
+                                class="ms-auto"
+                            />
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -46,8 +87,7 @@
                     <field
                         name="stage_id"
                         widget="statusbar"
-                        clickable="True"
-                        options="{'fold_field': 'fold'}"
+                        options="{'clickable': 1, 'fold_field': 'fold'}"
                     />
                     <field name="active" invisible="1" />
                 </header>
@@ -56,7 +96,7 @@
                         name="web_ribbon"
                         text="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <div class="oe_right">
                         <field
@@ -100,11 +140,11 @@
 
                     <group>
                         <group string="Contato">
-                                <field name="cnpj_cpf" />
-                                <field name="phone" />
-                                <field name="phone2" />
-                                <field name="email_from" />
-                                <field name="medium_id" string="Origem do contato" />
+                            <field name="cnpj_cpf" />
+                            <field name="phone" />
+                            <field name="phone2" />
+                            <field name="email_from" />
+                            <field name="medium_id" string="Origem do contato" />
                         </group>
                         <group string="Informações do produto">
                             <field
@@ -147,10 +187,7 @@
                     <label for="message" string="Mensagem" />
                     <field name="message" nolabel="1" />
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -170,67 +207,67 @@
                 <field name="reason_id" />
                 <field name="tracking_code" />
                 <field name="rating" />
-                 <separator />
-                    <filter
+                <separator />
+                <filter
                     string="Meus atendimentos"
                     name="my_sac"
                     domain="[('user_id','=',uid)]"
                     help="Leads that are assigned to me"
                 />
-                    <filter
+                <filter
                     string="Sem responsável"
                     name="unassigned"
                     domain="[('user_id','=', False)]"
                     help="Sem usuário responsável"
                 />
-                    <separator />
-                    <filter
+                <separator />
+                <filter
                     string="Unread Messages"
                     name="message_needaction"
                     domain="[('message_needaction','=',True)]"
                 />
-                    <filter
+                <filter
                     string="Archived"
                     name="archived"
                     domain="[('active', '=', False)]"
                 />
-                    <separator />
-                    <group expand="0" string="Group By">
-                        <filter
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
                         string="Responsável"
                         name="groupby_user"
                         domain="[]"
                         context="{'group_by':'user_id'}"
                     />
-                        <filter
+                    <filter
                         name="customer"
                         string="Customer"
                         help="CNPJ/CPF"
                         domain="[]"
                         context="{'group_by':'cnpj_cpf'}"
                     />
-                        <filter
+                    <filter
                         name="lot"
                         string="Lote"
                         help="CNPJ/CPF"
                         domain="[]"
                         context="{'group_by':'lot'}"
                     />
-                        <!--<filter string="Campanha" name="groupby_campaign"  domain="[]" context="{'group_by':'campaign_id'}"/>-->
-                        <filter
+                    <!--<filter string="Campanha" name="groupby_campaign"  domain="[]" context="{'group_by':'campaign_id'}"/>-->
+                    <filter
                         string="Origem"
                         name="groupby_source"
                         domain="[]"
                         context="{'group_by':'source_id'}"
                     />
-                        <!--<filter string="Midia" name="groupby_channel" domain="[]" context="{'group_by':'medium_id'}"/>-->
-                        <filter
+                    <!--<filter string="Midia" name="groupby_channel" domain="[]" context="{'group_by':'medium_id'}"/>-->
+                    <filter
                         string="Mês de criação"
                         name="groupby_createmonth"
                         domain="[]"
                         context="{'group_by':'create_date'}"
                     />
-                    </group>
+                </group>
             </search>
         </field>
     </record>
@@ -239,7 +276,7 @@
         <field name="name">sac.tree (in sac)</field>
         <field name="model">sac</field>
         <field name="arch" type="xml">
-            <tree decoration-bf="message_needaction==True">
+            <list decoration-bf="message_needaction==True">
                 <field name="name" />
                 <field name="customer_name" />
                 <field name="cnpj_cpf" />
@@ -249,7 +286,7 @@
                 <field name="type_id" />
                 <field name="stage_id" string="Situação" />
                 <field name="message_needaction" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -277,8 +314,9 @@
 
     <record model="ir.actions.act_window" id="sac_act_window">
         <field name="name">Sac - Serviço de atendimento ao consumidor</field>
+        <field name="type">ir.actions.act_window</field>
         <field name="res_model">sac</field>
-        <field name="view_mode">kanban,tree,graph,pivot,form</field>
+        <field name="view_mode">kanban,list,graph,pivot,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
@@ -289,5 +327,4 @@
         <field name="action" ref="sac_act_window" />
         <field name="sequence" eval="16" />
     </record>
-
 </odoo>

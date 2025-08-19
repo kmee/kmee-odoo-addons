@@ -2,7 +2,6 @@
 <!-- Copyright 2018 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <record id="sac_reason_elogio" model="sac.reason">
         <field name="name">Elogio</field>
     </record>
@@ -18,5 +17,4 @@
     <record id="sac_reason_outros" model="sac.reason">
         <field name="name">Outros</field>
     </record>
-
 </odoo>

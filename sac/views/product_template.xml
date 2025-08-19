@@ -9,8 +9,8 @@
         <field name="arch" type="xml">
             <div name="options" position="inside">
                 <div>
-					<field name="sac_ok" modifiers="{}" />
-					<label for="sac_ok" />
+                    <field name="sac_ok" modifiers="{}" />
+                    <label for="sac_ok" />
                 </div>
             </div>
         </field>

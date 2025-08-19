@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 KMEE INFORMATICA LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="sac_kanban_stage_view_form" model="ir.ui.view">
+        <field name="name">Kanban Stage - Form View</field>
+        <field name="model">sac.kanban.stage</field>
+        <field name="arch" type="xml">
+            <form string="Kanban Stage">
+                <header />
+                <sheet>
+                    <group string="Core Info" name="core_info">
+                        <field name="name" />
+                        <field name="sequence" />
+                        <field name="fold" />
+                        <field name="description" />
+                    </group>
+                    <group string="Priority and Statuses" name="explanations">
+                        <field name="legend_priority" />
+                        <field name="legend_blocked" />
+                        <field name="legend_done" />
+                        <field name="legend_normal" />
+                    </group>
+                    <group string="Comunication" name="comunication">
+                        <field name="mail_template_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="sac_kanban_stage_view_tree" model="ir.ui.view">
+        <field name="name">Kanban Stages - Tree View</field>
+        <field name="model">sac.kanban.stage</field>
+        <field name="arch" type="xml">
+            <list name="Kanban Stages">
+                <field name="name" />
+                <field name="sequence" />
+            </list>
+        </field>
+    </record>
+    <record id="sac_kanban_stage_view_search" model="ir.ui.view">
+        <field name="name">Kanban Stages - Search View</field>
+        <field name="model">sac.kanban.stage</field>
+        <field name="arch" type="xml">
+            <search string="Kanban Stages">
+                <field name="name" />
+                <field name="sequence" />
+            </search>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="sac_kanban_stage_action">
+        <field name="name">Kanban Stages</field>
+        <field name="res_model">sac.kanban.stage</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="sac_kanban_stage_menu"
+        name="Stages"
+        parent="sac_submenu_config"
+        action="sac_kanban_stage_action"
+    />
+</odoo>
