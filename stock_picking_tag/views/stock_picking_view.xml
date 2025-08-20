@@ -1,0 +1,38 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="stock_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field
+                    name="tag_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color', 'no_create_edit': True}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="stock_picking_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field
+                    name="tag_ids"
+                    optional="hide"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color'}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
