@@ -1,6 +1,6 @@
 from odoo import api, fields, models
-from odoo.tools.sql import drop_index, index_exists
-
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 class ProductConfigAttributeValueQty(models.Model):
     _name = "product.config.attribute.value.qty"
@@ -46,6 +46,7 @@ class ProductConfigAttributeValueQty(models.Model):
             if rec.qty_max and rec.qty > rec.qty_max:
                 raise ValidationError(_("Quantity is above the maximum allowed."))
 
+
 class ProductConfigLine(models.Model):
     _inherit = "product.config.line"
 
@@ -56,62 +57,65 @@ class ProductConfigLine(models.Model):
     )
 
     def get_selected_values_with_qty(self):
-        """Retorna [(value_id, qty)] para integrar com preço/BoM."""
         self.ensure_one()
         return [(l.value_id, l.qty) for l in self.value_qty_ids if l.value_id and l.qty]
 
     @api.onchange('value_ids')
     def _onchange_value_ids_seed_qty(self):
-        """
-        Sempre que os valores forem (re)selecionados no wizard,
-        semeia/atualiza `value_qty_ids` a partir dos defaults do template (PTAV).
-        """
         for line in self:
-            if not line.value_ids or not line.config_id or not line.config_id.product_tmpl_id:
+            # Descobre o template de forma robusta
+            tmpl = False
+            if hasattr(line, "wizard_id") and line.wizard_id:
+                tmpl = line.wizard_id.product_tmpl_id
+            elif hasattr(line, "configurator_id") and line.configurator_id:
+                tmpl = line.configurator_id.product_tmpl_id
+            elif hasattr(line, "product_tmpl_id") and line.product_tmpl_id:
+                tmpl = line.product_tmpl_id
+
+            # Se não tem valores ou não conseguiu achar o template, limpa e segue
+            if not line.value_ids or not tmpl:
                 line.value_qty_ids = [(5, 0, 0)]
                 continue
 
-            tmpl = line.config_id.product_tmpl_id  # produto do configurador
-            # mapa value_id -> (qty, min, max) vindos do template
-            defaults = {}
-            # acha PTAVs do template em questão
+            # PTAVs do template para os valores selecionados
             ptavs = self.env['product.template.attribute.value'].search([
                 ('product_tmpl_id', '=', tmpl.id),
                 ('product_attribute_value_id', 'in', line.value_ids.ids),
             ])
+
+            # Pega defaults (ex.: menor qty) e carrega também min/max do bind do template
+            defaults = {}
             if ptavs:
-                qty_recs = self.env['product.template.attribute.value.qty'].search([
-                    ('ptav_id', 'in', ptavs.ids)
+                qty_defaults = self.env['product.template.attribute.value.qty'].search([
+                    ('template_attri_value_id', 'in', ptavs.ids)
                 ])
-                for q in qty_recs:
-                    defaults[q.value_id.id] = (q.qty, q.qty_min, q.qty_max)
+                for q in qty_defaults.sorted(key=lambda r: (r.product_attribute_value_id.id, r.qty)):
+                    if q.product_attribute_value_id.id not in defaults:
+                        defaults[q.product_attribute_value_id.id] = {
+                            'qty': q.qty,
+                            'qty_min': q.qty_min or 0.0,
+                            'qty_max': q.qty_max or 0.0,
+                        }
 
-            # Monta linhas novas preservando qty já editadas quando possível
-            existing_map = {rec.value_id.id: rec for rec in line.value_qty_ids}
-            new_lines = []
-            for val in line.value_ids:
-                if val.id in existing_map:
-                    # mantém o que o usuário já editou
-                    rec = existing_map[val.id]
-                    new_lines.append((1, rec.id, {
-                        # mantém qty atual; atualiza limites caso mudem no template
-                        'qty_min': defaults.get(val.id, (rec.qty_min, 0.0, 0.0))[1],
-                        'qty_max': defaults.get(val.id, (rec.qty_max, 0.0, 0.0))[2],
-                    }))
-                else:
-                    q, qmin, qmax = defaults.get(val.id, (1.0, 0.0, 0.0))
-                    new_lines.append((0, 0, {
-                        'value_id': val.id,
-                        'qty': q,
-                        'qty_min': qmin,
-                        'qty_max': qmax,
-                    }))
-
-            # remove linhas de valores que não estão mais selecionados
-            to_remove = [rec.id for vid, rec in existing_map.items() if vid not in line.value_ids.ids]
+            existing = {rec.value_id.id: rec for rec in line.value_qty_ids}
             ops = []
-            if to_remove:
-                for rid in to_remove:
-                    ops.append((2, rid, 0))
-            ops.extend(new_lines)
-            line.value_qty_ids = ops
+
+            # remove os que saíram
+            to_remove = [rec.id for vid, rec in existing.items() if vid not in line.value_ids.ids]
+            for rid in to_remove:
+                ops.append((2, rid, 0))
+
+            # cria os que entraram
+            for val in line.value_ids:
+                if val.id in existing:
+                    continue
+                d = defaults.get(val.id, {'qty': 1.0, 'qty_min': 0.0, 'qty_max': 0.0})
+                ops.append((0, 0, {
+                    'value_id': val.id,
+                    'qty': d.get('qty', 1.0),
+                    'qty_min': d.get('qty_min', 0.0),
+                    'qty_max': d.get('qty_max', 0.0),
+                }))
+
+            if ops:
+                line.value_qty_ids = ops

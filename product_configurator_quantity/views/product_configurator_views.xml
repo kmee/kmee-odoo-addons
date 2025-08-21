@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- TREE da linha de quantidade da SESSÃO -->
+  <record id="view_pc_session_qty_tree" model="ir.ui.view">
+    <field name="name">product.config.session.value.qty.tree</field>
+    <field name="model">product.config.session.value.qty</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="product_attribute_id" readonly="1"/>
+        <field name="attr_value_id"/>
+        <field name="qty"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- FORM da linha de quantidade da SESSÃO -->
+  <record id="view_pc_session_qty_form" model="ir.ui.view">
+    <field name="name">product.config.session.value.qty.form</field>
+    <field name="model">product.config.session.value.qty</field>
+    <field name="arch" type="xml">
+      <form string="Value Quantity (Session)">
+        <sheet>
+          <group>
+            <field name="product_attribute_id" readonly="1"/>
+            <field name="attr_value_id"/>
+            <field name="qty"/>
+            <field name="template_value_qty_id"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- HERANÇA: injeta a grade no FORM do product.configurator (ID da sua captura) -->
+  <record id="product_configurator_form_inherit_qty" model="ir.ui.view">
+    <field name="name">product.configurator.form.inherit.qty</field>
+    <field name="model">product.configurator</field>
+    <field name="inherit_id" ref="product_configurator.product_configurator_form"/>
+    <field name="arch" type="xml">
+
+      <!-- adiciona DEPOIS do field attribute_line_ids (nível do wizard, não dentro do form do O2M) -->
+      <xpath expr="//field[@name='attribute_line_ids']" position="after">
+        <group string="Values with Quantities">
+          <field name="session_value_quantity_ids"
+                 mode="tree,form"
+                 views="[(ref('product_configurator_quantity.view_pc_session_qty_tree'), 'tree'),
+                         (ref('product_configurator_quantity.view_pc_session_qty_form'), 'form')]"/>
+        </group>
+      </xpath>
+
+    </field>
+  </record>
+
+</odoo>

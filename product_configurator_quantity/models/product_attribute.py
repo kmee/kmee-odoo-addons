@@ -1,47 +1,53 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+MAX_MATERIALIZED_QTYS = 500
 
 class ProductAttributeLine(models.Model):
     _inherit = "product.template.attribute.line"
 
     is_qty_required = fields.Boolean(string="Qty Required", copy=False)
 
+    def _materialize_qty_for_ptav(self, ptav):
+        """Cria registros discretos (default..maximum) para um PTAV."""
+        if ptav.default_qty is None or ptav.maximum_qty is None:
+            return
+        span = ptav.maximum_qty - ptav.default_qty + 1
+        if span <= 0:
+            return
+        if span > MAX_MATERIALIZED_QTYS:
+            raise ValidationError(_("Quantity range is too large to materialize (%s).") % span)
+
+        vals_list = []
+        for i in range(ptav.default_qty, ptav.maximum_qty + 1):
+            vals_list.append({
+                "product_tmpl_id": ptav.product_tmpl_id.id,
+                "product_attribute_id": ptav.attribute_id.id,
+                "product_attribute_value_id": ptav.product_attribute_value_id.id,
+                "qty": i,
+                "template_attri_value_id": ptav.id,
+            })
+        self.env["product.template.attribute.value.qty"].create(vals_list)
+
     @api.model_create_multi
     def create(self, vals_list):
-        result = super().create(vals_list)
-        template_attribute_value_obj = self.env["product.template.attribute.value"]
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
-        for val in vals_list:
-            qty_list = []
-            for attribute in result:
-                if attribute.is_qty_required and attribute.value_ids:
-                    for attr_value in attribute.value_ids:
-                        template_attri_value_id = template_attribute_value_obj.search(
-                            [
-                                ("product_tmpl_id", "=", attribute.product_tmpl_id.id),
-                                ("attribute_line_id", "=", attribute.id),
-                                ("product_attribute_value_id", "=", attr_value.id),
-                                ("attribute_id", "=", attribute.attribute_id.id),
-                            ]
-                        )
-                        for i in range(
-                            template_attri_value_id.default_qty,
-                            template_attri_value_id.maximum_qty + 1,
-                        ):
-                            qty_list.append(
-                                {
-                                    "product_tmpl_id": attribute.product_tmpl_id.id,
-                                    "product_attribute_id": attribute.attribute_id.id,
-                                    "product_attribute_value_id": attr_value.id,
-                                    "qty": i,
-                                    "template_attri_value_id": template_attri_value_id.id,
-                                }
-                            )
-        attribute_value_qty_obj.create(qty_list)
-        return result
+        records = super().create(vals_list)
+        # Materializa por linha criada
+        for line in records:
+            if not line.is_qty_required or not line.value_ids:
+                continue
+            ptavs = self.env["product.template.attribute.value"].search([
+                ("product_tmpl_id", "=", line.product_tmpl_id.id),
+                ("attribute_line_id", "=", line.id),
+                ("attribute_id", "=", line.attribute_id.id),
+                ("product_attribute_value_id", "in", line.value_ids.ids),
+            ])
+            for ptav in ptavs:
+                line._materialize_qty_for_ptav(ptav)
+        return records
 
     def _get_attribute_value_line_domain(self):
+        self.ensure_one()
         return [
             ("product_tmpl_id", "=", self.product_tmpl_id.id),
             ("attribute_line_id", "=", self.id),
@@ -49,61 +55,38 @@ class ProductAttributeLine(models.Model):
         ]
 
     def write(self, values):
-        result = super().write(values)
-        template_attribute_value_obj = self.env["product.template.attribute.value"]
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
-        attribute_value_line_domain = [
-            ("product_tmpl_id", "=", self.product_tmpl_id.id),
-            ("attribute_line_id", "=", self.id),
-            ("attribute_id", "=", self.attribute_id.id),
-        ]
-        if values.get("is_qty_required") and self.value_ids:
-            qty_list = []
-            for attr_value in self.value_ids:
-                attribute_value_line_domain = self._get_attribute_value_line_domain()
-                attribute_value_line_domain += [
-                    ("product_attribute_value_id", "=", attr_value.id)
-                ]
-                template_attri_value_id = template_attribute_value_obj.search(
-                    attribute_value_line_domain
+        res = super().write(values)
+
+        for line in self:
+            # habilitou a flag agora?
+            if values.get("is_qty_required") and line.value_ids:
+                ptavs = self.env["product.template.attribute.value"].search(
+                    line._get_attribute_value_line_domain() + [
+                        ("product_attribute_value_id", "in", line.value_ids.ids),
+                    ]
                 )
-                for i in range(
-                    template_attri_value_id.default_qty,
-                    template_attri_value_id.maximum_qty + 1,
-                ):
-                    qty_list.append(
-                        {
-                            "product_tmpl_id": self.product_tmpl_id.id,
-                            "product_attribute_id": self.attribute_id.id,
-                            "product_attribute_value_id": attr_value.id,
-                            "qty": i,
-                            "template_attri_value_id": template_attri_value_id.id,
-                        }
-                    )
-            attribute_value_qty_obj.create(qty_list)
-        elif not values.get("is_qty_required", False):
-            qty_variants = self.product_tmpl_id.product_variant_ids.filtered(
-                lambda variant: variant.product_attribute_value_qty_ids.filtered(
-                    lambda qty: qty.attr_value_id.attribute_id.id
-                    == self.attribute_id.id
-                )
-            )
-            if qty_variants:
-                raise ValidationError(
-                    _(
-                        "Qty Required cannot be disabled because there are variants that exist with quantities."
+                for ptav in ptavs:
+                    # recria a faixa (apaga antes p/ consistência)
+                    ptav.attribute_value_qty_ids.unlink()
+                    line._materialize_qty_for_ptav(ptav)
+
+            # desabilitou a flag agora?
+            if "is_qty_required" in values and not values["is_qty_required"]:
+                # bloqueio se já há variantes usando qty
+                qty_variants = line.product_tmpl_id.product_variant_ids.filtered(
+                    lambda v: v.product_attribute_value_qty_ids.filtered(
+                        lambda q: q.product_attribute_id.id == line.attribute_id.id
                     )
                 )
-            for attr_value in self.value_ids:
-                attribute_value_line_domain = self._get_attribute_value_line_domain()
-                attribute_value_line_domain += [
-                    ("product_attribute_value_id", "=", attr_value.id)
-                ]
-                template_attri_value_id = template_attribute_value_obj.search(
-                    attribute_value_line_domain
+                if qty_variants:
+                    raise ValidationError(_("Qty Required cannot be disabled because there are variants with quantities."))
+
+                ptavs = self.env["product.template.attribute.value"].search(
+                    line._get_attribute_value_line_domain()
                 )
-                template_attri_value_id.attribute_value_qty_ids.unlink()
-        return result
+                ptavs.mapped("attribute_value_qty_ids").unlink()
+
+        return res
 
     @api.onchange("is_qty_required", "multi", "custom")
     def onchange_is_qty_required(self):
@@ -111,47 +94,30 @@ class ProductAttributeLine(models.Model):
             self.is_qty_required = False
 
 
-class ProductAttributePrice(models.Model):
+class ProductTemplateAttributeValue(models.Model):
     _inherit = "product.template.attribute.value"
 
-    is_qty_required = fields.Boolean(
-        related="attribute_line_id.is_qty_required",
-        store=True,
-        string="Qty Required",
-        copy=False,
-    )
+    is_qty_required = fields.Boolean(related="attribute_line_id.is_qty_required", store=True, copy=False)
     default_qty = fields.Integer("Minimum Quantity", default=1)
     maximum_qty = fields.Integer("Maximum Quantity", default=2)
+
     attribute_value_qty_ids = fields.One2many(
-        "attribute.value.qty", "template_attri_value_id", string="Value Quantity"
+        "product.template.attribute.value.qty", "template_attri_value_id", string="Value Quantity"
     )
 
     @api.constrains("default_qty", "maximum_qty")
     def _check_default_qty_maximum_qty(self):
         for rec in self:
             if rec.default_qty > rec.maximum_qty:
-                raise ValidationError(
-                    _("Maximum Qty can't be smaller then Default Qty")
-                )
+                raise ValidationError(_("Maximum Qty can't be smaller than Default Qty"))
 
     def write(self, values):
-        result = super().write(values)
-        if self.is_qty_required and (
-            values.get("default_qty") or values.get("maximum_qty")
-        ):
-            qty_list = []
-            attribute_value_qty_obj = self.env["attribute.value.qty"]
-            for i in range(self.default_qty, self.maximum_qty + 1):
-                qty_list.append(
-                    {
-                        "product_tmpl_id": self.product_tmpl_id.id,
-                        "product_attribute_id": self.attribute_id.id,
-                        "product_attribute_value_id": self.product_attribute_value_id.id,
-                        "qty": i,
-                        "template_attri_value_id": self.id,
-                    }
-                )
-            self.attribute_value_qty_ids.unlink()
-            attribute_value_qty_obj.create(qty_list)
-
-        return result
+        res = super().write(values)
+        # Se alterou default/max e a linha requer qty, rematerializa
+        if any(k in values for k in ("default_qty", "maximum_qty")):
+            for ptav in self:
+                if not ptav.is_qty_required:
+                    continue
+                ptav.attribute_value_qty_ids.unlink()
+                ptav.attribute_line_id._materialize_qty_for_ptav(ptav)
+        return res
