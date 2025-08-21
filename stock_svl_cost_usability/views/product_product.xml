@@ -42,7 +42,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                                 <field name="display_name" optional="show" />
                                 <field name="quantity" optional="show" />
                                 <field name="uom_id" optional="show" />
-                                <field name="value" optional="hide" />
+                                <field name="value" optional="show" />
                                 <field name="unit_cost" decoration-bf="1" />
                             </tree>
                         </field>
