@@ -22,7 +22,15 @@ class ProductProduct(models.Model):
         """Compute the JSON text of stock valuation layer for each product."""
         self.ensure_one()
 
-        plot_dataset = [svl.unit_cost for svl in self.stock_valuation_layer_ids]
+        # Dataset should be sum of past SLV values divided by sum of past SLV quantities
+        plot_dataset = []
+        total_value = 0
+        total_quantity = 0
+        for svl in self.stock_valuation_layer_ids:
+            total_value += svl.value
+            total_quantity += svl.quantity
+            plot_dataset.append(total_value / total_quantity if total_quantity else 0)
+
         labels = [
             svl.create_date.strftime("%b - %Y")
             for svl in self.stock_valuation_layer_ids
