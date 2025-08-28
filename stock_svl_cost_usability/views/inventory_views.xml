@@ -1,0 +1,16 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <menuitem
+        id="menu_valuation_and_cost"
+        name="Inventory Valuation &amp; Cost"
+        parent="stock.menu_warehouse_report"
+        sequence="110"
+        action="stock_valuation_layer_and_cost_action"
+    />
+
+</odoo>

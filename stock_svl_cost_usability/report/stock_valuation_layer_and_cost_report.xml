@@ -1,0 +1,55 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="stock_valuation_layer_and_cost_view_tree" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.cost.report.view.tree</field>
+        <field name="model">stock.valuation.layer.cost.report</field>
+        <field name="arch" type="xml">
+            <tree default_order="create_date desc, id desc">
+                <field name="create_date" />
+                <field name="product_id" />
+                <field name="unit_cost" decoration-bf="1" />
+                <field name="quantity" />
+                <field name="value" />
+                <field name="company_id" />
+                <field name="stock_move_id" optional="hide" />
+                <field name="account_move_id" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_valuation_layer_and_cost_view_search" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.cost.report.view.search</field>
+        <field name="model">stock.valuation.layer.cost.report</field>
+        <field name="arch" type="xml">
+            <search string="SVL Search">
+                <field name="product_id" />
+                <field name="company_id" />
+                <field name="stock_move_id" />
+                <field name="account_move_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Product"
+                        name="group_by_product_id"
+                        domain="[]"
+                        context="{'group_by': 'product_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="stock_valuation_layer_and_cost_action" model="ir.actions.act_window">
+        <field name="name">Stock Valuation &amp; Cost</field>
+        <field name="res_model">stock.valuation.layer.cost.report</field>
+        <field name="view_mode">tree</field>
+        <field name="search_view_id" ref="stock_valuation_layer_and_cost_view_search" />
+        <field
+            name="context"
+        >{'search_default_group_by_product_id': 1, 'create':0}</field>
+    </record>
+</odoo>
