@@ -15,7 +15,9 @@
         "web_widget_json_graph",
     ],
     "data": [
-        "views/stock_valuation_layer_views.xml",
+        "security/ir.model.access.csv",
+        "report/stock_valuation_layer_and_cost_report.xml",
+        "views/inventory_views.xml",
         "views/product_product.xml",
         "views/product_template.xml",
     ],
