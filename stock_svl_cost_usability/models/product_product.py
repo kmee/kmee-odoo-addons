@@ -29,7 +29,8 @@ class ProductProduct(models.Model):
         for svl in self.stock_valuation_layer_ids:
             total_value += svl.value
             total_quantity += svl.quantity
-            plot_dataset.append(total_value / total_quantity if total_quantity else 0)
+            if total_quantity:
+                plot_dataset.append(total_value / total_quantity)
 
         labels = [
             svl.create_date.strftime("%b - %Y")
