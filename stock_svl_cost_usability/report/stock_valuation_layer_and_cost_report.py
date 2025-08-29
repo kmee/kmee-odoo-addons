@@ -44,6 +44,16 @@ class StockValuationLayerCostReport(models.Model):
     )
     value = fields.Monetary("Total Value")
     remaining_qty = fields.Float(digits="Product Unit of Measure")
+    stock_qty = fields.Float(
+        digits="Stock Total Quantity",
+        readonly=True,
+        defatult=0.0,
+    )
+    stock_value = fields.Float(
+        digits="Stock Total Value",
+        readonly=True,
+        defatult=0.0,
+    )
     remaining_value = fields.Monetary(readonly=True)
     description = fields.Char(readonly=True)
     stock_move_id = fields.Many2one(
@@ -97,6 +107,10 @@ class StockValuationLayerCostReport(models.Model):
                 cumulative_value AS cumulative_value,
                 cumulative_qty AS cumulative_qty,
 
+                -- fields mirroring cumulative values
+                cumulative_qty AS stock_qty,
+                cumulative_value AS stock_value,
+
                 CASE
                     WHEN cumulative_qty = 0
                         THEN LAG(
@@ -108,5 +122,5 @@ class StockValuationLayerCostReport(models.Model):
                     ELSE cumulative_value / NULLIF(cumulative_qty, 0)
                 END AS unit_cost
             FROM base
-        """
+            """
         )
