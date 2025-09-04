@@ -1,0 +1,21 @@
+<odoo>
+    <template id="boleto_inter_redirect_template">
+        <form
+            id="o_payment_redirect_form"
+            t-att-action="redirect_url"
+            method="get"
+            target="_blank"
+        >
+            <button type="submit" style="display:none;">Abrir Boleto</button>
+        </form>
+        <script>
+            // Submete o form automaticamente
+            document.addEventListener('DOMContentLoaded', function() {
+                var form = document.getElementById('o_payment_redirect_form');
+                if (form) {
+                    form.submit();
+                }
+            });
+        </script>
+    </template>
+</odoo>
