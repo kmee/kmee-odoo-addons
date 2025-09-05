@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_saleorder_document_inherit_periods"
+        inherit_id="sale.report_saleorder_document"
+    >
+        <xpath expr="//table[contains(@class, 'o_main_table')]" position="after">
+            <t t-if="doc.contract_period_details">
+                <div
+                    style="float: right;
+                            width: 20%;
+                            margin: 6px 6mm 12px 12mm;
+                            padding: 6px 0;
+                            page-break-inside: avoid;
+                            text-align: left;"
+                >
+                    <p style="margin: 0 0 6px 0;">
+                        <strong>Detalhes de Períodos</strong>
+                    </p>
+                    <div
+                        style="white-space: pre-line; font-size: 12px; line-height: 1.25;"
+                    >
+                        <t
+                            t-foreach="doc.contract_period_details.split('\n')"
+                            t-as="row"
+                        >
+                            <div t-esc="row" />
+                        </t>
+                    </div>
+                </div>
+                <div style="clear: both;" />
+            </t>
+        </xpath>
+        <xpath
+            expr="//tr[td/strong[contains(normalize-space(.), 'Subtotal')]]"
+            position="attributes"
+        >
+            <attribute name="t-if">False</attribute>
+        </xpath>
+    </template>
+</odoo>

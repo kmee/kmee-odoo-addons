@@ -11,6 +11,7 @@
         "views/product_views.xml",
         "views/sale_portal_templates.xml",
         "report/ir_actions_report_templates.xml",
+        "report/sale_report_periods.xml",
     ],
     "installable": True,
     "application": False,
