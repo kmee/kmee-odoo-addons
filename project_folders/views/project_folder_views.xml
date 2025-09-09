@@ -1,0 +1,106 @@
+<xml>
+    <odoo>
+        <record id="action_project_folder_all" model="ir.actions.act_window">
+            <field name="name">Pastas de Projeto</field>
+            <field name="res_model">project.folder</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{}</field>
+          </record>
+
+          <record id="view_project_folder_kanban" model="ir.ui.view">
+            <field name="name">project.folder.kanban</field>
+            <field name="model">project.folder</field>
+            <field name="arch" type="xml">
+              <kanban default_group_by="project_id" class="o_kanban_small_column">
+                <field name="name"/>
+                <field name="attachment_count"/>
+                <field name="project_id"/>
+                <field name="parent_id"/>
+                <templates>
+                  <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record">
+                      <div class="o_kanban_image">
+                        <i class="fa fa-folder fa-2x"/>
+                      </div>
+                      <div class="o_kanban_details">
+                        <strong t-esc="record.name.value"/>
+                        <div class="text-muted" t-esc="record.project_id.value"/>
+                        <div class="text-muted">
+                          <t t-esc="record.attachment_count.value"/> arquivos
+                        </div>
+                      </div>
+                    </div>
+                  </t>
+                </templates>
+              </kanban>
+            </field>
+          </record>
+
+          <record id="view_project_folder_tree" model="ir.ui.view">
+            <field name="name">project.folder.tree</field>
+            <field name="model">project.folder</field>
+            <field name="arch" type="xml">
+              <tree string="Pastas" editable="bottom">
+                <field name="name"/>
+                <field name="project_id" groups="base.group_user"/>
+                <field name="parent_id"/>
+                <field name="attachment_count" readonly="1"/>
+              </tree>
+            </field>
+          </record>
+
+          <record id="view_project_folder_form" model="ir.ui.view">
+            <field name="name">project.folder.form</field>
+            <field name="model">project.folder</field>
+            <field name="arch" type="xml">
+              <form string="Pasta do Projeto">
+                <header>
+                  <button name="%(action_project_folder_open_attachments)d"
+                          string="Arquivos"
+                          type="action"
+                          class="oe_stat_button"
+                          icon="fa-paperclip"
+                          context="{'search_default_project_folder_id': active_id, 'default_project_folder_id': active_id}">
+                    <field name="attachment_count" widget="statinfo"/>
+                  </button>
+                </header>
+                <sheet>
+                  <group>
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="parent_id" options="{'no_quick_create': True}"/>
+                    <field name="full_path" readonly="1"/>
+                  </group>
+                  <notebook>
+                    <page string="Subpastas">
+                      <field name="child_ids" context="{'default_project_id': project_id, 'default_parent_id': active_id}">
+                        <tree editable="bottom">
+                          <field name="name"/>
+                          <field name="attachment_count" readonly="1"/>
+                        </tree>
+                      </field>
+                    </page>
+                    <page string="Arquivos">
+                      <field name="attachment_ids" context="{'default_project_folder_id': active_id}">
+                        <tree>
+                          <field name="name"/>
+                          <field name="mimetype"/>
+                          <field name="create_date"/>
+                        </tree>
+                      </field>
+                    </page>
+                  </notebook>
+                </sheet>
+              </form>
+            </field>
+          </record>
+
+          <record id="action_project_folder_open_attachments" model="ir.actions.act_window">
+            <field name="name">Arquivos</field>
+            <field name="res_model">ir.attachment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('project_folder_id','=',active_id)]</field>
+            <field name="context">{'default_project_folder_id': active_id}</field>
+          </record>
+        </odoo>
+        </xml>

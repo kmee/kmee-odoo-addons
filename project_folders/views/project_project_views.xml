@@ -1,0 +1,101 @@
+<xml>
+    <odoo>
+        <record id="view_project_form_inherit_folders" model="ir.ui.view">
+            <field name="name">project.project.form.folders</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.view_project_form"/>
+            <field name="arch" type="xml">
+              <xpath expr="//header" position="inside">
+                <button name="action_open_folders" type="object" class="oe_stat_button" icon="fa-folder"
+                        string="Pastas Raiz">
+                  <field name="folder_count" widget="statinfo"/>
+                </button>
+                <button name="action_open_all_folders" type="object" class="oe_stat_button" icon="fa-sitemap"
+                        string="Todas as Pastas">
+                  <field name="folder_count" widget="statinfo"/>
+                </button>
+              </xpath>
+              <xpath expr="//sheet/notebook" position="inside">
+                <page string="Pastas do Projeto">
+                  <field name="root_folder_id" readonly="1"/>
+                  <field name="root_folder_id" invisible="1"/>
+                  <!-- grid de pastas do projeto inteiro -->
+                  <field name="root_folder_id" position="replace"/>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id"/>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="replace"/>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id"/>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="replace"/>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id"/>
+                  <!-- Lista completa (com hierarquia) -->
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                    <field name="root_folder_id" position="after"/>
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <!-- Uma lista filtrada de todas as pastas do projeto -->
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <!-- Mostra todas as pastas do projeto (árvore) -->
+                  <field name="root_folder_id" invisible="1"/>
+                  <div class="oe_title">
+                    <h2>Pastas</h2>
+                  </div>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+                  <field name="root_folder_id" invisible="1"/>
+                  <field name="root_folder_id" position="after">
+                    <field name="root_folder_id" invisible="1"/>
+                  </field>
+
+                  <tree string="Pastas (todas)" editable="bottom"
+                        create="true" delete="true" class="o_inner_tree"
+                        domain="[('project_id','=',active_id)]" >
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                    <field name="attachment_count" readonly="1"/>
+                  </tree>
+                </page>
+              </xpath>
+            </field>
+          </record>
+        </odoo>
+        </xml>

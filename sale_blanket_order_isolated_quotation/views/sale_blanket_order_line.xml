@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit the tree view to add discount field -->
+    <record id="sale_blanket_order_line_tree_inherit" model="ir.ui.view">
+        <field name="name">sale.blanket.order.line.tree.inherit</field>
+        <field name="model">sale.blanket.order.line</field>
+        <field name="inherit_id" ref="sale_blanket_order.sale_blanket_order_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="price_unit" position="after">
+                <field name="discount" string="Disc. %"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Inherit the form view to add discount field -->
+    <record id="sale_blanket_order_line_form_inherit" model="ir.ui.view">
+        <field name="name">sale.blanket.order.line.form.inherit</field>
+        <field name="model">sale.blanket.order.line</field>
+        <field name="inherit_id" ref="sale_blanket_order.sale_blanket_order_line_form"/>
+        <field name="arch" type="xml">
+            <field name="price_unit" position="after">
+                <field name="discount" string="Discount %"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -16,6 +16,7 @@
         "security/ir.model.access.csv",
         "wizards/sale_order_confirm.xml",
         "views/sale_blanket_order.xml",
+        "views/sale_blanket_order_line.xml",
         "views/sale_order.xml",
     ],
     "demo": [],
