@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="view_res_config_settings_netsuite_fin" model="ir.ui.view">
+        <field name="name">res.config.settings.view.netsuite.fin</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="80" />
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='contacts_settings']" position="after">
+                <div id="net_suite">
+                    <h2>NetSuite</h2>
+                    <div class="row mt16 o_settings_container" id="net_suite_settings">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane" id="netsuite_account_id">
+                                <div>
+                                    <div class="content-group mt16">
+                                        <label for="netsuite_account_id" />
+:                                        <field name="netsuite_account_id" />
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                            Id da conta no NetSuite.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane" id="netsuite_email">
+                                <div>
+                                    <div class="content-group mt16">
+                                        <label for="netsuite_email" />: <field
+                                            name="netsuite_email"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                            Email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane" id="netsuite_password">
+                                <div>
+                                    <div class="content-group mt16">
+                                        <label for="netsuite_password" />: <field
+                                            name="netsuite_password"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                            Senha.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane" id="netsuite_role_id">
+                                <div>
+                                    <div class="content-group mt16">
+                                        <label for="netsuite_role_id" />: <field
+                                            name="netsuite_role_id"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                            Role.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div class="o_setting_right_pane" id="netsuite_fin_field">
+                                <div>
+                                    <div class="content-group mt16">
+                                        <label for="netsuite_fin_field" />: <field
+                                            name="netsuite_fin_field"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                            Situação Financeira.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                            </div>
+                            <div
+                                class="o_setting_right_pane"
+                                id="netsuite_saved_search_id"
+                            >
+                                <div>
+                                    <div class="content-group mt16">
+                                        <label for="netsuite_saved_search_id" />: <field
+                                            name="netsuite_saved_search_id"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="text-muted">
+                            Search.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

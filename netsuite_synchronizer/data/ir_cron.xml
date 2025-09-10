@@ -1,0 +1,13 @@
+<odoo>
+  <!-- CRON que chama o método a cada 30 minutos -->
+  <record id="ir_cron_netsuite_fin_status" model="ir.cron">
+    <field name="name">NetSuite Pull Fin Status</field>
+    <field name="model_id" ref="base.model_res_partner" />
+    <field name="state">code</field>
+    <field name="code">model.cron_netsuite_pull_fin_status()</field>
+    <field name="interval_number">30</field>
+    <field name="interval_type">minutes</field>
+    <field name="numbercall">-1</field>
+    <field name="active">True</field>
+  </record>
+</odoo>
