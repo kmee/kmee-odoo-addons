@@ -1,0 +1,37 @@
+<odoo>
+    <template id="pix_inter_redirect_template">
+        <form id="o_payment_redirect_form" t-att-action="redirect_url" method="get">
+            <input type="hidden" name="reference" t-att-value="reference"/>
+        </form>
+    </template>
+
+    <template id="pix_inter_page_template">
+        <t t-call="website.layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h3 class="mb-4">Pagamento PIX</h3>
+                                <p class="mb-4">Valor: R$ <span t-esc="'%.2f' % amount"/></p>
+                                <p class="mb-4">Referência: <span t-esc="reference"/></p>
+                                <div class="mb-4">
+                                    <img t-att-src="'data:image/png;base64,%s' % qrcode_base64" alt="QR Code PIX" style="max-width: 250px;"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pix_code">Código PIX (Copiar e Colar):</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="pix_code" t-att-value="pix_code" readonly="readonly"/>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" onclick="navigator.clipboard.writeText(document.getElementById('pix_code').value)">Copiar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
