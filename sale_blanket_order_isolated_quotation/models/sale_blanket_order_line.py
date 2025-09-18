@@ -47,5 +47,5 @@ class BlanketOrderLine(models.Model):
                     ),
                     "price_total": taxes.get("total_included", 0.0),
                     "price_subtotal": taxes.get("total_excluded", 0.0),
-                }
-            )
+                    }
+                )

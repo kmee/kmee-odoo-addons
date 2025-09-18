@@ -37,7 +37,7 @@ class SaleOrderLine(models.Model):
         for record in self:
             if record.use_period_quantity:
                 record.product_uom_qty = record.period_qty * record.period_count
-                record.date_end = record._get_date_end()
+                record.date_end = record._get_date_end() if record.date_start else False
 
     def write(self, vals):
         for record in self:
