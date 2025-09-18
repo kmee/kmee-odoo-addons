@@ -52,9 +52,6 @@ class SaleOrderLine(models.Model):
                 self.blanket_order_line_id = bo_line[0].id
                 self.product_uom = bo_line[0].product_uom.id
                 self.price_unit = bo_line[0].price_unit
-                # Propagate discount from Blanket Order line if available
-                if hasattr(bo_line[0], "discount"):
-                    self.discount = bo_line[0].discount
 
     @api.onchange("product_uom_qty", "blanket_order_line_id")
     def _onchange_qty_blanket_order(self):
@@ -94,7 +91,6 @@ class SaleOrderLine(models.Model):
             "name": self.name,
             "product_uom": self.product_uom.id,
             "price_unit": self.price_unit,
-            "discount": self.discount,
             "original_uom_qty": self.product_uom_qty,
             "order_id": self.order_id.blanket_order_id.id,
         }
