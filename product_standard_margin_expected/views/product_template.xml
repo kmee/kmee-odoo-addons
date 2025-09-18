@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_template_form_view_inherit_margin_expected" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.margin.expected</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product_standard_margin.view_product_template_form"/>
+        <field name="arch" type="xml">
+            <!-- Adicionar campos de margem esperada após os campos de margem calculada -->
+            <xpath expr="//field[@name='standard_markup_rate']" position="after">
+                <field name="expected_margin_percent"
+                       string="Margem Esperada (%)"
+                       widget="percentage"
+                       attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+                <field name="expected_markup_percent"
+                       string="Markup Esperado (%)"
+                       widget="percentage"
+                       attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
