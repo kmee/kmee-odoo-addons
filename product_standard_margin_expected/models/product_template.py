@@ -11,13 +11,13 @@ class ProductTemplate(models.Model):
         string="Margem Esperada (%)",
         digits=(5, 2),
         help="Margem percentual esperada para este produto. "
-             "Usado para comparação com a margem calculada real.",
+        "Usado para comparação com a margem calculada real.",
     )
     expected_markup_percent = fields.Float(
         string="Markup Esperado (%)",
         digits=(5, 2),
         help="Markup percentual esperado para este produto. "
-             "Usado para comparação com o markup calculado real.",
+        "Usado para comparação com o markup calculado real.",
     )
 
     @api.onchange("expected_margin_percent")
@@ -26,7 +26,9 @@ class ProductTemplate(models.Model):
         if self.expected_margin_percent and self.expected_margin_percent != 100:
             # Fórmula: Markup = Margem / (100 - Margem) * 100
             self.expected_markup_percent = (
-                self.expected_margin_percent / (100 - self.expected_margin_percent) * 100
+                self.expected_margin_percent
+                / (100 - self.expected_margin_percent)
+                * 100
             )
 
     @api.onchange("expected_markup_percent")
@@ -35,5 +37,7 @@ class ProductTemplate(models.Model):
         if self.expected_markup_percent:
             # Fórmula: Margem = Markup / (100 + Markup) * 100
             self.expected_margin_percent = (
-                self.expected_markup_percent / (100 + self.expected_markup_percent) * 100
+                self.expected_markup_percent
+                / (100 + self.expected_markup_percent)
+                * 100
             )
