@@ -7,7 +7,7 @@
     <xpath expr="//td[@t-if='has_button_access'][a[@t-att-href]]" position="attributes">
       <attribute
                 name="t-if"
-            >has_button_access and 'Invoice' not in button_access['title'] and 'Journal' not in button_access['title']</attribute>
+            >has_button_access and 'Invoice' not in button_access['title'] and 'Journal' not in button_access['title'] and 'Lançamento' not in button_access['title'] and 'Fatura' not in button_access['title']</attribute>
     </xpath>
   </template>
 </odoo>
