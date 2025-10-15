@@ -19,7 +19,7 @@ class ProductTemplate(models.Model):
     def _compute_valuation_layer_json_text(self):
         """Compute the JSON text of stock valuation layer for each product."""
         self.ensure_one()
-        self.valuation_layer_json_text = ""
+        self.valuation_layer_json_text = "{}"
         if len(self.product_variant_ids) == 1:
             self.valuation_layer_json_text = (
                 self.product_variant_ids.valuation_layer_json_text
