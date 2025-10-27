@@ -11,12 +11,12 @@ class ContractLine(models.Model):
 
     # Adicionando campos de períodos
     period_qty = fields.Float(
-        string="Quantidade por Período",
+        string="Quantidade de Licenças",
         default=1.0,
-        help="Quantidade fornecida em cada período",
+        help="Quantidade de licenças fornecida em cada período",
     )
     period_count = fields.Integer(
-        string="Número de Períodos", default=1, help="Número total de períodos"
+        string="Meses", default=1, help="Número total de meses"
     )
     period_amount = fields.Monetary(
         string="Valor por Período", compute="_compute_period_amount", store=True
