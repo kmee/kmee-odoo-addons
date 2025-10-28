@@ -11,12 +11,12 @@ class SaleOrderLine(models.Model):
 
     # Adicionando campos de período na linha de pedido para contratos
     period_qty = fields.Float(
-        string="Quantidade por Período",
+        string="Quantidade de Licenças",
         default=1.0,
-        help="Quantidade fornecida em cada período",
+        help="Quantidade de licenças fornecidas em cada período",
     )
     period_count = fields.Integer(
-        string="Número de Períodos", default=1, help="Número total de períodos"
+        string="Número de Meses", default=1, help="Número total de meses para o contrato"
     )
     period_amount = fields.Monetary(
         string="Valor por Período",
