@@ -19,7 +19,7 @@ class SaleOrderLine(models.Model):
         string="Número de Meses", default=1, help="Número total de meses para o contrato"
     )
     period_amount = fields.Monetary(
-        string="Valor por Período",
+        string="Valor Mensal",
         compute="_compute_period_amount",
         store=True,
         help="Valor por período = Qtd * (Valor Unitário - Desconto)",
