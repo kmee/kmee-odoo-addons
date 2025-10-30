@@ -73,17 +73,19 @@ class ProductAttributeLine(models.Model):
             # desabilitou a flag agora?
             if "is_qty_required" in values and not values["is_qty_required"]:
                 # bloqueio se já há variantes usando qty
+                ptavs = self.env["product.template.attribute.value"].search(
+                    line._get_attribute_value_line_domain()
+                )
+                ptavs_with_qty = ptavs.filtered(lambda p: p.attribute_value_qty_ids)
+
+                # Variante usa qty se possuir algum PTAV (deste atributo) que tenha faixas de qty
                 qty_variants = line.product_tmpl_id.product_variant_ids.filtered(
-                    lambda v: v.product_attribute_value_qty_ids.filtered(
-                        lambda q: q.product_attribute_id.id == line.attribute_id.id
-                    )
+                    lambda v: bool(v.product_template_attribute_value_ids & ptavs_with_qty)
                 )
                 if qty_variants:
                     raise ValidationError(_("Qty Required cannot be disabled because there are variants with quantities."))
 
-                ptavs = self.env["product.template.attribute.value"].search(
-                    line._get_attribute_value_line_domain()
-                )
+                # Se não há variantes usando qty, apaga as faixas no template
                 ptavs.mapped("attribute_value_qty_ids").unlink()
 
         return res
