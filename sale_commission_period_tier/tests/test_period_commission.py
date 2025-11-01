@@ -1,12 +1,12 @@
 import logging
 from datetime import date
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
 
-class TestPeriodCommission(SavepointCase):
+class TestPeriodCommission(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -22,7 +22,6 @@ class TestPeriodCommission(SavepointCase):
         cls.product = cls.env.ref("product.product_product_5")
         cls.product.invoice_policy = "order"
         cls.product.list_price = 5
-        cls.product._cr.commit()  # garante escrita no banco
         cls.product.flush()
         assert cls.product.invoice_policy == "order"
 

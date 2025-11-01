@@ -7,9 +7,7 @@
         <field name="inherit_id" ref="sale_commission.sale_commission_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='section_ids']" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('commission_type', 'not in', ['section', 'period_section'])]}</attribute>
+                <attribute name="invisible">[('commission_type', 'not in', ['section', 'period_section'])]</attribute>
             </xpath>
         </field>
     </record>
