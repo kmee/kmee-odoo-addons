@@ -1,6 +1,6 @@
-# Sale Commission Period Tier
+# Sale Commission Period Tier (Odoo 16.0)
 
-This module extends the functionality of sale commissions to add tiered commission rates based on periodic sales performance.
+This module extends the functionality of sale commissions to add tiered commission rates based on periodic sales performance for Odoo 16.0.
 
 ## Features
 
