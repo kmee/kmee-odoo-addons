@@ -22,12 +22,14 @@ class SaleCommission(models.Model):
         if self.commission_type != "period_section":
             return 0.0
 
+        sections = self.section_ids.sorted("amount_from")
+
         # If no total_amount provided, return first section
         if total_amount is None:
-            return self.section_ids[0].percent if self.section_ids else 0.0
+            return sections[:1].percent if sections else 0.0
 
         # Find applicable section
-        for section in self.section_ids:
+        for section in sections:
             if (
                 section.amount_from
                 <= total_amount
