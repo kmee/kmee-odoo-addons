@@ -3,13 +3,14 @@
 
 {
     "name": "Sale Commission Manual Invoice",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["sale_commission"],
+    "depends": ["account_commission", "sale_commission"],
     "data": [
         "views/sale_commission_settlement.xml",
     ],
     "demo": [],
+    "installable": True,
 }
