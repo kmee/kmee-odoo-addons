@@ -16,7 +16,9 @@ class SaleOrderLine(models.Model):
         help="Quantidade de licenças fornecidas em cada período",
     )
     period_count = fields.Integer(
-        string="Número de Meses", default=1, help="Número total de meses para o contrato"
+        string="Número de Meses",
+        default=1,
+        help="Número total de meses para o contrato",
     )
     period_amount = fields.Monetary(
         string="Valor Mensal",
