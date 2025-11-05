@@ -3,8 +3,8 @@
 
 {
     "name": "Sale Order Line Qty Fields",
-    "summary": """sale_order_line_qty_fields""",
-    "version": "14.0.1.0.0",
+    "summary": "Display additional quantity fields on sale order lines",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",

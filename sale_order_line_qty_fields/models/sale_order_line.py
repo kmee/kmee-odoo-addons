@@ -8,4 +8,9 @@ class SaleOrderLine(models.Model):
 
     _inherit = "sale.order.line"
 
-    free_qty = fields.Float(related="product_id.free_qty", string="Free Qty")
+    free_qty = fields.Float(
+        related="product_id.free_qty",
+        string="Free Qty",
+        digits="Product Unit of Measure",
+        readonly=True,
+    )
