@@ -17,7 +17,7 @@
                     type="object"
                     name="action_sale_of_days_off"
                     help="Holiday Sale"
-                    groups="hr_holidays.group_hr_holidays_user"
+                    groups="base.group_user"
                 >
                     <div class="o_stat_info">
                         <span class="o_stat_value">
