@@ -1,0 +1,19 @@
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="is_intercompany_partner" invisible="1" />
+                <field name="partner_company_id" invisible="1" />
+                <field
+                    name="partner_pricelist_id"
+                    attrs="{'invisible': [('is_intercompany_partner', '=', False)]}"
+                    domain="[('company_id', '=', partner_company_id)]"
+                    string="Interco Pricelist"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
