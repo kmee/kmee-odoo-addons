@@ -8,7 +8,6 @@
             <xpath expr="//header" position="inside">
                 <field name="hide_sdr_bdr" invisible="1" />
                 <field name="hide_hunter" invisible="1" />
-                <field name="hide_closer" invisible="1" />
                 <field name="hide_farmer" invisible="1" />
             </xpath>
             <field name="user_id" position="after">
@@ -21,11 +20,6 @@
                     name="hunter_id"
                     widget="many2one_avatar_user"
                     attrs="{'invisible': [('hide_hunter', '=', True)]}"
-                />
-                <field
-                    name="closer_id"
-                    widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_closer', '=', True)]}"
                 />
                 <field
                     name="farmer_id"
@@ -43,11 +37,6 @@
                     name="hunter_id"
                     widget="many2one_avatar_user"
                     attrs="{'invisible': [('hide_hunter', '=', True)]}"
-                />
-                <field
-                    name="closer_id"
-                    widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_closer', '=', True)]}"
                 />
                 <field
                     name="farmer_id"
