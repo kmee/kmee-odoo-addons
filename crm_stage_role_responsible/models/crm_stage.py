@@ -6,8 +6,7 @@ class CrmStage(models.Model):
 
     role_responsible = fields.Selection(
         [
-            ("bdr", "BDR"),
-            ("sdr", "SDR"),
+            ("sdr_bdr", "SDR/BDR"),
             ("hunter", "Hunter"),
             ("closer", "Closer"),
             ("farmer", "Farmer"),

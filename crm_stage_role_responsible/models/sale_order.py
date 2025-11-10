@@ -4,8 +4,7 @@ from odoo import api, fields, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    bdr_id = fields.Many2one("res.users", string="BDR")
-    sdr_id = fields.Many2one("res.users", string="SDR")
+    sdr_bdr_id = fields.Many2one("res.users", string="SDR/BDR")
     hunter_id = fields.Many2one("res.users", string="Hunter")
     closer_id = fields.Many2one("res.users", string="Closer")
     farmer_id = fields.Many2one("res.users", string="Farmer")

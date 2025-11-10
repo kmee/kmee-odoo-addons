@@ -8,6 +8,7 @@
     "depends": [
         "crm",
         "sale_crm",
+        "crm_industry",
     ],
     "data": [
         "views/crm_team.xml",
