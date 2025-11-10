@@ -1,19 +1,14 @@
 from odoo import _, api, exceptions, fields, models
 
-ROLES = ["bdr", "sdr", "hunter", "closer", "farmer"]
+ROLES = ["sdr_bdr", "hunter", "closer", "farmer"]
 
 
 class CrmLead(models.Model):
     _inherit = "crm.lead"
 
-    bdr_id = fields.Many2one(
+    sdr_bdr_id = fields.Many2one(
         "res.users",
-        string="BDR",
-        domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
-    )
-    sdr_id = fields.Many2one(
-        "res.users",
-        string="SDR",
+        string="SDR/BDR",
         domain="['&', ('share', '=', False), ('company_ids', 'in', user_company_ids)]",
     )
     hunter_id = fields.Many2one(
@@ -40,8 +35,7 @@ class CrmLead(models.Model):
         index=True,
         tracking=True,
     )
-    hide_bdr = fields.Boolean(string="Hide BDR", related="team_id.hide_bdr", store=True)
-    hide_sdr = fields.Boolean(string="Hide SDR", related="team_id.hide_sdr", store=True)
+    hide_sdr_bdr = fields.Boolean(string="Hide SDR/BDR", related="team_id.hide_sdr_bdr", store=True)
     hide_hunter = fields.Boolean(
         string="Hide Hunter", related="team_id.hide_hunter", store=True
     )
@@ -62,8 +56,9 @@ class CrmLead(models.Model):
                     if user:
                         lead.user_id = user
                     else:
+                        role_display = role.replace("_", "/").upper()
                         raise exceptions.UserError(
-                            _(f"Current stage requires a {role.upper()} assignment.")
+                            _(f"Current stage requires a {role_display} assignment.")
                         )
 
     @api.model
@@ -82,8 +77,7 @@ class CrmLead(models.Model):
         quotation_context = super()._prepare_opportunity_quotation_context()
         quotation_context.update(
             {
-                "default_bdr_id": self.bdr_id.id if self.bdr_id else False,
-                "default_sdr_id": self.sdr_id.id if self.sdr_id else False,
+                "default_sdr_bdr_id": self.sdr_bdr_id.id if self.sdr_bdr_id else False,
                 "default_hunter_id": self.hunter_id.id if self.hunter_id else False,
                 "default_closer_id": self.closer_id.id if self.closer_id else False,
                 "default_farmer_id": self.farmer_id.id if self.farmer_id else False,
