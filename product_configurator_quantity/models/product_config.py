@@ -103,7 +103,7 @@ class ProductConfigSession(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
+        attribute_value_qty_obj = self.env["product.template.attribute.value.qty"]
         attribute_value_qty_obj2 = self.env["product.template.attribute.value"]
         for val in vals_list:
             product_tmpl = (
@@ -162,7 +162,7 @@ class ProductConfigSession(models.Model):
             product_tmpl_id = self.product_tmpl_id
 
         product_configurator_obj = self.env["product.configurator"]
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
+        attribute_value_qty_obj = self.env["product.template.attribute.value.qty"]
         field_prefix = product_configurator_obj._prefixes.get("field_prefix")
         custom_field_prefix = product_configurator_obj._prefixes.get(
             "custom_field_prefix"
@@ -585,4 +585,4 @@ class ProductConfigSessionValueQty(models.Model):
     attr_value_id = fields.Many2one("product.attribute.value")
     product_attribute_id = fields.Many2one("product.attribute")
     qty = fields.Integer(string="Quantity")
-    attribute_value_qty_id = fields.Many2one("attribute.value.qty", ondelete="cascade")
+    attribute_value_qty_id = fields.Many2one("product.template.attribute.value.qty", ondelete="cascade")

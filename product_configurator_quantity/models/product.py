@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 from odoo.tools.sql import drop_index, index_exists
+from odoo.exceptions import ValidationError
+from odoo import _
 
 
 class ProductConfigAttributeValueQty(models.Model):
@@ -81,10 +83,10 @@ class ProductConfigLine(models.Model):
             ])
             if ptavs:
                 qty_recs = self.env['product.template.attribute.value.qty'].search([
-                    ('ptav_id', 'in', ptavs.ids)
+                    ('template_attri_value_id', 'in', ptavs.ids)
                 ])
                 for q in qty_recs:
-                    defaults[q.value_id.id] = (q.qty, q.qty_min, q.qty_max)
+                    defaults[q.product_attribute_value_id.id] = (q.qty, q.qty_min, q.qty_max)
 
             # Monta linhas novas preservando qty já editadas quando possível
             existing_map = {rec.value_id.id: rec for rec in line.value_qty_ids}
@@ -115,3 +117,38 @@ class ProductConfigLine(models.Model):
                     ops.append((2, rid, 0))
             ops.extend(new_lines)
             line.value_qty_ids = ops
+
+
+class ProductProductAttributeValueQty(models.Model):
+    _name = "product.product.attribute.value.qty"
+    _description = "Product Variant Attribute Value Quantity"
+    _order = "id"
+
+    product_id = fields.Many2one(
+        "product.product",
+        string="Product Variant",
+        required=True,
+        ondelete="cascade",
+        index=True,
+    )
+    attr_value_id = fields.Many2one(
+        "product.attribute.value",
+        string="Attribute Value",
+        required=True,
+    )
+    qty = fields.Float(string="Quantity", default=1.0)
+    attribute_value_qty_id = fields.Many2one(
+        "product.template.attribute.value.qty",
+        string="Template Value Qty",
+        ondelete="set null",
+    )
+
+
+class ProductProduct(models.Model):
+    _inherit = "product.product"
+
+    product_attribute_value_qty_ids = fields.One2many(
+        "product.product.attribute.value.qty",
+        "product_id",
+        string="Attribute Value Quantities",
+    )

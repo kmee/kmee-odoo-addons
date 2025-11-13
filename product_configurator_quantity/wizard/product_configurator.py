@@ -12,7 +12,7 @@ class ProductConfigurator(models.TransientModel):
 
     dyn_qty_field_value = fields.Char()
     domain_qty_ids = fields.Many2many(
-        "attribute.value.qty",
+        "product.template.attribute.value.qty",
         string="Domain",
     )
     domains_dict = fields.Text("Domains")
@@ -60,14 +60,14 @@ class ProductConfigurator(models.TransientModel):
                     type="many2one",
                     domain=[("product_tmpl_id", "=", wiz.product_tmpl_id.id)],
                     string="Qty",
-                    relation="attribute.value.qty",
+                    relation="product.template.attribute.value.qty",
                     widget="selection",
                 )
         return res
 
     @api.model_create_multi
     def create(self, vals_list):
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
+        attribute_value_qty_obj = self.env["product.template.attribute.value.qty"]
         qty_prefix = self._prefixes.get("qty_field")
         for vals in vals_list:
             if "product_id" in vals:
@@ -106,7 +106,7 @@ class ProductConfigurator(models.TransientModel):
             qty_prefix = self._prefixes.get("qty_field")
             field_prefix = self._prefixes.get("field_prefix")
             template_attribute_line = self.env["product.template.attribute.line"]
-            attribute_value_qty_obj = self.env["attribute.value.qty"]
+            attribute_value_qty_obj = self.env["product.template.attribute.value.qty"]
             values_dict = self.values_dict and ast.literal_eval(self.values_dict) or {}
             for value in result.get("value"):
                 if value.startswith(field_prefix):
@@ -166,7 +166,7 @@ class ProductConfigurator(models.TransientModel):
         field_prefix = self._prefixes.get("field_prefix")
         qty_prefix = self._prefixes.get("qty_field")
         new_val = {}
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
+        attribute_value_qty_obj = self.env["product.template.attribute.value.qty"]
         product_template_attribute_value = self.env["product.template.attribute.value"]
         product_template_attribute_line = self.env["product.template.attribute.line"]
         qty_field_value = False
@@ -231,7 +231,7 @@ class ProductConfigurator(models.TransientModel):
         vals = onchange_values.get("value", {})
         qty_prefix = self._prefixes.get("qty_field")
         field_prefix = self._prefixes.get("field_prefix")
-        attribute_value_qty_obj = self.env["attribute.value.qty"]
+        attribute_value_qty_obj = self.env["product.template.attribute.value.qty"]
         attribute_value_obj = self.env["product.attribute.value"]
         qty = 1
         product_price = 1
@@ -342,7 +342,7 @@ class ProductConfigurator(models.TransientModel):
                 self.product_preset_id.product_attribute_value_qty_ids
             )
             attr_qty_list = []
-            attribute_qty_value_obj = self.env["attribute.value.qty"]
+            attribute_qty_value_obj = self.env["product.template.attribute.value.qty"]
             qty_prefix = self._prefixes.get("qty_field")
             field_prefix = self._prefixes.get("field_prefix")
             for qty_attr_value in product_attribute_value_qty_ids:
@@ -648,7 +648,7 @@ class ProductConfigurator(models.TransientModel):
                             "wizard_id": wiz.id,
                             "field_name": qty_field,
                             "is_qty_required": attr_line.is_qty_required,
-                            # "value_ids": self.env['attribute.value.qty'].search([]).ids,
+                            # "value_ids": self.env['product.template.attribute.value.qty'].search([]).ids,
                             "active_model": self._name,
                         }
                     ),
