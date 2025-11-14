@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_test_view_item_tree" model="ir.ui.view">
+        <field name="name">test.view.item.tree</field>
+        <field name="model">test.view.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <header>
+                    <button name="run_test" type="object" string="Run" />
+                    <button name="run_all_test" type="object" string="Run All" />
+                    <button name="run_global_test" type="object" string="Run Global" />
+                </header>
+                <field name="view_xml_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_test_view_item_form" model="ir.ui.view">
+        <field name="name">test.view.item.form</field>
+        <field name="model">test.view.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="view_xml_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_test_view_item" model="ir.actions.act_window">
+        <field name="name">Tested Views</field>
+        <field name="res_model">test.view.item</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_test_view_item_root"
+        name="Test Views"
+        parent="base.menu_custom"
+        sequence="999"
+    />
+
+    <menuitem
+        id="menu_test_view_item"
+        name="View List"
+        parent="menu_test_view_item_root"
+        action="action_test_view_item"
+    />
+</odoo>

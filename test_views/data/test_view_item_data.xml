@@ -1,0 +1,28 @@
+<odoo>
+
+    <!-- Move Form -->
+    <record id="test_view_item_move_form" model="test.view.item">
+        <field name="view_xml_id">account.view_move_form</field>
+    </record>
+
+    <!-- Vendor Bills Tree -->
+    <record id="test_view_item_vendor_bills_tree" model="test.view.item">
+        <field name="view_xml_id">account.view_in_invoice_bill_tree</field>
+    </record>
+
+    <!-- Customer Invoice Tree -->
+    <record id="test_view_item_customer_invoice_tree" model="test.view.item">
+        <field name="view_xml_id">account.view_out_invoice_tree</field>
+    </record>
+
+    <!-- Move Tree -->
+    <record id="test_view_item_move_tree" model="test.view.item">
+        <field name="view_xml_id">account.view_move_tree</field>
+    </record>
+
+    <!-- Purchase Order Form -->
+    <record id="test_view_item_purchase_order_form" model="test.view.item">
+        <field name="view_xml_id">purchase.purchase_order_form</field>
+    </record>
+
+</odoo>
