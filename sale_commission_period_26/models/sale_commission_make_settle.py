@@ -11,7 +11,7 @@ from odoo import models
 
 class SaleCommissionMakeSettle(models.TransientModel):
 
-    _inherit = "sale.commission.make.settle"
+    _inherit = "commission.make.settle"
 
     def _get_period_start(self, agent, date_to):
         if agent.settlement == "vinte_seis" and date_to:
