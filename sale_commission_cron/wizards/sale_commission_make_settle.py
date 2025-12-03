@@ -6,16 +6,21 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 
 
-class SaleCommissionMakeSettle(models.TransientModel):
-    _inherit = "sale.commission.make.settle"
+class SaleCommissionCron(models.TransientModel):
+    _name = "sale.commission.cron"
+    _description = "Sale Commission Cron Helper"
 
     @api.model
     def cron_generate_next_month_commissions(self):
+        """Create the standard settlement wizard for next month and run it."""
         # Calculate the date for next month
-        next_month_date = fields.Date.today() + relativedelta(months=1)
+        next_month_date = fields.Date.context_today(self) + relativedelta(months=1)
+
+        # Use the original settlement wizard model
+        settle_wizard_model = self.env["sale.commission.make.settle"].sudo()
 
         # Create the wizard record
-        wizard = self.create(
+        wizard = settle_wizard_model.create(
             {
                 "date_to": next_month_date,
                 "date_payment_to": next_month_date,
