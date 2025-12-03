@@ -1,51 +1,54 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record id="view_settlement_form_inherit" model="ir.ui.view">
-        <field name="name">sale.commission.settlement.form.inherit</field>
-        <field name="model">sale.commission.settlement</field>
-        <field name="inherit_id" ref="sale_commission.view_settlement_form" />
+    <record id="view_settlement_form_manual_invoice" model="ir.ui.view">
+        <field name="name">commission.settlement.form.manual.invoice</field>
+        <field name="model">commission.settlement</field>
+        <field name="inherit_id" ref="account_commission.view_settlement_form"/>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <field name="state" position="replace">
-                <field
-                    name="state"
-                    widget="statusbar"
-                    statusbar_visible="settled,paid,cancel"
-                />
-            </field>
-            <!-- Remove the original 'Make Invoice' button -->
-            <xpath expr="//button[@name='action_invoice']" position="replace" />
-            <xpath expr="//button[@name='action_cancel']" position="replace" />
-            <!-- Add 'Mark as Invoiced' button -->
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">settled,invoiced,paid,except_invoice,cancel</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice']" position="replace"/>
+            <xpath expr="//button[@name='action_draft']" position="replace"/>
             <xpath expr="//field[@name='state']" position="after">
                 <button
-                    name="action_confirm"
-                    string="Confirm"
+                    name="action_mark_invoiced"
+                    string="Mark as Invoiced"
                     type="object"
-                    class="btn-primary"
-                    groups="base.group_user"
+                    class="oe_highlight"
+                    groups="account.group_account_invoice"
+                    states="settled,except_invoice"
                 />
                 <button
-                    name="action_cancel"
-                    string="Cancel"
+                    name="action_confirm"
+                    string="Mark as Paid"
                     type="object"
-                    class="btn-secondary"
-                    groups="base.group_user"
+                    class="oe_highlight"
+                    groups="account.group_account_invoice"
+                    states="invoiced"
+                />
+                <button
+                    name="action_except_invoice"
+                    string="Invoice Exception"
+                    type="object"
+                    groups="account.group_account_invoice"
+                    states="settled,invoiced"
                 />
                 <button
                     name="action_settle"
                     string="Set to Settled"
                     type="object"
-                    class="btn-info"
-                    groups="base.group_user"
+                    groups="account.group_account_invoice"
+                    states="paid,invoiced,except_invoice,cancel"
                 />
             </xpath>
         </field>
     </record>
 
-    <record id="sale_commission.menu_commission_make_invoices" model="ir.ui.menu">
+    <record id="account_commission.menu_invoicing_settlements" model="ir.ui.menu">
         <field name="active">False</field>
     </record>
 </odoo>

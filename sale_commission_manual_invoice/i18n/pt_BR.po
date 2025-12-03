@@ -1,19 +1,24 @@
 #. module: sale_commission_manual_invoice
-#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_inherit
-msgid "Confirm"
-msgstr "Confirmar"
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Invoice Exception"
+msgstr "Exceção de Fatura"
 
 #. module: sale_commission_manual_invoice
-#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_inherit
-msgid "Cancel"
-msgstr "Cancelar"
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Mark as Invoiced"
+msgstr "Marcar como Faturado"
 
 #. module: sale_commission_manual_invoice
-#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_inherit
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Mark as Paid"
+msgstr "Marcar como Pago"
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
 msgid "Set to Settled"
 msgstr "Marcar como Aberto"
 
-#. module: sale_commission
-#: model:ir.model.fields.selection,name:sale_commission.selection__sale_commission_settlement__state__settled
-msgid "Open"
+#. module: sale_commission_manual_invoice
+#: model:ir.model.fields.selection,name:commission.selection__commission_settlement__state__settled
+msgid "Settled"
 msgstr "Aberto"
