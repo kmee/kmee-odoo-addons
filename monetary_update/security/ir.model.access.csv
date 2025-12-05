@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_monetary_update_index_user,monetary.update.index user,model_monetary_update_index,group_monetary_update_user,1,0,0,0
+access_monetary_update_index_manager,monetary.update.index manager,model_monetary_update_index,group_monetary_update_manager,1,1,1,1
+access_monetary_update_index_rate_user,monetary.update.index.rate user,model_monetary_update_index_rate,group_monetary_update_user,1,0,0,0
+access_monetary_update_index_rate_manager,monetary.update.index.rate manager,model_monetary_update_index_rate,group_monetary_update_manager,1,1,1,1
+access_monetary_update_field_state_user,monetary.update.field.state user,model_monetary_update_field_state,group_monetary_update_user,1,0,0,0
+access_monetary_update_field_state_manager,monetary.update.field.state manager,model_monetary_update_field_state,group_monetary_update_manager,1,1,1,1
+access_new_monetery_track_wizard_user,new.monetery.track.wizard user,model_new_monetery_track_wizard,group_monetary_update_user,1,1,1,0
+access_new_monetery_track_wizard_manager,new.monetery.track.wizard manager,model_new_monetery_track_wizard,group_monetary_update_manager,1,1,1,1
+access_update_field_by_index_wizard_user,update.field.by.index.wizard user,model_update_field_by_index_wizard,group_monetary_update_user,1,1,1,0
+access_update_field_by_index_wizard_manager,update.field.by.index.wizard manager,model_update_field_by_index_wizard,group_monetary_update_manager,1,1,1,1

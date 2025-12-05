@@ -1,0 +1,231 @@
+from datetime import date
+from typing import List, Optional, Tuple
+
+from odoo import _, api, models
+from odoo.exceptions import UserError
+
+
+class MonetaryUpdateService(models.AbstractModel):
+    _name = "monetary.update.service"
+    _description = "Monetary Update Service"
+
+    @api.model
+    def get_rate(
+        self, index_code: str, target_date: date, policy: str = "exact"
+    ) -> Optional[float]:
+        """
+        Get rate for a specific date.
+
+        :param index_code: Code of the monetary index
+        :param target_date: Target date
+        :param policy: 'exact' or 'use_last_available'
+        :return: Rate value or None
+        """
+        index = self._get_index_by_code(index_code)
+        if not index:
+            raise UserError(_("Index with code '%s' not found!") % index_code)
+
+        domain = [
+            ("index_id", "=", index.id),
+            ("date", "=", target_date),
+        ]
+        rate = self.env["monetary.update.index.rate"].search(domain, limit=1)
+
+        if rate:
+            return rate.value
+
+        if policy == "use_last_available":
+            domain = [
+                ("index_id", "=", index.id),
+                ("date", "<=", target_date),
+            ]
+            rate = self.env["monetary.update.index.rate"].search(
+                domain, order="date desc", limit=1
+            )
+            if rate:
+                return rate.value
+
+        return None
+
+    @api.model
+    def get_series(
+        self, index_code: str, start_date: date, end_date: date
+    ) -> List[Tuple[date, float]]:
+        """
+        Get series of rates between two dates.
+
+        :param index_code: Code of the monetary index
+        :param start_date: Start date
+        :param end_date: End date
+        :return: List of tuples (date, value)
+        """
+        index = self._get_index_by_code(index_code)
+        if not index:
+            raise UserError(_("Index with code '%s' not found!") % index_code)
+
+        domain = [
+            ("index_id", "=", index.id),
+            ("date", ">=", start_date),
+            ("date", "<=", end_date),
+        ]
+        rates = self.env["monetary.update.index.rate"].search(domain, order="date asc")
+
+        return [(rate.date, rate.value) for rate in rates]
+
+    @api.model
+    def compute_factor(
+        self,
+        index_code: str,
+        start_date: date,
+        end_date: date,
+        mode: str = "compound",
+        missing: str = "error",
+    ) -> float:
+        """
+        Compute accumulated factor between two dates.
+
+        :param index_code: Code of the monetary index
+        :param start_date: Start date
+        :param end_date: End date
+        :param mode: 'compound' or 'simple'
+        :param missing: 'error', 'use_last_available', or 'skip'
+        :return: Accumulated factor
+        """
+        if mode not in ("compound", "simple"):
+            raise UserError(_("Invalid mode: %s. Use 'compound' or 'simple'.") % mode)
+
+        if missing not in ("error", "use_last_available", "skip"):
+            raise UserError(
+                _(
+                    "Invalid missing policy: %s. Use 'error', 'use_last_available', or 'skip'."
+                )
+                % missing
+            )
+
+        series = self.get_series(index_code, start_date, end_date)
+
+        if not series and missing == "error":
+            raise UserError(
+                _("No rates found for index '%s' between %s and %s!")
+                % (index_code, start_date, end_date)
+            )
+
+        if mode == "compound":
+            factor = 1.0
+            for x, value in series:
+                factor *= 1.0 + value / 100.0
+            return factor
+        else:  # simple
+            total = sum(value for _, value in series)
+            return 1.0 + total / 100.0
+
+    @api.model
+    def compute_updated_amount(
+        self, index_code: str, amount: float, start_date: date, end_date: date, **kwargs
+    ) -> float:
+        """
+        Update an amount using the accumulated factor.
+
+        :param index_code: Code of the monetary index
+        :param amount: Original amount
+        :param start_date: Start date
+        :param end_date: End date
+        :param kwargs: Additional arguments passed to compute_factor
+        :return: Updated amount
+        """
+        factor = self.compute_factor(index_code, start_date, end_date, **kwargs)
+        return amount * factor
+
+    @api.model
+    def compute_factor_with_strategy(
+        self,
+        index_code: str,
+        start_date: date,
+        end_date: date,
+        strategy_code: str,
+        **kwargs,
+    ) -> float:
+        """
+        Compute factor using a registered strategy.
+
+        :param index_code: Code of the monetary index
+        :param start_date: Start date
+        :param end_date: End date
+        :param strategy_code: Code of the strategy to use
+        :param kwargs: Additional arguments for the strategy
+        :return: Computed factor
+        """
+        strategy_registry = self.env["monetary.update.strategy"]
+        strategy = strategy_registry.get_strategy(strategy_code)
+
+        if not strategy:
+            raise UserError(_("Strategy '%s' not found!") % strategy_code)
+
+        return strategy(self, index_code, start_date, end_date, **kwargs)
+
+    @api.model
+    def _get_index_by_code(self, code: str):
+        """Helper method to get index by code."""
+        return self.env["monetary.update.index"].search(
+            [("code", "=ilike", code)], limit=1
+        )
+
+    @api.model
+    def get_field_state(self, model, field_id):
+        return self.env["monetary.update.field.state"].search(
+            [
+                ("model_id", "=", model._name),
+                ("res_id", "=", model.id),
+                ("field_id", "=", field_id),
+            ],
+            limit=1,
+        )
+
+    @api.model
+    def update_fields_by_index_wizard(self, res_id):
+        model = self.env["ir.model"].search([("model", "=", self._name)])
+        if not model:
+            raise UserError(_("Model '%s' not found!") % self._name)
+
+        field_states = self.env["monetary.update.field.state"].search(
+            [
+                ("model_id", "=", model.id),
+                ("res_id", "=", res_id[0]),
+            ]
+        )
+
+        if not field_states:
+            raise UserError(
+                _("No monetary field being updated by any index in this record")
+            )
+
+        field_ids = field_states.mapped("field_id").mapped("id")
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Update Fields by index",
+            "res_model": "update.field.by.index.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_model_id": model.id,
+                "default_res_id": res_id[0],
+                "default_field_ids": [(6, 0, field_ids)],
+            },
+        }
+
+    @api.model
+    def new_monetery_track_wizard(self, res_id):
+        model = self.env["ir.model"].search([("model", "=", self._name)])
+        if not model:
+            raise UserError(_("Model '%s' not found!") % self._name)
+        return {
+            "type": "ir.actions.act_window",
+            "name": "New Monetery Track",
+            "res_model": "new.monetery.track.wizard",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_model_id": model.id,
+                "default_res_id": res_id[0],
+            },
+        }

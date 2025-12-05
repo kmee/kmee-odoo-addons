@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_monetary_update_field_state_tree" model="ir.ui.view">
+        <field name="name">monetary.update.field.state.tree</field>
+        <field name="model">monetary.update.field.state</field>
+        <field name="arch" type="xml">
+            <tree string="Estado de Atualização Monetária">
+                <field name="model_id" />
+                <field name="res_id" />
+                <field name="field_id" />
+                <field name="index_id" />
+                <field name="last_update_date" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_monetary_update_field_state_form" model="ir.ui.view">
+        <field name="name">monetary.update.field.state.form</field>
+        <field name="model">monetary.update.field.state</field>
+        <field name="arch" type="xml">
+            <form string="Estado de Atualização Monetária">
+                <sheet>
+                    <group>
+                        <group name="model_info" string="Informações do Modelo">
+                            <field name="model_id" />
+                            <field name="res_id" />
+                            <field name="field_id" />
+                        </group>
+                        <group name="update_info" string="Informações de Atualização">
+                            <field name="index_id" />
+                            <field name="last_update_date" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_monetary_update_field_state_search" model="ir.ui.view">
+        <field name="name">monetary.update.field.state.search</field>
+        <field name="model">monetary.update.field.state</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Estado de Atualização">
+                <field name="model_id" />
+                <field name="field_id" />
+                <field name="res_id" />
+                <filter
+                    string="SELIC"
+                    name="filter_selic"
+                    domain="[('index_id', '=', 'selic')]"
+                />
+                <filter
+                    string="IPCA"
+                    name="filter_ipca"
+                    domain="[('index_id', '=', 'ipca')]"
+                />
+                <separator />
+                <filter
+                    string="Atualizados este mês"
+                    name="filter_this_month"
+                    domain="[('last_update_date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%Y-%m-%d'))]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        string="Modelo"
+                        name="group_model"
+                        context="{'group_by': 'model_id'}"
+                    />
+                    <filter
+                        string="Campo"
+                        name="group_field"
+                        context="{'group_by': 'field_id'}"
+                    />
+                    <filter
+                        string="Tipo de Índice"
+                        name="group_index_id"
+                        context="{'group_by': 'index_id'}"
+                    />
+                    <filter
+                        string="Data de Atualização"
+                        name="group_date"
+                        context="{'group_by': 'last_update_date'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_monetary_update_field_state" model="ir.actions.act_window">
+        <field name="name">Estado de Atualização Monetária</field>
+        <field name="res_model">monetary.update.field.state</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_monetary_update_field_state_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Criar um novo estado de atualização monetária
+            </p>
+            <p>
+                Este registro rastreia o estado de atualização monetária por registro e campo.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_monetary_update_field_state"
+        name="Estado de Atualização"
+        parent="menu_monetary_update_root"
+        action="action_monetary_update_field_state"
+        sequence="20"
+    />
+</odoo>
