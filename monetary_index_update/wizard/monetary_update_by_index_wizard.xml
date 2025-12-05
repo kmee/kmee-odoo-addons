@@ -1,0 +1,41 @@
+<odoo>
+    <record id="view_update_field_by_index_wizard" model="ir.ui.view">
+        <field name="name">monetary.update.by.index.wizard</field>
+        <field name="model">monetary.update.by.index.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Monetary Update by Index Wizard">
+                <sheet>
+                    <group>
+                        <field name="model_id" invisible="1" />
+                        <field name="res_id" invisible="1" />
+                    </group>
+                    <group>
+                        <span
+                        >Select the index and the date range to calculate the accumulated factor to update the fields.</span>
+                        <group>
+                            <field name="index_id" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                    <group>
+                        <field
+                            name="result_preview"
+                            widget="text"
+                            attrs="{'readonly': True}"
+                        />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="update_fields_by_index"
+                        string="Update Fields"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button special="cancel" string="Cancel" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
