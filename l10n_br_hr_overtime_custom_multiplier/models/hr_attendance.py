@@ -20,7 +20,7 @@ class HrAttendance(models.Model):
             [("attendance_id", "in", self.ids)]
         )
         if overtime_ids:
-            overtime_ids.write(
+            overtime_ids.sudo().write(
                 {"note": "Automaticamente gerado com base no registro de horas."}
             )  # noqa
 
