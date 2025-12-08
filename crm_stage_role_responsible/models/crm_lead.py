@@ -35,7 +35,9 @@ class CrmLead(models.Model):
         index=True,
         tracking=True,
     )
-    hide_sdr_bdr = fields.Boolean(string="Hide SDR/BDR", related="team_id.hide_sdr_bdr", store=True)
+    hide_sdr_bdr = fields.Boolean(
+        string="Hide SDR/BDR", related="team_id.hide_sdr_bdr", store=True
+    )
     hide_hunter = fields.Boolean(
         string="Hide Hunter", related="team_id.hide_hunter", store=True
     )
