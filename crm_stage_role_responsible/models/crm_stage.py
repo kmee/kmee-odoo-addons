@@ -20,5 +20,5 @@ class CrmStage(models.Model):
             'closer': 'set default',
             'farmer': 'set default',
             'default': 'cascade'
-        }
+        }
     )
