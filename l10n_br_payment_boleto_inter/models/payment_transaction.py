@@ -55,19 +55,26 @@ class PaymentTransaction(models.Model):
             raise UserError(_(f"Erro ao gerar boleto Inter: {str(e)}")) from e
 
     def _prepare_boleto_data_inter(self):
-        order = self.sale_order_ids[0] if self.sale_order_ids else None
-        invoice = self.invoice_ids[0] if self.invoice_ids else None
-        if not invoice and not order:
-            raise UserError(
-                _("Não é possível gerar boleto sem fatura ou pedido associado")
-            )
+        order = self.sale_order_ids[:1]
+        order = order[0] if order else None
+        invoice = self.invoice_ids[:1]
+        invoice = invoice[0] if invoice else None
 
-        # Decide de onde puxar os dados
-        partner = (
-            invoice.partner_id if invoice else order.partner_id
-        ).commercial_partner_id
-        payment_mode = invoice.payment_mode_id if invoice else order.payment_mode_id
-        company = self.company_id
+        partner_source = (
+            (invoice.partner_id if invoice else None)
+            or (order.partner_id if order else None)
+            or self.partner_id
+        )
+        partner = partner_source and partner_source.commercial_partner_id
+        if not partner:
+            raise UserError(_("Transação não possui parceiro para geração do boleto"))
+
+        payment_mode = (
+            (invoice.payment_mode_id if invoice else None)
+            or (order.payment_mode_id if order else None)
+            or getattr(self, "payment_mode_id", None)
+        )
+        company = self.company_id or self.env.company
 
         # Validação de dados obrigatórios
         self._validate_partner_data(partner)
@@ -79,13 +86,17 @@ class PaymentTransaction(models.Model):
                 or invoice.invoice_date_due
                 or (datetime.now().date() + timedelta(days=30))
             )
-        else:
+        elif order:
             due_date = self.due_date or (
                 order.validity_date or (datetime.now().date() + timedelta(days=30))
             )
+        else:
+            due_date = self.due_date or (datetime.now().date() + timedelta(days=30))
 
         # Valores
         valor_nominal = round(float(self.amount), 2)
+        if valor_nominal < 2.5:
+            raise ValidationError(_("Valor mínimo do boleto Inter é R$ 2,50."))
 
         # --- PAGADOR ---
         match_pagador = re.match(r"(.+?),?\s*(\d+)?$", partner.street or "")
@@ -110,6 +121,26 @@ class PaymentTransaction(models.Model):
         )
 
         # Monta payload
+        # Dados do beneficiário final (empresa) com valores de segurança
+        company_city = (
+            company.city_id.name
+            or (
+                company.partner_id.city_id.name
+                if getattr(company, "partner_id", False)
+                else None
+            )
+            or "Cidade"
+        )
+        company_state = (
+            company.state_id.code
+            or (
+                company.partner_id.state_id.code
+                if getattr(company, "partner_id", False)
+                else None
+            )
+            or "MG"
+        )
+
         boleto_data = {
             "seuNumero": self.reference,
             "valorNominal": valor_nominal,
@@ -119,12 +150,16 @@ class PaymentTransaction(models.Model):
             "pagador": {
                 "cpfCnpj": re.sub(r"\D", "", partner.cnpj_cpf or ""),
                 "tipoPessoa": "JURIDICA" if partner.is_company else "FISICA",
-                "nome": partner.legal_name or partner.name or "Cliente Teste",
+                "nome": partner.legal_name or partner.name or "Cliente",
                 "endereco": endereco_pagador,
                 "numero": numero_pagador,
                 "complemento": partner.street2 or "",
-                "bairro": partner.district or "Bairro Teste",
-                "cidade": partner.city_id.name if partner.city_id else "Cidade Teste",
+                "bairro": partner.district or "Bairro",
+                "cidade": (
+                    partner.city_id.name
+                    if partner.city_id
+                    else (partner.city or "Cidade")
+                ),
                 "uf": partner.state_id.code if partner.state_id else "MG",
                 "cep": re.sub(r"\D", "", partner.zip or "00000000"),
                 "email": partner.email or "teste@teste.com",
@@ -138,8 +173,8 @@ class PaymentTransaction(models.Model):
                 "endereco": endereco_benef,
                 "numero": numero_benef,
                 "bairro": company.district or "",
-                "cidade": company.city_id.name if company.city_id else "",
-                "uf": company.state_id.code if company.state_id else "",
+                "cidade": company_city,
+                "uf": company_state,
                 "cep": re.sub(r"\D", "", company.zip or "00000000"),
             },
         }
@@ -256,7 +291,7 @@ class PaymentTransaction(models.Model):
             errors.append("Endereço - CEP")
         if not partner.state_id:
             errors.append("Endereço - Estado")
-        if not partner.city_id:
+        if not (partner.city_id or partner.city):
             errors.append("Endereço - Município")
         if not partner.cnpj_cpf:
             errors.append("CPF/CNPJ")
