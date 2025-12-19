@@ -9,7 +9,7 @@ class HrAttendance(models.Model):
 
     @api.model
     def _update_overtime(self, employee_attendance_dates=None):
-        self.env["hr.attendance.overtime"].search(
+        self.env["hr.attendance.overtime"].sudo().search(
             [("attendance_id", "in", self.ids)]
         ).unlink()
         res = super(
@@ -20,7 +20,7 @@ class HrAttendance(models.Model):
             [("attendance_id", "in", self.ids)]
         )
         if overtime_ids:
-            overtime_ids.write(
+            overtime_ids.sudo().write(
                 {"note": "Automaticamente gerado com base no registro de horas."}
             )  # noqa
 

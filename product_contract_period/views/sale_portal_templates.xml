@@ -10,7 +10,7 @@
             <attribute name="t-if">False</attribute>
         </xpath>
         <xpath expr="//table[contains(@class, 'table')]" position="attributes">
-            <attribute name="class" add=" table-bordered" separator=" "/>
+            <attribute name="class" add=" table-bordered" separator=" " />
         </xpath>
         <xpath
             expr="//t[@t-set='current_subtotal'][@t-value='current_subtotal + line.price_total']"
@@ -24,20 +24,45 @@
                 t-set="period_count"
                 t-value="any(l.period_count for l in lines_to_report)"
             />
-            <t t-set="has_unit_price" t-value="any(l.price_unit for l in lines_to_report)" />
+            <t
+                t-set="has_unit_price"
+                t-value="any(l.price_unit for l in lines_to_report)"
+            />
         </xpath>
         <xpath expr="//th[@id='product_name_header']" position="after">
-            <th class="text-end" t-if="period_count" id="period_label_header">Período</th>
-            <th class="text-end" t-if="period_qty" id="licenses_total_header">Total de Licenças</th>
-            <th class="text-end" t-if="has_unit_price" id="unit_price_header">Valor Unitário</th>
-            <th class="text-end" t-if="period_qty and has_unit_price" id="monthly_value_header">Valor Mensal</th>
-            <th class="text-end" t-if="period_qty and has_unit_price" id="annual_value_header">Valor Anual</th>
+            <th
+                class="text-end"
+                t-if="period_count"
+                id="period_label_header"
+            >Período</th>
+            <th
+                class="text-end"
+                t-if="period_qty"
+                id="licenses_total_header"
+            >Total de Licenças</th>
+            <th
+                class="text-end"
+                t-if="has_unit_price"
+                id="unit_price_header"
+            >Valor Unitário</th>
+            <th
+                class="text-end"
+                t-if="period_qty and has_unit_price"
+                id="monthly_value_header"
+            >Valor Mensal</th>
+            <th
+                class="text-end"
+                t-if="period_qty and has_unit_price"
+                id="annual_value_header"
+            >Valor Anual</th>
         </xpath>
         <xpath expr="//td[@id='product_name']" position="after">
             <!-- Período -->
             <td id="period_label" class="text-end" t-if="period_count">
                 <t t-if="line.recurring_rule_type == 'yearly'">
-                    <t t-esc="line.period_count"/> ANO<t t-if="line.period_count &gt; 1">S</t>
+                    <t t-esc="line.period_count" /> ANO<t
+                        t-if="line.period_count &gt; 1"
+                    >S</t>
                 </t>
                 <t t-elif="line.recurring_rule_type == 'monthly'">
                     <t t-esc="line.period_count"/> <t t-if="line.period_count == 1">MÊS</t><t t-else="">MESES</t>
@@ -46,7 +71,7 @@
                     <t t-esc="line.period_count"/> <t t-if="line.period_count == 1">SEMANA</t><t t-else="">SEMANAS</t>
                 </t>
                 <t t-else="">
-                    <t t-esc="line.period_count"/>
+                    <t t-esc="line.period_count" />
                 </t>
             </td>
 
@@ -57,28 +82,53 @@
 
             <!-- Valor Unitário -->
             <td id="unit_price" class="text-end" t-if="has_unit_price">
-                <span t-esc="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                <span
+                    t-esc="line.price_unit"
+                    t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                />
             </td>
 
             <!-- Valor Mensal = period_qty * (price_unit - desconto) -->
-            <td id="monthly_value" class="text-end" t-if="period_qty and has_unit_price">
-                <t t-set="_monthly" t-value="(line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))"/>
-                <span t-esc="_monthly" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+            <td
+                id="monthly_value"
+                class="text-end"
+                t-if="period_qty and has_unit_price"
+            >
+                <t
+                    t-set="_monthly"
+                    t-value="(line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))"
+                />
+                <span
+                    t-esc="_monthly"
+                    t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                />
             </td>
 
             <!-- Valor Anual = mensal * 12 -->
             <td id="annual_value" class="text-end" t-if="period_qty and has_unit_price">
-                <t t-set="_annual" t-value="((line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) * 12"/>
-                <span t-esc="_annual" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                <t
+                    t-set="_annual"
+                    t-value="((line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) * 12"
+                />
+                <span
+                    t-esc="_annual"
+                    t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                />
             </td>
         </xpath>
 
         <!-- Insert custom blue-styled table with only requested columns -->
         <xpath expr="//section[@id='details']" position="inside">
             <t t-if="False">
-                <t t-set="lines_to_report" t-value="sale_order._get_order_lines_to_report()"/>
+                <t
+                    t-set="lines_to_report"
+                    t-value="sale_order._get_order_lines_to_report()"
+                />
                 <div class="table-responsive" style="margin-top: 12px;">
-                    <table class="table table-sm table-bordered" style="border: 2px solid #0d47a1;">
+                    <table
+                        class="table table-sm table-bordered"
+                        style="border: 2px solid #0d47a1;"
+                    >
                         <thead>
                             <tr style="background:#0d47a1;color:#fff;border-color:#0d47a1;">
                                 <th class="text-start" style="border-color:#0d47a1;">Catálogo</th>
@@ -102,8 +152,11 @@
                                             <t t-elif="line.recurring_rule_type == 'weekly'"><t t-esc="line.period_count"/> <t t-if="line.period_count == 1">SEMANA</t><t t-else="">SEMANAS</t></t>
                                             <t t-else=""><t t-esc="line.period_count"/></t>
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
-                                            <span t-field="line.period_qty"/>
+                                        <td
+                                            class="text-end"
+                                            style="border-color:#0d47a1;"
+                                        >
+                                            <span t-field="line.period_qty" />
                                         </td>
                                         <!-- <td class="text-end" style="border-color:#0d47a1;">
                                             <span t-esc="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
@@ -112,9 +165,18 @@
                                             <t t-set="_monthly" t-value="(line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))"/>
                                             <span t-esc="_monthly" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
-                                            <t t-set="_annual" t-value="((line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) * 12"/>
-                                            <span t-esc="_annual" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                                        <td
+                                            class="text-end"
+                                            style="border-color:#0d47a1;"
+                                        >
+                                            <t
+                                                t-set="_annual"
+                                                t-value="((line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) * 12"
+                                            />
+                                            <span
+                                                t-esc="_annual"
+                                                t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                                            />
                                         </td>
                                     </tr>
                                 </t>
@@ -128,17 +190,43 @@
         <!-- Render the custom table before the totals so totals remain at the bottom -->
         <xpath expr="//div[@id='total']" position="before">
             <t>
-                <t t-set="lines_to_report" t-value="sale_order._get_order_lines_to_report()"/>
+                <t
+                    t-set="lines_to_report"
+                    t-value="sale_order._get_order_lines_to_report()"
+                />
                 <div class="table-responsive" style="margin-top: 12px;">
-                    <table class="table table-sm table-bordered" style="border: 2px solid #0d47a1;">
+                    <table
+                        class="table table-sm table-bordered"
+                        style="border: 2px solid #0d47a1;"
+                    >
                         <thead>
-                            <tr style="background:#0d47a1;color:#fff;border-color:#0d47a1;">
-                                <th class="text-start" style="border-color:#0d47a1;">Catálogo</th>
-                                <th class="text-end" style="border-color:#0d47a1;">Período</th>
-                                <th class="text-end" style="border-color:#0d47a1;">Total de Licenças</th>
-                                <th class="text-end" style="border-color:#0d47a1;">Valor Unitário</th>
-                                <th class="text-end" style="border-color:#0d47a1;">Valor Mensal</th>
-                                <th class="text-end" style="border-color:#0d47a1;">Valor Anual</th>
+                            <tr
+                                style="background:#0d47a1;color:#fff;border-color:#0d47a1;"
+                            >
+                                <th
+                                    class="text-start"
+                                    style="border-color:#0d47a1;"
+                                >Catálogo</th>
+                                <th
+                                    class="text-end"
+                                    style="border-color:#0d47a1;"
+                                >Período</th>
+                                <th
+                                    class="text-end"
+                                    style="border-color:#0d47a1;"
+                                >Total de Licenças</th>
+                                <th
+                                    class="text-end"
+                                    style="border-color:#0d47a1;"
+                                >Valor Unitário</th>
+                                <th
+                                    class="text-end"
+                                    style="border-color:#0d47a1;"
+                                >Valor Mensal</th>
+                                <th
+                                    class="text-end"
+                                    style="border-color:#0d47a1;"
+                                >Valor Anual</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,19 +242,46 @@
                                             <t t-elif="line.recurring_rule_type == 'weekly'"><t t-esc="line.period_count"/> <t t-if="line.period_count == 1">SEMANA</t><t t-else="">SEMANAS</t></t>
                                             <t t-else=""><t t-esc="line.period_count"/></t>
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
-                                            <span t-field="line.period_qty"/>
+                                        <td
+                                            class="text-end"
+                                            style="border-color:#0d47a1;"
+                                        >
+                                            <span t-field="line.period_qty" />
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
-                                            <span t-esc="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                                        <td
+                                            class="text-end"
+                                            style="border-color:#0d47a1;"
+                                        >
+                                            <span
+                                                t-esc="line.price_unit"
+                                                t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                                            />
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
-                                            <t t-set="_monthly" t-value="(line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))"/>
-                                            <span t-esc="_monthly" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                                        <td
+                                            class="text-end"
+                                            style="border-color:#0d47a1;"
+                                        >
+                                            <t
+                                                t-set="_monthly"
+                                                t-value="(line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))"
+                                            />
+                                            <span
+                                                t-esc="_monthly"
+                                                t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                                            />
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
-                                            <t t-set="_annual" t-value="((line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) * 12"/>
-                                            <span t-esc="_annual" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                                        <td
+                                            class="text-end"
+                                            style="border-color:#0d47a1;"
+                                        >
+                                            <t
+                                                t-set="_annual"
+                                                t-value="((line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))) * 12"
+                                            />
+                                            <span
+                                                t-esc="_annual"
+                                                t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"
+                                            />
                                         </td>
                                     </tr>
                                 </t>

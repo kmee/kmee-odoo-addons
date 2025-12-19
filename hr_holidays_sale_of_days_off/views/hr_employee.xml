@@ -17,7 +17,7 @@
                     class="oe_stat_button"
                     icon="fa-dollar"
                     context="{'search_default_employee_ids': active_id}"
-                    groups="hr_holidays.group_hr_holidays_user"
+                    groups="base.group_user"
                     help="Vacation days sold"
                 >
                     <div
