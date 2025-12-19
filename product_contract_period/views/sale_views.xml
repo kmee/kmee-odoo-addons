@@ -49,6 +49,7 @@
             <!-- Add contract summary fields -->
             <xpath expr="//group[@name='sale_total']" position="inside">
                 <field name="period_contract_value" widget="monetary" />
+                <field name="contract_annual_value" widget="monetary" />
                 <field name="contract_periods" />
                 <field name="contract_average_value" widget="monetary" />
                 <field name="contract_period_details" />

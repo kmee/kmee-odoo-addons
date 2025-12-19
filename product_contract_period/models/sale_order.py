@@ -49,6 +49,10 @@ class SaleOrder(models.Model):
         compute="_compute_contract_periods", string="Valor Médio Mensal", store=True
     )
 
+    contract_annual_value = fields.Monetary(
+        compute="_compute_contract_periods", string="Valor Anual", store=True
+    )
+
     @api.depends(
         "order_line.period_qty",
         "order_line.period_count",
@@ -63,8 +67,19 @@ class SaleOrder(models.Model):
             total_periods = sum(line.period_count for line in contract_lines)
             order.contract_periods = total_periods
 
-            # Calcular valor médio mensal
+            # Calcular valor médio mensal e anual
             if contract_lines:
+                # Calcular valor total por período (mensal)
+                total_period_value = sum(
+                    line.price_unit
+                    * line.period_qty
+                    * (1 - (line.discount or 0.0) / 100.0)
+                    for line in contract_lines
+                )
+
+                # Calcular valor anual (mensal * 12)
+                order.contract_annual_value = total_period_value * 12
+
                 # Calcular valor total dos contratos
                 total_contract_value = sum(
                     line.price_unit
@@ -106,22 +121,24 @@ class SaleOrder(models.Model):
                         * line.period_qty
                         * (1 - (line.discount or 0.0) / 100.0)
                     )
+                    annual_value = period_value * 12
                     details.append(
                         _(
-                            """%(product)s: %(period_value)s x %(period_count)s
-                             períodos (%(rule_type)s) = %(total)s"""
+                            """%(product)s: Valor por período: %(period_value)s | Valor anual: %(annual_value)s
+                             (%(period_count)s períodos - %(rule_type)s)"""
                         )
                         % {
                             "product": line.product_id.name,
                             "period_value": period_value,
+                            "annual_value": annual_value,
                             "period_count": line.period_count,
                             "rule_type": line.recurring_rule_type,
-                            "total": period_value * line.period_count,
                         }
                     )
                 order.contract_period_details = "\n".join(details)
             else:
                 order.contract_average_value = 0
+                order.contract_annual_value = 0
                 order.contract_period_details = ""
 
     def get_period_values_for_print(self):
@@ -130,12 +147,15 @@ class SaleOrder(models.Model):
             "contract_lines": [],
             "total_periods": self.contract_periods,
             "average_monthly": self.contract_average_value,
+            "total_period_value": self.period_contract_value,
+            "total_annual_value": self.contract_annual_value,
         }
 
         for line in self.order_line.filtered(lambda line: line.product_id.is_contract):
             period_value = (
                 line.price_unit * line.period_qty * (1 - (line.discount or 0.0) / 100.0)
             )
+            annual_value = period_value * 12
             result["contract_lines"].append(
                 {
                     "name": line.name,
@@ -143,8 +163,16 @@ class SaleOrder(models.Model):
                     "period_count": line.period_count,
                     "period_type": line.recurring_rule_type,
                     "period_value": period_value,
+                    "annual_value": annual_value,
                     "total_value": period_value * line.period_count,
                 }
             )
 
         return result
+
+    def _get_order_lines_to_report(self):
+        """Retorna as linhas de pedido que devem ser exibidas no relatório"""
+        self.ensure_one()
+        return self.order_line.filtered(
+            lambda line: line.product_id.is_contract and not line.display_type
+        )
