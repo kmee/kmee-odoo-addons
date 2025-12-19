@@ -40,10 +40,10 @@
                     <t t-esc="line.period_count"/> ANO<t t-if="line.period_count &gt; 1">S</t>
                 </t>
                 <t t-elif="line.recurring_rule_type == 'monthly'">
-                    <t t-esc="line.period_count"/> MÊS(ES)
+                    <t t-esc="line.period_count"/> <t t-if="line.period_count == 1">MÊS</t><t t-else="">MESES</t>
                 </t>
                 <t t-elif="line.recurring_rule_type == 'weekly'">
-                    <t t-esc="line.period_count"/> SEMANA(S)
+                    <t t-esc="line.period_count"/> <t t-if="line.period_count == 1">SEMANA</t><t t-else="">SEMANAS</t>
                 </t>
                 <t t-else="">
                     <t t-esc="line.period_count"/>
@@ -84,7 +84,7 @@
                                 <th class="text-start" style="border-color:#0d47a1;">Catálogo</th>
                                 <th class="text-end" style="border-color:#0d47a1;">Período</th>
                                 <th class="text-end" style="border-color:#0d47a1;">Total de Licenças</th>
-                                <th class="text-end" style="border-color:#0d47a1;">Valor Unitário</th>
+                                <!-- <th class="text-end" style="border-color:#0d47a1;">Valor Unitário</th> -->
                                 <th class="text-end" style="border-color:#0d47a1;">Valor Mensal</th>
                                 <th class="text-end" style="border-color:#0d47a1;">Valor Anual</th>
                             </tr>
@@ -94,20 +94,20 @@
                                 <t t-if="not line.display_type">
                                     <tr>
                                         <td class="text-start" style="border-color:#0d47a1;">
-                                            <span t-field="line.name"/>
+                                            <span t-esc="line.name"/>
                                         </td>
                                         <td class="text-end" style="border-color:#0d47a1;">
                                             <t t-if="line.recurring_rule_type == 'yearly'"><t t-esc="line.period_count"/> ANO<t t-if="line.period_count &gt; 1">S</t></t>
-                                            <t t-elif="line.recurring_rule_type == 'monthly'"><t t-esc="line.period_count"/> MÊS(ES)</t>
-                                            <t t-elif="line.recurring_rule_type == 'weekly'"><t t-esc="line.period_count"/> SEMANA(S)</t>
+                                            <t t-elif="line.recurring_rule_type == 'monthly'"><t t-esc="line.period_count"/> <t t-if="line.period_count == 1">MÊS</t><t t-else="">MESES</t></t>
+                                            <t t-elif="line.recurring_rule_type == 'weekly'"><t t-esc="line.period_count"/> <t t-if="line.period_count == 1">SEMANA</t><t t-else="">SEMANAS</t></t>
                                             <t t-else=""><t t-esc="line.period_count"/></t>
                                         </td>
                                         <td class="text-end" style="border-color:#0d47a1;">
                                             <span t-field="line.period_qty"/>
                                         </td>
-                                        <td class="text-end" style="border-color:#0d47a1;">
+                                        <!-- <td class="text-end" style="border-color:#0d47a1;">
                                             <span t-esc="line.price_unit" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
-                                        </td>
+                                        </td> -->
                                         <td class="text-end" style="border-color:#0d47a1;">
                                             <t t-set="_monthly" t-value="(line.period_qty or 0.0) * (line.price_unit * (1 - (line.discount or 0.0) / 100.0))"/>
                                             <span t-esc="_monthly" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
@@ -146,12 +146,12 @@
                                 <t t-if="not line.display_type">
                                     <tr>
                                         <td class="text-start" style="border-color:#0d47a1;">
-                                            <span t-field="line.name"/>
+                                            <span t-esc="line.name"/>
                                         </td>
                                         <td class="text-end" style="border-color:#0d47a1;">
                                             <t t-if="line.recurring_rule_type == 'yearly'"><t t-esc="line.period_count"/> ANO<t t-if="line.period_count &gt; 1">S</t></t>
-                                            <t t-elif="line.recurring_rule_type == 'monthly'"><t t-esc="line.period_count"/> MÊS(ES)</t>
-                                            <t t-elif="line.recurring_rule_type == 'weekly'"><t t-esc="line.period_count"/> SEMANA(S)</t>
+                                            <t t-elif="line.recurring_rule_type == 'monthly'"><t t-esc="line.period_count"/> <t t-if="line.period_count == 1">MÊS</t><t t-else="">MESES</t></t>
+                                            <t t-elif="line.recurring_rule_type == 'weekly'"><t t-esc="line.period_count"/> <t t-if="line.period_count == 1">SEMANA</t><t t-else="">SEMANAS</t></t>
                                             <t t-else=""><t t-esc="line.period_count"/></t>
                                         </td>
                                         <td class="text-end" style="border-color:#0d47a1;">
@@ -172,6 +172,19 @@
                                 </t>
                             </t>
                         </tbody>
+                        <tfoot>
+                            <tr style="background:#f0f0f0;font-weight:bold;border-color:#0d47a1;">
+                                <td class="text-end" colspan="4" style="border-color:#0d47a1;">Total</td>
+                                <td class="text-end" style="border-color:#0d47a1;">
+                                    <t t-set="total_monthly" t-value="sum((l.period_qty or 0.0) * (l.price_unit * (1 - (l.discount or 0.0) / 100.0)) for l in lines_to_report if not l.display_type)"/>
+                                    <span t-esc="total_monthly" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                                </td>
+                                <td class="text-end" style="border-color:#0d47a1;">
+                                    <t t-set="total_annual" t-value="sum(((l.period_qty or 0.0) * (l.price_unit * (1 - (l.discount or 0.0) / 100.0))) * 12 for l in lines_to_report if not l.display_type)"/>
+                                    <span t-esc="total_annual" t-options="{'widget': 'monetary', 'display_currency': sale_order.pricelist_id.currency_id}"/>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </t>
