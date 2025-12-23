@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from pypdf import PdfReader, PdfWriter
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
+from reportlab.lib.utils import simpleSplit
 from reportlab.pdfgen import canvas
 
 from odoo import fields, models
@@ -58,14 +59,38 @@ class SaleOrder(models.Model):
                 c = canvas.Canvas(buffer, pagesize=A4)
                 width, height = A4
 
-                c.setFont("Helvetica-Bold", 16)
-                c.drawString(20 * mm, height - 30 * mm, "Termos e Condições")
+                # Margens e configurações de texto
+                left_margin = 20 * mm
+                right_margin = 20 * mm
+                top_margin = 30 * mm
+                bottom_margin = 20 * mm
 
-                c.setFont("Helvetica", 10)
-                textobject = c.beginText(20 * mm, height - 40 * mm)
-                for line in default_terms_text.splitlines():
-                    textobject.textLine(line.strip())
-                c.drawText(textobject)
+                title_font = "Helvetica-Bold"
+                title_size = 16
+                body_font = "Helvetica"
+                body_size = 10
+                line_height = body_size * 1.2
+
+                # Título
+                c.setFont(title_font, title_size)
+                c.drawString(left_margin, height - top_margin, "Termos e Condições")
+
+                # Texto
+                c.setFont(body_font, body_size)
+                max_width = width - left_margin - right_margin
+
+                # Quebra de texto automática considerando a largura da página
+                wrapped_lines = simpleSplit(default_terms_text, body_font, body_size, max_width)
+
+                y = height - top_margin - 10 * mm
+
+                for line in wrapped_lines:
+                    if y <= bottom_margin:
+                        c.showPage()
+                        c.setFont(body_font, body_size)
+                        y = height - top_margin
+                    c.drawString(left_margin, y, line)
+                    y -= line_height
 
                 c.showPage()
                 c.save()
