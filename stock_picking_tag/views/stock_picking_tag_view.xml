@@ -1,0 +1,62 @@
+<!--
+Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="stock_picking_tag_view_form" model="ir.ui.view">
+        <field name="name">stock.picking.tag.view.form</field>
+        <field name="model">stock.picking.tag</field>
+        <field name="arch" type="xml">
+            <form string="Tags">
+                <sheet>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" />
+                        </div>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="color" required="True" widget="color_picker" />
+                            <field name="parent_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_picking_tag_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.tag.view.tree</field>
+        <field name="model">stock.picking.tag</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="parent_id" optional="hide" />
+                <field name="color" widget="color_picker" />
+            </list>
+        </field>
+    </record>
+
+    <record id="stock_picking_tag_action" model="ir.actions.act_window">
+        <field name="name">Tags</field>
+        <field name="res_model">stock.picking.tag</field>
+        <field name="view_id" ref="stock_picking_tag_view_tree" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create new tags for your stock pickings
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_stock_picking_tag_config"
+        name="Picking Tags"
+        parent="stock.menu_stock_config_settings"
+        action="stock_picking_tag.stock_picking_tag_action"
+        sequence="90"
+    />
+</odoo>
