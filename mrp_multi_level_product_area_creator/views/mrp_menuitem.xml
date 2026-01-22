@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        name="Create Product MRP Area"
+        id="menu_create_product_mrp_area"
+        action="product_mrp_area_create_act_window"
+        parent="mrp.mrp_planning_menu_root"
+        sequence="50"
+    />
+
+</odoo>
