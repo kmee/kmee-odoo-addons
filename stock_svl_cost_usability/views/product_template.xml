@@ -20,7 +20,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                     string="Inventory Valuation"
                     icon="fa-usd"
                     type="object"
-                    attrs="{'invisible': [('type', '!=', 'product')]}"
+                    invisible="type != 'consu'"
                 >
                 </button>
             </div>

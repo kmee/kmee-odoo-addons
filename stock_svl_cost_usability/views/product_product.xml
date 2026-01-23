@@ -17,7 +17,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                     string="Inventory Valuation"
                     icon="fa-usd"
                     type="object"
-                    attrs="{'invisible': [('type', '!=', 'product')]}"
+                    invisible="type != 'consu'"
                 >
                 </button>
             </div>
@@ -26,7 +26,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                 <page
                     string="Cost History"
                     name="stock_valuation_layers"
-                    attrs="{'invisible': [('type', '!=', 'product')]}"
+                    invisible="type != 'consu'"
                 >
                     <group colspan="4">
                         <field
@@ -37,14 +37,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                     </group>
                     <group string="SVLs" colspan="4">
                         <field name="stock_valuation_layer_ids" nolabel="1">
-                            <tree editable="false" create="false" delete="false">
+                            <list create="false" delete="false">
                                 <field name="create_date" decoration-bf="1" />
                                 <field name="display_name" optional="show" />
                                 <field name="quantity" optional="show" />
                                 <field name="uom_id" optional="show" />
                                 <field name="value" optional="show" />
                                 <field name="unit_cost" decoration-bf="1" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </page>

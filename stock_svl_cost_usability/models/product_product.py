@@ -53,22 +53,23 @@ class ProductProduct(models.Model):
             },
             "options": {
                 "scales": {
-                    "yAxes": [
-                        {
-                            "ticks": {"beginAtZero": False, "stacked": False},
-                            "scaleLabel": {"display": True, "labelString": "Cost"},
-                        }
-                    ],
-                    "xAxes": [
-                        {
-                            "scaleLabel": {"display": True, "labelString": "Date"},
-                        }
-                    ],
+                    "y": {
+                        "beginAtZero": False,
+                        "title": {"display": True, "text": "Cost"},
+                    },
+                    "x": {
+                        "title": {"display": True, "text": "Date"},
+                    },
                 },
                 "elements": {"point": {"radius": 3}},
-                # "legend": {"labels": {"usePointStyle": True}},
-                "legend": {"display": False},
-                "tooltips": {"intersect": False, "axis": "xy", "mode": "index"},
+                "plugins": {
+                    "legend": {"display": False},
+                    "tooltip": {
+                        "intersect": False,
+                        "axis": "xy",
+                        "mode": "index",
+                    },
+                },
             },
         }
         self.valuation_layer_json_text = json.dumps(info)
