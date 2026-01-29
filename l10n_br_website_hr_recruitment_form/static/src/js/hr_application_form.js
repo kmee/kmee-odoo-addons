@@ -1,5 +1,5 @@
 odoo.define("guep_sale.ApplicationForm", function (require) {
-    "use strict";
+
 
     const publicWidget = require("web.public.widget");
     const Dialog = require("web.Dialog");

@@ -56,9 +56,9 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://www.kmee.com.br>``\ \_:
+- ``KMEE <https://www.kmee.com.br>``\ \_:
 
-   -  Diego Paradeda
+  - Diego Paradeda
 
 Maintainers
 -----------

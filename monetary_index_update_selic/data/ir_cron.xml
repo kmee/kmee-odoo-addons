@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="ir_cron_update_selic_rates" model="ir.cron">
+        <field name="name">Atualizar SELIC (BCB)</field>
+        <field name="model_id" ref="model_monetary_index_provider" />
+        <field name="state">code</field>
+        <field name="code">model.cron_update_selic_rates()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall">False</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root" />
+    </record>
+</odoo>
