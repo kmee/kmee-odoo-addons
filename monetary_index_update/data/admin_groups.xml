@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Add admin to manager groups by default -->
+    <record id="base.user_admin" model="res.users">
+        <field
+            name="groups_id"
+            eval="[(4, ref('monetary_index_update.group_monetary_update_manager'))]"
+        />
+    </record>
+</odoo>

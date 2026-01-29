@@ -36,13 +36,28 @@ class MonetaryIndex(models.Model):
     _sql_constraints = [
         (
             "code_company_unique",
-            "UNIQUE(company_id, LOWER(code))",
+            "UNIQUE(company_id, code)",
             "The code must be unique per company!",
         )
     ]
 
-    @api.constrains("code")
-    def _check_code(self):
+    @api.constrains("code", "company_id")
+    def _check_code_unique(self):
         for record in self:
             if not record.code or not record.code.strip():
                 raise ValidationError(_("Code cannot be empty!"))
+            # Check case-insensitive uniqueness per company
+            domain = [
+                ("code", "=ilike", record.code),
+                ("company_id", "=", record.company_id.id),
+                ("id", "!=", record.id),
+            ]
+            duplicates = self.search(domain, limit=1)
+            if duplicates:
+                raise ValidationError(
+                    _(
+                        "The code '%(code)s' must be unique per company "
+                        "(case-insensitive)!",
+                    )
+                    % {"code": record.code}
+                )
