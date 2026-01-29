@@ -29,10 +29,10 @@ and structured data.
 
 Each satisfaction level:
 
--  Is represented by a colored icon (e.g., thermometer or emoticon)
--  Is linked via a ``Many2one`` field on the contact form
--  Is visible and editable in form, kanban, and list views
--  Can be used for filtering, grouping, and reporting
+- Is represented by a colored icon (e.g., thermometer or emoticon)
+- Is linked via a ``Many2one`` field on the contact form
+- Is visible and editable in form, kanban, and list views
+- Can be used for filtering, grouping, and reporting
 
 All changes are tracked in the chatter to ensure transparency and
 historical context.
@@ -58,10 +58,10 @@ To configure the Customer Satisfaction module, follow these steps:
 2. Click **Create** to add a new satisfaction level.
 3. Fill in the following fields:
 
-   -  **Customer Rating Description**: A label to identify the
-      satisfaction level.
-   -  **Rating Icon**: An image that visually represents the
-      satisfaction level across views.
+   - **Customer Rating Description**: A label to identify the
+     satisfaction level.
+   - **Rating Icon**: An image that visually represents the satisfaction
+     level across views.
 
 4. Click **Save**.
 
@@ -97,7 +97,7 @@ Other credits
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------

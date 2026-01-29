@@ -43,23 +43,6 @@ dos valores atualizados antes da confirmação.
 .. contents::
    :local:
 
-Use Cases / Context
-===================
-
-Some customers want to have a customized sales order report, and the
-ability to edit the layout whenever they want.
-
-Configuration
-=============
-
-To configure this module, you need to:
-
-1. Go to *Settings > Technical > Reporting > Py3o Templates*.
-2. Create a template by defining a name and uploading the ODT file.
-3. Go to *Settings > Technical > Reporting > Reports*.
-4. Search for "Quotation / Order py3o".
-5. In the Template field, choose the template created previously.
-
 Usage
 =====
 
@@ -257,18 +240,6 @@ Authors
 -------
 
 * KMEE
-
-Contributors
-------------
-
-- Tiago Amaral tiago.amaral@kmee.com.br
-
-Other credits
--------------
-
-The development of this module has been financially supported by:
-
-- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
