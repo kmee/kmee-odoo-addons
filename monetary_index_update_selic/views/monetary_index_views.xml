@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_monetary_index_form_selic" model="ir.ui.view">
+        <field name="name">monetary.index.form.selic</field>
+        <field name="model">monetary.index</field>
+        <field name="inherit_id" ref="monetary_index_update.view_monetary_index_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="%(action_monetary_index_selic_update_wizard)d"
+                    type="action"
+                    string="Atualizar SELIC"
+                    class="oe_stat_button"
+                    icon="fa-refresh"
+                    attrs="{'invisible': [('code', '!=', 'SELIC')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
