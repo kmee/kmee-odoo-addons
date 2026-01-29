@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_monetary_index_selic_update_wizard_form" model="ir.ui.view">
+        <field name="name">monetary.index.selic.update.wizard.form</field>
+        <field name="model">monetary.index.selic.update.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Atualizar SELIC">
+                <group>
+                    <field name="date_from" />
+                    <field name="date_to" />
+                    <field name="force" />
+                </group>
+                <footer>
+                    <button
+                        name="action_update"
+                        type="object"
+                        string="Atualizar"
+                        class="btn-primary"
+                    />
+                    <button string="Cancelar" special="cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="action_monetary_index_selic_update_wizard"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Atualizar SELIC</field>
+        <field name="res_model">monetary.index.selic.update.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_monetary_index_selic_update_wizard_form" />
+        <field name="target">new</field>
+    </record>
+</odoo>
