@@ -4,7 +4,7 @@
 {
     "name": "Stock Picking Reports Declaration",
     "summary": """stock_picking_reports_declaration""",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -14,5 +14,5 @@
         "views/report_stockpicking_operations.xml",
     ],
     "demo": [],
-    'installable': False,
+    "installable": True,
 }
