@@ -1,6 +1,6 @@
 {
     "name": "Help Desk Ticket  Stage Duration",
-    "version": "16.0.1.0.2",
+    "version": "18.0.1.0.0",
     "summary": "Shows the duration each ticket spent in each stage",
     "category": "helpdesk",
     "author": "Ananias, KMEE",
@@ -12,6 +12,6 @@
         "views/helpdesk_ticket_views.xml",
         "views/helpdesk_ticket_stage_duration_report_views.xml",
     ],
-    'installable': False,
+    "installable": True,
     "application": False,
 }
