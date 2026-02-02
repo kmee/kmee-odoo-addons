@@ -4,7 +4,7 @@
 {
     "name": "Sale Timesheet Invoice From Project",
     "summary": """sale_timesheet_invoice_from_project""",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Project",
     "license": "AGPL-3",
     "author": "KMEE",
@@ -15,5 +15,5 @@
     ],
     "data": ["views/project_menus.xml"],
     "demo": [],
-    'installable': False,
+    "installable": True,
 }
