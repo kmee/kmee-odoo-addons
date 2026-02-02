@@ -3,7 +3,7 @@
 
 {
     "name": "Project Task Service Class",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -14,5 +14,5 @@
         "views/project_task.xml",
     ],
     "demo": [],
-    'installable': False,
+    "installable": True,
 }
