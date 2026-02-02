@@ -5,7 +5,7 @@
     "name": "Account Payment Currency Rate",
     "summary": """
         Account Payment Currency Manual Rate""",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -13,5 +13,5 @@
     "data": [
         "wizards/account_payment_register.xml",
     ],
-    'installable': False,
+    "installable": True,
 }
