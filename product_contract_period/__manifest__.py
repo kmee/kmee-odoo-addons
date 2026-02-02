@@ -1,6 +1,6 @@
 {
     "name": "Sale Order Period",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Sales",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -12,7 +12,7 @@
         "views/sale_portal_templates.xml",
         "report/ir_actions_report_templates.xml",
     ],
-    'installable': False,
+    "installable": True,
     "application": False,
     "auto_install": False,
     "license": "AGPL-3",
