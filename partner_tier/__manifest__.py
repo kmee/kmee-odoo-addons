@@ -1,6 +1,6 @@
 {
     "name": "Partner Tier",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Sales/CRM",
     "summary": "Add tier classification to partners",
     "author": "KMEE",
@@ -16,7 +16,7 @@
     "demo": [
         "demo/res_partner_tier_demo.xml",
     ],
-    'installable': False,
+    "installable": True,
     "application": False,
     "auto_install": False,
 }
