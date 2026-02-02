@@ -4,7 +4,7 @@
 {
     "name": "Product Contract Period Bo",
     "summary": """product_contract_period_bo""",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -20,5 +20,5 @@
         "views/sale_blanket_order_line.xml",
     ],
     "demo": [],
-    'installable': False,
+    "installable": True,
 }
