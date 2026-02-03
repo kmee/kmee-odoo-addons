@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="credit_restriction_view_tree" model="ir.ui.view">
+        <field name="name">credit.restriction.tree</field>
+        <field name="model">credit.restriction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="analysis_id" />
+                <field name="company_id" />
+                <field name="type" />
+                <field name="date" />
+                <field name="value" sum="Total" />
+                <field name="creditor" />
+                <field name="state" widget="badge"
+                    decoration-danger="state == 'active'"
+                    decoration-success="state == 'resolved'" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="credit_restriction_view_form" model="ir.ui.view">
+        <field name="name">credit.restriction.form</field>
+        <field name="model">credit.restriction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="analysis_id" />
+                            <field name="company_id" />
+                            <field name="type" />
+                            <field name="state" widget="radio" />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="value" />
+                            <field name="creditor" />
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" />
+                        <field name="details" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="credit_restriction_view_search" model="ir.ui.view">
+        <field name="name">credit.restriction.search</field>
+        <field name="model">credit.restriction</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="analysis_id" />
+                <field name="company_id" />
+                <field name="type" />
+                <field name="creditor" />
+                <separator />
+                <filter name="filter_active" string="Ativas"
+                    domain="[('state', '=', 'active')]" />
+                <filter name="filter_resolved" string="Resolvidas"
+                    domain="[('state', '=', 'resolved')]" />
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_type" string="Tipo"
+                        context="{'group_by': 'type'}" />
+                    <filter name="group_company" string="Empresa"
+                        context="{'group_by': 'company_id'}" />
+                    <filter name="group_state" string="Situacao"
+                        context="{'group_by': 'state'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="credit_restriction_action" model="ir.actions.act_window">
+        <field name="name">Restricoes</field>
+        <field name="res_model">credit.restriction</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="credit_restriction_view_search" />
+        <field name="context">{'search_default_filter_active': 1}</field>
+    </record>
+
+</odoo>

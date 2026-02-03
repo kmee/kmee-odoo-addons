@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="credit_company_view_tree" model="ir.ui.view">
+        <field name="name">credit.company.tree</field>
+        <field name="model">credit.company</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cnpj" />
+                <field name="razao_social" />
+                <field name="nome_fantasia" />
+                <field name="situacao_cadastral"
+                    decoration-success="situacao_cadastral == 'ativo'"
+                    decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo')"
+                    decoration-warning="situacao_cadastral == 'suspenso'"
+                    widget="badge" />
+                <field name="state_id" optional="show" />
+                <field name="tempo_mercado" optional="show" />
+                <field name="analysis_count" string="Consultas" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="credit_company_view_form" model="ir.ui.view">
+        <field name="name">credit.company.form</field>
+        <field name="model">credit.company</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_new_analysis" type="object"
+                        string="Nova Consulta" class="btn-primary"
+                        icon="fa-search" />
+                    <button name="action_create_partner" type="object"
+                        string="Criar Contato"
+                        attrs="{'invisible': [('partner_id', '!=', False)]}"
+                        icon="fa-user-plus" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_analyses" type="object"
+                            class="oe_stat_button" icon="fa-search">
+                            <field name="analysis_count" widget="statinfo"
+                                string="Consultas" />
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Arquivado"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}" />
+                    <div class="oe_title">
+                        <label for="razao_social" />
+                        <h1>
+                            <field name="razao_social" placeholder="Razao Social" />
+                        </h1>
+                        <h2>
+                            <field name="nome_fantasia" placeholder="Nome Fantasia" />
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="cnpj" />
+                            <field name="cnpj_formatted" invisible="1" />
+                            <field name="partner_id" />
+                        </group>
+                        <group>
+                            <field name="situacao_cadastral" widget="badge"
+                                decoration-success="situacao_cadastral == 'ativo'"
+                                decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo')"
+                                decoration-warning="situacao_cadastral == 'suspenso'" />
+                            <field name="data_situacao_cadastral" />
+                            <field name="tempo_mercado" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Dados Cadastrais" name="cadastral">
+                            <group>
+                                <group string="Informacoes Gerais">
+                                    <field name="natureza_juridica_id" />
+                                    <field name="data_fundacao" />
+                                    <field name="data_inicio_atividade" />
+                                    <field name="capital_social" />
+                                    <field name="capital_atual" />
+                                </group>
+                                <group string="Registros">
+                                    <field name="inscricao_estadual" />
+                                    <field name="uf_inscricao_id" />
+                                    <field name="nire" />
+                                    <field name="uf_nire_id" />
+                                    <field name="orgao_registro" />
+                                    <field name="situacao_fgts" />
+                                </group>
+                            </group>
+                            <group string="Atividades">
+                                <field name="cnae_principal_id" />
+                                <field name="cnae_secundario_ids" widget="many2many_tags" />
+                            </group>
+                        </page>
+                        <page string="Endereco" name="address">
+                            <group>
+                                <group>
+                                    <field name="street" />
+                                    <field name="number" />
+                                    <field name="street2" />
+                                    <field name="district" />
+                                </group>
+                                <group>
+                                    <field name="zip" />
+                                    <field name="city" />
+                                    <field name="state_id" />
+                                    <field name="country_id" />
+                                    <field name="ibge_code" />
+                                </group>
+                            </group>
+                            <group>
+                                <field name="full_address" />
+                            </group>
+                            <group string="Filiais" attrs="{'invisible': [('qtd_filiais', '=', 0)]}">
+                                <field name="qtd_filiais" />
+                                <field name="branch_ids" nolabel="1" colspan="2">
+                                    <tree editable="bottom">
+                                        <field name="cnpj" />
+                                        <field name="name" />
+                                        <field name="city" />
+                                        <field name="state_id" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Socios" name="partners">
+                            <field name="partner_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="document_type" />
+                                    <field name="document" />
+                                    <field name="participation" />
+                                    <field name="signs_company" />
+                                    <field name="situation" widget="badge"
+                                        decoration-success="situation == 'regular'"
+                                        decoration-danger="situation == 'irregular'" />
+                                    <field name="has_debts" />
+                                    <field name="has_fraud" />
+                                    <field name="total_restrictions" sum="Total" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="active" invisible="1" />
+                    <field name="currency_id" invisible="1" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="credit_company_view_search" model="ir.ui.view">
+        <field name="name">credit.company.search</field>
+        <field name="model">credit.company</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="cnpj" filter_domain="['|', ('cnpj', 'ilike', self), ('cnpj', 'ilike', self.replace('.', '').replace('/', '').replace('-', ''))]" />
+                <field name="razao_social" />
+                <field name="nome_fantasia" />
+                <field name="partner_id" />
+                <separator />
+                <filter name="filter_active" string="Ativas"
+                    domain="[('situacao_cadastral', '=', 'ativo')]" />
+                <filter name="filter_inactive" string="Baixadas/Inativas"
+                    domain="[('situacao_cadastral', 'in', ('baixado', 'inapto', 'nulo'))]" />
+                <filter name="filter_with_analysis" string="Com Consultas"
+                    domain="[('analysis_count', '>', 0)]" />
+                <filter name="filter_no_analysis" string="Sem Consultas"
+                    domain="[('analysis_count', '=', 0)]" />
+                <separator />
+                <filter name="filter_archived" string="Arquivadas"
+                    domain="[('active', '=', False)]" />
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_situacao" string="Situacao Cadastral"
+                        context="{'group_by': 'situacao_cadastral'}" />
+                    <filter name="group_state" string="Estado"
+                        context="{'group_by': 'state_id'}" />
+                    <filter name="group_natureza" string="Natureza Juridica"
+                        context="{'group_by': 'natureza_juridica_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="credit_company_action" model="ir.actions.act_window">
+        <field name="name">Empresas</field>
+        <field name="res_model">credit.company</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="credit_company_view_search" />
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cadastre uma nova empresa para consulta de credito
+            </p>
+            <p>
+                Empresas cadastradas podem ser consultadas para analise de risco de credito.
+            </p>
+        </field>
+    </record>
+
+</odoo>

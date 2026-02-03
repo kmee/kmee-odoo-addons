@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="credit_analysis_view_tree" model="ir.ui.view">
+        <field name="name">credit.analysis.tree</field>
+        <field name="model">credit.analysis</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'cancelled'">
+                <field name="name" />
+                <field name="date" />
+                <field name="company_id" />
+                <field name="cnpj" />
+                <field name="score" />
+                <field name="risk_level" widget="badge"
+                    decoration-danger="risk_level in ('very_high', 'high')"
+                    decoration-warning="risk_level == 'medium'"
+                    decoration-success="risk_level in ('low', 'very_low')" />
+                <field name="recommendation_final" widget="badge"
+                    decoration-success="recommendation_final == 'approved'"
+                    decoration-warning="recommendation_final == 'caution'"
+                    decoration-danger="recommendation_final == 'rejected'" />
+                <field name="limite_credito_final" />
+                <field name="user_id" widget="many2one_avatar_user" />
+                <field name="state" widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-success="state == 'done'"
+                    decoration-muted="state == 'cancelled'" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="credit_analysis_view_kanban" model="ir.ui.view">
+        <field name="name">credit.analysis.kanban</field>
+        <field name="model">credit.analysis</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state" class="o_kanban_mobile">
+                <field name="name" />
+                <field name="company_id" />
+                <field name="score" />
+                <field name="risk_level" />
+                <field name="recommendation_final" />
+                <field name="state" />
+                <field name="user_id" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_top">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title">
+                                            <field name="name" />
+                                        </strong>
+                                    </div>
+                                    <field name="recommendation_final" widget="label_selection"
+                                        options="{'classes': {'approved': 'success', 'caution': 'warning', 'rejected': 'danger'}}" />
+                                </div>
+                                <div class="o_kanban_record_body">
+                                    <field name="company_id" />
+                                    <div class="mt-2">
+                                        <strong>Score: </strong>
+                                        <field name="score" />
+                                    </div>
+                                </div>
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left">
+                                        <field name="date" widget="date" />
+                                    </div>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="user_id" widget="many2one_avatar_user" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="credit_analysis_view_form" model="ir.ui.view">
+        <field name="name">credit.analysis.form</field>
+        <field name="model">credit.analysis</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object"
+                        string="Confirmar Consulta" class="btn-primary"
+                        states="draft" />
+                    <button name="action_cancel" type="object"
+                        string="Cancelar"
+                        states="draft,done" confirm="Tem certeza que deseja cancelar esta consulta?" />
+                    <button name="action_draft" type="object"
+                        string="Voltar a Rascunho"
+                        states="cancelled" />
+                    <button name="action_duplicate" type="object"
+                        string="Duplicar"
+                        states="done" icon="fa-copy" />
+                    <button name="action_print_report" type="object"
+                        string="Imprimir PDF" icon="fa-print"
+                        states="done" />
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,done" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object"
+                            name="action_print_report" icon="fa-print"
+                            attrs="{'invisible': [('state', '!=', 'done')]}">
+                            <span>Relatorio PDF</span>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Cancelada"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('state', '!=', 'cancelled')]}" />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+
+                    <!-- Quick CNPJ input -->
+                    <group attrs="{'invisible': [('company_id', '!=', False)]}">
+                        <field name="cnpj_input" placeholder="Digite o CNPJ para consulta rapida..." />
+                    </group>
+
+                    <!-- Main info -->
+                    <group>
+                        <group>
+                            <field name="company_id"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="cnpj" />
+                            <field name="razao_social" />
+                            <field name="nome_fantasia" />
+                        </group>
+                        <group>
+                            <field name="date"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="date_done"
+                                attrs="{'invisible': [('state', '!=', 'done')]}" />
+                            <field name="user_id"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                            <field name="situacao_cadastral" widget="badge"
+                                decoration-success="situacao_cadastral == 'ativo'"
+                                decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo')"
+                                decoration-warning="situacao_cadastral == 'suspenso'" />
+                            <field name="tempo_mercado" />
+                        </group>
+                    </group>
+
+                    <!-- Score and Recommendation Cards -->
+                    <div class="row mt-4 mb-4">
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Score</h5>
+                                    <h2>
+                                        <field name="score" widget="integer"
+                                            attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    </h2>
+                                    <field name="risk_level" widget="badge"
+                                        decoration-danger="risk_level in ('very_high', 'high')"
+                                        decoration-warning="risk_level == 'medium'"
+                                        decoration-success="risk_level in ('low', 'very_low')" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recomendacao</h5>
+                                    <h2>
+                                        <field name="recommendation_final" widget="badge"
+                                            decoration-success="recommendation_final == 'approved'"
+                                            decoration-warning="recommendation_final == 'caution'"
+                                            decoration-danger="recommendation_final == 'rejected'" />
+                                    </h2>
+                                    <small class="text-muted">
+                                        Prob. Inadimplencia: <field name="default_probability" />%
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Restricoes</h5>
+                                    <h2>
+                                        <field name="total_restricoes_value" />
+                                    </h2>
+                                    <span attrs="{'invisible': [('has_restricoes', '=', False)]}"
+                                        class="badge bg-danger">Com Restricoes</span>
+                                    <span attrs="{'invisible': [('has_restricoes', '=', True)]}"
+                                        class="badge bg-success">Sem Restricoes</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Limite Sugerido</h5>
+                                    <h2>
+                                        <field name="limite_credito_final" />
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <notebook>
+                        <page string="Score e Risco" name="score">
+                            <group>
+                                <group string="Score de Credito">
+                                    <field name="score"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="risk_level" />
+                                    <field name="default_probability" />
+                                </group>
+                                <group string="Recomendacao">
+                                    <field name="recommendation" />
+                                    <field name="recommendation_override"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="recommendation_notes"
+                                        attrs="{'invisible': [('recommendation_override', '=', False)],
+                                                'required': [('recommendation_override', '!=', False)],
+                                                'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="recommendation_final" />
+                                </group>
+                            </group>
+                            <group>
+                                <group string="Faturamento">
+                                    <field name="faturamento_faixa"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="faturamento_estimado"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="faturamento_medio" />
+                                </group>
+                                <group string="Limite de Credito">
+                                    <field name="limite_credito_sugerido" />
+                                    <field name="limite_credito_manual"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="limite_credito_final" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Restricoes" name="restrictions">
+                            <group>
+                                <group>
+                                    <field name="total_negativacoes" />
+                                    <field name="total_negativacoes_value" />
+                                </group>
+                                <group>
+                                    <field name="total_protestos" />
+                                    <field name="total_protestos_value" />
+                                </group>
+                                <group>
+                                    <field name="total_acoes" />
+                                    <field name="total_acoes_value" />
+                                </group>
+                                <group>
+                                    <field name="total_cheques" />
+                                    <field name="has_falencia" />
+                                </group>
+                            </group>
+                            <field name="restriction_ids"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="type" />
+                                    <field name="date" />
+                                    <field name="value" sum="Total" />
+                                    <field name="creditor" />
+                                    <field name="description" />
+                                    <field name="details" />
+                                    <field name="state" widget="badge"
+                                        decoration-danger="state == 'active'"
+                                        decoration-success="state == 'resolved'" />
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Comportamento Pgto" name="payment">
+                            <group>
+                                <group string="Pontualidade">
+                                    <field name="pontualidade_score"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="pontualidade_nivel" widget="badge"
+                                        decoration-success="pontualidade_nivel == 'alto'"
+                                        decoration-warning="pontualidade_nivel == 'medio'"
+                                        decoration-danger="pontualidade_nivel == 'baixo'" />
+                                </group>
+                                <group string="Atrasos">
+                                    <field name="atraso_score"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="atraso_nivel" widget="badge"
+                                        decoration-success="atraso_nivel == 'baixo'"
+                                        decoration-warning="atraso_nivel == 'medio'"
+                                        decoration-danger="atraso_nivel == 'alto'" />
+                                    <field name="media_dias_atraso"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Historico Credito" name="history">
+                            <group>
+                                <group>
+                                    <field name="total_credito_12m" />
+                                </group>
+                                <group>
+                                    <field name="media_credito_12m" />
+                                </group>
+                            </group>
+                            <field name="credit_history_ids"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="month" />
+                                    <field name="year" />
+                                    <field name="value" sum="Total" />
+                                    <field name="variation" />
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Comprometimento" name="commitment">
+                            <group>
+                                <group>
+                                    <field name="total_comprometido_12m" />
+                                </group>
+                            </group>
+                            <field name="commitment_ids"
+                                attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="month" />
+                                    <field name="year" />
+                                    <field name="qtd_titulos" />
+                                    <field name="value" sum="Total" />
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Socios" name="partners">
+                            <field name="partner_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="document_type" />
+                                    <field name="document" />
+                                    <field name="participation" />
+                                    <field name="signs_company" />
+                                    <field name="situation" widget="badge"
+                                        decoration-success="situation == 'regular'"
+                                        decoration-danger="situation == 'irregular'" />
+                                    <field name="has_debts" />
+                                    <field name="has_fraud" />
+                                    <field name="total_restrictions" sum="Total" />
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Observacoes" name="notes">
+                            <field name="notes" />
+                        </page>
+                    </notebook>
+                    <field name="currency_id" invisible="1" />
+                    <field name="has_restricoes" invisible="1" />
+                    <field name="has_falencia" invisible="1" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="credit_analysis_view_search" model="ir.ui.view">
+        <field name="name">credit.analysis.search</field>
+        <field name="model">credit.analysis</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="cnpj" filter_domain="['|', ('cnpj', 'ilike', self), ('cnpj', 'ilike', self.replace('.', '').replace('/', '').replace('-', ''))]" />
+                <field name="company_id" />
+                <field name="user_id" />
+                <separator />
+                <filter name="filter_draft" string="Rascunho"
+                    domain="[('state', '=', 'draft')]" />
+                <filter name="filter_done" string="Concluidas"
+                    domain="[('state', '=', 'done')]" />
+                <filter name="filter_cancelled" string="Canceladas"
+                    domain="[('state', '=', 'cancelled')]" />
+                <separator />
+                <filter name="filter_approved" string="Aprovadas"
+                    domain="[('recommendation_final', '=', 'approved')]" />
+                <filter name="filter_caution" string="Cautela"
+                    domain="[('recommendation_final', '=', 'caution')]" />
+                <filter name="filter_rejected" string="Rejeitadas"
+                    domain="[('recommendation_final', '=', 'rejected')]" />
+                <separator />
+                <filter name="filter_has_restrictions" string="Com Restricoes"
+                    domain="[('has_restricoes', '=', True)]" />
+                <filter name="filter_no_restrictions" string="Sem Restricoes"
+                    domain="[('has_restricoes', '=', False)]" />
+                <separator />
+                <filter name="filter_my" string="Minhas Consultas"
+                    domain="[('user_id', '=', uid)]" />
+                <separator />
+                <filter name="filter_today" string="Hoje"
+                    domain="[('date', '>=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                             ('date', '&lt;', datetime.datetime.combine(context_today() + relativedelta(days=1), datetime.time(0,0,0)))]" />
+                <filter name="filter_this_month" string="Este Mes"
+                    domain="[('date', '>=', datetime.datetime.combine(context_today().replace(day=1), datetime.time(0,0,0)))]" />
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_state" string="Status"
+                        context="{'group_by': 'state'}" />
+                    <filter name="group_recommendation" string="Recomendacao"
+                        context="{'group_by': 'recommendation_final'}" />
+                    <filter name="group_risk" string="Nivel de Risco"
+                        context="{'group_by': 'risk_level'}" />
+                    <filter name="group_user" string="Analista"
+                        context="{'group_by': 'user_id'}" />
+                    <filter name="group_company" string="Empresa"
+                        context="{'group_by': 'company_id'}" />
+                    <filter name="group_date" string="Data"
+                        context="{'group_by': 'date:month'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Pivot View -->
+    <record id="credit_analysis_view_pivot" model="ir.ui.view">
+        <field name="name">credit.analysis.pivot</field>
+        <field name="model">credit.analysis</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="date" type="row" interval="month" />
+                <field name="recommendation_final" type="col" />
+                <field name="id" type="measure" string="Quantidade" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="credit_analysis_view_graph" model="ir.ui.view">
+        <field name="name">credit.analysis.graph</field>
+        <field name="model">credit.analysis</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="risk_level" />
+                <field name="id" type="measure" string="Quantidade" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="credit_analysis_action" model="ir.actions.act_window">
+        <field name="name">Consultas de Credito</field>
+        <field name="res_model">credit.analysis</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph</field>
+        <field name="search_view_id" ref="credit_analysis_view_search" />
+        <field name="context">{'search_default_filter_done': 0}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crie uma nova consulta de credito
+            </p>
+            <p>
+                Analise o risco de credito de empresas com base em score,
+                restricoes, comportamento de pagamento e mais.
+            </p>
+        </field>
+    </record>
+
+</odoo>

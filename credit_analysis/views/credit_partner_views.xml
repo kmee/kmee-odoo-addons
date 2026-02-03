@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="credit_partner_view_tree" model="ir.ui.view">
+        <field name="name">credit.partner.tree</field>
+        <field name="model">credit.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="company_id" />
+                <field name="name" />
+                <field name="document_type" />
+                <field name="document_formatted" string="Documento" />
+                <field name="participation" />
+                <field name="signs_company" />
+                <field name="situation" widget="badge"
+                    decoration-success="situation == 'regular'"
+                    decoration-danger="situation == 'irregular'" />
+                <field name="has_debts" />
+                <field name="has_fraud" />
+                <field name="total_restrictions" sum="Total" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="credit_partner_view_form" model="ir.ui.view">
+        <field name="name">credit.partner.form</field>
+        <field name="model">credit.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_participations" type="object"
+                            class="oe_stat_button" icon="fa-building">
+                            <field name="participation_count" widget="statinfo"
+                                string="Participacoes" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Nome do Socio" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" />
+                            <field name="document_type" />
+                            <field name="document" />
+                            <field name="participation" />
+                            <field name="entry_date" />
+                        </group>
+                        <group>
+                            <field name="signs_company" />
+                            <field name="situation" widget="radio" />
+                            <field name="has_debts" />
+                            <field name="has_fraud" />
+                        </group>
+                    </group>
+                    <group string="Restricoes Financeiras">
+                        <group>
+                            <field name="negativacoes_value" />
+                            <field name="protestos_value" />
+                        </group>
+                        <group>
+                            <field name="acoes_value" />
+                            <field name="total_restrictions" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Participacoes em Outras Empresas" name="participations">
+                            <field name="participation_ids">
+                                <tree editable="bottom">
+                                    <field name="cnpj" />
+                                    <field name="razao_social" />
+                                    <field name="participation" />
+                                    <field name="situation" widget="badge"
+                                        decoration-success="situation == 'ativo'"
+                                        decoration-muted="situation == 'baixado'" />
+                                    <field name="entry_date" />
+                                    <field name="has_debts" />
+                                    <field name="has_fraud" />
+                                    <field name="negativacoes_value" />
+                                    <field name="protestos_value" />
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="currency_id" invisible="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="credit_partner_view_search" model="ir.ui.view">
+        <field name="name">credit.partner.search</field>
+        <field name="model">credit.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="document" />
+                <field name="company_id" />
+                <separator />
+                <filter name="filter_signs" string="Assina pela Empresa"
+                    domain="[('signs_company', '=', True)]" />
+                <filter name="filter_debts" string="Com Debitos"
+                    domain="[('has_debts', '=', True)]" />
+                <filter name="filter_fraud" string="Com Fraude"
+                    domain="[('has_fraud', '=', True)]" />
+                <filter name="filter_irregular" string="Irregulares"
+                    domain="[('situation', '=', 'irregular')]" />
+                <group expand="0" string="Agrupar por">
+                    <filter name="group_company" string="Empresa"
+                        context="{'group_by': 'company_id'}" />
+                    <filter name="group_situation" string="Situacao"
+                        context="{'group_by': 'situation'}" />
+                    <filter name="group_type" string="Tipo Documento"
+                        context="{'group_by': 'document_type'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="credit_partner_action" model="ir.actions.act_window">
+        <field name="name">Socios</field>
+        <field name="res_model">credit.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="credit_partner_view_search" />
+    </record>
+
+</odoo>

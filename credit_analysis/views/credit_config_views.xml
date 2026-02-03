@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="credit_config_view_form" model="ir.ui.view">
+        <field name="name">credit.config.form</field>
+        <field name="model">credit.config</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" groups="base.group_multi_company" />
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Faixas de Score" name="score_ranges">
+                            <group string="Risco Muito Alto (Score mais baixo)">
+                                <group>
+                                    <field name="score_very_high_min" />
+                                    <field name="score_very_high_max" />
+                                </group>
+                                <group>
+                                    <field name="prob_very_high" />
+                                    <field name="limite_factor_very_high" />
+                                </group>
+                            </group>
+                            <group string="Risco Alto">
+                                <group>
+                                    <field name="score_high_min" />
+                                    <field name="score_high_max" />
+                                </group>
+                                <group>
+                                    <field name="prob_high" />
+                                    <field name="limite_factor_high" />
+                                </group>
+                            </group>
+                            <group string="Risco Medio">
+                                <group>
+                                    <field name="score_medium_min" />
+                                    <field name="score_medium_max" />
+                                </group>
+                                <group>
+                                    <field name="prob_medium" />
+                                    <field name="limite_factor_medium" />
+                                </group>
+                            </group>
+                            <group string="Risco Baixo">
+                                <group>
+                                    <field name="score_low_min" />
+                                    <field name="score_low_max" />
+                                </group>
+                                <group>
+                                    <field name="prob_low" />
+                                    <field name="limite_factor_low" />
+                                </group>
+                            </group>
+                            <group string="Risco Muito Baixo (Score mais alto)">
+                                <group>
+                                    <field name="score_very_low_min" />
+                                    <field name="score_very_low_max" />
+                                </group>
+                                <group>
+                                    <field name="prob_very_low" />
+                                    <field name="limite_factor_very_low" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Relatorio" name="report">
+                            <group>
+                                <field name="report_watermark_enabled" />
+                                <field name="report_watermark_text"
+                                    attrs="{'invisible': [('report_watermark_enabled', '=', False)]}" />
+                            </group>
+                            <group>
+                                <field name="report_disclaimer" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="credit_config_view_tree" model="ir.ui.view">
+        <field name="name">credit.config.tree</field>
+        <field name="model">credit.config</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="active" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="credit_config_action" model="ir.actions.act_window">
+        <field name="name">Parametros de Credito</field>
+        <field name="res_model">credit.config</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

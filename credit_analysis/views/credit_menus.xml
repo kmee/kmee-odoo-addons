@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem id="menu_credit_root"
+        name="Credito"
+        sequence="45"
+        web_icon="credit_analysis,static/description/icon.png"
+        groups="credit_analysis.group_credit_user" />
+
+    <!-- Consultas Menu -->
+    <menuitem id="menu_credit_analysis"
+        name="Consultas"
+        parent="menu_credit_root"
+        sequence="10" />
+
+    <menuitem id="menu_credit_analysis_list"
+        name="Consultas de Credito"
+        parent="menu_credit_analysis"
+        action="credit_analysis_action"
+        sequence="10" />
+
+    <menuitem id="menu_credit_company_list"
+        name="Empresas"
+        parent="menu_credit_analysis"
+        action="credit_company_action"
+        sequence="20" />
+
+    <!-- Cadastros Menu -->
+    <menuitem id="menu_credit_master"
+        name="Cadastros"
+        parent="menu_credit_root"
+        sequence="20" />
+
+    <menuitem id="menu_credit_partner_list"
+        name="Socios"
+        parent="menu_credit_master"
+        action="credit_partner_action"
+        sequence="10" />
+
+    <menuitem id="menu_credit_restriction_list"
+        name="Restricoes"
+        parent="menu_credit_master"
+        action="credit_restriction_action"
+        sequence="20" />
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_credit_config"
+        name="Configuracao"
+        parent="menu_credit_root"
+        sequence="90"
+        groups="credit_analysis.group_credit_manager" />
+
+    <menuitem id="menu_credit_config_params"
+        name="Parametros"
+        parent="menu_credit_config"
+        action="credit_config_action"
+        sequence="10" />
+
+    <menuitem id="menu_credit_cnae"
+        name="CNAE"
+        parent="menu_credit_config"
+        action="credit_cnae_action"
+        sequence="20" />
+
+    <menuitem id="menu_credit_natureza_juridica"
+        name="Natureza Juridica"
+        parent="menu_credit_config"
+        action="credit_natureza_juridica_action"
+        sequence="30" />
+
+</odoo>

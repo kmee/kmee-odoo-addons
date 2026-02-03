@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Credit History Line Tree View -->
+    <record id="credit_history_line_view_tree" model="ir.ui.view">
+        <field name="name">credit.history.line.tree</field>
+        <field name="model">credit.history.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="analysis_id" />
+                <field name="month" />
+                <field name="year" />
+                <field name="value" sum="Total" />
+                <field name="variation" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Credit History Line Form View -->
+    <record id="credit_history_line_view_form" model="ir.ui.view">
+        <field name="name">credit.history.line.form</field>
+        <field name="model">credit.history.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="analysis_id" />
+                            <field name="month" />
+                            <field name="year" />
+                        </group>
+                        <group>
+                            <field name="value" />
+                            <field name="variation" />
+                            <field name="date" />
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Credit Commitment Line Tree View -->
+    <record id="credit_commitment_line_view_tree" model="ir.ui.view">
+        <field name="name">credit.commitment.line.tree</field>
+        <field name="model">credit.commitment.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="analysis_id" />
+                <field name="month" />
+                <field name="year" />
+                <field name="qtd_titulos" sum="Total" />
+                <field name="value" sum="Total" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Credit Commitment Line Form View -->
+    <record id="credit_commitment_line_view_form" model="ir.ui.view">
+        <field name="name">credit.commitment.line.form</field>
+        <field name="model">credit.commitment.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="analysis_id" />
+                            <field name="month" />
+                            <field name="year" />
+                        </group>
+                        <group>
+                            <field name="qtd_titulos" />
+                            <field name="value" />
+                            <field name="date" />
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

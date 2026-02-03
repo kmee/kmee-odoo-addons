@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Principais CNAEs -->
+        <record id="cnae_4711301" model="credit.cnae">
+            <field name="code">4711-3/01</field>
+            <field name="name">Comercio varejista de mercadorias em geral, com predominancia de produtos alimenticios - hipermercados</field>
+        </record>
+
+        <record id="cnae_4711302" model="credit.cnae">
+            <field name="code">4711-3/02</field>
+            <field name="name">Comercio varejista de mercadorias em geral, com predominancia de produtos alimenticios - supermercados</field>
+        </record>
+
+        <record id="cnae_4712100" model="credit.cnae">
+            <field name="code">4712-1/00</field>
+            <field name="name">Comercio varejista de mercadorias em geral, com predominancia de produtos alimenticios - minimercados, mercearias e armazens</field>
+        </record>
+
+        <record id="cnae_4781400" model="credit.cnae">
+            <field name="code">4781-4/00</field>
+            <field name="name">Comercio varejista de artigos do vestuario e acessorios</field>
+        </record>
+
+        <record id="cnae_4751200" model="credit.cnae">
+            <field name="code">4751-2/00</field>
+            <field name="name">Comercio varejista especializado de equipamentos e suprimentos de informatica</field>
+        </record>
+
+        <record id="cnae_4753900" model="credit.cnae">
+            <field name="code">4753-9/00</field>
+            <field name="name">Comercio varejista especializado de eletrodomesticos e equipamentos de audio e video</field>
+        </record>
+
+        <record id="cnae_5611201" model="credit.cnae">
+            <field name="code">5611-2/01</field>
+            <field name="name">Restaurantes e similares</field>
+        </record>
+
+        <record id="cnae_5611203" model="credit.cnae">
+            <field name="code">5611-2/03</field>
+            <field name="name">Lanchonetes, casas de cha, de sucos e similares</field>
+        </record>
+
+        <record id="cnae_6201501" model="credit.cnae">
+            <field name="code">6201-5/01</field>
+            <field name="name">Desenvolvimento de programas de computador sob encomenda</field>
+        </record>
+
+        <record id="cnae_6202300" model="credit.cnae">
+            <field name="code">6202-3/00</field>
+            <field name="name">Desenvolvimento e licenciamento de programas de computador customizaveis</field>
+        </record>
+
+        <record id="cnae_6203100" model="credit.cnae">
+            <field name="code">6203-1/00</field>
+            <field name="name">Desenvolvimento e licenciamento de programas de computador nao-customizaveis</field>
+        </record>
+
+        <record id="cnae_6204000" model="credit.cnae">
+            <field name="code">6204-0/00</field>
+            <field name="name">Consultoria em tecnologia da informacao</field>
+        </record>
+
+        <record id="cnae_6311900" model="credit.cnae">
+            <field name="code">6311-9/00</field>
+            <field name="name">Tratamento de dados, provedores de servicos de aplicacao e servicos de hospedagem na internet</field>
+        </record>
+
+        <record id="cnae_6399200" model="credit.cnae">
+            <field name="code">6399-2/00</field>
+            <field name="name">Outras atividades de prestacao de servicos de informacao nao especificadas anteriormente</field>
+        </record>
+
+        <record id="cnae_6920601" model="credit.cnae">
+            <field name="code">6920-6/01</field>
+            <field name="name">Atividades de contabilidade</field>
+        </record>
+
+        <record id="cnae_6920602" model="credit.cnae">
+            <field name="code">6920-6/02</field>
+            <field name="name">Atividades de consultoria e auditoria contabil e tributaria</field>
+        </record>
+
+        <record id="cnae_7020400" model="credit.cnae">
+            <field name="code">7020-4/00</field>
+            <field name="name">Atividades de consultoria em gestao empresarial, exceto consultoria tecnica especifica</field>
+        </record>
+
+        <record id="cnae_7311400" model="credit.cnae">
+            <field name="code">7311-4/00</field>
+            <field name="name">Agencias de publicidade</field>
+        </record>
+
+        <record id="cnae_7319003" model="credit.cnae">
+            <field name="code">7319-0/03</field>
+            <field name="name">Marketing direto</field>
+        </record>
+
+        <record id="cnae_7490104" model="credit.cnae">
+            <field name="code">7490-1/04</field>
+            <field name="name">Atividades de intermediacao e agenciamento de servicos e negocios em geral, exceto imobiliarios</field>
+        </record>
+
+        <record id="cnae_8219901" model="credit.cnae">
+            <field name="code">8219-9/01</field>
+            <field name="name">Fotocopias</field>
+        </record>
+
+        <record id="cnae_8599604" model="credit.cnae">
+            <field name="code">8599-6/04</field>
+            <field name="name">Treinamento em desenvolvimento profissional e gerencial</field>
+        </record>
+
+        <record id="cnae_9609208" model="credit.cnae">
+            <field name="code">9609-2/08</field>
+            <field name="name">Higiene e embelezamento de animais domesticos</field>
+        </record>
+
+        <record id="cnae_4110700" model="credit.cnae">
+            <field name="code">4110-7/00</field>
+            <field name="name">Incorporacao de empreendimentos imobiliarios</field>
+        </record>
+
+        <record id="cnae_4120400" model="credit.cnae">
+            <field name="code">4120-4/00</field>
+            <field name="name">Construcao de edificios</field>
+        </record>
+
+    </data>
+</odoo>

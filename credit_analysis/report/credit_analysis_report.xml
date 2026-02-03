@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_credit_analysis" model="ir.actions.report">
+        <field name="name">Relatorio de Consulta de Credito</field>
+        <field name="model">credit.analysis</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">credit_analysis.report_credit_analysis</field>
+        <field name="report_file">credit_analysis.report_credit_analysis</field>
+        <field name="print_report_name">'Consulta_Credito_%s_%s' % (object.name, object.company_id.cnpj.replace('.', '').replace('/', '').replace('-', ''))</field>
+        <field name="binding_model_id" ref="model_credit_analysis" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="paperformat_credit_analysis" model="report.paperformat">
+        <field name="name">Relatorio de Credito A4</field>
+        <field name="default" eval="False" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+
+</odoo>

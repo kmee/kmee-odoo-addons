@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_credit_analysis">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <!-- Header -->
+                        <div class="row mb-4">
+                            <div class="col-8">
+                                <h2>Relatorio de Analise de Credito</h2>
+                                <p class="text-muted">
+                                    Consulta: <strong t-field="o.name" /> |
+                                    Data: <span t-field="o.date" t-options='{"format": "dd/MM/yyyy HH:mm"}' />
+                                </p>
+                            </div>
+                            <div class="col-4 text-end">
+                                <t t-if="o.recommendation_final == 'approved'">
+                                    <span class="badge bg-success fs-4">APROVADO</span>
+                                </t>
+                                <t t-if="o.recommendation_final == 'caution'">
+                                    <span class="badge bg-warning fs-4">CAUTELA</span>
+                                </t>
+                                <t t-if="o.recommendation_final == 'rejected'">
+                                    <span class="badge bg-danger fs-4">REJEITADO</span>
+                                </t>
+                            </div>
+                        </div>
+
+                        <!-- Company Info -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-primary text-white">
+                                        <strong>Dados da Empresa</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p><strong>Razao Social:</strong> <span t-field="o.company_id.razao_social" /></p>
+                                                <p><strong>Nome Fantasia:</strong> <span t-field="o.company_id.nome_fantasia" /></p>
+                                                <p><strong>CNPJ:</strong> <span t-field="o.company_id.cnpj_formatted" /></p>
+                                                <p><strong>Natureza Juridica:</strong> <span t-field="o.company_id.natureza_juridica_id.name" /></p>
+                                            </div>
+                                            <div class="col-6">
+                                                <p><strong>Situacao Cadastral:</strong>
+                                                    <t t-if="o.company_id.situacao_cadastral == 'ativo'">
+                                                        <span class="badge bg-success">Ativo</span>
+                                                    </t>
+                                                    <t t-elif="o.company_id.situacao_cadastral == 'baixado'">
+                                                        <span class="badge bg-danger">Baixado</span>
+                                                    </t>
+                                                    <t t-elif="o.company_id.situacao_cadastral == 'suspenso'">
+                                                        <span class="badge bg-warning">Suspenso</span>
+                                                    </t>
+                                                    <t t-elif="o.company_id.situacao_cadastral == 'inapto'">
+                                                        <span class="badge bg-danger">Inapto</span>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <span t-field="o.company_id.situacao_cadastral" />
+                                                    </t>
+                                                </p>
+                                                <p><strong>Data de Fundacao:</strong> <span t-field="o.company_id.data_fundacao" /></p>
+                                                <p><strong>Tempo de Mercado:</strong> <span t-field="o.company_id.tempo_mercado" /> anos</p>
+                                                <p><strong>CNAE Principal:</strong> <span t-field="o.company_id.cnae_principal_id" /></p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <p><strong>Endereco:</strong> <span t-field="o.company_id.full_address" /></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Score and Risk Analysis -->
+                        <div class="row mb-4">
+                            <div class="col-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Score</h5>
+                                        <h2 t-field="o.score" />
+                                        <p>
+                                            <t t-if="o.risk_level == 'very_high'">
+                                                <span class="badge bg-danger">Muito Alto</span>
+                                            </t>
+                                            <t t-if="o.risk_level == 'high'">
+                                                <span class="badge bg-danger">Alto</span>
+                                            </t>
+                                            <t t-if="o.risk_level == 'medium'">
+                                                <span class="badge bg-warning">Medio</span>
+                                            </t>
+                                            <t t-if="o.risk_level == 'low'">
+                                                <span class="badge bg-success">Baixo</span>
+                                            </t>
+                                            <t t-if="o.risk_level == 'very_low'">
+                                                <span class="badge bg-success">Muito Baixo</span>
+                                            </t>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Prob. Inadimplencia</h5>
+                                        <h2><span t-field="o.default_probability" />%</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Restricoes</h5>
+                                        <h2 t-field="o.total_restricoes_value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                        <p>
+                                            <t t-if="o.has_restricoes">
+                                                <span class="badge bg-danger">Com Restricoes</span>
+                                            </t>
+                                            <t t-else="">
+                                                <span class="badge bg-success">Sem Restricoes</span>
+                                            </t>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Limite Sugerido</h5>
+                                        <h2 t-field="o.limite_credito_final" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Restrictions Summary -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-danger text-white">
+                                        <strong>Resumo de Restricoes</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <p><strong>Negativacoes:</strong></p>
+                                                <p>Quantidade: <span t-field="o.total_negativacoes" /></p>
+                                                <p>Valor: <span t-field="o.total_negativacoes_value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                            </div>
+                                            <div class="col-3">
+                                                <p><strong>Protestos:</strong></p>
+                                                <p>Quantidade: <span t-field="o.total_protestos" /></p>
+                                                <p>Valor: <span t-field="o.total_protestos_value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                            </div>
+                                            <div class="col-3">
+                                                <p><strong>Acoes Judiciais:</strong></p>
+                                                <p>Quantidade: <span t-field="o.total_acoes" /></p>
+                                                <p>Valor: <span t-field="o.total_acoes_value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                            </div>
+                                            <div class="col-3">
+                                                <p><strong>Cheques:</strong></p>
+                                                <p>Quantidade: <span t-field="o.total_cheques" /></p>
+                                                <p>
+                                                    <t t-if="o.has_falencia">
+                                                        <span class="badge bg-danger">Falencia/Recuperacao Judicial</span>
+                                                    </t>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Restrictions Detail -->
+                        <t t-if="o.restriction_ids">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Detalhamento de Restricoes</strong>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-sm table-striped mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipo</th>
+                                                        <th>Data</th>
+                                                        <th>Valor</th>
+                                                        <th>Credor</th>
+                                                        <th>Situacao</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="o.restriction_ids" t-as="r">
+                                                        <tr>
+                                                            <td t-field="r.type" />
+                                                            <td t-field="r.date" />
+                                                            <td t-field="r.value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                            <td t-field="r.creditor" />
+                                                            <td>
+                                                                <t t-if="r.state == 'active'">
+                                                                    <span class="badge bg-danger">Ativa</span>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span class="badge bg-success">Resolvida</span>
+                                                                </t>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Payment Behavior -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">
+                                        <strong>Comportamento de Pagamento</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <p><strong>Score de Pontualidade:</strong> <span t-field="o.pontualidade_score" /></p>
+                                                <p>
+                                                    <t t-if="o.pontualidade_nivel == 'alto'">
+                                                        <span class="badge bg-success">Alto</span>
+                                                    </t>
+                                                    <t t-if="o.pontualidade_nivel == 'medio'">
+                                                        <span class="badge bg-warning">Medio</span>
+                                                    </t>
+                                                    <t t-if="o.pontualidade_nivel == 'baixo'">
+                                                        <span class="badge bg-danger">Baixo</span>
+                                                    </t>
+                                                </p>
+                                            </div>
+                                            <div class="col-4">
+                                                <p><strong>Score de Atraso:</strong> <span t-field="o.atraso_score" /></p>
+                                                <p>
+                                                    <t t-if="o.atraso_nivel == 'baixo'">
+                                                        <span class="badge bg-success">Baixo</span>
+                                                    </t>
+                                                    <t t-if="o.atraso_nivel == 'medio'">
+                                                        <span class="badge bg-warning">Medio</span>
+                                                    </t>
+                                                    <t t-if="o.atraso_nivel == 'alto'">
+                                                        <span class="badge bg-danger">Alto</span>
+                                                    </t>
+                                                </p>
+                                            </div>
+                                            <div class="col-4">
+                                                <p><strong>Media de Dias em Atraso:</strong> <span t-field="o.media_dias_atraso" /> dias</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credit History -->
+                        <t t-if="o.credit_history_ids">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Historico de Credito (Ultimos 12 meses)</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col-6">
+                                                    <strong>Total:</strong> <span t-field="o.total_credito_12m" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                </div>
+                                                <div class="col-6">
+                                                    <strong>Media:</strong> <span t-field="o.media_credito_12m" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                </div>
+                                            </div>
+                                            <table class="table table-sm table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mes/Ano</th>
+                                                        <th>Valor</th>
+                                                        <th>Variacao</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="o.credit_history_ids" t-as="h">
+                                                        <tr>
+                                                            <td><span t-field="h.month" />/<span t-field="h.year" /></td>
+                                                            <td t-field="h.value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                            <td><span t-field="h.variation" />%</td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Partners (Shareholders) -->
+                        <t t-if="o.company_id.partner_ids">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-secondary text-white">
+                                            <strong>Quadro Societario</strong>
+                                        </div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-sm table-striped mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nome</th>
+                                                        <th>Documento</th>
+                                                        <th>Participacao</th>
+                                                        <th>Situacao</th>
+                                                        <th>Debitos</th>
+                                                        <th>Restricoes</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="o.company_id.partner_ids" t-as="p">
+                                                        <tr>
+                                                            <td t-field="p.name" />
+                                                            <td t-field="p.document_formatted" />
+                                                            <td><span t-field="p.participation" />%</td>
+                                                            <td>
+                                                                <t t-if="p.situation == 'regular'">
+                                                                    <span class="badge bg-success">Regular</span>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span class="badge bg-danger">Irregular</span>
+                                                                </t>
+                                                            </td>
+                                                            <td>
+                                                                <t t-if="p.has_debts">
+                                                                    <span class="badge bg-danger">Sim</span>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span class="badge bg-success">Nao</span>
+                                                                </t>
+                                                            </td>
+                                                            <td t-field="p.total_restrictions" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Override Notes -->
+                        <t t-if="o.recommendation_override and o.recommendation_notes">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-warning">
+                                            <strong>Justificativa do Override de Recomendacao</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <p t-field="o.recommendation_notes" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Notes -->
+                        <t t-if="o.notes">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Observacoes</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <span t-field="o.notes" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Footer / Disclaimer -->
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <hr />
+                                <p class="text-muted small">
+                                    <strong>AVISO DE CONFIDENCIALIDADE:</strong> Este documento contem informacoes confidenciais destinadas exclusivamente ao uso interno da empresa. A reproducao, distribuicao ou divulgacao sem autorizacao expressa e proibida. As informacoes aqui contidas sao baseadas em dados disponiveis no momento da consulta e nao constituem garantia de credito.
+                                </p>
+                                <p class="text-muted small">
+                                    <strong>Consulta realizada por:</strong> <span t-field="o.user_id.name" /> |
+                                    <strong>Data de impressao:</strong> <span t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M')" />
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

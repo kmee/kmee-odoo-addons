@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Extend res.partner form to show credit companies -->
+    <record id="res_partner_view_form_credit" model="ir.ui.view">
+        <field name="name">res.partner.form.credit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_credit_companies" type="object"
+                    class="oe_stat_button" icon="fa-building"
+                    attrs="{'invisible': [('credit_company_count', '=', 0)]}"
+                    groups="credit_analysis.group_credit_user">
+                    <field name="credit_company_count" widget="statinfo"
+                        string="Credito" />
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

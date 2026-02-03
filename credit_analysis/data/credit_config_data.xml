@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Default Configuration -->
+        <record id="credit_config_default" model="credit.config">
+            <field name="name">Configuracao Padrao</field>
+            <field name="company_id" eval="False" />
+            <field name="active" eval="True" />
+            <!-- Score ranges -->
+            <field name="score_very_high_min">0</field>
+            <field name="score_very_high_max">200</field>
+            <field name="score_high_min">201</field>
+            <field name="score_high_max">400</field>
+            <field name="score_medium_min">401</field>
+            <field name="score_medium_max">600</field>
+            <field name="score_low_min">601</field>
+            <field name="score_low_max">800</field>
+            <field name="score_very_low_min">801</field>
+            <field name="score_very_low_max">1000</field>
+            <!-- Probabilities -->
+            <field name="prob_very_high">50.0</field>
+            <field name="prob_high">35.0</field>
+            <field name="prob_medium">20.0</field>
+            <field name="prob_low">10.0</field>
+            <field name="prob_very_low">3.0</field>
+            <!-- Limit factors -->
+            <field name="limite_factor_very_high">0.01</field>
+            <field name="limite_factor_high">0.03</field>
+            <field name="limite_factor_medium">0.05</field>
+            <field name="limite_factor_low">0.08</field>
+            <field name="limite_factor_very_low">0.10</field>
+            <!-- Report settings -->
+            <field name="report_watermark_enabled" eval="True" />
+            <field name="report_watermark_text">CONFIDENCIAL</field>
+            <field name="report_disclaimer">CONFIDENCIAL - Este documento contem informacoes confidenciais destinadas exclusivamente ao uso interno da empresa. A reproducao, distribuicao ou divulgacao sem autorizacao expressa e proibida. As informacoes aqui contidas sao baseadas em dados disponiveis no momento da consulta e nao constituem garantia de credito.</field>
+        </record>
+
+    </data>
+</odoo>

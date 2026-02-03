@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Naturezas Juridicas mais comuns -->
+        <record id="natureza_mei" model="credit.natureza.juridica">
+            <field name="code">213-5</field>
+            <field name="name">Empresario Individual (MEI)</field>
+        </record>
+
+        <record id="natureza_ei" model="credit.natureza.juridica">
+            <field name="code">213-5</field>
+            <field name="name">Empresario Individual</field>
+        </record>
+
+        <record id="natureza_eireli" model="credit.natureza.juridica">
+            <field name="code">230-5</field>
+            <field name="name">Empresa Individual de Responsabilidade Limitada (EIRELI)</field>
+        </record>
+
+        <record id="natureza_ltda" model="credit.natureza.juridica">
+            <field name="code">206-2</field>
+            <field name="name">Sociedade Empresaria Limitada</field>
+        </record>
+
+        <record id="natureza_ss" model="credit.natureza.juridica">
+            <field name="code">224-0</field>
+            <field name="name">Sociedade Simples Limitada</field>
+        </record>
+
+        <record id="natureza_sa_fechada" model="credit.natureza.juridica">
+            <field name="code">204-6</field>
+            <field name="name">Sociedade Anonima Fechada</field>
+        </record>
+
+        <record id="natureza_sa_aberta" model="credit.natureza.juridica">
+            <field name="code">205-4</field>
+            <field name="name">Sociedade Anonima Aberta</field>
+        </record>
+
+        <record id="natureza_coop" model="credit.natureza.juridica">
+            <field name="code">214-3</field>
+            <field name="name">Cooperativa</field>
+        </record>
+
+        <record id="natureza_assoc" model="credit.natureza.juridica">
+            <field name="code">399-9</field>
+            <field name="name">Associacao Privada</field>
+        </record>
+
+        <record id="natureza_fundacao" model="credit.natureza.juridica">
+            <field name="code">306-9</field>
+            <field name="name">Fundacao Privada</field>
+        </record>
+
+        <record id="natureza_slu" model="credit.natureza.juridica">
+            <field name="code">231-3</field>
+            <field name="name">Sociedade Limitada Unipessoal</field>
+        </record>
+
+        <record id="natureza_consorcio" model="credit.natureza.juridica">
+            <field name="code">215-1</field>
+            <field name="name">Consorcio de Sociedades</field>
+        </record>
+
+        <record id="natureza_grupo" model="credit.natureza.juridica">
+            <field name="code">216-0</field>
+            <field name="name">Grupo de Sociedades</field>
+        </record>
+
+        <record id="natureza_estab_br" model="credit.natureza.juridica">
+            <field name="code">217-8</field>
+            <field name="name">Estabelecimento, no Brasil, de Sociedade Estrangeira</field>
+        </record>
+
+        <record id="natureza_filial" model="credit.natureza.juridica">
+            <field name="code">212-7</field>
+            <field name="name">Filial, no Brasil, de Sociedade Estrangeira</field>
+        </record>
+
+    </data>
+</odoo>

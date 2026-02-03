@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="credit_cnae_view_tree" model="ir.ui.view">
+        <field name="name">credit.cnae.tree</field>
+        <field name="model">credit.cnae</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="credit_cnae_view_form" model="ir.ui.view">
+        <field name="name">credit.cnae.form</field>
+        <field name="model">credit.cnae</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="code" />
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="credit_cnae_view_search" model="ir.ui.view">
+        <field name="name">credit.cnae.search</field>
+        <field name="model">credit.cnae</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code" />
+                <field name="name" />
+                <separator />
+                <filter name="filter_archived" string="Arquivados"
+                    domain="[('active', '=', False)]" />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="credit_cnae_action" model="ir.actions.act_window">
+        <field name="name">CNAE</field>
+        <field name="res_model">credit.cnae</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="credit_cnae_view_search" />
+    </record>
+
+</odoo>

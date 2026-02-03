@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Module Category -->
+    <record id="module_category_credit" model="ir.module.category">
+        <field name="name">Credito</field>
+        <field name="description">Modulo de Analise de Credito</field>
+        <field name="sequence">50</field>
+    </record>
+
+    <!-- User Group -->
+    <record id="group_credit_user" model="res.groups">
+        <field name="name">Usuario</field>
+        <field name="category_id" ref="module_category_credit" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="comment">Usuario pode visualizar e criar consultas de credito</field>
+    </record>
+
+    <!-- Analyst Group -->
+    <record id="group_credit_analyst" model="res.groups">
+        <field name="name">Analista</field>
+        <field name="category_id" ref="module_category_credit" />
+        <field name="implied_ids" eval="[(4, ref('group_credit_user'))]" />
+        <field name="comment">Analista pode editar e excluir suas proprias consultas</field>
+    </record>
+
+    <!-- Manager Group -->
+    <record id="group_credit_manager" model="res.groups">
+        <field name="name">Gerente</field>
+        <field name="category_id" ref="module_category_credit" />
+        <field name="implied_ids" eval="[(4, ref('group_credit_analyst'))]" />
+        <field name="comment">Gerente tem acesso total ao modulo, incluindo configuracoes</field>
+    </record>
+
+    <!-- Record Rules -->
+
+    <!-- Credit Analysis - User can see all, edit own -->
+    <record id="credit_analysis_rule_user" model="ir.rule">
+        <field name="name">Credit Analysis: User - Read All</field>
+        <field name="model_id" ref="model_credit_analysis" />
+        <field name="groups" eval="[(4, ref('group_credit_user'))]" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+
+    <record id="credit_analysis_rule_analyst" model="ir.rule">
+        <field name="name">Credit Analysis: Analyst - Edit Own</field>
+        <field name="model_id" ref="model_credit_analysis" />
+        <field name="groups" eval="[(4, ref('group_credit_analyst'))]" />
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="False" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
+    <record id="credit_analysis_rule_manager" model="ir.rule">
+        <field name="name">Credit Analysis: Manager - Full Access</field>
+        <field name="model_id" ref="model_credit_analysis" />
+        <field name="groups" eval="[(4, ref('group_credit_manager'))]" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
+    <!-- Credit Company - User can see all -->
+    <record id="credit_company_rule_user" model="ir.rule">
+        <field name="name">Credit Company: User - Read All</field>
+        <field name="model_id" ref="model_credit_company" />
+        <field name="groups" eval="[(4, ref('group_credit_user'))]" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+
+    <record id="credit_company_rule_manager" model="ir.rule">
+        <field name="name">Credit Company: Manager - Full Access</field>
+        <field name="model_id" ref="model_credit_company" />
+        <field name="groups" eval="[(4, ref('group_credit_manager'))]" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
+</odoo>
