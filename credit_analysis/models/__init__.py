@@ -3,7 +3,7 @@
 
 from . import credit_cnae
 from . import credit_natureza_juridica
-from . import credit_company
+from . import credit_subject
 from . import credit_partner
 from . import credit_partner_participation
 from . import credit_analysis

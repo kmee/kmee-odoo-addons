@@ -29,53 +29,138 @@
                             </div>
                         </div>
 
-                        <!-- Company Info -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header bg-primary text-white">
-                                        <strong>Dados da Empresa</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p><strong>Razao Social:</strong> <span t-field="o.company_id.razao_social" /></p>
-                                                <p><strong>Nome Fantasia:</strong> <span t-field="o.company_id.nome_fantasia" /></p>
-                                                <p><strong>CNPJ:</strong> <span t-field="o.company_id.cnpj_formatted" /></p>
-                                                <p><strong>Natureza Juridica:</strong> <span t-field="o.company_id.natureza_juridica_id.name" /></p>
-                                            </div>
-                                            <div class="col-6">
-                                                <p><strong>Situacao Cadastral:</strong>
-                                                    <t t-if="o.company_id.situacao_cadastral == 'ativo'">
-                                                        <span class="badge bg-success">Ativo</span>
-                                                    </t>
-                                                    <t t-elif="o.company_id.situacao_cadastral == 'baixado'">
-                                                        <span class="badge bg-danger">Baixado</span>
-                                                    </t>
-                                                    <t t-elif="o.company_id.situacao_cadastral == 'suspenso'">
-                                                        <span class="badge bg-warning">Suspenso</span>
-                                                    </t>
-                                                    <t t-elif="o.company_id.situacao_cadastral == 'inapto'">
-                                                        <span class="badge bg-danger">Inapto</span>
-                                                    </t>
-                                                    <t t-else="">
-                                                        <span t-field="o.company_id.situacao_cadastral" />
-                                                    </t>
-                                                </p>
-                                                <p><strong>Data de Fundacao:</strong> <span t-field="o.company_id.data_fundacao" /></p>
-                                                <p><strong>Tempo de Mercado:</strong> <span t-field="o.company_id.tempo_mercado" /> anos</p>
-                                                <p><strong>CNAE Principal:</strong> <span t-field="o.company_id.cnae_principal_id" /></p>
-                                            </div>
+                        <!-- Subject Info - PJ (Pessoa Juridica) -->
+                        <t t-if="o.subject_type == 'pj'">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white">
+                                            <strong>Dados da Empresa</strong>
                                         </div>
-                                        <div class="row mt-2">
-                                            <div class="col-12">
-                                                <p><strong>Endereco:</strong> <span t-field="o.company_id.full_address" /></p>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p><strong>Razao Social:</strong> <span t-field="o.subject_id.name" /></p>
+                                                    <p><strong>Nome Fantasia:</strong> <span t-field="o.subject_id.nome_fantasia" /></p>
+                                                    <p><strong>CNPJ:</strong> <span t-field="o.subject_id.document_formatted" /></p>
+                                                    <p><strong>Natureza Juridica:</strong> <span t-field="o.subject_id.natureza_juridica_id.name" /></p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p><strong>Situacao Cadastral:</strong>
+                                                        <t t-if="o.subject_id.situacao_cadastral == 'ativo'">
+                                                            <span class="badge bg-success">Ativo</span>
+                                                        </t>
+                                                        <t t-elif="o.subject_id.situacao_cadastral == 'baixado'">
+                                                            <span class="badge bg-danger">Baixado</span>
+                                                        </t>
+                                                        <t t-elif="o.subject_id.situacao_cadastral == 'suspenso'">
+                                                            <span class="badge bg-warning">Suspenso</span>
+                                                        </t>
+                                                        <t t-elif="o.subject_id.situacao_cadastral == 'inapto'">
+                                                            <span class="badge bg-danger">Inapto</span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-field="o.subject_id.situacao_cadastral" />
+                                                        </t>
+                                                    </p>
+                                                    <p><strong>Data de Fundacao:</strong> <span t-field="o.subject_id.data_fundacao" /></p>
+                                                    <p><strong>Tempo de Atividade:</strong> <span t-field="o.subject_id.tempo_atividade" /> anos</p>
+                                                    <p><strong>CNAE Principal:</strong> <span t-field="o.subject_id.cnae_principal_id" /></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-6">
+                                                    <p><strong>Capital Social:</strong> <span t-field="o.subject_id.capital_social" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p><strong>Capital Atual:</strong> <span t-field="o.subject_id.capital_atual" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <p><strong>Endereco:</strong> <span t-field="o.subject_id.full_address" /></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </t>
+
+                        <!-- Subject Info - PF (Pessoa Fisica) -->
+                        <t t-if="o.subject_type == 'pf'">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-primary text-white">
+                                            <strong>Dados Pessoais</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p><strong>Nome:</strong> <span t-field="o.subject_id.name" /></p>
+                                                    <p><strong>CPF:</strong> <span t-field="o.subject_id.document_formatted" /></p>
+                                                    <p><strong>Data de Nascimento:</strong> <span t-field="o.subject_id.data_nascimento" /></p>
+                                                    <p><strong>Idade:</strong> <span t-field="o.subject_id.idade" /> anos</p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p><strong>Situacao Cadastral:</strong>
+                                                        <t t-if="o.subject_id.situacao_cadastral == 'regular'">
+                                                            <span class="badge bg-success">Regular</span>
+                                                        </t>
+                                                        <t t-elif="o.subject_id.situacao_cadastral == 'pendente'">
+                                                            <span class="badge bg-warning">Pendente</span>
+                                                        </t>
+                                                        <t t-elif="o.subject_id.situacao_cadastral == 'cancelado'">
+                                                            <span class="badge bg-danger">Cancelado</span>
+                                                        </t>
+                                                        <t t-elif="o.subject_id.situacao_cadastral == 'nulo'">
+                                                            <span class="badge bg-danger">Nulo</span>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <span t-field="o.subject_id.situacao_cadastral" />
+                                                        </t>
+                                                    </p>
+                                                    <p><strong>Nome da Mae:</strong> <span t-field="o.subject_id.nome_mae" /></p>
+                                                    <p><strong>Estado Civil:</strong> <span t-field="o.subject_id.estado_civil" /></p>
+                                                    <p><strong>Sexo:</strong> <span t-field="o.subject_id.sexo" /></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <p><strong>Endereco:</strong> <span t-field="o.subject_id.full_address" /></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PF - Informacoes Profissionais e Renda -->
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-info text-white">
+                                            <strong>Informacoes Profissionais e Renda</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <p><strong>Profissao:</strong> <span t-field="o.subject_id.profissao" /></p>
+                                                    <p><strong>Empregador:</strong> <span t-field="o.subject_id.empregador" /></p>
+                                                    <p><strong>Data de Admissao:</strong> <span t-field="o.subject_id.data_admissao" /></p>
+                                                </div>
+                                                <div class="col-6">
+                                                    <p><strong>Renda Mensal Declarada:</strong> <span t-field="o.subject_id.renda_mensal" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                                    <p><strong>Faixa de Renda:</strong> <span t-field="o.renda_faixa" /></p>
+                                                    <p><strong>Renda Comprovada:</strong> <span t-field="o.renda_comprovada" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
 
                         <!-- Score and Risk Analysis -->
                         <div class="row mb-4">
@@ -308,8 +393,8 @@
                             </div>
                         </t>
 
-                        <!-- Partners (Shareholders) -->
-                        <t t-if="o.company_id.partner_ids">
+                        <!-- Partners (Shareholders) - Only for PJ -->
+                        <t t-if="o.subject_type == 'pj' and o.subject_id.partner_ids">
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <div class="card">
@@ -329,7 +414,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <t t-foreach="o.company_id.partner_ids" t-as="p">
+                                                    <t t-foreach="o.subject_id.partner_ids" t-as="p">
                                                         <tr>
                                                             <td t-field="p.name" />
                                                             <td t-field="p.document_formatted" />
@@ -351,6 +436,90 @@
                                                                 </t>
                                                             </td>
                                                             <td t-field="p.total_restrictions" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- PJ - Faturamento -->
+                        <t t-if="o.subject_type == 'pj'">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header bg-success text-white">
+                                            <strong>Informacoes de Faturamento</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <p><strong>Faturamento Declarado:</strong> <span t-field="o.faturamento_declarado" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <p><strong>Faturamento Presumido:</strong> <span t-field="o.faturamento_presumido" t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <p><strong>Porte da Empresa:</strong> <span t-field="o.faturamento_porte" /></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Commitments -->
+                        <t t-if="o.commitment_ids">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong>Compromissos Financeiros</strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col-4">
+                                                    <strong>Total a Vencer:</strong> <span t-field="o.total_compromissos_vencer" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                </div>
+                                                <div class="col-4">
+                                                    <strong>Total Vencido:</strong> <span t-field="o.total_compromissos_vencidos" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                </div>
+                                                <div class="col-4">
+                                                    <strong>Qtd. Credores:</strong> <span t-field="o.qtd_credores" />
+                                                </div>
+                                            </div>
+                                            <table class="table table-sm table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipo</th>
+                                                        <th>Instituicao</th>
+                                                        <th>Valor</th>
+                                                        <th>Vencimento</th>
+                                                        <th>Situacao</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="o.commitment_ids" t-as="c">
+                                                        <tr>
+                                                            <td t-field="c.type" />
+                                                            <td t-field="c.institution" />
+                                                            <td t-field="c.value" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+                                                            <td t-field="c.due_date" />
+                                                            <td>
+                                                                <t t-if="c.state == 'pending'">
+                                                                    <span class="badge bg-info">A Vencer</span>
+                                                                </t>
+                                                                <t t-elif="c.state == 'overdue'">
+                                                                    <span class="badge bg-danger">Vencido</span>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <span class="badge bg-success">Pago</span>
+                                                                </t>
+                                                            </td>
                                                         </tr>
                                                     </t>
                                                 </tbody>

@@ -20,29 +20,41 @@
         action="credit_analysis_action"
         sequence="10" />
 
-    <menuitem id="menu_credit_company_list"
-        name="Empresas"
-        parent="menu_credit_analysis"
-        action="credit_company_action"
-        sequence="20" />
-
     <!-- Cadastros Menu -->
     <menuitem id="menu_credit_master"
         name="Cadastros"
         parent="menu_credit_root"
         sequence="20" />
 
+    <menuitem id="menu_credit_subject_list"
+        name="Todos os Cadastros"
+        parent="menu_credit_master"
+        action="credit_subject_action"
+        sequence="5" />
+
+    <menuitem id="menu_credit_subject_pf"
+        name="Pessoas Fisicas (CPF)"
+        parent="menu_credit_master"
+        action="credit_subject_pf_action"
+        sequence="10" />
+
+    <menuitem id="menu_credit_subject_pj"
+        name="Pessoas Juridicas (CNPJ)"
+        parent="menu_credit_master"
+        action="credit_subject_pj_action"
+        sequence="20" />
+
     <menuitem id="menu_credit_partner_list"
         name="Socios"
         parent="menu_credit_master"
         action="credit_partner_action"
-        sequence="10" />
+        sequence="30" />
 
     <menuitem id="menu_credit_restriction_list"
         name="Restricoes"
         parent="menu_credit_master"
         action="credit_restriction_action"
-        sequence="20" />
+        sequence="40" />
 
     <!-- Configuration Menu -->
     <menuitem id="menu_credit_config"

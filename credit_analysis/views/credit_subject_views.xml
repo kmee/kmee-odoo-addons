@@ -2,30 +2,33 @@
 <odoo>
 
     <!-- Tree View -->
-    <record id="credit_company_view_tree" model="ir.ui.view">
-        <field name="name">credit.company.tree</field>
-        <field name="model">credit.company</field>
+    <record id="credit_subject_view_tree" model="ir.ui.view">
+        <field name="name">credit.subject.tree</field>
+        <field name="model">credit.subject</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="cnpj" />
-                <field name="razao_social" />
-                <field name="nome_fantasia" />
-                <field name="situacao_cadastral"
-                    decoration-success="situacao_cadastral == 'ativo'"
-                    decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo')"
-                    decoration-warning="situacao_cadastral == 'suspenso'"
-                    widget="badge" />
+                <field name="subject_type" widget="badge"
+                    decoration-info="subject_type == 'pj'"
+                    decoration-success="subject_type == 'pf'" />
+                <field name="document" />
+                <field name="name" />
+                <field name="nome_fantasia" optional="show" />
+                <field name="situacao_cadastral" widget="badge"
+                    decoration-success="situacao_cadastral in ('ativo', 'regular')"
+                    decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo', 'cancelado')"
+                    decoration-warning="situacao_cadastral in ('suspenso', 'pendente')" />
                 <field name="state_id" optional="show" />
-                <field name="tempo_mercado" optional="show" />
+                <field name="tempo_atividade" optional="show" />
+                <field name="idade" optional="hide" />
                 <field name="analysis_count" string="Consultas" />
             </tree>
         </field>
     </record>
 
     <!-- Form View -->
-    <record id="credit_company_view_form" model="ir.ui.view">
-        <field name="name">credit.company.form</field>
-        <field name="model">credit.company</field>
+    <record id="credit_subject_view_form" model="ir.ui.view">
+        <field name="name">credit.subject.form</field>
+        <field name="model">credit.subject</field>
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -49,31 +52,62 @@
                         bg_color="bg-danger"
                         attrs="{'invisible': [('active', '=', True)]}" />
                     <div class="oe_title">
-                        <label for="razao_social" />
+                        <label for="name" />
                         <h1>
-                            <field name="razao_social" placeholder="Razao Social" />
+                            <field name="name" placeholder="Nome/Razao Social" />
                         </h1>
-                        <h2>
+                        <h2 attrs="{'invisible': [('is_pf', '=', True)]}">
                             <field name="nome_fantasia" placeholder="Nome Fantasia" />
                         </h2>
                     </div>
                     <group>
                         <group>
-                            <field name="cnpj" />
-                            <field name="cnpj_formatted" invisible="1" />
+                            <field name="subject_type" widget="radio" options="{'horizontal': true}" />
+                            <field name="document" />
+                            <field name="document_formatted" invisible="1" />
                             <field name="partner_id" />
                         </group>
                         <group>
                             <field name="situacao_cadastral" widget="badge"
-                                decoration-success="situacao_cadastral == 'ativo'"
-                                decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo')"
-                                decoration-warning="situacao_cadastral == 'suspenso'" />
+                                decoration-success="situacao_cadastral in ('ativo', 'regular')"
+                                decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo', 'cancelado')"
+                                decoration-warning="situacao_cadastral in ('suspenso', 'pendente')" />
                             <field name="data_situacao_cadastral" />
-                            <field name="tempo_mercado" />
+                            <field name="tempo_atividade" attrs="{'invisible': [('is_pf', '=', True)]}" />
+                            <field name="idade" attrs="{'invisible': [('is_pj', '=', True)]}" />
                         </group>
                     </group>
                     <notebook>
-                        <page string="Dados Cadastrais" name="cadastral">
+                        <!-- PF - Dados Pessoais -->
+                        <page string="Dados Pessoais" name="personal" attrs="{'invisible': [('is_pf', '=', False)]}">
+                            <group>
+                                <group string="Informacoes Pessoais">
+                                    <field name="data_nascimento" />
+                                    <field name="sexo" />
+                                    <field name="estado_civil" />
+                                    <field name="nome_mae" />
+                                    <field name="nome_pai" />
+                                </group>
+                                <group string="Documentos">
+                                    <field name="rg" />
+                                    <field name="rg_orgao_emissor" />
+                                    <field name="rg_uf_id" />
+                                </group>
+                            </group>
+                            <group string="Informacoes Profissionais">
+                                <group>
+                                    <field name="profissao" />
+                                    <field name="empregador" />
+                                    <field name="data_admissao" />
+                                </group>
+                                <group>
+                                    <field name="renda_mensal" />
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- PJ - Dados Cadastrais -->
+                        <page string="Dados Cadastrais" name="cadastral" attrs="{'invisible': [('is_pj', '=', False)]}">
                             <group>
                                 <group string="Informacoes Gerais">
                                     <field name="natureza_juridica_id" />
@@ -96,6 +130,8 @@
                                 <field name="cnae_secundario_ids" widget="many2many_tags" />
                             </group>
                         </page>
+
+                        <!-- Endereco -->
                         <page string="Endereco" name="address">
                             <group>
                                 <group>
@@ -115,11 +151,20 @@
                             <group>
                                 <field name="full_address" />
                             </group>
-                            <group string="Filiais" attrs="{'invisible': [('qtd_filiais', '=', 0)]}">
+                            <group string="Contato">
+                                <group>
+                                    <field name="phone" />
+                                    <field name="mobile" />
+                                </group>
+                                <group>
+                                    <field name="email" widget="email" />
+                                </group>
+                            </group>
+                            <group string="Filiais" attrs="{'invisible': ['|', ('is_pf', '=', True), ('qtd_filiais', '=', 0)]}">
                                 <field name="qtd_filiais" />
                                 <field name="branch_ids" nolabel="1" colspan="2">
                                     <tree editable="bottom">
-                                        <field name="cnpj" />
+                                        <field name="document" />
                                         <field name="name" />
                                         <field name="city" />
                                         <field name="state_id" />
@@ -127,7 +172,9 @@
                                 </field>
                             </group>
                         </page>
-                        <page string="Socios" name="partners">
+
+                        <!-- Socios - apenas para PJ -->
+                        <page string="Socios" name="partners" attrs="{'invisible': [('is_pf', '=', True)]}">
                             <field name="partner_ids">
                                 <tree editable="bottom">
                                     <field name="name" />
@@ -147,6 +194,8 @@
                     </notebook>
                     <field name="active" invisible="1" />
                     <field name="currency_id" invisible="1" />
+                    <field name="is_pf" invisible="1" />
+                    <field name="is_pj" invisible="1" />
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" />
@@ -158,28 +207,35 @@
     </record>
 
     <!-- Search View -->
-    <record id="credit_company_view_search" model="ir.ui.view">
-        <field name="name">credit.company.search</field>
-        <field name="model">credit.company</field>
+    <record id="credit_subject_view_search" model="ir.ui.view">
+        <field name="name">credit.subject.search</field>
+        <field name="model">credit.subject</field>
         <field name="arch" type="xml">
             <search>
-                <field name="cnpj" filter_domain="['|', ('cnpj', 'ilike', self), ('cnpj', 'ilike', self.replace('.', '').replace('/', '').replace('-', ''))]" />
-                <field name="razao_social" />
+                <field name="document" filter_domain="['|', ('document', 'ilike', self), ('document', 'ilike', self.replace('.', '').replace('/', '').replace('-', ''))]" />
+                <field name="name" />
                 <field name="nome_fantasia" />
                 <field name="partner_id" />
                 <separator />
-                <filter name="filter_active" string="Ativas"
-                    domain="[('situacao_cadastral', '=', 'ativo')]" />
-                <filter name="filter_inactive" string="Baixadas/Inativas"
-                    domain="[('situacao_cadastral', 'in', ('baixado', 'inapto', 'nulo'))]" />
+                <filter name="filter_pf" string="Pessoa Fisica"
+                    domain="[('subject_type', '=', 'pf')]" />
+                <filter name="filter_pj" string="Pessoa Juridica"
+                    domain="[('subject_type', '=', 'pj')]" />
+                <separator />
+                <filter name="filter_active" string="Ativos"
+                    domain="[('situacao_cadastral', 'in', ('ativo', 'regular'))]" />
+                <filter name="filter_inactive" string="Inativos"
+                    domain="[('situacao_cadastral', 'in', ('baixado', 'inapto', 'nulo', 'cancelado'))]" />
                 <filter name="filter_with_analysis" string="Com Consultas"
                     domain="[('analysis_count', '>', 0)]" />
                 <filter name="filter_no_analysis" string="Sem Consultas"
                     domain="[('analysis_count', '=', 0)]" />
                 <separator />
-                <filter name="filter_archived" string="Arquivadas"
+                <filter name="filter_archived" string="Arquivados"
                     domain="[('active', '=', False)]" />
                 <group expand="0" string="Agrupar por">
+                    <filter name="group_type" string="Tipo de Pessoa"
+                        context="{'group_by': 'subject_type'}" />
                     <filter name="group_situacao" string="Situacao Cadastral"
                         context="{'group_by': 'situacao_cadastral'}" />
                     <filter name="group_state" string="Estado"
@@ -191,19 +247,49 @@
         </field>
     </record>
 
-    <!-- Action -->
-    <record id="credit_company_action" model="ir.actions.act_window">
-        <field name="name">Empresas</field>
-        <field name="res_model">credit.company</field>
+    <!-- Action for all subjects -->
+    <record id="credit_subject_action" model="ir.actions.act_window">
+        <field name="name">Cadastros</field>
+        <field name="res_model">credit.subject</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="credit_company_view_search" />
+        <field name="search_view_id" ref="credit_subject_view_search" />
         <field name="context">{'search_default_filter_active': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Cadastre uma nova empresa para consulta de credito
+                Cadastre uma nova pessoa ou empresa para consulta de credito
             </p>
             <p>
-                Empresas cadastradas podem ser consultadas para analise de risco de credito.
+                Cadastros podem ser consultados para analise de risco de credito.
+            </p>
+        </field>
+    </record>
+
+    <!-- Action for PF only -->
+    <record id="credit_subject_pf_action" model="ir.actions.act_window">
+        <field name="name">Pessoas Fisicas</field>
+        <field name="res_model">credit.subject</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="credit_subject_view_search" />
+        <field name="domain">[('subject_type', '=', 'pf')]</field>
+        <field name="context">{'default_subject_type': 'pf', 'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cadastre uma nova pessoa fisica para consulta de credito
+            </p>
+        </field>
+    </record>
+
+    <!-- Action for PJ only -->
+    <record id="credit_subject_pj_action" model="ir.actions.act_window">
+        <field name="name">Pessoas Juridicas</field>
+        <field name="res_model">credit.subject</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="credit_subject_view_search" />
+        <field name="domain">[('subject_type', '=', 'pj')]</field>
+        <field name="context">{'default_subject_type': 'pj', 'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Cadastre uma nova empresa para consulta de credito
             </p>
         </field>
     </record>

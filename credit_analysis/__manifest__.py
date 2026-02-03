@@ -24,7 +24,7 @@
         "data/credit_natureza_juridica_data.xml",
         "data/credit_config_data.xml",
         # Views
-        "views/credit_company_views.xml",
+        "views/credit_subject_views.xml",
         "views/credit_analysis_views.xml",
         "views/credit_restriction_views.xml",
         "views/credit_partner_views.xml",

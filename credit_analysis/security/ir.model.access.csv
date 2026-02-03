@@ -2,11 +2,11 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_credit_analysis_user,credit.analysis.user,model_credit_analysis,group_credit_user,1,1,1,0
 access_credit_analysis_analyst,credit.analysis.analyst,model_credit_analysis,group_credit_analyst,1,1,1,1
 access_credit_analysis_manager,credit.analysis.manager,model_credit_analysis,group_credit_manager,1,1,1,1
-access_credit_company_user,credit.company.user,model_credit_company,group_credit_user,1,1,1,0
-access_credit_company_analyst,credit.company.analyst,model_credit_company,group_credit_analyst,1,1,1,0
-access_credit_company_manager,credit.company.manager,model_credit_company,group_credit_manager,1,1,1,1
-access_credit_company_branch_user,credit.company.branch.user,model_credit_company_branch,group_credit_user,1,1,1,0
-access_credit_company_branch_manager,credit.company.branch.manager,model_credit_company_branch,group_credit_manager,1,1,1,1
+access_credit_subject_user,credit.subject.user,model_credit_subject,group_credit_user,1,1,1,0
+access_credit_subject_analyst,credit.subject.analyst,model_credit_subject,group_credit_analyst,1,1,1,0
+access_credit_subject_manager,credit.subject.manager,model_credit_subject,group_credit_manager,1,1,1,1
+access_credit_subject_branch_user,credit.subject.branch.user,model_credit_subject_branch,group_credit_user,1,1,1,0
+access_credit_subject_branch_manager,credit.subject.branch.manager,model_credit_subject_branch,group_credit_manager,1,1,1,1
 access_credit_restriction_user,credit.restriction.user,model_credit_restriction,group_credit_user,1,1,1,0
 access_credit_restriction_analyst,credit.restriction.analyst,model_credit_restriction,group_credit_analyst,1,1,1,1
 access_credit_restriction_manager,credit.restriction.manager,model_credit_restriction,group_credit_manager,1,1,1,1

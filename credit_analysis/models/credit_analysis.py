@@ -20,20 +20,25 @@ class CreditAnalysis(models.Model):
         copy=False,
         default=lambda self: _("Novo"),
     )
-    company_id = fields.Many2one(
-        comodel_name="credit.company",
-        string="Empresa",
+    subject_id = fields.Many2one(
+        comodel_name="credit.subject",
+        string="Sujeito",
         required=True,
         tracking=True,
     )
-    cnpj = fields.Char(
-        string="CNPJ",
-        related="company_id.cnpj",
+    subject_type = fields.Selection(
+        string="Tipo de Pessoa",
+        related="subject_id.subject_type",
         store=True,
     )
-    cnpj_input = fields.Char(
-        string="Consultar CNPJ",
-        help="Digite o CNPJ para iniciar uma consulta rapida",
+    document = fields.Char(
+        string="Documento",
+        related="subject_id.document",
+        store=True,
+    )
+    document_input = fields.Char(
+        string="Consultar CPF/CNPJ",
+        help="Digite o CPF ou CNPJ para iniciar uma consulta rapida",
     )
     date = fields.Datetime(
         string="Data da Consulta",
@@ -124,7 +129,7 @@ class CreditAnalysis(models.Model):
         store=True,
     )
 
-    # Credit Limit (F04)
+    # Credit Limit (F04) - For PJ
     faturamento_faixa = fields.Selection(
         selection=[
             ("mei", "Ate R$ 81.000"),
@@ -137,7 +142,7 @@ class CreditAnalysis(models.Model):
         string="Faixa de Faturamento",
     )
     faturamento_estimado = fields.Monetary(
-        string="Faturamento Estimado",
+        string="Faturamento/Renda Estimada",
         currency_field="currency_id",
     )
     faturamento_medio = fields.Monetary(
@@ -145,6 +150,29 @@ class CreditAnalysis(models.Model):
         compute="_compute_faturamento_medio",
         currency_field="currency_id",
     )
+
+    # Credit Limit (F04) - For PF
+    renda_faixa = fields.Selection(
+        selection=[
+            ("ate_1sm", "Ate 1 Salario Minimo"),
+            ("1_3sm", "1 a 3 Salarios Minimos"),
+            ("3_5sm", "3 a 5 Salarios Minimos"),
+            ("5_10sm", "5 a 10 Salarios Minimos"),
+            ("10_20sm", "10 a 20 Salarios Minimos"),
+            ("acima_20sm", "Acima de 20 Salarios Minimos"),
+        ],
+        string="Faixa de Renda",
+    )
+    renda_comprovada = fields.Monetary(
+        string="Renda Comprovada",
+        currency_field="currency_id",
+    )
+    renda_media = fields.Monetary(
+        string="Renda Media da Faixa",
+        compute="_compute_renda_media",
+        currency_field="currency_id",
+    )
+
     limite_credito_sugerido = fields.Monetary(
         string="Limite de Credito Sugerido",
         compute="_compute_limite_credito",
@@ -298,28 +326,32 @@ class CreditAnalysis(models.Model):
         currency_field="currency_id",
     )
 
-    # Company related fields for display
-    razao_social = fields.Char(
-        string="Razao Social",
-        related="company_id.razao_social",
+    # Subject related fields for display
+    subject_name = fields.Char(
+        string="Nome/Razao Social",
+        related="subject_id.name",
     )
     nome_fantasia = fields.Char(
         string="Nome Fantasia",
-        related="company_id.nome_fantasia",
+        related="subject_id.nome_fantasia",
     )
     situacao_cadastral = fields.Selection(
         string="Situacao Cadastral",
-        related="company_id.situacao_cadastral",
+        related="subject_id.situacao_cadastral",
     )
-    tempo_mercado = fields.Integer(
-        string="Tempo de Mercado",
-        related="company_id.tempo_mercado",
+    tempo_atividade = fields.Integer(
+        string="Tempo de Atividade",
+        related="subject_id.tempo_atividade",
+    )
+    idade = fields.Integer(
+        string="Idade",
+        related="subject_id.idade",
     )
 
-    # Partners from company
+    # Partners from subject (for PJ)
     partner_ids = fields.One2many(
         string="Socios",
-        related="company_id.partner_ids",
+        related="subject_id.partner_ids",
     )
 
     @api.model_create_multi
@@ -406,16 +438,47 @@ class CreditAnalysis(models.Model):
                 record.faturamento_faixa, 0
             )
 
-    @api.depends("score", "faturamento_estimado", "faturamento_medio")
+    @api.depends("renda_faixa")
+    def _compute_renda_media(self):
+        # Base: salario minimo 2026 = R$ 1.518,00 (estimated)
+        sm = 1518.00
+        faixa_valores = {
+            "ate_1sm": sm * 0.75,
+            "1_3sm": sm * 2,
+            "3_5sm": sm * 4,
+            "5_10sm": sm * 7.5,
+            "10_20sm": sm * 15,
+            "acima_20sm": sm * 30,
+        }
+        for record in self:
+            record.renda_media = faixa_valores.get(record.renda_faixa, 0)
+
+    @api.depends(
+        "score",
+        "subject_type",
+        "faturamento_estimado",
+        "faturamento_medio",
+        "renda_comprovada",
+        "renda_media",
+    )
     def _compute_limite_credito(self):
         for record in self:
-            base = record.faturamento_estimado or record.faturamento_medio
-            if base and record.score:
-                # Factor based on score: 0.01 to 0.10
-                factor = record.score / 10000.0
-                record.limite_credito_sugerido = base * factor
+            if record.subject_type == "pf":
+                base = record.renda_comprovada or record.renda_media
+                # For PF: limit up to 3x monthly income based on score
+                if base and record.score:
+                    factor = (record.score / 1000.0) * 3
+                    record.limite_credito_sugerido = base * factor
+                else:
+                    record.limite_credito_sugerido = 0
             else:
-                record.limite_credito_sugerido = 0
+                base = record.faturamento_estimado or record.faturamento_medio
+                if base and record.score:
+                    # Factor based on score: 0.01 to 0.10
+                    factor = record.score / 10000.0
+                    record.limite_credito_sugerido = base * factor
+                else:
+                    record.limite_credito_sugerido = 0
 
     @api.depends("limite_credito_sugerido", "limite_credito_manual")
     def _compute_limite_credito_final(self):
@@ -503,33 +566,59 @@ class CreditAnalysis(models.Model):
                     _("O score deve estar entre 0 e 1000.")
                 )
 
-    @api.onchange("cnpj_input")
-    def _onchange_cnpj_input(self):
-        if self.cnpj_input:
-            cnpj_clean = re.sub(r"\D", "", self.cnpj_input)
-            if len(cnpj_clean) == 14:
-                # Format CNPJ
-                cnpj_formatted = (
-                    f"{cnpj_clean[:2]}.{cnpj_clean[2:5]}."
-                    f"{cnpj_clean[5:8]}/{cnpj_clean[8:12]}-{cnpj_clean[12:]}"
+    @api.onchange("document_input")
+    def _onchange_document_input(self):
+        if self.document_input:
+            doc_clean = re.sub(r"\D", "", self.document_input)
+            subject = False
+            subject_type = False
+
+            if len(doc_clean) == 11:
+                # CPF - Pessoa Fisica
+                subject_type = "pf"
+                doc_formatted = (
+                    f"{doc_clean[:3]}.{doc_clean[3:6]}."
+                    f"{doc_clean[6:9]}-{doc_clean[9:]}"
                 )
-                # Search for existing company
-                company = self.env["credit.company"].search(
-                    ["|", ("cnpj", "=", cnpj_clean), ("cnpj", "=", cnpj_formatted)],
-                    limit=1,
+            elif len(doc_clean) == 14:
+                # CNPJ - Pessoa Juridica
+                subject_type = "pj"
+                doc_formatted = (
+                    f"{doc_clean[:2]}.{doc_clean[2:5]}."
+                    f"{doc_clean[5:8]}/{doc_clean[8:12]}-{doc_clean[12:]}"
                 )
-                if company:
-                    self.company_id = company
+            else:
+                return
+
+            # Search for existing subject
+            subject = self.env["credit.subject"].search(
+                [
+                    "|",
+                    ("document", "=", doc_clean),
+                    ("document", "=", doc_formatted),
+                ],
+                limit=1,
+            )
+
+            if subject:
+                self.subject_id = subject
+            else:
+                # Create new subject
+                if subject_type == "pf":
+                    name = _("Nova Pessoa - %s") % doc_formatted
                 else:
-                    # Create new company
-                    new_company = self.env["credit.company"].create(
-                        {
-                            "cnpj": cnpj_formatted,
-                            "razao_social": _("Nova Empresa - %s") % cnpj_formatted,
-                        }
-                    )
-                    self.company_id = new_company
-                self.cnpj_input = False
+                    name = _("Nova Empresa - %s") % doc_formatted
+
+                new_subject = self.env["credit.subject"].create(
+                    {
+                        "document": doc_formatted,
+                        "name": name,
+                        "subject_type": subject_type,
+                    }
+                )
+                self.subject_id = new_subject
+
+            self.document_input = False
 
     def action_confirm(self):
         """Confirm the credit analysis."""

@@ -9,12 +9,12 @@ from odoo.exceptions import ValidationError
 
 class CreditPartner(models.Model):
     _name = "credit.partner"
-    _description = "Socio da Empresa"
+    _description = "Socio/Participante"
     _order = "participation desc, name"
 
-    company_id = fields.Many2one(
-        comodel_name="credit.company",
-        string="Empresa",
+    subject_id = fields.Many2one(
+        comodel_name="credit.subject",
+        string="Empresa/Pessoa",
         required=True,
         ondelete="cascade",
     )

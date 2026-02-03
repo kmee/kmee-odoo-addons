@@ -9,8 +9,11 @@
             <tree decoration-muted="state == 'cancelled'">
                 <field name="name" />
                 <field name="date" />
-                <field name="company_id" />
-                <field name="cnpj" />
+                <field name="subject_type" widget="badge"
+                    decoration-info="subject_type == 'pj'"
+                    decoration-success="subject_type == 'pf'" />
+                <field name="subject_id" />
+                <field name="document" />
                 <field name="score" />
                 <field name="risk_level" widget="badge"
                     decoration-danger="risk_level in ('very_high', 'high')"
@@ -37,7 +40,8 @@
         <field name="arch" type="xml">
             <kanban default_group_by="state" class="o_kanban_mobile">
                 <field name="name" />
-                <field name="company_id" />
+                <field name="subject_id" />
+                <field name="subject_type" />
                 <field name="score" />
                 <field name="risk_level" />
                 <field name="recommendation_final" />
@@ -57,7 +61,7 @@
                                         options="{'classes': {'approved': 'success', 'caution': 'warning', 'rejected': 'danger'}}" />
                                 </div>
                                 <div class="o_kanban_record_body">
-                                    <field name="company_id" />
+                                    <field name="subject_id" />
                                     <div class="mt-2">
                                         <strong>Score: </strong>
                                         <field name="score" />
@@ -122,19 +126,22 @@
                         </h1>
                     </div>
 
-                    <!-- Quick CNPJ input -->
-                    <group attrs="{'invisible': [('company_id', '!=', False)]}">
-                        <field name="cnpj_input" placeholder="Digite o CNPJ para consulta rapida..." />
+                    <!-- Quick CPF/CNPJ input -->
+                    <group attrs="{'invisible': [('subject_id', '!=', False)]}">
+                        <field name="document_input" placeholder="Digite o CPF ou CNPJ para consulta rapida..." />
                     </group>
 
                     <!-- Main info -->
                     <group>
                         <group>
-                            <field name="company_id"
+                            <field name="subject_id"
                                 attrs="{'readonly': [('state', '!=', 'draft')]}" />
-                            <field name="cnpj" />
-                            <field name="razao_social" />
-                            <field name="nome_fantasia" />
+                            <field name="subject_type" widget="badge"
+                                decoration-info="subject_type == 'pj'"
+                                decoration-success="subject_type == 'pf'" />
+                            <field name="document" />
+                            <field name="subject_name" />
+                            <field name="nome_fantasia" attrs="{'invisible': [('subject_type', '=', 'pf')]}" />
                         </group>
                         <group>
                             <field name="date"
@@ -144,10 +151,11 @@
                             <field name="user_id"
                                 attrs="{'readonly': [('state', '!=', 'draft')]}" />
                             <field name="situacao_cadastral" widget="badge"
-                                decoration-success="situacao_cadastral == 'ativo'"
-                                decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo')"
-                                decoration-warning="situacao_cadastral == 'suspenso'" />
-                            <field name="tempo_mercado" />
+                                decoration-success="situacao_cadastral in ('ativo', 'regular')"
+                                decoration-danger="situacao_cadastral in ('baixado', 'inapto', 'nulo', 'cancelado')"
+                                decoration-warning="situacao_cadastral in ('suspenso', 'pendente')" />
+                            <field name="tempo_atividade" attrs="{'invisible': [('subject_type', '=', 'pf')]}" />
+                            <field name="idade" attrs="{'invisible': [('subject_type', '=', 'pj')]}" />
                         </group>
                     </group>
 
@@ -230,13 +238,30 @@
                                     <field name="recommendation_final" />
                                 </group>
                             </group>
-                            <group>
+                            <!-- PJ - Faturamento -->
+                            <group attrs="{'invisible': [('subject_type', '=', 'pf')]}">
                                 <group string="Faturamento">
                                     <field name="faturamento_faixa"
                                         attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                     <field name="faturamento_estimado"
                                         attrs="{'readonly': [('state', '!=', 'draft')]}" />
                                     <field name="faturamento_medio" />
+                                </group>
+                                <group string="Limite de Credito">
+                                    <field name="limite_credito_sugerido" />
+                                    <field name="limite_credito_manual"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="limite_credito_final" />
+                                </group>
+                            </group>
+                            <!-- PF - Renda -->
+                            <group attrs="{'invisible': [('subject_type', '=', 'pj')]}">
+                                <group string="Renda">
+                                    <field name="renda_faixa"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="renda_comprovada"
+                                        attrs="{'readonly': [('state', '!=', 'draft')]}" />
+                                    <field name="renda_media" />
                                 </group>
                                 <group string="Limite de Credito">
                                     <field name="limite_credito_sugerido" />
@@ -345,7 +370,7 @@
                             </field>
                         </page>
 
-                        <page string="Socios" name="partners">
+                        <page string="Socios" name="partners" attrs="{'invisible': [('subject_type', '=', 'pf')]}">
                             <field name="partner_ids" readonly="1">
                                 <tree>
                                     <field name="name" />
@@ -387,9 +412,14 @@
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
-                <field name="cnpj" filter_domain="['|', ('cnpj', 'ilike', self), ('cnpj', 'ilike', self.replace('.', '').replace('/', '').replace('-', ''))]" />
-                <field name="company_id" />
+                <field name="document" filter_domain="['|', ('document', 'ilike', self), ('document', 'ilike', self.replace('.', '').replace('/', '').replace('-', ''))]" />
+                <field name="subject_id" />
                 <field name="user_id" />
+                <separator />
+                <filter name="filter_pf" string="Pessoa Fisica"
+                    domain="[('subject_type', '=', 'pf')]" />
+                <filter name="filter_pj" string="Pessoa Juridica"
+                    domain="[('subject_type', '=', 'pj')]" />
                 <separator />
                 <filter name="filter_draft" string="Rascunho"
                     domain="[('state', '=', 'draft')]" />
@@ -419,6 +449,8 @@
                 <filter name="filter_this_month" string="Este Mes"
                     domain="[('date', '>=', datetime.datetime.combine(context_today().replace(day=1), datetime.time(0,0,0)))]" />
                 <group expand="0" string="Agrupar por">
+                    <filter name="group_type" string="Tipo de Pessoa"
+                        context="{'group_by': 'subject_type'}" />
                     <filter name="group_state" string="Status"
                         context="{'group_by': 'state'}" />
                     <filter name="group_recommendation" string="Recomendacao"
@@ -427,8 +459,8 @@
                         context="{'group_by': 'risk_level'}" />
                     <filter name="group_user" string="Analista"
                         context="{'group_by': 'user_id'}" />
-                    <filter name="group_company" string="Empresa"
-                        context="{'group_by': 'company_id'}" />
+                    <filter name="group_subject" string="Sujeito"
+                        context="{'group_by': 'subject_id'}" />
                     <filter name="group_date" string="Data"
                         context="{'group_by': 'date:month'}" />
                 </group>
@@ -473,7 +505,7 @@
                 Crie uma nova consulta de credito
             </p>
             <p>
-                Analise o risco de credito de empresas com base em score,
+                Analise o risco de credito de pessoas e empresas com base em score,
                 restricoes, comportamento de pagamento e mais.
             </p>
         </field>
