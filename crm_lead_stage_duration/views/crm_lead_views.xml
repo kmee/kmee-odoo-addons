@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_form_view_stage_duration" model="ir.ui.view">
+        <field name="name">crm.lead.form.stage.duration</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Stage Durations" name="stage_durations">
+                    <group>
+                        <field name="current_stage_total_duration" readonly="1" />
+                    </group>
+                    <field name="stage_duration_ids" readonly="1" nolabel="1">
+                        <tree create="false" delete="false" edit="false">
+                            <field name="stage_id" />
+                            <field name="team_id" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="duration_display" />
+                            <field name="duration_seconds" />
+                            <field name="running" />
+                            <field name="user_id" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
