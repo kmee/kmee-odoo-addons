@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_crm_lead_stage_duration_tree" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.tree</field>
+        <field name="model">crm.lead.stage.duration</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" edit="false">
+                <field name="lead_id" />
+                <field name="stage_id" />
+                <field name="team_id" />
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="duration_display" />
+                <field name="duration_seconds" />
+                <field name="running" />
+                <field name="user_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_stage_duration_search" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.search</field>
+        <field name="model">crm.lead.stage.duration</field>
+        <field name="arch" type="xml">
+            <search string="CRM Stage Durations">
+                <field name="lead_id" />
+                <field name="stage_id" />
+                <field name="team_id" />
+                <field name="user_id" />
+                <filter
+                    name="filter_running"
+                    string="Running"
+                    domain="[('running', '=', True)]"
+                />
+                <filter
+                    name="filter_closed"
+                    string="Closed"
+                    domain="[('running', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_team"
+                        string="Sales Team"
+                        domain="[]"
+                        context="{'group_by': 'team_id'}"
+                    />
+                    <filter
+                        name="group_stage"
+                        string="Stage"
+                        domain="[]"
+                        context="{'group_by': 'stage_id'}"
+                    />
+                    <filter
+                        name="group_user"
+                        string="Changed By"
+                        domain="[]"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_crm_lead_stage_duration" model="ir.actions.act_window">
+        <field name="name">Stage Duration Records</field>
+        <field name="res_model">crm.lead.stage.duration</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('lead_id.type', '=', 'opportunity')]</field>
+        <field name="search_view_id" ref="view_crm_lead_stage_duration_search" />
+    </record>
+
+    <record id="view_crm_lead_stage_duration_report_tree" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.report.tree</field>
+        <field name="model">crm.lead.stage.duration.report</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false" delete="false">
+                <field name="team_id" />
+                <field name="stage_id" />
+                <field name="line_count" />
+                <field name="lead_count" />
+                <field name="avg_duration_display" />
+                <field name="total_duration_seconds" />
+                <field name="avg_duration_seconds" />
+                <field name="min_duration_seconds" />
+                <field name="max_duration_seconds" />
+                <field name="closed_line_count" />
+                <field name="running_line_count" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_stage_duration_report_pivot" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.report.pivot</field>
+        <field name="model">crm.lead.stage.duration.report</field>
+        <field name="arch" type="xml">
+            <pivot string="CRM Stage Duration Analysis">
+                <field name="team_id" type="row" />
+                <field name="stage_id" type="row" />
+                <field name="lead_count" type="measure" />
+                <field name="line_count" type="measure" />
+                <field name="avg_duration_seconds" type="measure" />
+                <field name="total_duration_seconds" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_stage_duration_report_graph" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.report.graph</field>
+        <field name="model">crm.lead.stage.duration.report</field>
+        <field name="arch" type="xml">
+            <graph string="CRM Stage Duration Analysis" type="bar">
+                <field name="team_id" />
+                <field name="stage_id" />
+                <field name="avg_duration_seconds" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_stage_duration_report_kanban" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.report.kanban</field>
+        <field name="model">crm.lead.stage.duration.report</field>
+        <field name="arch" type="xml">
+            <kanban
+                class="o_kanban_small_column"
+                create="false"
+                edit="false"
+                default_group_by="team_id"
+            >
+                <field name="team_id" />
+                <field name="stage_id" />
+                <field name="lead_count" />
+                <field name="line_count" />
+                <field name="avg_duration_display" />
+                <field name="running_line_count" />
+                <field name="closed_line_count" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div class="o_kanban_record_title">
+                                    <strong><field name="team_id" /></strong>
+                                </div>
+                                <div class="o_kanban_record_subtitle">
+                                    <field name="stage_id" />
+                                </div>
+                                <div class="mt8">
+                                    <div>
+                                        <strong>Average:</strong>
+                                        <field name="avg_duration_display" />
+                                    </div>
+                                    <div>
+                                        <strong>Opportunities:</strong>
+                                        <field name="lead_count" />
+                                    </div>
+                                    <div>
+                                        <strong>Transitions:</strong>
+                                        <field name="line_count" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_stage_duration_report_search" model="ir.ui.view">
+        <field name="name">crm.lead.stage.duration.report.search</field>
+        <field name="model">crm.lead.stage.duration.report</field>
+        <field name="arch" type="xml">
+            <search string="CRM Stage Duration Report">
+                <field name="team_id" />
+                <field name="stage_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_report_team"
+                        string="Sales Team"
+                        context="{'group_by': 'team_id'}"
+                    />
+                    <filter
+                        name="group_report_stage"
+                        string="Stage"
+                        context="{'group_by': 'stage_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_crm_lead_stage_duration_report" model="ir.actions.act_window">
+        <field name="name">Stage Duration Analysis</field>
+        <field name="res_model">crm.lead.stage.duration.report</field>
+        <field name="view_mode">graph,pivot,kanban,tree</field>
+        <field
+            name="search_view_id"
+            ref="view_crm_lead_stage_duration_report_search"
+        />
+        <field name="context">{'search_default_group_report_team': 1}</field>
+    </record>
+
+    <menuitem
+        id="menu_crm_lead_stage_duration_report"
+        name="Stage Duration Analysis"
+        parent="crm.crm_menu_report"
+        action="action_crm_lead_stage_duration_report"
+        sequence="45"
+    />
+
+    <menuitem
+        id="menu_crm_lead_stage_duration_records"
+        name="Stage Duration Records"
+        parent="crm.crm_menu_report"
+        action="action_crm_lead_stage_duration"
+        sequence="46"
+        groups="sales_team.group_sale_manager"
+    />
+</odoo>
