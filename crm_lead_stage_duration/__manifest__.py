@@ -3,7 +3,7 @@
     "version": "16.0.1.0.0",
     "summary": "Track time spent by opportunities in each CRM stage",
     "category": "Sales/CRM",
-    "author": "KMEE, Diego Paradeda",
+    "author": "KMEE",
     "website": "https://github.com/kmee/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": [
