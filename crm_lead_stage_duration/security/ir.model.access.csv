@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_crm_lead_stage_duration_user,crm.lead.stage.duration.user,model_crm_lead_stage_duration,base.group_user,1,0,0,0
+access_crm_lead_stage_duration_user,crm.lead.stage.duration.user,model_crm_lead_stage_duration,base.group_user,1,1,1,0
 access_crm_lead_stage_duration_manager,crm.lead.stage.duration.manager,model_crm_lead_stage_duration,sales_team.group_sale_manager,1,1,1,1
 access_crm_lead_stage_duration_report_user,crm.lead.stage.duration.report.user,model_crm_lead_stage_duration_report,base.group_user,1,0,0,0
