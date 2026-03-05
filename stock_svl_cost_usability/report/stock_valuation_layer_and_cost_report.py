@@ -39,7 +39,7 @@ class StockValuationLayerCostReport(models.Model):
     unit_cost = fields.Monetary(
         readonly=True,
         defatult=0.0,
-        group_operator="avg",
+        aggregator="avg",
         help="Unit Cost is calculated as a moving average.",
     )
     value = fields.Monetary("Total Value")
