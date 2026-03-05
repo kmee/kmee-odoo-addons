@@ -4,7 +4,7 @@
     "summary": "Track time spent by opportunities in each CRM stage",
     "category": "Sales/CRM",
     "author": "KMEE",
-    "website": "https://github.com/kmee/kmee-odoo-addons",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": [
         "crm",
