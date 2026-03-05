@@ -35,14 +35,14 @@ Usage
 
 To use this module, you need to:
 
-- Go to *CRM*.
+-  Go to *CRM*.
 
-- Create an opportunity.
+-  Create an opportunity.
 
-- In the form for this opportunity, create a quotation by clicking on
-  "NEW QUOTATION".
+-  In the form for this opportunity, create a quotation by clicking on
+   "NEW QUOTATION".
 
-- In the quote created, add a product and click the "confirm" button.
+-  In the quote created, add a product and click the "confirm" button.
 
 Now the opportunity has the status "Won".
 
@@ -67,16 +67,16 @@ Authors
 Contributors
 ------------
 
-- ``KMEE <https://kmee.com.br/>``\ \_:
+-  ``KMEE <https://kmee.com.br/>``\ \_:
 
-  - Tiago Amaral tiago.amaral@kmee.com.br
+   -  Tiago Amaral tiago.amaral@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------

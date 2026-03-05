@@ -25,10 +25,10 @@ Sale Order Period
 This module extends the sale order line functionality by adding period
 fields to calculate contract values based on periods. It allows you to:
 
-- Define period quantity and number of periods for contract lines
-- Calculate period amounts and total contract value
-- Track contract periods and average values
-- View contract period details in the sale order form
+-  Define period quantity and number of periods for contract lines
+-  Calculate period amounts and total contract value
+-  Track contract periods and average values
+-  View contract period details in the sale order form
 
 The total calculation is based on: Quantity \* (Unit Price - Discount)
 \* Period
@@ -62,14 +62,14 @@ Authors
 Contributors
 ------------
 
-- Luis Felipe Miléo mileo@kmee.com.br
+-  Luis Felipe Miléo mileo@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------

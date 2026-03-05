@@ -80,7 +80,9 @@ class SaleOrder(models.Model):
                 max_width = width - left_margin - right_margin
 
                 # Quebra de texto automática considerando a largura da página
-                wrapped_lines = simpleSplit(default_terms_text, body_font, body_size, max_width)
+                wrapped_lines = simpleSplit(
+                    default_terms_text, body_font, body_size, max_width
+                )
 
                 y = height - top_margin - 10 * mm
 

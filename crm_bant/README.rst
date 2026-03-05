@@ -79,7 +79,7 @@ Authors
 Contributors
 ------------
 
-- Tiago Amaral tiago.amaral@kmee.com.br
+-  Tiago Amaral tiago.amaral@kmee.com.br
 
 Maintainers
 -----------
