@@ -8,7 +8,7 @@
     "summary": "Grouped summary of stock moves by product and UoM on pickings",
     "category": "Inventory/Inventory",
     "author": "KMEE",
-    "website": "https://github.com/kmee/kmee-odoo-addons",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": [
         "stock",
