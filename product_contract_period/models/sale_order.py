@@ -124,7 +124,8 @@ class SaleOrder(models.Model):
                     annual_value = period_value * 12
                     details.append(
                         _(
-                            """%(product)s: Valor por período: %(period_value)s | Valor anual: %(annual_value)s
+                            """%(product)s: Valor por período: %(period_value)s |
+                             Valor anual: %(annual_value)s
                              (%(period_count)s períodos - %(rule_type)s)"""
                         )
                         % {
