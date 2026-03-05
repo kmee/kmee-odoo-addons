@@ -2,7 +2,7 @@
     <record id="mrp_workorder_view_form_tablet_persistent_timer" model="ir.ui.view">
         <field name="name">mrp.workorder.view.form.tablet.persistent.timer</field>
         <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp_workorder.mrp_workorder_view_form_tablet"/>
+        <field name="inherit_id" ref="mrp_workorder.mrp_workorder_view_form_tablet" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_back']" position="attributes">
                 <attribute name="invisible">1</attribute>

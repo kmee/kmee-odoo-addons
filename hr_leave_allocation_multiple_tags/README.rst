@@ -60,14 +60,14 @@ Authors
 Contributors
 ------------
 
-- Luis Felipe Mileo mileo@kmee.com.br (https://kmee.com.br)
+-  Luis Felipe Mileo mileo@kmee.com.br (https://kmee.com.br)
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- KMEE
+-  KMEE
 
 Maintainers
 -----------

@@ -15,10 +15,10 @@ class CrmStage(models.Model):
         string="Stage Responsible",
         default="default",
         ondelete={
-            'sdr_bdr': 'set default',
-            'hunter': 'set default', 
-            'closer': 'set default',
-            'farmer': 'set default',
-            'default': 'cascade'
-        }
+            "sdr_bdr": "set default",
+            "hunter": "set default",
+            "closer": "set default",
+            "farmer": "set default",
+            "default": "cascade",
+        },
     )
