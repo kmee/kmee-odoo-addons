@@ -192,10 +192,7 @@
         <field name="name">Stage Duration Analysis</field>
         <field name="res_model">crm.lead.stage.duration.report</field>
         <field name="view_mode">graph,pivot,kanban,tree</field>
-        <field
-            name="search_view_id"
-            ref="view_crm_lead_stage_duration_report_search"
-        />
+        <field name="search_view_id" ref="view_crm_lead_stage_duration_report_search" />
         <field name="context">{'search_default_group_report_team': 1}</field>
     </record>
 
