@@ -1,0 +1,32 @@
+<!-- Copyright (C) 2025-Today - KMEE (https://www.kmee.com.br).
+     Author: Diego Paradeda <diego.paradeda@kmee.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form_summary" model="ir.ui.view">
+        <field name="name">stock.picking.form.summary</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_operations']" position="after">
+                <field name="has_summary" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='operations']/field[@name='move_ids_without_package']" position="before">
+                <div class="alert alert-info mb-0" role="alert" attrs="{'invisible': [('has_summary', '=', False)]}">
+                    This picking has a summary view.
+                </div>
+            </xpath>
+            <xpath expr="//page[@name='operations']" position="after">
+                <page string="Summary" name="operations_summary" attrs="{'invisible': [('has_summary', '=', False)]}">
+                    <field name="summary_line_ids" nolabel="1" readonly="1">
+                        <tree create="0" delete="0" edit="0">
+                            <field name="product_id"/>
+                            <field name="product_uom" options="{'no_open': True, 'no_create': True}" string="Unit of Measure"/>
+                            <field name="product_uom_qty" string="Demand"/>
+                            <field name="quantity_done" string="Done"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
