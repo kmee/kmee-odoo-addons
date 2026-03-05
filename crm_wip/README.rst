@@ -29,10 +29,10 @@ better organize their pipeline and prioritize their work.
 
 Key features:
 
-- WIP status tracking for opportunities
-- Visual indicators for opportunities in progress
-- Enhanced opportunity management workflow
-- Integration with standard CRM features
+-  WIP status tracking for opportunities
+-  Visual indicators for opportunities in progress
+-  Enhanced opportunity management workflow
+-  Integration with standard CRM features
 
 **Table of contents**
 
@@ -46,10 +46,10 @@ This module was developed to address the need for better tracking of
 active work on opportunities in the sales pipeline. It helps sales
 teams:
 
-- Identify which opportunities are currently being worked on
-- Improve pipeline visibility and management
-- Reduce overlap in sales team efforts
-- Better organize and prioritize sales activities
+-  Identify which opportunities are currently being worked on
+-  Improve pipeline visibility and management
+-  Reduce overlap in sales team efforts
+-  Better organize and prioritize sales activities
 
 Configuration
 =============
@@ -98,14 +98,14 @@ Authors
 Contributors
 ------------
 
-- Luis Felipe Miléo mileo@kmee.com.br
+-  Luis Felipe Miléo mileo@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
