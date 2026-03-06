@@ -16,7 +16,6 @@ class StockLandedCost(models.Model):
         comodel_name="stock.picking",
         string="Programmed Pickings",
         copy=False,
-        states={"done": [("readonly", True)]},
         help="Pickings that are scheduled (not applied) to this landed cost. "
         "They can be pickings not yet done; once all are done you can 'Apply Programmed"
         " Pickings'.",

@@ -24,6 +24,7 @@
                     widget="many2many_tags"
                     domain="[('company_id', '=', company_id)]"
                     options="{'no_create': True}"
+                    readonly="state == 'done'"
                 />
                 <field name="programmed_state" readonly="1" widget="badge" />
             </xpath>
