@@ -10,7 +10,7 @@ class MonetaryUpdateService(models.AbstractModel):
     _description = "Monetary Update Service"
     _fields_to_track = []
 
-    last_monetary_update_date = fields.Date(string="Last Monetary Update Date")
+    last_monetary_update_date = fields.Date()
 
     @api.model
     def get_rate(
@@ -109,8 +109,15 @@ class MonetaryUpdateService(models.AbstractModel):
 
         if not series and missing == "error":
             raise UserError(
-                _("No rates found for index '%s' between %s and %s!")
-                % (index_code, start_date, end_date)
+                _(
+                    "No rates found for index '%(index_code)s' between %(start_date)s "
+                    "and %(end_date)s!"
+                )
+                % {
+                    "index_code": index_code,
+                    "start_date": start_date,
+                    "end_date": end_date,
+                }
             )
 
         if mode == "compound":
