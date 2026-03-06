@@ -21,7 +21,6 @@ class CrmLead(models.Model):
         compute="_compute_current_stage_total_duration",
     )
     current_stage_total_duration = fields.Char(
-        string="Current Stage Total Duration",
         compute="_compute_current_stage_total_duration",
     )
 
