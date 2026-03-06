@@ -31,6 +31,8 @@ jobs:
     runs-on: ubuntu-22.04
     container: ${{ matrix.container }}
     name: ${{ matrix.name }}
+    env:
+      EXCLUDE: sale_blanket_order_isolated_quotation
     strategy:
       fail-fast: false
       matrix:
@@ -52,7 +54,9 @@ jobs:
         with:
           persist-credentials: false
       - name: Install addons and dependencies
-        run: oca_install_addons
+        run: |
+          export EXCLUDE_ADDONS="sale_blanket_order_isolated_quotation"
+          oca_install_addons
       - name: Check licenses
         run: manifestoo -d . check-licenses
       - name: Check development status

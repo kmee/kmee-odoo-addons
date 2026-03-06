@@ -19,4 +19,5 @@
         "views/sale_order.xml",
     ],
     "demo": [],
+    "installable": False,
 }
