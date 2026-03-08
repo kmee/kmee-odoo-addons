@@ -148,8 +148,17 @@ class TestCalcDecimoAvos(BaseCase):
     def test_admitido_dia_15_conta_mes(self):
         self.assertEqual(calc_decimo_avos(date(2024, 12, 15), date(2024, 12, 31)), 1)
 
-    def test_admitido_dia_16_nao_conta_mes(self):
-        self.assertEqual(calc_decimo_avos(date(2024, 12, 16), date(2024, 12, 31)), 0)
+    def test_admitido_dia_16_conta_mes_31_dias(self):
+        """Dia 16/dez (31 dias): 16 dias trabalhados >= 15 → conta."""
+        self.assertEqual(calc_decimo_avos(date(2024, 12, 16), date(2024, 12, 31)), 1)
+
+    def test_admitido_dia_18_nao_conta_mes(self):
+        """Dia 18/dez (31 dias): 14 dias trabalhados < 15 → não conta."""
+        self.assertEqual(calc_decimo_avos(date(2024, 12, 18), date(2024, 12, 31)), 0)
+
+    def test_admitido_dia_25_nao_conta_mes(self):
+        """Dia 25/dez (31 dias): 7 dias trabalhados < 15 → não conta."""
+        self.assertEqual(calc_decimo_avos(date(2024, 12, 25), date(2024, 12, 31)), 0)
 
     def test_maximo_12_avos(self):
         self.assertEqual(calc_decimo_avos(date(2019, 1, 1), date(2024, 12, 31)), 12)

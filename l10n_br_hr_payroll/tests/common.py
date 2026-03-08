@@ -27,14 +27,14 @@ class PayrollCommon(TransactionCase):
             }
         )
 
-    def _create_contract(self, employee, wage=5000.0, structure=None):
+    def _create_contract(self, employee, wage=5000.0, structure=None, date_start=None):
         """Helper: cria contrato de trabalho com estrutura salarial."""
         return self.env["hr.contract"].create(
             {
                 "name": f"Contrato - {employee.name}",
                 "employee_id": employee.id,
                 "wage": wage,
-                "date_start": date(2024, 1, 1),
+                "date_start": date_start or date(2024, 1, 1),
                 "state": "open",
                 "struct_id": (structure or self.structure_clt).id,
                 "company_id": self.env.company.id,
