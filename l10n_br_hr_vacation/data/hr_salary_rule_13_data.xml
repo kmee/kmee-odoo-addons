@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais do 13º Salário.
+
+        Estruturas:
+          - structure_13_primeira_parcela: 50% do salário, sem descontos
+          - structure_13_segunda_parcela: integral - 1ª parcela, com INSS/IRRF
+          - structure_13: 13º proporcional (usado em cálculos genéricos)
+          - structure_rescisao: 13º proporcional na rescisão
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         1ª PARCELA DO 13º (adiantamento)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="hr_rule_adiantamento_13" model="hr.salary.rule">
+        <field name="name">Adiantamento 13º Salário</field>
+        <field name="sequence" eval="1" />
+        <field name="code">ADIANTAMENTO_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_basic"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.wage * 0.5
+        </field>
+    </record>
+
+    <!-- NET para 1ª parcela (sem descontos) -->
+    <record id="hr_rule_net_13_primeira" model="hr.salary.rule">
+        <field name="name">Líquido (1ª Parcela 13º)</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_net"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         13º PROPORCIONAL / 2ª PARCELA
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 13º Bruto (proporcional por avos) -->
+    <record id="hr_rule_decimo_bruto" model="hr.salary.rule">
+        <field name="name">13º Salário Bruto</field>
+        <field name="sequence" eval="1" />
+        <field name="code">DECIMO_TERCEIRO_BRUTO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_basic"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+avos = payslip.l10n_br_avos_13
+result = contract.wage * avos / 12
+        </field>
+    </record>
+
+    <!-- GROSS 13º -->
+    <record id="hr_rule_gross_13" model="hr.salary.rule">
+        <field name="name">Remuneração Bruta (13º)</field>
+        <field name="sequence" eval="99" />
+        <field name="code">GROSS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_gross"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW
+        </field>
+    </record>
+
+    <!-- INSS sobre 13º -->
+    <record id="hr_rule_inss_13" model="hr.salary.rule">
+        <field name="name">INSS (13º)</field>
+        <field name="sequence" eval="100" />
+        <field name="code">INSS_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_inss(max(categories.GROSS, 0))
+        </field>
+    </record>
+
+    <!-- Base IRRF 13º -->
+    <record id="hr_rule_base_irrf_13" model="hr.salary.rule">
+        <field name="name">Base IRRF (13º)</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = INSS_13
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+pensao = employee.l10n_br_pensao_alimenticia
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- IRRF sobre 13º -->
+    <record id="hr_rule_irrf_13" model="hr.salary.rule">
+        <field name="name">IRRF (13º)</field>
+        <field name="sequence" eval="120" />
+        <field name="code">IRRF_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+        </field>
+    </record>
+
+    <!-- NET 13º (2ª parcela) -->
+    <record id="hr_rule_net_13" model="hr.salary.rule">
+        <field name="name">Líquido (13º)</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_net"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         13º NA RESCISÃO
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="hr_rule_decimo_rescisao" model="hr.salary.rule">
+        <field name="name">13º Salário (Rescisão)</field>
+        <field name="sequence" eval="5" />
+        <field name="code">DECIMO_RESCISAO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+avos = payslip.l10n_br_avos_13
+result = contract.wage * avos / 12
+        </field>
+    </record>
+</odoo>
