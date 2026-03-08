@@ -49,20 +49,20 @@ evaluate the module's usefulness in their context. ]
 
 BUSINESS NEED: It should explain the “why” of the module:
 
--  what is the business requirement that generated the need to develop
-   this module
--  in which context or use cases this module can be useful (practical
-   examples are welcome!).
+- what is the business requirement that generated the need to develop
+  this module
+- in which context or use cases this module can be useful (practical
+  examples are welcome!).
 
 APPROACH: It could also explain the approach to address the mentioned
 need.
 
 USEFUL INFORMATION: It can also inform on related modules:
 
--  modules it depends on and their features
--  other modules that can work well together with this one
--  suggested setups where the module is useful (eg: multicompany,
-   multi-website)
+- modules it depends on and their features
+- other modules that can work well together with this one
+- suggested setups where the module is useful (eg: multicompany,
+  multi-website)
 
 Installation
 ============
@@ -88,9 +88,9 @@ use of screenshots is strongly recommended.]
 
 To configure this module, you need to:
 
--  Go to *App* > Menu > Menu item
--  Activate boolean… > save
--  …
+- Go to *App* > Menu > Menu item
+- Activate boolean… > save
+- …
 
 Usage
 =====
@@ -108,17 +108,17 @@ covered and remember that images speak more than words!]
 
 To use this module, you need to:
 
--  Go to *App* > Menu > Menu item
+- Go to *App* > Menu > Menu item
 
-   *insert screenshot!*
+  *insert screenshot!*
 
--  In “Contact” form, add a value to field *xyz* > save
+- In “Contact” form, add a value to field *xyz* > save
 
-   *insert screenshot!*
+  *insert screenshot!*
 
--  The value of *xyz* is now displayed in the list view.
+- The value of *xyz* is now displayed in the list view.
 
-   *insert screenshot!*
+  *insert screenshot!*
 
 Known issues / Roadmap
 ======================
@@ -127,7 +127,7 @@ Known issues / Roadmap
 mostly intended for end-users, and can also help potential new
 contributors discovering new features to implement. ]
 
--  ...
+- ...
 
 Changelog
 =========
@@ -145,15 +145,15 @@ fragment is included. ]
 11.0.x.y.z (YYYY-MM-DD)
 -----------------------
 
--  [BREAKING] Breaking changes come first.
-   (`#70 <https://github.com/OCA/repo/issues/70>`__)
--  [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
--  [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
+- [BREAKING] Breaking changes come first.
+  (`#70 <https://github.com/OCA/repo/issues/70>`__)
+- [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
+- [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
 
 11.0.x.y.z (YYYY-MM-DD)
 -----------------------
 
--  ...
+- ...
 
 Bug Tracker
 ===========
@@ -176,10 +176,9 @@ Authors
 Contributors
 ------------
 
--  Firstname Lastname email.address@example.org (optional company
-   website url)
--  Second Person second.person@example.org (optional company website
-   url)
+- Firstname Lastname email.address@example.org (optional company website
+  url)
+- Second Person second.person@example.org (optional company website url)
 
 Other credits
 -------------
@@ -189,8 +188,8 @@ authors, contributors, and maintainers. ]
 
 The development of this module has been financially supported by:
 
--  Company 1 name
--  Company 2 name
+- Company 1 name
+- Company 2 name
 
 Maintainers
 -----------
