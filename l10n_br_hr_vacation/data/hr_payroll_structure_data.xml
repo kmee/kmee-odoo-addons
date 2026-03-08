@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Estrutura: Férias CLT -->
+    <record id="structure_ferias" model="hr.payroll.structure">
+        <field name="name">Férias</field>
+        <field name="code">FERIAS</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('hr_rule_ferias'),
+                ref('hr_rule_adicional_ferias'),
+                ref('hr_rule_abono_pecuniario'),
+                ref('hr_rule_gross_ferias'),
+                ref('hr_rule_inss_ferias'),
+                ref('hr_rule_base_irrf_ferias'),
+                ref('hr_rule_irrf_ferias'),
+                ref('hr_rule_net_ferias'),
+            ])]"
+        />
+    </record>
+
+    <!-- Estrutura: 13º Salário — 1ª Parcela (adiantamento, sem descontos) -->
+    <record id="structure_13_primeira_parcela" model="hr.payroll.structure">
+        <field name="name">13º Salário - 1ª Parcela</field>
+        <field name="code">13_1PARCELA</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('hr_rule_adiantamento_13'),
+                ref('hr_rule_net_13_primeira'),
+            ])]"
+        />
+    </record>
+
+    <!-- Estrutura: 13º Salário — 2ª Parcela (com INSS e IRRF) -->
+    <record id="structure_13_segunda_parcela" model="hr.payroll.structure">
+        <field name="name">13º Salário - 2ª Parcela</field>
+        <field name="code">13_2PARCELA</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('hr_rule_decimo_bruto'),
+                ref('hr_rule_gross_13'),
+                ref('hr_rule_inss_13'),
+                ref('hr_rule_base_irrf_13'),
+                ref('hr_rule_irrf_13'),
+                ref('hr_rule_net_13'),
+            ])]"
+        />
+    </record>
+
+    <!-- Estrutura: 13º Salário — Proporcional (genérico) -->
+    <record id="structure_13" model="hr.payroll.structure">
+        <field name="name">13º Salário</field>
+        <field name="code">13_SALARIO</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('hr_rule_decimo_bruto'),
+                ref('hr_rule_gross_13'),
+                ref('hr_rule_inss_13'),
+                ref('hr_rule_base_irrf_13'),
+                ref('hr_rule_irrf_13'),
+                ref('hr_rule_net_13'),
+            ])]"
+        />
+    </record>
+
+    <!-- Estrutura: Rescisão (inclui 13º proporcional) -->
+    <record id="structure_rescisao" model="hr.payroll.structure">
+        <field name="name">Rescisão</field>
+        <field name="code">RESCISAO</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('l10n_br_hr_payroll.hr_rule_salario_base'),
+                ref('l10n_br_hr_payroll.hr_rule_gross'),
+                ref('hr_rule_decimo_rescisao'),
+                ref('l10n_br_hr_payroll.hr_rule_net'),
+            ])]"
+        />
+    </record>
+</odoo>
