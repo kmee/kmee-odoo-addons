@@ -14,6 +14,11 @@
           employee, contract, payslip, payslips, worked_days, inputs,
           categories, rules, result_rules, payroll, current_contract,
           tools (tools.br.calc_inss, tools.br.calc_irrf, etc.)
+
+        IMPORTANTE: Para acessar o total de uma regra anterior, usar o
+        CÓDIGO da regra diretamente (ex: FALTAS, INSS), NÃO rules.CÓDIGO.
+        rules.CÓDIGO retorna o record hr.salary.rule, não o valor.
+        Os códigos são pré-populados com 0.0 em _get_baselocaldict.
     -->
 
     <!-- ══════════════════════════════════════════════════════════════
@@ -209,7 +214,7 @@ result = employee.l10n_br_tipo_contrato != 'aprendiz'
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-base_inss = categories.GROSS - rules.FALTAS - rules.DESC_DSR
+base_inss = categories.GROSS - FALTAS - DESC_DSR
 result = tools.br.calc_inss(max(base_inss, 0))
         </field>
     </record>
@@ -226,7 +231,7 @@ result = employee.l10n_br_tipo_contrato == 'aprendiz'
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-base_inss = categories.GROSS - rules.FALTAS - rules.DESC_DSR
+base_inss = categories.GROSS - FALTAS - DESC_DSR
 result = round(max(base_inss, 0) * 0.02, 2)
         </field>
     </record>
@@ -263,7 +268,7 @@ else:
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 gross = categories.GROSS
-deducoes = rules.FALTAS + rules.DESC_DSR + rules.INSS
+deducoes = FALTAS + DESC_DSR + INSS
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
 pensao = employee.l10n_br_pensao_alimenticia
 result = gross - deducoes - dependentes - pensao
@@ -280,7 +285,7 @@ result = gross - deducoes - dependentes - pensao
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 gross = categories.GROSS
-deducoes = rules.CONTRIB_RPPS
+deducoes = CONTRIB_RPPS
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
 pensao = employee.l10n_br_pensao_alimenticia
 result = gross - deducoes - dependentes - pensao
@@ -299,7 +304,7 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.calc_irrf(max(rules.BASE_IRRF, 0))
+result = tools.br.calc_irrf(max(BASE_IRRF, 0))
         </field>
     </record>
 
@@ -319,7 +324,7 @@ result = employee.l10n_br_tipo_contrato != 'aprendiz'
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-base_fgts = categories.GROSS - rules.FALTAS - rules.DESC_DSR
+base_fgts = categories.GROSS - FALTAS - DESC_DSR
 result = round(max(base_fgts, 0) * 0.08, 2)
         </field>
     </record>
@@ -336,7 +341,7 @@ result = employee.l10n_br_tipo_contrato == 'aprendiz'
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-base_fgts = categories.GROSS - rules.FALTAS - rules.DESC_DSR
+base_fgts = categories.GROSS - FALTAS - DESC_DSR
 result = round(max(base_fgts, 0) * 0.02, 2)
         </field>
     </record>
