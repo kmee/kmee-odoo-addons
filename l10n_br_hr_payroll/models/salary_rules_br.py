@@ -118,6 +118,10 @@ def calc_ferias_dias(faltas):
 def calc_decimo_avos(data_admissao, data_referencia):
     """Calcula os avos do 13º salário.
 
+    Regra CLT: fração igual ou superior a 15 dias no mês conta como 1 avo.
+    O cálculo considera os dias efetivamente trabalhados no mês de admissão,
+    variando conforme o número de dias do mês (28, 29, 30 ou 31).
+
     Args:
         data_admissao: Data de admissão (date).
         data_referencia: Data de referência (geralmente 31/12).
@@ -125,6 +129,8 @@ def calc_decimo_avos(data_admissao, data_referencia):
     Returns:
         Número de avos (0 a 12).
     """
+    import calendar
+
     avos = 0
     ano = data_referencia.year
     for mes in range(1, data_referencia.month + 1):
@@ -133,7 +139,9 @@ def calc_decimo_avos(data_admissao, data_referencia):
         elif data_admissao.year == ano and data_admissao.month < mes:
             avos += 1
         elif data_admissao.year == ano and data_admissao.month == mes:
-            if data_admissao.day <= 15:
+            dias_no_mes = calendar.monthrange(ano, mes)[1]
+            dias_trabalhados = dias_no_mes - data_admissao.day + 1
+            if dias_trabalhados >= 15:
                 avos += 1
     return min(avos, 12)
 
