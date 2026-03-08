@@ -45,6 +45,24 @@ class HrPayslip(models.Model):
             else:
                 rec.l10n_br_horas_noturnas_computadas = rec.l10n_br_horas_noturnas
 
+    def _get_baselocaldict(self, contracts):
+        """Pre-populate rule codes with 0.0 defaults.
+
+        Rules with conditional execution (e.g. FALTAS only when faltas > 0)
+        may not fire, leaving their code absent from localdict. Pre-populating
+        ensures downstream rules can safely reference them without NameError.
+        """
+        localdict = super()._get_baselocaldict(contracts)
+        for code in (
+            "FALTAS",
+            "DESC_DSR",
+            "INSS",
+            "CONTRIB_RPPS",
+            "BASE_IRRF",
+        ):
+            localdict.setdefault(code, 0.0)
+        return localdict
+
     def _get_tools_dict(self):
         tools = super()._get_tools_dict()
         tools["br"] = types.SimpleNamespace(
