@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Estrutura CLT -->
+    <record id="structure_clt" model="hr.payroll.structure">
+        <field name="name">CLT</field>
+        <field name="code">CLT</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('hr_rule_salario_base'),
+                ref('hr_rule_he_50'),
+                ref('hr_rule_he_100'),
+                ref('hr_rule_adicional_noturno'),
+                ref('hr_rule_periculosidade'),
+                ref('hr_rule_insalubridade'),
+                ref('hr_rule_salario_familia'),
+                ref('hr_rule_faltas'),
+                ref('hr_rule_desc_dsr'),
+                ref('hr_rule_gross'),
+                ref('hr_rule_inss'),
+                ref('hr_rule_inss_aprendiz'),
+                ref('hr_rule_base_irrf'),
+                ref('hr_rule_irrf'),
+                ref('hr_rule_fgts'),
+                ref('hr_rule_fgts_aprendiz'),
+                ref('hr_rule_net'),
+            ])]"
+        />
+    </record>
+    <!-- Estrutura Estatutário -->
+    <record id="structure_estatuto" model="hr.payroll.structure">
+        <field name="name">Estatutário</field>
+        <field name="code">ESTATUTO</field>
+        <field
+            name="rule_ids"
+            eval="[(6, 0, [
+                ref('hr_rule_salario_base'),
+                ref('hr_rule_gross'),
+                ref('hr_rule_contrib_rpps'),
+                ref('hr_rule_base_irrf_est'),
+                ref('hr_rule_irrf'),
+                ref('hr_rule_net'),
+            ])]"
+        />
+    </record>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_contract_form_payroll_br" model="ir.ui.view">
+        <field name="name">hr.contract.form.payroll.br</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='salary']" position="after">
+                <group string="Adicionais de Risco" name="risk_additionals">
+                    <field name="l10n_br_periculosidade" />
+                    <field name="l10n_br_insalubridade" />
+                    <field
+                        name="l10n_br_grau_insalubridade"
+                        attrs="{'invisible': [('l10n_br_insalubridade', '=', False)], 'required': [('l10n_br_insalubridade', '=', True)]}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
