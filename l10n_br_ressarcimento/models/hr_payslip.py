@@ -50,13 +50,16 @@ class HrPayslip(models.Model):
             sheets.write({"l10n_br_payslip_id": rec.id})
 
     def compute_sheet(self):
-        """Link pending expenses after computing payslip."""
-        result = super().compute_sheet()
+        """Link pending expenses BEFORE computing payslip.
+
+        Expenses must be linked first so the RESSARCIMENTO salary rule
+        can read l10n_br_total_ressarcimento during rule evaluation.
+        """
         self.action_link_pending_expenses()
         self.invalidate_recordset(
             ["l10n_br_expense_sheet_ids", "l10n_br_total_ressarcimento"]
         )
-        return result
+        return super().compute_sheet()
 
     def _get_baselocaldict(self, contracts):
         """Pre-populate RESSARCIMENTO with 0.0 default."""

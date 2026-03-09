@@ -20,13 +20,26 @@ class TestRessarcimento(PayrollCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.product_expense = cls.env["product.product"].create(
-            {
-                "name": "Despesa Viagem",
-                "can_be_expensed": True,
-                "type": "service",
-            }
+        # Enterprise sale module may leave sale_line_warn column with NOT NULL
+        # even when module is not loaded — set DB default to avoid constraint.
+        cls.env.cr.execute(
+            "SELECT 1 FROM information_schema.columns "
+            "WHERE table_name='product_template' "
+            "AND column_name='sale_line_warn' AND is_nullable='NO'"
         )
+        if cls.env.cr.fetchone():
+            cls.env.cr.execute(
+                "ALTER TABLE product_template "
+                "ALTER COLUMN sale_line_warn SET DEFAULT 'no-message'"
+            )
+        product_vals = {
+            "name": "Despesa Viagem",
+            "can_be_expensed": True,
+            "type": "service",
+        }
+        if "sale_line_warn" in cls.env["product.template"]._fields:
+            product_vals["sale_line_warn"] = "no-message"
+        cls.product_expense = cls.env["product.product"].create(product_vals)
 
     def _create_expense_sheet(self, employee, amount=500.0, refund_in_payslip=True):
         """Helper: create approved expense sheet."""

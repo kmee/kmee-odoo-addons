@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Conta de despesa para ressarcimento -->
+        <record id="demo_account_despesas_ressarcimento" model="account.account">
+            <field name="code">413050</field>
+            <field name="name">Despesas com Ressarcimento</field>
+            <field name="account_type">expense</field>
+        </record>
+
+        <!-- Conta de passivo para ressarcimento a pagar -->
+        <record id="demo_account_ressarcimento_pagar" model="account.account">
+            <field name="code">213050</field>
+            <field name="name">Ressarcimento a Pagar</field>
+            <field name="account_type">liability_current</field>
+        </record>
+
+        <!-- Mapear contas na regra RESSARCIMENTO -->
+        <record
+        id="l10n_br_ressarcimento.salary_rule_ressarcimento"
+        model="hr.salary.rule"
+    >
+            <field name="account_debit" ref="demo_account_despesas_ressarcimento" />
+            <field name="account_credit" ref="demo_account_ressarcimento_pagar" />
+        </record>
+
+</odoo>
