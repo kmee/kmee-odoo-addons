@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Holerite BR: substitui o relatório genérico da OCA -->
+    <record id="action_report_holerite" model="ir.actions.report">
+        <field name="name">Holerite</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_br_hr_payroll_report.report_holerite</field>
+        <field name="report_file">l10n_br_hr_payroll_report.report_holerite</field>
+        <field name="print_report_name">
+            'Holerite - %s - %s' % (object.employee_id.name, object.date_from)
+        </field>
+        <field name="binding_model_id" ref="payroll.model_hr_payslip" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
