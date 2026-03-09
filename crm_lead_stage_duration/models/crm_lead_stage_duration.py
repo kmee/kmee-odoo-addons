@@ -64,17 +64,14 @@ class CrmLeadStageDuration(models.Model):
         index=True,
     )
     start_date = fields.Datetime(
-        string="Start Date",
         required=True,
         default=fields.Datetime.now,
         index=True,
     )
     end_date = fields.Datetime(
-        string="End Date",
         index=True,
     )
     running = fields.Boolean(
-        string="Running",
         compute="_compute_running",
         store=True,
     )
