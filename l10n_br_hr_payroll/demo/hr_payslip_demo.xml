@@ -2,71 +2,226 @@
 <odoo>
 
     <!--
-            Holerites de demonstração — Março/2024.
-            Cria contracheques para todos os 6 empregados demo e calcula.
+            Holerites de demonstração — ciclo anual.
+            João: 11 meses (Jan–Dez exceto Jul=férias).
+            Demais: Março apenas.
         -->
 
-        <!-- João — CLT R$4.500, 2 dep IRRF, 2 filhos SF -->
-        <record id="demo_payslip_joao" model="hr.payslip">
-            <field name="name">Holerite 03/2024 - João Carlos da Silva</field>
+        <!-- ===== João — CLT R$4.500, ciclo anual ===== -->
+
+        <!-- Janeiro -->
+        <record id="demo_payslip_joao_01" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 01/%Y - João Carlos da Silva')"
+        />
             <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
             <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
             <field name="struct_id" ref="structure_clt" />
-            <field name="date_from">2024-03-01</field>
-            <field name="date_to">2024-03-31</field>
+            <field name="date_from" eval="time.strftime('%Y-01-01')" />
+            <field name="date_to" eval="time.strftime('%Y-01-31')" />
         </record>
+
+        <!-- Fevereiro -->
+        <record id="demo_payslip_joao_02" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 02/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-02-01')" />
+            <field name="date_to" eval="time.strftime('%Y-02-28')" />
+        </record>
+
+        <!-- Março -->
+        <record id="demo_payslip_joao" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
+        </record>
+
+        <!-- Abril — com 10 horas extras 50% -->
+        <record id="demo_payslip_joao_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+            <field name="l10n_br_horas_extras_50">10</field>
+        </record>
+
+        <!-- Maio -->
+        <record id="demo_payslip_joao_05" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 05/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-05-01')" />
+            <field name="date_to" eval="time.strftime('%Y-05-31')" />
+        </record>
+
+        <!-- Junho -->
+        <record id="demo_payslip_joao_06" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 06/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-06-01')" />
+            <field name="date_to" eval="time.strftime('%Y-06-30')" />
+        </record>
+
+        <!-- Julho — pular (férias no módulo l10n_br_hr_vacation) -->
+
+        <!-- Agosto -->
+        <record id="demo_payslip_joao_08" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 08/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-08-01')" />
+            <field name="date_to" eval="time.strftime('%Y-08-31')" />
+        </record>
+
+        <!-- Setembro — com 2 faltas injustificadas -->
+        <record id="demo_payslip_joao_09" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 09/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-09-01')" />
+            <field name="date_to" eval="time.strftime('%Y-09-30')" />
+            <field name="l10n_br_faltas_injustificadas">2</field>
+        </record>
+
+        <!-- Outubro -->
+        <record id="demo_payslip_joao_10" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 10/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-10-01')" />
+            <field name="date_to" eval="time.strftime('%Y-10-31')" />
+        </record>
+
+        <!-- Novembro — com 5 horas extras 100% -->
+        <record id="demo_payslip_joao_11" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 11/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-11-01')" />
+            <field name="date_to" eval="time.strftime('%Y-11-30')" />
+            <field name="l10n_br_horas_extras_100">5</field>
+        </record>
+
+        <!-- Dezembro -->
+        <record id="demo_payslip_joao_12" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 12/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-12-01')" />
+            <field name="date_to" eval="time.strftime('%Y-12-31')" />
+        </record>
+
+        <!-- ===== Demais funcionários — Março ===== -->
 
         <!-- Maria — CLT R$5.200, periculosidade 30% -->
         <record id="demo_payslip_maria" model="hr.payslip">
-            <field name="name">Holerite 03/2024 - Maria Fernanda Santos</field>
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Maria Fernanda Santos')"
+        />
             <field name="employee_id" ref="l10n_br_hr.demo_employee_maria" />
             <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_maria" />
             <field name="struct_id" ref="structure_clt" />
-            <field name="date_from">2024-03-01</field>
-            <field name="date_to">2024-03-31</field>
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
         </record>
 
         <!-- Pedro — CLT R$3.800, insalubridade grau máximo -->
         <record id="demo_payslip_pedro" model="hr.payslip">
-            <field name="name">Holerite 03/2024 - Pedro Henrique Oliveira</field>
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Pedro Henrique Oliveira')"
+        />
             <field name="employee_id" ref="l10n_br_hr.demo_employee_pedro" />
             <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_pedro" />
             <field name="struct_id" ref="structure_clt" />
-            <field name="date_from">2024-03-01</field>
-            <field name="date_to">2024-03-31</field>
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
         </record>
 
         <!-- Ana — Estatutário R$8.500, RPPS, 3 dep IRRF -->
         <record id="demo_payslip_ana" model="hr.payslip">
-            <field name="name">Holerite 03/2024 - Ana Beatriz Souza</field>
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Ana Beatriz Souza')"
+        />
             <field name="employee_id" ref="l10n_br_hr.demo_employee_ana" />
             <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_ana" />
             <field name="struct_id" ref="structure_estatuto" />
-            <field name="date_from">2024-03-01</field>
-            <field name="date_to">2024-03-31</field>
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
         </record>
 
         <!-- Lucas — Aprendiz R$1.412, INSS 2%, FGTS 2% -->
         <record id="demo_payslip_lucas" model="hr.payslip">
-            <field name="name">Holerite 03/2024 - Lucas Gabriel Costa</field>
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Lucas Gabriel Costa')"
+        />
             <field name="employee_id" ref="l10n_br_hr.demo_employee_lucas" />
             <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_lucas" />
             <field name="struct_id" ref="structure_clt" />
-            <field name="date_from">2024-03-01</field>
-            <field name="date_to">2024-03-31</field>
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
         </record>
 
         <!-- Carla — CLT R$6.000, PCD, moléstia grave (isenta IRRF) -->
         <record id="demo_payslip_carla" model="hr.payslip">
-            <field name="name">Holerite 03/2024 - Carla Regina Pereira</field>
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Carla Regina Pereira')"
+        />
             <field name="employee_id" ref="l10n_br_hr.demo_employee_carla" />
             <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_carla" />
             <field name="struct_id" ref="structure_clt" />
-            <field name="date_from">2024-03-01</field>
-            <field name="date_to">2024-03-31</field>
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
         </record>
-
-        <!-- Calcular todos os holerites demo -->
-        <function model="hr.payslip" name="_demo_compute_payslips" />
 
 </odoo>
