@@ -22,6 +22,7 @@
     ],
     "demo": [
         "demo/hr_leave_allocation_demo.xml",
+        "demo/hr_payslip_vacation_demo.xml",
     ],
     "installable": True,
     "auto_install": False,
