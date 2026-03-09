@@ -35,7 +35,7 @@ result = contract.wage
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = FERIAS / 3
+result = tools.br.round_money(FERIAS / 3)
         </field>
     </record>
 
@@ -55,7 +55,7 @@ result = payslip.l10n_br_abono_pecuniario
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 # Abono pecuniário = 10 dias (1/3 de 30) × salário-dia
-result = (contract.wage / 30) * 10
+result = tools.br.round_money((contract.wage / 30) * 10)
         </field>
     </record>
 

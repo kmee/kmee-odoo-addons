@@ -8,6 +8,25 @@ independentemente com pytest puro (sem banco de dados).
 
 Injetadas no contexto das regras salariais via `tools.br.*`.
 """
+from decimal import ROUND_HALF_UP, Decimal
+
+
+def round_money(value, places=2):
+    """Arredondamento monetário padrão brasileiro (ROUND_HALF_UP).
+
+    Python round() usa banker's rounding (ROUND_HALF_EVEN) que pode divergir
+    do padrão contábil em valores .xx5. Ex: round(2.345, 2) = 2.34 (banker's)
+    mas contabilidade BR espera 2.35.
+
+    Args:
+        value: Valor a arredondar.
+        places: Casas decimais (padrão 2 = centavos).
+
+    Returns:
+        Valor arredondado como float.
+    """
+    d = Decimal(str(value))
+    return float(d.quantize(Decimal(10) ** -places, rounding=ROUND_HALF_UP))
 
 
 # ── INSS — Tabela Progressiva ─────────────────────────────────────────
@@ -72,7 +91,7 @@ def calc_inss(salario_bruto, ano=2024):
             base_anterior = limite
         else:
             break
-    return round(min(result, tabela["teto"]), 2)
+    return round_money(min(result, tabela["teto"]))
 
 
 def calc_irrf(base_irrf, ano=2024):
@@ -91,7 +110,7 @@ def calc_irrf(base_irrf, ano=2024):
     for limite, aliquota, deducao in tabela:
         if base_irrf <= limite:
             result = base_irrf * aliquota - deducao
-            return round(max(0.0, result), 2)
+            return round_money(max(0.0, result))
     return 0.0
 
 
@@ -159,7 +178,7 @@ def calc_vt(salario, valor_vt):
         Valor do desconto de VT.
     """
     limite_6_porcento = salario * 0.06
-    return round(min(limite_6_porcento, valor_vt), 2)
+    return round_money(min(limite_6_porcento, valor_vt))
 
 
 def calc_salario_familia(salario_bruto, num_filhos, ano=2024):
@@ -178,5 +197,5 @@ def calc_salario_familia(salario_bruto, num_filhos, ano=2024):
     tabela = SALARIO_FAMILIA_TABELA_2024
     for limite, valor in tabela:
         if salario_bruto <= limite:
-            return round(num_filhos * valor, 2)
+            return round_money(num_filhos * valor)
     return 0.0
