@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- João — 0 faltas, 30 dias -->
+        <record id="demo_allocation_joao" model="hr.leave.allocation">
+            <field name="private_name">Férias 2024 - João Carlos da Silva</field>
+            <field name="holiday_status_id" ref="leave_type_ferias" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="number_of_days">30</field>
+            <field name="l10n_br_faltas_periodo_aquisitivo">0</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- Maria — 3 faltas, 30 dias -->
+        <record id="demo_allocation_maria" model="hr.leave.allocation">
+            <field name="private_name">Férias 2024 - Maria Fernanda Santos</field>
+            <field name="holiday_status_id" ref="leave_type_ferias" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_maria" />
+            <field name="number_of_days">30</field>
+            <field name="l10n_br_faltas_periodo_aquisitivo">3</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- Pedro — 8 faltas, 24 dias -->
+        <record id="demo_allocation_pedro" model="hr.leave.allocation">
+            <field name="private_name">Férias 2024 - Pedro Henrique Oliveira</field>
+            <field name="holiday_status_id" ref="leave_type_ferias" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_pedro" />
+            <field name="number_of_days">24</field>
+            <field name="l10n_br_faltas_periodo_aquisitivo">8</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- Ana — 0 faltas, 30 dias -->
+        <record id="demo_allocation_ana" model="hr.leave.allocation">
+            <field name="private_name">Férias 2024 - Ana Beatriz Souza</field>
+            <field name="holiday_status_id" ref="leave_type_ferias" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_ana" />
+            <field name="number_of_days">30</field>
+            <field name="l10n_br_faltas_periodo_aquisitivo">0</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- Lucas — 0 faltas, 30 dias -->
+        <record id="demo_allocation_lucas" model="hr.leave.allocation">
+            <field name="private_name">Férias 2024 - Lucas Gabriel Costa</field>
+            <field name="holiday_status_id" ref="leave_type_ferias" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_lucas" />
+            <field name="number_of_days">30</field>
+            <field name="l10n_br_faltas_periodo_aquisitivo">0</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- Carla — 0 faltas, 30 dias -->
+        <record id="demo_allocation_carla" model="hr.leave.allocation">
+            <field name="private_name">Férias 2024 - Carla Regina Pereira</field>
+            <field name="holiday_status_id" ref="leave_type_ferias" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_carla" />
+            <field name="number_of_days">30</field>
+            <field name="l10n_br_faltas_periodo_aquisitivo">0</field>
+            <field name="state">confirm</field>
+        </record>
+
+</odoo>

@@ -17,5 +17,8 @@
         "data/hr_salary_rule_benefit_data.xml",
         "data/hr_payroll_structure_data.xml",
     ],
+    "demo": [
+        "demo/hr_contract_advantage_demo.xml",
+    ],
     "installable": True,
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="demo_account_salarios_pagar" model="account.account">
+            <field name="code">213010</field>
+            <field name="name">Salários a Pagar</field>
+            <field name="account_type">liability_current</field>
+        </record>
+
+        <record id="demo_account_inss_recolher" model="account.account">
+            <field name="code">213020</field>
+            <field name="name">INSS a Recolher</field>
+            <field name="account_type">liability_current</field>
+        </record>
+
+        <record id="demo_account_irrf_recolher" model="account.account">
+            <field name="code">213030</field>
+            <field name="name">IRRF a Recolher</field>
+            <field name="account_type">liability_current</field>
+        </record>
+
+        <record id="demo_account_fgts_recolher" model="account.account">
+            <field name="code">213040</field>
+            <field name="name">FGTS a Recolher</field>
+            <field name="account_type">liability_current</field>
+        </record>
+
+        <record id="demo_account_despesas_pessoal" model="account.account">
+            <field name="code">413010</field>
+            <field name="name">Despesas com Pessoal</field>
+            <field name="account_type">expense</field>
+        </record>
+
+</odoo>

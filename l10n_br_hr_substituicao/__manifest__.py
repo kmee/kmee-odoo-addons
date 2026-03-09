@@ -16,5 +16,8 @@
         "security/ir.model.access.csv",
         "views/hr_substituicao_views.xml",
     ],
+    "demo": [
+        "demo/hr_substituicao_demo.xml",
+    ],
     "installable": True,
 }

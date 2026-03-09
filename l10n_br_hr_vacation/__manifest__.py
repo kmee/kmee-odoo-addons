@@ -20,6 +20,9 @@
         "data/hr_payroll_structure_data.xml",
         "views/hr_payslip_views.xml",
     ],
+    "demo": [
+        "demo/hr_leave_allocation_demo.xml",
+    ],
     "installable": True,
     "auto_install": False,
 }

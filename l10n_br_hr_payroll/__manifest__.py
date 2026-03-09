@@ -23,6 +23,11 @@
         "views/hr_contract_views.xml",
         "views/hr_payslip_views.xml",
     ],
+    "demo": [
+        "demo/hr_employee_payroll_demo.xml",
+        "demo/hr_contract_payroll_demo.xml",
+        "demo/hr_payslip_demo.xml",
+    ],
     "installable": True,
     "auto_install": False,
 }
