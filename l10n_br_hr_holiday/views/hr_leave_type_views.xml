@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_hr_leave_type_form_inherit_br" model="ir.ui.view">
+        <field name="name">hr.leave.type.form.br</field>
+        <field name="model">hr.leave.type</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Configuracao CLT" name="grp_clt">
+                    <group>
+                        <field name="l10n_br_category" />
+                        <field name="l10n_br_days_limit" />
+                    </group>
+                    <group>
+                        <field name="l10n_br_need_attachment" />
+                        <field name="l10n_br_payroll_discount" />
+                        <field name="l10n_br_discount_dsr" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
