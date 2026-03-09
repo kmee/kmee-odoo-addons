@@ -16,5 +16,8 @@
         "views/hr_expense_sheet_views.xml",
         "data/hr_salary_rule_data.xml",
     ],
+    "demo": [
+        "demo/hr_expense_demo.xml",
+    ],
     "installable": True,
 }
