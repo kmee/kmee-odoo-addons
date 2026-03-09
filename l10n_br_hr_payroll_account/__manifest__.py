@@ -15,5 +15,8 @@
     "data": [
         "data/account_journal_data.xml",
     ],
+    "demo": [
+        "demo/account_demo.xml",
+    ],
     "installable": True,
 }
