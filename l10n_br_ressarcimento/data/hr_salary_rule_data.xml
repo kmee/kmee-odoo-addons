@@ -11,11 +11,17 @@
         />
         <field name="condition_select">python</field>
         <field name="condition_python">
-result = payslip.l10n_br_total_ressarcimento > 0
+try:
+    result = payslip.l10n_br_total_ressarcimento > 0
+except Exception:
+    result = False
 </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = payslip.l10n_br_total_ressarcimento
+try:
+    result = payslip.l10n_br_total_ressarcimento
+except Exception:
+    result = 0
 </field>
         <field name="appears_on_payslip" eval="True" />
     </record>
