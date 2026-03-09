@@ -15,5 +15,9 @@
         "security/ir.model.access.csv",
         "views/l10n_br_hr_syndicate_views.xml",
     ],
+    "demo": [
+        "demo/res_partner_union_demo.xml",
+        "demo/l10n_br_hr_syndicate_demo.xml",
+    ],
     "installable": True,
 }
