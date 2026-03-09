@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+            Holerites de demonstração — Março/2024.
+            Cria contracheques para todos os 6 empregados demo e calcula.
+        -->
+
+        <!-- João — CLT R$4.500, 2 dep IRRF, 2 filhos SF -->
+        <record id="demo_payslip_joao" model="hr.payslip">
+            <field name="name">Holerite 03/2024 - João Carlos da Silva</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from">2024-03-01</field>
+            <field name="date_to">2024-03-31</field>
+        </record>
+
+        <!-- Maria — CLT R$5.200, periculosidade 30% -->
+        <record id="demo_payslip_maria" model="hr.payslip">
+            <field name="name">Holerite 03/2024 - Maria Fernanda Santos</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_maria" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_maria" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from">2024-03-01</field>
+            <field name="date_to">2024-03-31</field>
+        </record>
+
+        <!-- Pedro — CLT R$3.800, insalubridade grau máximo -->
+        <record id="demo_payslip_pedro" model="hr.payslip">
+            <field name="name">Holerite 03/2024 - Pedro Henrique Oliveira</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_pedro" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_pedro" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from">2024-03-01</field>
+            <field name="date_to">2024-03-31</field>
+        </record>
+
+        <!-- Ana — Estatutário R$8.500, RPPS, 3 dep IRRF -->
+        <record id="demo_payslip_ana" model="hr.payslip">
+            <field name="name">Holerite 03/2024 - Ana Beatriz Souza</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_ana" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_ana" />
+            <field name="struct_id" ref="structure_estatuto" />
+            <field name="date_from">2024-03-01</field>
+            <field name="date_to">2024-03-31</field>
+        </record>
+
+        <!-- Lucas — Aprendiz R$1.412, INSS 2%, FGTS 2% -->
+        <record id="demo_payslip_lucas" model="hr.payslip">
+            <field name="name">Holerite 03/2024 - Lucas Gabriel Costa</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_lucas" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_lucas" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from">2024-03-01</field>
+            <field name="date_to">2024-03-31</field>
+        </record>
+
+        <!-- Carla — CLT R$6.000, PCD, moléstia grave (isenta IRRF) -->
+        <record id="demo_payslip_carla" model="hr.payslip">
+            <field name="name">Holerite 03/2024 - Carla Regina Pereira</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_carla" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_carla" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from">2024-03-01</field>
+            <field name="date_to">2024-03-31</field>
+        </record>
+
+        <!-- Calcular todos os holerites demo -->
+        <function model="hr.payslip" name="_demo_compute_payslips" />
+
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- João — Estrutura CLT -->
+        <record id="l10n_br_hr_contract.demo_contract_joao" model="hr.contract">
+            <field name="struct_id" ref="structure_clt" />
+        </record>
+
+        <!-- Maria — Estrutura CLT + periculosidade -->
+        <record id="l10n_br_hr_contract.demo_contract_maria" model="hr.contract">
+            <field name="struct_id" ref="structure_clt" />
+            <field name="l10n_br_periculosidade" eval="True" />
+        </record>
+
+        <!-- Pedro — Estrutura CLT + insalubridade grau máximo -->
+        <record id="l10n_br_hr_contract.demo_contract_pedro" model="hr.contract">
+            <field name="struct_id" ref="structure_clt" />
+            <field name="l10n_br_insalubridade" eval="True" />
+            <field name="l10n_br_grau_insalubridade">maximo</field>
+        </record>
+
+        <!-- Ana — Estrutura Estatutário -->
+        <record id="l10n_br_hr_contract.demo_contract_ana" model="hr.contract">
+            <field name="struct_id" ref="structure_estatuto" />
+        </record>
+
+        <!-- Lucas — Estrutura CLT (aprendiz usa mesma estrutura) -->
+        <record id="l10n_br_hr_contract.demo_contract_lucas" model="hr.contract">
+            <field name="struct_id" ref="structure_clt" />
+        </record>
+
+        <!-- Carla — Estrutura CLT -->
+        <record id="l10n_br_hr_contract.demo_contract_carla" model="hr.contract">
+            <field name="struct_id" ref="structure_clt" />
+        </record>
+
+</odoo>
