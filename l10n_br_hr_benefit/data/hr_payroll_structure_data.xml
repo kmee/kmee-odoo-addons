@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Adiciona regras de benefícios às estruturas CLT e Estatutário.
+    -->
+
+    <!-- Regras de benefícios na estrutura CLT -->
+    <record id="l10n_br_hr_payroll.structure_clt" model="hr.payroll.structure">
+        <field
+            name="rule_ids"
+            eval="[
+            (4, ref('hr_rule_desc_vt')),
+            (4, ref('hr_rule_desc_plano_saude')),
+            (4, ref('hr_rule_vr_info')),
+            (4, ref('hr_rule_va_info')),
+        ]"
+        />
+    </record>
+
+    <!-- Regras de benefícios na estrutura Estatutário -->
+    <record id="l10n_br_hr_payroll.structure_estatuto" model="hr.payroll.structure">
+        <field
+            name="rule_ids"
+            eval="[
+            (4, ref('hr_rule_desc_vt')),
+            (4, ref('hr_rule_desc_plano_saude')),
+            (4, ref('hr_rule_vr_info')),
+            (4, ref('hr_rule_va_info')),
+        ]"
+        />
+    </record>
+
+    <!--
+        Atualiza a regra de BASE_IRRF para deduzir plano de saúde.
+        O DESC_PLANO_SAUDE é um desconto DED, então já está no categories.DED.
+        A fórmula do BASE_IRRF já subtrai DED via FALTAS + DESC_DSR + INSS,
+        mas o plano de saúde precisa ser subtraído explicitamente.
+    -->
+    <record id="l10n_br_hr_payroll.hr_rule_base_irrf" model="hr.salary.rule">
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = FALTAS + DESC_DSR + INSS + DESC_PLANO_SAUDE + DESC_VT
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+pensao = employee.l10n_br_pensao_alimenticia
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- Idem para Estatutário -->
+    <record id="l10n_br_hr_payroll.hr_rule_base_irrf_est" model="hr.salary.rule">
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = CONTRIB_RPPS + DESC_PLANO_SAUDE + DESC_VT
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+pensao = employee.l10n_br_pensao_alimenticia
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+</odoo>
