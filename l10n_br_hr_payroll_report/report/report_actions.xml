@@ -13,4 +13,54 @@
         <field name="binding_model_id" ref="payroll.model_hr_payslip" />
         <field name="binding_type">report</field>
     </record>
+
+    <!-- Recibo de Férias -->
+    <record id="action_report_recibo_ferias" model="ir.actions.report">
+        <field name="name">Recibo de Férias</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_br_hr_payroll_report.report_recibo_ferias</field>
+        <field name="report_file">l10n_br_hr_payroll_report.report_recibo_ferias</field>
+        <field name="print_report_name">
+            'Recibo Ferias - %s - %s' % (object.employee_id.name, object.date_from)
+        </field>
+        <field name="binding_model_id" ref="payroll.model_hr_payslip" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Termo de Rescisão -->
+    <record id="action_report_termo_rescisao" model="ir.actions.report">
+        <field name="name">Termo de Rescisão</field>
+        <field name="model">hr.payslip</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >l10n_br_hr_payroll_report.report_termo_rescisao</field>
+        <field
+            name="report_file"
+        >l10n_br_hr_payroll_report.report_termo_rescisao</field>
+        <field name="print_report_name">
+            'Rescisao - %s - %s' % (object.employee_id.name, object.date_from)
+        </field>
+        <field name="binding_model_id" ref="payroll.model_hr_payslip" />
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Ficha de Registro de Empregado -->
+    <record id="action_report_ficha_registro" model="ir.actions.report">
+        <field name="name">Ficha de Registro</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >l10n_br_hr_payroll_report.report_ficha_registro</field>
+        <field
+            name="report_file"
+        >l10n_br_hr_payroll_report.report_ficha_registro</field>
+        <field name="print_report_name">
+            'Ficha Registro - %s' % (object.name,)
+        </field>
+        <field name="binding_model_id" ref="hr.model_hr_employee" />
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
