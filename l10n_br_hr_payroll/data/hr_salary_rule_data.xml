@@ -51,7 +51,7 @@ result = payslip.l10n_br_horas_extras_50 > 0
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 salario_hora = contract.wage / 220
-result = salario_hora * 1.5 * payslip.l10n_br_horas_extras_50
+result = tools.br.round_money(salario_hora * 1.5 * payslip.l10n_br_horas_extras_50)
         </field>
     </record>
 
@@ -68,7 +68,7 @@ result = payslip.l10n_br_horas_extras_100 > 0
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 salario_hora = contract.wage / 220
-result = salario_hora * 2.0 * payslip.l10n_br_horas_extras_100
+result = tools.br.round_money(salario_hora * 2.0 * payslip.l10n_br_horas_extras_100)
         </field>
     </record>
 
@@ -85,7 +85,7 @@ result = payslip.l10n_br_horas_noturnas > 0
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 salario_hora = contract.wage / 220
-result = salario_hora * 0.20 * payslip.l10n_br_horas_noturnas
+result = tools.br.round_money(salario_hora * 0.20 * payslip.l10n_br_horas_noturnas)
         </field>
     </record>
 
@@ -101,7 +101,7 @@ result = contract.l10n_br_periculosidade
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = contract.wage * 0.30
+result = tools.br.round_money(contract.wage * 0.30)
         </field>
     </record>
 
@@ -120,7 +120,7 @@ result = contract.l10n_br_insalubridade
 SM = tools.br.SALARIO_MINIMO.get(2024, 1412.00)
 grau = contract.l10n_br_grau_insalubridade
 percentuais = {'minimo': 0.10, 'medio': 0.20, 'maximo': 0.40}
-result = SM * percentuais.get(grau, 0.10)
+result = tools.br.round_money(SM * percentuais.get(grau, 0.10))
         </field>
     </record>
 
@@ -159,7 +159,7 @@ result = payslip.l10n_br_faltas_injustificadas > 0
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = (contract.wage / 30) * payslip.l10n_br_faltas_injustificadas
+result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas)
         </field>
     </record>
 
@@ -177,7 +177,7 @@ result = payslip.l10n_br_faltas_injustificadas > 0
         <field name="amount_python_compute">
 dias_uteis = 26
 dsr_mes = 4
-result = (contract.wage / 30) * payslip.l10n_br_faltas_injustificadas * dsr_mes / dias_uteis
+result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas * dsr_mes / dias_uteis)
         </field>
     </record>
 
@@ -232,7 +232,7 @@ result = employee.l10n_br_tipo_contrato == 'aprendiz'
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 base_inss = categories.GROSS - FALTAS - DESC_DSR
-result = round(max(base_inss, 0) * 0.02, 2)
+result = tools.br.round_money(max(base_inss, 0) * 0.02)
         </field>
     </record>
 
@@ -248,7 +248,7 @@ result = round(max(base_inss, 0) * 0.02, 2)
 teto_rgps = 7786.02
 base = categories.GROSS
 if base > teto_rgps:
-    result = round((base - teto_rgps) * 0.14 + 908.86, 2)
+    result = tools.br.round_money((base - teto_rgps) * 0.14 + 908.86)
 else:
     result = tools.br.calc_inss(base)
         </field>
@@ -325,7 +325,7 @@ result = employee.l10n_br_tipo_contrato != 'aprendiz'
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 base_fgts = categories.GROSS - FALTAS - DESC_DSR
-result = round(max(base_fgts, 0) * 0.08, 2)
+result = tools.br.round_money(max(base_fgts, 0) * 0.08)
         </field>
     </record>
 
@@ -342,7 +342,7 @@ result = employee.l10n_br_tipo_contrato == 'aprendiz'
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 base_fgts = categories.GROSS - FALTAS - DESC_DSR
-result = round(max(base_fgts, 0) * 0.02, 2)
+result = tools.br.round_money(max(base_fgts, 0) * 0.02)
         </field>
     </record>
 
