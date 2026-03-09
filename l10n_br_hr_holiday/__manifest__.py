@@ -16,5 +16,8 @@
         "views/hr_leave_type_views.xml",
         "data/hr_leave_type_data.xml",
     ],
+    "demo": [
+        "demo/hr_leave_demo.xml",
+    ],
     "installable": True,
 }
