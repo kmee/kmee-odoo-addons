@@ -1,50 +1,58 @@
-id,codigo,nome,active
-l10n_br_esocial.mot_deslig_01,01,"Rescisão com justa causa, por iniciativa do empregador",True
-l10n_br_esocial.mot_deslig_02,02,"Rescisão sem justa causa, por iniciativa do empregador",True
-l10n_br_esocial.mot_deslig_03,03,"Rescisão antecipada do contrato a termo por iniciativa do empregador",True
-l10n_br_esocial.mot_deslig_04,04,"Rescisão antecipada do contrato a termo por iniciativa do empregado",True
-l10n_br_esocial.mot_deslig_05,05,"Rescisão por culpa recíproca",True
-l10n_br_esocial.mot_deslig_06,06,"Rescisão por término do contrato a termo",True
-l10n_br_esocial.mot_deslig_07,07,"Rescisão do contrato de trabalho por iniciativa do empregado",True
-l10n_br_esocial.mot_deslig_08,08,"Rescisão por interesse do empregado, nas hipóteses previstas nos arts. 394 e 483, § 1º, da CLT",True
-l10n_br_esocial.mot_deslig_09,09,"Rescisão por opção do empregado em virtude de falecimento do empregador individual ou doméstico",True
-l10n_br_esocial.mot_deslig_10,10,"Rescisão por falecimento do empregado",True
-l10n_br_esocial.mot_deslig_11,11,"Transferência de empregado para empresa do mesmo grupo empresarial, sem rescisão do contrato",True
-l10n_br_esocial.mot_deslig_12,12,"Transferência de empregado da consorciada para consórcio e vice-versa, sem rescisão do contrato",True
-l10n_br_esocial.mot_deslig_13,13,"Transferência de empregado de empresa ou consórcio por sucessão, sem rescisão do contrato de trabalho",True
-l10n_br_esocial.mot_deslig_14,14,"Rescisão por falecimento do empregador individual ou doméstico sem continuação da atividade",False
-l10n_br_esocial.mot_deslig_15,15,"Demissão de aprendizes por desempenho insuficiente ou inadaptação",False
-l10n_br_esocial.mot_deslig_16,16,"Nulidade do contrato de trabalho (art. 37, II, da Constituição), quando mantido o direito ao salário",True
-l10n_br_esocial.mot_deslig_17,17,"Rescisão indireta do contrato de trabalho",True
-l10n_br_esocial.mot_deslig_18,18,"Aposentadoria compulsória",False
-l10n_br_esocial.mot_deslig_19,19,"Aposentadoria por idade",False
-l10n_br_esocial.mot_deslig_20,20,"Aposentadoria por idade e tempo de contribuição",False
-l10n_br_esocial.mot_deslig_21,21,"Reforma militar",True
-l10n_br_esocial.mot_deslig_22,22,"Reserva militar",True
-l10n_br_esocial.mot_deslig_23,23,"Exoneração",True
-l10n_br_esocial.mot_deslig_24,24,"Demissão",True
-l10n_br_esocial.mot_deslig_25,25,"Vacância de cargo efetivo",True
-l10n_br_esocial.mot_deslig_26,26,"Rescisão por paralisação temporária ou definitiva da empresa motivada por atos de autoridade",True
-l10n_br_esocial.mot_deslig_27,27,"Rescisão por motivo de força maior",True
-l10n_br_esocial.mot_deslig_28,28,"Término da cessão/requisição",False
-l10n_br_esocial.mot_deslig_29,29,"Redistribuição ou Reforma Administrativa",True
-l10n_br_esocial.mot_deslig_30,30,"Mudança de regime trabalhista",True
-l10n_br_esocial.mot_deslig_31,31,"Reversão de reintegração",False
-l10n_br_esocial.mot_deslig_32,32,"Extravio de militar",True
-l10n_br_esocial.mot_deslig_33,33,"Rescisão por acordo entre as partes (art. 484-A da CLT)",True
-l10n_br_esocial.mot_deslig_34,34,"Transf. de titularidade do empregado doméstico para outro representante da mesma unidade familiar",True
-l10n_br_esocial.mot_deslig_35,35,"Extinção do contrato de trabalho intermitente",False
-l10n_br_esocial.mot_deslig_36,36,"Mudança de CPF",True
-l10n_br_esocial.mot_deslig_37,37,"Remoção, em caso de alteração do órgão declarante",True
-l10n_br_esocial.mot_deslig_38,38,"Aposentadoria, exceto por invalidez",True
-l10n_br_esocial.mot_deslig_39,39,"Aposentadoria de servidor estatutário, por invalidez",True
-l10n_br_esocial.mot_deslig_40,40,"Término de exercício de mandato",True
-l10n_br_esocial.mot_deslig_41,41,"Rescisão de aprendiz por desempenho insuficiente ou inadaptação",True
-l10n_br_esocial.mot_deslig_42,42,"Rescisão de aprendiz por ausência injustificada à escola que implique perda do ano letivo",True
-l10n_br_esocial.mot_deslig_43,43,"Transferência de empregado de empresa considerada inapta por inexistência de fato",True
-l10n_br_esocial.mot_deslig_44,44,"Agrupamento contratual",True
-l10n_br_esocial.mot_deslig_45,45,"Exclusão de militar das Forças Armadas do serviço ativo, com efeitos financeiros",True
-l10n_br_esocial.mot_deslig_46,46,"Exclusão de militar das Forças Armadas do serviço ativo, sem efeitos financeiros",True
-l10n_br_esocial.mot_deslig_47,47,"Rescisão por encerramento da empresa, de seus estabelecimentos ou supressão de parte de suas atividades",True
-l10n_br_esocial.mot_deslig_48,48,"Rescisão por falecimento do empregador individual sem continuação da atividade",True
-l10n_br_esocial.mot_deslig_49,49,"Rescisão por falecimento do empregador doméstico sem continuação da atividade",True
+id,codigo,nome,dt_inicio,dt_fim,gera_dae,categ_trab_aplicavel,gera_ind_cumprimento,desc_resumida,cod_categ_aplicavel,aplic_deslig_baixa_jud
+mot_deslig_01,01,"Rescisão com justa causa, por iniciativa do empregador",2014-01-01,,1,,1,"Rescisão com justa causa, por iniciativa do empregador",101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_02,02,"Rescisão sem justa causa, por iniciativa do empregador",2014-01-01,,2,101;102;103;104;105;106,2,"Rescisão sem justa causa, por iniciativa do empregador",101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_03,03,Rescisão antecipada do contrato a termo por iniciativa do empregador,2014-01-01,,2,101;102;103;104;105;106,2,Rescisão antecipada do contrato a termo por iniciativa do empregador,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_04,04,Rescisão antecipada do contrato a termo por iniciativa do empregado,2014-01-01,,1,,1,Rescisão antecipada do contrato a termo por iniciativa do empregado,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_05,05,Rescisão por culpa recíproca,2014-01-01,,2,101;102;103;104;105;106,2,Rescisão por culpa recíproca,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_06,06,Rescisão por término do contrato a termo,2014-01-01,,2,101;102;103;104;105;106,1,Rescisão por término do contrato a termo,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_07,07,Rescisão do contrato de trabalho por iniciativa do empregado,2014-01-01,,1,,1,Rescisão do contrato de trabalho por iniciativa do empregado,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_08,08,"Rescisão do contrato de trabalho por interesse do(a) empregado(a), nas hipóteses previstas nos arts. 394 e 483, § 1º, da CLT",2014-01-01,,1,,1,"Rescisão por interesse do empregado, nas hipóteses previstas nos arts. 394 e 483, § 1º, da CLT",101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_09,09,Rescisão por opção do empregado em virtude de falecimento do empregador individual ou empregador doméstico,2014-01-01,,1,,1,Rescisão por opção do empregado em virtude de falecimento do empregador individual ou doméstico,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_10,10,Rescisão por falecimento do empregado,2014-01-01,,1,,1,Rescisão por falecimento do empregado,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_11,11,"Transferência de empregado para empresa do mesmo grupo empresarial que tenha assumido os encargos trabalhistas, sem que tenha havido rescisão do contrato de trabalho",2014-01-01,,1,,1,"Transferência de empregado para empresa do mesmo grupo empresarial, sem rescisão do contrato",101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_12,12,"Transferência de empregado da empresa consorciada para o consórcio que tenha assumido os encargos trabalhistas, e vice-versa, sem que tenha havido rescisão do contrato de trabalho",2014-01-01,,1,,1,"Transferência de empregado da consorciada para consórcio e vice-versa, sem rescisão do contrato",101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_13,13,"Transferência de empregado de empresa ou consórcio, para outra empresa ou consórcio que tenha assumido os encargos trabalhistas por motivo de sucessão (fusão, cisão ou incorporação), sem que tenha havido rescisão do contrato de trabalho",2014-01-01,,1,,1,"Transferência de empregado de empresa ou consórcio por sucessão, sem rescisão do contrato de trabalho",101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_14,14,"Rescisão do contrato de trabalho por encerramento da empresa, de seus estabelecimentos ou supressão de parte de suas atividades ou falecimento do empregador individual ou empregador doméstico sem continuação da atividade",2014-01-01,2024-01-21,2,101;102;103;104;105;106,2,Rescisão por falecimento do empregador individual ou doméstico sem continuação da atividade,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_15,15,Demissão de aprendizes por desempenho insuficiente ou inadaptação,2014-01-01,2019-01-20,1,,1,Demissão de aprendizes por desempenho insuficiente ou inadaptação,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_15_16,15,"Rescisão do contrato de aprendizagem por desempenho insuficiente, inadaptação ou ausência injustificada do aprendiz à escola que implique perda do ano letivo",2019-01-21,2021-07-18,1,,1,"Rescisão de aprendiz por desempenho insuficiente, inadaptação ou ausência injustificada à escola",101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_16,16,"Declaração de nulidade do contrato de trabalho por infringência ao inciso II do art. 37 da Constituição Federal, quando mantido o direito ao salário",2014-01-01,,1,,1,"Nulidade do contrato de trabalho (art. 37, II, da Constituição), quando mantido o direito ao salário",101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_17,17,Rescisão indireta do contrato de trabalho,2014-01-01,,2,101;102;103;104;105;106,2,Rescisão indireta do contrato de trabalho,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_18,18,Aposentadoria compulsória,2014-01-01,2021-07-18,1,,1,Aposentadoria compulsória,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_19,19,Aposentadoria por idade,2014-01-01,2021-07-18,1,,1,Aposentadoria por idade,301;302;303;306;307;309,S
+mot_deslig_20,20,Aposentadoria por idade e tempo de contribuição,2014-01-01,2021-07-18,1,,1,Aposentadoria por idade e tempo de contribuição,301;302;303;306;307;309,S
+mot_deslig_21,21,Reforma militar,2014-01-01,2021-07-18,1,,1,Reforma militar,301;302;303;306;307;309,S
+mot_deslig_21_23,21,Reforma militar,2021-07-19,,1,,1,Reforma militar,307;314,S
+mot_deslig_22,22,Reserva militar,2014-01-01,2021-07-18,1,,1,Reserva militar,301;302;303;306;307;309,S
+mot_deslig_22_25,22,Reserva militar,2021-07-19,,1,,1,Reserva militar,307;314,S
+mot_deslig_23,23,Exoneração,2014-01-01,2021-07-18,1,,1,Exoneração,301;302;303;306;307;309,S
+mot_deslig_23_27,23,Exoneração,2021-07-19,,1,,1,Exoneração,301;302;303;306;307;309;310;312;314,S
+mot_deslig_24,24,Demissão,2014-01-01,2021-07-18,1,,1,Demissão,301;302;303;306;307;309,S
+mot_deslig_24_29,24,Demissão,2021-07-19,,1,,1,Demissão,301;302;303;306;307;309;310;312;314,S
+mot_deslig_25,25,Vacância de cargo efetivo,2014-01-01,2021-07-18,1,,1,Vacância de cargo efetivo,301;302;303;306;307;309,N
+mot_deslig_25_31,25,Vacância de cargo efetivo,2021-07-19,,1,,1,Vacância de cargo efetivo,301;307;314,N
+mot_deslig_26,26,"Rescisão do contrato de trabalho por paralisação temporária ou definitiva da empresa, estabelecimento ou parte das atividades motivada por atos de autoridade municipal, estadual ou federal",2014-01-01,,1,,2,Rescisão por paralisação temporária ou definitiva da empresa motivada por atos de autoridade,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_27,27,Rescisão por motivo de força maior,2014-01-01,,2,101;102;103;104;105;106,2,Rescisão por motivo de força maior,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_28,28,Término da cessão/requisição,2014-01-01,2021-07-18,1,,1,Término da cessão/requisição,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_29,29,Redistribuição,2014-01-01,2021-07-18,1,,1,Redistribuição,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_29_36,29,Redistribuição ou Reforma Administrativa,2021-07-19,,1,,1,Redistribuição ou Reforma Administrativa,301;303;306;307;309;314,N
+mot_deslig_30,30,Mudança de regime trabalhista,2014-01-01,,1,,1,Mudança de regime trabalhista,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_31,31,Reversão de reintegração,2014-01-01,2024-09-17,1,,1,Reversão de reintegração,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_32,32,Extravio de militar,2014-01-01,2021-07-18,1,,1,Extravio de militar,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_32_40,32,Extravio de militar,2021-07-19,,1,,1,Extravio de militar,307;314,S
+mot_deslig_33,33,Rescisão por acordo entre as partes (art. 484-A da CLT),2017-11-11,,2,101;102;103;104;105;106,2,Rescisão por acordo entre as partes (art. 484-A da CLT),101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_34,34,Transferência de titularidade do empregado doméstico para outro representante da mesma unidade familiar,2015-10-01,,1,,1,Transf. de titularidade do empregado doméstico para outro representante da mesma unidade familiar,104,N
+mot_deslig_35,35,Extinção do contrato de trabalho intermitente,2018-01-08,2018-06-30,1,,2,Extinção do contrato de trabalho intermitente,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_36,36,Mudança de CPF,2019-01-21,,1,,1,Mudança de CPF,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_37,37,"Remoção, em caso de alteração do órgão declarante",2021-05-10,,1,,1,"Remoção, em caso de alteração do órgão declarante",301;306;307;309;314,S
+mot_deslig_38,38,"Aposentadoria, exceto por invalidez",2021-05-10,,1,,1,"Aposentadoria, exceto por invalidez",101;301;302;303;306;307;309;310;312;314,S
+mot_deslig_39,39,"Aposentadoria de servidor estatutário, por invalidez",2021-05-10,,1,,1,"Aposentadoria de servidor estatutário, por invalidez",301;306;309,S
+mot_deslig_40,40,Término de exercício de mandato,2021-05-10,,1,,1,Término de exercício de mandato,301;302;303;306;307;309;310;312;314,S
+mot_deslig_41,41,Rescisão do contrato de aprendizagem por desempenho insuficiente ou inadaptação do aprendiz,2021-05-10,,1,,1,Rescisão de aprendiz por desempenho insuficiente ou inadaptação,103,S
+mot_deslig_42,42,Rescisão do contrato de aprendizagem por ausência injustificada do aprendiz à escola que implique perda do ano letivo,2021-05-10,,1,,1,Rescisão de aprendiz por ausência injustificada à escola que implique perda do ano letivo,103,S
+mot_deslig_43,43,Transferência de empregado de empresa considerada inapta por inexistência de fato,2014-01-01,,1,,1,Transferência de empregado de empresa considerada inapta por inexistência de fato,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_44,44,Agrupamento contratual,2014-01-01,,1,,1,Agrupamento contratual,101;102;103;104;105;106;107;108;111;301;302;303;306;307;309;310;312;314,N
+mot_deslig_45,45,"Exclusão de militar das Forças Armadas do serviço ativo, com efeitos financeiros",2014-01-01,,1,,1,"Exclusão de militar das Forças Armadas do serviço ativo, com efeitos financeiros",314,N
+mot_deslig_46,46,"Exclusão de militar das Forças Armadas do serviço ativo, sem efeitos financeiros",2014-01-01,,1,,1,"Exclusão de militar das Forças Armadas do serviço ativo, sem efeitos financeiros",314,N
+mot_deslig_47,47,"Rescisão do contrato de trabalho por encerramento da empresa, de seus estabelecimentos ou supressão de parte de suas atividades",2014-01-01,,2,101;102;103;105;106,1,"Rescisão por encerramento da empresa, de seus estabelecimentos ou supressão de parte de suas atividades",101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_48,48,Rescisão por falecimento do empregador individual sem continuação da atividade,2014-01-01,,2,101;102;103;105;106,1,Rescisão por falecimento do empregador individual sem continuação da atividade,101;102;103;105;106;107;108;111;301;302;303;306;307;309;310;312;314,S
+mot_deslig_49,49,Rescisão por falecimento do empregador doméstico sem continuação da atividade,2014-01-01,,2,104,1,Rescisão por falecimento do empregador doméstico sem continuação da atividade,104,S

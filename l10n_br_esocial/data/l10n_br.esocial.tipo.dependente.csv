@@ -1,0 +1,21 @@
+id,codigo,nome,dt_inicio,dt_fim
+tipo_dep_01,01,Cônjuge,2014-01-01,
+tipo_dep_02,02,Companheiro(a) com o(a) qual tenha filho ou viva há mais de 5 (cinco) anos,2014-01-01,2018-01-07
+tipo_dep_02_3,02,Companheiro(a) com o(a) qual tenha filho ou viva há mais de 5 (cinco) anos ou possua declaração de união estável,2018-01-08,
+tipo_dep_03,03,Filho(a) ou enteado(a) até 21 (vinte e um) anos,2014-01-01,2018-01-07
+tipo_dep_03_5,03,Filho(a) ou enteado(a),2018-01-08,
+tipo_dep_04,04,"Filho(a) ou enteado(a) universitário(a) ou cursando escola técnica de 2º grau, até 24 (vinte e quatro) anos",2014-01-01,2018-01-07
+tipo_dep_04_7,04,"Filho(a) ou enteado(a), universitário(a) ou cursando escola técnica de 2º grau",2018-01-08,2023-04-25
+tipo_dep_05,05,"Filho(a) ou enteado(a) em qualquer idade, quando incapacitado física e/ou mentalmente para o trabalho",2014-01-01,2018-01-07
+tipo_dep_06,06,"Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do(a) qual detenha a guarda judicial, até 21 (vinte e um) anos",2014-01-01,2018-01-07
+tipo_dep_06_10,06,"Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do(a) qual detenha a guarda judicial",2018-01-08,
+tipo_dep_07,07,"Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, com idade até 24 anos, se ainda estiver cursando estabelecimento de nível superior ou escola técnica de 2º grau, desde que tenha detido sua guarda judicial até os 21 anos",2014-01-01,2018-01-07
+tipo_dep_07_12,07,"Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, universitário(a) ou cursando escola técnica de 2° grau, do(a) qual detenha a guarda judicial",2018-01-08,2023-04-25
+tipo_dep_08,08,"Irmão(ã), neto(a) ou bisneto(a) sem arrimo dos pais, do(a) qual detenha a guarda judicial, em qualquer idade, quando incapacitado física e/ou mentalmente para o trabalho",2014-01-01,2018-01-07
+tipo_dep_09,09,"Pais, avós e bisavós",2014-01-01,
+tipo_dep_10,10,"Menor pobre, até 21 (vinte e um) anos, que crie e eduque e do qual detenha a guarda judicial",2014-01-01,2018-01-07
+tipo_dep_10_16,10,Menor pobre do qual detenha a guarda judicial,2018-01-08,
+tipo_dep_11,11,"A pessoa absolutamente incapaz, da qual seja tutor ou curador",2014-01-01,
+tipo_dep_12,12,Ex-cônjuge que receba pensão de alimentos,2014-01-01,2018-01-07
+tipo_dep_12_19,12,Ex-cônjuge,2018-01-08,
+tipo_dep_99,99,Agregado/Outros,2014-01-01,

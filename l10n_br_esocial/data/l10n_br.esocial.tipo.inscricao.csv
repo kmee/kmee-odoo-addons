@@ -1,0 +1,7 @@
+id,codigo,nome,dt_inicio,dt_fim
+tipo_insc_1,1,CNPJ,2014-01-01,
+tipo_insc_2,2,CPF,2014-01-01,
+tipo_insc_3,3,CAEPF (Cadastro de Atividade Econômica de Pessoa Física),2014-01-01,
+tipo_insc_4,4,CNO (Cadastro Nacional de Obra),2014-01-01,
+tipo_insc_5,5,CGC,2018-01-21,
+tipo_insc_6,6,CEI,2019-11-11,
