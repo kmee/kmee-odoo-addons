@@ -21,3 +21,15 @@ access_esocial_s1010_user,l10n_br.esocial.s1010 user,model_l10n_br_esocial_s1010
 access_esocial_s1010_manager,l10n_br.esocial.s1010 manager,model_l10n_br_esocial_s1010,payroll.group_payroll_manager,1,1,1,1
 access_esocial_s1200_user,l10n_br.esocial.s1200 user,model_l10n_br_esocial_s1200,base.group_user,1,0,0,0
 access_esocial_s1200_manager,l10n_br.esocial.s1200 manager,model_l10n_br_esocial_s1200,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s1000_user,l10n_br.esocial.s1000 user,model_l10n_br_esocial_s1000,base.group_user,1,0,0,0
+access_esocial_s1000_manager,l10n_br.esocial.s1000 manager,model_l10n_br_esocial_s1000,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s1020_user,l10n_br.esocial.s1020 user,model_l10n_br_esocial_s1020,base.group_user,1,0,0,0
+access_esocial_s1020_manager,l10n_br.esocial.s1020 manager,model_l10n_br_esocial_s1020,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s2200_user,l10n_br.esocial.s2200 user,model_l10n_br_esocial_s2200,base.group_user,1,0,0,0
+access_esocial_s2200_manager,l10n_br.esocial.s2200 manager,model_l10n_br_esocial_s2200,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s2206_user,l10n_br.esocial.s2206 user,model_l10n_br_esocial_s2206,base.group_user,1,0,0,0
+access_esocial_s2206_manager,l10n_br.esocial.s2206 manager,model_l10n_br_esocial_s2206,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s2230_user,l10n_br.esocial.s2230 user,model_l10n_br_esocial_s2230,base.group_user,1,0,0,0
+access_esocial_s2230_manager,l10n_br.esocial.s2230 manager,model_l10n_br_esocial_s2230,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s2299_user,l10n_br.esocial.s2299 user,model_l10n_br_esocial_s2299,base.group_user,1,0,0,0
+access_esocial_s2299_manager,l10n_br.esocial.s2299 manager,model_l10n_br_esocial_s2299,payroll.group_payroll_manager,1,1,1,1
