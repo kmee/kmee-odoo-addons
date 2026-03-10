@@ -78,6 +78,13 @@ class ESocialS2206(models.Model):
         if self.dsc_alt:
             data["dsc_alt"] = self.dsc_alt
 
+        # Union CNPJ (required for CLT)
+        union_cnpj = getattr(contract, "union_cnpj", None)
+        if union_cnpj:
+            data["cnpj_sind_categ_prof"] = "".join(c for c in union_cnpj if c.isdigit())
+        else:
+            data["cnpj_sind_categ_prof"] = "00000000000000"
+
         if contract.wage:
             data["vr_sal_fx"] = str(contract.wage)
             data["und_sal_fixo"] = 5  # Mensal
