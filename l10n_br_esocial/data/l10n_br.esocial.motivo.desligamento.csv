@@ -1,0 +1,50 @@
+id,codigo,nome,active
+l10n_br_esocial.mot_deslig_01,01,"Rescisão com justa causa, por iniciativa do empregador",True
+l10n_br_esocial.mot_deslig_02,02,"Rescisão sem justa causa, por iniciativa do empregador",True
+l10n_br_esocial.mot_deslig_03,03,"Rescisão antecipada do contrato a termo por iniciativa do empregador",True
+l10n_br_esocial.mot_deslig_04,04,"Rescisão antecipada do contrato a termo por iniciativa do empregado",True
+l10n_br_esocial.mot_deslig_05,05,"Rescisão por culpa recíproca",True
+l10n_br_esocial.mot_deslig_06,06,"Rescisão por término do contrato a termo",True
+l10n_br_esocial.mot_deslig_07,07,"Rescisão do contrato de trabalho por iniciativa do empregado",True
+l10n_br_esocial.mot_deslig_08,08,"Rescisão por interesse do empregado, nas hipóteses previstas nos arts. 394 e 483, § 1º, da CLT",True
+l10n_br_esocial.mot_deslig_09,09,"Rescisão por opção do empregado em virtude de falecimento do empregador individual ou doméstico",True
+l10n_br_esocial.mot_deslig_10,10,"Rescisão por falecimento do empregado",True
+l10n_br_esocial.mot_deslig_11,11,"Transferência de empregado para empresa do mesmo grupo empresarial, sem rescisão do contrato",True
+l10n_br_esocial.mot_deslig_12,12,"Transferência de empregado da consorciada para consórcio e vice-versa, sem rescisão do contrato",True
+l10n_br_esocial.mot_deslig_13,13,"Transferência de empregado de empresa ou consórcio por sucessão, sem rescisão do contrato de trabalho",True
+l10n_br_esocial.mot_deslig_14,14,"Rescisão por falecimento do empregador individual ou doméstico sem continuação da atividade",False
+l10n_br_esocial.mot_deslig_15,15,"Demissão de aprendizes por desempenho insuficiente ou inadaptação",False
+l10n_br_esocial.mot_deslig_16,16,"Nulidade do contrato de trabalho (art. 37, II, da Constituição), quando mantido o direito ao salário",True
+l10n_br_esocial.mot_deslig_17,17,"Rescisão indireta do contrato de trabalho",True
+l10n_br_esocial.mot_deslig_18,18,"Aposentadoria compulsória",False
+l10n_br_esocial.mot_deslig_19,19,"Aposentadoria por idade",False
+l10n_br_esocial.mot_deslig_20,20,"Aposentadoria por idade e tempo de contribuição",False
+l10n_br_esocial.mot_deslig_21,21,"Reforma militar",True
+l10n_br_esocial.mot_deslig_22,22,"Reserva militar",True
+l10n_br_esocial.mot_deslig_23,23,"Exoneração",True
+l10n_br_esocial.mot_deslig_24,24,"Demissão",True
+l10n_br_esocial.mot_deslig_25,25,"Vacância de cargo efetivo",True
+l10n_br_esocial.mot_deslig_26,26,"Rescisão por paralisação temporária ou definitiva da empresa motivada por atos de autoridade",True
+l10n_br_esocial.mot_deslig_27,27,"Rescisão por motivo de força maior",True
+l10n_br_esocial.mot_deslig_28,28,"Término da cessão/requisição",False
+l10n_br_esocial.mot_deslig_29,29,"Redistribuição ou Reforma Administrativa",True
+l10n_br_esocial.mot_deslig_30,30,"Mudança de regime trabalhista",True
+l10n_br_esocial.mot_deslig_31,31,"Reversão de reintegração",False
+l10n_br_esocial.mot_deslig_32,32,"Extravio de militar",True
+l10n_br_esocial.mot_deslig_33,33,"Rescisão por acordo entre as partes (art. 484-A da CLT)",True
+l10n_br_esocial.mot_deslig_34,34,"Transf. de titularidade do empregado doméstico para outro representante da mesma unidade familiar",True
+l10n_br_esocial.mot_deslig_35,35,"Extinção do contrato de trabalho intermitente",False
+l10n_br_esocial.mot_deslig_36,36,"Mudança de CPF",True
+l10n_br_esocial.mot_deslig_37,37,"Remoção, em caso de alteração do órgão declarante",True
+l10n_br_esocial.mot_deslig_38,38,"Aposentadoria, exceto por invalidez",True
+l10n_br_esocial.mot_deslig_39,39,"Aposentadoria de servidor estatutário, por invalidez",True
+l10n_br_esocial.mot_deslig_40,40,"Término de exercício de mandato",True
+l10n_br_esocial.mot_deslig_41,41,"Rescisão de aprendiz por desempenho insuficiente ou inadaptação",True
+l10n_br_esocial.mot_deslig_42,42,"Rescisão de aprendiz por ausência injustificada à escola que implique perda do ano letivo",True
+l10n_br_esocial.mot_deslig_43,43,"Transferência de empregado de empresa considerada inapta por inexistência de fato",True
+l10n_br_esocial.mot_deslig_44,44,"Agrupamento contratual",True
+l10n_br_esocial.mot_deslig_45,45,"Exclusão de militar das Forças Armadas do serviço ativo, com efeitos financeiros",True
+l10n_br_esocial.mot_deslig_46,46,"Exclusão de militar das Forças Armadas do serviço ativo, sem efeitos financeiros",True
+l10n_br_esocial.mot_deslig_47,47,"Rescisão por encerramento da empresa, de seus estabelecimentos ou supressão de parte de suas atividades",True
+l10n_br_esocial.mot_deslig_48,48,"Rescisão por falecimento do empregador individual sem continuação da atividade",True
+l10n_br_esocial.mot_deslig_49,49,"Rescisão por falecimento do empregador doméstico sem continuação da atividade",True

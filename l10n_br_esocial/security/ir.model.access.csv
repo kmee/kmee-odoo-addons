@@ -1,0 +1,23 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_esocial_natureza_rubrica_user,l10n_br.esocial.natureza.rubrica user,model_l10n_br_esocial_natureza_rubrica,base.group_user,1,0,0,0
+access_esocial_natureza_rubrica_manager,l10n_br.esocial.natureza.rubrica manager,model_l10n_br_esocial_natureza_rubrica,payroll.group_payroll_manager,1,1,1,1
+access_esocial_categoria_trabalhador_user,l10n_br.esocial.categoria.trabalhador user,model_l10n_br_esocial_categoria_trabalhador,base.group_user,1,0,0,0
+access_esocial_categoria_trabalhador_manager,l10n_br.esocial.categoria.trabalhador manager,model_l10n_br_esocial_categoria_trabalhador,payroll.group_payroll_manager,1,1,1,1
+access_esocial_classificacao_tributaria_user,l10n_br.esocial.classificacao.tributaria user,model_l10n_br_esocial_classificacao_tributaria,base.group_user,1,0,0,0
+access_esocial_classificacao_tributaria_manager,l10n_br.esocial.classificacao.tributaria manager,model_l10n_br_esocial_classificacao_tributaria,payroll.group_payroll_manager,1,1,1,1
+access_esocial_lotacao_tributaria_user,l10n_br.esocial.lotacao.tributaria user,model_l10n_br_esocial_lotacao_tributaria,base.group_user,1,0,0,0
+access_esocial_lotacao_tributaria_manager,l10n_br.esocial.lotacao.tributaria manager,model_l10n_br_esocial_lotacao_tributaria,payroll.group_payroll_manager,1,1,1,1
+access_esocial_motivo_afastamento_user,l10n_br.esocial.motivo.afastamento user,model_l10n_br_esocial_motivo_afastamento,base.group_user,1,0,0,0
+access_esocial_motivo_afastamento_manager,l10n_br.esocial.motivo.afastamento manager,model_l10n_br_esocial_motivo_afastamento,payroll.group_payroll_manager,1,1,1,1
+access_esocial_motivo_desligamento_user,l10n_br.esocial.motivo.desligamento user,model_l10n_br_esocial_motivo_desligamento,base.group_user,1,0,0,0
+access_esocial_motivo_desligamento_manager,l10n_br.esocial.motivo.desligamento manager,model_l10n_br_esocial_motivo_desligamento,payroll.group_payroll_manager,1,1,1,1
+access_esocial_evento_user,l10n_br.esocial.evento user,model_l10n_br_esocial_evento,base.group_user,1,0,0,0
+access_esocial_evento_manager,l10n_br.esocial.evento manager,model_l10n_br_esocial_evento,payroll.group_payroll_manager,1,1,1,1
+access_esocial_lote_user,l10n_br.esocial.lote user,model_l10n_br_esocial_lote,base.group_user,1,0,0,0
+access_esocial_lote_manager,l10n_br.esocial.lote manager,model_l10n_br_esocial_lote,payroll.group_payroll_manager,1,1,1,1
+access_esocial_ocorrencia_user,l10n_br.esocial.ocorrencia user,model_l10n_br_esocial_ocorrencia,base.group_user,1,0,0,0
+access_esocial_ocorrencia_manager,l10n_br.esocial.ocorrencia manager,model_l10n_br_esocial_ocorrencia,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s1010_user,l10n_br.esocial.s1010 user,model_l10n_br_esocial_s1010,base.group_user,1,0,0,0
+access_esocial_s1010_manager,l10n_br.esocial.s1010 manager,model_l10n_br_esocial_s1010,payroll.group_payroll_manager,1,1,1,1
+access_esocial_s1200_user,l10n_br.esocial.s1200 user,model_l10n_br_esocial_s1200,base.group_user,1,0,0,0
+access_esocial_s1200_manager,l10n_br.esocial.s1200 manager,model_l10n_br_esocial_s1200,payroll.group_payroll_manager,1,1,1,1
