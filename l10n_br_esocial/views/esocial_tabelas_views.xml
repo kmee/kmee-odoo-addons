@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- ===== Natureza Rubrica (Tab 3) ===== -->
+    <record id="view_esocial_natureza_rubrica_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.natureza.rubrica.tree</field>
+        <field name="model">l10n_br.esocial.natureza.rubrica</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_natureza_rubrica_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.natureza.rubrica.form</field>
+        <field name="model">l10n_br.esocial.natureza.rubrica</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_natureza_rubrica" model="ir.actions.act_window">
+        <field name="name">Natureza da Rubrica (Tab. 3)</field>
+        <field name="res_model">l10n_br.esocial.natureza.rubrica</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Categoria Trabalhador (Tab 1) ===== -->
+    <record id="view_esocial_categoria_trabalhador_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.categoria.trabalhador.tree</field>
+        <field name="model">l10n_br.esocial.categoria.trabalhador</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+                <field name="grupo" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_categoria_trabalhador_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.categoria.trabalhador.form</field>
+        <field name="model">l10n_br.esocial.categoria.trabalhador</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="grupo" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_categoria_trabalhador" model="ir.actions.act_window">
+        <field name="name">Categoria do Trabalhador (Tab. 1)</field>
+        <field name="res_model">l10n_br.esocial.categoria.trabalhador</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Classificação Tributária (Tab 8) ===== -->
+    <record id="view_esocial_classificacao_tributaria_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.classificacao.tributaria.tree</field>
+        <field name="model">l10n_br.esocial.classificacao.tributaria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_classificacao_tributaria_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.classificacao.tributaria.form</field>
+        <field name="model">l10n_br.esocial.classificacao.tributaria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_classificacao_tributaria" model="ir.actions.act_window">
+        <field name="name">Classificação Tributária (Tab. 8)</field>
+        <field name="res_model">l10n_br.esocial.classificacao.tributaria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Lotação Tributária (Tab 10) ===== -->
+    <record id="view_esocial_lotacao_tributaria_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.lotacao.tributaria.tree</field>
+        <field name="model">l10n_br.esocial.lotacao.tributaria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_lotacao_tributaria_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.lotacao.tributaria.form</field>
+        <field name="model">l10n_br.esocial.lotacao.tributaria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_lotacao_tributaria" model="ir.actions.act_window">
+        <field name="name">Lotação Tributária (Tab. 10)</field>
+        <field name="res_model">l10n_br.esocial.lotacao.tributaria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Motivo Afastamento (Tab 18) ===== -->
+    <record id="view_esocial_motivo_afastamento_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.afastamento.tree</field>
+        <field name="model">l10n_br.esocial.motivo.afastamento</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_motivo_afastamento_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.afastamento.form</field>
+        <field name="model">l10n_br.esocial.motivo.afastamento</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_motivo_afastamento" model="ir.actions.act_window">
+        <field name="name">Motivo de Afastamento (Tab. 18)</field>
+        <field name="res_model">l10n_br.esocial.motivo.afastamento</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Motivo Desligamento (Tab 19) ===== -->
+    <record id="view_esocial_motivo_desligamento_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.desligamento.tree</field>
+        <field name="model">l10n_br.esocial.motivo.desligamento</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_motivo_desligamento_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.desligamento.form</field>
+        <field name="model">l10n_br.esocial.motivo.desligamento</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_motivo_desligamento" model="ir.actions.act_window">
+        <field name="name">Motivo de Desligamento (Tab. 19)</field>
+        <field name="res_model">l10n_br.esocial.motivo.desligamento</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

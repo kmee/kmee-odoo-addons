@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_evento_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.evento.tree</field>
+        <field name="model">l10n_br.esocial.evento</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-danger="state == 'error'"
+                decoration-success="state == 'success'"
+                decoration-info="state == 'sent'"
+                decoration-muted="state == 'rectified'"
+            >
+                <field name="tipo" />
+                <field name="operacao" />
+                <field name="per_apur" />
+                <field name="ind_retif" />
+                <field name="nr_recibo" />
+                <field name="lote_id" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state in ('validated', 'pending')"
+                    decoration-success="state == 'success'"
+                    decoration-danger="state == 'error'"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_evento_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.evento.form</field>
+        <field name="model">l10n_br.esocial.evento</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_validate"
+                        type="object"
+                        string="Validar"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_reset_draft"
+                        type="object"
+                        string="Voltar a Rascunho"
+                        attrs="{'invisible': [('state', 'not in', ('validated', 'error'))]}"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,validated,sent,success"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Identificação">
+                            <field name="tipo" />
+                            <field name="operacao" />
+                            <field name="id_evento" />
+                            <field name="per_apur" />
+                            <field name="ind_retif" />
+                            <field name="nr_recibo" />
+                        </group>
+                        <group string="Vínculo">
+                            <field name="lote_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="origem_model" />
+                            <field name="origem_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="XML Envio" name="xml_envio">
+                            <field
+                                name="xml_envio"
+                                widget="ace"
+                                options="{'mode': 'xml'}"
+                            />
+                        </page>
+                        <page string="XML Retorno" name="xml_retorno">
+                            <field
+                                name="xml_retorno"
+                                widget="ace"
+                                options="{'mode': 'xml'}"
+                            />
+                        </page>
+                        <page string="Ocorrências" name="ocorrencias">
+                            <field name="ocorrencia_ids">
+                                <tree>
+                                    <field name="tipo" />
+                                    <field name="codigo" />
+                                    <field name="descricao" />
+                                    <field name="localizacao" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_esocial_evento_search" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.evento.search</field>
+        <field name="model">l10n_br.esocial.evento</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tipo" />
+                <field name="per_apur" />
+                <field name="nr_recibo" />
+                <field name="id_evento" />
+                <filter
+                    name="draft"
+                    string="Rascunho"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="validated"
+                    string="Validados"
+                    domain="[('state', '=', 'validated')]"
+                />
+                <filter
+                    name="sent"
+                    string="Transmitidos"
+                    domain="[('state', '=', 'sent')]"
+                />
+                <filter
+                    name="success"
+                    string="Sucesso"
+                    domain="[('state', '=', 'success')]"
+                />
+                <filter name="error" string="Erro" domain="[('state', '=', 'error')]" />
+                <separator />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_tipo"
+                        string="Tipo"
+                        context="{'group_by': 'tipo'}"
+                    />
+                    <filter
+                        name="group_state"
+                        string="Estado"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_per_apur"
+                        string="Período"
+                        context="{'group_by': 'per_apur'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_esocial_evento" model="ir.actions.act_window">
+        <field name="name">Eventos eSocial</field>
+        <field name="res_model">l10n_br.esocial.evento</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_esocial_evento_search" />
+    </record>
+
+</odoo>

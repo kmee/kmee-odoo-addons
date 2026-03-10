@@ -1,0 +1,16 @@
+id,codigo,nome,active
+l10n_br_esocial.lot_trib_01,01,"Classificação da atividade econômica exercida pela Pessoa Jurídica para fins de atribuição de código FPAS, inclusive obras de construção civil própria, exceto: a) empreitada parcial ou sub-empreitada de obra de construção civil (utilizar opção 02); b) prestação de serviços em instalações de terceiros (utilizar opções 03 a 09); c) Embarcação inscrita no Registro Especial Brasileiro - REB (utilizar opção 10)",True
+l10n_br_esocial.lot_trib_02,02,"Obra de construção civil - Empreitada parcial ou subempreitada",True
+l10n_br_esocial.lot_trib_03,03,"Pessoa Física tomadora de serviços prestados mediante cessão de mão de obra, exceto contratante de cooperativa",True
+l10n_br_esocial.lot_trib_04,04,"Pessoa Jurídica tomadora de serviços prestados mediante cessão de mão de obra, exceto contratante de cooperativa, nos termos da Lei 8.212/1991",True
+l10n_br_esocial.lot_trib_05,05,"Pessoa Jurídica tomadora de serviços prestados por cooperados por intermédio de cooperativa de trabalho, exceto aqueles prestados a entidade beneficente/isenta",True
+l10n_br_esocial.lot_trib_06,06,"Entidade beneficente/isenta tomadora de serviços prestados por cooperados por intermédio de cooperativa de trabalho",True
+l10n_br_esocial.lot_trib_07,07,"Pessoa Física tomadora de serviços prestados por cooperados por intermédio de cooperativa de trabalho",True
+l10n_br_esocial.lot_trib_08,08,"Operador portuário tomador de serviços de trabalhadores avulsos",True
+l10n_br_esocial.lot_trib_09,09,"Contratante de trabalhadores avulsos não portuários por intermédio de sindicato",True
+l10n_br_esocial.lot_trib_10,10,"Embarcação inscrita no Registro Especial Brasileiro - REB",True
+l10n_br_esocial.lot_trib_21,21,"Classificação da atividade econômica ou obra própria de construção civil da Pessoa Física",True
+l10n_br_esocial.lot_trib_24,24,"Empregador doméstico",True
+l10n_br_esocial.lot_trib_90,90,"Atividades desenvolvidas no exterior por trabalhador vinculado ao Regime Geral de Previdência Social (expatriados)",True
+l10n_br_esocial.lot_trib_91,91,"Atividades desenvolvidas por trabalhador estrangeiro vinculado a Regime de Previdência Social no exterior",True
+l10n_br_esocial.lot_trib_92,92,"Bolsista contribuinte individual sem contribuição patronal",True
