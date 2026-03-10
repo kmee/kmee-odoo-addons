@@ -1,0 +1,44 @@
+id,codigo,nome,active
+l10n_br_esocial.mot_afast_01,01,"Acidente/doença do trabalho",True
+l10n_br_esocial.mot_afast_02,02,"Novo afast.pelo mesmo acidente/doença do trabalho",False
+l10n_br_esocial.mot_afast_03,03,"Acidente/doença não relacionada ao trabalho",True
+l10n_br_esocial.mot_afast_04,04,"Novo afast. mesmo acid/doença não rel. ao trabalho",False
+l10n_br_esocial.mot_afast_05,05,"Afastamento/licença de servidor público ou militar prevista em estatuto, sem remuneração",True
+l10n_br_esocial.mot_afast_06,06,"Aposentadoria por invalidez",True
+l10n_br_esocial.mot_afast_07,07,"Acompanhamento - Licença para acompanhamento de membro da família enfermo",True
+l10n_br_esocial.mot_afast_08,08,"Afastamento do empregado para participar de atividade do Conselho Curador do FGTS - Art. 65, § 6º, do Decreto 99.684/1990 (Regulamento do FGTS)",False
+l10n_br_esocial.mot_afast_10,10,"Afastamento/licença de servidor público ou militar prevista em estatuto, com remuneração",True
+l10n_br_esocial.mot_afast_11,11,"Cárcere",True
+l10n_br_esocial.mot_afast_12,12,"Candidato a cargo eletivo - Lei 7.664/1988",True
+l10n_br_esocial.mot_afast_13,13,"Cargo eletivo - Candidato a cargo eletivo - Art. 1°, inciso II, alínea ""l"", da Lei Complementar 64/1990 - Servidor público, estatutário ou não, dos órgãos ou entidades da Administração Direta ou Indireta da União, dos Estados, do Distrito Federal, dos Municípios e dos Territórios, inclusive das fundações mantidas pelo Poder Público",True
+l10n_br_esocial.mot_afast_14,14,"Cessão/Requisição",False
+l10n_br_esocial.mot_afast_15,15,"Férias ou Recesso",True
+l10n_br_esocial.mot_afast_16,16,"Licença remunerada",True
+l10n_br_esocial.mot_afast_17,17,"Licença maternidade",True
+l10n_br_esocial.mot_afast_18,18,"Licença maternidade - Prorrogação por 60 dias (Empresa Cidadã)",True
+l10n_br_esocial.mot_afast_19,19,"Licença maternidade - Aborto não criminoso",True
+l10n_br_esocial.mot_afast_20,20,"Licença maternidade - Cônjuge sobrevivente ou decorrente de adoção ou guarda judicial",True
+l10n_br_esocial.mot_afast_21,21,"Licença não remunerada ou sem vencimento",True
+l10n_br_esocial.mot_afast_22,22,"Mandato eleitoral",True
+l10n_br_esocial.mot_afast_23,23,"Mandato eleitoral, com remuneração",False
+l10n_br_esocial.mot_afast_24,24,"Mandato sindical",True
+l10n_br_esocial.mot_afast_25,25,"Mulher vítima de violência - Lei 11.340/2006",True
+l10n_br_esocial.mot_afast_26,26,"Participação de empregado no Conselho Nacional de Previdência Social - CNPS - Art. 3º da Lei 8.213/1991",True
+l10n_br_esocial.mot_afast_27,27,"Qualificação - Afastamento por suspensão do contrato de acordo com o art. 476-A da CLT",True
+l10n_br_esocial.mot_afast_28,28,"Representante sindical - Afastamento pelo tempo que se fizer necessário, quando, na qualidade de representante de entidade sindical, estiver participando de reunião oficial de organismo internacional do qual o Brasil seja membro",True
+l10n_br_esocial.mot_afast_29,29,"Serviço militar obrigatório",True
+l10n_br_esocial.mot_afast_30,30,"Suspensão disciplinar - Art. 474 da CLT",False
+l10n_br_esocial.mot_afast_31,31,"Servidor público em disponibilidade",True
+l10n_br_esocial.mot_afast_33,33,"Licença maternidade - 180 dias - Crianças com sequelas neurológicas por doenças transmitidas pelo Aedes aegypti",False
+l10n_br_esocial.mot_afast_34,34,"Inatividade do trabalhador avulso (portuário ou não portuário) por período superior a 90 dias",True
+l10n_br_esocial.mot_afast_35,35,"Licença maternidade - Antecipação e/ou prorrogação mediante atestado médico",True
+l10n_br_esocial.mot_afast_36,36,"Afastamento temporário de exercente de mandato eletivo para cargo em comissão",True
+l10n_br_esocial.mot_afast_37,37,"Suspensão temporária do contrato de trabalho nos termos da Lei 14.020/2020 (conversão da MP 936/2020)",False
+l10n_br_esocial.mot_afast_38,38,"Impedimento de concorrência à escala para trabalho avulso",True
+l10n_br_esocial.mot_afast_39,39,"Suspensão de pagamento de servidor público por não recadastramento",True
+l10n_br_esocial.mot_afast_40,40,"Exercício em outro órgão de servidor ou empregado público cedido",True
+l10n_br_esocial.mot_afast_41,41,"Qualificação - Afastamento por suspensão do contrato de acordo com o art. 15 da Lei 14.457/2022",True
+l10n_br_esocial.mot_afast_42,42,"Qualificação - Afastamento por suspensão do contrato de acordo com o art. 17 da Lei 14.457/2022",True
+l10n_br_esocial.mot_afast_43,43,"Licença Maternidade - Prorrogação por 60 dias - Criança com deficiência permanente decorrente do vírus Zika",True
+l10n_br_esocial.mot_afast_44,44,"Suspensão contratual decorrente de ajuizamento de rescisão indireta do contrato",True
+l10n_br_esocial.mot_afast_45,45,"Suspensão contratual para ajuizamento de inquérito para apuração de falta grave",True

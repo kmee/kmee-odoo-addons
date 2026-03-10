@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Menu raiz eSocial (separado da Folha) -->
+    <menuitem
+        id="menu_esocial_root"
+        name="eSocial"
+        sequence="50"
+        web_icon="l10n_br_esocial,static/description/icon.png"
+    />
+
+    <!-- Eventos -->
+    <menuitem
+        id="menu_esocial_eventos"
+        parent="menu_esocial_root"
+        name="Eventos"
+        sequence="10"
+        action="action_esocial_evento"
+    />
+
+    <!-- Lotes -->
+    <menuitem
+        id="menu_esocial_lotes"
+        parent="menu_esocial_root"
+        name="Lotes de Transmissão"
+        sequence="20"
+        action="action_esocial_lote"
+    />
+
+    <!-- Configuração -->
+    <menuitem
+        id="menu_esocial_config"
+        parent="menu_esocial_root"
+        name="Configuração"
+        sequence="90"
+    />
+
+    <!-- Tabelas de Referência (sub-menu de Configuração) -->
+    <menuitem
+        id="menu_esocial_tabelas"
+        parent="menu_esocial_config"
+        name="Tabelas de Referência"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_esocial_tab_natureza_rubrica"
+        parent="menu_esocial_tabelas"
+        name="Natureza da Rubrica (Tab. 3)"
+        sequence="3"
+        action="action_esocial_natureza_rubrica"
+    />
+
+    <menuitem
+        id="menu_esocial_tab_categoria_trabalhador"
+        parent="menu_esocial_tabelas"
+        name="Categoria do Trabalhador (Tab. 1)"
+        sequence="1"
+        action="action_esocial_categoria_trabalhador"
+    />
+
+    <menuitem
+        id="menu_esocial_tab_classificacao_tributaria"
+        parent="menu_esocial_tabelas"
+        name="Classificação Tributária (Tab. 8)"
+        sequence="8"
+        action="action_esocial_classificacao_tributaria"
+    />
+
+    <menuitem
+        id="menu_esocial_tab_lotacao_tributaria"
+        parent="menu_esocial_tabelas"
+        name="Lotação Tributária (Tab. 10)"
+        sequence="10"
+        action="action_esocial_lotacao_tributaria"
+    />
+
+    <menuitem
+        id="menu_esocial_tab_motivo_afastamento"
+        parent="menu_esocial_tabelas"
+        name="Motivo de Afastamento (Tab. 18)"
+        sequence="18"
+        action="action_esocial_motivo_afastamento"
+    />
+
+    <menuitem
+        id="menu_esocial_tab_motivo_desligamento"
+        parent="menu_esocial_tabelas"
+        name="Motivo de Desligamento (Tab. 19)"
+        sequence="19"
+        action="action_esocial_motivo_desligamento"
+    />
+
+</odoo>
