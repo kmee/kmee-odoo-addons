@@ -1,0 +1,12 @@
+id,codigo,nome,dt_inicio,dt_fim
+trib_ext_10,10,Retenção do IRRF - Alíquota padrão,2014-01-01,
+trib_ext_11,11,Retenção do IRRF - Alíquota da tabela progressiva,2014-01-01,
+trib_ext_12,12,Retenção do IRRF - Alíquota diferenciada (países com tributação favorecida),2014-01-01,
+trib_ext_13,13,Retenção do IRRF - Alíquota limitada conforme cláusula em convênio,2014-01-01,
+trib_ext_30,30,Retenção do IRRF - Outras hipóteses,2014-01-01,
+trib_ext_40,40,Não retenção do IRRF - Isenção estabelecida em convênio,2014-01-01,
+trib_ext_41,41,Não retenção do IRRF - Isenção prevista em lei interna,2014-01-01,
+trib_ext_42,42,Não retenção do IRRF - Alíquota zero prevista em lei interna,2014-01-01,
+trib_ext_43,43,Não retenção do IRRF - Pagamento antecipado do imposto,2014-01-01,
+trib_ext_44,44,Não retenção do IRRF - Medida judicial,2014-01-01,
+trib_ext_50,50,Não retenção do IRRF - Outras hipóteses,2014-01-01,

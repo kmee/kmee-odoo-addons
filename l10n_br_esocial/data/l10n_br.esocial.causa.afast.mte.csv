@@ -1,0 +1,19 @@
+id,codigo,nome,dt_inicio,dt_fim,cod_esocial
+causa_afast_mte_jc2,JC2,"Despedida por justa causa, pelo empregador",2014-01-01,,01
+causa_afast_mte_sj2,SJ2,"Despedida sem justa causa, pelo empregador",2014-01-01,,02
+causa_afast_mte_ra2,RA2,"Rescisão antecipada, pelo empregador, do contrato de trabalho por prazo determinado",2014-01-01,,03
+causa_afast_mte_ra1,RA1,"Rescisão antecipada, pelo empregado, do contrato de trabalho por prazo determinado",2014-01-01,,04
+causa_afast_mte_cr0,CR0,Rescisão por culpa recí­proca,2014-01-01,,05
+causa_afast_mte_pd0,PD0,Extinção normal do contrato de trabalho por prazo determinado,2014-01-01,,06
+causa_afast_mte_sj1,SJ1,Rescisão contratual a pedido do empregado,2014-01-01,,07
+causa_afast_mte_sj1_8,SJ1,Rescisão contratual a pedido do empregado,2014-01-01,,08
+causa_afast_mte_fe1,FE1,Rescisão do contrato de trabalho por falecimento do empregador individual por opção do empregado,2014-01-01,,09
+causa_afast_mte_ft1,FT1,Rescisão do contrato de trabalho por falecimento do empregado,2014-01-01,,10
+causa_afast_mte_fe2,FE2,Rescisão do contrato de trabalho por falecimento do empregador individual sem continuação da atividade da empresa,2014-01-01,2024-01-21,14
+causa_afast_mte_fe2_12,FE2,"Rescisão do contrato de trabalho por encerramento da empresa, de seus estabelecimentos ou supressao de parte de suas atividades",2014-01-01,,47
+causa_afast_mte_fe2_13,FE2,Rescisão do contrato de trabalho por falecimento do empregador individual sem continuação da atividade,2014-01-01,,48
+causa_afast_mte_fe2_14,FE2,Rescisão do contrato de trabalho por falecimento do empregador domestico sem continuação da atividade,2014-01-01,,49
+causa_afast_mte_ri2,RI2,Rescisão indireta,2014-01-01,,17
+causa_afast_mte_fm0,FM0,Rescisão por força maior,2014-01-01,,27
+causa_afast_mte_ac0,AC0,Rescisão por acordo entre empregado e empregador,2017-11-10,,33
+causa_afast_mte_fp0,FP0,"Rescisão por impossibilidade da continuação da atividade, decorrente de ato de autoridade, lei ou resolução (Factum Principis)",2014-01-01,,26

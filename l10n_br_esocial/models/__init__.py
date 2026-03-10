@@ -1,3 +1,4 @@
+from . import tabelas
 from . import esocial_natureza_rubrica
 from . import esocial_categoria_trabalhador
 from . import esocial_classificacao_tributaria
