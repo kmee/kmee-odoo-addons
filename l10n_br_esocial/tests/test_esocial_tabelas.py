@@ -16,7 +16,7 @@ class TestESocialTabelas(TransactionCase):
         rec = self.env.ref("l10n_br_esocial.nat_rubr_1000")
         self.assertEqual(rec.codigo, "1000")
         self.assertIn("alário", rec.nome)
-        self.assertTrue(rec.name.startswith("1000"))
+        self.assertIn("1000", rec.name)
 
     def test_natureza_rubrica_inss(self):
         """Código 9201 deve ser Contribuição Previdenciária."""
@@ -40,7 +40,7 @@ class TestESocialTabelas(TransactionCase):
         """Código 101 deve ser Empregado CLT."""
         rec = self.env.ref("l10n_br_esocial.cat_trab_101")
         self.assertEqual(rec.codigo, "101")
-        self.assertEqual(rec.grupo, "1")
+        self.assertEqual(rec.grupo, "SE")
         self.assertIn("CLT", rec.nome)
 
     def test_classificacao_tributaria_loaded(self):

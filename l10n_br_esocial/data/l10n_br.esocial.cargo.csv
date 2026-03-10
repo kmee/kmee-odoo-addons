@@ -1,0 +1,228 @@
+id,codigo,nome,dt_inicio,dt_fim,cod_grupo,cod_cbo,tp_trab
+cargo_esocial_001,eSocial-001,Empregado doméstico nos serviços gerais,2014-01-01,,512,512105,1
+cargo_esocial_002,eSocial-002,Empregado doméstico arrumador,2014-01-01,,512,512110,1
+cargo_esocial_003,eSocial-003,Empregado doméstico faxineiro,2014-01-01,,512,512115,1
+cargo_esocial_004,eSocial-004,Babá,2014-01-01,,516,516205,1
+cargo_esocial_005,eSocial-005,Passador de roupas,2014-01-01,,516,516415,1
+cargo_esocial_006,eSocial-006,"Lavadeiro, em geral",2014-01-01,,516,516305,1
+cargo_esocial_007,eSocial-007,Caseiro,2014-01-01,,512,512105,1
+cargo_esocial_008,eSocial-008,Governanta de residência,2014-01-01,,513,513105,1
+cargo_esocial_009,eSocial-009,Mordomo de residência,2014-01-01,,513,513105,1
+cargo_esocial_010,eSocial-010,Cozinheiro do serviço doméstico,2014-01-01,,513,513210,1
+cargo_esocial_011,eSocial-011,Cuidador de pessoas idosas e dependentes,2014-01-01,,516,516210,1
+cargo_esocial_012,eSocial-012,Motorista no serviço doméstico,2014-01-01,,782,782305,1
+cargo_esocial_013,eSocial-013,Motorista particular,2014-01-01,,782,782305,1
+cargo_esocial_014,eSocial-014,Preparador físico,2014-01-01,,224,224120,1
+cargo_esocial_015,eSocial-015,Chefe de cozinha,2014-01-01,,371,271105,1
+cargo_esocial_016,eSocial-016,Subchefe de cozinha,2014-01-01,,271,271105,1
+cargo_esocial_017,eSocial-017,Supervisor de cozinha,2014-01-01,,271,271105,1
+cargo_esocial_018,eSocial-018,Dama de companhia,2014-01-01,,516,516210,1
+cargo_esocial_019,eSocial-019,Garçom,2014-01-01,,513,513405,1
+cargo_esocial_020,eSocial-020,Jardineiro,2014-01-01,,622,622010,1
+cargo_esocial_021,eSocial-021,Porteiro,2014-01-01,,517,517410,1
+cargo_esocial_022,eSocial-022,Vigia,2014-01-01,,517,517420,1
+cargo_esocial_023,eSocial-023,"Secretário, em geral",2014-01-01,,351,351505,1
+cargo_esocial_024,eSocial-024,Enfermeiro,2014-01-01,,223,223505,1
+cargo_esocial_025,eSocial-025,Atendente de enfermagem no serviço doméstico,2014-01-01,,515,515110,1
+cargo_esocial_026,eSocial-026,Auxiliar de enfermagem,2014-01-01,,322,322230,1
+cargo_esocial_027,eSocial-027,Técnico de enfermagem,2014-01-01,,322,322205,1
+cargo_esocial_028,eSocial-028,Assistente social,2014-01-01,,251,251605,1
+cargo_esocial_029,eSocial-029,Fisioterapeutas,2014-01-01,,223,223605,1
+cargo_esocial_030,eSocial-030,"Médicos, em geral",2014-01-01,,225,225125,1
+cargo_esocial_031,eSocial-031,Nutricionistas,2014-01-01,,223,223710,1
+cargo_esocial_032,eSocial-032,Fonoaudiólogos,2014-01-01,,223,223810,1
+cargo_esocial_033,eSocial-033,Psicólogos e psicanalistas,2014-01-01,,251,251510,1
+cargo_esocial_034,eSocial-034,Terapeutas ocupacionais e afins,2014-01-01,,223,223905,1
+cargo_esocial_035,eSocial-035,Professores de educação infantil,2014-01-01,,231,231105,1
+cargo_esocial_036,eSocial-036,Professores de ensino fundamental,2014-01-01,,231,231210,1
+cargo_esocial_037,eSocial-037,Professores do ensino médio,2014-01-01,,232,232110,1
+cargo_esocial_038,eSocial-038,Administradores,2014-01-01,,252,252105,1
+cargo_esocial_039,eSocial-039,Contadores e afins,2014-01-01,,252,252210,1
+cargo_esocial_040,eSocial-040,Economista doméstico,2014-01-01,,251,251610,1
+cargo_esocial_041,eSocial-041,Marinheiro de esporte e recreio,2014-01-01,,782,782725,1
+cargo_esocial_042,eSocial-042,Marinheiro de convés,2014-01-01,,782,782705,1
+cargo_esocial_043,eSocial-043,Moço de convés,2014-01-01,,782,782715,1
+cargo_esocial_044,eSocial-044,Piloto comercial de helicóptero,2014-01-01,,341,341110,1
+cargo_esocial_045,eSocial-045,Piloto de aeronaves,2014-01-01,,215,215305,1
+cargo_esocial_200,eSocial-200,Técnico agrícola,2014-01-01,,321,321105,2
+cargo_esocial_201,eSocial-201,Técnico agropecuário,2014-01-01,,321,321110,2
+cargo_esocial_202,eSocial-202,Técnico em piscicultura,2014-01-01,,321,321305,2
+cargo_esocial_203,eSocial-203,Técnico em carcinicultura,2014-01-01,,321,321310,2
+cargo_esocial_204,eSocial-204,Técnico em mitilicultura,2014-01-01,,321,321315,2
+cargo_esocial_205,eSocial-205,Técnico em ranicultura,2014-01-01,,321,321320,2
+cargo_esocial_206,eSocial-206,"Produtor agropecuário, em geral",2014-01-01,,611,611005,2
+cargo_esocial_207,eSocial-207,Produtor agrícola polivalente,2014-01-01,,612,612005,2
+cargo_esocial_208,eSocial-208,Produtor de arroz,2014-01-01,,612,612105,2
+cargo_esocial_209,eSocial-209,Produtor de cana-de-açúcar,2014-01-01,,612,612110,2
+cargo_esocial_210,eSocial-210,Produtor de cereais de inverno,2014-01-01,,612,612115,2
+cargo_esocial_211,eSocial-211,Produtor de gramíneas forrageiras,2014-01-01,,612,612120,2
+cargo_esocial_212,eSocial-212,Produtor de milho e sorgo,2014-01-01,,612,612125,2
+cargo_esocial_213,eSocial-213,Produtor de algodão,2014-01-01,,612,612205,2
+cargo_esocial_214,eSocial-214,Produtor de curauá,2014-01-01,,612,612210,2
+cargo_esocial_215,eSocial-215,Produtor de juta,2014-01-01,,612,612215,2
+cargo_esocial_216,eSocial-216,Produtor de rami,2014-01-01,,612,612220,2
+cargo_esocial_217,eSocial-217,Produtor de sisal,2014-01-01,,612,612225,2
+cargo_esocial_218,eSocial-218,Produtor na olericultura de legumes,2014-01-01,,612,612305,2
+cargo_esocial_219,eSocial-219,"Produtor na olericultura de raízes, bulbos e tubérculos",2014-01-01,,612,612310,2
+cargo_esocial_220,eSocial-220,"Produtor na olericultura de talos, folhas e flores",2014-01-01,,612,612315,2
+cargo_esocial_221,eSocial-221,Produtor na olericultura de frutos e sementes,2014-01-01,,612,612320,2
+cargo_esocial_222,eSocial-222,Produtor de flores de corte,2014-01-01,,612,612405,2
+cargo_esocial_223,eSocial-223,Produtor de flores em vaso,2014-01-01,,612,612410,2
+cargo_esocial_224,eSocial-224,Produtor de forrações,2014-01-01,,612,612415,2
+cargo_esocial_225,eSocial-225,Produtor de plantas ornamentais,2014-01-01,,612,612420,2
+cargo_esocial_226,eSocial-226,Produtor de árvores frutíferas,2014-01-01,,612,612505,2
+cargo_esocial_227,eSocial-227,Produtor de espécies frutíferas rasteiras,2014-01-01,,612,612510,2
+cargo_esocial_228,eSocial-228,Produtor de espécies frutíferas trepadeiras,2014-01-01,,612,612515,2
+cargo_esocial_229,eSocial-229,Cafeicultor,2014-01-01,,612,612605,2
+cargo_esocial_230,eSocial-230,Produtor de cacau,2014-01-01,,612,612610,2
+cargo_esocial_231,eSocial-231,Produtor de erva-mate,2014-01-01,,612,612615,2
+cargo_esocial_232,eSocial-232,Produtor de fumo,2014-01-01,,612,612620,2
+cargo_esocial_233,eSocial-233,Produtor de guaraná,2014-01-01,,612,612625,2
+cargo_esocial_234,eSocial-234,Produtor da cultura de amendoim,2014-01-01,,612,612705,2
+cargo_esocial_235,eSocial-235,Produtor da cultura de canola,2014-01-01,,612,612710,2
+cargo_esocial_236,eSocial-236,Produtor da cultura de coco-da-baia,2014-01-01,,612,612715,2
+cargo_esocial_237,eSocial-237,Produtor da cultura de dendê,2014-01-01,,612,612720,2
+cargo_esocial_238,eSocial-238,Produtor da cultura de girassol,2014-01-01,,612,612725,2
+cargo_esocial_239,eSocial-239,Produtor da cultura de linho,2014-01-01,,612,612730,2
+cargo_esocial_240,eSocial-240,Produtor da cultura de mamona,2014-01-01,,612,612735,2
+cargo_esocial_241,eSocial-241,Produtor da cultura de soja,2014-01-01,,612,612740,2
+cargo_esocial_242,eSocial-242,Produtor de especiarias,2014-01-01,,612,612805,2
+cargo_esocial_243,eSocial-243,Produtor de plantas aromáticas e medicinais,2014-01-01,,612,612810,2
+cargo_esocial_244,eSocial-244,Criador em pecuária polivalente,2014-01-01,,613,613005,2
+cargo_esocial_245,eSocial-245,Criador de animais domésticos,2014-01-01,,613,613010,2
+cargo_esocial_246,eSocial-246,Criador de asininos e muares,2014-01-01,,613,613105,2
+cargo_esocial_247,eSocial-247,Criador de bovinos (corte),2014-01-01,,613,613110,2
+cargo_esocial_248,eSocial-248,Criador de bovinos (leite),2014-01-01,,613,613115,2
+cargo_esocial_249,eSocial-249,Criador de bubalinos (corte),2014-01-01,,613,613120,2
+cargo_esocial_250,eSocial-250,Criador de bubalinos (leite),2014-01-01,,613,613125,2
+cargo_esocial_251,eSocial-251,Criador de eqüinos,2014-01-01,,613,613130,2
+cargo_esocial_252,eSocial-252,Criador de caprinos,2014-01-01,,613,613205,2
+cargo_esocial_253,eSocial-253,Criador de ovinos,2014-01-01,,613,613210,2
+cargo_esocial_254,eSocial-254,Criador de suínos,2014-01-01,,613,613215,2
+cargo_esocial_255,eSocial-255,Avicultor,2014-01-01,,613,613305,2
+cargo_esocial_256,eSocial-256,Cunicultor,2014-01-01,,613,613310,2
+cargo_esocial_257,eSocial-257,Apicultor,2014-01-01,,613,613405,2
+cargo_esocial_258,eSocial-258,Criador de animais produtores de veneno,2014-01-01,,613,613410,2
+cargo_esocial_259,eSocial-259,Minhocultor,2014-01-01,,613,613415,2
+cargo_esocial_260,eSocial-260,Sericultor,2014-01-01,,613,613420,2
+cargo_esocial_261,eSocial-261,Supervisor de exploração agrícola,2014-01-01,,620,620105,2
+cargo_esocial_262,eSocial-262,Supervisor de exploração agropecuária,2014-01-01,,620,620110,2
+cargo_esocial_263,eSocial-263,Supervisor de exploração pecuária,2014-01-01,,620,620115,2
+cargo_esocial_264,eSocial-264,Trabalhador agropecuário em geral,2014-01-01,,621,621005,2
+cargo_esocial_265,eSocial-265,Trabalhador na produção de mudas e sementes,2014-01-01,,622,622015,2
+cargo_esocial_266,eSocial-266,Trabalhador volante da agricultura,2014-01-01,,622,622020,2
+cargo_esocial_267,eSocial-267,Trabalhador da cultura de arroz,2014-01-01,,622,622105,2
+cargo_esocial_268,eSocial-268,Trabalhador da cultura de cana-de-açúcar,2014-01-01,,622,622110,2
+cargo_esocial_269,eSocial-269,Trabalhador da cultura de milho e sorgo,2014-01-01,,622,622115,2
+cargo_esocial_270,eSocial-270,"Trabalhador da cultura de trigo, aveia, cevada e triticale",2014-01-01,,622,622120,2
+cargo_esocial_271,eSocial-271,Trabalhador da cultura de algodão,2014-01-01,,622,622205,2
+cargo_esocial_272,eSocial-272,Trabalhador da cultura de sisal,2014-01-01,,622,622210,2
+cargo_esocial_273,eSocial-273,Trabalhador da cultura do rami,2014-01-01,,622,622215,2
+cargo_esocial_274,eSocial-274,Trabalhador na olericultura (frutos e sementes),2014-01-01,,622,622305,2
+cargo_esocial_275,eSocial-275,Trabalhador na olericultura (legumes),2014-01-01,,622,622310,2
+cargo_esocial_276,eSocial-276,"Trabalhador na olericultura (raízes, bulbos e tubérculos)",2014-01-01,,622,622315,2
+cargo_esocial_277,eSocial-277,"Trabalhador na olericultura (talos, folhas e flores)",2014-01-01,,622,622320,2
+cargo_esocial_278,eSocial-278,Trabalhador no cultivo de flores e folhagens de corte,2014-01-01,,622,622405,2
+cargo_esocial_279,eSocial-279,Trabalhador no cultivo de flores em vaso,2014-01-01,,622,622410,2
+cargo_esocial_280,eSocial-280,Trabalhador no cultivo de forrações,2014-01-01,,622,622415,2
+cargo_esocial_281,eSocial-281,Trabalhador no cultivo de mudas,2014-01-01,,622,622420,2
+cargo_esocial_282,eSocial-282,Trabalhador no cultivo de plantas ornamentais,2014-01-01,,622,622425,2
+cargo_esocial_283,eSocial-283,Trabalhador no cultivo de árvores frutíferas,2014-01-01,,622,622505,2
+cargo_esocial_284,eSocial-284,Trabalhador no cultivo de espécies frutíferas rasteiras,2014-01-01,,622,622510,2
+cargo_esocial_285,eSocial-285,Trabalhador no cultivo de trepadeiras frutíferas,2014-01-01,,622,622515,2
+cargo_esocial_286,eSocial-286,Trabalhador da cultura de cacau,2014-01-01,,622,622605,2
+cargo_esocial_287,eSocial-287,Trabalhador da cultura de café,2014-01-01,,622,622610,2
+cargo_esocial_288,eSocial-288,Trabalhador da cultura de erva-mate,2014-01-01,,622,622615,2
+cargo_esocial_289,eSocial-289,Trabalhador da cultura de fumo,2014-01-01,,622,622620,2
+cargo_esocial_290,eSocial-290,Trabalhador da cultura de guaraná,2014-01-01,,622,622625,2
+cargo_esocial_291,eSocial-291,Trabalhador na cultura de amendoim,2014-01-01,,622,622705,2
+cargo_esocial_292,eSocial-292,Trabalhador na cultura de canola,2014-01-01,,622,622710,2
+cargo_esocial_293,eSocial-293,Trabalhador na cultura de coco-da-baía,2014-01-01,,622,622715,2
+cargo_esocial_294,eSocial-294,Trabalhador na cultura de dendê,2014-01-01,,622,622720,2
+cargo_esocial_295,eSocial-295,Trabalhador na cultura de mamona,2014-01-01,,622,622725,2
+cargo_esocial_296,eSocial-296,Trabalhador na cultura de soja,2014-01-01,,622,622730,2
+cargo_esocial_297,eSocial-297,Trabalhador na cultura do girassol,2014-01-01,,622,622735,2
+cargo_esocial_298,eSocial-298,Trabalhador na cultura do linho,2014-01-01,,622,622740,2
+cargo_esocial_299,eSocial-299,Trabalhador da cultura de especiarias,2014-01-01,,622,622805,2
+cargo_esocial_300,eSocial-300,Trabalhador da cultura de plantas aromáticas e medicinais,2014-01-01,,622,622810,2
+cargo_esocial_301,eSocial-301,Adestrador de animais,2014-01-01,,623,623005,2
+cargo_esocial_302,eSocial-302,Inseminador,2014-01-01,,623,623010,2
+cargo_esocial_303,eSocial-303,Trabalhador de pecuária polivalente,2014-01-01,,623,623015,2
+cargo_esocial_304,eSocial-304,Tratador de animais,2014-01-01,,623,623020,2
+cargo_esocial_305,eSocial-305,Trabalhador da pecuária (asininos e muares),2014-01-01,,623,623105,2
+cargo_esocial_306,eSocial-306,Trabalhador da pecuária (bovinos corte),2014-01-01,,623,623110,2
+cargo_esocial_307,eSocial-307,Trabalhador da pecuária (bovinos leite),2014-01-01,,623,623115,2
+cargo_esocial_308,eSocial-308,Trabalhador da pecuária (bubalinos),2014-01-01,,623,623120,2
+cargo_esocial_309,eSocial-309,Trabalhador da pecuária (eqüinos),2014-01-01,,623,623125,2
+cargo_esocial_310,eSocial-310,Trabalhador da caprinocultura,2014-01-01,,623,623205,2
+cargo_esocial_311,eSocial-311,Trabalhador da ovinocultura,2014-01-01,,623,623210,2
+cargo_esocial_312,eSocial-312,Trabalhador da suinocultura,2014-01-01,,623,623215,2
+cargo_esocial_313,eSocial-313,Trabalhador da avicultura de corte,2014-01-01,,623,623305,2
+cargo_esocial_314,eSocial-314,Trabalhador da avicultura de postura,2014-01-01,,623,623310,2
+cargo_esocial_315,eSocial-315,Operador de incubadora,2014-01-01,,623,623315,2
+cargo_esocial_316,eSocial-316,Trabalhador da cunicultura,2014-01-01,,623,623320,2
+cargo_esocial_317,eSocial-317,Sexador,2014-01-01,,623,623325,2
+cargo_esocial_318,eSocial-318,Trabalhador em criatórios de animais produtores de veneno,2014-01-01,,623,623405,2
+cargo_esocial_319,eSocial-319,Trabalhador na apicultura,2014-01-01,,623,623410,2
+cargo_esocial_320,eSocial-320,Trabalhador na minhocultura,2014-01-01,,623,623415,2
+cargo_esocial_321,eSocial-321,Trabalhador na sericicultura,2014-01-01,,623,623420,2
+cargo_esocial_322,eSocial-322,Supervisor da aqüicultura,2014-01-01,,630,630105,2
+cargo_esocial_323,eSocial-323,Supervisor da área florestal,2014-01-01,,630,630110,2
+cargo_esocial_324,eSocial-324,Catador de caranguejos e siris,2014-01-01,,631,631005,2
+cargo_esocial_325,eSocial-325,Catador de mariscos,2014-01-01,,631,631010,2
+cargo_esocial_326,eSocial-326,Pescador artesanal de lagostas,2014-01-01,,631,631015,2
+cargo_esocial_327,eSocial-327,Pescador artesanal de peixes e camarões,2014-01-01,,631,631020,2
+cargo_esocial_328,eSocial-328,Pescador artesanal de água doce,2014-01-01,,631,631105,2
+cargo_esocial_329,eSocial-329,Pescador industrial,2014-01-01,,631,631205,2
+cargo_esocial_330,eSocial-330,Pescador profissional,2014-01-01,,631,631210,2
+cargo_esocial_331,eSocial-331,Criador de camarões,2014-01-01,,631,631305,2
+cargo_esocial_332,eSocial-332,Criador de jacarés,2014-01-01,,631,631310,2
+cargo_esocial_333,eSocial-333,Criador de mexilhões,2014-01-01,,631,631315,2
+cargo_esocial_334,eSocial-334,Criador de ostras,2014-01-01,,631,631320,2
+cargo_esocial_335,eSocial-335,Criador de peixes,2014-01-01,,631,631325,2
+cargo_esocial_336,eSocial-336,Criador de quelônios,2014-01-01,,631,631330,2
+cargo_esocial_337,eSocial-337,Criador de rãs,2014-01-01,,631,631335,2
+cargo_esocial_338,eSocial-338,Gelador industrial,2014-01-01,,631,631405,2
+cargo_esocial_339,eSocial-339,Gelador profissional,2014-01-01,,631,631410,2
+cargo_esocial_340,eSocial-340,Proeiro,2014-01-01,,631,631415,2
+cargo_esocial_341,eSocial-341,Redeiro (pesca),2014-01-01,,631,631420,2
+cargo_esocial_342,eSocial-342,Guia florestal,2014-01-01,,632,632005,2
+cargo_esocial_343,eSocial-343,Raizeiro,2014-01-01,,632,632010,2
+cargo_esocial_344,eSocial-344,Viveirista florestal,2014-01-01,,632,632015,2
+cargo_esocial_345,eSocial-345,Classificador de toras,2014-01-01,,632,632105,2
+cargo_esocial_346,eSocial-346,Cubador de madeira,2014-01-01,,632,632110,2
+cargo_esocial_347,eSocial-347,Identificador florestal,2014-01-01,,632,632115,2
+cargo_esocial_348,eSocial-348,Operador de motosserra,2014-01-01,,632,632120,2
+cargo_esocial_349,eSocial-349,"Trabalhador de extração florestal, em geral",2014-01-01,,632,632125,2
+cargo_esocial_350,eSocial-350,Seringueiro,2014-01-01,,632,632205,2
+cargo_esocial_351,eSocial-351,Trabalhador da exploração de espécies produtoras de gomas não elásticas,2014-01-01,,632,632210,2
+cargo_esocial_352,eSocial-352,Trabalhador da exploração de resinas,2014-01-01,,632,632215,2
+cargo_esocial_353,eSocial-353,Trabalhador da exploração de andiroba,2014-01-01,,632,632305,2
+cargo_esocial_354,eSocial-354,Trabalhador da exploração de babaçu,2014-01-01,,632,632310,2
+cargo_esocial_355,eSocial-355,Trabalhador da exploração de bacaba,2014-01-01,,632,632315,2
+cargo_esocial_356,eSocial-356,Trabalhador da exploração de buriti,2014-01-01,,632,632320,2
+cargo_esocial_357,eSocial-357,Trabalhador da exploração de carnaúba,2014-01-01,,632,632325,2
+cargo_esocial_358,eSocial-358,Trabalhador da exploração de coco-da-praia,2014-01-01,,632,632330,2
+cargo_esocial_359,eSocial-359,Trabalhador da exploração de copaíba,2014-01-01,,632,632335,2
+cargo_esocial_360,eSocial-360,Trabalhador da exploração de malva (pãina),2014-01-01,,632,632340,2
+cargo_esocial_361,eSocial-361,Trabalhador da exploração de murumuru,2014-01-01,,632,632345,2
+cargo_esocial_362,eSocial-362,Trabalhador da exploração de oiticica,2014-01-01,,632,632350,2
+cargo_esocial_363,eSocial-363,Trabalhador da exploração de ouricuri,2014-01-01,,632,632355,2
+cargo_esocial_364,eSocial-364,Trabalhador da exploração de pequi,2014-01-01,,632,632360,2
+cargo_esocial_365,eSocial-365,Trabalhador da exploração de piaçava,2014-01-01,,632,632365,2
+cargo_esocial_366,eSocial-366,Trabalhador da exploração de tucum,2014-01-01,,632,632370,2
+cargo_esocial_367,eSocial-367,Trabalhador da exploração de açaí,2014-01-01,,632,632405,2
+cargo_esocial_368,eSocial-368,Trabalhador da exploração de castanha,2014-01-01,,632,632410,2
+cargo_esocial_369,eSocial-369,Trabalhador da exploração de pinhão,2014-01-01,,632,632415,2
+cargo_esocial_370,eSocial-370,Trabalhador da exploração de pupunha,2014-01-01,,632,632420,2
+cargo_esocial_371,eSocial-371,Trabalhador da exploração de árvores e arbustos produtores de substâncias aromát. medic. e tóxicas,2014-01-01,,632,632505,2
+cargo_esocial_372,eSocial-372,"Trabalhador da exploração de cipós produtores de substâncias aromáticas, medicinais e tóxicas",2014-01-01,,632,632510,2
+cargo_esocial_373,eSocial-373,Trabalhador da exploração de madeiras tanantes,2014-01-01,,632,632515,2
+cargo_esocial_374,eSocial-374,"Trabalhador da exploração de raízes produtoras de substâncias aromáticas, medicinais e tóxicas",2014-01-01,,632,632520,2
+cargo_esocial_375,eSocial-375,"Trabalhador da extração de substâncias aromáticas, medicinais e tóxicas, em geral",2014-01-01,,632,632525,2
+cargo_esocial_376,eSocial-376,Carvoeiro,2014-01-01,,632,632605,2
+cargo_esocial_377,eSocial-377,Carbonizador,2014-01-01,,632,632610,2
+cargo_esocial_378,eSocial-378,Ajudante de carvoaria,2014-01-01,,632,632615,2
+cargo_esocial_379,eSocial-379,Condutor de veículos de tração animal (ruas e estradas),2014-01-01,,782,782805,2
+cargo_esocial_380,eSocial-380,Tropeiro,2014-01-01,,782,782810,2
+cargo_esocial_381,eSocial-381,Boiadeiro,2014-01-01,,782,782815,2

@@ -1,0 +1,3 @@
+id,codigo,nome,dt_inicio,dt_fim,tp_lotacao,tp_insc,nr_insc,fpas,cod_tercs
+lot_ref_esocial_001,eSocial-001,Lotação Tributária do Empregado Doméstico,2014-01-01,,24,,,868,0000
+lot_ref_esocial_002,eSocial-002,Lotação Tributária para Trabalhador Rural do Segurado Especial,2014-01-01,,21,,,604,003
