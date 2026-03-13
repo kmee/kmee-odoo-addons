@@ -7,6 +7,7 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": [
+        "mrp",
         "mrp_workorder",
     ],
     "data": [
