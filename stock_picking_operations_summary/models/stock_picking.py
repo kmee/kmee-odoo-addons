@@ -24,11 +24,12 @@ class StockPicking(models.Model):
     )
 
     @api.depends(
-        "move_ids_without_package",
-        "move_ids_without_package.product_id",
-        "move_ids_without_package.product_uom",
-        "move_ids_without_package.product_uom_qty",
-        "move_ids_without_package.quantity_done",
+        "move_ids",
+        "move_ids.product_id",
+        "move_ids.product_uom_qty",
+        "move_ids.quantity_done",
+        "move_ids.location_id",
+        "move_ids.location_dest_id",
     )
     def _compute_summary_line_ids(self):
         SummaryLine = self.env["stock.picking.summary.line"].sudo()
@@ -41,15 +42,24 @@ class StockPicking(models.Model):
                     "product_uom": False,
                     "product_uom_qty": 0.0,
                     "quantity_done": 0.0,
+                    "location_id": False,
+                    "location_dest_id": False,
                 }
             )
             for move in picking.move_ids_without_package:
-                key = (move.product_id.id, move.product_uom.id)
+                key = (
+                    move.product_id.id,
+                    move.product_uom.id,
+                    move.location_id.id,
+                    move.location_dest_id.id,
+                )
                 g = groups[key]
                 g["product_id"] = move.product_id.id
                 g["product_uom"] = move.product_uom.id
                 g["product_uom_qty"] += move.product_uom_qty
                 g["quantity_done"] += move.quantity_done
+                g["location_id"] = move.location_id.id
+                g["location_dest_id"] = move.location_dest_id.id
             lines = SummaryLine.create(
                 [
                     {
@@ -58,6 +68,8 @@ class StockPicking(models.Model):
                         "product_uom": g["product_uom"],
                         "product_uom_qty": g["product_uom_qty"],
                         "quantity_done": g["quantity_done"],
+                        "location_id": g["location_id"],
+                        "location_dest_id": g["location_dest_id"],
                     }
                     for g in groups.values()
                 ]
@@ -65,9 +77,9 @@ class StockPicking(models.Model):
             picking.summary_line_ids = lines
 
     @api.depends(
-        "move_ids_without_package",
-        "move_ids_without_package.product_id",
-        "move_ids_without_package.product_uom",
+        "move_ids",
+        "move_ids.product_id",
+        "move_ids.product_uom",
     )
     def _compute_has_summary(self):
         for picking in self:

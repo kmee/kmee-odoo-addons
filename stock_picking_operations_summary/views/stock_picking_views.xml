@@ -10,10 +10,7 @@
             <xpath expr="//field[@name='show_operations']" position="after">
                 <field name="has_summary" invisible="1" />
             </xpath>
-            <xpath
-                expr="//page[@name='operations']/field[@name='move_ids_without_package']"
-                position="before"
-            >
+            <xpath expr="//header" position="after">
                 <div
                     class="alert alert-info mb-0"
                     role="alert"
