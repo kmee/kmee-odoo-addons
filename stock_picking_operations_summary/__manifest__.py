@@ -15,6 +15,8 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "reports/report_print_picking_summary.xml",
+        "reports/report_print_picking_summary_template.xml",
         "views/stock_picking_views.xml",
     ],
     "installable": True,
