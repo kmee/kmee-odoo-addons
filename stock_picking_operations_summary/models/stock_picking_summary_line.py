@@ -33,3 +33,11 @@ class StockPickingSummaryLine(models.TransientModel):
         string="Done",
         digits="Product Unit of Measure",
     )
+    location_id = fields.Many2one(
+        "stock.location",
+        string="Source Location",
+    )
+    location_dest_id = fields.Many2one(
+        "stock.location",
+        string="Destination Location",
+    )
