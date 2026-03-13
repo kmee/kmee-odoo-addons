@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2025 KMEE Informatica LTDA - Luis Felipe Miléo
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="fiscal_operation_form" model="ir.ui.view">
+        <field name="name">fiscal.operation.form.template</field>
+        <field name="model">l10n_br_fiscal.operation</field>
+        <field name="inherit_id" ref="l10n_br_account.fiscal_operation_form" />
+        <field name="arch" type="xml">
+            <field name="deductible_taxes" position="after">
+                <field
+                    name="account_move_template_id"
+                    attrs="{'readonly': [('state', '!=', 'draft')]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
