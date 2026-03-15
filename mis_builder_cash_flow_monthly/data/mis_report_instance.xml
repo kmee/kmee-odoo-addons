@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="True">
+
+    <!-- ==================== -->
+    <!-- Cash Flow 12 Meses   -->
+    <!-- ==================== -->
+    <record id="mis_instance_cash_flow_12m" model="mis.report.instance">
+        <field name="name">Cash Flow 12 Meses</field>
+        <field name="report_id" ref="mis_builder_cash_flow.mis_report_cash_flow" />
+        <field name="comparison_mode" eval="True" />
+        <field name="landscape_pdf" eval="True" />
+    </record>
+    <record id="mis_12m_period_current" model="mis.report.instance.period">
+        <field name="name">Current</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">-5000</field>
+        <field name="duration">5001</field>
+        <field name="sequence">4</field>
+    </record>
+    <record id="mis_12m_period_plus_1m" model="mis.report.instance.period">
+        <field name="name">+1m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">1</field>
+        <field name="duration">1</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="mis_12m_period_plus_2m" model="mis.report.instance.period">
+        <field name="name">+2m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">2</field>
+        <field name="duration">1</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="mis_12m_period_plus_3m" model="mis.report.instance.period">
+        <field name="name">+3m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">3</field>
+        <field name="duration">1</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="mis_12m_period_plus_4m" model="mis.report.instance.period">
+        <field name="name">+4m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">4</field>
+        <field name="duration">1</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="mis_12m_period_plus_5m" model="mis.report.instance.period">
+        <field name="name">+5m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">5</field>
+        <field name="duration">1</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="mis_12m_period_plus_6m" model="mis.report.instance.period">
+        <field name="name">+6m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">6</field>
+        <field name="duration">1</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="mis_12m_period_plus_7m" model="mis.report.instance.period">
+        <field name="name">+7m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">7</field>
+        <field name="duration">1</field>
+        <field name="sequence">70</field>
+    </record>
+    <record id="mis_12m_period_plus_8m" model="mis.report.instance.period">
+        <field name="name">+8m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">8</field>
+        <field name="duration">1</field>
+        <field name="sequence">80</field>
+    </record>
+    <record id="mis_12m_period_plus_9m" model="mis.report.instance.period">
+        <field name="name">+9m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">9</field>
+        <field name="duration">1</field>
+        <field name="sequence">90</field>
+    </record>
+    <record id="mis_12m_period_plus_10m" model="mis.report.instance.period">
+        <field name="name">+10m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">10</field>
+        <field name="duration">1</field>
+        <field name="sequence">100</field>
+    </record>
+    <record id="mis_12m_period_plus_11m" model="mis.report.instance.period">
+        <field name="name">+11m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">11</field>
+        <field name="duration">1</field>
+        <field name="sequence">110</field>
+    </record>
+    <record id="mis_12m_period_plus_12m" model="mis.report.instance.period">
+        <field name="name">+12m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_12m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">12</field>
+        <field name="duration">1</field>
+        <field name="sequence">120</field>
+    </record>
+
+    <!-- ==================== -->
+    <!-- Cash Flow 24 Meses   -->
+    <!-- ==================== -->
+    <record id="mis_instance_cash_flow_24m" model="mis.report.instance">
+        <field name="name">Cash Flow 24 Meses</field>
+        <field name="report_id" ref="mis_builder_cash_flow.mis_report_cash_flow" />
+        <field name="comparison_mode" eval="True" />
+        <field name="landscape_pdf" eval="True" />
+    </record>
+    <record id="mis_24m_period_current" model="mis.report.instance.period">
+        <field name="name">Current</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">-5000</field>
+        <field name="duration">5001</field>
+        <field name="sequence">4</field>
+    </record>
+    <record id="mis_24m_period_plus_1m" model="mis.report.instance.period">
+        <field name="name">+1m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">1</field>
+        <field name="duration">1</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="mis_24m_period_plus_2m" model="mis.report.instance.period">
+        <field name="name">+2m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">2</field>
+        <field name="duration">1</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="mis_24m_period_plus_3m" model="mis.report.instance.period">
+        <field name="name">+3m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">3</field>
+        <field name="duration">1</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="mis_24m_period_plus_4m" model="mis.report.instance.period">
+        <field name="name">+4m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">4</field>
+        <field name="duration">1</field>
+        <field name="sequence">40</field>
+    </record>
+    <record id="mis_24m_period_plus_5m" model="mis.report.instance.period">
+        <field name="name">+5m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">5</field>
+        <field name="duration">1</field>
+        <field name="sequence">50</field>
+    </record>
+    <record id="mis_24m_period_plus_6m" model="mis.report.instance.period">
+        <field name="name">+6m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">6</field>
+        <field name="duration">1</field>
+        <field name="sequence">60</field>
+    </record>
+    <record id="mis_24m_period_plus_7m" model="mis.report.instance.period">
+        <field name="name">+7m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">7</field>
+        <field name="duration">1</field>
+        <field name="sequence">70</field>
+    </record>
+    <record id="mis_24m_period_plus_8m" model="mis.report.instance.period">
+        <field name="name">+8m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">8</field>
+        <field name="duration">1</field>
+        <field name="sequence">80</field>
+    </record>
+    <record id="mis_24m_period_plus_9m" model="mis.report.instance.period">
+        <field name="name">+9m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">9</field>
+        <field name="duration">1</field>
+        <field name="sequence">90</field>
+    </record>
+    <record id="mis_24m_period_plus_10m" model="mis.report.instance.period">
+        <field name="name">+10m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">10</field>
+        <field name="duration">1</field>
+        <field name="sequence">100</field>
+    </record>
+    <record id="mis_24m_period_plus_11m" model="mis.report.instance.period">
+        <field name="name">+11m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">11</field>
+        <field name="duration">1</field>
+        <field name="sequence">110</field>
+    </record>
+    <record id="mis_24m_period_plus_12m" model="mis.report.instance.period">
+        <field name="name">+12m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">12</field>
+        <field name="duration">1</field>
+        <field name="sequence">120</field>
+    </record>
+    <record id="mis_24m_period_plus_13m" model="mis.report.instance.period">
+        <field name="name">+13m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">13</field>
+        <field name="duration">1</field>
+        <field name="sequence">130</field>
+    </record>
+    <record id="mis_24m_period_plus_14m" model="mis.report.instance.period">
+        <field name="name">+14m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">14</field>
+        <field name="duration">1</field>
+        <field name="sequence">140</field>
+    </record>
+    <record id="mis_24m_period_plus_15m" model="mis.report.instance.period">
+        <field name="name">+15m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">15</field>
+        <field name="duration">1</field>
+        <field name="sequence">150</field>
+    </record>
+    <record id="mis_24m_period_plus_16m" model="mis.report.instance.period">
+        <field name="name">+16m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">16</field>
+        <field name="duration">1</field>
+        <field name="sequence">160</field>
+    </record>
+    <record id="mis_24m_period_plus_17m" model="mis.report.instance.period">
+        <field name="name">+17m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">17</field>
+        <field name="duration">1</field>
+        <field name="sequence">170</field>
+    </record>
+    <record id="mis_24m_period_plus_18m" model="mis.report.instance.period">
+        <field name="name">+18m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">18</field>
+        <field name="duration">1</field>
+        <field name="sequence">180</field>
+    </record>
+    <record id="mis_24m_period_plus_19m" model="mis.report.instance.period">
+        <field name="name">+19m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">19</field>
+        <field name="duration">1</field>
+        <field name="sequence">190</field>
+    </record>
+    <record id="mis_24m_period_plus_20m" model="mis.report.instance.period">
+        <field name="name">+20m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">20</field>
+        <field name="duration">1</field>
+        <field name="sequence">200</field>
+    </record>
+    <record id="mis_24m_period_plus_21m" model="mis.report.instance.period">
+        <field name="name">+21m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">21</field>
+        <field name="duration">1</field>
+        <field name="sequence">210</field>
+    </record>
+    <record id="mis_24m_period_plus_22m" model="mis.report.instance.period">
+        <field name="name">+22m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">22</field>
+        <field name="duration">1</field>
+        <field name="sequence">220</field>
+    </record>
+    <record id="mis_24m_period_plus_23m" model="mis.report.instance.period">
+        <field name="name">+23m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">23</field>
+        <field name="duration">1</field>
+        <field name="sequence">230</field>
+    </record>
+    <record id="mis_24m_period_plus_24m" model="mis.report.instance.period">
+        <field name="name">+24m</field>
+        <field name="report_instance_id" ref="mis_instance_cash_flow_24m" />
+        <field name="source">actuals_alt</field>
+        <field
+            name="source_aml_model_id"
+            ref="mis_builder_cash_flow.model_mis_cash_flow"
+        />
+        <field name="mode">relative</field>
+        <field name="type">m</field>
+        <field name="offset">24</field>
+        <field name="duration">1</field>
+        <field name="sequence">240</field>
+    </record>
+
+</odoo>
