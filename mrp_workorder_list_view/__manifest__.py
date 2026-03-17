@@ -5,6 +5,7 @@
 {
     "name": "MRP Workorder List View",
     "version": "16.0.1.0.0",
+    "development_status": "Alpha",
     "summary": "Easier workorder views: list first, open in current window",
     "category": "Manufacturing/Manufacturing",
     "author": "KMEE",
