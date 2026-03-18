@@ -65,17 +65,15 @@ class VanSession(models.Model):
         "res.company", required=True, default=lambda self: self.env.company
     )
     currency_id = fields.Many2one("res.currency", related="company_id.currency_id")
-    total_qty_out = fields.Float(
-        string="Total Saída", compute="_compute_totals", store=True
-    )
+    total_qty_out = fields.Float(string="Saída", compute="_compute_totals", store=True)
     total_qty_sold = fields.Float(
-        string="Total Vendido", compute="_compute_totals", store=True
+        string="Vendido", compute="_compute_totals", store=True
     )
     total_qty_returned = fields.Float(
-        string="Total Retornado", compute="_compute_totals", store=True
+        string="Retornado", compute="_compute_totals", store=True
     )
     total_qty_diff = fields.Float(
-        string="Total Diferença", compute="_compute_totals", store=True
+        string="Diferença", compute="_compute_totals", store=True
     )
     total_amount = fields.Monetary(
         string="Dif. Carga", compute="_compute_totals", store=True

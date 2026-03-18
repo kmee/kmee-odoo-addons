@@ -173,13 +173,13 @@
                                 </list>
                             </field>
                             <group>
-                                <group />
-                                <group>
+                                <group string="Quantidades Totais">
                                     <field name="total_qty_out" />
                                     <field name="total_qty_sold" />
                                     <field name="total_qty_returned" />
                                     <field name="total_qty_diff" />
-                                    <separator />
+                                </group>
+                                <group string="Valores">
                                     <field name="total_amount" />
                                     <field name="cash_diff" readonly="1" />
                                     <field name="total_diff" class="fw-bold" />
