@@ -669,22 +669,18 @@ class VanSessionLine(models.Model):
         string="Estoque Inicial",
         help="Quantidade já presente no caminhão antes da carga.",
     )
-    qty_out = fields.Float(string="Qty Saída")
-    qty_sold = fields.Float(
-        string="Qty Vendida", compute="_compute_qty_sold", store=True
-    )
+    qty_out = fields.Float(string="Saída")
+    qty_sold = fields.Float(string="Venda", compute="_compute_qty_sold", store=True)
     qty_returned = fields.Float(
-        string="Qty Retornada", compute="_compute_qty_returned", store=True
+        string="Retorno", compute="_compute_qty_returned", store=True
     )
     qty_diff = fields.Float(string="Diferença", compute="_compute_qty_diff", store=True)
     qty_keep = fields.Float(
-        string="Manter no Caminhão",
+        string="Estoque Final",
         help="Quantidade a manter no caminhão para a próxima sessão.",
     )
-    price_unit = fields.Float(string="Preço Unitário")
-    amount = fields.Float(
-        string="Valor Diferença", compute="_compute_amount", store=True
-    )
+    price_unit = fields.Float(string="Preço")
+    amount = fields.Float(string="Valor Dif.", compute="_compute_amount", store=True)
     waived = fields.Boolean()
     waive_reason = fields.Char(string="Motivo Abono")
 
