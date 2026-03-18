@@ -22,11 +22,25 @@
                         invisible="state != 'loading' or load_picking_id"
                     />
                     <button
+                        name="action_view_load_picking"
+                        string="Ver Carregamento"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'loading' or not load_picking_id"
+                    />
+                    <button
                         name="action_open_pos"
                         string="Abrir POS"
                         type="object"
                         class="btn-primary"
                         invisible="state != 'loaded'"
+                    />
+                    <button
+                        name="action_view_unload_picking"
+                        string="Conferir Retorno"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'returned' or not unload_picking_id"
                     />
                     <button
                         name="action_post"
@@ -62,34 +76,6 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button
-                            name="action_view_load_picking"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-truck"
-                            invisible="not load_picking_id"
-                        >
-                            <field
-                                name="load_picking_id"
-                                widget="statinfo"
-                                string="Ver Carregamento"
-                            />
-                        </button>
-                        <button
-                            name="action_view_unload_picking"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-undo"
-                            invisible="not unload_picking_id"
-                        >
-                            <field
-                                name="unload_picking_id"
-                                widget="statinfo"
-                                string="Conferir Retorno"
-                            />
-                        </button>
-                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1" />
