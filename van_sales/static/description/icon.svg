@@ -1,34 +1,33 @@
 <svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .bg { fill: #F4F7FB; }          /* fundo claro */
-    .van { fill: #5B8DEF; }         /* azul suave */
-    .wheel { fill: #2F3A4A; }       /* cinza escuro */
-    .accent { fill: #7ED6C2; }      /* verde suave */
-    .arrow { stroke: #9AA6B2; }     /* cinza leve */
-  </style>
-
-  <!-- Background circle -->
-  <circle cx="64" cy="64" r="60" class="bg"/>
-
-  <!-- Van -->
-  <rect x="30" y="55" width="45" height="25" rx="4" class="van"/>
-  <rect x="50" y="45" width="25" height="15" rx="3" class="van"/>
-  <circle cx="40" cy="85" r="5" class="wheel"/>
-  <circle cx="65" cy="85" r="5" class="wheel"/>
-
-  <!-- Cargo box -->
-  <rect x="32" y="58" width="10" height="10" class="accent"/>
-
-  <!-- Circular arrows -->
-  <path d="M64 20 A44 44 0 0 1 108 64" fill="none" class="arrow" stroke-width="3" marker-end="url(#arrow)"/>
-  <path d="M108 64 A44 44 0 0 1 64 108" fill="none" class="arrow" stroke-width="3" marker-end="url(#arrow)"/>
-  <path d="M64 108 A44 44 0 0 1 20 64" fill="none" class="arrow" stroke-width="3" marker-end="url(#arrow)"/>
-  <path d="M20 64 A44 44 0 0 1 64 20" fill="none" class="arrow" stroke-width="3" marker-end="url(#arrow)"/>
-
-  <!-- Arrow marker -->
   <defs>
     <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 Z" fill="#9AA6B2"/>
     </marker>
   </defs>
+
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="64" fill="#F4F7FB"/>
+
+  <!-- Circular arrows (larger, closer to edge) -->
+  <path d="M64 8 A56 56 0 0 1 120 64" fill="none" stroke="#9AA6B2" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M120 64 A56 56 0 0 1 64 120" fill="none" stroke="#9AA6B2" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M64 120 A56 56 0 0 1 8 64" fill="none" stroke="#9AA6B2" stroke-width="4" marker-end="url(#arrow)"/>
+  <path d="M8 64 A56 56 0 0 1 64 8" fill="none" stroke="#9AA6B2" stroke-width="4" marker-end="url(#arrow)"/>
+
+  <!-- Van body -->
+  <rect x="24" y="50" width="56" height="32" rx="5" fill="#5B8DEF"/>
+  <!-- Van cabin -->
+  <rect x="52" y="36" width="32" height="20" rx="4" fill="#5B8DEF"/>
+  <!-- Windshield -->
+  <rect x="56" y="40" width="24" height="12" rx="2" fill="#C8DCFF"/>
+
+  <!-- Cargo boxes -->
+  <rect x="28" y="54" width="14" height="14" rx="2" fill="#7ED6C2"/>
+  <rect x="44" y="54" width="14" height="14" rx="2" fill="#5EC4AB"/>
+
+  <!-- Wheels -->
+  <circle cx="38" cy="88" r="7" fill="#2F3A4A"/>
+  <circle cx="38" cy="88" r="3" fill="#6B7280"/>
+  <circle cx="70" cy="88" r="7" fill="#2F3A4A"/>
+  <circle cx="70" cy="88" r="3" fill="#6B7280"/>
 </svg>
