@@ -92,38 +92,72 @@
                             <field name="line_ids">
                                 <list editable="bottom">
                                     <field name="product_id" />
+                                    <!-- Carregamento: draft/loading -->
                                     <field
                                         name="qty_initial"
                                         readonly="1"
-                                        optional="show"
+                                        column_invisible="parent.state == 'draft'"
                                     />
                                     <field
                                         name="qty_demand"
                                         readonly="parent.state != 'loading'"
+                                        column_invisible="parent.state in ('returned', 'closed')"
                                     />
+                                    <!-- Carga confirmada: loaded+ -->
                                     <field
                                         name="qty_loaded"
                                         readonly="1"
-                                        optional="show"
+                                        column_invisible="parent.state in ('draft', 'loading')"
                                     />
-                                    <field name="qty_out" readonly="1" />
-                                    <field name="qty_sold" readonly="1" />
+                                    <field
+                                        name="qty_out"
+                                        readonly="1"
+                                        column_invisible="parent.state in ('draft', 'loading')"
+                                    />
+                                    <!-- Pós-venda: returned/closed -->
+                                    <field
+                                        name="qty_sold"
+                                        readonly="1"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
+                                    />
                                     <field
                                         name="qty_devolution"
                                         readonly="1"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
                                         optional="show"
                                     />
-                                    <field name="qty_returned" readonly="1" />
+                                    <field
+                                        name="qty_returned"
+                                        readonly="1"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
+                                    />
                                     <field
                                         name="qty_scrap"
                                         readonly="1"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
                                         optional="show"
                                     />
-                                    <field name="qty_diff" readonly="1" />
+                                    <field
+                                        name="qty_diff"
+                                        readonly="1"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
+                                    />
                                     <field name="price_unit" />
-                                    <field name="amount" readonly="1" sum="Total" />
-                                    <field name="waived" />
-                                    <field name="waive_reason" invisible="not waived" />
+                                    <field
+                                        name="amount"
+                                        readonly="1"
+                                        sum="Total"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
+                                    />
+                                    <field
+                                        name="waived"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
+                                    />
+                                    <field
+                                        name="waive_reason"
+                                        invisible="not waived"
+                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
+                                    />
                                 </list>
                             </field>
                             <group>
