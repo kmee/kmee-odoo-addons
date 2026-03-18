@@ -19,7 +19,7 @@
                         string="Gerar Picking de Carga"
                         type="object"
                         class="btn-primary"
-                        invisible="state != 'loading'"
+                        invisible="state != 'loading' or load_picking_id"
                     />
                     <button
                         name="action_open_pos"
@@ -34,7 +34,7 @@
                         type="object"
                         class="btn-primary"
                         invisible="state != 'returned'"
-                        confirm="Isso criará o picking de descarga e o lançamento contábil. Continuar?"
+                        confirm="Isso criará o lançamento contábil de fechamento. Continuar?"
                         groups="van_sales.group_van_sales_manager"
                     />
                     <button
@@ -62,6 +62,34 @@
                     />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_load_picking"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-truck"
+                            invisible="not load_picking_id"
+                        >
+                            <field
+                                name="load_picking_id"
+                                widget="statinfo"
+                                string="Ver Carregamento"
+                            />
+                        </button>
+                        <button
+                            name="action_view_unload_picking"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-undo"
+                            invisible="not unload_picking_id"
+                        >
+                            <field
+                                name="unload_picking_id"
+                                widget="statinfo"
+                                string="Conferir Retorno"
+                            />
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1" />
@@ -82,8 +110,6 @@
                                 groups="base.group_multi_company"
                             />
                             <field name="date_close" />
-                            <field name="load_picking_id" />
-                            <field name="unload_picking_id" readonly="1" />
                             <field name="move_id" readonly="1" />
                         </group>
                     </group>

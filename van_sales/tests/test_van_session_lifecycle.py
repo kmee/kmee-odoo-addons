@@ -177,10 +177,13 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self._validate_load_picking(session)
 
     def _validate_load_picking(self, session):
-        """Simulate warehouse validating the load picking."""
+        """Simulate warehouse confirming and validating the load picking."""
         picking = session.load_picking_id
         if not picking:
             return
+        if picking.state == "draft":
+            picking.action_confirm()
+        picking.action_assign()
         for ml in picking.move_line_ids:
             if not ml.quantity:
                 ml.quantity = ml.quantity_product_uom
@@ -188,12 +191,14 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         picking.button_validate()
 
     def _validate_unload_picking(self, session):
-        """Simulate warehouse validating the unload picking."""
+        """Simulate warehouse confirming and validating the unload picking."""
         picking = session.unload_picking_id
         if not picking or picking.state == "done":
             return
         if not picking.move_ids:
             return
+        if picking.state == "draft":
+            picking.action_confirm()
         picking.action_assign()
         for ml in picking.move_line_ids:
             if not ml.quantity:
@@ -360,10 +365,10 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         session.action_confirm()
 
-        # Picking created but not validated — state still loading
+        # Picking created in draft — state still loading
         self.assertEqual(session.state, "loading")
         self.assertTrue(session.load_picking_id)
-        self.assertIn(session.load_picking_id.state, ("confirmed", "assigned"))
+        self.assertEqual(session.load_picking_id.state, "draft")
         self.assertEqual(session.load_picking_id.van_type, "load")
         self.assertEqual(session.load_picking_id.van_session_id, session)
 
@@ -597,6 +602,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         # Validate with partial return (12 of 15 expected)
         unload = session.unload_picking_id
         self.assertTrue(unload)
+        unload.action_confirm()
         unload.action_assign()
         for ml in unload.move_line_ids:
             ml.quantity = 12  # Return fewer than expected
@@ -655,6 +661,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         # Unload picking created by _on_pos_session_closed
         # Validate with partial return (create backorder for the rest)
         unload = session.unload_picking_id
+        unload.action_confirm()
         unload.action_assign()
         for ml in unload.move_line_ids:
             ml.quantity = 12
@@ -775,6 +782,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         # Unload picking created by _on_pos_session_closed, validate with partial return
         unload = session.unload_picking_id
+        unload.action_confirm()
         unload.action_assign()
         move_a = unload.move_ids.filtered(lambda m: m.product_id == self.product_a)
         move_b = unload.move_ids.filtered(lambda m: m.product_id == self.product_b)
@@ -980,6 +988,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         # STEP 6: Validate unload with partial return
         unload = session.unload_picking_id
+        unload.action_confirm()
         unload.action_assign()
         move_a = unload.move_ids.filtered(lambda m: m.product_id == self.product_a)
         move_b = unload.move_ids.filtered(lambda m: m.product_id == self.product_b)

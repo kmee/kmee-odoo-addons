@@ -266,7 +266,7 @@ class VanSession(models.Model):
     # ------------------------------------------------------------------
 
     def action_confirm(self):
-        """Create load picking from lines. Picking validation moves to loaded."""
+        """Create draft load picking from lines. Picking validation moves to loaded."""
         for session in self:
             if session.state != "loading":
                 raise UserError(_("Só é possível confirmar sessões em carregamento."))
@@ -306,8 +306,6 @@ class VanSession(models.Model):
                             "location_dest_id": picking.location_dest_id.id,
                         }
                     )
-                picking.action_confirm()
-                picking.action_assign()
                 session.load_picking_id = picking
             else:
                 # All stock already in van, go directly to loaded
@@ -382,6 +380,28 @@ class VanSession(models.Model):
             raise UserError(_("Só é possível abrir o POS com sessão carregada."))
         return self.pos_config_id.open_ui()
 
+    def action_view_load_picking(self):
+        """Open the load picking form."""
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "stock.picking",
+            "res_id": self.load_picking_id.id,
+            "view_mode": "form",
+            "target": "current",
+        }
+
+    def action_view_unload_picking(self):
+        """Open the unload picking form."""
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "stock.picking",
+            "res_id": self.unload_picking_id.id,
+            "view_mode": "form",
+            "target": "current",
+        }
+
     # ------------------------------------------------------------------
     # POS session closed callback
     # ------------------------------------------------------------------
@@ -428,9 +448,6 @@ class VanSession(models.Model):
                     "location_dest_id": picking.location_dest_id.id,
                 }
             )
-        if picking.move_ids:
-            picking.action_confirm()
-            picking.action_assign()
         self.unload_picking_id = picking
 
     def _create_session_lines(self):
