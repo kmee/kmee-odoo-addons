@@ -262,11 +262,11 @@ class VanSession(models.Model):
             self.env["van.session.line"].create(lines_vals)
 
     # ------------------------------------------------------------------
-    # loading → loaded: create and validate picking
+    # loading: create load picking (validated externally by warehouse)
     # ------------------------------------------------------------------
 
     def action_confirm(self):
-        """Create load picking from manual lines, validate, state → loaded."""
+        """Create load picking from lines. Picking validation moves to loaded."""
         for session in self:
             if session.state != "loading":
                 raise UserError(_("Só é possível confirmar sessões em carregamento."))
@@ -295,7 +295,7 @@ class VanSession(models.Model):
                 )
                 for line in lines_to_load:
                     qty_to_load = line.qty_demand - line.qty_initial
-                    move = self.env["stock.move"].create(
+                    self.env["stock.move"].create(
                         {
                             "name": line.product_id.display_name,
                             "product_id": line.product_id.id,
@@ -306,19 +306,25 @@ class VanSession(models.Model):
                             "location_dest_id": picking.location_dest_id.id,
                         }
                     )
-                    move._action_confirm()
+                picking.action_confirm()
                 picking.action_assign()
-                # Set done quantities
-                for ml in picking.move_line_ids:
-                    ml.quantity = ml.quantity_product_uom
-                picking.move_ids.picked = True
-                picking.button_validate()
                 session.load_picking_id = picking
-                # Link move lines back to session lines
-                for line in lines_to_load:
-                    move_lines = picking.move_line_ids.filtered(
-                        lambda ml, p=line.product_id: ml.product_id == p
-                    )
+            else:
+                # All stock already in van, go directly to loaded
+                session.state = "loaded"
+
+    def _on_load_picking_validated(self):
+        """Called when the load picking is validated by the warehouse."""
+        for session in self:
+            picking = session.load_picking_id
+            if not picking:
+                continue
+            # Link move lines back to session lines
+            for line in session.line_ids:
+                move_lines = picking.move_line_ids.filtered(
+                    lambda ml, p=line.product_id: ml.product_id == p
+                )
+                if move_lines:
                     line.out_move_line_ids = [(6, 0, move_lines.ids)]
             session.state = "loaded"
 
@@ -336,9 +342,10 @@ class VanSession(models.Model):
                         " 'Carregado' ou 'Em Carregamento'."
                     )
                 )
-            if session.load_picking_id and session.load_picking_id.state == "done":
-                session.load_picking_id.action_cancel()
-            session.load_picking_id = False
+            if session.load_picking_id:
+                if session.load_picking_id.state != "cancel":
+                    session.load_picking_id.action_cancel()
+                session.load_picking_id = False
             for line in session.line_ids:
                 line.out_move_line_ids = [(5, 0, 0)]
             # Clear auto-loaded lines when going back from loading
@@ -481,31 +488,24 @@ class VanSession(models.Model):
     # Close / post journal entry
     # ------------------------------------------------------------------
 
-    def _auto_validate_unload_picking(self):
-        """Validate unload picking if assigned but not yet done."""
-        self.ensure_one()
-        picking = self.unload_picking_id
-        if not picking or picking.state == "done" or not picking.move_ids:
-            return
-        if picking.state in ("confirmed", "assigned"):
-            picking.action_assign()
-            for ml in picking.move_line_ids:
-                if not ml.quantity:
-                    ml.quantity = ml.quantity_product_uom
-            picking.move_ids.picked = True
-            picking.button_validate()
-            self._update_in_move_lines()
-
     def action_post(self):
         """Generate closing account.move, state → closed."""
         for session in self:
             if session.state != "returned":
                 raise UserError(_("Só é possível fechar sessões retornadas."))
-            # Create unload picking if not yet created
-            if not session.unload_picking_id:
-                session._create_unload_picking()
-            # Auto-validate unload picking if pending
-            session._auto_validate_unload_picking()
+            picking = session.unload_picking_id
+            if not picking:
+                raise UserError(
+                    _("O picking de descarga deve existir antes de fechar a sessão.")
+                )
+            # Allow closing if picking is done or has no moves (nothing to return)
+            if picking.state != "done" and picking.move_ids:
+                raise UserError(
+                    _(
+                        "O picking de descarga deve estar validado"
+                        " antes de fechar a sessão."
+                    )
+                )
 
             config = session.pos_config_id
             journal = config.van_journal_id

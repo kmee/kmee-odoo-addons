@@ -16,7 +16,7 @@
                     />
                     <button
                         name="action_confirm"
-                        string="Confirmar Carga"
+                        string="Gerar Picking de Carga"
                         type="object"
                         class="btn-primary"
                         invisible="state != 'loading'"

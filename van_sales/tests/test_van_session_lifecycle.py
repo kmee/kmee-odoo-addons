@@ -171,9 +171,35 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         return self.env["van.session"].create(vals)
 
     def _start_and_confirm(self, session):
-        """Shortcut: draft → loading → loaded."""
+        """Shortcut: draft → loading → loaded (validates load picking)."""
         session.action_start_loading()
         session.action_confirm()
+        self._validate_load_picking(session)
+
+    def _validate_load_picking(self, session):
+        """Simulate warehouse validating the load picking."""
+        picking = session.load_picking_id
+        if not picking:
+            return
+        for ml in picking.move_line_ids:
+            if not ml.quantity:
+                ml.quantity = ml.quantity_product_uom
+        picking.move_ids.picked = True
+        picking.button_validate()
+
+    def _validate_unload_picking(self, session):
+        """Simulate warehouse validating the unload picking."""
+        picking = session.unload_picking_id
+        if not picking or picking.state == "done":
+            return
+        if not picking.move_ids:
+            return
+        picking.action_assign()
+        for ml in picking.move_line_ids:
+            if not ml.quantity:
+                ml.quantity = ml.quantity_product_uom
+        picking.move_ids.picked = True
+        picking.button_validate()
 
     def _create_load_picking(self, products_qty):
         """Create and validate a load picking with given {product: qty} dict."""
@@ -309,7 +335,9 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
     def test_path_b_manual_lines_confirm_creates_picking(self):
         """GIVEN a van session in loading with manual lines
         WHEN action_confirm is called
-        THEN a load picking is created, validated, and state becomes 'loaded'.
+        THEN a load picking is created (not yet validated).
+        WHEN the picking is validated by warehouse
+        THEN state becomes 'loaded' and move lines are linked.
         """
         session = self._create_van_session()
         session.action_start_loading()
@@ -332,15 +360,19 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         session.action_confirm()
 
-        self.assertEqual(session.state, "loaded")
+        # Picking created but not validated — state still loading
+        self.assertEqual(session.state, "loading")
         self.assertTrue(session.load_picking_id)
-        self.assertEqual(session.load_picking_id.state, "done")
+        self.assertIn(session.load_picking_id.state, ("confirmed", "assigned"))
         self.assertEqual(session.load_picking_id.van_type, "load")
         self.assertEqual(session.load_picking_id.van_session_id, session)
-        # Out move lines linked
+
+        # Warehouse validates → session becomes loaded
+        self._validate_load_picking(session)
+        self.assertEqual(session.state, "loaded")
+        self.assertEqual(session.load_picking_id.state, "done")
         for line in session.line_ids:
             self.assertTrue(line.out_move_line_ids)
-        # qty_out computed from out_move_line_ids after confirm
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
         line_b = session.line_ids.filtered(lambda ln: ln.product_id == self.product_b)
         self.assertEqual(line_a.qty_out, 15)
@@ -372,6 +404,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         self.assertEqual(session.state, "loaded")
         with self.assertRaises(UserError):
             session.action_confirm()
@@ -404,6 +437,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         self.assertEqual(session.state, "loaded")
 
         self.pos_config.open_ui()
@@ -442,6 +476,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             ]
         )
         session.action_confirm()
+        self._validate_load_picking(session)
 
         # Open POS and sell
         pos_session = self._open_pos_session(session)
@@ -498,6 +533,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             ]
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         pos_session = self._open_pos_session(session)
         self._create_pos_order(
             pos_session,
@@ -515,6 +551,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self._close_pos_session(pos_session)
         self.assertEqual(session.state, "returned")
 
+        self._validate_unload_picking(session)
         session.action_post()
 
         self.assertTrue(session.unload_picking_id)
@@ -545,6 +582,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             ]
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         pos_session = self._open_pos_session(session)
         self._create_pos_order(
             pos_session,
@@ -555,16 +593,22 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self._close_pos_session(pos_session)
         self.assertEqual(session.state, "returned")
 
-        # Manually create unload picking (simulates action_post first step)
-        session._create_unload_picking()
-
-        # Validate unload picking (return 12 of 15 expected)
+        # Unload picking already created by _on_pos_session_closed
+        # Validate with partial return (12 of 15 expected)
         unload = session.unload_picking_id
+        self.assertTrue(unload)
         unload.action_assign()
         for ml in unload.move_line_ids:
             ml.quantity = 12  # Return fewer than expected
         unload.move_ids.picked = True
-        unload.button_validate()
+        res = unload.button_validate()
+        if (
+            isinstance(res, dict)
+            and res.get("res_model") == "stock.backorder.confirmation"
+        ):
+            self.env["stock.backorder.confirmation"].with_context(
+                **res.get("context", {})
+            ).create({}).process()
 
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
         self.assertTrue(line_a.in_move_line_ids)
@@ -598,6 +642,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             ]
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         pos_session = self._open_pos_session(session)
         self._create_pos_order(
             pos_session,
@@ -607,16 +652,23 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         )
         self._close_pos_session(pos_session)
 
-        # Manually create and validate unload with partial return
-        session._create_unload_picking()
+        # Unload picking created by _on_pos_session_closed
+        # Validate with partial return (create backorder for the rest)
         unload = session.unload_picking_id
         unload.action_assign()
         for ml in unload.move_line_ids:
             ml.quantity = 12
         unload.move_ids.picked = True
-        unload.button_validate()
+        res = unload.button_validate()
+        if (
+            isinstance(res, dict)
+            and res.get("res_model") == "stock.backorder.confirmation"
+        ):
+            self.env["stock.backorder.confirmation"].with_context(
+                **res.get("context", {})
+            ).create({}).process()
 
-        # Now post (unload already done, action_post skips creation)
+        # Now post (unload validated)
         session.action_post()
 
         self.assertEqual(session.state, "closed")
@@ -661,6 +713,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         pos_session = self._open_pos_session(session)
         self._create_pos_order(
             pos_session,
@@ -679,6 +732,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self.assertEqual(line_a.qty_sold, 10)
         self.assertEqual(line_a.qty_diff, 0)
 
+        self._validate_unload_picking(session)
         session.action_post()
         self.assertEqual(session.state, "closed")
         self.assertFalse(session.move_id)
@@ -707,6 +761,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             ]
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         pos_session = self._open_pos_session(session)
         # Sell some of each
         self._create_pos_order(
@@ -718,8 +773,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         )
         self._close_pos_session(pos_session)
 
-        # Manually create and validate unload with partial return
-        session._create_unload_picking()
+        # Unload picking created by _on_pos_session_closed, validate with partial return
         unload = session.unload_picking_id
         unload.action_assign()
         move_a = unload.move_ids.filtered(lambda m: m.product_id == self.product_a)
@@ -730,7 +784,14 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         for ml in move_b.move_line_ids:
             ml.quantity = 5
         unload.move_ids.picked = True
-        unload.button_validate()
+        res = unload.button_validate()
+        if (
+            isinstance(res, dict)
+            and res.get("res_model") == "stock.backorder.confirmation"
+        ):
+            self.env["stock.backorder.confirmation"].with_context(
+                **res.get("context", {})
+            ).create({}).process()
 
         # Waive product_b difference
         line_b = session.line_ids.filtered(lambda ln: ln.product_id == self.product_b)
@@ -743,6 +804,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
 
+        self._validate_unload_picking(session)
         session.action_post()
 
         # Only product_a diff in entry: 2 * 5.00 = 10.00 (product_b waived)
@@ -772,6 +834,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session1.action_confirm()
+        self._validate_load_picking(session1)
         self.assertEqual(session1.state, "loaded")
 
         # Create second session for same driver — draft is OK
@@ -840,6 +903,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session.action_confirm()
+        self._validate_load_picking(session)
 
         # The load picking moves should use sale price
         move = session.load_picking_id.move_ids[0]
@@ -892,6 +956,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         # STEP 2: Confirm load → loaded
         session.action_confirm()
+        self._validate_load_picking(session)
         self.assertEqual(session.state, "loaded")
         self.assertTrue(session.load_picking_id)
 
@@ -925,7 +990,14 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         for ml in move_b.move_line_ids:
             ml.quantity = 4
         unload.move_ids.picked = True
-        unload.button_validate()
+        res = unload.button_validate()
+        if (
+            isinstance(res, dict)
+            and res.get("res_model") == "stock.backorder.confirmation"
+        ):
+            self.env["stock.backorder.confirmation"].with_context(
+                **res.get("context", {})
+            ).create({}).process()
 
         # Check computed fields
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
@@ -942,6 +1014,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self.assertEqual(line_b.amount, 0.00)
 
         # STEP 7: Post closing → closed (unload already validated)
+        self._validate_unload_picking(session)
         session.action_post()
         self.assertEqual(session.state, "closed")
         self.assertTrue(session.move_id)
@@ -1016,6 +1089,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         line_a.qty_demand = 80
 
         session.action_confirm()
+        self._validate_load_picking(session)
 
         self.assertEqual(session.state, "loaded")
         self.assertTrue(session.load_picking_id)
@@ -1047,6 +1121,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         # qty_demand defaults to qty_initial = 30, no new load needed
 
         session.action_confirm()
+        self._validate_load_picking(session)
 
         self.assertEqual(session.state, "loaded")
         self.assertFalse(session.load_picking_id)
@@ -1075,6 +1150,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session1.action_confirm()
+        self._validate_load_picking(session1)
 
         pos_session1 = self._open_pos_session(session1)
         self._create_pos_order(
@@ -1088,6 +1164,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         # action_post creates unload for all remaining, validates, posts
         # Unload qty = qty_out - qty_sold + qty_devolution = 20 - 5 + 0 = 15
+        self._validate_unload_picking(session1)
         session1.action_post()
         self.assertEqual(session1.state, "closed")
 
@@ -1134,6 +1211,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             )
 
         session2.action_confirm()
+        self._validate_load_picking(session2)
         self.assertEqual(session2.state, "loaded")
         self.assertTrue(session2.load_picking_id)
 
@@ -1163,6 +1241,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             }
         )
         session.action_confirm()
+        self._validate_load_picking(session)
         pos_session = self._open_pos_session(session)
         self._create_pos_order(
             pos_session,

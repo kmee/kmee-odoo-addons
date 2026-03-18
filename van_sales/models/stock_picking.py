@@ -12,6 +12,10 @@ class StockPicking(models.Model):
     def button_validate(self):
         res = super().button_validate()
         for picking in self:
-            if picking.van_type == "unload" and picking.van_session_id:
+            if not picking.van_session_id:
+                continue
+            if picking.van_type == "load":
+                picking.van_session_id._on_load_picking_validated()
+            elif picking.van_type == "unload":
                 picking.van_session_id._update_in_move_lines()
         return res
