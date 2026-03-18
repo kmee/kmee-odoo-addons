@@ -193,6 +193,7 @@
     <record id="pos_config_van_01" model="pos.config">
         <field name="name">POS Van 01 - João</field>
         <field name="is_van_config">True</field>
+        <field name="warehouse_id" ref="warehouse_van_01" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_01" />
@@ -206,6 +207,7 @@
     <record id="pos_config_van_02" model="pos.config">
         <field name="name">POS Van 02 - Carlos</field>
         <field name="is_van_config">True</field>
+        <field name="warehouse_id" ref="warehouse_van_02" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_02" />
@@ -219,6 +221,7 @@
     <record id="pos_config_van_03" model="pos.config">
         <field name="name">POS Van 03 - Maria</field>
         <field name="is_van_config">True</field>
+        <field name="warehouse_id" ref="warehouse_van_03" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_03" />

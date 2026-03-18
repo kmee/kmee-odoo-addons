@@ -11,6 +11,7 @@ class VanSession(models.Model):
     state = fields.Selection(
         [
             ("draft", "Rascunho"),
+            ("loading", "Em Carregamento"),
             ("loaded", "Carregado"),
             ("in_route", "Em Rota"),
             ("returned", "Retornado"),
@@ -76,9 +77,6 @@ class VanSession(models.Model):
     total_qty_diff = fields.Float(
         string="Total Diferença", compute="_compute_totals", store=True
     )
-    total_qty_keep = fields.Float(
-        string="Total Manter", compute="_compute_totals", store=True
-    )
     total_amount = fields.Monetary(
         string="Dif. Carga", compute="_compute_totals", store=True
     )
@@ -88,25 +86,15 @@ class VanSession(models.Model):
     warehouse_id = fields.Many2one(
         "stock.warehouse",
         string="Armazém Caminhão",
-        compute="_compute_warehouse_id",
+        related="pos_config_id.warehouse_id",
         store=True,
     )
-
-    @api.depends("pos_config_id.van_load_picking_type_id")
-    def _compute_warehouse_id(self):
-        for session in self:
-            pt = session.pos_config_id.van_load_picking_type_id
-            if pt and pt.default_location_dest_id:
-                session.warehouse_id = pt.default_location_dest_id.warehouse_id
-            else:
-                session.warehouse_id = False
 
     @api.depends(
         "line_ids.qty_out",
         "line_ids.qty_sold",
         "line_ids.qty_returned",
         "line_ids.qty_diff",
-        "line_ids.qty_keep",
         "line_ids.amount",
         "line_ids.waived",
         "cash_diff",
@@ -118,7 +106,6 @@ class VanSession(models.Model):
             session.total_qty_sold = sum(lines.mapped("qty_sold"))
             session.total_qty_returned = sum(lines.mapped("qty_returned"))
             session.total_qty_diff = sum(lines.mapped("qty_diff"))
-            session.total_qty_keep = sum(lines.mapped("qty_keep"))
             session.total_amount = sum(ln.amount for ln in lines if not ln.waived)
             session.total_diff = session.total_amount + abs(
                 session.cash_diff if session.cash_diff < 0 else 0
@@ -140,7 +127,7 @@ class VanSession(models.Model):
 
     @api.constrains("driver_id", "state")
     def _check_unique_active_driver(self):
-        active_states = ("loaded", "in_route", "returned")
+        active_states = ("loading", "loaded", "in_route", "returned")
         for rec in self:
             if rec.state not in active_states:
                 continue
@@ -200,7 +187,7 @@ class VanSession(models.Model):
                     {
                         "session_id": session.id,
                         "product_id": move.product_id.id,
-                        "qty_out": sum(move.move_line_ids.mapped("quantity")),
+                        "qty_demand": move.product_uom_qty,
                         "out_move_line_ids": [(6, 0, move.move_line_ids.ids)],
                         "price_unit": price,
                     }
@@ -209,76 +196,80 @@ class VanSession(models.Model):
                 self.env["van.session.line"].create(lines_vals)
 
     # ------------------------------------------------------------------
-    # Load residual stock from van warehouse
+    # draft → loading: load residual stock from van warehouse
     # ------------------------------------------------------------------
 
-    def action_load_from_stock(self):
-        """Load lines from current stock in the van warehouse."""
+    def action_start_loading(self):
+        """Transition draft → loading, auto-fill lines with warehouse stock."""
         for session in self:
             if session.state != "draft":
                 raise UserError(
-                    _("Só é possível carregar estoque em sessões rascunho.")
+                    _("Só é possível iniciar carregamento de sessões em rascunho.")
                 )
-            picking_type = session.pos_config_id.van_load_picking_type_id
-            if not picking_type or not picking_type.default_location_dest_id:
-                raise UserError(
-                    _("Configure o tipo de picking de carga no POS %s.")
-                    % session.pos_config_id.display_name
+            if not session.pos_config_id:
+                raise UserError(_("Selecione o POS antes de iniciar o carregamento."))
+            session._load_initial_stock()
+            session.state = "loading"
+
+    def _load_initial_stock(self):
+        """Load lines from current stock in the van warehouse."""
+        self.ensure_one()
+        warehouse = self.pos_config_id.warehouse_id
+        if not warehouse or not warehouse.lot_stock_id:
+            return
+        van_location = warehouse.lot_stock_id
+        # Find all quants in the van location (and children) with non-zero qty
+        quants = self.env["stock.quant"].search(
+            [
+                ("location_id", "child_of", van_location.id),
+                ("quantity", "!=", 0),
+            ]
+        )
+        existing_products = self.line_ids.mapped("product_id")
+        lines_vals = []
+        for quant_group in quants.grouped("product_id").values():
+            product = quant_group[0].product_id
+            qty = sum(quant_group.mapped("quantity"))
+            if qty == 0:
+                continue
+            pricelist = self.pricelist_id
+            if pricelist:
+                price = pricelist._get_product_price(product, abs(qty))
+            else:
+                price = product.lst_price
+            if product in existing_products:
+                existing_line = self.line_ids.filtered(
+                    lambda ln, p=product: ln.product_id == p
                 )
-            van_location = picking_type.default_location_dest_id
-            # Find all quants in the van location (and children)
-            quants = self.env["stock.quant"].search(
-                [
-                    ("location_id", "child_of", van_location.id),
-                    ("quantity", ">", 0),
-                ]
-            )
-            existing_products = session.line_ids.mapped("product_id")
-            lines_vals = []
-            for quant_group in quants.grouped("product_id").values():
-                product = quant_group[0].product_id
-                qty = sum(quant_group.mapped("quantity"))
-                if qty <= 0:
-                    continue
-                pricelist = session.pricelist_id
-                if pricelist:
-                    price = pricelist._get_product_price(product, qty)
-                else:
-                    price = product.lst_price
-                if product in existing_products:
-                    # Update existing line
-                    existing_line = session.line_ids.filtered(
-                        lambda ln, p=product: ln.product_id == p
-                    )
-                    existing_line.write(
-                        {
-                            "qty_initial": qty,
-                            "qty_out": qty
-                            + (existing_line.qty_out - existing_line.qty_initial),
-                        }
-                    )
-                else:
-                    lines_vals.append(
-                        {
-                            "session_id": session.id,
-                            "product_id": product.id,
-                            "qty_initial": qty,
-                            "qty_out": qty,
-                            "price_unit": price,
-                        }
-                    )
-            if lines_vals:
-                self.env["van.session.line"].create(lines_vals)
+                existing_line.write(
+                    {
+                        "qty_initial": qty,
+                        "qty_demand": qty
+                        + (existing_line.qty_demand - existing_line.qty_initial),
+                    }
+                )
+            else:
+                lines_vals.append(
+                    {
+                        "session_id": self.id,
+                        "product_id": product.id,
+                        "qty_initial": qty,
+                        "qty_demand": qty,
+                        "price_unit": price,
+                    }
+                )
+        if lines_vals:
+            self.env["van.session.line"].create(lines_vals)
 
     # ------------------------------------------------------------------
-    # Path B: manual lines → create and validate picking
+    # loading → loaded: create and validate picking
     # ------------------------------------------------------------------
 
     def action_confirm(self):
         """Create load picking from manual lines, validate, state → loaded."""
         for session in self:
-            if session.state != "draft":
-                raise UserError(_("Só é possível confirmar sessões em rascunho."))
+            if session.state != "loading":
+                raise UserError(_("Só é possível confirmar sessões em carregamento."))
             if not session.line_ids:
                 raise UserError(_("Adicione pelo menos uma linha antes de confirmar."))
             picking_type = session.pos_config_id.van_load_picking_type_id
@@ -289,7 +280,7 @@ class VanSession(models.Model):
                 )
             # Only create picking for lines that need new stock from WH
             lines_to_load = session.line_ids.filtered(
-                lambda ln: ln.qty_out - ln.qty_initial > 0
+                lambda ln: ln.qty_demand - ln.qty_initial > 0
             )
             if lines_to_load:
                 picking = self.env["stock.picking"].create(
@@ -303,7 +294,7 @@ class VanSession(models.Model):
                     }
                 )
                 for line in lines_to_load:
-                    qty_to_load = line.qty_out - line.qty_initial
+                    qty_to_load = line.qty_demand - line.qty_initial
                     move = self.env["stock.move"].create(
                         {
                             "name": line.product_id.display_name,
@@ -336,17 +327,23 @@ class VanSession(models.Model):
     # ------------------------------------------------------------------
 
     def action_back_to_draft(self):
-        """Revert loaded → draft, cancel load picking."""
+        """Revert loaded/loading → draft, cancel load picking."""
         for session in self:
-            if session.state != "loaded":
+            if session.state not in ("loaded", "loading"):
                 raise UserError(
-                    _("Só é possível voltar ao rascunho a partir de 'Carregado'.")
+                    _(
+                        "Só é possível voltar ao rascunho a partir de"
+                        " 'Carregado' ou 'Em Carregamento'."
+                    )
                 )
             if session.load_picking_id and session.load_picking_id.state == "done":
                 session.load_picking_id.action_cancel()
             session.load_picking_id = False
             for line in session.line_ids:
                 line.out_move_line_ids = [(5, 0, 0)]
+            # Clear auto-loaded lines when going back from loading
+            if session.state == "loading":
+                session.line_ids.unlink()
             session.state = "draft"
 
     def action_back_to_loaded(self):
@@ -362,6 +359,7 @@ class VanSession(models.Model):
                 session.unload_picking_id = False
             for line in session.line_ids:
                 line.sale_move_line_ids = [(5, 0, 0)]
+                line.devolution_move_line_ids = [(5, 0, 0)]
                 line.in_move_line_ids = [(5, 0, 0)]
             session.cash_diff = 0
             session.state = "loaded"
@@ -386,6 +384,7 @@ class VanSession(models.Model):
         for session in self:
             session._create_session_lines()
             session.cash_diff = session.pos_session_id.cash_register_difference
+            session._create_unload_picking()
             session.state = "returned"
 
     def _create_unload_picking(self):
@@ -408,7 +407,7 @@ class VanSession(models.Model):
             }
         )
         for line in self.line_ids:
-            expected_return = line.qty_out - line.qty_sold - line.qty_keep
+            expected_return = line.qty_out - line.qty_sold + line.qty_devolution
             if expected_return <= 0:
                 continue
             self.env["stock.move"].create(
@@ -433,19 +432,33 @@ class VanSession(models.Model):
         pos_session = self.pos_session_id
         if not pos_session:
             return
-        # Gather sale move lines from POS pickings
         pos_pickings = self.env["stock.picking"].search(
             [
                 ("pos_session_id", "=", pos_session.id),
             ]
         )
-        sale_move_lines = pos_pickings.mapped("move_ids.move_line_ids")
+        # Split pickings by direction using picking type code
+        # Sale pickings: outgoing (van → customer)
+        sale_pickings = pos_pickings.filtered(
+            lambda p: p.picking_type_code == "outgoing"
+        )
+        # Devolution pickings: incoming (customer → van)
+        devolution_pickings = pos_pickings.filtered(
+            lambda p: p.picking_type_code == "incoming"
+        )
+        sale_move_lines = sale_pickings.mapped("move_ids.move_line_ids")
+        devolution_move_lines = devolution_pickings.mapped("move_ids.move_line_ids")
         for line in self.line_ids:
-            product_smls = sale_move_lines.filtered(
+            product_sale_mls = sale_move_lines.filtered(
                 lambda ml, p=line.product_id: ml.product_id == p
             )
-            if product_smls:
-                line.sale_move_line_ids = [(6, 0, product_smls.ids)]
+            if product_sale_mls:
+                line.sale_move_line_ids = [(6, 0, product_sale_mls.ids)]
+            product_dev_mls = devolution_move_lines.filtered(
+                lambda ml, p=line.product_id: ml.product_id == p
+            )
+            if product_dev_mls:
+                line.devolution_move_line_ids = [(6, 0, product_dev_mls.ids)]
 
     # ------------------------------------------------------------------
     # Unload validated callback
@@ -482,20 +495,6 @@ class VanSession(models.Model):
             picking.move_ids.picked = True
             picking.button_validate()
             self._update_in_move_lines()
-
-    def action_open_close_wizard(self):
-        """Open the close wizard to let the user decide qty_keep."""
-        self.ensure_one()
-        if self.state != "returned":
-            raise UserError(_("Só é possível fechar sessões retornadas."))
-        return {
-            "type": "ir.actions.act_window",
-            "name": "Fechamento de Sessão Van",
-            "res_model": "van.session.close.wizard",
-            "view_mode": "form",
-            "target": "new",
-            "context": {"active_id": self.id},
-        }
 
     def action_post(self):
         """Generate closing account.move, state → closed."""
@@ -639,10 +638,25 @@ class VanSessionLine(models.Model):
             pricelist = self.session_id.pricelist_id
             if pricelist:
                 self.price_unit = pricelist._get_product_price(
-                    self.product_id, self.qty_out or 1.0
+                    self.product_id, self.qty_demand or 1.0
                 )
             else:
                 self.price_unit = self.product_id.lst_price
+            # Auto-fill qty_initial from warehouse stock
+            warehouse = self.session_id.pos_config_id.warehouse_id
+            if warehouse and warehouse.lot_stock_id:
+                quants = self.env["stock.quant"].search(
+                    [
+                        ("location_id", "child_of", warehouse.lot_stock_id.id),
+                        ("product_id", "=", self.product_id.id),
+                        ("quantity", "!=", 0),
+                    ]
+                )
+                qty = sum(quants.mapped("quantity"))
+                if qty != 0:
+                    self.qty_initial = qty
+                    if not self.qty_demand:
+                        self.qty_demand = qty
 
     out_move_line_ids = fields.Many2many(
         "stock.move.line",
@@ -658,6 +672,13 @@ class VanSessionLine(models.Model):
         "sml_id",
         string="Sale Move Lines",
     )
+    devolution_move_line_ids = fields.Many2many(
+        "stock.move.line",
+        "van_line_devolution_sml_rel",
+        "van_line_id",
+        "sml_id",
+        string="Devolution Move Lines",
+    )
     in_move_line_ids = fields.Many2many(
         "stock.move.line",
         "van_line_in_sml_rel",
@@ -666,19 +687,29 @@ class VanSessionLine(models.Model):
         string="In Move Lines",
     )
     qty_initial = fields.Float(
-        string="Estoque Inicial",
+        string="Estoque",
         help="Quantidade já presente no caminhão antes da carga.",
     )
-    qty_out = fields.Float(string="Saída")
+    qty_demand = fields.Float(string="Demanda")
+    qty_loaded = fields.Float(
+        string="Carregamento",
+        compute="_compute_qty_loaded",
+        store=True,
+    )
+    qty_out = fields.Float(
+        string="Saída",
+        compute="_compute_qty_out",
+        store=True,
+    )
     qty_sold = fields.Float(string="Venda", compute="_compute_qty_sold", store=True)
+    qty_devolution = fields.Float(
+        string="Devolução", compute="_compute_qty_devolution", store=True
+    )
     qty_returned = fields.Float(
         string="Retorno", compute="_compute_qty_returned", store=True
     )
+    qty_scrap = fields.Float(string="Scrap", compute="_compute_qty_scrap", store=True)
     qty_diff = fields.Float(string="Diferença", compute="_compute_qty_diff", store=True)
-    qty_keep = fields.Float(
-        string="Estoque Final",
-        help="Quantidade a manter no caminhão para a próxima sessão.",
-    )
     price_unit = fields.Float(string="Preço")
     amount = fields.Float(string="Valor Dif.", compute="_compute_amount", store=True)
     waived = fields.Boolean()
@@ -690,56 +721,71 @@ class VanSessionLine(models.Model):
             {
                 "out_move_line_ids": [(5, 0, 0)],
                 "sale_move_line_ids": [(5, 0, 0)],
+                "devolution_move_line_ids": [(5, 0, 0)],
                 "in_move_line_ids": [(5, 0, 0)],
                 "qty_initial": 0,
-                "qty_keep": 0,
                 "waived": False,
                 "waive_reason": False,
             }
         )
         return super().copy_data(default=default)
 
+    @api.depends("out_move_line_ids.quantity")
+    def _compute_qty_loaded(self):
+        for line in self:
+            line.qty_loaded = sum(line.out_move_line_ids.mapped("quantity"))
+
+    @api.depends("qty_initial", "qty_loaded")
+    def _compute_qty_out(self):
+        for line in self:
+            line.qty_out = line.qty_initial + line.qty_loaded
+
     @api.depends("sale_move_line_ids.quantity")
     def _compute_qty_sold(self):
         for line in self:
             line.qty_sold = sum(line.sale_move_line_ids.mapped("quantity"))
+
+    @api.depends("devolution_move_line_ids.quantity")
+    def _compute_qty_devolution(self):
+        for line in self:
+            line.qty_devolution = sum(line.devolution_move_line_ids.mapped("quantity"))
 
     @api.depends("in_move_line_ids.quantity")
     def _compute_qty_returned(self):
         for line in self:
             line.qty_returned = sum(line.in_move_line_ids.mapped("quantity"))
 
-    @api.depends("qty_out", "qty_sold", "qty_returned", "qty_keep")
+    @api.depends("session_id.unload_picking_id")
+    def _compute_qty_scrap(self):
+        for line in self:
+            picking = line.session_id.unload_picking_id
+            if not picking:
+                line.qty_scrap = 0
+                continue
+            scraps = self.env["stock.scrap"].search(
+                [
+                    ("picking_id", "=", picking.id),
+                    ("product_id", "=", line.product_id.id),
+                    ("state", "=", "done"),
+                ]
+            )
+            line.qty_scrap = sum(scraps.mapped("scrap_qty"))
+
+    @api.depends("qty_out", "qty_sold", "qty_devolution", "qty_returned", "qty_scrap")
     def _compute_qty_diff(self):
         for line in self:
             line.qty_diff = (
-                line.qty_out - line.qty_sold - line.qty_returned - line.qty_keep
+                line.qty_out
+                - line.qty_sold
+                + line.qty_devolution
+                - line.qty_returned
+                - line.qty_scrap
             )
 
     @api.depends("qty_diff", "price_unit")
     def _compute_amount(self):
         for line in self:
             line.amount = line.qty_diff * line.price_unit
-
-    @api.constrains("qty_keep", "qty_out", "qty_sold")
-    def _check_qty_keep(self):
-        for line in self:
-            remaining = line.qty_out - line.qty_sold
-            if line.qty_keep < 0:
-                raise ValidationError(_("A quantidade a manter não pode ser negativa."))
-            if line.qty_keep > remaining:
-                raise ValidationError(
-                    _(
-                        "A quantidade a manter (%(qty_keep)s) não pode exceder"
-                        " o saldo disponível (%(remaining)s) para o produto"
-                        " %(product)s."
-                    )
-                    % {
-                        "qty_keep": line.qty_keep,
-                        "remaining": remaining,
-                        "product": line.product_id.display_name,
-                    }
-                )
 
     @api.constrains("waived", "waive_reason")
     def _check_waive_reason(self):

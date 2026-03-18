@@ -8,15 +8,15 @@
                 <field name="session_id" invisible="1" />
                 <group>
                     <div class="alert alert-info" role="alert" colspan="2">
-                        Defina a quantidade que deseja <b>manter no caminhão</b>
-                        para a próxima sessão. O restante será devolvido ao
-                        armazém principal via picking de descarga.
+                        Defina o <b>destino</b> de cada produto restante:
+                        <b>Manter no Caminhão</b> para a próxima sessão ou
+                        <b>Devolver ao Armazém</b> via picking de descarga.
                     </div>
                 </group>
                 <div class="mb-3">
                     <button
                         name="action_return_all"
-                        string="Devolver Tudo ao Estoque"
+                        string="Devolver Tudo ao Armazém"
                         type="object"
                         class="btn-secondary me-2"
                     />
@@ -34,7 +34,7 @@
                         <field name="qty_out" readonly="1" />
                         <field name="qty_sold" readonly="1" />
                         <field name="qty_remaining" readonly="1" />
-                        <field name="qty_keep" />
+                        <field name="return_to" />
                     </list>
                 </field>
                 <footer>

@@ -9,6 +9,7 @@
                 <group string="Van Sales" invisible="not is_van_config">
                     <group>
                         <field name="is_van_config" />
+                        <field name="warehouse_id" />
                         <field name="van_load_picking_type_id" />
                         <field name="van_unload_picking_type_id" />
                     </group>

@@ -8,10 +8,10 @@
             <form>
                 <header>
                     <button
-                        name="action_load_from_stock"
-                        string="Carregar Estoque Residual"
+                        name="action_start_loading"
+                        string="Iniciar Carregamento"
                         type="object"
-                        class="btn-secondary"
+                        class="btn-primary"
                         invisible="state != 'draft'"
                     />
                     <button
@@ -19,7 +19,7 @@
                         string="Confirmar Carga"
                         type="object"
                         class="btn-primary"
-                        invisible="state != 'draft'"
+                        invisible="state != 'loading'"
                     />
                     <button
                         name="action_open_pos"
@@ -29,11 +29,12 @@
                         invisible="state != 'loaded'"
                     />
                     <button
-                        name="action_open_close_wizard"
+                        name="action_post"
                         string="Postar Fechamento"
                         type="object"
                         class="btn-primary"
                         invisible="state != 'returned'"
+                        confirm="Isso criará o picking de descarga e o lançamento contábil. Continuar?"
                         groups="van_sales.group_van_sales_manager"
                     />
                     <button
@@ -41,8 +42,8 @@
                         string="Voltar ao Rascunho"
                         type="object"
                         class="btn-secondary"
-                        invisible="state != 'loaded'"
-                        confirm="Isso cancelará o picking de carga. Continuar?"
+                        invisible="state not in ('loaded', 'loading')"
+                        confirm="Isso cancelará o carregamento. Continuar?"
                         groups="van_sales.group_van_sales_manager"
                     />
                     <button
@@ -57,7 +58,7 @@
                     <field
                         name="state"
                         widget="statusbar"
-                        statusbar_visible="draft,loaded,in_route,returned,closed"
+                        statusbar_visible="draft,loading,loaded,in_route,returned,closed"
                     />
                 </header>
                 <sheet>
@@ -96,12 +97,26 @@
                                         readonly="1"
                                         optional="show"
                                     />
-                                    <field name="qty_out" />
+                                    <field
+                                        name="qty_demand"
+                                        readonly="parent.state != 'loading'"
+                                    />
+                                    <field
+                                        name="qty_loaded"
+                                        readonly="1"
+                                        optional="show"
+                                    />
+                                    <field name="qty_out" readonly="1" />
                                     <field name="qty_sold" readonly="1" />
+                                    <field
+                                        name="qty_devolution"
+                                        readonly="1"
+                                        optional="show"
+                                    />
                                     <field name="qty_returned" readonly="1" />
                                     <field
-                                        name="qty_keep"
-                                        readonly="parent.state != 'returned'"
+                                        name="qty_scrap"
+                                        readonly="1"
                                         optional="show"
                                     />
                                     <field name="qty_diff" readonly="1" />
@@ -117,7 +132,6 @@
                                     <field name="total_qty_out" />
                                     <field name="total_qty_sold" />
                                     <field name="total_qty_returned" />
-                                    <field name="total_qty_keep" />
                                     <field name="total_qty_diff" />
                                     <separator />
                                     <field name="total_amount" />
@@ -190,6 +204,11 @@
                     string="Rascunho"
                     name="draft"
                     domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    string="Em Carregamento"
+                    name="loading"
+                    domain="[('state', '=', 'loading')]"
                 />
                 <filter
                     string="Carregado"

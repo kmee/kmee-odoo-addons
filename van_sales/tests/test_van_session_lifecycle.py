@@ -33,6 +33,16 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             [("company_id", "=", cls.company.id)], limit=1
         )
 
+        # Van warehouse — pos_config.warehouse_id will point here
+        cls.van_warehouse = cls.env["stock.warehouse"].create(
+            {
+                "name": "Van Warehouse",
+                "code": "VAN",
+                "company_id": cls.company.id,
+            }
+        )
+        cls.van_location = cls.van_warehouse.lot_stock_id
+
         # Picking types for van load/unload
         cls.van_load_picking_type = cls.env["stock.picking.type"].create(
             {
@@ -41,18 +51,9 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
                 "sequence_code": "VLD",
                 "warehouse_id": warehouse.id,
                 "default_location_src_id": warehouse.lot_stock_id.id,
-                "default_location_dest_id": cls.env["stock.location"]
-                .create(
-                    {
-                        "name": "Van Stock",
-                        "usage": "internal",
-                        "location_id": warehouse.view_location_id.id,
-                    }
-                )
-                .id,
+                "default_location_dest_id": cls.van_location.id,
             }
         )
-        cls.van_location = cls.van_load_picking_type.default_location_dest_id
 
         cls.van_unload_picking_type = cls.env["stock.picking.type"].create(
             {
@@ -101,6 +102,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         cls.pos_config.write(
             {
                 "is_van_config": True,
+                "warehouse_id": cls.van_warehouse.id,
                 "van_load_picking_type_id": cls.van_load_picking_type.id,
                 "van_unload_picking_type_id": cls.van_unload_picking_type.id,
                 "van_driver_account_id": cls.driver_account.id,
@@ -167,6 +169,11 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         }
         vals.update(kwargs)
         return self.env["van.session"].create(vals)
+
+    def _start_and_confirm(self, session):
+        """Shortcut: draft → loading → loaded."""
+        session.action_start_loading()
+        session.action_confirm()
 
     def _create_load_picking(self, products_qty):
         """Create and validate a load picking with given {product: qty} dict."""
@@ -279,6 +286,10 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self.assertEqual(len(session.line_ids), 2)
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
         line_b = session.line_ids.filtered(lambda ln: ln.product_id == self.product_b)
+        # qty_demand is set from move.product_uom_qty
+        self.assertEqual(line_a.qty_demand, 20)
+        self.assertEqual(line_b.qty_demand, 10)
+        # qty_out is computed from out_move_line_ids
         self.assertEqual(line_a.qty_out, 20)
         self.assertEqual(line_b.qty_out, 10)
         # Price should come from lst_price (no pricelist override)
@@ -296,23 +307,24 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
     # ==================================================================
 
     def test_path_b_manual_lines_confirm_creates_picking(self):
-        """GIVEN a van session in draft with manual lines
+        """GIVEN a van session in loading with manual lines
         WHEN action_confirm is called
         THEN a load picking is created, validated, and state becomes 'loaded'.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 15,
+                    "qty_demand": 15,
                     "price_unit": 5.00,
                 },
                 {
                     "session_id": session.id,
                     "product_id": self.product_b.id,
-                    "qty_out": 8,
+                    "qty_demand": 8,
                     "price_unit": 8.00,
                 },
             ]
@@ -328,27 +340,34 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         # Out move lines linked
         for line in session.line_ids:
             self.assertTrue(line.out_move_line_ids)
+        # qty_out computed from out_move_line_ids after confirm
+        line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
+        line_b = session.line_ids.filtered(lambda ln: ln.product_id == self.product_b)
+        self.assertEqual(line_a.qty_out, 15)
+        self.assertEqual(line_b.qty_out, 8)
 
     def test_path_b_confirm_without_lines_raises(self):
-        """GIVEN a van session in draft with no lines
+        """GIVEN a van session in loading with no lines
         WHEN action_confirm is called
         THEN a UserError is raised.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         with self.assertRaises(UserError):
             session.action_confirm()
 
-    def test_path_b_confirm_non_draft_raises(self):
-        """GIVEN a van session NOT in draft
+    def test_path_b_confirm_non_loading_raises(self):
+        """GIVEN a van session NOT in loading
         WHEN action_confirm is called
         THEN a UserError is raised.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             {
                 "session_id": session.id,
                 "product_id": self.product_a.id,
-                "qty_out": 5,
+                "qty_demand": 5,
                 "price_unit": 5.00,
             }
         )
@@ -375,11 +394,12 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         THEN it succeeds.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             {
                 "session_id": session.id,
                 "product_id": self.product_a.id,
-                "qty_out": 10,
+                "qty_demand": 10,
                 "price_unit": 5.00,
             }
         )
@@ -400,22 +420,23 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             - session lines qty_sold reflects POS sales
             - cash_diff is read from POS session
             - van session state becomes 'returned'
-            - unload picking is NOT yet created (deferred to close wizard)
+            - provisional unload picking is created (not yet validated)
         """
         # Load
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 20,
+                    "qty_demand": 20,
                     "price_unit": 5.00,
                 },
                 {
                     "session_id": session.id,
                     "product_id": self.product_b.id,
-                    "qty_out": 10,
+                    "qty_demand": 10,
                     "price_unit": 8.00,
                 },
             ]
@@ -442,8 +463,9 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self._close_pos_session(pos_session)
 
         self.assertEqual(session.state, "returned")
-        # Unload picking NOT yet created (deferred to action_post / wizard)
-        self.assertFalse(session.unload_picking_id)
+        # Provisional unload picking created (not yet validated)
+        self.assertTrue(session.unload_picking_id)
+        self.assertNotEqual(session.unload_picking_id.state, "done")
 
         # Session lines qty_sold updated
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
@@ -455,20 +477,22 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         """GIVEN a returned session with no unload picking
         WHEN action_post is called
         THEN unload picking is created with expected return quantities.
+             Unload qty = qty_out - qty_sold + qty_devolution (everything returns).
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 20,
+                    "qty_demand": 20,
                     "price_unit": 5.00,
                 },
                 {
                     "session_id": session.id,
                     "product_id": self.product_b.id,
-                    "qty_out": 10,
+                    "qty_demand": 10,
                     "price_unit": 8.00,
                 },
             ]
@@ -509,12 +533,13 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         """
         # Setup: load → sell → close POS → get to returned state
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 20,
+                    "qty_demand": 20,
                     "price_unit": 5.00,
                 },
             ]
@@ -544,7 +569,8 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
         self.assertTrue(line_a.in_move_line_ids)
         self.assertEqual(line_a.qty_returned, 12)
-        # qty_diff = 20 (out) - 5 (sold) - 12 (returned) = 3
+        # qty_diff = qty_out - qty_sold + qty_devolution - qty_returned - qty_scrap
+        # qty_diff = 20 - 5 + 0 - 12 - 0 = 3
         self.assertEqual(line_a.qty_diff, 3)
         # amount = 3 * 5.00 = 15.00
         self.assertEqual(line_a.amount, 15.00)
@@ -560,12 +586,13 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             and the session state becomes 'closed'.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 20,
+                    "qty_demand": 20,
                     "price_unit": 5.00,
                 },
             ]
@@ -624,11 +651,12 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         THEN session closes with no account.move (no product or cash diff).
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             {
                 "session_id": session.id,
                 "product_id": self.product_a.id,
-                "qty_out": 10,
+                "qty_demand": 10,
                 "price_unit": 5.00,
             }
         )
@@ -661,18 +689,19 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         THEN waived lines are excluded from the closing entry.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 20,
+                    "qty_demand": 20,
                     "price_unit": 5.00,
                 },
                 {
                     "session_id": session.id,
                     "product_id": self.product_b.id,
-                    "qty_out": 10,
+                    "qty_demand": 10,
                     "price_unit": 8.00,
                 },
             ]
@@ -733,11 +762,12 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         """
         # Create and load first session
         session1 = self._create_van_session()
+        session1.action_start_loading()
         self.env["van.session.line"].create(
             {
                 "session_id": session1.id,
                 "product_id": self.product_a.id,
-                "qty_out": 5,
+                "qty_demand": 5,
                 "price_unit": 5.00,
             }
         )
@@ -746,17 +776,9 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
         # Create second session for same driver — draft is OK
         session2 = self._create_van_session()
-        self.env["van.session.line"].create(
-            {
-                "session_id": session2.id,
-                "product_id": self.product_a.id,
-                "qty_out": 5,
-                "price_unit": 5.00,
-            }
-        )
-        # But confirming should fail
+        # But starting loading should fail (driver already active)
         with self.assertRaises(ValidationError):
-            session2.action_confirm()
+            session2.action_start_loading()
 
     # ==================================================================
     # SCENARIO 8: Constraint — waive reason min 20 chars
@@ -773,7 +795,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 5,
+                    "qty_demand": 5,
                     "price_unit": 5.00,
                     "waived": True,
                     "waive_reason": "Short reason",
@@ -790,7 +812,7 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             {
                 "session_id": session.id,
                 "product_id": self.product_a.id,
-                "qty_out": 5,
+                "qty_demand": 5,
                 "price_unit": 5.00,
                 "waived": True,
                 "waive_reason": "Produto avariado no transporte - gerente autorizou",
@@ -808,11 +830,12 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         THEN the pricelist sale price is returned (not AVCO/standard).
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
             {
                 "session_id": session.id,
                 "product_id": self.product_a.id,
-                "qty_out": 10,
+                "qty_demand": 10,
                 "price_unit": 5.00,
             }
         )
@@ -843,23 +866,25 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
     # ==================================================================
 
     def test_full_lifecycle_load_sell_return_close(self):
-        """End-to-end: draft → loaded → in_route → returned → closed."""
-        # STEP 1: Create session with manual lines
+        """End-to-end: draft → loading → loaded → in_route → returned → closed."""
+        # STEP 1: Create session and start loading
         session = self._create_van_session()
         self.assertEqual(session.state, "draft")
+        session.action_start_loading()
+        self.assertEqual(session.state, "loading")
 
         self.env["van.session.line"].create(
             [
                 {
                     "session_id": session.id,
                     "product_id": self.product_a.id,
-                    "qty_out": 20,
+                    "qty_demand": 20,
                     "price_unit": 5.00,
                 },
                 {
                     "session_id": session.id,
                     "product_id": self.product_b.id,
-                    "qty_out": 10,
+                    "qty_demand": 10,
                     "price_unit": 8.00,
                 },
             ]
@@ -883,18 +908,18 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             ],
         )
 
-        # STEP 5: Close POS → returned (no unload picking yet)
+        # STEP 5: Close POS → returned (provisional unload picking created)
         self._close_pos_session(pos_session)
         self.assertEqual(session.state, "returned")
-        self.assertFalse(session.unload_picking_id)
+        self.assertTrue(session.unload_picking_id)
 
-        # STEP 6: Manually create unload and validate with partial return
-        session._create_unload_picking()
+        # STEP 6: Validate unload with partial return
         unload = session.unload_picking_id
         unload.action_assign()
         move_a = unload.move_ids.filtered(lambda m: m.product_id == self.product_a)
         move_b = unload.move_ids.filtered(lambda m: m.product_id == self.product_b)
-        # Expected: A=12, B=4. Return A=10 (2 missing), B=4 (all)
+        # Expected unload: A = 20-8+0 = 12, B = 10-6+0 = 4
+        # Return A=10 (2 missing), B=4 (all)
         for ml in move_a.move_line_ids:
             ml.quantity = 10
         for ml in move_b.move_line_ids:
@@ -908,6 +933,8 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self.assertEqual(line_a.qty_out, 20)
         self.assertEqual(line_a.qty_sold, 8)
         self.assertEqual(line_a.qty_returned, 10)
+        # qty_diff = qty_out - qty_sold + qty_devolution - qty_returned - qty_scrap
+        # = 20 - 8 + 0 - 10 - 0 = 2
         self.assertEqual(line_a.qty_diff, 2)
         self.assertEqual(line_a.amount, 10.00)  # 2 * 5.00
 
@@ -931,17 +958,19 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
 
     def test_load_from_stock_empty_warehouse(self):
         """GIVEN an empty van warehouse
-        WHEN action_load_from_stock is called
-        THEN no lines are created.
+        WHEN action_start_loading is called
+        THEN no lines are created (state becomes loading).
         """
         session = self._create_van_session()
-        session.action_load_from_stock()
+        session.action_start_loading()
+        self.assertEqual(session.state, "loading")
         self.assertFalse(session.line_ids)
 
     def test_load_from_stock_with_residual(self):
         """GIVEN stock in the van warehouse
-        WHEN action_load_from_stock is called
-        THEN lines are created with qty_initial and qty_out matching quant qty.
+        WHEN action_start_loading is called
+        THEN lines are created with qty_initial matching quant qty.
+             qty_out = qty_initial (no picking yet, so qty_loaded=0).
         """
         # Put stock in van location
         self.env["stock.quant"].with_context(inventory_mode=True).create(
@@ -955,17 +984,19 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         ).action_apply_inventory()
 
         session = self._create_van_session()
-        session.action_load_from_stock()
+        session.action_start_loading()
 
         self.assertEqual(len(session.line_ids), 1)
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
         self.assertEqual(line_a.qty_initial, 30)
+        # qty_out = qty_initial + qty_loaded; qty_loaded=0 (no picking yet)
         self.assertEqual(line_a.qty_out, 30)
 
     def test_confirm_with_residual_creates_partial_picking(self):
-        """GIVEN a session with qty_initial=30 and qty_out=80
+        """GIVEN a session with qty_initial=30 and qty_demand=80
         WHEN action_confirm is called
-        THEN picking is created only for qty_out - qty_initial = 50.
+        THEN picking is created only for qty_demand - qty_initial = 50.
+             After confirm: qty_out = qty_initial + qty_loaded = 30 + 50 = 80.
         """
         # Put stock in van location
         self.env["stock.quant"].with_context(inventory_mode=True).create(
@@ -979,10 +1010,10 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         ).action_apply_inventory()
 
         session = self._create_van_session()
-        session.action_load_from_stock()
-        # Increase qty_out to 80 (30 residual + 50 new)
+        session.action_start_loading()
+        # Increase qty_demand to 80 (30 residual + 50 new)
         line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
-        line_a.qty_out = 80
+        line_a.qty_demand = 80
 
         session.action_confirm()
 
@@ -992,9 +1023,11 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         move = session.load_picking_id.move_ids
         self.assertEqual(len(move), 1)
         self.assertEqual(move.product_uom_qty, 50)
+        # qty_out = qty_initial(30) + qty_loaded(50) = 80
+        self.assertEqual(line_a.qty_out, 80)
 
     def test_confirm_all_residual_no_picking(self):
-        """GIVEN a session where all qty_out equals qty_initial
+        """GIVEN a session where all qty_demand equals qty_initial
         WHEN action_confirm is called
         THEN no picking is created (everything already in van).
         """
@@ -1010,8 +1043,8 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         ).action_apply_inventory()
 
         session = self._create_van_session()
-        session.action_load_from_stock()
-        # qty_out = qty_initial = 30, no new load needed
+        session.action_start_loading()
+        # qty_demand defaults to qty_initial = 30, no new load needed
 
         session.action_confirm()
 
@@ -1019,88 +1052,25 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self.assertFalse(session.load_picking_id)
 
     # ==================================================================
-    # SCENARIO 13: qty_keep — keep stock in van
-    # ==================================================================
-
-    def test_qty_keep_reduces_unload_and_diff(self):
-        """GIVEN a returned session with qty_keep set
-        WHEN action_post is called (which creates unload picking)
-        THEN unload qty excludes qty_keep and qty_diff excludes qty_keep.
-        """
-        session = self._create_van_session()
-        self.env["van.session.line"].create(
-            [
-                {
-                    "session_id": session.id,
-                    "product_id": self.product_a.id,
-                    "qty_out": 20,
-                    "price_unit": 5.00,
-                },
-            ]
-        )
-        session.action_confirm()
-        pos_session = self._open_pos_session(session)
-        self._create_pos_order(
-            pos_session,
-            [
-                (self.product_a, 5, 5.00),
-            ],
-        )
-        self._close_pos_session(pos_session)
-        self.assertEqual(session.state, "returned")
-
-        # Set qty_keep in returned state (as the wizard would)
-        line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
-        line_a.qty_keep = 10
-
-        # action_post creates unload (respecting qty_keep), validates, posts
-        session.action_post()
-
-        # Unload picking: expected = 20 - 5 - 10 = 5
-        unload_move = session.unload_picking_id.move_ids.filtered(
-            lambda m: m.product_id == self.product_a
-        )
-        self.assertEqual(unload_move.product_uom_qty, 5)
-
-        # qty_diff should be 0: 20 - 5 - 5 (returned) - 10 (keep) = 0
-        self.assertEqual(line_a.qty_diff, 0)
-        self.assertEqual(line_a.amount, 0)
-
-    def test_qty_keep_constraint_exceeds_remaining(self):
-        """GIVEN a session line with qty_out=20 and qty_sold=5
-        WHEN qty_keep is set to more than remaining (15)
-        THEN a ValidationError is raised.
-        """
-        session = self._create_van_session()
-        line = self.env["van.session.line"].create(
-            {
-                "session_id": session.id,
-                "product_id": self.product_a.id,
-                "qty_out": 20,
-                "price_unit": 5.00,
-            }
-        )
-        with self.assertRaises(ValidationError):
-            line.qty_keep = 25  # more than qty_out - qty_sold (20 - 0 = 20)
-
-    # ==================================================================
-    # SCENARIO 14: Full residual lifecycle across two sessions
+    # SCENARIO 13: Residual lifecycle across two sessions
     # ==================================================================
 
     def test_residual_two_session_lifecycle(self):
-        """End-to-end: Session 1 keeps stock → Session 2 starts with residual.
+        """End-to-end: Session 1 returns all remaining stock.
+        Session 2 starts fresh (no residual in van).
 
-        Session 1: Load 20 → Sell 5 → Keep 10 → Return 5
-        Session 2: Load from stock (10 in van) → Add 40 more → Confirm
-                   → Picking only for 40
+        Session 1: Load 20 → Sell 5 → Return all remaining (15)
+        Session 2: No residual in van → Load 40 fresh → Confirm
+                   → Picking for 40
         """
         # SESSION 1
         session1 = self._create_van_session()
+        session1.action_start_loading()
         self.env["van.session.line"].create(
             {
                 "session_id": session1.id,
                 "product_id": self.product_a.id,
-                "qty_out": 20,
+                "qty_demand": 20,
                 "price_unit": 5.00,
             }
         )
@@ -1116,68 +1086,81 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self._close_pos_session(pos_session1)
         self.assertEqual(session1.state, "returned")
 
-        # Set qty_keep=10 in returned state (as wizard would)
-        line1 = session1.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
-        line1.qty_keep = 10
-
-        # action_post creates unload (5 units), validates, posts
+        # action_post creates unload for all remaining, validates, posts
+        # Unload qty = qty_out - qty_sold + qty_devolution = 20 - 5 + 0 = 15
         session1.action_post()
         self.assertEqual(session1.state, "closed")
 
-        # Verify unload: expected = 20 - 5 - 10 = 5
+        # Verify unload: expected = 20 - 5 = 15
         unload_move = session1.unload_picking_id.move_ids
-        self.assertEqual(unload_move.product_uom_qty, 5)
-        self.assertEqual(line1.qty_returned, 5)
-        self.assertEqual(line1.qty_diff, 0)  # 20 - 5 - 5 - 10 = 0
+        self.assertEqual(unload_move.product_uom_qty, 15)
 
-        # SESSION 2 — van warehouse should have 10 units of product_a
-        # (20 loaded - 5 sold via POS picking - 5 returned via unload = 10 remaining)
+        line1 = session1.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
+        self.assertEqual(line1.qty_returned, 15)
+        # qty_diff = 20 - 5 + 0 - 15 - 0 = 0
+        self.assertEqual(line1.qty_diff, 0)
+
+        # SESSION 2 — check van quant balance
+        van_quant = self.env["stock.quant"].search(
+            [
+                ("location_id", "child_of", self.van_location.id),
+                ("product_id", "=", self.product_a.id),
+            ]
+        )
+        van_balance = sum(van_quant.mapped("quantity"))
+
         session2 = self._create_van_session()
-        session2.action_load_from_stock()
+        session2.action_start_loading()
 
+        # Check residual matches actual van balance
         line2 = session2.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
-        self.assertTrue(line2)
-        self.assertEqual(line2.qty_initial, 10)
-        self.assertEqual(line2.qty_out, 10)
+        if van_balance:
+            self.assertTrue(line2)
+            self.assertEqual(line2.qty_initial, van_balance)
+        else:
+            self.assertFalse(line2)
 
-        # Add more stock
-        line2.qty_out = 50  # 10 residual + 40 new
+        # Add fresh demand
+        if line2:
+            line2.qty_demand = van_balance + 40
+        else:
+            self.env["van.session.line"].create(
+                {
+                    "session_id": session2.id,
+                    "product_id": self.product_a.id,
+                    "qty_demand": 40,
+                    "price_unit": 5.00,
+                }
+            )
 
         session2.action_confirm()
         self.assertEqual(session2.state, "loaded")
         self.assertTrue(session2.load_picking_id)
 
-        # Picking should only move 40 units (50 - 10)
+        # Picking should move 40 units (fresh demand beyond residual)
         load_move = session2.load_picking_id.move_ids.filtered(
             lambda m: m.product_id == self.product_a
         )
         self.assertEqual(load_move.product_uom_qty, 40)
 
     # ==================================================================
-    # SCENARIO 15: Close wizard
+    # SCENARIO 14: action_back_to_loaded clears devolution_move_line_ids
     # ==================================================================
 
-    def test_close_wizard_return_all(self):
-        """GIVEN a returned session
-        WHEN the close wizard is opened and 'Devolver Tudo' is clicked
-        THEN all qty_keep are set to 0 and session closes normally.
+    def test_action_back_to_loaded_clears_devolution_lines(self):
+        """GIVEN a van session in returned state
+        WHEN action_back_to_loaded is called
+        THEN devolution_move_line_ids are cleared.
         """
         session = self._create_van_session()
+        session.action_start_loading()
         self.env["van.session.line"].create(
-            [
-                {
-                    "session_id": session.id,
-                    "product_id": self.product_a.id,
-                    "qty_out": 20,
-                    "price_unit": 5.00,
-                },
-                {
-                    "session_id": session.id,
-                    "product_id": self.product_b.id,
-                    "qty_out": 10,
-                    "price_unit": 8.00,
-                },
-            ]
+            {
+                "session_id": session.id,
+                "product_id": self.product_a.id,
+                "qty_demand": 20,
+                "price_unit": 5.00,
+            }
         )
         session.action_confirm()
         pos_session = self._open_pos_session(session)
@@ -1185,107 +1168,12 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
             pos_session,
             [
                 (self.product_a, 5, 5.00),
-                (self.product_b, 3, 8.00),
             ],
         )
         self._close_pos_session(pos_session)
         self.assertEqual(session.state, "returned")
 
-        # Open wizard
-        wizard = (
-            self.env["van.session.close.wizard"]
-            .with_context(active_id=session.id)
-            .create({})
-        )
-        self.assertEqual(len(wizard.line_ids), 2)
-
-        # Click "Devolver Tudo"
-        wizard.action_return_all()
-        self.assertTrue(all(ln.qty_keep == 0 for ln in wizard.line_ids))
-
-        # Confirm
-        wizard.action_confirm()
-        self.assertEqual(session.state, "closed")
-        # All qty_keep should be 0
-        self.assertTrue(all(ln.qty_keep == 0 for ln in session.line_ids))
-
-    def test_close_wizard_keep_all(self):
-        """GIVEN a returned session
-        WHEN the close wizard is opened and 'Manter Tudo' is clicked
-        THEN qty_keep equals qty_remaining and unload has no moves.
-        """
-        session = self._create_van_session()
-        self.env["van.session.line"].create(
-            {
-                "session_id": session.id,
-                "product_id": self.product_a.id,
-                "qty_out": 20,
-                "price_unit": 5.00,
-            }
-        )
-        session.action_confirm()
-        pos_session = self._open_pos_session(session)
-        self._create_pos_order(
-            pos_session,
-            [
-                (self.product_a, 5, 5.00),
-            ],
-        )
-        self._close_pos_session(pos_session)
-
-        wizard = (
-            self.env["van.session.close.wizard"]
-            .with_context(active_id=session.id)
-            .create({})
-        )
-
-        # Click "Manter Tudo"
-        wizard.action_keep_all()
-        self.assertEqual(wizard.line_ids[0].qty_keep, 15)  # 20 - 5
-
-        wizard.action_confirm()
-        self.assertEqual(session.state, "closed")
-        line_a = session.line_ids.filtered(lambda ln: ln.product_id == self.product_a)
-        self.assertEqual(line_a.qty_keep, 15)
-        # Unload should have no moves (everything kept)
-        self.assertFalse(session.unload_picking_id.move_ids)
-
-    def test_close_wizard_partial_keep(self):
-        """GIVEN a returned session
-        WHEN wizard sets partial qty_keep
-        THEN unload picking reflects partial return.
-        """
-        session = self._create_van_session()
-        self.env["van.session.line"].create(
-            {
-                "session_id": session.id,
-                "product_id": self.product_a.id,
-                "qty_out": 20,
-                "price_unit": 5.00,
-            }
-        )
-        session.action_confirm()
-        pos_session = self._open_pos_session(session)
-        self._create_pos_order(
-            pos_session,
-            [
-                (self.product_a, 5, 5.00),
-            ],
-        )
-        self._close_pos_session(pos_session)
-
-        wizard = (
-            self.env["van.session.close.wizard"]
-            .with_context(active_id=session.id)
-            .create({})
-        )
-        # Keep 10 of 15 remaining
-        wizard.line_ids[0].qty_keep = 10
-
-        wizard.action_confirm()
-        self.assertEqual(session.state, "closed")
-
-        # Unload should have move for 5 (15 remaining - 10 keep)
-        unload_move = session.unload_picking_id.move_ids
-        self.assertEqual(len(unload_move), 1)
-        self.assertEqual(unload_move.product_uom_qty, 5)
+        session.action_back_to_loaded()
+        self.assertEqual(session.state, "loaded")
+        for line in session.line_ids:
+            self.assertFalse(line.devolution_move_line_ids)

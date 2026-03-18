@@ -5,5 +5,3 @@ access_van_session_line_user,van.session.line.user,model_van_session_line,group_
 access_van_session_line_manager,van.session.line.manager,model_van_session_line,group_van_sales_manager,1,1,1,1
 access_report_van_session_line_user,report.van.session.line.user,model_report_van_session_line,group_van_sales_user,1,0,0,0
 access_report_van_session_line_manager,report.van.session.line.manager,model_report_van_session_line,group_van_sales_manager,1,0,0,0
-access_van_session_close_wizard,van.session.close.wizard,model_van_session_close_wizard,group_van_sales_manager,1,1,1,1
-access_van_session_close_wizard_line,van.session.close.wizard.line,model_van_session_close_wizard_line,group_van_sales_manager,1,1,1,1

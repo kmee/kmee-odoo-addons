@@ -1,5 +1,4 @@
-from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo import api, fields, models
 
 
 class VanSessionCloseWizard(models.TransientModel):
@@ -32,7 +31,7 @@ class VanSessionCloseWizard(models.TransientModel):
                             "qty_out": line.qty_out,
                             "qty_sold": line.qty_sold,
                             "qty_remaining": qty_remaining,
-                            "qty_keep": line.qty_keep,
+                            "return_to": "van",
                         },
                     )
                 )
@@ -45,14 +44,13 @@ class VanSessionCloseWizard(models.TransientModel):
         return res
 
     def action_return_all(self):
-        """Set qty_keep=0 on all lines (return everything to WH)."""
-        self.line_ids.write({"qty_keep": 0})
+        """Set return_to='warehouse' on all lines (return everything to WH)."""
+        self.line_ids.write({"return_to": "warehouse"})
         return self._reopen()
 
     def action_keep_all(self):
-        """Set qty_keep=qty_remaining on all lines (keep everything in van)."""
-        for line in self.line_ids:
-            line.qty_keep = line.qty_remaining
+        """Set return_to='van' on all lines (keep everything in van)."""
+        self.line_ids.write({"return_to": "van"})
         return self._reopen()
 
     def _reopen(self):
@@ -66,12 +64,14 @@ class VanSessionCloseWizard(models.TransientModel):
         }
 
     def action_confirm(self):
-        """Apply qty_keep to session lines, then close the session."""
+        """Apply return_to decisions to session lines, then close the session."""
         self.ensure_one()
         session = self.session_id
         for wiz_line in self.line_ids:
-            wiz_line.session_line_id.qty_keep = wiz_line.qty_keep
-        # Reset qty_keep for lines not in wizard (fully sold) — already 0
+            if wiz_line.return_to == "van":
+                wiz_line.session_line_id.qty_keep = wiz_line.qty_remaining
+            else:
+                wiz_line.session_line_id.qty_keep = 0
         session.action_post()
         return {"type": "ir.actions.act_window_close"}
 
@@ -88,22 +88,12 @@ class VanSessionCloseWizardLine(models.TransientModel):
     qty_out = fields.Float(string="Saída", readonly=True)
     qty_sold = fields.Float(string="Vendida", readonly=True)
     qty_remaining = fields.Float(string="Sobra", readonly=True)
-    qty_keep = fields.Float(string="Manter no Caminhão")
-
-    @api.constrains("qty_keep", "qty_remaining")
-    def _check_qty_keep(self):
-        for line in self:
-            if line.qty_keep < 0:
-                raise ValidationError(_("A quantidade a manter não pode ser negativa."))
-            if line.qty_keep > line.qty_remaining:
-                raise ValidationError(
-                    _(
-                        "A quantidade a manter (%(qty_keep)s) não pode exceder"
-                        " a sobra (%(remaining)s) para o produto %(product)s."
-                    )
-                    % {
-                        "qty_keep": line.qty_keep,
-                        "remaining": line.qty_remaining,
-                        "product": line.product_id.display_name,
-                    }
-                )
+    return_to = fields.Selection(
+        [
+            ("van", "Manter no Caminhão"),
+            ("warehouse", "Devolver ao Armazém"),
+        ],
+        string="Destino",
+        default="van",
+        required=True,
+    )

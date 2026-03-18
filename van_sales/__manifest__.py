@@ -14,7 +14,6 @@
         "report/van_session_report_views.xml",
         "report/report_van_load_ticket.xml",
         "report/report_van_session_summary.xml",
-        "wizard/van_session_close_wizard_views.xml",
         "views/van_session_views.xml",
         "views/pos_config_views.xml",
         "views/menu.xml",

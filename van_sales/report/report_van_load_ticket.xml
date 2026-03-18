@@ -45,8 +45,9 @@
                                     <th class="text-center" style="width: 5%">#</th>
                                     <th>Produto</th>
                                     <th class="text-center">Unidade</th>
-                                    <th class="text-end">Já no Caminhão</th>
-                                    <th class="text-end">Qtd Carregada</th>
+                                    <th class="text-end">Estoque</th>
+                                    <th class="text-end">Demanda</th>
+                                    <th class="text-end">Carregado</th>
                                     <th class="text-end">Preço Unit.</th>
                                     <th class="text-end">Valor Total</th>
                                 </tr>
@@ -57,11 +58,11 @@
                                 <t t-foreach="o.line_ids" t-as="line">
                                     <t
                                         t-set="line_total"
-                                        t-value="line.qty_out * line.price_unit"
+                                        t-value="line.qty_demand * line.price_unit"
                                     />
                                     <t
                                         t-set="total_qty"
-                                        t-value="total_qty + line.qty_out"
+                                        t-value="total_qty + line.qty_demand"
                                     />
                                     <t
                                         t-set="total_amount"
@@ -83,7 +84,10 @@
                                             <span t-out="'%.2f' % line.qty_initial" />
                                         </td>
                                         <td class="text-end">
-                                            <span t-out="'%.2f' % line.qty_out" />
+                                            <span t-out="'%.2f' % line.qty_demand" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_loaded" />
                                         </td>
                                         <td class="text-end">
                                             <span t-out="'%.2f' % line.price_unit" />
@@ -96,7 +100,7 @@
                             </tbody>
                             <tfoot>
                                 <tr class="fw-bold">
-                                    <td colspan="4" class="text-end">TOTAL</td>
+                                    <td colspan="5" class="text-end">TOTAL</td>
                                     <td class="text-end">
                                         <t t-out="'%.2f' % total_qty" />
                                     </td>

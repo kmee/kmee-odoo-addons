@@ -14,6 +14,7 @@ class ReportVanSessionLine(models.Model):
     state = fields.Selection(
         [
             ("draft", "Rascunho"),
+            ("loading", "Em Carregamento"),
             ("loaded", "Carregado"),
             ("in_route", "Em Rota"),
             ("returned", "Retornado"),
@@ -24,11 +25,14 @@ class ReportVanSessionLine(models.Model):
     product_id = fields.Many2one("product.product", readonly=True)
     categ_id = fields.Many2one("product.category", string="Categoria", readonly=True)
     company_id = fields.Many2one("res.company", readonly=True)
+    qty_initial = fields.Float(string="Estoque Inicial", readonly=True)
+    qty_demand = fields.Float(string="Demanda", readonly=True)
+    qty_loaded = fields.Float(string="Carregamento", readonly=True)
     qty_out = fields.Float(string="Qtd Saída", readonly=True)
     qty_sold = fields.Float(string="Qtd Vendida", readonly=True)
+    qty_devolution = fields.Float(string="Devolução", readonly=True)
     qty_returned = fields.Float(string="Qtd Retornada", readonly=True)
-    qty_initial = fields.Float(string="Estoque Inicial", readonly=True)
-    qty_keep = fields.Float(string="Manter", readonly=True)
+    qty_scrap = fields.Float(string="Scrap", readonly=True)
     qty_diff = fields.Float(string="Diferença Qtd", readonly=True)
     price_unit = fields.Float(string="Preço Unit.", readonly=True, aggregator="avg")
     amount = fields.Float(string="Valor Diferença", readonly=True)
@@ -51,11 +55,14 @@ class ReportVanSessionLine(models.Model):
                 l.product_id AS product_id,
                 pt.categ_id AS categ_id,
                 s.company_id AS company_id,
+                l.qty_initial AS qty_initial,
+                l.qty_demand AS qty_demand,
+                l.qty_loaded AS qty_loaded,
                 l.qty_out AS qty_out,
                 l.qty_sold AS qty_sold,
+                l.qty_devolution AS qty_devolution,
                 l.qty_returned AS qty_returned,
-                l.qty_initial AS qty_initial,
-                l.qty_keep AS qty_keep,
+                l.qty_scrap AS qty_scrap,
                 l.qty_diff AS qty_diff,
                 l.price_unit AS price_unit,
                 l.amount AS amount,
