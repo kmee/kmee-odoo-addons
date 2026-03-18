@@ -180,8 +180,11 @@
                                     <field name="total_qty_diff" />
                                 </group>
                                 <group string="Valores">
-                                    <field name="total_amount" />
+                                    <field name="total_pos_sales" />
+                                    <field name="total_pos_payments" />
                                     <field name="cash_diff" readonly="1" />
+                                    <separator />
+                                    <field name="total_amount" />
                                     <field name="total_diff" class="fw-bold" />
                                 </group>
                             </group>

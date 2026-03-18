@@ -76,10 +76,18 @@ class VanSession(models.Model):
         string="Diferença", compute="_compute_totals", store=True
     )
     total_amount = fields.Monetary(
-        string="Dif. Carga", compute="_compute_totals", store=True
+        string="Dif. Estoque", compute="_compute_totals", store=True
     )
     total_diff = fields.Monetary(
         string="Dif. Total", compute="_compute_totals", store=True
+    )
+    total_pos_sales = fields.Monetary(
+        string="Vendas POS",
+        compute="_compute_pos_totals",
+    )
+    total_pos_payments = fields.Monetary(
+        string="Pagamentos POS",
+        compute="_compute_pos_totals",
     )
     warehouse_id = fields.Many2one(
         "stock.warehouse",
@@ -117,6 +125,12 @@ class VanSession(models.Model):
         compute="_compute_pos_payment_ids",
         string="Pagamentos POS",
     )
+
+    @api.depends("pos_order_ids.amount_total", "pos_payment_ids.amount")
+    def _compute_pos_totals(self):
+        for session in self:
+            session.total_pos_sales = sum(session.pos_order_ids.mapped("amount_total"))
+            session.total_pos_payments = sum(session.pos_payment_ids.mapped("amount"))
 
     @api.depends("pos_order_ids.payment_ids")
     def _compute_pos_payment_ids(self):
