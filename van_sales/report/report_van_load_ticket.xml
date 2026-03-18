@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_report_van_load_ticket" model="ir.actions.report">
+        <field name="name">Romaneio de Carga</field>
+        <field name="model">van.session</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">van_sales.report_van_load_ticket_document</field>
+        <field name="report_file">van_sales.report_van_load_ticket_document</field>
+        <field name="binding_model_id" ref="model_van_session" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Romaneio - %s' % object.name</field>
+    </record>
+
+    <template id="report_van_load_ticket_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">ROMANEIO DE CARGA</h2>
+
+                        <div class="row mt-4 mb-4">
+                            <div class="col-6">
+                                <strong>Sessão:</strong>
+                                <span t-field="o.name" />
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>Data:</strong>
+                                <span t-field="o.date" />
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <strong>Motorista:</strong>
+                                <span t-field="o.driver_id.name" />
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>POS:</strong>
+                                <span t-field="o.pos_config_id.name" />
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 5%">#</th>
+                                    <th>Produto</th>
+                                    <th class="text-center">Unidade</th>
+                                    <th class="text-end">Já no Caminhão</th>
+                                    <th class="text-end">Qtd Carregada</th>
+                                    <th class="text-end">Preço Unit.</th>
+                                    <th class="text-end">Valor Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="total_qty" t-value="0" />
+                                <t t-set="total_amount" t-value="0" />
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <t
+                                        t-set="line_total"
+                                        t-value="line.qty_out * line.price_unit"
+                                    />
+                                    <t
+                                        t-set="total_qty"
+                                        t-value="total_qty + line.qty_out"
+                                    />
+                                    <t
+                                        t-set="total_amount"
+                                        t-value="total_amount + line_total"
+                                    />
+                                    <tr>
+                                        <td class="text-center">
+                                            <t t-out="line_index + 1" />
+                                        </td>
+                                        <td>
+                                            <span t-field="line.product_id.name" />
+                                        </td>
+                                        <td class="text-center">
+                                            <span
+                                                t-field="line.product_id.uom_id.name"
+                                            />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_initial" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_out" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.price_unit" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line_total" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr class="fw-bold">
+                                    <td colspan="4" class="text-end">TOTAL</td>
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_qty" />
+                                    </td>
+                                    <td />
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_amount" />
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="row mt-5 pt-5">
+                            <div class="col-5 text-center">
+                                <div class="border-top pt-2">
+                                    <strong>Motorista</strong>
+                                    <br />
+                                    <span t-field="o.driver_id.name" />
+                                </div>
+                            </div>
+                            <div class="col-2" />
+                            <div class="col-5 text-center">
+                                <div class="border-top pt-2">
+                                    <strong>Almoxarifado</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

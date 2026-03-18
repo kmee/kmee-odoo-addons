@@ -1,0 +1,27 @@
+{
+    "name": "Van Sales",
+    "version": "18.0.1.0.0",
+    "category": "Sales/Point of Sale",
+    "summary": "Van sales cycle: load, POS sales, unload, difference settlement",
+    "author": "KMEE",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "license": "LGPL-3",
+    "depends": ["point_of_sale", "stock_account", "fleet"],
+    "data": [
+        "security/van_sales_security.xml",
+        "security/ir.model.access.csv",
+        "data/ir_sequence_data.xml",
+        "report/van_session_report_views.xml",
+        "report/report_van_load_ticket.xml",
+        "report/report_van_session_summary.xml",
+        "wizard/van_session_close_wizard_views.xml",
+        "views/van_session_views.xml",
+        "views/pos_config_views.xml",
+        "views/menu.xml",
+    ],
+    "demo": [
+        "data/demo_data.xml",
+    ],
+    "installable": True,
+    "application": True,
+}

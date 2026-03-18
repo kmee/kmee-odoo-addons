@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Actions -->
+    <record id="action_van_session" model="ir.actions.act_window">
+        <field name="name">Sessões Van</field>
+        <field name="res_model">van.session</field>
+        <field name="path">van-sessions</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_van_drivers" model="ir.actions.act_window">
+        <field name="name">Motoristas</field>
+        <field name="res_model">res.partner</field>
+        <field name="path">van-drivers</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_van_driver', '=', True)]</field>
+        <field name="context">{'default_is_van_driver': True}</field>
+    </record>
+
+    <record id="action_van_pos_configs" model="ir.actions.act_window">
+        <field name="name">POS Caminhões</field>
+        <field name="res_model">pos.config</field>
+        <field name="path">van-pos-config</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_van_config', '=', True)]</field>
+        <field name="context">{'default_is_van_config': True}</field>
+    </record>
+
+    <!-- Top-level menu -->
+    <menuitem
+        id="menu_van_sales_root"
+        name="Van Sales"
+        web_icon="van_sales,static/description/icon.png"
+        groups="group_van_sales_user"
+        sequence="90"
+    />
+
+    <!-- Sessions -->
+    <menuitem
+        id="menu_van_sessions_parent"
+        name="Sessões"
+        parent="menu_van_sales_root"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_van_sessions"
+        name="Sessões Van"
+        parent="menu_van_sessions_parent"
+        action="action_van_session"
+        sequence="10"
+    />
+
+    <!-- Drivers -->
+    <menuitem
+        id="menu_van_drivers_parent"
+        name="Motoristas"
+        parent="menu_van_sales_root"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_van_drivers"
+        name="Motoristas"
+        parent="menu_van_drivers_parent"
+        action="action_van_drivers"
+        sequence="10"
+    />
+
+    <!-- Reports -->
+    <menuitem
+        id="menu_van_reports_parent"
+        name="Relatórios"
+        parent="menu_van_sales_root"
+        sequence="25"
+    />
+    <menuitem
+        id="menu_van_report_analysis"
+        name="Análise de Vendas"
+        parent="menu_van_reports_parent"
+        action="van_sales.action_report_van_session_line"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_van_report_driver"
+        name="Desempenho por Motorista"
+        parent="menu_van_reports_parent"
+        action="van_sales.action_report_van_driver_performance"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_van_report_products"
+        name="Movimentação de Produtos"
+        parent="menu_van_reports_parent"
+        action="van_sales.action_report_van_product_movement"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_van_report_losses"
+        name="Controle de Diferenças"
+        parent="menu_van_reports_parent"
+        action="van_sales.action_report_van_losses"
+        sequence="40"
+    />
+
+    <!-- Configuration -->
+    <menuitem
+        id="menu_van_config_parent"
+        name="Configuração"
+        parent="menu_van_sales_root"
+        groups="group_van_sales_manager"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_van_pos_configs"
+        name="POS Caminhões"
+        parent="menu_van_config_parent"
+        action="action_van_pos_configs"
+        sequence="10"
+    />
+</odoo>

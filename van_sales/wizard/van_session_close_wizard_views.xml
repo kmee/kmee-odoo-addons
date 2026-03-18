@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="van_session_close_wizard_form" model="ir.ui.view">
+        <field name="name">van.session.close.wizard.form</field>
+        <field name="model">van.session.close.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fechamento de Sessão Van">
+                <field name="session_id" invisible="1" />
+                <group>
+                    <div class="alert alert-info" role="alert" colspan="2">
+                        Defina a quantidade que deseja <b>manter no caminhão</b>
+                        para a próxima sessão. O restante será devolvido ao
+                        armazém principal via picking de descarga.
+                    </div>
+                </group>
+                <div class="mb-3">
+                    <button
+                        name="action_return_all"
+                        string="Devolver Tudo ao Estoque"
+                        type="object"
+                        class="btn-secondary me-2"
+                    />
+                    <button
+                        name="action_keep_all"
+                        string="Manter Tudo no Caminhão"
+                        type="object"
+                        class="btn-secondary"
+                    />
+                </div>
+                <field name="line_ids">
+                    <list editable="bottom">
+                        <field name="session_line_id" column_invisible="1" />
+                        <field name="product_id" readonly="1" />
+                        <field name="qty_out" readonly="1" />
+                        <field name="qty_sold" readonly="1" />
+                        <field name="qty_remaining" readonly="1" />
+                        <field name="qty_keep" />
+                    </list>
+                </field>
+                <footer>
+                    <button
+                        name="action_confirm"
+                        string="Confirmar e Fechar Sessão"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancelar" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

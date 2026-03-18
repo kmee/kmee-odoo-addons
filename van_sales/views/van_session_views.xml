@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- van.session form -->
+    <record id="van_session_view_form" model="ir.ui.view">
+        <field name="name">van.session.form</field>
+        <field name="model">van.session</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_load_from_stock"
+                        string="Carregar Estoque Residual"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_confirm"
+                        string="Confirmar Carga"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_open_pos"
+                        string="Abrir POS"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'loaded'"
+                    />
+                    <button
+                        name="action_open_close_wizard"
+                        string="Postar Fechamento"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'returned'"
+                        groups="van_sales.group_van_sales_manager"
+                    />
+                    <button
+                        name="action_back_to_draft"
+                        string="Voltar ao Rascunho"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'loaded'"
+                        confirm="Isso cancelará o picking de carga. Continuar?"
+                        groups="van_sales.group_van_sales_manager"
+                    />
+                    <button
+                        name="action_back_to_loaded"
+                        string="Voltar a Carregado"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'returned'"
+                        confirm="Isso cancelará o picking de descarga. Continuar?"
+                        groups="van_sales.group_van_sales_manager"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,loaded,in_route,returned,closed"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <field name="currency_id" invisible="1" />
+                    <group>
+                        <group>
+                            <field name="driver_id" />
+                            <field name="date" />
+                            <field name="pos_config_id" />
+                            <field name="pricelist_id" />
+                            <field name="pos_session_id" readonly="1" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="date_close" />
+                            <field name="load_picking_id" />
+                            <field name="unload_picking_id" readonly="1" />
+                            <field name="move_id" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Linhas" name="lines">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id" />
+                                    <field
+                                        name="qty_initial"
+                                        readonly="1"
+                                        optional="show"
+                                    />
+                                    <field name="qty_out" />
+                                    <field name="qty_sold" readonly="1" />
+                                    <field name="qty_returned" readonly="1" />
+                                    <field
+                                        name="qty_keep"
+                                        readonly="parent.state != 'returned'"
+                                        optional="show"
+                                    />
+                                    <field name="qty_diff" readonly="1" />
+                                    <field name="price_unit" />
+                                    <field name="amount" readonly="1" sum="Total" />
+                                    <field name="waived" />
+                                    <field name="waive_reason" invisible="not waived" />
+                                </list>
+                            </field>
+                            <group>
+                                <group />
+                                <group>
+                                    <field name="total_qty_out" />
+                                    <field name="total_qty_sold" />
+                                    <field name="total_qty_returned" />
+                                    <field name="total_qty_keep" />
+                                    <field name="total_qty_diff" />
+                                    <separator />
+                                    <field name="total_amount" />
+                                    <field name="cash_diff" readonly="1" />
+                                    <field name="total_diff" class="fw-bold" />
+                                </group>
+                            </group>
+                        </page>
+                        <page
+                            string="Vendas POS"
+                            name="pos_orders"
+                            invisible="not pos_session_id"
+                        >
+                            <field name="pos_order_ids" readonly="1">
+                                <list>
+                                    <field name="name" />
+                                    <field name="partner_id" optional="show" />
+                                    <field name="date_order" />
+                                    <field name="amount_total" />
+                                    <field name="amount_paid" />
+                                    <field name="state" />
+                                </list>
+                            </field>
+                        </page>
+                        <page
+                            string="Pagamentos POS"
+                            name="pos_payments"
+                            invisible="not pos_session_id"
+                        >
+                            <field name="pos_payment_ids" readonly="1">
+                                <list>
+                                    <field name="pos_order_id" />
+                                    <field name="payment_method_id" />
+                                    <field name="amount" />
+                                    <field name="payment_date" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- van.session tree -->
+    <record id="van_session_view_list" model="ir.ui.view">
+        <field name="name">van.session.list</field>
+        <field name="model">van.session</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="date" />
+                <field name="driver_id" />
+                <field name="pos_config_id" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+
+    <!-- van.session search -->
+    <record id="van_session_view_search" model="ir.ui.view">
+        <field name="name">van.session.search</field>
+        <field name="model">van.session</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="driver_id" />
+                <field name="pos_config_id" />
+                <filter
+                    string="Rascunho"
+                    name="draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    string="Carregado"
+                    name="loaded"
+                    domain="[('state', '=', 'loaded')]"
+                />
+                <filter
+                    string="Em Rota"
+                    name="in_route"
+                    domain="[('state', '=', 'in_route')]"
+                />
+                <filter
+                    string="Retornado"
+                    name="returned"
+                    domain="[('state', '=', 'returned')]"
+                />
+                <filter
+                    string="Fechado"
+                    name="closed"
+                    domain="[('state', '=', 'closed')]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        string="Motorista"
+                        name="group_driver"
+                        context="{'group_by': 'driver_id'}"
+                    />
+                    <filter
+                        string="Estado"
+                        name="group_state"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Data"
+                        name="group_date"
+                        context="{'group_by': 'date'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

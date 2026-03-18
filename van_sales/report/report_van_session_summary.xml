@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_report_van_session_summary" model="ir.actions.report">
+        <field name="name">Resumo de Sessão Van</field>
+        <field name="model">van.session</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">van_sales.report_van_session_summary_document</field>
+        <field name="report_file">van_sales.report_van_session_summary_document</field>
+        <field name="binding_model_id" ref="model_van_session" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Resumo Van - %s' % object.name</field>
+    </record>
+
+    <template id="report_van_session_summary_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">RESUMO DE SESSÃO VAN</h2>
+
+                        <div class="row mt-4 mb-2">
+                            <div class="col-6">
+                                <strong>Sessão:</strong>
+                                <span t-field="o.name" />
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>Data:</strong>
+                                <span t-field="o.date" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <strong>Motorista:</strong>
+                                <span t-field="o.driver_id.name" />
+                            </div>
+                            <div class="col-6 text-end">
+                                <strong>POS:</strong>
+                                <span t-field="o.pos_config_id.name" />
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <strong>Estado:</strong>
+                                <span t-field="o.state" />
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th class="text-end">Saída</th>
+                                    <th class="text-end">Vendida</th>
+                                    <th class="text-end">Retornada</th>
+                                    <th class="text-end">Manter</th>
+                                    <th class="text-end">Diferença</th>
+                                    <th class="text-end">Preço Unit.</th>
+                                    <th class="text-end">Valor Dif.</th>
+                                    <th class="text-center">Abonado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="total_out" t-value="0" />
+                                <t t-set="total_sold" t-value="0" />
+                                <t t-set="total_returned" t-value="0" />
+                                <t t-set="total_keep" t-value="0" />
+                                <t t-set="total_diff" t-value="0" />
+                                <t t-set="total_amount" t-value="0" />
+                                <t t-set="total_waived" t-value="0" />
+                                <t t-foreach="o.line_ids" t-as="line">
+                                    <t
+                                        t-set="total_out"
+                                        t-value="total_out + line.qty_out"
+                                    />
+                                    <t
+                                        t-set="total_sold"
+                                        t-value="total_sold + line.qty_sold"
+                                    />
+                                    <t
+                                        t-set="total_returned"
+                                        t-value="total_returned + line.qty_returned"
+                                    />
+                                    <t
+                                        t-set="total_keep"
+                                        t-value="total_keep + line.qty_keep"
+                                    />
+                                    <t
+                                        t-set="total_diff"
+                                        t-value="total_diff + line.qty_diff"
+                                    />
+                                    <t
+                                        t-set="total_amount"
+                                        t-value="total_amount + (line.amount if not line.waived else 0)"
+                                    />
+                                    <t
+                                        t-set="total_waived"
+                                        t-value="total_waived + (line.amount if line.waived else 0)"
+                                    />
+                                    <tr
+                                        t-attf-class="#{'text-muted' if line.waived else ('text-danger fw-bold' if line.qty_diff > 0 else '')}"
+                                    >
+                                        <td>
+                                            <span t-field="line.product_id.name" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_out" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_sold" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_returned" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_keep" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.qty_diff" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.price_unit" />
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="'%.2f' % line.amount" />
+                                        </td>
+                                        <td class="text-center">
+                                            <t t-if="line.waived">Sim</t>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="line.waived and line.waive_reason">
+                                        <td colspan="9" class="text-muted small ps-4">
+                                            Motivo: <span t-field="line.waive_reason" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                            <tfoot>
+                                <tr class="fw-bold">
+                                    <td class="text-end">TOTAIS</td>
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_out" />
+                                    </td>
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_sold" />
+                                    </td>
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_returned" />
+                                    </td>
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_keep" />
+                                    </td>
+                                    <td class="text-end">
+                                        <t t-out="'%.2f' % total_diff" />
+                                    </td>
+                                    <td />
+                                    <td class="text-end">
+                                        <t
+                                            t-out="'%.2f' % (total_amount + total_waived)"
+                                        />
+                                    </td>
+                                    <td />
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="row mt-4">
+                            <div class="col-7">
+                                <table class="table table-sm" style="width: auto;">
+                                    <tr>
+                                        <td
+                                            class="fw-bold"
+                                        >Total Diferenças (cobrar motorista):</td>
+                                        <td class="text-end fw-bold">
+                                            <t t-out="'%.2f' % total_amount" />
+                                        </td>
+                                    </tr>
+                                    <tr t-if="total_waived">
+                                        <td>Total Abonado:</td>
+                                        <td class="text-end">
+                                            <t t-out="'%.2f' % total_waived" />
+                                        </td>
+                                    </tr>
+                                    <tr t-if="o.cash_diff">
+                                        <td class="fw-bold">Diferença de Caixa:</td>
+                                        <td class="text-end fw-bold">
+                                            <span
+                                                t-field="o.cash_diff"
+                                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5 pt-5">
+                            <div class="col-5 text-center">
+                                <div class="border-top pt-2">
+                                    <strong>Motorista</strong>
+                                    <br />
+                                    <span t-field="o.driver_id.name" />
+                                </div>
+                            </div>
+                            <div class="col-2" />
+                            <div class="col-5 text-center">
+                                <div class="border-top pt-2">
+                                    <strong>Responsável</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 text-center text-muted small">
+                                Data: ____/____/________
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="pos_config_view_form_inherit_van" model="ir.ui.view">
+        <field name="name">pos.config.form.inherit.van</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="inside">
+                <group string="Van Sales" invisible="not is_van_config">
+                    <group>
+                        <field name="is_van_config" />
+                        <field name="van_load_picking_type_id" />
+                        <field name="van_unload_picking_type_id" />
+                    </group>
+                    <group>
+                        <field name="van_driver_account_id" />
+                        <field name="van_transit_account_id" />
+                        <field name="van_cash_account_id" />
+                        <field name="van_journal_id" />
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//form/sheet" position="inside">
+                <group invisible="is_van_config">
+                    <field name="is_van_config" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

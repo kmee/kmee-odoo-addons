@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- ============================================================ -->
+    <!-- Search view                                                   -->
+    <!-- ============================================================ -->
+    <record id="report_van_session_line_view_search" model="ir.ui.view">
+        <field name="name">report.van.session.line.search</field>
+        <field name="model">report.van.session.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="driver_id" />
+                <field name="product_id" />
+                <field name="pos_config_id" />
+                <separator />
+                <filter
+                    string="Fechadas"
+                    name="closed"
+                    domain="[('state', '=', 'closed')]"
+                />
+                <filter
+                    string="Retornadas"
+                    name="returned"
+                    domain="[('state', '=', 'returned')]"
+                />
+                <filter
+                    string="Com Diferença"
+                    name="with_diff"
+                    domain="[('qty_diff', '!=', 0)]"
+                />
+                <filter
+                    string="Abonadas"
+                    name="waived"
+                    domain="[('waived', '=', True)]"
+                />
+                <separator />
+                <filter
+                    string="Este Mês"
+                    name="this_month"
+                    domain="[('date', '&gt;=', (context_today() - relativedelta(day=1)).strftime('%%Y-%%m-%%d'))]"
+                />
+                <filter
+                    string="Mês Passado"
+                    name="last_month"
+                    domain="[
+                            ('date', '&gt;=', (context_today() - relativedelta(months=1, day=1)).strftime('%%Y-%%m-%%d')),
+                            ('date', '&lt;', (context_today() - relativedelta(day=1)).strftime('%%Y-%%m-%%d')),
+                        ]"
+                />
+                <separator />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        string="Motorista"
+                        name="group_driver"
+                        context="{'group_by': 'driver_id'}"
+                    />
+                    <filter
+                        string="Produto"
+                        name="group_product"
+                        context="{'group_by': 'product_id'}"
+                    />
+                    <filter
+                        string="Categoria"
+                        name="group_categ"
+                        context="{'group_by': 'categ_id'}"
+                    />
+                    <filter
+                        string="POS"
+                        name="group_config"
+                        context="{'group_by': 'pos_config_id'}"
+                    />
+                    <filter
+                        string="Data"
+                        name="group_date"
+                        context="{'group_by': 'date'}"
+                    />
+                    <filter
+                        string="Data (Mês)"
+                        name="group_date_month"
+                        context="{'group_by': 'date:month'}"
+                    />
+                    <filter
+                        string="Estado"
+                        name="group_state"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Pivot view                                                    -->
+    <!-- ============================================================ -->
+    <record id="report_van_session_line_view_pivot" model="ir.ui.view">
+        <field name="name">report.van.session.line.pivot</field>
+        <field name="model">report.van.session.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Análise Van Sales">
+                <field name="driver_id" type="row" />
+                <field name="date" type="col" interval="month" />
+                <field name="amount_sold" type="measure" />
+                <field name="qty_sold" type="measure" />
+                <field name="qty_diff" type="measure" />
+                <field name="amount" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Graph view                                                    -->
+    <!-- ============================================================ -->
+    <record id="report_van_session_line_view_graph" model="ir.ui.view">
+        <field name="name">report.van.session.line.graph</field>
+        <field name="model">report.van.session.line</field>
+        <field name="arch" type="xml">
+            <graph string="Análise Van Sales" type="bar" stacked="1">
+                <field name="driver_id" />
+                <field name="amount_sold" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Actions                                                       -->
+    <!-- ============================================================ -->
+
+    <!-- Report 1: General analysis -->
+    <record id="action_report_van_session_line" model="ir.actions.act_window">
+        <field name="name">Análise de Vendas Van</field>
+        <field name="res_model">report.van.session.line</field>
+        <field name="path">van-sales-analysis</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{'search_default_closed': 1}</field>
+    </record>
+
+    <!-- Report 2: Driver performance -->
+    <record id="action_report_van_driver_performance" model="ir.actions.act_window">
+        <field name="name">Desempenho por Motorista</field>
+        <field name="res_model">report.van.session.line</field>
+        <field name="path">van-driver-performance</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{
+            'search_default_closed': 1,
+            'search_default_group_driver': 1,
+            'pivot_measures': ['amount_sold', 'qty_diff', 'amount', 'cash_diff'],
+        }</field>
+    </record>
+
+    <!-- Report 3: Product movement -->
+    <record id="action_report_van_product_movement" model="ir.actions.act_window">
+        <field name="name">Movimentação de Produtos</field>
+        <field name="res_model">report.van.session.line</field>
+        <field name="path">van-product-movement</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{
+            'search_default_closed': 1,
+            'search_default_group_product': 1,
+            'pivot_measures': ['qty_out', 'qty_sold', 'qty_returned', 'qty_diff', 'sell_through_rate'],
+        }</field>
+    </record>
+
+    <!-- Report 4: Difference/loss tracking -->
+    <record id="action_report_van_losses" model="ir.actions.act_window">
+        <field name="name">Controle de Diferenças</field>
+        <field name="res_model">report.van.session.line</field>
+        <field name="path">van-losses</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="domain">[('qty_diff', '!=', 0)]</field>
+        <field name="context">{
+            'search_default_closed': 1,
+            'search_default_group_driver': 1,
+        }</field>
+    </record>
+</odoo>

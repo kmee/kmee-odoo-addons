@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- ============================================================ -->
+    <!-- Motoristas                                                    -->
+    <!-- ============================================================ -->
+    <record id="driver_joao" model="res.partner">
+        <field name="name">João Silva (Motorista)</field>
+        <field name="is_van_driver">True</field>
+        <field name="phone">11 98765-4321</field>
+    </record>
+
+    <record id="driver_carlos" model="res.partner">
+        <field name="name">Carlos Souza (Motorista)</field>
+        <field name="is_van_driver">True</field>
+        <field name="phone">11 91234-5678</field>
+    </record>
+
+    <record id="driver_maria" model="res.partner">
+        <field name="name">Maria Oliveira (Motorista)</field>
+        <field name="is_van_driver">True</field>
+        <field name="phone">11 99876-5432</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Warehouses: 1 por caminhão, com resupply do WH principal      -->
+    <!-- O Odoo cria automaticamente: view_location, lot_stock_id,     -->
+    <!-- picking types (in, out, int), e as rotas de resupply.         -->
+    <!-- Estoque começa zerado; a carga vem do WH principal.           -->
+    <!-- ============================================================ -->
+    <record id="warehouse_van_01" model="stock.warehouse">
+        <field name="name">Van 01 - João</field>
+        <field name="code">VAN01</field>
+        <field name="resupply_wh_ids" eval="[(6, 0, [ref('stock.warehouse0')])]" />
+    </record>
+
+    <record id="warehouse_van_02" model="stock.warehouse">
+        <field name="name">Van 02 - Carlos</field>
+        <field name="code">VAN02</field>
+        <field name="resupply_wh_ids" eval="[(6, 0, [ref('stock.warehouse0')])]" />
+    </record>
+
+    <record id="warehouse_van_03" model="stock.warehouse">
+        <field name="name">Van 03 - Maria</field>
+        <field name="code">VAN03</field>
+        <field name="resupply_wh_ids" eval="[(6, 0, [ref('stock.warehouse0')])]" />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Picking types de Carga (WH principal → Van) e Descarga        -->
+    <!-- (Van → WH principal) para cada caminhão.                      -->
+    <!-- ============================================================ -->
+
+    <!-- Van 01 -->
+    <record id="picking_type_load_van_01" model="stock.picking.type">
+        <field name="name">Van 01 - Carga</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">V1LD</field>
+        <field name="warehouse_id" ref="warehouse_van_01" />
+        <field
+            name="default_location_src_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+        <field
+            name="default_location_dest_id"
+            model="stock.location"
+            eval="obj().env.ref('van_sales.warehouse_van_01').lot_stock_id.id"
+        />
+    </record>
+    <record id="picking_type_unload_van_01" model="stock.picking.type">
+        <field name="name">Van 01 - Descarga</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">V1UL</field>
+        <field name="warehouse_id" ref="warehouse_van_01" />
+        <field
+            name="default_location_src_id"
+            model="stock.location"
+            eval="obj().env.ref('van_sales.warehouse_van_01').lot_stock_id.id"
+        />
+        <field
+            name="default_location_dest_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <!-- Van 02 -->
+    <record id="picking_type_load_van_02" model="stock.picking.type">
+        <field name="name">Van 02 - Carga</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">V2LD</field>
+        <field name="warehouse_id" ref="warehouse_van_02" />
+        <field
+            name="default_location_src_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+        <field
+            name="default_location_dest_id"
+            model="stock.location"
+            eval="obj().env.ref('van_sales.warehouse_van_02').lot_stock_id.id"
+        />
+    </record>
+    <record id="picking_type_unload_van_02" model="stock.picking.type">
+        <field name="name">Van 02 - Descarga</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">V2UL</field>
+        <field name="warehouse_id" ref="warehouse_van_02" />
+        <field
+            name="default_location_src_id"
+            model="stock.location"
+            eval="obj().env.ref('van_sales.warehouse_van_02').lot_stock_id.id"
+        />
+        <field
+            name="default_location_dest_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <!-- Van 03 -->
+    <record id="picking_type_load_van_03" model="stock.picking.type">
+        <field name="name">Van 03 - Carga</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">V3LD</field>
+        <field name="warehouse_id" ref="warehouse_van_03" />
+        <field
+            name="default_location_src_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+        <field
+            name="default_location_dest_id"
+            model="stock.location"
+            eval="obj().env.ref('van_sales.warehouse_van_03').lot_stock_id.id"
+        />
+    </record>
+    <record id="picking_type_unload_van_03" model="stock.picking.type">
+        <field name="name">Van 03 - Descarga</field>
+        <field name="code">internal</field>
+        <field name="sequence_code">V3UL</field>
+        <field name="warehouse_id" ref="warehouse_van_03" />
+        <field
+            name="default_location_src_id"
+            model="stock.location"
+            eval="obj().env.ref('van_sales.warehouse_van_03').lot_stock_id.id"
+        />
+        <field
+            name="default_location_dest_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Contas contábeis para Van                                     -->
+    <!-- ============================================================ -->
+    <record id="account_van_driver" model="account.account">
+        <field name="code">1.1.3.01</field>
+        <field name="name">Motoristas Van - A Receber</field>
+        <field name="account_type">asset_receivable</field>
+        <field name="reconcile">True</field>
+    </record>
+
+    <record id="account_van_transit" model="account.account">
+        <field name="code">1.1.3.02</field>
+        <field name="name">Mercadoria em Trânsito Van</field>
+        <field name="account_type">asset_current</field>
+    </record>
+
+    <record id="account_van_cash" model="account.account">
+        <field name="code">1.1.1.05</field>
+        <field name="name">Caixa Van</field>
+        <field name="account_type">asset_current</field>
+    </record>
+
+    <record id="journal_van" model="account.journal">
+        <field name="name">Diário Van Sales</field>
+        <field name="code">VAN</field>
+        <field name="type">general</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Lista de Preços Van                                           -->
+    <!-- ============================================================ -->
+    <record id="pricelist_van" model="product.pricelist">
+        <field name="name">Lista de Preços Van</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- POS Config: 1 por caminhão                                    -->
+    <!-- ============================================================ -->
+    <record id="pos_config_van_01" model="pos.config">
+        <field name="name">POS Van 01 - João</field>
+        <field name="is_van_config">True</field>
+        <field name="pricelist_id" ref="pricelist_van" />
+        <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
+        <field name="van_load_picking_type_id" ref="picking_type_load_van_01" />
+        <field name="van_unload_picking_type_id" ref="picking_type_unload_van_01" />
+        <field name="van_driver_account_id" ref="account_van_driver" />
+        <field name="van_transit_account_id" ref="account_van_transit" />
+        <field name="van_cash_account_id" ref="account_van_cash" />
+        <field name="van_journal_id" ref="journal_van" />
+    </record>
+
+    <record id="pos_config_van_02" model="pos.config">
+        <field name="name">POS Van 02 - Carlos</field>
+        <field name="is_van_config">True</field>
+        <field name="pricelist_id" ref="pricelist_van" />
+        <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
+        <field name="van_load_picking_type_id" ref="picking_type_load_van_02" />
+        <field name="van_unload_picking_type_id" ref="picking_type_unload_van_02" />
+        <field name="van_driver_account_id" ref="account_van_driver" />
+        <field name="van_transit_account_id" ref="account_van_transit" />
+        <field name="van_cash_account_id" ref="account_van_cash" />
+        <field name="van_journal_id" ref="journal_van" />
+    </record>
+
+    <record id="pos_config_van_03" model="pos.config">
+        <field name="name">POS Van 03 - Maria</field>
+        <field name="is_van_config">True</field>
+        <field name="pricelist_id" ref="pricelist_van" />
+        <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
+        <field name="van_load_picking_type_id" ref="picking_type_load_van_03" />
+        <field name="van_unload_picking_type_id" ref="picking_type_unload_van_03" />
+        <field name="van_driver_account_id" ref="account_van_driver" />
+        <field name="van_transit_account_id" ref="account_van_transit" />
+        <field name="van_cash_account_id" ref="account_van_cash" />
+        <field name="van_journal_id" ref="journal_van" />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Estoque no WH principal para os produtos POS                  -->
+    <!-- ============================================================ -->
+    <record id="quant_wall_shelf" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.wall_shelf" />
+        <field name="inventory_quantity">500</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_small_shelf" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.small_shelf" />
+        <field name="inventory_quantity">300</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_letter_tray" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.letter_tray" />
+        <field name="inventory_quantity">400</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_magnetic_board" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.magnetic_board" />
+        <field name="inventory_quantity">200</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_whiteboard" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.whiteboard" />
+        <field name="inventory_quantity">150</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_newspaper_rack" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.newspaper_rack" />
+        <field name="inventory_quantity">300</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_led_lamp" model="stock.quant">
+        <field name="product_id" ref="point_of_sale.led_lamp" />
+        <field name="inventory_quantity">250</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+
+    <function model="stock.quant" name="action_apply_inventory">
+        <value
+            model="stock.quant"
+            eval="obj().browse([
+                       ref('quant_wall_shelf'),
+                       ref('quant_small_shelf'),
+                       ref('quant_letter_tray'),
+                       ref('quant_magnetic_board'),
+                       ref('quant_whiteboard'),
+                       ref('quant_newspaper_rack'),
+                       ref('quant_led_lamp'),
+                   ]).ids"
+        />
+    </function>
+
+    <!-- ============================================================ -->
+    <!-- Sessão Van de exemplo (em rascunho, pronta para testar)       -->
+    <!-- Usa produtos do POS existentes (furniture scenario)           -->
+    <!-- ============================================================ -->
+    <record id="van_session_demo_1" model="van.session">
+        <field name="driver_id" ref="driver_joao" />
+        <field name="pos_config_id" ref="pos_config_van_01" />
+    </record>
+
+    <record id="van_session_demo_1_line_1" model="van.session.line">
+        <field name="session_id" ref="van_session_demo_1" />
+        <field name="product_id" ref="point_of_sale.wall_shelf" />
+        <field name="qty_out">50</field>
+        <field name="price_unit">1.98</field>
+    </record>
+
+    <record id="van_session_demo_1_line_2" model="van.session.line">
+        <field name="session_id" ref="van_session_demo_1" />
+        <field name="product_id" ref="point_of_sale.letter_tray" />
+        <field name="qty_out">30</field>
+        <field name="price_unit">4.80</field>
+    </record>
+
+    <record id="van_session_demo_1_line_3" model="van.session.line">
+        <field name="session_id" ref="van_session_demo_1" />
+        <field name="product_id" ref="point_of_sale.magnetic_board" />
+        <field name="qty_out">20</field>
+        <field name="price_unit">1.98</field>
+    </record>
+</odoo>
