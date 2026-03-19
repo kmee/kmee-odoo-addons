@@ -58,10 +58,7 @@
                             </td>
                             <td>
                                 <span t-field="ml.product_uom_qty" />
-                                <span
-                                    t-field="ml.product_uom_id"
-                                    groups="uom.group_uom"
-                                />
+                                <span t-field="ml.product_uom" groups="uom.group_uom" />
                             </td>
                             <td
                                 t-if="o.picking_type_id.code != 'incoming'"
