@@ -76,6 +76,34 @@
                     />
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_load_picking"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-truck"
+                            invisible="not load_picking_id"
+                        >
+                            <field
+                                name="load_picking_id"
+                                widget="statinfo"
+                                string="Carga"
+                            />
+                        </button>
+                        <button
+                            name="action_view_unload_picking"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-truck fa-flip-horizontal"
+                            invisible="not unload_picking_id"
+                        >
+                            <field
+                                name="unload_picking_id"
+                                widget="statinfo"
+                                string="Descarga"
+                            />
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1" />
