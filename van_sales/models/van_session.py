@@ -549,6 +549,7 @@ class VanSession(models.Model):
             )
             total = sum(lines_to_charge.mapped("amount"))
 
+            driver = session.driver_id
             move_lines = []
             if total:
                 # Debit driver account
@@ -558,6 +559,7 @@ class VanSession(models.Model):
                         0,
                         {
                             "account_id": config.van_driver_account_id.id,
+                            "partner_id": driver.id,
                             "debit": total,
                             "credit": 0.0,
                             "name": "Diferença van %s" % session.name,
@@ -588,6 +590,7 @@ class VanSession(models.Model):
                             0,
                             {
                                 "account_id": config.van_driver_account_id.id,
+                                "partner_id": driver.id,
                                 "debit": abs_diff,
                                 "credit": 0.0,
                                 "name": "Diferença caixa %s" % session.name,
@@ -626,6 +629,7 @@ class VanSession(models.Model):
                             0,
                             {
                                 "account_id": config.van_driver_account_id.id,
+                                "partner_id": driver.id,
                                 "debit": 0.0,
                                 "credit": abs_diff,
                                 "name": "Diferença caixa %s" % session.name,
@@ -643,6 +647,7 @@ class VanSession(models.Model):
                     "journal_id": journal.id,
                     "date": session.date,
                     "ref": session.name,
+                    "partner_id": driver.id,
                     "line_ids": move_lines,
                 }
             )
@@ -650,6 +655,230 @@ class VanSession(models.Model):
             session.move_id = move
             session.date_close = fields.Date.context_today(self)
             session.state = "closed"
+
+    # ------------------------------------------------------------------
+    # Demo data helpers
+    # ------------------------------------------------------------------
+
+    @api.model
+    def _demo_create_closed_sessions(self):
+        """Create 3 demo van sessions with complete lifecycle.
+
+        Produces 3 closed sessions with pickings, POS orders, and journal
+        entries, matching the reference data from the devel database:
+
+        VAN/001 — diff=0, cash_diff=0
+        VAN/002 — diff=3 (R$5.94), cash_diff=0
+        VAN/003 — diff=0, cash_diff=-7.92
+        """
+        wall_shelf = self.env.ref("point_of_sale.wall_shelf")
+        letter_tray = self.env.ref("point_of_sale.letter_tray")
+        magnetic_board = self.env.ref("point_of_sale.magnetic_board")
+        driver = self.env.ref("van_sales.driver_joao")
+        pos_config = self.env.ref("van_sales.pos_config_van_01")
+        van_location = pos_config.warehouse_id.lot_stock_id
+
+        # Session 1: diff=0, cash_diff=0
+        self._demo_run_session(
+            driver=driver,
+            pos_config=pos_config,
+            lines=[
+                (wall_shelf, 10, 1.98),
+                (letter_tray, 1, 4.80),
+                (magnetic_board, 1, 1.98),
+            ],
+            sales=[[(wall_shelf, 1, 1.98)]],
+        )
+
+        # Residual stock before session 2: 1 Wall Shelf in van
+        self._demo_set_van_stock(wall_shelf, van_location, 1)
+
+        # Session 2: diff=3 (R$5.94), cash_diff=0
+        self._demo_run_session(
+            driver=driver,
+            pos_config=pos_config,
+            lines=[
+                (wall_shelf, 11, 1.98),
+                (letter_tray, 1, 4.80),
+                (magnetic_board, 1, 1.98),
+            ],
+            sales=[[(wall_shelf, 5, 1.98)]],
+            unload_qty={wall_shelf: 3},
+        )
+
+        # Residual stock before session 3: 8 Wall Shelf in van
+        # (3 remain from session 2 diff + 5 added via inventory adjustment)
+        self._demo_set_van_stock(wall_shelf, van_location, 8)
+
+        # Session 3: diff=0, cash_diff=-7.92
+        self._demo_run_session(
+            driver=driver,
+            pos_config=pos_config,
+            lines=[
+                (wall_shelf, 19, 1.98),
+                (letter_tray, 1, 4.80),
+                (magnetic_board, 1, 1.98),
+            ],
+            sales=[[(wall_shelf, 4, 1.98)]],
+            cash_amount=0,
+        )
+
+    def _demo_set_van_stock(self, product, location, qty):
+        """Set stock level for a product in a location (demo helper)."""
+        quant = self.env["stock.quant"].search(
+            [("product_id", "=", product.id), ("location_id", "=", location.id)],
+            limit=1,
+        )
+        if quant:
+            quant.inventory_quantity = qty
+        else:
+            quant = (
+                self.env["stock.quant"]
+                .with_context(inventory_mode=True)
+                .create(
+                    {
+                        "product_id": product.id,
+                        "inventory_quantity": qty,
+                        "location_id": location.id,
+                    }
+                )
+            )
+        quant.action_apply_inventory()
+
+    def _demo_run_session(
+        self, driver, pos_config, lines, sales, unload_qty=None, cash_amount=None
+    ):
+        """Run a single van session through the full lifecycle (demo helper).
+
+        Args:
+            driver: res.partner record
+            pos_config: pos.config record
+            lines: [(product, qty_demand, price_unit), ...]
+            sales: [[(product, qty, price), ...], ...] — list of POS orders
+            unload_qty: {product: qty} — partial unload overrides
+            cash_amount: float — cash to report (None = exact, no cash_diff)
+        """
+        # Create session
+        session = self.create({"driver_id": driver.id, "pos_config_id": pos_config.id})
+
+        # Draft → Loading (auto-fills lines from van stock via _load_initial_stock)
+        session.action_start_loading()
+
+        # Add/update lines with desired demand
+        for product, qty_demand, price_unit in lines:
+            existing = session.line_ids.filtered(
+                lambda ln, p=product: ln.product_id == p
+            )
+            if existing:
+                existing.write({"qty_demand": qty_demand, "price_unit": price_unit})
+            else:
+                self.env["van.session.line"].create(
+                    {
+                        "session_id": session.id,
+                        "product_id": product.id,
+                        "qty_demand": qty_demand,
+                        "price_unit": price_unit,
+                    }
+                )
+
+        # Loading → Loaded (confirm + validate load picking)
+        session.action_confirm()
+        picking = session.load_picking_id
+        if picking:
+            picking.action_confirm()
+            picking.action_assign()
+            for ml in picking.move_line_ids:
+                if not ml.quantity:
+                    ml.quantity = ml.quantity_product_uom
+            picking.move_ids.picked = True
+            picking.button_validate()
+
+        # Loaded → In Route (create POS session directly — open_ui rejects
+        # SUPERUSER_ID which is used during demo data loading)
+        pos_session = self.env["pos.session"].create(
+            {"config_id": pos_config.id, "user_id": self.env.uid}
+        )
+        pos_session.van_session_id = session
+        session.pos_session_id = pos_session
+        session.state = "in_route"
+
+        # Create POS orders
+        cash_pm = pos_config.payment_method_ids.filtered("is_cash_count")[:1]
+        for order_lines in sales:
+            total = sum(q * p for _, q, p in order_lines)
+            order = self.env["pos.order"].create(
+                {
+                    "session_id": pos_session.id,
+                    "lines": [
+                        (
+                            0,
+                            0,
+                            {
+                                "product_id": prod.id,
+                                "qty": qty,
+                                "price_unit": price,
+                                "price_subtotal": qty * price,
+                                "price_subtotal_incl": qty * price,
+                                "tax_ids": [(5, 0, 0)],
+                            },
+                        )
+                        for prod, qty, price in order_lines
+                    ],
+                    "amount_total": total,
+                    "amount_tax": 0,
+                    "amount_paid": total,
+                    "amount_return": 0,
+                }
+            )
+            self.env["pos.payment"].create(
+                {
+                    "pos_order_id": order.id,
+                    "payment_method_id": cash_pm.id,
+                    "amount": order.amount_total,
+                }
+            )
+            order.action_pos_order_paid()
+            order._create_order_picking()
+
+        # Close POS → triggers _on_pos_session_closed → state=returned
+        # post_closing_cash_details expects the TOTAL counted cash in the
+        # register, which includes the opening balance carried over from
+        # previous sessions on the same cash journal.
+        session_cash = sum(
+            pos_session.order_ids.payment_ids.filtered(
+                lambda p, pm=cash_pm: p.payment_method_id == pm
+            ).mapped("amount")
+        )
+        start = pos_session.cash_register_balance_start
+        if cash_amount is None:
+            reported_cash = start + session_cash
+        else:
+            reported_cash = start + cash_amount
+        pos_session.post_closing_cash_details(reported_cash)
+        pos_session.close_session_from_ui()
+
+        # Validate unload picking (with optional partial returns)
+        unload = session.unload_picking_id
+        if unload and unload.move_ids:
+            unload.action_confirm()
+            unload.action_assign()
+            for ml in unload.move_line_ids:
+                if unload_qty and ml.product_id in unload_qty:
+                    ml.quantity = unload_qty[ml.product_id]
+                else:
+                    ml.quantity = ml.quantity_product_uom
+            unload.move_ids.picked = True
+            res = unload.button_validate()
+            if isinstance(res, dict) and res.get("res_model") == (
+                "stock.backorder.confirmation"
+            ):
+                self.env["stock.backorder.confirmation"].with_context(
+                    **res.get("context", {})
+                ).create({}).process_cancel_backorder()
+
+        # Post journal entry → state=closed
+        session.action_post()
+        return session
 
 
 class VanSessionLine(models.Model):

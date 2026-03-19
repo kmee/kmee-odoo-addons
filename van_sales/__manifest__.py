@@ -19,7 +19,8 @@
         "views/menu.xml",
     ],
     "demo": [
-        "data/demo_data.xml",
+        "demo/demo_data.xml",
+        "demo/demo_sessions.xml",
     ],
     "installable": True,
     "application": True,

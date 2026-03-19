@@ -23,9 +23,6 @@
 
     <!-- ============================================================ -->
     <!-- Warehouses: 1 por caminhão, com resupply do WH principal      -->
-    <!-- O Odoo cria automaticamente: view_location, lot_stock_id,     -->
-    <!-- picking types (in, out, int), e as rotas de resupply.         -->
-    <!-- Estoque começa zerado; a carga vem do WH principal.           -->
     <!-- ============================================================ -->
     <record id="warehouse_van_01" model="stock.warehouse">
         <field name="name">Van 01 - João</field>
@@ -188,6 +185,39 @@
     </record>
 
     <!-- ============================================================ -->
+    <!-- Diários de caixa e métodos de pagamento (1 por POS — Odoo    -->
+    <!-- exige exclusividade de cash payment method por POS config)    -->
+    <!-- ============================================================ -->
+    <record id="journal_cash_van_01" model="account.journal">
+        <field name="name">Caixa Van 01</field>
+        <field name="code">CV01</field>
+        <field name="type">cash</field>
+    </record>
+    <record id="journal_cash_van_02" model="account.journal">
+        <field name="name">Caixa Van 02</field>
+        <field name="code">CV02</field>
+        <field name="type">cash</field>
+    </record>
+    <record id="journal_cash_van_03" model="account.journal">
+        <field name="name">Caixa Van 03</field>
+        <field name="code">CV03</field>
+        <field name="type">cash</field>
+    </record>
+
+    <record id="pos_pm_cash_van_01" model="pos.payment.method">
+        <field name="name">Dinheiro Van 01</field>
+        <field name="journal_id" ref="journal_cash_van_01" />
+    </record>
+    <record id="pos_pm_cash_van_02" model="pos.payment.method">
+        <field name="name">Dinheiro Van 02</field>
+        <field name="journal_id" ref="journal_cash_van_02" />
+    </record>
+    <record id="pos_pm_cash_van_03" model="pos.payment.method">
+        <field name="name">Dinheiro Van 03</field>
+        <field name="journal_id" ref="journal_cash_van_03" />
+    </record>
+
+    <!-- ============================================================ -->
     <!-- POS Config: 1 por caminhão                                    -->
     <!-- ============================================================ -->
     <record id="pos_config_van_01" model="pos.config">
@@ -196,6 +226,7 @@
         <field name="warehouse_id" ref="warehouse_van_01" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
+        <field name="payment_method_ids" eval="[(6, 0, [ref('pos_pm_cash_van_01')])]" />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_01" />
         <field name="van_unload_picking_type_id" ref="picking_type_unload_van_01" />
         <field name="van_driver_account_id" ref="account_van_driver" />
@@ -210,6 +241,7 @@
         <field name="warehouse_id" ref="warehouse_van_02" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
+        <field name="payment_method_ids" eval="[(6, 0, [ref('pos_pm_cash_van_02')])]" />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_02" />
         <field name="van_unload_picking_type_id" ref="picking_type_unload_van_02" />
         <field name="van_driver_account_id" ref="account_van_driver" />
@@ -224,6 +256,7 @@
         <field name="warehouse_id" ref="warehouse_van_03" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
+        <field name="payment_method_ids" eval="[(6, 0, [ref('pos_pm_cash_van_03')])]" />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_03" />
         <field name="van_unload_picking_type_id" ref="picking_type_unload_van_03" />
         <field name="van_driver_account_id" ref="account_van_driver" />
@@ -313,34 +346,4 @@
                    ]).ids"
         />
     </function>
-
-    <!-- ============================================================ -->
-    <!-- Sessão Van de exemplo (em rascunho, pronta para testar)       -->
-    <!-- Usa produtos do POS existentes (furniture scenario)           -->
-    <!-- ============================================================ -->
-    <record id="van_session_demo_1" model="van.session">
-        <field name="driver_id" ref="driver_joao" />
-        <field name="pos_config_id" ref="pos_config_van_01" />
-    </record>
-
-    <record id="van_session_demo_1_line_1" model="van.session.line">
-        <field name="session_id" ref="van_session_demo_1" />
-        <field name="product_id" ref="point_of_sale.wall_shelf" />
-        <field name="qty_out">50</field>
-        <field name="price_unit">1.98</field>
-    </record>
-
-    <record id="van_session_demo_1_line_2" model="van.session.line">
-        <field name="session_id" ref="van_session_demo_1" />
-        <field name="product_id" ref="point_of_sale.letter_tray" />
-        <field name="qty_out">30</field>
-        <field name="price_unit">4.80</field>
-    </record>
-
-    <record id="van_session_demo_1_line_3" model="van.session.line">
-        <field name="session_id" ref="van_session_demo_1" />
-        <field name="product_id" ref="point_of_sale.magnetic_board" />
-        <field name="qty_out">20</field>
-        <field name="price_unit">1.98</field>
-    </record>
 </odoo>
