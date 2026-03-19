@@ -707,26 +707,35 @@ class VanSession(models.Model):
 
     @api.model
     def _demo_create_closed_sessions(self):
-        """Create 3 demo van sessions with complete lifecycle.
+        """Create 7 demo van sessions for 3 drivers with complete lifecycle.
 
-        Produces 3 closed sessions with pickings, POS orders, and journal
-        entries, matching the reference data from the devel database:
+        Produces closed sessions with pickings, POS orders, and journal
+        entries, covering cash, card, transfer, and customer account payments:
 
-        VAN/001 — diff=0, cash_diff=0
-        VAN/002 — diff=3 (R$5.94), cash_diff=0
-        VAN/003 — diff=0, cash_diff=-7.92
+        João  (Van 01): VAN/001 diff=0 cash_diff=0; VAN/002 diff=3; VAN/003 cash_diff=-7.92
+        Carlos (Van 02): VAN/004 card payment; VAN/005 mixed payment + diff=2
+        Maria (Van 03): VAN/006 customer account; VAN/007 mixed + cash_diff
         """
         wall_shelf = self.env.ref("point_of_sale.wall_shelf")
         letter_tray = self.env.ref("point_of_sale.letter_tray")
         magnetic_board = self.env.ref("point_of_sale.magnetic_board")
-        driver = self.env.ref("van_sales.driver_joao")
-        pos_config = self.env.ref("van_sales.pos_config_van_01")
-        van_location = pos_config.warehouse_id.lot_stock_id
+        small_shelf = self.env.ref("point_of_sale.small_shelf")
+        whiteboard = self.env.ref("point_of_sale.whiteboard")
 
-        # Session 1: diff=0, cash_diff=0
+        # Shared payment methods
+        pm_card = self.env.ref("van_sales.pos_pm_card_van")
+        pm_transfer = self.env.ref("van_sales.pos_pm_transfer_van")
+        pm_customer = self.env.ref("van_sales.pos_pm_customer_account_van")
+
+        # ── João (Van 01) — 3 sessions ──────────────────────────────
+        driver_joao = self.env.ref("van_sales.driver_joao")
+        pos_01 = self.env.ref("van_sales.pos_config_van_01")
+        van_loc_01 = pos_01.warehouse_id.lot_stock_id
+
+        # Session 1: diff=0, cash_diff=0 (cash)
         self._demo_run_session(
-            driver=driver,
-            pos_config=pos_config,
+            driver=driver_joao,
+            pos_config=pos_01,
             lines=[
                 (wall_shelf, 10, 1.98),
                 (letter_tray, 1, 4.80),
@@ -735,13 +744,13 @@ class VanSession(models.Model):
             sales=[[(wall_shelf, 1, 1.98)]],
         )
 
-        # Residual stock before session 2: 1 Wall Shelf in van
-        self._demo_set_van_stock(wall_shelf, van_location, 1)
+        # Residual stock before session 2
+        self._demo_set_van_stock(wall_shelf, van_loc_01, 1)
 
-        # Session 2: diff=3 (R$5.94), cash_diff=0
+        # Session 2: diff=3 (R$5.94), cash_diff=0 (cash)
         self._demo_run_session(
-            driver=driver,
-            pos_config=pos_config,
+            driver=driver_joao,
+            pos_config=pos_01,
             lines=[
                 (wall_shelf, 11, 1.98),
                 (letter_tray, 1, 4.80),
@@ -751,14 +760,12 @@ class VanSession(models.Model):
             unload_qty={wall_shelf: 3},
         )
 
-        # Residual stock before session 3: 8 Wall Shelf in van
-        # (3 remain from session 2 diff + 5 added via inventory adjustment)
-        self._demo_set_van_stock(wall_shelf, van_location, 8)
+        self._demo_set_van_stock(wall_shelf, van_loc_01, 8)
 
-        # Session 3: diff=0, cash_diff=-7.92
+        # Session 3: diff=0, cash_diff=-7.92 (cash)
         self._demo_run_session(
-            driver=driver,
-            pos_config=pos_config,
+            driver=driver_joao,
+            pos_config=pos_01,
             lines=[
                 (wall_shelf, 19, 1.98),
                 (letter_tray, 1, 4.80),
@@ -766,6 +773,73 @@ class VanSession(models.Model):
             ],
             sales=[[(wall_shelf, 4, 1.98)]],
             cash_amount=0,
+        )
+
+        # ── Carlos (Van 02) — 2 sessions ────────────────────────────
+        driver_carlos = self.env.ref("van_sales.driver_carlos")
+        pos_02 = self.env.ref("van_sales.pos_config_van_02")
+        van_loc_02 = pos_02.warehouse_id.lot_stock_id
+
+        # Session 4: card payment, diff=0, cash_diff=0
+        self._demo_run_session(
+            driver=driver_carlos,
+            pos_config=pos_02,
+            lines=[
+                (small_shelf, 8, 2.83),
+                (letter_tray, 5, 4.80),
+            ],
+            sales=[[(small_shelf, 3, 2.83), (letter_tray, 2, 4.80)]],
+            order_payments=[pm_card],
+        )
+
+        self._demo_set_van_stock(small_shelf, van_loc_02, 2)
+
+        # Session 5: mixed (cash + transfer), diff=2 items
+        self._demo_run_session(
+            driver=driver_carlos,
+            pos_config=pos_02,
+            lines=[
+                (small_shelf, 12, 2.83),
+                (magnetic_board, 4, 1.98),
+            ],
+            sales=[
+                [(small_shelf, 4, 2.83)],
+                [(magnetic_board, 2, 1.98)],
+            ],
+            order_payments=[None, pm_transfer],
+            unload_qty={small_shelf: 6},
+        )
+
+        # ── Maria (Van 03) — 2 sessions ─────────────────────────────
+        driver_maria = self.env.ref("van_sales.driver_maria")
+        pos_03 = self.env.ref("van_sales.pos_config_van_03")
+
+        # Session 6: customer account payment, diff=0, cash_diff=0
+        self._demo_run_session(
+            driver=driver_maria,
+            pos_config=pos_03,
+            lines=[
+                (whiteboard, 5, 1.98),
+                (wall_shelf, 10, 1.98),
+            ],
+            sales=[[(whiteboard, 2, 1.98), (wall_shelf, 3, 1.98)]],
+            order_payments=[pm_customer],
+        )
+
+        # Session 7: mixed (cash + card), cash_diff=-5.00
+        self._demo_run_session(
+            driver=driver_maria,
+            pos_config=pos_03,
+            lines=[
+                (wall_shelf, 15, 1.98),
+                (letter_tray, 3, 4.80),
+            ],
+            sales=[
+                [(wall_shelf, 5, 1.98)],
+                [(letter_tray, 2, 4.80)],
+            ],
+            order_payments=[None, pm_card],
+            cash_amount=4.90,
         )
 
     def _demo_set_van_stock(self, product, location, qty):
@@ -791,7 +865,14 @@ class VanSession(models.Model):
         quant.action_apply_inventory()
 
     def _demo_run_session(
-        self, driver, pos_config, lines, sales, unload_qty=None, cash_amount=None
+        self,
+        driver,
+        pos_config,
+        lines,
+        sales,
+        unload_qty=None,
+        cash_amount=None,
+        order_payments=None,
     ):
         """Run a single van session through the full lifecycle (demo helper).
 
@@ -802,6 +883,8 @@ class VanSession(models.Model):
             sales: [[(product, qty, price), ...], ...] — list of POS orders
             unload_qty: {product: qty} — partial unload overrides
             cash_amount: float — cash to report (None = exact, no cash_diff)
+            order_payments: list of pos.payment.method records (one per order).
+                None entries or missing indices default to the cash payment method.
         """
         # Create session
         session = self.create({"driver_id": driver.id, "pos_config_id": pos_config.id})
@@ -849,36 +932,45 @@ class VanSession(models.Model):
 
         # Create POS orders
         cash_pm = pos_config.payment_method_ids.filtered("is_cash_count")[:1]
-        for order_lines in sales:
+        if not order_payments:
+            order_payments = [None] * len(sales)
+        demo_customer = self.env.ref("base.res_partner_2", raise_if_not_found=False)
+        for idx, order_lines in enumerate(sales):
             total = sum(q * p for _, q, p in order_lines)
-            order = self.env["pos.order"].create(
-                {
-                    "session_id": pos_session.id,
-                    "lines": [
-                        (
-                            0,
-                            0,
-                            {
-                                "product_id": prod.id,
-                                "qty": qty,
-                                "price_unit": price,
-                                "price_subtotal": qty * price,
-                                "price_subtotal_incl": qty * price,
-                                "tax_ids": [(5, 0, 0)],
-                            },
-                        )
-                        for prod, qty, price in order_lines
-                    ],
-                    "amount_total": total,
-                    "amount_tax": 0,
-                    "amount_paid": total,
-                    "amount_return": 0,
-                }
+            pm = (
+                order_payments[idx]
+                if idx < len(order_payments) and order_payments[idx]
+                else cash_pm
             )
+            order_vals = {
+                "session_id": pos_session.id,
+                "lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": prod.id,
+                            "qty": qty,
+                            "price_unit": price,
+                            "price_subtotal": qty * price,
+                            "price_subtotal_incl": qty * price,
+                            "tax_ids": [(5, 0, 0)],
+                        },
+                    )
+                    for prod, qty, price in order_lines
+                ],
+                "amount_total": total,
+                "amount_tax": 0,
+                "amount_paid": total,
+                "amount_return": 0,
+            }
+            if pm.split_transactions and demo_customer:
+                order_vals["partner_id"] = demo_customer.id
+            order = self.env["pos.order"].create(order_vals)
             self.env["pos.payment"].create(
                 {
                     "pos_order_id": order.id,
-                    "payment_method_id": cash_pm.id,
+                    "payment_method_id": pm.id,
                     "amount": order.amount_total,
                 }
             )

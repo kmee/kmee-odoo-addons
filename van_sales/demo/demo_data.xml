@@ -218,6 +218,34 @@
     </record>
 
     <!-- ============================================================ -->
+    <!-- Métodos de pagamento compartilhados (cartão, transf., conta) -->
+    <!-- ============================================================ -->
+    <record id="journal_bank_van" model="account.journal">
+        <field name="name">Banco Van</field>
+        <field name="code">BVAN</field>
+        <field name="type">bank</field>
+    </record>
+    <record id="pos_pm_card_van" model="pos.payment.method">
+        <field name="name">Cartão Van</field>
+        <field name="journal_id" ref="journal_bank_van" />
+    </record>
+
+    <record id="journal_transfer_van" model="account.journal">
+        <field name="name">Transferência Van</field>
+        <field name="code">TVAN</field>
+        <field name="type">bank</field>
+    </record>
+    <record id="pos_pm_transfer_van" model="pos.payment.method">
+        <field name="name">Transferência Van</field>
+        <field name="journal_id" ref="journal_transfer_van" />
+    </record>
+
+    <record id="pos_pm_customer_account_van" model="pos.payment.method">
+        <field name="name">Conta Cliente Van</field>
+        <field name="split_transactions">True</field>
+    </record>
+
+    <!-- ============================================================ -->
     <!-- POS Config: 1 por caminhão                                    -->
     <!-- ============================================================ -->
     <record id="pos_config_van_01" model="pos.config">
@@ -226,7 +254,15 @@
         <field name="warehouse_id" ref="warehouse_van_01" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
-        <field name="payment_method_ids" eval="[(6, 0, [ref('pos_pm_cash_van_01')])]" />
+        <field
+            name="payment_method_ids"
+            eval="[(6, 0, [
+            ref('pos_pm_cash_van_01'),
+            ref('pos_pm_card_van'),
+            ref('pos_pm_transfer_van'),
+            ref('pos_pm_customer_account_van'),
+        ])]"
+        />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_01" />
         <field name="van_unload_picking_type_id" ref="picking_type_unload_van_01" />
         <field name="van_driver_account_id" ref="account_van_driver" />
@@ -241,7 +277,15 @@
         <field name="warehouse_id" ref="warehouse_van_02" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
-        <field name="payment_method_ids" eval="[(6, 0, [ref('pos_pm_cash_van_02')])]" />
+        <field
+            name="payment_method_ids"
+            eval="[(6, 0, [
+            ref('pos_pm_cash_van_02'),
+            ref('pos_pm_card_van'),
+            ref('pos_pm_transfer_van'),
+            ref('pos_pm_customer_account_van'),
+        ])]"
+        />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_02" />
         <field name="van_unload_picking_type_id" ref="picking_type_unload_van_02" />
         <field name="van_driver_account_id" ref="account_van_driver" />
@@ -256,7 +300,15 @@
         <field name="warehouse_id" ref="warehouse_van_03" />
         <field name="pricelist_id" ref="pricelist_van" />
         <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_van')])]" />
-        <field name="payment_method_ids" eval="[(6, 0, [ref('pos_pm_cash_van_03')])]" />
+        <field
+            name="payment_method_ids"
+            eval="[(6, 0, [
+            ref('pos_pm_cash_van_03'),
+            ref('pos_pm_card_van'),
+            ref('pos_pm_transfer_van'),
+            ref('pos_pm_customer_account_van'),
+        ])]"
+        />
         <field name="van_load_picking_type_id" ref="picking_type_load_van_03" />
         <field name="van_unload_picking_type_id" ref="picking_type_unload_van_03" />
         <field name="van_driver_account_id" ref="account_van_driver" />

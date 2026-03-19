@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <!-- Run 3 demo sessions through the full lifecycle (closed state)
-         with pickings, POS orders, and journal entries.
+    <!-- Run 7 demo sessions for 3 drivers through the full lifecycle
+         (closed state) with pickings, POS orders, and journal entries.
          See VanSession._demo_create_closed_sessions() for details. -->
     <function model="van.session" name="_demo_create_closed_sessions" />
 </odoo>

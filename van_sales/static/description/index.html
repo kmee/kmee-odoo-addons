@@ -370,24 +370,312 @@ ul.auto-toc {
 !! source digest: sha256:58dc0e6ddfbdfb4f3442a072f6d476b973e97ed5d22c0f813af71838cab1b5d8
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/18.0/van_sales"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
-<p>Van sales cycle management for Odoo POS: load products into vans, sell via POS,
-handle unload returns and difference settlement.</p>
-<p>Supports residual stock (carry over unsold products between sessions) and a
-close wizard that lets the user choose to return stock to the warehouse or keep
-it in the van for the next session.</p>
+<p>Gestao completa do ciclo de venda em caminhoes/vans integrado ao Odoo POS.</p>
+<p>O modulo gerencia todo o fluxo operacional de vendas em vans: carregamento de
+produtos no armazem, vendas pelo POS durante a rota, conferencia do retorno e
+fechamento contabil com apuracao de diferencas de estoque e caixa.</p>
+<p>Principais funcionalidades:</p>
+<ul class="simple">
+<li><strong>Sessoes Van</strong> com maquina de estados completa:
+Rascunho -&gt; Em Carregamento -&gt; Carregado -&gt; Em Rota -&gt; Retornado -&gt; Fechado</li>
+<li><strong>Estoque residual</strong>: produtos nao vendidos permanecem no caminhao e sao
+automaticamente carregados na sessao seguinte (carry-over)</li>
+<li><strong>Integracao POS</strong>: abertura e fechamento do POS vinculados a sessao van,
+com captura automatica de vendas, devolucoes e pagamentos</li>
+<li><strong>Pickings automaticos</strong>: carga (armazem -&gt; van) e descarga (van -&gt; armazem)
+com rastreabilidade completa via stock.move.line</li>
+<li><strong>Apuracao de diferencas</strong>: calculo automatico de diferencas de estoque
+(qty_diff) e caixa (cash_diff) por sessao</li>
+<li><strong>Lancamento contabil</strong>: geracao automatica de account.move no fechamento,
+debitando o motorista por diferencas nao abonadas</li>
+<li><strong>Abono de diferencas</strong>: possibilidade de abonar diferencas de estoque com
+justificativa obrigatoria (minimo 20 caracteres)</li>
+<li><strong>Multiplos metodos de pagamento</strong>: suporte a dinheiro, cartao, transferencia
+bancaria e conta do cliente (pay later) por POS</li>
+<li><strong>Relatorios</strong>: analise de vendas, desempenho por motorista, movimentacao de
+produtos e controle de diferencas via pivot/graph</li>
+<li><strong>Lista de precos</strong>: preco unitario das linhas calculado pela pricelist
+configurada no POS, propagado para os stock.moves (valorizacao)</li>
+</ul>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-1">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-2">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-3">Authors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-4">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
+<li><a class="reference internal" href="#configuracao-inicial" id="toc-entry-2">Configuracao inicial</a></li>
+<li><a class="reference internal" href="#permissoes" id="toc-entry-3">Permissoes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-4">Usage</a><ul>
+<li><a class="reference internal" href="#fluxo-operacional" id="toc-entry-5">Fluxo operacional</a><ul>
+<li><a class="reference internal" href="#criar-sessao-rascunho" id="toc-entry-6">1. Criar Sessao (Rascunho)</a></li>
+<li><a class="reference internal" href="#iniciar-carregamento" id="toc-entry-7">2. Iniciar Carregamento</a></li>
+<li><a class="reference internal" href="#confirmar-carga" id="toc-entry-8">3. Confirmar Carga</a></li>
+<li><a class="reference internal" href="#abrir-pos-em-rota" id="toc-entry-9">4. Abrir POS (Em Rota)</a></li>
+<li><a class="reference internal" href="#fechar-pos-retornado" id="toc-entry-10">5. Fechar POS (Retornado)</a></li>
+<li><a class="reference internal" href="#fechar-sessao" id="toc-entry-11">6. Fechar Sessao</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#campos-calculados-por-linha" id="toc-entry-12">Campos calculados por linha</a></li>
+<li><a class="reference internal" href="#abono-de-diferencas" id="toc-entry-13">Abono de diferencas</a></li>
+<li><a class="reference internal" href="#reversao-de-estados" id="toc-entry-14">Reversao de estados</a></li>
+<li><a class="reference internal" href="#relatorios" id="toc-entry-15">Relatorios</a></li>
+<li><a class="reference internal" href="#impressoes" id="toc-entry-16">Impressoes</a></li>
+<li><a class="reference internal" href="#estoque-residual-carry-over" id="toc-entry-17">Estoque residual (carry-over)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-18">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-19">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-20">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-21">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-22">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-23">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
+<div class="section" id="configuracao-inicial">
+<h2><a class="toc-backref" href="#toc-entry-2">Configuracao inicial</a></h2>
+<ol class="arabic">
+<li><p class="first"><strong>Armazens (Warehouses)</strong></p>
+<p>Crie um armazem para cada caminhao/van em <em>Inventario &gt; Configuracao &gt; Armazens</em>.
+Configure o campo “Resupply From” apontando para o armazem principal (WH).
+Isso garante que o estoque flua do armazem central para a van.</p>
+<p>Exemplo:</p>
+<pre class="literal-block">
+Van 01 - Joao   (VAN01)  ← resupply de WH
+Van 02 - Carlos  (VAN02)  ← resupply de WH
+Van 03 - Maria   (VAN03)  ← resupply de WH
+</pre>
+</li>
+<li><p class="first"><strong>Tipos de Picking (Carga e Descarga)</strong></p>
+<p>Para cada van, crie dois tipos de operacao interna em
+<em>Inventario &gt; Configuracao &gt; Tipos de Operacoes</em>:</p>
+<ul class="simple">
+<li><strong>Carga</strong>: origem = estoque WH, destino = estoque da van</li>
+<li><strong>Descarga</strong>: origem = estoque da van, destino = estoque WH</li>
+</ul>
+</li>
+<li><p class="first"><strong>Contas Contabeis</strong></p>
+<p>Crie ou identifique 3 contas para o fechamento contabil:</p>
+<ul class="simple">
+<li><strong>Motoristas Van - A Receber</strong> (asset_receivable, reconcile=True):
+debitos por diferencas de estoque e caixa do motorista</li>
+<li><strong>Mercadoria em Transito Van</strong> (asset_current):
+credito pela diferenca de estoque (mercadoria que saiu e nao voltou)</li>
+<li><strong>Caixa Van</strong> (asset_current):
+credito/debito pela diferenca de caixa</li>
+</ul>
+</li>
+<li><p class="first"><strong>Diario Contabil</strong></p>
+<p>Crie um diario do tipo “Diversos” (general) para os lancamentos de
+fechamento de sessao, ex: “Diario Van Sales” (VAN).</p>
+</li>
+<li><p class="first"><strong>Diarios de Caixa</strong></p>
+<p>Cada POS precisa de um diario de caixa exclusivo (exigencia do Odoo).
+Crie um diario tipo “cash” para cada van, ex: “Caixa Van 01” (CV01).</p>
+</li>
+<li><p class="first"><strong>Metodos de Pagamento</strong></p>
+<p>Crie os metodos de pagamento desejados:</p>
+<ul class="simple">
+<li><strong>Dinheiro</strong>: um por POS (vinculado ao diario de caixa exclusivo)</li>
+<li><strong>Cartao</strong>: compartilhado, vinculado a um diario tipo “bank”</li>
+<li><strong>Transferencia</strong>: compartilhado, vinculado a outro diario tipo “bank”</li>
+<li><strong>Conta Cliente</strong>: compartilhado, sem diario, com <tt class="docutils literal">split_transactions=True</tt>
+(exige identificacao do cliente na venda POS)</li>
+</ul>
+</li>
+<li><p class="first"><strong>POS Config</strong></p>
+<p>Crie um POS para cada van em <em>Ponto de Venda &gt; Configuracao &gt; Pontos de Venda</em>.
+Configure os campos adicionais:</p>
+<ul class="simple">
+<li><strong>E Van Config</strong>: marcado</li>
+<li><strong>Armazem</strong>: armazem da van</li>
+<li><strong>Load Picking Type</strong>: tipo de carga da van</li>
+<li><strong>Unload Picking Type</strong>: tipo de descarga da van</li>
+<li><strong>Driver Account</strong>: conta a receber do motorista</li>
+<li><strong>Van Transit Account</strong>: conta de mercadoria em transito</li>
+<li><strong>Cash Account</strong>: conta de caixa</li>
+<li><strong>Van Journal</strong>: diario de fechamento</li>
+<li><strong>Metodos de Pagamento</strong>: dinheiro (exclusivo) + cartao, transferencia, etc.</li>
+</ul>
+</li>
+<li><p class="first"><strong>Motoristas</strong></p>
+<p>Cadastre os motoristas em <em>Van Sales &gt; Motoristas</em> ou em Contatos com o campo
+“E Motorista Van” marcado.</p>
+</li>
+<li><p class="first"><strong>Estoque Inicial</strong></p>
+<p>Garanta que os produtos a serem vendidos tenham estoque disponivel no
+armazem principal (WH). O estoque sera transferido para a van via picking
+de carga.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="permissoes">
+<h2><a class="toc-backref" href="#toc-entry-3">Permissoes</a></h2>
+<p>O modulo define dois grupos de acesso:</p>
+<ul class="simple">
+<li><strong>Van Sales / User</strong>: acesso a sessoes, leitura de configuracoes</li>
+<li><strong>Van Sales / Manager</strong>: pode fechar sessoes (action_post), reverter estados
+e acessar configuracoes</li>
+</ul>
+</div>
+</div>
+<div class="section" id="usage">
+<h1><a class="toc-backref" href="#toc-entry-4">Usage</a></h1>
+<div class="section" id="fluxo-operacional">
+<h2><a class="toc-backref" href="#toc-entry-5">Fluxo operacional</a></h2>
+<p>O ciclo de vida de uma sessao van segue 6 estados em sequencia:</p>
+<pre class="literal-block">
+Rascunho → Em Carregamento → Carregado → Em Rota → Retornado → Fechado
+</pre>
+<div class="section" id="criar-sessao-rascunho">
+<h3><a class="toc-backref" href="#toc-entry-6">1. Criar Sessao (Rascunho)</a></h3>
+<p>Acesse <em>Van Sales &gt; Sessoes &gt; Nova</em> e preencha:</p>
+<ul class="simple">
+<li><strong>Motorista</strong>: selecione o motorista responsavel</li>
+<li><strong>POS Config</strong>: selecione o POS do caminhao</li>
+</ul>
+<p>A lista de precos sera preenchida automaticamente a partir do POS.</p>
+</div>
+<div class="section" id="iniciar-carregamento">
+<h3><a class="toc-backref" href="#toc-entry-7">2. Iniciar Carregamento</a></h3>
+<p>Clique em <strong>Iniciar Carregamento</strong>. O sistema:</p>
+<ul class="simple">
+<li>Carrega automaticamente as linhas com produtos que ja estao na van
+(estoque residual de sessoes anteriores)</li>
+<li>Preenche <tt class="docutils literal">qty_initial</tt> (quantidade atual na van) e <tt class="docutils literal">qty_demand</tt>
+(quantidade desejada para a viagem)</li>
+</ul>
+<p>Ajuste as quantidades conforme necessario e adicione novos produtos.</p>
+</div>
+<div class="section" id="confirmar-carga">
+<h3><a class="toc-backref" href="#toc-entry-8">3. Confirmar Carga</a></h3>
+<p>Clique em <strong>Gerar Picking de Carga</strong>. O sistema:</p>
+<ul class="simple">
+<li>Cria um picking interno (armazem WH → van) com as quantidades adicionais
+(<tt class="docutils literal">qty_demand - qty_initial</tt>) para cada produto</li>
+<li>Se toda a quantidade ja estiver na van, pula direto para “Carregado”</li>
+</ul>
+<p>O picking deve ser validado pelo armazem. Ao validar, o estado muda
+automaticamente para <strong>Carregado</strong>.</p>
+</div>
+<div class="section" id="abrir-pos-em-rota">
+<h3><a class="toc-backref" href="#toc-entry-9">4. Abrir POS (Em Rota)</a></h3>
+<p>Com a sessao em “Carregado”, clique em <strong>Abrir POS</strong>. O sistema:</p>
+<ul class="simple">
+<li>Abre a interface POS padrão do Odoo</li>
+<li>Vincula a sessao POS a sessao van</li>
+<li>Muda o estado para <strong>Em Rota</strong></li>
+</ul>
+<p>O motorista realiza vendas normalmente no POS, podendo usar qualquer
+metodo de pagamento configurado (dinheiro, cartao, transferencia, conta
+cliente).</p>
+</div>
+<div class="section" id="fechar-pos-retornado">
+<h3><a class="toc-backref" href="#toc-entry-10">5. Fechar POS (Retornado)</a></h3>
+<p>Ao fechar o POS (fim do dia / retorno), o sistema automaticamente:</p>
+<ul class="simple">
+<li>Captura todas as vendas e devolucoes POS</li>
+<li>Calcula <tt class="docutils literal">qty_sold</tt> e <tt class="docutils literal">qty_devolution</tt> por produto</li>
+<li>Registra a diferenca de caixa (<tt class="docutils literal">cash_diff</tt>) a partir do POS</li>
+<li>Cria o picking de descarga (van → armazem WH) com as quantidades
+esperadas de retorno</li>
+<li>Muda o estado para <strong>Retornado</strong></li>
+</ul>
+<p>O conferente do armazem deve validar o picking de descarga, informando
+as quantidades reais recebidas. Diferencas geram <tt class="docutils literal">qty_diff</tt> nas linhas.</p>
+</div>
+<div class="section" id="fechar-sessao">
+<h3><a class="toc-backref" href="#toc-entry-11">6. Fechar Sessao</a></h3>
+<p>Com o picking de descarga validado, o gestor clica em <strong>Postar Fechamento</strong>:</p>
+<ul class="simple">
+<li>Gera um lancamento contabil (<tt class="docutils literal">account.move</tt>) com:<ul>
+<li><strong>Diferenca de estoque</strong>: debita motorista, credita mercadoria em transito</li>
+<li><strong>Diferenca de caixa</strong>: debita motorista (falta) ou credita motorista (sobra)</li>
+</ul>
+</li>
+<li>Se nao houver diferencas, fecha a sessao sem lancamento</li>
+<li>Estado muda para <strong>Fechado</strong></li>
+</ul>
+</div>
+</div>
+<div class="section" id="campos-calculados-por-linha">
+<h2><a class="toc-backref" href="#toc-entry-12">Campos calculados por linha</a></h2>
+<p>Cada linha (<tt class="docutils literal">van.session.line</tt>) possui campos computados:</p>
+<ul class="simple">
+<li><tt class="docutils literal">qty_initial</tt>: estoque ja presente na van antes da carga</li>
+<li><tt class="docutils literal">qty_demand</tt>: quantidade desejada para carregar</li>
+<li><tt class="docutils literal">qty_loaded</tt>: quantidade efetivamente carregada (do picking)</li>
+<li><tt class="docutils literal">qty_out</tt>: total de saida = <tt class="docutils literal">qty_initial + qty_loaded</tt></li>
+<li><tt class="docutils literal">qty_sold</tt>: quantidade vendida pelo POS</li>
+<li><tt class="docutils literal">qty_devolution</tt>: quantidade devolvida pelo cliente via POS</li>
+<li><tt class="docutils literal">qty_returned</tt>: quantidade retornada ao armazem (do picking de descarga)</li>
+<li><tt class="docutils literal">qty_scrap</tt>: quantidade descartada (via stock.scrap no picking)</li>
+<li><tt class="docutils literal">qty_diff</tt>: diferenca = <tt class="docutils literal">qty_out - qty_sold + qty_devolution - qty_returned - qty_scrap</tt></li>
+<li><tt class="docutils literal">price_unit</tt>: preco unitario (da pricelist)</li>
+<li><tt class="docutils literal">amount</tt>: valor da diferenca = <tt class="docutils literal">qty_diff * price_unit</tt></li>
+</ul>
+</div>
+<div class="section" id="abono-de-diferencas">
+<h2><a class="toc-backref" href="#toc-entry-13">Abono de diferencas</a></h2>
+<p>Linhas com diferenca podem ser abonadas marcando o campo <tt class="docutils literal">waived</tt> e
+preenchendo <tt class="docutils literal">waive_reason</tt> com justificativa de pelo menos 20 caracteres.
+Linhas abonadas nao geram lancamento contabil.</p>
+</div>
+<div class="section" id="reversao-de-estados">
+<h2><a class="toc-backref" href="#toc-entry-14">Reversao de estados</a></h2>
+<p>Em caso de erro, o gestor (grupo Manager) pode:</p>
+<ul class="simple">
+<li><strong>Voltar ao Rascunho</strong>: a partir de “Em Carregamento” ou “Carregado”
+(cancela o picking de carga)</li>
+<li><strong>Voltar a Carregado</strong>: a partir de “Retornado”
+(cancela o picking de descarga e limpa links de venda)</li>
+</ul>
+</div>
+<div class="section" id="relatorios">
+<h2><a class="toc-backref" href="#toc-entry-15">Relatorios</a></h2>
+<p>O modulo inclui 4 relatorios pre-configurados em <em>Van Sales &gt; Relatorios</em>:</p>
+<ul class="simple">
+<li><strong>Analise de Vendas</strong>: pivot/graph geral com vendas, diferencas e valores</li>
+<li><strong>Desempenho por Motorista</strong>: agrupado por motorista com metricas-chave</li>
+<li><strong>Movimentacao de Produtos</strong>: analise por produto com sell-through rate</li>
+<li><strong>Controle de Diferencas</strong>: somente linhas com diferenca, agrupadas por motorista</li>
+</ul>
+<p>Todos baseados na view SQL <tt class="docutils literal">report.van.session.line</tt> com filtros por periodo,
+estado e agrupamentos configuráveis.</p>
+</div>
+<div class="section" id="impressoes">
+<h2><a class="toc-backref" href="#toc-entry-16">Impressoes</a></h2>
+<ul class="simple">
+<li><strong>Ticket de Carga</strong>: relatorio de impressao das linhas de carregamento
+(disponivel na sessao em estado “Carregado”)</li>
+<li><strong>Resumo da Sessao</strong>: relatorio completo de fechamento com totais,
+diferencas e pagamentos</li>
+</ul>
+</div>
+<div class="section" id="estoque-residual-carry-over">
+<h2><a class="toc-backref" href="#toc-entry-17">Estoque residual (carry-over)</a></h2>
+<p>Produtos nao vendidos e nao retornados ao armazem permanecem no estoque
+da van. Na proxima sessao, ao clicar “Iniciar Carregamento”, esses
+produtos sao automaticamente carregados com <tt class="docutils literal">qty_initial</tt> preenchida,
+e <tt class="docutils literal">qty_demand</tt> ajustada para incluir a quantidade ja presente.</p>
+</div>
+</div>
+<div class="section" id="known-issues-roadmap">
+<h1><a class="toc-backref" href="#toc-entry-18">Known issues / Roadmap</a></h1>
+<ul class="simple">
+<li>Dashboard por motorista no estilo kanban com KPIs (sessoes ativas/fechadas,
+vendas totais, diferencas acumuladas)</li>
+<li>Captura de diferencas de caixa por metodo de pagamento (atualmente so
+captura dinheiro via <tt class="docutils literal">cash_register_difference</tt>, nao cartao/transferencia)</li>
+<li>Integracao com modulo fleet para vincular sessoes a veiculos</li>
+<li>Alertas automaticos por limites de diferenca acumulada por motorista</li>
+</ul>
+</div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-19">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -395,15 +683,24 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-2">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-20">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-3">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-21">Authors</a></h2>
 <ul class="simple">
 <li>KMEE</li>
 </ul>
 </div>
+<div class="section" id="contributors">
+<h2><a class="toc-backref" href="#toc-entry-22">Contributors</a></h2>
+<ul class="simple">
+<li>KMEE &lt;<a class="reference external" href="https://www.kmee.com.br">https://www.kmee.com.br</a>&gt;<ul>
+<li>Luis Felipe Mileo &lt;<a class="reference external" href="mailto:mileo&#64;kmee.com.br">mileo&#64;kmee.com.br</a>&gt;</li>
+</ul>
+</li>
+</ul>
+</div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-4">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-23">Maintainers</a></h2>
 <p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/18.0/van_sales">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
 </div>

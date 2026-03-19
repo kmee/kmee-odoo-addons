@@ -22,17 +22,291 @@ Van Sales
 
 |badge1| |badge2| |badge3|
 
-Van sales cycle management for Odoo POS: load products into vans, sell via POS,
-handle unload returns and difference settlement.
+Gestao completa do ciclo de venda em caminhoes/vans integrado ao Odoo POS.
 
-Supports residual stock (carry over unsold products between sessions) and a
-close wizard that lets the user choose to return stock to the warehouse or keep
-it in the van for the next session.
+O modulo gerencia todo o fluxo operacional de vendas em vans: carregamento de
+produtos no armazem, vendas pelo POS durante a rota, conferencia do retorno e
+fechamento contabil com apuracao de diferencas de estoque e caixa.
+
+Principais funcionalidades:
+
+* **Sessoes Van** com maquina de estados completa:
+  Rascunho -> Em Carregamento -> Carregado -> Em Rota -> Retornado -> Fechado
+* **Estoque residual**: produtos nao vendidos permanecem no caminhao e sao
+  automaticamente carregados na sessao seguinte (carry-over)
+* **Integracao POS**: abertura e fechamento do POS vinculados a sessao van,
+  com captura automatica de vendas, devolucoes e pagamentos
+* **Pickings automaticos**: carga (armazem -> van) e descarga (van -> armazem)
+  com rastreabilidade completa via stock.move.line
+* **Apuracao de diferencas**: calculo automatico de diferencas de estoque
+  (qty_diff) e caixa (cash_diff) por sessao
+* **Lancamento contabil**: geracao automatica de account.move no fechamento,
+  debitando o motorista por diferencas nao abonadas
+* **Abono de diferencas**: possibilidade de abonar diferencas de estoque com
+  justificativa obrigatoria (minimo 20 caracteres)
+* **Multiplos metodos de pagamento**: suporte a dinheiro, cartao, transferencia
+  bancaria e conta do cliente (pay later) por POS
+* **Relatorios**: analise de vendas, desempenho por motorista, movimentacao de
+  produtos e controle de diferencas via pivot/graph
+* **Lista de precos**: preco unitario das linhas calculado pela pricelist
+  configurada no POS, propagado para os stock.moves (valorizacao)
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+Configuracao inicial
+~~~~~~~~~~~~~~~~~~~~
+
+1. **Armazens (Warehouses)**
+
+   Crie um armazem para cada caminhao/van em *Inventario > Configuracao > Armazens*.
+   Configure o campo "Resupply From" apontando para o armazem principal (WH).
+   Isso garante que o estoque flua do armazem central para a van.
+
+   Exemplo::
+
+       Van 01 - Joao   (VAN01)  ← resupply de WH
+       Van 02 - Carlos  (VAN02)  ← resupply de WH
+       Van 03 - Maria   (VAN03)  ← resupply de WH
+
+2. **Tipos de Picking (Carga e Descarga)**
+
+   Para cada van, crie dois tipos de operacao interna em
+   *Inventario > Configuracao > Tipos de Operacoes*:
+
+   * **Carga**: origem = estoque WH, destino = estoque da van
+   * **Descarga**: origem = estoque da van, destino = estoque WH
+
+3. **Contas Contabeis**
+
+   Crie ou identifique 3 contas para o fechamento contabil:
+
+   * **Motoristas Van - A Receber** (asset_receivable, reconcile=True):
+     debitos por diferencas de estoque e caixa do motorista
+   * **Mercadoria em Transito Van** (asset_current):
+     credito pela diferenca de estoque (mercadoria que saiu e nao voltou)
+   * **Caixa Van** (asset_current):
+     credito/debito pela diferenca de caixa
+
+4. **Diario Contabil**
+
+   Crie um diario do tipo "Diversos" (general) para os lancamentos de
+   fechamento de sessao, ex: "Diario Van Sales" (VAN).
+
+5. **Diarios de Caixa**
+
+   Cada POS precisa de um diario de caixa exclusivo (exigencia do Odoo).
+   Crie um diario tipo "cash" para cada van, ex: "Caixa Van 01" (CV01).
+
+6. **Metodos de Pagamento**
+
+   Crie os metodos de pagamento desejados:
+
+   * **Dinheiro**: um por POS (vinculado ao diario de caixa exclusivo)
+   * **Cartao**: compartilhado, vinculado a um diario tipo "bank"
+   * **Transferencia**: compartilhado, vinculado a outro diario tipo "bank"
+   * **Conta Cliente**: compartilhado, sem diario, com ``split_transactions=True``
+     (exige identificacao do cliente na venda POS)
+
+7. **POS Config**
+
+   Crie um POS para cada van em *Ponto de Venda > Configuracao > Pontos de Venda*.
+   Configure os campos adicionais:
+
+   * **E Van Config**: marcado
+   * **Armazem**: armazem da van
+   * **Load Picking Type**: tipo de carga da van
+   * **Unload Picking Type**: tipo de descarga da van
+   * **Driver Account**: conta a receber do motorista
+   * **Van Transit Account**: conta de mercadoria em transito
+   * **Cash Account**: conta de caixa
+   * **Van Journal**: diario de fechamento
+   * **Metodos de Pagamento**: dinheiro (exclusivo) + cartao, transferencia, etc.
+
+8. **Motoristas**
+
+   Cadastre os motoristas em *Van Sales > Motoristas* ou em Contatos com o campo
+   "E Motorista Van" marcado.
+
+9. **Estoque Inicial**
+
+   Garanta que os produtos a serem vendidos tenham estoque disponivel no
+   armazem principal (WH). O estoque sera transferido para a van via picking
+   de carga.
+
+Permissoes
+~~~~~~~~~~
+
+O modulo define dois grupos de acesso:
+
+* **Van Sales / User**: acesso a sessoes, leitura de configuracoes
+* **Van Sales / Manager**: pode fechar sessoes (action_post), reverter estados
+  e acessar configuracoes
+
+Usage
+=====
+
+Fluxo operacional
+~~~~~~~~~~~~~~~~~
+
+O ciclo de vida de uma sessao van segue 6 estados em sequencia:
+
+::
+
+    Rascunho → Em Carregamento → Carregado → Em Rota → Retornado → Fechado
+
+1. Criar Sessao (Rascunho)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Acesse *Van Sales > Sessoes > Nova* e preencha:
+
+* **Motorista**: selecione o motorista responsavel
+* **POS Config**: selecione o POS do caminhao
+
+A lista de precos sera preenchida automaticamente a partir do POS.
+
+2. Iniciar Carregamento
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Clique em **Iniciar Carregamento**. O sistema:
+
+* Carrega automaticamente as linhas com produtos que ja estao na van
+  (estoque residual de sessoes anteriores)
+* Preenche ``qty_initial`` (quantidade atual na van) e ``qty_demand``
+  (quantidade desejada para a viagem)
+
+Ajuste as quantidades conforme necessario e adicione novos produtos.
+
+3. Confirmar Carga
+^^^^^^^^^^^^^^^^^^^
+
+Clique em **Gerar Picking de Carga**. O sistema:
+
+* Cria um picking interno (armazem WH → van) com as quantidades adicionais
+  (``qty_demand - qty_initial``) para cada produto
+* Se toda a quantidade ja estiver na van, pula direto para "Carregado"
+
+O picking deve ser validado pelo armazem. Ao validar, o estado muda
+automaticamente para **Carregado**.
+
+4. Abrir POS (Em Rota)
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Com a sessao em "Carregado", clique em **Abrir POS**. O sistema:
+
+* Abre a interface POS padrão do Odoo
+* Vincula a sessao POS a sessao van
+* Muda o estado para **Em Rota**
+
+O motorista realiza vendas normalmente no POS, podendo usar qualquer
+metodo de pagamento configurado (dinheiro, cartao, transferencia, conta
+cliente).
+
+5. Fechar POS (Retornado)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Ao fechar o POS (fim do dia / retorno), o sistema automaticamente:
+
+* Captura todas as vendas e devolucoes POS
+* Calcula ``qty_sold`` e ``qty_devolution`` por produto
+* Registra a diferenca de caixa (``cash_diff``) a partir do POS
+* Cria o picking de descarga (van → armazem WH) com as quantidades
+  esperadas de retorno
+* Muda o estado para **Retornado**
+
+O conferente do armazem deve validar o picking de descarga, informando
+as quantidades reais recebidas. Diferencas geram ``qty_diff`` nas linhas.
+
+6. Fechar Sessao
+^^^^^^^^^^^^^^^^^
+
+Com o picking de descarga validado, o gestor clica em **Postar Fechamento**:
+
+* Gera um lancamento contabil (``account.move``) com:
+
+  - **Diferenca de estoque**: debita motorista, credita mercadoria em transito
+  - **Diferenca de caixa**: debita motorista (falta) ou credita motorista (sobra)
+
+* Se nao houver diferencas, fecha a sessao sem lancamento
+* Estado muda para **Fechado**
+
+Campos calculados por linha
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cada linha (``van.session.line``) possui campos computados:
+
+* ``qty_initial``: estoque ja presente na van antes da carga
+* ``qty_demand``: quantidade desejada para carregar
+* ``qty_loaded``: quantidade efetivamente carregada (do picking)
+* ``qty_out``: total de saida = ``qty_initial + qty_loaded``
+* ``qty_sold``: quantidade vendida pelo POS
+* ``qty_devolution``: quantidade devolvida pelo cliente via POS
+* ``qty_returned``: quantidade retornada ao armazem (do picking de descarga)
+* ``qty_scrap``: quantidade descartada (via stock.scrap no picking)
+* ``qty_diff``: diferenca = ``qty_out - qty_sold + qty_devolution - qty_returned - qty_scrap``
+* ``price_unit``: preco unitario (da pricelist)
+* ``amount``: valor da diferenca = ``qty_diff * price_unit``
+
+Abono de diferencas
+~~~~~~~~~~~~~~~~~~~
+
+Linhas com diferenca podem ser abonadas marcando o campo ``waived`` e
+preenchendo ``waive_reason`` com justificativa de pelo menos 20 caracteres.
+Linhas abonadas nao geram lancamento contabil.
+
+Reversao de estados
+~~~~~~~~~~~~~~~~~~~
+
+Em caso de erro, o gestor (grupo Manager) pode:
+
+* **Voltar ao Rascunho**: a partir de "Em Carregamento" ou "Carregado"
+  (cancela o picking de carga)
+* **Voltar a Carregado**: a partir de "Retornado"
+  (cancela o picking de descarga e limpa links de venda)
+
+Relatorios
+~~~~~~~~~~
+
+O modulo inclui 4 relatorios pre-configurados em *Van Sales > Relatorios*:
+
+* **Analise de Vendas**: pivot/graph geral com vendas, diferencas e valores
+* **Desempenho por Motorista**: agrupado por motorista com metricas-chave
+* **Movimentacao de Produtos**: analise por produto com sell-through rate
+* **Controle de Diferencas**: somente linhas com diferenca, agrupadas por motorista
+
+Todos baseados na view SQL ``report.van.session.line`` com filtros por periodo,
+estado e agrupamentos configuráveis.
+
+Impressoes
+~~~~~~~~~~
+
+* **Ticket de Carga**: relatorio de impressao das linhas de carregamento
+  (disponivel na sessao em estado "Carregado")
+* **Resumo da Sessao**: relatorio completo de fechamento com totais,
+  diferencas e pagamentos
+
+Estoque residual (carry-over)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Produtos nao vendidos e nao retornados ao armazem permanecem no estoque
+da van. Na proxima sessao, ao clicar "Iniciar Carregamento", esses
+produtos sao automaticamente carregados com ``qty_initial`` preenchida,
+e ``qty_demand`` ajustada para incluir a quantidade ja presente.
+
+Known issues / Roadmap
+======================
+
+* Dashboard por motorista no estilo kanban com KPIs (sessoes ativas/fechadas,
+  vendas totais, diferencas acumuladas)
+* Captura de diferencas de caixa por metodo de pagamento (atualmente so
+  captura dinheiro via ``cash_register_difference``, nao cartao/transferencia)
+* Integracao com modulo fleet para vincular sessoes a veiculos
+* Alertas automaticos por limites de diferenca acumulada por motorista
 
 Bug Tracker
 ===========
@@ -51,6 +325,13 @@ Authors
 ~~~~~~~
 
 * KMEE
+
+Contributors
+~~~~~~~~~~~~
+
+* KMEE <https://www.kmee.com.br>
+
+  * Luis Felipe Mileo <mileo@kmee.com.br>
 
 Maintainers
 ~~~~~~~~~~~
