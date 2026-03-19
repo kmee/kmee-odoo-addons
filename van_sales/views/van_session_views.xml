@@ -158,36 +158,40 @@
                                     <field
                                         name="amount"
                                         readonly="1"
-                                        sum="Total"
                                         column_invisible="parent.state in ('draft', 'loading', 'loaded')"
                                     />
-                                    <field
-                                        name="waived"
-                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
-                                    />
-                                    <field
-                                        name="waive_reason"
-                                        invisible="not waived"
-                                        column_invisible="parent.state in ('draft', 'loading', 'loaded')"
-                                    />
+                                    <field name="waived" column_invisible="1" />
+                                    <field name="waive_reason" column_invisible="1" />
                                 </list>
                             </field>
-                            <group>
-                                <group string="Quantidades Totais">
+                            <group name="totals" col="6" class="mt-2 mt-md-0">
+                                <group
+                                    colspan="4"
+                                    name="qtd_totals"
+                                    class="order-1 order-lg-0"
+                                >
                                     <field name="total_qty_out" />
                                     <field name="total_qty_sold" />
                                     <field name="total_qty_returned" />
                                     <field name="total_qty_diff" />
                                 </group>
-                                <group string="Valores">
+                                <group
+                                    class="oe_subtotal_footer"
+                                    colspan="2"
+                                    name="van_totals"
+                                >
                                     <field name="total_pos_sales" />
                                     <field name="total_pos_payments" />
                                     <field name="cash_diff" readonly="1" />
-                                    <separator />
-                                    <field name="total_amount" />
-                                    <field name="total_diff" class="fw-bold" />
+                                    <field name="total_amount" string="Dif. Estoque" />
+                                    <field
+                                        name="total_diff"
+                                        class="oe_subtotal_footer_separator"
+                                        widget="monetary"
+                                    />
                                 </group>
                             </group>
+                            <field name="notes" placeholder="Notas internas..." />
                         </page>
                         <page
                             string="Vendas POS"

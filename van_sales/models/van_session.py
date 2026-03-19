@@ -61,6 +61,7 @@ class VanSession(models.Model):
         "account.move", string="Lançamento de Fechamento", readonly=True, copy=False
     )
     cash_diff = fields.Monetary(string="Diferença de Caixa", readonly=True, copy=False)
+    notes = fields.Html(string="Notas Internas")
     company_id = fields.Many2one(
         "res.company", required=True, default=lambda self: self.env.company
     )
@@ -113,9 +114,7 @@ class VanSession(models.Model):
             session.total_qty_returned = sum(lines.mapped("qty_returned"))
             session.total_qty_diff = sum(lines.mapped("qty_diff"))
             session.total_amount = sum(ln.amount for ln in lines if not ln.waived)
-            session.total_diff = session.total_amount + abs(
-                session.cash_diff if session.cash_diff < 0 else 0
-            )
+            session.total_diff = session.total_amount + abs(session.cash_diff)
 
     pos_order_ids = fields.One2many(
         related="pos_session_id.order_ids", string="Pedidos POS"

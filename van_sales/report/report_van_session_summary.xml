@@ -52,7 +52,6 @@
                                     <th class="text-end">Saída</th>
                                     <th class="text-end">Vendida</th>
                                     <th class="text-end">Retornada</th>
-                                    <th class="text-end">Manter</th>
                                     <th class="text-end">Diferença</th>
                                     <th class="text-end">Preço Unit.</th>
                                     <th class="text-end">Valor Dif.</th>
@@ -63,7 +62,6 @@
                                 <t t-set="total_out" t-value="0" />
                                 <t t-set="total_sold" t-value="0" />
                                 <t t-set="total_returned" t-value="0" />
-                                <t t-set="total_keep" t-value="0" />
                                 <t t-set="total_diff" t-value="0" />
                                 <t t-set="total_amount" t-value="0" />
                                 <t t-set="total_waived" t-value="0" />
@@ -79,10 +77,6 @@
                                     <t
                                         t-set="total_returned"
                                         t-value="total_returned + line.qty_returned"
-                                    />
-                                    <t
-                                        t-set="total_keep"
-                                        t-value="total_keep + line.qty_keep"
                                     />
                                     <t
                                         t-set="total_diff"
@@ -112,9 +106,6 @@
                                             <span t-out="'%.2f' % line.qty_returned" />
                                         </td>
                                         <td class="text-end">
-                                            <span t-out="'%.2f' % line.qty_keep" />
-                                        </td>
-                                        <td class="text-end">
                                             <span t-out="'%.2f' % line.qty_diff" />
                                         </td>
                                         <td class="text-end">
@@ -128,7 +119,7 @@
                                         </td>
                                     </tr>
                                     <tr t-if="line.waived and line.waive_reason">
-                                        <td colspan="9" class="text-muted small ps-4">
+                                        <td colspan="8" class="text-muted small ps-4">
                                             Motivo: <span t-field="line.waive_reason" />
                                         </td>
                                     </tr>
@@ -145,9 +136,6 @@
                                     </td>
                                     <td class="text-end">
                                         <t t-out="'%.2f' % total_returned" />
-                                    </td>
-                                    <td class="text-end">
-                                        <t t-out="'%.2f' % total_keep" />
                                     </td>
                                     <td class="text-end">
                                         <t t-out="'%.2f' % total_diff" />
@@ -167,9 +155,7 @@
                             <div class="col-7">
                                 <table class="table table-sm" style="width: auto;">
                                     <tr>
-                                        <td
-                                            class="fw-bold"
-                                        >Total Diferenças (cobrar motorista):</td>
+                                        <td class="fw-bold">Dif. Estoque:</td>
                                         <td class="text-end fw-bold">
                                             <t t-out="'%.2f' % total_amount" />
                                         </td>
@@ -185,6 +171,18 @@
                                         <td class="text-end fw-bold">
                                             <span
                                                 t-field="o.cash_diff"
+                                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr
+                                        t-if="total_amount or o.cash_diff"
+                                        class="border-top"
+                                    >
+                                        <td class="fw-bold fs-5">Diferença Total:</td>
+                                        <td class="text-end fw-bold fs-5">
+                                            <span
+                                                t-field="o.total_diff"
                                                 t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                                             />
                                         </td>
