@@ -30,6 +30,7 @@
     <menuitem
         id="menu_van_sales_root"
         name="Van Sales"
+        web_icon="van_sales,static/description/icon.png"
         groups="group_van_sales_user"
         sequence="90"
     />

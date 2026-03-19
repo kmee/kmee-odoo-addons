@@ -89,6 +89,10 @@ class VanSession(models.Model):
         string="Vendas POS",
         compute="_compute_pos_totals",
     )
+    total_pos_refunds = fields.Monetary(
+        string="Devoluções POS",
+        compute="_compute_pos_totals",
+    )
     total_pos_payments = fields.Monetary(
         string="Pagamentos POS",
         compute="_compute_pos_totals",
@@ -143,7 +147,10 @@ class VanSession(models.Model):
     @api.depends("pos_order_ids.amount_total", "pos_payment_ids.amount")
     def _compute_pos_totals(self):
         for session in self:
-            session.total_pos_sales = sum(session.pos_order_ids.mapped("amount_total"))
+            sales = session.pos_order_ids.filtered(lambda o: o.amount_total >= 0)
+            refunds = session.pos_order_ids.filtered(lambda o: o.amount_total < 0)
+            session.total_pos_sales = sum(sales.mapped("amount_total"))
+            session.total_pos_refunds = sum(refunds.mapped("amount_total"))
             session.total_pos_payments = sum(session.pos_payment_ids.mapped("amount"))
 
     @api.depends("pos_order_ids.payment_ids")

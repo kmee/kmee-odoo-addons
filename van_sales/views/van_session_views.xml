@@ -235,6 +235,7 @@
                                     name="van_totals"
                                 >
                                     <field name="total_pos_sales" />
+                                    <field name="total_pos_refunds" />
                                     <field name="total_pos_payments" />
                                     <field name="cash_diff" readonly="1" />
                                     <field name="total_amount" string="Dif. Estoque" />

@@ -1265,3 +1265,48 @@ class TestVanSessionLifecycle(TestPointOfSaleCommon):
         self.assertEqual(session.state, "loaded")
         for line in session.line_ids:
             self.assertFalse(line.devolution_move_line_ids)
+
+    # ==================================================================
+    # SCENARIO: POS refunds separated from sales in totals
+    # ==================================================================
+
+    def test_pos_refund_separated_from_sales_totals(self):
+        """GIVEN a session with a sale and a refund order,
+        WHEN POS is closed,
+        THEN total_pos_sales only includes positive orders,
+        AND total_pos_refunds only includes negative orders.
+        """
+        session = self._create_van_session()
+        session.action_start_loading()
+        self.env["van.session.line"].create(
+            {
+                "session_id": session.id,
+                "product_id": self.product_a.id,
+                "qty_demand": 20,
+                "price_unit": 5.00,
+            }
+        )
+        session.action_confirm()
+        self._validate_load_picking(session)
+        pos_session = self._open_pos_session(session)
+
+        # Create a sale order
+        self._create_pos_order(
+            pos_session,
+            [(self.product_a, 3, 5.00)],
+        )
+        # Create a refund order (negative qty and price)
+        self._create_pos_order(
+            pos_session,
+            [(self.product_a, -1, 5.00)],
+        )
+
+        self._close_pos_session(pos_session)
+        self.assertEqual(session.state, "returned")
+
+        # Sale: 3 * 5 = 15.00
+        self.assertAlmostEqual(session.total_pos_sales, 15.00)
+        # Refund: -1 * 5 = -5.00
+        self.assertAlmostEqual(session.total_pos_refunds, -5.00)
+        # Payments: net = 15 - 5 = 10.00
+        self.assertAlmostEqual(session.total_pos_payments, 10.00)
