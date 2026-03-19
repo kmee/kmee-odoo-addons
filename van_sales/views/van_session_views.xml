@@ -40,7 +40,7 @@
                         string="Conferir Retorno"
                         type="object"
                         class="btn-primary"
-                        invisible="state != 'returned' or not unload_picking_id"
+                        invisible="1"
                     />
                     <button
                         name="action_post"
@@ -101,6 +101,32 @@
                                 name="unload_picking_id"
                                 widget="statinfo"
                                 string="Descarga"
+                            />
+                        </button>
+                        <button
+                            name="action_view_pos_orders"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-shopping-cart"
+                            invisible="not pos_order_count"
+                        >
+                            <field
+                                name="pos_order_count"
+                                widget="statinfo"
+                                string="Pedidos"
+                            />
+                        </button>
+                        <button
+                            name="action_view_pos_payments"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-money"
+                            invisible="not pos_payment_count"
+                        >
+                            <field
+                                name="pos_payment_count"
+                                widget="statinfo"
+                                string="Pagamentos"
                             />
                         </button>
                     </div>
@@ -253,6 +279,7 @@
                         </page>
                     </notebook>
                 </sheet>
+                <chatter />
             </form>
         </field>
     </record>

@@ -4,6 +4,7 @@ from odoo.exceptions import UserError, ValidationError
 
 class VanSession(models.Model):
     _name = "van.session"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Van Sales Session"
     _order = "date desc, id desc"
 
@@ -20,12 +21,14 @@ class VanSession(models.Model):
         default="draft",
         required=True,
         copy=False,
+        tracking=True,
     )
     date = fields.Date(default=fields.Date.context_today, required=True)
     date_close = fields.Date(string="Data Fechamento", readonly=True, copy=False)
     driver_id = fields.Many2one(
         "res.partner",
         required=True,
+        tracking=True,
         domain="[('is_van_driver', '=', True)]",
     )
     pos_config_id = fields.Many2one(
@@ -119,11 +122,23 @@ class VanSession(models.Model):
     pos_order_ids = fields.One2many(
         related="pos_session_id.order_ids", string="Pedidos POS"
     )
+    pos_order_count = fields.Integer(
+        compute="_compute_pos_counts",
+    )
     pos_payment_ids = fields.One2many(
         "pos.payment",
         compute="_compute_pos_payment_ids",
         string="Pagamentos POS",
     )
+    pos_payment_count = fields.Integer(
+        compute="_compute_pos_counts",
+    )
+
+    @api.depends("pos_order_ids", "pos_payment_ids")
+    def _compute_pos_counts(self):
+        for session in self:
+            session.pos_order_count = len(session.pos_order_ids)
+            session.pos_payment_count = len(session.pos_payment_ids)
 
     @api.depends("pos_order_ids.amount_total", "pos_payment_ids.amount")
     def _compute_pos_totals(self):
@@ -410,6 +425,30 @@ class VanSession(models.Model):
             "res_model": "stock.picking",
             "res_id": self.unload_picking_id.id,
             "view_mode": "form",
+            "target": "current",
+        }
+
+    def action_view_pos_orders(self):
+        """Open POS orders list."""
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Pedidos POS"),
+            "res_model": "pos.order",
+            "view_mode": "list,form",
+            "domain": [("id", "in", self.pos_order_ids.ids)],
+            "target": "current",
+        }
+
+    def action_view_pos_payments(self):
+        """Open POS payments list."""
+        self.ensure_one()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Pagamentos POS"),
+            "res_model": "pos.payment",
+            "view_mode": "list,form",
+            "domain": [("id", "in", self.pos_payment_ids.ids)],
             "target": "current",
         }
 

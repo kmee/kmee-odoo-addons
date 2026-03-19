@@ -37,7 +37,7 @@ class PosConfig(models.Model):
             session = self.env["van.session"].search(
                 [
                     ("pos_config_id", "=", self.id),
-                    ("state", "=", "loaded"),
+                    ("state", "in", ("loaded", "in_route", "returned")),
                 ],
                 limit=1,
             )

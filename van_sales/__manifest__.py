@@ -6,7 +6,7 @@
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "LGPL-3",
-    "depends": ["point_of_sale", "stock_account", "fleet"],
+    "depends": ["point_of_sale", "stock_account", "fleet", "mail"],
     "data": [
         "security/van_sales_security.xml",
         "security/ir.model.access.csv",
