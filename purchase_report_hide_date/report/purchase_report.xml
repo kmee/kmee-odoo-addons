@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <template
+        id="purchase_report_hide_date"
+        name="purchase_hide_date"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="100"
+    >
+        <!-- Hide Order Date -->
+        <xpath expr="//div[@id='informations']//p[@t-field='o.date_approve']/.." position="replace">
+        </xpath>
+
+        <!-- Hide Order Deadline -->
+        <xpath expr="//div[@id='informations']//p[@t-field='o.date_order']/.." position="replace">
+        </xpath>
+
+        <!-- Hide Expected Arrival -->
+        <xpath expr="//div[@id='informations']//p[@t-field='o.date_planned']/.." position="replace">
+        </xpath>
+
+    </template>
+</odoo>
