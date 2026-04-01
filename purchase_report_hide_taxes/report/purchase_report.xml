@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <template
+        id="purchase_report_hide_taxes"
+        name="purchase_hide_taxes"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="100"
+    >
+
+        <!-- Hide Taxes column header -->
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+        </xpath>
+
+        <!-- Hide Taxes column data -->
+        <xpath expr="//td[@name='td_taxes']" position="replace">
+        </xpath>
+
+    </template>
+</odoo>
