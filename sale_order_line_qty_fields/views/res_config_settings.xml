@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">sale.order.line.qty.fields.config.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//app_settings_block[@data-key='sale']" position="inside">
+                <block title="Quantity Fields" id="quantity_fields_setting_block">
+                    <setting id="qty_available_today" string="Qty Available Today" help="Quantity available in stock today.">
+                        <field name="group_qty_available_today" />
+                    </setting>
+                    <setting id="free_qty_today_setting" string="Free Qty Today" help="Quantity available in stock today, considering reserves.">
+                        <field name="group_free_qty_today" />
+                    </setting>
+                    <setting id="free_qty_setting" string="Free Qty" help="Total quantity available for sale, without considering reserves or future commitments.">
+                        <field name="group_free_qty" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>
