@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="report_qweb_paperformat" model="report.paperformat">
+        <field name="name">70x62</field>
+        <field name="format">custom</field>
+        <field name="page_height">70</field>
+        <field name="page_width">62</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">1</field>
+        <field name="margin_bottom">1</field>
+        <field name="margin_left">1</field>
+        <field name="margin_right">1</field>
+        <field name="dpi">70</field>
+    </record>
+</odoo>
