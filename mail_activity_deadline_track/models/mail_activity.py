@@ -14,9 +14,7 @@ class MailActivity(models.Model):
                     self.env[activity.res_model].browse(activity.res_id).message_post(
                         body="Deadline alterado: %s<br/>%s -> %s"
                         % (
-                            activity.summary
-                            or activity.activity_type_id.name
-                            or "",
+                            activity.summary or activity.activity_type_id.name or "",
                             activity.date_deadline,
                             vals["date_deadline"],
                         )
