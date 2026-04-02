@@ -1,0 +1,34 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_cnpj_search_minha_receita
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_cnpj_search_minha_receita
+#: model:ir.model.fields,field_description:l10n_br_cnpj_search_minha_receita.field_res_config_settings__cnpj_provider
+msgid "CNPJ Search Provider"
+msgstr ""
+
+#. module: l10n_br_cnpj_search_minha_receita
+#: model:ir.model,name:l10n_br_cnpj_search_minha_receita.model_l10n_br_cnpj_search_webservice_abstract
+msgid "CNPJ Webservice"
+msgstr ""
+
+#. module: l10n_br_cnpj_search_minha_receita
+#: model:ir.model,name:l10n_br_cnpj_search_minha_receita.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_br_cnpj_search_minha_receita
+#: model:ir.model.fields.selection,name:l10n_br_cnpj_search_minha_receita.selection__res_config_settings__cnpj_provider__minhareceita
+msgid "Minha Receita"
+msgstr ""
