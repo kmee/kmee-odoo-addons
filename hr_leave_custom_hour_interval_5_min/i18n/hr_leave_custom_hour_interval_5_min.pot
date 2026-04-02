@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_leave_custom_hour_interval_5_min
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_leave_custom_hour_interval_5_min
+#: model:ir.model.fields,field_description:hr_leave_custom_hour_interval_5_min.field_hr_leave__request_hour_from
+msgid "Hour from"
+msgstr ""
+
+#. module: hr_leave_custom_hour_interval_5_min
+#: model:ir.model.fields,field_description:hr_leave_custom_hour_interval_5_min.field_hr_leave__request_hour_to
+msgid "Hour to"
+msgstr ""
+
+#. module: hr_leave_custom_hour_interval_5_min
+#: model:ir.model,name:hr_leave_custom_hour_interval_5_min.model_hr_leave
+msgid "Time Off"
+msgstr ""
