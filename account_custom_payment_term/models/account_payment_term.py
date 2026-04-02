@@ -14,17 +14,16 @@ class AccountPaymentTerm(models.Model):
         help="Indicates if this payment term is record-specific and editable.",
     )
 
-    @api.model
-    def create(self, vals):
-        term = super().create(vals)
-        if term.is_custom:
-            term.active = False
-        return term
+    @api.model_create_multi
+    def create(self, vals_list):
+        terms = super().create(vals_list)
+        terms.filtered("is_custom").active = False
+        return terms
 
     def write(self, vals):
         res = super().write(vals)
-        if "is_custom" in vals and vals["is_custom"]:
-            self.filtered(lambda t: t.is_custom).write({"active": False})
+        if vals.get("is_custom"):
+            self.filtered("is_custom").active = False
         return res
 
     def copy_term_id_as_custom(self, name="Custom"):
