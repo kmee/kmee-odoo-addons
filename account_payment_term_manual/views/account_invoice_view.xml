@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="invoice_form" model="ir.ui.view">
+        <field name="name">account_installments_review.invoice.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="l10n_br_account_due_list.invoice_form" />
+        <field name="arch" type="xml">
+
+            <xpath
+                expr="//field[@name='invoice_payment_term_id']"
+                position="attributes"
+            >
+                <attribute name="context">
+                    {
+                    'payment_term_id_view_onchange': True,
+                    }
+                </attribute>
+            </xpath>
+
+            <xpath
+                expr="//page[@name='receivable_move_line_tab']/field[@name='financial_move_line_ids']"
+                position="before"
+            >
+                <group>
+                    <group>
+                        <field
+                            name="manual_payment_term_id"
+                            class="oe_edit_only"
+                            options="{'no_create_edit': True}"
+                        />
+                        <field
+                            name="has_manual_lines"
+                            class="oe_edit_only"
+                            invisible="1"
+                        />
+                    </group>
+                </group>
+                <field
+                    name="manual_payment_term_line_ids"
+                    class="oe_read_only"
+                    attrs="{'invisible': [('has_manual_lines', '=', False)]}"
+                >
+                    <tree editable="bottom">
+                        <field name="sequence" widget="handle" />
+                        <field name="value" string="Due Type" />
+                        <field
+                            name="value_amount"
+                            attrs="{'readonly':[('value','=','balance')]}"
+                        />
+                        <field name="days" />
+                        <field name="option" string="" />
+                        <field name="fixed_date" />
+                        <field name="day_of_the_month" string="Day of the month" />
+                    </tree>
+                </field>
+            </xpath>
+
+            <xpath
+                expr="//page[@name='payable_move_line_tab']/field[@name='financial_move_line_ids']"
+                position="before"
+            >
+                <group>
+                    <group>
+                        <field
+                            name="manual_payment_term_id"
+                            class="oe_edit_only"
+                            options="{'no_create_edit': True}"
+                        />
+                        <field
+                            name="has_manual_lines"
+                            class="oe_edit_only"
+                            invisible="1"
+                        />
+                    </group>
+                </group>
+                <field
+                    name="manual_payment_term_line_ids"
+                    class="oe_read_only"
+                    attrs="{'invisible': [('has_manual_lines', '=', False)]}"
+                >
+                    <tree>
+                        <field name="sequence" widget="handle" />
+                        <field name="value" string="Due Type" />
+                        <field
+                            name="value_amount"
+                            attrs="{'readonly':[('value','=','balance')]}"
+                        />
+                        <field name="days" />
+                        <field name="option" string="" />
+                        <field name="fixed_date" />
+                        <field name="day_of_the_month" string="Day of the month" />
+                    </tree>
+                </field>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

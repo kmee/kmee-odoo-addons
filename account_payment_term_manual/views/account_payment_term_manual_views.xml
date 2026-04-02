@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <!-- payment.term.line views -->
+        <record id="view_payment_term_line_manual_tree" model="ir.ui.view">
+            <field name="name">account.payment.term.line.manual.tree</field>
+            <field name="model">account.payment.term.line.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_tree" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="option" position="after">
+                    <field name="fixed_date" />
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payment_term_line_manual_form" model="ir.ui.view">
+            <field name="name">account.payment.term.line.manual.form</field>
+            <field name="model">account.payment.term.line.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_form" />
+            <field name="mode">primary</field>
+            <field name="priority">800</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="replace">
+
+                    <form string="Payment Terms">
+                        <h2>Term Type</h2>
+                        <group>
+                            <group>
+                                <field name="value" widget="radio" />
+                            </group>
+
+                            <group>
+                                <div
+                                    attrs="{'invisible':[('value','=', 'balance')]}"
+                                    class="o_row"
+                                >
+                                    <label
+                                        for="value_amount"
+                                        attrs="{'invisible':[('value','=', 'balance')]}"
+                                    />
+                                    <field name="value_amount" class="oe_inline" />
+                                    <span
+                                        class="o_form_label oe_inline"
+                                        attrs="{'invisible':[('value','!=','percent')]}"
+                                    >%</span>
+                                </div>
+                            </group>
+                        </group>
+
+                        <field name="sequence" invisible="1" />
+
+                        <group col="4">
+                            <group colspan="2">
+                                <h2>Due Date Computation</h2>
+                                <div colspan="2">
+                                    <label
+                                        for="days"
+                                        string="Due"
+                                        attrs="{'invisible': [('option','!=', 'day_after_invoice_date')]}"
+                                    />
+                                    <label
+                                        for="days"
+                                        string="Due the"
+                                        attrs="{'invisible': [('option','=', 'day_after_invoice_date')]}"
+                                    />
+                                    <field name="days" class="oe_inline" />
+                                    <label
+                                        for="option"
+                                        string=""
+                                    /> <!--Empty
+                                    label to force space between elements-->
+                                    <field name="option" class="oe_inline" />
+                                </div>
+                                <div
+                                    colspan="2"
+                                    attrs="{'invisible': [('option','!=', 'day_after_invoice_date')]}"
+                                >
+                                    <label for="day_of_the_month" string="On the" />
+                                    <field name="day_of_the_month" class="oe_inline" />
+                                    <span class="o_form_label">of the month</span>
+                                </div>
+                            </group>
+
+                            <group colspan="2">
+                                <h2>or Fixed Date</h2>
+                                <field name="fixed_date" />
+                            </group>
+                        </group>
+
+                    </form>
+
+                </xpath>
+            </field>
+        </record>
+
+        <!-- payment.term views-->
+        <record id="view_payment_term_manual_search" model="ir.ui.view">
+            <field name="name">account.payment.term.manual.search</field>
+            <field name="model">account.payment.term.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_search" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payment_term_manual_form" model="ir.ui.view">
+            <field name="name">account.payment.term.manual.form</field>
+            <field name="model">account.payment.term.manual</field>
+            <field name="inherit_id" ref="account.view_payment_term_form" />
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//widget[@name='web_ribbon']" position="after">
+                    <field name="origin_term_id" invisible="1" />
+                </xpath>
+
+                <xpath expr="//widget[@name='web_ribbon']" position="attributes">
+                    <attribute name="attrs">{
+                        'invisible': ['|', ('active', '=', True),('origin_term_id','!=',False)]
+                        }</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_payment_term_manual_form" model="ir.actions.act_window">
+            <field name="name">Payment Terms</field>
+            <field name="res_model">account.payment.term.manual</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="view_payment_term_manual_search" />
+        </record>
+
+    </data>
+</odoo>
