@@ -1,4 +1,0 @@
-# List of OCA dependencies
-# Format: repo_name [url] [branch]
-# See https://github.com/OCA/maintainer-quality-tools for more info
-sale-workflow https://github.com/OCA/sale-workflow refs/pull/3679/head
