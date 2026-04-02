@@ -19,13 +19,13 @@
                         />
                     </group>
                     <field name="agent_team_ids">
-                        <tree editable="top">
+                        <list editable="top">
                             <field name="sequence" widget="handle" />
                             <field name="partner_id" invisible="1" />
                             <field name="team_id" />
                             <field name="agent_id" />
                             <field name="commission_id" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </page>

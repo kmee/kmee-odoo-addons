@@ -11,21 +11,21 @@
             <page name="members" position="before">
                 <page name="team_agents" string="Agents">
                     <field name="commission_rule_ids">
-                        <tree editable="top">
+                        <list editable="top">
                             <field name="sequence" widget="handle" />
                             <field name="name" />
                             <field name="code" />
                             <field name="active" />
-                        </tree>
+                        </list>
                     </field>
 
                     <field name="agent_ids">
-                        <tree editable="top">
+                        <list editable="top">
                             <field name="sequence" widget="handle" />
                             <field name="team_id" invisible="1" />
                             <field name="agent_id" />
                             <field name="commission_id" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </page>
