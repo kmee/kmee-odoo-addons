@@ -5,7 +5,7 @@
     <record id="view_settlement_form_manual_invoice" model="ir.ui.view">
         <field name="name">commission.settlement.form.manual.invoice</field>
         <field name="model">commission.settlement</field>
-        <field name="inherit_id" ref="account_commission.view_settlement_form"/>
+        <field name="inherit_id" ref="account_commission_oca.view_settlement_form"/>
         <field name="priority">100</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='state']" position="attributes">
@@ -48,7 +48,7 @@
         </field>
     </record>
 
-    <record id="account_commission.menu_invoicing_settlements" model="ir.ui.menu">
+    <record id="account_commission_oca.menu_invoicing_settlements" model="ir.ui.menu">
         <field name="active">False</field>
     </record>
 </odoo>
