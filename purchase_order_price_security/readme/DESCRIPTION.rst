@@ -1,0 +1,1 @@
+This Odoo module controls unit price editing permission on purchase order lines, allowing only users belonging to a "Can Edit The Price in Purchase" group to modify prices. For other users, the price is displayed as read-only.
