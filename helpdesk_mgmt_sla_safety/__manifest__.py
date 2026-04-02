@@ -1,7 +1,7 @@
 {
     "name": "Helpdesk Management SLA Safety Date",
     "summary": "Add safety date concept to SLA deadlines",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "After-Sales",
     "author": "Your Company",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
