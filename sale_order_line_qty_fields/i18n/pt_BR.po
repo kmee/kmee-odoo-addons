@@ -110,8 +110,3 @@ msgid ""
 "Total quantity available for sale, without considering reserves or future "
 "commitments."
 msgstr ""
-
-#. module: sale_stock
-#: model:ir.model.fields,field_description:sale_stock.field_sale_order_line__qty_available_today
-msgid "Qty Available Today"
-msgstr "Qtd Em Mãos"
