@@ -16,9 +16,7 @@ class SaleOrder(models.Model):
     @api.depends("order_line.product_id", "order_line.product_uom_qty")
     def _compute_totals(self):
         for record in self:
-            record.total_sale_product = len(
-                set(record.order_line.mapped("product_id"))
-            )
+            record.total_sale_product = len(set(record.order_line.mapped("product_id")))
             record.total_sale_quantity = sum(
                 record.order_line.mapped("product_uom_qty")
             )
