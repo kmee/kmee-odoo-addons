@@ -100,12 +100,8 @@ class AccountPaymentTerm(models.Model):
             }
 
             if line.value == "fixed":
-                term_vals["company_amount"] = sign * currency.round(
-                    line.value_amount
-                )
-                term_vals["foreign_amount"] = sign * currency.round(
-                    line.value_amount
-                )
+                term_vals["company_amount"] = sign * currency.round(line.value_amount)
+                term_vals["foreign_amount"] = sign * currency.round(line.value_amount)
             elif line.value == "percent":
                 term_vals["company_amount"] = currency.round(
                     total_amount * (line.value_amount / 100.0)
