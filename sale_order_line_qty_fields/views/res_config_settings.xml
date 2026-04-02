@@ -7,10 +7,13 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="sale.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//app_settings_block[@data-key='sale_stock']" position="after">
-                <app_settings_block
+            <xpath
+                expr="//app[@name='sale_management']//block[@name='quotation_order_setting_container']"
+                position="after"
+            >
+                <block
                     title="Quantity Fields"
-                    data-key="sale_order_line_qty_fields"
+                    name="qty_fields_setting_container"
                 >
                     <setting
                         id="qty_available_today"
@@ -33,7 +36,7 @@
                     >
                         <field name="group_free_qty" />
                     </setting>
-                </app_settings_block>
+                </block>
             </xpath>
         </field>
     </record>
