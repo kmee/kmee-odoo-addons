@@ -18,10 +18,11 @@ class SaleOrderLine(models.Model):
 
     def _compute_agent_ids(self):
         """Override to handle team commission rules."""
-        super()._compute_agent_ids()
+        result = super()._compute_agent_ids()
         for record in self:
             record.agent_ids = False
             if record.order_id.partner_id:
                 record.agent_ids = record._prepare_agents_vals_partner(
                     record.order_id.partner_id
                 )
+        return result
