@@ -17,16 +17,15 @@ class SaleOrder(models.Model):
         for order in self:
             if not order.order_line or not order.amount_freight_value:
                 continue
+            product_lines = order.order_line.filtered(
+                lambda l: l.product_id and l.product_id.type != "service"
+            )
             total_wo_delivery = sum(
-                line.price_subtotal
-                for line in order.order_line
-                if line.product_id.type == "product"
+                line.price_subtotal for line in product_lines
             )
             if total_wo_delivery == 0:
                 continue
-            for line in order.order_line:
-                if line.product_id.type != "product":
-                    continue
+            for line in product_lines:
                 proportion = line.price_subtotal / total_wo_delivery
                 line.freight_value = (
                     order.amount_freight_value * proportion / line.product_uom_qty

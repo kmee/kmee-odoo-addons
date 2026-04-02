@@ -4,7 +4,7 @@
 {
     "name": "Sale Freight Distribution",
     "summary": "Distributes freight cost proportionally across sale order lines",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "maintainers": ["mileo"],
