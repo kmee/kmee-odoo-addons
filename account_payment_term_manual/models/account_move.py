@@ -12,44 +12,27 @@ class AccountMove(models.Model):
         "account.payment.term.manual.mixin",
     ]
 
-    @api.onchange(
-        "line_ids",
-        "invoice_payment_term_id",
-        "invoice_date_due",
-        "invoice_cash_rounding_id",
-        "invoice_vendor_bill_id",
-    )
-    def _onchange_recompute_dynamic_lines(self):
+    @api.onchange("invoice_payment_term_id")
+    def _onchange_invoice_payment_term_id(self):
         if not self.invoice_payment_term_id:
-            return super(AccountMove, self)._onchange_recompute_dynamic_lines()
-        # Replace manual lines if:
-        # 1. invoice term has changed directly
-        # 2. invoice term has changed indirectly but no current manual term is set
+            return
         if (
             self.env.context.get("payment_term_id_view_onchange")
             or not self.manual_payment_term_id
         ):
-            # Unlink and create seem to reset invoice_payment_term_id, here we store it
-            # in a variable to set the term_id again at the END OF THE METHOD
             new_inv_term_id = self.invoice_payment_term_id
-
-            # unlinks/creates happen in this method: _update_manual_payment_term_id
             self._update_manual_payment_term_id(self.invoice_payment_term_id)
-
-            # END OF THE METHOD -> ensure term_id gets set to user defined value
             self.invoice_payment_term_id = new_inv_term_id
 
-        super(AccountMove, self)._onchange_recompute_dynamic_lines()
-
-    def _recompute_payment_terms_lines(self):
+    def _compute_needed_terms(self):
         return super(
             AccountMove,
             self.with_context(manual_payment_term_id=self.manual_payment_term_id),
-        )._recompute_payment_terms_lines()
+        )._compute_needed_terms()
 
     @api.onchange("manual_payment_term_id")
     def _onchange_manual_payment_term_id(self):
-        self._onchange_recompute_dynamic_lines()
+        self._compute_needed_terms()
 
     def recompute_payment_lines(self):
-        self._onchange_recompute_dynamic_lines()
+        self._compute_needed_terms()

@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class AccountPaymentTermManual(models.Model):
     _name = "account.payment.term.manual"
+    _description = "Manual Payment Term"
     _inherit = "account.payment.term"
 
     def _default_line_ids(self):
@@ -16,9 +17,8 @@ class AccountPaymentTermManual(models.Model):
                 {
                     "value": "balance",
                     "value_amount": 0.0,
-                    "sequence": 9,
-                    "days": 0,
-                    "option": "day_after_invoice_date",
+                    "nb_days": 0,
+                    "delay_type": "days_after",
                 },
             )
         ]
@@ -56,6 +56,7 @@ class AccountPaymentTermManual(models.Model):
 
 class AccountPaymentTermLineManual(models.Model):
     _name = "account.payment.term.line.manual"
+    _description = "Manual Payment Term Line"
     _inherit = "account.payment.term.line"
 
     manual_payment_id = fields.Many2one(
@@ -76,31 +77,28 @@ class AccountPaymentTermLineManual(models.Model):
         string="Fixed Date",
     )
 
-    option = fields.Selection(
+    delay_type = fields.Selection(
         selection_add=[("custom", "Custom")],
         ondelete={
             "custom": "set default",
         },
-        default="day_after_invoice_date",
     )
 
     @api.constrains(
         "value",
         "value_amount",
-        "days",
-        "option",
-        "day_of_the_month",
-        "sequence",
+        "nb_days",
+        "delay_type",
         "fixed_date",
     )
     def _check_manual_payment_term_id(self):
         for record in self:
-            if record.fixed_date and record.option != "custom":
-                record.option = "custom"
+            if record.fixed_date and record.delay_type != "custom":
+                record.delay_type = "custom"
         self.manual_payment_id.set_as_edited()
 
     @api.onchange("fixed_date")
     def _onchange_fixed_date(self):
         for record in self:
             if record.fixed_date:
-                record.option = "custom"
+                record.delay_type = "custom"
