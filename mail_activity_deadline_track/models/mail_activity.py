@@ -4,15 +4,21 @@
 from odoo import models
 
 
-class MailActity(models.Model):
+class MailActivity(models.Model):
     _inherit = "mail.activity"
 
     def write(self, vals):
         if "date_deadline" in vals:
-            if self.date_deadline != vals["date_deadline"]:
-                self.env[self.res_model].browse(self.res_id).message_post(
-                    body=f"""Deadline alterado: {
-                        self.summary or self.activity_type_id.name or ""
-                        } \n {self.date_deadline} -> {vals['date_deadline']}"""
-                )
-        return super(MailActity, self).write(vals)
+            for activity in self:
+                if str(activity.date_deadline) != str(vals["date_deadline"]):
+                    self.env[activity.res_model].browse(activity.res_id).message_post(
+                        body="Deadline alterado: %s<br/>%s -> %s"
+                        % (
+                            activity.summary
+                            or activity.activity_type_id.name
+                            or "",
+                            activity.date_deadline,
+                            vals["date_deadline"],
+                        )
+                    )
+        return super().write(vals)
