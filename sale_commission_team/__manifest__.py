@@ -8,7 +8,7 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "category": "Sales",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["commission", "sale", "sales_team", "commission_salesman"],
+    "depends": ["commission_oca", "sale", "sales_team", "sale_commission_salesman"],
     "data": [
         "security/ir.model.access.csv",
         "views/crm_team.xml",
