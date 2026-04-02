@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
 
-        <!-- payment.term.line.manual views -->
+    <!-- payment.term.line.manual views -->
         <record id="view_payment_term_line_manual_tree" model="ir.ui.view">
             <field name="name">account.payment.term.line.manual.tree</field>
             <field name="model">account.payment.term.line.manual</field>
@@ -106,5 +105,4 @@
             <field name="search_view_id" ref="view_payment_term_manual_search" />
         </record>
 
-    </data>
 </odoo>
