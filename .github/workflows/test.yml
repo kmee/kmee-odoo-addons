@@ -58,12 +58,7 @@ jobs:
             https://github.com/kmee/sale-workflow.git /tmp/sale-workflow
           pip install --no-deps -e /tmp/sale-workflow/setup/sale_isolated_quotation
       - name: Install addons and dependencies
-        run: |
-          oca_install_addons || {
-            # Workaround: remove stale v14 deps from auto-generated requirements
-            sed -i '/odoo14-addon/d; /odoo<14/d; /odoo<15/d' test-requirements.txt
-            pip install -r test-requirements.txt -c test-constraints.txt
-          }
+        run: oca_install_addons
       - name: Check licenses
         run: manifestoo -d . check-licenses
       - name: Check development status
