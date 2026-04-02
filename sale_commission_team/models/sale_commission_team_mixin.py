@@ -27,7 +27,7 @@ class SaleCommissionTeamMixin(models.AbstractModel):
     )
 
     commission_id = fields.Many2one(
-        comodel_name="sale.commission",
+        comodel_name="commission",
         required=True,
         string="Commission",
         help="This is the default commission used in the sales where this "

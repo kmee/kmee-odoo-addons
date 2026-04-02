@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class SaleCommissionMixin(models.AbstractModel):
-    _inherit = "sale.commission.mixin"
+    _inherit = "commission.mixin"
 
     @api.model
     def _prepare_agents_team_vals_partner(self, partner_id, team_id):
