@@ -42,16 +42,14 @@
                     attrs="{'invisible': [('has_manual_lines', '=', False)]}"
                 >
                     <tree editable="bottom">
-                        <field name="sequence" widget="handle" />
                         <field name="value" string="Due Type" />
                         <field
                             name="value_amount"
                             attrs="{'readonly':[('value','=','balance')]}"
                         />
-                        <field name="days" />
-                        <field name="option" string="" />
+                        <field name="nb_days" />
+                        <field name="delay_type" />
                         <field name="fixed_date" />
-                        <field name="day_of_the_month" string="Day of the month" />
                     </tree>
                 </field>
             </xpath>
@@ -80,16 +78,14 @@
                     attrs="{'invisible': [('has_manual_lines', '=', False)]}"
                 >
                     <tree>
-                        <field name="sequence" widget="handle" />
                         <field name="value" string="Due Type" />
                         <field
                             name="value_amount"
                             attrs="{'readonly':[('value','=','balance')]}"
                         />
-                        <field name="days" />
-                        <field name="option" string="" />
+                        <field name="nb_days" />
+                        <field name="delay_type" />
                         <field name="fixed_date" />
-                        <field name="day_of_the_month" string="Day of the month" />
                     </tree>
                 </field>
             </xpath>
