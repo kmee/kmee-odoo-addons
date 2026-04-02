@@ -9,7 +9,7 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "maintainers": ["mileo"],
-    "depends": ["commission"],
+    "depends": ["commission_oca"],
     "data": [
         "security/ir.model.access.csv",
         "data/cron_generate_commissions.xml",
