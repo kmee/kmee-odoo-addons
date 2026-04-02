@@ -51,6 +51,7 @@ msgid "No-Reply Email"
 msgstr ""
 
 #. module: mail_no_reply
+#: model:ir.model.fields,field_description:mail_no_reply.field_account_invoice_send__active_no_reply
 #: model:ir.model.fields,field_description:mail_no_reply.field_mail_compose_message__active_no_reply
 #: model:ir.model.fields,field_description:mail_no_reply.field_mail_template__active_no_reply
 msgid "Use no-reply email"
