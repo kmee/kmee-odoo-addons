@@ -6,6 +6,7 @@ from .fixtures import (
     GENERATE_BOLETO_PAYLOAD_DECRYPTED,
     SEND_CAPTURE_REQUEST_PAYLOAD,
     SEND_CAPTURE_REQUEST_RESPONSE,
+    SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO,
 )
 
 
@@ -85,13 +86,14 @@ class TestPaymentTransaction(TransactionCase):
         - The "our_number" field is correctly set.
         - The "digitable_line" field matches the expected format.
         - The "barcode" field is correctly generated.
-        - The "state" of the payment transaction is set to "authorized".
+
+        Note: The state transition is handled by `_process_notification_data`, not by
+        `_prepare_transaction_boleto_info`, which only extracts boleto display fields.
 
         Assertions:
             - The "our_number" field matches the expected value.
             - The "digitable_line" field matches the expected digitable line format.
             - The "barcode" field matches the expected barcode value.
-            - The "state" field is set to "authorized" with an appropriate message.
         """
         boleto_info = self.payment_transaction._prepare_transaction_boleto_info(
             SEND_CAPTURE_REQUEST_RESPONSE
@@ -105,11 +107,6 @@ class TestPaymentTransaction(TransactionCase):
         self.assertEqual(
             boleto_info["barcode"],
             "12345678901234567890123456789012345678901234",
-        )
-        self.assertEqual(
-            boleto_info["state"],
-            "authorized",
-            "Payment transaction state should be 'authorized'",
         )
 
     def test_send_payment_request(self):
@@ -165,8 +162,9 @@ class TestPaymentTransaction(TransactionCase):
             # Assert that the response matches the mocked response
             self.assertEqual(response, mock_response)
 
-            # Assert that the payment transaction state was updated to "authorized"
-            self.assertEqual(self.payment_transaction.state, "authorized")
+            # Assert that the payment transaction state was updated to "pending"
+            # (a newly created boleto has last_action=CREATED which maps to pending)
+            self.assertEqual(self.payment_transaction.state, "pending")
 
             # Assert that the transaction was updated with the boleto info
             self.assertEqual(self.payment_transaction.our_number, "123456789")
@@ -212,7 +210,7 @@ class TestPaymentTransaction(TransactionCase):
         with patch(
             "odoo.addons.l10n_br_payment_boleto_pinbank.models.payment_provider."
             "Paymentprovider._boleto_pinbank_make_request",
-            return_value=SEND_CAPTURE_REQUEST_RESPONSE,
+            return_value=SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO,
         ) as mock_make_request:
             self.payment_transaction._send_capture_request()
 
