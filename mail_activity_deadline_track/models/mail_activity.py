@@ -1,7 +1,7 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import _, models
 
 
 class MailActivity(models.Model):
@@ -12,8 +12,8 @@ class MailActivity(models.Model):
             for activity in self:
                 if str(activity.date_deadline) != str(vals["date_deadline"]):
                     self.env[activity.res_model].browse(activity.res_id).message_post(
-                        body="Deadline alterado: %s<br/>%s -> %s"
-                        % (
+                        body=_(
+                            "Deadline alterado: %s<br/>%s -> %s",
                             activity.summary or activity.activity_type_id.name or "",
                             activity.date_deadline,
                             vals["date_deadline"],
