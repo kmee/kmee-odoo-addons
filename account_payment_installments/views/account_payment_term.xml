@@ -12,7 +12,7 @@
                 <group
                     name="provider"
                     string="Informações do Parcelamento"
-                    attrs="{'invisible': [('is_installment', '!=', True)]}"
+                    invisible="not is_installment"
                 >
                     <field name="payment_term_id" />
                     <field name="provider_id" />
