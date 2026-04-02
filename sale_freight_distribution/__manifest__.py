@@ -3,13 +3,14 @@
 
 {
     "name": "Sale Freight Distribution",
-    "summary": """sale_freight_distribution""",
-    "version": "14.0.1.0.0",
+    "summary": "Distributes freight cost proportionally across sale order lines",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "author": "KMEE",
+    "author": "KMEE, Odoo Community Association (OCA)",
+    "maintainers": ["mileo"],
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
-        "sale",
+        "l10n_br_sale",
     ],
     "data": [],
     "demo": [],
