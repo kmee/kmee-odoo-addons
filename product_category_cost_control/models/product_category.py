@@ -13,6 +13,5 @@ class ProductCategory(models.Model):
             ("include_all_taxes", "Include All Taxes"),
             ("remove_included_taxes", "Remove Included Taxes"),
         ],
-        string="Price Control Option",
         help="Defines how the price unit is calculated for products in this category.",
     )
