@@ -1,0 +1,41 @@
+<odoo>
+    <record id="mrp_workorder_view_form_tablet_persistent_timer" model="ir.ui.view">
+        <field name="name">mrp.workorder.view.form.tablet.persistent.timer</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_workorder_view_form_tablet" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_back']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_back']" position="after">
+                <button
+                    name="action_back_no_pause"
+                    type="object"
+                    class="btn btn-secondary o_exit fa fa-arrow-left o_unblock"
+                    title="Keep timer running"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_workorder_kanban_pause_button" model="ir.ui.view">
+        <field name="name">mrp.workorder.kanban.pause.button</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.workcenter_line_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[contains(@class, 'oe_kanban_bottom_right') and @t-if=&quot;record.state.raw_value == 'progress'&quot;]"
+                position="inside"
+            >
+                <button
+                    t-if="record.working_state.raw_value != 'blocked' and record.working_user_ids.raw_value.length > 0"
+                    name="button_pending"
+                    type="object"
+                    class="btn btn-link p-0 ms-1"
+                    string="Pause"
+                    title="Pause work order"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
