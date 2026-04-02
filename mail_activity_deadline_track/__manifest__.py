@@ -5,7 +5,7 @@
     "name": "Mail Activity Deadline Track",
     "summary": """
         Deadline Track""",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "maintainer": ["mileo"],
     "author": "KMEE,Odoo Community Association (OCA)",
