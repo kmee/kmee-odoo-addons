@@ -7,7 +7,7 @@
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["account_commission", "sale_commission"],
+    "depends": ["account_commission_oca", "sale_commission_oca"],
     "data": [
         "views/sale_commission_settlement.xml",
     ],
