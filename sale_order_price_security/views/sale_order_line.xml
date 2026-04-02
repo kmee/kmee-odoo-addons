@@ -9,6 +9,20 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                position="after"
+            >
+                <field name="can_edit_price_sale" column_invisible="1" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                position="attributes"
+            >
+                <attribute
+                    name="readonly"
+                >not can_edit_price_sale</attribute>
+            </xpath>
+            <xpath
                 expr="//field[@name='order_line']/form//field[@name='price_unit']"
                 position="after"
             >
@@ -19,11 +33,8 @@
                 position="attributes"
             >
                 <attribute
-                    name="attrs"
-                >{'readonly': [('can_edit_price_sale', '=', False)]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='order_line']/tree" position="attributes">
-                <attribute name="editable" />
+                    name="readonly"
+                >not can_edit_price_sale</attribute>
             </xpath>
         </field>
     </record>
