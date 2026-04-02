@@ -3,7 +3,7 @@
 
 {
     "name": "Purchase Report Hide Taxes",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "LGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
