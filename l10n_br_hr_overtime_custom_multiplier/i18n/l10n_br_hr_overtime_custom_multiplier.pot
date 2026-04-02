@@ -1,0 +1,321 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_overtime_custom_multiplier
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__monday
+msgid "2ª"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__tuesday
+msgid "3ª"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__wednesday
+msgid "4ª"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__thursday
+msgid "5ª"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__friday
+msgid "6ª"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime__adjustment_overtime_id
+msgid "Adjustment Overtime"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#. odoo-python
+#: code:addons/l10n_br_hr_overtime_custom_multiplier/models/hr_attendance_exception.py:0
+#, python-format
+msgid "An exception already exists for this employee on this date."
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime__applied_multiplier
+msgid "Applied Multiplier"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime__attendance_id
+msgid "Attendance"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_attendance_exception
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_exception_menu
+msgid "Attendance Exception"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_attendance_overtime
+msgid "Attendance Overtime"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_menu_config
+msgid "Configurações"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__date
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__date
+msgid "Date"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__sunday
+msgid "Domingo"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__employee_id
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__employee_id
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.actions.act_window,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_exception_act_window
+msgid "Exception"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime__extra_hours_without_multiplier
+msgid "Extra Hours without Multiplier"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.actions.act_window,name:l10n_br_hr_overtime_custom_multiplier.action_hr_overtime_list
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_overtime_menu
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_overtime_menu_item
+msgid "Extra hours"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__holiday
+msgid "Feriado"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__friday
+msgid "Friday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__overtime_from
+msgid "From (hours)"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__holiday
+msgid "Holiday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_form_view
+msgid "Hr_attendance Overtime Payment Wizard"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__id
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__id
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__monday
+msgid "Monday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime__overtime_range_id
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__multiplier
+msgid "Multiplier"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.actions.act_window,name:l10n_br_hr_overtime_custom_multiplier.hr_overtime_multiplier_range_act_window
+msgid "Multiplier Range"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime__note
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__note
+msgid "Note"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_form_view
+msgid "OK"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__day_of_week_override
+msgid "Override Day of the Week"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_config
+msgid "Overtime"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_overtime_multiplier_range
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_overtime_multiplier_range_menu
+msgid "Overtime Multiplier Range"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.actions.act_window,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_act_window
+msgid "Overtime Payment Wizard"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.ui.menu,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_menu
+msgid "Pagamento de Horas Extras"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.actions.act_window,name:l10n_br_hr_overtime_custom_multiplier.act_action_hr_employee_overtime_payment_wizard
+msgid "Pay Overtime"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__saturday
+msgid "Sabado"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__saturday
+msgid "Saturday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__sunday
+msgid "Sunday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#. odoo-python
+#: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
+#, python-format
+msgid "The payment total cannot be greater than the total overtime."
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__thursday
+msgid "Thursday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__overtime_to
+msgid "To (hours)"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__total_overtime
+msgid "Total"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__total_hours
+msgid "Total Hours"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__payment_total
+msgid "Total a ser pago"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__tuesday
+msgid "Tuesday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_overtime_custom_multiplier.action_hr_overtime_list
+msgid "View and manage overtime records for employees"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__wednesday
+msgid "Wednesday"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_attendance_overtime_payment_wizard
+msgid "hr_attendance.overtime.payment.wizard"
+msgstr ""
