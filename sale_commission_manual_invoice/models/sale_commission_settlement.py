@@ -50,7 +50,5 @@ class Settlement(models.Model):
 
     def make_invoices(self, journal, product, date=False, grouped=False):
         raise UserError(
-            _(
-                "Automatic invoice creation is disabled. Handle invoicing manually."
-            )
+            _("Automatic invoice creation is disabled. Handle invoicing manually.")
         )
