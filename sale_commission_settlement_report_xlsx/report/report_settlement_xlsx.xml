@@ -10,7 +10,7 @@
         <field name="attachment_use">False</field>
         <field
             name="binding_model_id"
-            ref="account_commission.model_commission_settlement"
+            ref="account_commission_oca.model_commission_settlement"
         />
         <field name="binding_type">report</field>
     </record>
