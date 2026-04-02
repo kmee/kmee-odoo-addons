@@ -6,555 +6,492 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 12:01+0000\n"
-"PO-Revision-Date: 2024-12-20 12:01+0000\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_BR\n"
 
 #. module: l10n_br_website_hr_recruitment_form
-#. odoo-javascript
-#: code:addons/l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js:0
-#, python-format
-msgid ""
-"\n"
-"                <div class=\"dependent mb-3 p-3 border rounded\">\n"
-"                    <h6>Dependent ${index}</h6>\n"
-"                    <div class=\"row\">\n"
-"                        <div class=\"col-6 mb-2\">\n"
-"                            <label class=\"form-label\">Name</label>\n"
-"                            <input type=\"text\" class=\"form-control dependent_name\" required=\"1\" />\n"
-"                        </div>\n"
-"                        <div class=\"col-6 mb-2\">\n"
-"                            <label class=\"form-label\">Date of Birth</label>\n"
-"                            <input type=\"date\" class=\"form-control dependent_date_of_birth\" required=\"1\" />\n"
-"                        </div>\n"
-"                    </div>\n"
-"                    <button type=\"button\" class=\"btn btn-danger btn-sm o_application_remove_dependent\">Remove</button>\n"
-"                </div>\n"
-"            "
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "<option value=\"0\">Select a bank</option>"
 msgstr ""
-"\n"
-"                <div class=\"dependent mb-3 p-3 border rounded\">\n"
-"                    <h6>Dependente ${index}</h6>\n"
-"                    <div class=\"row\">\n"
-"                        <div class=\"col-6 mb-2\">\n"
-"                            <label class=\"form-label\">Nome</label>\n"
-"                            <input type=\"text\" class=\"form-control dependent_name\" required=\"1\" />\n"
-"                        </div>\n"
-"                        <div class=\"col-6 mb-2\">\n"
-"                            <label class=\"form-label\">Data de Nascimento</label>\n"
-"                            <input type=\"date\" class=\"form-control dependent_date_of_birth\" required=\"1\" />\n"
-"                        </div>\n"
-"                    </div>\n"
-"                    <button type=\"button\" class=\"btn btn-danger btn-sm o_application_remove_dependent\">Remover</button>\n"
-"                </div>\n"
-"            "
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "<option value=\"0\">Select a ethnicity</option>"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "<option value=\"0\">Select a nationality</option>"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid ""
+"<select class=\"form-select\" id=\"document_type\" name=\"document_type\" "
+"required=\"1\">\n"
+"                                        <option value=\"\">Select a document "
+"type</option>\n"
+"                                        <option value=\"rg\">RG</option>\n"
+"                                        <option value=\"cnh\">CNH</option>\n"
+"                                    </select>"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:mail.template,body_html:l10n_br_website_hr_recruitment_form.send_applicant_form
 msgid ""
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\"><tr><td align=\"center\">\n"
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate;\">\n"
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: "
+"16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; "
+"color: #454748; width: 100%; border-collapse:separate;\"><tr><td "
+"align=\"center\">\n"
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" "
+"style=\"padding: 16px; background-color: #FFFFFF; color: #454748; border-"
+"collapse:separate;\">\n"
 "<tbody>\n"
-"    <!-- HEADER -->\n"
-"    <tr>\n"
-"        <td align=\"center\" style=\"min-width: 590px;\">\n"
-"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
-"                <tr><td valign=\"middle\">\n"
-"                    <span style=\"font-size: 10px;\"></span><br>\n"
-"                    <span style=\"font-size: 20px; font-weight: bold;\">\n"
-"                        <t t-out=\"object.name or ''\"></t>\n"
-"                    </span>\n"
-"                </td><td valign=\"middle\" align=\"right\">\n"
-"                    <img t-attf-src=\"/logo.png?company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" t-att-alt=\"object.company_id.name\">\n"
-"                </td></tr>\n"
-"                <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
-"                  <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\">\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        </td>\n"
-"    </tr>\n"
-"    <!-- CONTENT -->\n"
-"    <tr>\n"
-"        <td align=\"center\" style=\"min-width: 590px;\">\n"
-"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
-"                <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
-"                    <div>\n"
-"                        Dear <t t-out=\"object.partner_name or ''\"></t>,<br><br>\n"
-"                        Here is a link to the applicant form:<br>\n"
-"                        <div style=\"margin: 16px 0px 16px 0px;\">\n"
-"                            <a t-att-href=\"object.form_url\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
-"                                Form\n"
-"                            </a>\n"
-"                        </div>\n"
-"                        <br><br>\n"
-"                        Thanks,\n"
-"                        <t t-if=\"user.signature\">\n"
-"                            <br>\n"
-"                            <t t-out=\"user.signature or ''\">--<br></t>\n"
-"                        </t>\n"
+"<!-- HEADER -->\n"
+"<tr>\n"
+"    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" "
+"width=\"590\" style=\"min-width: 590px; background-color: white; padding: "
+"0px 8px 0px 8px; border-collapse:separate;\">\n"
+"            <tr><td valign=\"middle\">\n"
+"                <span style=\"font-size: 10px;\"></span><br>\n"
+"                <span style=\"font-size: 20px; font-weight: bold;\">\n"
+"                    <t t-out=\"object.name or ''\"></t>\n"
+"                </span>\n"
+"            </td><td valign=\"middle\" align=\"right\">\n"
+"                <img t-attf-src=\"/logo.png?"
+"company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; "
+"height: auto; width: 80px;\" t-att-alt=\"object.company_id.name\">\n"
+"            </td></tr>\n"
+"            <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
+"                <hr width=\"100%\" style=\"background-"
+"color:rgb(204,204,204);border:medium none;clear:both;display:block;font-"
+"size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\">\n"
+"            </td></tr>\n"
+"        </table>\n"
+"    </td>\n"
+"</tr>\n"
+"<!-- CONTENT -->\n"
+"<tr>\n"
+"    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" "
+"width=\"590\" style=\"min-width: 590px; background-color: white; padding: "
+"0px 8px 0px 8px; border-collapse:separate;\">\n"
+"            <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
+"                <div>\n"
+"                    Dear <t t-out=\"object.partner_name or ''\"></t>,"
+"<br><br>\n"
+"                    Here is a link to the applicant form:<br>\n"
+"                    <div style=\"margin: 16px 0px 16px 0px;\">\n"
+"                        <a t-att-href=\"object.form_url\" style=\"background-"
+"color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: "
+"#fff; border-radius: 5px; font-size:13px;\">\n"
+"                            Form\n"
+"                        </a>\n"
 "                    </div>\n"
-"                </td></tr>\n"
-"                <tr><td style=\"text-align:center;\">\n"
-"                  <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\">\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        </td>\n"
-"    </tr>\n"
-"    <!-- FOOTER -->\n"
-"    <tr>\n"
-"        <td align=\"center\" style=\"min-width: 590px;\">\n"
-"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
-"                <tr><td valign=\"middle\" align=\"left\">\n"
-"                    <t t-out=\"object.company_id.name or ''\"></t>\n"
-"                </td></tr>\n"
-"                <tr><td valign=\"middle\" align=\"left\" style=\"opacity: 0.7;\">\n"
-"                    <t t-out=\"object.company_id.phone or ''\"></t>\n"
+"                    <br><br>\n"
+"                    Thanks,\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br>\n"
+"                        <t t-out=\"user.signature or ''\">--<br></t>\n"
+"                    </t>\n"
+"                </div>\n"
+"            </td></tr>\n"
+"            <tr><td style=\"text-align:center;\">\n"
+"                <hr width=\"100%\" style=\"background-"
+"color:rgb(204,204,204);border:medium none;clear:both;display:block;font-"
+"size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\">\n"
+"            </td></tr>\n"
+"        </table>\n"
+"    </td>\n"
+"</tr>\n"
+"<!-- FOOTER -->\n"
+"<tr>\n"
+"    <td align=\"center\" style=\"min-width: 590px;\">\n"
+"        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" "
+"width=\"590\" style=\"min-width: 590px; background-color: white; font-size: "
+"11px; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"            <tr><td valign=\"middle\" align=\"left\">\n"
+"                <t t-out=\"object.company_id.name or ''\"></t>\n"
+"            </td></tr>\n"
+"            <tr><td valign=\"middle\" align=\"left\" style=\"opacity: "
+"0.7;\">\n"
+"                <t t-out=\"object.company_id.phone or ''\"></t>\n"
 "\n"
-"                    <t t-if=\"object.company_id.email\">\n"
-"                        | <a t-att-href=\"'mailto:%s' % object.company_id.email\" style=\"text-decoration:none; color: #454748;\" t-out=\"object.company_id.email or ''\"></a>\n"
-"                    </t>\n"
-"                    <t t-if=\"object.company_id.website\">\n"
-"                        | <a t-att-href=\"'%s' % object.company_id.website\" style=\"text-decoration:none; color: #454748;\" t-out=\"object.company_id.website or ''\"></a>\n"
-"                    </t>\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        </td>\n"
-"    </tr>\n"
+"                <t t-if=\"object.company_id.email\">\n"
+"                    | <a t-att-href=\"'mailto:%s' % "
+"object.company_id.email\" style=\"text-decoration:none; color: #454748;\" t-"
+"out=\"object.company_id.email or ''\"></a>\n"
+"                </t>\n"
+"                <t t-if=\"object.company_id.website\">\n"
+"                    | <a t-att-href=\"'%s' % object.company_id.website\" "
+"style=\"text-decoration:none; color: #454748;\" t-"
+"out=\"object.company_id.website or ''\"></a>\n"
+"                </t>\n"
+"            </td></tr>\n"
+"        </table>\n"
+"    </td>\n"
+"</tr>\n"
 "</tbody>\n"
 "</table>\n"
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
-"      <tr><td style=\"text-align: center; font-size: 13px;\">\n"
-"        Powered by <a target=\"_blank\" href=\"https://www.odoo.com?utm_source=db&amp;utm_medium=auth\" style=\"color: #875A7B;\">Odoo</a>\n"
-"      </td></tr>\n"
-"    </table>\n"
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" "
+"style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; "
+"padding: 8px; border-collapse:separate;\">\n"
+"    <tr><td style=\"text-align: center; font-size: 13px;\">\n"
+"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
+"utm_source=db&amp;utm_medium=auth\" style=\"color: #875A7B;\">Odoo</a>\n"
+"    </td></tr>\n"
+"</table>\n"
 "</td></tr>\n"
 "</table>\n"
-"            "
+"        "
 msgstr ""
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\"><tr><td align=\"center\">\n"
-"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate;\">\n"
-"<tbody>\n"
-"    <!-- HEADER -->\n"
-"    <tr>\n"
-"        <td align=\"center\" style=\"min-width: 590px;\">\n"
-"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
-"                <tr><td valign=\"middle\">\n"
-"                    <span style=\"font-size: 10px;\"></span><br>\n"
-"                    <span style=\"font-size: 20px; font-weight: bold;\">\n"
-"                        <t t-out=\"object.name or ''\"></t>\n"
-"                    </span>\n"
-"                </td><td valign=\"middle\" align=\"right\">\n"
-"                    <img t-attf-src=\"/logo.png?company={{ object.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" t-att-alt=\"object.company_id.name\">\n"
-"                </td></tr>\n"
-"                <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
-"                  <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\">\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        </td>\n"
-"    </tr>\n"
-"    <!-- CONTENT -->\n"
-"    <tr>\n"
-"        <td align=\"center\" style=\"min-width: 590px;\">\n"
-"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
-"                <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
-"                    <div>\n"
-"                        Caro(a) <t t-out=\"object.partner_name or ''\"></t>,<br><br>\n"
-"                        Aqui está o link para o formulário de candidatura:<br>\n"
-"                        <div style=\"margin: 16px 0px 16px 0px;\">\n"
-"                            <a t-att-href=\"object.form_url\" style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\">\n"
-"                                Formulário\n"
-"                            </a>\n"
-"                        </div>\n"
-"                        <br><br>\n"
-"                        Obrigado,\n"
-"                        <t t-if=\"user.signature\">\n"
-"                            <br>\n"
-"                            <t t-out=\"user.signature or ''\">--<br></t>\n"
-"                        </t>\n"
-"                    </div>\n"
-"                </td></tr>\n"
-"                <tr><td style=\"text-align:center;\">\n"
-"                  <hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\">\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        </td>\n"
-"    </tr>\n"
-"    <!-- FOOTER -->\n"
-"    <tr>\n"
-"        <td align=\"center\" style=\"min-width: 590px;\">\n"
-"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
-"                <tr><td valign=\"middle\" align=\"left\">\n"
-"                    <t t-out=\"object.company_id.name or ''\"></t>\n"
-"                </td></tr>\n"
-"                <tr><td valign=\"middle\" align=\"left\" style=\"opacity: 0.7;\">\n"
-"                    <t t-out=\"object.company_id.phone or ''\"></t>\n"
-"\n"
-"                    <t t-if=\"object.company_id.email\">\n"
-"                        | <a t-att-href=\"'mailto:%s' % object.company_id.email\" style=\"text-decoration:none; color: #454748;\" t-out=\"object.company_id.email or ''\"></a>\n"
-"                    </t>\n"
-"                    <t t-if=\"object.company_id.website\">\n"
-"                        | <a t-att-href=\"'%s' % object.company_id.website\" style=\"text-decoration:none; color: #454748;\" t-out=\"object.company_id.website or ''\"></a>\n"
-"                    </t>\n"
-"                </td></tr>\n"
-"            </table>\n"
-"        </td>\n"
-"    </tr>\n"
-"</tbody>\n"
-"</table>\n"
-"</td></tr>\n"
-"<!-- POWERED BY -->\n"
-"<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;\">\n"
-"      <tr><td style=\"text-align: center; font-size: 13px;\">\n"
-"        Feito com <a target=\"_blank\" href=\"https://www.odoo.com?utm_source=db&amp;utm_medium=auth\" style=\"color: #875A7B;\">Odoo</a>\n"
-"      </td></tr>\n"
-"    </table>\n"
-"</td></tr>\n"
-"</table>\n"
-"            "
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Account"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Add Dependent"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Additional Info"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Address"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Agency"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:ir.model,name:l10n_br_website_hr_recruitment_form.model_hr_applicant
 msgid "Applicant"
-msgstr "Candidato"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Applicant Data"
-msgstr "Informações do Candidato"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:mail.template,subject:l10n_br_website_hr_recruitment_form.send_applicant_form
 msgid "Applicant Form"
-msgstr "Formulário do Candidato"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #. odoo-javascript
 #: code:addons/l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js:0
 #, python-format
 msgid "Application saved successfully!"
-msgstr "Candidatura salva com sucesso!"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Attach Address Proof"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Attach PIS"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Attach Reservist Proof"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Attach Study Proof"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Attach Voter Title"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Bank"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Bank Data"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "CEP"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "CNPJ"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "CPF"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #. odoo-javascript
 #: code:addons/l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js:0
 #, python-format
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "City"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Company Information"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Date of Birth"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Dependente"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Dependents"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "District"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Document"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Document Type"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Education"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Email"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #. odoo-javascript
 #: code:addons/l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js:0
 #, python-format
 msgid "Error"
-msgstr "Erro"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #. odoo-javascript
 #: code:addons/l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js:0
 #, python-format
 msgid "Error saving the application. Try again later."
-msgstr "Erro salvando a candidatura. Tente novamente mais tarde."
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Ethnicity"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Father's name"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:ir.model.fields,field_description:l10n_br_website_hr_recruitment_form.field_hr_applicant__form_url
 msgid "Form Url"
-msgstr "URL do Formulário"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Latest Social Contract"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Legal Name"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Legal Responsible RG or CNH"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Mother's name"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Nationality"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Notes"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "PIS"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Personal Information"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Phone"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "RG"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:mail.template,name:l10n_br_website_hr_recruitment_form.send_applicant_form
 msgid "Recruitment: Applicant Form"
-msgstr "Recrutamento: Formulário de Candidatura"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Remove"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Reservist"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Section"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:ir.model.fields,field_description:l10n_br_website_hr_recruitment_form.field_hr_applicant__access_token
 msgid "Security Token"
-msgstr "Token de Segurança"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model:mail.template,description:l10n_br_website_hr_recruitment_form.send_applicant_form
 msgid "Send applicant form link"
-msgstr "Enviar link do formulário de candidatura"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.view_l10n_br_website_hr_recruitment_form_form
 msgid "Share Applicant Form"
-msgstr "Compartilhar Formulário de Candidatura"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+msgid "Start date"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "State"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Street"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Street 2"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Street Number"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Submit"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #. odoo-javascript
 #: code:addons/l10n_br_website_hr_recruitment_form/static/src/js/hr_application_form.js:0
 #, python-format
 msgid "Success"
-msgstr "Sucesso"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Personal Information"
-msgstr "Dados Pessoais"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Name"
-msgstr "Nome"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Date of Birth"
-msgstr "Data de Nascimento"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Ethnicity"
-msgstr "Etnia"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Nationality"
-msgstr "Nacionalidade"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Phone"
-msgstr "Telefone"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Father's name"
-msgstr "Nome do pai"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Mother's name"
-msgstr "Nome da mãe"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Remove"
-msgstr "Remover"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Reservist"
-msgstr "Reservista"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Attach Reservist Proof"
-msgstr "Anexar Comprovante de Reservista"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Attach PIS"
-msgstr "Anexar PIS"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Address"
-msgstr "Endereço"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Street"
-msgstr "Rua"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Street Number"
-msgstr "Número"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Street 2"
-msgstr "Complemento"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "District"
-msgstr "Bairro"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "State"
-msgstr "Estado"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "City"
-msgstr "Cidade"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Attach Address Proof"
-msgstr "Anexar Comprovante de Residência"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Education"
-msgstr "Educação"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Attach Study Proof"
-msgstr "Anexar Comprovante Escolar"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Voter Data"
-msgstr "Dados de Eleitor"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Title Number"
-msgstr "Número do Título"
+msgstr ""
+
+#. module: l10n_br_website_hr_recruitment_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
+msgid "Voter Data"
+msgstr ""
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
 msgid "Zone"
-msgstr "Zona"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Section"
-msgstr "Seção"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Attach Voter Title"
-msgstr "Anexar Título de Eleitor"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Bank Data"
-msgstr "Dados Bancários"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Bank"
-msgstr "Banco"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Agency"
-msgstr "Agencia"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Account"
-msgstr "Conta"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Documents"
-msgstr "Documentos"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Dependents"
-msgstr "Dependentes"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Add Dependent"
-msgstr "Adicionar Dependente"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Submit"
-msgstr "Enviar"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Document Type"
-msgstr "Tipo de Documento"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "Document"
-msgstr "Documento"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "<option value=\"0\">Select a bank</option>"
-msgstr "<option value=\"0\">Selecione um banco</option>"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "<option value=\"0\">Select a ethnicity</option>"
-msgstr "<option value=\"0\">Selecione uma etnia</option>"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid "<option value=\"0\">Select a nationality</option>"
-msgstr "<option value=\"0\">Selecione uma nacionalidade</option>"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_form_portal_template
-msgid ""
-"<select class=\"form-select\" id=\"document_type\" name=\"document_type\" required=\"1\">\n"
-"                                        <option value=\"\">Select a document type</option>\n"
-"                                        <option value=\"rg\">RG</option>\n"
-"                                        <option value=\"cnh\">CNH</option>\n"
-"                                    </select>"
 msgstr ""
-"<select class=\"form-select\" id=\"document_type\" name=\"document_type\" required=\"1\">\n"
-"                                        <option value=\"\">Selecione um tipo de documento</option>\n"
-"                                        <option value=\"rg\">RG</option>\n"
-"                                        <option value=\"cnh\">CNH</option>\n"
-"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Additional Info"
-msgstr "Informações Adicionais"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Company Information"
-msgstr "Dados da Empresa"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Latest Social Contract"
-msgstr "Última alteração do Contrato Social consolidada"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Legal Name"
-msgstr "Razão Social"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Legal Responsible RG or CNH"
-msgstr "RG ou CNH do Responsável Legal"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Notes"
-msgstr "Observações"
-
-#. module: l10n_br_website_hr_recruitment_form
-#: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template
-msgid "Start date"
-msgstr "Data de Entrada/Início da prestação de Serviços"

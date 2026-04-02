@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2024-12-20 14:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -43,13 +44,18 @@ msgid "Bank Account Number"
 msgstr "Número da Conta Bancária"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_contract_type__regime__clt
+msgid "CLT"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__cnh_file
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__cnh_file
 msgid "CNH File"
 msgstr "Arquivo da Carteira de Motorista"
 
 #. module: l10n_br_hr_recruitment
-#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__cpf
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__cnpj_cpf
 msgid "CPF"
 msgstr ""
 
@@ -67,6 +73,31 @@ msgstr "Caracteristicas"
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
 msgid "Citizenship"
 msgstr "Cidadania"
+
+#. module: l10n_br_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
+msgid "Company"
+msgstr "Empresa"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__company_responsible_document
+msgid "Company Responsible Document"
+msgstr "Documento do responsável da empresa"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model,name:l10n_br_hr_recruitment.model_hr_contract_type
+msgid "Contract Type"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__create_date
+msgid "Created on"
+msgstr ""
 
 #. module: l10n_br_hr_recruitment
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__date_of_birth
@@ -159,9 +190,34 @@ msgid "Graduate"
 msgstr "Graduado"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
 msgid "Identity"
 msgstr "Identidade"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant_dependent__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__latest_social_contract
+msgid "Latest Social Contract"
+msgstr "Última alteração do Contrato Social consolidada"
 
 #. module: l10n_br_hr_recruitment
 #: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__master
@@ -184,10 +240,20 @@ msgid "Name"
 msgstr "Nome"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,help:l10n_br_hr_recruitment.field_hr_applicant__rg
+msgid "National ID number"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__nationality_id
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_employee__nationality_id
 msgid "Nationality"
 msgstr "Nacionalidade"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__notes
+msgid "Notes"
+msgstr "Observações"
 
 #. module: l10n_br_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
@@ -200,15 +266,30 @@ msgid "Other"
 msgstr "Outros"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_contract_type__regime__other
+msgid "Outros"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__pis_pasep
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
 msgid "PIS/PASEP"
 msgstr ""
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_contract_type__regime__pj
+msgid "PJ"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
 msgid "Parents names"
 msgstr "Nome dos Pais"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__partner_legal_name
+msgid "Partner Legal Name"
+msgstr "Razão Social"
 
 #. module: l10n_br_hr_recruitment
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__pis_file
@@ -238,6 +319,11 @@ msgid "RG File"
 msgstr "Arquivo da Identidade"
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_contract_type__regime
+msgid "Regime"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
 msgid "Reservist"
 msgstr "Reservista"
@@ -252,6 +338,11 @@ msgstr "Arquivo de Reservista"
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__study_school
 msgid "School"
 msgstr "Escola"
+
+#. module: l10n_br_hr_recruitment
+#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__start_date
+msgid "Start Date"
+msgstr "Data de Entrada/Início da prestação de Serviços"
 
 #. module: l10n_br_hr_recruitment
 #: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__study_proof_file
@@ -287,30 +378,10 @@ msgstr "Zona do Eleitor"
 
 #. module: l10n_br_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
-msgid "Company"
-msgstr "Empresa"
+msgid "XXX.XXXXX.XX-X"
+msgstr ""
 
 #. module: l10n_br_hr_recruitment
-#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__company_responsible_document
-msgid "Company Responsible Document"
-msgstr "Documento do responsável da empresa"
-
-#. module: l10n_br_hr_recruitment
-#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__latest_social_contract
-msgid "Latest Social Contract"
-msgstr "Última alteração do Contrato Social consolidada"
-
-#. module: l10n_br_hr_recruitment
-#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__notes
-msgid "Notes"
-msgstr "Observações"
-
-#. module: l10n_br_hr_recruitment
-#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__partner_legal_name
-msgid "Partner Legal Name"
-msgstr "Razão Social"
-
-#. module: l10n_br_hr_recruitment
-#: model:ir.model.fields,field_description:l10n_br_hr_recruitment.field_hr_applicant__start_date
-msgid "Start Date"
-msgstr "Data de Entrada/Início da prestação de Serviços"
+#: model:ir.model,name:l10n_br_hr_recruitment.model_hr_applicant_dependent
+msgid "hr.applicant.dependent"
+msgstr ""

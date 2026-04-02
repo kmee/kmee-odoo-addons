@@ -10,64 +10,31 @@ msgstr ""
 "PO-Revision-Date: 2025-08-01 16:45+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model,name:helpdesk_mgmt_ticket_life_cycle.model_helpdesk_ticket_stage_duration_report
-msgid "Helpdesk Ticket Stage Duration Report"
-msgstr "Relatório de Duração de Estágios de Tickets do Helpdesk"
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_kanban
+msgid "<strong>Active:</strong>"
+msgstr ""
 
 #. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__team_id
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__team_id
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-msgid "Team"
-msgstr "Equipe"
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_kanban
+msgid "<strong>Avg Duration:</strong>"
+msgstr ""
 
 #. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__stage_id
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__stage_id
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-msgid "Stage"
-msgstr "Estágio"
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_kanban
+msgid "<strong>Completed:</strong>"
+msgstr ""
 
 #. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__ticket_count
-msgid "Number of Tickets"
-msgstr "Número de Tickets"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__total_duration_seconds
-msgid "Total Duration (seconds)"
-msgstr "Duração Total (segundos)"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__avg_duration_seconds
-msgid "Average Duration (seconds)"
-msgstr "Duração Média (segundos)"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__avg_duration_display
-msgid "Average Duration"
-msgstr "Duração Média"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__min_duration_seconds
-msgid "Min Duration (seconds)"
-msgstr "Duração Mínima (segundos)"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__max_duration_seconds
-msgid "Max Duration (seconds)"
-msgstr "Duração Máxima (segundos)"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__completed_tickets
-msgid "Completed Tickets"
-msgstr "Tickets Concluídos"
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_kanban
+msgid "<strong>Tickets:</strong>"
+msgstr ""
 
 #. module: helpdesk_mgmt_ticket_life_cycle
 #: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__active_tickets
@@ -75,18 +42,140 @@ msgid "Active Tickets"
 msgstr "Tickets Ativos"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__avg_duration_display
+msgid "Average Duration"
+msgstr "Duração Média"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__avg_duration_seconds
+msgid "Average Duration (seconds)"
+msgstr "Duração Média (segundos)"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__completed_tickets
+msgid "Completed Tickets"
+msgstr "Tickets Concluídos"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
 #: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__completion_rate
 msgid "Completion Rate (%)"
 msgstr "Taxa de Conclusão (%)"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.actions.act_window,name:helpdesk_mgmt_ticket_life_cycle.action_helpdesk_ticket_stage_duration_report
-#: model:ir.ui.menu,name:helpdesk_mgmt_ticket_life_cycle.menu_helpdesk_ticket_stage_duration_report
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_tree
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__display_name
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__duration_display
+#, fuzzy
+msgid "Duration"
+msgstr "Alta Duração"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_form_inherit_life_cicle
+msgid "Duration (formatted)"
+msgstr "Duração (formatada)"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_form_inherit_life_cicle
+msgid "Duration (seconds)"
+msgstr "Duração (segundos)"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__duration_seconds
+msgid "Duration in Seconds"
+msgstr "Duração em Segundos"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__end_date
+msgid "End Date"
+msgstr "Data de Fim"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_kanban
-msgid "Stage Duration Report"
-msgstr "Relatório de Duração de Estágios"
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model,name:helpdesk_mgmt_ticket_life_cycle.model_helpdesk_ticket
+msgid "Helpdesk Ticket"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model,name:helpdesk_mgmt_ticket_life_cycle.model_helpdesk_ticket_stage_duration_report
+msgid "Helpdesk Ticket Stage Duration Report"
+msgstr "Relatório de Duração de Estágios de Tickets do Helpdesk"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
+msgid "High Duration"
+msgstr "Alta Duração"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__id
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__id
+msgid "ID"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration____last_update
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
+msgid "Low Completion Rate"
+msgstr "Baixa Taxa de Conclusão"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__max_duration_seconds
+msgid "Max Duration (seconds)"
+msgstr "Duração Máxima (segundos)"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__min_duration_seconds
+msgid "Min Duration (seconds)"
+msgstr "Duração Mínima (segundos)"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.actions.act_window,help:helpdesk_mgmt_ticket_life_cycle.action_helpdesk_ticket_stage_duration_report
+msgid "No stage duration data available."
+msgstr "Nenhum dado de duração de estágio disponível."
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__ticket_count
+msgid "Number of Tickets"
+msgstr "Número de Tickets"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__stage_id
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__stage_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
+msgid "Stage"
+msgstr "Estágio"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_graph
@@ -95,34 +184,12 @@ msgid "Stage Duration Analysis"
 msgstr "Análise de Duração de Estágios"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.actions.act_window,name:helpdesk_mgmt_ticket_life_cycle.action_helpdesk_ticket_stage_duration_report
+#: model:ir.ui.menu,name:helpdesk_mgmt_ticket_life_cycle.menu_helpdesk_ticket_stage_duration_report
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_kanban
 #: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-msgid "High Duration"
-msgstr "Alta Duração"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-msgid "Low Completion Rate"
-msgstr "Baixa Taxa de Conclusão"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-msgid "Group By"
-msgstr "Agrupar Por"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
-msgid "Team and Stage"
-msgstr "Equipe e Estágio"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.actions.act_window,help:helpdesk_mgmt_ticket_life_cycle.action_helpdesk_ticket_stage_duration_report
-msgid "No stage duration data available."
-msgstr "Nenhum dado de duração de estágio disponível."
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.actions.act_window,help:helpdesk_mgmt_ticket_life_cycle.action_helpdesk_ticket_stage_duration_report
-msgid "This report shows how long tickets stay in each stage by team. Use it to identify bottlenecks and improve team performance."
-msgstr "Este relatório mostra quanto tempo os tickets permanecem em cada estágio por equipe. Use-o para identificar gargalos e melhorar o desempenho da equipe."
+msgid "Stage Duration Report"
+msgstr "Relatório de Duração de Estágios"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
 #: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket__stage_duration_ids
@@ -131,14 +198,42 @@ msgid "Stage Durations"
 msgstr "Durações de Estágios"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__start_date
+msgid "Start Date"
+msgstr "Data de Início"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__team_id
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__team_id
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
+msgid "Team"
+msgstr "Equipe"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_stage_duration_report_search
+msgid "Team and Stage"
+msgstr "Equipe e Estágio"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model_terms:ir.actions.act_window,help:helpdesk_mgmt_ticket_life_cycle.action_helpdesk_ticket_stage_duration_report
+#, fuzzy
+msgid ""
+"This report shows how long tickets stay in each stage by team.\n"
+"                    Use it to identify bottlenecks and improve team "
+"performance."
+msgstr ""
+"Este relatório mostra quanto tempo os tickets permanecem em cada estágio por "
+"equipe. Use-o para identificar gargalos e melhorar o desempenho da equipe."
+
+#. module: helpdesk_mgmt_ticket_life_cycle
+#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration_report__total_duration_seconds
+msgid "Total Duration (seconds)"
+msgstr "Duração Total (segundos)"
+
+#. module: helpdesk_mgmt_ticket_life_cycle
 #: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket__current_stage_total_duration
 msgid "Total Time in Current Stage"
 msgstr "Tempo Total no Estágio Atual"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model,name:helpdesk_mgmt_ticket_life_cycle.model_helpdesk_ticket_stage_duration
-msgid "ticket Stage Duration"
-msgstr "Duração de Estágio do Ticket"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
 #: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__ticket_id
@@ -146,48 +241,18 @@ msgid "ticket"
 msgstr "Ticket"
 
 #. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__start_date
-msgid "Start Date"
-msgstr "Data de Início"
+#: model:ir.model,name:helpdesk_mgmt_ticket_life_cycle.model_helpdesk_ticket_stage_duration
+msgid "ticket Stage Duration"
+msgstr "Duração de Estágio do Ticket"
 
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__end_date
-msgid "End Date"
-msgstr "Data de Fim"
+#~ msgid "Duration Display"
+#~ msgstr "Exibição da Duração"
 
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__duration_seconds
-msgid "Duration in Seconds"
-msgstr "Duração em Segundos"
+#~ msgid "Current Stage Duration"
+#~ msgstr "Duração do Estágio Atual"
 
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.model.fields,field_description:helpdesk_mgmt_ticket_life_cycle.field_helpdesk_ticket_stage_duration__duration_display
-msgid "Duration Display"
-msgstr "Exibição da Duração"
+#~ msgid "Help Desk Ticket  Stage Duration"
+#~ msgstr "Duração de Estágios de Tickets do Help Desk"
 
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_form_inherit_life_cicle
-msgid "Duration (seconds)"
-msgstr "Duração (segundos)"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_form_inherit_life_cicle
-msgid "Duration (formatted)"
-msgstr "Duração (formatada)"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model_terms:ir.ui.view,arch_db:helpdesk_mgmt_ticket_life_cycle.view_helpdesk_ticket_kanban_with_duration
-msgid "Current Stage Duration"
-msgstr "Duração do Estágio Atual"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.module.module,name:helpdesk_mgmt_ticket_life_cycle.module_helpdesk_mgmt_ticket_life_cycle
-msgid "Help Desk Ticket  Stage Duration"
-msgstr "Duração de Estágios de Tickets do Help Desk"
-
-#. module: helpdesk_mgmt_ticket_life_cycle
-#: model:ir.module.module,summary:helpdesk_mgmt_ticket_life_cycle.module_helpdesk_mgmt_ticket_life_cycle
-msgid "Shows the duration each ticket spent in each stage"
-msgstr "Mostra a duração que cada ticket permaneceu em cada estágio"
-
-# End of translation file
+#~ msgid "Shows the duration each ticket spent in each stage"
+#~ msgstr "Mostra a duração que cada ticket permaneceu em cada estágio"
