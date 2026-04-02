@@ -7,7 +7,7 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "maintainers": ["mileo"],
-    "depends": ["commission", "sale_commission", "account_commission"],
+    "depends": ["commission_oca", "sale_commission_oca", "account_commission_oca"],
     "data": [
         "views/sale_commission_views.xml",
     ],
