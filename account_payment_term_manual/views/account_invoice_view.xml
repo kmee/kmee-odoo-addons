@@ -15,7 +15,7 @@
                 </attribute>
             </xpath>
 
-            <xpath expr="//page[@name='receivable_move_line_tab']/field[@name='financial_move_line_ids']" position="before">
+            <xpath expr="//page[@name='receivable_move_line_tab']/field[@name='due_line_ids']" position="before">
                 <group>
                     <group>
                         <field name="manual_payment_term_id" class="oe_edit_only" options="{'no_create_edit': True}"/>
@@ -33,7 +33,7 @@
                 </field>
             </xpath>
 
-            <xpath expr="//page[@name='payable_move_line_tab']/field[@name='financial_move_line_ids']" position="before">
+            <xpath expr="//page[@name='payable_move_line_tab']/field[@name='due_line_ids']" position="before">
                 <group>
                     <group>
                         <field name="manual_payment_term_id" class="oe_edit_only" options="{'no_create_edit': True}"/>
