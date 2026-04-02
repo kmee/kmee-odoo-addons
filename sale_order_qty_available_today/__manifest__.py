@@ -3,14 +3,14 @@
 
 {
     "name": "Sale Order Qty Available Today",
-    "summary": """Sale Order Free Qty""",
+    "summary": "Show qty available today on sale order line form",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "author": "KMEE",
+    "author": "KMEE, Odoo Community Association (OCA)",
+    "maintainers": ["mileo"],
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["sale_stock"],
     "data": [
         "views/sale_order_line.xml",
     ],
-    "demo": [],
 }
