@@ -9,9 +9,7 @@ class SaleCommissionTeamMixin(models.AbstractModel):
     _name = "sale.commission.team.mixin"
     _description = "Agent Team Mixin"
 
-    sequence = fields.Integer(
-        string="Sequence",
-    )
+    sequence = fields.Integer()
 
     team_id = fields.Many2one(
         comodel_name="crm.team",

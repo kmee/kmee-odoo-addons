@@ -18,7 +18,7 @@ class AccountInvoiceLine(models.Model):
 
     def _compute_agent_ids(self):
         """Override to handle team commission rules."""
-        super()._compute_agent_ids()
+        result = super()._compute_agent_ids()
 
         for record in self.filtered(
             lambda x: x.move_id.partner_id and x.move_id.move_type[:3] == "out"
@@ -28,3 +28,4 @@ class AccountInvoiceLine(models.Model):
                 record.agent_ids = record._prepare_agents_vals_partner(
                     record.move_id.partner_id
                 )
+        return result
