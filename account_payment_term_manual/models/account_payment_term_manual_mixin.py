@@ -52,6 +52,6 @@ class AccountPaymentTermManualMixin(models.AbstractModel):
         manual_term_id.line_ids = manual_term_id.line_ids.create(
             nl[2] for nl in new_line_ids
         )
-        self.with_context(
-            skip_manual_term_onchange=True
-        ).manual_payment_term_id = manual_term_id
+        self.with_context(skip_manual_term_onchange=True).manual_payment_term_id = (
+            manual_term_id
+        )
