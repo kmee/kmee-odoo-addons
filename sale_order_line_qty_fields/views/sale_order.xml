@@ -5,22 +5,27 @@
 
     <record model="ir.ui.view" id="sale_order_line_form_view">
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock_qty" />
         <field name="arch" type="xml">
+            <!-- Make qty_available_today visible in list when group is enabled -->
             <xpath
-                expr="//field[@name='order_line']//field[@name='qty_available_today']"
+                expr="//field[@name='order_line']/list//field[@name='qty_available_today']"
                 position="attributes"
             >
+                <attribute name="column_invisible">False</attribute>
                 <attribute name="groups">sale_order_line_qty_fields.group_qty_available_today</attribute>
             </xpath>
+            <!-- Make free_qty_today visible in list when group is enabled -->
             <xpath
-                expr="//field[@name='order_line']//field[@name='free_qty_today']"
+                expr="//field[@name='order_line']/list//field[@name='free_qty_today']"
                 position="attributes"
             >
+                <attribute name="column_invisible">False</attribute>
                 <attribute name="groups">sale_order_line_qty_fields.group_free_qty_today</attribute>
             </xpath>
+            <!-- Add free_qty field after free_qty_today in list -->
             <xpath
-                expr="//field[@name='order_line']//field[@name='free_qty_today']"
+                expr="//field[@name='order_line']/list//field[@name='free_qty_today']"
                 position="after"
             >
                 <field
