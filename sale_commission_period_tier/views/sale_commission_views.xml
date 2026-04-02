@@ -4,7 +4,7 @@
     <record id="commission_form_period" model="ir.ui.view">
         <field name="name">commission.form.period</field>
         <field name="model">commission</field>
-        <field name="inherit_id" ref="commission.commission_form" />
+        <field name="inherit_id" ref="commission_oca.commission_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='section_ids']" position="attributes">
                 <attribute
@@ -18,7 +18,7 @@
     <record id="view_settlement_form_period" model="ir.ui.view">
         <field name="name">commission.settlement.form.period</field>
         <field name="model">commission.settlement</field>
-        <field name="inherit_id" ref="account_commission.view_settlement_form" />
+        <field name="inherit_id" ref="account_commission_oca.view_settlement_form" />
         <field name="arch" type="xml">
             <button name="action_cancel" position="before">
                 <button
