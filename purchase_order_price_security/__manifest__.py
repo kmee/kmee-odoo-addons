@@ -15,4 +15,5 @@
         "views/purchase_order_line.xml",
     ],
     "demo": [],
+    "maintainers": ["mileo"],
 }
