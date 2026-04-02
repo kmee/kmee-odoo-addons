@@ -31,13 +31,12 @@ groups operations by product and unit of measure. When multiple moves
 share the same product and UoM, their demand and done quantities are
 summed into a single line.
 
--  A computed field indicates when a summary view is available (i.e.
-   when there are duplicate product+UoM lines).
--  When the summary differs from the full operations list, an alert
-   appears on the Operations page with a link that opens the Summary
-   tab.
--  The Summary tab shows a read-only list of grouped lines (product,
-   UoM, demand, done). Summary data is computed when the form is opened.
+- A computed field indicates when a summary view is available (i.e. when
+  there are duplicate product+UoM lines).
+- When the summary differs from the full operations list, an alert
+  appears on the Operations page with a link that opens the Summary tab.
+- The Summary tab shows a read-only list of grouped lines (product, UoM,
+  demand, done). Summary data is computed when the form is opened.
 
 **Table of contents**
 
@@ -65,16 +64,16 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://kmee.com.br/>``\ \_:
+- ``KMEE <https://kmee.com.br/>``\ \_:
 
-   -  Diego Paradeda diego.paradeda@kmee.com.br
+  - Diego Paradeda diego.paradeda@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
