@@ -1,0 +1,951 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sac
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sac
+#: model:mail.template,body_html:sac.mail_template_sac_troca_realizada
+msgid ""
+"\n"
+"<p>Olá ${object.customer_name or ''},</p>\n"
+"<br />\n"
+"<p>A troca do seu produto foi enviada.</p>\n"
+"<br/></br>\n"
+"<p>Seu código de rastreamento é o : ${object.tracking_code or ''}<br/></p>\n"
+"<p>Veja todos os detalhes da postagem no link abaixo inserindo o código acima.\n"
+"https://www2.correios.com.br/sistemas/rastreamento/\n"
+"<br/>\n"
+"<p>Se você ainda tiver alguma dúvida, não exite em entrar em contato.</p>\n"
+"<br />\n"
+"<p>Muito obrigado.</p>"
+msgstr ""
+
+#. module: sac
+#: model:mail.template,body_html:sac.mail_template_sac_complete
+msgid ""
+"\n"
+"<p>Olá ${object.customer_name or ''},</p>\n"
+"<br />\n"
+"<p>O chamado nº ${object.name} foi considerado concluido.</p>\n"
+"<br/>\n"
+"<p>Agradeçemos o contato. Sua opinião é muito importante para melhorarmos nossos produtos.<br/></p>\n"
+"<br/>\n"
+"<p>Se você ainda tiver alguma dúvida, por favor entre em contato.</p>\n"
+"<br/>\n"
+"<p>Atenciosamente.</p>"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__1
+msgid "1 - Roxo"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__2
+msgid "2 - Branco"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__3
+msgid "3 - Cinza"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__4
+msgid "4 - Lilás"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__5
+msgid "5 - Pastel"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__6
+msgid "6 - Amarelo"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__7
+msgid "7- Verde"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__8
+msgid "8 - Azul"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields.selection,name:sac.selection__sac_reason__kanban_color__9
+msgid "9 - Laranja"
+msgstr ""
+
+#. module: sac
+#: model:mail.template,body_html:sac.mail_template_sac_receive
+msgid ""
+"<div>\n"
+"                    <p>Olá <t t-out=\"object.customer_name or ''\"></t>,</p>\n"
+"                    <br>\n"
+"                    <p>Nós recebemos o seu chamado ele esta sendo analisado pelos nossos colaboradores. Entraremos em contato em breve<br></p>\n"
+"                    <p>Se você tiver alguma dúvida, por favor entre em contato e infome o número deste chamado: <t t-out=\"object.name\"></t></p>\n"
+"                    <br>\n"
+"                    <p>Tudo de bom.</p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_status
+msgid ""
+"A record can have one of several Kanban statuses, which are used to indicate whether there are any special situations affecting it. The exact meaning of each status is allowed to vary based on the stage the record is in but they are roughly as follow:\n"
+"* Normal Handling: Default status, no special situations\n"
+"* Ready: Ready to transition to the next stage\n"
+"* Special Handling: Blocked in some way (e.g. must be handled by a specific user)\n"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__active
+msgid "Active"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,description:sac.sac_kanban_aguardando_envio
+msgid "Aguardando Envio"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Archived"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,name:sac.sac_kanban_aguardando_envio
+msgid "Arguardando envio"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__district
+msgid "Bairro"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__cnpj_cpf
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "CNPJ/CPF"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__campaign_id
+msgid "Campaign"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_print_form_view
+msgid "Cancelar"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,description:sac.sac_kanban_analisado
+msgid "Chamados analisados"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,description:sac.sac_kanban_nao_solucionado
+msgid "Chamados não solucionados"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,description:sac.sac_kanban_solucionado
+msgid "Chamados solucionado"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__company_id
+msgid "Company"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__street2
+msgid "Complemento"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.base_kanban_stage_form_view
+msgid "Comunication"
+msgstr ""
+
+#. module: sac
+#: model:ir.ui.menu,name:sac.sac_submenu_config
+msgid "Configurações"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Contato"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__create_date_date
+msgid "Create Date Date"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__create_uid
+#: model:ir.model.fields,field_description:sac.field_sac_print__create_uid
+#: model:ir.model.fields,field_description:sac.field_sac_reason__create_uid
+#: model:ir.model.fields,field_description:sac.field_sac_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac_print__create_date
+#: model:ir.model.fields,field_description:sac.field_sac_reason__create_date
+#: model:ir.model.fields,field_description:sac.field_sac_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__create_date
+msgid "Creation Date"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Customer"
+msgstr ""
+
+#. module: sac
+#. odoo-python
+#: code:addons/sac/models/sac.py:0
+#, python-format
+msgid "Customer Email"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__customer_name
+msgid "Customer Name"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Código"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__due_date
+msgid "Data de validade"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__create_date
+msgid "Date on which sac is created."
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_print_form_view
+msgid "Deseja imprimir todos os chamados prontos para envio?"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac_print__display_name
+#: model:ir.model.fields,field_description:sac.field_sac_reason__display_name
+#: model:ir.model.fields,field_description:sac.field_sac_type__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,name:sac.sac_kanban_analisado
+msgid "Em analise"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__email_from
+msgid "Email"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__email_cc
+msgid "Email CC"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_base_kanban_stage__mail_template_id
+msgid "Email Template"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__end_date
+msgid "End Date"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Endereço"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__state_id
+msgid "Estado"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_legend_normal
+msgid ""
+"Explanation text to help users understand how the normal handling status "
+"applies to this record (depends on current stage)"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_legend_priority
+msgid ""
+"Explanation text to help users understand how the priority/star mechanism "
+"applies to this record (depends on current stage)"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_legend_done
+msgid ""
+"Explanation text to help users understand how the ready status applies to "
+"this record (depends on current stage)"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_legend_blocked
+msgid ""
+"Explanation text to help users understand how the special handling status "
+"applies to this record (depends on current stage)"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__rating
+msgid "Feedback"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,legend_blocked:sac.sac_kanban_aguardando_envio
+#: model:base.kanban.stage,legend_blocked:sac.sac_kanban_analisado
+#: model:base.kanban.stage,legend_blocked:sac.sac_kanban_nao_solucionado
+#: model:base.kanban.stage,legend_blocked:sac.sac_kanban_new
+#: model:base.kanban.stage,legend_blocked:sac.sac_kanban_solucionado
+#: model:base.kanban.stage,legend_blocked:sac.sac_kanban_troca
+msgid ""
+"Give a card the special handling status to indicate that it requires "
+"handling by a special user or subset of users."
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__id
+#: model:ir.model.fields,field_description:sac.field_sac_print__id
+#: model:ir.model.fields,field_description:sac.field_sac_reason__id
+#: model:ir.model.fields,field_description:sac.field_sac_type__id
+msgid "ID"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_base_kanban_stage__mail_template_id
+msgid ""
+"If set an email will be sent to the customer when the sac reaches this step."
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__is_printed
+msgid "Impresso"
+msgstr ""
+
+#. module: sac
+#: model:ir.actions.act_window,name:sac.sac_print_act_window
+#: model:ir.ui.menu,name:sac.sac_print_menu
+#: model_terms:ir.ui.view,arch_db:sac.sac_print_form_view
+msgid "Imprimir"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Informações do produto"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Informações do retorno"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_color
+#: model:ir.model.fields,field_description:sac.field_sac_reason__kanban_color
+msgid "Kanban Color"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_priority
+msgid "Kanban Priority"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_sequence
+msgid "Kanban Sequence"
+msgstr ""
+
+#. module: sac
+#: model:ir.model,name:sac.model_base_kanban_stage
+#: model:ir.model.fields,field_description:sac.field_sac__stage_id
+msgid "Kanban Stage"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_status
+msgid "Kanban Status"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac____last_update
+#: model:ir.model.fields,field_description:sac.field_sac_print____last_update
+#: model:ir.model.fields,field_description:sac.field_sac_reason____last_update
+#: model:ir.model.fields,field_description:sac.field_sac_type____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__write_uid
+#: model:ir.model.fields,field_description:sac.field_sac_print__write_uid
+#: model:ir.model.fields,field_description:sac.field_sac_reason__write_uid
+#: model:ir.model.fields,field_description:sac.field_sac_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__write_date
+#: model:ir.model.fields,field_description:sac.field_sac_print__write_date
+#: model:ir.model.fields,field_description:sac.field_sac_reason__write_date
+#: model:ir.model.fields,field_description:sac.field_sac_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Leads that are assigned to me"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__lot
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Lote"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,legend_priority:sac.sac_kanban_aguardando_envio
+#: model:base.kanban.stage,legend_priority:sac.sac_kanban_analisado
+#: model:base.kanban.stage,legend_priority:sac.sac_kanban_nao_solucionado
+#: model:base.kanban.stage,legend_priority:sac.sac_kanban_new
+#: model:base.kanban.stage,legend_priority:sac.sac_kanban_solucionado
+#: model:base.kanban.stage,legend_priority:sac.sac_kanban_troca
+msgid ""
+"Mark a card as medium or high priority (one or two stars) to indicate that "
+"it should be escalated ahead of others with lower priority/star counts."
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,legend_done:sac.sac_kanban_aguardando_envio
+#: model:base.kanban.stage,legend_done:sac.sac_kanban_analisado
+#: model:base.kanban.stage,legend_done:sac.sac_kanban_nao_solucionado
+#: model:base.kanban.stage,legend_done:sac.sac_kanban_new
+#: model:base.kanban.stage,legend_done:sac.sac_kanban_solucionado
+#: model:base.kanban.stage,legend_done:sac.sac_kanban_troca
+msgid "Mark a card as ready when it has been fully processed."
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__medium_id
+msgid "Medium"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Mensagem"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_kanban
+msgid "Mensagens não lidas"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Meus atendimentos"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__reason_id
+#: model:ir.ui.menu,name:sac.sac_reason_menu
+msgid "Motivo"
+msgstr ""
+
+#. module: sac
+#: model:ir.actions.act_window,name:sac.sac_reason_act_window
+msgid "Motivo SAC"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__l10n_br_city_id
+msgid "Municipio"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Mês de criação"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__display_name
+#: model:ir.model.fields,field_description:sac.field_sac_print__name
+#: model:ir.model.fields,field_description:sac.field_sac_reason__name
+#: model:ir.model.fields,field_description:sac.field_sac_type__name
+msgid "Name"
+msgstr ""
+
+#. module: sac
+#. odoo-python
+#: code:addons/sac/models/sac.py:0 code:addons/sac/models/sac.py:0
+#: code:addons/sac/models/sac.py:0
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Nome completo"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_legend_normal
+msgid "Normal Handling Explanation"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,name:sac.sac_kanban_new
+msgid "Novo"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,description:sac.sac_kanban_new
+msgid "Novos chamados abertos no SAC"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__number
+msgid "Nº"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,name:sac.sac_kanban_nao_solucionado
+msgid "Não Solucionado"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__name
+msgid "Order Reference"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_sequence
+msgid ""
+"Order of record in relation to other records in the same Kanban stage and "
+"with the same priority"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Origem"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Origem do contato"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__phone
+msgid "Phone"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__phone2
+msgid "Phone 2"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__price
+msgid "Preço"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__price_total
+msgid "Price Total"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__price
+msgid "Price at which the product is sold to customers."
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+msgid "Prioridade"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_legend_priority
+msgid "Priority Explanation"
+msgstr ""
+
+#. module: sac
+#: model:ir.model,name:sac.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__product_id
+msgid "Produto"
+msgstr ""
+
+#. module: sac
+#: model:ir.ui.menu,name:sac.sac_product_menu
+msgid "Produtos"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__qty
+msgid "Quantidade"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_legend_done
+msgid "Ready Explanation"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__user_id
+#: model_terms:ir.ui.view,arch_db:sac.sac_form_view
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Responsável"
+msgstr ""
+
+#. module: sac
+#: model:ir.module.category,name:sac.MODULE_CATEGORY_SAC
+#: model_terms:ir.ui.view,arch_db:sac.sac_graph_view
+#: model_terms:ir.ui.view,arch_db:sac.sac_pivot_view
+msgid "SAC"
+msgstr ""
+
+#. module: sac
+#: model:res.groups,name:sac.GROUP_SAC_GENERAL
+msgid "SAC (geral)"
+msgstr ""
+
+#. module: sac
+#: model:res.groups,name:sac.GROUP_SAC_MANAGER
+msgid "SAC (gerente)"
+msgstr ""
+
+#. module: sac
+#: model:res.groups,name:sac.GROUP_SAC_READ
+msgid "SAC (somente leitura)"
+msgstr ""
+
+#. module: sac
+#: model:ir.ui.menu,name:sac.sac_base
+#: model:ir.ui.menu,name:sac.sac_submenu_sac
+msgid "Sac"
+msgstr ""
+
+#. module: sac
+#: model:ir.actions.act_window,name:sac.sac_act_window
+msgid "Sac - Serviço de atendimento ao consumidor"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_print_form_view
+msgid "Sac Print"
+msgstr ""
+
+#. module: sac
+#: model:ir.model,name:sac.model_sac_reason
+msgid "Sac Reason"
+msgstr ""
+
+#. module: sac
+#: model:ir.model,name:sac.model_sac_type
+msgid "Sac Type"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Sem responsável"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Sem usuário responsável"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__send_date
+msgid "Send Date"
+msgstr ""
+
+#. module: sac
+#: model:ir.model,name:sac.model_sac
+#: model:ir.module.category,description:sac.MODULE_CATEGORY_SAC
+msgid "Serviço de atendimento ao consumidor"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_tree_view
+msgid "Situação"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,name:sac.sac_kanban_solucionado
+msgid "Solucionado"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__source_id
+msgid "Source"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__kanban_legend_blocked
+msgid "Special Handling Explanation"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__street
+msgid "Street"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_graph_view
+#: model_terms:ir.ui.view,arch_db:sac.sac_pivot_view
+msgid "Stuação"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__stage_id
+msgid "The Kanban stage that this record is currently in"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__kanban_priority
+msgid "The priority of the record (shown as stars in Kanban views)"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__campaign_id
+msgid ""
+"This is a name that helps you keep track of your different campaign efforts,"
+" e.g. Fall_Drive, Christmas_Special"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,legend_normal:sac.sac_kanban_aguardando_envio
+#: model:base.kanban.stage,legend_normal:sac.sac_kanban_analisado
+#: model:base.kanban.stage,legend_normal:sac.sac_kanban_nao_solucionado
+#: model:base.kanban.stage,legend_normal:sac.sac_kanban_new
+#: model:base.kanban.stage,legend_normal:sac.sac_kanban_solucionado
+#: model:base.kanban.stage,legend_normal:sac.sac_kanban_troca
+msgid ""
+"This is the default status and indicates that a card can be processed by any"
+" user working this queue."
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__medium_id
+msgid "This is the method of delivery, e.g. Postcard, Email, or Banner Ad"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__source_id
+msgid ""
+"This is the source of the link, e.g. Search Engine, another domain, or name "
+"of email list"
+msgstr ""
+
+#. module: sac
+#: model:ir.actions.act_window,name:sac.sac_type_act_window
+#: model:ir.model.fields,field_description:sac.field_sac__type_id
+#: model:ir.ui.menu,name:sac.sac_type_menu
+msgid "Tipo de reclamação"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__tracking_code
+msgid "Tracking Code"
+msgstr ""
+
+#. module: sac
+#: model:base.kanban.stage,description:sac.sac_kanban_troca
+#: model:base.kanban.stage,name:sac.sac_kanban_troca
+msgid "Troca realizada"
+msgstr ""
+
+#. module: sac
+#: model_terms:ir.ui.view,arch_db:sac.sac_search_view
+msgid "Unread Messages"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__user_id
+msgid "User that the record is currently assigned to"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_product_product__sac_ok
+#: model:ir.model.fields,field_description:sac.field_product_template__sac_ok
+msgid "Visível no SAC"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,help:sac.field_sac__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: sac
+#. odoo-python
+#: code:addons/sac/models/sac.py:0
+#, python-format
+msgid "You cannot delete a SAC record that is in done state."
+msgstr ""
+
+#. module: sac
+#. odoo-python
+#: code:addons/sac/models/sac.py:0
+#, python-format
+msgid "You do not have access to this email."
+msgstr ""
+
+#. module: sac
+#: model:ir.model.fields,field_description:sac.field_sac__zip_code
+msgid "Zip"
+msgstr ""
+
+#. module: sac
+#: model:mail.template,subject:sac.mail_template_sac_complete
+#: model:mail.template,subject:sac.mail_template_sac_troca_realizada
+msgid "[SAC] ${object.company_id.name} ref ${object.name or 'N/A'}"
+msgstr ""
+
+#. module: sac
+#: model:mail.template,name:sac.mail_template_sac_receive
+msgid "[SAC] Recebido"
+msgstr ""
+
+#. module: sac
+#: model:mail.template,name:sac.mail_template_sac_troca_realizada
+msgid "[SAC] Troca enviada"
+msgstr ""
+
+#. module: sac
+#: model:mail.template,subject:sac.mail_template_sac_receive
+msgid "[SAC] {{ object.company_id.name }} ref {{ object.name or 'N/A' }}"
+msgstr ""
+
+#. module: sac
+#: model:ir.model,name:sac.model_sac_print
+msgid "sac print"
+msgstr ""

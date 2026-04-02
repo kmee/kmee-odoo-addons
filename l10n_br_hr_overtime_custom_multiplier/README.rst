@@ -56,9 +56,9 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://www.kmee.com.br>``\ \_:
+- ``KMEE <https://www.kmee.com.br>``\ \_:
 
-   -  Luis Malta
+  - Luis Malta
 
 Maintainers
 -----------

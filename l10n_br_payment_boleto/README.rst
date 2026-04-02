@@ -43,10 +43,10 @@ Configuration
 To enable the automatic creation of a payment transaction upon invoice
 validation:
 
--  On the payment mode associated with the automatic creation, enable
-   the field **Generate boletos on invoice**.
--  Select the **Payment Provider** that will be used to issue the
-   payments.
+- On the payment mode associated with the automatic creation, enable the
+  field **Generate boletos on invoice**.
+- Select the **Payment Provider** that will be used to issue the
+  payments.
 
 Usage
 =====
@@ -57,7 +57,7 @@ will be displayed if the transaction corresponds to a boleto payment.
 Known issues / Roadmap
 ======================
 
--  ...
+- ...
 
 Changelog
 =========
@@ -65,9 +65,9 @@ Changelog
 16.0.1.0.0 (2025-04-17)
 -----------------------
 
--  [ADD] Initial release of the module.
+- [ADD] Initial release of the module.
 
--  ...
+- ...
 
 Bug Tracker
 ===========
@@ -90,14 +90,14 @@ Authors
 Contributors
 ------------
 
--  Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
+- Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  KMEE
+- KMEE
 
 Maintainers
 -----------

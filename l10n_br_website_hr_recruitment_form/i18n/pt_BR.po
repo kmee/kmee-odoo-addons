@@ -522,7 +522,7 @@ msgstr ""
 "                                        <option value=\"\">Selecione um tipo de documento</option>\n"
 "                                        <option value=\"rg\">RG</option>\n"
 "                                        <option value=\"cnh\">CNH</option>\n"
-"
+"                                    </select>"
 
 #. module: l10n_br_website_hr_recruitment_form
 #: model_terms:ir.ui.view,arch_db:l10n_br_website_hr_recruitment_form.hr_application_company_form_portal_template

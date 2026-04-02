@@ -31,9 +31,9 @@ management in Odoo.
 
 It provides a base structure that allows:
 
--  Marking records as "work in progress" (WIP)
--  Tracking work status of different records
--  Integration with other modules to extend specific WIP functionalities
+- Marking records as "work in progress" (WIP)
+- Tracking work status of different records
+- Integration with other modules to extend specific WIP functionalities
 
 **Table of contents**
 
@@ -45,10 +45,10 @@ Use Cases / Context
 
 Work in Progress (WIP) control is essential for:
 
--  Improving activity progress visibility
--  Avoiding work duplication
--  Facilitating resource management
--  Identifying process bottlenecks
+- Improving activity progress visibility
+- Avoiding work duplication
+- Facilitating resource management
+- Identifying process bottlenecks
 
 This module serves as a foundation for other modules that need to
 implement WIP control in their specific functionalities.
@@ -72,9 +72,9 @@ interface of its own.
 Developers can extend this module to add WIP functionalities in their
 own modules through:
 
--  Inheritance of the base.wip.mixin model
--  Implementation of callback functions for state control
--  Addition of domain-specific fields and logic
+- Inheritance of the base.wip.mixin model
+- Implementation of callback functions for state control
+- Addition of domain-specific fields and logic
 
 For implementation examples, check the modules that depend on this one.
 
@@ -99,14 +99,14 @@ Authors
 Contributors
 ------------
 
--  Luis Felipe Miléo mileo@kmee.com.br
+- Luis Felipe Miléo mileo@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------

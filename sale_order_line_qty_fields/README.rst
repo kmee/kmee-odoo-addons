@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ==========================
 Sale Order Line Qty Fields
 ==========================
@@ -13,7 +17,7 @@ Sale Order Line Qty Fields
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
@@ -65,11 +69,19 @@ Contributors
 
 * `KMEE <https://www.kmee.com.br>`__:
 
-  * - Tiago Amaral <tiago.amaral@kmee.com.br>
+  * Tiago Amaral <tiago.amaral@kmee.com.br>
 
 
 Maintainers
 ~~~~~~~~~~~
+
+.. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
+    :target: https://github.com/mileo
+    :alt: mileo
+
+Current maintainer:
+
+|maintainer-mileo| 
 
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_order_line_qty_fields>`_ project on GitHub.
 

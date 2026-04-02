@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_currency_rate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_currency_rate
+#: model:ir.model.fields,field_description:account_payment_currency_rate.field_account_payment_register__change_rate
+msgid "Change Rate"
+msgstr ""
+
+#. module: account_payment_currency_rate
+#: model:ir.model.fields,field_description:account_payment_currency_rate.field_account_payment_register__change_rate_percent
+msgid "Change Rate Percent"
+msgstr ""
+
+#. module: account_payment_currency_rate
+#: model:ir.model.fields,field_description:account_payment_currency_rate.field_account_payment_register__original_rate
+msgid "Current Rate"
+msgstr ""
+
+#. module: account_payment_currency_rate
+#: model:ir.model,name:account_payment_currency_rate.model_account_payment_register
+msgid "Register Payment"
+msgstr ""
+
+#. module: account_payment_currency_rate
+#: model:ir.model.fields,help:account_payment_currency_rate.field_account_payment_register__original_rate
+msgid "The rate of the currency to the currency of rate 1."
+msgstr ""
