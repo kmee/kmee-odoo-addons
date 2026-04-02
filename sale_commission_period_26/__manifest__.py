@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["commission"],
+    "depends": ["commission_oca"],
     "installable": True,
     "maintainers": ["mileo"],
 }
