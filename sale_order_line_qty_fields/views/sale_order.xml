@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="sale_order_line_form_view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']//field[@name='qty_available_today']"
+                position="attributes"
+            >
+                <attribute name="groups">sale_order_line_qty_fields.group_qty_available_today</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']//field[@name='free_qty_today']"
+                position="attributes"
+            >
+                <attribute name="groups">sale_order_line_qty_fields.group_free_qty_today</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']//field[@name='free_qty_today']"
+                position="after"
+            >
+                <field
+                    name="free_qty"
+                    groups="sale_order_line_qty_fields.group_free_qty"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
