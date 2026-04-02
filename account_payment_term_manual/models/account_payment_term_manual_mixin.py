@@ -7,6 +7,7 @@ from odoo import fields, models
 class AccountPaymentTermManualMixin(models.AbstractModel):
 
     _name = "account.payment.term.manual.mixin"
+    _description = "Account Payment Term Manual Mixin"
 
     manual_payment_term_id = fields.Many2one(
         comodel_name="account.payment.term.manual",
