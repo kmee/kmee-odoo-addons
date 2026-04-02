@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="res.groups" id="group_qty_available_today">
+        <field name="name">Show Qty Available Today</field>
+        <field name="category_id" ref="base.module_category_usability" />
+    </record>
+    <record model="res.groups" id="group_free_qty_today">
+        <field name="name">Show Free Qty Today</field>
+        <field name="category_id" ref="base.module_category_usability" />
+    </record>
+    <record model="res.groups" id="group_free_qty">
+        <field name="name">Show Free Qty</field>
+        <field name="category_id" ref="base.module_category_usability" />
+    </record>
+</odoo>
