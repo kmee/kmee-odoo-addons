@@ -9,7 +9,7 @@
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
-        "account_commission",
+        "account_commission_oca",
         "report_xlsx",
     ],
     "data": ["report/report_settlement_xlsx.xml"],
