@@ -6,9 +6,9 @@
     <record model="ir.ui.view" id="res_partner_form_view">
         <field name="name">res.partner.form (in sale_commission_team)</field>
         <field name="model">res.partner</field>
-        <field name="inherit_id" ref="sale_commission.view_partner_form_agent" />
+        <field name="inherit_id" ref="commission.view_partner_form_agent" />
         <field name="arch" type="xml">
-            <field name="agent_ids" posistion="replace" />
+            <field name="agent_ids" position="replace" />
             <page name="sales_purchases" position="after">
                 <page name="team_agents" string="Agents">
                     <group>
