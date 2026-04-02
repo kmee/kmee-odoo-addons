@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ===============================
 Sale Enforce Commercial Partner
 ===============================
@@ -13,11 +17,11 @@ Sale Enforce Commercial Partner
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/14.0/sale_enforce_commercial_partner
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_enforce_commercial_partner
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
@@ -42,7 +46,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20sale_enforce_commercial_partner%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20sale_enforce_commercial_partner%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -57,18 +61,26 @@ Authors
 Contributors
 ------------
 
--  Luis Felipe Mileo mileo@kmee.com.br
+- Luis Felipe Mileo mileo@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/14.0/sale_enforce_commercial_partner>`_ project on GitHub.
+.. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
+    :target: https://github.com/mileo
+    :alt: mileo
+
+Current maintainer:
+
+|maintainer-mileo| 
+
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_enforce_commercial_partner>`_ project on GitHub.
 
 You are welcome to contribute.
