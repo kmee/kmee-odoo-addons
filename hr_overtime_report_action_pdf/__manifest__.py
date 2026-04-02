@@ -1,6 +1,6 @@
 {
     "name": "HR Overtime Report Action PDF",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "summary": "Exporta PDF via menu Ações na list view hr.attendance.overtime",
     "author": "Seu Nome",
     "category": "Human Resources",
