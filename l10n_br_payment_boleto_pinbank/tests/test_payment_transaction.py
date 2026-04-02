@@ -6,6 +6,7 @@ from .fixtures import (
     GENERATE_BOLETO_PAYLOAD_DECRYPTED,
     SEND_CAPTURE_REQUEST_PAYLOAD,
     SEND_CAPTURE_REQUEST_RESPONSE,
+    SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO,
 )
 
 
@@ -89,6 +90,9 @@ class TestPaymentTransaction(TransactionCase):
         - The "digitable_line" field matches the expected format.
         - The "barcode" field is correctly generated.
 
+        Note: The state transition is handled by `_process_notification_data`, not by
+        `_prepare_transaction_boleto_info`, which only extracts boleto display fields.
+
         Assertions:
             - The "our_number" field matches the expected value.
             - The "digitable_line" field matches the expected digitable line format.
@@ -162,6 +166,7 @@ class TestPaymentTransaction(TransactionCase):
             self.assertEqual(response, mock_response)
 
             # Assert that the payment transaction state was updated to "pending"
+            # (a newly created boleto has last_action=CREATED which maps to pending)
             self.assertEqual(self.payment_transaction.state, "pending")
 
             # Assert that the transaction was updated with the boleto info
@@ -208,7 +213,7 @@ class TestPaymentTransaction(TransactionCase):
         with patch(
             "odoo.addons.l10n_br_payment_boleto_pinbank.models.payment_provider."
             "Paymentprovider._boleto_pinbank_make_request",
-            return_value=SEND_CAPTURE_REQUEST_RESPONSE,
+            return_value=SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO,
         ) as mock_make_request:
             self.payment_transaction._send_capture_request()
 
