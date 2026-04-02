@@ -73,9 +73,7 @@ class AccountPaymentTermLineManual(models.Model):
         required=False,
     )
 
-    fixed_date = fields.Date(
-        string="Fixed Date",
-    )
+    fixed_date = fields.Date()
 
     delay_type = fields.Selection(
         selection_add=[("custom", "Custom")],
