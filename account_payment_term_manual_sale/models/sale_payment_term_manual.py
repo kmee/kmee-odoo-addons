@@ -43,9 +43,7 @@ class SaleOrder(models.Model):
     def _create_invoices(self, grouped=False, final=False, date=None):
         """Invoicing from SO: trigger manual term recompute lines."""
         self = self.with_context(skip_manual_term_onchange=True)
-        invoice_ids = super()._create_invoices(
-            grouped=grouped, final=final, date=date
-        )
+        invoice_ids = super()._create_invoices(grouped=grouped, final=final, date=date)
         for inv in invoice_ids:
             if inv.manual_payment_term_id:
                 inv.recompute_payment_lines()
