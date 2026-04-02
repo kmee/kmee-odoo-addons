@@ -6,7 +6,7 @@
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "maintainers": ["mileo"],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "depends": ["base_partner_company_group", "contacts"],
     "data": [
         "security/ir.model.access.csv",
