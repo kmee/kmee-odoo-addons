@@ -11,8 +11,9 @@
         "sale",
     ],
     "data": [
-        "views/sale_order_line.xml",
         "security/groups.xml",
+        "views/sale_order_line.xml",
     ],
     "demo": [],
+    "maintainers": ["mileo"],
 }
