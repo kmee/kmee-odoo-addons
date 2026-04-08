@@ -48,7 +48,6 @@ exclude: |
   ^project_task_service_class/|
   ^project_tech_lead/|
   ^sale_blanket_order_isolated_quotation/|
-  ^sale_crm_auto_won/|
   ^sale_exception_quotation/|
   ^sale_hide_internal_reference/|
   ^sale_order_template_pricelist/|
@@ -162,7 +161,7 @@ repos:
         additional_dependencies:
           - "eslint@9.12.0"
           - "eslint-plugin-jsdoc@50.3.1"
-          - "globals@18.0.0"
+          - "globals@15.14.0"
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
