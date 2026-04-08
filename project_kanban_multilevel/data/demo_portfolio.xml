@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="portfolio_digital_products" model="project.portfolio">
+            <field name="name">Produtos Digitais</field>
+            <field name="sequence">10</field>
+            <field name="description">&lt;p&gt;Portfolio de produtos digitais da empresa.&lt;/p&gt;</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+            <field name="color">4</field>
+        </record>
+
+        <record id="portfolio_infrastructure" model="project.portfolio">
+            <field name="name">Infraestrutura</field>
+            <field name="sequence">20</field>
+            <field name="description">&lt;p&gt;Portfolio de projetos de infraestrutura.&lt;/p&gt;</field>
+            <field name="color">2</field>
+        </record>
+
+    </data>
+</odoo>

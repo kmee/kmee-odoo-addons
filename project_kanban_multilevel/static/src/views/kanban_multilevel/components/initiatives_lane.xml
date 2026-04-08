@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.InitiativesLane">
+        <div class="o_initiatives_lane">
+            <!-- Header -->
+            <div class="o_initiatives_header" t-on-click="toggle">
+                <span class="o_initiatives_title">
+                    Initiatives Workflow
+                    <span class="o_initiatives_count">
+                        (<t t-esc="props.initiatives.length"/>)
+                    </span>
+                </span>
+                <span class="o_initiatives_toggle">
+                    <t t-if="props.collapsed">▶</t>
+                    <t t-else="">▼</t>
+                </span>
+            </div>
+
+            <!-- Expanded: initiative cards by stage -->
+            <div t-if="!props.collapsed" class="o_initiatives_body">
+                <div class="o_initiatives_spacer"/>
+                <t t-foreach="props.stages" t-as="stage" t-key="stage.id">
+                    <div class="o_initiative_cell"
+                         t-att-style="stage.has_sub_stages ? 'flex: 2' : 'flex: 1'">
+                        <t t-foreach="initiativesByStage[stage.id] or []" t-as="init" t-key="init.id">
+                            <div class="o_initiative_card">
+                                <div class="o_init_name"><t t-esc="init.name"/></div>
+                                <div class="o_init_squares">
+                                    <t t-foreach="getProgressSquares(init)" t-as="sq" t-key="sq.id">
+                                        <span class="o_init_square"
+                                              t-att-style="'background-color:' + getAreaColor(sq.area_type)"
+                                              t-att-title="sq.name + ' (' + sq.stage_name + ')'"/>
+                                    </t>
+                                </div>
+                                <div class="o_init_size"><t t-esc="init.card_size or 0"/>pt</div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Pivot view: Lead Time and Cycle Time by stage -->
+    <record id="view_project_task_analytics_pivot" model="ir.ui.view">
+        <field name="name">project.task.analytics.pivot</field>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <pivot string="Analytics Kanban">
+                <field name="stage_id" type="row"/>
+                <field name="lead_time_days" type="measure"/>
+                <field name="cycle_time_days" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph view: Throughput (tasks completed per month) -->
+    <record id="view_project_task_analytics_graph" model="ir.ui.view">
+        <field name="name">project.task.analytics.graph</field>
+        <field name="model">project.task</field>
+        <field name="arch" type="xml">
+            <graph string="Throughput">
+                <field name="date_done" interval="month"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action to open analytics views -->
+    <record id="action_project_analytics" model="ir.actions.act_window">
+        <field name="name">Analytics Kanban</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="context">{'search_default_project_id': active_id}</field>
+    </record>
+
+    <record id="action_project_analytics_view_pivot" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_project_task_analytics_pivot"/>
+        <field name="act_window_id" ref="action_project_analytics"/>
+    </record>
+
+    <record id="action_project_analytics_view_graph" model="ir.actions.act_window.view">
+        <field name="sequence">2</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_project_task_analytics_graph"/>
+        <field name="act_window_id" ref="action_project_analytics"/>
+    </record>
+
+    <!-- Smart button on project form -->
+    <record id="view_project_form_inherit_analytics" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.analytics</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_project_analytics)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-bar-chart"
+                        invisible="not use_multilevel_kanban">
+                    <span>Analytics</span>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

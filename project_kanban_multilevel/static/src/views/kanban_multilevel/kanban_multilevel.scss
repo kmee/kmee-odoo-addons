@@ -1,0 +1,626 @@
+// =============================================================================
+// Kanban Multilevel — Main Styles
+// =============================================================================
+
+.o_kanban_multilevel_wrapper {
+    display: flex;
+    height: 100%;
+    min-height: 400px;
+    overflow: hidden;
+}
+
+.o_kanban_multilevel_main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.o_kanban_multilevel {
+    display: grid;
+    gap: 1px;
+    background: #e5e7eb;
+    overflow: auto;
+    flex: 1;
+    // grid-template-columns is set inline via JS
+}
+
+// =============================================================================
+// Filter Bar
+// =============================================================================
+
+.o_multilevel_filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    flex-shrink: 0;
+}
+
+.o_filter_search {
+    flex: 1;
+    max-width: 300px;
+}
+
+.o_filter_input {
+    width: 100%;
+    padding: 4px 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 13px;
+    outline: none;
+
+    &:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+    }
+}
+
+.o_filter_dropdowns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.o_filter_select {
+    padding: 4px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 13px;
+    background: white;
+    cursor: pointer;
+
+    &:focus {
+        border-color: #3b82f6;
+        outline: none;
+    }
+}
+
+.o_filter_clear {
+    font-size: 12px;
+    padding: 3px 8px;
+}
+
+// =============================================================================
+// Column Headers
+// =============================================================================
+
+// Row wrappers use display:contents so their children participate in the grid
+.o_column_headers_row1,
+.o_column_headers_row2 {
+    display: contents;
+}
+
+.o_header_spacer {
+    background: #f9fafb;
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    min-width: 180px;
+    padding: 8px;
+}
+
+.o_column_header_parent {
+    background: #f3f4f6;
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    text-align: center;
+    border-bottom: 2px solid #d1d5db;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.o_column_header_sub {
+    background: #f9fafb;
+    padding: 4px 8px;
+    font-size: 11px;
+    text-align: center;
+    color: #6b7280;
+    position: sticky;
+    top: 38px;
+    z-index: 5;
+
+    &.o_has_sub {
+        border-bottom: 1px solid #d1d5db;
+    }
+}
+
+.o_sub_label {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+// =============================================================================
+// WIP Badge
+// =============================================================================
+
+.o_wip_badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+
+    &.o_wip_ok {
+        background: #e5e7eb;
+        color: #6b7280;
+    }
+
+    &.o_wip_at_limit {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    &.o_wip_exceeded {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+}
+
+// =============================================================================
+// Initiatives Lane
+// =============================================================================
+
+.o_initiatives_lane {
+    grid-column: 1 / -1;
+    background: #eff6ff;
+    border-bottom: 2px solid #93c5fd;
+}
+
+.o_initiatives_header {
+    padding: 8px 12px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #1e40af;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+        background: #dbeafe;
+    }
+}
+
+.o_initiatives_count {
+    font-weight: 400;
+    color: #3b82f6;
+}
+
+.o_initiatives_toggle {
+    font-size: 10px;
+    color: #60a5fa;
+}
+
+.o_initiatives_body {
+    display: flex;
+    gap: 1px;
+    background: #dbeafe;
+}
+
+.o_initiatives_spacer {
+    background: #eff6ff;
+    min-width: 180px;
+    flex-shrink: 0;
+}
+
+.o_initiative_cell {
+    background: #eff6ff;
+    padding: 6px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.o_initiative_card {
+    background: white;
+    border-radius: 6px;
+    padding: 6px 8px;
+    border: 1px solid #bfdbfe;
+    font-size: 12px;
+
+    &:hover {
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.o_init_name {
+    font-weight: 500;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.o_init_squares {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+}
+
+.o_init_square {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.o_init_size {
+    font-size: 10px;
+    color: #6b7280;
+    text-align: right;
+}
+
+// =============================================================================
+// Swimlane Band
+// =============================================================================
+
+// display:contents lets label+cells participate in parent grid directly
+.o_swimlane_band {
+    display: contents;
+}
+
+.o_swimlane_label {
+    background: #f9fafb;
+    padding: 8px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    min-width: 180px;
+    border-right: 3px solid #d1d5db;
+
+    &:hover {
+        background: #f3f4f6;
+    }
+
+    &.o_label_expedite {
+        border-right-color: #7c3aed;
+        background: #f5f3ff;
+    }
+}
+
+.o_swimlane_icon {
+    font-size: 14px;
+}
+
+.o_swimlane_name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.o_swimlane_toggle {
+    font-size: 9px;
+    color: #9ca3af;
+}
+
+// Collapsed counters
+.o_cell_counter {
+    background: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    min-height: 32px;
+}
+
+// =============================================================================
+// Board Cell
+// =============================================================================
+
+.o_board_cell {
+    background: #fafafa;
+    padding: 4px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background 0.15s;
+
+    &.o_cell_drag_over {
+        background: #dbeafe;
+        outline: 2px dashed #3b82f6;
+        outline-offset: -2px;
+    }
+
+    &.o_cell_expedite {
+        background: #faf5ff;
+    }
+}
+
+.o_cell_empty {
+    min-height: 40px;
+}
+
+// =============================================================================
+// Compact Card
+// =============================================================================
+
+.o_compact_card {
+    display: flex;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    cursor: grab;
+    min-width: 140px;
+    max-width: 200px;
+    transition: box-shadow 0.15s, border-color 0.15s;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        border-color: #93c5fd;
+    }
+
+    &:active {
+        cursor: grabbing;
+        opacity: 0.8;
+    }
+
+    &.o_compact_card_blocked {
+        background: #fef2f2;
+        border-color: #f87171;
+    }
+
+    &.o_compact_card_aging {
+        border-color: #fbbf24;
+    }
+}
+
+.o_card_sidebar {
+    width: 3px;
+    min-height: 100%;
+    flex-shrink: 0;
+}
+
+.o_card_content {
+    padding: 4px 6px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.o_card_header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+}
+
+.o_card_id {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.o_card_priority {
+    color: #f59e0b;
+    font-size: 8px;
+}
+
+.o_badge {
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+.o_badge_blocked {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.o_badge_aging {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.o_card_title {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+    max-height: 2.6em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.o_card_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.o_card_size {
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.o_card_avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+// =============================================================================
+// Detail Panel (sidebar)
+// =============================================================================
+
+.o_detail_panel {
+    width: 320px;
+    min-width: 320px;
+    background: white;
+    border-left: 1px solid #d1d5db;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.o_detail_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.o_detail_id {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.o_detail_actions {
+    display: flex;
+    gap: 6px;
+}
+
+.o_detail_close {
+    padding: 2px 8px;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.o_detail_loading {
+    padding: 24px 16px;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.o_detail_content {
+    padding: 16px;
+    flex: 1;
+}
+
+.o_detail_title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.o_detail_meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.o_detail_row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+}
+
+.o_detail_label {
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.o_detail_value {
+    color: #111827;
+}
+
+.o_detail_blocked {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-bottom: 16px;
+}
+
+.o_blocked_reason {
+    font-size: 12px;
+    color: #991b1b;
+    margin: 4px 0 0;
+}
+
+.o_detail_assignee {
+    margin-bottom: 16px;
+}
+
+.o_detail_avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.o_detail_section_title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.o_subtask_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.o_subtask_list li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    font-size: 13px;
+    border-bottom: 1px solid #f3f4f6;
+
+    &.o_subtask_done {
+        color: #9ca3af;
+        text-decoration: line-through;
+    }
+}
+
+.o_subtask_check {
+    font-size: 14px;
+    width: 18px;
+    flex-shrink: 0;
+}
+
+.o_subtask_name {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.o_detail_empty {
+    padding: 24px 16px;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+}

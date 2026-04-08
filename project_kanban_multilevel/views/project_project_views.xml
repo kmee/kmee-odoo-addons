@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_form_inherit_multilevel" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.multilevel</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_multilevel_kanban)d"
+                        type="action"
+                        class="oe_stat_button"
+                        icon="fa-th"
+                        invisible="not use_multilevel_kanban">
+                    <span>Board Multinível</span>
+                </button>
+            </xpath>
+            <xpath expr="//page[last()]" position="after">
+                <page string="Kanban Multinível" name="kanban_multilevel">
+                    <group>
+                        <group>
+                            <field name="use_multilevel_kanban"/>
+                            <field name="show_initiatives_lane"
+                                   invisible="not use_multilevel_kanban"/>
+                            <field name="aging_threshold"
+                                   invisible="not use_multilevel_kanban"/>
+                        </group>
+                    </group>
+                    <group invisible="not use_multilevel_kanban">
+                        <button name="action_create_swimlanes_from_template"
+                                type="object"
+                                string="Criar Swimlanes (Template)"
+                                class="btn-secondary"
+                                icon="fa-magic"/>
+                        <button name="action_copy_swimlanes"
+                                type="object"
+                                string="Copiar Swimlanes de Outro Projeto"
+                                class="btn-secondary"
+                                icon="fa-copy"/>
+                    </group>
+                    <field name="swimlane_ids"
+                           invisible="not use_multilevel_kanban"
+                           context="{'default_project_id': id}">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="icon"/>
+                            <field name="name"/>
+                            <field name="color" widget="color"/>
+                            <field name="is_expedite"/>
+                            <field name="wip_limit"/>
+                            <field name="task_count"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

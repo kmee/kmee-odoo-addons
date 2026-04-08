@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Multilevel board template -->
+    <t t-name="project_kanban_multilevel.MultilevelBoard">
+        <div class="o_kanban_multilevel_wrapper">
+            <div class="o_kanban_multilevel_main">
+                <!-- Filter Bar -->
+                <div class="o_multilevel_filters">
+                    <div class="o_filter_search">
+                        <input type="text"
+                               class="o_filter_input"
+                               placeholder="Buscar por título ou ID..."
+                               t-att-value="uiState.searchText"
+                               t-on-input="onSearchInput"/>
+                    </div>
+                    <div class="o_filter_dropdowns">
+                        <select class="o_filter_select" t-on-change="onFilterSwimlane">
+                            <option value="">Todas swimlanes</option>
+                            <t t-foreach="swimlanes" t-as="sl" t-key="sl.id">
+                                <option t-att-value="sl.id"
+                                        t-att-selected="uiState.filterSwimlaneId === sl.id">
+                                    <t t-esc="sl.icon"/> <t t-esc="sl.name"/>
+                                </option>
+                            </t>
+                        </select>
+                        <select class="o_filter_select" t-on-change="onFilterUser">
+                            <option value="">Todos membros</option>
+                            <t t-foreach="members" t-as="m" t-key="m.id">
+                                <option t-att-value="m.id"
+                                        t-att-selected="uiState.filterUserId === m.id">
+                                    <t t-esc="m.name"/>
+                                </option>
+                            </t>
+                        </select>
+                        <button t-if="hasActiveFilters"
+                                class="btn btn-sm btn-outline-secondary o_filter_clear"
+                                t-on-click="onClearFilters">
+                            Limpar filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Grid Board -->
+                <div class="o_kanban_multilevel"
+                     t-att-style="'grid-template-columns:' + gridTemplateColumns">
+
+                    <!-- Initiatives Lane -->
+                    <InitiativesLane t-if="showInitiatives"
+                        initiatives="initiatives"
+                        stages="stages"
+                        columns="columns"
+                        collapsed="uiState.collapsedInitiatives"
+                        onToggle="onToggleInitiatives"
+                    />
+
+                    <!-- Column Headers -->
+                    <ColumnHeaders
+                        stages="stages"
+                        columns="columns"
+                        getWipCount="getWipCount"
+                    />
+
+                    <!-- Swimlane Bands -->
+                    <t t-foreach="swimlanes" t-as="swimlane" t-key="swimlane.id">
+                        <SwimlaneBand
+                            swimlane="swimlane"
+                            columns="columns"
+                            getTasksForCell="getTasksForCell"
+                            collapsed="isSwimlaneCollapsed(swimlane.id)"
+                            onToggle="onToggleSwimlane"
+                            onCardDrop="onCardDrop"
+                            onCardClick="onCardClick"
+                        />
+                    </t>
+
+                    <!-- "Sem categoria" virtual swimlane -->
+                    <SwimlaneBand
+                        swimlane="null"
+                        columns="columns"
+                        getTasksForCell="getTasksForCell"
+                        collapsed="isSwimlaneCollapsed(false)"
+                        onToggle="onToggleSwimlane"
+                        onCardDrop="onCardDrop"
+                        onCardClick="onCardClick"
+                    />
+                </div>
+            </div>
+
+            <!-- Detail Panel -->
+            <DetailPanel t-if="showDetailPanel"
+                taskId="uiState.selectedTaskId"
+                onClose="onClosePanel"
+                onOpenForm="onOpenForm"
+            />
+        </div>
+    </t>
+
+    <!-- Main renderer: standalone template, no xpath inheritance -->
+    <t t-name="project_kanban_multilevel.KanbanMultilevelRenderer">
+        <t t-if="isMultilevel">
+            <t t-call="project_kanban_multilevel.MultilevelBoard"/>
+        </t>
+        <t t-else="">
+            <t t-call="web.KanbanRenderer"/>
+        </t>
+    </t>
+
+</templates>

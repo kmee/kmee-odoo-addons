@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Kanban Multilevel view (registered as own view type) -->
+    <record id="view_task_kanban_multilevel" model="ir.ui.view">
+        <field name="name">project.task.kanban.multilevel</field>
+        <field name="model">project.task</field>
+        <field name="type">kanban_multilevel</field>
+        <field name="arch" type="xml">
+            <kanban_multilevel
+                default_group_by="stage_id"
+                class="o_kanban_small_column o_kanban_project_tasks"
+                default_order="priority desc, sequence, id desc"
+            >
+                <field name="stage_id"/>
+                <field name="swimlane_id"/>
+                <field name="sub_stage"/>
+                <field name="card_size"/>
+                <field name="is_blocked"/>
+                <field name="blocked_reason"/>
+                <field name="aging_days"/>
+                <field name="is_initiative"/>
+                <field name="child_progress_data"/>
+                <field name="user_ids"/>
+                <field name="priority"/>
+                <field name="color"/>
+                <field name="parent_id"/>
+                <field name="child_ids"/>
+                <field name="project_id"/>
+                <templates>
+                    <t t-name="card">
+                        <field name="name"/>
+                    </t>
+                </templates>
+            </kanban_multilevel>
+        </field>
+    </record>
+
+    <!-- Action to open the multilevel kanban board -->
+    <record id="action_multilevel_kanban" model="ir.actions.act_window">
+        <field name="name">Kanban Multinível</field>
+        <field name="res_model">project.task</field>
+        <field name="view_mode">kanban_multilevel,kanban,list,form</field>
+        <field name="context">{
+            'default_project_id': active_id,
+            'search_default_project_id': active_id,
+        }</field>
+    </record>
+
+    <!-- Bind our kanban_multilevel view to the action -->
+    <record id="action_multilevel_kanban_view_kanban_multilevel" model="ir.actions.act_window.view">
+        <field name="sequence">1</field>
+        <field name="view_mode">kanban_multilevel</field>
+        <field name="view_id" ref="view_task_kanban_multilevel"/>
+        <field name="act_window_id" ref="action_multilevel_kanban"/>
+    </record>
+
+    <!-- Inherit task form to add multilevel fields -->
+    <record id="view_task_form_inherit_multilevel" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.multilevel</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="swimlane_id"
+                       domain="[('project_id', '=', project_id)]"/>
+                <field name="sub_stage"
+                       invisible="not stage_id.has_sub_stages"/>
+                <field name="card_size"/>
+                <field name="is_blocked"/>
+                <field name="blocked_reason"
+                       invisible="not is_blocked"/>
+                <field name="aging_days" readonly="1"/>
+                <field name="is_initiative" readonly="1" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

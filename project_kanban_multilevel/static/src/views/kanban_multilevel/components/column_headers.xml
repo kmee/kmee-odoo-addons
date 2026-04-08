@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.ColumnHeaders">
+        <!-- Row 1: Parent headers (stage names + WIP) -->
+        <div class="o_column_headers_row1">
+            <div class="o_header_spacer"/>
+            <t t-foreach="props.stages" t-as="stage" t-key="stage.id">
+                <div class="o_column_header_parent"
+                     t-att-style="'grid-column: span ' + (stage.has_sub_stages ? 2 : 1)">
+                    <span class="o_header_name"><t t-esc="stage.name"/></span>
+                    <WipBadge t-if="stage.wip_limit"
+                        current="props.getWipCount(stage.id, stage.wip_limit_type)"
+                        limit="stage.wip_limit"
+                    />
+                </div>
+            </t>
+        </div>
+
+        <!-- Row 2: Sub-column headers -->
+        <div class="o_column_headers_row2">
+            <div class="o_header_spacer"/>
+            <t t-foreach="props.columns" t-as="col" t-key="'' + col.stageId + '_' + (col.subStage || 'full')">
+                <div t-att-class="'o_column_header_sub' + (col.isSubColumn ? ' o_has_sub' : '')">
+                    <t t-if="col.isSubColumn">
+                        <span class="o_sub_label"><t t-esc="col.subStageLabel"/></span>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>

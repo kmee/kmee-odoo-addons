@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.WipBadge">
+        <span t-if="show" t-att-class="'o_wip_badge ' + colorClass">
+            <t t-esc="label"/>
+        </span>
+    </t>
+
+</templates>

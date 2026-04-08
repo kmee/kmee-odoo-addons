@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.BoardCell">
+        <div t-att-class="cellClasses"
+             t-on-dragover="onDragOver"
+             t-on-dragleave="onDragLeave"
+             t-on-drop="onDrop">
+            <t t-foreach="props.tasks" t-as="task" t-key="task.resId or task.id or (task.data and task.data.id)">
+                <CompactCard
+                    record="task"
+                    color="props.swimlaneColor or '#714B67'"
+                    onCardClick="props.onCardClick"
+                />
+            </t>
+            <div t-if="!props.tasks.length" class="o_cell_empty"/>
+        </div>
+    </t>
+
+</templates>

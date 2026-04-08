@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.DetailPanel">
+        <div class="o_detail_panel">
+            <!-- Header -->
+            <div class="o_detail_header">
+                <span class="o_detail_id" t-if="task">#<t t-esc="task.id"/></span>
+                <div class="o_detail_actions">
+                    <button class="btn btn-sm btn-primary" t-on-click="onOpenForm">Abrir</button>
+                    <button class="btn btn-sm btn-outline-secondary o_detail_close" t-on-click="onClose">✕</button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div t-if="state.loading" class="o_detail_loading">
+                <i class="fa fa-spinner fa-spin"/> Carregando...
+            </div>
+
+            <!-- Content -->
+            <div t-elif="task" class="o_detail_content">
+                <!-- Title -->
+                <h5 class="o_detail_title"><t t-esc="task.name"/></h5>
+
+                <!-- Metadata -->
+                <div class="o_detail_meta">
+                    <div class="o_detail_row">
+                        <span class="o_detail_label">Estágio</span>
+                        <span class="o_detail_value"><t t-esc="stageName"/></span>
+                    </div>
+                    <div class="o_detail_row">
+                        <span class="o_detail_label">Sub-estágio</span>
+                        <span class="o_detail_value"><t t-esc="subStageLabel"/></span>
+                    </div>
+                    <div class="o_detail_row">
+                        <span class="o_detail_label">Swimlane</span>
+                        <span class="o_detail_value"><t t-esc="swimlaneName"/></span>
+                    </div>
+                    <div class="o_detail_row">
+                        <span class="o_detail_label">Prioridade</span>
+                        <span class="o_detail_value"><t t-esc="priorityLabel"/></span>
+                    </div>
+                    <div class="o_detail_row">
+                        <span class="o_detail_label">Pontos</span>
+                        <span class="o_detail_value"><t t-esc="task.card_size or 1"/>pt</span>
+                    </div>
+                    <div class="o_detail_row">
+                        <span class="o_detail_label">Aging</span>
+                        <span class="o_detail_value">
+                            <t t-esc="task.aging_days or 0"/> dias
+                        </span>
+                    </div>
+                    <div class="o_detail_row" t-if="task.date_deadline">
+                        <span class="o_detail_label">Deadline</span>
+                        <span class="o_detail_value"><t t-esc="task.date_deadline"/></span>
+                    </div>
+                </div>
+
+                <!-- Blocked -->
+                <div t-if="task.is_blocked" class="o_detail_blocked">
+                    <span class="o_badge o_badge_blocked">BLOQUEADO</span>
+                    <p t-if="task.blocked_reason" class="o_blocked_reason">
+                        <t t-esc="task.blocked_reason"/>
+                    </p>
+                </div>
+
+                <!-- Assignee -->
+                <div class="o_detail_assignee" t-if="avatarUrl">
+                    <img class="o_detail_avatar" t-att-src="avatarUrl" alt="Avatar"/>
+                </div>
+
+                <!-- Subtasks -->
+                <div class="o_detail_subtasks" t-if="subtasks.length">
+                    <h6 class="o_detail_section_title">Subtarefas (<t t-esc="subtasks.length"/>)</h6>
+                    <ul class="o_subtask_list">
+                        <t t-foreach="subtasks" t-as="sub" t-key="sub.id">
+                            <li t-att-class="isSubtaskDone(sub) ? 'o_subtask_done' : ''">
+                                <span class="o_subtask_check">
+                                    <t t-if="isSubtaskDone(sub)">☑</t>
+                                    <t t-else="">☐</t>
+                                </span>
+                                <span class="o_subtask_name"><t t-esc="sub.name"/></span>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- No task selected -->
+            <div t-else="" class="o_detail_empty">
+                Selecione uma task para ver detalhes.
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.SwimlaneBand">
+        <div t-att-class="'o_swimlane_band'">
+            <!-- Swimlane Label -->
+            <div t-att-class="labelClasses" t-on-click="toggle">
+                <span class="o_swimlane_icon" t-if="props.swimlane">
+                    <t t-esc="icon"/>
+                </span>
+                <span class="o_swimlane_name"><t t-esc="label"/></span>
+                <span class="o_swimlane_toggle">
+                    <t t-if="props.collapsed">▶</t>
+                    <t t-else="">▼</t>
+                </span>
+            </div>
+
+            <!-- Collapsed: show counters -->
+            <t t-if="props.collapsed">
+                <t t-foreach="props.columns" t-as="col" t-key="'' + col.stageId + '_' + (col.subStage or 'full')">
+                    <div class="o_cell_counter">
+                        <t t-esc="getCollapsedCount(col)"/>
+                    </div>
+                </t>
+            </t>
+
+            <!-- Expanded: show board cells -->
+            <t t-else="">
+                <t t-foreach="props.columns" t-as="col" t-key="'' + col.stageId + '_' + (col.subStage or 'full')">
+                    <BoardCell
+                        tasks="props.getTasksForCell(swimlaneId, col.stageId, col.subStage)"
+                        stageId="col.stageId"
+                        subStage="col.subStage"
+                        swimlaneId="swimlaneId"
+                        swimlaneColor="swimlaneColor"
+                        isExpedite="isExpedite"
+                        onCardDrop="props.onCardDrop"
+                        onCardClick="props.onCardClick"
+                    />
+                </t>
+            </t>
+        </div>
+    </t>
+
+</templates>

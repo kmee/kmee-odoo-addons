@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="project_kanban_multilevel.CompactCard">
+        <div t-att-class="cardClasses"
+             draggable="true"
+             t-on-dragstart="onDragStart"
+             t-on-click="onClick">
+            <div class="o_card_sidebar" t-att-style="'background-color:' + sidebarColor"/>
+            <div class="o_card_content">
+                <div class="o_card_header">
+                    <span class="o_card_id">#<t t-esc="taskId"/></span>
+                    <span t-if="priority" class="o_card_priority">●</span>
+                    <span t-if="isBlocked" class="o_badge o_badge_blocked">BLOQUEADO</span>
+                    <span t-if="showAging" class="o_badge o_badge_aging">
+                        ⏱<t t-esc="agingDays"/>d
+                    </span>
+                </div>
+                <div class="o_card_title" t-att-title="taskName">
+                    <t t-esc="taskName"/>
+                </div>
+                <div class="o_card_footer">
+                    <span class="o_card_size"><t t-esc="cardSize"/>pt</span>
+                    <img t-if="assigneeAvatar"
+                         class="o_card_avatar"
+                         t-att-src="assigneeAvatar"
+                         alt="Avatar"/>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Projeto -->
+        <record id="project_portal_cliente" model="project.project">
+            <field name="name">Portal do Cliente</field>
+            <field name="use_multilevel_kanban" eval="True"/>
+            <field name="show_initiatives_lane" eval="True"/>
+        </record>
+
+        <!-- Estágios -->
+        <record id="stage_backlog" model="project.task.type">
+            <field name="name">Backlog</field>
+            <field name="sequence">1</field>
+            <field name="has_sub_stages" eval="False"/>
+            <field name="wip_limit">0</field>
+            <field name="area_type">requested</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+        </record>
+
+        <record id="stage_pronto" model="project.task.type">
+            <field name="name">Pronto p/ iniciar</field>
+            <field name="sequence">2</field>
+            <field name="has_sub_stages" eval="False"/>
+            <field name="wip_limit">6</field>
+            <field name="wip_limit_type">count</field>
+            <field name="area_type">requested</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+        </record>
+
+        <record id="stage_dev" model="project.task.type">
+            <field name="name">Desenvolvimento</field>
+            <field name="sequence">3</field>
+            <field name="has_sub_stages" eval="True"/>
+            <field name="wip_limit">8</field>
+            <field name="wip_limit_type">count</field>
+            <field name="area_type">progress</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+        </record>
+
+        <record id="stage_review" model="project.task.type">
+            <field name="name">Code Review</field>
+            <field name="sequence">4</field>
+            <field name="has_sub_stages" eval="True"/>
+            <field name="wip_limit">4</field>
+            <field name="wip_limit_type">count</field>
+            <field name="area_type">progress</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+        </record>
+
+        <record id="stage_qa" model="project.task.type">
+            <field name="name">QA / Teste</field>
+            <field name="sequence">5</field>
+            <field name="has_sub_stages" eval="True"/>
+            <field name="wip_limit">5</field>
+            <field name="wip_limit_type">count</field>
+            <field name="area_type">progress</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+        </record>
+
+        <record id="stage_done" model="project.task.type">
+            <field name="name">Concluído</field>
+            <field name="sequence">6</field>
+            <field name="has_sub_stages" eval="False"/>
+            <field name="wip_limit">0</field>
+            <field name="area_type">done</field>
+            <field name="project_ids" eval="[(4, ref('project_portal_cliente'))]"/>
+        </record>
+
+        <!-- Swimlanes -->
+        <record id="swimlane_expedite" model="project.kanban.swimlane">
+            <field name="name">Expedite</field>
+            <field name="color">#7C3AED</field>
+            <field name="icon">⚡</field>
+            <field name="is_expedite" eval="True"/>
+            <field name="wip_limit">2</field>
+            <field name="sequence">5</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+        </record>
+
+        <record id="swimlane_features" model="project.kanban.swimlane">
+            <field name="name">Features</field>
+            <field name="color">#714B67</field>
+            <field name="icon">◆</field>
+            <field name="sequence">10</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+        </record>
+
+        <record id="swimlane_bugs" model="project.kanban.swimlane">
+            <field name="name">Bugs</field>
+            <field name="color">#DC2626</field>
+            <field name="icon">●</field>
+            <field name="sequence">20</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+        </record>
+
+        <record id="swimlane_tech_debt" model="project.kanban.swimlane">
+            <field name="name">Tech Debt</field>
+            <field name="color">#D97706</field>
+            <field name="icon">▲</field>
+            <field name="sequence">30</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+        </record>
+
+        <!-- Initiatives (tasks pai com filhos) -->
+        <record id="initiative_portal_v2" model="project.task">
+            <field name="name">Portal v2</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">13</field>
+        </record>
+
+        <record id="initiative_mobile_app" model="project.task">
+            <field name="name">Mobile App</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_pronto"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">21</field>
+        </record>
+
+        <record id="initiative_security_audit" model="project.task">
+            <field name="name">Security Audit</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">8</field>
+        </record>
+
+        <record id="initiative_perf_optimization" model="project.task">
+            <field name="name">Performance Optimization</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_qa"/>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <!-- Child tasks da initiative Portal v2 -->
+        <record id="task_design" model="project.task">
+            <field name="name">Design System</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_portal_v2"/>
+            <field name="stage_id" ref="stage_done"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <record id="task_api" model="project.task">
+            <field name="name">API REST</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_portal_v2"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">8</field>
+        </record>
+
+        <record id="task_frontend" model="project.task">
+            <field name="name">Frontend SPA</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_portal_v2"/>
+            <field name="stage_id" ref="stage_pronto"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">8</field>
+        </record>
+
+        <record id="task_testes_e2e" model="project.task">
+            <field name="name">Testes E2E</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_portal_v2"/>
+            <field name="stage_id" ref="stage_backlog"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <!-- Child tasks da initiative Mobile App -->
+        <record id="task_mobile_wireframes" model="project.task">
+            <field name="name">Wireframes Mobile</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_mobile_app"/>
+            <field name="stage_id" ref="stage_pronto"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <record id="task_mobile_auth" model="project.task">
+            <field name="name">Auth Mobile</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_mobile_app"/>
+            <field name="stage_id" ref="stage_backlog"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <record id="task_mobile_push" model="project.task">
+            <field name="name">Push Notifications</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_mobile_app"/>
+            <field name="stage_id" ref="stage_backlog"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <!-- Child tasks Security Audit -->
+        <record id="task_pentest" model="project.task">
+            <field name="name">Pentest externo</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_security_audit"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <record id="task_owasp_fix" model="project.task">
+            <field name="name">Fix OWASP Top 10</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_security_audit"/>
+            <field name="stage_id" ref="stage_backlog"/>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">8</field>
+        </record>
+
+        <!-- Child tasks Performance -->
+        <record id="task_cache" model="project.task">
+            <field name="name">Redis Cache</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_perf_optimization"/>
+            <field name="stage_id" ref="stage_qa"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <record id="task_cdn" model="project.task">
+            <field name="name">CDN Setup</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="parent_id" ref="initiative_perf_optimization"/>
+            <field name="stage_id" ref="stage_done"/>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">2</field>
+        </record>
+
+        <!-- Standalone tasks - Features -->
+        <record id="task_dashboard" model="project.task">
+            <field name="name">Dashboard principal</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <record id="task_oauth" model="project.task">
+            <field name="name">OAuth2 Integration</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">done</field>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <record id="task_notifications" model="project.task">
+            <field name="name">Sistema de notificações</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_review"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <record id="task_export_pdf" model="project.task">
+            <field name="name">Export PDF</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_pronto"/>
+            <field name="swimlane_id" ref="swimlane_features"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <!-- Standalone tasks - Bugs -->
+        <record id="task_bug_login" model="project.task">
+            <field name="name">Bug login timeout</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_bugs"/>
+            <field name="card_size">2</field>
+            <field name="is_blocked" eval="True"/>
+            <field name="blocked_reason">Aguardando resposta do time de infra</field>
+        </record>
+
+        <record id="task_bug_upload" model="project.task">
+            <field name="name">Crash no upload de arquivo</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_review"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_bugs"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <record id="task_bug_memory" model="project.task">
+            <field name="name">Memory leak no dashboard</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">done</field>
+            <field name="swimlane_id" ref="swimlane_bugs"/>
+            <field name="card_size">5</field>
+        </record>
+
+        <record id="task_bug_css" model="project.task">
+            <field name="name">CSS quebrado no Safari</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_qa"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_bugs"/>
+            <field name="card_size">1</field>
+        </record>
+
+        <record id="task_bug_pagination" model="project.task">
+            <field name="name">Paginação incorreta</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_backlog"/>
+            <field name="swimlane_id" ref="swimlane_bugs"/>
+            <field name="card_size">2</field>
+        </record>
+
+        <!-- Standalone tasks - Tech Debt -->
+        <record id="task_refactor_models" model="project.task">
+            <field name="name">Refactor models layer</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">8</field>
+            <field name="is_blocked" eval="True"/>
+            <field name="blocked_reason">Depende do merge da branch feature/api</field>
+        </record>
+
+        <record id="task_update_deps" model="project.task">
+            <field name="name">Update dependencies</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_pronto"/>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <record id="task_ci_pipeline" model="project.task">
+            <field name="name">CI Pipeline optimization</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_done"/>
+            <field name="swimlane_id" ref="swimlane_tech_debt"/>
+            <field name="card_size">3</field>
+        </record>
+
+        <!-- Expedite tasks -->
+        <record id="task_hotfix_prod" model="project.task">
+            <field name="name">Hotfix produção - API down</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_dev"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_expedite"/>
+            <field name="card_size">1</field>
+            <field name="is_blocked" eval="True"/>
+            <field name="blocked_reason">Aguardando acesso ao servidor de produção</field>
+        </record>
+
+        <record id="task_security_patch" model="project.task">
+            <field name="name">Security patch CVE-2026</field>
+            <field name="project_id" ref="project_portal_cliente"/>
+            <field name="stage_id" ref="stage_review"/>
+            <field name="sub_stage">doing</field>
+            <field name="swimlane_id" ref="swimlane_expedite"/>
+            <field name="card_size">2</field>
+        </record>
+
+    </data>
+</odoo>

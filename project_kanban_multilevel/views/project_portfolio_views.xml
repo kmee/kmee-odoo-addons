@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_project_portfolio_form" model="ir.ui.view">
+        <field name="name">project.portfolio.form</field>
+        <field name="model">project.portfolio</field>
+        <field name="arch" type="xml">
+            <form string="Portfolio">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_projects"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-puzzle-piece">
+                            <field name="project_count" widget="statinfo" string="Projetos"/>
+                        </button>
+                        <button name="action_view_all_tasks"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-tasks">
+                            <field name="task_count" widget="statinfo" string="Tarefas"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon"
+                            title="Archived"
+                            bg_color="text-bg-danger"
+                            invisible="active"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nome do Portfolio"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="sequence"/>
+                            <field name="color" widget="color_picker"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Descrição" name="description">
+                            <field name="description" placeholder="Descrição do portfolio..."/>
+                        </page>
+                        <page string="Projetos" name="projects">
+                            <field name="project_ids" widget="many2many_tags"/>
+                            <separator string="Lista de Projetos"/>
+                            <field name="project_ids" mode="list" widget="one2many">
+                                <list create="0" delete="0">
+                                    <field name="name"/>
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                    <field name="task_count" string="Tarefas"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_project_portfolio_list" model="ir.ui.view">
+        <field name="name">project.portfolio.list</field>
+        <field name="model">project.portfolio</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="project_count" string="Projetos"/>
+                <field name="task_count" string="Tarefas"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_project_portfolio_kanban" model="ir.ui.view">
+        <field name="name">project.portfolio.kanban</field>
+        <field name="model">project.portfolio</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1"
+                    action="action_view_all_tasks" type="object">
+                <field name="name"/>
+                <field name="color"/>
+                <field name="project_count"/>
+                <field name="task_count"/>
+                <field name="active"/>
+                <templates>
+                    <t t-name="card">
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <span class="o_text_overflow fw-bold">
+                                        <field name="name"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content mt-2">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <strong>
+                                            <field name="project_count"/>
+                                        </strong>
+                                        <span class="ms-1 text-muted">Projetos</span>
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>
+                                            <field name="task_count"/>
+                                        </strong>
+                                        <span class="ms-1 text-muted">Tarefas</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_project_portfolio_search" model="ir.ui.view">
+        <field name="name">project.portfolio.search</field>
+        <field name="model">project.portfolio</field>
+        <field name="arch" type="xml">
+            <search string="Portfolios">
+                <field name="name"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_project_portfolio" model="ir.actions.act_window">
+        <field name="name">Portfolios</field>
+        <field name="res_model">project.portfolio</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="view_project_portfolio_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crie seu primeiro Portfolio
+            </p>
+            <p>
+                Agrupe projetos em portfolios para ter uma visão consolidada.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_project_portfolio"
+              name="Portfolios"
+              parent="project.menu_main_pm"
+              action="action_project_portfolio"
+              sequence="3"/>
+
+</odoo>

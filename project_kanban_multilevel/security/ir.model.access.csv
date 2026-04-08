@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_swimlane_user,project.kanban.swimlane.user,model_project_kanban_swimlane,project.group_project_user,1,0,0,0
+access_swimlane_manager,project.kanban.swimlane.manager,model_project_kanban_swimlane,project.group_project_manager,1,1,1,1
+access_swimlane_wizard_manager,project.kanban.swimlane.wizard.manager,model_project_kanban_swimlane_wizard,project.group_project_manager,1,1,1,1
+access_copy_swimlanes_wizard_manager,project.kanban.copy.swimlanes.wizard.manager,model_project_kanban_copy_swimlanes_wizard,project.group_project_manager,1,1,1,1
+access_portfolio_user,project.portfolio.user,model_project_portfolio,project.group_project_user,1,0,0,0
+access_portfolio_manager,project.portfolio.manager,model_project_portfolio,project.group_project_manager,1,1,1,1

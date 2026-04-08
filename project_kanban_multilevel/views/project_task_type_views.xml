@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_task_type_form_inherit_multilevel" model="ir.ui.view">
+        <field name="name">project.task.type.form.inherit.multilevel</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Kanban Multinível">
+                    <group>
+                        <field name="has_sub_stages"/>
+                        <field name="area_type"/>
+                    </group>
+                    <group>
+                        <field name="wip_limit"/>
+                        <field name="wip_limit_type"
+                               invisible="wip_limit == 0"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
