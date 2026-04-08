@@ -7,13 +7,15 @@ from odoo import models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
-    def _prepare_agents_vals_partner(self, partner_id):
+    def _prepare_agents_vals_partner(self, partner_id, **kwargs):
         """Override to use team logic."""
         return self._compute_agents_with_team(
             team=self.order_id.team_id,
             partner_id=partner_id,
             user_id=self.order_id.user_id.partner_id,
-            base_agents=super()._prepare_agents_vals_partner(partner_id) or [],
+            base_agents=super()._prepare_agents_vals_partner(
+                partner_id, **kwargs
+            ) or [],
         )
 
     def _compute_agent_ids(self):
