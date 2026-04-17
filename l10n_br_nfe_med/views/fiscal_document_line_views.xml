@@ -3,7 +3,7 @@
     <record id="document_line_form" model="ir.ui.view">
         <field name="name">l10n_br_fiscal.document.line.form.l10n_br_nfe_med</field>
         <field name="model">l10n_br_fiscal.document.line</field>
-        <field name="inherit_id" ref="l10n_br_fiscal.document_fiscal_line_form" />
+        <field name="inherit_id" ref="l10n_br_fiscal.document_line_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='fiscal_line_extra_info']" position="after">
                 <page name="med" string="Medicamento">
