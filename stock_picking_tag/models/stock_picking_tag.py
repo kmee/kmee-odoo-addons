@@ -27,13 +27,13 @@ class StockPickingTag(models.Model):
         ("tag_name_uniq", "unique (name)", "Tag name already exists!"),
     ]
 
-    @api.depends('name', 'parent_id')
+    @api.depends("name", "parent_id.display_name")
     def _compute_display_name(self):
         for tag in self:
             names = []
-            current = tag.parent_id
+            current = tag
             while current:
-                names.append(current.name)
+                names.append(current.name or "")
                 current = current.parent_id
             tag.display_name = " / ".join(reversed(names))
 
