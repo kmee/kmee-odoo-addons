@@ -37,17 +37,17 @@ payment provider integration with Pinbank for boleto generation.
 Configuration
 =============
 
-- Go to Invoice -> Configuration -> Payment Providers and configure the
-  Pinbank provider with the following information provided by the
-  provider:
+-  Go to Invoice -> Configuration -> Payment Providers and configure the
+   Pinbank provider with the following information provided by the
+   provider:
 
-  - Pinbank Username
-  - Pinbank Password
-  - Pinbank Channel Code
-  - Pinbank Client Code
-  - Pinbank Request Origin
+   -  Pinbank Username
+   -  Pinbank Password
+   -  Pinbank Channel Code
+   -  Pinbank Client Code
+   -  Pinbank Request Origin
 
-- Activate the payment provider
+-  Activate the payment provider
 
 Usage
 =====
@@ -58,7 +58,7 @@ Providers.
 Known issues / Roadmap
 ======================
 
-- ...
+-  ...
 
 Changelog
 =========
@@ -66,9 +66,9 @@ Changelog
 16.0.1.0.0 (2025-04-17)
 -----------------------
 
-- [ADD] Initial release of the module.
+-  [ADD] Initial release of the module.
 
-- ...
+-  ...
 
 Bug Tracker
 ===========
@@ -91,14 +91,14 @@ Authors
 Contributors
 ------------
 
-- Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
+-  Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- KMEE
+-  KMEE
 
 Maintainers
 -----------
