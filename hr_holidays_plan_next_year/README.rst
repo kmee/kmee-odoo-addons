@@ -58,17 +58,17 @@ covered and remember that images speak more than words!]
 
 To use this module, you need to:
 
-- Go to *App* > Menu > Menu item
+-  Go to *App* > Menu > Menu item
 
-  *insert screenshot!*
+   *insert screenshot!*
 
-- In “Contact” form, add a value to field *xyz* > save
+-  In “Contact” form, add a value to field *xyz* > save
 
-  *insert screenshot!*
+   *insert screenshot!*
 
-- The value of *xyz* is now displayed in the list view.
+-  The value of *xyz* is now displayed in the list view.
 
-  *insert screenshot!*
+   *insert screenshot!*
 
 Bug Tracker
 ===========
@@ -91,16 +91,16 @@ Authors
 Contributors
 ------------
 
-- ``KMEE <https://www.kmee.com.br>``\ \_:
+-  ``KMEE <https://www.kmee.com.br>``\ \_:
 
-  - Luis Miléo
+   -  Luis Miléo
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
