@@ -70,16 +70,16 @@ Authors
 Contributors
 ------------
 
-- ``KMEE <https://www.kmee.com.br>``\ \_\_:
+-  ``KMEE <https://www.kmee.com.br>``\ \_\_:
 
-  - Bruno Corredato Botti
+   -  Bruno Corredato Botti
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
