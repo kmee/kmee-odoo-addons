@@ -265,6 +265,6 @@ class AccountMoveMatchPickingLine(models.TransientModel):
     scheduled_date = fields.Datetime(
         related="picking_id.scheduled_date",
     )
-    has_unreserved = fields.Boolean(string="Has Unreserved")
+    has_unreserved = fields.Boolean()
     p_line_match = fields.Float(string="Matching Lines")
     p_qty_match = fields.Float(string="Approx. Qty. Match")

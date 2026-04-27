@@ -33,8 +33,8 @@ lead.
 
 When a lead is marked as lost, the system automatically:
 
-- Redirects it to a specific sales team
-- Moves it to a specific recovery stage (pipeline column)
+-  Redirects it to a specific sales team
+-  Moves it to a specific recovery stage (pipeline column)
 
 This ensures that each loss reason is handled by the appropriate
 recovery workflow.
@@ -53,12 +53,12 @@ To configure this module, you need to:
 2. Click **Create** to add a new transition rule
 3. Fill in the following fields:
 
-   - **Loss Reason**: The reason selected when the lead is marked as
-     lost
-   - **Source Stage**: The current stage of the lead
-   - **Target Team**: The sales team that will handle the recovery
-   - **Target Stage**: The stage where the lead should be placed in the
-     recovery team
+   -  **Loss Reason**: The reason selected when the lead is marked as
+      lost
+   -  **Source Stage**: The current stage of the lead
+   -  **Target Team**: The sales team that will handle the recovery
+   -  **Target Stage**: The stage where the lead should be placed in the
+      recovery team
 
 4. Save the rule
 
@@ -94,7 +94,7 @@ Other credits
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
