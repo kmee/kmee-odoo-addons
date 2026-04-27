@@ -1,0 +1,44 @@
+<!-- Copyright 2024 KMEE
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="sale_order_line_form_view">
+        <field name="name">sale.order.form (in sale_order_price_security)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+
+            <!-- form odoo/addons/sale/views/sale_order_views.xml:292 -->
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='price_unit']"
+                position="before"
+            >
+                <field name="can_edit_price_sale" invisible="1" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='price_unit']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('can_edit_price_sale', '=', False)]}</attribute>
+            </xpath>
+
+            <!-- tree odoo/addons/sale/views/sale_order_views.xml:384 -->
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                position="after"
+            >
+                <field name="can_edit_price_sale" invisible="1" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('ccan_edit_price_sale', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
