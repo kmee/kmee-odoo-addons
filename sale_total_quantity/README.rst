@@ -29,8 +29,8 @@ Sale Total Quantity
 This module extends the main sale order form view to display extra
 information regarding product quantities. Key features include:
 
-- Display the total product quantity,
-- Display the total number of products included in the sale order.
+-  Display the total product quantity,
+-  Display the total number of products included in the sale order.
 
 **Table of contents**
 
@@ -58,16 +58,16 @@ Authors
 Contributors
 ------------
 
-- ``KMEE <https://www.kmee.com.br>``\ \_\_:
+-  ``KMEE <https://www.kmee.com.br>``\ \_\_:
 
-  - Diego Paradeda diego.paradeda@kmee.com.br
+   -  Diego Paradeda diego.paradeda@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
