@@ -37,7 +37,7 @@
             >
                 <attribute
                     name="attrs"
-                >{'readonly': [('ccan_edit_price_sale', '=', False)]}</attribute>
+                >{'readonly': [('can_edit_price_sale', '=', False)]}</attribute>
             </xpath>
         </field>
     </record>
