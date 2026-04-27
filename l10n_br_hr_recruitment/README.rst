@@ -61,14 +61,14 @@ Authors
 Contributors
 ------------
 
-- Felipe Zago <felipe.zago@kmee.com.br>
+-  Felipe Zago <felipe.zago@kmee.com.br>
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- `KMEE <https://kmee.com.br/>`__
+-  `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
