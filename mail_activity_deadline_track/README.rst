@@ -55,9 +55,9 @@ Authors
 Contributors
 ------------
 
-- ``KMEE <https://www.kmee.com.br>``\ \_\_:
+-  ``KMEE <https://www.kmee.com.br>``\ \_\_:
 
-  - Luis Felipe Mileo mileo@kmee.com.br
+   -  Luis Felipe Mileo mileo@kmee.com.br
 
 Maintainers
 -----------
