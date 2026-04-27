@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_sale_order_price_editor" model="res.groups">
+        <field name="name">Can Edit The Price in Sale</field>
+        <field name="category_id" ref="base.module_category_usability" />
+    </record>
+</odoo>
