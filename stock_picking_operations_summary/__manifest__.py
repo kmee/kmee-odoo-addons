@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Picking Operations Summary",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "summary": "Grouped summary of stock moves by product and UoM on pickings",
     "category": "Inventory/Inventory",
     "author": "KMEE",
