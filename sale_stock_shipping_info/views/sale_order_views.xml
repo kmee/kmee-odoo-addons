@@ -1,0 +1,54 @@
+<!--
+Copyright (C) 2026-Today - KMEE (<http://www.kmee.com.br>).
+@author Diego Paradeda <diego.paradeda@kmee.com.br>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_order_form_shipping_info" model="ir.ui.view">
+        <field name="name">sale.order.form.shipping.info</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='other_information']//group[@name='sale_shipping']"
+                position="after"
+            >
+                <group string="Shipping Information" name="sale_shipping_info">
+                    <label for="shipping_weight" string="Total Weight" />
+                    <div>
+                        <field name="shipping_weight" class="oe_inline" readonly="1" />
+                        <field
+                            name="weight_uom_name"
+                            nolabel="1"
+                            class="oe_inline"
+                            style="margin-left:5px"
+                            readonly="1"
+                        />
+                    </div>
+                    <label for="shipping_volume" string="Total Volume" />
+                    <div>
+                        <field name="shipping_volume" class="oe_inline" readonly="1" />
+                        <field
+                            name="volume_uom_name"
+                            nolabel="1"
+                            class="oe_inline"
+                            style="margin-left:5px"
+                            readonly="1"
+                        />
+                    </div>
+                    <label for="longest_dimension" string="Longest Dimension" />
+                    <div>
+                        <field name="longest_dimension" class="oe_inline" />
+                        <field
+                            name="dimension_uom_name"
+                            nolabel="1"
+                            class="oe_inline"
+                            style="margin-left:5px"
+                            readonly="1"
+                        />
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
