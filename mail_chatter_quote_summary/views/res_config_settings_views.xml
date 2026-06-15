@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.quote.summary</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    string="Chatter Quote Summary"
+                    name="mail_chatter_quote_summary"
+                    logo="/base/static/img/icons/base.png"
+                >
+                    <block title="Quoted email history" name="quote_summary_block">
+                        <setting
+                            help="Show only the most recent reply in chatter messages; the quoted history is loaded on demand."
+                        >
+                            <field name="quote_summary_enabled" />
+                        </setting>
+                        <setting
+                            string="Restrict to models"
+                            help="Comma-separated technical model names (e.g. helpdesk.ticket,crm.lead). Empty applies to every chatter."
+                        >
+                            <field name="quote_summary_models" />
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
