@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="action_reprocess_descriptions" model="ir.actions.server">
+        <field name="name">Reprocess helpdesk descriptions</field>
+        <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket" />
+        <field name="state">code</field>
+        <field
+            name="code"
+        >env["helpdesk.ticket"].action_reprocess_descriptions()</field>
+    </record>
+
+    <record id="cron_reprocess_descriptions" model="ir.cron">
+        <field name="name">Reprocess helpdesk descriptions (one-off)</field>
+        <field name="model_id" ref="helpdesk_mgmt.model_helpdesk_ticket" />
+        <field name="state">code</field>
+        <field name="code">model.action_reprocess_descriptions()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">1</field>
+        <field name="active" eval="False" />
+    </record>
+</odoo>
