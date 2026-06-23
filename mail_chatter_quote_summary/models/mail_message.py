@@ -50,14 +50,22 @@ class MailMessage(models.Model):
         if not self._quote_summary_enabled():
             return formatted
         allowed_models = self._quote_summary_models()
+        sanitizer = HtmlSanitizer()
         by_id = {message.id: message for message in self}
         for vals in formatted:
             message = by_id.get(vals.get("id"))
             if message is None or not message._quote_summary_applies(allowed_models):
                 continue
-            summary = message._quote_summary_body(vals.get("body") or "")
+            body = vals.get("body") or ""
+            summary = message._quote_summary_body(body)
             if summary is not None:
                 vals["body"] = summary
+                continue
+            compact = sanitizer.collapse_empty_paragraphs(
+                sanitizer.remove_zero_width_chars(body)
+            )
+            if compact != body:
+                vals["body"] = compact
         return formatted
 
     def _quote_history_blocks(self, history_html):
