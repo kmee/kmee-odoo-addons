@@ -7,26 +7,45 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//form" position="inside">
-                <app
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Chatter Quote Summary"
                     string="Chatter Quote Summary"
-                    name="mail_chatter_quote_summary"
-                    logo="/base/static/img/icons/base.png"
+                    data-key="mail_chatter_quote_summary"
                 >
-                    <block title="Quoted email history" name="quote_summary_block">
-                        <setting
-                            help="Show only the most recent reply in chatter messages; the quoted history is loaded on demand."
-                        >
-                            <field name="quote_summary_enabled" />
-                        </setting>
-                        <setting
-                            string="Restrict to models"
-                            help="Comma-separated technical model names (e.g. helpdesk.ticket,crm.lead). Empty applies to every chatter."
-                        >
-                            <field name="quote_summary_models" />
-                        </setting>
-                    </block>
-                </app>
+                    <h2>Quoted email history</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="quote_summary_enabled" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="quote_summary_enabled" />
+                                <div class="text-muted">
+                                    Show only the most recent reply in chatter
+                                    messages; the quoted history is loaded on
+                                    demand.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane" />
+                            <div class="o_setting_right_pane">
+                                <label
+                                    for="quote_summary_models"
+                                    string="Restrict to models"
+                                />
+                                <div class="text-muted">
+                                    Comma-separated technical model names (e.g.
+                                    helpdesk.ticket,crm.lead). Empty applies to
+                                    every chatter.
+                                </div>
+                                <field name="quote_summary_models" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>
