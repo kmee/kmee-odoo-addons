@@ -234,37 +234,20 @@ class HtmlSanitizer:
         return result
 
     def collapse_empty_paragraphs(self, html: str) -> str:
-        """Reduce runs of empty <p> to MAX_CONSECUTIVE_EMPTY_PARAGRAPHS."""
+        """Reduce runs of empty <p> to MAX_CONSECUTIVE_EMPTY_PARAGRAPHS.
+
+        An empty paragraph holds only whitespace, ``&nbsp;`` and/or ``<br>``
+        tags, may carry attributes, and may be separated by whitespace.
+        """
         if not html:
             return html
 
-        empty_p_pattern = r"<p>\s*(?:&nbsp;|\s)\s*</p>"
+        empty_p = r"<p\b[^>]*>(?:\s|&nbsp;|<br\s*/?>)*</p>"
+        keep = self.MAX_CONSECUTIVE_EMPTY_PARAGRAPHS
+        run = re.compile(r"(?:%s\s*){%d,}" % (empty_p, keep + 1), re.IGNORECASE)
+        replacement = "<p>&nbsp;</p>" * keep
 
-        result = html
-        matches = list(re.finditer(empty_p_pattern, result, re.IGNORECASE))
-        if not matches:
-            return result
-
-        i = 0
-        while i < len(matches):
-            start = matches[i].start()
-            count = 1
-            j = i + 1
-
-            while j < len(matches) and matches[j].start() == matches[j - 1].end():
-                count += 1
-                j += 1
-
-            end = matches[j - 1].end() if j > i else matches[i].end()
-
-            if count > self.MAX_CONSECUTIVE_EMPTY_PARAGRAPHS:
-                empty_p = "<p>&nbsp;</p>"
-                replacement = empty_p * self.MAX_CONSECUTIVE_EMPTY_PARAGRAPHS
-                result = result[:start] + replacement + result[end:]
-                matches = list(re.finditer(empty_p_pattern, result, re.IGNORECASE))
-                i = 0
-            else:
-                i = j
+        return run.sub(replacement, html)
 
         return result
 
