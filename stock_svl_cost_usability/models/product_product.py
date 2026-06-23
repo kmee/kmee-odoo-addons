@@ -20,59 +20,59 @@ class ProductProduct(models.Model):
 
     def _compute_valuation_layer_json_text(self):
         """Compute the JSON text of stock valuation layer for each product."""
-        self.ensure_one()
+        for product in self:
+            # Dataset should be sum of past SLV values divided by sum of past
+            # SLV quantities
+            plot_dataset = []
+            total_value = 0
+            total_quantity = 0
+            for svl in product.stock_valuation_layer_ids:
+                total_value += svl.value
+                total_quantity += svl.quantity
+                if total_quantity:
+                    plot_dataset.append(total_value / total_quantity)
 
-        # Dataset should be sum of past SLV values divided by sum of past SLV quantities
-        plot_dataset = []
-        total_value = 0
-        total_quantity = 0
-        for svl in self.stock_valuation_layer_ids:
-            total_value += svl.value
-            total_quantity += svl.quantity
-            if total_quantity:
-                plot_dataset.append(total_value / total_quantity)
+            labels = [
+                svl.create_date.strftime("%b - %Y")
+                for svl in product.stock_valuation_layer_ids
+            ]
 
-        labels = [
-            svl.create_date.strftime("%b - %Y")
-            for svl in self.stock_valuation_layer_ids
-        ]
-
-        info = {
-            "type": "line",
-            "data": {
-                "labels": labels,
-                "datasets": [
-                    {
-                        "data": plot_dataset,
-                        "fill": False,
-                        "label": "Cost",
-                        "borderWidth": 2,
-                        "backgroundColor": "#a5d8d7",
-                    }
-                ],
-            },
-            "options": {
-                "scales": {
-                    "y": {
-                        "beginAtZero": False,
-                        "title": {"display": True, "text": "Cost"},
+            info = {
+                "type": "line",
+                "data": {
+                    "labels": labels,
+                    "datasets": [
+                        {
+                            "data": plot_dataset,
+                            "fill": False,
+                            "label": "Cost",
+                            "borderWidth": 2,
+                            "backgroundColor": "#a5d8d7",
+                        }
+                    ],
+                },
+                "options": {
+                    "scales": {
+                        "y": {
+                            "beginAtZero": False,
+                            "title": {"display": True, "text": "Cost"},
+                        },
+                        "x": {
+                            "title": {"display": True, "text": "Date"},
+                        },
                     },
-                    "x": {
-                        "title": {"display": True, "text": "Date"},
+                    "elements": {"point": {"radius": 3}},
+                    "plugins": {
+                        "legend": {"display": False},
+                        "tooltip": {
+                            "intersect": False,
+                            "axis": "xy",
+                            "mode": "index",
+                        },
                     },
                 },
-                "elements": {"point": {"radius": 3}},
-                "plugins": {
-                    "legend": {"display": False},
-                    "tooltip": {
-                        "intersect": False,
-                        "axis": "xy",
-                        "mode": "index",
-                    },
-                },
-            },
-        }
-        self.valuation_layer_json_text = json.dumps(info)
+            }
+            product.valuation_layer_json_text = json.dumps(info)
 
     def action_open_stock_valuation_layer(self):
         self.ensure_one()
