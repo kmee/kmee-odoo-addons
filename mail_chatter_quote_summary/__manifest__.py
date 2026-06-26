@@ -12,6 +12,7 @@
     "data": [
         "views/res_config_settings_views.xml",
     ],
+    "post_init_hook": "post_init_hook",
     "assets": {
         "web.assets_backend": [
             "mail_chatter_quote_summary/static/src/js/quote_history.js",
