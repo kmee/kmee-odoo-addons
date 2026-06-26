@@ -9,7 +9,6 @@ class ResConfigSettings(models.TransientModel):
     quote_summary_enabled = fields.Boolean(
         string="Collapse quoted email history in chatter",
         config_parameter="mail_chatter_quote_summary.enabled",
-        default=True,
         help="Show only the most recent reply in chatter messages; the quoted "
         "history is loaded on demand.",
     )
