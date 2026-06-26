@@ -7,24 +7,23 @@ class HelpdeskTicket(models.Model):
     _name = "helpdesk.ticket"
     _inherit = ["helpdesk.ticket", "html.optimizer.mixin"]
 
-    _optimizer_fields = {"description": "description_full"}
-
-    description_full = fields.Html(
-        string="Full Description",
+    description_summary = fields.Html(
+        string="Description Summary",
         sanitize=False,
+        compute="_compute_description_summary",
+        store=True,
         copy=False,
     )
     has_description_full = fields.Boolean(
         compute="_compute_has_description_full",
     )
 
-    @api.depends("description_full")
+    @api.depends("description")
+    def _compute_description_summary(self):
+        for ticket in self:
+            ticket.description_summary = ticket._optimizer_summary(ticket.description)
+
+    @api.depends("description")
     def _compute_has_description_full(self):
         for ticket in self:
-            ticket.has_description_full = ticket._optimizer_has_full("description_full")
-
-    def action_reprocess_descriptions(self):
-        """Enqueue a background job that re-optimizes existing tickets."""
-        self.env["helpdesk.ticket"].with_delay(
-            description="Reprocess helpdesk descriptions"
-        )._optimizer_reprocess()
+            ticket.has_description_full = ticket._optimizer_has_more(ticket.description)
