@@ -16,7 +16,7 @@ class MailMessage(models.Model):
     _inherit = "mail.message"
 
     def _quote_summary_enabled(self):
-        param = self.env["ir.config_parameter"].sudo().get_param(ENABLED_PARAM, "True")
+        param = self.env["ir.config_parameter"].sudo().get_param(ENABLED_PARAM, "False")
         return param not in ("False", "0", "", False)
 
     def _quote_summary_models(self):
