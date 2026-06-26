@@ -11,12 +11,12 @@ class TestDescriptionOptimizer(TransactionCase):
             {"name": "Description Optimizer Test Team"}
         )
 
-    def _big_description(self, visible_chars=3000):
+    def _big_description(self, lines=120):
         return (
             "<div>"
             + "".join(
                 "<p>Linha %d de conteudo sem dados pessoais.</p>" % i
-                for i in range(visible_chars // 40 + 1)
+                for i in range(lines)
             )
             + "</div>"
         )
@@ -30,32 +30,50 @@ class TestDescriptionOptimizer(TransactionCase):
             }
         )
 
-    def test_full_kept_and_summary_shorter(self):
+    def _text_len(self, html):
+        return self.env["helpdesk.ticket"]._optimizer_sanitizer().text_content_length(
+            html
+        )
+
+    def test_source_kept_intact_and_summary_shorter(self):
         big = self._big_description()
         ticket = self._create_ticket(big)
-        self.assertTrue(ticket.description_full)
+        self.assertIn("Linha 0", ticket.description)
+        self.assertIn("Linha 119", ticket.description)
+        self.assertEqual(self._text_len(ticket.description), self._text_len(big))
         self.assertTrue(ticket.has_description_full)
         self.assertLess(
-            len(ticket.description),
-            len(ticket.description_full),
-            "summary should be shorter than the full content",
+            self._text_len(ticket.description_summary),
+            self._text_len(ticket.description),
         )
 
     def test_short_description_not_flagged(self):
         ticket = self._create_ticket("<p>Mensagem curta.</p>")
         self.assertFalse(ticket.has_description_full)
+        self.assertEqual(ticket.description, "<p>Mensagem curta.</p>")
 
-    def test_load_full_chunk_reconstructs_content(self):
+    def test_edit_preserves_full_content(self):
         ticket = self._create_ticket(self._big_description())
-        offset = 0
-        html = ""
-        while offset is not False:
-            result = ticket.load_optimizer_full_chunk("description_full", offset, 25)
-            html += result["html"]
-            offset = result["next_offset"]
-        self.assertIn("Linha 0", html)
+        original_text_len = self._text_len(ticket.description)
+        ticket.write({"description": ticket.description + "<p>EDICAO TESTE B4</p>"})
+        self.assertIn("Linha 0", ticket.description)
+        self.assertIn("EDICAO TESTE B4", ticket.description)
+        self.assertGreater(self._text_len(ticket.description), original_text_len)
+        self.assertTrue(ticket.has_description_full)
 
-    def test_chunk_rejects_unknown_field(self):
-        ticket = self._create_ticket("<p>x</p>")
-        with self.assertRaises(ValueError):
-            ticket.load_optimizer_full_chunk("name", 0, 25)
+    def test_duplicate_preserves_full_content(self):
+        ticket = self._create_ticket(self._big_description())
+        copy = ticket.copy()
+        self.assertEqual(copy.description, ticket.description)
+        self.assertTrue(copy.has_description_full)
+        self.assertLess(
+            self._text_len(copy.description_summary),
+            self._text_len(copy.description),
+        )
+
+    def test_summary_recomputed_on_description_change(self):
+        ticket = self._create_ticket("<p>curta</p>")
+        self.assertFalse(ticket.has_description_full)
+        ticket.write({"description": self._big_description()})
+        self.assertTrue(ticket.has_description_full)
+        self.assertIn("Linha 0", ticket.description)
