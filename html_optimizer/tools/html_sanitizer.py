@@ -214,24 +214,28 @@ class HtmlSanitizer:
         )
 
         seen_hashes = set()
-        blocks_to_replace = []
+        parts = []
+        last_end = 0
 
         for match in re.finditer(tag_pattern, html, re.DOTALL | re.IGNORECASE):
             block = match.group(0)
             text_content = re.sub(r"<[^>]+>", "", block)
 
-            if len(text_content) >= 100:
-                text_hash = hashlib.sha1(text_content.encode("utf-8")).hexdigest()
-                if text_hash in seen_hashes:
-                    blocks_to_replace.append(block)
-                else:
-                    seen_hashes.add(text_hash)
+            if len(text_content) < 100:
+                continue
 
-        result = html
-        for block in blocks_to_replace:
-            result = result.replace(block, "", 1)
+            text_hash = hashlib.sha1(text_content.encode("utf-8")).hexdigest()
+            if text_hash in seen_hashes:
+                parts.append(html[last_end : match.start()])
+                last_end = match.end()
+            else:
+                seen_hashes.add(text_hash)
 
-        return result
+        if not parts:
+            return html
+
+        parts.append(html[last_end:])
+        return "".join(parts)
 
     def collapse_empty_paragraphs(self, html: str) -> str:
         """Reduce runs of empty <p> to MAX_CONSECUTIVE_EMPTY_PARAGRAPHS.
