@@ -1,5 +1,6 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+import signal
 import unittest
 from pathlib import Path
 
@@ -122,6 +123,23 @@ class TestQuoteDetection(unittest.TestCase):
         self.assertTrue(signals["outlook_thread_headers"])
         self.assertTrue(signals["outlook_reply_divider"])
         self.assertEqual(classify_quote_scenario(html), "outlook_reply_divider")
+
+    @unittest.skipUnless(
+        hasattr(signal, "SIGALRM"), "SIGALRM-based time guard is Unix only"
+    )
+    def test_bold_run_without_header_stays_linear(self):
+        poison = "<div><b> " + "<span></span> " * 60 + "no header label</b></div>"
+
+        def _timeout(signum, frame):
+            raise AssertionError("quote detection took too long (regex backtracking)")
+
+        previous = signal.signal(signal.SIGALRM, _timeout)
+        signal.setitimer(signal.ITIMER_REAL, 5)
+        try:
+            self.assertFalse(should_collapse_history(poison))
+        finally:
+            signal.setitimer(signal.ITIMER_REAL, 0)
+            signal.signal(signal.SIGALRM, previous)
 
 
 if __name__ == "__main__":
