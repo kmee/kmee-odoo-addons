@@ -22,7 +22,7 @@ _MARKER_REGEX = {
 }
 
 _OUTLOOK_HEADER_TAG = r"(?:b|strong)"
-_OUTLOOK_INNER_TAGS = r"(?:\s*<[^>]+>\s*)*"
+_OUTLOOK_INNER_TAGS = r"(?:<[^>]+>|\s)*"
 
 _OUTLOOK_FROM_LABEL_RE = re.compile(
     rf"<{_OUTLOOK_HEADER_TAG}[^>]*>{_OUTLOOK_INNER_TAGS}"
@@ -73,20 +73,29 @@ def _has_outlook_reply_divider(body):
     return False
 
 
+def _evaluate_signal(scenario, body):
+    marker = _MARKER_REGEX.get(scenario)
+    if marker is not None:
+        return bool(marker.search(body))
+    if scenario == "outlook_reply_divider":
+        return _has_outlook_reply_divider(body)
+    if scenario == "outlook_thread_headers":
+        return _has_outlook_thread_headers(body)
+    return False
+
+
 def collect_quote_signals(html_body):
     body = html_body or ""
-    signals = {
-        key: bool(pattern.search(body)) for key, pattern in _MARKER_REGEX.items()
+    return {
+        scenario: _evaluate_signal(scenario, body)
+        for scenario in QUOTE_SCENARIO_ORDER
     }
-    signals["outlook_thread_headers"] = _has_outlook_thread_headers(body)
-    signals["outlook_reply_divider"] = _has_outlook_reply_divider(body)
-    return signals
 
 
 def classify_quote_scenario(html_body):
-    signals = collect_quote_signals(html_body)
+    body = html_body or ""
     for scenario in QUOTE_SCENARIO_ORDER:
-        if signals.get(scenario):
+        if _evaluate_signal(scenario, body):
             return scenario
     return "none"
 
