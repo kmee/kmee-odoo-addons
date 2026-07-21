@@ -17,7 +17,7 @@ Sale Crm Auto Won
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_crm_auto_won
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/18.0/sale_crm_auto_won
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
@@ -35,14 +35,14 @@ Usage
 
 To use this module, you need to:
 
--  Go to *CRM*.
+- Go to *CRM*.
 
--  Create an opportunity.
+- Create an opportunity.
 
--  In the form for this opportunity, create a quotation by clicking on
-   "NEW QUOTATION".
+- In the form for this opportunity, create a quotation by clicking on
+  "NEW QUOTATION".
 
--  In the quote created, add a product and click the "confirm" button.
+- In the quote created, add a product and click the "confirm" button.
 
 Now the opportunity has the status "Won".
 
@@ -52,7 +52,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20sale_crm_auto_won%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20sale_crm_auto_won%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -67,20 +67,20 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://kmee.com.br/>``\ \_:
+- ``KMEE <https://kmee.com.br/>``\ \_:
 
-   -  Tiago Amaral tiago.amaral@kmee.com.br
+  - Tiago Amaral tiago.amaral@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_crm_auto_won>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/18.0/sale_crm_auto_won>`_ project on GitHub.
 
 You are welcome to contribute.
