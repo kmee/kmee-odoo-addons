@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <template
+        id="purchase_report_hide_taxes"
+        name="purchase_hide_taxes"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="100"
+    >
+
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+        </xpath>
+
+        <!-- Hide the taxes cell in order lines (td containing the taxes_id span) -->
+        <xpath
+            expr="//span[contains(@t-out, 'taxes_id')]/.."
+            position="replace"
+        >
+        </xpath>
+    </template>
+</odoo>
