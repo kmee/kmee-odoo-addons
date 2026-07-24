@@ -135,8 +135,16 @@ class TestBeneficios(PayrollCommon):
         desc = self._get_line_total(payslip, "DESC_PLANO_SAUDE")
         self.assertAlmostEqualMoney(desc, 150.00)
 
-    def test_plano_saude_reduz_base_irrf(self):
-        """Plano de saúde reduz a base de cálculo do IRRF."""
+    def test_plano_saude_nao_altera_base_irrf(self):
+        """Plano de saúde NÃO altera a base do IRRF na retenção mensal.
+
+        Fisco (Fix 1): a coparticipação/mensalidade de plano de saúde não é
+        dedutível na retenção do IRRF na fonte — só é dedutível na Declaração
+        de Ajuste Anual (art. 4º Lei 9.250/95; art. 677 RIR/2018; art. 52 IN
+        RFB 1.500/2014). O desconto DESC_PLANO_SAUDE reduz o líquido (categoria
+        DED), mas a BASE_IRRF permanece a mesma. O override que reduzia a base
+        foi removido em data/hr_payroll_structure_data.xml.
+        """
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=5000.00)
         # Sem plano
@@ -146,11 +154,11 @@ class TestBeneficios(PayrollCommon):
         self._add_advantage(contract, self.template_plano, 500.00)
         payslip_com = self._create_payslip_benefit(emp, contract)
         irrf_com = self._get_line_total(payslip_com, "IRRF")
-        # IRRF com plano deve ser menor (base reduzida)
-        self.assertLess(
+        # IRRF deve ser IGUAL com e sem plano (base inalterada).
+        self.assertAlmostEqualMoney(
             irrf_com,
             irrf_sem,
-            msg="IRRF com plano de saúde deve ser menor que sem plano",
+            msg="Plano de saúde não pode alterar a base/IRRF na fonte",
         )
 
     # ── Integração ──────────────────────────────────────────────

@@ -31,29 +31,15 @@
     </record>
 
     <!--
-        Atualiza a regra de BASE_IRRF para deduzir plano de saúde.
-        O DESC_PLANO_SAUDE é um desconto DED, então já está no categories.DED.
-        A fórmula do BASE_IRRF já subtrai DED via FALTAS + DESC_DSR + INSS,
-        mas o plano de saúde precisa ser subtraído explicitamente.
+        NOTA FISCAL: este módulo NÃO sobrescreve a regra BASE_IRRF.
+        Na retenção mensal do IRRF na fonte (art. 4º da Lei 9.250/95;
+        art. 677 do RIR/2018; art. 52 da IN RFB 1.500/2014) o rol de
+        deduções é taxativo: previdência oficial (INSS/RPPS), dependentes,
+        pensão alimentícia e previdência complementar privada. Plano de
+        saúde só é dedutível na Declaração de Ajuste Anual, e o desconto de
+        vale-transporte não é dedução tributária. Logo, DESC_PLANO_SAUDE e
+        DESC_VT permanecem apenas como descontos do líquido (categoria DED),
+        sem afetar a base do IRRF — a regra base original do
+        l10n_br_hr_payroll é a fiscalmente correta.
     -->
-    <record id="l10n_br_hr_payroll.hr_rule_base_irrf" model="hr.salary.rule">
-        <field name="amount_python_compute">
-gross = categories.GROSS
-deducoes = FALTAS + DESC_DSR + INSS + DESC_PLANO_SAUDE + DESC_VT
-dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
-pensao = employee.l10n_br_pensao_alimenticia
-result = gross - deducoes - dependentes - pensao
-        </field>
-    </record>
-
-    <!-- Idem para Estatutário -->
-    <record id="l10n_br_hr_payroll.hr_rule_base_irrf_est" model="hr.salary.rule">
-        <field name="amount_python_compute">
-gross = categories.GROSS
-deducoes = CONTRIB_RPPS + DESC_PLANO_SAUDE + DESC_VT
-dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
-pensao = employee.l10n_br_pensao_alimenticia
-result = gross - deducoes - dependentes - pensao
-        </field>
-    </record>
 </odoo>
