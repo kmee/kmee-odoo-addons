@@ -1,9 +1,19 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
 class TestESocialEvento(TransactionCase):
     """Testes da máquina de estados do evento eSocial."""
+
+    def setUp(self):
+        super().setUp()
+        # action_mark_error/success now require the payroll manager group.
+        self.env.user.groups_id = [
+            (4, self.env.ref("payroll.group_payroll_manager").id)
+        ]
 
     def _create_evento(self, **kwargs):
         vals = {
