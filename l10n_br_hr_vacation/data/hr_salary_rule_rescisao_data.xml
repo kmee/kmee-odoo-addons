@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais da Rescisão (verbas rescisórias SEGURAS).
+
+        ESCOPO IMPLEMENTADO (verbas bem fundamentadas):
+          - Saldo de salário proporcional aos dias trabalhados no mês
+            (CLT art. 457/459). TRIBUTÁVEL: INSS, IRRF e FGTS.
+          - 13º proporcional aos avos até a rescisão (CLT/Lei 4.090/62).
+            TRIBUTÁVEL com incidência SEPARADA de INSS e IRRF (o 13º nunca
+            se soma ao salário do mês para fins de imposto) e FGTS.
+          - Férias proporcionais + 1/3 constitucional. INDENIZATÓRIAS na
+            rescisão: NÃO incidem INSS (Lei 8.212/91 art. 28 §9º), IRRF
+            (Súmula 386 STJ / ADI SRF 5/2005) nem FGTS.
+
+        LACUNAS DELIBERADAS (exigem validação fiscal / dados adicionais —
+        ver relatório): aviso prévio (indenizado/trabalhado) e reflexos;
+        multa de 40% do FGTS; distinção por tipo de rescisão (sem justa
+        causa, pedido, justa causa, comum acordo); férias VENCIDAS de
+        períodos aquisitivos completos não gozados (dependem de rastreio
+        de alocações); médias de horas extras/adicionais habituais.
+
+        Convenção de sinais: proventos positivos; DED positivo subtraído;
+        NET = proventos - descontos. FGTS é COMP (não afeta o NET).
+    -->
+
+    <!-- Saldo de salário proporcional aos dias trabalhados no mês -->
+    <record id="hr_rule_saldo_salario" model="hr.salary.rule">
+        <field name="name">Saldo de Salário</field>
+        <field name="sequence" eval="1" />
+        <field name="code">SALDO_SALARIO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_basic"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Dias trabalhados no mês da rescisão (mês comercial de 30 dias).
+# Assume período iniciando no dia 1º; dias = dia do desligamento.
+dias = payslip.date_to.day
+result = tools.br.round_money((contract.wage / 30) * dias)
+        </field>
+    </record>
+
+    <!-- Férias proporcionais (INDENIZATÓRIAS) -->
+    <record id="hr_rule_ferias_indenizadas" model="hr.salary.rule">
+        <field name="name">Férias Proporcionais (Indenizadas)</field>
+        <field name="sequence" eval="6" />
+        <field name="code">FERIAS_INDENIZADAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_avos_ferias > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+avos = payslip.l10n_br_avos_ferias
+result = tools.br.round_money(contract.wage * avos / 12)
+        </field>
+    </record>
+
+    <!-- 1/3 constitucional sobre as férias proporcionais (INDENIZATÓRIO) -->
+    <record id="hr_rule_adicional_ferias_indenizadas" model="hr.salary.rule">
+        <field name="name">Adicional Férias Indenizadas (1/3)</field>
+        <field name="sequence" eval="7" />
+        <field name="code">ADICIONAL_FERIAS_INDENIZADAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_avos_ferias > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(FERIAS_INDENIZADAS / 3)
+        </field>
+    </record>
+
+    <!-- INSS sobre o saldo de salário -->
+    <record id="hr_rule_inss_rescisao" model="hr.salary.rule">
+        <field name="name">INSS (Saldo de Salário)</field>
+        <field name="sequence" eval="100" />
+        <field name="code">INSS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_inss(max(SALDO_SALARIO, 0))
+        </field>
+    </record>
+
+    <!-- INSS sobre o 13º proporcional (incidência separada) -->
+    <record id="hr_rule_inss_13_rescisao" model="hr.salary.rule">
+        <field name="name">INSS (13º Rescisão)</field>
+        <field name="sequence" eval="101" />
+        <field name="code">INSS_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_inss(max(DECIMO_RESCISAO, 0))
+        </field>
+    </record>
+
+    <!-- Base IRRF do saldo de salário -->
+    <record id="hr_rule_base_irrf_rescisao" model="hr.salary.rule">
+        <field name="name">Base IRRF (Saldo de Salário)</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
+pensao = employee.l10n_br_pensao_alimenticia
+result = SALDO_SALARIO - INSS - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- Base IRRF do 13º proporcional (incidência separada) -->
+    <record id="hr_rule_base_irrf_13_rescisao" model="hr.salary.rule">
+        <field name="name">Base IRRF (13º Rescisão)</field>
+        <field name="sequence" eval="111" />
+        <field name="code">BASE_IRRF_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
+result = DECIMO_RESCISAO - INSS_13 - dependentes
+        </field>
+    </record>
+
+    <!-- IRRF sobre o saldo de salário -->
+    <record id="hr_rule_irrf_rescisao" model="hr.salary.rule">
+        <field name="name">IRRF (Saldo de Salário)</field>
+        <field name="sequence" eval="120" />
+        <field name="code">IRRF</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_irrf(max(BASE_IRRF, 0))
+        </field>
+    </record>
+
+    <!-- IRRF sobre o 13º proporcional (incidência separada) -->
+    <record id="hr_rule_irrf_13_rescisao" model="hr.salary.rule">
+        <field name="name">IRRF (13º Rescisão)</field>
+        <field name="sequence" eval="121" />
+        <field name="code">IRRF_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+        </field>
+    </record>
+
+    <!-- FGTS sobre o saldo de salário -->
+    <record id="hr_rule_fgts_rescisao" model="hr.salary.rule">
+        <field name="name">FGTS (Saldo de Salário)</field>
+        <field name="sequence" eval="150" />
+        <field name="code">FGTS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(max(SALDO_SALARIO, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- FGTS sobre o 13º proporcional -->
+    <record id="hr_rule_fgts_13_rescisao" model="hr.salary.rule">
+        <field name="name">FGTS (13º Rescisão)</field>
+        <field name="sequence" eval="151" />
+        <field name="code">FGTS_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(max(DECIMO_RESCISAO, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- NET rescisão (proventos tributáveis + indenizatórios - descontos) -->
+    <record id="hr_rule_net_rescisao" model="hr.salary.rule">
+        <field name="name">Líquido (Rescisão)</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_net"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = (
+    SALDO_SALARIO
+    + DECIMO_RESCISAO
+    + FERIAS_INDENIZADAS
+    + ADICIONAL_FERIAS_INDENIZADAS
+    - INSS
+    - INSS_13
+    - IRRF
+    - IRRF_13
+)
+        </field>
+    </record>
+</odoo>
