@@ -63,6 +63,14 @@ Contributors
 Maintainers
 -----------
 
+.. |maintainer-mileo| image:: https://github.com/mileo.png?size=40px
+    :target: https://github.com/mileo
+    :alt: mileo
+
+Current maintainer:
+
+|maintainer-mileo| 
+
 This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_overtime_custom_multiplier>`_ project on GitHub.
 
 You are welcome to contribute.
