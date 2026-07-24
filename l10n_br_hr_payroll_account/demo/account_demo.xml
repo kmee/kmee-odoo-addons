@@ -10,11 +10,16 @@
         FOPAG (journal_folha_pagamento). Como os holerites demo ficam vinculados
         ao FOPAG, isso derrubava a FK hr_payslip_journal_id_fkey (ForeignKeyViolation).
 
-        As contas eram meramente ilustrativas (não referenciadas por nenhuma
-        regra salarial nem por testes — os testes de contabilização criam as
-        próprias contas). Foram removidas para não disparar o wipe destrutivo do
-        CoA; assim o diário FOPAG sobrevive e os holerites demo permanecem
-        vinculados a ele (ver models/hr_payslip.py::_demo_compute_payslips).
+        As contas eram meramente ilustrativas. Foram removidas para não disparar
+        o wipe destrutivo do CoA; assim o diário FOPAG sobrevive e os holerites
+        demo permanecem vinculados a ele (ver
+        models/hr_payslip.py::_demo_compute_payslips).
+
+        O mapeamento regra→conta (RF-17) NÃO recria contas próprias: o
+        post_init_hook (ver __init__.py e models/hr_salary_rule.py) deriva as
+        contas de despesa/passivo do PLANO DE CONTAS já carregado na empresa.
+        Não reintroduza contas de demonstração aqui — isso ressuscitaria a
+        ForeignKeyViolation descrita acima.
     -->
 
 </odoo>

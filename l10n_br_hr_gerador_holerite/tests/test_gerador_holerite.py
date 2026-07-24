@@ -56,6 +56,40 @@ class TestGeradorHolerite(TransactionCase):
         wizard.action_generate()
         self.assertEqual(len(wizard.payslip_ids), 3)
 
+    def test_no_duplicate_on_second_run(self):
+        """Gerar a mesma competência duas vezes não duplica holerites."""
+        Payslip = self.env["hr.payslip"]
+        domain = [
+            ("contract_id", "=", self.contract.id),
+            ("date_from", ">=", date(2024, 1, 1)),
+            ("date_to", "<=", date(2024, 12, 31)),
+        ]
+        self._create_wizard(mes_do_ano="1", ano=2024, quantity=3).action_generate()
+        count_after_first = Payslip.search_count(domain)
+        self.assertEqual(count_after_first, 3)
+
+        wizard2 = self._create_wizard(mes_do_ano="1", ano=2024, quantity=3)
+        wizard2.action_generate()
+        count_after_second = Payslip.search_count(domain)
+        self.assertEqual(
+            count_after_second,
+            3,
+            "Segunda geração não deve duplicar holerites da mesma competência",
+        )
+        self.assertFalse(
+            wizard2.payslip_ids,
+            "Nenhum holerite novo deve ser criado na segunda geração",
+        )
+
+    def test_invalid_quantity_rejected(self):
+        """Quantidade inválida (zero ou acima do teto) é rejeitada."""
+        from odoo.exceptions import UserError
+
+        with self.assertRaises(UserError):
+            self._create_wizard(quantity=0)
+        with self.assertRaises(UserError):
+            self._create_wizard(quantity=999)
+
     def test_date_to_is_last_day_of_month(self):
         """Verifica que date_to é o último dia do mês."""
         wizard = self._create_wizard(mes_do_ano="2", ano=2024, quantity=1)
