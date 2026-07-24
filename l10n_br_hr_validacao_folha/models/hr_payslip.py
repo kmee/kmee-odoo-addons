@@ -1,6 +1,8 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from erpbrasil.base.fiscal import cnpj_cpf
+
 from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
@@ -10,25 +12,39 @@ class HrPayslip(models.Model):
 
     @api.constrains("employee_id", "date_from", "date_to", "struct_id", "state")
     def _check_payslip_duplicate_period(self):
-        """Prevent duplicate payslips for same employee/period/structure."""
+        """Impede holerites com período sobreposto para o mesmo
+        empregado/estrutura.
+
+        A verificação anterior comparava apenas datas exatas, permitindo que
+        dois holerites do mesmo mês/estrutura (ex.: 01-15 e 01-31) coexistissem.
+        Agora detecta qualquer sobreposição de intervalo
+        (``date_from <= other.date_to AND date_to >= other.date_from``).
+        """
         for rec in self:
             if rec.state == "cancel":
                 continue
+            if not rec.date_from or not rec.date_to:
+                continue
             domain = [
                 ("employee_id", "=", rec.employee_id.id),
-                ("date_from", "=", rec.date_from),
-                ("date_to", "=", rec.date_to),
                 ("struct_id", "=", rec.struct_id.id),
                 ("state", "!=", "cancel"),
                 ("id", "!=", rec.id),
+                ("date_from", "<=", rec.date_to),
+                ("date_to", ">=", rec.date_from),
             ]
-            if self.search_count(domain):
+            other = self.search(domain, limit=1)
+            if other:
                 raise ValidationError(
                     _(
                         "Já existe um holerite para o empregado "
-                        "'%(employee)s' no período %(date_from)s a "
-                        "%(date_to)s com a mesma estrutura salarial.",
+                        "'%(employee)s' com período sobreposto "
+                        "(%(other_from)s a %(other_to)s) à faixa "
+                        "%(date_from)s a %(date_to)s, na mesma estrutura "
+                        "salarial.",
                         employee=rec.employee_id.name,
+                        other_from=other.date_from,
+                        other_to=other.date_to,
                         date_from=rec.date_from,
                         date_to=rec.date_to,
                     )
@@ -52,12 +68,23 @@ class HrPayslip(models.Model):
         """Validate payslip consistency before confirming."""
         for rec in self:
             # CPF obrigatório
-            if rec.employee_id and not rec.employee_id.cnpj_cpf:
+            cpf = rec.employee_id.cnpj_cpf if rec.employee_id else False
+            if rec.employee_id and not cpf:
                 raise ValidationError(
                     _(
                         "O empregado '%(employee)s' não possui CPF "
                         "cadastrado. O CPF é obrigatório para confirmar "
                         "a folha.",
+                        employee=rec.employee_id.name,
+                    )
+                )
+            # CPF com dígitos verificadores válidos
+            if cpf and not cnpj_cpf.validar_cpf(cpf):
+                raise ValidationError(
+                    _(
+                        "O CPF '%(cpf)s' do empregado '%(employee)s' é "
+                        "inválido (dígitos verificadores incorretos).",
+                        cpf=cpf,
                         employee=rec.employee_id.name,
                     )
                 )
