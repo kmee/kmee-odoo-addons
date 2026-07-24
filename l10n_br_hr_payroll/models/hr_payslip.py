@@ -86,18 +86,53 @@ class HrPayslip(models.Model):
             localdict.setdefault(code, 0.0)
         return localdict
 
+    def _get_competencia(self):
+        """Data de referência (fato gerador) para resolver as tabelas fiscais.
+
+        Convenção: fim do período do holerite (``date_to``), com fallback para
+        ``date_from``. Para holerites mensais ambos caem no mesmo mês; em
+        períodos que cruzam a virada de uma vigência (ex.: férias abril→maio),
+        vale a tabela vigente no encerramento/pagamento.
+        """
+        return self.date_to or self.date_from
+
     def _get_tools_dict(self):
         tools = super()._get_tools_dict()
+        # `self` é único aqui (chamado a partir de _get_baselocaldict, que faz
+        # ensure_one). Resolvemos a competência do holerite e vinculamos
+        # funções que já carregam a tabela vigente — as regras continuam
+        # chamando tools.br.calc_inss(base) sem passar o ano.
+        competencia = self._get_competencia()
+        inss_model = self.env["l10n_br.hr.payroll.inss.faixa"]
+        irrf_model = self.env["l10n_br.hr.payroll.irrf.faixa"]
+        sf_model = self.env["l10n_br.hr.payroll.sal.familia.faixa"]
+        dep_model = self.env["l10n_br.hr.payroll.irrf.dependente"]
+
+        def calc_inss(salario_bruto):
+            return salary_rules_br.calc_inss(
+                salario_bruto, inss_model._tabela(competencia)
+            )
+
+        def calc_irrf(base_irrf):
+            return salary_rules_br.calc_irrf(base_irrf, irrf_model._tabela(competencia))
+
+        def calc_salario_familia(remuneracao, num_filhos):
+            return salary_rules_br.calc_salario_familia(
+                remuneracao, num_filhos, sf_model._tabela(competencia)
+            )
+
         tools["br"] = types.SimpleNamespace(
             round_money=salary_rules_br.round_money,
-            calc_inss=salary_rules_br.calc_inss,
-            calc_irrf=salary_rules_br.calc_irrf,
+            calc_inss=calc_inss,
+            calc_irrf=calc_irrf,
             calc_ferias_dias=salary_rules_br.calc_ferias_dias,
             calc_decimo_avos=salary_rules_br.calc_decimo_avos,
             calc_vt=salary_rules_br.calc_vt,
-            calc_salario_familia=salary_rules_br.calc_salario_familia,
-            IRRF_DEDUCAO_DEPENDENTE=salary_rules_br.IRRF_DEDUCAO_DEPENDENTE,
-            SALARIO_MINIMO=salary_rules_br.SALARIO_MINIMO,
+            calc_salario_familia=calc_salario_familia,
+            # Resolvidos por competência (lazy: só falham se a regra usar).
+            irrf_deducao_dependente=lambda: dep_model._valor(competencia),
+            salario_minimo=lambda: inss_model._salario_minimo(competencia),
+            teto_inss=lambda: inss_model._teto(competencia),
         )
         return tools
 
