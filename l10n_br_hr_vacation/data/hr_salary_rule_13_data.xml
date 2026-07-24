@@ -112,7 +112,7 @@ result = tools.br.calc_inss(max(categories.GROSS, 0))
         <field name="amount_python_compute">
 gross = categories.GROSS
 deducoes = INSS_13
-dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
 pensao = employee.l10n_br_pensao_alimenticia
 result = gross - deducoes - dependentes - pensao
         </field>
