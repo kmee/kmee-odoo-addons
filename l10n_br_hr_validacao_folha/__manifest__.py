@@ -11,6 +11,5 @@
     "depends": [
         "l10n_br_hr_payroll",
     ],
-    "data": [],
     "installable": True,
 }
