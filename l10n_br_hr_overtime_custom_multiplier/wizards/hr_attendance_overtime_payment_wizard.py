@@ -6,8 +6,8 @@ from odoo.exceptions import UserError
 
 
 class Hr_attendanceOvertimePaymentWizard(models.TransientModel):
-
     _name = "hr_attendance.overtime.payment.wizard"
+    _description = "Overtime Payment Wizard"
 
     employee_id = fields.Many2one("hr.employee", string="Employee", required=True)
     date = fields.Date(required=True, default=fields.Date.context_today)
@@ -19,6 +19,8 @@ class Hr_attendanceOvertimePaymentWizard(models.TransientModel):
 
     def doit(self):
         for wizard in self:
+            if wizard.payment_total <= 0:
+                raise UserError(_("The payment total must be greater than zero."))
             if wizard.payment_total > wizard.total_overtime:
                 raise UserError(
                     _("The payment total cannot be greater than the total overtime.")
@@ -35,14 +37,14 @@ class Hr_attendanceOvertimePaymentWizard(models.TransientModel):
             )
         result_ids = (
             self.env["hr.attendance.overtime"]
-            .search([("employee_id", "=", wizard.employee_id.id)])
+            .search([("employee_id", "in", self.employee_id.ids)])
             .ids
         )
         action = {
             "type": "ir.actions.act_window",
-            "name": "Employee Overtimes",
+            "name": _("Employee Overtimes"),
             "res_model": "hr.attendance.overtime",
-            "domain": [("id", "=", result_ids)],
+            "domain": [("id", "in", result_ids)],
             "view_mode": "tree",
         }
         return action
