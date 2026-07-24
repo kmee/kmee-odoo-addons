@@ -22,8 +22,17 @@ class HrEmployee(models.Model):
         default=0,
     )
     l10n_br_pensao_alimenticia = fields.Float(
-        string="Pensão Alimentícia",
+        string="Pensão Alimentícia (Valor Fixo)",
         default=0.0,
+        help="Parcela fixa mensal de pensão alimentícia determinada "
+        "judicialmente. Somada à parcela percentual (se houver).",
+    )
+    l10n_br_pensao_percentual = fields.Float(
+        string="Pensão Alimentícia (% da Remuneração)",
+        default=0.0,
+        help="Percentual da remuneração bruta destinado à pensão alimentícia "
+        "(ex.: 30 = 30%). O valor efetivo descontado é: valor fixo + "
+        "percentual sobre a remuneração bruta do mês.",
     )
     l10n_br_molestia_grave = fields.Boolean(
         string="Portador de Moléstia Grave",

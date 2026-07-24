@@ -50,7 +50,7 @@ result = payslip.l10n_br_horas_extras_50 > 0
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-salario_hora = contract.wage / 220
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
 result = tools.br.round_money(salario_hora * 1.5 * payslip.l10n_br_horas_extras_50)
         </field>
     </record>
@@ -67,7 +67,7 @@ result = payslip.l10n_br_horas_extras_100 > 0
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-salario_hora = contract.wage / 220
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
 result = tools.br.round_money(salario_hora * 2.0 * payslip.l10n_br_horas_extras_100)
         </field>
     </record>
@@ -84,7 +84,7 @@ result = payslip.l10n_br_horas_noturnas > 0
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-salario_hora = contract.wage / 220
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
 result = tools.br.round_money(salario_hora * 0.20 * payslip.l10n_br_horas_noturnas)
         </field>
     </record>
@@ -175,8 +175,7 @@ result = payslip.l10n_br_faltas_injustificadas > 0
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-dias_uteis = 26
-dsr_mes = 4
+dias_uteis, dsr_mes = tools.br.dias_dsr()
 result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas * dsr_mes / dias_uteis)
         </field>
     </record>
@@ -254,6 +253,28 @@ else:
         </field>
     </record>
 
+    <!-- 106. Pensão Alimentícia (desconto do líquido) -->
+    <record id="hr_rule_pensao_alimenticia" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia</field>
+        <field name="sequence" eval="106" />
+        <field name="code">PENSAO_ALIMENTICIA</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_pensao_alimenticia > 0 or employee.l10n_br_pensao_percentual > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Valor efetivo = parcela fixa + percentual sobre a remuneração bruta.
+# Descontado do líquido (categoria DED) e deduzido da base do IRRF.
+result = tools.br.calc_pensao_alimenticia(
+    categories.GROSS,
+    employee.l10n_br_pensao_alimenticia,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
     <!-- ══════════════════════════════════════════════════════════════
          IRRF
          ══════════════════════════════════════════════════════════════ -->
@@ -270,7 +291,7 @@ else:
 gross = categories.GROSS
 deducoes = FALTAS + DESC_DSR + INSS
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
-pensao = employee.l10n_br_pensao_alimenticia
+pensao = PENSAO_ALIMENTICIA
 result = gross - deducoes - dependentes - pensao
         </field>
     </record>
@@ -287,7 +308,7 @@ result = gross - deducoes - dependentes - pensao
 gross = categories.GROSS
 deducoes = CONTRIB_RPPS
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
-pensao = employee.l10n_br_pensao_alimenticia
+pensao = PENSAO_ALIMENTICIA
 result = gross - deducoes - dependentes - pensao
         </field>
     </record>
@@ -304,7 +325,16 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.calc_irrf(max(BASE_IRRF, 0))
+# RF-16: retenção pela forma mais favorável ao contribuinte (menor imposto).
+#  1) Dedução legal: base já calculada em BASE_IRRF (INSS/RPPS, dependentes,
+#     pensão).
+#  2) Desconto simplificado (Lei 14.663/2023): parcela fixa por competência,
+#     no lugar das deduções legais, sobre o rendimento tributável.
+irrf_legal = tools.br.calc_irrf(max(BASE_IRRF, 0))
+rendimento = categories.GROSS - FALTAS - DESC_DSR
+base_simplificada = max(rendimento - tools.br.desconto_simplificado(), 0)
+irrf_simplificado = tools.br.calc_irrf(base_simplificada)
+result = min(irrf_legal, irrf_simplificado)
         </field>
     </record>
 

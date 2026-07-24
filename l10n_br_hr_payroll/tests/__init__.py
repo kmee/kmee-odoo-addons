@@ -4,6 +4,7 @@
 from . import test_salary_rules_pure
 from . import test_arredondamento
 from . import test_competencia
+from . import test_melhorias_base
 from . import test_inss
 from . import test_irrf
 from . import test_verbas

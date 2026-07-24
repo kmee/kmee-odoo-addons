@@ -14,6 +14,7 @@
                         <group string="IRRF">
                             <field name="l10n_br_irrf_dependentes" />
                             <field name="l10n_br_pensao_alimenticia" />
+                            <field name="l10n_br_pensao_percentual" />
                             <field name="l10n_br_molestia_grave" />
                             <field
                                 name="l10n_br_cid_molestia"

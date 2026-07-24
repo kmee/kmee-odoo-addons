@@ -22,26 +22,27 @@ class TestHoraExtra(PayrollCommon):
     """Testes de cálculo de hora extra."""
 
     def test_hora_extra_50_porcento(self):
-        """HE em dias úteis: 150% do salário-hora."""
+        """HE em dias úteis: 150% do salário-hora (divisor da jornada)."""
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self._create_payslip(emp, contract)
         payslip.write({"l10n_br_horas_extras_50": 10})
         payslip.compute_sheet()
         he = self._get_line_total(payslip, "HE_50")
-        # (3000/220) × 1.50 × 10 = 204.55
-        self.assertAlmostEqualMoney(he, 204.55)
+        # (3000/divisor) × 1.50 × 10, divisor derivado da jornada (RF-26).
+        divisor = contract._l10n_br_divisor_horas_mensais()
+        self.assertAlmostEqualMoney(he, (3000.00 / divisor) * 1.5 * 10)
 
     def test_hora_extra_100_porcento(self):
-        """HE em domingo/feriado: 200% do salário-hora."""
+        """HE em domingo/feriado: 200% do salário-hora (divisor da jornada)."""
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self._create_payslip(emp, contract)
         payslip.write({"l10n_br_horas_extras_100": 5})
         payslip.compute_sheet()
         he = self._get_line_total(payslip, "HE_100")
-        # (3000/220) × 2.00 × 5 = 136.36
-        self.assertAlmostEqualMoney(he, 136.36)
+        divisor = contract._l10n_br_divisor_horas_mensais()
+        self.assertAlmostEqualMoney(he, (3000.00 / divisor) * 2.0 * 5)
 
     def test_hora_extra_integra_base_fgts(self):
         """Hora extra compõe a base de cálculo do FGTS."""
@@ -92,7 +93,8 @@ class TestAdicionalNoturno(PayrollCommon):
         payslip.write({"l10n_br_horas_noturnas": 176})
         payslip.compute_sheet()
         adicional = self._get_line_total(payslip, "ADICIONAL_NOTURNO")
-        esperado = (3000.00 / 220) * 0.20 * 176
+        divisor = contract._l10n_br_divisor_horas_mensais()
+        esperado = (3000.00 / divisor) * 0.20 * 176
         self.assertAlmostEqualMoney(adicional, esperado)
 
     def test_hora_noturna_reduzida_52min30s(self):
