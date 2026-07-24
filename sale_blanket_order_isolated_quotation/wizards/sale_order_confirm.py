@@ -17,13 +17,13 @@ class SaleOrderConfirm(models.TransientModel):
         order = self.sale_id.copy(self.sale_id._prepare_order_from_quotation())
         self.sale_id.order_id = order.id
         if self.sale_id.state == "draft":
-            self.sale_id.action_done()
+            self.sale_id._action_done()
         return self.sale_id.open_duplicated_sale_order()
 
     def create_blanket_order(self):
         """Create blanket order from quotation"""
         self.ensure_one()
-        self.sale_id.action_done()
+        self.sale_id._action_done()
         return self._prepare_and_create_bo()
 
     def _prepare_and_create_bo(self):

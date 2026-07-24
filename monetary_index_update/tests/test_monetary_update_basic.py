@@ -1,7 +1,10 @@
 from datetime import date
 
+from psycopg2 import IntegrityError
+
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 
 class TestMonetaryUpdateBasic(TransactionCase):
@@ -103,16 +106,17 @@ class TestMonetaryUpdateBasic(TransactionCase):
     def test_update_amount(self):
         """Test updating amount"""
         original = 1000.0
-        updated = self.service.update_amount(
+        updated = self.service.compute_updated_amount(
             "TEST", original, date(2024, 1, 1), date(2024, 3, 1), mode="compound"
         )
         factor = 1.01 * 1.02 * 1.015
         expected = original * factor
         self.assertAlmostEqual(updated, expected, places=2)
 
+    @mute_logger("odoo.sql_db")
     def test_index_code_unique(self):
         """Test that index code is unique per company"""
-        with self.assertRaises(UserError):
+        with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.index_model.create(
                 {
                     "name": "Duplicate Test Index",
@@ -121,9 +125,10 @@ class TestMonetaryUpdateBasic(TransactionCase):
                 }
             )
 
+    @mute_logger("odoo.sql_db")
     def test_rate_date_unique(self):
         """Test that rate date is unique per index"""
-        with self.assertRaises(UserError):
+        with self.assertRaises(IntegrityError), self.cr.savepoint():
             self.rate_model.create(
                 {
                     "index_id": self.test_index.id,

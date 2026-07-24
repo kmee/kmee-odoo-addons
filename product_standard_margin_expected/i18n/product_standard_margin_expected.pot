@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_standard_margin_expected
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_standard_margin_expected
+#: model:ir.model.fields,field_description:product_standard_margin_expected.field_product_product__expected_margin_percent
+#: model:ir.model.fields,field_description:product_standard_margin_expected.field_product_template__expected_margin_percent
+#: model_terms:ir.ui.view,arch_db:product_standard_margin_expected.product_template_form_view_inherit_margin_expected
+msgid "Margem Esperada (%)"
+msgstr ""
+
+#. module: product_standard_margin_expected
+#: model:ir.model.fields,help:product_standard_margin_expected.field_product_product__expected_margin_percent
+#: model:ir.model.fields,help:product_standard_margin_expected.field_product_template__expected_margin_percent
+msgid ""
+"Margem percentual esperada para este produto. Usado para comparação com a "
+"margem calculada real."
+msgstr ""
+
+#. module: product_standard_margin_expected
+#: model:ir.model.fields,field_description:product_standard_margin_expected.field_product_product__expected_markup_percent
+#: model:ir.model.fields,field_description:product_standard_margin_expected.field_product_template__expected_markup_percent
+#: model_terms:ir.ui.view,arch_db:product_standard_margin_expected.product_template_form_view_inherit_margin_expected
+msgid "Markup Esperado (%)"
+msgstr ""
+
+#. module: product_standard_margin_expected
+#: model:ir.model.fields,help:product_standard_margin_expected.field_product_product__expected_markup_percent
+#: model:ir.model.fields,help:product_standard_margin_expected.field_product_template__expected_markup_percent
+msgid ""
+"Markup percentual esperado para este produto. Usado para comparação com o "
+"markup calculado real."
+msgstr ""
+
+#. module: product_standard_margin_expected
+#: model:ir.model,name:product_standard_margin_expected.model_product_template
+msgid "Product"
+msgstr ""

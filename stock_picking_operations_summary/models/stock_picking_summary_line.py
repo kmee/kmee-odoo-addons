@@ -9,12 +9,6 @@ class StockPickingSummaryLine(models.TransientModel):
     _name = "stock.picking.summary.line"
     _description = "Stock Picking Operations Summary Line"
 
-    picking_id = fields.Many2one(
-        "stock.picking",
-        string="Transfer",
-        required=True,
-        ondelete="cascade",
-    )
     product_id = fields.Many2one(
         "product.product",
         string="Product",
@@ -32,4 +26,12 @@ class StockPickingSummaryLine(models.TransientModel):
     quantity_done = fields.Float(
         string="Done",
         digits="Product Unit of Measure",
+    )
+    location_id = fields.Many2one(
+        "stock.location",
+        string="Source Location",
+    )
+    location_dest_id = fields.Many2one(
+        "stock.location",
+        string="Destination Location",
     )
