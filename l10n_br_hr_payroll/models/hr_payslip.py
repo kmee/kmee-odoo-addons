@@ -68,22 +68,46 @@ class HrPayslip(models.Model):
                     payslip.write({"worked_days_line_ids": lines})
         return super().compute_sheet()
 
+    # Códigos referenciados por regras COMPARTILHADAS entre estruturas cuja
+    # regra-fonte pode não estar na estrutura corrente (ex.: a regra IRRF é
+    # usada por CLT e Estatutário e referencia FALTAS/DESC_DSR, que só
+    # existem na estrutura CLT). Estes garantem o default mesmo quando a regra
+    # que os define está ausente da estrutura do holerite.
+    _L10N_BR_BASELOCALDICT_BASELINE = (
+        "FALTAS",
+        "DESC_DSR",
+        "INSS",
+        "CONTRIB_RPPS",
+        "PENSAO_ALIMENTICIA",
+        "BASE_IRRF",
+    )
+
     def _get_baselocaldict(self, contracts):
-        """Pre-populate rule codes with 0.0 defaults.
+        """Pre-populate rule codes with 0.0 defaults (RF-15).
 
         Rules with conditional execution (e.g. FALTAS only when faltas > 0)
-        may not fire, leaving their code absent from localdict. Pre-populating
-        ensures downstream rules can safely reference them without NameError.
+        may not fire, leaving their code absent from localdict. Uma regra que
+        referencie o código "nu" de outra regra ainda-não-calculada
+        levantaria ``NameError``.
+
+        A pré-população é EXTENSÍVEL: em vez de depender só de uma tupla fixa
+        mantida à mão (que já causou bugs quando uma regra satélite
+        referenciava um código fora da lista), os defaults são derivados das
+        PRÓPRIAS regras das estruturas do holerite — qualquer código presente
+        na estrutura fica disponível desde o início do cálculo, sem manutenção.
+
+        Mantém-se ainda uma baseline mínima
+        (``_L10N_BR_BASELOCALDICT_BASELINE``) para os códigos referenciados por
+        regras compartilhadas entre estruturas cuja regra-fonte pode não estar
+        na estrutura corrente (a regra IRRF, usada por CLT e Estatutário,
+        referencia FALTAS/DESC_DSR que só existem na CLT).
         """
         localdict = super()._get_baselocaldict(contracts)
-        for code in (
-            "FALTAS",
-            "DESC_DSR",
-            "INSS",
-            "CONTRIB_RPPS",
-            "BASE_IRRF",
-        ):
+        for code in self._L10N_BR_BASELOCALDICT_BASELINE:
             localdict.setdefault(code, 0.0)
+        for rule in self._get_salary_rules():
+            if rule.code:
+                localdict.setdefault(rule.code, 0.0)
         return localdict
 
     def _get_competencia(self):
@@ -121,6 +145,9 @@ class HrPayslip(models.Model):
                 remuneracao, num_filhos, sf_model._tabela(competencia)
             )
 
+        def dias_dsr():
+            return salary_rules_br.dias_dsr(competencia.year, competencia.month)
+
         tools["br"] = types.SimpleNamespace(
             round_money=salary_rules_br.round_money,
             calc_inss=calc_inss,
@@ -129,8 +156,14 @@ class HrPayslip(models.Model):
             calc_decimo_avos=salary_rules_br.calc_decimo_avos,
             calc_vt=salary_rules_br.calc_vt,
             calc_salario_familia=calc_salario_familia,
+            calc_pensao_alimenticia=salary_rules_br.calc_pensao_alimenticia,
+            # Dias úteis/DSR da competência (RF-26).
+            dias_dsr=dias_dsr,
             # Resolvidos por competência (lazy: só falham se a regra usar).
             irrf_deducao_dependente=lambda: dep_model._valor(competencia),
+            desconto_simplificado=lambda: irrf_model._desconto_simplificado(
+                competencia
+            ),
             salario_minimo=lambda: inss_model._salario_minimo(competencia),
             teto_inss=lambda: inss_model._teto(competencia),
         )

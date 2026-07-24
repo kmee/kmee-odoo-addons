@@ -164,6 +164,40 @@ class L10nBrPayrollIrrfFaixa(models.Model):
         faixas = self._vigentes(competencia, order="base_max asc")
         return [(f.base_max, f.aliquota / 100.0, f.parcela_deduzir) for f in faixas]
 
+    # Fator legal do desconto simplificado mensal (Lei 14.663/2023, art. 1º,
+    # que converteu a MP 1.171/2023): a parcela corresponde a 25% do valor
+    # máximo da faixa de isenção da tabela mensal vigente.
+    FATOR_DESCONTO_SIMPLIFICADO = 0.25
+
+    @api.model
+    def _desconto_simplificado(self, competencia):
+        """Parcela do desconto simplificado mensal do IRRF por competência.
+
+        Vigente desde 05/2023 (Lei 14.663/2023): opcionalmente, no lugar das
+        deduções legais (INSS, dependentes, pensão), o contribuinte pode
+        abater uma parcela fixa correspondente a **25% do teto da faixa de
+        isenção** da tabela mensal vigente. A retenção deve usar a forma mais
+        favorável (menor imposto) — ver a regra salarial IRRF.
+
+        Deriva o valor da própria tabela de IRRF já parametrizada por
+        vigência (não introduz constante nova): teto da faixa de isenção é o
+        menor ``base_max`` da tabela (faixa com alíquota zero).
+
+        Conferência com os valores oficiais:
+          - 05/2023–01/2024: 25% × 2.112,00 = 528,00
+          - 02/2024–04/2025: 25% × 2.259,20 = 564,80
+          - a partir 05/2025: 25% × 2.428,80 = 607,20
+
+        Pendência (documentada): o fator de 25% é fixado em lei; caso uma
+        vigência futura altere o percentual, basta sobrepor este método ou
+        adicionar um campo de fator por vigência.
+        """
+        tabela = self._tabela(competencia)
+        teto_isencao = min(base_max for base_max, _aliq, _parcela in tabela)
+        return salary_rules_br.round_money(
+            self.FATOR_DESCONTO_SIMPLIFICADO * teto_isencao
+        )
+
 
 class L10nBrPayrollSalFamiliaFaixa(models.Model):
     _name = "l10n_br.hr.payroll.sal.familia.faixa"

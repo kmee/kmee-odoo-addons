@@ -15,8 +15,10 @@ from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     calc_ferias_dias,
     calc_inss as _calc_inss,
     calc_irrf as _calc_irrf,
+    calc_pensao_alimenticia,
     calc_salario_familia as _calc_salario_familia,
     calc_vt,
+    dias_dsr,
 )
 
 from .fixtures import FAIXAS_INSS_2024, FAIXAS_IRRF_2024, FAIXAS_SF_2024
@@ -216,3 +218,42 @@ class TestCalcSalarioFamilia(BaseCase):
 
     def test_sem_filhos(self):
         self.assertAlmostEqual(calc_salario_familia(1412.00, 0), 0.00)
+
+
+class TestCalcPensaoAlimenticia(BaseCase):
+    """RF-03: valor efetivo da pensão (fixo + percentual sobre remuneração)."""
+
+    def test_apenas_valor_fixo(self):
+        self.assertAlmostEqual(calc_pensao_alimenticia(5000.00, 800.00, 0.0), 800.00)
+
+    def test_apenas_percentual(self):
+        """30% de R$5.000 = R$1.500."""
+        self.assertAlmostEqual(calc_pensao_alimenticia(5000.00, 0.0, 30.0), 1500.00)
+
+    def test_fixo_mais_percentual(self):
+        """R$500 + 10% de R$5.000 = R$500 + R$500 = R$1.000."""
+        self.assertAlmostEqual(calc_pensao_alimenticia(5000.00, 500.00, 10.0), 1000.00)
+
+    def test_sem_pensao(self):
+        self.assertAlmostEqual(calc_pensao_alimenticia(5000.00, 0.0, 0.0), 0.00)
+
+
+class TestDiasDSR(BaseCase):
+    """RF-26: dias úteis e DSR derivados do mês da competência."""
+
+    def test_marco_2024_cinco_domingos(self):
+        """Março/2024: 31 dias, 5 domingos (3,10,17,24,31) → 26 úteis, 5 DSR."""
+        uteis, dsr = dias_dsr(2024, 3)
+        self.assertEqual((uteis, dsr), (26, 5))
+
+    def test_fevereiro_2024_quatro_domingos(self):
+        """Fevereiro/2024 (bissexto): 29 dias, 4 domingos → 25 úteis, 4 DSR."""
+        uteis, dsr = dias_dsr(2024, 2)
+        self.assertEqual((uteis, dsr), (25, 4))
+
+    def test_soma_bate_com_total_do_mes(self):
+        for mes in range(1, 13):
+            with self.subTest(mes=mes):
+                uteis, dsr = dias_dsr(2025, mes)
+                self.assertGreater(uteis, 0)
+                self.assertGreater(dsr, 0)

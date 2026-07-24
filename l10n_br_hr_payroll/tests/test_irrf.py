@@ -22,6 +22,21 @@ def calc_irrf(base):
     return _calc_irrf(base, FAIXAS_IRRF_2024)
 
 
+# Desconto simplificado 2024 = 25% do teto da faixa de isenção (2.259,20).
+DESCONTO_SIMPLIFICADO_2024 = round(0.25 * 2259.20, 2)  # 564.80
+
+
+def irrf_favoravel(gross, deducoes_legais):
+    """IRRF mensal pela forma mais favorável (RF-16): min(legal, simplificado).
+
+    Espelha a regra salarial: base legal = gross - deduções legais; base
+    simplificada = gross - desconto simplificado; retenção = menor imposto.
+    """
+    base_legal = max(gross - deducoes_legais, 0.0)
+    base_simpl = max(gross - DESCONTO_SIMPLIFICADO_2024, 0.0)
+    return min(calc_irrf(base_legal), calc_irrf(base_simpl))
+
+
 class TestIRRFTabela(PayrollCommon):
     """Testes da tabela progressiva do IRRF sem dependentes."""
 
@@ -34,47 +49,51 @@ class TestIRRFTabela(PayrollCommon):
         self.assertEqual(irrf, 0.0)
 
     def test_irrf_faixa2_7_5_porcento(self):
-        """Base entre R$2.259,21 e R$2.826,65 → alíquota 7,5%."""
+        """Base na faixa de 7,5% pela dedução legal.
+
+        Com poucas deduções o desconto simplificado (RF-16) é mais favorável,
+        então a retenção efetiva é o menor imposto entre as duas formas.
+        """
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=2700.00)
         payslip = self._create_payslip(emp, contract)
         inss = self._get_line_total(payslip, "INSS")
-        base_esperada = 2700.00 - inss
         irrf = self._get_line_total(payslip, "IRRF")
-        irrf_esperado = base_esperada * 0.075 - 169.44
-        self.assertAlmostEqualMoney(irrf, max(0, irrf_esperado))
+        self.assertAlmostEqualMoney(irrf, irrf_favoravel(2700.00, inss))
 
     def test_irrf_faixa3_15_porcento(self):
-        """Base entre R$2.826,66 e R$3.751,05 → alíquota 15%."""
+        """Base na faixa de 15% (retenção pela forma mais favorável)."""
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=3500.00)
         payslip = self._create_payslip(emp, contract)
         inss = self._get_line_total(payslip, "INSS")
-        base = 3500.00 - inss
         irrf = self._get_line_total(payslip, "IRRF")
-        irrf_esperado = base * 0.15 - 381.44
-        self.assertAlmostEqualMoney(irrf, max(0, irrf_esperado))
+        self.assertAlmostEqualMoney(irrf, irrf_favoravel(3500.00, inss))
 
     def test_irrf_faixa4_22_5_porcento(self):
-        """Base entre R$3.751,06 e R$4.664,68 → alíquota 22,5%."""
+        """Base na faixa de 22,5% (retenção pela forma mais favorável)."""
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=4500.00)
         payslip = self._create_payslip(emp, contract)
         inss = self._get_line_total(payslip, "INSS")
-        base = 4500.00 - inss
         irrf = self._get_line_total(payslip, "IRRF")
-        irrf_esperado = base * 0.225 - 662.77
-        self.assertAlmostEqualMoney(irrf, max(0, irrf_esperado))
+        self.assertAlmostEqualMoney(irrf, irrf_favoravel(4500.00, inss))
 
     def test_irrf_faixa5_27_5_porcento(self):
-        """Base acima de R$4.664,69 → alíquota 27,5%."""
+        """Base na faixa de 27,5%: dedução legal ganha (INSS alto).
+
+        Para salário alto a dedução legal (INSS no teto) supera o desconto
+        simplificado, então a retenção efetiva usa a base legal.
+        """
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=10000.00)
         payslip = self._create_payslip(emp, contract)
         inss = self._get_line_total(payslip, "INSS")
-        base = 10000.00 - inss
         irrf = self._get_line_total(payslip, "IRRF")
+        base = 10000.00 - inss
         irrf_esperado = base * 0.275 - 896.00
+        # Aqui a forma legal é a mais favorável.
+        self.assertAlmostEqualMoney(irrf, irrf_favoravel(10000.00, inss))
         self.assertAlmostEqualMoney(irrf, irrf_esperado)
 
 
