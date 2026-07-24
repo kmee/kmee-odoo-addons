@@ -1,1 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inss_faixa_user,inss.faixa.user,model_l10n_br_hr_payroll_inss_faixa,payroll.group_payroll_user,1,0,0,0
+access_inss_faixa_manager,inss.faixa.manager,model_l10n_br_hr_payroll_inss_faixa,payroll.group_payroll_manager,1,1,1,1
+access_irrf_faixa_user,irrf.faixa.user,model_l10n_br_hr_payroll_irrf_faixa,payroll.group_payroll_user,1,0,0,0
+access_irrf_faixa_manager,irrf.faixa.manager,model_l10n_br_hr_payroll_irrf_faixa,payroll.group_payroll_manager,1,1,1,1
+access_sal_familia_faixa_user,sal.familia.faixa.user,model_l10n_br_hr_payroll_sal_familia_faixa,payroll.group_payroll_user,1,0,0,0
+access_sal_familia_faixa_manager,sal.familia.faixa.manager,model_l10n_br_hr_payroll_sal_familia_faixa,payroll.group_payroll_manager,1,1,1,1
+access_irrf_dependente_user,irrf.dependente.user,model_l10n_br_hr_payroll_irrf_dependente,payroll.group_payroll_user,1,0,0,0
+access_irrf_dependente_manager,irrf.dependente.manager,model_l10n_br_hr_payroll_irrf_dependente,payroll.group_payroll_manager,1,1,1,1
