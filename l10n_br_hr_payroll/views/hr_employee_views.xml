@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_employee_form_payroll_br" model="ir.ui.view">
+        <field name="name">hr.employee.form.payroll.br</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page string="Folha de Pagamento" name="payroll_br">
+                    <group>
+                        <group string="Contrato">
+                            <field name="l10n_br_tipo_contrato" />
+                        </group>
+                        <group string="IRRF">
+                            <field name="l10n_br_irrf_dependentes" />
+                            <field name="l10n_br_pensao_alimenticia" />
+                            <field name="l10n_br_molestia_grave" />
+                            <field
+                                name="l10n_br_cid_molestia"
+                                attrs="{'invisible': [('l10n_br_molestia_grave', '=', False)]}"
+                            />
+                        </group>
+                        <group string="Salário Família">
+                            <field name="l10n_br_num_filhos_sf" />
+                            <field name="l10n_br_filhos_invalidos_sf" />
+                        </group>
+                        <group string="PcD">
+                            <field name="l10n_br_pcd" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

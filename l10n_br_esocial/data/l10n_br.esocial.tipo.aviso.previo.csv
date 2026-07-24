@@ -1,0 +1,6 @@
+id,codigo,nome,dt_inicio,dt_fim
+tipo_aviso_1,1,"Aviso prévio trabalhado dado pelo empregador ao empregado, que optou pela redução de duas horas diárias [caput do art. 488 da CLT]",2014-01-01,
+tipo_aviso_2,2,"Aviso prévio trabalhado dado pelo empregador ao empregado, que optou pela redução de dias corridos [parágrafo único do art. 488 da CLT]",2014-01-01,
+tipo_aviso_4,4,"Aviso prévio dado pelo empregado (pedido de demissão), não dispensado de seu cumprimento, sob pena de desconto, pelo empregador, dos salários correspondentes ao prazo respectivo (§2º do art. 487 da CLT)",2014-01-01,
+tipo_aviso_5,5,"Aviso prévio trabalhado dado pelo empregador rural ao empregado, com redução de um dia por semana ( art. 15 da Lei nº 5889/73)",2014-01-01,
+tipo_aviso_6,6,"Aviso prévio trabalhado decorrente de acordo entre empregado e empregador (art. 484-A, """"caput"""", da CLT)",2014-01-01,

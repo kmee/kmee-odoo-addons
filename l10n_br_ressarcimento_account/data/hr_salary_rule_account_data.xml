@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Mapeamento contábil da regra de ressarcimento.
+
+        Ressarcimento é INFO (não afeta NET). A contabilização cria
+        lançamento separado: Debit despesa / Credit passivo.
+        O pagamento ao empregado é feito junto com o salário líquido.
+
+        As contas são configuradas via demo data ou manualmente pelo
+        usuário, pois dependem do plano de contas de cada empresa.
+    -->
+</odoo>

@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- ===== Natureza Rubrica (Tab 3) ===== -->
+    <record id="view_esocial_natureza_rubrica_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.natureza.rubrica.tree</field>
+        <field name="model">l10n_br.esocial.natureza.rubrica</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+                <field name="dt_inicio" optional="hide" />
+                <field name="dt_fim" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_natureza_rubrica_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.natureza.rubrica.form</field>
+        <field name="model">l10n_br.esocial.natureza.rubrica</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="dt_inicio" />
+                        <field name="dt_fim" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_natureza_rubrica" model="ir.actions.act_window">
+        <field name="name">Natureza da Rubrica (Tab. 3)</field>
+        <field name="res_model">l10n_br.esocial.natureza.rubrica</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Categoria Trabalhador (Tab 1) ===== -->
+    <record id="view_esocial_categoria_trabalhador_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.categoria.trabalhador.tree</field>
+        <field name="model">l10n_br.esocial.categoria.trabalhador</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+                <field name="grupo" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_categoria_trabalhador_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.categoria.trabalhador.form</field>
+        <field name="model">l10n_br.esocial.categoria.trabalhador</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="grupo" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_categoria_trabalhador" model="ir.actions.act_window">
+        <field name="name">Categoria do Trabalhador (Tab. 1)</field>
+        <field name="res_model">l10n_br.esocial.categoria.trabalhador</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Classificação Tributária (Tab 8) ===== -->
+    <record id="view_esocial_classificacao_tributaria_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.classificacao.tributaria.tree</field>
+        <field name="model">l10n_br.esocial.classificacao.tributaria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_classificacao_tributaria_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.classificacao.tributaria.form</field>
+        <field name="model">l10n_br.esocial.classificacao.tributaria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_classificacao_tributaria" model="ir.actions.act_window">
+        <field name="name">Classificação Tributária (Tab. 8)</field>
+        <field name="res_model">l10n_br.esocial.classificacao.tributaria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Lotação Tributária (Tab 10) ===== -->
+    <record id="view_esocial_lotacao_tributaria_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.lotacao.tributaria.tree</field>
+        <field name="model">l10n_br.esocial.lotacao.tributaria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_lotacao_tributaria_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.lotacao.tributaria.form</field>
+        <field name="model">l10n_br.esocial.lotacao.tributaria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_lotacao_tributaria" model="ir.actions.act_window">
+        <field name="name">Lotação Tributária (Tab. 10)</field>
+        <field name="res_model">l10n_br.esocial.lotacao.tributaria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Motivo Afastamento (Tab 18) ===== -->
+    <record id="view_esocial_motivo_afastamento_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.afastamento.tree</field>
+        <field name="model">l10n_br.esocial.motivo.afastamento</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_motivo_afastamento_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.afastamento.form</field>
+        <field name="model">l10n_br.esocial.motivo.afastamento</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_motivo_afastamento" model="ir.actions.act_window">
+        <field name="name">Motivo de Afastamento (Tab. 18)</field>
+        <field name="res_model">l10n_br.esocial.motivo.afastamento</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Motivo Desligamento (Tab 19) ===== -->
+    <record id="view_esocial_motivo_desligamento_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.desligamento.tree</field>
+        <field name="model">l10n_br.esocial.motivo.desligamento</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="codigo" />
+                <field name="nome" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_motivo_desligamento_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.motivo.desligamento.form</field>
+        <field name="model">l10n_br.esocial.motivo.desligamento</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="codigo" />
+                        <field name="nome" />
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_motivo_desligamento" model="ir.actions.act_window">
+        <field name="name">Motivo de Desligamento (Tab. 19)</field>
+        <field name="res_model">l10n_br.esocial.motivo.desligamento</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Financiamento Aposentadoria (Tab 02) ===== -->
+    <record id="action_esocial_financiamento_aposent" model="ir.actions.act_window">
+        <field name="name">Financiamento Aposentadoria (Tab. 2)</field>
+        <field name="res_model">l10n_br.esocial.financiamento.aposent</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== FPAS/Terceiros (Tab 04) ===== -->
+    <record id="action_esocial_fpas_terceiros" model="ir.actions.act_window">
+        <field name="name">FPAS/Terceiros (Tab. 4)</field>
+        <field name="res_model">l10n_br.esocial.fpas.terceiros</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Inscrição (Tab 05) ===== -->
+    <record id="action_esocial_tipo_inscricao" model="ir.actions.act_window">
+        <field name="name">Tipos de Inscrição (Tab. 5)</field>
+        <field name="res_model">l10n_br.esocial.tipo.inscricao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== País (Tab 06) ===== -->
+    <record id="action_esocial_pais" model="ir.actions.act_window">
+        <field name="name">Países eSocial (Tab. 6)</field>
+        <field name="res_model">l10n_br.esocial.pais</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Arquivo (Tab 09) ===== -->
+    <record id="action_esocial_tipo_arquivo" model="ir.actions.act_window">
+        <field name="name">Tipos de Arquivo/Evento (Tab. 9)</field>
+        <field name="res_model">l10n_br.esocial.tipo.arquivo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Compat Categ/Lotação (Tab 11) ===== -->
+    <record id="action_esocial_compat_categ_lotacao" model="ir.actions.act_window">
+        <field name="name">Compatibilidade Categ/Lotação (Tab. 11)</field>
+        <field name="res_model">l10n_br.esocial.compat.categ.lotacao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Parte Corpo (Tab 13) ===== -->
+    <record id="action_esocial_parte_corpo" model="ir.actions.act_window">
+        <field name="name">Parte do Corpo (Tab. 13)</field>
+        <field name="res_model">l10n_br.esocial.parte.corpo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Agente Causador (Tab 14) ===== -->
+    <record id="action_esocial_agente_causador" model="ir.actions.act_window">
+        <field name="name">Agente Causador (Tab. 14)</field>
+        <field name="res_model">l10n_br.esocial.agente.causador</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Situação Geradora (Tab 15) ===== -->
+    <record id="action_esocial_situacao_geradora" model="ir.actions.act_window">
+        <field name="name">Situação Geradora (Tab. 15)</field>
+        <field name="res_model">l10n_br.esocial.situacao.geradora</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Natureza Lesão (Tab 17) ===== -->
+    <record id="action_esocial_natureza_lesao" model="ir.actions.act_window">
+        <field name="name">Natureza da Lesão (Tab. 17)</field>
+        <field name="res_model">l10n_br.esocial.natureza.lesao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Logradouro (Tab 20) ===== -->
+    <record id="action_esocial_tipo_logradouro" model="ir.actions.act_window">
+        <field name="name">Tipos de Logradouro (Tab. 20)</field>
+        <field name="res_model">l10n_br.esocial.tipo.logradouro</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Incidência IRRF (Tab 21) ===== -->
+    <record id="action_esocial_incidencia_irrf" model="ir.actions.act_window">
+        <field name="name">Incidência IRRF (Tab. 21)</field>
+        <field name="res_model">l10n_br.esocial.incidencia.irrf</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Agente Nocivo (Tab 22) ===== -->
+    <record id="action_esocial_agente_nocivo" model="ir.actions.act_window">
+        <field name="name">Agentes Nocivos (Tab. 22)</field>
+        <field name="res_model">l10n_br.esocial.agente.nocivo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Aposentadoria Especial (Tab 23) ===== -->
+    <record id="action_esocial_aposentadoria_especial" model="ir.actions.act_window">
+        <field name="name">Aposentadoria Especial (Tab. 23)</field>
+        <field name="res_model">l10n_br.esocial.aposentadoria.especial</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Compatibilidade FPAS (Tab 24) ===== -->
+    <record id="action_esocial_compat_fpas" model="ir.actions.act_window">
+        <field name="name">Compatibilidade FPAS (Tab. 24)</field>
+        <field name="res_model">l10n_br.esocial.compat.fpas</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Dependente (Tab 25) ===== -->
+    <record id="action_esocial_tipo_dependente" model="ir.actions.act_window">
+        <field name="name">Tipos de Dependente (Tab. 25)</field>
+        <field name="res_model">l10n_br.esocial.tipo.dependente</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Procedimentos Diagnósticos (Tab 27) ===== -->
+    <record id="action_esocial_procedimento_diagnostico" model="ir.actions.act_window">
+        <field name="name">Procedimentos Diagnósticos (Tab. 27)</field>
+        <field name="res_model">l10n_br.esocial.procedimento.diagnostico</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Treinamento (Tab 29) ===== -->
+    <record id="action_esocial_treinamento" model="ir.actions.act_window">
+        <field name="name">Treinamentos (Tab. 29)</field>
+        <field name="res_model">l10n_br.esocial.treinamento</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tributação Exterior (Tab 30) ===== -->
+    <record id="action_esocial_trib_exterior" model="ir.actions.act_window">
+        <field name="name">Tributação Exterior (Tab. 30)</field>
+        <field name="res_model">l10n_br.esocial.trib.exterior</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Receita Reclamatória (Tab 32) ===== -->
+    <record id="action_esocial_receita_reclamatoria" model="ir.actions.act_window">
+        <field name="name">Receita Reclamatória (Tab. 32)</field>
+        <field name="res_model">l10n_br.esocial.receita.reclamatoria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Motivo Cessação (Tab 34) ===== -->
+    <record id="action_esocial_motivo_cessacao" model="ir.actions.act_window">
+        <field name="name">Motivos Cessação Benefício (Tab. 34)</field>
+        <field name="res_model">l10n_br.esocial.motivo.cessacao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Benefício (Tab 35) ===== -->
+    <record id="action_esocial_tipo_beneficio" model="ir.actions.act_window">
+        <field name="name">Tipos de Benefício (Tab. 35)</field>
+        <field name="res_model">l10n_br.esocial.tipo.beneficio</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Inst. Empréstimo (Tab 37) ===== -->
+    <record id="action_esocial_inst_emprestimo" model="ir.actions.act_window">
+        <field name="name">Instituições Empréstimo (Tab. 37)</field>
+        <field name="res_model">l10n_br.esocial.inst.emprestimo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== CBO (Tab 50) — Referência OCA l10n_br_hr.cbo ===== -->
+    <record id="action_esocial_cbo_oca" model="ir.actions.act_window">
+        <field name="name">CBO (Tab. 50) - via OCA</field>
+        <field name="res_model">l10n_br_hr.cbo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Código Terceiro (Tab 51) ===== -->
+    <record id="action_esocial_codigo_terceiro" model="ir.actions.act_window">
+        <field name="name">Códigos de Terceiro (Tab. 51)</field>
+        <field name="res_model">l10n_br.esocial.codigo.terceiro</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Horário (Tab 52) ===== -->
+    <record id="action_esocial_horario" model="ir.actions.act_window">
+        <field name="name">Horários (Tab. 52)</field>
+        <field name="res_model">l10n_br.esocial.horario</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Natureza Jurídica (Tab 53) — Referência OCA l10n_br_fiscal.legal.nature ===== -->
+    <record id="action_esocial_natureza_juridica_oca" model="ir.actions.act_window">
+        <field name="name">Natureza Jurídica (Tab. 53) - via OCA</field>
+        <field name="res_model">l10n_br_fiscal.legal.nature</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Rubrica Padrão (Tab 54) ===== -->
+    <record id="action_esocial_rubrica_padrao" model="ir.actions.act_window">
+        <field name="name">Rubricas Padrão (Tab. 54)</field>
+        <field name="res_model">l10n_br.esocial.rubrica.padrao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== CNAE (Tab 56) — Referência OCA l10n_br_fiscal.cnae ===== -->
+    <record id="action_esocial_cnae_oca" model="ir.actions.act_window">
+        <field name="name">CNAE (Tab. 56) - via OCA</field>
+        <field name="res_model">l10n_br_fiscal.cnae</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Faixa INSS (Tab 57) ===== -->
+    <record id="view_esocial_faixa_inss_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.faixa.inss.tree</field>
+        <field name="model">l10n_br.esocial.faixa.inss</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="inf_sal_cont" />
+                <field name="sup_sal_cont" />
+                <field name="aliquota" />
+                <field name="dt_inicio" />
+                <field name="dt_fim" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_esocial_faixa_inss" model="ir.actions.act_window">
+        <field name="name">Faixas INSS (Tab. 57)</field>
+        <field name="res_model">l10n_br.esocial.faixa.inss</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Faixa IRRF (Tab 58) ===== -->
+    <record id="view_esocial_faixa_irrf_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.faixa.irrf.tree</field>
+        <field name="model">l10n_br.esocial.faixa.irrf</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="inf_base_calc" />
+                <field name="sup_base_calc" />
+                <field name="aliquota" />
+                <field name="dt_inicio" />
+                <field name="dt_fim" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_esocial_faixa_irrf" model="ir.actions.act_window">
+        <field name="name">Faixas IRRF (Tab. 58)</field>
+        <field name="res_model">l10n_br.esocial.faixa.irrf</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Decisão (Tab 59) ===== -->
+    <record id="action_esocial_tipo_decisao" model="ir.actions.act_window">
+        <field name="name">Tipo Decisão (Tab. 59)</field>
+        <field name="res_model">l10n_br.esocial.tipo.decisao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== CID (Tab 60) ===== -->
+    <record id="action_esocial_cid" model="ir.actions.act_window">
+        <field name="name">CID (Tab. 60)</field>
+        <field name="res_model">l10n_br.esocial.cid</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Cargos (Tab 61) ===== -->
+    <record id="action_esocial_cargo" model="ir.actions.act_window">
+        <field name="name">Cargos eSocial (Tab. 61)</field>
+        <field name="res_model">l10n_br.esocial.cargo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Lotação Referência (Tab 64) ===== -->
+    <record id="action_esocial_lotacao_ref" model="ir.actions.act_window">
+        <field name="name">Lotação Referência (Tab. 64)</field>
+        <field name="res_model">l10n_br.esocial.lotacao.ref</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Faixa Salário Família (Tab 65) ===== -->
+    <record id="view_esocial_faixa_sal_familia_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.faixa.sal.familia.tree</field>
+        <field name="model">l10n_br.esocial.faixa.sal.familia</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="inf_base_calc" />
+                <field name="sup_base_calc" />
+                <field name="valor" />
+                <field name="dt_inicio" />
+                <field name="dt_fim" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_esocial_faixa_sal_familia" model="ir.actions.act_window">
+        <field name="name">Faixas Salário Família (Tab. 65)</field>
+        <field name="res_model">l10n_br.esocial.faixa.sal.familia</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Causa Afastamento MTE (Tab 67) ===== -->
+    <record id="action_esocial_causa_afast_mte" model="ir.actions.act_window">
+        <field name="name">Causas Afastamento MTE (Tab. 67)</field>
+        <field name="res_model">l10n_br.esocial.causa.afast.mte</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Rubrica Rescisória (Tab 68) ===== -->
+    <record id="action_esocial_rubrica_rescisoria" model="ir.actions.act_window">
+        <field name="name">Rubricas Rescisórias (Tab. 68)</field>
+        <field name="res_model">l10n_br.esocial.rubrica.rescisoria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Info Rescisão (Tab 69) ===== -->
+    <record id="action_esocial_info_rescisao" model="ir.actions.act_window">
+        <field name="name">Info Rescisão (Tab. 69)</field>
+        <field name="res_model">l10n_br.esocial.info.rescisao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Admissão (Tab 70) — Referência OCA hr.contract.admission.type ===== -->
+    <record id="action_esocial_tipo_admissao_oca" model="ir.actions.act_window">
+        <field name="name">Tipo Admissão (Tab. 70) - via OCA</field>
+        <field name="res_model">hr.contract.admission.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo CAT (Tab 71) ===== -->
+    <record id="action_esocial_tipo_cat" model="ir.actions.act_window">
+        <field name="name">Tipos de CAT (Tab. 71)</field>
+        <field name="res_model">l10n_br.esocial.tipo.cat</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo ASO (Tab 72) ===== -->
+    <record id="action_esocial_tipo_aso" model="ir.actions.act_window">
+        <field name="name">Tipos de ASO (Tab. 72)</field>
+        <field name="res_model">l10n_br.esocial.tipo.aso</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Tipo Aviso Prévio (Tab 73) ===== -->
+    <record id="action_esocial_tipo_aviso_previo" model="ir.actions.act_window">
+        <field name="name">Tipos de Aviso Prévio (Tab. 73)</field>
+        <field name="res_model">l10n_br.esocial.tipo.aviso.previo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Motivo Cancel. Aviso (Tab 74) ===== -->
+    <record id="action_esocial_motivo_cancel_aviso" model="ir.actions.act_window">
+        <field name="name">Motivos Cancelamento Aviso (Tab. 74)</field>
+        <field name="res_model">l10n_br.esocial.motivo.cancel.aviso</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Processo FAP (Tab 77) ===== -->
+    <record id="action_esocial_processo_fap" model="ir.actions.act_window">
+        <field name="name">Processos FAP (Tab. 77)</field>
+        <field name="res_model">l10n_br.esocial.processo.fap</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Receita Totalizador (Tab 78) ===== -->
+    <record id="action_esocial_receita_totalizador" model="ir.actions.act_window">
+        <field name="name">Receita Totalizador (Tab. 78)</field>
+        <field name="res_model">l10n_br.esocial.receita.totalizador</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Valor Contrib Prev (Tab 79) ===== -->
+    <record id="action_esocial_valor_contrib_prev" model="ir.actions.act_window">
+        <field name="name">Tipo Valor Contrib. Prev. (Tab. 79)</field>
+        <field name="res_model">l10n_br.esocial.valor.contrib.prev</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Valor IRRF Totalizador (Tab 80) ===== -->
+    <record id="action_esocial_valor_irrf_totalizador" model="ir.actions.act_window">
+        <field name="name">Tipo Valor IRRF Totaliz. (Tab. 80)</field>
+        <field name="res_model">l10n_br.esocial.valor.irrf.totalizador</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== CNAE MEI (Tab 81) ===== -->
+    <record id="action_esocial_cnae_mei" model="ir.actions.act_window">
+        <field name="name">CNAE MEI (Tab. 81)</field>
+        <field name="res_model">l10n_br.esocial.cnae.mei</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Base FGTS (Tab 82) ===== -->
+    <record id="action_esocial_base_fgts" model="ir.actions.act_window">
+        <field name="name">Bases de Cálculo FGTS (Tab. 82)</field>
+        <field name="res_model">l10n_br.esocial.base.fgts</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Depósito FGTS (Tab 83) ===== -->
+    <record id="action_esocial_deposito_fgts" model="ir.actions.act_window">
+        <field name="name">Tipos Depósito FGTS (Tab. 83)</field>
+        <field name="res_model">l10n_br.esocial.deposito.fgts</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Feriado (Tab 84) ===== -->
+    <record id="action_esocial_feriado" model="ir.actions.act_window">
+        <field name="name">Feriados eSocial (Tab. 84)</field>
+        <field name="res_model">l10n_br.esocial.feriado</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Descrição FPAS (Tab 85) ===== -->
+    <record id="action_esocial_descricao_fpas" model="ir.actions.act_window">
+        <field name="name">Descrição FPAS (Tab. 85)</field>
+        <field name="res_model">l10n_br.esocial.descricao.fpas</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ===== Teto Verde e Amarela (Tab 86) ===== -->
+    <record id="action_esocial_teto_verde_amarela" model="ir.actions.act_window">
+        <field name="name">Teto Verde e Amarela (Tab. 86)</field>
+        <field name="res_model">l10n_br.esocial.teto.verde.amarela</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

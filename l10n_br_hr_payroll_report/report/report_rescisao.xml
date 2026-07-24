@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_termo_rescisao">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .rescisao-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+                            .rescisao-table td, .rescisao-table th { border: 1px solid #333; padding: 2px 4px; }
+                            .rescisao-header { background-color: #e9e9e9; font-weight: bold; }
+                            .rescisao-title { font-size: 12px; font-weight: bold; text-align: center; padding: 4px; }
+                            .text-right { text-align: right; }
+                            .text-center { text-align: center; }
+                            .rescisao-totals td { font-weight: bold; background-color: #f5f5f5; }
+                        </style>
+
+                        <!-- CABEÇALHO -->
+                        <table class="rescisao-table">
+                            <tr>
+                                <td colspan="6" class="rescisao-title">
+                                    TERMO DE RESCISÃO DO CONTRATO DE TRABALHO
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- IDENTIFICAÇÃO DO EMPREGADOR -->
+                        <table class="rescisao-table">
+                            <tr class="rescisao-header">
+                                <td colspan="6">IDENTIFICAÇÃO DO EMPREGADOR</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <strong>Razão Social:</strong>
+                                    <span t-field="o.company_id.name" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>CNPJ:</strong>
+                                    <span t-field="o.company_id.cnpj_cpf" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <strong>Endereço:</strong>
+                                    <t t-if="o.company_id.street">
+                                        <span t-field="o.company_id.street" />,
+                                    </t>
+                                    <t t-if="o.company_id.city">
+                                        <span t-field="o.company_id.city" /> -
+                                    </t>
+                                    <t t-if="o.company_id.state_id">
+                                        <span t-field="o.company_id.state_id.code" />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- IDENTIFICAÇÃO DO TRABALHADOR -->
+                        <table class="rescisao-table">
+                            <tr class="rescisao-header">
+                                <td colspan="6">IDENTIFICAÇÃO DO TRABALHADOR</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Nome:</strong>
+                                    <span t-field="o.employee_id.name" />
+                                </td>
+                                <td>
+                                    <strong>CPF:</strong>
+                                    <span t-field="o.employee_id.cnpj_cpf" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>PIS/PASEP:</strong>
+                                    <span t-field="o.employee_id.pis_pasep" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>CTPS:</strong>
+                                    <span t-field="o.employee_id.ctps" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>Cargo:</strong>
+                                    <span t-field="o.employee_id.job_id" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>Depto:</strong>
+                                    <span t-field="o.employee_id.department_id" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- DADOS DO CONTRATO -->
+                        <table class="rescisao-table">
+                            <tr class="rescisao-header">
+                                <td colspan="4">DADOS DO CONTRATO</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Admissão:</strong>
+                                    <span t-field="o.contract_id.date_start" />
+                                </td>
+                                <td>
+                                    <strong>Desligamento:</strong>
+                                    <span t-field="o.date_to" />
+                                </td>
+                                <td>
+                                    <strong>Último Salário:</strong>
+                                    <span
+                                        t-esc="o.contract_id.wage"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                                <td>
+                                    <strong>Aviso Prévio:</strong>
+                                    <t t-if="o.contract_id.notice_of_termination_id">
+                                        <span
+                                            t-field="o.contract_id.notice_of_termination_id"
+                                        />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- DISCRIMINAÇÃO DAS VERBAS RESCISÓRIAS -->
+                        <t
+                            t-set="proventos"
+                            t-value="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0 and l.category_id.code not in ('DED', 'NET', 'INFO', 'COMP'))"
+                        />
+                        <t
+                            t-set="descontos"
+                            t-value="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0 and l.category_id.code == 'DED')"
+                        />
+
+                        <table class="rescisao-table">
+                            <tr class="rescisao-header">
+                                <td style="width:8%;" class="text-center">Cód</td>
+                                <td style="width:42%;">Descrição</td>
+                                <td style="width:25%;" class="text-right">Proventos</td>
+                                <td style="width:25%;" class="text-right">Descontos</td>
+                            </tr>
+
+                            <t t-foreach="proventos" t-as="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="line.code" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name" />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="line.total"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </td>
+                                    <td />
+                                </tr>
+                            </t>
+
+                            <t t-foreach="descontos" t-as="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="line.code" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name" />
+                                    </td>
+                                    <td />
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="line.total"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <t
+                                t-set="total_proventos"
+                                t-value="sum(proventos.mapped('total'))"
+                            />
+                            <t
+                                t-set="total_descontos"
+                                t-value="sum(descontos.mapped('total'))"
+                            />
+                            <t
+                                t-set="line_net"
+                                t-value="o.line_ids.filtered(lambda l: l.code == 'NET')[:1]"
+                            />
+                            <tr class="rescisao-totals">
+                                <td colspan="2" class="text-center">TOTAIS</td>
+                                <td class="text-right">
+                                    <span
+                                        t-esc="total_proventos"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                                <td class="text-right">
+                                    <span
+                                        t-esc="total_descontos"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- LÍQUIDO RESCISÓRIO -->
+                        <table class="rescisao-table">
+                            <tr class="rescisao-header">
+                                <td class="text-center" style="width:50%;">
+                                    LÍQUIDO RESCISÓRIO
+                                </td>
+                                <td class="text-center" style="width:25%;">
+                                    Base FGTS
+                                </td>
+                                <td class="text-center" style="width:25%;">
+                                    FGTS Mês
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right" style="font-size: 12px;">
+                                    <strong>
+                                        <span
+                                            t-esc="line_net.total if line_net else 0.0"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </strong>
+                                </td>
+                                <t
+                                    t-set="base_fgts"
+                                    t-value="o.line_ids.filtered(lambda l: l.code == 'BASE_FGTS')[:1]"
+                                />
+                                <t
+                                    t-set="fgts"
+                                    t-value="o.line_ids.filtered(lambda l: l.code == 'FGTS')[:1]"
+                                />
+                                <td class="text-right">
+                                    <span
+                                        t-esc="base_fgts.total if base_fgts else 0.0"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                                <td class="text-right">
+                                    <span
+                                        t-esc="fgts.total if fgts else 0.0"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- DECLARAÇÃO -->
+                        <p style="font-size: 9px;">
+                            É vedada ao empregador, na rescisão contratual, efetuar
+                            desconto no valor correspondente ao aviso prévio, quando o
+                            empregado não cumprir o prazo previsto em lei (art. 487, §2°,
+                            CLT, com redação dada pela Lei n° 7.108, de 05/07/83).
+                        </p>
+                        <p style="font-size: 9px;">
+                            Recebi a importância líquida acima discriminada, correspondente
+                            às verbas rescisórias do meu contrato de trabalho, dando ao meu
+                            empregador plena e irrevogável quitação.
+                        </p>
+
+                        <br />
+                        <br />
+
+                        <!-- ASSINATURAS -->
+                        <table style="width:100%;">
+                            <tr>
+                                <td
+                                    style="width:33%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Empregador
+                                </td>
+                                <td
+                                    style="width:33%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Empregado
+                                </td>
+                                <td
+                                    style="width:33%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Homologador
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

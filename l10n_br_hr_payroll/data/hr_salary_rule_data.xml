@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais da Folha de Pagamento Brasileira.
+
+        Convenções de sinal:
+          - Regras em BASIC, ALW, GROSS: valores POSITIVOS (proventos)
+          - Regras em DED: valores POSITIVOS (descontos)
+          - NET = BASIC + ALW - DED
+          - COMP: valores POSITIVOS (encargos patronais, não afetam NET)
+          - INFO: valores informativos (não afetam NET)
+
+        Variáveis disponíveis no contexto das regras:
+          employee, contract, payslip, payslips, worked_days, inputs,
+          categories, rules, result_rules, payroll, current_contract,
+          tools (tools.br.calc_inss, tools.br.calc_irrf, etc.)
+
+        IMPORTANTE: Para acessar o total de uma regra anterior, usar o
+        CÓDIGO da regra diretamente (ex: FALTAS, INSS), NÃO rules.CÓDIGO.
+        rules.CÓDIGO retorna o record hr.salary.rule, não o valor.
+        Os códigos são pré-populados com 0.0 em _get_baselocaldict.
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PROVENTOS (BASIC + ALW)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 1. Salário Base (compartilhado CLT e Estatutário) -->
+    <record id="hr_rule_salario_base" model="hr.salary.rule">
+        <field name="name">Salário Base</field>
+        <field name="sequence" eval="1" />
+        <field name="code">SALARIO_BASE</field>
+        <field name="category_id" ref="hr_salary_rule_category_basic" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.wage
+        </field>
+    </record>
+
+    <!-- 5. Hora Extra 50% -->
+    <record id="hr_rule_he_50" model="hr.salary.rule">
+        <field name="name">Hora Extra 50%</field>
+        <field name="sequence" eval="5" />
+        <field name="code">HE_50</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_horas_extras_50 > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / 220
+result = tools.br.round_money(salario_hora * 1.5 * payslip.l10n_br_horas_extras_50)
+        </field>
+    </record>
+
+    <!-- 6. Hora Extra 100% -->
+    <record id="hr_rule_he_100" model="hr.salary.rule">
+        <field name="name">Hora Extra 100%</field>
+        <field name="sequence" eval="6" />
+        <field name="code">HE_100</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_horas_extras_100 > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / 220
+result = tools.br.round_money(salario_hora * 2.0 * payslip.l10n_br_horas_extras_100)
+        </field>
+    </record>
+
+    <!-- 10. Adicional Noturno -->
+    <record id="hr_rule_adicional_noturno" model="hr.salary.rule">
+        <field name="name">Adicional Noturno</field>
+        <field name="sequence" eval="10" />
+        <field name="code">ADICIONAL_NOTURNO</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_horas_noturnas > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / 220
+result = tools.br.round_money(salario_hora * 0.20 * payslip.l10n_br_horas_noturnas)
+        </field>
+    </record>
+
+    <!-- 15. Adicional de Periculosidade -->
+    <record id="hr_rule_periculosidade" model="hr.salary.rule">
+        <field name="name">Adicional de Periculosidade</field>
+        <field name="sequence" eval="15" />
+        <field name="code">ADICIONAL_PERICULOSIDADE</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = contract.l10n_br_periculosidade
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(contract.wage * 0.30)
+        </field>
+    </record>
+
+    <!-- 16. Adicional de Insalubridade -->
+    <record id="hr_rule_insalubridade" model="hr.salary.rule">
+        <field name="name">Adicional de Insalubridade</field>
+        <field name="sequence" eval="16" />
+        <field name="code">ADICIONAL_INSALUBRIDADE</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = contract.l10n_br_insalubridade
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+SM = tools.br.SALARIO_MINIMO.get(2024, 1412.00)
+grau = contract.l10n_br_grau_insalubridade
+percentuais = {'minimo': 0.10, 'medio': 0.20, 'maximo': 0.40}
+result = tools.br.round_money(SM * percentuais.get(grau, 0.10))
+        </field>
+    </record>
+
+    <!-- 20. Salário Família -->
+    <record id="hr_rule_salario_familia" model="hr.salary.rule">
+        <field name="name">Salário Família</field>
+        <field name="sequence" eval="20" />
+        <field name="code">SALARIO_FAMILIA</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_num_filhos_sf > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_salario_familia(
+    contract.wage,
+    employee.l10n_br_num_filhos_sf,
+)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DESCONTOS (DED) — valores positivos, subtraídos do NET
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 50. Faltas Injustificadas -->
+    <record id="hr_rule_faltas" model="hr.salary.rule">
+        <field name="name">Faltas Injustificadas</field>
+        <field name="sequence" eval="50" />
+        <field name="code">FALTAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_faltas_injustificadas > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas)
+        </field>
+    </record>
+
+    <!-- 51. Desconto de DSR -->
+    <record id="hr_rule_desc_dsr" model="hr.salary.rule">
+        <field name="name">Desconto DSR</field>
+        <field name="sequence" eval="51" />
+        <field name="code">DESC_DSR</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_faltas_injustificadas > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+dias_uteis = 26
+dsr_mes = 4
+result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas * dsr_mes / dias_uteis)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         BRUTO (GROSS) — subtotal
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 99. Remuneração Bruta -->
+    <record id="hr_rule_gross" model="hr.salary.rule">
+        <field name="name">Remuneração Bruta</field>
+        <field name="sequence" eval="99" />
+        <field name="code">GROSS</field>
+        <field name="category_id" ref="hr_salary_rule_category_gross" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CONTRIBUIÇÕES PREVIDENCIÁRIAS
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 100. INSS (RGPS) — CLT normal -->
+    <record id="hr_rule_inss" model="hr.salary.rule">
+        <field name="name">INSS</field>
+        <field name="sequence" eval="100" />
+        <field name="code">INSS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_inss = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.calc_inss(max(base_inss, 0))
+        </field>
+    </record>
+
+    <!-- 101. INSS Aprendiz (2%) -->
+    <record id="hr_rule_inss_aprendiz" model="hr.salary.rule">
+        <field name="name">INSS Aprendiz</field>
+        <field name="sequence" eval="101" />
+        <field name="code">INSS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato == 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_inss = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(max(base_inss, 0) * 0.02)
+        </field>
+    </record>
+
+    <!-- 105. Contribuição RPPS (Estatutário) -->
+    <record id="hr_rule_contrib_rpps" model="hr.salary.rule">
+        <field name="name">Contribuição RPPS</field>
+        <field name="sequence" eval="105" />
+        <field name="code">CONTRIB_RPPS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+teto_rgps = 7786.02
+base = categories.GROSS
+if base > teto_rgps:
+    result = tools.br.round_money((base - teto_rgps) * 0.14 + 908.86)
+else:
+    result = tools.br.calc_inss(base)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         IRRF
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 110. Base IRRF (informativo) -->
+    <record id="hr_rule_base_irrf" model="hr.salary.rule">
+        <field name="name">Base IRRF</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF</field>
+        <field name="category_id" ref="hr_salary_rule_category_info" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = FALTAS + DESC_DSR + INSS
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+pensao = employee.l10n_br_pensao_alimenticia
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- 110b. Base IRRF para Estatutário -->
+    <record id="hr_rule_base_irrf_est" model="hr.salary.rule">
+        <field name="name">Base IRRF (Estatutário)</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF</field>
+        <field name="category_id" ref="hr_salary_rule_category_info" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = CONTRIB_RPPS
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+pensao = employee.l10n_br_pensao_alimenticia
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- 120. IRRF -->
+    <record id="hr_rule_irrf" model="hr.salary.rule">
+        <field name="name">IRRF</field>
+        <field name="sequence" eval="120" />
+        <field name="code">IRRF</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_irrf(max(BASE_IRRF, 0))
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ENCARGOS PATRONAIS (COMP)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 150. FGTS (CLT normal) -->
+    <record id="hr_rule_fgts" model="hr.salary.rule">
+        <field name="name">FGTS</field>
+        <field name="sequence" eval="150" />
+        <field name="code">FGTS</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_fgts = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(max(base_fgts, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- 151. FGTS Aprendiz (2%) -->
+    <record id="hr_rule_fgts_aprendiz" model="hr.salary.rule">
+        <field name="name">FGTS Aprendiz</field>
+        <field name="sequence" eval="151" />
+        <field name="code">FGTS</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato == 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_fgts = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(max(base_fgts, 0) * 0.02)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         LÍQUIDO (NET)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 200. Salário Líquido -->
+    <record id="hr_rule_net" model="hr.salary.rule">
+        <field name="name">Salário Líquido</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field name="category_id" ref="hr_salary_rule_category_net" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+</odoo>

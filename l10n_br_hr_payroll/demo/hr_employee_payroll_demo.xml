@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- João — CLT, 2 dep. IRRF, 2 filhos SF -->
+        <record id="l10n_br_hr.demo_employee_joao" model="hr.employee">
+            <field name="l10n_br_tipo_contrato">clt</field>
+            <field name="l10n_br_irrf_dependentes">2</field>
+            <field name="l10n_br_num_filhos_sf">2</field>
+        </record>
+
+        <!-- Maria — CLT, 0 dep. -->
+        <record id="l10n_br_hr.demo_employee_maria" model="hr.employee">
+            <field name="l10n_br_tipo_contrato">clt</field>
+            <field name="l10n_br_irrf_dependentes">0</field>
+        </record>
+
+        <!-- Pedro — CLT, 1 dep. IRRF, 1 filho SF -->
+        <record id="l10n_br_hr.demo_employee_pedro" model="hr.employee">
+            <field name="l10n_br_tipo_contrato">clt</field>
+            <field name="l10n_br_irrf_dependentes">1</field>
+            <field name="l10n_br_num_filhos_sf">1</field>
+        </record>
+
+        <!-- Ana — Estatutário, 3 dep. IRRF, 2 filhos SF -->
+        <record id="l10n_br_hr.demo_employee_ana" model="hr.employee">
+            <field name="l10n_br_tipo_contrato">estatutario</field>
+            <field name="l10n_br_irrf_dependentes">3</field>
+            <field name="l10n_br_num_filhos_sf">2</field>
+        </record>
+
+        <!-- Lucas — Aprendiz, 0 dep. -->
+        <record id="l10n_br_hr.demo_employee_lucas" model="hr.employee">
+            <field name="l10n_br_tipo_contrato">aprendiz</field>
+            <field name="l10n_br_irrf_dependentes">0</field>
+        </record>
+
+        <!-- Carla — CLT PCD + moléstia grave (isenta IRRF) -->
+        <record id="l10n_br_hr.demo_employee_carla" model="hr.employee">
+            <field name="l10n_br_tipo_contrato">clt</field>
+            <field name="l10n_br_irrf_dependentes">0</field>
+            <field name="l10n_br_pcd" eval="True" />
+            <field name="l10n_br_molestia_grave" eval="True" />
+            <field name="l10n_br_cid_molestia">C50</field>
+        </record>
+
+</odoo>

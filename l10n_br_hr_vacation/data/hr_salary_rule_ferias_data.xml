@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais de Férias.
+
+        Convenção: mesmos padrões de l10n_br_hr_payroll.
+        Variáveis bare code, NÃO usar rules.CÓDIGO.
+    -->
+
+    <!-- Férias (valor base = salário) -->
+    <record id="hr_rule_ferias" model="hr.salary.rule">
+        <field name="name">Férias</field>
+        <field name="sequence" eval="1" />
+        <field name="code">FERIAS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_basic"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.wage
+        </field>
+    </record>
+
+    <!-- Adicional de Férias (1/3 constitucional) -->
+    <record id="hr_rule_adicional_ferias" model="hr.salary.rule">
+        <field name="name">Adicional de Férias (1/3)</field>
+        <field name="sequence" eval="2" />
+        <field name="code">ADICIONAL_FERIAS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(FERIAS / 3)
+        </field>
+    </record>
+
+    <!-- Abono Pecuniário (venda de 1/3 das férias) -->
+    <record id="hr_rule_abono_pecuniario" model="hr.salary.rule">
+        <field name="name">Abono Pecuniário</field>
+        <field name="sequence" eval="3" />
+        <field name="code">ABONO_PECUNIARIO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_abono_pecuniario
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Abono pecuniário = 10 dias (1/3 de 30) × salário-dia
+result = tools.br.round_money((contract.wage / 30) * 10)
+        </field>
+    </record>
+
+    <!-- GROSS para férias -->
+    <record id="hr_rule_gross_ferias" model="hr.salary.rule">
+        <field name="name">Remuneração Bruta (Férias)</field>
+        <field name="sequence" eval="99" />
+        <field name="code">GROSS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_gross"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW
+        </field>
+    </record>
+
+    <!-- INSS sobre férias -->
+    <record id="hr_rule_inss_ferias" model="hr.salary.rule">
+        <field name="name">INSS (Férias)</field>
+        <field name="sequence" eval="100" />
+        <field name="code">INSS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_inss(max(categories.GROSS, 0))
+        </field>
+    </record>
+
+    <!-- Base IRRF férias -->
+    <record id="hr_rule_base_irrf_ferias" model="hr.salary.rule">
+        <field name="name">Base IRRF (Férias)</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = INSS
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+pensao = employee.l10n_br_pensao_alimenticia
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- IRRF sobre férias -->
+    <record id="hr_rule_irrf_ferias" model="hr.salary.rule">
+        <field name="name">IRRF (Férias)</field>
+        <field name="sequence" eval="120" />
+        <field name="code">IRRF</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_irrf(max(BASE_IRRF, 0))
+        </field>
+    </record>
+
+    <!-- NET férias -->
+    <record id="hr_rule_net_ferias" model="hr.salary.rule">
+        <field name="name">Líquido (Férias)</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_net"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+</odoo>

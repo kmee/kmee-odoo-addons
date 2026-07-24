@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Convenção Coletiva — Metalúrgicos SP 2024/2025 -->
+        <record
+        id="demo_convention_metalurgicos"
+        model="l10n.br.hr.collective.convention"
+    >
+            <field name="name">CCT Metalúrgicos SP 2024/2025</field>
+            <field name="partner_union_id" ref="demo_partner_sindicato_metalurgicos" />
+            <field name="date_start">2024-05-01</field>
+            <field name="date_end">2025-04-30</field>
+            <field name="dissidio_month">5</field>
+            <field name="wage_floor">1800.00</field>
+            <field name="contribution_employee_pct">1.0</field>
+            <field name="contribution_employer_pct">2.0</field>
+        </record>
+
+        <!-- Pisos salariais por cargo -->
+        <record id="demo_wage_floor_operador" model="l10n.br.hr.convention.wage.floor">
+            <field name="convention_id" ref="demo_convention_metalurgicos" />
+            <field name="job_id" ref="l10n_br_hr.demo_job_operador_industrial" />
+            <field name="wage_floor">2200.00</field>
+        </record>
+
+        <record id="demo_wage_floor_tecnico" model="l10n.br.hr.convention.wage.floor">
+            <field name="convention_id" ref="demo_convention_metalurgicos" />
+            <field name="job_id" ref="l10n_br_hr.demo_job_tecnico_seguranca" />
+            <field name="wage_floor">2800.00</field>
+        </record>
+
+        <!-- Contribuições sindicais -->
+        <record
+        id="demo_contribution_assistencial"
+        model="l10n.br.hr.syndicate.contribution"
+    >
+            <field name="partner_union_id" ref="demo_partner_sindicato_metalurgicos" />
+            <field name="year">2024</field>
+            <field name="month">5</field>
+            <field name="contribution_type">assistencial</field>
+            <field name="calc_method">percent</field>
+            <field name="percentage">1.0</field>
+        </record>
+
+        <record
+        id="demo_contribution_sindical"
+        model="l10n.br.hr.syndicate.contribution"
+    >
+            <field name="partner_union_id" ref="demo_partner_sindicato_metalurgicos" />
+            <field name="year">2024</field>
+            <field name="month">3</field>
+            <field name="contribution_type">sindical</field>
+            <field name="calc_method">one_day</field>
+        </record>
+
+        <!-- Vincular contratos aos sindicatos -->
+        <record id="l10n_br_hr_contract.demo_contract_joao" model="hr.contract">
+            <field name="partner_union" ref="demo_partner_sindicato_metalurgicos" />
+        </record>
+
+        <record id="l10n_br_hr_contract.demo_contract_maria" model="hr.contract">
+            <field name="partner_union" ref="demo_partner_sindicato_metalurgicos" />
+        </record>
+
+        <record id="l10n_br_hr_contract.demo_contract_pedro" model="hr.contract">
+            <field name="partner_union" ref="demo_partner_sindicato_metalurgicos" />
+        </record>
+
+        <record id="l10n_br_hr_contract.demo_contract_ana" model="hr.contract">
+            <field name="partner_union" ref="demo_partner_sindicato_servidores" />
+        </record>
+
+</odoo>

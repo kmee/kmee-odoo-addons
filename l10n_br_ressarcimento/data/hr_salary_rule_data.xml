@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Regra: Ressarcimento de Despesas -->
+    <record id="salary_rule_ressarcimento" model="hr.salary.rule">
+        <field name="name">Ressarcimento de Despesas</field>
+        <field name="code">RESSARCIMENTO</field>
+        <field name="sequence">30</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+try:
+    result = payslip.l10n_br_total_ressarcimento > 0
+except Exception:
+    result = False
+</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+try:
+    result = payslip.l10n_br_total_ressarcimento
+except Exception:
+    result = 0
+</field>
+        <field name="appears_on_payslip" eval="True" />
+    </record>
+
+    <!-- Adicionar regra à estrutura CLT -->
+    <record id="l10n_br_hr_payroll.structure_clt" model="hr.payroll.structure">
+        <field name="rule_ids" eval="[(4, ref('salary_rule_ressarcimento'))]" />
+    </record>
+</odoo>

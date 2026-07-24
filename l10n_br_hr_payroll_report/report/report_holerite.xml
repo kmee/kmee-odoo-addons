@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_holerite">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .holerite-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+                            .holerite-table td, .holerite-table th { border: 1px solid #333; padding: 2px 4px; }
+                            .holerite-header { background-color: #e9e9e9; font-weight: bold; }
+                            .holerite-title { font-size: 12px; font-weight: bold; text-align: center; padding: 4px; }
+                            .text-right { text-align: right; }
+                            .text-center { text-align: center; }
+                            .holerite-totals td { font-weight: bold; background-color: #f5f5f5; }
+                            .no-border { border: none !important; }
+                        </style>
+
+                        <!-- ══ CABEÇALHO EMPRESA ══ -->
+                        <table class="holerite-table">
+                            <tr>
+                                <td colspan="6" class="holerite-title">
+                                    RECIBO DE PAGAMENTO DE SALÁRIO
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <strong>Empresa:</strong>
+                                    <span t-field="o.company_id.name" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>CNPJ:</strong>
+                                    <span t-field="o.company_id.cnpj_cpf" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <strong>Endereço:</strong>
+                                    <t t-if="o.company_id.street">
+                                        <span t-field="o.company_id.street" />,
+                                    </t>
+                                    <t t-if="o.company_id.city">
+                                        <span t-field="o.company_id.city" /> -
+                                    </t>
+                                    <t t-if="o.company_id.state_id">
+                                        <span t-field="o.company_id.state_id.code" />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- ══ DADOS DO EMPREGADO ══ -->
+                        <table class="holerite-table">
+                            <tr class="holerite-header">
+                                <td colspan="6">DADOS DO EMPREGADO</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Nome:</strong>
+                                    <span t-field="o.employee_id.name" />
+                                </td>
+                                <td>
+                                    <strong>CPF:</strong>
+                                    <span t-field="o.employee_id.cnpj_cpf" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>PIS/PASEP:</strong>
+                                    <span t-field="o.employee_id.pis_pasep" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Cargo:</strong>
+                                    <span t-field="o.employee_id.job_id" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>Depto:</strong>
+                                    <span t-field="o.employee_id.department_id" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>Admissão:</strong>
+                                    <span t-field="o.contract_id.date_start" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Competência:</strong>
+                                    <span t-field="o.date_from" /> a <span
+                                        t-field="o.date_to"
+                                    />
+                                </td>
+                                <td colspan="3">
+                                    <strong>Salário Base:</strong>
+                                    <span
+                                        t-esc="o.contract_id.wage"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- ══ PROVENTOS E DESCONTOS ══ -->
+                        <t
+                            t-set="proventos"
+                            t-value="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0 and l.category_id.code not in ('DED', 'NET', 'INFO', 'COMP'))"
+                        />
+                        <t
+                            t-set="descontos"
+                            t-value="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0 and l.category_id.code == 'DED')"
+                        />
+                        <t
+                            t-set="informativos"
+                            t-value="o.line_ids.filtered(lambda l: l.appears_on_payslip and l.total &gt; 0 and l.category_id.code == 'INFO')"
+                        />
+
+                        <table class="holerite-table">
+                            <tr class="holerite-header">
+                                <td style="width:8%;" class="text-center">
+                                    Cód
+                                </td>
+                                <td style="width:42%;">Descrição</td>
+                                <td style="width:25%;" class="text-right">Proventos</td>
+                                <td style="width:25%;" class="text-right">Descontos</td>
+                            </tr>
+
+                            <!-- Proventos -->
+                            <t t-foreach="proventos" t-as="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="line.code" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name" />
+                                    </td>
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="line.total"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </td>
+                                    <td />
+                                </tr>
+                            </t>
+
+                            <!-- Descontos -->
+                            <t t-foreach="descontos" t-as="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="line.code" />
+                                    </td>
+                                    <td>
+                                        <span t-field="line.name" />
+                                    </td>
+                                    <td />
+                                    <td class="text-right">
+                                        <span
+                                            t-esc="line.total"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </td>
+                                </tr>
+                            </t>
+
+                            <!-- Totais -->
+                            <t
+                                t-set="total_proventos"
+                                t-value="sum(proventos.mapped('total'))"
+                            />
+                            <t
+                                t-set="total_descontos"
+                                t-value="sum(descontos.mapped('total'))"
+                            />
+                            <t
+                                t-set="line_net"
+                                t-value="o.line_ids.filtered(lambda l: l.code == 'NET')[:1]"
+                            />
+                            <tr class="holerite-totals">
+                                <td colspan="2" class="text-center">
+                                    TOTAIS
+                                </td>
+                                <td class="text-right">
+                                    <span
+                                        t-esc="total_proventos"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                                <td class="text-right">
+                                    <span
+                                        t-esc="total_descontos"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- ══ LÍQUIDO + BASES ══ -->
+                        <table class="holerite-table">
+                            <tr class="holerite-header">
+                                <td class="text-center" style="width:25%;">
+                                    LÍQUIDO A RECEBER
+                                </td>
+                                <td class="text-center" style="width:25%;">
+                                    Base INSS
+                                </td>
+                                <td class="text-center" style="width:25%;">
+                                    Base IRRF
+                                </td>
+                                <td class="text-center" style="width:25%;">
+                                    Base FGTS / FGTS Mês
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">
+                                    <strong>
+                                        <span
+                                            t-esc="line_net.total if line_net else 0.0"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </strong>
+                                </td>
+                                <t
+                                    t-set="base_inss_line"
+                                    t-value="o.line_ids.filtered(lambda l: l.code == 'BASE_INSS')[:1]"
+                                />
+                                <td class="text-right">
+                                    <span
+                                        t-esc="base_inss_line.total if base_inss_line else 0.0"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                                <t
+                                    t-set="base_irrf_line"
+                                    t-value="o.line_ids.filtered(lambda l: l.code == 'BASE_IRRF')[:1]"
+                                />
+                                <td class="text-right">
+                                    <span
+                                        t-esc="base_irrf_line.total if base_irrf_line else 0.0"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                                <t
+                                    t-set="fgts_line"
+                                    t-value="o.line_ids.filtered(lambda l: l.code == 'FGTS')[:1]"
+                                />
+                                <t
+                                    t-set="base_fgts_line"
+                                    t-value="o.line_ids.filtered(lambda l: l.code == 'BASE_FGTS')[:1]"
+                                />
+                                <td class="text-right">
+                                    <span
+                                        t-esc="base_fgts_line.total if base_fgts_line else 0.0"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    /> /
+                                    <span
+                                        t-esc="fgts_line.total if fgts_line else 0.0"
+                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                    />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ══ INFORMATIVOS ══ -->
+                        <t t-if="informativos">
+                            <br />
+                            <table class="holerite-table">
+                                <tr class="holerite-header">
+                                    <td colspan="3">INFORMATIVOS</td>
+                                </tr>
+                                <t t-foreach="informativos" t-as="line">
+                                    <tr>
+                                        <td style="width:8%;" class="text-center">
+                                            <span t-field="line.code" />
+                                        </td>
+                                        <td>
+                                            <span t-field="line.name" />
+                                        </td>
+                                        <td class="text-right" style="width:25%;">
+                                            <span
+                                                t-esc="line.total"
+                                                t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </t>
+
+                        <br />
+                        <br />
+
+                        <!-- ══ ASSINATURA ══ -->
+                        <table style="width:100%;">
+                            <tr>
+                                <td
+                                    style="width:50%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Empregador
+                                </td>
+                                <td
+                                    style="width:50%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Empregado
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

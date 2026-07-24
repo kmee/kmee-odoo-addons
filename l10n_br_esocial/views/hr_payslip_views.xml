@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_hr_payslip_form_esocial" model="ir.ui.view">
+        <field name="name">hr.payslip.form.esocial</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_esocial_gerar_s1200"
+                    type="object"
+                    string="Gerar S-1200 eSocial"
+                    attrs="{'invisible': [('state', '!=', 'done')]}"
+                />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="eSocial"
+                    name="esocial"
+                    attrs="{'invisible': [('l10n_br_esocial_s1200_id', '=', False)]}"
+                >
+                    <group>
+                        <field name="l10n_br_esocial_s1200_id" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

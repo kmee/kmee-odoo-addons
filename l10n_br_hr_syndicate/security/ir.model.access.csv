@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_collective_convention_user,l10n.br.hr.collective.convention.user,model_l10n_br_hr_collective_convention,hr.group_hr_user,1,0,0,0
+access_collective_convention_manager,l10n.br.hr.collective.convention.manager,model_l10n_br_hr_collective_convention,hr.group_hr_manager,1,1,1,1
+access_convention_wage_floor_user,l10n.br.hr.convention.wage.floor.user,model_l10n_br_hr_convention_wage_floor,hr.group_hr_user,1,0,0,0
+access_convention_wage_floor_manager,l10n.br.hr.convention.wage.floor.manager,model_l10n_br_hr_convention_wage_floor,hr.group_hr_manager,1,1,1,1
+access_syndicate_contribution_user,l10n.br.hr.syndicate.contribution.user,model_l10n_br_hr_syndicate_contribution,hr.group_hr_user,1,0,0,0
+access_syndicate_contribution_manager,l10n.br.hr.syndicate.contribution.manager,model_l10n_br_hr_syndicate_contribution,hr.group_hr_manager,1,1,1,1

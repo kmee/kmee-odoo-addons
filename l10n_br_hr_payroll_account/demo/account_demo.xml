@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        Bug 2 (demo): estas contas contábeis de demonstração eram criadas ANTES
+        de o plano de contas (l10n_generic_coa) ser carregado no modo demo.
+        A presença de contas na empresa faz o `account.chart.template._load`
+        (OCA/account) entender que está "trocando de localização" e APAGAR todos
+        os journals da empresa antes de instalar o novo CoA — inclusive o diário
+        FOPAG (journal_folha_pagamento). Como os holerites demo ficam vinculados
+        ao FOPAG, isso derrubava a FK hr_payslip_journal_id_fkey (ForeignKeyViolation).
+
+        As contas eram meramente ilustrativas (não referenciadas por nenhuma
+        regra salarial nem por testes — os testes de contabilização criam as
+        próprias contas). Foram removidas para não disparar o wipe destrutivo do
+        CoA; assim o diário FOPAG sobrevive e os holerites demo permanecem
+        vinculados a ele (ver models/hr_payslip.py::_demo_compute_payslips).
+    -->
+
+</odoo>
