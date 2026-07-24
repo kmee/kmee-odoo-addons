@@ -64,6 +64,70 @@ class TestValidacaoFolha(PayrollCommon):
                 self._create_payslip_vals(emp, contract, "Test 2")
             )
 
+    def test_overlapping_period_rejected(self):
+        """Períodos sobrepostos não idênticos (01-15 e 01-31) são rejeitados."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=3000.00)
+        self.env["hr.payslip"].create(
+            {
+                "name": "Quinzena 1",
+                "employee_id": emp.id,
+                "contract_id": contract.id,
+                "struct_id": contract.struct_id.id,
+                "date_from": date(2024, 3, 1),
+                "date_to": date(2024, 3, 15),
+            }
+        )
+        with self.assertRaises(ValidationError):
+            self.env["hr.payslip"].create(
+                {
+                    "name": "Mês cheio",
+                    "employee_id": emp.id,
+                    "contract_id": contract.id,
+                    "struct_id": contract.struct_id.id,
+                    "date_from": date(2024, 3, 1),
+                    "date_to": date(2024, 3, 31),
+                }
+            )
+
+    def test_adjacent_period_allowed(self):
+        """Períodos adjacentes sem sobreposição são permitidos."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=3000.00)
+        self.env["hr.payslip"].create(
+            {
+                "name": "Março",
+                "employee_id": emp.id,
+                "contract_id": contract.id,
+                "struct_id": contract.struct_id.id,
+                "date_from": date(2024, 3, 1),
+                "date_to": date(2024, 3, 31),
+            }
+        )
+        payslip2 = self.env["hr.payslip"].create(
+            {
+                "name": "Abril",
+                "employee_id": emp.id,
+                "contract_id": contract.id,
+                "struct_id": contract.struct_id.id,
+                "date_from": date(2024, 4, 1),
+                "date_to": date(2024, 4, 30),
+            }
+        )
+        self.assertTrue(payslip2)
+
+    def test_cpf_invalid_digits_rejected(self):
+        """Empregado com CPF de dígitos inválidos não confirma holerite."""
+        emp = self._create_employee()
+        emp.cnpj_cpf = "123.456.789-00"  # dígitos verificadores incorretos
+        contract = self._create_contract(emp, wage=3000.00)
+        payslip = self.env["hr.payslip"].create(
+            self._create_payslip_vals(emp, contract)
+        )
+        payslip.compute_sheet()
+        with self.assertRaises(ValidationError):
+            payslip.action_payslip_done()
+
     def test_duplicate_different_struct_allowed(self):
         """Holerites com estruturas diferentes são permitidos."""
         emp = self._create_employee()
