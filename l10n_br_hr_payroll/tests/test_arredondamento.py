@@ -14,12 +14,26 @@ Podem ser executados sem instância Odoo:
 from odoo.tests.common import BaseCase
 
 from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
-    calc_inss,
-    calc_irrf,
-    calc_salario_familia,
+    calc_inss as _calc_inss,
+    calc_irrf as _calc_irrf,
+    calc_salario_familia as _calc_salario_familia,
     calc_vt,
     round_money,
 )
+
+from .fixtures import FAIXAS_INSS_2024, FAIXAS_IRRF_2024, FAIXAS_SF_2024
+
+
+def calc_inss(base):
+    return _calc_inss(base, FAIXAS_INSS_2024)
+
+
+def calc_irrf(base):
+    return _calc_irrf(base, FAIXAS_IRRF_2024)
+
+
+def calc_salario_familia(remuneracao, num_filhos):
+    return _calc_salario_familia(remuneracao, num_filhos, FAIXAS_SF_2024)
 
 
 class TestRoundMoney(BaseCase):
@@ -282,9 +296,12 @@ class TestSalarioFamiliaArredondamento(BaseCase):
         """3 filhos × R$62,04 = R$186,12 (exato)."""
         self.assertEqual(calc_salario_familia(1412.00, 3), 186.12)
 
-    def test_5_filhos_faixa2(self):
-        """5 filhos × R$43,84 = R$219,20 (exato)."""
-        self.assertEqual(calc_salario_familia(2000.00, 5), 219.20)
+    def test_acima_faixa_unica_zero(self):
+        """R$2.000 acima da faixa única de 2024 (R$1.819,26) → zero.
+
+        A antiga 2ª faixa (R$43,84) foi extinta.
+        """
+        self.assertEqual(calc_salario_familia(2000.00, 5), 0.00)
 
     def test_resultado_sempre_2_decimais(self):
         """Resultado deve ter no máximo 2 casas decimais."""

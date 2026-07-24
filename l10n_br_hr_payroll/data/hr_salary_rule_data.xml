@@ -117,7 +117,7 @@ result = contract.l10n_br_insalubridade
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-SM = tools.br.SALARIO_MINIMO.get(2024, 1412.00)
+SM = tools.br.salario_minimo()
 grau = contract.l10n_br_grau_insalubridade
 percentuais = {'minimo': 0.10, 'medio': 0.20, 'maximo': 0.40}
 result = tools.br.round_money(SM * percentuais.get(grau, 0.10))
@@ -245,10 +245,10 @@ result = tools.br.round_money(max(base_inss, 0) * 0.02)
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-teto_rgps = 7786.02
+teto_rgps, teto_valor = tools.br.teto_inss()
 base = categories.GROSS
 if base > teto_rgps:
-    result = tools.br.round_money((base - teto_rgps) * 0.14 + 908.86)
+    result = tools.br.round_money((base - teto_rgps) * 0.14 + teto_valor)
 else:
     result = tools.br.calc_inss(base)
         </field>
@@ -269,7 +269,7 @@ else:
         <field name="amount_python_compute">
 gross = categories.GROSS
 deducoes = FALTAS + DESC_DSR + INSS
-dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
 pensao = employee.l10n_br_pensao_alimenticia
 result = gross - deducoes - dependentes - pensao
         </field>
@@ -286,7 +286,7 @@ result = gross - deducoes - dependentes - pensao
         <field name="amount_python_compute">
 gross = categories.GROSS
 deducoes = CONTRIB_RPPS
-dependentes = employee.l10n_br_irrf_dependentes * tools.br.IRRF_DEDUCAO_DEPENDENTE
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
 pensao = employee.l10n_br_pensao_alimenticia
 result = gross - deducoes - dependentes - pensao
         </field>

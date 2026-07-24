@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- ═══════════════ INSS ═══════════════ -->
+    <record id="view_inss_faixa_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.payroll.inss.faixa</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="valor_min" />
+                <field name="valor_max" />
+                <field name="aliquota" />
+                <field name="parcela_deduzir" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_inss_faixa" model="ir.actions.act_window">
+        <field name="name">Tabela INSS</field>
+        <field name="res_model">l10n_br.hr.payroll.inss.faixa</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- ═══════════════ IRRF ═══════════════ -->
+    <record id="view_irrf_faixa_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.payroll.irrf.faixa</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="base_min" />
+                <field name="base_max" />
+                <field name="aliquota" />
+                <field name="parcela_deduzir" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_irrf_faixa" model="ir.actions.act_window">
+        <field name="name">Tabela IRRF</field>
+        <field name="res_model">l10n_br.hr.payroll.irrf.faixa</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- ═══════════════ Salário Família ═══════════════ -->
+    <record id="view_sal_familia_faixa_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.payroll.sal.familia.faixa</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="base_max" />
+                <field name="valor" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_sal_familia_faixa" model="ir.actions.act_window">
+        <field name="name">Tabela Salário Família</field>
+        <field name="res_model">l10n_br.hr.payroll.sal.familia.faixa</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- ═══════════════ Dedução por Dependente IRRF ═══════════════ -->
+    <record id="view_irrf_dependente_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.payroll.irrf.dependente</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="valor" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_irrf_dependente" model="ir.actions.act_window">
+        <field name="name">Dedução por Dependente IRRF</field>
+        <field name="res_model">l10n_br.hr.payroll.irrf.dependente</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- ═══════════════ Menus ═══════════════ -->
+    <menuitem
+        id="menu_payroll_fiscal_tables"
+        name="Tabelas Fiscais BR"
+        parent="payroll.payroll_menu_configuration"
+        sequence="90"
+    />
+    <menuitem
+        id="menu_inss_faixa"
+        parent="menu_payroll_fiscal_tables"
+        action="action_inss_faixa"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_irrf_faixa"
+        parent="menu_payroll_fiscal_tables"
+        action="action_irrf_faixa"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_irrf_dependente"
+        parent="menu_payroll_fiscal_tables"
+        action="action_irrf_dependente"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_sal_familia_faixa"
+        parent="menu_payroll_fiscal_tables"
+        action="action_sal_familia_faixa"
+        sequence="40"
+    />
+</odoo>
