@@ -1,6 +1,8 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 
@@ -18,6 +20,12 @@ class HrPayslip(models.Model):
     l10n_br_avos_13 = fields.Integer(
         string="Avos de 13º",
         compute="_compute_avos_13",
+    )
+    l10n_br_avos_ferias = fields.Integer(
+        string="Avos de Férias Proporcionais",
+        compute="_compute_avos_ferias",
+        help="Meses (fração >= 15 dias) do período aquisitivo em curso, "
+        "usados para as férias proporcionais na rescisão.",
     )
     l10n_br_primeira_parcela_13_paga = fields.Float(
         string="1ª Parcela do 13º já paga",
@@ -50,6 +58,45 @@ class HrPayslip(models.Model):
             else:
                 rec.l10n_br_avos_13 = 0
 
+    @api.depends("contract_id", "date_to")
+    def _compute_avos_ferias(self):
+        for rec in self:
+            if rec.contract_id and rec.contract_id.date_start and rec.date_to:
+                rec.l10n_br_avos_ferias = self._calc_avos_ferias_proporcionais(
+                    rec.contract_id.date_start, rec.date_to
+                )
+            else:
+                rec.l10n_br_avos_ferias = 0
+
+    @staticmethod
+    def _calc_avos_ferias_proporcionais(data_admissao, data_referencia):
+        """Avos de férias proporcionais do período aquisitivo em curso.
+
+        Conta os meses (alinhados ao aniversário de admissão) com fração
+        igual ou superior a 15 dias, desde o início do período aquisitivo
+        em curso (último aniversário de admissão <= referência) até a data
+        de referência (rescisão). Máximo de 12 avos.
+
+        Nota: NÃO considera férias vencidas de períodos aquisitivos
+        completos e não gozados — ver relatório (lacuna).
+        """
+        anos = data_referencia.year - data_admissao.year
+        inicio = data_admissao + relativedelta(years=anos)
+        if inicio > data_referencia:
+            inicio = data_admissao + relativedelta(years=anos - 1)
+        avos = 0
+        cursor = inicio
+        while cursor <= data_referencia:
+            fim_mes = cursor + relativedelta(months=1) - relativedelta(days=1)
+            if fim_mes <= data_referencia:
+                avos += 1
+            else:
+                dias = (data_referencia - cursor).days + 1
+                if dias >= 15:
+                    avos += 1
+            cursor += relativedelta(months=1)
+        return min(avos, 12)
+
     @api.depends("line_ids", "l10n_br_primeira_parcela_13_paga")
     def _compute_liquido_13(self):
         for rec in self:
@@ -78,11 +125,16 @@ class HrPayslip(models.Model):
             "FERIAS",
             "ADICIONAL_FERIAS",
             "ABONO_PECUNIARIO",
+            "ADICIONAL_ABONO",
             "DECIMO_TERCEIRO_BRUTO",
             "ADIANTAMENTO_13",
             "INSS_13",
             "IRRF_13",
+            "BASE_IRRF_13",
             "DECIMO_RESCISAO",
+            "SALDO_SALARIO",
+            "FERIAS_INDENIZADAS",
+            "ADICIONAL_FERIAS_INDENIZADAS",
         ):
             localdict.setdefault(code, 0.0)
         return localdict

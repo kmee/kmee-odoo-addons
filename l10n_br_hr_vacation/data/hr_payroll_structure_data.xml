@@ -10,10 +10,12 @@
                 ref('hr_rule_ferias'),
                 ref('hr_rule_adicional_ferias'),
                 ref('hr_rule_abono_pecuniario'),
+                ref('hr_rule_adicional_abono'),
                 ref('hr_rule_gross_ferias'),
                 ref('hr_rule_inss_ferias'),
                 ref('hr_rule_base_irrf_ferias'),
                 ref('hr_rule_irrf_ferias'),
+                ref('hr_rule_fgts_ferias'),
                 ref('hr_rule_net_ferias'),
             ])]"
         />
@@ -32,7 +34,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — 2ª Parcela (com INSS e IRRF) -->
+    <!-- Estrutura: 13º Salário — 2ª Parcela (com INSS, IRRF, FGTS e dedução da 1ª) -->
     <record id="structure_13_segunda_parcela" model="hr.payroll.structure">
         <field name="name">13º Salário - 2ª Parcela</field>
         <field name="code">13_2PARCELA</field>
@@ -44,6 +46,8 @@
                 ref('hr_rule_inss_13'),
                 ref('hr_rule_base_irrf_13'),
                 ref('hr_rule_irrf_13'),
+                ref('hr_rule_fgts_13'),
+                ref('hr_rule_desconto_adiantamento_13'),
                 ref('hr_rule_net_13'),
             ])]"
         />
@@ -61,22 +65,32 @@
                 ref('hr_rule_inss_13'),
                 ref('hr_rule_base_irrf_13'),
                 ref('hr_rule_irrf_13'),
+                ref('hr_rule_fgts_13'),
                 ref('hr_rule_net_13'),
             ])]"
         />
     </record>
 
-    <!-- Estrutura: Rescisão (inclui 13º proporcional) -->
+    <!-- Estrutura: Rescisão (verbas rescisórias seguras — ver rescisão data) -->
     <record id="structure_rescisao" model="hr.payroll.structure">
         <field name="name">Rescisão</field>
         <field name="code">RESCISAO</field>
         <field
             name="rule_ids"
             eval="[(6, 0, [
-                ref('l10n_br_hr_payroll.hr_rule_salario_base'),
-                ref('l10n_br_hr_payroll.hr_rule_gross'),
+                ref('hr_rule_saldo_salario'),
                 ref('hr_rule_decimo_rescisao'),
-                ref('l10n_br_hr_payroll.hr_rule_net'),
+                ref('hr_rule_ferias_indenizadas'),
+                ref('hr_rule_adicional_ferias_indenizadas'),
+                ref('hr_rule_inss_rescisao'),
+                ref('hr_rule_inss_13_rescisao'),
+                ref('hr_rule_base_irrf_rescisao'),
+                ref('hr_rule_base_irrf_13_rescisao'),
+                ref('hr_rule_irrf_rescisao'),
+                ref('hr_rule_irrf_13_rescisao'),
+                ref('hr_rule_fgts_rescisao'),
+                ref('hr_rule_fgts_13_rescisao'),
+                ref('hr_rule_net_rescisao'),
             ])]"
         />
     </record>
