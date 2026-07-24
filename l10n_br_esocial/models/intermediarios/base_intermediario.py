@@ -1,4 +1,9 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import logging
+
+from lxml import etree
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -79,35 +84,103 @@ class ESocialBaseIntermediario(models.AbstractModel):
         """Override in subclasses. Must return event type string (e.g. 'S-1010')."""
         raise NotImplementedError
 
+    def _gerar_xml_sem_validacao(self, event_type, data, environment):
+        """Fallback generation when the bundled XSD schemas are absent.
+
+        esociallib ships without the official XSDs, so ``to_xml`` raises
+        ``FileNotFoundError`` on validation. We still need to emit the event,
+        but we refuse to return XML that is not at least well-formed, and we
+        log an explicit ERROR so the missing-XSD condition is never silent.
+        """
+        from esociallib.generator import _BUILDERS, _ensure_builders_loaded
+
+        _ensure_builders_loaded()
+        builder = _BUILDERS.get(event_type)
+        if builder is None:
+            raise UserError(
+                _(
+                    "Não foi possível gerar o evento %(tipo)s: a esociallib não "
+                    "possui um builder registrado para este evento e os schemas "
+                    "XSD não estão disponíveis para validação."
+                )
+                % {"tipo": event_type}
+            )
+        _logger.error(
+            "eSocial %s: schemas XSD ausentes na esociallib — XML gerado SEM "
+            "validação XSD. Instale os XSDs oficiais em "
+            "esociallib/esocial/schemas/v_s13/ para validar antes de transmitir.",
+            event_type,
+        )
+        evento = builder(data, environment=environment)
+        xml = evento.to_xml()
+        # Guard: never return XML that is not well-formed.
+        try:
+            etree.fromstring(xml.encode("utf-8") if isinstance(xml, str) else xml)
+        except (etree.XMLSyntaxError, ValueError) as exc:
+            raise UserError(
+                _(
+                    "Falha ao gerar o XML do evento %(tipo)s: o conteúdo gerado "
+                    "não é um XML válido (%(erro)s)."
+                )
+                % {"tipo": event_type, "erro": exc}
+            ) from exc
+        return xml
+
     def _gerar_xml(self):
         """Generate XML for this intermediary record."""
         self.ensure_one()
         self._check_esociallib()
         data = self._to_esociallib_dict()
         environment = self._get_tp_amb()
+        event_type = self._get_event_type()
         try:
-            xml = to_xml(self._get_event_type(), data, environment=environment)
+            xml = to_xml(event_type, data, environment=environment)
         except FileNotFoundError:
-            # XSD schemas not available — generate without validation
-            from esociallib.generator import _BUILDERS, _ensure_builders_loaded
-
-            _ensure_builders_loaded()
-            builder = _BUILDERS.get(self._get_event_type())
-            if builder is None:
-                raise
-            evento = builder(data, environment=environment)
-            xml = evento.to_xml()
-            _logger.warning("XSD schemas not found — XML generated without validation")
+            xml = self._gerar_xml_sem_validacao(event_type, data, environment)
         return xml
+
+    @api.model
+    def _extract_id_evento(self, xml):
+        """Extract the eSocial event ``Id`` attribute from generated XML.
+
+        The eSocial layout always wraps the event element as
+        ``<eSocial><evtXxx Id="ID...">``, so the Id is the ``Id`` attribute of
+        the first child element of the root. Returns ``False`` when it cannot
+        be found (never raises, so it never blocks event creation).
+        """
+        if not xml:
+            return False
+        try:
+            root = etree.fromstring(
+                xml.encode("utf-8") if isinstance(xml, str) else xml
+            )
+        except (etree.XMLSyntaxError, ValueError):
+            _logger.warning(
+                "eSocial: não foi possível parsear o XML para extrair o Id."
+            )
+            return False
+        for child in root:
+            id_evento = child.get("Id")
+            if id_evento:
+                return id_evento
+        return root.get("Id") or False
 
     def action_gerar_evento(self):
         """Generate XML and create evento record."""
         self.ensure_one()
         xml = self._gerar_xml()
+        id_evento = self._extract_id_evento(xml)
+        if not id_evento:
+            _logger.warning(
+                "eSocial %s: XML gerado sem atributo Id — o retorno do lote não "
+                "poderá casar o evento pelo id_evento.",
+                self._get_event_type(),
+            )
         evento = self.env["l10n_br.esocial.evento"].create(
             {
                 "tipo": self._get_event_type(),
                 "operacao": "I",
+                "id_evento": id_evento,
                 "xml_envio": xml,
                 "company_id": self.company_id.id,
                 "origem_model": self._name,

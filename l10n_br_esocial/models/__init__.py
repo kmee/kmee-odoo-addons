@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from . import tabelas
 from . import esocial_natureza_rubrica
 from . import esocial_categoria_trabalhador
