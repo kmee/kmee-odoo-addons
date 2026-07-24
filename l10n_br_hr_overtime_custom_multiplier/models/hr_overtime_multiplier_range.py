@@ -39,7 +39,17 @@ class HrOvertimeMultiplierRange(models.Model):
 
         exception_id = self.env["hr.attendance.exception"]
 
-        day_name = fields.Date.from_string(attendance_date).strftime("%A").lower()
+        # weekday(): 0=Monday ... 6=Sunday (locale-independent, unlike strftime)
+        weekday_fields = (
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday",
+        )
+        weekday = fields.Date.from_string(attendance_date).weekday()
         domain = []
 
         if employee_id:
@@ -52,25 +62,12 @@ class HrOvertimeMultiplierRange(models.Model):
                 domain.append((exception_id.day_of_week_override, "=", True))
 
         if not exception_id:
-
             if employee_id and self.env["hr.holidays.public"].is_public_holiday(
                 selected_date=attendance_date, employee_id=employee_id.id
             ):
                 domain.append(("holiday", "=", True))
-            elif day_name == "monday":
-                domain.append(("monday", "=", True))
-            elif day_name == "tuesday":
-                domain.append(("tuesday", "=", True))
-            elif day_name == "wednesday":
-                domain.append(("wednesday", "=", True))
-            elif day_name == "thursday":
-                domain.append(("thursday", "=", True))
-            elif day_name == "friday":
-                domain.append(("friday", "=", True))
-            elif day_name == "saturday":
-                domain.append(("saturday", "=", True))
-            elif day_name == "sunday":
-                domain.append(("sunday", "=", True))
+            else:
+                domain.append((weekday_fields[weekday], "=", True))
 
         overtime_ranges = self.search(domain)
         return overtime_ranges

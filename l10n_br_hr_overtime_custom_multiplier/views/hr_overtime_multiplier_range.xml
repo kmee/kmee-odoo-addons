@@ -3,22 +3,6 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <!-- <record model="ir.ui.view" id="hr_overtime_multiplier_range_form_view">
-        <field name="model">hr.overtime.multiplier.range</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="day_of_week" />
-                        <field name="overtime_from" />
-                        <field name="overtime_to" />
-                        <field name="multiplier" />
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record> -->
-
     <record model="ir.ui.view" id="hr_overtime_multiplier_range_search_view">
         <field name="model">hr.overtime.multiplier.range</field>
         <field name="arch" type="xml">
