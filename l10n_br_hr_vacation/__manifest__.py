@@ -17,6 +17,7 @@
         "data/hr_leave_type_data.xml",
         "data/hr_salary_rule_ferias_data.xml",
         "data/hr_salary_rule_13_data.xml",
+        "data/hr_salary_rule_rescisao_data.xml",
         "data/hr_payroll_structure_data.xml",
         "views/hr_payslip_views.xml",
     ],
