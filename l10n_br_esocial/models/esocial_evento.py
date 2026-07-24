@@ -1,5 +1,12 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class ESocialEvento(models.Model):
@@ -111,10 +118,42 @@ class ESocialEvento(models.Model):
                 )
             rec.state = "draft"
 
+    def _check_audit_manager(self):
+        """Only payroll managers may force an event state manually."""
+        if not self.env.user.has_group("payroll.group_payroll_manager"):
+            raise UserError(
+                _(
+                    "Apenas gestores de folha de pagamento podem forçar "
+                    "manualmente o estado de um evento eSocial."
+                )
+            )
+
     def action_mark_error(self):
+        self._check_audit_manager()
         for rec in self:
             rec.state = "error"
+            rec.message_post(
+                body=_("Estado forçado manualmente para ERRO por %(user)s.")
+                % {"user": self.env.user.name}
+            )
+            _logger.info(
+                "eSocial evento %s: estado forçado para 'error' por %s (uid=%s).",
+                rec.id,
+                self.env.user.name,
+                self.env.uid,
+            )
 
     def action_mark_success(self):
+        self._check_audit_manager()
         for rec in self:
             rec.state = "success"
+            rec.message_post(
+                body=_("Estado forçado manualmente para SUCESSO por %(user)s.")
+                % {"user": self.env.user.name}
+            )
+            _logger.info(
+                "eSocial evento %s: estado forçado para 'success' por %s (uid=%s).",
+                rec.id,
+                self.env.user.name,
+                self.env.uid,
+            )

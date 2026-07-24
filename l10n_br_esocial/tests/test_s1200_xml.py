@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import logging
 
 from odoo.exceptions import UserError
@@ -36,6 +39,15 @@ class TestS1200XML(TransactionCase):
                 "cnpj_cpf": "076.166.929-41",
                 "l10n_br_esocial_matricula": "MAT001",
                 "l10n_br_esocial_categoria_id": cls.cat_101.id,
+            }
+        )
+        cls.contract = cls.env["hr.contract"].create(
+            {
+                "name": "Contrato Test S1200",
+                "employee_id": cls.employee.id,
+                "wage": 5000.0,
+                "date_start": "2024-01-02",
+                "state": "open",
             }
         )
 
@@ -120,3 +132,106 @@ class TestS1200XML(TransactionCase):
         """hr.payslip deve ter campo l10n_br_esocial_s1200_id."""
         fields = self.env["hr.payslip"]._fields
         self.assertIn("l10n_br_esocial_s1200_id", fields)
+
+    # ── RF-25: robustez do S-1200 ──────────────────────────────────────────
+
+    def _create_payslip_with_lines(self, amounts):
+        """Cria um holerite com uma linha por valor em ``amounts``."""
+        payslip = self.env["hr.payslip"].create(
+            {
+                "name": "Holerite Test",
+                "employee_id": self.employee.id,
+                "contract_id": self.contract.id,
+                "date_from": "2024-03-01",
+                "date_to": "2024-03-31",
+            }
+        )
+        for i, amount in enumerate(amounts):
+            self.env["hr.payslip.line"].create(
+                {
+                    "slip_id": payslip.id,
+                    "salary_rule_id": self.rule.id,
+                    "name": f"Linha {i}",
+                    "code": f"L{i}",
+                    "employee_id": self.employee.id,
+                    "contract_id": self.contract.id,
+                    "quantity": 1,
+                    "amount": amount,
+                    "rate": 100,
+                }
+            )
+        return payslip
+
+    def test_s1200_filtra_linhas_zeradas(self):
+        """Linhas com total == 0 não devem ir para itens_remun."""
+        payslip = self._create_payslip_with_lines([5000.0, 0.0])
+        s1200 = self._create_s1200(payslip_ids=[payslip.id])
+        itens = s1200._build_itens_remun()
+        self.assertEqual(len(itens), 1)
+        self.assertEqual(itens[0]["vr_rubr"], "5000.0")
+
+    def test_s1200_requires_matricula(self):
+        """Deve dar erro se empregado não tem matrícula.
+
+        A validação de matrícula ocorre antes da leitura das linhas, então
+        não é necessário montar holerite para exercitá-la.
+        """
+        emp = self.env["hr.employee"].create(
+            {
+                "name": "No Matricula Worker",
+                "cnpj_cpf": "857.642.960-52",
+                "l10n_br_esocial_categoria_id": self.cat_101.id,
+            }
+        )
+        s1200 = self.env["l10n_br.esocial.s1200"].create(
+            {
+                "employee_id": emp.id,
+                "per_apur": "2024-03",
+                "ind_apuracao": "1",
+                "company_id": self.company.id,
+            }
+        )
+        with self.assertRaises(UserError):
+            s1200._to_esociallib_dict()
+
+    def test_s1200_retificacao_exige_nr_recibo(self):
+        """ind_retif=2 sem nr_recibo deve levantar erro."""
+        payslip = self._create_payslip_with_lines([5000.0])
+        s1200 = self.env["l10n_br.esocial.s1200"].create(
+            {
+                "employee_id": self.employee.id,
+                "payslip_ids": [(6, 0, [payslip.id])],
+                "per_apur": "2024-03",
+                "ind_apuracao": "1",
+                "ind_retif": "2",
+                "company_id": self.company.id,
+            }
+        )
+        with self.assertRaises(UserError):
+            s1200._to_esociallib_dict()
+
+    def test_s1200_retificacao_com_nr_recibo(self):
+        """ind_retif=2 com nr_recibo deve popular o dict corretamente."""
+        payslip = self._create_payslip_with_lines([5000.0])
+        s1200 = self.env["l10n_br.esocial.s1200"].create(
+            {
+                "employee_id": self.employee.id,
+                "payslip_ids": [(6, 0, [payslip.id])],
+                "per_apur": "2024-03",
+                "ind_apuracao": "1",
+                "ind_retif": "2",
+                "nr_recibo": "1.2.202403.0000001",
+                "company_id": self.company.id,
+            }
+        )
+        data = s1200._to_esociallib_dict()
+        self.assertEqual(data["ind_retif"], 2)
+        self.assertEqual(data["nr_recibo"], "1.2.202403.0000001")
+
+    def test_s1200_original_sem_nr_recibo(self):
+        """ind_retif=1 (original) não deve incluir nr_recibo."""
+        payslip = self._create_payslip_with_lines([5000.0])
+        s1200 = self._create_s1200(payslip_ids=[payslip.id])
+        data = s1200._to_esociallib_dict()
+        self.assertEqual(data["ind_retif"], 1)
+        self.assertNotIn("nr_recibo", data)
