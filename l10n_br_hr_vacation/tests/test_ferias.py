@@ -10,9 +10,12 @@ Cobertura:
 """
 from datetime import date
 
+from odoo.tests import tagged
+
 from .common import VacationCommon
 
 
+@tagged("post_install", "-at_install")
 class TestDiasFeriasParFaltas(VacationCommon):
     """Tabela CLT art. 130 — Dias de férias por faltas no período aquisitivo."""
 
@@ -87,6 +90,7 @@ class TestDiasFeriasParFaltas(VacationCommon):
         self.assertEqual(alloc.number_of_days, 12)
 
 
+@tagged("post_install", "-at_install")
 class TestValorFerias(VacationCommon):
     """Testes do cálculo do valor monetário das férias."""
 
@@ -131,25 +135,84 @@ class TestValorFerias(VacationCommon):
         adicional = self._get_line_total(payslip, "ADICIONAL_FERIAS")
         self.assertAlmostEqualMoney(adicional, ferias / 3)
 
-    def test_abono_pecuniario_10_dias(self):
-        """Abono pecuniário: venda de 10 dias (1/3 de 30)."""
-        emp = self._create_employee()
-        contract = self._create_contract(emp, wage=6000.00)
-        payslip = self.env["hr.payslip"].create(
+    def _payslip_ferias(self, emp, contract, abono=False, wage_month=(2024, 5)):
+        year, month = wage_month
+        return self.env["hr.payslip"].create(
             {
-                "name": "Férias com Abono - Teste",
+                "name": "Férias - Teste",
                 "employee_id": emp.id,
                 "contract_id": contract.id,
-                "date_from": date(2024, 5, 1),
-                "date_to": date(2024, 5, 30),
+                "date_from": date(year, month, 1),
+                "date_to": date(year, month, 30),
                 "struct_id": self.structure_ferias.id,
-                "l10n_br_abono_pecuniario": True,
+                "l10n_br_abono_pecuniario": abono,
                 "company_id": self.env.company.id,
             }
         )
+
+    def test_abono_pecuniario_ferias_proporcionais(self):
+        """Abono: goza 20 dias (férias 20/30), vende 10 dias + 1/3 sobre cada.
+
+        CLT art. 143: ao vender 1/3 (10 dias), o empregado GOZA 20 dias.
+        Férias = 20/30 do salário; abono = 10/30 do salário; cada verba
+        recebe o seu 1/3 constitucional.
+        """
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        payslip = self._payslip_ferias(emp, contract, abono=True)
         payslip.compute_sheet()
-        ferias_gozadas = payslip.l10n_br_dias_ferias_gozadas
+
+        ferias = self._get_line_total(payslip, "FERIAS")
+        adicional = self._get_line_total(payslip, "ADICIONAL_FERIAS")
         abono = self._get_line_total(payslip, "ABONO_PECUNIARIO")
-        self.assertEqual(ferias_gozadas, 20)
-        # Abono: 10 dias × (6000/30) = 2000
+        adicional_abono = self._get_line_total(payslip, "ADICIONAL_ABONO")
+
+        self.assertEqual(payslip.l10n_br_dias_ferias_gozadas, 20)
+        # Férias gozadas proporcionais: 20/30 × 6000 = 4000 (NÃO paga 30 dias)
+        self.assertAlmostEqualMoney(ferias, 4000.00)
+        self.assertAlmostEqualMoney(adicional, 4000.00 / 3)
+        # Abono: 10 dias × (6000/30) = 2000, com 1/3 constitucional próprio
         self.assertAlmostEqualMoney(abono, 2000.00)
+        self.assertAlmostEqualMoney(adicional_abono, 2000.00 / 3)
+
+    def test_abono_isento_inss_irrf(self):
+        """Abono e seu 1/3 são indenizatórios: fora do GROSS/base tributável."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        com_abono = self._payslip_ferias(emp, contract, abono=True)
+        com_abono.compute_sheet()
+
+        ferias = self._get_line_total(com_abono, "FERIAS")
+        adicional = self._get_line_total(com_abono, "ADICIONAL_FERIAS")
+        gross = self._get_line_total(com_abono, "GROSS")
+        base_irrf = self._get_line_total(com_abono, "BASE_IRRF")
+        inss = self._get_line_total(com_abono, "INSS")
+
+        # GROSS = apenas férias gozadas + 1/3 (abono + 1/3 excluídos).
+        # Como INSS/IRRF incidem sobre o GROSS, isto prova a isenção do abono.
+        self.assertAlmostEqualMoney(gross, ferias + adicional)
+        # A base tributável não pode conter o abono (2000) nem seu 1/3.
+        self.assertLess(base_irrf, gross)
+        self.assertGreater(inss, 0.0)
+
+    def test_fgts_ferias(self):
+        """FGTS incide sobre férias gozadas + 1/3 (8%)."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        payslip = self._payslip_ferias(emp, contract, abono=False)
+        payslip.compute_sheet()
+        gross = self._get_line_total(payslip, "GROSS")
+        fgts = self._get_line_total(payslip, "FGTS")
+        self.assertAlmostEqualMoney(gross, 8000.00)  # 6000 + 1/3
+        self.assertAlmostEqualMoney(fgts, 640.00)  # 8% de 8000
+
+    def test_fgts_ferias_exclui_abono(self):
+        """FGTS não incide sobre o abono (indenizatório)."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        payslip = self._payslip_ferias(emp, contract, abono=True)
+        payslip.compute_sheet()
+        gross = self._get_line_total(payslip, "GROSS")
+        fgts = self._get_line_total(payslip, "FGTS")
+        # FGTS = 8% do GROSS (férias gozadas + 1/3), sem o abono.
+        self.assertAlmostEqualMoney(fgts, round(gross * 0.08, 2))

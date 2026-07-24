@@ -11,9 +11,12 @@ Cobertura:
 """
 from datetime import date
 
+from odoo.tests import tagged
+
 from .common import VacationCommon
 
 
+@tagged("post_install", "-at_install")
 class TestDecimoTerceiro(VacationCommon):
     """Testes do 13º Salário."""
 
@@ -102,11 +105,59 @@ class TestDecimoTerceiro(VacationCommon):
         payslip.compute_sheet()
         inss_13 = self._get_line_total(payslip, "INSS_13")
         irrf_13 = self._get_line_total(payslip, "IRRF_13")
+        # A dedução da 1ª parcela deve existir como linha DED (ADIANTAMENTO_13),
+        # não apenas no campo computado — senão paga-se o 13º em dobro.
+        adiantamento_ded = self._get_line_total(payslip, "ADIANTAMENTO_13")
+        net = self._get_line_total(payslip, "NET")
         liquido = payslip.l10n_br_liquido_13
         expected_liquido = 5000.00 - inss_13 - irrf_13 - 2500.00
+        self.assertAlmostEqualMoney(adiantamento_ded, 2500.00)
+        # O NET (linha da folha) já desconta o adiantamento.
+        self.assertAlmostEqualMoney(net, expected_liquido)
         self.assertAlmostEqualMoney(liquido, expected_liquido)
         self.assertGreater(inss_13, 0.0)
         self.assertGreater(irrf_13, 0.0)
+
+    def test_primeira_parcela_proporcional_meio_ano(self):
+        """Admitido no meio do ano: 1ª parcela = metade dos avos projetados."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=5000.00, date_start=date(2024, 7, 1))
+        payslip = self.env["hr.payslip"].create(
+            {
+                "name": "13º Adiantamento - meio de ano",
+                "employee_id": emp.id,
+                "contract_id": contract.id,
+                "date_from": date(2024, 11, 1),
+                "date_to": date(2024, 11, 30),
+                "struct_id": self.structure_13_primeira.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        payslip.compute_sheet()
+        adiant = self._get_line_total(payslip, "ADIANTAMENTO_13")
+        # Admitido jul: 6 avos até 31/12 => 5000 × 6/12 × 0,5 = 1250
+        self.assertAlmostEqualMoney(adiant, 1250.00)
+
+    def test_fgts_incide_sobre_13(self):
+        """FGTS (8%) incide sobre o 13º bruto na 2ª parcela."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=5000.00, date_start=date(2024, 1, 1))
+        payslip = self.env["hr.payslip"].create(
+            {
+                "name": "13º 2ª Parcela FGTS",
+                "employee_id": emp.id,
+                "contract_id": contract.id,
+                "date_from": date(2024, 12, 1),
+                "date_to": date(2024, 12, 31),
+                "struct_id": self.structure_13_segunda.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        payslip.compute_sheet()
+        bruto = self._get_line_total(payslip, "DECIMO_TERCEIRO_BRUTO")
+        fgts = self._get_line_total(payslip, "FGTS")
+        self.assertAlmostEqualMoney(bruto, 5000.00)
+        self.assertAlmostEqualMoney(fgts, 400.00)  # 8% de 5000
 
     def test_decimo_na_rescisao_proporcional(self):
         """13º na rescisão = proporcional aos meses trabalhados no ano."""
