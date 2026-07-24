@@ -13,11 +13,25 @@ from odoo.tests.common import BaseCase
 from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     calc_decimo_avos,
     calc_ferias_dias,
-    calc_inss,
-    calc_irrf,
-    calc_salario_familia,
+    calc_inss as _calc_inss,
+    calc_irrf as _calc_irrf,
+    calc_salario_familia as _calc_salario_familia,
     calc_vt,
 )
+
+from .fixtures import FAIXAS_INSS_2024, FAIXAS_IRRF_2024, FAIXAS_SF_2024
+
+
+def calc_inss(base):
+    return _calc_inss(base, FAIXAS_INSS_2024)
+
+
+def calc_irrf(base):
+    return _calc_irrf(base, FAIXAS_IRRF_2024)
+
+
+def calc_salario_familia(remuneracao, num_filhos):
+    return _calc_salario_familia(remuneracao, num_filhos, FAIXAS_SF_2024)
 
 
 class TestCalcINSSPuro(BaseCase):
@@ -189,8 +203,13 @@ class TestCalcSalarioFamilia(BaseCase):
     def test_faixa1_dois_filhos(self):
         self.assertAlmostEqual(calc_salario_familia(1412.00, 2), 124.08)
 
-    def test_faixa2_um_filho(self):
-        self.assertAlmostEqual(calc_salario_familia(2000.00, 1), 43.84)
+    def test_acima_faixa_unica_zero(self):
+        """Remuneração acima do limite da faixa única (2024) → sem direito.
+
+        A estrutura de 2 faixas foi extinta; em 2024 há uma única faixa até
+        R$1.819,26. R$2.000 está acima → salário família zero.
+        """
+        self.assertAlmostEqual(calc_salario_familia(2000.00, 1), 0.00)
 
     def test_acima_teto_zero(self):
         self.assertAlmostEqual(calc_salario_familia(5000.00, 3), 0.00)

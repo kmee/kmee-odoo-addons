@@ -185,7 +185,7 @@ class TestSalarioFamilia(PayrollCommon):
     """Testes de salário família."""
 
     def test_salario_familia_faixa1(self):
-        """Salário até R$1.869,34: R$62,04 por filho."""
+        """Faixa única 2024 (remuneração até R$1.819,26): R$62,04 por filho."""
         emp = self._create_employee()
         emp.write({"l10n_br_num_filhos_sf": 1})
         contract = self._create_contract(emp, wage=1412.00)
@@ -202,17 +202,20 @@ class TestSalarioFamilia(PayrollCommon):
         sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
         self.assertAlmostEqualMoney(sf, 124.08)
 
-    def test_salario_familia_faixa2(self):
-        """Salário entre R$1.869,35 e R$2.903,98: R$43,84 por filho."""
+    def test_salario_familia_acima_faixa_unica_zero(self):
+        """Estrutura de 2 faixas extinta: acima de R$1.819,26 (2024) → zero.
+
+        R$2.000 antes caía na antiga 2ª faixa (R$43,84); hoje não há direito.
+        """
         emp = self._create_employee()
         emp.write({"l10n_br_num_filhos_sf": 1})
         contract = self._create_contract(emp, wage=2000.00)
         payslip = self._create_payslip(emp, contract)
         sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
-        self.assertAlmostEqualMoney(sf, 43.84)
+        self.assertAlmostEqualMoney(sf, 0.00)
 
     def test_salario_familia_acima_teto_zero(self):
-        """Salário acima de R$2.903,98: sem salário família."""
+        """Salário bem acima do limite: sem salário família."""
         emp = self._create_employee()
         emp.write({"l10n_br_num_filhos_sf": 3})
         contract = self._create_contract(emp, wage=5000.00)

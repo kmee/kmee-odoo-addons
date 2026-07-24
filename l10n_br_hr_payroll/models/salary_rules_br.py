@@ -31,83 +31,49 @@ def round_money(value, places=2):
 
 # ── INSS — Tabela Progressiva ─────────────────────────────────────────
 
-INSS_TABELAS = {
-    2024: {
-        "faixas": [
-            (1412.00, 0.075),
-            (2666.68, 0.09),
-            (4000.03, 0.12),
-            (7786.02, 0.14),
-        ],
-        "teto": 908.86,
-    },
-}
 
-# ── IRRF — Tabela Progressiva ─────────────────────────────────────────
+def calc_inss(salario_bruto, faixas):
+    """Calcula o INSS progressivo conforme as faixas vigentes.
 
-IRRF_TABELAS = {
-    2024: [
-        (2259.20, 0.000, 0.00),
-        (2826.65, 0.075, 169.44),
-        (3751.05, 0.150, 381.44),
-        (4664.68, 0.225, 662.77),
-        (float("inf"), 0.275, 896.00),
-    ],
-}
-
-IRRF_DEDUCAO_DEPENDENTE = 189.59
-
-# ── Salário Família — Tabela 2024 ─────────────────────────────────────
-
-SALARIO_FAMILIA_TABELA_2024 = [
-    (1869.34, 62.04),
-    (2903.98, 43.84),
-]
-
-# ── Salário Mínimo ────────────────────────────────────────────────────
-
-SALARIO_MINIMO = {
-    2024: 1412.00,
-}
-
-
-def calc_inss(salario_bruto, ano=2024):
-    """Calcula o INSS progressivo conforme a tabela do ano.
+    As faixas são resolvidas pela competência do holerite fora daqui
+    (ver ``l10n_br.hr.payroll.inss.faixa._tabela``); esta função é pura.
 
     Args:
         salario_bruto: Salário bruto mensal em R$.
-        ano: Ano de referência para a tabela.
+        faixas: Lista ``[(teto, aliquota_fracao), ...]`` ordenada ascendente.
+            A incidência é progressiva; o teto de contribuição é a soma das
+            faixas até o último ``teto`` (não precisa ser informado à parte).
 
     Returns:
         Valor do desconto de INSS em R$ (positivo = desconto).
     """
-    tabela = INSS_TABELAS.get(ano, INSS_TABELAS[2024])
     result = 0.0
     base_anterior = 0.0
-    for limite, aliquota in tabela["faixas"]:
+    for limite, aliquota in faixas:
         if salario_bruto > base_anterior:
             base_faixa = min(salario_bruto, limite) - base_anterior
             result += base_faixa * aliquota
             base_anterior = limite
         else:
             break
-    return round_money(min(result, tabela["teto"]))
+    return round_money(result)
 
 
-def calc_irrf(base_irrf, ano=2024):
+def calc_irrf(base_irrf, faixas):
     """Calcula o IRRF sobre a base de cálculo já deduzida.
 
     A base deve já ter sido deduzida de INSS, dependentes e pensão.
 
     Args:
         base_irrf: Base de cálculo do IRRF.
-        ano: Ano de referência.
+        faixas: Lista ``[(base_max, aliquota_fracao, parcela), ...]`` ascendente,
+            resolvida pela competência (ver
+            ``l10n_br.hr.payroll.irrf.faixa._tabela``).
 
     Returns:
         Valor do desconto de IRRF em R$ (sempre >= 0).
     """
-    tabela = IRRF_TABELAS.get(ano, IRRF_TABELAS[2024])
-    for limite, aliquota, deducao in tabela:
+    for limite, aliquota, deducao in faixas:
         if base_irrf <= limite:
             result = base_irrf * aliquota - deducao
             return round_money(max(0.0, result))
@@ -181,21 +147,21 @@ def calc_vt(salario, valor_vt):
     return round_money(min(limite_6_porcento, valor_vt))
 
 
-def calc_salario_familia(salario_bruto, num_filhos, ano=2024):
+def calc_salario_familia(remuneracao, num_filhos, faixas):
     """Calcula o salário família.
 
     Args:
-        salario_bruto: Salário bruto mensal.
+        remuneracao: Remuneração mensal usada como base de enquadramento.
         num_filhos: Número de filhos elegíveis (até 14 anos ou inválidos).
-        ano: Ano de referência.
+        faixas: Lista ``[(base_max, valor), ...]`` ascendente, resolvida pela
+            competência (ver ``l10n_br.hr.payroll.sal.familia.faixa._tabela``).
 
     Returns:
         Valor do salário família mensal.
     """
     if num_filhos <= 0:
         return 0.0
-    tabela = SALARIO_FAMILIA_TABELA_2024
-    for limite, valor in tabela:
-        if salario_bruto <= limite:
+    for limite, valor in faixas:
+        if remuneracao <= limite:
             return round_money(num_filhos * valor)
     return 0.0

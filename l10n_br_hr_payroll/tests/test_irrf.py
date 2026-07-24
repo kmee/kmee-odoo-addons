@@ -10,9 +10,16 @@ Cobertura:
   - Dedução de pensão alimentícia
   - Isenção por moléstia grave
 """
-from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import calc_irrf
+from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
+    calc_irrf as _calc_irrf,
+)
 
 from .common import PayrollCommon
+from .fixtures import FAIXAS_IRRF_2024
+
+
+def calc_irrf(base):
+    return _calc_irrf(base, FAIXAS_IRRF_2024)
 
 
 class TestIRRFTabela(PayrollCommon):
