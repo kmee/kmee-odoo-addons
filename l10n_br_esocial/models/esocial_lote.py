@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import base64
 import logging
 
@@ -5,6 +8,22 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
+
+# S-1xxx events that belong to the periodic group (grupo 3), not the tables
+# group (grupo 1).
+PERIODIC_S1_TYPES = frozenset(
+    {
+        "S-1200",
+        "S-1202",
+        "S-1207",
+        "S-1210",
+        "S-1260",
+        "S-1270",
+        "S-1280",
+        "S-1298",
+        "S-1299",
+    }
+)
 
 try:
     from esociallib import assinar, consultar_lote, enviar_lote
@@ -134,50 +153,41 @@ class ESocialLote(models.Model):
         tp_amb = self.company_id.l10n_br_esocial_tp_amb or "2"
         environment = "restricted" if tp_amb == "2" else "production"
 
-        # Determine grupo from event types
-        tipos = set(eventos_validados.mapped("tipo"))
-        if any(
-            t.startswith("S-1")
-            and t
-            not in (
-                "S-1200",
-                "S-1202",
-                "S-1207",
-                "S-1210",
-                "S-1260",
-                "S-1270",
-                "S-1280",
-                "S-1298",
-                "S-1299",
+        # Determine grupo and enforce lote homogeneity: a single lote must
+        # only carry events of the same eSocial group.
+        grupo = self._get_lote_grupo(eventos_validados)
+
+        # Sign and transmit inside a single guarded block: any failure must
+        # roll back (via UserError) so we never persist signed XML with the
+        # lote left in an inconsistent state.
+        try:
+            eventos_xml = []
+            for evento in eventos_validados:
+                if not evento.xml_envio:
+                    raise UserError(
+                        _("Evento %(name)s não possui XML de envio.")
+                        % {"name": evento.name}
+                    )
+                xml_assinado = assinar(evento.xml_envio, pfx_data, senha)
+                evento.xml_envio = xml_assinado
+                eventos_xml.append(xml_assinado)
+
+            protocolo = enviar_lote(
+                eventos_xml,
+                pfx_data,
+                senha,
+                environment=environment,
+                grupo=grupo,
             )
-            for t in tipos
-        ):
-            grupo = 1  # Tabelas
-        elif any(t.startswith("S-2") for t in tipos):
-            grupo = 2  # Não-periódicos
-        else:
-            grupo = 3  # Periódicos
+        except UserError:
+            raise
+        except Exception as exc:
+            _logger.exception("Erro ao assinar/transmitir lote eSocial %s", self.id)
+            raise UserError(
+                _("Falha na assinatura/transmissão do lote: %(erro)s")
+                % {"erro": exc}
+            ) from exc
 
-        # Sign each event
-        eventos_xml = []
-        for evento in eventos_validados:
-            if not evento.xml_envio:
-                raise UserError(
-                    _("Evento %(name)s não possui XML de envio.")
-                    % {"name": evento.name}
-                )
-            xml_assinado = assinar(evento.xml_envio, pfx_data, senha)
-            evento.xml_envio = xml_assinado
-            eventos_xml.append(xml_assinado)
-
-        # Transmit
-        protocolo = enviar_lote(
-            eventos_xml,
-            pfx_data,
-            senha,
-            environment=environment,
-            grupo=grupo,
-        )
         self.protocolo = protocolo
         self.state = "sent"
         eventos_validados.write({"state": "sent"})
@@ -186,11 +196,40 @@ class ESocialLote(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": "Lote Transmitido",
-                "message": f"Protocolo: {protocolo}",
+                "title": _("Lote Transmitido"),
+                "message": _("Protocolo: %(protocolo)s") % {"protocolo": protocolo},
                 "type": "success",
             },
         }
+
+    @api.model
+    def _classify_grupo(self, tipo):
+        """Return the eSocial transmission group (1/2/3) for an event type.
+
+        1 = Tabelas, 2 = Não-periódicos (S-2xxx / S-3xxx), 3 = Periódicos.
+        """
+        tipo = tipo or ""
+        if tipo.startswith("S-1") and tipo not in PERIODIC_S1_TYPES:
+            return 1
+        if tipo.startswith("S-2") or tipo.startswith("S-3"):
+            return 2
+        return 3
+
+    def _get_lote_grupo(self, eventos):
+        """Validate group homogeneity and return the single group of the lote."""
+        self.ensure_one()
+        grupos = {self._classify_grupo(tipo) for tipo in eventos.mapped("tipo")}
+        if len(grupos) > 1:
+            labels = {1: "1-Tabelas", 2: "2-Não Periódicos", 3: "3-Periódicos"}
+            raise UserError(
+                _(
+                    "O lote contém eventos de grupos eSocial diferentes (%(grupos)s). "
+                    "Cada lote deve conter apenas eventos de um mesmo grupo. "
+                    "Separe os eventos em lotes distintos."
+                )
+                % {"grupos": ", ".join(labels[g] for g in sorted(grupos))}
+            )
+        return grupos.pop()
 
     def action_consultar(self):
         """Query batch result from eSocial."""
@@ -215,11 +254,17 @@ class ESocialLote(models.Model):
             self.state = "done"
             for evt_result in resultado.eventos:
                 # Match event by id_evento
+                event_id = evt_result.event_id
                 evento = self.evento_ids.filtered(
-                    lambda e: e.id_evento == evt_result.event_id
+                    lambda e, eid=event_id: e.id_evento and e.id_evento == eid
                 )
                 if not evento:
-                    # Try matching by order
+                    _logger.warning(
+                        "eSocial lote %s: retorno com event_id %s não casou com "
+                        "nenhum evento do lote.",
+                        self.id,
+                        evt_result.event_id,
+                    )
                     continue
                 if evt_result.aceito:
                     evento.write(
@@ -250,8 +295,8 @@ class ESocialLote(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": "Consulta Lote",
-                "message": f"Status: {resultado.status}",
+                "title": _("Consulta Lote"),
+                "message": _("Status: %(status)s") % {"status": resultado.status},
                 "type": "info" if resultado.status != "erro" else "danger",
             },
         }

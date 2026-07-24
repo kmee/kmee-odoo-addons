@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from odoo import _, fields, models
 from odoo.exceptions import UserError
 
@@ -32,6 +35,20 @@ class ESocialS1200(models.Model):
         default="1",
         required=True,
     )
+    ind_retif = fields.Selection(
+        [
+            ("1", "Original"),
+            ("2", "Retificação"),
+        ],
+        string="Indicativo Retificação",
+        default="1",
+        required=True,
+    )
+    nr_recibo = fields.Char(
+        string="Nº Recibo",
+        help="Número do recibo do evento a ser retificado. "
+        "Obrigatório quando Indicativo de Retificação for 'Retificação'.",
+    )
 
     def _get_event_type(self):
         return "S-1200"
@@ -46,6 +63,9 @@ class ESocialS1200(models.Model):
                 if not rule.l10n_br_esocial_nat_rubr_id:
                     continue
                 if not rule.l10n_br_esocial_cod_rubr:
+                    continue
+                # Skip zero-valued lines — they must not be reported.
+                if not line.total:
                     continue
                 itens.append(
                     {
@@ -69,6 +89,11 @@ class ESocialS1200(models.Model):
         cpf_limpo = "".join(c for c in cpf if c.isdigit())
 
         matricula = employee.l10n_br_esocial_matricula
+        if not matricula:
+            raise UserError(
+                _("Empregado '%(name)s' não possui Matrícula eSocial configurada.")
+                % {"name": employee.name}
+            )
         categoria = employee.l10n_br_esocial_categoria_id
         if not categoria:
             raise UserError(
@@ -96,13 +121,22 @@ class ESocialS1200(models.Model):
 
         cod_lotacao = company.l10n_br_esocial_cod_lotacao or "1"
 
+        ind_retif = int(self.ind_retif)
+        if ind_retif == 2 and not self.nr_recibo:
+            raise UserError(
+                _(
+                    "Retificação (ind_retif=2) exige o Nº do Recibo do evento "
+                    "original a ser retificado."
+                )
+            )
+
         data = {
             "tp_insc": ide["tp_insc"],
             "nr_insc": ide["nr_insc"],
             "cpf_trab": cpf_limpo,
             "ind_apuracao": int(self.ind_apuracao),
             "per_apur": self.per_apur,
-            "ind_retif": 1,
+            "ind_retif": ind_retif,
             "proc_emi": proc["proc_emi"],
             "ver_proc": proc["ver_proc"],
             "dm_dev": [
@@ -127,5 +161,8 @@ class ESocialS1200(models.Model):
                 }
             ],
         }
+
+        if ind_retif == 2:
+            data["nr_recibo"] = self.nr_recibo
 
         return data
