@@ -138,7 +138,11 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+imposto = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+# Redutor do IRPF (Lei 15.270/2025, desde 01/01/2026): a lei alcança também o
+# imposto exclusivo de fonte do 13º, usando o rendimento BRUTO do 13º como
+# base do redutor. Sem redutor cadastrado (até 12/2025) o imposto não muda.
+result = tools.br.irrf_apos_redutor(max(categories.GROSS, 0), imposto)
         </field>
     </record>
 
