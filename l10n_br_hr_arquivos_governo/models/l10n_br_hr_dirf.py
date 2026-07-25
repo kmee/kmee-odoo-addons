@@ -1,10 +1,16 @@
 import base64
 import calendar
 import io
+import logging
 import unicodedata
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+from .constantes_rh import CODIGOS_INSS, CODIGOS_IRRF, CODIGOS_REMUNERACAO_BRUTA
+from .rubricas import somar_rubricas
+
+_logger = logging.getLogger(__name__)
 
 
 def _normalize(text, size=0, fill=" "):
@@ -134,13 +140,14 @@ class HrDirf(models.Model):
             )
         return self.env["hr.payslip"].search(domain)
 
-    def _get_line_total(self, payslips, code):
-        """Soma o total de uma rubrica nos holerites."""
-        total = 0.0
-        for payslip in payslips:
-            for line in payslip.line_ids:
-                if line.code == code:
-                    total += line.total
+    def _get_line_total(self, payslips, codigos):
+        """Soma o total de uma rubrica nos holerites.
+
+        ``codigos`` pode ser um código único ou uma coleção de códigos
+        equivalentes (ex.: ``INSS`` na folha mensal e ``INSS_13`` no 13º).
+        Holerites sem nenhuma linha com esses códigos geram aviso no log.
+        """
+        total, _faltantes = somar_rubricas(payslips, codigos, origem="DIRF")
         return total
 
     def _generate_header(self):
@@ -175,8 +182,12 @@ class HrDirf(models.Model):
         )
         return lines
 
-    def _generate_employee_data(self, employee):
-        """Gera dados DIRF de um empregado."""
+    def _generate_employee_data(self, employee, resumo=None):
+        """Gera dados DIRF de um empregado.
+
+        ``resumo`` é um dicionário opcional acumulador usado por
+        :meth:`action_gerar_dirf` para detectar arquivos zerados.
+        """
         lines = []
         payslips = self._get_payslips_employee(employee)
         if not payslips:
@@ -197,22 +208,38 @@ class HrDirf(models.Model):
         )
 
         # RTRT - Rendimentos tributáveis por mês
+        rendimento_ano = 0.0
         for month in range(1, 13):
             month_payslips = self._get_payslips_employee(employee, month)
-            rendimento = self._get_line_total(month_payslips, "BRUTO")
+            rendimento = self._get_line_total(month_payslips, CODIGOS_REMUNERACAO_BRUTA)
+            rendimento_ano += rendimento
             lines.append("RTRT|%s|" % _format_value(rendimento))
 
         # RTPO - Previdência oficial por mês
         for month in range(1, 13):
             month_payslips = self._get_payslips_employee(employee, month)
-            inss = self._get_line_total(month_payslips, "INSS")
+            inss = self._get_line_total(month_payslips, CODIGOS_INSS)
             lines.append("RTPO|%s|" % _format_value(inss))
 
         # RTDP - IR retido por mês
         for month in range(1, 13):
             month_payslips = self._get_payslips_employee(employee, month)
-            irrf = self._get_line_total(month_payslips, "IRRF")
+            irrf = self._get_line_total(month_payslips, CODIGOS_IRRF)
             lines.append("RTDP|%s|" % _format_value(irrf))
+
+        if not rendimento_ano:
+            _logger.warning(
+                "DIRF %s: rendimento tributável ZERO para %s, apesar de existirem "
+                "%d holerite(s) no ano-calendário. Verifique as rubricas %s.",
+                self.ano_referencia,
+                employee.display_name,
+                len(payslips),
+                "/".join(CODIGOS_REMUNERACAO_BRUTA),
+            )
+
+        if resumo is not None:
+            resumo["payslips"] = resumo.get("payslips", 0) + len(payslips)
+            resumo["rendimento"] = resumo.get("rendimento", 0.0) + rendimento_ano
 
         return lines
 
@@ -223,8 +250,27 @@ class HrDirf(models.Model):
             raise UserError(_("Busque os funcionários antes de gerar a DIRF."))
 
         lines = self._generate_header()
+        resumo = {}
         for employee in self.employee_ids:
-            lines.extend(self._generate_employee_data(employee))
+            lines.extend(self._generate_employee_data(employee, resumo=resumo))
+
+        # Falha alta: com holerites no ano-calendário, uma DIRF integralmente
+        # zerada indica rubrica ausente/errada e não um arquivo válido.
+        if resumo.get("payslips") and not resumo.get("rendimento"):
+            raise UserError(
+                _(
+                    "Nenhum rendimento tributável encontrado nos %(qtd)s holerite(s) "
+                    "do ano-calendário %(ano)s.\n\n"
+                    "A DIRF não foi gerada para evitar um arquivo zerado. "
+                    "Confira se as regras salariais da folha possuem as rubricas "
+                    "%(codigos)s."
+                )
+                % {
+                    "qtd": resumo["payslips"],
+                    "ano": self.ano_calendario,
+                    "codigos": "/".join(CODIGOS_REMUNERACAO_BRUTA),
+                }
+            )
 
         lines.append("FIMDirf|")
         content = "\r\n".join(lines)

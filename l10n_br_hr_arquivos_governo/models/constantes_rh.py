@@ -1,5 +1,37 @@
 """Constantes para geração de arquivos do governo brasileiro (SEFIP, DIRF, CAGED)."""
 
+# ══════════════════════════════════════════════════════════════════════
+# Códigos das rubricas (hr.salary.rule.code) consumidos pelos geradores.
+#
+# São os códigos REAIS das regras salariais definidas em
+# ``l10n_br_hr_payroll`` (folha mensal e estatutário) e, quando instalado,
+# ``l10n_br_hr_vacation`` (férias, 13º salário e rescisão).
+#
+# A mesma verba tem código diferente conforme a estrutura de cálculo:
+# a folha mensal, as férias e a rescisão usam ``INSS``/``IRRF``, enquanto
+# o 13º salário usa ``INSS_13``/``IRRF_13``.  Por isso cada verba é
+# declarada como uma TUPLA de códigos equivalentes, cujos valores são
+# somados ao compor o arquivo.
+#
+# ATENÇÃO: não existe rubrica com código "BRUTO" na folha brasileira —
+# a remuneração bruta é a regra de código ``GROSS``.
+# ══════════════════════════════════════════════════════════════════════
+
+#: Remuneração bruta (proventos): BASIC + ALW.
+CODIGOS_REMUNERACAO_BRUTA = ("GROSS",)
+
+#: Contribuição previdenciária do segurado (INSS/RPPS), incluindo 13º.
+CODIGOS_INSS = ("INSS", "INSS_13", "CONTRIB_RPPS")
+
+#: Imposto de renda retido na fonte, incluindo 13º.
+CODIGOS_IRRF = ("IRRF", "IRRF_13")
+
+#: FGTS depositado pelo empregador, incluindo 13º.
+CODIGOS_FGTS = ("FGTS", "FGTS_13")
+
+#: Salário líquido.
+CODIGOS_LIQUIDO = ("NET",)
+
 MESES = [
     ("1", "Janeiro"),
     ("2", "Fevereiro"),

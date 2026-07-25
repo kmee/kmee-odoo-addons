@@ -1,15 +1,163 @@
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
+from ..models.constantes_rh import (
+    CODIGOS_FGTS,
+    CODIGOS_INSS,
+    CODIGOS_IRRF,
+    CODIGOS_REMUNERACAO_BRUTA,
+)
 
-class TestDirf(TransactionCase):
+#: Salário do contrato de teste: sem adicionais nem salário-família,
+#: a remuneração bruta (GROSS) é exatamente este valor.
+SALARIO_TESTE = 5000.00
+
+#: Logger onde os avisos de rubrica ausente são registrados.
+LOGGER_RUBRICAS = "odoo.addons.l10n_br_hr_arquivos_governo.models.rubricas"
+
+
+class ArquivosGovernoCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                tracking_disable=True,
+                test_queue_job_no_delay=True,
+            )
+        )
         cls.company = cls.env.ref("base.main_company")
         cls.employee = cls.env.ref("l10n_br_hr.demo_employee_joao")
         cls.contract = cls.env.ref("l10n_br_hr_contract.demo_contract_joao")
+        cls.struct_clt = cls.env.ref("l10n_br_hr_payroll.structure_clt")
+        cls.cat_gross = cls.env.ref("l10n_br_hr_payroll.hr_salary_rule_category_gross")
+        cls.cat_ded = cls.env.ref("l10n_br_hr_payroll.hr_salary_rule_category_ded")
+        cls.cat_comp = cls.env.ref("l10n_br_hr_payroll.hr_salary_rule_category_comp")
 
+        # Empregado/contrato determinístico: nenhum adicional, nenhum
+        # dependente e nenhum filho para salário-família, de modo que
+        # GROSS == SALARIO_TESTE.
+        cls.employee_valor = cls.env["hr.employee"].create(
+            {
+                "name": "Funcionario Valor Conhecido",
+                "company_id": cls.company.id,
+                "country_id": cls.env.ref("base.br").id,
+                "l10n_br_tipo_contrato": "clt",
+                "l10n_br_irrf_dependentes": 0,
+                "l10n_br_num_filhos_sf": 0,
+            }
+        )
+        cls.contract_valor = cls.env["hr.contract"].create(
+            {
+                "name": "Contrato Valor Conhecido",
+                "employee_id": cls.employee_valor.id,
+                "company_id": cls.company.id,
+                "wage": SALARIO_TESTE,
+                "date_start": "2024-01-02",
+                "state": "open",
+                "struct_id": cls.struct_clt.id,
+            }
+        )
+
+    @classmethod
+    def _criar_holerite(
+        cls,
+        contract,
+        date_from,
+        date_to,
+        struct=None,
+        name="Holerite Teste",
+    ):
+        """Cria, calcula e fecha um holerite."""
+        payslip = cls.env["hr.payslip"].create(
+            {
+                "name": name,
+                "employee_id": contract.employee_id.id,
+                "contract_id": contract.id,
+                "struct_id": (struct or contract.struct_id).id,
+                "date_from": date_from,
+                "date_to": date_to,
+            }
+        )
+        payslip.compute_sheet()
+        payslip.action_payslip_done()
+        return payslip
+
+    @classmethod
+    def _criar_estrutura_13(cls):
+        """Estrutura de 13º salário com valores fixos e códigos do 13º.
+
+        Reproduz os códigos usados em ``l10n_br_hr_vacation``
+        (GROSS / INSS_13 / IRRF_13 / FGTS) sem depender daquele módulo.
+        """
+
+        def _regra(name, code, category, valor, sequence):
+            return cls.env["hr.salary.rule"].create(
+                {
+                    "name": name,
+                    "code": code,
+                    "sequence": sequence,
+                    "category_id": category.id,
+                    "condition_select": "none",
+                    "amount_select": "fix",
+                    "amount_fix": valor,
+                }
+            )
+
+        regras = (
+            _regra("13 Bruto", "GROSS", cls.cat_gross, SALARIO_TESTE, 99)
+            | _regra("13 INSS", "INSS_13", cls.cat_ded, 400.0, 100)
+            | _regra("13 IRRF", "IRRF_13", cls.cat_ded, 100.0, 120)
+            | _regra("13 FGTS", "FGTS", cls.cat_comp, 400.0, 150)
+        )
+        return cls.env["hr.payroll.structure"].create(
+            {
+                "name": "13o Salario (Teste)",
+                "code": "TESTE_13",
+                "company_id": cls.company.id,
+                "rule_ids": [(6, 0, regras.ids)],
+            }
+        )
+
+    @classmethod
+    def _criar_estrutura_sem_bruto(cls):
+        """Estrutura sem nenhuma rubrica de remuneração bruta."""
+        regra = cls.env["hr.salary.rule"].create(
+            {
+                "name": "Verba Desconhecida",
+                "code": "VERBA_INEXISTENTE",
+                "sequence": 10,
+                "category_id": cls.cat_ded.id,
+                "condition_select": "none",
+                "amount_select": "fix",
+                "amount_fix": 100.0,
+            }
+        )
+        return cls.env["hr.payroll.structure"].create(
+            {
+                "name": "Estrutura sem bruto (Teste)",
+                "code": "TESTE_SEM_BRUTO",
+                "company_id": cls.company.id,
+                "rule_ids": [(6, 0, regra.ids)],
+            }
+        )
+
+    @staticmethod
+    def _centavos(valor, size=15):
+        """Mesma formatação usada nos arquivos: centavos com zeros à esquerda."""
+        return str(int(round(abs(valor) * 100, 0))).zfill(size)
+
+    @staticmethod
+    def _valor_rubrica(payslip, codigos):
+        """Total das linhas do holerite com os códigos informados."""
+        linhas = payslip.line_ids.filtered(lambda line: line.code in codigos)
+        return sum(linhas.mapped("total"))
+
+
+@tagged("post_install", "-at_install")
+class TestDirf(ArquivosGovernoCommon):
     def _create_dirf(self, **kwargs):
         vals = {
             "company_id": self.company.id,
@@ -43,18 +191,9 @@ class TestDirf(TransactionCase):
 
     def test_dirf_buscar_e_gerar(self):
         """Busca funcionários e gera DIRF com holerite existente."""
-        payslip = self.env["hr.payslip"].create(
-            {
-                "employee_id": self.employee.id,
-                "contract_id": self.contract.id,
-                "struct_id": self.contract.struct_id.id,
-                "date_from": "2024-01-01",
-                "date_to": "2024-01-31",
-                "name": "Holerite DIRF Test",
-            }
+        self._criar_holerite(
+            self.contract, "2024-01-01", "2024-01-31", name="Holerite DIRF Test"
         )
-        payslip.compute_sheet()
-        payslip.action_payslip_done()
 
         dirf = self._create_dirf()
         dirf.action_buscar_funcionarios()
@@ -73,15 +212,90 @@ class TestDirf(TransactionCase):
         self.assertTrue(dirf.retificadora)
         self.assertEqual(dirf.numero_recibo, "12345")
 
+    def test_dirf_valores_mensais(self):
+        """RTRT/RTPO/RTDP devem trazer os VALORES do holerite, não zeros."""
+        payslip = self._criar_holerite(
+            self.contract_valor, "2024-03-01", "2024-03-31", name="Holerite 03/2024"
+        )
+        bruto = self._valor_rubrica(payslip, CODIGOS_REMUNERACAO_BRUTA)
+        inss = self._valor_rubrica(payslip, CODIGOS_INSS)
+        irrf = self._valor_rubrica(payslip, CODIGOS_IRRF)
+        # Pré-condições: as rubricas existem e têm valor.
+        self.assertEqual(bruto, SALARIO_TESTE)
+        self.assertGreater(inss, 0.0)
+        self.assertGreater(irrf, 0.0)
 
-class TestSefip(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.company = cls.env.ref("base.main_company")
-        cls.employee = cls.env.ref("l10n_br_hr.demo_employee_joao")
-        cls.contract = cls.env.ref("l10n_br_hr_contract.demo_contract_joao")
+        dirf = self._create_dirf()
+        dirf.employee_ids = self.employee_valor
+        dirf.action_gerar_dirf()
 
+        linhas = dirf.file_content.split("\r\n")
+        rtrt = [line for line in linhas if line.startswith("RTRT|")]
+        rtpo = [line for line in linhas if line.startswith("RTPO|")]
+        rtdp = [line for line in linhas if line.startswith("RTDP|")]
+        self.assertEqual(len(rtrt), 12)
+        self.assertEqual(len(rtpo), 12)
+        self.assertEqual(len(rtdp), 12)
+
+        # Março (índice 2) traz os valores; os demais meses ficam zerados.
+        self.assertEqual(rtrt[2], "RTRT|000000000500000|")
+        self.assertEqual(rtrt[2], "RTRT|%s|" % self._centavos(bruto))
+        self.assertEqual(rtpo[2], "RTPO|%s|" % self._centavos(inss))
+        self.assertEqual(rtdp[2], "RTDP|%s|" % self._centavos(irrf))
+        self.assertEqual(rtrt[0], "RTRT|%s|" % ("0" * 15))
+        # Regressão do bug de rubrica inexistente ("BRUTO"): o mês com
+        # holerite não pode sair zerado.
+        self.assertNotEqual(rtrt[2], "RTRT|%s|" % ("0" * 15))
+
+    def test_dirf_valores_13_salario(self):
+        """13º salário: INSS_13/IRRF_13 devem ser somados nos registros."""
+        struct_13 = self._criar_estrutura_13()
+        payslip = self._criar_holerite(
+            self.contract_valor,
+            "2024-12-01",
+            "2024-12-31",
+            struct=struct_13,
+            name="13o Salario 2024",
+        )
+        self.assertEqual(self._valor_rubrica(payslip, CODIGOS_INSS), 400.0)
+        self.assertEqual(self._valor_rubrica(payslip, CODIGOS_IRRF), 100.0)
+
+        dirf = self._create_dirf()
+        dirf.employee_ids = self.employee_valor
+        dirf.action_gerar_dirf()
+
+        linhas = dirf.file_content.split("\r\n")
+        rtrt = [line for line in linhas if line.startswith("RTRT|")]
+        rtpo = [line for line in linhas if line.startswith("RTPO|")]
+        rtdp = [line for line in linhas if line.startswith("RTDP|")]
+        # Dezembro = índice 11
+        self.assertEqual(rtrt[11], "RTRT|000000000500000|")
+        self.assertEqual(rtpo[11], "RTPO|%s|" % self._centavos(400.0))
+        self.assertEqual(rtdp[11], "RTDP|%s|" % self._centavos(100.0))
+
+    def test_dirf_rubrica_bruta_ausente_falha_alto(self):
+        """Sem rubrica de remuneração bruta: aviso no log e UserError."""
+        struct = self._criar_estrutura_sem_bruto()
+        self._criar_holerite(
+            self.contract_valor,
+            "2024-04-01",
+            "2024-04-30",
+            struct=struct,
+            name="Holerite sem bruto",
+        )
+        dirf = self._create_dirf()
+        dirf.employee_ids = self.employee_valor
+        with self.assertLogs(LOGGER_RUBRICAS, level="WARNING") as log:
+            with self.assertRaises(UserError):
+                dirf.action_gerar_dirf()
+        self.assertTrue(
+            any("GROSS" in mensagem for mensagem in log.output),
+            "O aviso de rubrica ausente deve citar o código GROSS.",
+        )
+
+
+@tagged("post_install", "-at_install")
+class TestSefip(ArquivosGovernoCommon):
     def _create_sefip(self, **kwargs):
         vals = {
             "company_id": self.company.id,
@@ -90,6 +304,12 @@ class TestSefip(TransactionCase):
         }
         vals.update(kwargs)
         return self.env["l10n_br.hr.sefip"].create(vals)
+
+    @staticmethod
+    def _registros_30(sefip):
+        return [
+            line for line in sefip.file_content.split("\r\n") if line.startswith("30")
+        ]
 
     def test_sefip_create(self):
         """Cria registro SEFIP."""
@@ -105,25 +325,16 @@ class TestSefip(TransactionCase):
 
     def test_sefip_gerar_com_holerite(self):
         """Gera SEFIP com holerite existente."""
-        payslip = self.env["hr.payslip"].create(
-            {
-                "employee_id": self.employee.id,
-                "contract_id": self.contract.id,
-                "struct_id": self.contract.struct_id.id,
-                "date_from": "2024-01-01",
-                "date_to": "2024-01-31",
-                "name": "Holerite SEFIP Test",
-            }
+        self._criar_holerite(
+            self.contract, "2024-01-01", "2024-01-31", name="Holerite SEFIP Test"
         )
-        payslip.compute_sheet()
-        payslip.action_payslip_done()
 
         sefip = self._create_sefip()
         sefip.action_gerar_sefip()
         self.assertEqual(sefip.state, "open")
         self.assertTrue(sefip.file_content)
         # Nome é normalizado (sem acentos) no arquivo SEFIP
-        self.assertIn("JOAO", sefip.file_content.upper()[:500])
+        self.assertIn("JOAO", sefip.file_content.upper())
 
     def test_sefip_workflow(self):
         """Testa transições de estado SEFIP."""
@@ -133,15 +344,79 @@ class TestSefip(TransactionCase):
         sefip.action_sent()
         self.assertEqual(sefip.state, "sent")
 
+    def test_sefip_valores_registro_30(self):
+        """Registro 30 deve conter remuneração, INSS e FGTS do holerite."""
+        payslip = self._criar_holerite(
+            self.contract_valor, "2024-02-01", "2024-02-29", name="Holerite 02/2024"
+        )
+        bruto = self._valor_rubrica(payslip, CODIGOS_REMUNERACAO_BRUTA)
+        inss = self._valor_rubrica(payslip, CODIGOS_INSS)
+        fgts = self._valor_rubrica(payslip, CODIGOS_FGTS)
+        self.assertEqual(bruto, SALARIO_TESTE)
+        self.assertGreater(inss, 0.0)
+        self.assertEqual(fgts, SALARIO_TESTE * 0.08)
 
-class TestCaged(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.company = cls.env.ref("base.main_company")
-        cls.employee = cls.env.ref("l10n_br_hr.demo_employee_joao")
-        cls.contract = cls.env.ref("l10n_br_hr_contract.demo_contract_joao")
+        sefip = self._create_sefip(mes="2")
+        sefip.action_gerar_sefip()
 
+        registros = self._registros_30(sefip)
+        self.assertEqual(len(registros), 1)
+        registro = registros[0]
+        # Posições do registro 30: "30" + PIS(11) + nome(70) + 3 valores(15)
+        remuneracao_arquivo = registro[83:98]
+        inss_arquivo = registro[98:113]
+        fgts_arquivo = registro[113:128]
+        self.assertEqual(remuneracao_arquivo, "000000000500000")
+        self.assertEqual(remuneracao_arquivo, self._centavos(bruto))
+        self.assertEqual(inss_arquivo, self._centavos(inss))
+        self.assertEqual(fgts_arquivo, self._centavos(fgts))
+        self.assertEqual(fgts_arquivo, "000000000040000")
+        # Regressão do bug de rubrica inexistente ("BRUTO").
+        self.assertNotEqual(remuneracao_arquivo, "0" * 15)
+
+    def test_sefip_valores_13_salario(self):
+        """13º salário: remuneração e INSS_13 entram no registro 30."""
+        struct_13 = self._criar_estrutura_13()
+        self._criar_holerite(
+            self.contract_valor,
+            "2024-12-01",
+            "2024-12-31",
+            struct=struct_13,
+            name="13o Salario 2024",
+        )
+
+        sefip = self._create_sefip(mes="12")
+        sefip.action_gerar_sefip()
+
+        registros = self._registros_30(sefip)
+        self.assertEqual(len(registros), 1)
+        registro = registros[0]
+        self.assertEqual(registro[83:98], self._centavos(SALARIO_TESTE))
+        self.assertEqual(registro[98:113], self._centavos(400.0))
+        self.assertEqual(registro[113:128], self._centavos(400.0))
+
+    def test_sefip_rubrica_bruta_ausente_falha_alto(self):
+        """Sem rubrica de remuneração bruta: aviso no log e UserError."""
+        struct = self._criar_estrutura_sem_bruto()
+        self._criar_holerite(
+            self.contract_valor,
+            "2024-05-01",
+            "2024-05-31",
+            struct=struct,
+            name="Holerite sem bruto",
+        )
+        sefip = self._create_sefip(mes="5")
+        with self.assertLogs(LOGGER_RUBRICAS, level="WARNING") as log:
+            with self.assertRaises(UserError):
+                sefip.action_gerar_sefip()
+        self.assertTrue(
+            any("GROSS" in mensagem for mensagem in log.output),
+            "O aviso de rubrica ausente deve citar o código GROSS.",
+        )
+
+
+@tagged("post_install", "-at_install")
+class TestCaged(ArquivosGovernoCommon):
     def _create_caged(self, **kwargs):
         vals = {
             "company_id": self.company.id,

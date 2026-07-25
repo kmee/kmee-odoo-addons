@@ -9,11 +9,15 @@ from odoo.exceptions import UserError
 from .constantes_rh import (
     CENTRALIZADORA,
     CODIGO_RECOLHIMENTO,
+    CODIGOS_FGTS,
+    CODIGOS_INSS,
+    CODIGOS_REMUNERACAO_BRUTA,
     MESES,
     MODALIDADE_ARQUIVO,
     RECOLHIMENTO_FGTS,
     RECOLHIMENTO_GPS,
 )
+from .rubricas import somar_rubricas
 
 
 def _normalize(text, size, fill=" "):
@@ -156,12 +160,16 @@ class L10nBrHrSefip(models.Model):
             ]
         return self.env["hr.payslip"].search(domain)
 
-    def _get_line_total(self, payslip, code):
-        """Retorna total de uma rubrica no holerite."""
-        for line in payslip.line_ids:
-            if line.code == code:
-                return abs(line.total)
-        return 0.0
+    def _get_line_total(self, payslips, codigos):
+        """Retorna o total de uma rubrica nos holerites.
+
+        ``codigos`` pode ser um código único ou uma coleção de códigos
+        equivalentes (ex.: ``INSS`` na folha mensal e ``INSS_13`` no 13º,
+        somados quando ambos existem, como na rescisão).  Holerites sem
+        nenhuma linha com esses códigos geram aviso explícito no log.
+        """
+        total, _faltantes = somar_rubricas(payslips, codigos, origem="SEFIP")
+        return abs(total)
 
     def _generate_reg00(self):
         """Registro 00 - Header."""
@@ -210,12 +218,14 @@ class L10nBrHrSefip(models.Model):
         lines.append(self._generate_reg10())
 
         # Registro 30 - Trabalhadores (simplificado)
+        total_remuneracao = 0.0
         for payslip in payslips:
             employee = payslip.employee_id
             pis = (employee.pis_pasep or "").replace(".", "").replace("-", "")
-            remuneracao = self._get_line_total(payslip, "BRUTO")
-            inss_desc = self._get_line_total(payslip, "INSS")
-            fgts = self._get_line_total(payslip, "FGTS")
+            remuneracao = self._get_line_total(payslip, CODIGOS_REMUNERACAO_BRUTA)
+            inss_desc = self._get_line_total(payslip, CODIGOS_INSS)
+            fgts = self._get_line_total(payslip, CODIGOS_FGTS)
+            total_remuneracao += remuneracao
 
             line = (
                 "30"
@@ -228,6 +238,25 @@ class L10nBrHrSefip(models.Model):
                 + " " * 50  # complemento
             )
             lines.append(line)
+
+        # Falha alta: SEFIP com remuneração total zerada em todos os
+        # trabalhadores indica rubrica ausente/errada, não arquivo válido.
+        if not total_remuneracao:
+            raise UserError(
+                _(
+                    "Nenhuma remuneração encontrada nos %(qtd)s holerite(s) da "
+                    "competência %(mes)s/%(ano)s.\n\n"
+                    "O SEFIP não foi gerado para evitar um arquivo zerado. "
+                    "Confira se as regras salariais da folha possuem as rubricas "
+                    "%(codigos)s."
+                )
+                % {
+                    "qtd": len(payslips),
+                    "mes": self.mes,
+                    "ano": self.ano,
+                    "codigos": "/".join(CODIGOS_REMUNERACAO_BRUTA),
+                }
+            )
 
         content = "\r\n".join(lines)
         buf = io.BytesIO()
