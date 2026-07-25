@@ -18,6 +18,9 @@ except ImportError:
 
 
 class _FakeEventoResult:
+    # __slots__ mantém a classe leve e satisfaz o flake8-bugbear B903.
+    __slots__ = ("event_id", "aceito", "nr_recibo", "code", "description")
+
     def __init__(self, event_id, aceito=True, nr_recibo=None, code=None, desc=None):
         self.event_id = event_id
         self.aceito = aceito
@@ -87,9 +90,9 @@ class TestRF14IdEvento(TransactionCase):
         self.assertEqual(len(evento.id_evento), 36)
         self.assertTrue(evento.id_evento.startswith("ID"))
         # O id_evento deve bater exatamente com o Id presente no XML gerado.
-        id_from_xml = self.env[
-            "l10n_br.esocial.base.intermediario"
-        ]._extract_id_evento(evento.xml_envio)
+        id_from_xml = self.env["l10n_br.esocial.base.intermediario"]._extract_id_evento(
+            evento.xml_envio
+        )
         self.assertEqual(evento.id_evento, id_from_xml)
 
     # ── matching do retorno casa pelo id_evento ────────────────────────────
@@ -122,9 +125,7 @@ class TestRF14IdEvento(TransactionCase):
         with mock.patch(
             "odoo.addons.l10n_br_esocial.models.esocial_lote.consultar_lote",
             return_value=fake,
-        ), mock.patch.object(
-            type(lote), "_get_certificate", return_value=(b"", "")
-        ):
+        ), mock.patch.object(type(lote), "_get_certificate", return_value=(b"", "")):
             lote.action_consultar()
 
         self.assertEqual(evento.state, "success")
@@ -159,9 +160,7 @@ class TestRF14IdEvento(TransactionCase):
         with mock.patch(
             "odoo.addons.l10n_br_esocial.models.esocial_lote.consultar_lote",
             return_value=fake,
-        ), mock.patch.object(
-            type(lote), "_get_certificate", return_value=(b"", "")
-        ):
+        ), mock.patch.object(type(lote), "_get_certificate", return_value=(b"", "")):
             lote.action_consultar()
 
         self.assertEqual(evento.state, "error")
@@ -190,9 +189,7 @@ class TestRF14IdEvento(TransactionCase):
         with mock.patch(
             "odoo.addons.l10n_br_esocial.models.esocial_lote.consultar_lote",
             return_value=fake,
-        ), mock.patch.object(
-            type(lote), "_get_certificate", return_value=(b"", "")
-        ):
+        ), mock.patch.object(type(lote), "_get_certificate", return_value=(b"", "")):
             lote.action_consultar()
 
         self.assertEqual(evento.state, "sent")

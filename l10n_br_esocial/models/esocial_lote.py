@@ -184,8 +184,7 @@ class ESocialLote(models.Model):
         except Exception as exc:
             _logger.exception("Erro ao assinar/transmitir lote eSocial %s", self.id)
             raise UserError(
-                _("Falha na assinatura/transmissão do lote: %(erro)s")
-                % {"erro": exc}
+                _("Falha na assinatura/transmissão do lote: %(erro)s") % {"erro": exc}
             ) from exc
 
         self.protocolo = protocolo
