@@ -18,6 +18,7 @@
         "security/ir.model.access.csv",
         "data/l10n_br.hr.payroll.inss.faixa.csv",
         "data/l10n_br.hr.payroll.irrf.faixa.csv",
+        "data/l10n_br.hr.payroll.irrf.redutor.csv",
         "data/l10n_br.hr.payroll.sal.familia.faixa.csv",
         "data/l10n_br.hr.payroll.irrf.dependente.csv",
         "data/hr_salary_rule_category_data.xml",
