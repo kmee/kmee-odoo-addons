@@ -1,0 +1,584 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_payroll
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__active
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__active
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__active
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__active
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_contract_form_payroll_br
+msgid "Adicionais de Risco"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_adicional_noturno
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_payslip_form_br
+msgid "Adicional Noturno"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_insalubridade
+msgid "Adicional de Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_periculosidade
+msgid "Adicional de Periculosidade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_contract__l10n_br_periculosidade
+msgid "Adicional de periculosidade (30% do salário base)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__aliquota
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__aliquota
+msgid "Alíquota (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_employee__l10n_br_tipo_contrato__aprendiz
+msgid "Aprendiz"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_base_irrf
+msgid "Base IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_base_irrf_est
+msgid "Base IRRF (Estatutário)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__base_max
+msgid "Base de Cálculo (Até)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__base_min
+msgid "Base de Cálculo (De)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_cid_molestia
+msgid "CID da Moléstia"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_employee__l10n_br_tipo_contrato__clt
+msgid "CLT"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
+msgid "Contrato"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_contrib_rpps
+msgid "Contribuição RPPS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_payslip_form_br
+msgid "Dados BR"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__valor
+msgid "Dedução por Dependente"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_irrf_dependente
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_irrf_dependente
+msgid "Dedução por Dependente IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_irrf_dependente
+msgid "Dedução por Dependente do IRRF por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_irrf_dependentes
+msgid "Dependentes IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_ded
+msgid "Desconto"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_desc_dsr
+msgid "Desconto DSR"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_comp
+msgid "Encargos Patronais"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_employee__l10n_br_tipo_contrato__estatutario
+msgid "Estatutário"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_fgts
+msgid "FGTS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_fgts_aprendiz
+msgid "FGTS Aprendiz"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_inss_faixa
+msgid "Faixa de Contribuição INSS por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_irrf_faixa
+msgid "Faixa de Retenção IRRF por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_sal_familia_faixa
+msgid "Faixa de Salário Família por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_payslip_form_br
+msgid "Faltas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_faltas
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_faltas_injustificadas
+msgid "Faltas Injustificadas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_filhos_invalidos_sf
+msgid "Filhos Inválidos (Salário Família)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_num_filhos_sf
+msgid "Filhos até 14 anos ou inválidos de qualquer idade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_filhos_invalidos_sf
+msgid "Filhos inválidos de qualquer idade que recebem salário família"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_num_filhos_sf
+msgid "Filhos para Salário Família"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_end
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_end
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_end
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_end
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_end
+msgid "Fim da Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
+msgid "Folha de Pagamento"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_contract__l10n_br_grau_insalubridade
+msgid "Grau de Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_he_100
+msgid "Hora Extra 100%"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_he_50
+msgid "Hora Extra 50%"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_payslip__l10n_br_usar_hora_reduzida
+msgid "Hora noturna = 52min30s (7/8 da hora normal)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_payslip_form_br
+msgid "Horas Extras"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_extras_100
+msgid "Horas Extras 100%"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_extras_50
+msgid "Horas Extras 50%"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_noturnas
+msgid "Horas Noturnas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_noturnas_computadas
+msgid "Horas Noturnas Computadas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_extras_50
+msgid "Horas extras em dias úteis"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_extras_100
+msgid "Horas extras em domingos/feriados"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_payslip__l10n_br_horas_noturnas
+msgid "Horas trabalhadas entre 22h e 05h"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__id
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__id
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__id
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_inss
+msgid "INSS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_inss_aprendiz
+msgid "INSS Aprendiz"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_irrf
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
+msgid "IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_info
+msgid "Informativo"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_contract__l10n_br_insalubridade
+msgid "Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_start
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_start
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_start
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_start
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_start
+msgid "Início da Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_molestia_grave
+msgid "Isenção de IRRF conforme Lei 7.713/88"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__base_max
+msgid "Limite de remuneração para ter direito à cota."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_net
+msgid "Líquido"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_grau_insalubridade__maximo
+msgid "Máximo (40%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_grau_insalubridade__medio
+msgid "Médio (20%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_grau_insalubridade__minimo
+msgid "Mínimo (10%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll/models/fiscal_tables.py:0
+#, python-format
+msgid ""
+"Não há %(label)s vigente para a competência %(data)s. Cadastre a vigência em"
+" Folha de Pagamento › Configuração › Tabelas Fiscais."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll/models/hr_contract.py:0
+#, python-format
+msgid ""
+"Não é permitido acumular periculosidade e insalubridade (Súmula 364 do TST)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll/models/fiscal_tables.py:0
+#, python-format
+msgid ""
+"Não é possível resolver a %s: o holerite está sem competência "
+"(date_from/date_to)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__parcela_deduzir
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__parcela_deduzir
+msgid "Parcela a Deduzir"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__parcela_deduzir
+msgid ""
+"Parcela a deduzir do método simplificado (referência). O cálculo usa a "
+"incidência progressiva por faixa."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_hr_payslip
+msgid "Payslip"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
+msgid "PcD"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_alimenticia
+msgid "Pensão Alimentícia"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_contract__l10n_br_periculosidade
+msgid "Periculosidade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_pcd
+msgid "Pessoa com Deficiência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_molestia_grave
+msgid "Portador de Moléstia Grave"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_alw
+msgid "Provento"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__base_max
+msgid "Remuneração (Até)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_gross
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_gross
+msgid "Remuneração Bruta"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_salario_base
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_basic
+msgid "Salário Base"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_salario_familia
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
+msgid "Salário Família"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_net
+msgid "Salário Líquido"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__valor_max
+msgid "Salário de Contribuição (Até)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__valor_min
+msgid "Salário de Contribuição (De)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_tabela_mixin
+msgid "Tabela Fiscal da Folha por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_inss_faixa
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_inss_faixa
+msgid "Tabela INSS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_irrf_faixa
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_irrf_faixa
+msgid "Tabela IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_sal_familia_faixa
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_sal_familia_faixa
+msgid "Tabela Salário Família"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_payroll_fiscal_tables
+msgid "Tabelas Fiscais BR"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_employee__l10n_br_tipo_contrato__temporario
+msgid "Temporário"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_tipo_contrato
+msgid "Tipo de Contrato"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_usar_hora_reduzida
+msgid "Usar Hora Noturna Reduzida"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__valor
+msgid "Valor da Cota"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_end
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_end
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_end
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_end
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_end
+msgid "Vazio = vigente por prazo indeterminado."
+msgstr ""
