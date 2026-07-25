@@ -1,0 +1,331 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_syndicate
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__4
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__4
+msgid "Abril"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__active
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__8
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__8
+msgid "Agosto"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__year
+msgid "Ano"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__job_id
+msgid "Cargo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__contribution_type__assistencial
+msgid "Contribuição Assistencial"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__contribution_type__confederativa
+msgid "Contribuição Confederativa"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__contribution_employee_pct
+msgid "Contribuição Empregado (%)"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__contribution_employer_pct
+msgid "Contribuição Patronal (%)"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model,name:l10n_br_hr_syndicate.model_l10n_br_hr_syndicate_contribution
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_syndicate_contribution_form
+msgid "Contribuição Sindical"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__contribution_type__sindical
+msgid "Contribuição Sindical (ex-imposto)"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.actions.act_window,name:l10n_br_hr_syndicate.action_syndicate_contribution
+#: model:ir.ui.menu,name:l10n_br_hr_syndicate.menu_syndicate_contribution
+msgid "Contribuições Sindicais"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__convention_id
+msgid "Convention"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_collective_convention_form
+msgid "Convenção Coletiva"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model,name:l10n_br_hr_syndicate.model_l10n_br_hr_collective_convention
+msgid "Convenção Coletiva de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.actions.act_window,name:l10n_br_hr_syndicate.action_collective_convention
+#: model:ir.ui.menu,name:l10n_br_hr_syndicate.menu_collective_convention
+msgid "Convenções Coletivas"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_syndicate_contribution_form
+msgid "Cálculo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__12
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__12
+msgid "Dezembro"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__2
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__2
+msgid "Fevereiro"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__id
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__id
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__1
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__1
+msgid "Janeiro"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__7
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__7
+msgid "Julho"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__6
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__6
+msgid "Junho"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__5
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__5
+msgid "Maio"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__3
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__3
+msgid "Março"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__calc_method
+msgid "Método de Cálculo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__month
+msgid "Mês de Desconto"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__dissidio_month
+msgid "Mês do Dissídio (Data-Base)"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,help:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__month
+msgid "Mês em que a contribuição é descontada do empregado."
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_collective_convention_form
+msgid "Nome da Convenção"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__11
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__11
+msgid "Novembro"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__notes
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_collective_convention_form
+msgid "Observações"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__10
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__10
+msgid "Outubro"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__percentage
+msgid "Percentual (%)"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,help:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__contribution_employee_pct
+msgid "Percentual de contribuição assistencial do empregado."
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,help:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__contribution_employer_pct
+msgid "Percentual de contribuição patronal ao sindicato."
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__calc_method__percent
+msgid "Percentual do Salário"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,help:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__percentage
+msgid "Percentual sobre o salário bruto."
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__wage_floor
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor__wage_floor
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_collective_convention_form
+msgid "Piso Salarial"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model,name:l10n_br_hr_syndicate.model_l10n_br_hr_convention_wage_floor
+msgid "Piso Salarial por Cargo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,help:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__wage_floor
+msgid "Piso salarial definido pela convenção coletiva."
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__wage_floor_job_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_syndicate.view_collective_convention_form
+msgid "Pisos por Cargo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__9
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__9
+msgid "Setembro"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__partner_union_id
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__partner_union_id
+#: model:ir.ui.menu,name:l10n_br_hr_syndicate.menu_syndicate_root
+msgid "Sindicato"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__contribution_type
+msgid "Tipo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__calc_method__one_day
+msgid "Um Dia de Salário"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution__fixed_amount
+#: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__calc_method__fixed
+msgid "Valor Fixo"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__date_end
+msgid "Vigência Fim"
+msgstr ""
+
+#. module: l10n_br_hr_syndicate
+#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention__date_start
+msgid "Vigência Início"
+msgstr ""
