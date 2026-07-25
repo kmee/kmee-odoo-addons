@@ -3,13 +3,21 @@
 
 import logging
 
-from odoo import api, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
 
 class HrPayslip(models.Model):
     _inherit = "hr.payslip"
+
+    # O default do OCA é o primeiro diário `general` da base ("Miscellaneous
+    # Operations" em bases com CoA genérico), que não tem conta de
+    # contrapartida configurada e faz o action_payslip_done falhar agora que
+    # este módulo entrega o mapeamento regra→conta. Ver _l10n_br_payroll_journal.
+    journal_id = fields.Many2one(
+        default=lambda self: self.env["account.journal"]._l10n_br_payroll_journal()
+    )
 
     @api.model
     def _demo_compute_payslips(self):
