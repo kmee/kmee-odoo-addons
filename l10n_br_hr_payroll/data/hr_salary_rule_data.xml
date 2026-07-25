@@ -124,25 +124,6 @@ result = tools.br.round_money(SM * percentuais.get(grau, 0.10))
         </field>
     </record>
 
-    <!-- 20. Salário Família -->
-    <record id="hr_rule_salario_familia" model="hr.salary.rule">
-        <field name="name">Salário Família</field>
-        <field name="sequence" eval="20" />
-        <field name="code">SALARIO_FAMILIA</field>
-        <field name="category_id" ref="hr_salary_rule_category_alw" />
-        <field name="condition_select">python</field>
-        <field name="condition_python">
-result = employee.l10n_br_num_filhos_sf > 0
-        </field>
-        <field name="amount_select">code</field>
-        <field name="amount_python_compute">
-result = tools.br.calc_salario_familia(
-    contract.wage,
-    employee.l10n_br_num_filhos_sf,
-)
-        </field>
-    </record>
-
     <!-- ══════════════════════════════════════════════════════════════
          DESCONTOS (DED) — valores positivos, subtraídos do NET
          ══════════════════════════════════════════════════════════════ -->
@@ -331,10 +312,53 @@ result = not employee.l10n_br_molestia_grave
 #  2) Desconto simplificado (Lei 14.663/2023): parcela fixa por competência,
 #     no lugar das deduções legais, sobre o rendimento tributável.
 irrf_legal = tools.br.calc_irrf(max(BASE_IRRF, 0))
-rendimento = categories.GROSS - FALTAS - DESC_DSR
+rendimento = max(categories.GROSS - FALTAS - DESC_DSR, 0)
 base_simplificada = max(rendimento - tools.br.desconto_simplificado(), 0)
 irrf_simplificado = tools.br.calc_irrf(base_simplificada)
-result = min(irrf_legal, irrf_simplificado)
+imposto = min(irrf_legal, irrf_simplificado)
+# Redutor do IRPF (Lei 15.270/2025, vigente desde 01/01/2026): aplicado DEPOIS
+# do imposto apurado pela forma mais favorável, em função do rendimento
+# tributável BRUTO do mês (não da base de cálculo) e limitado ao imposto.
+# Competências anteriores a 01/2026 não têm redutor cadastrado → imposto
+# inalterado.
+result = tools.br.irrf_apos_redutor(rendimento, imposto)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SALÁRIO FAMÍLIA (ALW, mas FORA da base tributável)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 130. Salário Família — roda DEPOIS do GROSS (sequência 99).
+         Duas razões:
+           a) a base legal de enquadramento é o SALÁRIO DE CONTRIBUIÇÃO do mês
+              (remuneração mensal: salário + horas extras, adicionais,
+              comissões — Lei 8.213/91 art. 65 c/c Lei 8.212/91 art. 28), que
+              só existe depois do GROSS;
+           b) a cota NÃO integra o salário de contribuição (Lei 8.212/91
+              art. 28 §9º "j"), logo deve ficar fora das bases de
+              INSS/IRRF/FGTS — o que se obtém naturalmente calculando-a
+              depois do GROSS. Continua somada ao NET (categoria ALW). -->
+    <record id="hr_rule_salario_familia" model="hr.salary.rule">
+        <field name="name">Salário Família</field>
+        <field name="sequence" eval="130" />
+        <field name="code">SALARIO_FAMILIA</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_num_filhos_sf > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Base = salário de contribuição do mês (mesma base do INSS), não contract.wage.
+base_sc = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+# Cota proporcional aos dias de vigência do contrato no mês (admissão/demissão).
+dias = tools.br.dias_trabalhados_mes(contract)
+result = tools.br.calc_salario_familia(
+    base_sc,
+    employee.l10n_br_num_filhos_sf,
+    dias,
+)
         </field>
     </record>
 

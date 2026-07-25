@@ -129,6 +129,7 @@ class HrPayslip(models.Model):
         competencia = self._get_competencia()
         inss_model = self.env["l10n_br.hr.payroll.inss.faixa"]
         irrf_model = self.env["l10n_br.hr.payroll.irrf.faixa"]
+        redutor_model = self.env["l10n_br.hr.payroll.irrf.redutor"]
         sf_model = self.env["l10n_br.hr.payroll.sal.familia.faixa"]
         dep_model = self.env["l10n_br.hr.payroll.irrf.dependente"]
 
@@ -140,9 +141,37 @@ class HrPayslip(models.Model):
         def calc_irrf(base_irrf):
             return salary_rules_br.calc_irrf(base_irrf, irrf_model._tabela(competencia))
 
-        def calc_salario_familia(remuneracao, num_filhos):
+        def redutor_irrf(rendimento_bruto, imposto_apurado):
+            """Redutor do IRPF (Lei 15.270/2025) vigente na competência."""
+            return salary_rules_br.calc_redutor_irrf(
+                rendimento_bruto, imposto_apurado, redutor_model._tabela(competencia)
+            )
+
+        def irrf_apos_redutor(rendimento_bruto, imposto_apurado):
+            """Imposto do mês já abatido o redutor vigente na competência.
+
+            Competências anteriores a 01/2026 não têm redutor cadastrado e o
+            imposto retorna inalterado (comportamento antigo preservado).
+            """
+            return salary_rules_br.calc_irrf_apos_redutor(
+                rendimento_bruto, imposto_apurado, redutor_model._tabela(competencia)
+            )
+
+        def calc_salario_familia(remuneracao, num_filhos, dias_trabalhados=30):
             return salary_rules_br.calc_salario_familia(
-                remuneracao, num_filhos, sf_model._tabela(competencia)
+                remuneracao,
+                num_filhos,
+                sf_model._tabela(competencia),
+                dias_trabalhados,
+            )
+
+        def dias_trabalhados_mes(contrato):
+            """Dias de vigência do ``contrato`` no período deste holerite."""
+            return salary_rules_br.dias_trabalhados_mes(
+                self.date_from,
+                self.date_to,
+                contrato.date_start,
+                contrato.date_end,
             )
 
         def dias_dsr():
@@ -152,10 +181,15 @@ class HrPayslip(models.Model):
             round_money=salary_rules_br.round_money,
             calc_inss=calc_inss,
             calc_irrf=calc_irrf,
+            # Redutor do IRPF da Lei 15.270/2025 (só a partir de 01/2026).
+            redutor_irrf=redutor_irrf,
+            irrf_apos_redutor=irrf_apos_redutor,
             calc_ferias_dias=salary_rules_br.calc_ferias_dias,
             calc_decimo_avos=salary_rules_br.calc_decimo_avos,
             calc_vt=salary_rules_br.calc_vt,
             calc_salario_familia=calc_salario_familia,
+            # Dias de vigência do contrato no mês (verbas proporcionais).
+            dias_trabalhados_mes=dias_trabalhados_mes,
             calc_pensao_alimenticia=salary_rules_br.calc_pensao_alimenticia,
             # Dias úteis/DSR da competência (RF-26).
             dias_dsr=dias_dsr,

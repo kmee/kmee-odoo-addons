@@ -80,6 +80,67 @@ def calc_irrf(base_irrf, faixas):
     return 0.0
 
 
+def calc_redutor_irrf(rendimento_bruto, imposto_apurado, faixas):
+    """Redutor do IRPF na fonte da Lei 15.270/2025 (vigente desde 01/01/2026).
+
+    A lei NÃO alterou a tabela progressiva mensal (a faixa de isenção continua
+    em R$ 2.428,80): a isenção efetiva até R$ 5.000,00 e a redução parcial até
+    R$ 7.350,00 operam EXCLUSIVAMENTE por um redutor aplicado **depois** do
+    imposto já apurado pela tabela — seja pelo caminho das deduções legais,
+    seja pelo desconto simplificado (o mais favorável, ver a regra IRRF).
+
+    Pontos sensíveis da apuração (fonte frequente de erro):
+
+      - A faixa do redutor é definida pelo **rendimento tributável BRUTO do
+        mês**, e NÃO pela base de cálculo após INSS/dependentes/pensão.
+      - O redutor é **limitado ao imposto apurado**: nunca gera imposto
+        negativo nem restituição na folha.
+      - Acima do teto da última faixa o corte é **seco** (sem redutor).
+
+    Args:
+        rendimento_bruto: Rendimento tributável bruto do mês (ou do 13º,
+            quando aplicado ao imposto exclusivo de fonte da gratificação).
+        imposto_apurado: Imposto já apurado pela tabela progressiva.
+        faixas: Lista ``[(rendimento_max, valor_fixo, fator), ...]`` ascendente,
+            resolvida pela competência (ver
+            ``l10n_br.hr.payroll.irrf.redutor._tabela``). O redutor da faixa é
+            ``valor_fixo - fator * rendimento_bruto``; faixas com ``fator = 0``
+            representam redutor fixo (isenção até o teto da faixa). Lista
+            VAZIA = competência sem redutor (anterior a 01/2026).
+
+    Returns:
+        Valor do redutor em R$ (>= 0), limitado ao ``imposto_apurado``.
+    """
+    if imposto_apurado <= 0 or not faixas:
+        return 0.0
+    rendimento = max(rendimento_bruto or 0.0, 0.0)
+    for rendimento_max, valor_fixo, fator in faixas:
+        if rendimento <= rendimento_max:
+            redutor = valor_fixo - fator * rendimento
+            return round_money(min(max(redutor, 0.0), imposto_apurado))
+    # Acima da última faixa: corte seco, sem redutor.
+    return 0.0
+
+
+def calc_irrf_apos_redutor(rendimento_bruto, imposto_apurado, faixas):
+    """Imposto do mês já abatido o redutor da Lei 15.270/2025.
+
+    Conveniência para as regras salariais: encapsula
+    ``imposto_apurado - calc_redutor_irrf(...)`` com piso em zero, evitando
+    repetir a subtração (e o piso) em cada regra de IRRF.
+
+    Args:
+        rendimento_bruto: Rendimento tributável bruto do mês.
+        imposto_apurado: Imposto apurado pela tabela progressiva.
+        faixas: Faixas do redutor vigentes na competência (vazio = sem redutor).
+
+    Returns:
+        Imposto a reter em R$ (>= 0).
+    """
+    redutor = calc_redutor_irrf(rendimento_bruto, imposto_apurado, faixas)
+    return round_money(max(imposto_apurado - redutor, 0.0))
+
+
 def calc_pensao_alimenticia(remuneracao, valor_fixo=0.0, percentual=0.0):
     """Valor efetivo da pensão alimentícia a descontar do líquido.
 
@@ -155,13 +216,19 @@ def calc_ferias_dias(faltas):
 def calc_decimo_avos(data_admissao, data_referencia):
     """Calcula os avos do 13º salário.
 
-    Regra CLT: fração igual ou superior a 15 dias no mês conta como 1 avo.
-    O cálculo considera os dias efetivamente trabalhados no mês de admissão,
-    variando conforme o número de dias do mês (28, 29, 30 ou 31).
+    Regra dos 15 dias (Lei 4.090/62, art. 1º §2º): "a fração igual ou superior
+    a 15 (quinze) dias de trabalho será havida como mês integral". A regra vale
+    para **qualquer** mês do ano-base — o de admissão E o do desligamento
+    (art. 3º, que manda pagar o 13º proporcional na extinção do contrato).
+
+    Por isso o mês da ``data_referencia`` também é medido pelos dias
+    efetivamente trabalhados: antes ele era contado como avo cheio, o que
+    gerava um avo indevido em rescisões ocorridas antes do dia 15.
 
     Args:
         data_admissao: Data de admissão (date).
-        data_referencia: Data de referência (geralmente 31/12).
+        data_referencia: Último dia considerado (date) — 31/12 no 13º anual,
+            data do desligamento no 13º proporcional da rescisão.
 
     Returns:
         Número de avos (0 a 12).
@@ -171,15 +238,24 @@ def calc_decimo_avos(data_admissao, data_referencia):
     avos = 0
     ano = data_referencia.year
     for mes in range(1, data_referencia.month + 1):
-        if data_admissao.year < ano:
+        # Meses anteriores à admissão não geram avo.
+        if data_admissao.year > ano or (
+            data_admissao.year == ano and data_admissao.month > mes
+        ):
+            continue
+        primeiro_dia = (
+            data_admissao.day
+            if data_admissao.year == ano and data_admissao.month == mes
+            else 1
+        )
+        ultimo_dia = (
+            data_referencia.day
+            if mes == data_referencia.month
+            else calendar.monthrange(ano, mes)[1]
+        )
+        dias_trabalhados = ultimo_dia - primeiro_dia + 1
+        if dias_trabalhados >= 15:
             avos += 1
-        elif data_admissao.year == ano and data_admissao.month < mes:
-            avos += 1
-        elif data_admissao.year == ano and data_admissao.month == mes:
-            dias_no_mes = calendar.monthrange(ano, mes)[1]
-            dias_trabalhados = dias_no_mes - data_admissao.day + 1
-            if dias_trabalhados >= 15:
-                avos += 1
     return min(avos, 12)
 
 
@@ -199,21 +275,56 @@ def calc_vt(salario, valor_vt):
     return round_money(min(limite_6_porcento, valor_vt))
 
 
-def calc_salario_familia(remuneracao, num_filhos, faixas):
+def calc_salario_familia(remuneracao, num_filhos, faixas, dias_trabalhados=30):
     """Calcula o salário família.
 
     Args:
-        remuneracao: Remuneração mensal usada como base de enquadramento.
+        remuneracao: **Salário de contribuição do mês** (remuneração mensal:
+            salário + horas extras, adicionais, comissões etc.), que é a base
+            legal de enquadramento (Lei 8.213/91 art. 65 c/c Lei 8.212/91
+            art. 28) — NÃO o salário contratual.
         num_filhos: Número de filhos elegíveis (até 14 anos ou inválidos).
         faixas: Lista ``[(base_max, valor), ...]`` ascendente, resolvida pela
             competência (ver ``l10n_br.hr.payroll.sal.familia.faixa._tabela``).
+        dias_trabalhados: Dias de vigência do contrato no mês (mês comercial de
+            30 dias). Nos meses de admissão e de demissão a cota é devida
+            proporcionalmente aos dias trabalhados; nos demais meses vale 30
+            (cota integral).
 
     Returns:
         Valor do salário família mensal.
     """
     if num_filhos <= 0:
         return 0.0
+    dias = max(0, min(int(dias_trabalhados), 30))
     for limite, valor in faixas:
         if remuneracao <= limite:
-            return round_money(num_filhos * valor)
+            return round_money(num_filhos * valor * dias / 30.0)
     return 0.0
+
+
+def dias_trabalhados_mes(date_from, date_to, data_admissao=None, data_demissao=None):
+    """Dias de vigência do contrato dentro do período do holerite.
+
+    Usado para as verbas devidas proporcionalmente aos dias trabalhados nos
+    meses de admissão e de demissão (ex.: cota do salário família). Adota o
+    mês comercial de 30 dias, teto usual da folha brasileira.
+
+    Args:
+        date_from: Início do período do holerite (date).
+        date_to: Fim do período do holerite (date).
+        data_admissao: Início do contrato (date) ou ``None``.
+        data_demissao: Fim do contrato (date) ou ``None`` (contrato ativo).
+
+    Returns:
+        Dias trabalhados no período (int, 0..30).
+    """
+    inicio = date_from
+    if data_admissao and data_admissao > inicio:
+        inicio = data_admissao
+    fim = date_to
+    if data_demissao and data_demissao < fim:
+        fim = data_demissao
+    if fim < inicio:
+        return 0
+    return min((fim - inicio).days + 1, 30)

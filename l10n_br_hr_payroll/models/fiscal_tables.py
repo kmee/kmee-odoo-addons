@@ -43,11 +43,13 @@ class L10nBrPayrollTabelaMixin(models.AbstractModel):
     active = fields.Boolean(default=True)
 
     @api.model
-    def _vigentes(self, competencia, order=None):
-        """Registros vigentes na ``competencia`` (date).
+    def _vigentes_opcional(self, competencia, order=None):
+        """Como ``_vigentes``, mas devolve recordset VAZIO se não houver tabela.
 
-        Levanta ``UserError`` se não houver nenhum — a folha NUNCA deve cair
-        silenciosamente em uma tabela de outro ano.
+        Para tabelas que só passam a existir a partir de certa competência e
+        cuja ausência é o comportamento legal correto (ex.: o redutor do IRPF
+        da Lei 15.270/2025, inexistente antes de 01/2026). Continua exigindo a
+        competência.
         """
         if not competencia:
             raise UserError(
@@ -57,7 +59,7 @@ class L10nBrPayrollTabelaMixin(models.AbstractModel):
                 )
                 % self._tabela_label
             )
-        recs = self.search(
+        return self.search(
             [
                 ("date_start", "<=", competencia),
                 "|",
@@ -66,6 +68,15 @@ class L10nBrPayrollTabelaMixin(models.AbstractModel):
             ],
             order=order,
         )
+
+    @api.model
+    def _vigentes(self, competencia, order=None):
+        """Registros vigentes na ``competencia`` (date).
+
+        Levanta ``UserError`` se não houver nenhum — a folha NUNCA deve cair
+        silenciosamente em uma tabela de outro ano.
+        """
+        recs = self._vigentes_opcional(competencia, order=order)
         if not recs:
             raise UserError(
                 _(
@@ -197,6 +208,56 @@ class L10nBrPayrollIrrfFaixa(models.Model):
         return salary_rules_br.round_money(
             self.FATOR_DESCONTO_SIMPLIFICADO * teto_isencao
         )
+
+
+class L10nBrPayrollIrrfRedutor(models.Model):
+    _name = "l10n_br.hr.payroll.irrf.redutor"
+    _inherit = "l10n_br.hr.payroll.tabela.mixin"
+    _description = "Faixa do Redutor do IRPF na Fonte por Vigência"
+    _order = "date_start desc, rendimento_max"
+    _tabela_label = "tabela do redutor do IRPF"
+
+    name = fields.Char(compute="_compute_name", store=True)
+    rendimento_max = fields.Float(
+        string="Rendimento Bruto (Até)",
+        digits=(16, 2),
+        help="Teto do rendimento tributável BRUTO do mês para a faixa. Acima "
+        "do maior teto cadastrado não há redutor (corte seco).",
+    )
+    valor_fixo = fields.Float(
+        string="Parcela Fixa",
+        digits=(16, 2),
+        help="Parcela fixa da fórmula do redutor.",
+    )
+    fator = fields.Float(
+        string="Fator sobre o Rendimento",
+        digits=(16, 6),
+        help="Coeficiente multiplicado pelo rendimento bruto do mês. "
+        "Redutor = Parcela Fixa − Fator × rendimento bruto. Zero = redutor "
+        "fixo (isenção integral até o teto da faixa).",
+    )
+
+    @api.depends("rendimento_max", "valor_fixo", "fator", "date_start")
+    def _compute_name(self):
+        for rec in self:
+            rec.name = "[%s] até R$ %.2f → %.2f − %.6f × rendimento" % (
+                rec.date_start or "",
+                rec.rendimento_max,
+                rec.valor_fixo,
+                rec.fator,
+            )
+
+    @api.model
+    def _tabela(self, competencia):
+        """Faixas do redutor vigentes como ``[(teto, valor_fixo, fator), ...]``
+        ascendente.
+
+        Devolve lista VAZIA quando a competência não tem redutor (qualquer
+        competência anterior a 01/2026, antes da Lei 15.270/2025) — nesse caso
+        o comportamento anterior da folha é integralmente preservado.
+        """
+        faixas = self._vigentes_opcional(competencia, order="rendimento_max asc")
+        return [(f.rendimento_max, f.valor_fixo, f.fator) for f in faixas]
 
 
 class L10nBrPayrollSalFamiliaFaixa(models.Model):
