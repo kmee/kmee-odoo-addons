@@ -9,10 +9,13 @@ Cobertura:
   - Periculosidade (30% do salário)
   - Insalubridade (10%, 20%, 40% do salário mínimo)
   - Constraint: não acumular periculosidade + insalubridade
-  - Salário família por faixa salarial
+  - Salário família: base = salário de contribuição do mês, cota proporcional
+    aos dias trabalhados nos meses de admissão/demissão, fora do GROSS
   - Faltas e DSR
   - FGTS integra hora extra
 """
+from datetime import date
+
 from odoo.exceptions import ValidationError
 
 from .common import PayrollCommon
@@ -224,3 +227,79 @@ class TestSalarioFamilia(PayrollCommon):
         payslip = self._create_payslip(emp, contract)
         sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
         self.assertEqual(sf, 0.0)
+
+    def test_salario_familia_base_e_o_salario_de_contribuicao(self):
+        """A base de enquadramento é a REMUNERAÇÃO do mês, não contract.wage.
+
+        Salário de R$1.800 (dentro do limite de R$1.819,26 de 2024) com horas
+        extras que levam a remuneração acima do limite → perde a cota. Se a
+        regra usasse ``contract.wage`` (bug corrigido), pagaria R$62,04.
+        """
+        emp = self._create_employee()
+        emp.write({"l10n_br_num_filhos_sf": 1})
+        contract = self._create_contract(emp, wage=1800.00)
+        payslip = self._create_payslip(emp, contract)
+        payslip.write({"l10n_br_horas_extras_50": 10})
+        payslip.compute_sheet()
+        gross = self._get_line_total(payslip, "GROSS")
+        sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
+        self.assertGreater(gross, 1819.26)
+        self.assertEqual(sf, 0.0)
+
+    def test_salario_familia_sem_extras_mantem_cota(self):
+        """Contraprova: mesmo salário sem horas extras mantém a cota integral."""
+        emp = self._create_employee()
+        emp.write({"l10n_br_num_filhos_sf": 1})
+        contract = self._create_contract(emp, wage=1800.00)
+        payslip = self._create_payslip(emp, contract)
+        self.assertAlmostEqualMoney(
+            self._get_line_total(payslip, "SALARIO_FAMILIA"), 62.04
+        )
+
+    def test_salario_familia_fora_da_base_tributavel(self):
+        """A cota não integra o salário de contribuição (Lei 8.212/91 art. 28
+        §9º "j"): fica fora do GROSS e das bases de INSS/IRRF/FGTS, mas é
+        somada ao líquido."""
+        emp = self._create_employee()
+        emp.write({"l10n_br_num_filhos_sf": 2})
+        contract = self._create_contract(emp, wage=1412.00)
+        payslip = self._create_payslip(emp, contract)
+        gross = self._get_line_total(payslip, "GROSS")
+        sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
+        inss = self._get_line_total(payslip, "INSS")
+        net = self._get_line_total(payslip, "NET")
+        self.assertAlmostEqualMoney(sf, 124.08)
+        # GROSS = só o salário: a cota não entrou na base.
+        self.assertAlmostEqualMoney(gross, 1412.00)
+        self.assertAlmostEqualMoney(inss, 105.90)  # 7,5% de 1412 (tabela 2024)
+        # O líquido soma a cota.
+        self.assertAlmostEqualMoney(net, 1412.00 + 124.08 - 105.90)
+
+    def test_salario_familia_proporcional_no_mes_de_admissao(self):
+        """Mês de admissão: cota proporcional aos dias trabalhados.
+
+        Admitido em 16/03/2024 → 16 dias de vigência no mês →
+        R$62,04 × 16/30 = R$33,09.
+        """
+        emp = self._create_employee()
+        emp.write({"l10n_br_num_filhos_sf": 1})
+        contract = self._create_contract(
+            emp, wage=1412.00, date_start=date(2024, 3, 16)
+        )
+        payslip = self._create_payslip(emp, contract)
+        sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
+        self.assertAlmostEqualMoney(sf, 33.09)
+
+    def test_salario_familia_proporcional_no_mes_de_demissao(self):
+        """Mês de demissão: cota proporcional aos dias trabalhados.
+
+        Contrato encerrado em 10/03/2024 → 10 dias →
+        R$62,04 × 10/30 = R$20,68.
+        """
+        emp = self._create_employee()
+        emp.write({"l10n_br_num_filhos_sf": 1})
+        contract = self._create_contract(emp, wage=1412.00)
+        contract.write({"date_end": date(2024, 3, 10)})
+        payslip = self._create_payslip(emp, contract)
+        sf = self._get_line_total(payslip, "SALARIO_FAMILIA")
+        self.assertAlmostEqualMoney(sf, 20.68)
