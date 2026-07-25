@@ -1,0 +1,25 @@
+# Requisitos adicionais para o CI (mantido à mão).
+# O oca_install_addons ACRESCENTA a este arquivo as dependências geradas a
+# partir dos manifests dos addons, então as linhas abaixo são preservadas.
+#
+# Estes pinos alinham o CI com a imagem que realmente entregamos (os mesmos
+# pinos de odoo/custom/dependencies/pip.txt do deployment doodba). Sem eles o
+# resolvedor do pip instala a versão mais nova de cada lib da localização
+# fiscal e monta um ambiente incompatível com o Odoo 16.0 — o que derrubava
+# todo o CI do repositório desde ~abril/2026, antes de qualquer teste rodar:
+#
+#   * lxml >= 5 removeu o módulo lxml.html.clean, importado pelo Odoo 16 em
+#     odoo/tools/mail.py -> ImportError em `import odoo`, fazendo o
+#     oca_list_external_dependencies abortar durante o oca_install_addons
+#     ("could not obtain odoo.addons.__path__ using python").
+#
+#   * signxml 5.x exige cryptography >= 4x, que removeu bindings legados do
+#     OpenSSL ainda usados pelo pyOpenSSL/urllib3 da stack do Odoo 16 ->
+#     "AttributeError: module 'lib' has no attribute 'GEN_EMAIL'" ao importar
+#     odoo.addons.base (odoo/addons/base/models/ir_mail_server.py), derrubando
+#     o oca_init_test_database.
+#
+# pyopenssl==22.1.0 já fixa transitivamente o cryptography em 38.x (>=38,<39).
+lxml==4.6.5
+pyopenssl==22.1.0
+signxml<3.1.0
