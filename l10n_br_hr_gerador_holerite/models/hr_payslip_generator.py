@@ -62,9 +62,7 @@ class HrPayslipGenerator(models.TransientModel):
         """Valida a quantidade solicitada (positiva e dentro do teto)."""
         for wizard in self:
             if wizard.quantity <= 0:
-                raise UserError(
-                    _("A quantidade de holerites deve ser maior que zero.")
-                )
+                raise UserError(_("A quantidade de holerites deve ser maior que zero."))
             if wizard.quantity > MAX_QUANTITY:
                 raise UserError(
                     _(
