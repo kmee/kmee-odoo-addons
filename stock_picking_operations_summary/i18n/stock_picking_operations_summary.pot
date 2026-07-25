@@ -146,7 +146,6 @@ msgstr ""
 
 #. module: stock_picking_operations_summary
 #: model:ir.model,name:stock_picking_operations_summary.model_stock_picking
-#: model:ir.model.fields,field_description:stock_picking_operations_summary.field_stock_picking_summary_line__picking_id
 msgid "Transfer"
 msgstr ""
 
