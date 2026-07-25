@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_validacao_folha
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_validacao_folha
+#. odoo-python
+#: code:addons/l10n_br_hr_validacao_folha/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"A data inicial (%(date_from)s) não pode ser posterior à data final "
+"(%(date_to)s)."
+msgstr ""
+
+#. module: l10n_br_hr_validacao_folha
+#. odoo-python
+#: code:addons/l10n_br_hr_validacao_folha/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"Já existe um holerite para o empregado '%(employee)s' com período sobreposto"
+" (%(other_from)s a %(other_to)s) à faixa %(date_from)s a %(date_to)s, na "
+"mesma estrutura salarial."
+msgstr ""
+
+#. module: l10n_br_hr_validacao_folha
+#. odoo-python
+#: code:addons/l10n_br_hr_validacao_folha/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"O CPF '%(cpf)s' do empregado '%(employee)s' é inválido (dígitos "
+"verificadores incorretos)."
+msgstr ""
+
+#. module: l10n_br_hr_validacao_folha
+#. odoo-python
+#: code:addons/l10n_br_hr_validacao_folha/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"O empregado '%(employee)s' não possui CPF cadastrado. O CPF é obrigatório "
+"para confirmar a folha."
+msgstr ""
+
+#. module: l10n_br_hr_validacao_folha
+#. odoo-python
+#: code:addons/l10n_br_hr_validacao_folha/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"O holerite de '%(employee)s' não possui linha de líquido (NET). Verifique a "
+"estrutura salarial."
+msgstr ""
+
+#. module: l10n_br_hr_validacao_folha
+#. odoo-python
+#: code:addons/l10n_br_hr_validacao_folha/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"O holerite de '%(employee)s' não possui linhas calculadas. Compute a folha "
+"antes de confirmar."
+msgstr ""
+
+#. module: l10n_br_hr_validacao_folha
+#: model:ir.model,name:l10n_br_hr_validacao_folha.model_hr_payslip
+msgid "Payslip"
+msgstr ""
