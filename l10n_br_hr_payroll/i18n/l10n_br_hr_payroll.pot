@@ -454,6 +454,13 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_alimenticia
+msgid ""
+"Parcela fixa mensal de pensão alimentícia determinada judicialmente. Somada "
+"à parcela percentual (se houver)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model,name:l10n_br_hr_payroll.model_hr_payslip
 msgid "Payslip"
 msgstr ""
@@ -464,8 +471,26 @@ msgid "PcD"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
-#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_alimenticia
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_pensao_alimenticia
 msgid "Pensão Alimentícia"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_percentual
+msgid "Pensão Alimentícia (% da Remuneração)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_alimenticia
+msgid "Pensão Alimentícia (Valor Fixo)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_percentual
+msgid ""
+"Percentual da remuneração bruta destinado à pensão alimentícia (ex.: 30 = "
+"30%). O valor efetivo descontado é: valor fixo + percentual sobre a "
+"remuneração bruta do mês."
 msgstr ""
 
 #. module: l10n_br_hr_payroll
