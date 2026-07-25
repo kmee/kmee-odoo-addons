@@ -1,0 +1,631 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_arquivos_governo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__13
+msgid "13º Salário"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__state__open
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_dirf__state__open
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__state__open
+msgid "Aberto"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__4
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__4
+msgid "Abril"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__8
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__8
+msgid "Agosto"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__ano
+msgid "Ano"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__ano_calendario
+msgid "Ano Calendário"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__ano_referencia
+msgid "Ano de Referência"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__file_binary
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+msgid "Arquivo CAGED"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__file_binary
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+msgid "Arquivo DIRF"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__file_binary
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid "Arquivo SEFIP"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.res_company_form_governo
+msgid "Arquivos Governo (Folha)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.ui.menu,name:l10n_br_hr_arquivos_governo.menu_hr_arquivos_governo
+msgid "Arquivos do Governo"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+msgid "Buscar Funcionários"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#. odoo-python
+#: code:addons/l10n_br_hr_arquivos_governo/models/l10n_br_hr_dirf.py:0
+#, python-format
+msgid "Busque os funcionários antes de gerar a DIRF."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.actions.act_window,name:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_action
+#: model:ir.ui.menu,name:l10n_br_hr_arquivos_governo.menu_hr_caged
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+msgid "CAGED"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model,name:l10n_br_hr_arquivos_governo.model_l10n_br_hr_caged
+msgid "CAGED - Cadastro de Empregados e Desempregados"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__cpf_responsavel
+msgid "CPF do Responsável"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__centralizadora__2
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__res_company__l10n_br_centralizadora__2
+msgid "Centralizada"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__centralizadora__1
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__res_company__l10n_br_centralizadora__1
+msgid "Centralizadora"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__centralizadora
+msgid "Centralização"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_centralizadora
+msgid "Centralização FGTS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model,name:l10n_br_hr_arquivos_governo.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__ano
+msgid "Competência (Ano)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__mes
+msgid "Competência (Mês)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__modalidade_arquivo__9
+msgid "Confirmação de Informações Anteriores"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__file_content
+msgid "Conteúdo CAGED"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__file_content
+msgid "Conteúdo DIRF"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__file_content
+msgid "Conteúdo SEFIP"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__codigo_fpas
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_codigo_fpas
+msgid "Código FPAS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__codigo_outras_entidades
+msgid "Código Outras Entidades"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_codigo_outras_entidades
+msgid "Código Outras Entidades (SEFIP)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_codigo_recolhimento_gps
+msgid "Código Recolhimento GPS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__codigo_recolhimento
+msgid "Código de Recolhimento"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,help:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_codigo_outras_entidades
+msgid ""
+"Código de terceiros/outras entidades (Salário Educação, INCRA, SESCOOP)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.actions.act_window,name:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_action
+#: model:ir.ui.menu,name:l10n_br_hr_arquivos_governo.menu_hr_dirf
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+msgid "DIRF"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model,name:l10n_br_hr_arquivos_governo.model_l10n_br_hr_dirf
+msgid "DIRF - Declaração do IR Retido na Fonte"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__retificadora
+msgid "Declaração Retificadora"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__modalidade_arquivo__1
+msgid "Declaração ao FGTS e à Previdência"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__211
+msgid "Declaração para a Previdência - Cooperativa de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__12
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__12
+msgid "Dezembro"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__608
+msgid "Dirigente Sindical - Recolhimento ao FGTS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__email_responsavel
+msgid "E-mail do Responsável"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__company_id
+msgid "Empresa"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__state__sent
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_dirf__state__sent
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__state__sent
+msgid "Enviado"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__317
+msgid "FGTS - Parcelamento (Competências Anteriores)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__327
+msgid "FGTS - Parcelamento (Mês Rescisão/Dissídio)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__337
+msgid "FGTS - Parcelamento (Saldo Residual)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__307
+msgid "FGTS - Parcelamento de Débitos"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__345
+msgid "FGTS - Parcelamento de Débitos - Obra"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__2
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__2
+msgid "Fevereiro"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__employee_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+msgid "Funcionários"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,help:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_codigo_fpas
+msgid "Fundo de Previdência e Assistência Social"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_gps__2
+msgid "GPS em atraso"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_gps__1
+msgid "GPS no prazo"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_fgts__2
+msgid "GRF em atraso"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_fgts__3
+msgid "GRF em atraso com ação fiscal"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_fgts__1
+msgid "GRF no prazo"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+msgid "Gerar CAGED"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+msgid "Gerar DIRF"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid "Gerar SEFIP"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__payslip_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid "Holerites"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__id
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__id
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_fgts__5
+msgid "Individualização"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_fgts__6
+msgid "Individualização (retificação)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__1
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__1
+msgid "Janeiro"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__7
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__7
+msgid "Julho"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__6
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__6
+msgid "Junho"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__5
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__5
+msgid "Maio"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid "Marcar como Enviado"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__3
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__3
+msgid "Março"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__modalidade_arquivo
+msgid "Modalidade do Arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__contract_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+msgid "Movimentações"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__mes
+msgid "Mês"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#. odoo-python
+#: code:addons/l10n_br_hr_arquivos_governo/models/l10n_br_hr_sefip.py:0
+#, python-format
+msgid "Nenhum holerite encontrado para %(mes)s/%(ano)s."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#. odoo-python
+#: code:addons/l10n_br_hr_arquivos_governo/models/l10n_br_hr_caged.py:0
+#, python-format
+msgid "Nenhuma movimentação encontrada para %(mes)s/%(ano)s."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__name
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__name
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__name
+msgid "Nome"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__file_name
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__file_name
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__file_name
+msgid "Nome do Arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__11
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__11
+msgid "Novembro"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__centralizadora__0
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__res_company__l10n_br_centralizadora__0
+msgid "Não centraliza"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__recolhimento_gps__3
+msgid "Não gerar GPS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__numero_recibo
+msgid "Número do Recibo (retificação)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__10
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__10
+msgid "Outubro"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,help:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_porcentagem_filantropia
+msgid "Percentual de isenção de filantropia para FPAS 639"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_res_company__l10n_br_porcentagem_filantropia
+msgid "Porcentagem Filantropia (%)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__primeira_declaracao
+msgid "Primeira Declaração"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__state__draft
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_dirf__state__draft
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__state__draft
+msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__recolhimento_fgts
+msgid "Recolhimento FGTS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__recolhimento_gps
+msgid "Recolhimento GPS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__660
+msgid "Recolhimento ao FGTS - Anistia (Lei Complementar 110/01)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__145
+msgid "Recolhimento ao FGTS - Diferenças"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__155
+msgid "Recolhimento ao FGTS - Emp. Contratante (Lei 6.019/74)"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__115
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__modalidade_arquivo___
+msgid "Recolhimento ao FGTS e Declaração à Previdência"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__650
+msgid "Recolhimento ao FGTS e Informações - Contingenciamento"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__150
+msgid ""
+"Recolhimento ao FGTS e Informações à Previdência - Obra/Construção Civil"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__135
+msgid ""
+"Recolhimento ao FGTS e Informações à Previdência - Trab. Avulso Não "
+"Portuário"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__codigo_recolhimento__130
+msgid ""
+"Recolhimento ao FGTS e Informações à Previdência - Trab. Avulso Portuário"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__responsavel
+msgid "Responsável"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.actions.act_window,name:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_action
+#: model:ir.ui.menu,name:l10n_br_hr_arquivos_governo.menu_hr_sefip
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid "SEFIP"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model,name:l10n_br_hr_arquivos_governo.model_l10n_br_hr_sefip
+msgid "SEFIP - FGTS e Previdência Social"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.res_company_form_governo
+msgid "SEFIP / FGTS"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__9
+#: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__9
+msgid "Setembro"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_caged__state
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_dirf__state
+#: model:ir.model.fields,field_description:l10n_br_hr_arquivos_governo.field_l10n_br_hr_sefip__state
+msgid "Situação"
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid "Voltar para Rascunho"
+msgstr ""
