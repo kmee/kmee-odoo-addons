@@ -25,7 +25,12 @@
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.round_money(contract.wage * 0.5)
+# 1ª parcela = 50% do 13º projetado para 31/12 (proporcional aos avos).
+# Para empregado de ano cheio, avos=12 => 50% do salário.
+# Para admitido no meio do ano, proporcional aos meses trabalhados.
+ref = payslip.date_to + tools.relativedelta(month=12, day=31)
+avos = tools.br.calc_decimo_avos(contract.date_start, ref)
+result = tools.br.round_money(contract.wage * avos / 12 * 0.5)
         </field>
     </record>
 
@@ -134,6 +139,45 @@ result = not employee.l10n_br_molestia_grave
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 result = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+        </field>
+    </record>
+
+    <!-- FGTS sobre 13º (8% do 13º bruto) -->
+    <record id="hr_rule_fgts_13" model="hr.salary.rule">
+        <field name="name">FGTS (13º)</field>
+        <field name="sequence" eval="150" />
+        <field name="code">FGTS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(max(categories.GROSS, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- Dedução da 1ª parcela (adiantamento) já paga -->
+    <record id="hr_rule_desconto_adiantamento_13" model="hr.salary.rule">
+        <field name="name">Adiantamento 13º (1ª parcela)</field>
+        <field name="sequence" eval="160" />
+        <field name="code">ADIANTAMENTO_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_primeira_parcela_13_paga > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Deduz o adiantamento (1ª parcela) para não pagar em dobro.
+result = payslip.l10n_br_primeira_parcela_13_paga
         </field>
     </record>
 

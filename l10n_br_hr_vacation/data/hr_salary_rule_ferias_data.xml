@@ -5,9 +5,26 @@
 
         Convenção: mesmos padrões de l10n_br_hr_payroll.
         Variáveis bare code, NÃO usar rules.CÓDIGO.
+
+        Fundamentação:
+          - Férias gozadas + 1/3 constitucional: verbas TRIBUTÁVEIS
+            (INSS, IRRF e FGTS incidem).
+          - Abono pecuniário (venda de até 1/3 das férias, CLT art. 143) e
+            seu 1/3 constitucional: verbas INDENIZATÓRIAS. NÃO incide INSS
+            (Lei 8.212/91 art. 28 §9º "e" 6) nem IRRF (ADI SRF 5/2005),
+            nem FGTS. Ficam na categoria PROV_INDENIZ, fora do GROSS/base
+            tributável, mas somadas ao NET.
+          - Ao vender 10 dias, o empregado GOZA 20 dias: as férias gozadas
+            são proporcionais (20/30) via l10n_br_dias_ferias_gozadas.
     -->
 
-    <!-- Férias (valor base = salário) -->
+    <!-- Categoria de proventos indenizatórios (fora da base tributável) -->
+    <record id="hr_salary_rule_category_prov_indeniz" model="hr.salary.rule.category">
+        <field name="name">Provento Indenizatório</field>
+        <field name="code">PROV_INDENIZ</field>
+    </record>
+
+    <!-- Férias gozadas (proporcional aos dias efetivamente gozados) -->
     <record id="hr_rule_ferias" model="hr.salary.rule">
         <field name="name">Férias</field>
         <field name="sequence" eval="1" />
@@ -19,11 +36,14 @@
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = contract.wage
+# Férias proporcionais aos dias gozados: ao vender o abono (10 dias), o
+# empregado goza 20 dias => 20/30 do salário (CLT art. 143).
+dias_gozados = payslip.l10n_br_dias_ferias_gozadas
+result = tools.br.round_money(contract.wage * dias_gozados / 30)
         </field>
     </record>
 
-    <!-- Adicional de Férias (1/3 constitucional) -->
+    <!-- Adicional de Férias (1/3 constitucional sobre as férias gozadas) -->
     <record id="hr_rule_adicional_ferias" model="hr.salary.rule">
         <field name="name">Adicional de Férias (1/3)</field>
         <field name="sequence" eval="2" />
@@ -39,27 +59,41 @@ result = tools.br.round_money(FERIAS / 3)
         </field>
     </record>
 
-    <!-- Abono Pecuniário (venda de 1/3 das férias) -->
+    <!-- Abono Pecuniário (venda de 1/3 das férias) — INDENIZATÓRIO -->
     <record id="hr_rule_abono_pecuniario" model="hr.salary.rule">
         <field name="name">Abono Pecuniário</field>
         <field name="sequence" eval="3" />
         <field name="code">ABONO_PECUNIARIO</field>
-        <field
-            name="category_id"
-            ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
-        />
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
         <field name="condition_select">python</field>
         <field name="condition_python">
 result = payslip.l10n_br_abono_pecuniario
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-# Abono pecuniário = 10 dias (1/3 de 30) × salário-dia
-result = tools.br.round_money((contract.wage / 30) * 10)
+# Dias vendidos = 30 - dias gozados (10 dias quando vende 1/3).
+dias_vendidos = 30 - payslip.l10n_br_dias_ferias_gozadas
+result = tools.br.round_money((contract.wage / 30) * dias_vendidos)
         </field>
     </record>
 
-    <!-- GROSS para férias -->
+    <!-- 1/3 constitucional sobre o abono pecuniário — INDENIZATÓRIO -->
+    <record id="hr_rule_adicional_abono" model="hr.salary.rule">
+        <field name="name">Adicional sobre Abono (1/3)</field>
+        <field name="sequence" eval="4" />
+        <field name="code">ADICIONAL_ABONO</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_abono_pecuniario
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(ABONO_PECUNIARIO / 3)
+        </field>
+    </record>
+
+    <!-- GROSS para férias (apenas verbas TRIBUTÁVEIS: férias gozadas + 1/3) -->
     <record id="hr_rule_gross_ferias" model="hr.salary.rule">
         <field name="name">Remuneração Bruta (Férias)</field>
         <field name="sequence" eval="99" />
@@ -75,7 +109,7 @@ result = categories.BASIC + categories.ALW
         </field>
     </record>
 
-    <!-- INSS sobre férias -->
+    <!-- INSS sobre férias (só verbas tributáveis) -->
     <record id="hr_rule_inss_ferias" model="hr.salary.rule">
         <field name="name">INSS (Férias)</field>
         <field name="sequence" eval="100" />
@@ -130,7 +164,26 @@ result = tools.br.calc_irrf(max(BASE_IRRF, 0))
         </field>
     </record>
 
-    <!-- NET férias -->
+    <!-- FGTS sobre férias (8% das verbas tributáveis: férias gozadas + 1/3) -->
+    <record id="hr_rule_fgts_ferias" model="hr.salary.rule">
+        <field name="name">FGTS (Férias)</field>
+        <field name="sequence" eval="150" />
+        <field name="code">FGTS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(max(categories.GROSS, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- NET férias (inclui os proventos indenizatórios; FGTS/COMP não afeta) -->
     <record id="hr_rule_net_ferias" model="hr.salary.rule">
         <field name="name">Líquido (Férias)</field>
         <field name="sequence" eval="200" />
@@ -142,7 +195,9 @@ result = tools.br.calc_irrf(max(BASE_IRRF, 0))
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = categories.BASIC + categories.ALW - categories.DED
+result = (
+    categories.BASIC + categories.ALW + categories.PROV_INDENIZ - categories.DED
+)
         </field>
     </record>
 </odoo>

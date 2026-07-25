@@ -80,6 +80,58 @@ def calc_irrf(base_irrf, faixas):
     return 0.0
 
 
+def calc_pensao_alimenticia(remuneracao, valor_fixo=0.0, percentual=0.0):
+    """Valor efetivo da pensão alimentícia a descontar do líquido.
+
+    Semântica adotada (documentada): o desconto é a SOMA da parcela fixa com
+    a parcela percentual sobre a remuneração bruta do mês. Isso cobre os três
+    cenários usuais das decisões judiciais:
+
+      - só valor fixo   → ``percentual = 0``;
+      - só percentual   → ``valor_fixo = 0``;
+      - fixo + percentual (ex.: 1 salário mínimo + 10% do que exceder).
+
+    Args:
+        remuneracao: Remuneração bruta do mês (base do percentual).
+        valor_fixo: Parcela fixa mensal em R$.
+        percentual: Percentual sobre a remuneração em pontos percentuais
+            (ex.: ``30.0`` = 30%).
+
+    Returns:
+        Valor efetivo da pensão em R$ (>= 0), arredondado.
+    """
+    valor = (valor_fixo or 0.0) + (remuneracao or 0.0) * (percentual or 0.0) / 100.0
+    return round_money(max(0.0, valor))
+
+
+def dias_dsr(ano, mes):
+    """Dias úteis e de descanso (DSR) de um mês.
+
+    Deriva do calendário civil da competência: os domingos são o descanso
+    semanal remunerado (DSR) e os demais dias (segunda a sábado) são úteis
+    para fins do rateio do desconto de DSR.
+
+    Limitação conhecida: feriados NÃO são computados como DSR (exigiria um
+    calendário de feriados por localidade — ver ``l10n_br_resource``). Para a
+    maioria das competências o erro é pequeno; quando houver feriado no mês o
+    desconto de DSR fica marginalmente subestimado. Documentado como
+    pendência de evolução (RF-26).
+
+    Args:
+        ano: Ano da competência.
+        mes: Mês da competência (1-12).
+
+    Returns:
+        Tupla ``(dias_uteis, dsr)``.
+    """
+    import calendar as _cal
+    from datetime import date as _date
+
+    total = _cal.monthrange(ano, mes)[1]
+    domingos = sum(1 for d in range(1, total + 1) if _date(ano, mes, d).weekday() == 6)
+    return total - domingos, domingos
+
+
 def calc_ferias_dias(faltas):
     """Retorna dias de férias conforme faltas injustificadas (CLT art. 130).
 
