@@ -1,0 +1,461 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_payroll_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,print_report_name:l10n_br_hr_payroll_report.action_report_ficha_registro
+msgid ""
+"\n"
+"            'Ficha Registro - %s' % (object.name,)\n"
+"        "
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,print_report_name:l10n_br_hr_payroll_report.action_report_holerite
+msgid ""
+"\n"
+"            'Holerite - %s - %s' % (object.employee_id.name, object.date_from)\n"
+"        "
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,print_report_name:l10n_br_hr_payroll_report.action_report_recibo_ferias
+msgid ""
+"\n"
+"            'Recibo Ferias - %s - %s' % (object.employee_id.name, object.date_from)\n"
+"        "
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,print_report_name:l10n_br_hr_payroll_report.action_report_termo_rescisao
+msgid ""
+"\n"
+"            'Rescisao - %s - %s' % (object.employee_id.name, object.date_from)\n"
+"        "
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "- Série:"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Admissão:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Aviso Prévio:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>CNPJ:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>CPF:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>CTPS:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Cargo:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Cidade:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+msgid "<strong>Competência:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Data Nascimento:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Dependentes IRRF:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Depto:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Desligamento:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Documento:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "<strong>Empresa:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Endereço:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Estado Civil:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Filhos Salário-Família:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Logradouro:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Nacionalidade:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Nome da Mãe:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Nome do Pai:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Nome:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>PIS/PASEP:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "<strong>Período Aquisitivo:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "<strong>Período de Gozo:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Razão Social:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "<strong>Salário Base:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Salário:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>Sexo:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "<strong>UF:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "<strong>Último Salário:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Base FGTS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+msgid "Base FGTS / FGTS Mês"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+msgid "Base INSS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+msgid "Base IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "CONTRATO DE TRABALHO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Cód"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "DADOS DO CONTRATO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "DADOS DO EMPREGADO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "DADOS PESSOAIS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "DEPENDENTES (IRRF/SALÁRIO-FAMÍLIA)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid ""
+"Declaro que recebi a importância líquida acima discriminada,\n"
+"                            referente às férias indicadas neste recibo, dando plena e\n"
+"                            irrevogável quitação."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Descontos"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Descrição"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "EMPRESA"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "ENDEREÇO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Empregado"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Empregador"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "FGTS Mês"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "FICHA DE REGISTRO DE EMPREGADO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,name:l10n_br_hr_payroll_report.action_report_ficha_registro
+msgid "Ficha de Registro"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,name:l10n_br_hr_payroll_report.action_report_holerite
+msgid "Holerite"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Homologador"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "IDENTIFICAÇÃO DO EMPREGADOR"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "IDENTIFICAÇÃO DO TRABALHADOR"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+msgid "INFORMATIVOS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "LÍQUIDO A RECEBER"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "LÍQUIDO RESCISÓRIO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "OBSERVAÇÕES"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "PERÍODO DE FÉRIAS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "Pessoa com Deficiência (PCD)<br/>"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_ficha_registro
+msgid "Portador de Moléstia Grave — CID:"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "Proventos"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+msgid "RECIBO DE FÉRIAS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+msgid "RECIBO DE PAGAMENTO DE SALÁRIO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid ""
+"Recebi a importância líquida acima discriminada, correspondente\n"
+"                            às verbas rescisórias do meu contrato de trabalho, dando ao meu\n"
+"                            empregador plena e irrevogável quitação."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,name:l10n_br_hr_payroll_report.action_report_recibo_ferias
+msgid "Recibo de Férias"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "TERMO DE RESCISÃO DO CONTRATO DE TRABALHO"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_recibo_ferias
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid "TOTAIS"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model:ir.actions.report,name:l10n_br_hr_payroll_report.action_report_termo_rescisao
+msgid "Termo de Rescisão"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_report
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_report.report_termo_rescisao
+msgid ""
+"É vedada ao empregador, na rescisão contratual, efetuar\n"
+"                            desconto no valor correspondente ao aviso prévio, quando o\n"
+"                            empregado não cumprir o prazo previsto em lei (art. 487, §2°,\n"
+"                            CLT, com redação dada pela Lei n° 7.108, de 05/07/83)."
+msgstr ""
