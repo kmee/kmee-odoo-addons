@@ -73,6 +73,13 @@ msgid "Attendance Overtime"
 msgstr ""
 
 #. module: l10n_br_hr_overtime_custom_multiplier
+#. odoo-python
+#: code:addons/l10n_br_hr_overtime_custom_multiplier/models/hr_attendance.py:0
+#, python-format
+msgid "Automaticamente gerado com base no registro de horas."
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_form_view
 msgid "Cancel"
 msgstr ""
@@ -118,6 +125,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception__employee_id
 #: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__employee_id
 msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#. odoo-python
+#: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
+#, python-format
+msgid "Employee Overtimes"
 msgstr ""
 
 #. module: l10n_br_hr_overtime_custom_multiplier
@@ -240,6 +254,7 @@ msgstr ""
 
 #. module: l10n_br_hr_overtime_custom_multiplier
 #: model:ir.actions.act_window,name:l10n_br_hr_overtime_custom_multiplier.hr_attendance_overtime_payment_wizard_act_window
+#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_attendance_overtime_payment_wizard
 msgid "Overtime Payment Wizard"
 msgstr ""
 
@@ -273,6 +288,13 @@ msgstr ""
 #: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
 #, python-format
 msgid "The payment total cannot be greater than the total overtime."
+msgstr ""
+
+#. module: l10n_br_hr_overtime_custom_multiplier
+#. odoo-python
+#: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
+#, python-format
+msgid "The payment total must be greater than zero."
 msgstr ""
 
 #. module: l10n_br_hr_overtime_custom_multiplier
@@ -313,9 +335,4 @@ msgstr ""
 #. module: l10n_br_hr_overtime_custom_multiplier
 #: model:ir.model.fields.selection,name:l10n_br_hr_overtime_custom_multiplier.selection__hr_attendance_exception__day_of_week_override__wednesday
 msgid "Wednesday"
-msgstr ""
-
-#. module: l10n_br_hr_overtime_custom_multiplier
-#: model:ir.model,name:l10n_br_hr_overtime_custom_multiplier.model_hr_attendance_overtime_payment_wizard
-msgid "hr_attendance.overtime.payment.wizard"
 msgstr ""
