@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="document_import_extraction_tree" model="ir.ui.view">
+        <field name="name">l10n_br.document.import.extraction.tree</field>
+        <field name="model">l10n_br.document.import.extraction</field>
+        <field name="arch" type="xml">
+            <tree create="false">
+                <field name="create_date" />
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="extraction_method" />
+                <field name="state" />
+                <field name="duration" widget="float_time" optional="hide" />
+                <field name="document_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="document_import_extraction_form" model="ir.ui.view">
+        <field name="name">l10n_br.document.import.extraction.form</field>
+        <field name="model">l10n_br.document.import.extraction</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="partner_id" />
+                            <field name="document_id" />
+                            <field name="state" />
+                        </group>
+                        <group>
+                            <field name="extraction_method" />
+                            <field name="structuring_method" />
+                            <field name="duration" />
+                            <field name="file_checksum" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Texto extraído" name="raw_text">
+                            <field name="raw_text" />
+                        </page>
+                        <page string="Dados estruturados" name="structured">
+                            <field name="structured_data" />
+                            <field name="field_confidence" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="document_import_extraction_action" model="ir.actions.act_window">
+        <field name="name">Extrações de importação</field>
+        <field name="res_model">l10n_br.document.import.extraction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="document_import_extraction_menu"
+        name="Extrações de importação (OCR)"
+        parent="l10n_br_fiscal.others_config_menu"
+        action="document_import_extraction_action"
+        sequence="90"
+    />
+
+</odoo>
