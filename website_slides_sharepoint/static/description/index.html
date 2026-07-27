@@ -1,0 +1,936 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>README.rst</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document">
+
+
+<a class="reference external image-reference" href="https://odoo-community.org/get-involved?utm_source=readme">
+<img alt="Odoo Community Association" src="https://odoo-community.org/readme-banner-image" />
+</a>
+<div class="section" id="website-slides-sharepoint-microsoft-365">
+<h1>Website Slides - SharePoint / Microsoft 365</h1>
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:f510e7bc68e0eb72a2a659d31645d70db87992625aec5d02e9300a3a3afc6ada
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/website_slides_sharepoint"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
+<p>Odoo eLearning (<tt class="docutils literal">website_slides</tt>) only accepts YouTube, Vimeo and
+Google Drive as external content sources. This module adds <strong>SharePoint
+Online / OneDrive for Business</strong> (Microsoft 365) as a fourth source, for
+both videos and documents.</p>
+<p>Microsoft does not support anonymous embedding of SharePoint videos: the
+native <tt class="docutils literal">embed.aspx</tt> iframe only renders for a visitor who already has
+a Microsoft 365 session in their browser. This module therefore does
+<strong>not</strong> use that iframe. Instead, the Odoo server itself authenticates
+against Microsoft Graph with an Entra ID (Azure AD) application using
+the client credentials flow, resolves the shared link and serves the
+content to the attendee. As a consequence:</p>
+<ul class="simple">
+<li>attendees do <strong>not</strong> need a Microsoft account, not even a login
+prompt;</li>
+<li>the files stay private on SharePoint — no “Anyone with the link”
+sharing;</li>
+<li>videos play in the native HTML5 player, so <strong>completion tracking
+works</strong> just like it does for YouTube and Vimeo (the SharePoint iframe
+offers no player API);</li>
+<li>Word, Excel and PowerPoint documents are converted to PDF on the fly
+by Microsoft Graph, so they display in the course viewer.</li>
+</ul>
+<p>Supported links are whatever Microsoft Graph can resolve: sharing links
+(<tt class="docutils literal"><span class="pre">/:v:/s/...</span></tt>, <tt class="docutils literal"><span class="pre">/:b:/s/...</span></tt>), <tt class="docutils literal">stream.aspx</tt> links, OneDrive short
+links (<tt class="docutils literal">1drv.ms</tt>) and direct file URLs.</p>
+<p><strong>Table of contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
+<li><a class="reference internal" href="#on-the-sharepoint-microsoft-365-side" id="toc-entry-2">1. On the SharePoint / Microsoft 365 side</a><ul>
+<li><a class="reference internal" href="#where-the-files-must-live" id="toc-entry-3">1.1 Where the files must live</a></li>
+<li><a class="reference internal" href="#what-you-do-not-need-to-do" id="toc-entry-4">1.2 What you do <strong>not</strong> need to do</a></li>
+<li><a class="reference internal" href="#video-format-read-this-before-uploading" id="toc-entry-5">1.3 Video format — read this before uploading</a></li>
+<li><a class="reference internal" href="#getting-the-link" id="toc-entry-6">1.4 Getting the link</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#register-the-application-in-entra-id-azure-ad" id="toc-entry-7">2. Register the application in Entra ID (Azure AD)</a><ul>
+<li><a class="reference internal" href="#create-the-registration" id="toc-entry-8">2.1 Create the registration</a></li>
+<li><a class="reference internal" href="#grant-permissions" id="toc-entry-9">2.2 Grant permissions</a></li>
+<li><a class="reference internal" href="#outbound-hosts-to-allow" id="toc-entry-10">2.3 Outbound hosts to allow</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#in-odoo" id="toc-entry-11">3. In Odoo</a></li>
+<li><a class="reference internal" href="#check-that-it-works" id="toc-entry-12">4. Check that it works</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-13">Usage</a><ul>
+<li><a class="reference internal" href="#adding-a-lesson-from-the-website" id="toc-entry-14">Adding a lesson from the website</a></li>
+<li><a class="reference internal" href="#adding-a-lesson-from-the-backend" id="toc-entry-15">Adding a lesson from the backend</a></li>
+<li><a class="reference internal" href="#what-attendees-see" id="toc-entry-16">What attendees see</a></li>
+<li><a class="reference internal" href="#day-to-day-operations" id="toc-entry-17">Day-to-day operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-18">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-19">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-20">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-21">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-22">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-23">Maintainers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#toc-entry-1">Configuration</a></h2>
+<p>Configuration has three parts: prepare the content on Microsoft 365,
+register an application in Entra ID (Azure AD), and fill in the
+credentials in Odoo. Budget about 20 minutes. Granting the permissions
+(step 2.2) needs a <strong>Global Administrator</strong> or Privileged Role
+Administrator of the Microsoft tenant — the rest can be done by whoever
+administers the courses.</p>
+<div class="section" id="on-the-sharepoint-microsoft-365-side">
+<h3><a class="toc-backref" href="#toc-entry-2">1. On the SharePoint / Microsoft 365 side</a></h3>
+<div class="section" id="where-the-files-must-live">
+<h4><a class="toc-backref" href="#toc-entry-3">1.1 Where the files must live</a></h4>
+<p>Any file readable by Microsoft Graph works:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="55%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Source</th>
+<th class="head">Where it actually lives</th>
+<th class="head">Supported</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>SharePoint site document
+library</td>
+<td><tt class="docutils literal"><span class="pre">contoso.sharepoint.com/sites/&lt;site&gt;</span></tt></td>
+<td>Yes</td>
+</tr>
+<tr><td>Teams channel <em>Files</em> tab</td>
+<td>the SharePoint site of the team</td>
+<td>Yes</td>
+</tr>
+<tr><td>OneDrive for Business</td>
+<td><tt class="docutils literal"><span class="pre">contoso-my.sharepoint.com/personal/&lt;user&gt;</span></tt></td>
+<td>Yes</td>
+</tr>
+<tr><td>Teams meeting recording</td>
+<td>OneDrive of the organiser, or the channel
+site</td>
+<td>Yes</td>
+</tr>
+<tr><td>Stream (Classic) video
+never migrated</td>
+<td>old Stream service</td>
+<td><strong>No</strong></td>
+</tr>
+<tr><td>Personal (consumer)
+OneDrive</td>
+<td><tt class="docutils literal">onedrive.live.com</tt></td>
+<td><strong>No</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation:</strong> create one dedicated SharePoint site (e.g.
+<em>eLearning</em>) with one library per course, instead of scattering lessons
+across personal OneDrives. It keeps the permission grant of step 2.2
+narrow, and a lesson does not break when the person who uploaded it
+leaves the company.</p>
+</div>
+<div class="section" id="what-you-do-not-need-to-do">
+<h4><a class="toc-backref" href="#toc-entry-4">1.2 What you do <strong>not</strong> need to do</a></h4>
+<p>These are the usual dead ends — skip them:</p>
+<ul class="simple">
+<li><strong>Do not</strong> share the files with <em>“Anyone with the link”</em>. The Odoo
+server reads them with its own application identity; keep your default
+(restricted) sharing settings.</li>
+<li><strong>Do not</strong> configure anything in <em>SharePoint admin center &gt; Settings &gt;
+Embedding</em>. That setting governs the <tt class="docutils literal">embed.aspx</tt> iframe, which this
+module does not use.</li>
+<li><strong>Do not</strong> create Microsoft accounts or guest invitations for your
+attendees.</li>
+</ul>
+</div>
+<div class="section" id="video-format-read-this-before-uploading">
+<h4><a class="toc-backref" href="#toc-entry-5">1.3 Video format — read this before uploading</a></h4>
+<p>Odoo serves the <strong>original file</strong> to the browser’s native <tt class="docutils literal">&lt;video&gt;</tt>
+player. There is no transcoding and no adaptive streaming, so the format
+must be one browsers can play natively:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Format</th>
+<th class="head">Result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><strong>MP4 (H.264 video + AAC
+audio)</strong></td>
+<td>Works everywhere — <strong>use this</strong></td>
+</tr>
+<tr><td>WebM (VP8/VP9)</td>
+<td>Works on Chrome/Firefox/Edge</td>
+</tr>
+<tr><td>MOV</td>
+<td>Only if it wraps H.264 + AAC</td>
+</tr>
+<tr><td>MKV, AVI, WMV, FLV</td>
+<td><strong>Does not play</strong></td>
+</tr>
+<tr><td>HEVC/H.265 in MP4</td>
+<td>Unreliable (no Chrome/Firefox
+support on many platforms)</td>
+</tr>
+</tbody>
+</table>
+<p>If you upload from Teams recordings you already get MP4/H.264 and
+nothing needs to be done. For anything else, convert before uploading,
+e.g.:</p>
+<pre class="code bash literal-block">
+ffmpeg<span class="w"> </span>-i<span class="w"> </span>lesson.mkv<span class="w"> </span>-c:v<span class="w"> </span>libx264<span class="w"> </span>-profile:v<span class="w"> </span>high<span class="w"> </span>-c:a<span class="w"> </span>aac<span class="w"> </span>-movflags<span class="w"> </span>+faststart<span class="w"> </span>lesson.mp4
+</pre>
+<p><tt class="docutils literal"><span class="pre">-movflags</span> +faststart</tt> matters: it moves the index to the beginning of
+the file so the attendee can start watching before the whole video is
+downloaded.</p>
+<p>Also keep an eye on file size: every viewer downloads the full file, so
+a 4 GB lesson costs 4 GB of Microsoft egress per attendee. Aim for
+720p/1080p at a reasonable bitrate.</p>
+</div>
+<div class="section" id="getting-the-link">
+<h4><a class="toc-backref" href="#toc-entry-6">1.4 Getting the link</a></h4>
+<p>Open the file in SharePoint, Teams or OneDrive and use <strong>Copy link</strong>
+(the <em>Share</em> dialog works too). All of these are accepted:</p>
+<pre class="literal-block">
+https://contoso.sharepoint.com/:v:/s/elearning/EaBcDeF123?e=xYz789
+https://contoso-my.sharepoint.com/:v:/g/personal/user_contoso_com/EaBcDeF123
+https://contoso.sharepoint.com/sites/elearning/_layouts/15/stream.aspx?id=%2Fsites%2F...
+https://contoso.sharepoint.com/sites/elearning/Shared%20Documents/lesson.mp4
+https://1drv.ms/v/s!AbCdEf
+</pre>
+<p>The module does not parse these URLs itself — it asks Microsoft Graph to
+resolve them — so link formats that Microsoft changes in the future keep
+working.</p>
+</div>
+</div>
+<div class="section" id="register-the-application-in-entra-id-azure-ad">
+<h3><a class="toc-backref" href="#toc-entry-7">2. Register the application in Entra ID (Azure AD)</a></h3>
+<div class="section" id="create-the-registration">
+<h4><a class="toc-backref" href="#toc-entry-8">2.1 Create the registration</a></h4>
+<ol class="arabic simple">
+<li>Go to <a class="reference external" href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">App
+registrations</a>
+and click <strong>New registration</strong>.</li>
+<li>Name it (e.g. <tt class="docutils literal">Odoo eLearning</tt>), pick <em>Accounts in this
+organizational directory only</em>, and leave the redirect URI <strong>empty</strong>
+— this is a daemon application, no user ever signs in.</li>
+<li>From the <em>Overview</em> page, copy the <strong>Directory (tenant) ID</strong> and the
+<strong>Application (client) ID</strong>.</li>
+<li>In <strong>Certificates &amp; secrets &gt; New client secret</strong>, create a secret
+and copy its <strong>value</strong> immediately — it is shown only once. Note the
+expiry date: when the secret expires, videos stop loading, so put a
+reminder in your calendar.</li>
+</ol>
+</div>
+<div class="section" id="grant-permissions">
+<h4><a class="toc-backref" href="#toc-entry-9">2.2 Grant permissions</a></h4>
+<p>Two options. Pick the second one unless you are in a hurry.</p>
+<p><strong>Option A — simple, broad (``Files.Read.All`` + ``Sites.Read.All``)</strong></p>
+<p>In <strong>API permissions &gt; Add a permission &gt; Microsoft Graph &gt; Application
+permissions</strong>, add <tt class="docutils literal">Files.Read.All</tt> and <tt class="docutils literal">Sites.Read.All</tt>, then click
+<strong>Grant admin consent for &lt;tenant&gt;</strong>.</p>
+<p>This lets the application read <em>every</em> file of the tenant. It is the
+fastest path and what most tutorials show, but it is a lot of authority
+for an eLearning portal.</p>
+<p><strong>Option B — least privilege (``Sites.Selected``), recommended</strong></p>
+<p>Add only the <tt class="docutils literal">Sites.Selected</tt> application permission and grant admin
+consent. By itself it gives access to <em>nothing</em>: an administrator then
+authorises the application site by site. With the <a class="reference external" href="https://learn.microsoft.com/en-us/powershell/microsoftgraph/">Microsoft Graph
+PowerShell
+SDK</a>:</p>
+<pre class="code powershell literal-block">
+<span class="nb">Connect-MgGraph</span> <span class="n">-Scopes</span> <span class="s2">&quot;Sites.FullControl.All&quot;</span>
+<span class="nv">$site</span> <span class="p">=</span> <span class="nb">Get-MgSite</span> <span class="n">-Search</span> <span class="s2">&quot;elearning&quot;</span>          <span class="c"># note the returned site Id</span>
+<span class="nb">New-MgSitePermission</span> <span class="n">-SiteId</span> <span class="nv">$site</span><span class="p">.</span><span class="n">Id</span> <span class="n">-BodyParameter</span> <span class="p">&#64;{</span>
+    <span class="n">roles</span> <span class="p">=</span> <span class="p">&#64;(</span><span class="s2">&quot;read&quot;</span><span class="p">)</span>
+    <span class="n">grantedToIdentities</span> <span class="p">=</span> <span class="p">&#64;(&#64;{</span> <span class="n">application</span> <span class="p">=</span> <span class="p">&#64;{</span>
+        <span class="n">id</span> <span class="p">=</span> <span class="s2">&quot;&lt;application-client-id&gt;&quot;</span><span class="p">;</span> <span class="n">displayName</span> <span class="p">=</span> <span class="s2">&quot;Odoo eLearning&quot;</span> <span class="p">}</span> <span class="p">})</span>
+<span class="p">}</span>
+</pre>
+<p>Repeat for every site holding course content (including the OneDrive
+site of a user, if you serve lessons from a personal OneDrive).</p>
+<blockquote>
+<strong>Important:</strong> do <strong>not</strong> combine <tt class="docutils literal">Sites.Selected</tt> with
+<tt class="docutils literal">Files.Read.All</tt> or <tt class="docutils literal">Sites.Read.All</tt>. The broad permissions win
+and the per-site restriction becomes meaningless — see the <a class="reference external" href="https://learn.microsoft.com/en-us/graph/permissions-reference">Microsoft
+Graph permissions
+reference</a>.</blockquote>
+<p>Either way, the permissions are <strong>read-only</strong>: the module never writes
+to SharePoint.</p>
+</div>
+<div class="section" id="outbound-hosts-to-allow">
+<h4><a class="toc-backref" href="#toc-entry-10">2.3 Outbound hosts to allow</a></h4>
+<p>The Odoo server is the one talking to Microsoft, so if its outbound
+traffic is filtered, these hosts have to be reachable <strong>from the
+server</strong>:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Host</th>
+<th class="head">Needed for</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">login.microsoftonline.com</tt></td>
+<td>obtaining the application token</td>
+</tr>
+<tr><td><tt class="docutils literal">graph.microsoft.com</tt></td>
+<td>resolving links, reading
+metadata</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">&lt;tenant&gt;.sharepoint.com</span></tt>,
+<tt class="docutils literal"><span class="pre">&lt;tenant&gt;-my.sharepoint.com</span></tt>,
+<tt class="docutils literal">*.svc.ms</tt></td>
+<td>downloading thumbnails and
+converted PDFs</td>
+</tr>
+</tbody>
+</table>
+<p>Nothing has to be opened <em>inbound</em>: no callback, no webhook, no redirect
+URI.</p>
+<p>In <em>Stream through Odoo</em> delivery mode, the content hosts on the third
+row also carry the media itself. In <em>Redirect</em> mode the attendee’s
+browser fetches the media straight from Microsoft, so those hosts must
+also be reachable <strong>from the attendees’ network</strong> — which is normally
+the case for anyone with internet access.</p>
+</div>
+</div>
+<div class="section" id="in-odoo">
+<h3><a class="toc-backref" href="#toc-entry-11">3. In Odoo</a></h3>
+<ol class="arabic simple">
+<li>Go to <strong>Website &gt; Configuration &gt; Settings &gt; eLearning &gt; Microsoft
+365 / SharePoint</strong> and fill in <strong>Tenant ID</strong>, <strong>Client ID</strong> and
+<strong>Client Secret</strong>.</li>
+<li>Choose the <strong>Delivery</strong> mode:<ul>
+<li><strong>Redirect to Microsoft</strong> (default) — Odoo answers with a
+redirection to a short lived pre-authenticated Microsoft URL. The
+media never transits through Odoo, which keeps the workers free.
+This is what you want for video. Trade-off: an attendee who
+inspects the page sees that Microsoft URL, and it stays usable for
+about an hour.</li>
+<li><strong>Stream through Odoo</strong> — Odoo downloads and re-streams the
+content, hiding the Microsoft URL. Range requests are honoured so
+seeking still works, but a worker is busy for the whole playback.
+Only pick this if exposing the temporary URL is unacceptable, and
+size your workers accordingly (one concurrent viewer = one busy
+worker).</li>
+</ul>
+</li>
+</ol>
+<p>The credentials are stored in <tt class="docutils literal">ir.config_parameter</tt>
+(<tt class="docutils literal">website_slides_sharepoint.tenant_id</tt>, <tt class="docutils literal">.client_id</tt>,
+<tt class="docutils literal">.client_secret</tt>), which is readable by administrators only. The
+application token is cached in the same place and renewed automatically.</p>
+</div>
+<div class="section" id="check-that-it-works">
+<h3><a class="toc-backref" href="#toc-entry-12">4. Check that it works</a></h3>
+<p>Add a video lesson with a SharePoint link (see USAGE). If the title,
+thumbnail and duration are filled in automatically, the whole chain —
+token, Graph, permissions — is working.</p>
+<p>If it is not, the table below covers what actually goes wrong in
+practice. Server log messages are emitted by
+<tt class="docutils literal">odoo.addons.website_slides_sharepoint</tt>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="31%" />
+<col width="37%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Symptom</th>
+<th class="head">Cause</th>
+<th class="head">Fix</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><em>“The Microsoft 365
+integration is not
+configured”</em></td>
+<td>empty
+Tenant/Client/Secret</td>
+<td>step 3</td>
+</tr>
+<tr><td><em>“Could not
+authenticate against
+Microsoft 365”</em></td>
+<td>wrong tenant/client
+id, or <strong>expired
+client secret</strong></td>
+<td>recreate the secret
+(2.1)</td>
+</tr>
+<tr><td><em>“The file could not
+be found on
+SharePoint, or the
+Odoo application
+does not have
+permission”</em></td>
+<td>admin consent
+missing, or the site
+was not granted
+under
+<tt class="docutils literal">Sites.Selected</tt></td>
+<td>2.2</td>
+</tr>
+<tr><td>Metadata is fetched
+but the player stays
+black</td>
+<td>video codec not
+supported by
+browsers</td>
+<td>1.3, re-encode to
+MP4/H.264</td>
+</tr>
+<tr><td>Video plays but
+seeking is
+impossible</td>
+<td><tt class="docutils literal">moov</tt> atom at the
+end of the file</td>
+<td>re-encode with
+<tt class="docutils literal"><span class="pre">-movflags</span> +faststart</tt></td>
+</tr>
+<tr><td>Office document
+shows an error
+instead of a PDF</td>
+<td>conversion timed out
+(large or complex
+file)</td>
+<td>see ROADMAP; upload a
+PDF instead</td>
+</tr>
+<tr><td>Everything works for
+staff, nothing for
+anonymous visitors</td>
+<td>the course/lesson is
+not published, or
+the lesson is
+members-only</td>
+<td>publish the course, or
+tick <em>Allow Preview</em></td>
+</tr>
+<tr><td>Sporadic failures
+under load</td>
+<td>Graph throttling
+(HTTP 429)</td>
+<td>spread the load, prefer
+<em>Redirect</em> mode</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#toc-entry-13">Usage</a></h2>
+<div class="section" id="adding-a-lesson-from-the-website">
+<h3><a class="toc-backref" href="#toc-entry-14">Adding a lesson from the website</a></h3>
+<p>In a course, click <strong>Add Content</strong> and:</p>
+<ul class="simple">
+<li><strong>Video</strong>: paste the SharePoint / OneDrive link in <em>Video Link</em>. Get
+it with the <strong>Copy link</strong> button of SharePoint, Teams or OneDrive. The
+title, thumbnail and duration are filled in automatically.</li>
+<li><strong>Document</strong>: choose <em>Retrieve from Google Drive or SharePoint</em> and
+paste the SharePoint link. PDF files are served directly; Word, Excel
+and PowerPoint files are converted to PDF by Microsoft Graph.</li>
+<li><strong>Image</strong>: same as documents.</li>
+</ul>
+<p>The source is detected from the link itself, so there is no extra option
+to pick: a Google Drive link keeps using the native Google integration
+and a SharePoint link goes through Microsoft Graph.</p>
+</div>
+<div class="section" id="adding-a-lesson-from-the-backend">
+<h3><a class="toc-backref" href="#toc-entry-15">Adding a lesson from the backend</a></h3>
+<p><strong>eLearning &gt; Courses &gt; (a course) &gt; Content</strong>. Set <em>Content Type</em>,
+then:</p>
+<ul class="simple">
+<li>for a video, paste the link in <em>Video Link</em> — <em>Video Source</em> switches
+to <strong>SharePoint</strong> on its own;</li>
+<li>for a document or an image, set the source to <em>Retrieve from
+SharePoint</em> and use the <em>SharePoint Document Link</em> / <em>SharePoint Image
+Link</em> field.</li>
+</ul>
+</div>
+<div class="section" id="what-attendees-see">
+<h3><a class="toc-backref" href="#toc-entry-16">What attendees see</a></h3>
+<p>Nothing Microsoft-specific: no login prompt, no consent screen, not even
+a Microsoft account. Videos play in the browser’s own player, and the
+lesson is marked as completed automatically when the attendee reaches
+the end — the same behaviour as YouTube and Vimeo lessons.</p>
+<p>There is no need to change the sharing settings of the file on
+SharePoint. Access is controlled by the eLearning rules only: an
+attendee can watch a video if, and only if, they can access the lesson
+(published course, <em>Allow Preview</em> lesson, or course membership). Course
+officers can always access it.</p>
+</div>
+<div class="section" id="day-to-day-operations">
+<h3><a class="toc-backref" href="#toc-entry-17">Day-to-day operations</a></h3>
+<ul class="simple">
+<li><strong>Replacing a video</strong>: edit the lesson and paste the new link. The
+cached Microsoft identifiers and URL are dropped and re-resolved.</li>
+<li><strong>Moving files on SharePoint</strong>: avoid it, or fix the links afterwards
+— see ROADMAP.</li>
+<li><strong>Rotating the client secret</strong>: put a reminder before its expiry date.
+When it expires, every SharePoint lesson stops loading at once;
+replacing the secret in the settings is enough, the cached token is
+renewed automatically.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="known-issues-roadmap">
+<h2><a class="toc-backref" href="#toc-entry-18">Known issues / Roadmap</a></h2>
+<p>Known limitations, and what they mean in practice.</p>
+<p><strong>Video is served as-is, with no transcoding.</strong> The browser plays the
+original file, so the format has to be browser-friendly (MP4/H.264 — see
+CONFIGURE 1.3) and there is no adaptive bitrate: every attendee
+downloads the full quality of the file. Building a transcoding pipeline
+is out of scope; if you need HLS/DASH, put a real video platform in
+front.</p>
+<p><strong>Office to PDF conversion inherits Microsoft’s limits.</strong> Graph converts
+Word/Excel/PowerPoint on the fly, but the conversion <a class="reference external" href="https://learn.microsoft.com/en-us/answers/questions/5679108/microsoft-graph-pdf-conversion-timing-out-at-45-se">times out after
+roughly 45
+seconds</a>,
+which large or complex documents hit well below the documented 100 MB
+ceiling. Excel is additionally capped at 250 pages, and macro-enabled
+formats (<tt class="docutils literal">.docm</tt>, <tt class="docutils literal">.xlsm</tt> in some cases) are not converted at all.
+For heavy documents, upload a PDF to SharePoint instead — PDFs are
+served directly, without conversion.</p>
+<p><strong>Completion time is only computed for files under 30 MB.</strong> Odoo has to
+download the document to count its pages; above that threshold the
+duration is left for you to fill in manually. Videos are unaffected: the
+duration comes from the Graph metadata.</p>
+<p><strong>Slides store a Microsoft item id, not a copy of the file.</strong> Moving a
+file to another site, or deleting it, breaks the lesson with a 404.
+Renaming is fine.</p>
+<p><strong>The pre-authenticated URL is cached for 45 minutes.</strong> In <em>Redirect</em>
+delivery mode, an attendee who copies that URL out of their browser can
+reshare it until it expires. Use <em>Stream through Odoo</em> if that matters
+more than worker capacity.</p>
+<p><strong>Stream (Classic) videos and live events are not supported</strong>, because
+Microsoft Graph cannot read them as drive items.</p>
+<p><strong>No ``slide.embed`` view counting for external embeds.</strong> The lesson can
+be embedded on a third party website, and the media loads, but the
+SharePoint player has no iframe of its own so the native external-embed
+statistics of <tt class="docutils literal">website_slides</tt> are less meaningful than for YouTube.</p>
+<p>Possible improvements, in rough order of usefulness:</p>
+<ul class="simple">
+<li>certificate-based authentication instead of a client secret, to get
+rid of the yearly secret rotation;</li>
+<li>a <em>Test connection</em> button in the settings, instead of relying on the
+first lesson to validate the credentials;</li>
+<li>resumable playback (store the last position per attendee), which the
+HTML5 player makes easy and the YouTube/Vimeo integrations do not
+offer either.</li>
+</ul>
+</div>
+<div class="section" id="bug-tracker">
+<h2><a class="toc-backref" href="#toc-entry-19">Bug Tracker</a></h2>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20website_slides_sharepoint%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h2><a class="toc-backref" href="#toc-entry-20">Credits</a></h2>
+<div class="section" id="authors">
+<h3><a class="toc-backref" href="#toc-entry-21">Authors</a></h3>
+<ul class="simple">
+<li>KMEE</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h3><a class="toc-backref" href="#toc-entry-22">Contributors</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="https://kmee.com.br">KMEE</a>:<ul>
+<li>Luis Felipe Mileo <a class="reference external" href="mailto:mileo&#64;kmee.com.br">mileo&#64;kmee.com.br</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h3><a class="toc-backref" href="#toc-entry-23">Maintainers</a></h3>
+<p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/website_slides_sharepoint">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
+<p>You are welcome to contribute.</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
