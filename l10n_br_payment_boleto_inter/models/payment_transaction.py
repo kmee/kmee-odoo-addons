@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 from odoo import _, fields, models
 from odoo.exceptions import UserError, ValidationError
 
+from odoo.addons.payment import utils as payment_utils
+
 _logger = logging.getLogger(__name__)
 
 
@@ -36,7 +38,8 @@ class PaymentTransaction(models.Model):
 
             # Salva referência
             self.codigo_solicitacao = response["codigoSolicitacao"]
-            self.state = "pending"
+            if self.state != "pending":
+                self._set_pending()
 
             # Baixa PDF automaticamente
             pdf_content = self.download_boleto_pdf_inter(
@@ -50,9 +53,11 @@ class PaymentTransaction(models.Model):
                 self.codigo_solicitacao,
             )
 
+        except UserError:
+            raise
         except Exception as e:
             _logger.error("Erro ao gerar boleto Inter: %s", str(e), exc_info=True)
-            raise UserError(_(f"Erro ao gerar boleto Inter: {str(e)}")) from e
+            raise UserError(_("Erro ao gerar boleto Inter: %s", str(e))) from e
 
     def _prepare_boleto_data_inter(self):
         order = self.sale_order_ids[:1]
@@ -241,7 +246,7 @@ class PaymentTransaction(models.Model):
                 _("Esta transação não possui código de solicitação do Banco Inter")
             )
         self.cancel_boleto_inter(self.provider_id, self.codigo_solicitacao)
-        self.state = "cancel"
+        self._set_canceled()
         _logger.info("Boleto %s cancelado com sucesso", self.codigo_solicitacao)
 
     def cron_update_boleto_status(self):
@@ -265,10 +270,11 @@ class PaymentTransaction(models.Model):
                     situacao,
                 )
                 if situacao == "RECEBIDO":
-                    tx.state = "done"
+                    # _set_done dispara a conciliação do account_payment.
+                    tx._set_done()
                     _logger.info("Boleto %s marcado como pago.", tx.codigo_solicitacao)
                 elif situacao in ["CANCELADO", "VENCIDO"]:
-                    tx.state = "cancel"
+                    tx._set_canceled(state_message=situacao)
                     _logger.info(
                         "Boleto %s marcado como cancelado.", tx.codigo_solicitacao
                     )
@@ -299,8 +305,9 @@ class PaymentTransaction(models.Model):
         if errors:
             raise ValidationError(
                 _(
-                    f"Dados obrigatórios ausentes no parceiro '{partner.name}':\n"
-                    + "\n".join(f"• {err}" for err in errors)
+                    "Dados obrigatórios ausentes no parceiro '%(partner)s':\n%(errors)s",
+                    partner=partner.name,
+                    errors="\n".join(f"• {err}" for err in errors),
                 )
             )
 
@@ -315,7 +322,10 @@ class PaymentTransaction(models.Model):
             if not self.boleto_pdf:
                 raise UserError(_("Boleto PDF não disponível"))
 
-            boleto_url = f"/payment/boleto/{self.id}"
+            access_token = payment_utils.generate_access_token(
+                self.reference, self.partner_id.id
+            )
+            boleto_url = f"/payment/boleto/{self.id}?access_token={access_token}"
             res.update(
                 {
                     "redirect_url": boleto_url,
