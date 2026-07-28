@@ -258,3 +258,60 @@ class TestBoletoInterAccess(BancoInterCommon, HttpCase):
         self.authenticate("admin", "admin")
         response = self.url_open(self.url)
         self.assertEqual(response.content, PDF_CONTENT)
+
+
+@tagged("post_install", "-at_install")
+class TestBoletoInterReport(BancoInterCommon):
+    """O boleto é impresso como relatório, junto dos demais documentos."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.report_ref = (
+            "l10n_br_payment_boleto_inter.action_report_account_move_boleto"
+        )
+        cls.invoice = cls.env["account.move"].create(
+            {
+                "move_type": "out_invoice",
+                "partner_id": cls.env.ref("base.res_partner_2").id,
+            }
+        )
+
+    def _create_transaction(self, reference, boleto_pdf=None, due_date=None):
+        return self.env["payment.transaction"].create(
+            {
+                "provider_id": self.provider.id,
+                "reference": reference,
+                "amount": 10.0,
+                "currency_id": self.env.ref("base.BRL").id,
+                "partner_id": self.invoice.partner_id.id,
+                "invoice_ids": [(6, 0, self.invoice.ids)],
+                "due_date": due_date or "2026-09-10",
+                "boleto_pdf": boleto_pdf,
+            }
+        )
+
+    def test_report_renders_the_boleto_of_the_invoice(self):
+        self._create_transaction("REP-0001", base64.b64encode(PDF_CONTENT))
+        content, content_type = (
+            self.env["ir.actions.report"]
+            .with_context(force_report_rendering=True)
+            ._render_qweb_pdf(self.report_ref, self.invoice.ids)
+        )
+
+        self.assertEqual(content_type, "pdf")
+        self.assertEqual(content, PDF_CONTENT)
+
+    def test_report_without_boleto(self):
+        """Sem boleto emitido, o usuário recebe uma mensagem clara."""
+        self._create_transaction("REP-0002")
+        with self.assertRaises(UserError):
+            self.env["ir.actions.report"]._render_qweb_pdf(
+                self.report_ref, self.invoice.ids
+            )
+
+    def test_report_is_bound_to_the_print_menu(self):
+        """O boleto aparece no menu Imprimir da fatura, como os demais."""
+        report = self.env.ref(self.report_ref)
+        self.assertEqual(report.binding_model_id.model, "account.move")
+        self.assertEqual(report.binding_type, "report")
