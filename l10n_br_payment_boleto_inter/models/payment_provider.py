@@ -1,4 +1,5 @@
-from odoo import fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class PaymentProvider(models.Model):
@@ -36,31 +37,31 @@ class PaymentProvider(models.Model):
         groups="base.group_system",
     )
 
-    # @api.constrains("code")
-    # def _check_inter_configuration(self):
-    #     """Valida configurações obrigatórias para o provider Inter"""
-    #     for provider in self:
-    #         if provider.code == "inter" and provider.state != "disabled":
-    #             required_fields = [
-    #                 "inter_conta_corrente",
-    #                 "inter_client_id",
-    #                 "inter_client_secret",
-    #                 "inter_certificate",
-    #             ]
-    #             missing_fields = []
-
-    #             for field in required_fields:
-    #                 if not getattr(provider, field):
-    #                     field_label = provider._fields[field].string
-    #                     missing_fields.append(field_label)
-
-    #             if missing_fields:
-    #                 raise ValidationError(
-    #                     _(
-    #                         f"Configuração incompleta do Banco Inter. "
-    #                         f"Campos obrigatórios: {', '.join(missing_fields)}"
-    #                     )
-    #                 )
+    @api.constrains("code", "state")
+    def _check_inter_configuration(self):
+        """Valida configurações obrigatórias para o provider Inter"""
+        required_fields = [
+            "inter_conta_corrente",
+            "inter_client_id",
+            "inter_client_secret",
+            "inter_certificate",
+        ]
+        for provider in self:
+            if provider.code != "inter" or provider.state == "disabled":
+                continue
+            missing_fields = [
+                provider._fields[field].string
+                for field in required_fields
+                if not provider[field]
+            ]
+            if missing_fields:
+                raise ValidationError(
+                    _(
+                        "Configuração incompleta do Banco Inter. "
+                        "Campos obrigatórios: %s",
+                        ", ".join(missing_fields),
+                    )
+                )
 
     def _get_supported_currencies(self):
         """Retorna moedas suportadas pelo provider"""
