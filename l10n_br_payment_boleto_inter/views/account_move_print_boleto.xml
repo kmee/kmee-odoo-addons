@@ -1,12 +1,19 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <odoo>
-    <record id="action_report_account_move_boleto" model="ir.actions.server">
+    <record id="action_report_account_move_boleto" model="ir.actions.report">
         <field name="name">Boleto</field>
-        <field name="model_id" ref="account.model_account_move" />
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >l10n_br_payment_boleto_inter.action_report_account_move_boleto</field>
+        <field
+            name="report_file"
+        >l10n_br_payment_boleto_inter.action_report_account_move_boleto</field>
         <field name="binding_model_id" ref="account.model_account_move" />
-        <field name="state">code</field>
         <field name="binding_type">report</field>
-        <field name="code">action = records.action_print_boleto()</field>
+        <field
+            name="print_report_name"
+        >"Boleto - %s" % (object.name or "").replace("/", "_")</field>
     </record>
-
 </odoo>

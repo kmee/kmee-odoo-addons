@@ -5,24 +5,19 @@ from odoo.exceptions import UserError
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def action_print_boleto(self):
+    def _get_boleto_inter_transactions(self):
+        """Devolve as transações do Inter com boleto emitido para a fatura.
+
+        Uma fatura parcelada tem uma transação por vencimento, e o relatório
+        junta todos os boletos num arquivo só.
+
+        :return: As transações com boleto.
+        :rtype: recordset of `payment.transaction`
+        """
         self.ensure_one()
-        tx = self.env["payment.transaction"].search(
-            [
-                ("reference", "=", self.payment_reference),
-                ("provider_code", "=", "inter"),
-            ],
-            limit=1,
-        )
-
-        if not tx or not tx.boleto_pdf:
-            raise UserError(_("Boleto não disponível para esta fatura."))
-
-        return {
-            "type": "ir.actions.act_url",
-            "url": f"/payment/boleto/{tx.id}?download=true",
-            "target": "self",
-        }
+        return self.transaction_ids.filtered(
+            lambda t: t.provider_code == "inter" and t.boleto_pdf
+        ).sorted("due_date")
 
     def generate_boletos(self):
         """Gera boletos apenas para transações com provider Inter"""
