@@ -48,27 +48,47 @@ class Paymentprovider(models.Model):
 
     # === BUSINESS METHODS === #
 
+    def _boleto_pinbank_token_param_names(self):
+        """Devolve as chaves usadas para guardar o token do provider.
+
+        O token e emitido por conta: guardar um unico token para toda a base faz
+        duas contas PinBank, ou o ambiente de teste e o de producao, usarem o
+        token uma da outra.
+
+        :return: As chaves do token e da sua expiracao.
+        :rtype: tuple
+        """
+        self.ensure_one()
+        return (
+            f"pinbank.token.{self.id}",
+            f"pinbank.token.expiration.{self.id}",
+        )
+
     def _boleto_pinbank_save_token(self, token, expire_in):
-        self.env["ir.config_parameter"].sudo().set_param("pinbank.token", token)
+        IrParamSudo = self.env["ir.config_parameter"].sudo()
+        token_key, expiration_key = self._boleto_pinbank_token_param_names()
+        IrParamSudo.set_param(token_key, token)
 
         if expire_in:
-            expiration = datetime.now() + timedelta(seconds=expire_in)
-            self.env["ir.config_parameter"].sudo().set_param(
-                "pinbank.token.expiration", expiration
-            )
+            expiration = datetime.now() + timedelta(seconds=int(expire_in))
+            IrParamSudo.set_param(expiration_key, expiration.isoformat())
 
     def _boleto_pinbank_check_existing_token(self):
-        token_expiration = (
-            self.env["ir.config_parameter"].sudo().get_param("pinbank.token.expiration")
-        )
+        IrParamSudo = self.env["ir.config_parameter"].sudo()
+        token_key, expiration_key = self._boleto_pinbank_token_param_names()
+        token_expiration = IrParamSudo.get_param(expiration_key)
         if not token_expiration:
             return False
 
+        # O parametro volta como texto: comparar direto com datetime estoura.
+        try:
+            token_expiration = datetime.fromisoformat(token_expiration)
+        except ValueError:
+            return False
         if token_expiration < datetime.now():
             return False
 
-        token = self.env["ir.config_parameter"].sudo().get_param("pinbank.token")
-        return token
+        return IrParamSudo.get_param(token_key)
 
     def _boleto_pinbank_get_token(self):
         """Get the Pin Bank access token
@@ -105,9 +125,9 @@ class Paymentprovider(models.Model):
             error_message = response_content.get("Message", "")
             raise ValidationError(
                 _(
-                    "Pin Bank: "
-                    "The communication with the API failed. "
-                    f"Pin Bank gave us the following information: '{error_message}'"
+                    "Pin Bank: The communication with the API failed. Pin Bank "
+                    "gave us the following information: '%s'",
+                    error_message,
                 )
             ) from requests.exceptions.HTTPError
 
@@ -180,11 +200,11 @@ class Paymentprovider(models.Model):
                 error_message = response_content.get("Message", "")
                 raise ValidationError(
                     _(
-                        "Pin Bank: "
-                        "The communication with the API failed. "
-                        f"Pin Bank gave us the following information: '{error_message}'",
+                        "Pin Bank: The communication with the API failed. Pin "
+                        "Bank gave us the following information: '%s'",
+                        error_message,
                     )
-                ) from requests.exceptions.HTTPError
+                ) from None
         except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
             _logger.exception("Unable to reach endpoint at %s", url)
             raise ValidationError(
