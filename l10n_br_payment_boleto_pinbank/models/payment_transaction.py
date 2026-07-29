@@ -4,7 +4,7 @@ import re
 
 from werkzeug.urls import url_encode, url_join
 
-from odoo import _, models
+from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 from ..controllers.main import PinBankController
@@ -14,6 +14,20 @@ _logger = logging.getLogger(__name__)
 GERAR_BOLETO_ENDPOINT = "/CashIn/GerarBoletoEncrypted"
 CANCELAR_BOLETO_ENDPOINT = "/CashIn/SolicitarBaixaBoletoEncrypted"
 CONSULTAR_BOLETO_ENDPOINT = "/CashIn/ConsultarBoletoEncrypted"
+
+# Chaves que carregam dados pessoais do sacado e nao vao para o log.
+PERSONAL_DATA_KEYS = frozenset(
+    {
+        "cpfcnpj",
+        "nome",
+        "email",
+        "endereco",
+        "bairro",
+        "cep",
+        "dadossacado",
+        "base64",
+    }
+)
 
 STATE_MAPPING = {
     "PENDENTE": "pending",
@@ -105,12 +119,33 @@ class PaymentTransaction(models.Model):
                 boleto_info["boleto_pdf"] = boleto_pdf
 
             boleto_info["provider_technical_info"] = pprint.pformat(
-                boleto_response.get("Data", {})
+                self._pinbank_redact(boleto_response.get("Data", {}))
             )
 
             return boleto_info
 
         return super()._prepare_transaction_boleto_info(boleto_response)
+
+    @api.model
+    def _pinbank_redact(self, data):
+        """Devolve uma copia dos dados sem os dados pessoais do sacado.
+
+        A notificacao e a resposta do PinBank trazem nome, documento e endereco
+        do sacado, e o log de um gateway nao precisa deles.
+
+        :param data: O conteudo a limpar.
+        :return: A copia limpa, segura para registrar.
+        """
+        if isinstance(data, dict):
+            return {
+                key: "***"
+                if str(key).replace("_", "").lower() in PERSONAL_DATA_KEYS
+                else self._pinbank_redact(value)
+                for key, value in data.items()
+            }
+        elif isinstance(data, list | tuple):
+            return [self._pinbank_redact(item) for item in data]
+        return data
 
     def _send_refund_request(self, amount_to_refund=None):
         """Override of `payment` to send a refund request to PinBank.
@@ -345,7 +380,7 @@ class PaymentTransaction(models.Model):
                 "Received data for transaction with reference %s "
                 "with missing status: %s",
                 self.reference,
-                pprint.pformat(notification_data),
+                pprint.pformat(self._pinbank_redact(notification_data)),
             )
             self._set_error("PinBank: " + _("Received data with missing status."))
             return
