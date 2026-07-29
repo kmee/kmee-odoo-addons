@@ -29,7 +29,7 @@ L10n Br Payment Boleto Inter
 [ This file must be max 2-3 paragraphs, and is required.
 
 The goal of this document is to explain quickly the features of this
-module: “what” this module does and “what” it is for. ]
+module: "what" this module does and "what" it is for. ]
 
 Example:
 
@@ -47,7 +47,7 @@ Use Cases / Context
 [ This file is optional but strongly suggested to allow end-users to
 evaluate the module's usefulness in their context. ]
 
-BUSINESS NEED: It should explain the “why” of the module:
+BUSINESS NEED: It should explain the "why" of the module:
 
 - what is the business requirement that generated the need to develop
   this module
@@ -89,13 +89,13 @@ use of screenshots is strongly recommended.]
 To configure this module, you need to:
 
 - Go to *App* > Menu > Menu item
-- Activate boolean… > save
-- …
+- Activate boolean... > save
+- ...
 
 Usage
 =====
 
-[ This file is required and contains the instructions on **“how”** to
+[ This file is required and contains the instructions on **"how"** to
 use the module for end-users.
 
 If the module does not have a visible impact on the user interface, just
@@ -103,7 +103,7 @@ add the following sentence:
 
    This module does not impact the user interface.
 
-If that’s not the case, please make sure that every usage step is
+If that's not the case, please make sure that every usage step is
 covered and remember that images speak more than words!]
 
 To use this module, you need to:
@@ -112,7 +112,7 @@ To use this module, you need to:
 
   *insert screenshot!*
 
-- In “Contact” form, add a value to field *xyz* > save
+- In "Contact" form, add a value to field *xyz* > save
 
   *insert screenshot!*
 

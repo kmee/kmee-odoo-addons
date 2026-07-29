@@ -2,7 +2,7 @@
 module's usefulness in their context. ]
 
 BUSINESS NEED: 
-It should explain the “why” of the module: 
+It should explain the "why" of the module: 
 - what is the business requirement that generated the need to develop this module
 - in which context or use cases this module can be useful (practical examples are welcome!). 
 
