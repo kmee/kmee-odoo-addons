@@ -6,5 +6,5 @@ Please be detailed on the path to configuration (eg: do you need to activate dev
 To configure this module, you need to:
 
 - Go to *App* > Menu > Menu item
-- Activate boolean… > save
-- …
+- Activate boolean... > save
+- ...
