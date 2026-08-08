@@ -19,12 +19,16 @@ class AccountExport(models.Model):
         out = self._new_buffer()
         contas = self._get_export_lines().account_id
         for conta in contas.sorted("code"):
+            # com plano de destino no perfil, o 0200 sai com o codigo E o nome
+            # da conta como o escritorio a conhece; sem plano, com o campo
+            # simples e o nome da conta do Odoo
+            dest_code, dest_name = self._resolve_account(conta)
             campos = [
                 "0200",
-                conta.l10n_br_export_code or "",
+                dest_code,
                 "1",
                 "A",
-                fh.clean_text(conta.name, 60, sep="|"),
+                fh.clean_text(dest_name or conta.name, 60, sep="|"),
                 fh.format_date(self.date_start),
                 "A",
                 "",
