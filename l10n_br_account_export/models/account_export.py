@@ -292,9 +292,12 @@ class AccountExport(models.Model):
                 raise UserError(_("O layout nao produziu nenhum arquivo."))
 
             export.attachment_ids.unlink()
-            anexos = self.env["ir.attachment"]
+            # o ir.attachment ordena por id decrescente, entao um recordset
+            # acumulado nao preserva a ordem de geracao: o arquivo principal e
+            # guardado explicitamente, e nao pela posicao no conjunto
+            principal = False
             for nome, conteudo in arquivos:
-                anexos |= self.env["ir.attachment"].create(
+                anexo = self.env["ir.attachment"].create(
                     {
                         "name": nome,
                         "raw": conteudo,
@@ -302,7 +305,9 @@ class AccountExport(models.Model):
                         "res_id": export.id,
                     }
                 )
-            export.write({"state": "done", "attachment_id": anexos[:1].id})
+                if not principal:
+                    principal = anexo
+            export.write({"state": "done", "attachment_id": principal.id})
             export._warn_previous_exports()
         return True
 
