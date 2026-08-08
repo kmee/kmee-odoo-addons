@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="view_company_form_sped_referential" model="ir.ui.view">
+        <field name="name">res.company.form.l10n_br_sped_referential</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_info']" position="inside">
+                <group string="SPED Contabil">
+                    <field name="l10n_br_sped_referential_plan_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
