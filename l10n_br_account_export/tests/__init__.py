@@ -4,3 +4,4 @@
 from . import common
 from . import test_format_helper
 from . import test_export
+from . import test_export_mapping
