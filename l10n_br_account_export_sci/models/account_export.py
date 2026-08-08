@@ -16,7 +16,7 @@ class AccountExport(models.Model):
         for move in self.move_ids:
             for line in self._get_export_lines(move):
                 seq += 1
-                conta = fh.zero_pad(line.account_id.l10n_br_export_code or "0", 8)
+                conta = fh.zero_pad(self._resolve_account(line.account_id)[0] or "0", 8)
                 debito = bool(line.debit)
                 campos = [
                     fh.zero_pad(seq, 6),
