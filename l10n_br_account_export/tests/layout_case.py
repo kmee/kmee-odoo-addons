@@ -16,7 +16,7 @@ from .common import AccountExportCommon
 class LayoutCase(AccountExportCommon):
     _layout = None  # o modulo de layout preenche
     _is_spreadsheet = False
-    _fixed_width = None  # largura da linha, para layouts posicionais
+    _fixed_width = None  # largura unica, ou tupla de larguras aceitas
 
     def _run(self, moves=None, partial=False):
         export = self._create_export(self._layout, moves or self.move, partial)
@@ -77,14 +77,20 @@ class LayoutCase(AccountExportCommon):
         self.assertTrue(export.attachment_ids[0].raw)
 
     def test_largura_fixa(self):
-        """Em layout posicional, toda linha tem a largura do contrato."""
+        """Em layout posicional, toda linha tem largura prevista pelo contrato.
+
+        Layouts com mais de um tipo de registro tem uma largura por registro
+        (o Calima, por exemplo, abre com 252 e detalha com 597), por isso o
+        contrato aceita um conjunto de larguras.
+        """
         if not self._layout or not self._fixed_width:
             self.skipTest("nao e posicional")
+        larguras = self._fixed_width
+        if isinstance(larguras, int):
+            larguras = (larguras,)
         export = self._run()
         for linha in self._lines(export):
-            self.assertEqual(
-                len(linha), self._fixed_width, f"{self._layout}: {linha[:40]}"
-            )
+            self.assertIn(len(linha), larguras, f"{self._layout}: {linha[:40]}")
 
     def test_conta_sem_depara_bloqueia(self):
         """Sem codigo no plano do escritorio, o arquivo nao sai."""
