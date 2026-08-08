@@ -32,7 +32,7 @@ class AccountExport(models.Model):
                     + fh.zero_pad(seq, 10)
                     + move.date.strftime("%Y%m")
                     + fh.pad("", 4)
-                    + fh.pad(line.account_id.l10n_br_export_code or "", 20)
+                    + fh.pad(self._resolve_account(line.account_id)[0], 20)
                     + fh.pad(
                         fh.format_amount(
                             line.debit or line.credit, decimal_sep=".", decimals=6
