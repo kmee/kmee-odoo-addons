@@ -22,7 +22,7 @@ class TestDominioCompleto(LayoutCase):
         """
         export = self._run()
         self.assertEqual(len(export.attachment_ids), 2)
-        plano = self._text(export, 1)
+        plano = self._text(export, contendo="plano_contas")
         self.assertIn("|0200|", plano)
         self.assertIn("1101", plano)
         self.assertIn("2201", plano)

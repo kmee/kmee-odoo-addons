@@ -12,4 +12,4 @@ class TestCalima(LayoutCase):
 
     _layout = "calima"
     _is_spreadsheet = False
-    _fixed_width = 597
+    _fixed_width = (252, 597)  # abertura e detalhe
