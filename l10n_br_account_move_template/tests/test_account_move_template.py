@@ -325,3 +325,26 @@ class TestAccountMoveTemplate(AccountMoveBRCommon):
 
         with self.assertRaises(ValidationError):
             template_a.parent_id = template_b
+
+    def test_historico_padrao_no_item(self):
+        """Item com historico padrao gera linhas com o texto do template."""
+        history = self.env["l10n_br.account.history"].create(
+            {
+                "name": "Apropriacao ICMS",
+                "template": "%{CAMPO} s/ doc. %{DOC} de %{PARCEIRO}",
+                "code": "30",
+            }
+        )
+        self.sale_template.item_ids.filtered(
+            lambda i: i.fiscal_field == "icms_value"
+        ).history_id = history
+
+        move = self._create_sale_invoice(post=True)
+        de_lines = move.line_ids.filtered(lambda line: line.is_double_entry_line)
+        icms_lines = de_lines.filtered(lambda line: "ICMS" in (line.name or ""))
+
+        self.assertTrue(icms_lines, "linhas de ICMS deveriam existir")
+        for line in icms_lines:
+            self.assertIn("s/ doc.", line.name)
+            self.assertNotIn("%{", line.name, "variavel nao substituida vazou")
+            self.assertIn(move.partner_id.name, line.name)
