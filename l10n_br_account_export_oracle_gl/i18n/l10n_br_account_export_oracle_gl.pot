@@ -14,15 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_br_account_export_oracle_gl
-#. odoo-python
-#: code:addons/l10n_br_account_export_oracle_gl/models/account_export.py:0
-#, python-format
-msgid ""
-"A biblioteca xlsxwriter e necessaria para os layouts em planilha. Instale-a "
-"no servidor."
-msgstr ""
-
-#. module: l10n_br_account_export_oracle_gl
 #: model:ir.model,name:l10n_br_account_export_oracle_gl.model_l10n_br_account_export_config
 msgid "Configuracao de Exportacao Contabil"
 msgstr ""
