@@ -17,6 +17,5 @@
         "views/account_mapping.xml",
         "views/res_company.xml",
     ],
-    "demo": ["demo/account_mapping_sped_demo.xml"],
     "installable": True,
 }

@@ -14,6 +14,11 @@ class AccountMappingPlan(models.Model):
         "referencial da Receita Federal. E o mapeamento que alimenta o "
         "registro I051 do SPED Contabil (ECD).",
     )
+    sped_layout_version = fields.Char(
+        string="Leiaute de origem",
+        help="Versao do leiaute da tabela dinamica da RFB de onde este plano "
+        "foi carregado (auditoria da carga).",
+    )
     sped_plan_code = fields.Char(
         string="Codigo do plano referencial",
         size=10,
@@ -52,3 +57,33 @@ class AccountMappingPlan(models.Model):
             "COD_PLAN_REF": self.sped_plan_code or "",
             "COD_CTA_REF": dest.code,
         }
+
+
+class AccountMappingAccount(models.Model):
+    _inherit = "l10n_br.account.mapping.account"
+
+    sped_account_type = fields.Selection(
+        [("S", "Sintetica"), ("A", "Analitica")],
+        string="Tipo (RFB)",
+        help="Tipo da conta na tabela referencial: sintetica (agrupadora) ou "
+        "analitica (recebe mapeamento). O I051 so referencia analiticas.",
+    )
+    sped_parent_code = fields.Char(
+        string="Conta superior (RFB)",
+        size=20,
+        help="Codigo da conta superior na hierarquia da tabela referencial.",
+    )
+    sped_nature = fields.Char(
+        string="Natureza (RFB)",
+        size=2,
+        help="Natureza da conta na tabela referencial (1 ativo, 2 passivo, "
+        "3 patrimonio liquido, 4 resultado, 9 outras).",
+    )
+    sped_date_start = fields.Date(
+        string="Vigencia inicial (RFB)",
+        help="Inicio de vigencia da conta na tabela dinamica.",
+    )
+    sped_date_end = fields.Date(
+        string="Vigencia final (RFB)",
+        help="Fim de vigencia; vazio quando a conta segue vigente.",
+    )
