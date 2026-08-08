@@ -32,7 +32,7 @@ class AccountExport(models.Model):
                 valores = {
                     "data": move.date and move.date.strftime("%d/%m/%Y") or "",
                     "lancamento": move.name or "",
-                    "conta": line.account_id.l10n_br_export_code or "",
+                    "conta": self._resolve_account(line.account_id)[0],
                     "conta_odoo": line.account_id.code or "",
                     "debito": line.debit,
                     "credito": line.credit,
