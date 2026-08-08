@@ -55,7 +55,8 @@
                                     <field name="tax_domain" />
                                     <field name="account_debit_id" />
                                     <field name="account_credit_id" />
-                                    <field name="require_tax_credit" />
+                                    <field name="history_id" />
+                            <field name="require_tax_credit" />
                                 </tree>
                             </field>
                         </page>
