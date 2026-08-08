@@ -7,6 +7,8 @@ Assim um adapter novo ja nasce com a bateria completa, e uma regra nova vale
 para todos os layouts de uma vez, sem copiar teste.
 """
 
+import time
+
 from odoo.tests import tagged
 
 from .common import AccountExportCommon
@@ -32,11 +34,19 @@ class LayoutCase(AccountExportCommon):
         self.assertTrue(export.attachment_ids[0].raw)
 
     def test_deterministico(self):
-        """Mesma entrada e mesma configuracao produzem bytes identicos."""
+        """Mesma entrada e mesma configuracao produzem bytes identicos.
+
+        O intervalo entre as duas geracoes e proposital: formatos que gravam a
+        hora de criacao dentro do arquivo (o XLSX faz isso) so denunciam a
+        diferenca quando as duas nao caem no mesmo segundo.
+        """
         if not self._layout:
             self.skipTest("classe base")
         export = self._run()
         conteudo = export.attachment_ids[0].raw
+
+        time.sleep(1.1)
+
         export.action_back_to_draft()
         self.move.write({"l10n_br_account_export_id": export.id})
         export.action_generate()
