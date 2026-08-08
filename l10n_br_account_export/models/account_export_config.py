@@ -34,6 +34,13 @@ class AccountExportConfig(models.Model):
         required=True,
         help="A maioria dos sistemas brasileiros importa em ANSI.",
     )
+    mapping_plan_id = fields.Many2one(
+        comodel_name="l10n_br.account.mapping.plan",
+        string="Plano de contas do destino",
+        help="Quando definido, os codigos de conta do arquivo saem do "
+        "mapeamento deste plano (N contas do Odoo por conta do destino). Sem "
+        "plano, vale o campo Codigo no escritorio de cada conta (1:1).",
+    )
     company_code = fields.Char(
         string="Codigo da empresa no escritorio",
         size=20,

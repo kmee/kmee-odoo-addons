@@ -17,7 +17,7 @@ class AccountExport(models.Model):
                 linha = (
                     move.date.strftime("%d%m")
                     + fh.zero_pad(0, 1)
-                    + fh.pad(line.account_id.l10n_br_export_code or "", 20)
+                    + fh.pad(self._resolve_account(line.account_id)[0], 20)
                     + fh.pad("", 5)
                     + fh.pad(fh.clean_text(line.name or move.ref, 50), 50)
                     + fh.pad(

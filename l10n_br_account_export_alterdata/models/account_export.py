@@ -17,7 +17,7 @@ class AccountExport(models.Model):
         out = self._new_buffer()
         for move in self.move_ids:
             for line in self._get_export_lines(move):
-                conta = line.account_id.l10n_br_export_code or ""
+                conta = self._resolve_account(line.account_id)[0]
                 debito = bool(line.debit)
                 campos = [
                     "",

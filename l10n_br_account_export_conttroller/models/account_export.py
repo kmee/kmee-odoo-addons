@@ -21,7 +21,7 @@ class AccountExport(models.Model):
                 campos = [
                     periodo,
                     seq,
-                    line.account_id.l10n_br_export_code or "",
+                    self._resolve_account(line.account_id)[0],
                     "000",
                     fh.zero_pad(0, 6),
                     fh.format_date(move.date),
