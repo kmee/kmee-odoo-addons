@@ -221,6 +221,11 @@ msgid "Group By"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__history_id
+msgid "Historico Padrao"
+msgstr ""
+
+#. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ibs_value
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__ibs
 msgid "IBS"
@@ -478,6 +483,14 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__parent_id
 msgid "Parent Template"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,help:l10n_br_account_move_template.field_l10n_br_account_move_template_item__history_id
+msgid ""
+"Quando definido, o texto das linhas geradas por este item vem do template do"
+" historico (com as variaveis de data, documento e parceiro), em vez do "
+"rotulo padrao."
 msgstr ""
 
 #. module: l10n_br_account_move_template
