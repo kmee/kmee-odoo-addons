@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+
+    Amostra ILUSTRATIVA do plano referencial. A carga oficial vem da tabela
+    dinamica do SPED (ver readme): os codigos abaixo servem apenas para
+    demonstrar o mecanismo em base demo.
+-->
+<odoo>
+
+    <record id="plan_referencial_demo" model="l10n_br.account.mapping.plan">
+        <field name="name">Plano Referencial RFB (demo)</field>
+        <field name="sped_referential" eval="True" />
+        <field name="sped_plan_code">1</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+    <record id="ref_caixa_demo" model="l10n_br.account.mapping.account">
+        <field name="plan_id" ref="plan_referencial_demo" />
+        <field name="code">1.01.01.01.01</field>
+        <field name="name">Caixa e Equivalentes de Caixa</field>
+    </record>
+
+    <record id="ref_receita_demo" model="l10n_br.account.mapping.account">
+        <field name="plan_id" ref="plan_referencial_demo" />
+        <field name="code">3.01.01.01.01</field>
+        <field name="name">Receita Bruta de Vendas</field>
+    </record>
+
+</odoo>
