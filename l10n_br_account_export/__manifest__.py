@@ -12,7 +12,7 @@
     "maintainers": ["mileo"],
     "development_status": "Alpha",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["account", "l10n_br_base"],
+    "depends": ["account", "l10n_br_base", "l10n_br_account_mapping"],
     "data": [
         "security/ir.model.access.csv",
         "data/ir_sequence.xml",

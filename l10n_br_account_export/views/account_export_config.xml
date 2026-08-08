@@ -23,6 +23,7 @@
                             <field name="encoding" />
                         </group>
                         <group>
+                            <field name="mapping_plan_id" />
                             <field name="company_code" />
                             <field
                                 name="company_id"
