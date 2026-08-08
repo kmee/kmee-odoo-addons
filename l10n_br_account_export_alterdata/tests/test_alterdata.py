@@ -18,5 +18,5 @@ class TestAlterdata(LayoutCase):
         export = self._run()
         texto = self._text(export)
         self.assertTrue(self._lines(export)[0].startswith('""'))
-        self.assertIn('"01/08/2026"', texto)
+        self.assertIn('"05/08/2026"', texto)
         self.assertIn('"1500,00"', texto)
