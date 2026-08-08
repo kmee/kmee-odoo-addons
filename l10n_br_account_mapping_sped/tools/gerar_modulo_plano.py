@@ -59,7 +59,7 @@ PLAN_XML_TEMPLATE = """<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
     <record id="{plan_xmlid}" model="l10n_br.account.mapping.plan">
-        <field name="name">Plano Referencial RFB {plan_code} - {plan_name}</field>
+{name_field}
         <field name="sped_referential" eval="True" />
         <field name="sped_plan_code">{plan_code}</field>
         <field name="sped_layout_version">{leiaute}</field>
@@ -156,12 +156,27 @@ def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
     with open(
         os.path.join(base, "data", "mapping_plan.xml"), "w", encoding="utf-8"
     ) as f:
+        # replica a regra de 88 colunas do prettier do repo: inline quando
+        # cabe, quebrado quando nao; assim regenerar = identico ao formatado
+        full_name = f"Plano Referencial RFB {plan_code} - {plan_name}"
+        # literais com espacos fora de f-string: o flake8 do repo tokeniza o
+        # interior de f-strings e acusa E221 falso nos espacos de indentacao
+        inline = '        <field name="name">' + full_name + "</field>"
+        if len(inline) <= 88:
+            name_field = inline
+        else:
+            name_field = (
+                "        <field\n"
+                '            name="name"\n'
+                "        >" + full_name + "</field>"
+            )
         f.write(
             PLAN_XML_TEMPLATE.format(
                 leiaute=leiaute,
                 plan_xmlid=plan_xmlid,
                 plan_code=plan_code,
                 plan_name=plan_name,
+                name_field=name_field,
             )
         )
 
