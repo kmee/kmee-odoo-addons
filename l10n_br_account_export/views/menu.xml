@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 KMEE INFORMATICA LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <menuitem
+        id="menu_account_export_root"
+        name="Exportacao Contabil"
+        parent="account.menu_finance_entries"
+        sequence="90"
+    />
+    <menuitem
+        id="menu_account_export"
+        name="Exportacoes"
+        parent="menu_account_export_root"
+        action="account_export_action"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_account_export_config"
+        name="Configuracoes"
+        parent="menu_account_export_root"
+        action="account_export_config_action"
+        sequence="20"
+        groups="account.group_account_manager"
+    />
+
+</odoo>
