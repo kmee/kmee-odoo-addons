@@ -36,7 +36,7 @@ MANIFEST_TEMPLATE = """{header}
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "maintainers": ["mileo"],
-    "development_status": "Production/Stable",
+    "development_status": "Beta",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["l10n_br_account_mapping_sped"],
     "data": [
