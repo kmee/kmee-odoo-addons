@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 KMEE INFORMATICA LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="account_export_form" model="ir.ui.view">
+        <field name="name">l10n_br.account.export.form</field>
+        <field name="model">l10n_br.account.export</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_get_moves"
+                        type="object"
+                        string="Buscar lancamentos"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_generate"
+                        type="object"
+                        string="Gerar arquivo"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_back_to_draft"
+                        type="object"
+                        string="Voltar para rascunho"
+                        confirm="Isto apaga os arquivos gerados e libera os lancamentos para uma nova exportacao. Confirma?"
+                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" />
+                            <field name="config_id" />
+                            <field name="layout" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                            <field name="target_move" />
+                            <field name="partial_export" />
+                        </group>
+                    </group>
+                    <group string="Resultado">
+                        <group>
+                            <field name="move_count" />
+                            <field name="line_count" />
+                        </group>
+                    </group>
+                    <group
+                        string="Criticas"
+                        attrs="{'invisible': [('critica', '=', False)]}"
+                    >
+                        <field name="critica" nolabel="1" readonly="1" />
+                    </group>
+                    <notebook>
+                        <page string="Arquivos" name="files">
+                            <field name="attachment_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="file_size" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Lancamentos" name="moves">
+                            <field name="move_ids" readonly="1">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="date" />
+                                    <field name="journal_id" />
+                                    <field name="ref" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Diarios" name="journals">
+                            <field name="journal_ids" widget="many2many_tags" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_export_tree" model="ir.ui.view">
+        <field name="name">l10n_br.account.export.tree</field>
+        <field name="model">l10n_br.account.export</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="layout" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="move_count" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="account_export_action" model="ir.actions.act_window">
+        <field name="name">Exportacao Contabil</field>
+        <field name="res_model">l10n_br.account.export</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
