@@ -152,9 +152,22 @@ class AccountExportCommon(AccountTestInvoicingCommon):
             moves.write({"l10n_br_account_export_id": export.id})
         return export
 
-    def _text(self, export, index=0):
-        """Conteudo do arquivo gerado, ja decodificado."""
-        return export.attachment_ids[index].raw.decode(export.config_id.encoding)
+    def _text(self, export, index=0, contendo=None):
+        """Conteudo de um arquivo gerado, ja decodificado.
 
-    def _lines(self, export, index=0):
-        return [line for line in self._text(export, index).split("\n") if line]
+        Prefira ``contendo`` (trecho do nome do arquivo) a ``index``: o
+        ir.attachment ordena por id decrescente, entao posicao nao e criterio
+        confiavel quando o layout entrega mais de um arquivo.
+        """
+        anexos = export.attachment_ids
+        if contendo:
+            anexo = anexos.filtered(lambda a: contendo in a.name)
+            self.assertTrue(anexo, f"nenhum arquivo com '{contendo}' no nome")
+            anexo = anexo[0]
+        else:
+            anexo = anexos[index]
+        return anexo.raw.decode(export.config_id.encoding)
+
+    def _lines(self, export, index=0, contendo=None):
+        texto = self._text(export, index, contendo)
+        return [line for line in texto.split("\n") if line]
