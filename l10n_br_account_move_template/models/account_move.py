@@ -92,7 +92,7 @@ class AccountMove(models.Model):
         fields_done.add(fiscal_field)
 
         label = dict(FISCAL_FIELD).get(fiscal_field, fiscal_field)
-        name = "[{}] {}".format(label, inv_line.name or "")
+        name = self._prepare_double_entry_name(inv_line, template_item, label)
 
         due_date = (
             self.invoice_date_due
@@ -150,6 +150,22 @@ class AccountMove(models.Model):
             else:
                 vals["display_type"] = "cogs"
         return [debit_vals, credit_vals]
+
+    def _prepare_double_entry_name(self, inv_line, template_item, label):
+        """Historico da linha gerada.
+
+        Com historico padrao no item, o texto vem do template dele (data,
+        documento, parceiro, rotulo do campo); sem historico, mantem o rotulo
+        do campo fiscal com a descricao da linha.
+        """
+        if template_item.history_id:
+            return self.env["l10n_br.account.history"].render_for_move_line(
+                template_item.history_id,
+                self,
+                line_name=inv_line.name,
+                field_label=label,
+            )
+        return "[{}] {}".format(label, inv_line.name or "")
 
     def _has_tax_credit(self, line, tax_domain):
         """Check if the fiscal line has tax credit rights for the given domain."""

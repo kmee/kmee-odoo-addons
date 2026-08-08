@@ -39,6 +39,13 @@ class AccountMoveTemplateItem(models.Model):
         string="Credit Account",
         company_dependent=True,
     )
+    history_id = fields.Many2one(
+        comodel_name="l10n_br.account.history",
+        string="Historico Padrao",
+        help="Quando definido, o texto das linhas geradas por este item vem do "
+        "template do historico (com as variaveis de data, documento e "
+        "parceiro), em vez do rotulo padrao.",
+    )
     require_tax_credit = fields.Boolean(
         help="When checked, this item only generates entries if the fiscal line "
         "has tax credit rights (based on CST codes or credit classification).",

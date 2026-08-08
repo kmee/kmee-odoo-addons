@@ -11,6 +11,7 @@
     "category": "Accounting",
     "depends": [
         "l10n_br_account",
+        "l10n_br_account_history",
     ],
     "data": [
         "security/ir.model.access.csv",
