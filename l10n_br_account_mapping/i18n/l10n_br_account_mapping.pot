@@ -119,9 +119,19 @@ msgid "Em quais contas dos planos de destino esta conta desagua."
 msgstr ""
 
 #. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_end
+msgid "Fim de vigencia; vazio quando a conta segue vigente."
+msgstr ""
+
+#. module: l10n_br_account_mapping
 #: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__id
 #: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__id
 msgid "ID"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_start
+msgid "Inicio de vigencia da conta no destino. Vazio vale desde sempre."
 msgstr ""
 
 #. module: l10n_br_account_mapping
@@ -207,4 +217,14 @@ msgstr ""
 #. module: l10n_br_account_mapping
 #: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__company_id
 msgid "Vazio vale para todas as empresas."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_end
+msgid "Vigencia final"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_start
+msgid "Vigencia inicial"
 msgstr ""
