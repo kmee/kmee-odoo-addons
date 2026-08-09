@@ -58,16 +58,16 @@ Authors
 Contributors
 ------------
 
--  `KMEE <https://kmee.com.br>`__:
+- `KMEE <https://kmee.com.br>`__:
 
-   -  Diego Paradeda <diego.paradeda@kmee.com.br>
+  - Diego Paradeda <diego.paradeda@kmee.com.br>
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
