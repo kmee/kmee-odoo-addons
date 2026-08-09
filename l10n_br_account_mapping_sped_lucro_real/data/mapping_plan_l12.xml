@@ -9,8 +9,10 @@
 -->
 <odoo>
 
-    <record id="plan_referencial_1" model="l10n_br.account.mapping.plan">
-        <field name="name">Plano Referencial RFB 1 - PJ em Geral - Lucro Real</field>
+    <record id="plan_referencial_1_l12" model="l10n_br_account_mapping.plan">
+        <field
+            name="name"
+        >Plano Referencial RFB 1 - PJ em Geral - Lucro Real (leiaute 12)</field>
         <field name="sped_referential" eval="True" />
         <field name="sped_plan_code">1</field>
         <field name="sped_layout_version">12</field>

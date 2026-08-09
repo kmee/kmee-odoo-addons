@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <!-- Plano sem empresa vale para todas; plano com empresa so aparece
+         para quem esta nela. Sem esta regra o usuario da empresa A resolvia
+         contas pelo plano da empresa B e exportava com o codigo errado. -->
+    <record id="mapping_plan_company_rule" model="ir.rule">
+        <field name="name">Plano de destino: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_account_mapping_plan" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="mapping_account_company_rule" model="ir.rule">
+        <field name="name">Conta do plano de destino: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_account_mapping_account" />
+        <field
+            name="domain_force"
+        >['|', ('plan_id.company_id', '=', False), ('plan_id.company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>
