@@ -19,7 +19,7 @@ class AccountExport(models.Model):
                     + move.date.strftime("%d")
                     + fh.zero_pad(0, 4)
                     + fh.pad(
-                        line.account_id.l10n_br_export_code or "",
+                        self._resolve_account(line.account_id)[0],
                         5,
                         align=fh.ALIGN_RIGHT,
                     )

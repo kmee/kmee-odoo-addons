@@ -199,18 +199,27 @@ class AccountExport(models.Model):
 
         sem_codigo = self.env["account.account"]
         for line in self._get_export_lines():
-            if not line.account_id.l10n_br_export_code:
+            if not self._account_has_code(line.account_id):
                 sem_codigo |= line.account_id
         for conta in sem_codigo:
             qtd = len(
                 self._get_export_lines().filtered(lambda x, c=conta: x.account_id == c)
             )
+            plan = self.config_id.mapping_plan_id
+            destino = (
+                _("no plano %s") % plan.name if plan else _("no sistema do escritorio")
+            )
             criticas.append(
                 _(
-                    "Conta %(code)s (%(name)s) sem codigo no sistema do escritorio: "
+                    "Conta %(code)s (%(name)s) sem codigo %(destino)s: "
                     "%(qtd)s partida(s)."
                 )
-                % {"code": conta.code, "name": conta.name, "qtd": qtd}
+                % {
+                    "code": conta.code,
+                    "name": conta.name,
+                    "qtd": qtd,
+                    "destino": destino,
+                }
             )
 
         for move in self.move_ids:
@@ -229,7 +238,7 @@ class AccountExport(models.Model):
         invalid = self.env["account.move"]
         for move in self.move_ids:
             if any(
-                not line.account_id.l10n_br_export_code
+                not self._account_has_code(line.account_id)
                 for line in self._get_export_lines(move)
             ):
                 invalid |= move
@@ -352,6 +361,25 @@ class AccountExport(models.Model):
     # ------------------------------------------------------------------
     # utilidades para os adapters
     # ------------------------------------------------------------------
+    def _resolve_account(self, account):
+        """Codigo e nome da conta NO DESTINO desta exportacao.
+
+        Com plano de destino no perfil, resolve pelo mapeamento (N contas do
+        Odoo por conta do destino); sem plano, vale o campo simples 1:1 da
+        conta. Devolve ``(code, name)``, com strings vazias quando nao ha
+        mapeamento: quem decide recusar e a validacao, nao este metodo.
+        """
+        self.ensure_one()
+        plan = self.config_id.mapping_plan_id
+        if plan:
+            dest = plan.resolve(account)
+            return (dest.code or "", dest.name or "")
+        return (account.l10n_br_export_code or "", account.name or "")
+
+    def _account_has_code(self, account):
+        """A conta tem codigo neste destino? (alimenta a critica)"""
+        return bool(self._resolve_account(account)[0])
+
     def _file_name(self, sufixo="", extensao="txt"):
         """Nome de arquivo estavel: mesma entrada gera o mesmo nome."""
         self.ensure_one()
@@ -391,7 +419,7 @@ class AccountExport(models.Model):
             return []
 
         def conta(line):
-            return line.account_id.l10n_br_export_code or ""
+            return self._resolve_account(line.account_id)[0]
 
         def hist(line):
             return line.name or move.ref or ""
