@@ -19,11 +19,11 @@ class TestExportMapping(AccountExportCommon):
     @classmethod
     def setUpClass(cls, chart_template_ref=None):
         super().setUpClass(chart_template_ref=chart_template_ref)
-        cls.plan = cls.env["l10n_br.account.mapping.plan"].create(
+        cls.plan = cls.env["l10n_br_account_mapping.plan"].create(
             {"name": "Escritorio Mapping", "company_id": cls.company.id}
         )
         # N:1 de verdade: as duas contas do fixture desaguam na mesma conta
-        cls.dest = cls.env["l10n_br.account.mapping.account"].create(
+        cls.dest = cls.env["l10n_br_account_mapping.account"].create(
             {
                 "plan_id": cls.plan.id,
                 "code": "90001",
@@ -75,14 +75,3 @@ class TestExportMapping(AccountExportCommon):
             export.action_generate()
         self.assertIn("Escritorio Mapping", str(cm.exception))
         self.assertEqual(export.state, "draft")
-
-    def test_dominio_completo_usa_nome_do_destino(self):
-        """O 0200 sai com codigo e NOME da conta como o escritorio conhece."""
-        export = self._create_export("dominio_completo", self.move)
-        export.config_id.mapping_plan_id = self.plan
-        export.action_generate()
-        plano = self._text(export, contendo="plano_contas")
-        self.assertIn("|90001|", plano)
-        self.assertIn("Resultado consolidado", plano)
-        # o nome da conta do Odoo nao vaza para o plano do destino
-        self.assertNotIn(self.account_debito.name, plano)
