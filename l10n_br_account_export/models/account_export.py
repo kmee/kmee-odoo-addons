@@ -372,7 +372,9 @@ class AccountExport(models.Model):
         self.ensure_one()
         plan = self.config_id.mapping_plan_id
         if plan:
-            dest = plan.resolve(account)
+            # a data-base do lote decide a vigencia: reexportar um periodo
+            # antigo usa a tabela da epoca, nao a atual
+            dest = plan.resolve(account, date=self.date_end)
             return (dest.code or "", dest.name or "")
         return (account.l10n_br_export_code or "", account.name or "")
 
