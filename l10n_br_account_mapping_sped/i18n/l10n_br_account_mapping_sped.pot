@@ -58,16 +58,6 @@ msgid "Conta superior (RFB)"
 msgstr ""
 
 #. module: l10n_br_account_mapping_sped
-#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_date_end
-msgid "Fim de vigencia; vazio quando a conta segue vigente."
-msgstr ""
-
-#. module: l10n_br_account_mapping_sped
-#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_date_start
-msgid "Inicio de vigencia da conta na tabela dinamica."
-msgstr ""
-
-#. module: l10n_br_account_mapping_sped
 #: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_layout_version
 msgid "Leiaute de origem"
 msgstr ""
@@ -90,6 +80,19 @@ msgstr ""
 msgid ""
 "Natureza da conta na tabela referencial (1 ativo, 2 passivo, 3 patrimonio "
 "liquido, 4 resultado, 9 outras)."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_level
+msgid "Nivel (RFB)"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_level
+msgid ""
+"Nivel da conta na hierarquia da tabela referencial (coluna NIVEL da tabela "
+"dinamica). Os registros P100/P150 da ECF e o E010 exigem o nivel oficial, "
+"que nem sempre e a profundidade do codigo."
 msgstr ""
 
 #. module: l10n_br_account_mapping_sped
@@ -147,14 +150,4 @@ msgstr ""
 msgid ""
 "Versao do leiaute da tabela dinamica da RFB de onde este plano foi carregado"
 " (auditoria da carga)."
-msgstr ""
-
-#. module: l10n_br_account_mapping_sped
-#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_date_end
-msgid "Vigencia final (RFB)"
-msgstr ""
-
-#. module: l10n_br_account_mapping_sped
-#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_date_start
-msgid "Vigencia inicial (RFB)"
 msgstr ""
