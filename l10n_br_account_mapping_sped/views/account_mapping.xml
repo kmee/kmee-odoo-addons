@@ -6,8 +6,8 @@
 <odoo>
 
     <record id="mapping_plan_form_sped" model="ir.ui.view">
-        <field name="name">l10n_br.account.mapping.plan.form.sped</field>
-        <field name="model">l10n_br.account.mapping.plan</field>
+        <field name="name">l10n_br_account_mapping.plan.form.sped</field>
+        <field name="model">l10n_br_account_mapping.plan</field>
         <field name="inherit_id" ref="l10n_br_account_mapping.mapping_plan_form" />
         <field name="arch" type="xml">
             <field name="company_id" position="after">
