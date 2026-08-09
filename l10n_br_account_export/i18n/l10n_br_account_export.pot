@@ -166,9 +166,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
 #, python-format
-msgid ""
-"Conta %(code)s (%(name)s) sem codigo no sistema do escritorio: %(qtd)s "
-"partida(s)."
+msgid "Conta %(code)s (%(name)s) sem codigo %(destino)s: %(qtd)s partida(s)."
 msgstr ""
 
 #. module: l10n_br_account_export
@@ -498,6 +496,19 @@ msgid "O layout nao produziu nenhum arquivo."
 msgstr ""
 
 #. module: l10n_br_account_export
+#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export_config__mapping_plan_id
+msgid "Plano de contas do destino"
+msgstr ""
+
+#. module: l10n_br_account_export
+#: model:ir.model.fields,help:l10n_br_account_export.field_l10n_br_account_export_config__mapping_plan_id
+msgid ""
+"Quando definido, os codigos de conta do arquivo saem do mapeamento deste "
+"plano (N contas do Odoo por conta do destino). Sem plano, vale o campo "
+"Codigo no escritorio de cada conta (1:1)."
+msgstr ""
+
+#. module: l10n_br_account_export
 #: model:ir.model.fields.selection,name:l10n_br_account_export.selection__l10n_br_account_export__state__draft
 msgid "Rascunho"
 msgstr ""
@@ -605,4 +616,18 @@ msgstr ""
 #. module: l10n_br_account_export
 #: model:ir.model.fields.selection,name:l10n_br_account_export.selection__l10n_br_account_export_config__encoding__cp1252
 msgid "Windows-1252 (ANSI)"
+msgstr ""
+
+#. module: l10n_br_account_export
+#. odoo-python
+#: code:addons/l10n_br_account_export/models/account_export.py:0
+#, python-format
+msgid "no plano %s"
+msgstr ""
+
+#. module: l10n_br_account_export
+#. odoo-python
+#: code:addons/l10n_br_account_export/models/account_export.py:0
+#, python-format
+msgid "no sistema do escritorio"
 msgstr ""
