@@ -8,7 +8,7 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     l10n_br_sped_referential_plan_id = fields.Many2one(
-        comodel_name="l10n_br.account.mapping.plan",
+        comodel_name="l10n_br_account_mapping.plan",
         string="Plano referencial da RFB",
         domain=[("sped_referential", "=", True)],
         help="Plano referencial usado por esta empresa na ECD (registro "

@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 
 
 class AccountMappingPlan(models.Model):
-    _inherit = "l10n_br.account.mapping.plan"
+    _inherit = "l10n_br_account_mapping.plan"
 
     sped_referential = fields.Boolean(
         string="Plano referencial da RFB",
@@ -41,16 +41,19 @@ class AccountMappingPlan(models.Model):
                     % plan.name
                 )
 
-    def sped_referential_line(self, account):
+    def sped_referential_line(self, account, date=None):
         """Dados do registro I051 da ECD para uma conta do Odoo.
 
         Devolve ``{"COD_PLAN_REF": ..., "COD_CTA_REF": ...}`` quando a conta
         esta mapeada neste plano, ou ``{}`` quando nao esta. O I051 e opcional
         por conta na ECD: conta sem mapeamento simplesmente nao gera o
         registro filho.
+
+        :param date: data-base da escrituracao; escrituracao retificadora de
+            ano anterior usa a tabela vigente na epoca.
         """
         self.ensure_one()
-        dest = self.resolve(account)
+        dest = self.resolve(account, date=date)
         if not dest:
             return {}
         return {
@@ -60,7 +63,7 @@ class AccountMappingPlan(models.Model):
 
 
 class AccountMappingAccount(models.Model):
-    _inherit = "l10n_br.account.mapping.account"
+    _inherit = "l10n_br_account_mapping.account"
 
     sped_account_type = fields.Selection(
         [("S", "Sintetica"), ("A", "Analitica")],
@@ -79,11 +82,9 @@ class AccountMappingAccount(models.Model):
         help="Natureza da conta na tabela referencial (1 ativo, 2 passivo, "
         "3 patrimonio liquido, 4 resultado, 9 outras).",
     )
-    sped_date_start = fields.Date(
-        string="Vigencia inicial (RFB)",
-        help="Inicio de vigencia da conta na tabela dinamica.",
-    )
-    sped_date_end = fields.Date(
-        string="Vigencia final (RFB)",
-        help="Fim de vigencia; vazio quando a conta segue vigente.",
+    sped_level = fields.Integer(
+        string="Nivel (RFB)",
+        help="Nivel da conta na hierarquia da tabela referencial (coluna "
+        "NIVEL da tabela dinamica). Os registros P100/P150 da ECF e o E010 "
+        "exigem o nivel oficial, que nem sempre e a profundidade do codigo.",
     )
