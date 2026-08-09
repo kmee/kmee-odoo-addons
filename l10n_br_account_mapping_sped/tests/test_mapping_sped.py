@@ -18,14 +18,14 @@ class TestMappingSped(TransactionCase):
                 "company_id": cls.env.company.id,
             }
         )
-        cls.plan = cls.env["l10n_br.account.mapping.plan"].create(
+        cls.plan = cls.env["l10n_br_account_mapping.plan"].create(
             {
                 "name": "Referencial Lucro Real",
                 "sped_referential": True,
                 "sped_plan_code": "1",
             }
         )
-        cls.ref = cls.env["l10n_br.account.mapping.account"].create(
+        cls.ref = cls.env["l10n_br_account_mapping.account"].create(
             {
                 "plan_id": cls.plan.id,
                 "code": "1.01.01.01.01",
@@ -59,13 +59,13 @@ class TestMappingSped(TransactionCase):
     def test_referencial_exige_codigo_do_plano(self):
         """Plano marcado como referencial sem COD_PLAN_REF e recusado."""
         with self.assertRaises(ValidationError):
-            self.env["l10n_br.account.mapping.plan"].create(
+            self.env["l10n_br_account_mapping.plan"].create(
                 {"name": "Referencial sem codigo", "sped_referential": True}
             )
 
     def test_dominio_do_campo_da_empresa(self):
         """O campo da empresa so aceita planos marcados como referenciais."""
-        comum = self.env["l10n_br.account.mapping.plan"].create(
+        comum = self.env["l10n_br_account_mapping.plan"].create(
             {"name": "Plano comum de escritorio"}
         )
         field = self.env.company._fields["l10n_br_sped_referential_plan_id"]
