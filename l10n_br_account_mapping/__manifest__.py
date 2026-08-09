@@ -15,6 +15,7 @@
     "depends": ["account"],
     "data": [
         "security/ir.model.access.csv",
+        "security/ir_rule.xml",
         "views/account_mapping.xml",
     ],
     "demo": ["demo/account_mapping_demo.xml"],
