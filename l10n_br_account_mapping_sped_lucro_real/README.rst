@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ==================================================
 Plano Referencial RFB 1 - PJ em Geral - Lucro Real
 ==================================================
