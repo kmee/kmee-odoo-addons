@@ -13,25 +13,33 @@ publicado em http://sped.rfb.gov.br (ECF). Cada aba de plano referencial tem as
 colunas: CODIGO, DESCRICAO, DT_INI, DT_FIM, TIPO (S/A), CONTA SUPERIOR, NIVEL,
 NATUREZA.
 
-O modulo gerado carrega um `l10n_br.account.mapping.plan` marcado como
-referencial e todas as contas vigentes como `l10n_br.account.mapping.account`,
-em CSV nativo do Odoo com IDs externos deterministicos (o `-u` atualiza a
-tabela sem migracao). Regerar com uma versao nova da planilha atualiza o
-modulo; o diff do git mostra exatamente o que a RFB mudou.
+Cada LEIAUTE vive no proprio subdiretorio (``data/l12/``) com o proprio
+registro de plano (``plan_referencial_1_l12``) e IDs externos proprios
+(``ref_1_l12_...``): regerar com o leiaute novo ACRESCENTA arquivos sem tocar
+nos do leiaute anterior, entao a escrituracao retificadora de um ano antigo
+continua achando a tabela da epoca, e o ``-u`` nao apaga o mapeamento que o
+cliente fez sobre o leiaute anterior. Ao gerar por cima de um modulo
+existente, as entradas de dados dos leiautes anteriores sao preservadas no
+manifest.
+
+O NIVEL vem da coluna oficial quando presente; sem ela, e calculado pela
+cadeia de CONTA SUPERIOR (que nem sempre e prefixo do codigo: no plano 1 do
+leiaute 12, a conta 3.11.01.05.01.48 tem pai 3.01.01.05.01).
 """
 
 import argparse
 import csv
 import io
 import os
+import re
 import sys
 
 MANIFEST_TEMPLATE = """{header}
 {{
     "name": "Plano Referencial RFB {plan_code} - {plan_name}",
     "summary": "Tabela oficial do plano referencial {plan_code} da RFB "
-    "({abas_str}, leiaute {leiaute}) para o registro I051 da ECD",
-    "version": "16.0.{leiaute}.0.0",
+    "({abas_str}) para o registro I051 da ECD",
+    "version": "16.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
@@ -40,8 +48,7 @@ MANIFEST_TEMPLATE = """{header}
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["l10n_br_account_mapping_sped"],
     "data": [
-        "data/mapping_plan.xml",
-        "data/l10n_br.account.mapping.account.csv",
+{data_entries}
     ],
     "installable": True,
 }}
@@ -58,7 +65,7 @@ PLAN_XML_TEMPLATE = """<?xml version="1.0" encoding="UTF-8" ?>
 -->
 <odoo>
 
-    <record id="{plan_xmlid}" model="l10n_br.account.mapping.plan">
+    <record id="{plan_xmlid}" model="l10n_br_account_mapping.plan">
 {name_field}
         <field name="sped_referential" eval="True" />
         <field name="sped_plan_code">{plan_code}</field>
@@ -86,9 +93,30 @@ def _date_iso(value):
     return ""
 
 
-def _xmlid(plan_ref, code):
+def _xmlid(plan_ref, leiaute, code):
     safe = code.replace(".", "_").replace("-", "_")
-    return f"ref_{plan_ref}_{safe}"
+    return f"ref_{plan_ref}_l{leiaute}_{safe}"
+
+
+def _nivel_pela_cadeia(contas):
+    """NIVEL calculado pela cadeia de pais quando a planilha nao o traz."""
+    parent_by_code = {c["code"]: c["parent"] for c in contas}
+    level_by_code = {}
+
+    def level(code, seen=()):
+        if code in level_by_code:
+            return level_by_code[code]
+        parent = parent_by_code.get(code, "")
+        if not parent or parent == code or code in seen:
+            lv = 1
+        else:
+            lv = level(parent, seen + (code,)) + 1
+        level_by_code[code] = lv
+        return lv
+
+    for c in contas:
+        c["level"] = level(c["code"])
+    return contas
 
 
 def ler_abas(xlsx_path, abas):
@@ -112,6 +140,7 @@ def ler_abas(xlsx_path, abas):
             code = _clean(col(row, "CÓDIGO", "CODIGO"))
             if not code:
                 continue
+            nivel = _clean(col(row, "NÍVEL", "NIVEL"))
             contas.append(
                 {
                     "code": code,
@@ -121,18 +150,34 @@ def ler_abas(xlsx_path, abas):
                     "type": _clean(col(row, "TIPO")) or "A",
                     "parent": _clean(col(row, "CONTA SUPERIOR")),
                     "nature": _clean(col(row, "NATUREZA")),
+                    "level": int(nivel) if nivel.isdigit() else None,
                     "aba": aba,
                 }
             )
+    if any(c["level"] is None for c in contas):
+        contas = _nivel_pela_cadeia(contas)
     return contas
+
+
+def _data_entries_existentes(base, leiaute):
+    """Entradas de dados de OUTROS leiautes ja presentes no modulo."""
+    manifest = os.path.join(base, "__manifest__.py")
+    if not os.path.exists(manifest):
+        return []
+    with open(manifest, encoding="utf-8") as f:
+        content = f.read()
+    entries = re.findall(r'"(data/[^"]+)"', content)
+    return [e for e in entries if f"_l{leiaute}." not in e and f"/l{leiaute}/" not in e]
 
 
 def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
     base = os.path.join(saida, module)
-    os.makedirs(os.path.join(base, "data"), exist_ok=True)
+    data_dir = os.path.join(base, "data", f"l{leiaute}")
+    os.makedirs(data_dir, exist_ok=True)
     os.makedirs(os.path.join(base, "readme"), exist_ok=True)
 
-    plan_xmlid = f"plan_referencial_{plan_code}"
+    anteriores = _data_entries_existentes(base, leiaute)
+    plan_xmlid = f"plan_referencial_{plan_code}_l{leiaute}"
     header = (
         "# Copyright (C) 2026 KMEE Informatica LTDA\n"
         "# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).\n"
@@ -140,6 +185,14 @@ def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
 
     abas = sorted({c["aba"] for c in contas})
     abas_str = ", ".join(abas)
+    novas = [
+        f"data/mapping_plan_l{leiaute}.xml",
+        f"data/l{leiaute}/l10n_br_account_mapping.account.csv",
+    ]
+    entries = anteriores + novas
+    # concatenacao em vez de f-string: o flake8 do repo tokeniza o interior
+    # de f-strings e acusa E231 falso na virgula do literal
+    data_entries = "\n".join('        "' + e + '",' for e in entries)
     with open(os.path.join(base, "__manifest__.py"), "w", encoding="utf-8") as f:
         f.write(
             MANIFEST_TEMPLATE.format(
@@ -147,18 +200,22 @@ def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
                 plan_code=plan_code,
                 plan_name=plan_name,
                 abas_str=abas_str,
-                leiaute=leiaute,
+                data_entries=data_entries,
             )
         )
     with open(os.path.join(base, "__init__.py"), "w", encoding="utf-8") as f:
         f.write(header)
 
     with open(
-        os.path.join(base, "data", "mapping_plan.xml"), "w", encoding="utf-8"
+        os.path.join(base, "data", f"mapping_plan_l{leiaute}.xml"),
+        "w",
+        encoding="utf-8",
     ) as f:
         # replica a regra de 88 colunas do prettier do repo: inline quando
         # cabe, quebrado quando nao; assim regenerar = identico ao formatado
-        full_name = f"Plano Referencial RFB {plan_code} - {plan_name}"
+        full_name = (
+            f"Plano Referencial RFB {plan_code} - {plan_name} (leiaute {leiaute})"
+        )
         # literais com espacos fora de f-string: o flake8 do repo tokeniza o
         # interior de f-strings e acusa E221 falso nos espacos de indentacao
         inline = '        <field name="name">' + full_name + "</field>"
@@ -193,13 +250,14 @@ def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
             "sped_account_type",
             "sped_parent_code",
             "sped_nature",
-            "sped_date_start",
-            "sped_date_end",
+            "sped_level",
+            "date_start",
+            "date_end",
         ]
     )
     vistos = set()
     for c in contas:
-        xmlid = _xmlid(plan_code, c["code"])
+        xmlid = _xmlid(plan_code, leiaute, c["code"])
         if xmlid in vistos:
             print(  # noqa: T201 pylint: disable=print-used
                 f"  AVISO: codigo duplicado ignorado: {c['code']}"
@@ -215,12 +273,13 @@ def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
                 c["type"],
                 c["parent"],
                 c["nature"],
+                c["level"],
                 c["date_start"],
                 c["date_end"],
             ]
         )
     with open(
-        os.path.join(base, "data", "l10n_br.account.mapping.account.csv"),
+        os.path.join(data_dir, "l10n_br_account_mapping.account.csv"),
         "w",
         encoding="utf-8",
         newline="",
@@ -233,12 +292,14 @@ def gerar_modulo(contas, plan_code, plan_name, module, leiaute, saida):
         f.write(
             f"Carga oficial do **plano referencial {plan_code} da RFB**\n"
             f"({plan_name}), abas {abas_str} do pacote de tabelas\n"
-            f"dinamicas do SPED, leiaute {leiaute}.\n\n"
+            "dinamicas do SPED.\n\n"
             f"Sao {len(vistos)} contas referenciais, com tipo\n"
-            "(sintetica/analitica), hierarquia, natureza e vigencia. O modulo\n"
-            "e gerado por ``tools/gerar_modulo_plano.py`` a partir da planilha\n"
-            "publicada em http://sped.rfb.gov.br e atualizado por ``-u`` quando\n"
-            "a RFB publica um leiaute novo.\n\n"
+            "(sintetica/analitica), hierarquia, nivel, natureza e vigencia.\n"
+            "Cada leiaute da RFB vive no proprio subdiretorio de dados e no\n"
+            "proprio registro de plano: os leiautes convivem, e a\n"
+            "escrituracao retificadora de um ano antigo usa a tabela da\n"
+            "epoca. O modulo e gerado por ``tools/gerar_modulo_plano.py`` a\n"
+            "partir da planilha publicada em http://sped.rfb.gov.br.\n\n"
             "Depois de instalar, vincule as contas do Odoo as contas\n"
             "referenciais (analiticas) e aponte o plano na empresa: e o que\n"
             "alimenta o registro I051 da ECD.\n"
