@@ -224,4 +224,129 @@
             <field name="date_to" eval="time.strftime('%Y-03-31')" />
         </record>
 
+        <!-- Renata - CLT R$15.000, acima do teto do INSS -->
+        <record id="demo_payslip_renata" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Renata Alves Machado')"
+        />
+            <field name="employee_id" ref="demo_employee_renata" />
+            <field name="contract_id" ref="demo_contract_renata" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
+        </record>
+
+        <!-- Josefa - CLT salário mínimo, 2 filhos (salário família) -->
+        <record id="demo_payslip_josefa" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Josefa Ribeiro Campos')"
+        />
+            <field name="employee_id" ref="demo_employee_josefa" />
+            <field name="contract_id" ref="demo_contract_josefa" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-03-01')" />
+            <field name="date_to" eval="time.strftime('%Y-03-31')" />
+        </record>
+
+        <!-- ===== Abril - folha completa (todos os funcionários) =====
+             O holerite de abril do João já está declarado acima (com horas
+             extras 50%). Aqui entram os demais, para que o lote 04 tenha a
+             empresa inteira e sirva de contraste com o lote 03 já fechado. -->
+
+        <!-- Maria - Abril -->
+        <record id="demo_payslip_maria_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Maria Fernanda Santos')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_maria" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_maria" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+        </record>
+
+        <!-- Pedro - Abril, com 4 horas noturnas (hora reduzida) -->
+        <record id="demo_payslip_pedro_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Pedro Henrique Oliveira')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_pedro" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_pedro" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+            <field name="l10n_br_horas_noturnas">4</field>
+            <field name="l10n_br_usar_hora_reduzida" eval="True" />
+        </record>
+
+        <!-- Ana - Abril (estatutária) -->
+        <record id="demo_payslip_ana_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Ana Beatriz Souza')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_ana" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_ana" />
+            <field name="struct_id" ref="structure_estatuto" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+        </record>
+
+        <!-- Lucas - Abril (aprendiz: INSS 2%, FGTS 2%) -->
+        <record id="demo_payslip_lucas_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Lucas Gabriel Costa')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_lucas" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_lucas" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+        </record>
+
+        <!-- Carla - Abril (isenta de IRRF por moléstia grave) -->
+        <record id="demo_payslip_carla_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Carla Regina Pereira')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_carla" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_carla" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+        </record>
+
+        <!-- Renata - Abril -->
+        <record id="demo_payslip_renata_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Renata Alves Machado')"
+        />
+            <field name="employee_id" ref="demo_employee_renata" />
+            <field name="contract_id" ref="demo_contract_renata" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+        </record>
+
+        <!-- Josefa - Abril, com 1 falta injustificada (FALTAS + desconto DSR) -->
+        <record id="demo_payslip_josefa_04" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Holerite 04/%Y - Josefa Ribeiro Campos')"
+        />
+            <field name="employee_id" ref="demo_employee_josefa" />
+            <field name="contract_id" ref="demo_contract_josefa" />
+            <field name="struct_id" ref="structure_clt" />
+            <field name="date_from" eval="time.strftime('%Y-04-01')" />
+            <field name="date_to" eval="time.strftime('%Y-04-30')" />
+            <field name="l10n_br_faltas_injustificadas">1</field>
+        </record>
+
 </odoo>

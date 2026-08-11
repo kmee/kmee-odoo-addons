@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
+    <!--
+        Parte 1 - Complemento dos contratos de demonstração do
+        l10n_br_hr_contract com a estrutura salarial e os adicionais da folha.
+
+        A jornada de 44h/semana (`demo_calendar_clt_44h`) é aplicada aos
+        contratos que declaram 220 horas mensais, para que o divisor do
+        salário-hora derivado do calendário (RF-26) coincida com o contrato.
+        O contrato do aprendiz (30h/150h) fica no calendário padrão da empresa.
+    -->
+
     <!-- João — Estrutura CLT -->
         <record id="l10n_br_hr_contract.demo_contract_joao" model="hr.contract">
             <field name="struct_id" ref="structure_clt" />
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
         </record>
 
         <!-- Maria — Estrutura CLT + periculosidade -->
         <record id="l10n_br_hr_contract.demo_contract_maria" model="hr.contract">
             <field name="struct_id" ref="structure_clt" />
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
             <field name="l10n_br_periculosidade" eval="True" />
         </record>
 
         <!-- Pedro — Estrutura CLT + insalubridade grau máximo -->
         <record id="l10n_br_hr_contract.demo_contract_pedro" model="hr.contract">
             <field name="struct_id" ref="structure_clt" />
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
             <field name="l10n_br_insalubridade" eval="True" />
             <field name="l10n_br_grau_insalubridade">maximo</field>
         </record>
@@ -22,6 +35,7 @@
         <!-- Ana — Estrutura Estatutário -->
         <record id="l10n_br_hr_contract.demo_contract_ana" model="hr.contract">
             <field name="struct_id" ref="structure_estatuto" />
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
         </record>
 
         <!-- Lucas — Estrutura CLT (aprendiz usa mesma estrutura) -->
@@ -31,6 +45,63 @@
 
         <!-- Carla — Estrutura CLT -->
         <record id="l10n_br_hr_contract.demo_contract_carla" model="hr.contract">
+            <field name="struct_id" ref="structure_clt" />
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
+        </record>
+
+        <!--
+        Parte 2 - Contratos dos funcionários criados neste módulo.
+    -->
+
+        <!-- Renata - CLT, RGPS, mensal, R$ 15.000 (acima do teto do INSS) -->
+        <record id="demo_contract_renata" model="hr.contract">
+            <field name="name">Contrato Renata Alves Machado</field>
+            <field name="employee_id" ref="demo_employee_renata" />
+            <field name="department_id" ref="l10n_br_hr.demo_department_ti" />
+            <field name="job_id" ref="l10n_br_hr.demo_job_analista_sistemas" />
+            <field name="wage">15000.00</field>
+            <field name="date_start">2024-01-02</field>
+            <field name="state">open</field>
+            <field name="labor_regime_id" ref="l10n_br_hr_contract.labor_regime_clt" />
+            <field
+            name="labor_bond_type_id"
+            ref="l10n_br_hr_contract.labor_bond_type_10"
+        />
+            <field
+            name="admission_type_id"
+            ref="l10n_br_hr_contract.admission_type_1"
+        />
+            <field name="welfare_policy">rgps</field>
+            <field name="salary_unit" ref="l10n_br_hr_contract.salary_unit_5" />
+            <field name="weekly_hours">44</field>
+            <field name="monthly_hours">220</field>
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
+            <field name="struct_id" ref="structure_clt" />
+        </record>
+
+        <!-- Josefa - CLT, RGPS, mensal, salário mínimo 2026 (R$ 1.621,00) -->
+        <record id="demo_contract_josefa" model="hr.contract">
+            <field name="name">Contrato Josefa Ribeiro Campos</field>
+            <field name="employee_id" ref="demo_employee_josefa" />
+            <field name="department_id" ref="l10n_br_hr.demo_department_operacional" />
+            <field name="job_id" ref="l10n_br_hr.demo_job_operador_industrial" />
+            <field name="wage">1621.00</field>
+            <field name="date_start">2024-01-02</field>
+            <field name="state">open</field>
+            <field name="labor_regime_id" ref="l10n_br_hr_contract.labor_regime_clt" />
+            <field
+            name="labor_bond_type_id"
+            ref="l10n_br_hr_contract.labor_bond_type_10"
+        />
+            <field
+            name="admission_type_id"
+            ref="l10n_br_hr_contract.admission_type_1"
+        />
+            <field name="welfare_policy">rgps</field>
+            <field name="salary_unit" ref="l10n_br_hr_contract.salary_unit_5" />
+            <field name="weekly_hours">44</field>
+            <field name="monthly_hours">220</field>
+            <field name="resource_calendar_id" ref="demo_calendar_clt_44h" />
             <field name="struct_id" ref="structure_clt" />
         </record>
 
