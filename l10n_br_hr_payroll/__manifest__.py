@@ -30,9 +30,11 @@
         "views/hr_payslip_views.xml",
     ],
     "demo": [
+        "demo/resource_calendar_payroll_demo.xml",
         "demo/hr_employee_payroll_demo.xml",
         "demo/hr_contract_payroll_demo.xml",
         "demo/hr_payslip_demo.xml",
+        "demo/hr_payslip_run_demo.xml",
     ],
     "installable": True,
     "auto_install": False,

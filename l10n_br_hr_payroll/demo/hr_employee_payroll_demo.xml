@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
+    <!--
+        Parte 1 - Complemento dos funcionários de demonstração do l10n_br_hr
+        com os campos de folha (tipo de contrato, dependentes de IRRF, filhos
+        para salário família, moléstia grave).
+    -->
+
     <!-- João — CLT, 2 dep. IRRF, 2 filhos SF -->
         <record id="l10n_br_hr.demo_employee_joao" model="hr.employee">
             <field name="l10n_br_tipo_contrato">clt</field>
@@ -41,6 +47,71 @@
             <field name="l10n_br_pcd" eval="True" />
             <field name="l10n_br_molestia_grave" eval="True" />
             <field name="l10n_br_cid_molestia">C50</field>
+        </record>
+
+        <!--
+        Parte 2 - Funcionários criados aqui para cobrir casos de cálculo que o
+        conjunto do l10n_br_hr não cobre:
+
+          - Renata: salário acima do TETO do INSS (2026: R$ 8.475,55), único
+            caso CLT que exercita a 4ª faixa até o teto e a limitação da
+            contribuição (a Ana ganha R$ 8.500,00, mas é estatutária/RPPS,
+            regra diferente).
+          - Josefa: salário mínimo com filhos, único caso que efetivamente
+            gera cota de SALÁRIO FAMÍLIA (limite 2026: R$ 1.980,38 de
+            remuneração). Os demais têm salário acima do limite e a cota sai
+            zerada mesmo com filhos declarados.
+    -->
+
+        <!-- Renata Alves Machado - CLT acima do teto do INSS -->
+        <record id="demo_employee_renata" model="hr.employee">
+            <field name="name">Renata Alves Machado</field>
+            <field name="gender">female</field>
+            <field name="birthday">1979-04-08</field>
+            <field name="marital">married</field>
+            <field name="country_id" ref="base.br" />
+            <field name="department_id" ref="l10n_br_hr.demo_department_ti" />
+            <field name="job_id" ref="l10n_br_hr.demo_job_analista_sistemas" />
+            <field name="cnpj_cpf">987.654.321-00</field>
+            <field name="pis_pasep">11223344554</field>
+            <field name="ctps">78901</field>
+            <field name="ctps_series">0007</field>
+            <field name="ctps_date">2005-03-01</field>
+            <field name="ctps_uf_id" ref="base.state_br_sp" />
+            <field name="father_name">Antônio Machado Filho</field>
+            <field name="mother_name">Vera Lúcia Alves</field>
+            <field name="ethnicity" ref="l10n_br_hr.ethnicity_1" />
+            <field name="blood_type">b+</field>
+            <field name="registration">EMP007</field>
+            <field name="employee_relationship_type">funcionario</field>
+            <field name="l10n_br_tipo_contrato">clt</field>
+            <field name="l10n_br_irrf_dependentes">0</field>
+        </record>
+
+        <!-- Josefa Ribeiro Campos - CLT salário mínimo, 2 filhos (sal. família) -->
+        <record id="demo_employee_josefa" model="hr.employee">
+            <field name="name">Josefa Ribeiro Campos</field>
+            <field name="gender">female</field>
+            <field name="birthday">1994-12-02</field>
+            <field name="marital">single</field>
+            <field name="country_id" ref="base.br" />
+            <field name="department_id" ref="l10n_br_hr.demo_department_operacional" />
+            <field name="job_id" ref="l10n_br_hr.demo_job_operador_industrial" />
+            <field name="cnpj_cpf">456.789.123-64</field>
+            <field name="pis_pasep">99887766551</field>
+            <field name="ctps">89012</field>
+            <field name="ctps_series">0008</field>
+            <field name="ctps_date">2018-08-15</field>
+            <field name="ctps_uf_id" ref="base.state_br_sp" />
+            <field name="father_name">Sebastião Campos</field>
+            <field name="mother_name">Marlene Ribeiro Campos</field>
+            <field name="ethnicity" ref="l10n_br_hr.ethnicity_3" />
+            <field name="blood_type">o+</field>
+            <field name="registration">EMP008</field>
+            <field name="employee_relationship_type">funcionario</field>
+            <field name="l10n_br_tipo_contrato">clt</field>
+            <field name="l10n_br_irrf_dependentes">2</field>
+            <field name="l10n_br_num_filhos_sf">2</field>
         </record>
 
 </odoo>

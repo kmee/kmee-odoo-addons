@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        Jornada padrão CLT: 44 horas semanais (art. 7º, XIII, CF/88).
+
+        O calendário padrão do Odoo tem 40h (seg-sex, 8h/dia). Aqui a jornada
+        brasileira é completada com o sábado pela manhã, chegando às 44h que os
+        contratos de demonstração declaram em `weekly_hours`/`monthly_hours`.
+
+        Isso importa para o cálculo: `hr.contract._l10n_br_divisor_horas_mensais()`
+        deriva o divisor do salário-hora do CALENDÁRIO (horas semanais x 5), não
+        do campo `monthly_hours`. Sem este calendário o divisor cai em 200
+        (40h x 5) e as horas extras da demo saem calculadas com salário-hora de
+        200 avos, divergindo dos 220 avos declarados no contrato.
+    -->
+    <record id="demo_calendar_clt_44h" model="resource.calendar">
+        <field name="name">Jornada CLT 44h/semana</field>
+        <field name="tz">America/Sao_Paulo</field>
+        <field name="hours_per_day">8.0</field>
+    </record>
+
+    <!-- Sábado 08:00-12:00 (as 40h de seg-sex vêm do default do Odoo) -->
+    <record id="demo_calendar_clt_44h_sabado" model="resource.calendar.attendance">
+        <field name="name">Saturday Morning</field>
+        <field name="calendar_id" ref="demo_calendar_clt_44h" />
+        <field name="dayofweek">5</field>
+        <field name="hour_from">8.0</field>
+        <field name="hour_to">12.0</field>
+        <field name="day_period">morning</field>
+    </record>
+
+</odoo>
