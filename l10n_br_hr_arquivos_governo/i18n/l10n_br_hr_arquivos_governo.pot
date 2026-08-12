@@ -19,6 +19,69 @@ msgid "13º Salário"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
+msgid ""
+"<strong>CAGED extinto.</strong> Pela Portaria SEPRT\n"
+"                        1.127/2019, quem presta informações pelo eSocial está\n"
+"                        dispensado do CAGED desde janeiro de 2020: as\n"
+"                        movimentações vão pelos eventos S-2200 (admissão) e\n"
+"                        S-2299 (desligamento). A geração de arquivo está\n"
+"                        desativada; esta tela serve apenas para consultar o\n"
+"                        histórico já gerado."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
+msgid ""
+"<strong>DIRF extinta.</strong> A IN RFB 2.181/2024\n"
+"                        encerrou a DIRF: os fatos ocorridos a partir de\n"
+"                        01/01/2025 são informados pela EFD-Reinf (série R-4000)\n"
+"                        e pelo eSocial, com confissão e recolhimento na DCTFWeb.\n"
+"                        A geração de arquivo está desativada; esta tela serve\n"
+"                        apenas para consultar o histórico já gerado."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
+msgid ""
+"<strong>SEFIP substituída pelo FGTS Digital.</strong>\n"
+"                        Pela Portaria MTE 3.240/2023, desde a competência\n"
+"                        03/2024 a guia do FGTS (GFD) é emitida pelo FGTS Digital\n"
+"                        a partir dos eventos do eSocial, e as contribuições\n"
+"                        previdenciárias vão pela DCTFWeb. A geração de arquivo\n"
+"                        está desativada; esta tela serve apenas para consultar o\n"
+"                        histórico já gerado."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#. odoo-python
+#: code:addons/l10n_br_hr_arquivos_governo/models/l10n_br_hr_dirf.py:0
+#, python-format
+msgid ""
+"A DIRF foi extinta e este gerador foi descontinuado.\n"
+"\n"
+"Norma: IN RFB 2.181/2024, que encerrou a DIRF. Para os fatos ocorridos a partir de 1o de janeiro de 2025 não há mais entrega de DIRF.\n"
+"\n"
+"Caminho atual: as retenções de imposto de renda na fonte são informadas pela EFD-Reinf (eventos da série R-4000) e pelo eSocial, e a confissão e o recolhimento passam pela DCTFWeb. O comprovante anual de rendimentos ao beneficiário continua devido e não depende deste gerador.\n"
+"\n"
+"Os registros de DIRF já existentes continuam disponíveis somente para consulta de histórico."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
+#. odoo-python
+#: code:addons/l10n_br_hr_arquivos_governo/models/l10n_br_hr_sefip.py:0
+#, python-format
+msgid ""
+"A SEFIP foi substituída pelo FGTS Digital e este gerador foi descontinuado.\n"
+"\n"
+"Norma: Portaria MTE 3.240/2023, que instituiu o FGTS Digital. Desde a competência 03/2024 o recolhimento do FGTS não usa mais o arquivo SEFIP nem a GRF.\n"
+"\n"
+"Caminho atual: os eventos de remuneração do eSocial alimentam o FGTS Digital, que emite a guia (GFD); as contribuições previdenciárias são confessadas e recolhidas pela DCTFWeb.\n"
+"\n"
+"Os registros de SEFIP já existentes continuam disponíveis somente para consulta de histórico."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
 #: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__state__open
 #: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_dirf__state__open
 #: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__state__open
@@ -101,7 +164,7 @@ msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
 #: model:ir.model,name:l10n_br_hr_arquivos_governo.model_l10n_br_hr_caged
-msgid "CAGED - Cadastro de Empregados e Desempregados"
+msgid "CAGED - Cadastro de Empregados e Desempregados (descontinuado)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
@@ -221,7 +284,7 @@ msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
 #: model:ir.model,name:l10n_br_hr_arquivos_governo.model_l10n_br_hr_dirf
-msgid "DIRF - Declaração do IR Retido na Fonte"
+msgid "DIRF - Declaração do IR Retido na Fonte (descontinuada)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
@@ -345,17 +408,17 @@ msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_caged_form
-msgid "Gerar CAGED"
+msgid "Gerar CAGED (descontinuado)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_dirf_form
-msgid "Gerar DIRF"
+msgid "Gerar DIRF (descontinuado)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_arquivos_governo.l10n_br_hr_sefip_form
-msgid "Gerar SEFIP"
+msgid "Gerar SEFIP (descontinuado)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
@@ -506,6 +569,20 @@ msgid "Número do Recibo (retificação)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
+#. odoo-python
+#: code:addons/l10n_br_hr_arquivos_governo/models/l10n_br_hr_caged.py:0
+#, python-format
+msgid ""
+"O CAGED foi extinto e este gerador foi descontinuado.\n"
+"\n"
+"Norma: Portaria SEPRT 1.127/2019, que dispensou a declaração do CAGED para quem presta informações pelo eSocial. Desde janeiro de 2020 não há mais entrega do arquivo CAGED.\n"
+"\n"
+"Caminho atual: as admissões e os desligamentos são informados pelos eventos S-2200 (admissão) e S-2299 (desligamento) do eSocial, que alimentam o Novo CAGED.\n"
+"\n"
+"Os registros de CAGED já existentes continuam disponíveis somente para consulta de histórico."
+msgstr ""
+
+#. module: l10n_br_hr_arquivos_governo
 #: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_caged__mes__10
 #: model:ir.model.fields.selection,name:l10n_br_hr_arquivos_governo.selection__l10n_br_hr_sefip__mes__10
 msgid "Outubro"
@@ -602,7 +679,7 @@ msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
 #: model:ir.model,name:l10n_br_hr_arquivos_governo.model_l10n_br_hr_sefip
-msgid "SEFIP - FGTS e Previdência Social"
+msgid "SEFIP - FGTS e Previdência Social (descontinuada)"
 msgstr ""
 
 #. module: l10n_br_hr_arquivos_governo
