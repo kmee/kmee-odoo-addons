@@ -395,6 +395,186 @@ result = tools.br.round_money(max(base_fgts, 0) * 0.02)
         </field>
     </record>
 
+    <!--
+        152-154. Encargos patronais previdenciários (RF-31/RF-32/RF-33).
+
+        Custo do EMPREGADOR: não são descontados do empregado e não entram no
+        líquido (categoria COMP, como o FGTS). Aparecem no holerite e no lote
+        como informação de custo e são contabilizados pelo
+        l10n_br_hr_payroll_account (despesa x passivo por tributo).
+
+        Base: a mesma do FGTS/INSS (remuneração do mês). A cota do salário
+        família fica FORA de toda base patronal e do FGTS (Lei 8.212/91,
+        art. 28, §9º, "a"; codIncCP 00 no eSocial) - o que se obtém
+        naturalmente porque a rubrica dela é calculada depois do GROSS. A CPP
+        e o RAT não têm teto: o teto do RGPS limita apenas a contribuição do
+        segurado.
+
+        Todas as três alíquotas vêm de tools.br.aliquotas_patronais(contract),
+        que resolve o regime tributário da empresa do holerite: no Simples
+        Nacional dos anexos I, II, III e V nenhuma delas é devida (CPP e RAT
+        no DAS pelo art. 13, VI; terceiros dispensados pelo art. 13, §3º da
+        LC 123/2006) e as regras nem geram linha. Ver models/res_company.py.
+    -->
+
+    <!-- 152. CPP - contribuição previdenciária patronal (20%) -->
+    <record id="hr_rule_cpp_patronal" model="hr.salary.rule">
+        <field name="name">INSS Patronal (CPP)</field>
+        <field name="sequence" eval="152" />
+        <field name="code">CPP</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = tools.br.aliquotas_patronais(contract).cpp &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Lei 8.212/91, art. 22, I: 20% sobre o total das remunerações, sem teto.
+# Optante pela CPRB: alíquota reduzida pela proporção do ano na transição da
+# Lei 14.973/2024 (a redução alcança SÓ este inciso - ver RAT e terceiros).
+base_patronal = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.round_money(base_patronal * tools.br.aliquotas_patronais(contract).cpp)
+        </field>
+    </record>
+
+    <!-- 153. RAT ajustado (RAT x FAP) -->
+    <record id="hr_rule_rat_patronal" model="hr.salary.rule">
+        <field name="name">RAT Ajustado (GILRAT)</field>
+        <field name="sequence" eval="153" />
+        <field name="code">RAT</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = tools.br.aliquotas_patronais(contract).rat &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Lei 8.212/91, art. 22, II (riscos ambientais do trabalho): 1%, 2% ou 3%
+# pelo CNAE preponderante, multiplicado pelo FAP (Decreto 3.048/99,
+# art. 202-A). INTEGRAL mesmo para optante da CPRB e INTEGRAL sobre o 13º.
+# Só alcança segurado empregado: remuneração de contribuinte individual
+# (pró-labore) é art. 22, III, sem RAT.
+base_patronal = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.round_money(base_patronal * tools.br.aliquotas_patronais(contract).rat)
+        </field>
+    </record>
+
+    <!-- 154. Terceiros / outras entidades (código FPAS) -->
+    <record id="hr_rule_terceiros_patronal" model="hr.salary.rule">
+        <field name="name">Terceiros (Outras Entidades)</field>
+        <field name="sequence" eval="154" />
+        <field name="code">TERCEIROS</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = tools.br.aliquotas_patronais(contract).terceiros &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Contribuições a outras entidades e fundos, pela alíquota do código FPAS
+# (indústria, FPAS 507: 5,8%). INTEGRAIS para optante da CPRB.
+base_patronal = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.round_money(base_patronal * tools.br.aliquotas_patronais(contract).terceiros)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PROVISÕES TRABALHISTAS (PROV) - competência, não caixa
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!--
+        160-163. Provisões mensais de férias + 1/3 e de 13º salário, com os
+        encargos patronais incidentes sobre a própria provisão (RF-34).
+
+        Reconhecimento por competência: o direito é adquirido mês a mês (CLT
+        art. 130; Lei 4.090/62 art. 1º), então o custo pertence ao mês, não ao
+        pagamento (Lei 6.404/76, art. 177; CPC 33). Sem isso o resultado do mês
+        do gozo/pagamento fica distorcido e o custo por regime tributário sai
+        subavaliado. Dedutibilidade fiscal da provisão com encargos:
+        arts. 342 (férias) e 343 (13º) do RIR/2018.
+
+        Os encargos sobre a provisão seguem o MESMO regime das rubricas
+        patronais: no Simples dos anexos I, II, III e V sobra apenas o FGTS.
+        Na provisão do 13º de optante da CPRB a proporção usada é a do 13º
+        (sem CPP de 2025 a 2027, Lei 12.546/2011 art. 9º-A, §1º), mas RAT e
+        terceiros continuam integrais. Na provisão de férias, a parcela que se
+        espera pagar como verba INDENIZATÓRIA é excluída da base dos encargos
+        (parâmetro por empresa), porque férias indenizadas não têm INSS nem
+        FGTS.
+    -->
+
+    <!-- 160. Provisão de férias + 1/3 -->
+    <record id="hr_rule_provisao_ferias" model="hr.salary.rule">
+        <field name="name">Provisão de Férias + 1/3</field>
+        <field name="sequence" eval="160" />
+        <field name="code">PROV_FERIAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# 1/12 da remuneração + 1/3 constitucional = remuneração x 4 / 36.
+base_provisao = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.calc_provisao_ferias(base_provisao)
+        </field>
+    </record>
+
+    <!-- 161. Encargos patronais sobre a provisão de férias -->
+    <record id="hr_rule_provisao_ferias_encargos" model="hr.salary.rule">
+        <field name="name">Encargos sobre Provisão de Férias</field>
+        <field name="sequence" eval="161" />
+        <field name="code">PROV_FERIAS_ENC</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = PROV_FERIAS &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# CPP + RAT ajustado + terceiros + FGTS, conforme o regime da empresa.
+# A parcela esperada de férias INDENIZADAS sai da base (sem INSS nem FGTS).
+aliquotas = tools.br.aliquotas_patronais(contract)
+company = payslip.company_id or contract.company_id
+result = tools.br.calc_encargos_sobre_provisao(
+    PROV_FERIAS,
+    aliquotas.total_com_fgts,
+    company.l10n_br_hr_prov_ferias_perc_indenizado,
+)
+        </field>
+    </record>
+
+    <!-- 162. Provisão de 13º salário -->
+    <record id="hr_rule_provisao_decimo" model="hr.salary.rule">
+        <field name="name">Provisão de 13º Salário</field>
+        <field name="sequence" eval="162" />
+        <field name="code">PROV_13</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_provisao = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.calc_provisao_decimo_terceiro(base_provisao)
+        </field>
+    </record>
+
+    <!-- 163. Encargos patronais sobre a provisão de 13º -->
+    <record id="hr_rule_provisao_decimo_encargos" model="hr.salary.rule">
+        <field name="name">Encargos sobre Provisão de 13º</field>
+        <field name="sequence" eval="163" />
+        <field name="code">PROV_13_ENC</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = PROV_13 &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# A CPRB tem cronograma PRÓPRIO para o 13º (sem CPP de 2025 a 2027), por isso
+# a alíquota do 13º é resolvida com decimo_terceiro=True.
+aliquotas = tools.br.aliquotas_patronais(contract, decimo_terceiro=True)
+result = tools.br.calc_encargos_sobre_provisao(PROV_13, aliquotas.total_com_fgts)
+        </field>
+    </record>
+
     <!-- ══════════════════════════════════════════════════════════════
          LÍQUIDO (NET)
          ══════════════════════════════════════════════════════════════ -->

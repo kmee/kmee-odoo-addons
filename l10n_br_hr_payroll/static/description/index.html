@@ -378,8 +378,8 @@ ul.auto-toc {
 <p>Folha de Pagamento Brasileira para Odoo 16.0.</p>
 <p>Implementa os cálculos de:</p>
 <ul class="simple">
-<li>INSS (tabela progressiva 2024)</li>
-<li>IRRF (tabela progressiva 2024)</li>
+<li>INSS (tabela progressiva por vigência)</li>
+<li>IRRF (tabela progressiva por vigência, desconto simplificado e redutor)</li>
 <li>FGTS (8% CLT, 2% aprendiz)</li>
 <li>Hora extra 50% e 100%</li>
 <li>Adicional noturno (20%)</li>
@@ -389,6 +389,100 @@ ul.auto-toc {
 <li>Faltas injustificadas e DSR</li>
 <li>Estruturas CLT e Estatutário</li>
 </ul>
+<div class="section" id="encargos-patronais-por-regime-tributario">
+<h2>Encargos patronais por regime tributário</h2>
+<p>O custo do empregador é calculado a partir do regime tributário da empresa
+(<tt class="docutils literal">tax_framework</tt> do <tt class="docutils literal">l10n_br_fiscal</tt>) e dos parâmetros de folha cadastrados
+na empresa (aba <strong>Encargos da Folha</strong>): RAT, FAP, código FPAS e alíquota de
+terceiros da lotação padrão, anexo do Simples Nacional e opção pela CPRB.</p>
+<p>Rubricas patronais (categoria COMP, informativas: são custo, não descontam do
+empregado e não entram no líquido):</p>
+<ul class="simple">
+<li><strong>CPP</strong> - contribuição previdenciária patronal de 20% (Lei 8.212/91, art. 22, I)</li>
+<li><strong>RAT</strong> - RAT ajustado, isto é, RAT x FAP (art. 22, II; Decreto 3.048/99, art. 202-A)</li>
+<li><strong>TERCEIROS</strong> - outras entidades e fundos, pela alíquota do código FPAS
+(indústria, FPAS 507: 5,8%)</li>
+</ul>
+<p>Variação por regime:</p>
+<ul class="simple">
+<li><strong>Lucro Real / Presumido</strong>: encargo cheio (CPP + RAT + terceiros)</li>
+<li><strong>Simples Nacional, anexos I, II, III e V</strong>: nenhuma das três é devida (CPP e
+RAT no DAS pela LC 123/2006, art. 13, VI; terceiros dispensados pelo §3º);
+permanece apenas o FGTS</li>
+<li><strong>Simples Nacional, anexo IV</strong>: CPP e RAT por fora do DAS (art. 18, §5º-C),
+sem terceiros. O anexo pode ser declarado no CONTRATO quando a atividade do
+empregado difere da atividade preponderante da empresa</li>
+<li><strong>CPRB (desoneração em transição)</strong>: a CPP é reduzida pela proporção do ano
+(Lei 14.973/2024: 25% em 2025, 50% em 2026, 75% em 2027, extinção em 2028),
+parametrizada por vigência em <em>Tabelas Fiscais BR &gt; Transição da CPRB</em>. RAT e
+terceiros permanecem INTEGRAIS, e a gratificação natalina tem coluna própria
+(sem CPP de 2025 a 2027)</li>
+</ul>
+</div>
+<div class="section" id="provisoes-trabalhistas">
+<h2>Provisões trabalhistas</h2>
+<p>Rubricas de provisão mensal (categoria PROV, também fora do líquido), para que
+o custo seja reconhecido por competência (CPC 33; dedutibilidade nos arts. 342
+e 343 do RIR/2018):</p>
+<ul class="simple">
+<li><strong>PROV_FERIAS</strong> - 1/12 da remuneração com o 1/3 constitucional</li>
+<li><strong>PROV_FERIAS_ENC</strong> - encargos patronais sobre a provisão de férias, excluída
+a parcela que se espera pagar como verba indenizatória (férias indenizadas
+não têm INSS nem FGTS)</li>
+<li><strong>PROV_13</strong> - 1/12 da remuneração</li>
+<li><strong>PROV_13_ENC</strong> - encargos sobre a provisão do 13º (no optante da CPRB, sem
+CPP até 2027)</li>
+</ul>
+<p>Conferência (salário de R$ 6.000,00, competência 2026, FAP 1,0):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="38%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Regime</th>
+<th class="head">CPP</th>
+<th class="head">RAT</th>
+<th class="head">Terceiros</th>
+<th class="head">FGTS</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Lucro Real (RAT 3%)</td>
+<td>1.200,00</td>
+<td>180,00</td>
+<td>348,00</td>
+<td>480,00</td>
+</tr>
+<tr><td>Lucro Presumido (2%)</td>
+<td>1.200,00</td>
+<td>120,00</td>
+<td>348,00</td>
+<td>480,00</td>
+</tr>
+<tr><td>CPRB 2026 (RAT 3%)</td>
+<td>600,00</td>
+<td>180,00</td>
+<td>348,00</td>
+<td>480,00</td>
+</tr>
+<tr><td>Simples anexo III</td>
+<td>0,00</td>
+<td>0,00</td>
+<td>0,00</td>
+<td>480,00</td>
+</tr>
+<tr><td>Simples anexo IV (2%)</td>
+<td>1.200,00</td>
+<td>120,00</td>
+<td>0,00</td>
+<td>480,00</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -401,7 +495,7 @@ ul.auto-toc {
 </ul>
 </div>
 <div class="section" id="bug-tracker">
-<h2><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h2>
+<h3><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h3>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -409,17 +503,18 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h2><a class="toc-backref" href="#toc-entry-2">Credits</a></h2>
+<h3><a class="toc-backref" href="#toc-entry-2">Credits</a></h3>
 <div class="section" id="authors">
-<h3><a class="toc-backref" href="#toc-entry-3">Authors</a></h3>
+<h4><a class="toc-backref" href="#toc-entry-3">Authors</a></h4>
 <ul class="simple">
 <li>KMEE</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h3><a class="toc-backref" href="#toc-entry-4">Maintainers</a></h3>
+<h4><a class="toc-backref" href="#toc-entry-4">Maintainers</a></h4>
 <p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_payroll">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
+</div>
 </div>
 </div>
 </div>

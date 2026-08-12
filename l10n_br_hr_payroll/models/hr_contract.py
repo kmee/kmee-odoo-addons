@@ -4,10 +4,24 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
+from .res_company import SIMPLES_ANEXO
+
 
 class HrContract(models.Model):
     _inherit = "hr.contract"
 
+    l10n_br_hr_simples_anexo = fields.Selection(
+        selection=SIMPLES_ANEXO,
+        string="Anexo do Simples (Atividade)",
+        help="Anexo do Simples Nacional da atividade exercida pelo empregado, "
+        "quando diferente do anexo preponderante da empresa. Vazio = usa o "
+        "anexo da empresa.\n\n"
+        "Serve à atividade concomitante do Simples: uma optante com atividade "
+        "do anexo IV (construção civil, vigilância, limpeza) recolhe a "
+        "contribuição patronal por fora do DAS (LC 123/2006, art. 18, §5º-C) "
+        "para os empregados dessa atividade, ainda que o anexo preponderante "
+        "seja outro. É eixo INDEPENDENTE da desoneração/CPRB.",
+    )
     l10n_br_periculosidade = fields.Boolean(
         string="Periculosidade",
         help="Adicional de periculosidade (30% do salário base)",
