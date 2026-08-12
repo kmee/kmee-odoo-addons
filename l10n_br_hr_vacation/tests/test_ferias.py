@@ -9,7 +9,7 @@ Cobertura:
   - Abono pecuniário (venda de 1/3): isento de INSS/IRRF/FGTS
   - 1/3 constitucional sobre o abono: TRIBUTÁVEL pelo IRRF (COSIT 209/2021),
     sem INSS e sem FGTS
-  - Apuração do IRRF de férias em separado (IN RFB 1.500/2014)
+  - Apuração do IRRF de férias em separado (IN RFB 1.500/2014, art. 29, § 1º)
 """
 from datetime import date
 
@@ -22,7 +22,7 @@ from .common import VacationCommon
 
 @tagged("post_install", "-at_install")
 class TestDiasFeriasParFaltas(VacationCommon):
-    """Tabela CLT art. 130 — Dias de férias por faltas no período aquisitivo."""
+    """Tabela CLT art. 130 - Dias de férias por faltas no período aquisitivo."""
 
     def _set_faltas(self, employee, faltas):
         """Helper: registra faltas no período aquisitivo."""
@@ -39,56 +39,56 @@ class TestDiasFeriasParFaltas(VacationCommon):
         return alloc
 
     def test_ferias_sem_faltas_30_dias(self):
-        """0 faltas → 30 dias de férias."""
+        """0 faltas -> 30 dias de férias."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 0)
         self.assertEqual(alloc.number_of_days, 30)
 
     def test_ferias_5_faltas_30_dias(self):
-        """5 faltas → ainda 30 dias (limite máximo da faixa 1)."""
+        """5 faltas -> ainda 30 dias (limite máximo da faixa 1)."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 5)
         self.assertEqual(alloc.number_of_days, 30)
 
     def test_ferias_6_faltas_24_dias(self):
-        """6 faltas → reduz para 24 dias."""
+        """6 faltas -> reduz para 24 dias."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 6)
         self.assertEqual(alloc.number_of_days, 24)
 
     def test_ferias_14_faltas_24_dias(self):
-        """14 faltas → 24 dias (teto da faixa 2)."""
+        """14 faltas -> 24 dias (teto da faixa 2)."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 14)
         self.assertEqual(alloc.number_of_days, 24)
 
     def test_ferias_15_faltas_18_dias(self):
-        """15 faltas → 18 dias."""
+        """15 faltas -> 18 dias."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 15)
         self.assertEqual(alloc.number_of_days, 18)
 
     def test_ferias_23_faltas_18_dias(self):
-        """23 faltas → 18 dias (teto da faixa 3)."""
+        """23 faltas -> 18 dias (teto da faixa 3)."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 23)
         self.assertEqual(alloc.number_of_days, 18)
 
     def test_ferias_24_faltas_12_dias(self):
-        """24 faltas → 12 dias."""
+        """24 faltas -> 12 dias."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 24)
         self.assertEqual(alloc.number_of_days, 12)
 
     def test_ferias_32_faltas_12_dias(self):
-        """32 faltas → 12 dias (teto da faixa 4)."""
+        """32 faltas -> 12 dias (teto da faixa 4)."""
         emp = self._create_employee()
         self._create_contract(emp, wage=3000.00)
         alloc = self._set_faltas(emp, 32)
@@ -173,10 +173,10 @@ class TestValorFerias(VacationCommon):
         adicional_abono = self._get_line_total(payslip, "ADICIONAL_ABONO")
 
         self.assertEqual(payslip.l10n_br_dias_ferias_gozadas, 20)
-        # Férias gozadas proporcionais: 20/30 × 6000 = 4000 (NÃO paga 30 dias)
+        # Férias gozadas proporcionais: 20/30 x 6000 = 4000 (NÃO paga 30 dias)
         self.assertAlmostEqualMoney(ferias, 4000.00)
         self.assertAlmostEqualMoney(adicional, 4000.00 / 3)
-        # Abono: 10 dias × (6000/30) = 2000, com 1/3 constitucional próprio
+        # Abono: 10 dias x (6000/30) = 2000, com 1/3 constitucional próprio
         self.assertAlmostEqualMoney(abono, 2000.00)
         self.assertAlmostEqualMoney(adicional_abono, 2000.00 / 3)
 
@@ -202,7 +202,7 @@ class TestValorFerias(VacationCommon):
         # GROSS (base de INSS e FGTS) = apenas férias gozadas + 1/3.
         self.assertAlmostEqualMoney(gross, ferias + adicional)
         self.assertGreater(inss, 0.0)
-        # Base do IRRF = GROSS + 1/3 do abono − INSS. O abono principal
+        # Base do IRRF = GROSS + 1/3 do abono - INSS. O abono principal
         # (R$2.000) NÃO aparece em nenhuma base.
         self.assertAlmostEqualMoney(abono, 2000.00)
         self.assertAlmostEqualMoney(base_irrf, gross + adicional_abono - inss)
@@ -256,10 +256,11 @@ class TestValorFerias(VacationCommon):
     def test_irrf_ferias_apurado_em_separado(self):
         """IRRF das férias apurado EM SEPARADO do salário do mês.
 
-        IN RFB 1.500/2014: na vigência do contrato as férias e o respectivo
-        1/3 têm o imposto apurado isoladamente. Aqui isso é estrutural — o
-        holerite de férias tem estrutura própria, com GROSS, BASE_IRRF e IRRF
-        exclusivos, sem qualquer soma com o holerite mensal do mesmo período.
+        IN RFB 1.500/2014, art. 29, § 1º: na vigência do contrato as férias e o
+        respectivo 1/3 têm o imposto apurado isoladamente. Aqui isso é
+        estrutural: o holerite de férias tem estrutura própria, com GROSS,
+        BASE_IRRF e IRRF exclusivos, sem qualquer soma com o holerite mensal do
+        mesmo período.
         """
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=6000.00)

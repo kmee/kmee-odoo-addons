@@ -36,23 +36,23 @@ class TestRedutorDecimoTerceiro(VacationCommon):
 
     def test_13_de_4500_zerado_pelo_redutor_em_2026(self):
         """13º bruto de R$4.500 em 12/2026: imposto 239,92 absorvido pelo
-        redutor da 1ª faixa (até R$5.000) → IRRF_13 zero.
+        redutor da 1ª faixa (até R$5.000) -> IRRF_13 zero.
 
-        INSS_13 = 431,51 → base 4.068,49 → 22,5% − 675,49 = 239,92.
-        Redutor máximo da faixa = 312,89 > imposto → imposto zero.
+        INSS_13 = 431,51 -> base 4.068,49 -> 22,5% - 675,49 = 239,92.
+        Redutor máximo da faixa = 312,89 > imposto -> imposto zero.
         """
         payslip = self._payslip_13(4500.00, 2026)
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "INSS_13"), 431.51)
         self.assertEqual(self._get_line_total(payslip, "IRRF_13"), 0.0)
 
     def test_13_de_6000_redutor_parcial_em_2026(self):
-        """13º bruto de R$6.000: 564,85 − 179,75 = R$385,10."""
+        """13º bruto de R$6.000: 564,85 - 179,75 = R$385,10."""
         payslip = self._payslip_13(6000.00, 2026)
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "INSS_13"), 641.51)
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "IRRF_13"), 385.10)
 
     def test_13_de_8000_sem_redutor_em_2026(self):
-        """13º bruto acima de R$7.350: corte seco → R$1.037,85."""
+        """13º bruto acima de R$7.350: corte seco -> R$1.037,85."""
         payslip = self._payslip_13(8000.00, 2026)
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "IRRF_13"), 1037.85)
 
@@ -60,10 +60,10 @@ class TestRedutorDecimoTerceiro(VacationCommon):
         """Competência 12/2025: sem redutor, mas COM desconto simplificado.
 
         INSS_13 (tabela 2025) = 439,60 -> base legal 4.060,40 -> 238,10.
-        Desconto simplificado (RF-16, Lei 14.663/2023): 4.500 - 607,20 =
-        3.892,80 -> 22,5% - 675,49 = 200,39, MENOR que os 238,10 da dedução
-        legal. Antes a apuração do 13º ignorava o simplificado e retinha os
-        238,10 - retenção a maior de R$37,71.
+        Desconto simplificado (RF-16, IN RFB 1.500/2014, art. 13, § 8º):
+        4.500 - 607,20 = 3.892,80 -> 22,5% - 675,49 = 200,39, MENOR que os
+        238,10 da dedução legal. Antes a apuração do 13º ignorava o
+        simplificado e retinha os 238,10, retenção a maior de R$37,71.
         """
         payslip = self._payslip_13(4500.00, 2025)
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "INSS_13"), 439.60)
@@ -111,7 +111,7 @@ class TestRedutorRescisao(VacationCommon):
         return payslip
 
     def test_saldo_salario_zerado_pelo_redutor_em_2026(self):
-        """Saldo de salário de R$4.500 em 2026 → IRRF zero pelo redutor."""
+        """Saldo de salário de R$4.500 em 2026 -> IRRF zero pelo redutor."""
         payslip = self._rescisao(4500.00, date(2026, 6, 30))
         self.assertAlmostEqualMoney(
             self._get_line_total(payslip, "SALDO_SALARIO"), 4500.00
@@ -119,7 +119,7 @@ class TestRedutorRescisao(VacationCommon):
         self.assertEqual(self._get_line_total(payslip, "IRRF"), 0.0)
 
     def test_saldo_salario_com_redutor_parcial_em_2026(self):
-        """Saldo de R$6.000: IRRF de R$385,10 (564,85 − 179,75)."""
+        """Saldo de R$6.000: IRRF de R$385,10 (564,85 - 179,75)."""
         payslip = self._rescisao(6000.00, date(2026, 6, 30))
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "IRRF"), 385.10)
 
@@ -151,10 +151,10 @@ class TestAvos13NoDesligamento(VacationCommon):
         return payslip
 
     def test_desligamento_dia_10_nao_gera_avo_de_junho(self):
-        """Desligado em 10/06: 5 avos (jan..mai) → 4800 × 5/12 = R$2.000.
+        """Desligado em 10/06: 5 avos (jan..mai) -> 4800 x 5/12 = R$2.000.
 
         Antes o mês do desligamento era sempre contado como avo cheio,
-        pagando 6 avos (R$2.400) — 13º proporcional a mais.
+        pagando 6 avos (R$2.400) - 13º proporcional a mais.
         """
         payslip = self._rescisao_no_dia(10)
         self.assertEqual(payslip.l10n_br_avos_13, 5)
@@ -163,7 +163,7 @@ class TestAvos13NoDesligamento(VacationCommon):
         )
 
     def test_desligamento_dia_15_gera_avo_de_junho(self):
-        """Desligado em 15/06: exatamente 15 dias → 6 avos → R$2.400."""
+        """Desligado em 15/06: exatamente 15 dias -> 6 avos -> R$2.400."""
         payslip = self._rescisao_no_dia(15)
         self.assertEqual(payslip.l10n_br_avos_13, 6)
         self.assertAlmostEqualMoney(
@@ -171,7 +171,7 @@ class TestAvos13NoDesligamento(VacationCommon):
         )
 
     def test_desligamento_dia_20_gera_avo_de_junho(self):
-        """Desligado em 20/06: 20 dias → 6 avos → R$2.400."""
+        """Desligado em 20/06: 20 dias -> 6 avos -> R$2.400."""
         payslip = self._rescisao_no_dia(20)
         self.assertEqual(payslip.l10n_br_avos_13, 6)
         self.assertAlmostEqualMoney(

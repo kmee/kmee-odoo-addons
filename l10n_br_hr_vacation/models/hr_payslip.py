@@ -78,7 +78,7 @@ class HrPayslip(models.Model):
         de referência (rescisão). Máximo de 12 avos.
 
         Nota: NÃO considera férias vencidas de períodos aquisitivos
-        completos e não gozados — ver relatório (lacuna).
+        completos e não gozados - ver relatório (lacuna).
         """
         anos = data_referencia.year - data_admissao.year
         inicio = data_admissao + relativedelta(years=anos)

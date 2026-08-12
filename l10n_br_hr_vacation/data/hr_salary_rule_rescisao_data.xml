@@ -13,7 +13,7 @@
             rescisão: NÃO incidem INSS (Lei 8.212/91 art. 28 §9º), IRRF
             (Súmula 386 STJ / ADI SRF 5/2005) nem FGTS.
 
-        LACUNAS DELIBERADAS (exigem validação fiscal / dados adicionais —
+        LACUNAS DELIBERADAS (exigem validação fiscal / dados adicionais -
         ver relatório): aviso prévio (indenizado/trabalhado) e reflexos;
         multa de 40% do FGTS; distinção por tipo de rescisão (sem justa
         causa, pedido, justa causa, comum acordo); férias VENCIDAS de
@@ -238,7 +238,9 @@ result = not employee.l10n_br_molestia_grave
         <field name="amount_python_compute">
 # RF-16: forma mais favorável (dedução legal x desconto simplificado) sobre o
 # rendimento tributável BRUTO desta apuração - aqui o saldo de salário -,
-# seguida do redutor do IRPF (Lei 15.270/2025, desde 01/2026).
+# seguida do redutor do IRPF (Lei 9.250/95, art. 3º-A, caput, incluído pela Lei
+# 15.270/2025, desde 01/2026). O simplificado no saldo de salário segue a base
+# mensal: IN RFB 1.500/2014, art. 52, § 3º.
 result = tools.br.irrf_mais_favoravel(max(SALDO_SALARIO, 0), BASE_IRRF)
         </field>
     </record>
@@ -259,7 +261,9 @@ result = not employee.l10n_br_molestia_grave
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 # RF-16: forma mais favorável DENTRO da apuração exclusiva do 13º da rescisão,
-# seguida do redutor do IRPF (Lei 15.270/2025) sobre o 13º bruto.
+# seguida do redutor do IRPF sobre o 13º bruto (Lei 9.250/95, art. 3º-A, § 3º,
+# dispositivo expresso para a gratificação natalina). Simplificado do 13º:
+# IN RFB 1.500/2014, art. 13, § 8º.
 result = tools.br.irrf_mais_favoravel(max(DECIMO_RESCISAO, 0), BASE_IRRF_13)
         </field>
     </record>

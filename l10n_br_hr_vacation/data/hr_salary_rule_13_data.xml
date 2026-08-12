@@ -180,11 +180,14 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-# RF-16: forma mais favorável DENTRO da apuração exclusiva do 13º - dedução
-# legal (BASE_IRRF_13) x desconto simplificado (Lei 14.663/2023) sobre o 13º
-# bruto. O redutor do IRPF (Lei 15.270/2025) alcança também o imposto exclusivo
-# de fonte do 13º e usa o BRUTO do 13º como base; sem redutor cadastrado (até
-# 12/2025) o imposto não muda.
+# RF-16: forma mais favorável DENTRO da apuração exclusiva do 13º: dedução
+# legal (BASE_IRRF_13) x desconto simplificado sobre o 13º bruto. A opção pelo
+# simplificado na base do 13º é expressa: IN RFB 1.500/2014, art. 13, § 8º
+# (incluído pela IN RFB 2.141/2023); reforço no MAFON 2025, alínea e.7.
+# O redutor do IRPF alcança o imposto exclusivo de fonte do 13º por dispositivo
+# EXPRESSO: Lei 9.250/95, art. 3º-A, § 3º (incluído pela Lei 15.270/2025). A
+# base do redutor é o BRUTO do 13º; sem redutor cadastrado (até 12/2025) o
+# imposto não muda.
 result = tools.br.irrf_mais_favoravel(max(categories.GROSS, 0), BASE_IRRF_13)
         </field>
     </record>
