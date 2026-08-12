@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="mapping_plan_form_sped" model="ir.ui.view">
+        <field name="name">l10n_br_account_mapping.plan.form.sped</field>
+        <field name="model">l10n_br_account_mapping.plan</field>
+        <field name="inherit_id" ref="l10n_br_account_mapping.mapping_plan_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="sped_referential" />
+                <field
+                    name="sped_plan_code"
+                    attrs="{'invisible': [('sped_referential', '=', False)],
+                            'required': [('sped_referential', '=', True)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,589 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_account_move_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_fiscal_operation__account_move_template_id
+msgid "Accounting Template"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template__fiscal_operation_type__all
+msgid "All"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_search
+msgid "Archived"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__cbs_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__cbs
+msgid "CBS"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__cofins
+msgid "COFINS"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__cofinsst_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__cofinsst
+msgid "COFINS ST"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__cofins_wh
+msgid "COFINS WH"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__cofins_value
+msgid "COFINS própria"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__cofins_wh_value
+msgid "COFINS retida"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__csll
+msgid "CSLL"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__csll_wh
+msgid "CSLL WH"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__csll_value
+msgid "CSLL própria"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__csll_wh_value
+msgid "CSLL retida"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__child_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_form
+msgid "Child Templates"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__company_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_search
+msgid "Company"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:l10n_br.account.move.template,name:l10n_br_account_move_template.template_compra_lp
+msgid "Compra - Lucro Presumido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.actions.act_window,help:l10n_br_account_move_template.account_move_template_action
+msgid "Create your first double-entry accounting template"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__create_uid
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__create_date
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__account_credit_id
+msgid "Credit Account"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icmssn_credit_value
+msgid "Crédito ICMS Simples Nacional"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icms_destination_value
+msgid "DIFAL - ICMS Destino"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icms_origin_value
+msgid "DIFAL - ICMS Origem"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__account_debit_id
+msgid "Debit Account"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__discount_value
+msgid "Desconto"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ii_customhouse_charges
+msgid "Despesas Aduaneiras"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__display_name
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model,name:l10n_br_account_move_template.model_l10n_br_account_move_template
+msgid "Double Entry Accounting Template"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model,name:l10n_br_account_move_template.model_l10n_br_account_move_template_item
+msgid "Double Entry Accounting Template Item"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.view_move_form_double_entry
+msgid "Double Entry Lines"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.actions.act_window,name:l10n_br_account_move_template.account_move_template_action
+#: model:ir.ui.menu,name:l10n_br_account_move_template.account_move_template_menu
+msgid "Double Entry Templates"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#. odoo-python
+#: code:addons/l10n_br_account_move_template/models/account_move_template.py:0
+#, python-format
+msgid "Error! You cannot create recursive template hierarchies."
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__fiscal_field
+msgid "Fiscal Field"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model,name:l10n_br_account_move_template.model_l10n_br_fiscal_operation
+msgid "Fiscal Operation"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__fiscal_operation_type
+msgid "Fiscal Operation Type"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__fiscal_operation_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_form
+msgid "Fiscal Operations"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__freight_value
+msgid "Frete"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_search
+msgid "Group By"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__history_id
+msgid "Historico Padrao"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ibs_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__ibs
+msgid "IBS"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__icms
+msgid "ICMS - Próprio"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__icmssn
+msgid "ICMS - Simples Nacional"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__icmsst
+msgid "ICMS - Subistituição Tributária"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icmsfcp_value
+msgid "ICMS FCP"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__icmsfcp
+msgid "ICMS FCP - Fundo de Combate a Pobreza"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icmsfcpst_value
+msgid "ICMS FCP ST"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__icmsfcpst
+msgid "ICMS FCP ST- Fundo de Combate a Pobreza ST"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icmsst_value
+msgid "ICMS ST"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icms_value
+msgid "ICMS próprio"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__id
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__ii
+msgid "II"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__inss
+msgid "INSS"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__inss_wh
+msgid "INSS WH"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__inss_value
+msgid "INSS próprio"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__inss_wh_value
+msgid "INSS retido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ii_iof_value
+msgid "IOF (importação)"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ipi_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__ipi
+msgid "IPI"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ipi_devol_value
+msgid "IPI Devolvido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__ir
+msgid "IR"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__irpj
+msgid "IRPJ"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__irpj_wh
+msgid "IRPJ WH"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__irpj_value
+msgid "IRPJ próprio"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__irpj_wh_value
+msgid "IRRF retido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__is
+msgid "IS"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__issqn_wh_value
+msgid "ISS retido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__issqn_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__issqn
+msgid "ISSQN"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__issqn_wh
+msgid "ISSQN WH"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ii_value
+msgid "Imposto de Importação"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:l10n_br.account.move.template,name:l10n_br_account_move_template.template_impostos_comuns
+msgid "Impostos Comuns - Lucro Presumido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__amount_tax_included
+msgid "Impostos incluídos no preço"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__amount_tax_not_included
+msgid "Impostos não incluídos no preço"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template__fiscal_operation_type__in
+msgid "In"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,help:l10n_br_account_move_template.field_account_move_line__is_double_entry_line
+msgid ""
+"Indicates this line was auto-generated by a fiscal accounting template."
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__item_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_form
+msgid "Items"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model,name:l10n_br_account_move_template.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model,name:l10n_br_account_move_template.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template____last_update
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__write_uid
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__write_date
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_search
+msgid "Operation Type"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template__fiscal_operation_type__out
+msgid "Out"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__other_value
+msgid "Outras despesas acessórias"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__others
+msgid "Outros"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__pis
+msgid "PIS"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__pisst_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__pisst
+msgid "PIS ST"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__pis_value
+msgid "PIS próprio"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__pis_wh_value
+msgid "PIS retido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__parent_id
+msgid "Parent Template"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,help:l10n_br_account_move_template.field_l10n_br_account_move_template_item__history_id
+msgid ""
+"Quando definido, o texto das linhas geradas por este item vem do template do"
+" historico (com as variaveis de data, documento e parceiro), em vez do "
+"rotulo padrao."
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__require_tax_credit
+msgid "Require Tax Credit"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__insurance_value
+msgid "Seguro"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__simple_value
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__simples
+msgid "Simples Nacional"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__tax_domain
+msgid "Tax Domain"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__template_id
+msgid "Template"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_account_move_line__is_double_entry_line
+msgid "Template Double Entry"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.actions.act_window,help:l10n_br_account_move_template.account_move_template_action
+msgid ""
+"Templates define how fiscal document values (taxes, amounts)\n"
+"                are mapped to debit/credit accounts in double-entry bookkeeping."
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.view_move_form_double_entry
+msgid "Total Credit"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.view_move_form_double_entry
+msgid "Total Debit"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__financial_total
+msgid "Total financeiro"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__amount_tax_withholding
+msgid "Total retenções"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__amount_fiscal
+msgid "Valor da operação"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__fiscal_amount_untaxed
+msgid "Valor sem impostos"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__fiscal_amount_total
+msgid "Valor total fiscal"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:l10n_br.account.move.template,name:l10n_br_account_move_template.template_venda_lp
+msgid "Venda - Lucro Presumido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields,help:l10n_br_account_move_template.field_l10n_br_account_move_template_item__require_tax_credit
+msgid ""
+"When checked, this item only generates entries if the fiscal line has tax "
+"credit rights (based on CST codes or credit classification)."
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__tax_domain__pis_wh
+msgid "pis_wh"
+msgstr ""

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+
+    Gerado por tools/gerar_modulo_plano.py a partir da tabela dinamica oficial
+    da RFB (leiaute 12). Nao editar a mao: regerar com a planilha nova.
+    Sem noupdate: a atualizacao da tabela chega pelo -u do modulo.
+-->
+<odoo>
+
+    <record id="plan_referencial_1_l12" model="l10n_br_account_mapping.plan">
+        <field
+            name="name"
+        >Plano Referencial RFB 1 - PJ em Geral - Lucro Real (leiaute 12)</field>
+        <field name="sped_referential" eval="True" />
+        <field name="sped_plan_code">1</field>
+        <field name="sped_layout_version">12</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+</odoo>

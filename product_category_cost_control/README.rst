@@ -71,9 +71,9 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://www.kmee.com.br>``\ \_\_:
+- ``KMEE <https://www.kmee.com.br>``\ \_\_:
 
-   -  Diego Paradeda diego.paradeda@kmee.com.br
+  - Diego Paradeda diego.paradeda@kmee.com.br
 
 Maintainers
 -----------

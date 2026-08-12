@@ -35,8 +35,18 @@ msgid "Abono Pecuniário"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_desconto_adiantamento_13
+msgid "Adiantamento 13º (1ª parcela)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_adiantamento_13
 msgid "Adiantamento 13º Salário"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_adicional_ferias_indenizadas
+msgid "Adicional Férias Indenizadas (1/3)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
@@ -45,8 +55,23 @@ msgid "Adicional de Férias (1/3)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_adicional_abono
+msgid "Adicional sobre Abono (1/3)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:ir.model.fields,field_description:l10n_br_hr_vacation.field_hr_payslip__l10n_br_avos_13
 msgid "Avos de 13º"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:ir.model.fields,field_description:l10n_br_hr_vacation.field_hr_payslip__l10n_br_avos_ferias
+msgid "Avos de Férias Proporcionais"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_base_irrf_13_rescisao
+msgid "Base IRRF (13º Rescisão)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
@@ -60,8 +85,33 @@ msgid "Base IRRF (Férias)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_base_irrf_rescisao
+msgid "Base IRRF (Saldo de Salário)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:ir.model.fields,field_description:l10n_br_hr_vacation.field_hr_payslip__l10n_br_dias_ferias_gozadas
 msgid "Dias de Férias Gozadas"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_fgts_13_rescisao
+msgid "FGTS (13º Rescisão)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_fgts_13
+msgid "FGTS (13º)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_fgts_ferias
+msgid "FGTS (Férias)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_fgts_rescisao
+msgid "FGTS (Saldo de Salário)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
@@ -81,6 +131,16 @@ msgid "Férias"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_ferias_indenizadas
+msgid "Férias Proporcionais (Indenizadas)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_inss_13_rescisao
+msgid "INSS (13º Rescisão)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_inss_13
 msgid "INSS (13º)"
 msgstr ""
@@ -91,6 +151,16 @@ msgid "INSS (Férias)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_inss_rescisao
+msgid "INSS (Saldo de Salário)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_irrf_13_rescisao
+msgid "IRRF (13º Rescisão)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_irrf_13
 msgid "IRRF (13º)"
 msgstr ""
@@ -98,6 +168,11 @@ msgstr ""
 #. module: l10n_br_hr_vacation
 #: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_irrf_ferias
 msgid "IRRF (Férias)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_irrf_rescisao
+msgid "IRRF (Saldo de Salário)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
@@ -116,13 +191,30 @@ msgid "Líquido (Férias)"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_net_rescisao
+msgid "Líquido (Rescisão)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:ir.model.fields,field_description:l10n_br_hr_vacation.field_hr_payslip__l10n_br_liquido_13
 msgid "Líquido 13º"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:ir.model.fields,help:l10n_br_hr_vacation.field_hr_payslip__l10n_br_avos_ferias
+msgid ""
+"Meses (fração >= 15 dias) do período aquisitivo em curso, usados para as "
+"férias proporcionais na rescisão."
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:ir.model,name:l10n_br_hr_vacation.model_hr_payslip
 msgid "Payslip"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule.category,name:l10n_br_hr_vacation.hr_salary_rule_category_prov_indeniz
+msgid "Provento Indenizatório"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
@@ -133,6 +225,11 @@ msgstr ""
 #. module: l10n_br_hr_vacation
 #: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_gross_ferias
 msgid "Remuneração Bruta (Férias)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_saldo_salario
+msgid "Saldo de Salário"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
