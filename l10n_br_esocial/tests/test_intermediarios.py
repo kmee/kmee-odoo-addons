@@ -116,6 +116,11 @@ class TestS1020(TestESocialIntermediarioBase):
 
     def test_s1020_dict_structure(self):
         """Dict do S-1020 deve conter campos obrigatórios."""
+        # Empresa do Simples não recolhe terceiros (LC 123 art. 13, § 3º):
+        # para exercitar um código de terceiros devido, sai do Simples.
+        self.company.l10n_br_esocial_class_trib_id = self.env.ref(
+            "l10n_br_esocial.class_trib_06"
+        )
         s1020 = self.env["l10n_br.esocial.s1020"].create(
             {
                 "operacao": "inclusao",
@@ -150,6 +155,11 @@ class TestS1020(TestESocialIntermediarioBase):
         """Deve gerar XML via esociallib."""
         if not HAS_ESOCIALLIB:
             return
+        # Empresa do Simples não recolhe terceiros (LC 123 art. 13, § 3º):
+        # para exercitar um código de terceiros devido, sai do Simples.
+        self.company.l10n_br_esocial_class_trib_id = self.env.ref(
+            "l10n_br_esocial.class_trib_06"
+        )
         s1020 = self.env["l10n_br.esocial.s1020"].create(
             {
                 "operacao": "inclusao",
