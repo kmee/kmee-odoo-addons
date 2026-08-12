@@ -22,6 +22,12 @@
           - da base do 13º deduz-se a pensão RETIDA sobre o próprio 13º
             (percentual). A parcela fixa da pensão é obrigação mensal e não se
             repete aqui - ver o cabeçalho de hr_salary_rule_ferias_data.xml.
+
+        MÉDIA DE VERBAS VARIÁVEIS HABITUAIS (RF-18) - mesma regra do
+        cabeçalho de hr_salary_rule_ferias_data.xml: a base do 13º (1ª
+        parcela, 13º bruto e 13º da rescisão) soma a média das horas extras
+        habituais e do adicional noturno dos últimos 12 meses (Súmula 45
+        TST / CLT art. 142), via tools.br.media_habitual.
     -->
 
     <!-- ══════════════════════════════════════════════════════════════
@@ -42,9 +48,11 @@
 # 1ª parcela = 50% do 13º projetado para 31/12 (proporcional aos avos).
 # Para empregado de ano cheio, avos=12 => 50% do salário.
 # Para admitido no meio do ano, proporcional aos meses trabalhados.
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
 ref = payslip.date_to + tools.relativedelta(month=12, day=31)
 avos = tools.br.calc_decimo_avos(contract.date_start, ref)
-result = tools.br.round_money(contract.wage * avos / 12 * 0.5)
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12 * 0.5)
         </field>
     </record>
 
@@ -80,8 +88,10 @@ result = categories.BASIC + categories.ALW - categories.DED
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
 avos = payslip.l10n_br_avos_13
-result = tools.br.round_money(contract.wage * avos / 12)
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12)
         </field>
     </record>
 
@@ -259,11 +269,21 @@ result = categories.BASIC + categories.ALW - categories.DED
             name="category_id"
             ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
         />
-        <field name="condition_select">none</field>
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+# RF-06: o 13º proporcional NÃO é devido na dispensa por JUSTA CAUSA
+# (Lei 4.090/62 art. 3º: "ocorrendo rescisão, SEM justa causa..."; Decreto
+# 57.155/65 art. 7º: "salvo na hipótese de rescisão com justa causa"). É
+# devido em qualquer outra hipótese, inclusive pedido de demissão
+# (Súmula 157 TST).
+result = payslip.l10n_br_tipo_rescisao != 'justa_causa'
+        </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
 avos = payslip.l10n_br_avos_13
-result = tools.br.round_money(contract.wage * avos / 12)
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12)
         </field>
     </record>
 </odoo>

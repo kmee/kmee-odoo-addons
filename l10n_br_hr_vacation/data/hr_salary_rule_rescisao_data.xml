@@ -1,24 +1,89 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <!--
-        Regras salariais da Rescisão (verbas rescisórias SEGURAS).
+        Regras salariais da Rescisão (RF-06 completo).
 
-        ESCOPO IMPLEMENTADO (verbas bem fundamentadas):
-          - Saldo de salário proporcional aos dias trabalhados no mês
-            (CLT art. 457/459). TRIBUTÁVEL: INSS, IRRF e FGTS.
-          - 13º proporcional aos avos até a rescisão (CLT/Lei 4.090/62).
-            TRIBUTÁVEL com incidência SEPARADA de INSS e IRRF (o 13º nunca
-            se soma ao salário do mês para fins de imposto) e FGTS.
-          - Férias proporcionais + 1/3 constitucional. INDENIZATÓRIAS na
-            rescisão: NÃO incidem INSS (Lei 8.212/91 art. 28 §9º), IRRF
-            (Súmula 386 STJ / ADI SRF 5/2005) nem FGTS.
+        VERBAS IMPLEMENTADAS:
+          - Saldo de salário proporcional aos dias de vigência do contrato
+            no mês (CLT art. 457/459), inclusive quando o contrato começou
+            no meio do mês (tools.br.dias_trabalhados_mes). TRIBUTÁVEL:
+            INSS, IRRF e FGTS.
+          - 13º proporcional aos avos até a rescisão (Lei 4.090/62 art. 3º;
+            Decreto 57.155/65 art. 7º), com incidência SEPARADA de INSS e
+            IRRF e FGTS. NÃO é devido na dispensa por JUSTA CAUSA (mesmos
+            dispositivos: só cabe "ocorrendo rescisão SEM justa causa" /
+            "salvo na hipótese de rescisão com justa causa"); é devido em
+            qualquer outra hipótese, inclusive pedido de demissão
+            (Súmula 157 TST).
+          - Férias proporcionais + 1/3 do período aquisitivo em curso.
+            INDENIZATÓRIAS: NÃO incidem INSS (Lei 8.212/91 art. 28 §9º "d"),
+            FGTS (Lei 8.036/90 art. 15 §6º, que remete ao mesmo §9º) nem
+            IRRF (IN RFB 1.500/2014 art. 62 §1º VIII; Súmula 386 STJ). NÃO
+            são devidas na dispensa por JUSTA CAUSA (Súmula 171 TST; CLT
+            art. 146 parágrafo único e art. 147).
+          - Férias VENCIDAS (período aquisitivo já completo, sem gozo nem
+            venda integral) + 1/3, apuradas contra os holerites de férias
+            já confirmados vinculados à mesma alocação (RF-19). Mesmas
+            isenções das proporcionais indenizadas (Lei 8.212/91 art. 28
+            §9º "d"; Lei 8.036/90 art. 15 §6º; IN RFB 1.500/2014 art. 62
+            §1º VII/X; Súmulas 125 e 386 do STJ). DEVIDAS em qualquer
+            hipótese de rescisão, "qualquer que seja a causa" (CLT art.
+            146, caput) — inclusive na justa causa. Pagas em DOBRO
+            (CLT art. 137, caput) quando o período concessivo (os 12 meses
+            seguintes ao término do período aquisitivo, CLT art. 134,
+            caput) já tiver expirado sem gozo.
+          - Aviso prévio INDENIZADO (Lei 12.506/2011: 30 dias + 3 por ano
+            completo, máx. 90) e seus reflexos no 13º e nas férias
+            proporcionais (Súmula 371 TST projeta o contrato para esses dois
+            fins, e só para eles). Devido pelo empregador SOMENTE em
+            rescisão sem justa causa ou por acordo (CLT art. 484-A); NÃO há
+            aviso indenizado devido pelo empregador em pedido de demissão
+            (CLT art. 487 §1º x §2º) nem em justa causa. NÃO incide INSS
+            (fundamento hoje é jurisprudencial — STJ, Tema 478 dos
+            repetitivos, REsp 1.230.957/RS — já que a Lei 9.528/97 retirou
+            o aviso indenizado da lista de isenções do art. 28 §9º da Lei
+            8.212/91; norma administrativa vigente: IN RFB 2.110/2022 art.
+            34). NÃO incide IRRF (Lei 7.713/88 art. 6º, caput, V). O FGTS
+            (8%) INCIDE sobre o aviso indenizado (Lei 8.036/90 art. 15,
+            caput; CLT art. 487 §§1º e 6º; Súmula 305 TST) — e por isso
+            também compõe a base da multa de 40%. O REFLEXO do aviso no 13º
+            (avos adicionais projetados) segue a tributação normal do 13º
+            desta rescisão (INS/IRRF/FGTS): a IN RFB 2.110/2022 art. 34
+            ressalva que esse reflexo sofre INSS; a incidência do IRRF sobre
+            ele é ponto controvertido nas soluções de consulta da RFB — não
+            criamos aqui uma exceção não fundamentada, e o simplesmente
+            tributamos como o restante do 13º proporcional (mais
+            conservador que presumir isenção sem base clara).
+          - Multa de 40% do FGTS (Lei 8.036/90 art. 18 §1º), reduzida a 20%
+            no acordo (CLT art. 484-A, I, "b", que remete ao mesmo art. 18
+            §1º) e não devida em pedido de demissão ou justa causa. Base:
+            total depositado na conta vinculada durante o contrato
+            (informado manualmente, campo l10n_br_fgts_saldo_conta); sem
+            informação, uma ESTIMATIVA 8% × salário × meses trabalhados
+            (sem juros/correção, documentada como fallback). INDENIZATÓRIA:
+            não incide INSS (Lei 8.212/91 art. 28 §9º "e", item 1, que
+            remete ao art. 10, I, do ADCT) nem IRRF (Lei 7.713/88 art. 6º V;
+            Lei 8.036/90 art. 28) nem FGTS sobre si mesma (não é
+            remuneração).
+          - Tipo de rescisão (l10n_br_tipo_rescisao) determina o aviso e a
+            multa (sem justa causa: 100%/40%; acordo CLT art. 484-A: 50%/
+            20%; pedido de demissão e justa causa: nenhum dos dois) e exclui
+            as férias proporcionais na justa causa (mas não o 13º
+            proporcional, que só é excluído na justa causa por dispositivo
+            próprio — Lei 4.090/62 art. 3º — nem as férias vencidas, sempre
+            devidas por força do art. 146 caput da CLT).
 
-        LACUNAS DELIBERADAS (exigem validação fiscal / dados adicionais -
-        ver relatório): aviso prévio (indenizado/trabalhado) e reflexos;
-        multa de 40% do FGTS; distinção por tipo de rescisão (sem justa
-        causa, pedido, justa causa, comum acordo); férias VENCIDAS de
-        períodos aquisitivos completos não gozados (dependem de rastreio
-        de alocações); médias de horas extras/adicionais habituais.
+        MÉDIA DE VERBAS VARIÁVEIS HABITUAIS (RF-18) — mesma regra do
+        cabeçalho de hr_salary_rule_ferias_data.xml: 13º da rescisão, férias
+        proporcionais e férias vencidas somam a média das horas extras
+        habituais e do adicional noturno dos últimos 12 meses (Súmula 45
+        TST / CLT art. 142). O aviso prévio indenizado também soma a média
+        (Súmula 94 TST). O saldo de salário NÃO soma a média: é pago pelos
+        dias realmente trabalhados no mês, não por proporção/projeção.
+
+        LACUNA REMANESCENTE (fora desta onda, documentada no relatório):
+        desconto do aviso prévio não cumprido pelo empregado em pedido de
+        demissão (CLT art. 487 §2º) — este módulo não gera esse desconto.
 
         Convenção de sinais: proventos positivos; DED positivo subtraído;
         NET = proventos - descontos. FGTS é COMP (não afeta o NET).
@@ -33,13 +98,16 @@
           - saldo de salário: parcela FIXA + percentual sobre o saldo;
           - 13º proporcional: SOMENTE o percentual, sobre o próprio 13º
             (apuração exclusiva de fonte, base própria);
-          - férias indenizadas e o seu 1/3: sem retenção de pensão nesta
-            implementação - são verbas indenizatórias e a incidência depende de
-            decisão judicial específica (não presumir). Como também não sofrem
-            IRRF, nada muda na base do imposto.
+          - férias indenizadas (proporcionais e vencidas) e o seu 1/3: sem
+            retenção de pensão nesta implementação - são verbas
+            indenizatórias e a incidência depende de decisão judicial
+            específica (não presumir). Como também não sofrem IRRF, nada
+            muda na base do imposto;
+          - aviso prévio indenizado e multa do FGTS: mesma lógica das
+            férias indenizadas (indenizatórias, sem retenção presumida).
     -->
 
-    <!-- Saldo de salário proporcional aos dias trabalhados no mês -->
+    <!-- Saldo de salário proporcional aos dias de vigência do contrato -->
     <record id="hr_rule_saldo_salario" model="hr.salary.rule">
         <field name="name">Saldo de Salário</field>
         <field name="sequence" eval="1" />
@@ -51,14 +119,17 @@
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-# Dias trabalhados no mês da rescisão (mês comercial de 30 dias).
-# Assume período iniciando no dia 1º; dias = dia do desligamento.
-dias = payslip.date_to.day
+# Dias de vigência do contrato dentro do período do holerite (mês
+# comercial de 30 dias) — cobre tanto a rescisão em qualquer dia do mês
+# quanto o contrato iniciado no MEIO do mês (tools.br.dias_trabalhados_mes
+# já balanceia contra contract.date_start e contract.date_end).
+dias = tools.br.dias_trabalhados_mes(contract)
 result = tools.br.round_money((contract.wage / 30) * dias)
         </field>
     </record>
 
-    <!-- Férias proporcionais (INDENIZATÓRIAS) -->
+    <!-- Férias proporcionais (INDENIZATÓRIAS). Não devidas na justa causa
+         (Súmula 171 TST; CLT art. 146 parágrafo único e art. 147). -->
     <record id="hr_rule_ferias_indenizadas" model="hr.salary.rule">
         <field name="name">Férias Proporcionais (Indenizadas)</field>
         <field name="sequence" eval="6" />
@@ -66,12 +137,17 @@ result = tools.br.round_money((contract.wage / 30) * dias)
         <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
         <field name="condition_select">python</field>
         <field name="condition_python">
-result = payslip.l10n_br_avos_ferias > 0
+result = (
+    payslip.l10n_br_avos_ferias > 0
+    and payslip.l10n_br_tipo_rescisao != 'justa_causa'
+)
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
 avos = payslip.l10n_br_avos_ferias
-result = tools.br.round_money(contract.wage * avos / 12)
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12)
         </field>
     </record>
 
@@ -83,11 +159,133 @@ result = tools.br.round_money(contract.wage * avos / 12)
         <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
         <field name="condition_select">python</field>
         <field name="condition_python">
-result = payslip.l10n_br_avos_ferias > 0
+result = (
+    payslip.l10n_br_avos_ferias > 0
+    and payslip.l10n_br_tipo_rescisao != 'justa_causa'
+)
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 result = tools.br.round_money(FERIAS_INDENIZADAS / 3)
+        </field>
+    </record>
+
+    <!-- Férias VENCIDAS (período aquisitivo completo e não gozado),
+         devidas em QUALQUER hipótese de rescisão (CLT art. 146, caput) —
+         inclusive na justa causa. Paga em dobro se o período concessivo já
+         expirou sem gozo (CLT art. 137, caput). INDENIZATÓRIA: mesmas
+         isenções das proporcionais (ver cabeçalho). -->
+    <record id="hr_rule_ferias_vencidas" model="hr.salary.rule">
+        <field name="name">Férias Vencidas</field>
+        <field name="sequence" eval="8" />
+        <field name="code">FERIAS_VENCIDAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = bool(payslip._l10n_br_ferias_vencidas_dados())
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# RF-18: também soma a média habitual, como qualquer verba de férias.
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+salario_dia = (contract.wage + media) / 30
+result = tools.br.round_money(sum(
+    salario_dia * periodo["dias"] * (2 if periodo["dobro"] else 1)
+    for periodo in payslip._l10n_br_ferias_vencidas_dados()
+))
+        </field>
+    </record>
+
+    <!-- 1/3 constitucional sobre as férias vencidas (INDENIZATÓRIO) -->
+    <record id="hr_rule_adicional_ferias_vencidas" model="hr.salary.rule">
+        <field name="name">Adicional Férias Vencidas (1/3)</field>
+        <field name="sequence" eval="9" />
+        <field name="code">ADICIONAL_FERIAS_VENCIDAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = FERIAS_VENCIDAS > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(FERIAS_VENCIDAS / 3)
+        </field>
+    </record>
+
+    <!-- Aviso Prévio Indenizado (Lei 12.506/2011). Devido só em rescisão
+         sem justa causa ou por acordo, e só quando marcado INDENIZADO
+         (trabalhado já é pago na folha mensal do próprio período).
+         INDENIZATÓRIO: sem INSS (STJ Tema 478) nem IRRF (Lei 7.713/88
+         art. 6º V); o FGTS incide em rubrica própria (FGTS_AVISO). -->
+    <record id="hr_rule_aviso_previo_indenizado" model="hr.salary.rule">
+        <field name="name">Aviso Prévio Indenizado</field>
+        <field name="sequence" eval="10" />
+        <field name="code">AVISO_PREVIO_INDENIZADO</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip._l10n_br_aviso_indenizado_devido()
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Acordo (CLT art. 484-A, I, "a"): aviso pago pela METADE. Sem justa causa:
+# integral. Súmula 94 TST: a base soma a média das verbas habituais.
+dias = payslip._l10n_br_dias_aviso_previo()
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+fator = 0.5 if payslip.l10n_br_tipo_rescisao == 'acordo' else 1.0
+result = tools.br.round_money((contract.wage + media) / 30 * dias * fator)
+        </field>
+    </record>
+
+    <!-- FGTS sobre o aviso prévio indenizado (Lei 8.036/90 art. 15, caput;
+         CLT art. 487 §§1º e 6º; Súmula 305 TST: incide mesmo indenizado). -->
+    <record id="hr_rule_fgts_aviso" model="hr.salary.rule">
+        <field name="name">FGTS (Aviso Prévio Indenizado)</field>
+        <field name="sequence" eval="11" />
+        <field name="code">FGTS_AVISO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = AVISO_PREVIO_INDENIZADO > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(AVISO_PREVIO_INDENIZADO * 0.08)
+        </field>
+    </record>
+
+    <!-- Multa de 40% do FGTS (Lei 8.036/90 art. 18 §1º), 20% no acordo
+         (CLT art. 484-A, I, "b"). Base: saldo informado da conta vinculada
+         ou, na ausência, estimativa 8% × salário × meses trabalhados
+         (fallback documentado, sem juros/correção — subestima o saldo
+         real). INDENIZATÓRIA: sem INSS (Lei 8.212/91 art. 28 §9º "e", 1,
+         c/c ADCT art. 10, I) nem IRRF (Lei 7.713/88 art. 6º V; Lei
+         8.036/90 art. 28). -->
+    <record id="hr_rule_multa_fgts" model="hr.salary.rule">
+        <field name="name">Multa do FGTS</field>
+        <field name="sequence" eval="12" />
+        <field name="code">MULTA_FGTS</field>
+        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_tipo_rescisao in ('sem_justa_causa', 'acordo')
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+if payslip.l10n_br_fgts_saldo_conta:
+    base = payslip.l10n_br_fgts_saldo_conta
+else:
+    # Fallback documentado: 8% do salário por mês trabalhado, sem
+    # juros/correção monetária — subestima o saldo real da conta
+    # vinculada. Preencher l10n_br_fgts_saldo_conta com o extrato do FGTS
+    # Digital sempre que disponível.
+    meses = tools.br.meses_trabalhados(contract.date_start, payslip.date_to)
+    base = tools.br.round_money(contract.wage * 0.08 * meses)
+percentual = 0.20 if payslip.l10n_br_tipo_rescisao == 'acordo' else 0.40
+result = tools.br.round_money(base * percentual)
         </field>
     </record>
 
@@ -110,7 +308,9 @@ result = tools.br.calc_inss(max(SALDO_SALARIO, 0))
         </field>
     </record>
 
-    <!-- INSS sobre o 13º proporcional (incidência separada) -->
+    <!-- INSS sobre o 13º proporcional (incidência separada). Só dispara
+         quando o 13º é devido (não devido na justa causa — ver
+         hr_rule_decimo_rescisao): DECIMO_RESCISAO já vem 0 nesse caso. -->
     <record id="hr_rule_inss_13_rescisao" model="hr.salary.rule">
         <field name="name">INSS (13º Rescisão)</field>
         <field name="sequence" eval="101" />
@@ -323,6 +523,10 @@ result = (
     + DECIMO_RESCISAO
     + FERIAS_INDENIZADAS
     + ADICIONAL_FERIAS_INDENIZADAS
+    + FERIAS_VENCIDAS
+    + ADICIONAL_FERIAS_VENCIDAS
+    + AVISO_PREVIO_INDENIZADO
+    + MULTA_FGTS
     - INSS
     - INSS_13
     - IRRF
