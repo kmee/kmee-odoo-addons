@@ -213,6 +213,26 @@ msgid "Payslip"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_pensao_13_rescisao
+msgid "Pensão Alimentícia (13º Rescisão)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_pensao_13
+msgid "Pensão Alimentícia (13º)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_pensao_ferias
+msgid "Pensão Alimentícia (Férias)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
+#: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_pensao_rescisao
+msgid "Pensão Alimentícia (Saldo de Salário)"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:hr.salary.rule.category,name:l10n_br_hr_vacation.hr_salary_rule_category_prov_indeniz
 msgid "Provento Indenizatório"
 msgstr ""
