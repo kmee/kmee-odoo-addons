@@ -1,7 +1,7 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -49,6 +49,11 @@ class ESocialS1200(models.Model):
         help="Número do recibo do evento a ser retificado. "
         "Obrigatório quando Indicativo de Retificação for 'Retificação'.",
     )
+
+    @api.constrains("nr_recibo")
+    def _check_nr_recibo(self):
+        for rec in self:
+            rec._validar_nr_recibo(rec.nr_recibo, _("Nº Recibo"))
 
     def _get_event_type(self):
         return "S-1200"
