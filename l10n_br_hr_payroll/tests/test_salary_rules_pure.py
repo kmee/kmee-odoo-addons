@@ -15,6 +15,7 @@ from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     calc_ferias_dias,
     calc_inss as _calc_inss,
     calc_irrf as _calc_irrf,
+    calc_irrf_mais_favoravel as _calc_irrf_mais_favoravel,
     calc_pensao_alimenticia,
     calc_salario_familia as _calc_salario_familia,
     calc_vt,
@@ -22,7 +23,15 @@ from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     dias_trabalhados_mes,
 )
 
-from .fixtures import FAIXAS_INSS_2024, FAIXAS_IRRF_2024, FAIXAS_SF_2024
+from .fixtures import (
+    FAIXAS_INSS_2024,
+    FAIXAS_IRRF_2024,
+    FAIXAS_IRRF_2026,
+    FAIXAS_REDUTOR_2026,
+    FAIXAS_SF_2024,
+)
+
+DESCONTO_SIMPLIFICADO_2024 = 564.80
 
 
 def calc_inss(base):
@@ -338,6 +347,59 @@ class TestCalcPensaoAlimenticia(BaseCase):
 
     def test_sem_pensao(self):
         self.assertAlmostEqual(calc_pensao_alimenticia(5000.00, 0.0, 0.0), 0.00)
+
+
+class TestCalcIRRFMaisFavoravel(BaseCase):
+    """RF-16: dedução legal x desconto simplificado, dentro de UMA apuração.
+
+    O helper é o mesmo usado pela folha mensal e pelas apurações separadas
+    (férias, 13º e rescisão): quem escolhe é o menor imposto.
+    """
+
+    def _favoravel(self, rendimento, base_legal, simplificado=None, redutor=()):
+        return _calc_irrf_mais_favoravel(
+            rendimento,
+            base_legal,
+            FAIXAS_IRRF_2024,
+            DESCONTO_SIMPLIFICADO_2024 if simplificado is None else simplificado,
+            redutor,
+        )
+
+    def test_simplificado_ganha_quando_deducoes_sao_pequenas(self):
+        """Rendimento 4.000 com dedução legal de só R$300.
+
+        Legal: base 3.700 -> 15% - 381,44 = 173,56.
+        Simplificado: base 3.435,20 -> 15% - 381,44 = 133,84 (menor).
+        """
+        self.assertAlmostEqual(self._favoravel(4000.00, 3700.00), 133.84)
+
+    def test_legal_ganha_quando_deducoes_sao_grandes(self):
+        """Dedução legal de R$1.000 supera os R$564,80 do simplificado."""
+        self.assertAlmostEqual(self._favoravel(4000.00, 3000.00), 68.56)
+
+    def test_sem_simplificado_usa_somente_a_deducao_legal(self):
+        """Competência anterior a 05/2023: parcela zero -> só o caminho legal."""
+        self.assertAlmostEqual(
+            self._favoravel(4000.00, 3700.00, simplificado=0.0), 173.56
+        )
+
+    def test_base_negativa_nao_gera_imposto(self):
+        self.assertAlmostEqual(self._favoravel(1000.00, -500.00), 0.0)
+
+    def test_redutor_aplicado_depois_da_forma_mais_favoravel(self):
+        """13º/rescisão de R$4.500 em 2026: simplificado 200,39, redutor zera.
+
+        Base legal 4.068,49 -> 239,92; simplificado 3.892,80 -> 200,39. O
+        redutor da 1ª faixa (312,89, rendimento até R$5.000) absorve o menor.
+        """
+        imposto = _calc_irrf_mais_favoravel(
+            4500.00, 4068.49, FAIXAS_IRRF_2026, 607.20, FAIXAS_REDUTOR_2026
+        )
+        self.assertAlmostEqual(imposto, 0.0)
+        sem_redutor = _calc_irrf_mais_favoravel(
+            4500.00, 4068.49, FAIXAS_IRRF_2026, 607.20, ()
+        )
+        self.assertAlmostEqual(sem_redutor, 200.39)
 
 
 class TestDiasDSR(BaseCase):
