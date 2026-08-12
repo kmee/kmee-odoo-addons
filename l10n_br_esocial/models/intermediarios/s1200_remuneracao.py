@@ -53,6 +53,30 @@ class ESocialS1200(models.Model):
     def _get_event_type(self):
         return "S-1200"
 
+    def get_ide_dm_dev(self):
+        """Identificador do demonstrativo de valores devidos (ideDmDev).
+
+        O S-1210 tem de apontar para o MESMO ideDmDev informado no S-1200 da
+        competência (é assim que o governo liga o pagamento à apuração), por
+        isso o identificador é derivado do id do registro e nunca do contexto
+        de geração.
+        """
+        self.ensure_one()
+        return "DEM%06d" % (self.id or 1)
+
+    def _prepare_evento_vals(self, xml, id_evento):
+        vals = super()._prepare_evento_vals(xml, id_evento)
+        # nr_recibo do evento guarda o recibo DEVOLVIDO pelo governo, não o
+        # recibo retificado — este último vive no intermediário.
+        vals.update(
+            {
+                "per_apur": self.per_apur,
+                "ind_retif": self.ind_retif,
+                "operacao": "R" if self.ind_retif == "2" else "I",
+            }
+        )
+        return vals
+
     def _build_itens_remun(self):
         """Build list of rubric items from payslip lines."""
         itens = []
@@ -141,7 +165,7 @@ class ESocialS1200(models.Model):
             "ver_proc": proc["ver_proc"],
             "dm_dev": [
                 {
-                    "ide_dm_dev": f"DEM{self.id or 1:06d}",
+                    "ide_dm_dev": self.get_ide_dm_dev(),
                     "cod_categ": categoria.codigo,
                     "info_per_apur": {
                         "ide_estab_lot": [

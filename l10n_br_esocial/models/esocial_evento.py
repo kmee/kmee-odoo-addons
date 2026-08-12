@@ -25,6 +25,7 @@ class ESocialEvento(models.Model):
             ("success", "Sucesso"),
             ("error", "Erro"),
             ("rectified", "Retificado"),
+            ("excluded", "Excluído"),
         ],
         default="draft",
         tracking=True,
@@ -95,6 +96,30 @@ class ESocialEvento(models.Model):
         "evento_id",
         string="Ocorrências",
     )
+    evento_excluido_id = fields.Many2one(
+        "l10n_br.esocial.evento",
+        string="Evento Excluído",
+        ondelete="set null",
+        help="Preenchido nos eventos S-3000: aponta o evento que a exclusão " "desfaz.",
+    )
+    exclusao_evento_id = fields.One2many(
+        "l10n_br.esocial.evento",
+        "evento_excluido_id",
+        string="Exclusões",
+    )
+    totalizador_ids = fields.One2many(
+        "l10n_br.esocial.totalizador",
+        "evento_id",
+        string="Totalizadores",
+        help="Eventos totalizadores (S-5001/S-5002/S-5011/S-5012) devolvidos "
+        "pelo governo no processamento deste evento.",
+    )
+    totalizador_count = fields.Integer(compute="_compute_totalizador_count")
+
+    @api.depends("totalizador_ids")
+    def _compute_totalizador_count(self):
+        for rec in self:
+            rec.totalizador_count = len(rec.totalizador_ids)
 
     @api.depends("tipo", "id_evento")
     def _compute_name(self):
@@ -117,6 +142,46 @@ class ESocialEvento(models.Model):
                     _("Apenas eventos validados ou com erro podem voltar a rascunho.")
                 )
             rec.state = "draft"
+
+    def registrar_aceite(self, nr_recibo=None, retorno_xml=None):
+        """Registra o aceite do evento pelo eSocial.
+
+        Concentra tudo o que depende do aceite: recibo, XML de retorno,
+        totalizadores devolvidos e propagação da exclusão (S-3000). É chamado
+        pelo processamento do retorno do lote.
+        """
+        for rec in self:
+            vals = {"state": "success"}
+            if nr_recibo:
+                vals["nr_recibo"] = nr_recibo
+            if retorno_xml:
+                vals["xml_retorno"] = retorno_xml
+            rec.write(vals)
+            if retorno_xml:
+                rec._consumir_totalizadores(retorno_xml)
+            rec._propagar_exclusao()
+
+    def _consumir_totalizadores(self, retorno_xml):
+        """Persiste os totalizadores devolvidos no retorno deste evento."""
+        self.ensure_one()
+        return self.env["l10n_br.esocial.totalizador"].criar_do_retorno(
+            self, retorno_xml
+        )
+
+    def _propagar_exclusao(self):
+        """Marca como excluído o evento que um S-3000 aceito desfez."""
+        self.ensure_one()
+        if self.tipo != "S-3000" or not self.evento_excluido_id:
+            return
+        excluido = self.evento_excluido_id
+        excluido.write({"state": "excluded"})
+        excluido.message_post(
+            body=_(
+                "Evento excluído no eSocial pelo S-3000 %(nome)s "
+                "(recibo %(recibo)s)."
+            )
+            % {"nome": self.name, "recibo": self.nr_recibo or _("sem recibo")}
+        )
 
     def _check_audit_manager(self):
         """Only payroll managers may force an event state manually."""

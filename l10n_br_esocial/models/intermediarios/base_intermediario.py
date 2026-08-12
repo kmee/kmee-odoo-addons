@@ -2,13 +2,20 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import logging
+import re
 
 from lxml import etree
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
+
+# Competência mensal (AAAA-MM) e anual (AAAA), conforme TS_perApur do leiaute.
+RE_COMPETENCIA_MENSAL = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
+RE_COMPETENCIA_ANUAL = re.compile(r"^\d{4}$")
+# Recibo de entrega do eSocial: 1.<dígito>.<19 dígitos> (TS_nrRecibo).
+RE_NR_RECIBO = re.compile(r"^1\.\d\.\d{19}$")
 
 try:
     from esociallib import to_xml, validate_xsd
@@ -60,6 +67,52 @@ class ESocialBaseIntermediario(models.AbstractModel):
         if len(cnpj_limpo) == 14:
             return {"tp_insc": 1, "nr_insc": cnpj_limpo[:8]}
         return {"tp_insc": 2, "nr_insc": cnpj_limpo}
+
+    @api.model
+    def _so_digitos(self, valor):
+        """Remove pontuação de inscrições e códigos numéricos."""
+        return "".join(c for c in (valor or "") if c.isdigit())
+
+    @api.model
+    def _validar_competencia(self, valor, rotulo, anual=False):
+        """Valida o formato de uma competência do leiaute (AAAA-MM ou AAAA).
+
+        Campo vazio é aceito (a obrigatoriedade é de cada evento). Levanta
+        ValidationError para poder ser usado em ``@api.constrains``.
+        """
+        if not valor:
+            return
+        if anual:
+            valido = RE_COMPETENCIA_ANUAL.match(valor) or RE_COMPETENCIA_MENSAL.match(
+                valor
+            )
+            esperado = "AAAA (anual) ou AAAA-MM (mensal)"
+        else:
+            valido = RE_COMPETENCIA_MENSAL.match(valor)
+            esperado = "AAAA-MM"
+        if not valido:
+            raise ValidationError(
+                _(
+                    "%(rotulo)s inválido: %(valor)r. O eSocial espera o formato "
+                    "%(esperado)s."
+                )
+                % {"rotulo": rotulo, "valor": valor, "esperado": esperado}
+            )
+
+    @api.model
+    def _validar_nr_recibo(self, valor, rotulo):
+        """Valida o formato do recibo de entrega (1.d.19 dígitos)."""
+        if not valor:
+            return
+        if not RE_NR_RECIBO.match(valor.strip()):
+            raise ValidationError(
+                _(
+                    "%(rotulo)s inválido: %(valor)r. O recibo de entrega do "
+                    "eSocial tem o formato 1.D.<19 dígitos>, por exemplo "
+                    "1.2.0000000000000012345."
+                )
+                % {"rotulo": rotulo, "valor": valor}
+            )
 
     def _get_proc_info(self):
         """Return process emission info."""
@@ -165,6 +218,23 @@ class ESocialBaseIntermediario(models.AbstractModel):
                 return id_evento
         return root.get("Id") or False
 
+    def _prepare_evento_vals(self, xml, id_evento):
+        """Valores do ``l10n_br.esocial.evento`` gerado por este intermediário.
+
+        Subclasses estendem para carregar competência, retificação ou vínculos
+        próprios do evento (ver S-1200, S-1210, S-1299, S-3000).
+        """
+        self.ensure_one()
+        return {
+            "tipo": self._get_event_type(),
+            "operacao": "I",
+            "id_evento": id_evento,
+            "xml_envio": xml,
+            "company_id": self.company_id.id,
+            "origem_model": self._name,
+            "origem_id": self.id,
+        }
+
     def action_gerar_evento(self):
         """Generate XML and create evento record."""
         self.ensure_one()
@@ -177,15 +247,7 @@ class ESocialBaseIntermediario(models.AbstractModel):
                 self._get_event_type(),
             )
         evento = self.env["l10n_br.esocial.evento"].create(
-            {
-                "tipo": self._get_event_type(),
-                "operacao": "I",
-                "id_evento": id_evento,
-                "xml_envio": xml,
-                "company_id": self.company_id.id,
-                "origem_model": self._name,
-                "origem_id": self.id,
-            }
+            self._prepare_evento_vals(xml, id_evento)
         )
         self.evento_id = evento.id
         return evento
