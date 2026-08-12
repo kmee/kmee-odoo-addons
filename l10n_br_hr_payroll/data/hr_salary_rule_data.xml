@@ -125,7 +125,7 @@ result = tools.br.round_money(SM * percentuais.get(grau, 0.10))
     </record>
 
     <!-- ══════════════════════════════════════════════════════════════
-         DESCONTOS (DED) — valores positivos, subtraídos do NET
+         DESCONTOS (DED) - valores positivos, subtraídos do NET
          ══════════════════════════════════════════════════════════════ -->
 
     <!-- 50. Faltas Injustificadas -->
@@ -162,7 +162,7 @@ result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_inju
     </record>
 
     <!-- ══════════════════════════════════════════════════════════════
-         BRUTO (GROSS) — subtotal
+         BRUTO (GROSS) - subtotal
          ══════════════════════════════════════════════════════════════ -->
 
     <!-- 99. Remuneração Bruta -->
@@ -182,7 +182,7 @@ result = categories.BASIC + categories.ALW
          CONTRIBUIÇÕES PREVIDENCIÁRIAS
          ══════════════════════════════════════════════════════════════ -->
 
-    <!-- 100. INSS (RGPS) — CLT normal -->
+    <!-- 100. INSS (RGPS) - CLT normal -->
     <record id="hr_rule_inss" model="hr.salary.rule">
         <field name="name">INSS</field>
         <field name="sequence" eval="100" />
@@ -309,19 +309,18 @@ result = not employee.l10n_br_molestia_grave
 # RF-16: retenção pela forma mais favorável ao contribuinte (menor imposto).
 #  1) Dedução legal: base já calculada em BASE_IRRF (INSS/RPPS, dependentes,
 #     pensão).
-#  2) Desconto simplificado (Lei 14.663/2023): parcela fixa por competência,
-#     no lugar das deduções legais, sobre o rendimento tributável.
-irrf_legal = tools.br.calc_irrf(max(BASE_IRRF, 0))
+#  2) Desconto simplificado (Lei 9.250/95, art. 4º, § 2º, incluído pela Lei
+#     14.663/2023, art. 6º; na base mensal, IN RFB 1.500/2014, art. 52, § 3º,
+#     incluído pela IN RFB 2.141/2023, reforçado no MAFON 2025, código 0561,
+#     alínea f): parcela fixa por competência, no lugar das deduções legais,
+#     sobre o rendimento tributável.
+# O redutor do IRPF (Lei 9.250/95, art. 3º-A, incluído pela Lei 15.270/2025,
+# desde 01/2026) é aplicado DEPOIS, sobre o imposto da forma mais favorável, em
+# função do rendimento tributável BRUTO do mês (não da base). Tudo isso está em
+# tools.br.irrf_mais_favoravel, comum a todas as apurações (mensal, férias, 13º
+# e rescisão).
 rendimento = max(categories.GROSS - FALTAS - DESC_DSR, 0)
-base_simplificada = max(rendimento - tools.br.desconto_simplificado(), 0)
-irrf_simplificado = tools.br.calc_irrf(base_simplificada)
-imposto = min(irrf_legal, irrf_simplificado)
-# Redutor do IRPF (Lei 15.270/2025, vigente desde 01/01/2026): aplicado DEPOIS
-# do imposto apurado pela forma mais favorável, em função do rendimento
-# tributável BRUTO do mês (não da base de cálculo) e limitado ao imposto.
-# Competências anteriores a 01/2026 não têm redutor cadastrado → imposto
-# inalterado.
-result = tools.br.irrf_apos_redutor(rendimento, imposto)
+result = tools.br.irrf_mais_favoravel(rendimento, BASE_IRRF)
         </field>
     </record>
 
@@ -329,15 +328,15 @@ result = tools.br.irrf_apos_redutor(rendimento, imposto)
          SALÁRIO FAMÍLIA (ALW, mas FORA da base tributável)
          ══════════════════════════════════════════════════════════════ -->
 
-    <!-- 130. Salário Família — roda DEPOIS do GROSS (sequência 99).
+    <!-- 130. Salário Família - roda DEPOIS do GROSS (sequência 99).
          Duas razões:
            a) a base legal de enquadramento é o SALÁRIO DE CONTRIBUIÇÃO do mês
               (remuneração mensal: salário + horas extras, adicionais,
-              comissões — Lei 8.213/91 art. 65 c/c Lei 8.212/91 art. 28), que
+              comissões - Lei 8.213/91 art. 65 c/c Lei 8.212/91 art. 28), que
               só existe depois do GROSS;
            b) a cota NÃO integra o salário de contribuição (Lei 8.212/91
               art. 28 §9º "j"), logo deve ficar fora das bases de
-              INSS/IRRF/FGTS — o que se obtém naturalmente calculando-a
+              INSS/IRRF/FGTS - o que se obtém naturalmente calculando-a
               depois do GROSS. Continua somada ao NET (categoria ALW). -->
     <record id="hr_rule_salario_familia" model="hr.salary.rule">
         <field name="name">Salário Família</field>

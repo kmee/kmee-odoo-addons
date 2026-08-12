@@ -15,6 +15,7 @@ from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     calc_ferias_dias,
     calc_inss as _calc_inss,
     calc_irrf as _calc_irrf,
+    calc_irrf_mais_favoravel as _calc_irrf_mais_favoravel,
     calc_pensao_alimenticia,
     calc_salario_familia as _calc_salario_familia,
     calc_vt,
@@ -22,7 +23,15 @@ from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     dias_trabalhados_mes,
 )
 
-from .fixtures import FAIXAS_INSS_2024, FAIXAS_IRRF_2024, FAIXAS_SF_2024
+from .fixtures import (
+    FAIXAS_INSS_2024,
+    FAIXAS_IRRF_2024,
+    FAIXAS_IRRF_2026,
+    FAIXAS_REDUTOR_2026,
+    FAIXAS_SF_2024,
+)
+
+DESCONTO_SIMPLIFICADO_2024 = 564.80
 
 
 def calc_inss(base):
@@ -168,15 +177,15 @@ class TestCalcDecimoAvos(BaseCase):
         self.assertEqual(calc_decimo_avos(date(2024, 12, 15), date(2024, 12, 31)), 1)
 
     def test_admitido_dia_16_conta_mes_31_dias(self):
-        """Dia 16/dez (31 dias): 16 dias trabalhados >= 15 → conta."""
+        """Dia 16/dez (31 dias): 16 dias trabalhados >= 15 -> conta."""
         self.assertEqual(calc_decimo_avos(date(2024, 12, 16), date(2024, 12, 31)), 1)
 
     def test_admitido_dia_18_nao_conta_mes(self):
-        """Dia 18/dez (31 dias): 14 dias trabalhados < 15 → não conta."""
+        """Dia 18/dez (31 dias): 14 dias trabalhados < 15 -> não conta."""
         self.assertEqual(calc_decimo_avos(date(2024, 12, 18), date(2024, 12, 31)), 0)
 
     def test_admitido_dia_25_nao_conta_mes(self):
-        """Dia 25/dez (31 dias): 7 dias trabalhados < 15 → não conta."""
+        """Dia 25/dez (31 dias): 7 dias trabalhados < 15 -> não conta."""
         self.assertEqual(calc_decimo_avos(date(2024, 12, 25), date(2024, 12, 31)), 0)
 
     def test_maximo_12_avos(self):
@@ -187,13 +196,13 @@ class TestCalcDecimoAvosDesligamento(BaseCase):
     """Regra dos 15 dias no mês do DESLIGAMENTO (Lei 4.090/62 art. 1º §2º).
 
     A fração igual ou superior a 15 dias vale como mês integral em QUALQUER
-    mês — não só no de admissão. Antes o mês da data de referência era sempre
+    mês - não só no de admissão. Antes o mês da data de referência era sempre
     contado como avo cheio, gerando um avo indevido em rescisões antes do dia
     15 (e 13º proporcional a mais na rescisão).
     """
 
     def test_desligamento_dia_10_nao_gera_avo(self):
-        """Desligado em 10/06: 10 dias em junho < 15 → 5 avos (jan..mai)."""
+        """Desligado em 10/06: 10 dias em junho < 15 -> 5 avos (jan..mai)."""
         self.assertEqual(calc_decimo_avos(date(2023, 1, 1), date(2024, 6, 10)), 5)
 
     def test_desligamento_dia_14_nao_gera_avo(self):
@@ -205,7 +214,7 @@ class TestCalcDecimoAvosDesligamento(BaseCase):
         self.assertEqual(calc_decimo_avos(date(2023, 1, 1), date(2024, 6, 15)), 6)
 
     def test_desligamento_dia_20_gera_avo(self):
-        """Desligado em 20/06: 20 dias >= 15 → 6 avos."""
+        """Desligado em 20/06: 20 dias >= 15 -> 6 avos."""
         self.assertEqual(calc_decimo_avos(date(2023, 1, 1), date(2024, 6, 20)), 6)
 
     def test_desligamento_ultimo_dia_do_mes(self):
@@ -213,23 +222,23 @@ class TestCalcDecimoAvosDesligamento(BaseCase):
         self.assertEqual(calc_decimo_avos(date(2023, 1, 1), date(2024, 9, 30)), 9)
 
     def test_admissao_e_desligamento_no_mesmo_mes(self):
-        """Admitido 01/06 e desligado 12/06: 12 dias < 15 → 0 avos."""
+        """Admitido 01/06 e desligado 12/06: 12 dias < 15 -> 0 avos."""
         self.assertEqual(calc_decimo_avos(date(2024, 6, 1), date(2024, 6, 12)), 0)
 
     def test_admissao_e_desligamento_no_mesmo_mes_com_15_dias(self):
-        """Admitido 01/06 e desligado 15/06: 15 dias → 1 avo."""
+        """Admitido 01/06 e desligado 15/06: 15 dias -> 1 avo."""
         self.assertEqual(calc_decimo_avos(date(2024, 6, 1), date(2024, 6, 15)), 1)
 
     def test_admissao_no_ano_da_referencia_apos_o_mes(self):
-        """Admitido depois da data de referência → nenhum avo."""
+        """Admitido depois da data de referência -> nenhum avo."""
         self.assertEqual(calc_decimo_avos(date(2024, 8, 1), date(2024, 6, 30)), 0)
 
     def test_fevereiro_bissexto_dia_14(self):
-        """Fevereiro de ano bissexto, desligamento no dia 14 → sem avo."""
+        """Fevereiro de ano bissexto, desligamento no dia 14 -> sem avo."""
         self.assertEqual(calc_decimo_avos(date(2023, 1, 1), date(2024, 2, 14)), 1)
 
     def test_fevereiro_bissexto_dia_15(self):
-        """Fevereiro de ano bissexto, desligamento no dia 15 → avo em fev."""
+        """Fevereiro de ano bissexto, desligamento no dia 15 -> avo em fev."""
         self.assertEqual(calc_decimo_avos(date(2023, 1, 1), date(2024, 2, 15)), 2)
 
 
@@ -258,7 +267,7 @@ class TestDiasTrabalhadosMes(BaseCase):
         )
 
     def test_contrato_fora_do_periodo(self):
-        """Contrato encerrado antes do período → zero dias."""
+        """Contrato encerrado antes do período -> zero dias."""
         self.assertEqual(
             dias_trabalhados_mes(
                 date(2026, 2, 1), date(2026, 2, 28), data_demissao=date(2026, 1, 31)
@@ -293,10 +302,10 @@ class TestCalcSalarioFamilia(BaseCase):
         self.assertAlmostEqual(calc_salario_familia(1412.00, 2), 124.08)
 
     def test_acima_faixa_unica_zero(self):
-        """Remuneração acima do limite da faixa única (2024) → sem direito.
+        """Remuneração acima do limite da faixa única (2024) -> sem direito.
 
         A estrutura de 2 faixas foi extinta; em 2024 há uma única faixa até
-        R$1.819,26. R$2.000 está acima → salário família zero.
+        R$1.819,26. R$2.000 está acima -> salário família zero.
         """
         self.assertAlmostEqual(calc_salario_familia(2000.00, 1), 0.00)
 
@@ -307,7 +316,7 @@ class TestCalcSalarioFamilia(BaseCase):
         self.assertAlmostEqual(calc_salario_familia(1412.00, 0), 0.00)
 
     def test_cota_proporcional_meio_mes(self):
-        """15 dias trabalhados (admissão/demissão) → metade da cota."""
+        """15 dias trabalhados (admissão/demissão) -> metade da cota."""
         self.assertAlmostEqual(calc_salario_familia(1412.00, 1, 15), 31.02)
 
     def test_cota_proporcional_dez_dias(self):
@@ -340,16 +349,69 @@ class TestCalcPensaoAlimenticia(BaseCase):
         self.assertAlmostEqual(calc_pensao_alimenticia(5000.00, 0.0, 0.0), 0.00)
 
 
+class TestCalcIRRFMaisFavoravel(BaseCase):
+    """RF-16: dedução legal x desconto simplificado, dentro de UMA apuração.
+
+    O helper é o mesmo usado pela folha mensal e pelas apurações separadas
+    (férias, 13º e rescisão): quem escolhe é o menor imposto.
+    """
+
+    def _favoravel(self, rendimento, base_legal, simplificado=None, redutor=()):
+        return _calc_irrf_mais_favoravel(
+            rendimento,
+            base_legal,
+            FAIXAS_IRRF_2024,
+            DESCONTO_SIMPLIFICADO_2024 if simplificado is None else simplificado,
+            redutor,
+        )
+
+    def test_simplificado_ganha_quando_deducoes_sao_pequenas(self):
+        """Rendimento 4.000 com dedução legal de só R$300.
+
+        Legal: base 3.700 -> 15% - 381,44 = 173,56.
+        Simplificado: base 3.435,20 -> 15% - 381,44 = 133,84 (menor).
+        """
+        self.assertAlmostEqual(self._favoravel(4000.00, 3700.00), 133.84)
+
+    def test_legal_ganha_quando_deducoes_sao_grandes(self):
+        """Dedução legal de R$1.000 supera os R$564,80 do simplificado."""
+        self.assertAlmostEqual(self._favoravel(4000.00, 3000.00), 68.56)
+
+    def test_sem_simplificado_usa_somente_a_deducao_legal(self):
+        """Competência anterior a 05/2023: parcela zero -> só o caminho legal."""
+        self.assertAlmostEqual(
+            self._favoravel(4000.00, 3700.00, simplificado=0.0), 173.56
+        )
+
+    def test_base_negativa_nao_gera_imposto(self):
+        self.assertAlmostEqual(self._favoravel(1000.00, -500.00), 0.0)
+
+    def test_redutor_aplicado_depois_da_forma_mais_favoravel(self):
+        """13º/rescisão de R$4.500 em 2026: simplificado 200,39, redutor zera.
+
+        Base legal 4.068,49 -> 239,92; simplificado 3.892,80 -> 200,39. O
+        redutor da 1ª faixa (312,89, rendimento até R$5.000) absorve o menor.
+        """
+        imposto = _calc_irrf_mais_favoravel(
+            4500.00, 4068.49, FAIXAS_IRRF_2026, 607.20, FAIXAS_REDUTOR_2026
+        )
+        self.assertAlmostEqual(imposto, 0.0)
+        sem_redutor = _calc_irrf_mais_favoravel(
+            4500.00, 4068.49, FAIXAS_IRRF_2026, 607.20, ()
+        )
+        self.assertAlmostEqual(sem_redutor, 200.39)
+
+
 class TestDiasDSR(BaseCase):
     """RF-26: dias úteis e DSR derivados do mês da competência."""
 
     def test_marco_2024_cinco_domingos(self):
-        """Março/2024: 31 dias, 5 domingos (3,10,17,24,31) → 26 úteis, 5 DSR."""
+        """Março/2024: 31 dias, 5 domingos (3,10,17,24,31) -> 26 úteis, 5 DSR."""
         uteis, dsr = dias_dsr(2024, 3)
         self.assertEqual((uteis, dsr), (26, 5))
 
     def test_fevereiro_2024_quatro_domingos(self):
-        """Fevereiro/2024 (bissexto): 29 dias, 4 domingos → 25 úteis, 4 DSR."""
+        """Fevereiro/2024 (bissexto): 29 dias, 4 domingos -> 25 úteis, 4 DSR."""
         uteis, dsr = dias_dsr(2024, 2)
         self.assertEqual((uteis, dsr), (25, 4))
 

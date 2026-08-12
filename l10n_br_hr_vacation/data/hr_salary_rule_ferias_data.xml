@@ -19,12 +19,42 @@
             (PROV_TRIB_IRRF): entra na base do IRRF, mas não no GROSS, que é
             a base de INSS e FGTS.
             A isenção do ADI SRF 5/2005 alcança o 1/3 de férias INDENIZADAS
-            NA RESCISÃO — não o 1/3 do abono do art. 143 com contrato ativo.
+            NA RESCISÃO - não o 1/3 do abono do art. 143 com contrato ativo.
           - Ao vender 10 dias, o empregado GOZA 20 dias: as férias gozadas
             são proporcionais (20/30) via l10n_br_dias_ferias_gozadas.
           - IRRF apurado EM SEPARADO dos demais rendimentos do mês (IN RFB
-            1.500/2014): garantido pela estrutura/holerite próprios de férias,
-            com GROSS, BASE_IRRF e IRRF exclusivos deste holerite.
+            1.500/2014, art. 29, § 1º): garantido pela estrutura/holerite
+            próprios de férias, com GROSS, BASE_IRRF e IRRF exclusivos deste
+            holerite.
+
+        PENSÃO ALIMENTÍCIA NAS APURAÇÕES SEPARADAS (RF-03) - regra adotada,
+        válida também para o 13º e para a rescisão:
+
+          1. Só se DEDUZ da base do IRRF a pensão que é EFETIVAMENTE RETIDA
+             neste holerite. A dedução do art. 4º II da Lei 9.250/95 pressupõe
+             importância PAGA a título de pensão; reduzir a base sem retenção
+             (comportamento anterior) inventava dedução e subtributava.
+             Lastro direto: IN RFB 1.500/2014, art. 13, § 6º, I, que só admite
+             as deduções "desde que correspondam a esse rendimento" e veda usar
+             o mesmo valor em outra base de cálculo; e art. 29, § 3º, que na
+             base das férias remete às deduções do art. 52 "correspondentes às
+             férias".
+          2. Parcela FIXA: obrigação MENSAL, quitada UMA única vez por mês, na
+             folha mensal (rubrica PENSAO_ALIMENTICIA de l10n_br_hr_payroll).
+             NÃO é replicada no holerite de férias nem no do 13º, porque
+             replicar desconta duas vezes do empregado e usa a mesma
+             importância em duas bases, o que o art. 13, § 6º, I veda
+             expressamente.
+          3. Parcela PERCENTUAL: incide sobre a própria verba desta apuração
+             (férias + 1/3 aqui; 13º bruto no holerite do 13º), acompanhando o
+             entendimento consolidado de que o percentual fixado em juízo
+             alcança férias, terço constitucional e gratificação natalina.
+             Como a base é a verba deste holerite, não há sobreposição com o
+             percentual retido na folha mensal (que incide sobre o salário do
+             mês).
+          4. EXCEÇÃO da rescisão: lá não existe folha mensal, e o saldo de
+             salário faz o papel da remuneração do mês - por isso a parcela
+             fixa é retida no saldo de salário (ver hr_salary_rule_rescisao).
     -->
 
     <!-- Categoria de proventos indenizatórios (fora de todas as bases) -->
@@ -74,7 +104,7 @@ result = tools.br.round_money(FERIAS / 3)
         </field>
     </record>
 
-    <!-- Abono Pecuniário (venda de 1/3 das férias) — INDENIZATÓRIO -->
+    <!-- Abono Pecuniário (venda de 1/3 das férias) - INDENIZATÓRIO -->
     <record id="hr_rule_abono_pecuniario" model="hr.salary.rule">
         <field name="name">Abono Pecuniário</field>
         <field name="sequence" eval="3" />
@@ -92,7 +122,7 @@ result = tools.br.round_money((contract.wage / 30) * dias_vendidos)
         </field>
     </record>
 
-    <!-- 1/3 constitucional sobre o abono pecuniário — TRIBUTÁVEL PELO IRRF
+    <!-- 1/3 constitucional sobre o abono pecuniário - TRIBUTÁVEL PELO IRRF
          (Solução de Consulta COSIT nº 209/2021), sem INSS e sem FGTS. -->
     <record id="hr_rule_adicional_abono" model="hr.salary.rule">
         <field name="name">Adicional sobre Abono (1/3)</field>
@@ -141,6 +171,35 @@ result = tools.br.calc_inss(max(categories.GROSS, 0))
         </field>
     </record>
 
+    <!-- Pensão alimentícia retida sobre as férias (RF-03).
+         SOMENTE a parcela percentual: a parcela fixa é obrigação mensal e já
+         é descontada na folha mensal (ver cabeçalho, item 2). -->
+    <record id="hr_rule_pensao_ferias" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia (Férias)</field>
+        <field name="sequence" eval="106" />
+        <field name="code">PENSAO_ALIMENTICIA</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_pensao_percentual &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Percentual sobre a remuneração de férias (férias gozadas + 1/3 = GROSS).
+# O abono pecuniário e o seu 1/3 ficam FORA: são verbas indenizatórias, cuja
+# inclusão na pensão depende de decisão judicial específica (não presumir).
+# valor_fixo = 0.0: parcela fixa é mensal e não se repete aqui.
+result = tools.br.calc_pensao_alimenticia(
+    categories.GROSS,
+    0.0,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
     <!-- Base IRRF férias -->
     <record id="hr_rule_base_irrf_ferias" model="hr.salary.rule">
         <field name="name">Base IRRF (Férias)</field>
@@ -158,8 +217,15 @@ result = tools.br.calc_inss(max(categories.GROSS, 0))
 # IRRF (COSIT 209/2021) apesar de não sofrer INSS nem FGTS.
 rendimento = categories.GROSS + categories.PROV_TRIB_IRRF
 deducoes = INSS
+# Dedução por dependente concedida também nesta apuração, mesmo quando há
+# folha mensal no mesmo mês: prática de mercado sem dispositivo expresso; no
+# 13º a duplicidade é autorizada (MAFON 2025, alínea e.1), nas férias decorre
+# da remissão do art. 29, § 3º da IN RFB 1.500/2014 ao art. 52. Diferente da
+# pensão, cuja parcela fixa NÃO se repete, porque ali o art. 13, § 6º, I veda
+# usar a mesma importância em duas bases.
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
-pensao = employee.l10n_br_pensao_alimenticia
+# Só a pensão EFETIVAMENTE RETIDA neste holerite reduz a base (ver cabeçalho).
+pensao = PENSAO_ALIMENTICIA
 result = rendimento - deducoes - dependentes - pensao
         </field>
     </record>
@@ -179,11 +245,17 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-imposto = tools.br.calc_irrf(max(BASE_IRRF, 0))
-# Redutor do IRPF (Lei 15.270/2025, desde 01/01/2026) sobre o imposto apurado,
-# em função do rendimento tributável BRUTO desta apuração.
+# RF-16: a apuração das férias também segue a forma MAIS FAVORÁVEL: dedução
+# legal (BASE_IRRF) x desconto simplificado, sobre o rendimento tributável
+# desta apuração. O desconto simplificado nas férias tem dispositivo próprio:
+# IN RFB 1.500/2014, art. 29, § 5º (incluído pela IN RFB 2.141/2023), que
+# reproduz na base das férias a opção do art. 4º, § 2º da Lei 9.250/95.
+# O redutor do IRPF (Lei 9.250/95, art. 3º-A, caput, incluído pela Lei
+# 15.270/2025, desde 01/2026) entra depois, sobre o rendimento BRUTO: aqui por
+# subsunção ao caput, que não menciona as férias em separado.
+# Antes só existia o caminho da dedução legal, com risco de retenção A MAIOR.
 rendimento = max(categories.GROSS + categories.PROV_TRIB_IRRF, 0)
-result = tools.br.irrf_apos_redutor(rendimento, imposto)
+result = tools.br.irrf_mais_favoravel(rendimento, BASE_IRRF)
         </field>
     </record>
 

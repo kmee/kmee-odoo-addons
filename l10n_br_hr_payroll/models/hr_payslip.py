@@ -93,7 +93,7 @@ class HrPayslip(models.Model):
         A pré-população é EXTENSÍVEL: em vez de depender só de uma tupla fixa
         mantida à mão (que já causou bugs quando uma regra satélite
         referenciava um código fora da lista), os defaults são derivados das
-        PRÓPRIAS regras das estruturas do holerite — qualquer código presente
+        PRÓPRIAS regras das estruturas do holerite - qualquer código presente
         na estrutura fica disponível desde o início do cálculo, sem manutenção.
 
         Mantém-se ainda uma baseline mínima
@@ -115,7 +115,7 @@ class HrPayslip(models.Model):
 
         Convenção: fim do período do holerite (``date_to``), com fallback para
         ``date_from``. Para holerites mensais ambos caem no mesmo mês; em
-        períodos que cruzam a virada de uma vigência (ex.: férias abril→maio),
+        períodos que cruzam a virada de uma vigência (ex.: férias abril->maio),
         vale a tabela vigente no encerramento/pagamento.
         """
         return self.date_to or self.date_from
@@ -124,7 +124,7 @@ class HrPayslip(models.Model):
         tools = super()._get_tools_dict()
         # `self` é único aqui (chamado a partir de _get_baselocaldict, que faz
         # ensure_one). Resolvemos a competência do holerite e vinculamos
-        # funções que já carregam a tabela vigente — as regras continuam
+        # funções que já carregam a tabela vigente - as regras continuam
         # chamando tools.br.calc_inss(base) sem passar o ano.
         competencia = self._get_competencia()
         inss_model = self.env["l10n_br.hr.payroll.inss.faixa"]
@@ -157,6 +157,22 @@ class HrPayslip(models.Model):
                 rendimento_bruto, imposto_apurado, redutor_model._tabela(competencia)
             )
 
+        def irrf_mais_favoravel(rendimento_tributavel, base_legal):
+            """IRRF pela forma mais favorável, com as tabelas da competência.
+
+            Usada por TODAS as apurações (mensal, férias, 13º e rescisão):
+            compara dedução legal x desconto simplificado (Lei 9.250/95,
+            art. 4º, § 2º) e aplica o redutor da Lei 9.250/95, art. 3º-A,
+            sobre o resultado.
+            """
+            return salary_rules_br.calc_irrf_mais_favoravel(
+                rendimento_tributavel,
+                base_legal,
+                irrf_model._tabela(competencia),
+                irrf_model._desconto_simplificado(competencia),
+                redutor_model._tabela(competencia),
+            )
+
         def calc_salario_familia(remuneracao, num_filhos, dias_trabalhados=30):
             return salary_rules_br.calc_salario_familia(
                 remuneracao,
@@ -184,6 +200,8 @@ class HrPayslip(models.Model):
             # Redutor do IRPF da Lei 15.270/2025 (só a partir de 01/2026).
             redutor_irrf=redutor_irrf,
             irrf_apos_redutor=irrf_apos_redutor,
+            # Apuração completa do IRRF (legal x simplificado + redutor).
+            irrf_mais_favoravel=irrf_mais_favoravel,
             calc_ferias_dias=salary_rules_br.calc_ferias_dias,
             calc_decimo_avos=salary_rules_br.calc_decimo_avos,
             calc_vt=salary_rules_br.calc_vt,

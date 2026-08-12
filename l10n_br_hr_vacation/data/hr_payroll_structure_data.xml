@@ -13,6 +13,7 @@
                 ref('hr_rule_adicional_abono'),
                 ref('hr_rule_gross_ferias'),
                 ref('hr_rule_inss_ferias'),
+                ref('hr_rule_pensao_ferias'),
                 ref('hr_rule_base_irrf_ferias'),
                 ref('hr_rule_irrf_ferias'),
                 ref('hr_rule_fgts_ferias'),
@@ -21,7 +22,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — 1ª Parcela (adiantamento, sem descontos) -->
+    <!-- Estrutura: 13º Salário - 1ª Parcela (adiantamento, sem descontos) -->
     <record id="structure_13_primeira_parcela" model="hr.payroll.structure">
         <field name="name">13º Salário - 1ª Parcela</field>
         <field name="code">13_1PARCELA</field>
@@ -34,7 +35,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — 2ª Parcela (com INSS, IRRF, FGTS e dedução da 1ª) -->
+    <!-- Estrutura: 13º Salário - 2ª Parcela (com INSS, IRRF, FGTS e dedução da 1ª) -->
     <record id="structure_13_segunda_parcela" model="hr.payroll.structure">
         <field name="name">13º Salário - 2ª Parcela</field>
         <field name="code">13_2PARCELA</field>
@@ -44,6 +45,7 @@
                 ref('hr_rule_decimo_bruto'),
                 ref('hr_rule_gross_13'),
                 ref('hr_rule_inss_13'),
+                ref('hr_rule_pensao_13'),
                 ref('hr_rule_base_irrf_13'),
                 ref('hr_rule_irrf_13'),
                 ref('hr_rule_fgts_13'),
@@ -53,7 +55,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — Proporcional (genérico) -->
+    <!-- Estrutura: 13º Salário - Proporcional (genérico) -->
     <record id="structure_13" model="hr.payroll.structure">
         <field name="name">13º Salário</field>
         <field name="code">13_SALARIO</field>
@@ -63,6 +65,7 @@
                 ref('hr_rule_decimo_bruto'),
                 ref('hr_rule_gross_13'),
                 ref('hr_rule_inss_13'),
+                ref('hr_rule_pensao_13'),
                 ref('hr_rule_base_irrf_13'),
                 ref('hr_rule_irrf_13'),
                 ref('hr_rule_fgts_13'),
@@ -71,7 +74,7 @@
         />
     </record>
 
-    <!-- Estrutura: Rescisão (verbas rescisórias seguras — ver rescisão data) -->
+    <!-- Estrutura: Rescisão (verbas rescisórias seguras - ver rescisão data) -->
     <record id="structure_rescisao" model="hr.payroll.structure">
         <field name="name">Rescisão</field>
         <field name="code">RESCISAO</field>
@@ -84,6 +87,8 @@
                 ref('hr_rule_adicional_ferias_indenizadas'),
                 ref('hr_rule_inss_rescisao'),
                 ref('hr_rule_inss_13_rescisao'),
+                ref('hr_rule_pensao_rescisao'),
+                ref('hr_rule_pensao_13_rescisao'),
                 ref('hr_rule_base_irrf_rescisao'),
                 ref('hr_rule_base_irrf_13_rescisao'),
                 ref('hr_rule_irrf_rescisao'),

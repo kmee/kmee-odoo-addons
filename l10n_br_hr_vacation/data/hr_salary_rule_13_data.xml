@@ -8,6 +8,20 @@
           - structure_13_segunda_parcela: integral - 1ª parcela, com INSS/IRRF
           - structure_13: 13º proporcional (usado em cálculos genéricos)
           - structure_rescisao: 13º proporcional na rescisão
+
+        Tributação: o 13º é apurado EM SEPARADO, com incidência EXCLUSIVA na
+        fonte (não se soma aos demais rendimentos do mês e não é ajustado na
+        declaração anual). Consequências implementadas aqui:
+          - INSS, IRRF e pensão alimentícia percentual recaem integralmente
+            sobre o 13º INTEGRAL, na apuração que o fecha (2ª parcela ou 13º
+            proporcional) - a 1ª parcela é adiantamento e não sofre nenhum
+            desses descontos;
+          - a comparação dedução legal x desconto simplificado (RF-16) é feita
+            DENTRO da própria apuração do 13º, com a tabela mensal aplicada
+            isoladamente;
+          - da base do 13º deduz-se a pensão RETIDA sobre o próprio 13º
+            (percentual). A parcela fixa da pensão é obrigação mensal e não se
+            repete aqui - ver o cabeçalho de hr_salary_rule_ferias_data.xml.
     -->
 
     <!-- ══════════════════════════════════════════════════════════════
@@ -103,6 +117,33 @@ result = tools.br.calc_inss(max(categories.GROSS, 0))
         </field>
     </record>
 
+    <!-- Pensão alimentícia retida sobre o 13º (RF-03).
+         SOMENTE a parcela percentual, sobre o 13º bruto desta apuração: a
+         parcela fixa é obrigação mensal, quitada na folha mensal. -->
+    <record id="hr_rule_pensao_13" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia (13º)</field>
+        <field name="sequence" eval="106" />
+        <field name="code">PENSAO_ALIMENTICIA_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_pensao_percentual &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Percentual sobre o 13º bruto (GROSS desta estrutura). Retido uma única vez,
+# na apuração que fecha o 13º - a 1ª parcela não tem esta rubrica.
+result = tools.br.calc_pensao_alimenticia(
+    categories.GROSS,
+    0.0,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
     <!-- Base IRRF 13º -->
     <record id="hr_rule_base_irrf_13" model="hr.salary.rule">
         <field name="name">Base IRRF (13º)</field>
@@ -118,7 +159,8 @@ result = tools.br.calc_inss(max(categories.GROSS, 0))
 gross = categories.GROSS
 deducoes = INSS_13
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
-pensao = employee.l10n_br_pensao_alimenticia
+# Só a pensão EFETIVAMENTE RETIDA sobre o 13º reduz a base do 13º.
+pensao = PENSAO_ALIMENTICIA_13
 result = gross - deducoes - dependentes - pensao
         </field>
     </record>
@@ -138,11 +180,15 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-imposto = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
-# Redutor do IRPF (Lei 15.270/2025, desde 01/01/2026): a lei alcança também o
-# imposto exclusivo de fonte do 13º, usando o rendimento BRUTO do 13º como
-# base do redutor. Sem redutor cadastrado (até 12/2025) o imposto não muda.
-result = tools.br.irrf_apos_redutor(max(categories.GROSS, 0), imposto)
+# RF-16: forma mais favorável DENTRO da apuração exclusiva do 13º: dedução
+# legal (BASE_IRRF_13) x desconto simplificado sobre o 13º bruto. A opção pelo
+# simplificado na base do 13º é expressa: IN RFB 1.500/2014, art. 13, § 8º
+# (incluído pela IN RFB 2.141/2023); reforço no MAFON 2025, alínea e.7.
+# O redutor do IRPF alcança o imposto exclusivo de fonte do 13º por dispositivo
+# EXPRESSO: Lei 9.250/95, art. 3º-A, § 3º (incluído pela Lei 15.270/2025). A
+# base do redutor é o BRUTO do 13º; sem redutor cadastrado (até 12/2025) o
+# imposto não muda.
+result = tools.br.irrf_mais_favoravel(max(categories.GROSS, 0), BASE_IRRF_13)
         </field>
     </record>
 
