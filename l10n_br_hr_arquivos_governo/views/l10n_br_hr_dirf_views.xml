@@ -15,9 +15,8 @@
                     />
                     <button
                         name="action_gerar_dirf"
-                        string="Gerar DIRF"
+                        string="Gerar DIRF (descontinuado)"
                         type="object"
-                        class="btn-primary"
                         attrs="{'invisible': [('state', '!=', 'draft')]}"
                     />
                     <button
@@ -35,6 +34,14 @@
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
+                    <div class="alert alert-warning" role="alert">
+                        <strong>DIRF extinta.</strong> A IN RFB 2.181/2024
+                        encerrou a DIRF: os fatos ocorridos a partir de
+                        01/01/2025 são informados pela EFD-Reinf (série R-4000)
+                        e pelo eSocial, com confissão e recolhimento na DCTFWeb.
+                        A geração de arquivo está desativada; esta tela serve
+                        apenas para consultar o histórico já gerado.
+                    </div>
                     <group>
                         <group>
                             <field name="company_id" />
