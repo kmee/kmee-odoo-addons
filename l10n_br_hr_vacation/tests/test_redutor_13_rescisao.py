@@ -57,13 +57,17 @@ class TestRedutorDecimoTerceiro(VacationCommon):
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "IRRF_13"), 1037.85)
 
     def test_13_de_4500_em_2025_sem_redutor(self):
-        """Competência 12/2025: sem redutor, IRRF_13 de R$238,10 (preservado).
+        """Competência 12/2025: sem redutor, mas COM desconto simplificado.
 
-        INSS_13 (tabela 2025) = 439,60 → base 4.060,40 → 238,10.
+        INSS_13 (tabela 2025) = 439,60 -> base legal 4.060,40 -> 238,10.
+        Desconto simplificado (RF-16, Lei 14.663/2023): 4.500 - 607,20 =
+        3.892,80 -> 22,5% - 675,49 = 200,39, MENOR que os 238,10 da dedução
+        legal. Antes a apuração do 13º ignorava o simplificado e retinha os
+        238,10 - retenção a maior de R$37,71.
         """
         payslip = self._payslip_13(4500.00, 2025)
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "INSS_13"), 439.60)
-        self.assertAlmostEqualMoney(self._get_line_total(payslip, "IRRF_13"), 238.10)
+        self.assertAlmostEqualMoney(self._get_line_total(payslip, "IRRF_13"), 200.39)
 
     def test_base_do_redutor_do_13_e_o_bruto_do_13(self):
         """A faixa do redutor segue o BRUTO do 13º, não a base após INSS.
@@ -77,6 +81,9 @@ class TestRedutorDecimoTerceiro(VacationCommon):
         irrf = self._get_line_total(payslip, "IRRF_13")
         self.assertLess(base, 7350.00)
         faixas = self.env["l10n_br.hr.payroll.irrf.faixa"]._tabela(payslip.date_to)
+        # Neste patamar a dedução legal vence o desconto simplificado
+        # (7.500 - 607,20 = 6.892,80 daria imposto maior), logo o imposto
+        # retido é o da tabela sobre a base legal, sem redutor algum.
         self.assertAlmostEqualMoney(irrf, calc_irrf(base, faixas))
 
 
