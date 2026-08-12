@@ -6,3 +6,4 @@ from . import test_decimo_terceiro
 from . import test_ciclo_anual
 from . import test_rescisao
 from . import test_redutor_13_rescisao
+from . import test_pensao_apuracoes_separadas

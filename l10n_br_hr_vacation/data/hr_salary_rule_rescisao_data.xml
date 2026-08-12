@@ -22,6 +22,21 @@
 
         Convenção de sinais: proventos positivos; DED positivo subtraído;
         NET = proventos - descontos. FGTS é COMP (não afeta o NET).
+
+        PENSÃO ALIMENTÍCIA NA RESCISÃO (RF-03) - a regra geral está no
+        cabeçalho de hr_salary_rule_ferias_data.xml. Aqui vale a EXCEÇÃO da
+        parcela fixa: na rescisão não existe folha mensal, e o saldo de salário
+        ocupa o lugar da remuneração do mês. Se a parcela fixa não fosse retida
+        aqui, ela simplesmente deixaria de ser descontada no mês do
+        desligamento (e a base do IRRF do saldo perderia uma dedução legítima).
+        Logo:
+          - saldo de salário: parcela FIXA + percentual sobre o saldo;
+          - 13º proporcional: SOMENTE o percentual, sobre o próprio 13º
+            (apuração exclusiva de fonte, base própria);
+          - férias indenizadas e o seu 1/3: sem retenção de pensão nesta
+            implementação - são verbas indenizatórias e a incidência depende de
+            decisão judicial específica (não presumir). Como também não sofrem
+            IRRF, nada muda na base do imposto.
     -->
 
     <!-- Saldo de salário proporcional aos dias trabalhados no mês -->
@@ -114,6 +129,60 @@ result = tools.br.calc_inss(max(DECIMO_RESCISAO, 0))
         </field>
     </record>
 
+    <!-- Pensão alimentícia retida do saldo de salário (RF-03).
+         Parcela FIXA + percentual: aqui o saldo de salário substitui a folha
+         mensal do mês do desligamento (ver cabeçalho). -->
+    <record id="hr_rule_pensao_rescisao" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia (Saldo de Salário)</field>
+        <field name="sequence" eval="106" />
+        <field name="code">PENSAO_ALIMENTICIA</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = (
+    employee.l10n_br_pensao_alimenticia &gt; 0
+    or employee.l10n_br_pensao_percentual &gt; 0
+)
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# A parcela fixa é mensal e integral (não é rateada pelos dias trabalhados);
+# o percentual incide sobre o saldo de salário efetivamente devido.
+result = tools.br.calc_pensao_alimenticia(
+    max(SALDO_SALARIO, 0),
+    employee.l10n_br_pensao_alimenticia,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
+    <!-- Pensão alimentícia retida do 13º proporcional da rescisão (RF-03).
+         SOMENTE o percentual: a parcela fixa já foi retida do saldo. -->
+    <record id="hr_rule_pensao_13_rescisao" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia (13º Rescisão)</field>
+        <field name="sequence" eval="107" />
+        <field name="code">PENSAO_ALIMENTICIA_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_pensao_percentual &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_pensao_alimenticia(
+    max(DECIMO_RESCISAO, 0),
+    0.0,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
     <!-- Base IRRF do saldo de salário -->
     <record id="hr_rule_base_irrf_rescisao" model="hr.salary.rule">
         <field name="name">Base IRRF (Saldo de Salário)</field>
@@ -127,7 +196,8 @@ result = tools.br.calc_inss(max(DECIMO_RESCISAO, 0))
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
-pensao = employee.l10n_br_pensao_alimenticia
+# Só a pensão EFETIVAMENTE RETIDA do saldo de salário reduz a base.
+pensao = PENSAO_ALIMENTICIA
 result = SALDO_SALARIO - INSS - dependentes - pensao
         </field>
     </record>
@@ -145,7 +215,9 @@ result = SALDO_SALARIO - INSS - dependentes - pensao
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
-result = DECIMO_RESCISAO - INSS_13 - dependentes
+# Pensão retida sobre o próprio 13º (percentual) - dedutível também na
+# apuração exclusiva de fonte da gratificação natalina.
+result = DECIMO_RESCISAO - INSS_13 - dependentes - PENSAO_ALIMENTICIA_13
         </field>
     </record>
 
@@ -164,10 +236,10 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-imposto = tools.br.calc_irrf(max(BASE_IRRF, 0))
-# Redutor do IRPF (Lei 15.270/2025, desde 01/01/2026) sobre o rendimento
-# tributável BRUTO da apuração — aqui o saldo de salário.
-result = tools.br.irrf_apos_redutor(max(SALDO_SALARIO, 0), imposto)
+# RF-16: forma mais favorável (dedução legal x desconto simplificado) sobre o
+# rendimento tributável BRUTO desta apuração - aqui o saldo de salário -,
+# seguida do redutor do IRPF (Lei 15.270/2025, desde 01/2026).
+result = tools.br.irrf_mais_favoravel(max(SALDO_SALARIO, 0), BASE_IRRF)
         </field>
     </record>
 
@@ -186,9 +258,9 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-imposto = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
-# Redutor do IRPF (Lei 15.270/2025) sobre o 13º proporcional da rescisão.
-result = tools.br.irrf_apos_redutor(max(DECIMO_RESCISAO, 0), imposto)
+# RF-16: forma mais favorável DENTRO da apuração exclusiva do 13º da rescisão,
+# seguida do redutor do IRPF (Lei 15.270/2025) sobre o 13º bruto.
+result = tools.br.irrf_mais_favoravel(max(DECIMO_RESCISAO, 0), BASE_IRRF_13)
         </field>
     </record>
 
@@ -251,6 +323,8 @@ result = (
     - INSS_13
     - IRRF
     - IRRF_13
+    - PENSAO_ALIMENTICIA
+    - PENSAO_ALIMENTICIA_13
 )
         </field>
     </record>
