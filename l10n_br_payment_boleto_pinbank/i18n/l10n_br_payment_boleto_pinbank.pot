@@ -78,8 +78,19 @@ msgstr ""
 #. module: l10n_br_payment_boleto_pinbank
 #. odoo-python
 #: code:addons/l10n_br_payment_boleto_pinbank/models/payment_provider.py:0
+#: code:addons/l10n_br_payment_boleto_pinbank/models/payment_provider.py:0
 #, python-format
 msgid "Pin Bank: Could not establish the connection to the API."
+msgstr ""
+
+#. module: l10n_br_payment_boleto_pinbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_pinbank/models/payment_provider.py:0
+#: code:addons/l10n_br_payment_boleto_pinbank/models/payment_provider.py:0
+#, python-format
+msgid ""
+"Pin Bank: The communication with the API failed. Pin Bank gave us the "
+"following information: '%s'"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_pinbank
