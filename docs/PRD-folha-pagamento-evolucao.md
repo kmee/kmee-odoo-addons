@@ -185,6 +185,46 @@ Todo o restante deste PRD é **backlog de evolução** — NÃO faz parte do PR 
   (`overtime/views/hr_attendance_overtime.xml:114-118`);
   `weekday()`/`digits`/`_description` no wizard de overtime.
 
+### P1 (adendo de 2026-08-11): regime tributário e encargos patronais
+
+Origem: verificação de código pós-demo comercial de 11/08 (hipótese do Mileo
+confirmada). Evidência: zero ocorrências de `tax_framework`, Simples, Presumido, RAT,
+FPAS ou "patronal" em `l10n_br_hr_payroll` e `l10n_br_hr_payroll_account`; as regras de
+`data/hr_salary_rule_data.xml` cobrem só o lado do empregado; os funcionários de demo
+não têm `company_id` (caem na main company).
+
+- **RF-31 - Encargos patronais (rubricas de empregador):** não existe nenhuma rubrica
+  patronal. Criar, em categoria própria (padrão COMP do payroll OCA): CPP 20% (art. 22,
+  I, Lei 8.212/91), RAT 1/2/3% pelo CNAE preponderante multiplicado pelo FAP 0,5-2,0
+  (RAT ajustado), e Terceiros/Outras Entidades pela alíquota do código FPAS (indústria
+  tipicamente 5,8%) [verificar por FPAS]. Parametrização por empresa/estabelecimento
+  (RAT, FAP, FPAS, código de terceiros), alinhada ao que o eSocial S-1005 declara. Sem
+  isso o holerite e o lote não mostram custo do empregador.
+- **RF-32 - Variação por regime tributário:** as rubricas patronais devem ler o
+  `tax_framework` da empresa (`l10n_br_base`). Lucro Presumido/Real: patronal cheia
+  (CPP + RAT + terceiros). Simples Nacional anexos I-III e V: CPP e terceiros dentro do
+  DAS (LC 123/2006, art. 13, par. 3): rubricas patronais NÃO geram (FGTS permanece).
+  Simples anexo IV (limpeza, vigilância, obras): CPP 20% + RAT devidos por fora, SEM
+  terceiros [verificar]. A classificação tributária (classTrib) do S-1000 deve casar com
+  o regime, senão os totalizadores S-5011 divergem da folha.
+- **RF-33 - CPRB/desoneração em transição:** setores da Lei 12.546/2011 estão em
+  reoneração gradual (Lei 14.973/2024: híbrido CPRB parcial sobre receita + CPP
+  proporcional sobre folha até a extinção em 2028) [verificar percentuais por ano]. A
+  CPRB é da contabilidade (receita), mas a CPP proporcional é rubrica de folha: suportar
+  percentual de CPP parametrizado por vigência.
+- **RF-34 - Contabilização por regime + provisões com encargos:** estender o RF-17:
+  mapeamento regra->conta incluindo os encargos patronais (despesa x passivo por
+  tributo) e provisões mensais de férias+1/3 e 13º COM encargos sobre a provisão; no
+  Simples I-III/V a provisão vai sem encargo patronal (só FGTS). Hoje o custo contábil
+  sai idêntico para regimes diferentes, o que é materialmente errado para DRE e
+  precificação.
+- **RF-35 - Demo multi-empresa por regime:** o demo atual é mono-empresa (kmee#429;
+  funcionários sem `company_id`). Criar demo com três empresas (Lucro Real industrial,
+  Lucro Presumido, Simples anexo III; mais um contrato anexo IV) com os MESMOS salários
+  entre empresas, para evidenciar lado a lado a diferença de custo patronal; todo
+  registro de demo com `company_id` explícito. Espelha a base de demo comercial, que é
+  organizada por regime.
+
 ## 5. Riscos fiscais destacados (para validação por especialista)
 
 1. Competência ≥ 2025 com tabela 2024 (INSS/IRRF/teto/isenção) — sub/super-retenção
@@ -202,6 +242,14 @@ Todo o restante deste PRD é **backlog de evolução** — NÃO faz parte do PR 
 8. S-1200 usa `abs(total)` — sinal depende 100% da classificação `tp_rubr`; rubrica mal
    classificada inverte provento/desconto sem erro.
 
+9. Custo do empregador invisível: sem CPP/RAT/terceiros a folha "fecha" subavaliando o
+   custo em ~26-29% sobre a remuneração em Presumido/Real; e o erro inverso no Simples
+   (aplicar patronal indevida) se a parametrização for copiada entre empresas de regimes
+   diferentes.
+10. Multi-empresa: demo e parametrização mono-empresa somem da tela ao trocar de empresa
+    (record rules) e induzem configuração na empresa errada (aconteceu na demo comercial
+    de 11/08/2026).
+
 ## 6. Estratégia de testes (lacunas prioritárias)
 
 - **Competência ≠ 2024**: payslip 2025/2026 (exporia o fallback silencioso) — teste mais
@@ -218,6 +266,10 @@ Todo o restante deste PRD é **backlog de evolução** — NÃO faz parte do PR 
   dias).
 - Convenções: `@tagged("post_install","-at_install")` + `tracking_disable` nos commons
   de teste.
+
+- Regimes lado a lado: mesmo salário em Lucro Real, Presumido e Simples (anexo III e
+  IV), com asserção dos totais patronais (cheio x zero x CPP+RAT sem terceiros) e das
+  provisões com/sem encargos.
 
 ## 7. Fora de escopo / decisões pendentes
 
