@@ -17,6 +17,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__active
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__active
 msgid "Active"
@@ -90,6 +91,14 @@ msgid "CLT"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__fator
+msgid ""
+"Coeficiente multiplicado pelo rendimento bruto do mês. Redutor = Parcela "
+"Fixa − Fator × rendimento bruto. Zero = redutor fixo (isenção integral até o"
+" teto da faixa)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
 msgid "Contrato"
 msgstr ""
@@ -103,6 +112,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__create_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__create_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__create_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__create_uid
 msgid "Created by"
 msgstr ""
@@ -111,6 +121,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__create_date
 msgid "Created on"
 msgstr ""
@@ -155,6 +166,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__display_name
 msgid "Display Name"
 msgstr ""
@@ -205,6 +217,11 @@ msgid "Faixa de Salário Família por Vigência"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_irrf_redutor
+msgid "Faixa do Redutor do IRPF na Fonte por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_payslip_form_br
 msgid "Faltas"
 msgstr ""
@@ -213,6 +230,11 @@ msgstr ""
 #: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_faltas
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_faltas_injustificadas
 msgid "Faltas Injustificadas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__fator
+msgid "Fator sobre o Rendimento"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -239,6 +261,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_end
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_end
 msgid "Fim da Vigência"
@@ -313,6 +336,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__id
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__id
 msgid "ID"
 msgstr ""
@@ -347,6 +371,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_start
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_start
 msgid "Início da Vigência"
@@ -361,6 +386,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa____last_update
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente____last_update
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor____last_update
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -369,6 +395,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__write_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__write_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__write_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -377,6 +404,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__write_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__write_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__write_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__write_date
 msgid "Last Updated on"
 msgstr ""
@@ -410,6 +438,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__name
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__name
 msgid "Name"
 msgstr ""
@@ -441,6 +470,11 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__valor_fixo
+msgid "Parcela Fixa"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__parcela_deduzir
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__parcela_deduzir
 msgid "Parcela a Deduzir"
@@ -454,6 +488,11 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__valor_fixo
+msgid "Parcela fixa da fórmula do redutor."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_alimenticia
 msgid ""
 "Parcela fixa mensal de pensão alimentícia determinada judicialmente. Somada "
@@ -463,6 +502,11 @@ msgstr ""
 #. module: l10n_br_hr_payroll
 #: model:ir.model,name:l10n_br_hr_payroll.model_hr_payslip
 msgid "Payslip"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_hr_payslip_run
+msgid "Payslip Batches"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -514,6 +558,12 @@ msgid "Provento"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_irrf_redutor
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_irrf_redutor
+msgid "Redutor do IRPF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__base_max
 msgid "Remuneração (Até)"
 msgstr ""
@@ -522,6 +572,11 @@ msgstr ""
 #: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_gross
 #: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_gross
 msgid "Remuneração Bruta"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__rendimento_max
+msgid "Rendimento Bruto (Até)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -585,6 +640,13 @@ msgid "Temporário"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__rendimento_max
+msgid ""
+"Teto do rendimento tributável BRUTO do mês para a faixa. Acima do maior teto"
+" cadastrado não há redutor (corte seco)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_employee__l10n_br_tipo_contrato
 msgid "Tipo de Contrato"
 msgstr ""
@@ -603,6 +665,7 @@ msgstr ""
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_end
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_end
 msgid "Vazio = vigente por prazo indeterminado."
