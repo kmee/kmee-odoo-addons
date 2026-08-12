@@ -5,3 +5,4 @@ from . import test_ferias
 from . import test_decimo_terceiro
 from . import test_ciclo_anual
 from . import test_rescisao
+from . import test_redutor_13_rescisao

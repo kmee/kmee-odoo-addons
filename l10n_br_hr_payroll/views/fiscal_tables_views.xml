@@ -40,6 +40,25 @@
         <field name="view_mode">tree</field>
     </record>
 
+    <!-- ═══════════════ Redutor do IRPF (Lei 15.270/2025) ═══════════════ -->
+    <record id="view_irrf_redutor_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.payroll.irrf.redutor</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="rendimento_max" />
+                <field name="valor_fixo" />
+                <field name="fator" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_irrf_redutor" model="ir.actions.act_window">
+        <field name="name">Redutor do IRPF</field>
+        <field name="res_model">l10n_br.hr.payroll.irrf.redutor</field>
+        <field name="view_mode">tree</field>
+    </record>
+
     <!-- ═══════════════ Salário Família ═══════════════ -->
     <record id="view_sal_familia_faixa_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.payroll.sal.familia.faixa</field>
@@ -99,6 +118,12 @@
         parent="menu_payroll_fiscal_tables"
         action="action_irrf_dependente"
         sequence="30"
+    />
+    <menuitem
+        id="menu_irrf_redutor"
+        parent="menu_payroll_fiscal_tables"
+        action="action_irrf_redutor"
+        sequence="25"
     />
     <menuitem
         id="menu_sal_familia_faixa"

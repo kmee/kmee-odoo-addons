@@ -164,7 +164,10 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.calc_irrf(max(BASE_IRRF, 0))
+imposto = tools.br.calc_irrf(max(BASE_IRRF, 0))
+# Redutor do IRPF (Lei 15.270/2025, desde 01/01/2026) sobre o rendimento
+# tributável BRUTO da apuração — aqui o saldo de salário.
+result = tools.br.irrf_apos_redutor(max(SALDO_SALARIO, 0), imposto)
         </field>
     </record>
 
@@ -183,7 +186,9 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+imposto = tools.br.calc_irrf(max(BASE_IRRF_13, 0))
+# Redutor do IRPF (Lei 15.270/2025) sobre o 13º proporcional da rescisão.
+result = tools.br.irrf_apos_redutor(max(DECIMO_RESCISAO, 0), imposto)
         </field>
     </record>
 

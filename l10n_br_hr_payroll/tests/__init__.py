@@ -7,5 +7,6 @@ from . import test_competencia
 from . import test_melhorias_base
 from . import test_inss
 from . import test_irrf
+from . import test_redutor_irrf
 from . import test_verbas
 from . import test_worked_days

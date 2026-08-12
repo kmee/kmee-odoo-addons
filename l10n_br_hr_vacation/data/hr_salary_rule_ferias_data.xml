@@ -9,19 +9,34 @@
         Fundamentação:
           - Férias gozadas + 1/3 constitucional: verbas TRIBUTÁVEIS
             (INSS, IRRF e FGTS incidem).
-          - Abono pecuniário (venda de até 1/3 das férias, CLT art. 143) e
-            seu 1/3 constitucional: verbas INDENIZATÓRIAS. NÃO incide INSS
-            (Lei 8.212/91 art. 28 §9º "e" 6) nem IRRF (ADI SRF 5/2005),
-            nem FGTS. Ficam na categoria PROV_INDENIZ, fora do GROSS/base
-            tributável, mas somadas ao NET.
+          - Abono pecuniário (venda de até 1/3 das férias, CLT art. 143):
+            verba INDENIZATÓRIA. NÃO incide INSS (Lei 8.212/91 art. 28 §9º
+            "e" 6), IRRF nem FGTS. Fica na categoria PROV_INDENIZ, fora do
+            GROSS e de qualquer base, mas somada ao NET.
+          - 1/3 constitucional SOBRE O ABONO, pago na vigência do contrato:
+            É TRIBUTÁVEL pelo IRRF (Solução de Consulta COSIT nº 209/2021).
+            Continua SEM INSS e SEM FGTS. Por isso fica em categoria própria
+            (PROV_TRIB_IRRF): entra na base do IRRF, mas não no GROSS, que é
+            a base de INSS e FGTS.
+            A isenção do ADI SRF 5/2005 alcança o 1/3 de férias INDENIZADAS
+            NA RESCISÃO — não o 1/3 do abono do art. 143 com contrato ativo.
           - Ao vender 10 dias, o empregado GOZA 20 dias: as férias gozadas
             são proporcionais (20/30) via l10n_br_dias_ferias_gozadas.
+          - IRRF apurado EM SEPARADO dos demais rendimentos do mês (IN RFB
+            1.500/2014): garantido pela estrutura/holerite próprios de férias,
+            com GROSS, BASE_IRRF e IRRF exclusivos deste holerite.
     -->
 
-    <!-- Categoria de proventos indenizatórios (fora da base tributável) -->
+    <!-- Categoria de proventos indenizatórios (fora de todas as bases) -->
     <record id="hr_salary_rule_category_prov_indeniz" model="hr.salary.rule.category">
         <field name="name">Provento Indenizatório</field>
         <field name="code">PROV_INDENIZ</field>
+    </record>
+
+    <!-- Categoria de proventos tributáveis SOMENTE pelo IRRF (sem INSS/FGTS) -->
+    <record id="hr_salary_rule_category_prov_trib_irrf" model="hr.salary.rule.category">
+        <field name="name">Provento Tributável Apenas pelo IRRF</field>
+        <field name="code">PROV_TRIB_IRRF</field>
     </record>
 
     <!-- Férias gozadas (proporcional aos dias efetivamente gozados) -->
@@ -77,12 +92,13 @@ result = tools.br.round_money((contract.wage / 30) * dias_vendidos)
         </field>
     </record>
 
-    <!-- 1/3 constitucional sobre o abono pecuniário — INDENIZATÓRIO -->
+    <!-- 1/3 constitucional sobre o abono pecuniário — TRIBUTÁVEL PELO IRRF
+         (Solução de Consulta COSIT nº 209/2021), sem INSS e sem FGTS. -->
     <record id="hr_rule_adicional_abono" model="hr.salary.rule">
         <field name="name">Adicional sobre Abono (1/3)</field>
         <field name="sequence" eval="4" />
         <field name="code">ADICIONAL_ABONO</field>
-        <field name="category_id" ref="hr_salary_rule_category_prov_indeniz" />
+        <field name="category_id" ref="hr_salary_rule_category_prov_trib_irrf" />
         <field name="condition_select">python</field>
         <field name="condition_python">
 result = payslip.l10n_br_abono_pecuniario
@@ -137,15 +153,18 @@ result = tools.br.calc_inss(max(categories.GROSS, 0))
         <field name="condition_select">none</field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-gross = categories.GROSS
+# Rendimento tributável do holerite de férias = férias gozadas + 1/3 (GROSS)
+# MAIS o 1/3 constitucional sobre o abono pecuniário, que é tributável pelo
+# IRRF (COSIT 209/2021) apesar de não sofrer INSS nem FGTS.
+rendimento = categories.GROSS + categories.PROV_TRIB_IRRF
 deducoes = INSS
 dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
 pensao = employee.l10n_br_pensao_alimenticia
-result = gross - deducoes - dependentes - pensao
+result = rendimento - deducoes - dependentes - pensao
         </field>
     </record>
 
-    <!-- IRRF sobre férias -->
+    <!-- IRRF sobre férias (apuração em separado do salário do mês) -->
     <record id="hr_rule_irrf_ferias" model="hr.salary.rule">
         <field name="name">IRRF (Férias)</field>
         <field name="sequence" eval="120" />
@@ -160,7 +179,11 @@ result = not employee.l10n_br_molestia_grave
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.calc_irrf(max(BASE_IRRF, 0))
+imposto = tools.br.calc_irrf(max(BASE_IRRF, 0))
+# Redutor do IRPF (Lei 15.270/2025, desde 01/01/2026) sobre o imposto apurado,
+# em função do rendimento tributável BRUTO desta apuração.
+rendimento = max(categories.GROSS + categories.PROV_TRIB_IRRF, 0)
+result = tools.br.irrf_apos_redutor(rendimento, imposto)
         </field>
     </record>
 
@@ -183,7 +206,7 @@ result = tools.br.round_money(max(categories.GROSS, 0) * 0.08)
         </field>
     </record>
 
-    <!-- NET férias (inclui os proventos indenizatórios; FGTS/COMP não afeta) -->
+    <!-- NET férias (inclui indenizatórios e o 1/3 do abono; COMP não afeta) -->
     <record id="hr_rule_net_ferias" model="hr.salary.rule">
         <field name="name">Líquido (Férias)</field>
         <field name="sequence" eval="200" />
@@ -196,7 +219,11 @@ result = tools.br.round_money(max(categories.GROSS, 0) * 0.08)
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 result = (
-    categories.BASIC + categories.ALW + categories.PROV_INDENIZ - categories.DED
+    categories.BASIC
+    + categories.ALW
+    + categories.PROV_INDENIZ
+    + categories.PROV_TRIB_IRRF
+    - categories.DED
 )
         </field>
     </record>

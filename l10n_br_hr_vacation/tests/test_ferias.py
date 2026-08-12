@@ -6,11 +6,16 @@ Testes ORM: Férias CLT.
 Cobertura:
   - Dias de férias por faltas (tabela CLT art. 130)
   - Cálculo do valor das férias + adicional 1/3
-  - Abono pecuniário (venda de 1/3)
+  - Abono pecuniário (venda de 1/3): isento de INSS/IRRF/FGTS
+  - 1/3 constitucional sobre o abono: TRIBUTÁVEL pelo IRRF (COSIT 209/2021),
+    sem INSS e sem FGTS
+  - Apuração do IRRF de férias em separado (IN RFB 1.500/2014)
 """
 from datetime import date
 
 from odoo.tests import tagged
+
+from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import calc_inss, calc_irrf
 
 from .common import VacationCommon
 
@@ -175,8 +180,12 @@ class TestValorFerias(VacationCommon):
         self.assertAlmostEqualMoney(abono, 2000.00)
         self.assertAlmostEqualMoney(adicional_abono, 2000.00 / 3)
 
-    def test_abono_isento_inss_irrf(self):
-        """Abono e seu 1/3 são indenizatórios: fora do GROSS/base tributável."""
+    def test_abono_pecuniario_isento_inss_irrf_fgts(self):
+        """O abono pecuniário em si (venda de 10 dias) é isento de tudo.
+
+        Lei 8.212/91 art. 28 §9º "e" 6 (INSS), ADI SRF 5/2005 (IRRF) e sem
+        FGTS. Fica fora do GROSS e fora da base do IRRF.
+        """
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=6000.00)
         com_abono = self._payslip_ferias(emp, contract, abono=True)
@@ -184,16 +193,100 @@ class TestValorFerias(VacationCommon):
 
         ferias = self._get_line_total(com_abono, "FERIAS")
         adicional = self._get_line_total(com_abono, "ADICIONAL_FERIAS")
+        abono = self._get_line_total(com_abono, "ABONO_PECUNIARIO")
+        adicional_abono = self._get_line_total(com_abono, "ADICIONAL_ABONO")
         gross = self._get_line_total(com_abono, "GROSS")
         base_irrf = self._get_line_total(com_abono, "BASE_IRRF")
         inss = self._get_line_total(com_abono, "INSS")
 
-        # GROSS = apenas férias gozadas + 1/3 (abono + 1/3 excluídos).
-        # Como INSS/IRRF incidem sobre o GROSS, isto prova a isenção do abono.
+        # GROSS (base de INSS e FGTS) = apenas férias gozadas + 1/3.
         self.assertAlmostEqualMoney(gross, ferias + adicional)
-        # A base tributável não pode conter o abono (2000) nem seu 1/3.
-        self.assertLess(base_irrf, gross)
         self.assertGreater(inss, 0.0)
+        # Base do IRRF = GROSS + 1/3 do abono − INSS. O abono principal
+        # (R$2.000) NÃO aparece em nenhuma base.
+        self.assertAlmostEqualMoney(abono, 2000.00)
+        self.assertAlmostEqualMoney(base_irrf, gross + adicional_abono - inss)
+        self.assertLess(base_irrf, gross + abono)
+
+    def test_terco_do_abono_e_tributavel_pelo_irrf(self):
+        """1/3 constitucional SOBRE O ABONO: tributável pelo IRRF.
+
+        Solução de Consulta COSIT nº 209/2021: na vigência do contrato, o 1/3
+        do abono pecuniário do art. 143 da CLT integra o rendimento tributável
+        do IRRF (a isenção do ADI SRF 5/2005 alcança o 1/3 das férias
+        INDENIZADAS NA RESCISÃO). Continua sem INSS e sem FGTS.
+        """
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        payslip = self._payslip_ferias(emp, contract, abono=True)
+        payslip.compute_sheet()
+
+        gross = self._get_line_total(payslip, "GROSS")
+        adicional_abono = self._get_line_total(payslip, "ADICIONAL_ABONO")
+        base_irrf = self._get_line_total(payslip, "BASE_IRRF")
+        inss = self._get_line_total(payslip, "INSS")
+        fgts = self._get_line_total(payslip, "FGTS")
+
+        self.assertAlmostEqualMoney(adicional_abono, 2000.00 / 3)
+        # IRRF: o 1/3 do abono ENTRA na base (antes ficava de fora).
+        self.assertAlmostEqualMoney(base_irrf, gross + adicional_abono - inss)
+        self.assertGreater(base_irrf, gross - inss)
+        # INSS e FGTS continuam calculados só sobre o GROSS.
+        faixas = self.env["l10n_br.hr.payroll.inss.faixa"]._tabela(payslip.date_to)
+        self.assertAlmostEqualMoney(inss, calc_inss(gross, faixas))
+        self.assertAlmostEqualMoney(fgts, round(gross * 0.08, 2))
+
+    def test_terco_do_abono_somado_ao_liquido(self):
+        """O 1/3 do abono continua compondo o líquido do holerite de férias."""
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        payslip = self._payslip_ferias(emp, contract, abono=True)
+        payslip.compute_sheet()
+        g = self._get_line_total
+        esperado = (
+            g(payslip, "FERIAS")
+            + g(payslip, "ADICIONAL_FERIAS")
+            + g(payslip, "ABONO_PECUNIARIO")
+            + g(payslip, "ADICIONAL_ABONO")
+            - g(payslip, "INSS")
+            - g(payslip, "IRRF")
+        )
+        self.assertAlmostEqualMoney(g(payslip, "NET"), esperado)
+
+    def test_irrf_ferias_apurado_em_separado(self):
+        """IRRF das férias apurado EM SEPARADO do salário do mês.
+
+        IN RFB 1.500/2014: na vigência do contrato as férias e o respectivo
+        1/3 têm o imposto apurado isoladamente. Aqui isso é estrutural — o
+        holerite de férias tem estrutura própria, com GROSS, BASE_IRRF e IRRF
+        exclusivos, sem qualquer soma com o holerite mensal do mesmo período.
+        """
+        emp = self._create_employee()
+        contract = self._create_contract(emp, wage=6000.00)
+        ferias = self._payslip_ferias(emp, contract)
+        ferias.compute_sheet()
+        mensal = self.env["hr.payslip"].create(
+            {
+                "name": "Mensal - Teste",
+                "employee_id": emp.id,
+                "contract_id": contract.id,
+                "date_from": date(2024, 5, 1),
+                "date_to": date(2024, 5, 30),
+                "struct_id": self.structure_clt.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        mensal.compute_sheet()
+
+        # Bases independentes: nenhuma contém a outra.
+        self.assertAlmostEqualMoney(self._get_line_total(ferias, "GROSS"), 8000.00)
+        self.assertAlmostEqualMoney(self._get_line_total(mensal, "GROSS"), 6000.00)
+        # O IRRF das férias é calculado sobre a base do próprio holerite.
+        faixas = self.env["l10n_br.hr.payroll.irrf.faixa"]._tabela(ferias.date_to)
+        self.assertAlmostEqualMoney(
+            self._get_line_total(ferias, "IRRF"),
+            calc_irrf(self._get_line_total(ferias, "BASE_IRRF"), faixas),
+        )
 
     def test_fgts_ferias(self):
         """FGTS incide sobre férias gozadas + 1/3 (8%)."""
