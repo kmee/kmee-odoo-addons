@@ -73,7 +73,7 @@ class L10nBrPayrollTabelaMixin(models.AbstractModel):
     def _vigentes(self, competencia, order=None):
         """Registros vigentes na ``competencia`` (date).
 
-        Levanta ``UserError`` se não houver nenhum — a folha NUNCA deve cair
+        Levanta ``UserError`` se não houver nenhum - a folha NUNCA deve cair
         silenciosamente em uma tabela de outro ano.
         """
         recs = self._vigentes_opcional(competencia, order=order)
@@ -113,7 +113,7 @@ class L10nBrPayrollInssFaixa(models.Model):
     @api.depends("valor_min", "valor_max", "aliquota", "date_start")
     def _compute_name(self):
         for rec in self:
-            rec.name = "[%s] R$ %.2f–%.2f · %.2f%%" % (
+            rec.name = "[%s] R$ %.2f-%.2f · %.2f%%" % (
                 rec.date_start or "",
                 rec.valor_min,
                 rec.valor_max,
@@ -161,7 +161,7 @@ class L10nBrPayrollIrrfFaixa(models.Model):
     @api.depends("base_min", "base_max", "aliquota", "date_start")
     def _compute_name(self):
         for rec in self:
-            rec.name = "[%s] R$ %.2f–%.2f · %.2f%%" % (
+            rec.name = "[%s] R$ %.2f-%.2f · %.2f%%" % (
                 rec.date_start or "",
                 rec.base_min,
                 rec.base_max,
@@ -175,29 +175,35 @@ class L10nBrPayrollIrrfFaixa(models.Model):
         faixas = self._vigentes(competencia, order="base_max asc")
         return [(f.base_max, f.aliquota / 100.0, f.parcela_deduzir) for f in faixas]
 
-    # Fator legal do desconto simplificado mensal (Lei 14.663/2023, art. 1º,
-    # que converteu a MP 1.171/2023): a parcela corresponde a 25% do valor
-    # máximo da faixa de isenção da tabela mensal vigente.
+    # Fator legal do desconto simplificado mensal (Lei 9.250/95, art. 4º, § 2º,
+    # incluído pela Lei 14.663/2023, art. 6º): a parcela corresponde a 25% do
+    # valor máximo da faixa de isenção da tabela mensal vigente.
     FATOR_DESCONTO_SIMPLIFICADO = 0.25
 
     @api.model
     def _desconto_simplificado(self, competencia):
         """Parcela do desconto simplificado mensal do IRRF por competência.
 
-        Vigente desde 05/2023 (Lei 14.663/2023): opcionalmente, no lugar das
-        deduções legais (INSS, dependentes, pensão), o contribuinte pode
-        abater uma parcela fixa correspondente a **25% do teto da faixa de
-        isenção** da tabela mensal vigente. A retenção deve usar a forma mais
-        favorável (menor imposto) — ver a regra salarial IRRF.
+        Vigente desde 05/2023 (Lei 9.250/95, art. 4º, § 2º, incluído pela Lei
+        14.663/2023, art. 6º): opcionalmente, no lugar das deduções legais
+        (INSS, dependentes, pensão), o contribuinte pode abater uma parcela
+        fixa correspondente a **25% do teto da faixa de isenção** da tabela
+        mensal vigente. A retenção deve usar a forma mais favorável (menor
+        imposto), ver a regra salarial IRRF.
+
+        A opção existe em CADA apuração, porque a IN RFB 2.141/2023 inseriu o
+        dispositivo em cada base da IN RFB 1.500/2014: art. 13, § 8º (13º
+        salário), art. 29, § 5º (férias) e art. 52, § 3º (rendimentos do
+        trabalho em geral, folha mensal).
 
         Deriva o valor da própria tabela de IRRF já parametrizada por
         vigência (não introduz constante nova): teto da faixa de isenção é o
         menor ``base_max`` da tabela (faixa com alíquota zero).
 
         Conferência com os valores oficiais:
-          - 05/2023–01/2024: 25% × 2.112,00 = 528,00
-          - 02/2024–04/2025: 25% × 2.259,20 = 564,80
-          - a partir 05/2025: 25% × 2.428,80 = 607,20
+          - 05/2023-01/2024: 25% x 2.112,00 = 528,00
+          - 02/2024-04/2025: 25% x 2.259,20 = 564,80
+          - a partir 05/2025: 25% x 2.428,80 = 607,20
 
         Pendência (documentada): o fator de 25% é fixado em lei; caso uma
         vigência futura altere o percentual, basta sobrepor este método ou
@@ -233,14 +239,14 @@ class L10nBrPayrollIrrfRedutor(models.Model):
         string="Fator sobre o Rendimento",
         digits=(16, 6),
         help="Coeficiente multiplicado pelo rendimento bruto do mês. "
-        "Redutor = Parcela Fixa − Fator × rendimento bruto. Zero = redutor "
+        "Redutor = Parcela Fixa - Fator x rendimento bruto. Zero = redutor "
         "fixo (isenção integral até o teto da faixa).",
     )
 
     @api.depends("rendimento_max", "valor_fixo", "fator", "date_start")
     def _compute_name(self):
         for rec in self:
-            rec.name = "[%s] até R$ %.2f → %.2f − %.6f × rendimento" % (
+            rec.name = "[%s] até R$ %.2f -> %.2f - %.6f x rendimento" % (
                 rec.date_start or "",
                 rec.rendimento_max,
                 rec.valor_fixo,
@@ -253,7 +259,7 @@ class L10nBrPayrollIrrfRedutor(models.Model):
         ascendente.
 
         Devolve lista VAZIA quando a competência não tem redutor (qualquer
-        competência anterior a 01/2026, antes da Lei 15.270/2025) — nesse caso
+        competência anterior a 01/2026, antes da Lei 15.270/2025) - nesse caso
         o comportamento anterior da folha é integralmente preservado.
         """
         faixas = self._vigentes_opcional(competencia, order="rendimento_max asc")
@@ -278,7 +284,7 @@ class L10nBrPayrollSalFamiliaFaixa(models.Model):
     @api.depends("base_max", "valor", "date_start")
     def _compute_name(self):
         for rec in self:
-            rec.name = "[%s] até R$ %.2f → R$ %.2f" % (
+            rec.name = "[%s] até R$ %.2f -> R$ %.2f" % (
                 rec.date_start or "",
                 rec.base_max,
                 rec.valor,

@@ -94,7 +94,7 @@ msgstr ""
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__fator
 msgid ""
 "Coeficiente multiplicado pelo rendimento bruto do mês. Redutor = Parcela "
-"Fixa − Fator × rendimento bruto. Zero = redutor fixo (isenção integral até o"
+"Fixa - Fator x rendimento bruto. Zero = redutor fixo (isenção integral até o"
 " teto da faixa)."
 msgstr ""
 
