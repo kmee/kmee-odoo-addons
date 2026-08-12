@@ -8,7 +8,9 @@ Regra fiscal validada aqui (documentada no cabeçalho de
 ``data/hr_salary_rule_ferias_data.xml``):
 
   - só se deduz da base do IRRF a pensão EFETIVAMENTE RETIDA no holerite
-    (Lei 9.250/95 art. 4º II: importância PAGA a título de pensão);
+    (Lei 9.250/95 art. 4º II: importância PAGA a título de pensão; IN RFB
+    1.500/2014, art. 13, § 6º, I, que exige deduções correspondentes ao
+    rendimento e veda usar o mesmo valor em outra base, e art. 29, § 3º);
   - a parcela FIXA é obrigação mensal e é descontada UMA vez por mês, na folha
     mensal - não se repete em férias nem no 13º (seria desconto em dobro do
     empregado e dedução em dobro da mesma importância);
@@ -17,7 +19,9 @@ Regra fiscal validada aqui (documentada no cabeçalho de
   - na rescisão não existe folha mensal: o saldo de salário ocupa esse lugar e
     recebe a parcela fixa;
   - o IRRF de cada apuração é retido pela forma mais favorável (dedução legal
-    x desconto simplificado da Lei 14.663/2023).
+    x desconto simplificado da Lei 9.250/95, art. 4º, § 2º, cuja opção a IN RFB
+    2.141/2023 inseriu em cada base: art. 13, § 8º para o 13º, art. 29, § 5º
+    para as férias e art. 52, § 3º para a folha mensal).
 
 Competências usadas: 2024 (tabela IRRF vigente de 02/2024 a 04/2025, isenção
 até R$2.259,20 e desconto simplificado de R$564,80 = 25% da isenção).

@@ -22,7 +22,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — 1ª Parcela (adiantamento, sem descontos) -->
+    <!-- Estrutura: 13º Salário - 1ª Parcela (adiantamento, sem descontos) -->
     <record id="structure_13_primeira_parcela" model="hr.payroll.structure">
         <field name="name">13º Salário - 1ª Parcela</field>
         <field name="code">13_1PARCELA</field>
@@ -35,7 +35,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — 2ª Parcela (com INSS, IRRF, FGTS e dedução da 1ª) -->
+    <!-- Estrutura: 13º Salário - 2ª Parcela (com INSS, IRRF, FGTS e dedução da 1ª) -->
     <record id="structure_13_segunda_parcela" model="hr.payroll.structure">
         <field name="name">13º Salário - 2ª Parcela</field>
         <field name="code">13_2PARCELA</field>
@@ -55,7 +55,7 @@
         />
     </record>
 
-    <!-- Estrutura: 13º Salário — Proporcional (genérico) -->
+    <!-- Estrutura: 13º Salário - Proporcional (genérico) -->
     <record id="structure_13" model="hr.payroll.structure">
         <field name="name">13º Salário</field>
         <field name="code">13_SALARIO</field>
@@ -74,7 +74,7 @@
         />
     </record>
 
-    <!-- Estrutura: Rescisão (verbas rescisórias seguras — ver rescisão data) -->
+    <!-- Estrutura: Rescisão (verbas rescisórias seguras - ver rescisão data) -->
     <record id="structure_rescisao" model="hr.payroll.structure">
         <field name="name">Rescisão</field>
         <field name="code">RESCISAO</field>
