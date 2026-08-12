@@ -157,6 +157,21 @@ class HrPayslip(models.Model):
                 rendimento_bruto, imposto_apurado, redutor_model._tabela(competencia)
             )
 
+        def irrf_mais_favoravel(rendimento_tributavel, base_legal):
+            """IRRF pela forma mais favorável, com as tabelas da competência.
+
+            Usada por TODAS as apurações (mensal, férias, 13º e rescisão):
+            compara dedução legal x desconto simplificado (Lei 14.663/2023) e
+            aplica o redutor da Lei 15.270/2025 sobre o resultado.
+            """
+            return salary_rules_br.calc_irrf_mais_favoravel(
+                rendimento_tributavel,
+                base_legal,
+                irrf_model._tabela(competencia),
+                irrf_model._desconto_simplificado(competencia),
+                redutor_model._tabela(competencia),
+            )
+
         def calc_salario_familia(remuneracao, num_filhos, dias_trabalhados=30):
             return salary_rules_br.calc_salario_familia(
                 remuneracao,
@@ -184,6 +199,8 @@ class HrPayslip(models.Model):
             # Redutor do IRPF da Lei 15.270/2025 (só a partir de 01/2026).
             redutor_irrf=redutor_irrf,
             irrf_apos_redutor=irrf_apos_redutor,
+            # Apuração completa do IRRF (legal x simplificado + redutor).
+            irrf_mais_favoravel=irrf_mais_favoravel,
             calc_ferias_dias=salary_rules_br.calc_ferias_dias,
             calc_decimo_avos=salary_rules_br.calc_decimo_avos,
             calc_vt=salary_rules_br.calc_vt,

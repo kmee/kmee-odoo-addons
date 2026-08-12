@@ -141,6 +141,63 @@ def calc_irrf_apos_redutor(rendimento_bruto, imposto_apurado, faixas):
     return round_money(max(imposto_apurado - redutor, 0.0))
 
 
+def calc_irrf_mais_favoravel(
+    rendimento_tributavel,
+    base_legal,
+    faixas_irrf,
+    desconto_simplificado=0.0,
+    faixas_redutor=(),
+):
+    """IRRF a reter pela forma MAIS FAVORÁVEL ao contribuinte (RF-16).
+
+    Encapsula, num único lugar, as três etapas da apuração do imposto na
+    fonte, para que toda apuração (mensal, férias, 13º e rescisão) siga
+    exatamente o mesmo caminho:
+
+      1. **Dedução legal** (Lei 9.250/95 art. 4º): imposto sobre a base já
+         deduzida de contribuição previdenciária, dependentes e pensão
+         alimentícia - a base vem calculada de fora (rubrica ``BASE_IRRF``).
+      2. **Desconto simplificado** (Lei 14.663/2023): no lugar de TODAS as
+         deduções legais, abate-se uma parcela fixa do rendimento tributável.
+         Vale para cada apuração isoladamente, inclusive para o imposto
+         exclusivo de fonte do 13º salário, cuja tabela é aplicada em
+         separado dos demais rendimentos.
+      3. **Redutor do IRPF** (Lei 15.270/2025, desde 01/2026): aplicado
+         DEPOIS de escolhida a forma mais favorável, em função do rendimento
+         tributável BRUTO da apuração.
+
+    A retenção é o MENOR imposto entre (1) e (2): a opção pelo desconto
+    simplificado é do contribuinte, e a fonte pagadora deve adotar de ofício
+    a forma que resulte no menor imposto, sem exigir declaração do empregado.
+    Reter pelo caminho legal quando o simplificado é mais barato significa
+    retenção a maior.
+
+    Observação importante: o desconto simplificado substitui as deduções
+    legais apenas para efeito de BASE DE CÁLCULO. A pensão alimentícia
+    continua sendo integralmente descontada do líquido (é pagamento ao
+    alimentando, não dedução tributária).
+
+    Args:
+        rendimento_tributavel: Rendimento tributável BRUTO da apuração (antes
+            de qualquer dedução). Base do desconto simplificado e do redutor.
+        base_legal: Base de cálculo pelo caminho das deduções legais.
+        faixas_irrf: Faixas da tabela progressiva vigentes na competência.
+        desconto_simplificado: Parcela do desconto simplificado vigente na
+            competência (0 = competência anterior a 05/2023, em que só existe
+            o caminho das deduções legais).
+        faixas_redutor: Faixas do redutor vigentes (vazio = sem redutor).
+
+    Returns:
+        Imposto a reter em R$ (>= 0).
+    """
+    rendimento = max(rendimento_tributavel or 0.0, 0.0)
+    imposto = calc_irrf(max(base_legal or 0.0, 0.0), faixas_irrf)
+    if desconto_simplificado:
+        base_simplificada = max(rendimento - desconto_simplificado, 0.0)
+        imposto = min(imposto, calc_irrf(base_simplificada, faixas_irrf))
+    return calc_irrf_apos_redutor(rendimento, imposto, faixas_redutor)
+
+
 def calc_pensao_alimenticia(remuneracao, valor_fixo=0.0, percentual=0.0):
     """Valor efetivo da pensão alimentícia a descontar do líquido.
 

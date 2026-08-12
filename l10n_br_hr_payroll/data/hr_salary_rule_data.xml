@@ -311,17 +311,12 @@ result = not employee.l10n_br_molestia_grave
 #     pensão).
 #  2) Desconto simplificado (Lei 14.663/2023): parcela fixa por competência,
 #     no lugar das deduções legais, sobre o rendimento tributável.
-irrf_legal = tools.br.calc_irrf(max(BASE_IRRF, 0))
+# O redutor do IRPF (Lei 15.270/2025, desde 01/2026) é aplicado DEPOIS, sobre o
+# imposto da forma mais favorável, em função do rendimento tributável BRUTO do
+# mês (não da base). Tudo isso está em tools.br.irrf_mais_favoravel, comum a
+# todas as apurações (mensal, férias, 13º e rescisão).
 rendimento = max(categories.GROSS - FALTAS - DESC_DSR, 0)
-base_simplificada = max(rendimento - tools.br.desconto_simplificado(), 0)
-irrf_simplificado = tools.br.calc_irrf(base_simplificada)
-imposto = min(irrf_legal, irrf_simplificado)
-# Redutor do IRPF (Lei 15.270/2025, vigente desde 01/01/2026): aplicado DEPOIS
-# do imposto apurado pela forma mais favorável, em função do rendimento
-# tributável BRUTO do mês (não da base de cálculo) e limitado ao imposto.
-# Competências anteriores a 01/2026 não têm redutor cadastrado → imposto
-# inalterado.
-result = tools.br.irrf_apos_redutor(rendimento, imposto)
+result = tools.br.irrf_mais_favoravel(rendimento, BASE_IRRF)
         </field>
     </record>
 
