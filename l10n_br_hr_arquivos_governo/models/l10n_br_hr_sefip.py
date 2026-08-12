@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import base64
 import calendar
 import io
@@ -36,8 +39,18 @@ def _val(value, size):
 
 
 class L10nBrHrSefip(models.Model):
+    """SEFIP descontinuada.
+
+    A SEFIP foi substituída pelo FGTS Digital (Portaria MTE 3.240/2023):
+    desde a competência 03/2024 a guia (GFD) é emitida pelo FGTS Digital a
+    partir dos eventos do eSocial, e a parte previdenciária passou para a
+    DCTFWeb. O modelo é mantido apenas para consulta do histórico já
+    gerado: a ação de geração está bloqueada e o código de montagem do
+    arquivo abaixo não é mais executado.
+    """
+
     _name = "l10n_br.hr.sefip"
-    _description = "SEFIP - FGTS e Previdência Social"
+    _description = "SEFIP - FGTS e Previdência Social (descontinuada)"
     _order = "ano desc, mes desc"
 
     name = fields.Char(
@@ -194,7 +207,28 @@ class L10nBrHrSefip(models.Model):
         )
 
     def action_gerar_sefip(self):
-        """Gera o arquivo SEFIP."""
+        """Bloqueado: a SEFIP foi substituída (ver docstring da classe)."""
+        raise UserError(
+            _(
+                "A SEFIP foi substituída pelo FGTS Digital e este gerador foi "
+                "descontinuado.\n\n"
+                "Norma: Portaria MTE 3.240/2023, que instituiu o FGTS Digital. "
+                "Desde a competência 03/2024 o recolhimento do FGTS não usa "
+                "mais o arquivo SEFIP nem a GRF.\n\n"
+                "Caminho atual: os eventos de remuneração do eSocial alimentam "
+                "o FGTS Digital, que emite a guia (GFD); as contribuições "
+                "previdenciárias são confessadas e recolhidas pela DCTFWeb.\n\n"
+                "Os registros de SEFIP já existentes continuam disponíveis "
+                "somente para consulta de histórico."
+            )
+        )
+
+    def _gerar_sefip_descontinuado(self):
+        """Código morto mantido como referência do leiaute antigo da SEFIP.
+
+        Não é chamado por nenhuma ação: a geração está bloqueada em
+        :meth:`action_gerar_sefip`.
+        """
         self.ensure_one()
         payslips = self._buscar_holerites()
         if not payslips:

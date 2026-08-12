@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import base64
 import calendar
 import io
@@ -24,8 +27,17 @@ def _num(value, size):
 
 
 class L10nBrHrCaged(models.Model):
+    """CAGED descontinuado.
+
+    O CAGED foi extinto: desde janeiro de 2020 (Portaria SEPRT 1.127/2019)
+    as movimentações são informadas pelo eSocial (S-2200 e S-2299), que
+    alimenta o Novo CAGED. O modelo é mantido apenas para consulta do
+    histórico já gerado: a ação de geração está bloqueada e o código de
+    montagem do arquivo abaixo não é mais executado.
+    """
+
     _name = "l10n_br.hr.caged"
-    _description = "CAGED - Cadastro de Empregados e Desempregados"
+    _description = "CAGED - Cadastro de Empregados e Desempregados (descontinuado)"
     _order = "ano desc, mes desc"
 
     name = fields.Char(
@@ -134,7 +146,27 @@ class L10nBrHrCaged(models.Model):
         return admissoes | demissoes
 
     def action_gerar_caged(self):
-        """Gera o arquivo CAGED."""
+        """Bloqueado: o CAGED foi extinto (ver docstring da classe)."""
+        raise UserError(
+            _(
+                "O CAGED foi extinto e este gerador foi descontinuado.\n\n"
+                "Norma: Portaria SEPRT 1.127/2019, que dispensou a declaração "
+                "do CAGED para quem presta informações pelo eSocial. Desde "
+                "janeiro de 2020 não há mais entrega do arquivo CAGED.\n\n"
+                "Caminho atual: as admissões e os desligamentos são informados "
+                "pelos eventos S-2200 (admissão) e S-2299 (desligamento) do "
+                "eSocial, que alimentam o Novo CAGED.\n\n"
+                "Os registros de CAGED já existentes continuam disponíveis "
+                "somente para consulta de histórico."
+            )
+        )
+
+    def _gerar_caged_descontinuado(self):
+        """Código morto mantido como referência do leiaute antigo do CAGED.
+
+        Não é chamado por nenhuma ação: a geração está bloqueada em
+        :meth:`action_gerar_caged`.
+        """
         self.ensure_one()
         contracts = self._buscar_movimentacoes()
         if not contracts:
