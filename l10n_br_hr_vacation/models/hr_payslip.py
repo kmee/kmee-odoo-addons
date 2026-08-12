@@ -131,6 +131,10 @@ class HrPayslip(models.Model):
             "INSS_13",
             "IRRF_13",
             "BASE_IRRF_13",
+            # Pensão retida sobre a apuração exclusiva do 13º (RF-03): a base
+            # do IRRF do 13º a referencia mesmo quando o empregado não tem
+            # pensão (regra condicional que não dispara).
+            "PENSAO_ALIMENTICIA_13",
             "DECIMO_RESCISAO",
             "SALDO_SALARIO",
             "FERIAS_INDENIZADAS",
