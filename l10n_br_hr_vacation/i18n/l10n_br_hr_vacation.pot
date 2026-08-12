@@ -218,6 +218,11 @@ msgid "Provento Indenizatório"
 msgstr ""
 
 #. module: l10n_br_hr_vacation
+#: model:hr.salary.rule.category,name:l10n_br_hr_vacation.hr_salary_rule_category_prov_trib_irrf
+msgid "Provento Tributável Apenas pelo IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_vacation
 #: model:hr.salary.rule,name:l10n_br_hr_vacation.hr_rule_gross_13
 msgid "Remuneração Bruta (13º)"
 msgstr ""
