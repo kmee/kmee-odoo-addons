@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_marcacao_view_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.marcacao</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-muted="state == 'desconsiderada'"
+                decoration-warning="not employee_id"
+                create="0"
+            >
+                <field name="nsr" />
+                <field name="datetime_marcacao" />
+                <field name="employee_id" />
+                <field name="cpf" optional="show" />
+                <field name="pis_pasep" optional="hide" />
+                <field name="tipo_marcacao" />
+                <field name="seq_par" optional="hide" />
+                <field name="origem" />
+                <field name="fonte_aej" optional="hide" />
+                <field name="rep_id" optional="show" />
+                <field name="state" />
+                <field name="motivo" optional="hide" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_marcacao_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.marcacao</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Desconsiderada"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('state', '!=', 'desconsiderada')]}"
+                    />
+                    <div class="oe_title">
+                        <h1>NSR <field name="nsr" readonly="1" class="oe_inline" /></h1>
+                    </div>
+                    <group>
+                        <group string="Registro original">
+                            <field name="datetime_marcacao" readonly="1" />
+                            <field name="datetime_gravacao" readonly="1" />
+                            <field name="rep_id" readonly="1" />
+                            <field name="origem" readonly="1" />
+                            <field name="coletor" readonly="1" />
+                            <field name="offline" readonly="1" />
+                        </group>
+                        <group string="Identificação">
+                            <field name="employee_id" />
+                            <field name="cpf" readonly="1" />
+                            <field name="pis_pasep" readonly="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group string="Tratamento (art. 82)">
+                            <field name="tipo_marcacao" />
+                            <field name="seq_par" />
+                            <field name="state" />
+                            <field name="motivo" />
+                            <field name="user_tratamento_id" />
+                            <field name="marcacao_origem_id" readonly="1" />
+                        </group>
+                        <group string="Integridade">
+                            <field name="hash_registro" readonly="1" />
+                            <field name="hash_anterior" readonly="1" />
+                            <field name="fonte_aej" readonly="1" />
+                            <field name="attendance_id" readonly="1" />
+                        </group>
+                    </group>
+                    <field name="tratamento_ids" nolabel="1" readonly="1">
+                        <tree>
+                            <field name="datetime_marcacao" />
+                            <field name="tipo_marcacao" />
+                            <field name="motivo" />
+                            <field name="user_tratamento_id" />
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_marcacao_view_search" model="ir.ui.view">
+        <field name="model">l10n_br.hr.marcacao</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" />
+                <field name="nsr" />
+                <field name="cpf" />
+                <field name="rep_id" />
+                <filter
+                    name="filter_pendente"
+                    string="Sem funcionário (pendente)"
+                    domain="[('employee_id', '=', False)]"
+                />
+                <filter
+                    name="filter_desconsiderada"
+                    string="Desconsideradas"
+                    domain="[('state', '=', 'desconsiderada')]"
+                />
+                <filter
+                    name="filter_manual"
+                    string="Incluídas manualmente"
+                    domain="[('origem', '=', 'manual')]"
+                />
+                <separator />
+                <filter
+                    name="filter_hoje"
+                    string="Hoje"
+                    domain="[('date_marcacao', '=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_employee"
+                        string="Funcionário"
+                        context="{'group_by': 'employee_id'}"
+                    />
+                    <filter
+                        name="group_dia"
+                        string="Dia"
+                        context="{'group_by': 'date_marcacao'}"
+                    />
+                    <filter
+                        name="group_rep"
+                        string="REP"
+                        context="{'group_by': 'rep_id'}"
+                    />
+                    <filter
+                        name="group_origem"
+                        string="Origem"
+                        context="{'group_by': 'origem'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_marcacao_action" model="ir.actions.act_window">
+        <field name="name">Marcações de Ponto</field>
+        <field name="res_model">l10n_br.hr.marcacao</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_group_employee': 1}</field>
+    </record>
+
+    <record id="l10n_br_hr_marcacao_action_pendente" model="ir.actions.act_window">
+        <field name="name">Marcações Pendentes de Conciliação</field>
+        <field name="res_model">l10n_br.hr.marcacao</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id', '=', False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Nenhuma marcação pendente</p>
+            <p>
+                Marcação cujo CPF ou PIS não bateu com nenhum funcionário fica aqui
+                em vez de ser descartada. Cadastre o documento no funcionário e
+                reprocesse a importação, ou vincule manualmente.
+            </p>
+        </field>
+    </record>
+
+</odoo>
