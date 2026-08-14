@@ -37,6 +37,10 @@ class TestMediaHabitual(VacationCommon):
                 "company_id": self.env.company.id,
             }
         )
+        # Confirmar sem calcular deixa o holerite sem linhas, e a validação da
+        # folha (l10n_br_hr_validacao_folha) recusa. Calcular aqui reproduz o
+        # que o usuário faz na tela e o que a média habitual precisa ler.
+        payslip.compute_sheet()
         payslip.action_payslip_done()
         return payslip
 
