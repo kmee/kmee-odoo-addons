@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_apuracao_periodo_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.periodo</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_hr_attendance_aej.l10n_br_hr_apuracao_periodo_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_ver_integridade"
+                    type="object"
+                    string="Verificar integridade do PTRP"
+                />
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group
+                    string="Integridade do PTRP (art. 89)"
+                    attrs="{'invisible': [('ptrp_resumo', '=', False)]}"
+                >
+                    <group>
+                        <field name="ptrp_integridade_ok" />
+                        <field name="ptrp_resumo" />
+                    </group>
+                    <group>
+                        <field name="ptrp_diagnostico" nolabel="1" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
