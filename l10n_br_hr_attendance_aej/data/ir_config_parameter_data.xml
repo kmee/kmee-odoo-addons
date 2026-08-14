@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <!-- Identificação do PTRP no registro 08 do AEJ. Quem preenche é o
+         desenvolvedor que assina o Atestado Técnico do art. 89 - por isso os
+         valores vêm em branco, para forçar a decisão consciente em vez de
+         entregar um arquivo com dados de outra empresa. -->
+
+    <record id="param_ptrp_nome" model="ir.config_parameter">
+        <field name="key">l10n_br_hr_attendance_aej.ptrp_nome</field>
+        <field name="value">Odoo PTRP</field>
+    </record>
+
+    <record id="param_ptrp_versao" model="ir.config_parameter">
+        <field name="key">l10n_br_hr_attendance_aej.ptrp_versao</field>
+        <field name="value">16.0</field>
+    </record>
+
+    <record id="param_ptrp_tipo_inscricao" model="ir.config_parameter">
+        <field name="key">l10n_br_hr_attendance_aej.ptrp_tipo_inscricao</field>
+        <field name="value">1</field>
+    </record>
+
+    <record id="param_ptrp_cnpj" model="ir.config_parameter">
+        <field name="key">l10n_br_hr_attendance_aej.ptrp_cnpj</field>
+        <field name="value" />
+    </record>
+
+    <record id="param_ptrp_razao_social" model="ir.config_parameter">
+        <field name="key">l10n_br_hr_attendance_aej.ptrp_razao_social</field>
+        <field name="value" />
+    </record>
+
+    <record id="param_ptrp_email" model="ir.config_parameter">
+        <field name="key">l10n_br_hr_attendance_aej.ptrp_email</field>
+        <field name="value" />
+    </record>
+
+</odoo>

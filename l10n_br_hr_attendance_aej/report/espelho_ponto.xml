@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="action_report_espelho_ponto" model="ir.actions.report">
+        <field name="name">Espelho de Ponto</field>
+        <field name="model">l10n_br.hr.apuracao.periodo</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_br_hr_attendance_aej.report_espelho_ponto</field>
+        <field name="report_file">l10n_br_hr_attendance_aej.report_espelho_ponto</field>
+        <field name="binding_model_id" ref="model_l10n_br_hr_apuracao_periodo" />
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Espelho de Ponto - %s' % (object.name)</field>
+    </record>
+
+    <template id="report_espelho_ponto">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="periodo">
+                <t
+                    t-foreach="periodo.dia_ids.mapped('employee_id').sorted('name')"
+                    t-as="employee"
+                >
+                    <t t-call="web.external_layout">
+                        <t
+                            t-set="dias"
+                            t-value="periodo.dia_ids.filtered(lambda d: d.employee_id == employee).sorted('date')"
+                        />
+                        <div class="page">
+                            <h2>Espelho de Ponto Eletrônico</h2>
+                            <p class="text-muted">
+                                Art. 84 da Portaria MTP nº 671/2021
+                            </p>
+
+                            <table class="table table-sm table-borderless">
+                                <tr>
+                                    <td><strong>Empregador</strong></td>
+                                    <td><span t-field="periodo.company_id.name" /></td>
+                                    <td><strong>CNPJ</strong></td>
+                                    <td>
+                                        <span t-field="periodo.company_id.cnpj_cpf" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Trabalhador</strong></td>
+                                    <td><span t-field="employee.name" /></td>
+                                    <td><strong>CPF</strong></td>
+                                    <td><span
+                                            t-esc="employee.sudo().cpf or employee.sudo().cnpj_cpf or ''"
+                                        /></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Período</strong></td>
+                                    <td colspan="3">
+                                        <span t-field="periodo.date_from" /> a
+                                        <span t-field="periodo.date_to" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Jornada contratual</strong></td>
+                                    <td colspan="3">
+                                        <span
+                                            t-esc="employee.resource_calendar_id.name or ''"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <th>Dia</th>
+                                        <th>Sem.</th>
+                                        <th>Previsto</th>
+                                        <th>Marcações</th>
+                                        <th class="text-end">Trabalhado</th>
+                                        <th class="text-end">Extras</th>
+                                        <th class="text-end">Atraso</th>
+                                        <th class="text-end">Noturno</th>
+                                        <th>Ocorrências</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="dias" t-as="dia">
+                                        <td><span t-field="dia.date" /></td>
+                                        <td><span t-field="dia.dia_semana" /></td>
+                                        <td>
+                                            <span
+                                                t-field="dia.jornada_prevista"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </td>
+                                        <td>
+                                            <t
+                                                t-foreach="dia.marcacao_ids.sorted('datetime_marcacao')"
+                                                t-as="marcacao"
+                                            >
+                                                <span
+                                                    t-att-class="'text-muted text-decoration-line-through' if marcacao.state == 'desconsiderada' else ''"
+                                                >
+                                                    <span
+                                                        t-field="marcacao.datetime_marcacao"
+                                                        t-options="{'widget': 'datetime', 'format': 'HH:mm'}"
+                                                    />
+                                                    <sup t-esc="marcacao.fonte_aej" />
+                                                </span>
+                                                <span t-if="not marcacao_last">, </span>
+                                            </t>
+                                        </td>
+                                        <td class="text-end">
+                                            <span
+                                                t-field="dia.jornada_realizada"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </td>
+                                        <td class="text-end">
+                                            <span
+                                                t-field="dia.horas_extras"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </td>
+                                        <td class="text-end">
+                                            <span
+                                                t-field="dia.atraso"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </td>
+                                        <td class="text-end">
+                                            <span
+                                                t-field="dia.noturno_computado"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span
+                                                t-esc="', '.join(dia.ocorrencia_ids.mapped('name'))"
+                                            />
+                                            <span
+                                                t-if="dia.falta_injustificada"
+                                                class="text-danger"
+                                            >Falta</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="4">Totais do período</th>
+                                        <th class="text-end">
+                                            <span
+                                                t-esc="sum(dias.mapped('jornada_realizada'))"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </th>
+                                        <th class="text-end">
+                                            <span
+                                                t-esc="sum(dias.mapped('horas_extras'))"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </th>
+                                        <th class="text-end">
+                                            <span
+                                                t-esc="sum(dias.mapped('atraso'))"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </th>
+                                        <th class="text-end">
+                                            <span
+                                                t-esc="sum(dias.mapped('noturno_computado'))"
+                                                t-options="{'widget': 'float_time'}"
+                                            />
+                                        </th>
+                                        <th />
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <p class="text-muted mt-3">
+                                Fonte da marcação: O = original do REP;
+                                I = incluída manualmente; P = pré-assinalada;
+                                X = ponto por exceção; T = outras fontes.
+                                Marcações riscadas foram desconsideradas no
+                                tratamento, com o motivo registrado no sistema.
+                            </p>
+
+                            <div class="row mt-5">
+                                <div class="col-6 text-center">
+                                    <p>__________________________________</p>
+                                    <p><span t-field="employee.name" /></p>
+                                </div>
+                                <div class="col-6 text-center">
+                                    <p>__________________________________</p>
+                                    <p>
+                                        <span t-field="periodo.company_id.name" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
