@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ocorrencia_employee,l10n_br.hr.ocorrencia.employee,model_l10n_br_hr_ocorrencia,base.group_user,1,0,0,0
+access_ocorrencia_manager,l10n_br.hr.ocorrencia.manager,model_l10n_br_hr_ocorrencia,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_apuracao_dia_employee,l10n_br.hr.apuracao.dia.employee,model_l10n_br_hr_apuracao_dia,base.group_user,1,0,0,0
+access_apuracao_dia_user,l10n_br.hr.apuracao.dia.user,model_l10n_br_hr_apuracao_dia,hr_attendance.group_hr_attendance_user,1,1,1,0
+access_apuracao_dia_manager,l10n_br.hr.apuracao.dia.manager,model_l10n_br_hr_apuracao_dia,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_apuracao_dia_auditor,l10n_br.hr.apuracao.dia.auditor,model_l10n_br_hr_apuracao_dia,l10n_br_hr_attendance.group_l10n_br_ponto_auditor,1,0,0,0
+access_apuracao_periodo_user,l10n_br.hr.apuracao.periodo.user,model_l10n_br_hr_apuracao_periodo,hr_attendance.group_hr_attendance_user,1,1,1,0
+access_apuracao_periodo_manager,l10n_br.hr.apuracao.periodo.manager,model_l10n_br_hr_apuracao_periodo,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_apuracao_periodo_auditor,l10n_br.hr.apuracao.periodo.auditor,model_l10n_br_hr_apuracao_periodo,l10n_br_hr_attendance.group_l10n_br_ponto_auditor,1,0,0,0
