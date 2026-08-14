@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_rep_view_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.rep</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="not atestado_valido">
+                <field name="name" />
+                <field name="tipo" />
+                <field name="cnpj_cpf" />
+                <field name="numero_fabricacao" optional="show" />
+                <field name="numero_inpi" optional="hide" />
+                <field name="nsr_ultimo" />
+                <field name="atestado_date_end" />
+                <field name="atestado_valido" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_rep_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.rep</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_marcacoes"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-clock-o"
+                        >
+                            <field
+                                name="marcacao_count"
+                                widget="statinfo"
+                                string="Marcações"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1><field name="name" placeholder="Relógio da portaria" /></h1>
+                    </div>
+                    <group>
+                        <group string="Registrador">
+                            <field name="tipo" />
+                            <field
+                                name="numero_fabricacao"
+                                attrs="{'invisible': [('tipo', '!=', 'rep_c')], 'required': [('tipo', '=', 'rep_c')]}"
+                            />
+                            <field
+                                name="modelo"
+                                attrs="{'invisible': [('tipo', '!=', 'rep_c')]}"
+                            />
+                            <field
+                                name="certificacao_inmetro"
+                                attrs="{'invisible': [('tipo', '!=', 'rep_c')]}"
+                            />
+                            <field
+                                name="numero_inpi"
+                                attrs="{'invisible': [('tipo', '!=', 'rep_p')], 'required': [('tipo', '=', 'rep_p')]}"
+                            />
+                            <field
+                                name="numero_acordo"
+                                attrs="{'invisible': [('tipo', '!=', 'rep_a')]}"
+                            />
+                            <field name="nsr_ultimo" />
+                            <field name="active" widget="boolean_toggle" />
+                        </group>
+                        <group string="Estabelecimento">
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="tipo_inscricao" />
+                            <field name="cnpj_cpf" />
+                            <field name="caepf_cno" />
+                        </group>
+                        <group string="Fabricante / desenvolvedor">
+                            <field name="fabricante_nome" />
+                            <field name="fabricante_tipo_inscricao" />
+                            <field name="fabricante_cnpj_cpf" />
+                        </group>
+                        <group string="Atestado técnico (art. 89)">
+                            <field name="atestado_date_start" />
+                            <field name="atestado_date_end" />
+                            <field name="atestado_valido" />
+                        </group>
+                    </group>
+                    <group string="Observações">
+                        <field name="note" nolabel="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_rep_view_search" model="ir.ui.view">
+        <field name="model">l10n_br.hr.rep</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="numero_fabricacao" />
+                <field name="cnpj_cpf" />
+                <filter
+                    name="filter_atestado_vencido"
+                    string="Atestado vencido"
+                    domain="[('atestado_valido', '=', False)]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_tipo"
+                        string="Tipo"
+                        context="{'group_by': 'tipo'}"
+                    />
+                    <filter
+                        name="group_estabelecimento"
+                        string="Estabelecimento"
+                        context="{'group_by': 'cnpj_cpf'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_rep_action" model="ir.actions.act_window">
+        <field name="name">Registradores de Ponto (REP)</field>
+        <field name="res_model">l10n_br.hr.rep</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Cadastre o primeiro REP</p>
+            <p>
+                O REP é o equipamento (REP-C), o conjunto autorizado (REP-A) ou o
+                programa (REP-P) que captura a marcação. Ele define o estabelecimento
+                e a sequência de NSR exigidos pela Portaria MTP 671/2021.
+            </p>
+        </field>
+    </record>
+
+</odoo>
