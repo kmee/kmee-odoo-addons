@@ -69,6 +69,11 @@ MODELOS_ATESTADOS = (
 MODULOS_DO_PTRP = tuple(NUCLEO_ATESTADO) + ("l10n_br_hr_attendance_integridade",)
 
 
+def marca_de_ausencia(nome_modulo):
+    """Entrada de manifesto para módulo do escopo que não está instalado."""
+    return "%s/(modulo nao instalado)" % nome_modulo
+
+
 def _sha256_do_arquivo(caminho):
     """Resumo do arquivo com quebra de linha normalizada.
 

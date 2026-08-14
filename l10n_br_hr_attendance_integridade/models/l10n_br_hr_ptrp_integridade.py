@@ -34,23 +34,45 @@ class L10nBrHrPtrpIntegridade(models.AbstractModel):
     # ------------------------------------------------------------------
 
     @api.model
-    def _manifesto_fonte(self):
-        """Manifesto do escopo atestado, apenas dos módulos instalados."""
-        instalados = set(
+    def _modulos_instalados(self):
+        return set(
             self.env["ir.module.module"]
             .sudo()
             .search([("state", "=", "installed")])
             .mapped("name")
         )
+
+    @api.model
+    def _manifesto_fonte(self):
+        """Manifesto do escopo atestado neste servidor.
+
+        Módulo do escopo que não está instalado entra no manifesto como
+        ausente, em vez de ser omitido: a composição faz parte do que se
+        atesta, e duas instalações diferentes precisam produzir resumos
+        diferentes com a diferença explicada no próprio manifesto.
+        """
+        instalados = self._modulos_instalados()
         entradas = []
         for modulo, padroes in sorted(ptrp_escopo.NUCLEO_ATESTADO.items()):
-            if modulo not in instalados:
-                continue
-            caminho = get_module_path(modulo, display_warning=False)
+            caminho = (
+                get_module_path(modulo, display_warning=False)
+                if modulo in instalados
+                else None
+            )
             if not caminho:
+                entradas.append((ptrp_escopo.marca_de_ausencia(modulo), ""))
                 continue
             entradas.extend(ptrp_escopo.manifesto_do_modulo(caminho, modulo, padroes))
         return entradas
+
+    @api.model
+    def _modulos_do_escopo_ausentes(self):
+        instalados = self._modulos_instalados()
+        return [
+            modulo
+            for modulo in sorted(ptrp_escopo.NUCLEO_ATESTADO)
+            if modulo not in instalados
+        ]
 
     @api.model
     def resumo_fonte(self):
@@ -144,6 +166,7 @@ class L10nBrHrPtrpIntegridade(models.AbstractModel):
             "versao": parametro.get_param(PARAM_VERSAO_ATESTADA) or "",
             "confere": (resumo == homologado) if homologado else None,
             "divergencias": divergencias,
+            "ausentes": self._modulos_do_escopo_ausentes(),
             "manifesto": manifesto,
         }
 
@@ -172,6 +195,14 @@ class L10nBrHrPtrpIntegridade(models.AbstractModel):
                     "(esperado %s). O Atestado Técnico não cobre esta versão."
                 )
                 % estado["homologado"]
+            )
+        if estado["ausentes"]:
+            linhas.append(
+                _(
+                    "Módulos do escopo não instalados neste servidor "
+                    "(o resumo homologado tem que ser o da mesma composição): %s"
+                )
+                % ", ".join(estado["ausentes"])
             )
         if estado["divergencias"]:
             linhas.append(_("Extensões encontradas sobre o PTRP:"))
