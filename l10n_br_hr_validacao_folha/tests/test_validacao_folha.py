@@ -32,6 +32,10 @@ class TestValidacaoFolha(PayrollCommon):
     def test_cpf_required_for_confirm(self):
         """Empregado sem CPF não pode confirmar holerite."""
         emp = self._create_employee()
+        # A fixture cria o empregado com CPF, que é o caso normal; aqui o CPF
+        # é apagado de propósito, porque é justamente a ausência dele que este
+        # teste exercita.
+        emp.cnpj_cpf = False
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self.env["hr.payslip"].create(
             self._create_payslip_vals(emp, contract)

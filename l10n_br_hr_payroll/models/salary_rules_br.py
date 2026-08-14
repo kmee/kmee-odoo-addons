@@ -320,6 +320,81 @@ def calc_decimo_avos(data_admissao, data_referencia):
     return min(avos, 12)
 
 
+def calc_media_habitual(valores_mensais, janela_meses=12):
+    """Média de verba variável habitual (Súmula 45 TST / CLT art. 142).
+
+    Parcelas variáveis habituais (horas extras habituais, adicional noturno
+    quando variável mês a mês) integram férias, 13º salário e as verbas
+    rescisórias pela MÉDIA dos últimos meses, e não pelo valor do mês de
+    referência (que pode estar zerado ou atípico).
+
+    Args:
+        valores_mensais: lista de totais mensais já ordenada do mais antigo
+            para o mais recente (tipicamente extraída dos holerites MENSAIS
+            confirmados anteriores do mesmo contrato). Meses sem a verba
+            entram com 0.0 (a média é sobre o PERÍODO, não só sobre os meses
+            em que houve a verba).
+        janela_meses: tamanho da janela em meses (padrão 12, Súmula 45 TST).
+            Quando o empregado tem menos meses de casa que a janela, a média
+            é feita apenas sobre os meses efetivamente trabalhados: basta
+            que ``valores_mensais`` já venha recortado a esses meses.
+
+    Returns:
+        Média aritmética dos valores (0.0 se a lista estiver vazia).
+    """
+    if not valores_mensais:
+        return 0.0
+    janela = valores_mensais[-janela_meses:] if janela_meses else valores_mensais
+    if not janela:
+        return 0.0
+    return round_money(sum(janela) / len(janela))
+
+
+def calc_aviso_previo_dias(data_admissao, data_referencia):
+    """Dias de aviso prévio proporcional ao tempo de serviço (Lei 12.506/2011).
+
+    30 dias corridos, acrescidos de 3 dias por ano completo de serviço no
+    mesmo empregador, até o máximo de 60 dias adicionais (90 dias no total).
+    Vale tanto para o aviso prévio trabalhado quanto para o indenizado.
+
+    Args:
+        data_admissao: Data de admissão (date).
+        data_referencia: Data do desligamento (date).
+
+    Returns:
+        Dias de aviso prévio (int, 30 a 90).
+    """
+    anos_completos = data_referencia.year - data_admissao.year
+    aniversario = data_admissao.replace(year=data_admissao.year + anos_completos)
+    if aniversario > data_referencia:
+        anos_completos -= 1
+    anos_completos = max(anos_completos, 0)
+    return min(30 + 3 * anos_completos, 90)
+
+
+def calc_meses_trabalhados(data_admissao, data_referencia):
+    """Meses completos de contrato entre a admissão e a referência.
+
+    Usado apenas para ESTIMAR o saldo do FGTS na conta vinculada quando ele
+    não é informado manualmente (ver base da multa de 40%, Lei 8.036/90 art.
+    18 §1º) — uma aproximação de "8% × meses" sem juros/correção, que NÃO
+    substitui o extrato oficial do FGTS quando disponível.
+
+    Args:
+        data_admissao: Data de admissão (date).
+        data_referencia: Data de referência, tipicamente o desligamento.
+
+    Returns:
+        Meses completos (int, >= 0).
+    """
+    meses = (data_referencia.year - data_admissao.year) * 12 + (
+        data_referencia.month - data_admissao.month
+    )
+    if data_referencia.day < data_admissao.day:
+        meses -= 1
+    return max(meses, 0)
+
+
 def calc_vt(salario, valor_vt):
     """Calcula o desconto de Vale-Transporte do empregado.
 

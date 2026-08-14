@@ -55,6 +55,20 @@ class TestRescisao(VacationCommon):
             self._get_line_total(rescisao, "SALDO_SALARIO"), 1500.00
         )
 
+    def test_saldo_salario_contrato_iniciado_no_meio_do_mes(self):
+        """RF-06: contrato iniciado dia 10/09, rescisão dia 30/09→ 21 dias.
+
+        Antes, o cálculo assumia sempre início no dia 1º (``date_to.day``),
+        pagando 30 dias mesmo quando o contrato começou no meio do mês.
+        """
+        rescisao = self._rescisao(
+            wage=3000.00, date_start=date(2024, 9, 10), date_to=date(2024, 9, 30)
+        )
+        # 10 a 30/09 = 21 dias.
+        self.assertAlmostEqualMoney(
+            self._get_line_total(rescisao, "SALDO_SALARIO"), 3000.00 * 21 / 30
+        )
+
     def test_decimo_proporcional_avos(self):
         """13º proporcional aos avos até a rescisão (9/12)."""
         rescisao = self._rescisao(wage=3000.00)

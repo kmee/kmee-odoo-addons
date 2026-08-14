@@ -8,6 +8,25 @@ from datetime import date
 from odoo.tests.common import TransactionCase
 
 
+def cpf_valido(sequencial):
+    """CPF com dígitos verificadores corretos a partir de um sequencial.
+
+    A validação da folha recusa holerite de empregado sem CPF ou com dígito
+    inválido, e ela vive em outro módulo (l10n_br_hr_validacao_folha). Num
+    banco enxuto o módulo não está instalado e a fixture sem CPF passava; no
+    CI, que instala o repositório inteiro no mesmo banco, ela derrubava as
+    suítes de férias e rescisão. Gerar o CPF aqui mantém a fixture realista e
+    independente de qual conjunto de módulos está instalado.
+    """
+    base = "%09d" % (sequencial % 1000000000)
+    for _ in range(2):
+        peso = len(base) + 1
+        soma = sum(int(digito) * (peso - i) for i, digito in enumerate(base))
+        resto = (soma * 10) % 11
+        base += str(0 if resto == 10 else resto)
+    return base
+
+
 class PayrollCommon(TransactionCase):
     """Classe base com fixtures para testes de folha de pagamento BR."""
 
@@ -16,6 +35,12 @@ class PayrollCommon(TransactionCase):
         super().setUpClass()
         cls.structure_clt = cls.env.ref("l10n_br_hr_payroll.structure_clt")
         cls.structure_estatuto = cls.env.ref("l10n_br_hr_payroll.structure_estatuto")
+        cls._cpf_sequencial = 0
+
+    def _proximo_cpf(self):
+        """CPF válido e distinto a cada empregado criado pela fixture."""
+        type(self)._cpf_sequencial += 1
+        return cpf_valido(type(self)._cpf_sequencial)
 
     def _create_employee(self, name="Funcionário Teste", tipo_contrato="clt"):
         """Helper: cria funcionário com tipo de contrato."""
@@ -23,6 +48,7 @@ class PayrollCommon(TransactionCase):
             {
                 "name": name,
                 "l10n_br_tipo_contrato": tipo_contrato,
+                "cnpj_cpf": self._proximo_cpf(),
                 "company_id": self.env.company.id,
             }
         )

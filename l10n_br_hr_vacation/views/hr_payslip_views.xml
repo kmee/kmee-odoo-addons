@@ -10,10 +10,17 @@
                 position="after"
             >
                 <field name="l10n_br_abono_pecuniario" />
+                <field name="l10n_br_ferias_allocation_id" />
+                <field name="l10n_br_dias_direito_ferias" />
+                <field name="l10n_br_dias_periodo_gozado" />
+                <field name="l10n_br_dias_abono" />
                 <field name="l10n_br_dias_ferias_gozadas" />
                 <field name="l10n_br_avos_13" />
                 <field name="l10n_br_primeira_parcela_13_paga" />
                 <field name="l10n_br_liquido_13" />
+                <field name="l10n_br_tipo_rescisao" />
+                <field name="l10n_br_aviso_previo" />
+                <field name="l10n_br_fgts_saldo_conta" />
             </xpath>
         </field>
     </record>

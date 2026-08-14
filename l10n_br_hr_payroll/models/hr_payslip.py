@@ -4,6 +4,8 @@
 import logging
 import types
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 from . import salary_rules_br
@@ -120,6 +122,57 @@ class HrPayslip(models.Model):
         """
         return self.date_to or self.date_from
 
+    # Estruturas MENSAIS (não férias/13º/rescisão) usadas como fonte da
+    # média de verbas variáveis habituais (RF-18). Ver `_l10n_br_media_habitual`.
+    _L10N_BR_STRUCT_CODES_MENSAIS = ("CLT", "ESTATUTO")
+
+    def _l10n_br_media_habitual(self, codes, janela_meses=12):
+        """Média de `codes` nos holerites MENSAIS anteriores (RF-18).
+
+        Súmula 45 TST / CLT art. 142: parcelas variáveis habituais (horas
+        extras habituais, adicional noturno) integram férias, 13º e as
+        verbas rescisórias pela média, não pelo valor do mês de referência.
+
+        Lê os holerites de estrutura MENSAL (CLT/Estatutário) do mesmo
+        contrato, já CONFIRMADOS (``state == "done"`` — este motor de folha
+        não usa um estado "paid" separado), com competência anterior à deste
+        holerite, dentro da janela de `janela_meses` meses (ou desde o início
+        do contrato, se mais recente que a janela). Holerites de férias, 13º
+        e rescisão são excluídos: não são "mês trabalhado" para este fim.
+
+        Args:
+            codes: iterável de códigos de rubrica a somar por holerite
+                (ex.: ``("HE_50", "HE_100", "ADICIONAL_NOTURNO")``).
+            janela_meses: tamanho da janela (padrão 12, Súmula 45 TST).
+
+        Returns:
+            Média mensal (float, 0.0 se não houver holerites na janela).
+        """
+        self.ensure_one()
+        contract = self.contract_id
+        referencia = self.date_from or self.date_to
+        if not contract or not referencia:
+            return 0.0
+        limite = referencia - relativedelta(months=janela_meses)
+        if contract.date_start and contract.date_start > limite:
+            limite = contract.date_start
+        payslips = self.env["hr.payslip"].search(
+            [
+                ("contract_id", "=", contract.id),
+                ("struct_id.code", "in", self._L10N_BR_STRUCT_CODES_MENSAIS),
+                ("state", "=", "done"),
+                ("date_from", "<", referencia),
+                ("date_from", ">=", limite),
+            ],
+            order="date_from",
+        )
+        codes = tuple(codes)
+        valores = [
+            sum(p.line_ids.filtered(lambda ln: ln.code in codes).mapped("total"))
+            for p in payslips
+        ]
+        return salary_rules_br.calc_media_habitual(valores, janela_meses)
+
     def _get_tools_dict(self):
         tools = super()._get_tools_dict()
         # `self` é único aqui (chamado a partir de _get_baselocaldict, que faz
@@ -193,6 +246,11 @@ class HrPayslip(models.Model):
         def dias_dsr():
             return salary_rules_br.dias_dsr(competencia.year, competencia.month)
 
+        def media_habitual(codes, janela_meses=12):
+            """Média das verbas variáveis habituais `codes` (RF-18, Súmula
+            45 TST / CLT art. 142), lida dos holerites mensais anteriores."""
+            return self._l10n_br_media_habitual(codes, janela_meses)
+
         tools["br"] = types.SimpleNamespace(
             round_money=salary_rules_br.round_money,
             calc_inss=calc_inss,
@@ -211,6 +269,12 @@ class HrPayslip(models.Model):
             calc_pensao_alimenticia=salary_rules_br.calc_pensao_alimenticia,
             # Dias úteis/DSR da competência (RF-26).
             dias_dsr=dias_dsr,
+            # Média de verbas variáveis habituais (RF-18).
+            media_habitual=media_habitual,
+            # Aviso prévio proporcional (Lei 12.506/2011) e meses de contrato
+            # (estimativa de saldo do FGTS quando não informado) — RF-06.
+            aviso_previo_dias=salary_rules_br.calc_aviso_previo_dias,
+            meses_trabalhados=salary_rules_br.calc_meses_trabalhados,
             # Resolvidos por competência (lazy: só falham se a regra usar).
             irrf_deducao_dependente=lambda: dep_model._valor(competencia),
             desconto_simplificado=lambda: irrf_model._desconto_simplificado(
