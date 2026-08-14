@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="ocorrencia_dsr" model="l10n_br.hr.ocorrencia">
+        <field name="name">Descanso Semanal Remunerado</field>
+        <field name="codigo">DSR</field>
+        <field name="tipo_aej">1</field>
+        <field name="abona" eval="True" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="ocorrencia_falta_injustificada" model="l10n_br.hr.ocorrencia">
+        <field name="name">Falta não justificada</field>
+        <field name="codigo">FALTA</field>
+        <field name="tipo_aej">2</field>
+        <field name="desconta_dia" eval="True" />
+        <field name="desconta_dsr" eval="True" />
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="ocorrencia_banco_horas" model="l10n_br.hr.ocorrencia">
+        <field name="name">Movimento no banco de horas</field>
+        <field name="codigo">BH</field>
+        <field name="tipo_aej">3</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="ocorrencia_folga_compensatoria" model="l10n_br.hr.ocorrencia">
+        <field name="name">Folga compensatória de feriado</field>
+        <field name="codigo">FOLGA_FERIADO</field>
+        <field name="tipo_aej">4</field>
+        <field name="abona" eval="True" />
+        <field name="sequence">40</field>
+    </record>
+
+    <record id="ocorrencia_atestado" model="l10n_br.hr.ocorrencia">
+        <field name="name">Atestado médico</field>
+        <field name="codigo">ATESTADO</field>
+        <field name="abona" eval="True" />
+        <field name="sequence">50</field>
+    </record>
+
+    <record id="ocorrencia_ferias" model="l10n_br.hr.ocorrencia">
+        <field name="name">Férias</field>
+        <field name="codigo">FERIAS</field>
+        <field name="abona" eval="True" />
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="ocorrencia_afastamento" model="l10n_br.hr.ocorrencia">
+        <field name="name">Afastamento</field>
+        <field name="codigo">AFASTAMENTO</field>
+        <field name="abona" eval="True" />
+        <field name="sequence">70</field>
+    </record>
+
+</odoo>

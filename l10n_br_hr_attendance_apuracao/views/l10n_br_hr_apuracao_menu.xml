@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        id="menu_l10n_br_apuracao_periodo"
+        name="Competências"
+        parent="l10n_br_hr_attendance.menu_l10n_br_ponto"
+        action="l10n_br_hr_apuracao_periodo_action"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_l10n_br_apuracao_dia"
+        name="Apuração diária"
+        parent="l10n_br_hr_attendance.menu_l10n_br_ponto"
+        action="l10n_br_hr_apuracao_dia_action"
+        sequence="60"
+    />
+
+    <menuitem
+        id="menu_l10n_br_ocorrencia"
+        name="Ocorrências"
+        parent="l10n_br_hr_attendance.menu_l10n_br_ponto"
+        action="l10n_br_hr_ocorrencia_action"
+        groups="hr_attendance.group_hr_attendance_manager"
+        sequence="95"
+    />
+
+</odoo>
