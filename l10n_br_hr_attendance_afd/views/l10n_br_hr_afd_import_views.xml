@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_afd_import_view_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.afd.import</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="state == 'erro'" decoration-warning="tem_lacuna">
+                <field name="name" />
+                <field name="rep_id" />
+                <field name="leiaute_detectado" />
+                <field name="nsr_inicial" />
+                <field name="nsr_final" />
+                <field name="qtd_marcacoes" />
+                <field name="qtd_importadas" />
+                <field name="qtd_duplicadas" />
+                <field name="qtd_pendentes" />
+                <field name="tem_lacuna" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_afd_import_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.afd.import</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_analisar"
+                        type="object"
+                        string="Analisar arquivo"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '=', 'importado')]}"
+                    />
+                    <button
+                        name="action_importar"
+                        type="object"
+                        string="Importar marcações"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'not in', ('analisado', 'erro'))]}"
+                        confirm="Confirma a importação das marcações deste arquivo?"
+                    />
+                    <button
+                        name="action_reconciliar_pendentes"
+                        type="object"
+                        string="Reconciliar pendentes"
+                        attrs="{'invisible': [('qtd_pendentes', '=', 0)]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_ver_pendentes"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-user-times"
+                            attrs="{'invisible': [('qtd_pendentes', '=', 0)]}"
+                        >
+                            <field
+                                name="qtd_pendentes"
+                                widget="statinfo"
+                                string="Pendentes"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group>
+                        <group string="Arquivo">
+                            <field
+                                name="arquivo"
+                                filename="arquivo_nome"
+                                widget="binary"
+                            />
+                            <field name="arquivo_nome" invisible="1" />
+                            <field name="rep_id" />
+                            <field name="leiaute" />
+                            <field
+                                name="fuso_horas"
+                                attrs="{'invisible': [('leiaute', '=', '671')]}"
+                            />
+                            <field name="hash_arquivo" />
+                        </group>
+                        <group string="Resultado">
+                            <field name="leiaute_detectado" />
+                            <field name="nsr_inicial" />
+                            <field name="nsr_final" />
+                            <field name="qtd_marcacoes" />
+                            <field name="qtd_importadas" />
+                            <field name="qtd_duplicadas" />
+                            <field name="qtd_eventos" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="lacunas" string="Lacunas de NSR">
+                            <field name="tem_lacuna" invisible="1" />
+                            <field name="lacunas_nsr" nolabel="1" readonly="1" />
+                        </page>
+                        <page name="log" string="Ocorrências">
+                            <field name="log" nolabel="1" readonly="1" />
+                        </page>
+                        <page name="marcacoes" string="Marcações">
+                            <field name="marcacao_ids" nolabel="1" readonly="1">
+                                <tree>
+                                    <field name="nsr" />
+                                    <field name="datetime_marcacao" />
+                                    <field name="employee_id" />
+                                    <field name="cpf" />
+                                    <field name="pis_pasep" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_afd_import_action" model="ir.actions.act_window">
+        <field name="name">Importação de AFD</field>
+        <field name="res_model">l10n_br.hr.afd.import</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Importe o primeiro AFD</p>
+            <p>
+                Anexe o arquivo coletado do relógio, analise e importe. A análise
+                confere CRC-16, continuidade de NSR e as contagens do trailer antes
+                de gravar qualquer marcação.
+            </p>
+        </field>
+    </record>
+
+</odoo>
