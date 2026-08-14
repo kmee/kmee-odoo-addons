@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_ocorrencia_view_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.ocorrencia</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="codigo" />
+                <field name="name" />
+                <field name="tipo_aej" />
+                <field name="abona" />
+                <field name="desconta_dia" />
+                <field name="desconta_dsr" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_ocorrencia_action" model="ir.actions.act_window">
+        <field name="name">Ocorrências de Jornada</field>
+        <field name="res_model">l10n_br.hr.ocorrencia</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
