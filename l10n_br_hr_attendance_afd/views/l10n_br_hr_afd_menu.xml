@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        id="menu_l10n_br_afd_import"
+        name="Importar AFD"
+        parent="l10n_br_hr_attendance.menu_l10n_br_ponto"
+        action="l10n_br_hr_afd_import_action"
+        sequence="30"
+    />
+
+    <menuitem
+        id="menu_l10n_br_afd_export"
+        name="Gerar AFD"
+        parent="l10n_br_hr_attendance.menu_l10n_br_ponto"
+        action="l10n_br_hr_afd_export_wizard_action"
+        sequence="40"
+    />
+
+</odoo>
