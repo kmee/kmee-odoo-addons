@@ -17,6 +17,27 @@ Cinco módulos novos, cobrindo as fases 1 a 4 do PRD (todo o P0 de código):
 | `l10n_br_hr_attendance_apuracao` | RP-09 a RP-15 | Motor de jornada: tolerância, intervalos, noturno, horas extras, faltas, fechamento |
 | `l10n_br_hr_payroll_attendance` | RP-16 a RP-19 | Ponte com a folha: fim da digitação manual, `worked_days` da presença efetiva, rubricas novas |
 | `l10n_br_hr_attendance_aej` | RP-20 a RP-23 | AEJ (Anexo VI), espelho de ponto, assinatura CAdES, retenção dos arquivos |
+| `l10n_br_hr_attendance_integridade` | RP-42 (novo) | Resumo digital do escopo atestado e detecção de sobreposição em execução |
+
+### RP-42: integridade do PTRP (requisito acrescentado ao PRD)
+
+Requisito que não estava no PRD e nasceu da discussão sobre distribuir o
+código como software livre. O Atestado Técnico do art. 89 declara que um
+programa atende à Portaria; para a declaração ser verificável é preciso saber
+**o que foi atestado** e **se é isso que está rodando**.
+
+- **Escopo atestado declarado arquivo a arquivo** em `ptrp_escopo.py`: só o
+  código que implementa os requisitos (leiautes, motor de apuração,
+  imutabilidade, espelho). Alterar tela, tradução, teste ou README não muda o
+  resumo digital e não obriga a revisar o atestado. É isso que evita
+  reemissão a cada release.
+- **Duas camadas de verificação**: resumo SHA-256 do escopo, mais a detecção
+  de módulos que estendem os modelos do PTRP e de código Python guardado no
+  banco (ação de servidor, automação) sobre eles. No Odoo dá para mudar o
+  resultado de uma apuração sem tocar em nenhum arquivo, então conferir só o
+  código-fonte daria uma resposta tranquilizadora e errada.
+- **A prova acompanha o artefato**: ao gerar o AEJ, a competência grava o
+  resumo, a situação da conferência e o diagnóstico.
 
 ### Decisões de arquitetura tomadas na implementação
 
