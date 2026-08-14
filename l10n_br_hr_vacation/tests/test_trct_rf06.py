@@ -61,6 +61,7 @@ class TestTRCTSemJustaCausa(VacationCommon):
                     "company_id": self.env.company.id,
                 }
             )
+            mensal.compute_sheet()
             mensal.action_payslip_done()
             self.valores_he.append(self._get_line_total(mensal, "HE_50"))
         self.media = calc_media_habitual(self.valores_he, 12)

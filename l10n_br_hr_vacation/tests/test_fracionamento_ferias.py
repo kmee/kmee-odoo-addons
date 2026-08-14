@@ -10,6 +10,7 @@ fracionadas em até 3 períodos, um deles com pelo menos 14 dias corridos e
 os demais com pelo menos 5 dias corridos cada. O holerite de férias paga
 os dias DO PERÍODO efetivamente gozado nesta fração, não o saldo inteiro.
 """
+import calendar
 from datetime import date
 
 from odoo.exceptions import ValidationError
@@ -36,14 +37,27 @@ class TestFracionamentoFerias(VacationCommon):
         return alloc
 
     def _payslip_ferias(self, emp, contract, alloc, dias_gozados, dias_abono=0):
+        # Cada fração de férias é gozada num período próprio. Repetir o mesmo
+        # mês em todas colide com a validação de holerite sobreposto, que vive
+        # no l10n_br_hr_validacao_folha e está instalada no banco do CI: o
+        # teste morria na duplicidade antes de exercitar o fracionamento.
+        fracao = self.env["hr.payslip"].search_count(
+            [
+                ("employee_id", "=", emp.id),
+                ("struct_id", "=", self.structure_ferias.id),
+            ]
+        )
+        mes = min(1 + fracao, 12)
+        inicio = date(2024, mes, 1)
+        fim = date(2024, mes, calendar.monthrange(2024, mes)[1])
         payslip = self.env["hr.payslip"].create(
             {
-                "name": "Férias - Fração",
+                "name": "Férias - Fração %s" % (fracao + 1),
                 "employee_id": emp.id,
                 "contract_id": contract.id,
                 "struct_id": self.structure_ferias.id,
-                "date_from": date(2024, 1, 1),
-                "date_to": date(2024, 1, 31),
+                "date_from": inicio,
+                "date_to": fim,
                 "l10n_br_ferias_allocation_id": alloc.id,
                 "l10n_br_dias_periodo_gozado": dias_gozados,
                 "l10n_br_dias_abono": dias_abono,
