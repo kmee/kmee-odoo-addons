@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="group_sst_medico" model="res.groups">
+        <field name="name">Saúde Ocupacional</field>
+        <field name="category_id" ref="l10n_br_hr_sst.module_category_l10n_br_hr_sst" />
+        <field name="comment">Acessa dado clínico do trabalhador (LGPD art. 11). Grupo
+            distinto do RH: quem cuida da folha não precisa, e não deve, enxergar
+            prontuário.</field>
+    </record>
+
+    <!-- Sigilo: o RH vê o ASO do trabalhador, o trabalhador vê o próprio, e a
+         saúde ocupacional vê tudo. A regra do hr_employee_medical_examination
+         já restringe o usuário comum aos próprios exames; aqui ela ganha o
+         recorte por empresa e o acesso da saúde ocupacional. -->
+    <record id="hr_medical_examination_rule_medico" model="ir.rule">
+        <field name="name">Saúde Ocupacional: todos os exames</field>
+        <field
+            name="model_id"
+            ref="hr_employee_medical_examination.model_hr_employee_medical_examination"
+        />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(6, 0, [ref('group_sst_medico')])]" />
+    </record>
+
+    <record id="l10n_br_sst_pcmso_company_rule" model="ir.rule">
+        <field name="name">PCMSO: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_sst_pcmso" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>

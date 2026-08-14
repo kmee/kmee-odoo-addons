@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_sst_saude"
+        parent="l10n_br_hr_sst.menu_sst_root"
+        name="Saúde Ocupacional"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_sst_pcmso"
+        parent="menu_sst_saude"
+        name="PCMSO"
+        sequence="10"
+        action="l10n_br_sst_pcmso_action"
+    />
+    <menuitem
+        id="menu_sst_aso"
+        parent="menu_sst_saude"
+        name="Exames Ocupacionais"
+        sequence="20"
+        action="hr_employee_medical_examination_action_vencimentos"
+    />
+
+</odoo>
