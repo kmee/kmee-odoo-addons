@@ -28,6 +28,68 @@
     />
 
     <!-- ============================================================ -->
+    <!-- Ciclo periódico (S-1005 -> S-1200/S-1210 -> S-1299) -->
+    <!-- ============================================================ -->
+    <menuitem
+        id="menu_esocial_ciclo"
+        parent="menu_esocial_root"
+        name="Ciclo Periódico"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_esocial_s1210"
+        parent="menu_esocial_ciclo"
+        name="S-1210 - Pagamentos"
+        sequence="10"
+        action="action_esocial_s1210"
+    />
+    <menuitem
+        id="menu_esocial_s1299"
+        parent="menu_esocial_ciclo"
+        name="S-1299 - Fechamento"
+        sequence="20"
+        action="action_esocial_s1299"
+    />
+    <menuitem
+        id="menu_esocial_s1298"
+        parent="menu_esocial_ciclo"
+        name="S-1298 - Reabertura"
+        sequence="30"
+        action="action_esocial_s1298"
+    />
+    <menuitem
+        id="menu_esocial_s3000"
+        parent="menu_esocial_ciclo"
+        name="S-3000 - Exclusão"
+        sequence="40"
+        action="action_esocial_s3000"
+    />
+
+    <!-- ============================================================ -->
+    <!-- Apuração devolvida pelo governo -->
+    <!-- ============================================================ -->
+    <menuitem
+        id="menu_esocial_apuracao"
+        parent="menu_esocial_root"
+        name="Apuração"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_esocial_conferencia"
+        parent="menu_esocial_apuracao"
+        name="Conferência da Competência"
+        sequence="10"
+        action="action_esocial_conferencia"
+    />
+    <menuitem
+        id="menu_esocial_totalizador"
+        parent="menu_esocial_apuracao"
+        name="Totalizadores Recebidos"
+        sequence="20"
+        action="action_esocial_totalizador"
+    />
+
+    <!-- ============================================================ -->
     <!-- Configuração -->
     <!-- ============================================================ -->
     <menuitem
@@ -43,6 +105,22 @@
         parent="menu_esocial_config"
         name="Tabelas de Referência"
         sequence="10"
+    />
+
+    <!-- Cadastro de estabelecimentos (parâmetro dos encargos patronais) -->
+    <menuitem
+        id="menu_esocial_s1005"
+        parent="menu_esocial_config"
+        name="S-1005 - Estabelecimentos"
+        sequence="5"
+        action="action_esocial_s1005"
+    />
+    <menuitem
+        id="menu_esocial_s1020"
+        parent="menu_esocial_config"
+        name="S-1020 - Lotações Tributárias"
+        sequence="6"
+        action="action_esocial_s1020"
     />
 
     <!-- Sub-categorias de tabelas -->

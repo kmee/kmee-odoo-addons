@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
@@ -220,13 +220,27 @@ class TestS1200XML(TransactionCase):
                 "per_apur": "2024-03",
                 "ind_apuracao": "1",
                 "ind_retif": "2",
-                "nr_recibo": "1.2.202403.0000001",
+                "nr_recibo": "1.2.0000000000000012345",
                 "company_id": self.company.id,
             }
         )
         data = s1200._to_esociallib_dict()
         self.assertEqual(data["ind_retif"], 2)
-        self.assertEqual(data["nr_recibo"], "1.2.202403.0000001")
+        self.assertEqual(data["nr_recibo"], "1.2.0000000000000012345")
+
+    def test_s1200_recibo_em_formato_invalido(self):
+        """Recibo de entrega tem formato fixo: 1.D seguido de 19 dígitos."""
+        with self.assertRaises(ValidationError):
+            self.env["l10n_br.esocial.s1200"].create(
+                {
+                    "employee_id": self.employee.id,
+                    "per_apur": "2024-03",
+                    "ind_apuracao": "1",
+                    "ind_retif": "2",
+                    "nr_recibo": "1.2.202403.0000001",
+                    "company_id": self.company.id,
+                }
+            )
 
     def test_s1200_original_sem_nr_recibo(self):
         """ind_retif=1 (original) não deve incluir nr_recibo."""
