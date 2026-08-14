@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        id="menu_l10n_br_ponto"
+        name="Ponto (Portaria 671)"
+        parent="hr_attendance.menu_hr_attendance_root"
+        sequence="80"
+    />
+
+    <menuitem
+        id="menu_l10n_br_marcacao"
+        name="Marcações"
+        parent="menu_l10n_br_ponto"
+        action="l10n_br_hr_marcacao_action"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_l10n_br_marcacao_pendente"
+        name="Pendências de conciliação"
+        parent="menu_l10n_br_ponto"
+        action="l10n_br_hr_marcacao_action_pendente"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_l10n_br_rep"
+        name="Registradores (REP)"
+        parent="menu_l10n_br_ponto"
+        action="l10n_br_hr_rep_action"
+        groups="hr_attendance.group_hr_attendance_manager"
+        sequence="90"
+    />
+
+</odoo>

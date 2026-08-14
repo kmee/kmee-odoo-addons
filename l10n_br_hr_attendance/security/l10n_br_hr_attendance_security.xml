@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="group_l10n_br_ponto_auditor" model="res.groups">
+        <field name="name">Ponto: auditor (somente leitura)</field>
+        <field name="category_id" ref="base.module_category_human_resources" />
+        <field
+            name="comment"
+        >Acesso de leitura a marcações, REPs e apurações, sem poder de alteração. Atende o art. 85 da Portaria 671/2021 (fornecimento de arquivos ao Auditor-Fiscal) sem abrir escrita.</field>
+    </record>
+
+    <record id="marcacao_rule_empregado" model="ir.rule">
+        <field name="name">Marcação: funcionário vê apenas as próprias</field>
+        <field name="model_id" ref="model_l10n_br_hr_marcacao" />
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+
+    <record id="marcacao_rule_rh" model="ir.rule">
+        <field name="name">Marcação: RH vê todas da empresa</field>
+        <field name="model_id" ref="model_l10n_br_hr_marcacao" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('hr_attendance.group_hr_attendance_user')), (4, ref('group_l10n_br_ponto_auditor'))]"
+        />
+    </record>
+
+    <record id="rep_rule_company" model="ir.rule">
+        <field name="name">REP: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_hr_rep" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>
