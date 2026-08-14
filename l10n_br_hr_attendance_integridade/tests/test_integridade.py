@@ -108,6 +108,25 @@ class TestIntegridadePtrp(TransactionCase):
         )
         self.assertIn("Ação de servidor", self.verificador.texto_do_diagnostico())
 
+    def test_modulo_do_escopo_ausente_aparece_no_manifesto(self):
+        """Composição faz parte do que se atesta: ausência não pode sumir.
+
+        Se um módulo do escopo não está instalado, o manifesto tem que dizer
+        isso, senão duas instalações diferentes produziriam resumos diferentes
+        sem explicação em lugar nenhum.
+        """
+        caminhos = [caminho for caminho, _r in self.verificador._manifesto_fonte()]
+        for modulo in self.verificador._modulos_do_escopo_ausentes():
+            self.assertIn(ptrp_escopo.marca_de_ausencia(modulo), caminhos)
+
+    def test_todo_modulo_do_escopo_esta_representado(self):
+        caminhos = [caminho for caminho, _r in self.verificador._manifesto_fonte()]
+        for modulo in ptrp_escopo.NUCLEO_ATESTADO:
+            self.assertTrue(
+                any(caminho.startswith(modulo + "/") for caminho in caminhos),
+                "Módulo %s não aparece no manifesto" % modulo,
+            )
+
     def test_modulos_do_ptrp_nao_contam_como_extensao(self):
         """Os próprios módulos da suíte não podem aparecer como intrusos."""
         self.assertFalse(self.verificador._extensoes_de_terceiros())
