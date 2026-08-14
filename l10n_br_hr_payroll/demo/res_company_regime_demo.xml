@@ -84,7 +84,7 @@
         <field name="legal_name">Indústria Desonerada CPRB Ltda</field>
         <field name="is_company" eval="True" />
         <field name="country_id" ref="base.br" />
-        <field name="cnpj_cpf">12.345.678/0001-95</field>
+        <field name="cnpj_cpf">34.567.890/0001-30</field>
     </record>
 
     <record id="demo_company_cprb" model="res.company">
