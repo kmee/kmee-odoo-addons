@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_sst_risco_view_tree" model="ir.ui.view">
+        <field name="name">l10n_br.sst.risco.tree</field>
+        <field name="model">l10n_br.sst.risco</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="ausencia_de_risco">
+                <field name="ambiente_id" />
+                <field name="agente_nocivo_id" />
+                <field name="tp_aval" optional="show" />
+                <field name="intensidade" optional="show" />
+                <field name="un_med" optional="hide" />
+                <field name="insalubridade" optional="show" />
+                <field name="grau_insalubridade" optional="show" />
+                <field name="periculosidade" optional="show" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="laudo_id" optional="show" />
+                <field name="ausencia_de_risco" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_risco_view_form" model="ir.ui.view">
+        <field name="name">l10n_br.sst.risco.form</field>
+        <field name="model">l10n_br.sst.risco</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Identificação">
+                            <field name="ambiente_id" />
+                            <field name="agente_nocivo_id" />
+                            <field name="ausencia_de_risco" />
+                            <field name="laudo_id" />
+                            <field name="job_ids" widget="many2many_tags" />
+                        </group>
+                        <group string="Vigência">
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="active" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Avaliação" name="avaliacao">
+                            <group>
+                                <group>
+                                    <field name="tp_aval" />
+                                    <field name="intensidade" />
+                                    <field name="limite_tolerancia" />
+                                </group>
+                                <group>
+                                    <field name="un_med" />
+                                    <field name="tecnica_medicao" />
+                                    <field name="nr_proc_jud" />
+                                </group>
+                            </group>
+                            <group string="Descrição Complementar">
+                                <field name="descricao" nolabel="1" />
+                            </group>
+                        </page>
+                        <page string="Proteção (EPC/EPI)" name="protecao">
+                            <group>
+                                <group>
+                                    <field name="utiliz_epc" />
+                                    <field
+                                        name="efic_epc"
+                                        attrs="{'invisible': [('utiliz_epc', '!=', '2')]}"
+                                    />
+                                </group>
+                                <group>
+                                    <field name="utiliz_epi" />
+                                    <field
+                                        name="efic_epi"
+                                        attrs="{'invisible': [('utiliz_epi', '!=', '2')]}"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Consequências" name="consequencias">
+                            <group>
+                                <group string="Previdenciário">
+                                    <field name="aposentadoria_especial_id" />
+                                    <field name="financiamento_aposent_id" />
+                                </group>
+                                <group string="Trabalhista">
+                                    <field name="insalubridade" />
+                                    <field
+                                        name="grau_insalubridade"
+                                        attrs="{'invisible': [('insalubridade', '=', False)], 'required': [('insalubridade', '=', True)]}"
+                                    />
+                                    <field name="periculosidade" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_risco_view_search" model="ir.ui.view">
+        <field name="name">l10n_br.sst.risco.search</field>
+        <field name="model">l10n_br.sst.risco</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="ambiente_id" />
+                <field name="agente_nocivo_id" />
+                <field name="laudo_id" />
+                <filter
+                    name="filter_vigente"
+                    string="Vigentes"
+                    domain="['&amp;', ('date_from', '&lt;=', context_today().strftime('%Y-%m-%d')), '|', ('date_to', '=', False), ('date_to', '&gt;=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_insalubridade"
+                    string="Geram Insalubridade"
+                    domain="[('insalubridade', '=', True)]"
+                />
+                <filter
+                    name="filter_periculosidade"
+                    string="Geram Periculosidade"
+                    domain="[('periculosidade', '=', True)]"
+                />
+                <filter
+                    name="filter_especial"
+                    string="Aposentadoria Especial"
+                    domain="[('financiamento_aposent_id.codigo', 'in', ['2', '3', '4'])]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_ambiente"
+                        string="Ambiente"
+                        context="{'group_by': 'ambiente_id'}"
+                    />
+                    <filter
+                        name="group_agente"
+                        string="Agente Nocivo"
+                        context="{'group_by': 'agente_nocivo_id'}"
+                    />
+                    <filter
+                        name="group_laudo"
+                        string="Laudo"
+                        context="{'group_by': 'laudo_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_risco_action" model="ir.actions.act_window">
+        <field name="name">Fatores de Risco</field>
+        <field name="res_model">l10n_br.sst.risco</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_vigente': 1}</field>
+    </record>
+
+</odoo>
