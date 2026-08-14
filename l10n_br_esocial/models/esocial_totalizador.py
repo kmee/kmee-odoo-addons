@@ -5,16 +5,9 @@ import logging
 
 from odoo import _, api, fields, models
 
-_logger = logging.getLogger(__name__)
+from .retorno_totalizadores import parse_totalizadores
 
-try:
-    from esociallib.retorno_totalizadores import parse_totalizadores
-except ImportError:
-    parse_totalizadores = None
-    _logger.warning(
-        "esociallib sem retorno_totalizadores: os eventos totalizadores do "
-        "eSocial não serão persistidos."
-    )
+_logger = logging.getLogger(__name__)
 
 TIPO_TOTALIZADOR = [
     ("S-5001", "S-5001 - Bases e valores por trabalhador"),
@@ -141,8 +134,6 @@ class ESocialTotalizador(models.Model):
         Idempotente: uma nova consulta do mesmo lote substitui os
         totalizadores anteriores do evento, em vez de duplicá-los.
         """
-        if parse_totalizadores is None:
-            return self.browse()
         totalizadores = parse_totalizadores(retorno_xml)
         if not totalizadores:
             return self.browse()
