@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_sst_root"
+        name="SST"
+        sequence="55"
+        groups="l10n_br_hr_sst.group_sst_user"
+    />
+
+    <menuitem
+        id="menu_sst_riscos"
+        parent="menu_sst_root"
+        name="Riscos Ocupacionais"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_sst_laudo"
+        parent="menu_sst_riscos"
+        name="Laudos"
+        sequence="10"
+        action="l10n_br_sst_laudo_action"
+    />
+    <menuitem
+        id="menu_sst_ambiente"
+        parent="menu_sst_riscos"
+        name="Ambientes de Trabalho"
+        sequence="20"
+        action="l10n_br_sst_ambiente_action"
+    />
+    <menuitem
+        id="menu_sst_risco"
+        parent="menu_sst_riscos"
+        name="Fatores de Risco"
+        sequence="30"
+        action="l10n_br_sst_risco_action"
+    />
+
+    <menuitem
+        id="menu_sst_configuracao"
+        parent="menu_sst_root"
+        name="Configuração"
+        sequence="90"
+        groups="l10n_br_hr_sst.group_sst_manager"
+    />
+    <menuitem
+        id="menu_sst_responsavel"
+        parent="menu_sst_configuracao"
+        name="Responsáveis Técnicos"
+        sequence="10"
+        action="l10n_br_sst_responsavel_action"
+    />
+
+</odoo>
