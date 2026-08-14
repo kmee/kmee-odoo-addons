@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_afd_import_user,l10n_br.hr.afd.import.user,model_l10n_br_hr_afd_import,hr_attendance.group_hr_attendance_user,1,1,1,0
+access_afd_import_manager,l10n_br.hr.afd.import.manager,model_l10n_br_hr_afd_import,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_afd_import_auditor,l10n_br.hr.afd.import.auditor,model_l10n_br_hr_afd_import,l10n_br_hr_attendance.group_l10n_br_ponto_auditor,1,0,0,0
+access_afd_export_wizard,l10n_br.hr.afd.export.wizard,model_l10n_br_hr_afd_export_wizard,hr_attendance.group_hr_attendance_user,1,1,1,1
