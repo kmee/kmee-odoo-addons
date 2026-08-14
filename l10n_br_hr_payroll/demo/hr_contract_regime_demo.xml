@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        RF-35 - Contratos da comparação por regime: MESMO salário de
+        R$ 6.000,00 em todas as empresas, estrutura CLT, sem adicionais.
+
+        O calendário de trabalho é omitido (cai no da própria empresa): nada no
+        cenário depende do divisor de horas, e o calendário de 44h da demo
+        pertence à empresa principal.
+    -->
+
+    <record id="demo_contract_regime_real" model="hr.contract">
+        <field name="name">Contrato Rogério Matos (Lucro Real)</field>
+        <field name="employee_id" ref="demo_employee_regime_real" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_real" />
+        <field name="wage">6000.00</field>
+        <field name="date_start">2024-01-02</field>
+        <field name="state">open</field>
+        <field name="welfare_policy">rgps</field>
+        <field name="struct_id" ref="structure_clt" />
+    </record>
+
+    <record id="demo_contract_regime_presumido" model="hr.contract">
+        <field name="name">Contrato Paula Nogueira (Lucro Presumido)</field>
+        <field name="employee_id" ref="demo_employee_regime_presumido" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field name="wage">6000.00</field>
+        <field name="date_start">2024-01-02</field>
+        <field name="state">open</field>
+        <field name="welfare_policy">rgps</field>
+        <field name="struct_id" ref="structure_clt" />
+    </record>
+
+    <record id="demo_contract_regime_simples" model="hr.contract">
+        <field name="name">Contrato Sandra Lopes (Simples anexo III)</field>
+        <field name="employee_id" ref="demo_employee_regime_simples" />
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="wage">6000.00</field>
+        <field name="date_start">2024-01-02</field>
+        <field name="state">open</field>
+        <field name="welfare_policy">rgps</field>
+        <field name="struct_id" ref="structure_clt" />
+    </record>
+
+    <!--
+        Anexo IV declarado NO CONTRATO: a empresa é anexo III (preponderante),
+        mas a atividade deste empregado é do anexo IV, então para ele a CPP e o
+        RAT são devidos por fora do DAS. O campo do contrato sobrepõe o da
+        empresa exatamente para permitir esse recorte por atividade.
+    -->
+    <record id="demo_contract_regime_anexo4" model="hr.contract">
+        <field name="name">Contrato Antônio Vieira (Simples anexo IV)</field>
+        <field name="employee_id" ref="demo_employee_regime_anexo4" />
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="wage">6000.00</field>
+        <field name="date_start">2024-01-02</field>
+        <field name="state">open</field>
+        <field name="welfare_policy">rgps</field>
+        <field name="struct_id" ref="structure_clt" />
+        <field name="l10n_br_hr_simples_anexo">iv</field>
+    </record>
+
+    <record id="demo_contract_regime_cprb" model="hr.contract">
+        <field name="name">Contrato Cláudio Ferraz (CPRB)</field>
+        <field name="employee_id" ref="demo_employee_regime_cprb" />
+        <field name="company_id" ref="demo_company_cprb" />
+        <field name="wage">6000.00</field>
+        <field name="date_start">2024-01-02</field>
+        <field name="state">open</field>
+        <field name="welfare_policy">rgps</field>
+        <field name="struct_id" ref="structure_clt" />
+    </record>
+
+</odoo>

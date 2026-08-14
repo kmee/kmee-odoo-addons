@@ -19,6 +19,32 @@ class HrPayslip(models.Model):
         default=lambda self: self.env["account.journal"]._l10n_br_payroll_journal()
     )
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Corrige o diário quando o holerite é de OUTRA empresa.
+
+        O default de ``journal_id`` é avaliado com a empresa ATIVA, mas o
+        holerite pode nascer com ``company_id`` de outra empresa (folha
+        multiempresa, demo por regime tributário, criação via API). Sem esta
+        correção o lançamento contábil de uma empresa iria para o diário de
+        outra - custo registrado na empresa errada, que passa silenciosamente
+        porque o Odoo não valida empresa cruzada no holerite.
+
+        Se a empresa do holerite não tiver diário de folha, o diário original é
+        mantido (o campo é obrigatório): a contabilização fica a cargo de quem
+        configurar o diário daquela empresa.
+        """
+        slips = super().create(vals_list)
+        Journal = self.env["account.journal"]
+        for slip in slips:
+            journal_company = slip.journal_id.company_id
+            if not slip.company_id or journal_company in (slip.company_id, False):
+                continue
+            journal = Journal.with_company(slip.company_id)._l10n_br_payroll_journal()
+            if journal and journal.company_id in (slip.company_id, False):
+                slip.journal_id = journal
+        return slips
+
     @api.model
     def _demo_compute_payslips(self):
         """Pin every demo payslip to the Folha de Pagamento journal (FOPAG).
@@ -52,7 +78,13 @@ class HrPayslip(models.Model):
             raise_if_not_found=False,
         )
         if journal:
-            slips = self.search([("state", "=", "draft")])
+            # Somente os holerites da empresa DONA do FOPAG: os das demais
+            # empresas (demo por regime) têm de ficar no diário da própria
+            # empresa, ou o custo cairia na empresa errada.
+            company = journal.company_id or self.env.company
+            slips = self.search(
+                [("state", "=", "draft"), ("company_id", "=", company.id)]
+            )
             to_fix = slips.filtered(lambda s: s.journal_id != journal)
             if to_fix:
                 to_fix.write({"journal_id": journal.id})

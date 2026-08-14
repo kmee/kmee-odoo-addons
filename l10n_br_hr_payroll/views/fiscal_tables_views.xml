@@ -94,6 +94,26 @@
         <field name="view_mode">tree</field>
     </record>
 
+    <!-- ═══════════════ Transição da CPRB (desoneração) ═══════════════ -->
+    <record id="view_cprb_transicao_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.payroll.cprb.transicao</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="perc_cprb" />
+                <field name="perc_cpp" />
+                <field name="perc_cpp_13" />
+                <field name="base_legal" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_cprb_transicao" model="ir.actions.act_window">
+        <field name="name">Transição da CPRB</field>
+        <field name="res_model">l10n_br.hr.payroll.cprb.transicao</field>
+        <field name="view_mode">tree</field>
+    </record>
+
     <!-- ═══════════════ Menus ═══════════════ -->
     <menuitem
         id="menu_payroll_fiscal_tables"
@@ -130,5 +150,11 @@
         parent="menu_payroll_fiscal_tables"
         action="action_sal_familia_faixa"
         sequence="40"
+    />
+    <menuitem
+        id="menu_cprb_transicao"
+        parent="menu_payroll_fiscal_tables"
+        action="action_cprb_transicao"
+        sequence="50"
     />
 </odoo>
