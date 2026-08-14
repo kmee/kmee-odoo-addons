@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_s2240_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s2240.tree</field>
+        <field name="model">l10n_br.esocial.s2240</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="ambiente_id" />
+                <field name="dt_ini_condicao" />
+                <field name="dt_fim_condicao" />
+                <field name="laudo_id" optional="show" />
+                <field name="ind_retif" optional="hide" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s2240_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s2240.form</field>
+        <field name="model">l10n_br.esocial.s2240</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_validar" type="object" string="Validar" />
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Evento"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Vínculo">
+                            <field name="employee_id" />
+                            <field name="contract_id" />
+                            <field name="ambiente_id" />
+                            <field name="laudo_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group string="Condição">
+                            <field name="dt_ini_condicao" />
+                            <field name="dt_fim_condicao" />
+                            <field name="ind_retif" />
+                            <field
+                                name="nr_recibo"
+                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="Descrição das Atividades">
+                        <field name="dsc_ativ_des" nolabel="1" />
+                    </group>
+                    <notebook>
+                        <page string="Fatores de Risco" name="riscos">
+                            <field name="risco_ids">
+                                <tree>
+                                    <field name="agente_nocivo_id" />
+                                    <field name="tp_aval" />
+                                    <field name="intensidade" />
+                                    <field name="un_med" />
+                                    <field name="utiliz_epc" />
+                                    <field name="efic_epc" />
+                                    <field name="utiliz_epi" />
+                                    <field name="efic_epi" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Responsáveis" name="responsaveis">
+                            <field name="responsavel_ids">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="cpf" />
+                                    <field name="ide_oc" />
+                                    <field name="nr_oc" />
+                                    <field name="uf_oc" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Observações" name="obs">
+                            <field name="obs_compl" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s2240" model="ir.actions.act_window">
+        <field name="name">S-2240 - Condições Ambientais</field>
+        <field name="res_model">l10n_br.esocial.s2240</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_s2220_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s2220.tree</field>
+        <field name="model">l10n_br.esocial.s2220</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="examination_id" />
+                <field name="dt_aso" />
+                <field name="ind_retif" optional="hide" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s2220_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s2220.form</field>
+        <field name="model">l10n_br.esocial.s2220</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Evento"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="examination_id" />
+                            <field name="dt_aso" readonly="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="ind_retif" />
+                            <field
+                                name="nr_recibo"
+                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s2220" model="ir.actions.act_window">
+        <field name="name">S-2220 - Monitoramento da Saúde</field>
+        <field name="res_model">l10n_br.esocial.s2220</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
