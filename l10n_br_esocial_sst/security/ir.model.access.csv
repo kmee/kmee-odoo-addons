@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_br_esocial_s2210_user,l10n_br.esocial.s2210 user,model_l10n_br_esocial_s2210,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_esocial_s2210_manager,l10n_br.esocial.s2210 manager,model_l10n_br_esocial_s2210,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_esocial_s2210_hr,l10n_br.esocial.s2210 hr,model_l10n_br_esocial_s2210,hr.group_hr_manager,1,1,1,1
+access_l10n_br_esocial_s2220_user,l10n_br.esocial.s2220 user,model_l10n_br_esocial_s2220,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_esocial_s2220_manager,l10n_br.esocial.s2220 manager,model_l10n_br_esocial_s2220,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_esocial_s2220_hr,l10n_br.esocial.s2220 hr,model_l10n_br_esocial_s2220,hr.group_hr_manager,1,1,1,1
+access_l10n_br_esocial_s2221_user,l10n_br.esocial.s2221 user,model_l10n_br_esocial_s2221,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_esocial_s2221_manager,l10n_br.esocial.s2221 manager,model_l10n_br_esocial_s2221,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_esocial_s2221_hr,l10n_br.esocial.s2221 hr,model_l10n_br_esocial_s2221,hr.group_hr_manager,1,1,1,1
+access_l10n_br_esocial_s2240_user,l10n_br.esocial.s2240 user,model_l10n_br_esocial_s2240,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_esocial_s2240_manager,l10n_br.esocial.s2240 manager,model_l10n_br_esocial_s2240,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_esocial_s2240_hr,l10n_br.esocial.s2240 hr,model_l10n_br_esocial_s2240,hr.group_hr_manager,1,1,1,1
