@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_sst_epi"
+        parent="l10n_br_hr_sst.menu_sst_root"
+        name="EPI"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_sst_ca"
+        parent="menu_sst_epi"
+        name="Certificados de Aprovação"
+        sequence="10"
+        action="l10n_br_sst_ca_action"
+    />
+    <menuitem
+        id="menu_sst_entregas"
+        parent="menu_sst_epi"
+        name="Entregas de EPI"
+        sequence="20"
+        action="hr_personal_equipment_request.hr_personal_equipment_act_window"
+    />
+
+</odoo>
