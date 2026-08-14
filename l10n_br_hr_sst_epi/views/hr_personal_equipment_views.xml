@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_personal_equipment_form_view_sst" model="ir.ui.view">
+        <field name="name">hr.personal.equipment.form (in l10n_br_hr_sst_epi)</field>
+        <field name="model">hr.personal.equipment</field>
+        <field
+            name="inherit_id"
+            ref="hr_employee_ppe.hr_personal_equipment_form_view"
+        />
+        <field name="arch" type="xml">
+            <field name="certification" position="before">
+                <field name="l10n_br_sst_ca_id" />
+                <field name="l10n_br_sst_ca_validade" />
+                <field name="l10n_br_sst_ca_state" />
+            </field>
+            <field name="certification" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <xpath expr="//sheet" position="inside">
+                <group string="NR-6" name="l10n_br_sst">
+                    <group string="Assinatura do Trabalhador">
+                        <field name="l10n_br_sst_assinatura" widget="image" />
+                        <field name="l10n_br_sst_data_assinatura" />
+                        <button
+                            name="action_assinar"
+                            type="object"
+                            string="Confirmar Assinatura"
+                            class="btn-secondary"
+                        />
+                    </group>
+                    <group string="Devolução ou Troca">
+                        <field name="l10n_br_sst_motivo_devolucao" />
+                        <field name="l10n_br_sst_data_devolucao" />
+                        <field name="l10n_br_sst_observacao_devolucao" />
+                        <button
+                            name="action_devolver"
+                            type="object"
+                            string="Registrar Devolução"
+                            class="btn-secondary"
+                            attrs="{'invisible': [('state', '!=', 'valid')]}"
+                        />
+                    </group>
+                </group>
+                <group string="Riscos Neutralizados" name="l10n_br_sst_riscos">
+                    <field name="l10n_br_sst_risco_ids" nolabel="1" readonly="1">
+                        <tree>
+                            <field name="ambiente_id" />
+                            <field name="agente_nocivo_id" />
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_personal_equipment_tree_view_sst" model="ir.ui.view">
+        <field name="name">hr.personal.equipment.tree (in l10n_br_hr_sst_epi)</field>
+        <field name="model">hr.personal.equipment</field>
+        <field
+            name="inherit_id"
+            ref="hr_employee_ppe.hr_personal_equipment_tree_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expiry_date']" position="after">
+                <field name="l10n_br_sst_ca_id" optional="show" />
+                <field name="l10n_br_sst_ca_state" optional="show" />
+                <field name="l10n_br_sst_data_devolucao" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

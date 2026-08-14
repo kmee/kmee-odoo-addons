@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_sst_ca_view_tree" model="ir.ui.view">
+        <field name="name">l10n_br.sst.ca.tree</field>
+        <field name="model">l10n_br.sst.ca</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-danger="state == 'vencido'"
+                decoration-warning="state == 'a_vencer'"
+            >
+                <field name="numero" />
+                <field name="descricao_epi" />
+                <field name="tipo_epi" optional="show" />
+                <field name="fabricante_id" optional="show" />
+                <field name="validade" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_ca_view_form" model="ir.ui.view">
+        <field name="name">l10n_br.sst.ca.form</field>
+        <field name="model">l10n_br.sst.ca</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Vencido"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('state', '!=', 'vencido')]}"
+                    />
+                    <div class="oe_title">
+                        <label for="numero" string="Número do CA" />
+                        <h1><field name="numero" placeholder="12345" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="descricao_epi" />
+                            <field name="tipo_epi" />
+                            <field name="fabricante_id" />
+                            <field name="fabricante" />
+                        </group>
+                        <group>
+                            <field name="validade" />
+                            <field name="state" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Riscos Neutralizados" name="riscos">
+                            <field name="risco_neutralizado_ids">
+                                <tree>
+                                    <field name="ambiente_id" />
+                                    <field name="agente_nocivo_id" />
+                                    <field name="date_from" />
+                                    <field name="date_to" />
+                                </tree>
+                            </field>
+                            <field
+                                name="agente_nocivo_ids"
+                                widget="many2many_tags"
+                                readonly="1"
+                            />
+                        </page>
+                        <page string="Produtos" name="produtos">
+                            <field name="product_ids">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="is_ppe" />
+                                    <field name="expirable_ppe" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Observações" name="observacao">
+                            <field name="observacao" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_ca_view_search" model="ir.ui.view">
+        <field name="name">l10n_br.sst.ca.search</field>
+        <field name="model">l10n_br.sst.ca</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="numero" />
+                <field name="descricao_epi" />
+                <field name="fabricante_id" />
+                <filter
+                    name="filter_vencido"
+                    string="Vencidos"
+                    domain="[('state', '=', 'vencido')]"
+                />
+                <filter
+                    name="filter_a_vencer"
+                    string="A Vencer"
+                    domain="[('state', '=', 'a_vencer')]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_state"
+                        string="Situação"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_fabricante"
+                        string="Fabricante"
+                        context="{'group_by': 'fabricante_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_ca_action" model="ir.actions.act_window">
+        <field name="name">Certificados de Aprovação</field>
+        <field name="res_model">l10n_br.sst.ca</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
