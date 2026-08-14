@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_sst_laudo_view_form_esocial" model="ir.ui.view">
+        <field name="name">l10n_br.sst.laudo.form (in l10n_br_esocial_sst)</field>
+        <field name="model">l10n_br.sst.laudo</field>
+        <field name="inherit_id" ref="l10n_br_hr_sst.l10n_br_sst_laudo_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_gerar_s2240"
+                    type="object"
+                    string="Gerar S-2240 em Massa"
+                    attrs="{'invisible': [('state', '!=', 'vigente')]}"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_s2240"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-paper-plane"
+                >
+                    <field name="s2240_count" widget="statinfo" string="S-2240" />
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
