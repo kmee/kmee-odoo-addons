@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_sst_acidentes"
+        parent="l10n_br_hr_sst.menu_sst_root"
+        name="Acidentes"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_sst_acidente"
+        parent="menu_sst_acidentes"
+        name="Acidentes de Trabalho"
+        sequence="10"
+        action="l10n_br_sst_acidente_action"
+    />
+    <menuitem
+        id="menu_sst_cat"
+        parent="menu_sst_acidentes"
+        name="CATs"
+        sequence="20"
+        action="l10n_br_sst_cat_action"
+    />
+
+</odoo>

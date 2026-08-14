@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_sst_acidente_view_tree" model="ir.ui.view">
+        <field name="name">l10n_br.sst.acidente.tree</field>
+        <field name="model">l10n_br.sst.acidente</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="houve_obito">
+                <field name="date_acidente" />
+                <field name="employee_id" />
+                <field name="tp_acid" />
+                <field name="parte_corpo_id" optional="show" />
+                <field name="agente_causador_id" optional="hide" />
+                <field name="houve_afastamento" />
+                <field name="houve_obito" />
+                <field name="cat_count" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_acidente_view_form" model="ir.ui.view">
+        <field name="name">l10n_br.sst.acidente.form</field>
+        <field name="model">l10n_br.sst.acidente</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_registrar"
+                        type="object"
+                        string="Registrar e Abrir CAT"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_criar_cat_reabertura"
+                        type="object"
+                        string="CAT de Reabertura"
+                        attrs="{'invisible': [('state', 'in', ('draft', 'cancelled'))]}"
+                    />
+                    <button
+                        name="action_criar_cat_obito"
+                        type="object"
+                        string="CAT de Óbito"
+                        attrs="{'invisible': ['|', ('state', 'in', ('draft', 'cancelled')), ('houve_obito', '=', False)]}"
+                    />
+                    <button
+                        name="action_gerar_afastamento"
+                        type="object"
+                        string="Gerar Afastamento (S-2230)"
+                        attrs="{'invisible': ['|', ('houve_afastamento', '=', False), ('afastamento_id', '!=', False)]}"
+                    />
+                    <button
+                        name="action_cancelar"
+                        type="object"
+                        string="Cancelar"
+                        attrs="{'invisible': [('state', '=', 'cancelled')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_cats"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o"
+                        >
+                            <field name="cat_count" widget="statinfo" string="CATs" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Acidente">
+                            <field name="employee_id" />
+                            <field name="date_acidente" />
+                            <field name="hora_acidente" placeholder="1430" />
+                            <field name="hrs_trab_antes_acid" placeholder="0600" />
+                            <field name="tp_acid" />
+                            <field name="situacao_geradora_id" />
+                            <field name="iniciat_cat" />
+                        </group>
+                        <group string="Consequências">
+                            <field name="houve_afastamento" />
+                            <field name="ultimo_dia_trabalhado" />
+                            <field name="houve_obito" />
+                            <field
+                                name="date_obito"
+                                attrs="{'invisible': [('houve_obito', '=', False)], 'required': [('houve_obito', '=', True)]}"
+                            />
+                            <field name="comunicacao_policia" />
+                            <field name="afastamento_id" readonly="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Local do Acidente" name="local">
+                            <group>
+                                <group>
+                                    <field name="tp_local" />
+                                    <field name="dsc_local" />
+                                    <field name="dsc_lograd" />
+                                    <field name="nr_lograd" />
+                                    <field name="complemento_local" />
+                                </group>
+                                <group>
+                                    <field name="bairro_local" />
+                                    <field name="cep_local" />
+                                    <field name="city_id" />
+                                    <field name="state_id" />
+                                    <field name="country_id" />
+                                </group>
+                            </group>
+                            <group string="Inscrição do Local (quando de terceiros)">
+                                <field name="tp_insc_local" />
+                                <field name="nr_insc_local" />
+                            </group>
+                        </page>
+                        <page string="Lesão" name="lesao">
+                            <group>
+                                <group>
+                                    <field name="parte_corpo_id" />
+                                    <field name="lateralidade" />
+                                </group>
+                                <group>
+                                    <field name="agente_causador_id" />
+                                    <field name="natureza_lesao_id" />
+                                    <field name="cid_id" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Atestado Médico" name="atestado">
+                            <group>
+                                <group>
+                                    <field name="date_atendimento" />
+                                    <field name="hora_atendimento" placeholder="1500" />
+                                    <field name="ind_internacao" />
+                                    <field name="dur_trat" />
+                                    <field name="ind_afast" />
+                                </group>
+                                <group>
+                                    <field name="nm_emit" />
+                                    <field name="ide_oc_emit" />
+                                    <field name="nr_oc_emit" />
+                                    <field name="uf_oc_emit" />
+                                </group>
+                            </group>
+                            <group>
+                                <field name="dsc_comp_lesao" />
+                                <field name="diagnostico_provavel" />
+                                <field name="observacao_atestado" />
+                            </group>
+                        </page>
+                        <page string="Observações" name="observacoes">
+                            <group>
+                                <field name="testemunhas" />
+                                <field name="observacao" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_acidente_action" model="ir.actions.act_window">
+        <field name="name">Acidentes de Trabalho</field>
+        <field name="res_model">l10n_br.sst.acidente</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
