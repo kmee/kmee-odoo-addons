@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_br_hr_rep_user,l10n_br.hr.rep.user,model_l10n_br_hr_rep,hr_attendance.group_hr_attendance_user,1,0,0,0
+access_l10n_br_hr_rep_manager,l10n_br.hr.rep.manager,model_l10n_br_hr_rep,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_l10n_br_hr_rep_auditor,l10n_br.hr.rep.auditor,model_l10n_br_hr_rep,l10n_br_hr_attendance.group_l10n_br_ponto_auditor,1,0,0,0
+access_l10n_br_hr_marcacao_employee,l10n_br.hr.marcacao.employee,model_l10n_br_hr_marcacao,base.group_user,1,0,0,0
+access_l10n_br_hr_marcacao_user,l10n_br.hr.marcacao.user,model_l10n_br_hr_marcacao,hr_attendance.group_hr_attendance_user,1,1,1,0
+access_l10n_br_hr_marcacao_manager,l10n_br.hr.marcacao.manager,model_l10n_br_hr_marcacao,hr_attendance.group_hr_attendance_manager,1,1,1,1
+access_l10n_br_hr_marcacao_auditor,l10n_br.hr.marcacao.auditor,model_l10n_br_hr_marcacao,l10n_br_hr_attendance.group_l10n_br_ponto_auditor,1,0,0,0
