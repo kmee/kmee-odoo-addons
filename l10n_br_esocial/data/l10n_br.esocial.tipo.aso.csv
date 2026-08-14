@@ -2,6 +2,6 @@ id,codigo,nome,dt_inicio,dt_fim
 tipo_aso_0,0,Admissional,2014-01-01,
 tipo_aso_1,1,"Periódico, conforme planejamento do PCMSO",2014-01-01,
 tipo_aso_2,2,De retorno ao trabalho,2014-01-01,
-tipo_aso_3,3,De mudança de função,2014-01-01,
+tipo_aso_3,3,De mudança de função ou de mudança de risco ocupacional,2014-01-01,
 tipo_aso_4,4,"De monitoração pontual, não enquadrado nos casos anteriores",2014-01-01,
-tipo_aso_8,8,Demissional,2014-01-01,
+tipo_aso_9,9,Demissional,2014-01-01,
