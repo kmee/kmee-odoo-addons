@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_s2221_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s2221.tree</field>
+        <field name="model">l10n_br.esocial.s2221</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="dt_exame" />
+                <field name="cnpj_lab" />
+                <field name="cod_seq_exame" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s2221_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s2221.form</field>
+        <field name="model">l10n_br.esocial.s2221</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Evento"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Exame">
+                            <field name="employee_id" />
+                            <field name="dt_exame" />
+                            <field name="cnpj_lab" />
+                            <field name="cod_seq_exame" placeholder="AB123456789" />
+                        </group>
+                        <group string="Médico">
+                            <field name="nm_med" />
+                            <field name="nr_crm" />
+                            <field name="uf_crm" />
+                            <field name="ind_retif" />
+                            <field
+                                name="nr_recibo"
+                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s2221" model="ir.actions.act_window">
+        <field name="name">S-2221 - Exame Toxicológico</field>
+        <field name="res_model">l10n_br.esocial.s2221</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_esocial_sst"
+        parent="l10n_br_esocial.menu_esocial_root"
+        name="Eventos de SST"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_esocial_s2210"
+        parent="menu_esocial_sst"
+        name="S-2210 - CAT"
+        sequence="10"
+        action="action_esocial_s2210"
+    />
+    <menuitem
+        id="menu_esocial_s2220"
+        parent="menu_esocial_sst"
+        name="S-2220 - Monitoramento da Saúde"
+        sequence="20"
+        action="action_esocial_s2220"
+    />
+    <menuitem
+        id="menu_esocial_s2221"
+        parent="menu_esocial_sst"
+        name="S-2221 - Exame Toxicológico"
+        sequence="30"
+        action="action_esocial_s2221"
+    />
+    <menuitem
+        id="menu_esocial_s2240"
+        parent="menu_esocial_sst"
+        name="S-2240 - Condições Ambientais"
+        sequence="40"
+        action="action_esocial_s2240"
+    />
+
+</odoo>
