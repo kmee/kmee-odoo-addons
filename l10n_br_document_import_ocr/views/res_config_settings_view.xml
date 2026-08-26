@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form.document.import.ocr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Importação OCR (Brasil)"
+                    string="Importação OCR (Brasil)"
+                    data-key="l10n_br_document_import_ocr"
+                >
+                    <h2>Importação de documentos por OCR</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Engine de OCR</span>
+                                <div class="text-muted">
+                                    Usado quando o PDF não tem camada de texto
+                                    (documento escaneado ou foto).
+                                </div>
+                                <field name="document_import_ocr_engine" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Destino da importação</span>
+                                <div class="text-muted">
+                                    Criar somente o documento fiscal ou também a
+                                    fatura de fornecedor.
+                                </div>
+                                <field name="document_import_destination" />
+                                <span class="o_form_label">Operação fiscal padrão</span>
+                                <field name="document_import_default_operation_id" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
