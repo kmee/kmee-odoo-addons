@@ -1,6 +1,6 @@
 {
     "name": "CRM Predictable Revenue",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Sales/CRM",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -21,7 +21,7 @@
     "demo": [
         # 'demo/crm_team_demo.xml',
     ],
-    'installable': False,
+    "installable": True,
     "application": False,
     "auto_install": False,
 }
