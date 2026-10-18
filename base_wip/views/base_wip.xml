@@ -74,14 +74,14 @@
         <field name="name">base.wip.tree (in base_wip)</field>
         <field name="model">base.wip</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="state" />
                 <field name="date_hour_start" />
                 <field name="date_hour_stop" />
                 <field name="lead_time" />
                 <field name="state" />
                 <field name="user_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -112,7 +112,7 @@
     <record model="ir.actions.act_window" id="base_wip_act_window">
         <field name="name">Wip</field>
         <field name="res_model">base.wip</field>
-        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_mode">list,form,pivot,graph</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
