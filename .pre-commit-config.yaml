@@ -33,7 +33,6 @@ exclude: |
   ^partner_customer_rating/|
   ^partner_display_name_ref/|
   ^partner_linkedin/|
-  ^partner_tier/|
   ^product_contract_payment_mode/|
   ^product_contract_period/|
   ^product_contract_period_bo/|
