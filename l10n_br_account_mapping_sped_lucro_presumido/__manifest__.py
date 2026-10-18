@@ -5,7 +5,7 @@
     "name": "Plano Referencial RFB 2 - PJ em Geral - Lucro Presumido",
     "summary": "Tabela oficial do plano referencial 2 da RFB "
     "(P100A, P150A, leiaute 12) para o registro I051 da ECD",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
