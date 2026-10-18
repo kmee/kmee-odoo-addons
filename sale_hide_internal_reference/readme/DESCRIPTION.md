@@ -1,1 +1,0 @@
-Allows you to hide the internal reference of the product.

@@ -1,1 +1,0 @@
-Product names change from the format "[1234] name" to "name"
