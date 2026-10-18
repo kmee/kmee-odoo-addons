@@ -9,7 +9,7 @@ from .fixtures import (
 )
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestPaymentTransaction(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -39,7 +39,7 @@ class TestPaymentTransaction(TransactionCase):
                 .search([("code", "=", "SP")], limit=1)
                 .id,
                 "country_id": self.env.ref("base.br").id,
-                "cnpj_cpf": "73.145.637/0001-40",
+                "vat": "73.145.637/0001-40",
             }
         )
 
@@ -53,6 +53,9 @@ class TestPaymentTransaction(TransactionCase):
                 "currency_id": self.env.ref("base.BRL").id,
                 "partner_id": self.partner.id,
                 "provider_id": self.payment_provider.id,
+                "payment_method_id": self.env.ref(
+                    "l10n_br_payment_boleto_pinbank.payment_method_boleto_pinbank"
+                ).id,
                 "provider_code": "boleto_pinbank",
                 "boleto_penalty": 0.01,
                 "boleto_interest": 0.01,
@@ -85,13 +88,11 @@ class TestPaymentTransaction(TransactionCase):
         - The "our_number" field is correctly set.
         - The "digitable_line" field matches the expected format.
         - The "barcode" field is correctly generated.
-        - The "state" of the payment transaction is set to "authorized".
 
         Assertions:
             - The "our_number" field matches the expected value.
             - The "digitable_line" field matches the expected digitable line format.
             - The "barcode" field matches the expected barcode value.
-            - The "state" field is set to "authorized" with an appropriate message.
         """
         boleto_info = self.payment_transaction._prepare_transaction_boleto_info(
             SEND_CAPTURE_REQUEST_RESPONSE
@@ -106,11 +107,6 @@ class TestPaymentTransaction(TransactionCase):
             boleto_info["barcode"],
             "12345678901234567890123456789012345678901234",
         )
-        self.assertEqual(
-            boleto_info["state"],
-            "authorized",
-            "Payment transaction state should be 'authorized'",
-        )
 
     def test_send_payment_request(self):
         """
@@ -119,7 +115,7 @@ class TestPaymentTransaction(TransactionCase):
         This test verifies the following:
         1. The `_boleto_pinbank_make_request` method is called with the correct
            endpoint and payload.
-        2. The payment transaction state is updated to "authorized".
+        2. The payment transaction state is updated to "pending".
         3. The response from `_send_payment_request` matches the mocked response.
         4. The payment transaction is updated with the correct boleto information,
            including `our_number`, `digitable_line`, `barcode`, and `boleto_pdf`.
@@ -165,8 +161,8 @@ class TestPaymentTransaction(TransactionCase):
             # Assert that the response matches the mocked response
             self.assertEqual(response, mock_response)
 
-            # Assert that the payment transaction state was updated to "authorized"
-            self.assertEqual(self.payment_transaction.state, "authorized")
+            # Assert that the payment transaction state was updated to "pending"
+            self.assertEqual(self.payment_transaction.state, "pending")
 
             # Assert that the transaction was updated with the boleto info
             self.assertEqual(self.payment_transaction.our_number, "123456789")
@@ -190,7 +186,7 @@ class TestPaymentTransaction(TransactionCase):
         This test verifies the following:
         1. The `_boleto_pinbank_make_request` method is called with the correct endpoint
            and payload when `_send_capture_request` is executed.
-        2. The state of the payment transaction is updated to "authorized" after the
+        2. The state of the payment transaction is updated to "pending" after the
            capture request is sent.
         3. The payment transaction is updated with the correct boleto information,
            including `our_number`, `digitable_line`, and `barcode`.
@@ -203,7 +199,7 @@ class TestPaymentTransaction(TransactionCase):
         Assertions:
         - The mocked `_boleto_pinbank_make_request` method is called once with the
           expected endpoint and payload.
-        - The `state` of the payment transaction is updated to "authorized".
+        - The `state` of the payment transaction is updated to "pending".
         - The `our_number`, `digitable_line`, and `barcode` fields of the payment
           transaction are updated with the expected values.
         """
@@ -223,8 +219,8 @@ class TestPaymentTransaction(TransactionCase):
                 payload=SEND_CAPTURE_REQUEST_PAYLOAD,
             )
 
-            # Assert that the payment transaction state was updated to "authorized"
-            self.assertEqual(self.payment_transaction.state, "authorized")
+            # Assert that the payment transaction state was updated to "pending"
+            self.assertEqual(self.payment_transaction.state, "pending")
 
             # Assert that the transaction was updated with the boleto info
             self.assertEqual(self.payment_transaction.our_number, "123456789")
