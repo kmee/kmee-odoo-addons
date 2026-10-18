@@ -1,1 +1,0 @@
-After checking the "Website display description", the job description will be inserted just below the job location
