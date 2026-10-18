@@ -33,7 +33,6 @@ exclude: |
   ^project_tech_lead/|
   ^sac/|
   ^sale_blanket_order_isolated_quotation/|
-  ^sale_partial_lock/|
   ^sale_report_merge_pdf/|
   ^sale_timesheet_invoice_from_project/|
   ^stock_intercompany_bidirectional_pull/|
