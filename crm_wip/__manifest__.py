@@ -1,7 +1,7 @@
 {
     "name": "CRM WIP",
     "summary": "Add WIP tracking to CRM Leads/Opportunities",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "CRM",
     "author": "KMEE, Odoo Community Association (OCA)",
     "license": "AGPL-3",
