@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_attendance_overtime_payment_wizard_form_view">
         <field name="model">hr_attendance.overtime.payment.wizard</field>
         <field name="arch" type="xml">
@@ -37,7 +36,7 @@
         <field name="target">new</field>
     </record>
 
- <record
+    <record
         id="act_action_hr_employee_overtime_payment_wizard"
         model="ir.actions.act_window"
     >
@@ -53,7 +52,6 @@
         />
         <field name="target">new</field>
     </record>
-
 
     <record model="ir.ui.menu" id="hr_attendance_overtime_payment_wizard_menu">
         <field name="name">Pagamento de Horas Extras</field>

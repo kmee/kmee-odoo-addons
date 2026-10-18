@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_overtime_multiplier_range_search_view">
         <field name="model">hr.overtime.multiplier.range</field>
         <field name="arch" type="xml">
@@ -50,5 +49,4 @@
         action="hr_overtime_multiplier_range_act_window"
         sequence="17"
     />
-
 </odoo>

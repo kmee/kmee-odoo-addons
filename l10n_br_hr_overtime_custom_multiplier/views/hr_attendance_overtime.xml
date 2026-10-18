@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_attendance_overtime_form_view">
         <field name="model">hr.attendance.overtime</field>
         <field name="arch" type="xml">
@@ -26,7 +25,6 @@
             </form>
         </field>
     </record>
-
 
     <record model="ir.ui.view" id="hr_attendance_overtime_tree_view">
         <field name="model">hr.attendance.overtime</field>
@@ -93,5 +91,4 @@
         parent="hr_attendance_menu_config"
         sequence="9999"
     />
-
 </odoo>

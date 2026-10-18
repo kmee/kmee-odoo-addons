@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_attendance_exception_form_view">
         <field name="model">hr.attendance.exception</field>
         <field name="arch" type="xml">
@@ -48,7 +47,6 @@
         <field name="context">{}</field>
     </record>
 
-
     <menuitem
         id="hr_attendance_exception_menu"
         name="Attendance Exception"
@@ -56,5 +54,4 @@
         action="hr_attendance_exception_act_window"
         sequence="16"
     />
-
 </odoo>
