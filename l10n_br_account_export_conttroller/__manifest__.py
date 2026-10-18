@@ -4,7 +4,7 @@
 {
     "name": "Exportacao Contabil - Conttroller",
     "summary": "Exporta lancamentos contabeis no layout do Conttroller",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
