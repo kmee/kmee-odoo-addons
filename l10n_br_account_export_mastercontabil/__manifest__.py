@@ -4,7 +4,7 @@
 {
     "name": "Exportacao Contabil - Master Contabil",
     "summary": "Exporta lancamentos contabeis no layout do Master Contabil",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
