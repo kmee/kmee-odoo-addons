@@ -5,7 +5,7 @@
     "name": "Planos de Contas de Destino",
     "summary": "Mapeia as contas do Odoo para planos de contas externos: o "
     "plano do escritorio de contabilidade e o plano referencial da RFB",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",

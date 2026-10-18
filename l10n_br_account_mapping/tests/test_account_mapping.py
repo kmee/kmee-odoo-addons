@@ -142,7 +142,7 @@ class TestAccountMapping(TransactionCase):
                 "login": "usuario_empresa_a@example.com",
                 "company_id": self.env.company.id,
                 "company_ids": [(6, 0, [self.env.company.id])],
-                "groups_id": [
+                "group_ids": [
                     (6, 0, [self.env.ref("account.group_account_manager").id])
                 ],
             }
