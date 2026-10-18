@@ -1,0 +1,1 @@
+Contains the stock picking report in py3o format.
