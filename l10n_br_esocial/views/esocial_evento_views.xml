@@ -41,13 +41,13 @@
                         type="object"
                         string="Validar"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_reset_draft"
                         type="object"
                         string="Voltar a Rascunho"
-                        attrs="{'invisible': [('state', 'not in', ('validated', 'error'))]}"
+                        invisible="state not in ('validated', 'error')"
                     />
                     <field
                         name="state"
@@ -62,7 +62,7 @@
                         </h1>
                     </div>
                     <group>
-                        <group string="Identificação">
+                        <group string="Identifica&#231;&#227;o">
                             <field name="tipo" />
                             <field name="operacao" />
                             <field name="id_evento" />
@@ -70,7 +70,7 @@
                             <field name="ind_retif" />
                             <field name="nr_recibo" />
                         </group>
-                        <group string="Vínculo">
+                        <group string="V&#237;nculo">
                             <field name="lote_id" />
                             <field
                                 name="company_id"
@@ -95,7 +95,7 @@
                                 options="{'mode': 'xml'}"
                             />
                         </page>
-                        <page string="Ocorrências" name="ocorrencias">
+                        <page string="Ocorr&#234;ncias" name="ocorrencias">
                             <field name="ocorrencia_ids">
                                 <tree>
                                     <field name="tipo" />
@@ -159,7 +159,7 @@
                     />
                     <filter
                         name="group_per_apur"
-                        string="Período"
+                        string="Per&#237;odo"
                         context="{'group_by': 'per_apur'}"
                     />
                 </group>

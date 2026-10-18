@@ -38,27 +38,27 @@
                         type="object"
                         string="Adicionar Eventos Validados"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_transmitir"
                         type="object"
                         string="Transmitir"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
                         confirm="Deseja transmitir este lote ao eSocial?"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_consultar"
                         type="object"
                         string="Consultar Resultado"
-                        attrs="{'invisible': [('state', 'not in', ('sent', 'processing'))]}"
+                        invisible="state not in ('sent', 'processing')"
                     />
                     <button
                         name="action_reset_draft"
                         type="object"
                         string="Voltar a Rascunho"
-                        attrs="{'invisible': [('state', 'not in', ('sent', 'error'))]}"
+                        invisible="state not in ('sent', 'error')"
                     />
                     <field
                         name="state"
@@ -103,7 +103,7 @@
     </record>
 
     <record id="action_esocial_lote" model="ir.actions.act_window">
-        <field name="name">Lotes de Transmissão</field>
+        <field name="name">Lotes de Transmiss&#227;o</field>
         <field name="res_model">l10n_br.esocial.lote</field>
         <field name="view_mode">tree,form</field>
     </record>

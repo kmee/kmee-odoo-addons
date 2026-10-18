@@ -5,6 +5,7 @@ import logging
 
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 _logger = logging.getLogger(__name__)
 
@@ -23,6 +24,14 @@ class TestS1200XML(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Sem os XSDs oficiais na esociallib o gerador loga ERROR/WARNING por
+        # desenho; isso e esperado nestes testes.
+        mute = mute_logger(
+            "odoo.addons.l10n_br_esocial.models.intermediarios.base_intermediario",
+            "odoo.addons.l10n_br_esocial.models.esocial_lote",
+        )
+        mute.__enter__()
+        cls.addClassCleanup(mute.__exit__, None, None, None)
         cls.company = cls.env.company
         partner = cls.company.partner_id
         if not partner.cnpj_cpf:
