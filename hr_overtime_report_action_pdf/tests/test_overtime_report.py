@@ -20,9 +20,7 @@ class TestOvertimeReport(TransactionCase):
         cls.report = cls.env.ref("hr_overtime_report_action_pdf.action_report_overtime")
 
     def test_action_print_pdf_returns_report_action(self):
-        action = self.overtime.with_context(
-            discard_logo_check=True
-        ).action_print_pdf()
+        action = self.overtime.with_context(discard_logo_check=True).action_print_pdf()
         self.assertEqual(action["type"], "ir.actions.report")
         self.assertEqual(action["report_name"], self.report.report_name)
         self.assertEqual(action["context"]["active_ids"], self.overtime.ids)
