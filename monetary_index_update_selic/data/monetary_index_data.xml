@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="monetary_index_selic" model="monetary.index">
+        <field name="name">SELIC</field>
+        <field name="code">SELIC</field>
+        <field name="authority">BCB</field>
+        <field name="country_id" ref="base.br" />
+        <field name="description">Taxa SELIC acumulada - Banco Central do Brasil</field>
+    </record>
+</odoo>
