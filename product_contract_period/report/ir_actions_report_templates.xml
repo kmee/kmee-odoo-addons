@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_saleorder_document"
+        inherit_id="sale.report_saleorder_document"
+    >
+        <xpath
+            expr="//table[contains(@class, 'o_main_table') and .//th[@name='th_description' and text()='Description']]"
+            position="before"
+        >
+            <t
+                t-set="period_qty"
+                t-value="any(l.period_qty for l in lines_to_report)"
+            />
+            <t
+                t-set="period_count"
+                t-value="any(l.period_count for l in lines_to_report)"
+            />
+            <t
+                t-set="date_start"
+                t-value="any(l.date_start for l in lines_to_report)"
+            />
+            <t t-set="date_end" t-value="any(l.date_end for l in lines_to_report)" />
+        </xpath>
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th name="th_date_start" t-if="date_start" class="text-end">Date Start</th>
+            <th name="th_date_end" t-if="date_end" class="text-end">Date End</th>
+            <th name="th_period_qty" t-if="period_qty" class="text-end">Qtd/Per.</th>
+            <th name="th_period_count" t-if="period_count" class="text-end">N° Per.</th>
+        </xpath>
+        <xpath expr="//td[@name='td_name']" position="after">
+            <td name="td_date_start" t-if="date_start" class="text-end">
+                <span t-field="line.date_start" />
+            </td>
+            <td name="td_date_end" t-if="date_end" class="text-end">
+                <span t-field="line.date_end" />
+            </td>
+            <td name="td_period_qty" t-if="period_qty" class="text-end">
+                <span t-field="line.period_qty" />
+            </td>
+            <td name="td_period_count" t-if="period_count" class="text-end">
+                <span t-field="line.period_count" />
+            </td>
+        </xpath>
+    </template>
+</odoo>
