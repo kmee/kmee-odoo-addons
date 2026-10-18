@@ -99,8 +99,8 @@ class HelpdeskTicketStageDurationReport(models.Model):
 
     def init(self):
         """Initialize the report view"""
-        tools.drop_view_if_exists(self._cr, "helpdesk_ticket_stage_duration_report")
-        self._cr.execute(
+        tools.drop_view_if_exists(self.env.cr, "helpdesk_ticket_stage_duration_report")
+        self.env.cr.execute(
             """
             CREATE OR REPLACE VIEW helpdesk_ticket_stage_duration_report AS (
                 WITH stage_stats AS (
