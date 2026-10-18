@@ -23,7 +23,6 @@ exclude: |
   ^l10n_br_payment_boleto_pinbank/|
   ^l10n_br_website_hr_recruitment_form/|
   ^mail_no_reply/|
-  ^mail_role_filter/|
   ^partner_customer_rating/|
   ^partner_linkedin/|
   ^partner_tier/|
