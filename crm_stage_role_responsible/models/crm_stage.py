@@ -6,8 +6,7 @@ class CrmStage(models.Model):
 
     role_responsible = fields.Selection(
         [
-            ("bdr", "BDR"),
-            ("sdr", "SDR"),
+            ("sdr_bdr", "SDR/BDR"),
             ("hunter", "Hunter"),
             ("closer", "Closer"),
             ("farmer", "Farmer"),
@@ -15,4 +14,11 @@ class CrmStage(models.Model):
         ],
         string="Stage Responsible",
         default="default",
+        ondelete={
+            "sdr_bdr": "set default",
+            "hunter": "set default",
+            "closer": "set default",
+            "farmer": "set default",
+            "default": "cascade",
+        },
     )

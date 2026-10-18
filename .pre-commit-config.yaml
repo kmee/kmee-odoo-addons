@@ -2,7 +2,6 @@ exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
   ^crm_linkedin/|
-  ^crm_stage_role_responsible/|
   ^crm_wip/|
   ^helpdesk_mgmt_ticket_life_cycle/|
   ^hr_holidays_allocation_plan/|
