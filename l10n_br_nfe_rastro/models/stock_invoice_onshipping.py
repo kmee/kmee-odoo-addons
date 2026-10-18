@@ -11,7 +11,7 @@ class StockInvoiceOnshipping(models.TransientModel):
             return False
         vals = {
             "nfe40_nLote": lot.name,
-            "nfe40_qLote": move_line.qty_done,
+            "nfe40_qLote": move_line.quantity,
         }
         if hasattr(lot, "production_date") and lot.production_date:
             vals["nfe40_dFab"] = lot.production_date
