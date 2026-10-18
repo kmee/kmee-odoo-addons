@@ -9,5 +9,7 @@ class TestSalePartialLock(TransactionCase):
         arch = self.env["sale.order"].get_view(
             self.env.ref("sale.view_order_form").id, "form"
         )["arch"]
+        if isinstance(arch, bytes):
+            arch = arch.decode()
         self.assertIn("state != 'done'", arch)
         self.assertIn("invoice_status != 'to invoice' and state != 'done'", arch)
