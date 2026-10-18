@@ -48,7 +48,7 @@ repos:
       - id: oca-gen-addon-readme
         args:
           - --addons-dir=.
-          - --branch=19.0
+          - --branch=20.0
           - --org-name=KMEE
           - --repo-name=kmee-odoo-addons
           - --if-source-changed
