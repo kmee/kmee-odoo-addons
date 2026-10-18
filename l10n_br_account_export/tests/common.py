@@ -7,12 +7,14 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 class AccountExportCommon(AccountTestInvoicingCommon):
     """Base compartilhada: empresa com CNPJ, contas com de-para e lancamentos."""
 
+    chart_template = "generic_coa"
+
     @classmethod
-    def setUpClass(cls, chart_template_ref="generic_coa"):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         cls.company = cls.company_data["company"]
         cls.company.write(
-            {"cnpj_cpf": "12.345.678/0001-95", "legal_name": "Empresa Demo LTDA"}
+            {"vat": "12.345.678/0001-95", "legal_name": "Empresa Demo LTDA"}
         )
         cls.journal = cls.company_data["default_journal_misc"]
 
@@ -26,7 +28,7 @@ class AccountExportCommon(AccountTestInvoicingCommon):
                 "name": "Conta sem de-para",
                 "code": cls._free_account_code(),
                 "account_type": "asset_current",
-                "company_id": cls.company.id,
+                "company_ids": [(6, 0, cls.company.ids)],
             }
         )
         cls.move = cls._create_move("2026-08-05", 1500.0)
@@ -36,7 +38,7 @@ class AccountExportCommon(AccountTestInvoicingCommon):
         """Codigo livre: o plano generico ja ocupa varios codigos altos."""
         codigo = 990000
         while cls.env["account.account"].search_count(
-            [("code", "=", str(codigo)), ("company_id", "=", cls.company.id)]
+            [("code", "=", str(codigo)), ("company_ids", "in", cls.company.ids)]
         ):
             codigo += 1
         return str(codigo)

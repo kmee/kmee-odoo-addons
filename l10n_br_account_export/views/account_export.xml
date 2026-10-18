@@ -62,20 +62,20 @@
                     <notebook>
                         <page string="Arquivos" name="files">
                             <field name="attachment_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="file_size" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Lancamentos" name="moves">
                             <field name="move_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="date" />
                                     <field name="journal_id" />
                                     <field name="ref" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Diarios" name="journals">
@@ -87,33 +87,30 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
 
     <record id="account_export_tree" model="ir.ui.view">
-        <field name="name">l10n_br.account.export.tree</field>
+        <field name="name">l10n_br.account.export.list</field>
         <field name="model">l10n_br.account.export</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="layout" />
                 <field name="date_start" readonly="state != 'draft'" />
                 <field name="date_end" readonly="state != 'draft'" />
                 <field name="move_count" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="account_export_action" model="ir.actions.act_window">
         <field name="name">Exportacao Contabil</field>
         <field name="res_model">l10n_br.account.export</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>

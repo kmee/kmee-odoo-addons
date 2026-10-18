@@ -19,8 +19,8 @@ class TestExportMapping(AccountExportCommon):
     """
 
     @classmethod
-    def setUpClass(cls, chart_template_ref="generic_coa"):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         layouts = dict(
             cls.env["l10n_br.account.export.config"]._fields["layout"].selection
         )
