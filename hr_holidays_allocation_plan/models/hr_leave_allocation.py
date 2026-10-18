@@ -3,7 +3,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class HrLeaveAllocation(models.Model):
@@ -94,7 +94,6 @@ class HrLeaveAllocationPlan(models.Model):
         index=True,
         copy=False,
         default=fields.Date.context_today,
-        states={"draft": [("readonly", False)], "check": [("readonly", False)]},
         tracking=True,
         required=True,
     )
@@ -108,17 +107,9 @@ class HrLeaveAllocationPlan(models.Model):
         string="Time Off Type",
         required=True,
         readonly=False,
-        states={
-            "cancel": [("readonly", True)],
-            "refuse": [("readonly", True)],
-            "running1": [("readonly", True)],
-            "running": [("readonly", True)],
-        },
     )
     notes = fields.Text(
         "Reasons",
-        readonly=True,
-        states={"draft": [("readonly", False)], "check": [("readonly", False)]},
     )
 
     approver_id = fields.Many2one(
@@ -140,10 +131,8 @@ class HrLeaveAllocationPlan(models.Model):
             ("category_or", "By any of Employee Tags (OR)"),
         ],
         string="Allocation Mode",
-        readonly=True,
         required=True,
         default="company",
-        states={"draft": [("readonly", False)], "check": [("readonly", False)]},
         help="Allow to create requests in batchs:\n- By Employee: for a specific employee"
         "\n- By Company: all employees of the specified company"
         "\n- By Department: all employees of the specified department"
@@ -158,8 +147,6 @@ class HrLeaveAllocationPlan(models.Model):
         ],
         required=True,
         default="accrual",
-        readonly=True,
-        states={"draft": [("readonly", False)], "check": [("readonly", False)]},
     )
 
     mode_company_id = fields.Many2one(
@@ -168,18 +155,13 @@ class HrLeaveAllocationPlan(models.Model):
         store=True,
         string="Company Mode",
         readonly=False,
-        states={
-            "cancel": [("readonly", True)],
-            "refuse": [("readonly", True)],
-            "running": [("readonly", True)],
-        },
     )
     department_id = fields.Many2one(
         "hr.department",
         compute="_compute_department_id",
         store=True,
         string="Department",
-        states={"draft": [("readonly", False)], "check": [("readonly", False)]},
+        readonly=False,
     )
     category_id = fields.Many2one(
         "hr.employee.category",
@@ -187,22 +169,12 @@ class HrLeaveAllocationPlan(models.Model):
         store=True,
         string="Employee Tag",
         readonly=False,
-        states={
-            "cancel": [("readonly", True)],
-            "refuse": [("readonly", True)],
-            "running": [("readonly", True)],
-        },
     )
 
     category_ids = fields.Many2many(
         "hr.employee.category",
         string="Employee Tags",
         readonly=False,
-        states={
-            "cancel": [("readonly", True)],
-            "refuse": [("readonly", True)],
-            "validate": [("readonly", True)],
-        },
     )
 
     accrual_plan_id = fields.Many2one(
@@ -248,6 +220,31 @@ class HrLeaveAllocationPlan(models.Model):
         default=1,
         help="Defines how long the allocated leave is valid from the allocation date.",
     )
+
+    @api.depends("holiday_type")
+    def _compute_from_holiday_type(self):
+        for plan in self:
+            if plan.holiday_type == "company":
+                plan.mode_company_id = plan.mode_company_id or self.env.company
+                plan.category_id = False
+            elif plan.holiday_type == "category":
+                plan.mode_company_id = False
+            else:
+                plan.mode_company_id = False
+                plan.category_id = False
+
+    @api.depends("holiday_type")
+    def _compute_department_id(self):
+        for plan in self:
+            if plan.holiday_type != "department":
+                plan.department_id = False
+
+    @api.depends("holiday_status_id")
+    def _compute_from_holiday_status_id(self):
+        for plan in self:
+            accrual_type = plan.accrual_plan_id.time_off_type_id
+            if accrual_type and accrual_type != plan.holiday_status_id:
+                plan.accrual_plan_id = False
 
     def action_recompute_plan(self):
         for record in self:
@@ -434,8 +431,12 @@ class HrLeaveAllocationPlan(models.Model):
             record.allocation_ids.action_refuse()
 
     def action_allocation_draft(self):
+        """In 17.0 allocations have no draft state, so refused ones go back to
+        the first state (to approve)."""
         for record in self:
-            record.allocation_ids.action_draft()
+            record.allocation_ids.filtered(lambda a: a.state == "refuse").write(
+                {"state": "confirm"}
+            )
 
     def action_allocation_unlink(self):
         for record in self:
@@ -443,4 +444,6 @@ class HrLeaveAllocationPlan(models.Model):
 
     def action_allocation_confirm(self):
         for record in self:
-            record.allocation_ids.action_confirm()
+            record.allocation_ids.filtered(lambda a: a.state == "refuse").write(
+                {"state": "confirm"}
+            )

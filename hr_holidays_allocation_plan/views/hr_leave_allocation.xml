@@ -40,8 +40,8 @@
                                 name="name"
                                 class="w-100"
                                 placeholder="e.g. Time Off type (From validity start to validity end / no limit)"
-                                attrs="{'invisible': [('state', 'not in', ('draft', 'confirm'))]}"
                                 required="1"
+                                invisible="state not in ('draft', 'confirm')"
                             />
                         </h2>
                     </div>
@@ -50,17 +50,24 @@
                             <field
                                 name="holiday_status_id"
                                 options="{'always_reload': True}"
+                                readonly="state in ('cancel', 'running')"
                             />
                             <field
                                 name="allocation_type"
                                 options="{'always_reload': True}"
                                 widget="radio"
+                                readonly="state not in ('draft', 'check')"
                             />
                             <div class="o_td_label" name="validity_label">
                                 <label for="date_from" string="Start Date" />
                             </div>
                             <div class="o_row" name="validity">
-                                <field name="date_from" widget="date" nolabel="1" />
+                                <field
+                                    name="date_from"
+                                    widget="date"
+                                    nolabel="1"
+                                    readonly="state not in ('draft', 'check')"
+                                />
                                 <i
                                     class="fa fa-long-arrow-right mx-2"
                                     aria-label="Arrow icon"
@@ -81,47 +88,64 @@
                         </group>
                         <group name="alloc_right_col">
                             <field name="auto_run" widget="boolean_toggle" />
-                            <field name="holiday_type" widget="radio" />
+                            <field
+                                name="holiday_type"
+                                widget="radio"
+                                readonly="state not in ('draft', 'check')"
+                            />
                             <field
                                 name="mode_company_id"
-                                attrs="{'required': [('holiday_type', '=', 'company')], 'invisible': [('holiday_type', '!=', 'company')]}"
+                                required="holiday_type == 'company'"
+                                readonly="state in ('cancel', 'running')"
+                                invisible="holiday_type != 'company'"
                             />
                             <field
                                 name="category_id"
-                                attrs="{'required': [('holiday_type', '=', 'category')], 'invisible': [('holiday_type', '!=', 'category')]}"
+                                required="holiday_type == 'category'"
+                                readonly="state in ('cancel', 'running')"
+                                invisible="holiday_type != 'category'"
                             />
                             <field
                                 name="category_ids"
-                                attrs="{'required': [('holiday_type', 'in', ('category_and', 'category_or'))], 'invisible': [('holiday_type', 'not in', ('category_and', 'category_or'))]}"
+                                required="holiday_type in ('category_and', 'category_or')"
+                                readonly="state in ('cancel', 'running')"
+                                invisible="holiday_type not in ('category_and', 'category_or')"
                             />
                             <field
                                 name="department_id"
-                                attrs="{'required': [('holiday_type', '=', 'department')], 'invisible': [('holiday_type', '!=', 'department')]}"
+                                required="holiday_type == 'department'"
+                                readonly="state not in ('draft', 'check')"
+                                invisible="holiday_type != 'department'"
                             />
                         </group>
                     </group>
-                    <field name="notes" nolabel="1" placeholder="Add a reason..." />
+                    <field
+                        name="notes"
+                        nolabel="1"
+                        placeholder="Add a reason..."
+                        readonly="state not in ('draft', 'check')"
+                    />
                     <notebook>
                         <page name="allocation" string="Allocation Type">
                             <group>
                                 <group
                                     name="accrual"
                                     string="Accrual"
-                                    attrs="{'invisible': [('allocation_type', '!=', 'accrual')]}"
+                                    invisible="allocation_type != 'accrual'"
                                 >
                                     <field name="accrual_plan_id" />
                                 </group>
                                 <group
                                     name="regular"
                                     string="Regular"
-                                    attrs="{'invisible': [('allocation_type', '!=', 'regular')]}"
+                                    invisible="allocation_type != 'regular'"
                                 >
                                     <field name="number_of_days" />
                                 </group>
                                 <group
                                     name="recurrent"
                                     string="Recurrent"
-                                    attrs="{'invisible': [('allocation_type', '!=', 'recurrent')]}"
+                                    invisible="allocation_type != 'recurrent'"
                                 >
                                     <field name="recurring_renewal_frequency" />
                                     <field name="number_of_days" />
