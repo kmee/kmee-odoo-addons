@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <!-- Plano sem empresa vale para todas; plano com empresa so aparece
          para quem esta nela. Sem esta regra o usuario da empresa A resolvia
          contas pelo plano da empresa B e exportava com o codigo errado. -->
@@ -23,5 +22,4 @@
             name="domain_force"
         >['|', ('plan_id.company_id', '=', False), ('plan_id.company_id', 'in', company_ids)]</field>
     </record>
-
 </odoo>

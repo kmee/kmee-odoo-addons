@@ -126,7 +126,7 @@ class AccountMappingAccount(models.Model):
     )
 
     _code_plan_uniq = models.Constraint(
-        'unique (plan_id, code)',
+        "unique (plan_id, code)",
         "Ja existe uma conta com este codigo neste plano de destino.",
     )
 
