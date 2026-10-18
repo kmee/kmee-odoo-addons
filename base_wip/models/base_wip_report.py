@@ -135,8 +135,8 @@ class BaseWipReport(models.Model):
         CRM Lead Report
         @param cr: the current row, from the database cursor
         """
-        tools.drop_view_if_exists(self._cr, "base_wip_report")
-        self._cr.execute(
+        tools.drop_view_if_exists(self.env.cr, "base_wip_report")
+        self.env.cr.execute(
             """
                 CREATE OR REPLACE VIEW base_wip_report AS (
                 with initial as (select
