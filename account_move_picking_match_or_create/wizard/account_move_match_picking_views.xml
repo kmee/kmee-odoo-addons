@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_account_move_match_picking" model="ir.ui.view">
+        <field name="name">Match Pickings from Invoice</field>
+        <field name="model">account.move.match.picking</field>
+        <field name="arch" type="xml">
+            <form string="Match Pickings">
+                <field name="state" invisible="1" />
+                <field name="can_action_exact_match" invisible="1" />
+                <field name="can_action_create_all" invisible="1" />
+                <field name="can_action_match_create" invisible="1" />
+                <field name="count_lines_matching" invisible="1" />
+                <field name="stock_picking_ids" invisible="1" />
+                <field name="candidate_stock_picking_ids" invisible="1" />
+                <h1>
+                    <span>Match or Create Stock Pickings</span>
+                </h1>
+                <div class="oe_inline">
+                    <strong>
+                        <span>Account Move Lines matched: </span>
+                        <field name="count_lines_matched" class="oe_inline" />
+                        <span>/</span>
+                        <field name="count_lines" class="oe_inline" />
+                    </strong>
+                    <field name="matching_progress" widget="progressbar" />
+                </div>
+                <group>
+                    <group string="Candidate Pickings">
+                        <field name="candidate_match_line_ids" nolabel="1">
+                            <tree>
+                                <field name="picking_id" />
+                                <field name="partner_id" />
+                                <field name="origin" />
+                                <field name="state" />
+                                <field name="scheduled_date" />
+                                <field name="p_line_match" />
+                                <field name="p_qty_match" />
+                            </tree>
+                        </field>
+                    </group>
+                </group>
+                <group>
+                    <group string="Unmatched Invoice Lines">
+                        <field name="unmatched_invoice_line_ids" nolabel="1">
+                            <tree>
+                                <field name="product_id" />
+                                <field name="quantity" />
+                                <field name="price_unit" />
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Matched Invoice Lines">
+                        <field name="full_match_invoice_line_ids" nolabel="1">
+                            <tree>
+                                <field name="product_id" />
+                                <field name="quantity" />
+                                <field name="price_unit" />
+                            </tree>
+                        </field>
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_exact_match"
+                        string="Exact Match"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not can_action_exact_match"
+                    />
+                    <button
+                        name="action_create_all"
+                        string="Create Pickings"
+                        type="object"
+                        class="btn-primary"
+                        invisible="not can_action_create_all"
+                    />
+                    <button string="Close" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

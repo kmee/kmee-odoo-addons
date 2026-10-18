@@ -1,0 +1,316 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_picking_match_or_create
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,help:account_move_picking_match_or_create.field_account_move_match_picking_line__state
+msgid ""
+" * Draft: The transfer is not confirmed yet. Reservation doesn't apply.\n"
+" * Waiting another operation: This transfer is waiting for another operation before being ready.\n"
+" * Waiting: The transfer is waiting for the availability of some products.\n"
+"(a) The shipping policy is \"As soon as possible\": no product could be reserved.\n"
+"(b) The shipping policy is \"When all products are ready\": not all the products could be reserved.\n"
+" * Ready: The transfer is ready to be processed.\n"
+"(a) The shipping policy is \"As soon as possible\": at least one product has been reserved.\n"
+"(b) The shipping policy is \"When all products are ready\": all product have been reserved.\n"
+" * Done: The transfer has been processed.\n"
+" * Cancelled: The transfer has been cancelled."
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "<span>/</span>"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "<span>Account Move Lines matched: </span>"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "<span>Match or Create Stock Pickings</span>"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__account_move_id
+msgid "Account Move"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__p_qty_match
+msgid "Approx. Qty. Match"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__can_action_create_all
+msgid "Can Create All"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__can_action_exact_match
+msgid "Can Exact Match"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__can_action_match_create
+msgid "Can Match and Create"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__candidate_match_line_ids
+msgid "Candidate Match Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__candidate_match_wizard_id
+msgid "Candidate Match Wizard"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Candidate Pickings"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__candidate_stock_picking_count
+msgid "Candidate Pickings Count"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__candidate_stock_picking_ids
+msgid "Candidate Stock Pickings"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Close"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Create Pickings"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__create_uid
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__create_date
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__display_name
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Exact Match"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__full_match_invoice_line_ids
+msgid "Full Match Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__has_unreserved
+msgid "Has Unreserved"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__id
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__id
+msgid "ID"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model,name:account_move_picking_match_or_create.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking____last_update
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__write_uid
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__write_date
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields.selection,name:account_move_picking_match_or_create.selection__account_move_match_picking__state__main
+msgid "Main"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model,name:account_move_picking_match_or_create.model_account_move_match_picking_line
+msgid "Match Picking Line"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Match Pickings"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model,name:account_move_picking_match_or_create.model_account_move_match_picking
+msgid "Match Pickings from Invoice"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_move_form_match_picking
+msgid "Match/Create Picking"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Matched Invoice Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__count_lines_matched
+msgid "Matched Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__matching_invoice_line_ids
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__p_line_match
+msgid "Matching Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__count_lines_matching
+msgid "Matching Lines Count"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__new_match_line_ids
+msgid "New Match Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__new_match_wizard_id
+msgid "New Match Wizard"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__new_stock_picking_ids
+msgid "New Stock Pickings"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__partial_match_invoice_line_ids
+msgid "Partial Match Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__priority
+msgid "Priority"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,help:account_move_picking_match_or_create.field_account_move_match_picking_line__priority
+msgid ""
+"Products will be reserved first for the transfers with the highest "
+"priorities."
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__matching_progress
+msgid "Progress"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,help:account_move_picking_match_or_create.field_account_move_match_picking_line__origin
+msgid "Reference of the document"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__scheduled_date
+msgid "Scheduled Date"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,help:account_move_picking_match_or_create.field_account_move_match_picking_line__scheduled_date
+msgid ""
+"Scheduled time for the first part of the shipment to be processed. Setting "
+"manually a value here would set it as expected date for all the stock moves."
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields.selection,name:account_move_picking_match_or_create.selection__account_move_match_picking__state__select
+msgid "Select"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__origin
+msgid "Source Document"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__state
+msgid "State"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__state
+msgid "Status"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__stock_picking_ids
+msgid "Stock Pickings"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__count_lines
+msgid "Total Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking_line__picking_id
+msgid "Transfer"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model_terms:ir.ui.view,arch_db:account_move_picking_match_or_create.view_account_move_match_picking
+msgid "Unmatched Invoice Lines"
+msgstr ""
+
+#. module: account_move_picking_match_or_create
+#: model:ir.model.fields,field_description:account_move_picking_match_or_create.field_account_move_match_picking__unmatched_invoice_line_ids
+msgid "Unmatched Lines"
+msgstr ""
