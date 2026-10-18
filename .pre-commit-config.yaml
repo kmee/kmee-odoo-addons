@@ -12,7 +12,6 @@ exclude: |
   ^hr_holidays_allocation_plan/|
   ^hr_holidays_sale_of_days_off/|
   ^hr_leave_allocation_multiple_tags/|
-  ^hr_leave_custom_hour_interval_5_min/|
   ^hr_overtime_report_action_pdf/|
   ^hr_recruitment_job_share/|
   ^hr_recruitment_reject_mail_editable/|
