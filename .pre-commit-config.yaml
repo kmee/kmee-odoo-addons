@@ -5,7 +5,6 @@ exclude: |
   ^account_statement_import_ofx_invert_type/|
   ^base_wip/|
   ^crm_linkedin/|
-  ^crm_lost_reason_transition/|
   ^crm_predict_revenue/|
   ^crm_stage_role_responsible/|
   ^crm_wip/|
