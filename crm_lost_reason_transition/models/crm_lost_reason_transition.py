@@ -6,7 +6,7 @@ class CrmLostReasonTransition(models.Model):
     _description = "Transitioning Lost Leads by Reason and Stage"
 
     _unique_reason_stage = models.Constraint(
-        'unique(lost_reason_id, target_stage_id)',
+        "unique(lost_reason_id, target_stage_id)",
         "There is already a transition configured for this loss reason and target stage.",
     )
 
