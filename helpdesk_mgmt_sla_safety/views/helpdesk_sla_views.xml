@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="helpdesk_mgmt_sla.helpdesk_ticket_sla_form" />
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/group/group[2]" position="inside">
-                    <label for="safety_days" string="Safety Margin" />
-                    <div class="o_row">
+                <label for="safety_days" string="Safety Margin" />
+                <div class="o_row">
                         <field name="safety_days" />
                         days
                         <br />
