@@ -34,9 +34,9 @@ class HrLeaveAllocationGenerateMultiWizard(models.TransientModel):
         )
         if self.allocation_mode == "category_and":
             for category in self.category_ids:
-                employees = employees.filtered(lambda e, c=category: c in e.category_ids)
+                employees = employees.filtered(
+                    lambda e, c=category: c in e.category_ids
+                )
         else:
-            employees = employees.filtered(
-                lambda e: e.category_ids & self.category_ids
-            )
+            employees = employees.filtered(lambda e: e.category_ids & self.category_ids)
         return employees

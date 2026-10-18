@@ -17,22 +17,16 @@ Hr Leave Allocation Multiple Tags
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/hr_leave_allocation_multiple_tags
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/20.0/hr_leave_allocation_multiple_tags
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
-This module extends Odoo's hr.leave.allocation model to add new vacation
-allocation functionality based on employee categories, allowing you to
-select employee tags with "AND" or "OR" logic (through the holiday_type
-fields with values ​​" category_and" or "category_or"). The category_ids
-field is introduced to allow the selection of employee tags, and the
-allocation calculation is adapted according to the type of category
-selected. Additionally, validations are added to ensure the correct
-fields are populated based on the chosen allocation type, such as
-employee, category, department, or company. The module also changes the
-user interface of the vacation allocation form to include and control
-the category_ids field depending on the allocation type selected.
+This module extends the multiple employees time off allocation wizard
+(hr.leave.allocation.generate.multi.wizard) with two new allocation
+modes based on employee tags: all of the selected tags (AND) or any of
+the selected tags (OR). The category_ids field is introduced to select
+the employee tags.
 
 **Table of contents**
 
@@ -45,7 +39,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20hr_leave_allocation_multiple_tags%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20hr_leave_allocation_multiple_tags%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -72,6 +66,6 @@ The development of this module has been financially supported by:
 Maintainers
 -----------
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/hr_leave_allocation_multiple_tags>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/20.0/hr_leave_allocation_multiple_tags>`_ project on GitHub.
 
 You are welcome to contribute.
