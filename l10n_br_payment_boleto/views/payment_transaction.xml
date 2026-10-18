@@ -9,10 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
                     <group string="Boleto" name="boleto">
-                    <group
-                        name="boleto_info"
-                        attrs="{'invisible': [('is_boleto_payment', '=', False)]}"
-                    >
+                    <group name="boleto_info" invisible="not is_boleto_payment">
                         <field name="is_boleto_payment" invisible="1" />
                         <field name="due_date" />
                         <field name="our_number" />

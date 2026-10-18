@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, tagged
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestL10nBrPaymentBoleto(TransactionCase):
     def setUp(self):
         super().setUp()
