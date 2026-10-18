@@ -4,18 +4,17 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="account_move_template_tree" model="ir.ui.view">
-        <field name="name">l10n_br.account.move.template.tree</field>
+        <field name="name">l10n_br.account.move.template.list</field>
         <field name="model">l10n_br.account.move.template</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="fiscal_operation_type" />
                 <field name="parent_id" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="active" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -49,32 +48,32 @@
                     <notebook>
                         <page string="Items" name="items">
                             <field name="item_ids">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="sequence" widget="handle" />
                                     <field name="fiscal_field" />
                                     <field name="tax_domain" />
                                     <field name="account_debit_id" />
                                     <field name="account_credit_id" />
                                     <field name="history_id" />
-                            <field name="require_tax_credit" />
-                                </tree>
+                                    <field name="require_tax_credit" />
+                                </list>
                             </field>
                         </page>
                         <page string="Fiscal Operations" name="operations">
                             <field name="fiscal_operation_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="fiscal_operation_type" />
                                     <field name="fiscal_type" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Child Templates" name="children">
                             <field name="child_ids">
-                                <tree>
+                                <list>
                                     <field name="name" />
                                     <field name="fiscal_operation_type" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -116,7 +115,7 @@
     <record id="account_move_template_action" model="ir.actions.act_window">
         <field name="name">Double Entry Templates</field>
         <field name="res_model">l10n_br.account.move.template</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first double-entry accounting template
@@ -135,5 +134,4 @@
         action="account_move_template_action"
         sequence="30"
     />
-
 </odoo>

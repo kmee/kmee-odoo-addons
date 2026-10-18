@@ -4,7 +4,6 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="view_move_form_double_entry" model="ir.ui.view">
         <field name="name">account.move.form.double.entry</field>
         <field name="model">account.move</field>
@@ -19,12 +18,12 @@
                 >
                     <field
                         name="line_ids"
-                        mode="tree"
+                        mode="list"
                         domain="[('is_double_entry_line', '=', True)]"
                         context="{'default_is_double_entry_line': True}"
                         readonly="state != 'draft'"
                     >
-                        <tree create="false" delete="false">
+                        <list create="false" delete="false">
                             <field name="is_double_entry_line" invisible="1" />
                             <field name="company_id" invisible="1" />
                             <field name="name" />
@@ -33,11 +32,10 @@
                             <field name="debit" sum="Total Debit" />
                             <field name="credit" sum="Total Credit" />
                             <field name="currency_id" invisible="1" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>
         </field>
     </record>
-
 </odoo>
