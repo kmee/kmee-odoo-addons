@@ -23,7 +23,7 @@ class StockPickingSummaryLine(models.TransientModel):
         string="Demand",
         digits="Product Unit of Measure",
     )
-    quantity_done = fields.Float(
+    quantity = fields.Float(
         string="Done",
         digits="Product Unit of Measure",
     )
