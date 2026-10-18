@@ -69,8 +69,8 @@ class CrmLeadStageDurationReport(models.Model):
             )
 
     def init(self):
-        tools.drop_view_if_exists(self._cr, "crm_lead_stage_duration_report")
-        self._cr.execute(
+        tools.drop_view_if_exists(self.env.cr, "crm_lead_stage_duration_report")
+        self.env.cr.execute(
             """
             CREATE OR REPLACE VIEW crm_lead_stage_duration_report AS (
                 WITH stage_stats AS (
