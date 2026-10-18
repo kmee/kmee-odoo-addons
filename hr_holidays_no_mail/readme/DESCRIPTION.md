@@ -1,0 +1,1 @@
+This module customizes the behavior of vacation allocation models and vacation records by disabling the automatic sending of email notifications when a new record is created or when an existing record is created or changed.
