@@ -2,7 +2,6 @@ exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
   ^account_payment_currency_rate/|
-  ^base_wip/|
   ^crm_linkedin/|
   ^crm_predict_revenue/|
   ^crm_stage_role_responsible/|
