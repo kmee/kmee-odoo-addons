@@ -65,9 +65,9 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://kmee.com.br/>``\ \_:
+- ``KMEE <https://kmee.com.br/>``\ \_:
 
-   -  Bruno Botti bruno.botti@kmee.com.br
+  - Bruno Botti bruno.botti@kmee.com.br
 
 Maintainers
 -----------
