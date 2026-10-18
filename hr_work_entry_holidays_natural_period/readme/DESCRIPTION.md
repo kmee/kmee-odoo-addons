@@ -1,1 +1,0 @@
-fix hr_holidays_natural_period when hr_work_entry_holidays is installed

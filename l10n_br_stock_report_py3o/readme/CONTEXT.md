@@ -1,1 +1,0 @@
-Some customers want to have a customized stock picking report, and the ability to edit the layout whenever they want.
