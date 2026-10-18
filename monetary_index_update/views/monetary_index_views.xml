@@ -96,7 +96,7 @@
                     domain="[('active', '=', False)]"
                 />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Country"
                         name="group_by_country"

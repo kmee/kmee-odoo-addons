@@ -3,7 +3,7 @@
     <!-- Add admin to manager groups by default -->
     <record id="base.user_admin" model="res.users">
         <field
-            name="groups_id"
+            name="group_ids"
             eval="[(4, ref('monetary_index_update.group_monetary_update_manager'))]"
         />
     </record>
