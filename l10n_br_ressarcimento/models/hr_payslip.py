@@ -33,7 +33,7 @@ class HrPayslip(models.Model):
             total = 0.0
             for sheet in rec.l10n_br_expense_sheet_ids:
                 for expense in sheet.expense_line_ids:
-                    total += expense.unit_amount * expense.quantity
+                    total += expense.total_amount
             rec.l10n_br_total_ressarcimento = total
 
     def action_link_pending_expenses(self):
