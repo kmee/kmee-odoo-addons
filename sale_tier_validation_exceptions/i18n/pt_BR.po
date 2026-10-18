@@ -10,15 +10,11 @@ msgstr ""
 "PO-Revision-Date: 2025-03-24 22:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: sale_tier_validation_exceptions
-#: model:ir.model,name:sale_tier_validation_exceptions.model_ir_actions_report
-msgid "Report Action"
-msgstr "Reportar Ação"
 
 #. module: sale_tier_validation_exceptions
 #: model:ir.model,name:sale_tier_validation_exceptions.model_sale_order
@@ -33,36 +29,29 @@ msgstr ""
 #. module: sale_tier_validation_exceptions
 #. odoo-python
 #: code:addons/sale_tier_validation_exceptions/controllers/main.py:0
-#: code:addons/sale_tier_validation_exceptions/reports/block_report_printing.py:0
 #, python-format
 msgid ""
-"The report cannot be generated because the quote has exceptions that need to"
-" be validated."
+"The report cannot be generated because the quote has exceptions that need to "
+"be validated."
 msgstr ""
 "O relatório não pode ser gerado, pois a cotação tem exceções que precisam "
 "ser validadas."
 
-#. module: base_tier_validation
-#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
-msgid "<i class=\"fa fa-thumbs-down\"/> Operation has been <b>rejected</b>."
-msgstr ""
-"<i class=\"fa fa-thumbs-down\"/> A operação foi <b>rejeitada</b>."
+#~ msgid "Report Action"
+#~ msgstr "Reportar Ação"
 
-#. module: base_tier_validation
-#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_label
-msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
-msgstr "<i class=\"fa fa-thumbs-up\"/> A operação foi <b>validada</b>!"
+#~ msgid "<i class=\"fa fa-thumbs-down\"/> Operation has been <b>rejected</b>."
+#~ msgstr "<i class=\"fa fa-thumbs-down\"/> A operação foi <b>rejeitada</b>."
 
-#. module: sale_exception
-#: model_terms:ir.ui.view,arch_db:sale_exception.view_order_form
-msgid ""
-"<strong>There are exceptions blocking the confirmation of this Sale Order:</"
-"strong>"
-msgstr ""
-"<strong>Existem exceções que bloqueiam a confirmação desta Cotação:</"
-"strong>"
+#~ msgid "<i class=\"fa fa-thumbs-up\"/> Operation has been <b>validated</b>!"
+#~ msgstr "<i class=\"fa fa-thumbs-up\"/> A operação foi <b>validada</b>!"
 
-#. module: base_tier_validation
-#: model_terms:ir.ui.view,arch_db:base_tier_validation.tier_validation_buttons
-msgid "Request Validation"
-msgstr "Requisitar Validação"
+#~ msgid ""
+#~ "<strong>There are exceptions blocking the confirmation of this Sale Order:"
+#~ "</strong>"
+#~ msgstr ""
+#~ "<strong>Existem exceções que bloqueiam a confirmação desta Cotação:</"
+#~ "strong>"
+
+#~ msgid "Request Validation"
+#~ msgstr "Requisitar Validação"
