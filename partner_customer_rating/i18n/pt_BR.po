@@ -72,7 +72,7 @@ msgstr "Classificação de satisfação do cliente"
 #. module: partner_customer_rating
 #: model:ir.model.fields,field_description:partner_customer_rating.field_customer_rating__display_name
 msgid "Display Name"
-msgstr "Nome de exibição
+msgstr "Nome de exibição"
 
 #. module: partner_customer_rating
 #: model:ir.model.fields,field_description:partner_customer_rating.field_customer_rating__id
