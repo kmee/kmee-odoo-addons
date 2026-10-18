@@ -27,7 +27,7 @@ class StockPicking(models.Model):
         "move_ids",
         "move_ids.product_id",
         "move_ids.product_uom_qty",
-        "move_ids.quantity_done",
+        "move_ids.quantity",
         "move_ids.location_id",
         "move_ids.location_dest_id",
     )
@@ -39,7 +39,7 @@ class StockPicking(models.Model):
                     "product_id": False,
                     "product_uom": False,
                     "product_uom_qty": 0.0,
-                    "quantity_done": 0.0,
+                    "quantity": 0.0,
                     "location_id": False,
                     "location_dest_id": False,
                 }
@@ -55,7 +55,7 @@ class StockPicking(models.Model):
                 g["product_id"] = move.product_id.id
                 g["product_uom"] = move.product_uom.id
                 g["product_uom_qty"] += move.product_uom_qty
-                g["quantity_done"] += move.quantity_done
+                g["quantity"] += move.quantity
                 g["location_id"] = move.location_id.id
                 g["location_dest_id"] = move.location_dest_id.id
             picking.summary_line_ids = (
@@ -65,7 +65,7 @@ class StockPicking(models.Model):
                             "product_id": g["product_id"],
                             "product_uom": g["product_uom"],
                             "product_uom_qty": g["product_uom_qty"],
-                            "quantity_done": g["quantity_done"],
+                            "quantity": g["quantity"],
                             "location_id": g["location_id"],
                             "location_dest_id": g["location_dest_id"],
                         }
