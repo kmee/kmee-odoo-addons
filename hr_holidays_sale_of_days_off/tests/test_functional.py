@@ -17,7 +17,7 @@ class TestSaleOfDaysOff(TransactionCase):
                 "name": "Vacation Abono",
                 "requires_allocation": "yes",
                 "employee_requests": "no",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
                 "hr_holidays_sale_of_days_off": True,
             }
         )
