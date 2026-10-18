@@ -1,1 +1,0 @@
-This module allows the validation of exceptions in a sale order. It uses the mechanisms of the sale_tier_validation module to request that reviewers ignore exceptions caught by the sale_exception module.
