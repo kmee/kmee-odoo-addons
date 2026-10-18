@@ -4,15 +4,15 @@
 {
     "name": "Sale Report Merge Pdf",
     "summary": """Merge pdf with sale base report""",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["sale_management"],
     "data": [
-        "security/ir.model.access.csv",
         "views/sale_pdf_cover.xml",
         "views/sale_order_form.xml",
+        "security/ir.access.csv",
     ],
     "external_dependencies": {
         "python": [
