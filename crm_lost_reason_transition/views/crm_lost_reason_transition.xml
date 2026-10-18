@@ -22,15 +22,15 @@
     </record>
 
     <record id="view_crm_lost_reason_transition_tree" model="ir.ui.view">
-        <field name="name">crm.lost.reason.transition.tree</field>
+        <field name="name">crm.lost.reason.transition.list</field>
         <field name="model">crm.lost.reason.transition</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" readonly="1" />
                 <field name="lost_reason_id" />
                 <field name="team_id" />
                 <field name="target_stage_id" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>
