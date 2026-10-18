@@ -16,12 +16,15 @@ class TestAccountExport(AccountExportCommon):
     """
 
     @classmethod
-    def setUpClass(cls, chart_template_ref="generic_coa"):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         # registra um layout minimo so para os testes do chassi
-        cls.env["l10n_br.account.export.config"]._fields["layout"].selection.append(
-            ("teste", "Layout de teste")
-        )
+        field = cls.env["l10n_br.account.export.config"]._fields["layout"]
+        field.selection.append(("teste", "Layout de teste"))
+        cls.addClassCleanup(field.selection.remove, ("teste", "Layout de teste"))
+        # since 18.0 the field validates against a cached dict of the options
+        cls.addClassCleanup(setattr, field, "_selection", field._selection)
+        field._selection = dict(field.selection)
 
     def _export_teste(self, moves=None, partial=False):
         export = self._create_export("teste", moves=moves, partial=partial)
