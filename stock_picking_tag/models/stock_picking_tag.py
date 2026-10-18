@@ -27,6 +27,8 @@ class StockPickingTag(models.Model):
         ("tag_name_uniq", "unique (name)", "Tag name already exists!"),
     ]
 
+    display_name = fields.Char(recursive=True)
+
     @api.depends("name", "parent_id.display_name")
     def _compute_display_name(self):
         for tag in self:
