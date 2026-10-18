@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- João — VT R$ 220, VR R$ 550 -->
+        <record id="demo_advantage_joao_vt" model="hr.contract.advantage">
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="advantage_template_id" ref="advantage_template_vt" />
+            <field name="amount">220.00</field>
+        </record>
+
+        <record id="demo_advantage_joao_vr" model="hr.contract.advantage">
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="advantage_template_id" ref="advantage_template_vr" />
+            <field name="amount">550.00</field>
+        </record>
+
+        <!-- Maria — VT R$ 180 -->
+        <record id="demo_advantage_maria_vt" model="hr.contract.advantage">
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_maria" />
+            <field name="advantage_template_id" ref="advantage_template_vt" />
+            <field name="amount">180.00</field>
+        </record>
+
+        <!-- Pedro — VT R$ 200, VA R$ 450 -->
+        <record id="demo_advantage_pedro_vt" model="hr.contract.advantage">
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_pedro" />
+            <field name="advantage_template_id" ref="advantage_template_vt" />
+            <field name="amount">200.00</field>
+        </record>
+
+        <record id="demo_advantage_pedro_va" model="hr.contract.advantage">
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_pedro" />
+            <field name="advantage_template_id" ref="advantage_template_va" />
+            <field name="amount">450.00</field>
+        </record>
+
+        <!-- Carla — Plano de Saúde R$ 350 -->
+        <record id="demo_advantage_carla_plano_saude" model="hr.contract.advantage">
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_carla" />
+            <field name="advantage_template_id" ref="advantage_template_plano_saude" />
+            <field name="amount">350.00</field>
+        </record>
+
+</odoo>
