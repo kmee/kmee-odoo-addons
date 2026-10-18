@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **TOTVS Protheus**.
 
 Largura fixa, valor em centavos sem separador.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -20,17 +20,17 @@ Largura fixa, valor em centavos sem separador.
 | 97-99 | reservado | espaços |
 | 100-139 | histórico | 40 |
 
-## Exemplo
+**Exemplo**
 
 ```
 000001   1101                                    2201                          00000000000150000   Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - Valor em centavos: R$ 1.500,00 vira `00000000000150000`.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

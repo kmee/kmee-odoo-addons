@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **SCI (Visual Sucessor / Único)**.
 
 Uma linha por partida, com sequencial próprio e conta `0` no lado vazio.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -23,17 +23,17 @@ Uma linha por partida, com sequencial próprio e conta `0` no lado vazio.
 | 9 | CNPJ/CPF do parceiro | só dígitos |
 | 10-11 | reservados | vazios |
 
-## Exemplo
+**Exemplo**
 
 ```
 000001,20260805,00001101,0,1500.00,00000000,Venda de agosto,DOC123,,,
 ```
 
-## Observações
+**Observações**
 
 - Este é o único layout da série que usa **ponto** como separador decimal.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

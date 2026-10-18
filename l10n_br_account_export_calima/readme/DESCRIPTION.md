@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Calima ERP Contábil**.
 
 Registro de abertura (252 posições) e um registro `301` por partida (597).
 
-## Estrutura
+**Estrutura**
 
-### Registro `abertura` (identificação)
+**Registro `abertura` (identificação)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -19,7 +19,7 @@ Registro de abertura (252 posições) e um registro `301` por partida (597).
 | 43-52 | data final | `dd/mm/aaaa` |
 | 53-152 | descrição | 100 |
 
-### Registro `301` (partida)
+**Registro `301` (partida)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -31,18 +31,18 @@ Registro de abertura (252 posições) e um registro `301` por partida (597).
 | 51-59 | valor | 9, centavos |
 | 60-259 | histórico | 200 |
 
-## Exemplo
+**Exemplo**
 
 ```
 0000000208/08/20261234567800019501/08/202631/08/2026Arquivo de integracao...
 30105/08/2026R1101              2201              000150000Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - As duas larguras (252 e 597) são verificadas por teste.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

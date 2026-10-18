@@ -6,23 +6,23 @@ Exporta lançamentos contábeis no layout do **Mega Contábil**.
 
 Cabeçalho de identificação seguido das partidas.
 
-## Estrutura
+**Estrutura**
 
-### Registro `00` (identificação do sistema)
+**Registro `00` (identificação do sistema)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
 | 1-2 | tipo | `00` |
 | 3+ | nome | `MEGACONTABIL` |
 
-### Registro `01` (empresa)
+**Registro `01` (empresa)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
 | 1-2 | tipo | `01` |
 | 3+ | CNPJ | formatado |
 
-### Registro `02` (partida)
+**Registro `02` (partida)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -33,7 +33,7 @@ Cabeçalho de identificação seguido das partidas.
 | 41-55 | valor | 15, à direita |
 | 56-155 | histórico | 100 |
 
-## Exemplo
+**Exemplo**
 
 ```
 00MEGACONTABIL
@@ -41,7 +41,7 @@ Cabeçalho de identificação seguido das partidas.
 02050820261101           2201                   1500,00Venda de agosto
 ```
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

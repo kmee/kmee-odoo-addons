@@ -99,7 +99,7 @@ class AccountMoveMatchPicking(models.TransientModel):
         for wizard in self:
             move = wizard.account_move_id
             product_lines = move.invoice_line_ids.filtered(
-                lambda l: l.product_id and l.display_type == "product"
+                lambda line: line.product_id and line.display_type == "product"
             )
             matched = wizard.matching_invoice_line_ids
             wizard.count_lines = len(product_lines)
@@ -164,7 +164,7 @@ class AccountMoveMatchPicking(models.TransientModel):
         for line in self.candidate_match_line_ids:
             picking = line.picking_id
             for move_line in move.invoice_line_ids.filtered(
-                lambda l: l.product_id and l.display_type == "product"
+                lambda line: line.product_id and line.display_type == "product"
             ):
                 for stock_move in picking.move_ids:
                     if stock_move.product_id == move_line.product_id:
