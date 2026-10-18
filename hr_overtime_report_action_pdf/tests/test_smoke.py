@@ -21,7 +21,9 @@ class TestModuleSmoke(TransactionCase):
             if model:
                 models.add(model.model)
         field_ids = [r.res_id for r in data if r.model == "ir.model.fields"]
-        models.update(cls.env["ir.model.fields"].browse(field_ids).exists().mapped("model"))
+        models.update(
+            cls.env["ir.model.fields"].browse(field_ids).exists().mapped("model")
+        )
         cls.model_names = sorted(name for name in models if name in cls.env)
         cls.view_ids = [r.res_id for r in data if r.model == "ir.ui.view"]
         cls.action_ids = [r.res_id for r in data if r.model == "ir.actions.act_window"]
@@ -46,7 +48,9 @@ class TestModuleSmoke(TransactionCase):
             self.env[view.model].get_view(view.id, view.type)
 
     def test_actions_can_be_read(self):
-        for action in self.env["ir.actions.act_window"].browse(self.action_ids).exists():
+        for action in (
+            self.env["ir.actions.act_window"].browse(self.action_ids).exists()
+        ):
             self.assertTrue(action.read(), action.name)
 
     def test_reports_are_registered(self):
