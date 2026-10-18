@@ -11,14 +11,14 @@
                     name="action_esocial_gerar_s1200"
                     type="object"
                     string="Gerar S-1200 eSocial"
-                    attrs="{'invisible': [('state', '!=', 'done')]}"
+                    invisible="state != 'done'"
                 />
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page
                     string="eSocial"
                     name="esocial"
-                    attrs="{'invisible': [('l10n_br_esocial_s1200_id', '=', False)]}"
+                    invisible="not l10n_br_esocial_s1200_id"
                 >
                     <group>
                         <field name="l10n_br_esocial_s1200_id" />
