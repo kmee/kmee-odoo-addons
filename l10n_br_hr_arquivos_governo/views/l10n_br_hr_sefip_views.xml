@@ -11,31 +11,31 @@
                         name="action_gerar_sefip"
                         string="Gerar SEFIP (descontinuado)"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_sent"
                         string="Marcar como Enviado"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'open')]}"
+                        invisible="state != 'open'"
                     />
                     <button
                         name="action_draft"
                         string="Voltar para Rascunho"
                         type="object"
-                        attrs="{'invisible': [('state', '=', 'draft')]}"
+                        invisible="state == 'draft'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="alert alert-warning" role="alert">
-                        <strong>SEFIP substituída pelo FGTS Digital.</strong>
-                        Pela Portaria MTE 3.240/2023, desde a competência
-                        03/2024 a guia do FGTS (GFD) é emitida pelo FGTS Digital
-                        a partir dos eventos do eSocial, e as contribuições
-                        previdenciárias vão pela DCTFWeb. A geração de arquivo
-                        está desativada; esta tela serve apenas para consultar o
-                        histórico já gerado.
+                        <strong>SEFIP substitu&#237;da pelo FGTS Digital.</strong>
+                        Pela Portaria MTE 3.240/2023, desde a compet&#234;ncia
+                        03/2024 a guia do FGTS (GFD) &#233; emitida pelo FGTS Digital
+                        a partir dos eventos do eSocial, e as contribui&#231;&#245;es
+                        previdenci&#225;rias v&#227;o pela DCTFWeb. A gera&#231;&#227;o de arquivo
+                        est&#225; desativada; esta tela serve apenas para consultar o
+                        hist&#243;rico j&#225; gerado.
                     </div>
                     <group>
                         <group>
