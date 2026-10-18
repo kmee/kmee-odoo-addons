@@ -1,0 +1,45 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_category_cost_control
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_category_cost_control
+#: model:ir.model.fields,help:product_category_cost_control.field_product_category__price_control_option
+msgid ""
+"Defines how the price unit is calculated for products in this category."
+msgstr ""
+
+#. module: product_category_cost_control
+#: model:ir.model.fields.selection,name:product_category_cost_control.selection__product_category__price_control_option__include_all_taxes
+msgid "Include All Taxes"
+msgstr ""
+
+#. module: product_category_cost_control
+#: model:ir.model.fields,field_description:product_category_cost_control.field_product_category__price_control_option
+msgid "Price Control Option"
+msgstr ""
+
+#. module: product_category_cost_control
+#: model:ir.model,name:product_category_cost_control.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: product_category_cost_control
+#: model:ir.model.fields.selection,name:product_category_cost_control.selection__product_category__price_control_option__remove_included_taxes
+msgid "Remove Included Taxes"
+msgstr ""
+
+#. module: product_category_cost_control
+#: model:ir.model,name:product_category_cost_control.model_stock_move
+msgid "Stock Move"
+msgstr ""
