@@ -1,0 +1,314 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* crm_bant
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-25 13:56+0000\n"
+"PO-Revision-Date: 2026-02-12 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_PY\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_timeline_status__short_term
+msgid "1-3 Months"
+msgstr "1-3 meses"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_timeline_status__medium_term
+msgid "3-6 Months"
+msgstr "3-6 meses"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_timeline_status__long_term
+msgid "6+ Months"
+msgstr "6+ meses"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_timeline_status__immediate
+msgid "<1 Month"
+msgstr "<1 mes"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_authority_status__approver
+msgid "Approver"
+msgstr "Aprobador"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.crm_case_form_view_oppor_bant
+msgid "Authority"
+msgstr "Autoridad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_authority_contact
+msgid "Authority Contact"
+msgstr "Contacto con autoridad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_authority_notes
+msgid "Authority Notes"
+msgstr "Notas sobre la autoridad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_authority_role
+msgid "Authority Role"
+msgstr "Rol de autoridad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_authority_score
+msgid "Authority Score"
+msgstr "Puntuacion de autoridad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_authority_status
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "Authority Status"
+msgstr "Estado de autoridad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_budget_amount
+msgid "Available Budget"
+msgstr "Presupuesto disponible"
+
+#. module: crm_bant
+#: model:ir.ui.menu,name:crm_bant.menu_bant_dashboard
+#: model_terms:ir.ui.view,arch_db:crm_bant.crm_case_form_view_oppor_bant
+msgid "BANT"
+msgstr "BANT"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_progress
+msgid "BANT Progress"
+msgstr "Progreso BANT"
+
+#. module: crm_bant
+#: model:ir.actions.act_window,name:crm_bant.action_bant_dashboard
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_qualification_status
+#: model_terms:ir.ui.view,arch_db:crm_bant.bant_qualification_graph
+#: model_terms:ir.ui.view,arch_db:crm_bant.bant_qualification_pivot
+msgid "BANT Qualification"
+msgstr "Calificacion BANT"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "BANT Qualified"
+msgstr "Calificado BANT"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_total_score
+msgid "BANT Score"
+msgstr "Puntuacion BANT"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.crm_case_form_view_oppor_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "BANT Status"
+msgstr "Estado BANT"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "BANT Unqualified"
+msgstr "No calificado BANT"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.crm_case_form_view_oppor_bant
+msgid "Budget"
+msgstr "Presupuesto"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_status__budget_approved
+msgid "Budget Approved"
+msgstr "Presupuesto aprobado"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_status__budget_defined
+msgid "Budget Defined"
+msgstr "Presupuesto definido"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_budget_score
+msgid "Budget Score"
+msgstr "Puntuacion de presupuesto"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_budget_status
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "Budget Status"
+msgstr "Estado de presupuesto"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_budget_timeframe
+msgid "Budget Timeframe"
+msgstr "Plazo de presupuesto"
+
+#. module: crm_bant
+#: model_terms:ir.actions.act_window,help:crm_bant.action_bant_dashboard
+msgid "Create opportunities to track your BANT qualification process."
+msgstr "Cree oportunidades para seguir su proceso de calificacion BANT."
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_need_status__critical
+msgid "Critical"
+msgstr "Critico"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_timeframe__current_quarter
+msgid "Current Quarter"
+msgstr "Trimestre actual"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_timeframe__current_year
+msgid "Current Year"
+msgstr "Ano actual"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_authority_status__decision_maker
+msgid "Decision Maker"
+msgstr "Tomador de decisiones"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_qualification_status__fully_qualified
+msgid "Fully Qualified"
+msgstr "Totalmente calificado"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_need_status__important
+msgid "Important"
+msgstr "Importante"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_authority_status__influencer
+msgid "Influencer"
+msgstr "Influenciador"
+
+#. module: crm_bant
+#: model:ir.model,name:crm_bant.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Lead/Oportunidad"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.crm_case_form_view_oppor_bant
+msgid "Need"
+msgstr "Necesidad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_need_description
+msgid "Need Description"
+msgstr "Descripcion de la necesidad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_need_score
+msgid "Need Score"
+msgstr "Puntuacion de la necesidad"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_need_status
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "Need Status"
+msgstr "Estado de la necesidad"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_timeframe__next_quarter
+msgid "Next Quarter"
+msgstr "Proximo trimestre"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_timeframe__next_year
+msgid "Next Year"
+msgstr "Proximo ano"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_need_status__nice_to_have
+msgid "Nice to Have"
+msgstr "Deseable"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_status__no_budget
+msgid "No Budget"
+msgstr "Sin presupuesto"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_timeline_status__no_timeline
+msgid "No Timeline"
+msgstr "Sin plazo"
+
+#. module: crm_bant
+#: model_terms:ir.actions.act_window,help:crm_bant.action_bant_dashboard
+msgid "No opportunities found"
+msgstr "No se encontraron oportunidades"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_need_pain_points
+msgid "Pain Points"
+msgstr "Puntos de dolor"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_qualification_status__partially_qualified
+msgid "Partially Qualified"
+msgstr "Parcialmente calificado"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_qualification_status__qualified
+msgid "Qualified"
+msgstr "Calificado"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_authority_status__recommender
+msgid "Recommender"
+msgstr "Recomendador"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_need_status__strategic
+msgid "Strategic"
+msgstr "Estrategico"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_need_success_criteria
+msgid "Success Criteria"
+msgstr "Criterios de exito"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_timeline_date
+msgid "Target Implementation Date"
+msgstr "Fecha objetivo de implementacion"
+
+#. module: crm_bant
+#: model_terms:ir.ui.view,arch_db:crm_bant.crm_case_form_view_oppor_bant
+msgid "Timeline"
+msgstr "Cronograma"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_timeline_reason
+msgid "Timeline Reasoning"
+msgstr "Justificacion del cronograma"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_timeline_score
+msgid "Timeline Score"
+msgstr "Puntuacion del cronograma"
+
+#. module: crm_bant
+#: model:ir.model.fields,field_description:crm_bant.field_crm_lead__bant_timeline_status
+#: model_terms:ir.ui.view,arch_db:crm_bant.view_crm_case_opportunities_filter_bant
+msgid "Timeline Status"
+msgstr "Estado del cronograma"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_authority_status__undefined
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_budget_status__undefined
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_need_status__undefined
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_timeline_status__undefined
+msgid "Undefined"
+msgstr "No definido"
+
+#. module: crm_bant
+#: model:ir.model.fields.selection,name:crm_bant.selection__crm_lead__bant_qualification_status__unqualified
+msgid "Unqualified"
+msgstr "No calificado"
