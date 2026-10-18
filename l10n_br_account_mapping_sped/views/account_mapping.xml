@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <record id="mapping_plan_form_sped" model="ir.ui.view">
         <field name="name">l10n_br_account_mapping.plan.form.sped</field>
         <field name="model">l10n_br_account_mapping.plan</field>
@@ -20,5 +19,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

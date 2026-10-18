@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <record id="view_company_form_sped_referential" model="ir.ui.view">
         <field name="name">res.company.form.l10n_br_sped_referential</field>
         <field name="model">res.company</field>
@@ -17,5 +16,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
