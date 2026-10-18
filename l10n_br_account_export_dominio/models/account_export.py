@@ -16,7 +16,7 @@ class AccountExport(models.Model):
         MESMA linha; em partidas multiplas a conta "0" marca o lado rateado.
         """
         out = self._new_buffer()
-        cnpj = fh.only_digits(self.company_id.cnpj_cpf)
+        cnpj = fh.only_digits(self.company_id.vat)
         out.write(fh.join_delimited(["0000", cnpj], "|", leading=True, trailing=True))
         out.write("\n")
         for move in self.move_ids:
