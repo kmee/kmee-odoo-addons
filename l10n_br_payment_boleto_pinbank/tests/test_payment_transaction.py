@@ -10,7 +10,7 @@ from .fixtures import (
 )
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestPaymentTransaction(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -54,6 +54,7 @@ class TestPaymentTransaction(TransactionCase):
                 "currency_id": self.env.ref("base.BRL").id,
                 "partner_id": self.partner.id,
                 "provider_id": self.payment_provider.id,
+                "payment_method_id": self.env.ref("payment.payment_method_boleto").id,
                 "provider_code": "boleto_pinbank",
                 "boleto_penalty": 0.01,
                 "boleto_interest": 0.01,
@@ -236,7 +237,7 @@ class TestPaymentTransaction(TransactionCase):
             )
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestPinbankToken(TransactionCase):
     """O token e emitido por conta e volta do parametro como texto."""
 
@@ -285,7 +286,7 @@ class TestPinbankToken(TransactionCase):
         self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestPinbankRedaction(TransactionCase):
     """O boleto carrega nome, documento e endereco do sacado."""
 

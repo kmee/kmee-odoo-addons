@@ -48,6 +48,13 @@ class Paymentprovider(models.Model):
 
     # === BUSINESS METHODS === #
 
+    def _get_default_payment_method_codes(self):
+        """Override of `payment` to return the default payment method codes."""
+        default_codes = super()._get_default_payment_method_codes()
+        if self.code != BOLETO_PINBANK:
+            return default_codes
+        return ["boleto"]
+
     def _boleto_pinbank_token_param_names(self):
         """Devolve as chaves usadas para guardar o token do provider.
 
@@ -228,8 +235,7 @@ class Paymentprovider(models.Model):
         super()._compute_feature_support_fields()
         return self.filtered(lambda p: p.code == BOLETO_PINBANK).update(
             {
-                "support_fees": True,
-                "support_manual_capture": True,
+                "support_manual_capture": "full_only",
                 "support_refund": "full_only",
                 "support_tokenization": True,
             }
