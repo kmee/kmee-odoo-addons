@@ -23,7 +23,7 @@
                 <attribute
                     name="readonly"
                 >not can_edit_price_purchase</attribute></xpath>
-            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+            <xpath expr="//field[@name='order_line']/list" position="attributes">
                 <attribute name="editable" />
             </xpath>
         </field>
