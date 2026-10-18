@@ -5,14 +5,10 @@ class CrmLostReasonTransition(models.Model):
     _name = "crm.lost.reason.transition"
     _description = "Transitioning Lost Leads by Reason and Stage"
 
-    _sql_constraints = [
-        (
-            "unique_reason_stage",
-            "unique(lost_reason_id, target_stage_id)",
-            "There is already a transition configured "
-            "for this loss reason and target stage.",
-        )
-    ]
+    _unique_reason_stage = models.Constraint(
+        'unique(lost_reason_id, target_stage_id)',
+        "There is already a transition configured for this loss reason and target stage.",
+    )
 
     name = fields.Char(compute="_compute_name", store=True, readonly=True)
     lost_reason_id = fields.Many2one("crm.lost.reason", required=True)
