@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_mapping_plan_user,mapping.plan user,l10n_br_account_mapping.plan,account.group_account_user,r,
+access_mapping_plan_manager,mapping.plan manager,l10n_br_account_mapping.plan,account.group_account_manager,crud,
+mapping_plan_company_rule,Plano de destino: multi-empresa,l10n_br_account_mapping.plan,,crud,"['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]"
+access_mapping_account_user,mapping.account user,l10n_br_account_mapping.account,account.group_account_user,r,
+access_mapping_account_manager,mapping.account manager,l10n_br_account_mapping.account,account.group_account_manager,crud,
+mapping_account_company_rule,Conta do plano de destino: multi-empresa,l10n_br_account_mapping.account,,crud,"['|', ('plan_id.company_id', '=', False), ('plan_id.company_id', 'in', company_ids)]"
