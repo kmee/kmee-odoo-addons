@@ -24,7 +24,7 @@ class HrLeaveAllocation(models.Model):
     def action_sale_of_days_off(self):
         return {
             "name": _("Holiday Sales"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "hr.leave.abono",
             "target": "current",
             "type": "ir.actions.act_window",
