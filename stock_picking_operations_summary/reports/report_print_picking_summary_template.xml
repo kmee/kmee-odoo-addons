@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <template
         id="picking_summary"
         inherit_id="stock.report_picking"
         primary="True"
         priority="100"
     >
-        <xpath
-            expr="//table[@t-if='o.move_line_ids and o.move_ids_without_package']"
-            position="replace"
-        >
+        <xpath expr="//table[hasclass('o_main_table')]" position="replace">
             <div class="w-100 text-center">
                 <h2>Products Summary</h2>
             </div>
@@ -64,7 +60,7 @@
                                 t-if="o.picking_type_id.code != 'incoming'"
                                 groups="stock.group_stock_multi_locations"
                             >
-                                <span t-esc="ml.location_id.display_name" />
+                                <span t-out="ml.location_id.display_name" />
                             </td>
                             <td
                                 t-if="o.picking_type_id.code != 'outgoing'"
@@ -94,7 +90,6 @@
                     </t>
                 </tbody>
             </table>
-
         </xpath>
     </template>
 </odoo>
