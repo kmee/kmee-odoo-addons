@@ -7,7 +7,7 @@
     "category": "Localization",
     "author": "KMEE, " "Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "version": "16.0.0.0.0",
+    "version": "18.0.1.0.0",
     "depends": [
         "hr_recruitment",
         "l10n_br_hr",
@@ -19,7 +19,7 @@
         "views/hr_contract_type_view.xml",
     ],
     "test": [],
-    'installable': False,
+    "installable": True,
     "auto_install": False,
     "license": "AGPL-3",
 }

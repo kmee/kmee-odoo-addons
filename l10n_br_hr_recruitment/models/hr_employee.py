@@ -7,14 +7,6 @@ from odoo import fields, models
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    nationality_id = fields.Many2one(
-        string="Nationality",
-        store=True,
-        related="address_home_id.country_id",
-        readonly=False,
-        groups="hr.group_hr_user",
-    )
-
     rg_file = fields.Binary(string="RG File")
 
     cnh_file = fields.Binary(string="CNH File")

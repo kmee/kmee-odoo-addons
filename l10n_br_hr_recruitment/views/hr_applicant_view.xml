@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_l10n_br_hr_applicant_recruitment_form" model="ir.ui.view">
         <field name="name">l10n_br_hr_recruitment.applicant.form</field>
@@ -14,16 +14,14 @@
                     <group>
                         <group string="Private Contact">
                             <field
-                                name="address_home_id"
-                                context="{
-                                    'show_address': 1,
-                                    'default_type': 'private',
-                                    'form_view_ref': 'base.res_partner_view_form_private'}"
-                                options='{"always_reload": True, "highlight_first_line": True}'
+                                name="partner_id"
+                                string="Private Contact"
+                                context="{                                     'show_address': 1,                                     'default_type': 'private',                                     'form_view_ref': 'base.res_partner_view_form_private'}"
+                                options="{&quot;always_reload&quot;: True, &quot;highlight_first_line&quot;: True}"
                             />
                             <field
                                 name="bank_account_id"
-                                context="{'default_partner_id': address_home_id}"
+                                context="{'default_partner_id': partner_id}"
                             />
                             <field name="address_proof_file" />
                         </group>
@@ -39,7 +37,7 @@
                             <field name="cnpj_cpf" />
                             <field
                                 name="nationality_id"
-                                options='{"no_open": True, "no_create": True}'
+                                options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
                             />
                             <field name="birthday" />
                         </group>
@@ -83,14 +81,8 @@
                         </group>
                         <group name="diver_license" string="Driver License">
                             <field name="driver_license" string="Number" />
-                            <field
-                                name="driver_categ"
-                                attrs="{'required': [('driver_license', '!=', False)]}"
-                            />
-                            <field
-                                name="expiration_date"
-                                attrs="{'required': [('driver_license', '!=', False)]}"
-                            />
+                            <field name="driver_categ" required="driver_license" />
+                            <field name="expiration_date" required="driver_license" />
                             <field name="cnh_file" />
                         </group>
                         <group name="pis_pasep" string="PIS/PASEP">
@@ -106,10 +98,10 @@
 
                 <page string="Dependents" groups="hr.group_hr_user">
                     <field name="dependent_ids" nolabel="1">
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="name" />
                             <field name="date_of_birth" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>

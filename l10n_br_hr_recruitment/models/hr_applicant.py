@@ -9,19 +9,10 @@ class HrApplicant(models.Model):
 
     birthday = fields.Date("Date of Birth", groups="hr.group_hr_user", tracking=True)
 
-    address_home_id = fields.Many2one(
-        "res.partner",
-        "Address",
-        help="Enter here the private address of the applicant",
-        groups="hr.group_hr_user",
-        tracking=True,
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
-    )
-
     nationality_id = fields.Many2one(
         string="Nationality",
         store=True,
-        related="address_home_id.country_id",
+        related="partner_id.country_id",
         readonly=False,
         groups="hr.group_hr_user",
     )
@@ -42,7 +33,7 @@ class HrApplicant(models.Model):
         string="RG",
         store=True,
         readonly=False,
-        related="address_home_id.inscr_est",
+        related="partner_id.l10n_br_rg_code",
         help="National ID number",
         groups="hr.group_hr_user",
     )
@@ -50,7 +41,7 @@ class HrApplicant(models.Model):
     cnpj_cpf = fields.Char(
         string="CPF",
         store=True,
-        related="address_home_id.cnpj_cpf",
+        related="partner_id.vat",
         readonly=False,
         groups="hr.group_hr_user",
     )
@@ -65,7 +56,7 @@ class HrApplicant(models.Model):
         "res.partner.bank",
         "Bank Account Number",
         domain="""[
-            ('partner_id', '=', address_home_id),
+            ('partner_id', '=', partner_id),
             '|',
             ('company_id', '=', False),
             ('company_id', '=', company_id)]
@@ -134,55 +125,65 @@ class HrApplicant(models.Model):
 
     notes = fields.Text()
 
+    def _prepare_l10n_br_employee_vals(self):
+        self.ensure_one()
+        vals = {}
+        vals.update(
+            {
+                "bank_account_id": self.bank_account_id.id,
+                "ethnicity": self.ethnicity.id,
+                "father_name": self.father_name,
+                "mother_name": self.mother_name,
+                "voter_title": self.voter_title,
+                "voter_zone": self.voter_zone,
+                "voter_section": self.voter_section,
+                "creservist": self.creservist,
+                "pis_pasep": self.pis_pasep,
+                "driver_license": self.driver_license,
+                "driver_categ": self.driver_categ,
+                "expiration_date": self.expiration_date,
+                "certificate": self.certificate,
+                "study_field": self.study_field,
+                "study_school": self.study_school,
+                "rg_file": self.rg_file,
+                "cnh_file": self.cnh_file,
+                "voter_title_file": self.voter_title_file,
+                "reservist_file": self.reservist_file,
+                "address_proof_file": self.address_proof_file,
+                "study_proof_file": self.study_proof_file,
+                "pis_file": self.pis_file,
+                "relative_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": dependent.name,
+                            "date_of_birth": dependent.date_of_birth,
+                            "relation_id": self.env.ref(
+                                "hr_employee_relative.relation_child"
+                            ).id,
+                        },
+                    )
+                    for dependent in self.dependent_ids
+                ],
+            }
+        )
+        if self.nationality_id:
+            vals["country_id"] = self.nationality_id.id
+        return vals
+
     def create_employee_from_applicant(self):
-        res = super().create_employee_from_applicant()
-
-        res["context"] = {
-            **res["context"],
-            "default_address_home_id": self.address_home_id.id,
-            "default_bank_account_id": self.bank_account_id.id,
-            "default_ethnicity": self.ethnicity.id,
-            "default_father_name": self.father_name,
-            "default_mother_name": self.mother_name,
-            "default_voter_title": self.voter_title,
-            "default_voter_zone": self.voter_zone,
-            "default_voter_section": self.voter_section,
-            "default_creservist": self.creservist,
-            "default_pis_pasep": self.pis_pasep,
-            "default_driver_license": self.driver_license,
-            "default_driver_categ": self.driver_categ,
-            "default_expiration_date": self.expiration_date,
-            "default_certificate": self.certificate,
-            "default_study_field": self.study_field,
-            "default_study_school": self.study_school,
-            "default_rg_file": self.rg_file,
-            "default_cnh_file": self.cnh_file,
-            "default_voter_title_file": self.voter_title_file,
-            "default_reservist_file": self.reservist_file,
-            "default_address_proof_file": self.address_proof_file,
-            "default_study_proof_file": self.study_proof_file,
-            "default_pis_file": self.pis_file,
-            "default_relative_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "name": dependent.name,
-                        "date_of_birth": dependent.date_of_birth,
-                        "relation_id": self.env.ref(
-                            "hr_employee_relative.relation_child"
-                        ).id,
-                    },
-                )
-                for dependent in self.dependent_ids
-            ],
-        }
-
-        return res
+        # Odoo 18 builds the employee from hr.candidate, so the Brazilian
+        # applicant data is written on the created employee afterwards.
+        action = super().create_employee_from_applicant()
+        employee = self.env["hr.employee"].browse(action["res_id"])
+        employee.write(self._prepare_l10n_br_employee_vals())
+        return action
 
 
 class HrApplicantDependent(models.Model):
     _name = "hr.applicant.dependent"
+    _description = "Applicant Dependent"
 
     applicant_id = fields.Many2one(comodel_name="hr.applicant")
 
