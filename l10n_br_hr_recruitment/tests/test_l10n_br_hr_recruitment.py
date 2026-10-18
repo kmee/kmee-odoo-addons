@@ -16,11 +16,12 @@ class TestL10nBrHrRecruitment(TransactionCase):
                 "l10n_br_rg_code": "123456789",
             }
         )
+        cls.candidate = cls.env["hr.candidate"].create(
+            {"partner_name": "Candidate Partner", "partner_id": cls.partner.id}
+        )
         cls.applicant = cls.env["hr.applicant"].create(
             {
-                "name": "Candidate",
-                "partner_name": "Candidate Partner",
-                "partner_id": cls.partner.id,
+                "candidate_id": cls.candidate.id,
                 "pis_pasep": "12345678900",
                 "father_name": "Father",
                 "mother_name": "Mother",

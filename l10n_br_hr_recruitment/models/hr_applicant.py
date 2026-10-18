@@ -125,8 +125,9 @@ class HrApplicant(models.Model):
 
     notes = fields.Text()
 
-    def _get_employee_create_vals(self):
-        vals = super()._get_employee_create_vals()
+    def _prepare_l10n_br_employee_vals(self):
+        self.ensure_one()
+        vals = {}
         vals.update(
             {
                 "bank_account_id": self.bank_account_id.id,
@@ -170,6 +171,14 @@ class HrApplicant(models.Model):
         if self.nationality_id:
             vals["country_id"] = self.nationality_id.id
         return vals
+
+    def create_employee_from_applicant(self):
+        # Odoo 18 builds the employee from hr.candidate, so the Brazilian
+        # applicant data is written on the created employee afterwards.
+        action = super().create_employee_from_applicant()
+        employee = self.env["hr.employee"].browse(action["res_id"])
+        employee.write(self._prepare_l10n_br_employee_vals())
+        return action
 
 
 class HrApplicantDependent(models.Model):
