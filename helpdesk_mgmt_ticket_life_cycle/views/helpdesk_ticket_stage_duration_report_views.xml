@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-        <!-- Tree View -->
+        <!-- List View -->
         <record id="view_helpdesk_ticket_stage_duration_report_tree" model="ir.ui.view">
-            <field name="name">helpdesk.ticket.stage.duration.report.tree</field>
+            <field name="name">helpdesk.ticket.stage.duration.report.list</field>
             <field name="model">helpdesk.ticket.stage.duration.report</field>
             <field name="arch" type="xml">
-                <tree create="false" edit="false">
+                <list create="false" edit="false">
                     <field name="team_id" />
                     <field name="stage_id" />
                     <field name="ticket_count" />
@@ -15,7 +15,7 @@
                     <field name="completed_tickets" />
                     <field name="active_tickets" />
                     <field name="completion_rate" widget="percentage" />
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -76,7 +76,7 @@
                     <field name="active_tickets" />
                     <field name="completion_rate" />
                     <templates>
-                        <t t-name="kanban-box">
+                        <t t-name="card">
                             <div class="oe_kanban_card oe_kanban_global_click">
                                 <div class="oe_kanban_content">
                                     <div class="o_kanban_record_top">
@@ -198,7 +198,7 @@
     >
             <field name="name">Stage Duration Report</field>
             <field name="res_model">helpdesk.ticket.stage.duration.report</field>
-            <field name="view_mode">graph,kanban,pivot,tree</field>
+            <field name="view_mode">graph,kanban,pivot,list</field>
             <field
             name="view_id"
             ref="view_helpdesk_ticket_stage_duration_report_kanban"
