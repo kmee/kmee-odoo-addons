@@ -50,9 +50,9 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://www.kmee.com.br>``\ \_:
+- ``KMEE <https://www.kmee.com.br>``\ \_:
 
-   -  Luis Felipe Miléo
+  - Luis Felipe Miléo
 
 Maintainers
 -----------
