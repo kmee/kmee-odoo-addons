@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =======
 CRM WIP
 =======
@@ -17,7 +13,7 @@ CRM WIP
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
@@ -33,10 +29,10 @@ better organize their pipeline and prioritize their work.
 
 Key features:
 
--  WIP status tracking for opportunities
--  Visual indicators for opportunities in progress
--  Enhanced opportunity management workflow
--  Integration with standard CRM features
+- WIP status tracking for opportunities
+- Visual indicators for opportunities in progress
+- Enhanced opportunity management workflow
+- Integration with standard CRM features
 
 **Table of contents**
 
@@ -50,10 +46,10 @@ This module was developed to address the need for better tracking of
 active work on opportunities in the sales pipeline. It helps sales
 teams:
 
--  Identify which opportunities are currently being worked on
--  Improve pipeline visibility and management
--  Reduce overlap in sales team efforts
--  Better organize and prioritize sales activities
+- Identify which opportunities are currently being worked on
+- Improve pipeline visibility and management
+- Reduce overlap in sales team efforts
+- Better organize and prioritize sales activities
 
 Configuration
 =============
@@ -102,14 +98,14 @@ Authors
 Contributors
 ------------
 
--  Luis Felipe Miléo mileo@kmee.com.br
+- Luis Felipe Miléo mileo@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
