@@ -1,1 +1,0 @@
-Add tier to the partner
