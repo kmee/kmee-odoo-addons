@@ -58,15 +58,19 @@ jobs:
         with:
           persist-credentials: false
       - name: Install addons and dependencies
+        if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: oca_install_addons
       - name: Check licenses
+        if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: manifestoo -d . check-licenses
       - name: Check development status
+        if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
       - name: Install the Brazilian chart of accounts used by the l10n_br dependencies
-        if: ${{ matrix.coa == 'true' }}
+        if: ${{ matrix.coa == 'true' && hashFiles('*/__manifest__.py') != '' }}
         run: pip install --pre "odoo-addon-l10n_br_coa_generic==20.0.*" "odoo-addon-l10n_br_coa==20.0.*" xsdata
       - name: Initialize test db
+        if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: |
           oca_wait_for_postgres
           if [ -n "$INCLUDE" ]; then SEL="--select-include $INCLUDE"; else SEL="--select-addons-dir ."; fi
@@ -74,6 +78,7 @@ jobs:
           if [ "${{ matrix.coa }}" = "true" ]; then ADDONS="$ADDONS,l10n_br_coa_generic"; fi
           unbuffer odoo -d ${PGDATABASE} -i ${ADDONS} --http-interface=127.0.0.1 --stop-after-init | oca_checklog_odoo
       - name: Run tests
+        if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: oca_run_tests
       - uses: codecov/codecov-action@v4
         with:
