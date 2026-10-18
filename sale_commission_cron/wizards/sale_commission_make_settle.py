@@ -23,7 +23,7 @@ class SaleCommissionCron(models.TransientModel):
         wizard = settle_wizard_model.create(
             {
                 "date_to": next_month_date,
-                "date_payment_to": next_month_date,
+                "settlement_type": "sale_invoice",
             }
         )
 
