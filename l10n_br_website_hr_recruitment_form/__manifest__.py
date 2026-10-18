@@ -5,7 +5,7 @@
     "name": "Brazilian Localization Website Hr Recruitment Form",
     "summary": """
         Brazilian Localization Website Hr Recruitment Form""",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
