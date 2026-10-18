@@ -3,6 +3,7 @@
 
 import unittest
 
+from odoo import Command
 from odoo.tests import tagged
 
 from odoo.addons.l10n_br_account.tests.common import AccountMoveBRCommon
@@ -34,14 +35,14 @@ class TestAccountMoveTemplate(AccountMoveBRCommon):
         # Create accounts for testing
         cls.account_revenue = cls.env["account.account"].search(
             [
-                ("company_id", "=", cls.company_data["company"].id),
+                ("company_ids", "in", cls.company_data["company"].ids),
                 ("account_type", "=", "income"),
             ],
             limit=1,
         )
         cls.account_receivable = cls.env["account.account"].search(
             [
-                ("company_id", "=", cls.company_data["company"].id),
+                ("company_ids", "in", cls.company_data["company"].ids),
                 ("account_type", "=", "asset_receivable"),
             ],
             limit=1,
@@ -51,7 +52,7 @@ class TestAccountMoveTemplate(AccountMoveBRCommon):
                 "name": "ICMS s/ Vendas",
                 "code": "3.1.1.01.001",
                 "account_type": "expense",
-                "company_id": cls.company_data["company"].id,
+                "company_ids": [Command.set(cls.company_data["company"].ids)],
             }
         )
         cls.account_icms_credit = cls.env["account.account"].create(
@@ -59,7 +60,7 @@ class TestAccountMoveTemplate(AccountMoveBRCommon):
                 "name": "ICMS a Recolher",
                 "code": "2.1.1.01.001",
                 "account_type": "liability_current",
-                "company_id": cls.company_data["company"].id,
+                "company_ids": [Command.set(cls.company_data["company"].ids)],
             }
         )
         cls.account_ipi_debit = cls.env["account.account"].create(
@@ -67,7 +68,7 @@ class TestAccountMoveTemplate(AccountMoveBRCommon):
                 "name": "IPI a Recuperar",
                 "code": "1.1.5.01.001",
                 "account_type": "asset_current",
-                "company_id": cls.company_data["company"].id,
+                "company_ids": [Command.set(cls.company_data["company"].ids)],
             }
         )
         cls.account_ipi_credit = cls.env["account.account"].create(
@@ -75,7 +76,7 @@ class TestAccountMoveTemplate(AccountMoveBRCommon):
                 "name": "IPI a Recolher",
                 "code": "2.1.1.02.001",
                 "account_type": "liability_current",
-                "company_id": cls.company_data["company"].id,
+                "company_ids": [Command.set(cls.company_data["company"].ids)],
             }
         )
 

@@ -4,7 +4,6 @@
   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo noupdate="1">
-
     <!-- ============================================================ -->
     <!-- Contas contábeis para partida dobrada                        -->
     <!-- ============================================================ -->
@@ -14,28 +13,40 @@
         <field name="name">ICMS s/ Vendas</field>
         <field name="code">3.1.1.01.001</field>
         <field name="account_type">expense</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_pis_sobre_vendas" model="account.account">
         <field name="name">PIS s/ Vendas</field>
         <field name="code">3.1.1.01.002</field>
         <field name="account_type">expense</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_cofins_sobre_vendas" model="account.account">
         <field name="name">COFINS s/ Vendas</field>
         <field name="code">3.1.1.01.003</field>
         <field name="account_type">expense</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_ipi_sobre_vendas" model="account.account">
         <field name="name">IPI s/ Vendas</field>
         <field name="code">3.1.1.01.004</field>
         <field name="account_type">expense</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- Impostos a Recolher (Credit) -->
@@ -43,28 +54,40 @@
         <field name="name">ICMS a Recolher</field>
         <field name="code">2.1.1.01.001</field>
         <field name="account_type">liability_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_pis_a_recolher" model="account.account">
         <field name="name">PIS a Recolher</field>
         <field name="code">2.1.1.01.002</field>
         <field name="account_type">liability_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_cofins_a_recolher" model="account.account">
         <field name="name">COFINS a Recolher</field>
         <field name="code">2.1.1.01.003</field>
         <field name="account_type">liability_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_ipi_a_recolher" model="account.account">
         <field name="name">IPI a Recolher</field>
         <field name="code">2.1.1.01.004</field>
         <field name="account_type">liability_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- Impostos a Recuperar (Compras - Debit) -->
@@ -72,28 +95,40 @@
         <field name="name">ICMS a Recuperar</field>
         <field name="code">1.1.5.01.001</field>
         <field name="account_type">asset_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_pis_a_recuperar" model="account.account">
         <field name="name">PIS a Recuperar</field>
         <field name="code">1.1.5.01.002</field>
         <field name="account_type">asset_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_cofins_a_recuperar" model="account.account">
         <field name="name">COFINS a Recuperar</field>
         <field name="code">1.1.5.01.003</field>
         <field name="account_type">asset_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_ipi_a_recuperar" model="account.account">
         <field name="name">IPI a Recuperar</field>
         <field name="code">1.1.5.01.004</field>
         <field name="account_type">asset_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- Custo das mercadorias vendidas / Estoque -->
@@ -101,14 +136,20 @@
         <field name="name">Custo das Mercadorias Vendidas</field>
         <field name="code">3.1.2.01.001</field>
         <field name="account_type">expense</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <record id="account_estoque_mercadorias" model="account.account">
         <field name="name">Estoque de Mercadorias</field>
         <field name="code">1.1.4.01.001</field>
         <field name="account_type">asset_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- Receita de vendas -->
@@ -116,7 +157,10 @@
         <field name="name">Receita de Vendas</field>
         <field name="code">4.1.1.01.001</field>
         <field name="account_type">income</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- Fornecedores -->
@@ -124,7 +168,10 @@
         <field name="name">Fornecedores Nacionais</field>
         <field name="code">2.1.2.01.001</field>
         <field name="account_type">liability_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- ICMS ST a Recolher -->
@@ -132,7 +179,10 @@
         <field name="name">ICMS ST a Recolher</field>
         <field name="code">2.1.1.01.005</field>
         <field name="account_type">liability_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- ICMS ST a Recuperar -->
@@ -140,7 +190,10 @@
         <field name="name">ICMS ST a Recuperar</field>
         <field name="code">1.1.5.01.005</field>
         <field name="account_type">asset_current</field>
-        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field
+            name="company_ids"
+            eval="[Command.set([ref('l10n_br_base.empresa_lucro_presumido')])]"
+        />
     </record>
 
     <!-- ============================================================ -->
@@ -312,5 +365,4 @@
     <record id="l10n_br_fiscal.fo_compras" model="l10n_br_fiscal.operation">
         <field name="account_move_template_id" ref="template_compra_lp" />
     </record>
-
 </odoo>
