@@ -23,7 +23,7 @@
             name="report_name"
         >l10n_br_sale_report_py3o.report_saleorder_pro_forma</field>
         <!-- <field name="report_file">sale.report_saleorder_pro_forma</field> -->
-    <field name="binding_model_id" ref="sale.model_sale_order" />
+        <field name="binding_model_id" ref="sale.model_sale_order" />
         <field name="binding_type">report</field>
         <field name="report_type">py3o</field>
         <field name="py3o_filetype">pdf</field>
@@ -33,5 +33,4 @@
             name="print_report_name"
         >'Proforma-' + object.name + '-' + object.partner_id.name.replace(' ', '_') + '.pdf'</field>
     </record>
-
 </odoo>
