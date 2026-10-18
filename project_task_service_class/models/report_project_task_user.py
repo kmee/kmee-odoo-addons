@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
+from odoo.tools import SQL
 
 
 class ReportProjectTaskUser(models.Model):
@@ -13,7 +14,7 @@ class ReportProjectTaskUser(models.Model):
     )
 
     def _select(self):
-        return super()._select() + ", t.service_class_id"
+        return SQL("%s, t.service_class_id", super()._select())
 
     def _group_by(self):
-        return super()._group_by() + ", t.service_class_id"
+        return SQL("%s, t.service_class_id", super()._group_by())

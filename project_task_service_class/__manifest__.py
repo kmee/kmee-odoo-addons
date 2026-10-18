@@ -3,15 +3,15 @@
 
 {
     "name": "Project Task Service Class",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["project"],
     "data": [
-        "security/project_task_service_class.xml",
         "views/project_task_service_class.xml",
         "views/project_task.xml",
+        "security/ir.access.csv",
     ],
     "demo": [],
 }
