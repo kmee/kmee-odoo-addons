@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_sale_exception_confirm">
+        <field name="model">sale.exception.confirm</field>
+        <field name="inherit_id" ref="sale_exception.view_sale_exception_confirm" />
+        <field name="arch" type="xml">
+            <field name="ignore" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
