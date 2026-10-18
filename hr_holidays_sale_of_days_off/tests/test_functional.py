@@ -15,8 +15,8 @@ class TestSaleOfDaysOff(TransactionCase):
         cls.leave_type = cls.env["hr.leave.type"].create(
             {
                 "name": "Vacation Abono",
-                "requires_allocation": "yes",
-                "employee_requests": "no",
+                "requires_allocation": True,
+                "employee_requests": False,
                 "allocation_validation_type": "hr",
                 "hr_holidays_sale_of_days_off": True,
             }
@@ -31,7 +31,7 @@ class TestSaleOfDaysOff(TransactionCase):
                 "date_to": "2099-12-31",
             }
         )
-        cls.allocation.action_validate()
+        cls.allocation.action_approve()
 
     def _abono(self, days):
         return self.env["hr.leave.abono"].create(
