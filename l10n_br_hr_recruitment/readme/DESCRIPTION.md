@@ -1,0 +1,1 @@
+This module implements the localization fields found on the employee on the applicant module, to garantee that employee created from the application has all information.
