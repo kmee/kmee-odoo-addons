@@ -16,7 +16,10 @@ class AccountAccount(models.Model):
         :param date: data-base da escrituracao (vigencia da tabela oficial).
         """
         self.ensure_one()
-        plan = self.company_id.l10n_br_sped_referential_plan_id
+        # since 18.0 an account belongs to several companies: prefer the
+        # company in use and fall back to the first one of the account
+        company = (self.company_ids & self.env.companies)[:1] or self.company_ids[:1]
+        plan = company.l10n_br_sped_referential_plan_id
         if not plan:
             return {}
         return plan.sped_referential_line(self, date=date)

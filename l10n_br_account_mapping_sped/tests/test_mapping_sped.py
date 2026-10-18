@@ -15,7 +15,7 @@ class TestMappingSped(TransactionCase):
                 "name": "Caixa geral",
                 "code": "SPEDTEST1",
                 "account_type": "asset_cash",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.plan = cls.env["l10n_br_account_mapping.plan"].create(
@@ -47,7 +47,7 @@ class TestMappingSped(TransactionCase):
                 "name": "Conta sem referencial",
                 "code": "SPEDTEST2",
                 "account_type": "expense",
-                "company_id": self.env.company.id,
+                "company_ids": [(6, 0, self.env.company.ids)],
             }
         )
         self.assertEqual(outra.l10n_br_sped_referential_line(), {})
