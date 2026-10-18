@@ -25,6 +25,7 @@ _INTERVALS = {
 class L10n_brPublicHolidaysWizard(models.TransientModel):
 
     _name = "l10n_br.public.holidays.wizard"
+    _description = "Brazilian Public Holidays Import Wizard"
 
     start_date = fields.Date(default=fields.Date.today)
     end_date = fields.Date(compute="_compute_end_date", readonly=False)
