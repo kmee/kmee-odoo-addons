@@ -1,22 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
 <odoo>
     <template
         id="default_website_description"
         inherit_id="website_hr_recruitment.detail"
     >
-        <xpath expr="//h5[hasclass('fw-light', 'o_not_editable')]" position="after">
-            <t t-if="job.website_display_description">
-                <section class="pt32">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-8 pb32">
-                                <p class="lead">
-                                    <t t-esc="job.description" />
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </t>
+        <xpath expr="//div[@t-field='job.description']" position="attributes">
+            <attribute name="t-if">job.website_display_description</attribute>
         </xpath>
     </template>
 </odoo>
