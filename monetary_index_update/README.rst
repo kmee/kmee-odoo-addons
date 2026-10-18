@@ -17,7 +17,7 @@ Monetary Index Update
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/18.0/monetary_index_update
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/19.0/monetary_index_update
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
@@ -50,16 +50,14 @@ This is a base/technical module that provides the infrastructure for
 monetary updates. It should be used together with other modules that
 implement the specific functionality for different system models.
 
-For End Users
--------------
+**For End Users**
 
 The monetary update functionality will be made available through
 specific modules that extend this base module. Each implementing module
 may provide different ways to access the monetary correction feature
 (e.g., buttons, menu items, actions).
 
-Using Monetary Update on Records
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Using Monetary Update on Records**
 
 When the functionality is implemented in a model, you will typically use
 a wizard to apply monetary corrections. The wizard allows you to:
@@ -81,8 +79,7 @@ a wizard to apply monetary corrections. The wizard allows you to:
    to the documentation of the module you are using for detailed
    instructions.
 
-Viewing Monetary Indexes
-------------------------
+**Viewing Monetary Indexes**
 
 To view the monetary indexes available in the system:
 
@@ -97,11 +94,9 @@ To view the monetary indexes available in the system:
    "Monetary Update Manager" permission can create, edit, or delete
    indexes.
 
-For Monetary Update Managers
-----------------------------
+**For Monetary Update Managers**
 
-Managing Monetary Indexes
-~~~~~~~~~~~~~~~~~~~~~~~~~
+**Managing Monetary Indexes**
 
 1. Go to **Settings > Monetary Indexes**
 2. Click **Create** to add a new index
@@ -113,8 +108,7 @@ Managing Monetary Indexes
    - **Country**: Country associated with the index
    - **Description**: Detailed information about the index
 
-Managing Historical Rates
-~~~~~~~~~~~~~~~~~~~~~~~~~
+**Managing Historical Rates**
 
 1. Open a monetary index form
 2. Go to the **Rates** tab
@@ -125,14 +119,12 @@ Managing Historical Rates
    - **Source**: Data source (optional)
    - **Note**: Additional notes (optional)
 
-For Developers
---------------
+**For Developers**
 
 To implement monetary correction in your custom modules, follow these
 steps:
 
-1. Add Dependency
-~~~~~~~~~~~~~~~~~
+**1. Add Dependency**
 
 In your module's ``__manifest__.py``:
 
@@ -147,8 +139,7 @@ In your module's ``__manifest__.py``:
        # ...
    }
 
-2. Extend Your Model
-~~~~~~~~~~~~~~~~~~~~
+**2. Extend Your Model**
 
 Inherit from ``monetary.update.service`` and specify which fields should
 be tracked:
@@ -166,8 +157,7 @@ be tracked:
        
        # Your model fields and methods...
 
-3. Add UI Access
-~~~~~~~~~~~~~~~~
+**3. Add UI Access**
 
 Provide a way for users to trigger the monetary update wizard. This can
 be done through:
@@ -193,14 +183,13 @@ be done through:
 **Option B - Action in context menu, or any other UI pattern that fits
 your use case.**
 
-4. Using the Service Programmatically (Optional)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**4. Using the Service Programmatically (Optional)**
 
 You can also use the monetary update service directly in your code:
 
 .. code:: python
 
-   # Calculate updated amount
+   **Calculate updated amount**
    updated_amount = self.env["monetary.update.service"].compute_updated_amount(
        index_code="selic",
        amount=1000.00,
@@ -208,8 +197,7 @@ You can also use the monetary update service directly in your code:
        end_date="2024-01-01",
    )
 
-Key Points
-~~~~~~~~~~
+**Key Points**
 
 - The ``_fields_to_track`` attribute defines which monetary fields can
   be updated
@@ -229,7 +217,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20monetary_index_update%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20monetary_index_update%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -244,6 +232,6 @@ Authors
 Maintainers
 -----------
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/18.0/monetary_index_update>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/19.0/monetary_index_update>`_ project on GitHub.
 
 You are welcome to contribute.
