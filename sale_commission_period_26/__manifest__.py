@@ -3,7 +3,7 @@
 
 {
     "name": "Sale Commission Period 26",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "summary": "Allow the commission to close from the 26th to the 25th of each month.",
     "category": "Sales",
     "license": "AGPL-3",
