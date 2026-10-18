@@ -12,7 +12,6 @@ exclude: |
   ^l10n_br_payment_boleto_pinbank/|
   ^l10n_br_website_hr_recruitment_form/|
   ^mail_role_filter/|
-  ^product_contract_period/|
   ^product_contract_period_bo/|
   ^project_task_service_class/|
   ^sac/|
