@@ -27,7 +27,6 @@ exclude: |
   ^l10n_br_hr_recruitment/|
   ^l10n_br_payment_boleto/|
   ^l10n_br_payment_boleto_pinbank/|
-  ^l10n_br_sale_report_py3o/|
   ^l10n_br_stock_report_py3o/|
   ^l10n_br_website_hr_recruitment_form/|
   ^mail_no_reply/|
