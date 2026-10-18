@@ -398,37 +398,14 @@ links (<tt class="docutils literal">1drv.ms</tt>) and direct file URLs.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
-<li><a class="reference internal" href="#on-the-sharepoint-microsoft-365-side" id="toc-entry-2">1. On the SharePoint / Microsoft 365 side</a><ul>
-<li><a class="reference internal" href="#where-the-files-must-live" id="toc-entry-3">1.1 Where the files must live</a></li>
-<li><a class="reference internal" href="#what-you-do-not-need-to-do" id="toc-entry-4">1.2 What you do <strong>not</strong> need to do</a></li>
-<li><a class="reference internal" href="#video-format-read-this-before-uploading" id="toc-entry-5">1.3 Video format — read this before uploading</a></li>
-<li><a class="reference internal" href="#getting-the-link" id="toc-entry-6">1.4 Getting the link</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#register-the-application-in-entra-id-azure-ad" id="toc-entry-7">2. Register the application in Entra ID (Azure AD)</a><ul>
-<li><a class="reference internal" href="#create-the-registration" id="toc-entry-8">2.1 Create the registration</a></li>
-<li><a class="reference internal" href="#grant-permissions" id="toc-entry-9">2.2 Grant permissions</a></li>
-<li><a class="reference internal" href="#outbound-hosts-to-allow" id="toc-entry-10">2.3 Outbound hosts to allow</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#in-odoo" id="toc-entry-11">3. In Odoo</a></li>
-<li><a class="reference internal" href="#check-that-it-works" id="toc-entry-12">4. Check that it works</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#usage" id="toc-entry-13">Usage</a><ul>
-<li><a class="reference internal" href="#adding-a-lesson-from-the-website" id="toc-entry-14">Adding a lesson from the website</a></li>
-<li><a class="reference internal" href="#adding-a-lesson-from-the-backend" id="toc-entry-15">Adding a lesson from the backend</a></li>
-<li><a class="reference internal" href="#what-attendees-see" id="toc-entry-16">What attendees see</a></li>
-<li><a class="reference internal" href="#day-to-day-operations" id="toc-entry-17">Day-to-day operations</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-18">Known issues / Roadmap</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-19">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-20">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-21">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-22">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-23">Maintainers</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a></li>
+<li><a class="reference internal" href="#usage" id="toc-entry-2">Usage</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-3">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-4">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-5">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-6">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-7">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-8">Maintainers</a></li>
 </ul>
 </li>
 </ul>
@@ -441,10 +418,8 @@ credentials in Odoo. Budget about 20 minutes. Granting the permissions
 (step 2.2) needs a <strong>Global Administrator</strong> or Privileged Role
 Administrator of the Microsoft tenant — the rest can be done by whoever
 administers the courses.</p>
-<div class="section" id="on-the-sharepoint-microsoft-365-side">
-<h2><a class="toc-backref" href="#toc-entry-2">1. On the SharePoint / Microsoft 365 side</a></h2>
-<div class="section" id="where-the-files-must-live">
-<h3><a class="toc-backref" href="#toc-entry-3">1.1 Where the files must live</a></h3>
+<p><strong>1. On the SharePoint / Microsoft 365 side</strong></p>
+<p><strong>1.1 Where the files must live</strong></p>
 <p>Any file readable by Microsoft Graph works:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -494,9 +469,7 @@ OneDrive</td>
 across personal OneDrives. It keeps the permission grant of step 2.2
 narrow, and a lesson does not break when the person who uploaded it
 leaves the company.</p>
-</div>
-<div class="section" id="what-you-do-not-need-to-do">
-<h3><a class="toc-backref" href="#toc-entry-4">1.2 What you do <strong>not</strong> need to do</a></h3>
+<p><strong>1.2 What you do not need to do</strong></p>
 <p>These are the usual dead ends — skip them:</p>
 <ul class="simple">
 <li><strong>Do not</strong> share the files with <em>“Anyone with the link”</em>. The Odoo
@@ -508,9 +481,7 @@ module does not use.</li>
 <li><strong>Do not</strong> create Microsoft accounts or guest invitations for your
 attendees.</li>
 </ul>
-</div>
-<div class="section" id="video-format-read-this-before-uploading">
-<h3><a class="toc-backref" href="#toc-entry-5">1.3 Video format — read this before uploading</a></h3>
+<p><strong>1.3 Video format — read this before uploading</strong></p>
 <p>Odoo serves the <strong>original file</strong> to the browser’s native <tt class="docutils literal">&lt;video&gt;</tt>
 player. There is no transcoding and no adaptive streaming, so the format
 must be one browsers can play natively:</p>
@@ -556,9 +527,7 @@ downloaded.</p>
 <p>Also keep an eye on file size: every viewer downloads the full file, so
 a 4 GB lesson costs 4 GB of Microsoft egress per attendee. Aim for
 720p/1080p at a reasonable bitrate.</p>
-</div>
-<div class="section" id="getting-the-link">
-<h3><a class="toc-backref" href="#toc-entry-6">1.4 Getting the link</a></h3>
+<p><strong>1.4 Getting the link</strong></p>
 <p>Open the file in SharePoint, Teams or OneDrive and use <strong>Copy link</strong>
 (the <em>Share</em> dialog works too). All of these are accepted:</p>
 <pre class="literal-block">
@@ -571,12 +540,8 @@ https://1drv.ms/v/s!AbCdEf
 <p>The module does not parse these URLs itself — it asks Microsoft Graph to
 resolve them — so link formats that Microsoft changes in the future keep
 working.</p>
-</div>
-</div>
-<div class="section" id="register-the-application-in-entra-id-azure-ad">
-<h2><a class="toc-backref" href="#toc-entry-7">2. Register the application in Entra ID (Azure AD)</a></h2>
-<div class="section" id="create-the-registration">
-<h3><a class="toc-backref" href="#toc-entry-8">2.1 Create the registration</a></h3>
+<p><strong>2. Register the application in Entra ID (Azure AD)</strong></p>
+<p><strong>2.1 Create the registration</strong></p>
 <ol class="arabic simple">
 <li>Go to <a class="reference external" href="https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade">App
 registrations</a>
@@ -591,9 +556,7 @@ and copy its <strong>value</strong> immediately — it is shown only once. Note 
 expiry date: when the secret expires, videos stop loading, so put a
 reminder in your calendar.</li>
 </ol>
-</div>
-<div class="section" id="grant-permissions">
-<h3><a class="toc-backref" href="#toc-entry-9">2.2 Grant permissions</a></h3>
+<p><strong>2.2 Grant permissions</strong></p>
 <p>Two options. Pick the second one unless you are in a hurry.</p>
 <p><strong>Option A — simple, broad (``Files.Read.All`` + ``Sites.Read.All``)</strong></p>
 <p>In <strong>API permissions &gt; Add a permission &gt; Microsoft Graph &gt; Application
@@ -627,9 +590,7 @@ Graph permissions
 reference</a>.</blockquote>
 <p>Either way, the permissions are <strong>read-only</strong>: the module never writes
 to SharePoint.</p>
-</div>
-<div class="section" id="outbound-hosts-to-allow">
-<h3><a class="toc-backref" href="#toc-entry-10">2.3 Outbound hosts to allow</a></h3>
+<p><strong>2.3 Outbound hosts to allow</strong></p>
 <p>The Odoo server is the one talking to Microsoft, so if its outbound
 traffic is filtered, these hosts have to be reachable <strong>from the
 server</strong>:</p>
@@ -666,10 +627,7 @@ row also carry the media itself. In <em>Redirect</em> mode the attendee’s
 browser fetches the media straight from Microsoft, so those hosts must
 also be reachable <strong>from the attendees’ network</strong> — which is normally
 the case for anyone with internet access.</p>
-</div>
-</div>
-<div class="section" id="in-odoo">
-<h2><a class="toc-backref" href="#toc-entry-11">3. In Odoo</a></h2>
+<p><strong>3. In Odoo</strong></p>
 <ol class="arabic simple">
 <li>Go to <strong>Website &gt; Configuration &gt; Settings &gt; eLearning &gt; Microsoft
 365 / SharePoint</strong> and fill in <strong>Tenant ID</strong>, <strong>Client ID</strong> and
@@ -694,9 +652,7 @@ worker).</li>
 (<tt class="docutils literal">website_slides_sharepoint.tenant_id</tt>, <tt class="docutils literal">.client_id</tt>,
 <tt class="docutils literal">.client_secret</tt>), which is readable by administrators only. The
 application token is cached in the same place and renewed automatically.</p>
-</div>
-<div class="section" id="check-that-it-works">
-<h2><a class="toc-backref" href="#toc-entry-12">4. Check that it works</a></h2>
+<p><strong>4. Check that it works</strong></p>
 <p>Add a video lesson with a SharePoint link (see USAGE). If the title,
 thumbnail and duration are filled in automatically, the whole chain —
 token, Graph, permissions — is working.</p>
@@ -791,11 +747,9 @@ under load</td>
 </tbody>
 </table>
 </div>
-</div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#toc-entry-13">Usage</a></h1>
-<div class="section" id="adding-a-lesson-from-the-website">
-<h2><a class="toc-backref" href="#toc-entry-14">Adding a lesson from the website</a></h2>
+<h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
+<p><strong>Adding a lesson from the website</strong></p>
 <p>In a course, click <strong>Add Content</strong> and:</p>
 <ul class="simple">
 <li><strong>Video</strong>: paste the SharePoint / OneDrive link in <em>Video Link</em>. Get
@@ -809,9 +763,7 @@ and PowerPoint files are converted to PDF by Microsoft Graph.</li>
 <p>The source is detected from the link itself, so there is no extra option
 to pick: a Google Drive link keeps using the native Google integration
 and a SharePoint link goes through Microsoft Graph.</p>
-</div>
-<div class="section" id="adding-a-lesson-from-the-backend">
-<h2><a class="toc-backref" href="#toc-entry-15">Adding a lesson from the backend</a></h2>
+<p><strong>Adding a lesson from the backend</strong></p>
 <p><strong>eLearning &gt; Courses &gt; (a course) &gt; Content</strong>. Set <em>Content Type</em>,
 then:</p>
 <ul class="simple">
@@ -821,9 +773,7 @@ to <strong>SharePoint</strong> on its own;</li>
 SharePoint</em> and use the <em>SharePoint Document Link</em> / <em>SharePoint Image
 Link</em> field.</li>
 </ul>
-</div>
-<div class="section" id="what-attendees-see">
-<h2><a class="toc-backref" href="#toc-entry-16">What attendees see</a></h2>
+<p><strong>What attendees see</strong></p>
 <p>Nothing Microsoft-specific: no login prompt, no consent screen, not even
 a Microsoft account. Videos play in the browser’s own player, and the
 lesson is marked as completed automatically when the attendee reaches
@@ -833,9 +783,7 @@ SharePoint. Access is controlled by the eLearning rules only: an
 attendee can watch a video if, and only if, they can access the lesson
 (published course, <em>Allow Preview</em> lesson, or course membership). Course
 officers can always access it.</p>
-</div>
-<div class="section" id="day-to-day-operations">
-<h2><a class="toc-backref" href="#toc-entry-17">Day-to-day operations</a></h2>
+<p><strong>Day-to-day operations</strong></p>
 <ul class="simple">
 <li><strong>Replacing a video</strong>: edit the lesson and paste the new link. The
 cached Microsoft identifiers and URL are dropped and re-resolved.</li>
@@ -847,9 +795,8 @@ replacing the secret in the settings is enough, the cached token is
 renewed automatically.</li>
 </ul>
 </div>
-</div>
 <div class="section" id="known-issues-roadmap">
-<h1><a class="toc-backref" href="#toc-entry-18">Known issues / Roadmap</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-3">Known issues / Roadmap</a></h1>
 <p>Known limitations, and what they mean in practice.</p>
 <p><strong>Video is served as-is, with no transcoding.</strong> The browser plays the
 original file, so the format has to be browser-friendly (MP4/H.264 — see
@@ -895,7 +842,7 @@ offer either.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-19">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -903,15 +850,15 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-20">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-5">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-21">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-6">Authors</a></h2>
 <ul class="simple">
 <li>KMEE</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-22">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-7">Contributors</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="https://kmee.com.br">KMEE</a>:<ul>
 <li>Luis Felipe Mileo <a class="reference external" href="mailto:mileo&#64;kmee.com.br">mileo&#64;kmee.com.br</a></li>
@@ -920,7 +867,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-23">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-8">Maintainers</a></h2>
 <p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/20.0/website_slides_sharepoint">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
 </div>

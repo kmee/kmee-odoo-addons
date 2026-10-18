@@ -1,4 +1,4 @@
-## Adding a lesson from the website
+**Adding a lesson from the website**
 
 In a course, click **Add Content** and:
 
@@ -14,7 +14,7 @@ The source is detected from the link itself, so there is no extra option to pick
 a Google Drive link keeps using the native Google integration and a SharePoint
 link goes through Microsoft Graph.
 
-## Adding a lesson from the backend
+**Adding a lesson from the backend**
 
 **eLearning > Courses > (a course) > Content**. Set *Content Type*, then:
 
@@ -23,7 +23,7 @@ link goes through Microsoft Graph.
 * for a document or an image, set the source to *Retrieve from SharePoint* and use
   the *SharePoint Document Link* / *SharePoint Image Link* field.
 
-## What attendees see
+**What attendees see**
 
 Nothing Microsoft-specific: no login prompt, no consent screen, not even a
 Microsoft account. Videos play in the browser's own player, and the lesson is
@@ -35,7 +35,7 @@ is controlled by the eLearning rules only: an attendee can watch a video if, and
 only if, they can access the lesson (published course, *Allow Preview* lesson, or
 course membership). Course officers can always access it.
 
-## Day-to-day operations
+**Day-to-day operations**
 
 * **Replacing a video**: edit the lesson and paste the new link. The cached
   Microsoft identifiers and URL are dropped and re-resolved.

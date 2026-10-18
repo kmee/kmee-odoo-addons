@@ -64,11 +64,9 @@ credentials in Odoo. Budget about 20 minutes. Granting the permissions
 Administrator of the Microsoft tenant — the rest can be done by whoever
 administers the courses.
 
-1. On the SharePoint / Microsoft 365 side
------------------------------------------
+**1. On the SharePoint / Microsoft 365 side**
 
-1.1 Where the files must live
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**1.1 Where the files must live**
 
 Any file readable by Microsoft Graph works:
 
@@ -98,8 +96,7 @@ across personal OneDrives. It keeps the permission grant of step 2.2
 narrow, and a lesson does not break when the person who uploaded it
 leaves the company.
 
-1.2 What you do **not** need to do
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**1.2 What you do not need to do**
 
 These are the usual dead ends — skip them:
 
@@ -112,8 +109,7 @@ These are the usual dead ends — skip them:
 - **Do not** create Microsoft accounts or guest invitations for your
   attendees.
 
-1.3 Video format — read this before uploading
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**1.3 Video format — read this before uploading**
 
 Odoo serves the **original file** to the browser's native ``<video>``
 player. There is no transcoding and no adaptive streaming, so the format
@@ -151,8 +147,7 @@ Also keep an eye on file size: every viewer downloads the full file, so
 a 4 GB lesson costs 4 GB of Microsoft egress per attendee. Aim for
 720p/1080p at a reasonable bitrate.
 
-1.4 Getting the link
-~~~~~~~~~~~~~~~~~~~~
+**1.4 Getting the link**
 
 Open the file in SharePoint, Teams or OneDrive and use **Copy link**
 (the *Share* dialog works too). All of these are accepted:
@@ -169,11 +164,9 @@ The module does not parse these URLs itself — it asks Microsoft Graph to
 resolve them — so link formats that Microsoft changes in the future keep
 working.
 
-2. Register the application in Entra ID (Azure AD)
---------------------------------------------------
+**2. Register the application in Entra ID (Azure AD)**
 
-2.1 Create the registration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**2.1 Create the registration**
 
 1. Go to `App
    registrations <https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade>`__
@@ -188,8 +181,7 @@ working.
    expiry date: when the secret expires, videos stop loading, so put a
    reminder in your calendar.
 
-2.2 Grant permissions
-~~~~~~~~~~~~~~~~~~~~~
+**2.2 Grant permissions**
 
 Two options. Pick the second one unless you are in a hurry.
 
@@ -233,8 +225,7 @@ site of a user, if you serve lessons from a personal OneDrive).
 Either way, the permissions are **read-only**: the module never writes
 to SharePoint.
 
-2.3 Outbound hosts to allow
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**2.3 Outbound hosts to allow**
 
 The Odoo server is the one talking to Microsoft, so if its outbound
 traffic is filtered, these hosts have to be reachable **from the
@@ -262,8 +253,7 @@ browser fetches the media straight from Microsoft, so those hosts must
 also be reachable **from the attendees' network** — which is normally
 the case for anyone with internet access.
 
-3. In Odoo
-----------
+**3. In Odoo**
 
 1. Go to **Website > Configuration > Settings > eLearning > Microsoft
    365 / SharePoint** and fill in **Tenant ID**, **Client ID** and
@@ -289,8 +279,7 @@ The credentials are stored in ``ir.config_parameter``
 ``.client_secret``), which is readable by administrators only. The
 application token is cached in the same place and renewed automatically.
 
-4. Check that it works
-----------------------
+**4. Check that it works**
 
 Add a video lesson with a SharePoint link (see USAGE). If the title,
 thumbnail and duration are filled in automatically, the whole chain —
@@ -342,8 +331,7 @@ practice. Server log messages are emitted by
 Usage
 =====
 
-Adding a lesson from the website
---------------------------------
+**Adding a lesson from the website**
 
 In a course, click **Add Content** and:
 
@@ -359,8 +347,7 @@ The source is detected from the link itself, so there is no extra option
 to pick: a Google Drive link keeps using the native Google integration
 and a SharePoint link goes through Microsoft Graph.
 
-Adding a lesson from the backend
---------------------------------
+**Adding a lesson from the backend**
 
 **eLearning > Courses > (a course) > Content**. Set *Content Type*,
 then:
@@ -371,8 +358,7 @@ then:
   SharePoint* and use the *SharePoint Document Link* / *SharePoint Image
   Link* field.
 
-What attendees see
-------------------
+**What attendees see**
 
 Nothing Microsoft-specific: no login prompt, no consent screen, not even
 a Microsoft account. Videos play in the browser's own player, and the
@@ -385,8 +371,7 @@ attendee can watch a video if, and only if, they can access the lesson
 (published course, *Allow Preview* lesson, or course membership). Course
 officers can always access it.
 
-Day-to-day operations
----------------------
+**Day-to-day operations**
 
 - **Replacing a video**: edit the lesson and paste the new link. The
   cached Microsoft identifiers and URL are dropped and re-resolved.
