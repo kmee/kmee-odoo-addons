@@ -1,7 +1,7 @@
 {
     "name": "Account Custom Payment Term",
     "summary": "Adds record-specific editable payment terms that are archived by default.",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Accounting",
     "author": "KMEE",
     "license": "AGPL-3",
