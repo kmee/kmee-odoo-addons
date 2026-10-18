@@ -15,7 +15,9 @@
                     name="category_ids"
                     widget="many2many_tags"
                     string="Employee Tags"
-                    attrs="{'required': [('holiday_type', 'in', ('category_and', 'category_or'))], 'invisible': [('holiday_type', 'not in', ('category_and', 'category_or'))]}"
+                    readonly="state in ('cancel', 'refuse', 'validate')"
+                    required="holiday_type in ('category_and', 'category_or')"
+                    invisible="holiday_type not in ('category_and', 'category_or')"
                 />
             </xpath>
         </field>
