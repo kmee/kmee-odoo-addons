@@ -138,7 +138,7 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter" />
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='filter_won']" position="before">
+            <xpath expr="//filter[@name='filter_won_status_won']" position="before">
                 <filter
                     string="BANT Qualified"
                     name="bant_qualified"
