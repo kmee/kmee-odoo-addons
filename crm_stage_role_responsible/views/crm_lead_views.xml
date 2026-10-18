@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_role" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.role</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="hide_sdr_bdr" invisible="1" />
+                <field name="hide_hunter" invisible="1" />
+                <field name="hide_farmer" invisible="1" />
+            </xpath>
+            <field name="user_id" position="after">
+                <field
+                    name="sdr_bdr_id"
+                    widget="many2one_avatar_user"
+                    invisible="hide_sdr_bdr"
+                />
+                <field
+                    name="hunter_id"
+                    widget="many2one_avatar_user"
+                    invisible="hide_hunter"
+                />
+                <field
+                    name="farmer_id"
+                    widget="many2one_avatar_user"
+                    invisible="hide_farmer"
+                />
+            </field>
+            <field name="team_id" position="before">
+                <field
+                    name="sdr_bdr_id"
+                    widget="many2one_avatar_user"
+                    invisible="hide_sdr_bdr"
+                />
+                <field
+                    name="hunter_id"
+                    widget="many2one_avatar_user"
+                    invisible="hide_hunter"
+                />
+                <field
+                    name="farmer_id"
+                    widget="many2one_avatar_user"
+                    invisible="hide_farmer"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
