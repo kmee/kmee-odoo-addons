@@ -1,0 +1,143 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_payment_boleto
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__barcode
+msgid "Barcode"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto.account_payment_mode_form_view
+#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto.payment_transaction_form_view
+msgid "Boleto"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__boleto_pdf
+msgid "Boleto PDF"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto/models/account_move.py:0
+#, python-format
+msgid ""
+"Could not generate the boletos. No payment provider is configured for the "
+"selected payment method"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__digitable_line
+msgid "Digitable Line"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__due_date
+msgid "Due Date"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_account_payment_mode__generate_boletos_on_invoice
+msgid "Generate boletos on invoice?"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_account_payment_mode__generate_boletos_on_invoice
+msgid ""
+"If true, when confirming the invoice with this payment method, the boletos "
+"will be automatically generated using the associated payment provider"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_instructions
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__boleto_instructions
+msgid "Instructions"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_instructions
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_payment_transaction__boleto_instructions
+msgid ""
+"Instructions to be printed on the boleto. This field is used to provide "
+"additional information to the payer."
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_interest
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__boleto_interest
+msgid "Interest"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_interest
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_payment_transaction__boleto_interest
+msgid ""
+"Interest fee for overdue payments. This value will be added to the total "
+"amount of the invoice."
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__is_boleto_payment
+msgid "Is boleto payment"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model,name:l10n_br_payment_boleto.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__our_number
+msgid "Our Number"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model,name:l10n_br_payment_boleto.model_account_payment_mode
+msgid "Payment Modes"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model,name:l10n_br_payment_boleto.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_account_payment_mode__payment_provider_id
+msgid "Payment provider"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_penalty
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__boleto_penalty
+msgid "Penalty"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_penalty
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_payment_transaction__boleto_penalty
+msgid ""
+"Penalty fee for overdue payments. This value will be added to the total "
+"amount of the invoice."
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__provider_technical_info
+msgid "Technical Information"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_payment_transaction__provider_technical_info
+msgid "Technical information about the payment transaction."
+msgstr ""
