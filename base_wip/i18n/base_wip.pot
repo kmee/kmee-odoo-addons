@@ -1,0 +1,262 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_wip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: base_wip
+#: model:ir.model,name:base_wip.model_base_wip_report
+msgid "Base WIP Report"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model,name:base_wip.model_base_wip
+msgid "Base Wip"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model,name:base_wip.model_base_wip_abstract
+msgid "Base Wip Abstract"
+msgstr ""
+
+#. module: base_wip
+#: model_terms:ir.ui.view,arch_db:base_wip.view_base_wip_report_graph
+msgid "Base Wip Report"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip__wip_state__closed
+msgid "Closed"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__cycle_time
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__cycle_time
+msgid "Cycle Time"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__cycle_time_float
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__cycle_time_float
+msgid "Cycle Time Float"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__date_start
+msgid "Date Start"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__date_stop
+msgid "Date Stop"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__display_name
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__state__done
+msgid "Done"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__state__exception
+msgid "Exception"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__flow_efficience
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__flow_efficience
+msgid "Flow Efficience"
+msgstr ""
+
+#. module: base_wip
+#: model_terms:ir.ui.view,arch_db:base_wip.base_wip_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__id
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__id
+msgid "ID"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__state__open
+msgid "In Progress"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip____last_update
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__lead_time
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__lead_time
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__lead_time
+msgid "Lead Time"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__lead_time_seconds
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__lead_time_float
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__lead_time_float
+msgid "Lead Time Float"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__logged_time
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__logged_time
+msgid "Logged Time"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__logged_time_float
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__logged_time_float
+msgid "Logged Time Float"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__model_id
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__model_id
+#: model_terms:ir.ui.view,arch_db:base_wip.base_wip_search_view
+msgid "Model"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__state__draft
+msgid "New"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__state__pending
+msgid "Pending"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__reference_id__project_task
+msgid "Project Task"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__reaction_time
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__reaction_time
+msgid "Reaction Time"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__reaction_time_float
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__reaction_time_float
+msgid "Reaction Time Float"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__reference_id
+msgid "Record"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.ui.menu,name:base_wip.base_wip_menu
+msgid "Records"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.ui.menu,name:base_wip.base_wip_report_view
+msgid "Report"
+msgstr ""
+
+#. module: base_wip
+#: model_terms:ir.ui.view,arch_db:base_wip.base_wip_search_view
+msgid "Resource"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__res_id
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__res_id
+msgid "Resource ID"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields.selection,name:base_wip.selection__base_wip__wip_state__running
+msgid "Running"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__date_hour_start
+msgid "Start"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__state
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_report__state
+msgid "State"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__date_hour_stop
+#: model_terms:ir.ui.view,arch_db:base_wip.base_wip_form_view
+msgid "Stop"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__user_id
+msgid "User"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.actions.act_window,name:base_wip.base_wip_act_window
+#: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__wip_ids
+#: model:ir.ui.menu,name:base_wip.base_wip_menu_view
+#: model_terms:ir.ui.view,arch_db:base_wip.base_wip_graph_view
+#: model_terms:ir.ui.view,arch_db:base_wip.base_wip_pivot_view
+msgid "Wip"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.model.fields,field_description:base_wip.field_base_wip__wip_state
+msgid "Wip State"
+msgstr ""
+
+#. module: base_wip
+#: model:ir.actions.act_window,name:base_wip.base_wip_view_act_window
+msgid "Wip View"
+msgstr ""
