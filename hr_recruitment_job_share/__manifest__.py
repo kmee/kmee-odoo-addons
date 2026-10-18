@@ -5,7 +5,7 @@
     "name": "Hr Recruitment Job Share",
     "summary": """
         Share job in odoo portal""",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -13,9 +13,9 @@
         "website_hr_recruitment",
     ],
     "data": [
-        "security/ir.model.access.csv",
         "views/hr_job.xml",
         "views/website_hr_recruitment_templates.xml",
         "wizards/job_share.xml",
+        "security/ir.access.csv",
     ],
 }

@@ -13,7 +13,7 @@ class Job(models.Model):
     application_url = fields.Char("URL da Vaga", compute="_compute_application_url")
 
     def get_share_url(self):
-        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
+        base_url = self.env["ir.config_parameter"].sudo().get_str("web.base.url")
         return f"{base_url}/jobs/details/{self.id}?access_token={self.access_token}"
 
     @api.depends("access_token")
