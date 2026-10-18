@@ -7,10 +7,6 @@
         <field name="inherit_id" ref="l10n_br_hr.view_l10n_br_hr_employee_form" />
         <field name="priority">999</field>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='gender']" position="after">
-                <field name="nationality_id" />
-            </xpath>
-
             <xpath expr="//field[@name='identity_city_id']" position="after">
                 <field name="rg_file" />
             </xpath>
