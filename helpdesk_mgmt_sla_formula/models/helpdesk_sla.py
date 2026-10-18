@@ -1,6 +1,6 @@
 import ast
 import logging
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from dateutil.relativedelta import relativedelta
 
@@ -37,31 +37,27 @@ class HelpdeskSLAFormula(models.Model):
                     _("Erro de sintaxe na fórmula Python: %s", str(e))
                 ) from e
 
-    def check_ticket_sla(self, tickets):
+    def _eval_deadline_formula(self, ticket):
+        """Evaluate the formula for a ticket and return a datetime (or False)."""
         self.ensure_one()
-        if not self.use_formula:
-            return super().check_ticket_sla(tickets)
-
-        for ticket in tickets:
-            try:
-                safe_dict = {
-                    "datetime": datetime,
-                    "timedelta": timedelta,
-                    "relativedelta": relativedelta,
-                    "record": ticket,
-                }
-
-                deadline = eval(  # pylint: disable=eval-used
-                    self.sla_deadline_formula, {"__builtins__": {}}, safe_dict
-                )
-
-                ticket.sla_deadline = deadline
-                ticket.sla_expired = deadline < datetime.now()
-
-            except Exception as e:
-                _logger.error(
-                    "Erro ao calcular deadline SLA %s para ticket %s: %s",
-                    self.name,
-                    ticket.id,
-                    str(e),
-                )
+        safe_dict = {
+            "datetime": datetime,
+            "timedelta": timedelta,
+            "relativedelta": relativedelta,
+            "record": ticket,
+        }
+        try:
+            deadline = eval(  # pylint: disable=eval-used
+                self.sla_deadline_formula, {"__builtins__": {}}, safe_dict
+            )
+        except Exception as e:
+            _logger.error(
+                "Error computing SLA deadline %s for ticket %s: %s",
+                self.name,
+                ticket.id,
+                str(e),
+            )
+            return False
+        if isinstance(deadline, date) and not isinstance(deadline, datetime):
+            deadline = datetime.combine(deadline, datetime.max.time())
+        return deadline or False
