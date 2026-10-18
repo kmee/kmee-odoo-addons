@@ -30,18 +30,19 @@ class SaleOrderCoverPdf(models.Model):
                     )
                 )
 
-    @api.model
-    def create(self, vals):
-        if vals.get("active", True):
-            existing_active = self.search([("active", "=", True)])
-            if existing_active:
-                raise ValidationError(
-                    _(
-                        "Já existe um registro ativo de capa PDF. "
-                        "Desative-o antes de criar um novo."
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("active", True):
+                existing_active = self.search([("active", "=", True)])
+                if existing_active:
+                    raise ValidationError(
+                        _(
+                            "Já existe um registro ativo de capa PDF. "
+                            "Desative-o antes de criar um novo."
+                        )
                     )
-                )
-        return super().create(vals)
+        return super().create(vals_list)
 
     @api.model
     def get_active_cover(self):

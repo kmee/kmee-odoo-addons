@@ -48,6 +48,7 @@ class SaleOrder(models.Model):
 
         try:
             company = self.env.company
+            default_terms_text = ""
             if company.terms_type == "html":
                 default_terms_text = html2plaintext(company.invoice_terms_html)
 
