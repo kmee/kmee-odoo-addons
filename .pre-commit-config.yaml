@@ -39,7 +39,6 @@ exclude: |
   ^project_tech_lead/|
   ^sac/|
   ^sale_blanket_order_isolated_quotation/|
-  ^sale_order_template_pricelist/|
   ^sale_partial_lock/|
   ^sale_report_merge_pdf/|
   ^sale_tier_validation_exceptions/|
