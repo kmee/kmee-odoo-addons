@@ -9,7 +9,6 @@ exclude: |
   ^product_contract_period_bo/|
   ^sac/|
   ^sale_blanket_order_isolated_quotation/|
-  ^sale_partial_lock/|
   ^stock_intercompany_bidirectional_pull/|
   ^stock_picking_reports_declaration/|
   ^website_hr_recruitment_display_description/|
