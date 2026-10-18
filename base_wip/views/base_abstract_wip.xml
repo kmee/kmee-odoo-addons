@@ -12,14 +12,14 @@
                     <notebook>
                         <page name="wip_page" string="Metrics">
                             <field name="wip_ids" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="state" />
                                     <field name="date_hour_start" />
                                     <field name="date_hour_stop" />
                                     <field name="lead_time" />
                                     <field name="state" />
                                     <field name="user_id" />
-                                </tree>
+                                </list>
                             </field>
                             <group>
                                 <group>
@@ -34,7 +34,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter" />
+                <chatter />
             </form>
         </field>
     </record> -->
@@ -69,7 +69,7 @@
                 <field name="logged_time" />
                 <field name="logged_time_float" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_global_click">
                             <div>
                                 <span class="o_kanban_record_title">
@@ -119,11 +119,11 @@
     </record>
 
     <record id="view_base_wip_report_tree" model="ir.ui.view">
-        <field name="name">base.wip.report.tree</field>
+        <field name="name">base.wip.report.list</field>
         <field name="model">base.wip.report</field>
         <field name="arch" type="xml">
-            <tree>
-            <!-- <tree> -->
+            <list>
+            <!-- <list> -->
                 <field name="reference_id" />
                 <field name="state" />
                 <field name="res_id" />
@@ -137,14 +137,14 @@
                 <field name="logged_time" />
                 <field name="logged_time_float" />
                 <field name="flow_efficience" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="base_wip_view_act_window">
         <field name="name">Wip View</field>
         <field name="res_model">base.wip.report</field>
-        <field name="view_mode">kanban,pivot,tree</field>
+        <field name="view_mode">kanban,pivot,list</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
