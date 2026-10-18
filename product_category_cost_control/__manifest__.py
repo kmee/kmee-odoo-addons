@@ -1,6 +1,6 @@
 {
     "name": "Product Category Cost Control",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "summary": "Control price unit calculation based on product category settings.",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",

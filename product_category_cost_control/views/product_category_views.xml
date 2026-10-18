@@ -7,10 +7,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
     <record id="view_product_category_form_inherit_price_control" model="ir.ui.view">
         <field name="name">product.category.form.inherit.price.control</field>
         <field name="model">product.category</field>
-        <field
-            name="inherit_id"
-            ref="stock_account.view_category_property_form_stock"
-        />
+        <field name="inherit_id" ref="account.view_category_property_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='property_valuation']" position="after">
                 <field

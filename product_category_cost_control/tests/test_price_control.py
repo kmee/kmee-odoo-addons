@@ -24,7 +24,7 @@ class TestPriceControl(TransactionCase):
             {
                 "product_id": product.id,
                 "product_uom_qty": 2.0,
-                "product_uom": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "location_id": self.env.ref("stock.stock_location_suppliers").id,
                 "location_dest_id": warehouse.lot_stock_id.id,
             }
