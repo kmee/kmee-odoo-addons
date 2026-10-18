@@ -41,7 +41,7 @@ class HrSalaryRule(models.Model):
             account = Account.search(
                 [
                     ("account_type", "=", account_type),
-                    ("company_id", "=", company.id),
+                    ("company_ids", "in", company.ids),
                     ("deprecated", "=", False),
                 ],
                 order="code",

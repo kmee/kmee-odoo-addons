@@ -7,7 +7,7 @@ from odoo import models
 class AccountChartTemplate(models.AbstractModel):
     _inherit = "account.chart.template"
 
-    def _load(self, template_code, company, install_demo):
+    def _load(self, template_code, company, install_demo, force_create=True):
         """Após aplicar um plano de contas, (re)tenta o mapeamento FOPAG.
 
         A auto-instalação dos módulos de plano de contas (l10n_generic_coa,
@@ -17,6 +17,6 @@ class AccountChartTemplate(models.AbstractModel):
         FOPAG sejam vinculados. A rotina é idempotente e mira a empresa dona do
         diário FOPAG (ver ``hr.salary.rule._l10n_br_setup_payroll_accounts``).
         """
-        res = super()._load(template_code, company, install_demo)
+        res = super()._load(template_code, company, install_demo, force_create)
         self.env["hr.salary.rule"]._l10n_br_setup_payroll_accounts()
         return res

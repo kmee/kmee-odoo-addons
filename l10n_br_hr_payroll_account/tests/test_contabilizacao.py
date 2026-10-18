@@ -30,7 +30,7 @@ class TestContabilizacaoFolha(PayrollCommon):
         # não estas especificamente — o vínculo continua sendo do módulo).
         Account = cls.env["account.account"]
         if not Account.search(
-            [("account_type", "=", "expense"), ("company_id", "=", cls.company.id)],
+            [("account_type", "=", "expense"), ("company_ids", "in", cls.company.ids)],
             limit=1,
         ):
             Account.create(
@@ -38,13 +38,13 @@ class TestContabilizacaoFolha(PayrollCommon):
                     "name": "Despesas com Pessoal (fixture)",
                     "code": "TST6101",
                     "account_type": "expense",
-                    "company_id": cls.company.id,
+                    "company_ids": [(6, 0, cls.company.ids)],
                 }
             )
         if not Account.search(
             [
                 ("account_type", "=", "liability_current"),
-                ("company_id", "=", cls.company.id),
+                ("company_ids", "in", cls.company.ids),
             ],
             limit=1,
         ):
@@ -53,7 +53,7 @@ class TestContabilizacaoFolha(PayrollCommon):
                     "name": "Obrigações Trabalhistas (fixture)",
                     "code": "TST2101",
                     "account_type": "liability_current",
-                    "company_id": cls.company.id,
+                    "company_ids": [(6, 0, cls.company.ids)],
                 }
             )
 
