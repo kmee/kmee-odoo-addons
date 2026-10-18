@@ -1,1 +1,0 @@
-Allows you to create invoices even when a sale order is locked.

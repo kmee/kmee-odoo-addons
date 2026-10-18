@@ -1,1 +1,0 @@
-Now you can cancel or create an invoice in any status of the sale order.
