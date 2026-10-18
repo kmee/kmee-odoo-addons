@@ -7,6 +7,9 @@ from odoo import fields, models
 class HrLeaveType(models.Model):
     _inherit = "hr.leave.type"
 
+    code = fields.Char(
+        help="Short code of the leave type, used to map it in the payroll rules."
+    )
     l10n_br_category = fields.Selection(
         selection=[
             ("disease", "Doenca / Acidente"),
