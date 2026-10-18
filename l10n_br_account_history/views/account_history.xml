@@ -39,21 +39,21 @@
     </record>
 
     <record id="account_history_tree" model="ir.ui.view">
-        <field name="name">l10n_br.account.history.tree</field>
+        <field name="name">l10n_br.account.history.list</field>
         <field name="model">l10n_br.account.history</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="template" />
                 <field name="code" optional="show" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="account_history_action" model="ir.actions.act_window">
         <field name="name">Historicos Padrao</field>
         <field name="res_model">l10n_br.account.history</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem
