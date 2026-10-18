@@ -27,7 +27,7 @@
                 <group>
                     <group string="Candidate Pickings">
                         <field name="candidate_match_line_ids" nolabel="1">
-                            <tree>
+                            <list>
                                 <field name="picking_id" />
                                 <field name="partner_id" />
                                 <field name="origin" />
@@ -35,27 +35,27 @@
                                 <field name="scheduled_date" />
                                 <field name="p_line_match" />
                                 <field name="p_qty_match" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </group>
                 <group>
                     <group string="Unmatched Invoice Lines">
                         <field name="unmatched_invoice_line_ids" nolabel="1">
-                            <tree>
+                            <list>
                                 <field name="product_id" />
                                 <field name="quantity" />
                                 <field name="price_unit" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                     <group string="Matched Invoice Lines">
                         <field name="full_match_invoice_line_ids" nolabel="1">
-                            <tree>
+                            <list>
                                 <field name="product_id" />
                                 <field name="quantity" />
                                 <field name="price_unit" />
-                            </tree>
+                            </list>
                         </field>
                     </group>
                 </group>
