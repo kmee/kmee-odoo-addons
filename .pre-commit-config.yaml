@@ -3,7 +3,6 @@ exclude: |
   # NOT INSTALLABLE ADDONS
   ^account_payment_currency_rate/|
   ^account_statement_import_ofx_invert_type/|
-  ^base_wip/|
   ^crm_bant/|
   ^crm_linkedin/|
   ^crm_lost_reason_transition/|

@@ -123,7 +123,7 @@
         <field name="model">base.wip.report</field>
         <field name="arch" type="xml">
             <tree>
-            <!-- <tree string="Base Wip Report"> -->
+            <!-- <tree> -->
                 <field name="reference_id" />
                 <field name="state" />
                 <field name="res_id" />
