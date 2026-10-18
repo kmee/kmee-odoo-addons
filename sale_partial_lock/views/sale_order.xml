@@ -13,15 +13,18 @@
                     name="action_cancel"
                     type="object"
                     string="Cancel"
-                    states="done"
+                    invisible="state != 'done'"
                 />
             </xpath>
-            <xpath expr='//button[@name="payment_action_void"]' position="after">
+            <xpath
+                expr="//button[@name=&quot;payment_action_void&quot;]"
+                position="after"
+            >
                 <button
                     name="%(sale.action_view_sale_advance_payment_inv)d"
                     string="Create Invoice"
                     type="action"
-                    attrs="{'invisible': [('invoice_status', '!=', 'to invoice'), ('state', '!=', 'done')]}"
+                    invisible="invoice_status != 'to invoice' and state != 'done'"
                 />
             </xpath>
         </field>
