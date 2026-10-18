@@ -1,1 +1,0 @@
-Some customers want to have a customized sales order report, and the ability to edit the layout whenever they want.
