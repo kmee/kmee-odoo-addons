@@ -8,7 +8,6 @@
             <field name="assignment_domain">[('email_state', '=', 'correct')]</field>
             <field name="assignment_max">50</field>
             <field name="alias_name">leads</field>
-            <field name="alias_user_id" ref="base.user_admin" />
         </record>
 
         <!-- Equipe de Qualificação (SDRs Inbound) -->
@@ -19,7 +18,6 @@
             <field name="assignment_domain">[('source_id.name', '=', 'Website')]</field>
             <field name="assignment_max">40</field>
             <field name="alias_name">qualificar</field>
-            <field name="alias_user_id" ref="base.user_admin" />
         </record>
 
         <!-- Equipe de Fechamento (Account Executives) -->
@@ -30,6 +28,5 @@
             <field name="assignment_domain">[('type', '=', 'opportunity')]</field>
             <field name="assignment_max">20</field>
             <field name="alias_name">oportunidades</field>
-            <field name="alias_user_id" ref="base.user_admin" />
         </record>
 </odoo>

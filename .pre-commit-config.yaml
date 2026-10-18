@@ -2,7 +2,6 @@ exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
   ^crm_linkedin/|
-  ^crm_predict_revenue/|
   ^crm_stage_role_responsible/|
   ^crm_wip/|
   ^helpdesk_mgmt_index_content/|

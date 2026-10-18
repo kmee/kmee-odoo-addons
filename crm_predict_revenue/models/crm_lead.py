@@ -113,14 +113,15 @@ class CrmLead(models.Model):
     # Campos para análise
     source_channel = fields.Selection(
         [
-            ("inbound", "Inbound"),
-            ("outbound", "Outbound"),
-            ("referral", "Indicação"),
-            ("partner", "Parceiro"),
-            ("other", "Outro"),
+            ("inbound_call", "Inbound – Ligação Recebida"),
+            ("inbound_internal", "Inbound - Direcionamento Interno"),
+            ("inbound_organic", "Inbound - Orgânico/Desconhecido"),
+            ("outbound_segmented", "Outbound - Prospecção Segmentada"),
+            ("outbound_events", "Outbound – Eventos"),
+            ("migration_saraiva", "Migração Saraiva"),
         ],
         string="Canal de Origem",
-        default="inbound",
+        default="inbound_call",
     )
 
     won_sales_cycle_days = fields.Integer(
