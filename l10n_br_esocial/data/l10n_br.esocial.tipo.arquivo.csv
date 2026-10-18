@@ -1,0 +1,61 @@
+id,codigo,nome,dt_inicio,dt_fim,id_tp_evento,tag_tp_evento,identificador
+tipo_arq_s_1000,S-1000,Informações do Empregador/Contribuinte/Órgão Público,2014-01-01,,1,evtInfoEmpregador,CONTRIBUINTE
+tipo_arq_s_1005,S-1005,"Tabela de Estabelecimentos, Obras ou Unidades de Órgãos Públicos",2014-01-01,,10,evtTabEstab,CONTRIBUINTE
+tipo_arq_s_1010,S-1010,Tabela de Rubricas,2014-01-01,,11,evtTabRubrica,CONTRIBUINTE
+tipo_arq_s_1020,S-1020,Tabela de Lotações Tributárias,2014-01-01,,12,evtTabLotacao,CONTRIBUINTE
+tipo_arq_s_1030,S-1030,Tabela de Cargos/Empregos Públicos,2014-01-01,2022-03-09,13,evtTabCargo,CONTRIBUINTE
+tipo_arq_s_1040,S-1040,Tabela de Funções/Cargos em Comissão,2014-01-01,2022-03-09,14,evtTabFuncao,CONTRIBUINTE
+tipo_arq_s_1050,S-1050,Tabela de Horários/Turnos de Trabalho,2014-01-01,2022-03-09,15,evtTabHorTur,CONTRIBUINTE
+tipo_arq_s_1070,S-1070,Tabela de Processos Administrativos/Judiciais,2014-01-01,,17,evtTabProcesso,CONTRIBUINTE
+tipo_arq_s_1080,S-1080,Tabela de Operadores Portuários,2014-01-01,2022-03-09,18,evtTabOperPort,CONTRIBUINTE
+tipo_arq_s_1200,S-1200,Remuneração de Trabalhador vinculado ao Regime Geral de Previd. Social,2014-01-01,,70,evtRemun,TRABALHADOR
+tipo_arq_s_1202,S-1202,Remuneração de Servidor vinculado ao Regime Próprio de Previd. Social,2022-08-01,,78,evtRmnRPPS,INDEFINIDO
+tipo_arq_s_1207,S-1207,Benefícios - Entes Públicos,2022-08-01,,72,evtBenPrRP,INDEFINIDO
+tipo_arq_s_1210,S-1210,Pagamentos de Rendimentos do Trabalho,2014-01-01,,71,evtPgtos,INDEFINIDO
+tipo_arq_s_1250,S-1250,Aquisição de Produção Rural,2014-01-01,2021-07-20,73,evtAqProd,INDEFINIDO
+tipo_arq_s_1260,S-1260,Comercialização da Produção Rural Pessoa Física,2014-01-01,,74,evtComProd,INDEFINIDO
+tipo_arq_s_1270,S-1270,Contratação de Trabalhadores Avulsos Não Portuários,2014-01-01,,75,evtContratAvNP,INDEFINIDO
+tipo_arq_s_1280,S-1280,Informações Complementares aos Eventos Periódicos,2014-01-01,,76,evtInfoComplPer,INDEFINIDO
+tipo_arq_s_1295,S-1295,Solicitação de Totalização para Pagamento em Contingência,2014-01-01,2022-03-09,77,evtTotConting,INDEFINIDO
+tipo_arq_s_1298,S-1298,Reabertura dos Eventos Periódicos,2014-01-01,,79,evtReabreEvPer,INDEFINIDO
+tipo_arq_s_1299,S-1299,Fechamento dos Eventos Periódicos,2014-01-01,,80,evtFechaEvPer,INDEFINIDO
+tipo_arq_s_1300,S-1300,Contribuição Sindical Patronal,2014-01-01,2022-03-09,81,evtContrSindPatr,INDEFINIDO
+tipo_arq_s_2100,S-2100,Cadastramento Inicial do Vínculo,2014-01-01,2018-01-07,40,evtCadInicial,VINCULO_TRABALHISTA
+tipo_arq_s_2190,S-2190,Registro Preliminar de Trabalhador,2014-01-01,,41,evtAdmPrelim,SEGURADO_EMPREGADO
+tipo_arq_s_2200,S-2200,Cadastramento Inicial do Vínculo e Admissão/Ingresso de Trabalhador,2014-01-01,,42,evtAdmissao,VINCULO_TRABALHISTA
+tipo_arq_s_2205,S-2205,Alteração de Dados Cadastrais do Trabalhador,2014-01-01,,43,evtAltCadastral,TRABALHADOR
+tipo_arq_s_2206,S-2206,Alteração de Contrato de Trabalho/Relação Estatutária,2014-01-01,,44,evtAltContratual,VINCULO_TRABALHISTA
+tipo_arq_s_2210,S-2210,Comunicação de Acidente de Trabalho,2021-10-13,,45,evtCAT,AFASTAMENTO
+tipo_arq_s_2220,S-2220,Monitoramento da Saúde do Trabalhador,2021-10-13,,46,evtMonit,AFASTAMENTO
+tipo_arq_s_2221,S-2221,Exame Toxicológico do Motorista Profissional,9999-12-31,,39,evtToxic,AFASTAMENTO
+tipo_arq_s_2230,S-2230,Afastamento Temporário,2014-01-01,,48,evtAfastTemp,AFASTAMENTO
+tipo_arq_s_2231,S-2231,Cessão/Exercício em Outro Órgão,2021-07-19,,49,evtCessao,VINCULO_TRABALHISTA
+tipo_arq_s_2240,S-2240,Condições Ambientais do Trabalho - Agentes Nocivos,2021-10-13,,50,evtExpRisco,AFASTAMENTO
+tipo_arq_s_2250,S-2250,Aviso Prévio,2014-01-01,2022-03-09,55,evtAvPrevio,VINCULO_TRABALHISTA
+tipo_arq_s_2260,S-2260,Convocação para Trabalho Intermitente,2017-11-01,2022-03-09,47,evtConvInterm,VINCULO_TRABALHISTA
+tipo_arq_s_2298,S-2298,Reintegração/Outros Provimentos,2014-01-01,,56,evtReintegr,VINCULO_TRABALHISTA
+tipo_arq_s_2299,S-2299,Desligamento,2014-01-01,,57,evtDeslig,VINCULO_TRABALHISTA
+tipo_arq_s_2300,S-2300,Trabalhador Sem Vínculo de Emprego/Estatutário - Início,2014-01-01,,60,evtTSVInicio,TRABALHADOR_SEM_VINCULO
+tipo_arq_s_2306,S-2306,Trabalhador Sem Vínculo de Emprego/Estatutário - Alteração Contratual,2014-01-01,,61,evtTSVAltContr,TRABALHADOR_SEM_VINCULO
+tipo_arq_s_2399,S-2399,Trabalhador Sem Vínculo de Emprego/Estatutário - Término,2014-01-01,,62,evtTSVTermino,TRABALHADOR_SEM_VINCULO
+tipo_arq_s_2400,S-2400,Cadastro de Beneficiário - Entes Públicos - Início,2021-11-22,,63,evtCdBenefIn,TRABALHADOR
+tipo_arq_s_2405,S-2405,Cadastro de Beneficiário - Entes Públicos - Alteração,2021-11-22,,64,evtCdBenefAlt,TRABALHADOR
+tipo_arq_s_2410,S-2410,Cadastro de Benefício - Entes Públicos - Início,2021-11-22,,65,evtCdBenIn,BENEFICIO
+tipo_arq_s_2416,S-2416,Cadastro de Benefício - Entes Públicos - Alteração,2021-11-22,,66,evtCdBenAlt,BENEFICIO
+tipo_arq_s_2418,S-2418,Reativação de Benefício - Entes Públicos,2021-11-22,,67,evtReativBen,BENEFICIO
+tipo_arq_s_2420,S-2420,Cadastro de Benefício - Entes Públicos - Término,2021-11-22,,68,evtCdBenTerm,BENEFICIO
+tipo_arq_s_2500,S-2500,Processo Trabalhista,2023-10-01,,83,evtProcTrab,TRABALHADOR
+tipo_arq_s_2501,S-2501,Informações de Tributos Decorrentes de Processo Trabalhista,2023-10-01,,84,evtContProc,INDEFINIDO
+tipo_arq_s_2555,S-2555,Solicitação de Consolidação das Informações de Tributos Decorrentes de Processo Trabalhista,2024-02-02,,86,evtConsolidContProc,INDEFINIDO
+tipo_arq_s_3000,S-3000,Exclusão de Eventos,2014-01-01,,95,evtExclusao,INDEFINIDO
+tipo_arq_s_3500,S-3500,Exclusão de Eventos - Processo Trabalhista,2023-10-01,,98,evtExcProcTrab,INDEFINIDO
+tipo_arq_s_5001,S-5001,Informações das Contribuições Sociais por Trabalhador,2014-01-01,,91,evtBasesTrab,INDEFINIDO
+tipo_arq_s_5002,S-5002,Imposto de Renda Retido na Fonte por Trabalhador,2014-01-01,,93,evtIrrfBenef,INDEFINIDO
+tipo_arq_s_5003,S-5003,Informações do FGTS por Trabalhador,2018-05-01,,96,evtBasesFGTS,INDEFINIDO
+tipo_arq_s_5011,S-5011,Informações das Contribuições Sociais Consolidadas por Contribuinte,2014-01-01,,92,evtCS,INDEFINIDO
+tipo_arq_s_5012,S-5012,Informações do IRRF Consolidadas por Contribuinte,2014-01-01,,94,evtIrrf,INDEFINIDO
+tipo_arq_s_5013,S-5013,Informações do FGTS Consolidadas por Contribuinte,2018-05-01,,97,evtFGTS,INDEFINIDO
+tipo_arq_s_5501,S-5501,Informações Consolidadas de Tributos Decorrentes de Processo Trabalhista,2023-10-01,,85,evtTribProcTrab,INDEFINIDO
+tipo_arq_s_5503,S-5503,Evento Bases FGTS por Trabalhador em Processo Trabalhista,2023-11-20,,99,evtFGTSProcTrab,INDEFINIDO
+tipo_arq_s_8200,S-8200,Anotação Judicial do Vínculo,2023-11-20,,38,evtAnotJud,VINCULO_TRABALHISTA
+tipo_arq_s_8299,S-8299,Baixa Judicial do Vínculo,2019-09-24,,82,evtBaixa,VINCULO_TRABALHISTA

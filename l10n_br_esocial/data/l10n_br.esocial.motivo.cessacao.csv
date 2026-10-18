@@ -1,0 +1,13 @@
+id,codigo,nome,dt_inicio,dt_fim
+mot_cess_01,01,Óbito,2014-01-01,
+mot_cess_02,02,Reversão,2014-01-01,
+mot_cess_03,03,Por decisão judicial,2014-01-01,
+mot_cess_04,04,Cassação,2014-01-01,
+mot_cess_05,05,Término do prazo do benefício,2014-01-01,
+mot_cess_06,06,Extinção de quota,2014-01-01,
+mot_cess_07,07,Não homologado pelo Tribunal de Contas,2014-01-01,
+mot_cess_08,08,Renúncia expressa,2014-01-01,
+mot_cess_09,09,Transferência de órgão administrador,2014-01-01,
+mot_cess_10,10,Mudança de CPF do beneficiário,2014-01-01,
+mot_cess_11,11,Não recadastramento,2014-01-01,
+mot_cess_12,12,Revisão de reforma de militar,2014-01-01,
