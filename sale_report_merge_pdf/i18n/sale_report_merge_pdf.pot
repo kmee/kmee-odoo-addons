@@ -1,0 +1,152 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_report_merge_pdf
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_report_merge_pdf
+#: model_terms:ir.ui.view,arch_db:sale_report_merge_pdf.view_sale_order_cover_pdf_form
+msgid "<strong>Importante:</strong>"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model_terms:ir.ui.view,arch_db:sale_report_merge_pdf.view_sale_order_cover_pdf_form
+msgid "Apenas um registro pode estar ativo por vez"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model_terms:ir.actions.act_window,help:sale_report_merge_pdf.action_sale_order_cover_pdf
+msgid ""
+"Aqui você pode definir um PDF que será usado como capa em todos os\n"
+"                relatórios de pedidos de venda que tiverem a opção \"Print with Cover\" marcada."
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__active
+msgid "Ativo"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model_terms:ir.actions.act_window,help:sale_report_merge_pdf.action_sale_order_cover_pdf
+msgid "Configure o PDF de capa para pedidos de venda"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model_terms:ir.ui.view,arch_db:sale_report_merge_pdf.view_sale_order_cover_pdf_form
+msgid ""
+"Este PDF será usado como capa em todos os pedidos de venda com \"Print with "
+"Cover\" marcado"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#. odoo-python
+#: code:addons/sale_report_merge_pdf/models/sale_order_cover_pdf.py:0
+#, python-format
+msgid ""
+"Já existe um registro ativo de capa PDF. Desative-o antes de criar um novo."
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__display_name
+msgid "Nome"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__cover_pdf_filename
+msgid "Nome do Arquivo"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model_terms:ir.ui.view,arch_db:sale_report_merge_pdf.view_sale_order_cover_pdf_form
+msgid "O arquivo deve estar no formato PDF"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.actions.act_window,name:sale_report_merge_pdf.action_sale_order_cover_pdf
+#: model:ir.ui.menu,name:sale_report_merge_pdf.menu_sale_order_cover_pdf
+#: model_terms:ir.ui.view,arch_db:sale_report_merge_pdf.view_sale_order_cover_pdf_form
+msgid "PDF Cover"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order_cover_pdf__cover_pdf
+msgid "PDF da Capa"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model,name:sale_report_merge_pdf.model_sale_order_cover_pdf
+msgid "PDF de Capa para Pedidos de Venda"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,help:sale_report_merge_pdf.field_sale_order_cover_pdf__cover_pdf
+msgid "PDF que será usado como capa em todos os pedidos de venda."
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,field_description:sale_report_merge_pdf.field_sale_order__merge_pdf
+msgid "Print with Cover"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model,name:sale_report_merge_pdf.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model,name:sale_report_merge_pdf.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#: model:ir.model.fields,help:sale_report_merge_pdf.field_sale_order__merge_pdf
+msgid "Se marcado, o PDF da capa será incluído no relatório."
+msgstr ""
+
+#. module: sale_report_merge_pdf
+#. odoo-python
+#: code:addons/sale_report_merge_pdf/models/sale_order_cover_pdf.py:0
+#, python-format
+msgid ""
+"Só pode existir um registro ativo de capa PDF por vez. Desative o registro "
+"atual antes de ativar outro."
+msgstr ""
