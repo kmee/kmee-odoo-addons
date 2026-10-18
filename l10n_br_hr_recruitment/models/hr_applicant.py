@@ -130,7 +130,6 @@ class HrApplicant(models.Model):
         vals = {}
         vals.update(
             {
-                "bank_account_id": self.bank_account_id.id,
                 "ethnicity": self.ethnicity.id,
                 "father_name": self.father_name,
                 "mother_name": self.mother_name,
@@ -168,13 +167,15 @@ class HrApplicant(models.Model):
                 ],
             }
         )
+        if self.bank_account_id:
+            vals["bank_account_ids"] = [(4, self.bank_account_id.id)]
         if self.nationality_id:
             vals["country_id"] = self.nationality_id.id
         return vals
 
     def create_employee_from_applicant(self):
-        # Odoo 18 builds the employee from hr.candidate, so the Brazilian
-        # applicant data is written on the created employee afterwards.
+        # The core builds the employee from the generic applicant data, so the
+        # Brazilian applicant data is written on the created employee afterwards.
         action = super().create_employee_from_applicant()
         employee = self.env["hr.employee"].browse(action["res_id"])
         employee.write(self._prepare_l10n_br_employee_vals())

@@ -16,12 +16,14 @@ class TestL10nBrHrRecruitment(TransactionCase):
                 "l10n_br_rg_code": "123456789",
             }
         )
-        cls.candidate = cls.env["hr.candidate"].create(
-            {"partner_name": "Candidate Partner", "partner_id": cls.partner.id}
+        cls.bank = cls.env["res.partner.bank"].create(
+            {"acc_number": "12345-6", "partner_id": cls.partner.id}
         )
         cls.applicant = cls.env["hr.applicant"].create(
             {
-                "candidate_id": cls.candidate.id,
+                "bank_account_id": cls.bank.id,
+                "partner_name": "Candidate Partner",
+                "partner_id": cls.partner.id,
                 "pis_pasep": "12345678900",
                 "father_name": "Father",
                 "mother_name": "Mother",
@@ -39,6 +41,7 @@ class TestL10nBrHrRecruitment(TransactionCase):
         action = self.applicant.create_employee_from_applicant()
         employee = self.env["hr.employee"].browse(action["res_id"])
         self.assertEqual(employee.pis_pasep, "12345678900")
+        self.assertEqual(employee.bank_account_ids, self.bank)
         self.assertEqual(employee.father_name, "Father")
         self.assertEqual(employee.mother_name, "Mother")
         self.assertEqual(employee.country_id, self.env.ref("base.br"))

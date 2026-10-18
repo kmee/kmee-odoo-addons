@@ -26,7 +26,7 @@
                 <field name="address_proof_file" />
             </xpath>
 
-            <xpath expr="//field[@name='study_school']" position="after">
+            <xpath expr="//field[@name='study_field']" position="after">
                 <field name="study_proof_file" />
             </xpath>
 
