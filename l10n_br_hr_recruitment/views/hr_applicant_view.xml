@@ -98,10 +98,10 @@
 
                 <page string="Dependents" groups="hr.group_hr_user">
                     <field name="dependent_ids" nolabel="1">
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="name" />
                             <field name="date_of_birth" />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>
