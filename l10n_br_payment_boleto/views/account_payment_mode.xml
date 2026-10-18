@@ -13,7 +13,7 @@
                         <field name="generate_boletos_on_invoice" />
                         <field
                             name="payment_provider_id"
-                            attrs="{'invisible': [('generate_boletos_on_invoice', '=', False)]}"
+                            invisible="not generate_boletos_on_invoice"
                         />
                     </group>
                     <group name="boleto-fees">
@@ -39,7 +39,7 @@
                 <field name="generate_boletos_on_invoice" />
                 <field
                     name="payment_provider_id"
-                    attrs="{'invisible': [('generate_boletos_on_invoice', '=', False)]}"
+                    invisible="not generate_boletos_on_invoice"
                 />
             </field>
         </field>
@@ -53,7 +53,7 @@
                 <field name="generate_boletos_on_invoice" />
                 <field
                     name="payment_provider_id"
-                    attrs="{'invisible': [('generate_boletos_on_invoice', '=', False)]}"
+                    invisible="not generate_boletos_on_invoice"
                 />
             </field>
         </field>
