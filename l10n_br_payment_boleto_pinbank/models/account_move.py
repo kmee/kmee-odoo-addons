@@ -36,6 +36,7 @@ class AccountMove(models.Model):
             "is_boleto_payment": True,
             "reference": f"{moveline.name}/{index}",
             "provider_id": provider.id,
+            "payment_method_id": self.env.ref("payment.payment_method_boleto").id,
             "amount": round(moveline.amount_residual, 2),
             "currency_id": moveline.move_id.currency_id.id,
             "partner_id": moveline.partner_id.id,

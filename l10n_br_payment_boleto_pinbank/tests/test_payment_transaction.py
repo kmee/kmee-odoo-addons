@@ -6,10 +6,11 @@ from .fixtures import (
     GENERATE_BOLETO_PAYLOAD_DECRYPTED,
     SEND_CAPTURE_REQUEST_PAYLOAD,
     SEND_CAPTURE_REQUEST_RESPONSE,
+    SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO,
 )
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestPaymentTransaction(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -53,6 +54,7 @@ class TestPaymentTransaction(TransactionCase):
                 "currency_id": self.env.ref("base.BRL").id,
                 "partner_id": self.partner.id,
                 "provider_id": self.payment_provider.id,
+                "payment_method_id": self.env.ref("payment.payment_method_boleto").id,
                 "provider_code": "boleto_pinbank",
                 "boleto_penalty": 0.01,
                 "boleto_interest": 0.01,
@@ -85,13 +87,14 @@ class TestPaymentTransaction(TransactionCase):
         - The "our_number" field is correctly set.
         - The "digitable_line" field matches the expected format.
         - The "barcode" field is correctly generated.
-        - The "state" of the payment transaction is set to "authorized".
+
+        Note: The state transition is handled by `_process_notification_data`, not by
+        `_prepare_transaction_boleto_info`, which only extracts boleto display fields.
 
         Assertions:
             - The "our_number" field matches the expected value.
             - The "digitable_line" field matches the expected digitable line format.
             - The "barcode" field matches the expected barcode value.
-            - The "state" field is set to "authorized" with an appropriate message.
         """
         boleto_info = self.payment_transaction._prepare_transaction_boleto_info(
             SEND_CAPTURE_REQUEST_RESPONSE
@@ -105,11 +108,6 @@ class TestPaymentTransaction(TransactionCase):
         self.assertEqual(
             boleto_info["barcode"],
             "12345678901234567890123456789012345678901234",
-        )
-        self.assertEqual(
-            boleto_info["state"],
-            "authorized",
-            "Payment transaction state should be 'authorized'",
         )
 
     def test_send_payment_request(self):
@@ -165,8 +163,9 @@ class TestPaymentTransaction(TransactionCase):
             # Assert that the response matches the mocked response
             self.assertEqual(response, mock_response)
 
-            # Assert that the payment transaction state was updated to "authorized"
-            self.assertEqual(self.payment_transaction.state, "authorized")
+            # Assert that the payment transaction state was updated to "pending"
+            # (a newly created boleto has last_action=CREATED which maps to pending)
+            self.assertEqual(self.payment_transaction.state, "pending")
 
             # Assert that the transaction was updated with the boleto info
             self.assertEqual(self.payment_transaction.our_number, "123456789")
@@ -212,7 +211,7 @@ class TestPaymentTransaction(TransactionCase):
         with patch(
             "odoo.addons.l10n_br_payment_boleto_pinbank.models.payment_provider."
             "Paymentprovider._boleto_pinbank_make_request",
-            return_value=SEND_CAPTURE_REQUEST_RESPONSE,
+            return_value=SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO,
         ) as mock_make_request:
             self.payment_transaction._send_capture_request()
 
@@ -236,3 +235,84 @@ class TestPaymentTransaction(TransactionCase):
                 self.payment_transaction.barcode,
                 "12345678901234567890123456789012345678901234",
             )
+
+
+@tagged("post_install", "-at_install")
+class TestPinbankToken(TransactionCase):
+    """O token e emitido por conta e volta do parametro como texto."""
+
+    def setUp(self):
+        super().setUp()
+        self.provider = self.env.ref(
+            "l10n_br_payment_boleto_pinbank.payment_acquirer_boleto_pinbank"
+        )
+
+    def test_token_is_saved_per_provider(self):
+        other_provider = self.provider.copy({"name": "Outra conta PinBank"})
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+        other_provider._boleto_pinbank_save_token("token-dois", 600)
+
+        self.assertEqual(
+            self.provider._boleto_pinbank_check_existing_token(), "token-um"
+        )
+        self.assertEqual(
+            other_provider._boleto_pinbank_check_existing_token(), "token-dois"
+        )
+
+    def test_saved_token_is_reused(self):
+        """A segunda requisicao nao pode estourar comparando texto com data."""
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+
+        self.assertEqual(
+            self.provider._boleto_pinbank_check_existing_token(),
+            "token-um",
+            "o token guardado nao foi reaproveitado",
+        )
+
+    def test_expired_token_is_discarded(self):
+        self.provider._boleto_pinbank_save_token("token-velho", 600)
+        _token_key, expiration_key = self.provider._boleto_pinbank_token_param_names()
+        self.env["ir.config_parameter"].sudo().set_param(
+            expiration_key, "2020-01-01T00:00:00"
+        )
+
+        self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
+
+    def test_invalid_expiration_is_discarded(self):
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+        _token_key, expiration_key = self.provider._boleto_pinbank_token_param_names()
+        self.env["ir.config_parameter"].sudo().set_param(expiration_key, "nao-e-data")
+
+        self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
+
+
+@tagged("post_install", "-at_install")
+class TestPinbankRedaction(TransactionCase):
+    """O boleto carrega nome, documento e endereco do sacado."""
+
+    def test_personal_data_is_dropped(self):
+        redacted = self.env["payment.transaction"]._pinbank_redact(
+            {
+                "Data": {
+                    "NossoNumero": "12345",
+                    "DadosSacado": {
+                        "CpfCnpj": "23130935000198",
+                        "Nome": "Cliente Boleto",
+                        "Endereco": "Rua das Flores",
+                    },
+                }
+            }
+        )
+
+        self.assertNotIn("23130935000198", str(redacted))
+        self.assertNotIn("Cliente Boleto", str(redacted))
+        self.assertNotIn("Rua das Flores", str(redacted))
+        self.assertEqual(redacted["Data"]["NossoNumero"], "12345")
+
+    def test_pdf_is_dropped(self):
+        """O PDF em base64 nao tem porque ficar no campo tecnico."""
+        redacted = self.env["payment.transaction"]._pinbank_redact(
+            {"Base64": "JVBERi0xLjQ="}
+        )
+
+        self.assertEqual(redacted["Base64"], "***")
