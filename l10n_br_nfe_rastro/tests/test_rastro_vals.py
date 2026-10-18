@@ -14,7 +14,12 @@ class TestRastroVals(TransactionCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.wizard = cls.env["stock.invoice.onshipping"]
         cls.product = cls.env["product.product"].create(
-            {"name": "Tracked product", "detailed_type": "product", "tracking": "lot"}
+            {
+                "name": "Tracked product",
+                "type": "consu",
+                "is_storable": True,
+                "tracking": "lot",
+            }
         )
 
     def _lot(self, **vals):
