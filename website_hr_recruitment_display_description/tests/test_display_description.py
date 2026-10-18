@@ -14,3 +14,9 @@ class TestDisplayDescription(TransactionCase):
             self.env.ref("hr.view_hr_job_form").id, "form"
         )["arch"]
         self.assertIn("website_display_description", arch)
+
+    def test_website_template_hides_description_when_disabled(self):
+        view = self.env.ref(
+            "website_hr_recruitment_display_description.default_website_description"
+        )
+        self.assertIn("job.website_display_description", view.arch_db)
