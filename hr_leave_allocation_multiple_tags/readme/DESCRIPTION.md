@@ -1,1 +1,4 @@
-This module extends Odoo's hr.leave.allocation model to add new vacation allocation functionality based on employee categories, allowing you to select employee tags with "AND" or "OR" logic (through the holiday_type fields with values ​​" category_and" or "category_or"). The category_ids field is introduced to allow the selection of employee tags, and the allocation calculation is adapted according to the type of category selected. Additionally, validations are added to ensure the correct fields are populated based on the chosen allocation type, such as employee, category, department, or company. The module also changes the user interface of the vacation allocation form to include and control the category_ids field depending on the allocation type selected.
+This module extends the multiple employees time off allocation wizard
+(hr.leave.allocation.generate.multi.wizard) with two new allocation modes based on
+employee tags: all of the selected tags (AND) or any of the selected tags (OR).
+The category_ids field is introduced to select the employee tags.
