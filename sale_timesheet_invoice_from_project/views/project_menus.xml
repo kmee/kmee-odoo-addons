@@ -2,23 +2,18 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record
-        id="project_project_action_multi_create_invoice"
-        model="ir.actions.act_window"
-    >
+    <record id="project_project_action_multi_create_invoice" model="ir.actions.server">
         <field name="name">Create Invoice</field>
-        <field name="res_model">project.create.invoice</field>
-        <field name="view_mode">form</field>
-        <field name="view_id" ref="sale_timesheet.project_create_invoice_view_form" />
-        <field name="target">new</field>
-        <field name="context">{'active_model': 'project.project'}</field>
+        <field name="model_id" ref="project.model_project_project" />
+        <field name="binding_model_id" ref="project.model_project_project" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field
+            name="code"
+        >action = records.action_create_invoice_from_projects()</field>
+        <field
+            name="group_ids"
+            eval="[(6, 0, [ref('account.group_account_invoice'), ref('project.group_project_manager')])]"
+        />
     </record>
-    <menuitem
-        id="menu_project_create_invoice"
-        name="Create Invoice"
-        parent="project.menu_project_config"
-        action="project_project_action_multi_create_invoice"
-        sequence="20"
-        groups="account.group_account_invoice,project.group_project_manager"
-    />
 </odoo>
