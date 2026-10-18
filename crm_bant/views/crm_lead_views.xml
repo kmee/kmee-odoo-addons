@@ -26,11 +26,11 @@
                             <field name="bant_budget_status" />
                             <field
                                 name="bant_budget_amount"
-                                attrs="{'invisible': [('bant_budget_status', 'in', ['undefined', 'no_budget'])]}"
+                                invisible="bant_budget_status in ['undefined', 'no_budget']"
                             />
                             <field
                                 name="bant_budget_timeframe"
-                                attrs="{'invisible': [('bant_budget_status', 'in', ['undefined', 'no_budget'])]}"
+                                invisible="bant_budget_status in ['undefined', 'no_budget']"
                             />
                             <field name="bant_budget_score" widget="badge" />
                         </group>
@@ -38,11 +38,11 @@
                             <field name="bant_authority_status" />
                             <field
                                 name="bant_authority_contact"
-                                attrs="{'invisible': [('bant_authority_status', '=', 'undefined')]}"
+                                invisible="bant_authority_status == 'undefined'"
                             />
                             <field
                                 name="bant_authority_role"
-                                attrs="{'invisible': [('bant_authority_status', '=', 'undefined')]}"
+                                invisible="bant_authority_status == 'undefined'"
                             />
                             <field name="bant_authority_score" widget="badge" />
                         </group>
@@ -50,15 +50,15 @@
                             <field name="bant_need_status" />
                             <field
                                 name="bant_need_description"
-                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                                invisible="bant_need_status == 'undefined'"
                             />
                             <field
                                 name="bant_need_pain_points"
-                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                                invisible="bant_need_status == 'undefined'"
                             />
                             <field
                                 name="bant_need_success_criteria"
-                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                                invisible="bant_need_status == 'undefined'"
                             />
                             <field name="bant_need_score" widget="badge" />
                         </group>
@@ -66,11 +66,11 @@
                             <field name="bant_timeline_status" />
                             <field
                                 name="bant_timeline_date"
-                                attrs="{'invisible': [('bant_timeline_status', 'in', ['undefined', 'no_timeline'])]}"
+                                invisible="bant_timeline_status in ['undefined', 'no_timeline']"
                             />
                             <field
                                 name="bant_timeline_reason"
-                                attrs="{'invisible': [('bant_timeline_status', 'in', ['undefined', 'no_timeline'])]}"
+                                invisible="bant_timeline_status in ['undefined', 'no_timeline']"
                             />
                             <field name="bant_timeline_score" widget="badge" />
                         </group>
@@ -102,11 +102,7 @@
                 <field
                     name="bant_qualification_status"
                     widget="label_selection"
-                    options="{'classes': {
-                    'unqualified': 'danger',
-                    'partially_qualified': 'warning',
-                    'qualified': 'info',
-                    'fully_qualified': 'success'}}"
+                    options="{'classes': {                     'unqualified': 'danger',                     'partially_qualified': 'warning',                     'qualified': 'info',                     'fully_qualified': 'success'}}"
                 />
             </xpath>
         </field>
