@@ -6,11 +6,6 @@
         inherit_id="purchase.report_purchaseorder_document"
         priority="100"
     >
-        <xpath expr="//th[@name='th_date_req']" position="replace">
-        </xpath>
-
-        <xpath expr="//span[@t-field='line.date_planned']" position="replace">
-        </xpath>
-
+        <xpath expr="//div[@t-if='o.date_planned']" position="replace" />
     </template>
 </odoo>
