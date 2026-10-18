@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_history_user,l10n_br.account.history user,l10n_br.account.history,account.group_account_user,r,
+access_account_history_manager,l10n_br.account.history manager,l10n_br.account.history,account.group_account_manager,crud,

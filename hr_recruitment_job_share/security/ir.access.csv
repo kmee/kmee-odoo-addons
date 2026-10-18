@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_job_share_wizard,job.share.wizard,job.share.wizard,hr_recruitment.group_hr_recruitment_user,crud,
+access_hr_job_public,access_hr_job_public,hr.job,base.group_public,r,
