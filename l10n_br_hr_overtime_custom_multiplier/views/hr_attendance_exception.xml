@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_attendance_exception_form_view">
         <field name="model">hr.attendance.exception</field>
         <field name="arch" type="xml">
@@ -32,22 +31,21 @@
     <record model="ir.ui.view" id="hr_attendance_exception_tree_view">
         <field name="model">hr.attendance.exception</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="employee_id" />
                 <field name="date" />
                 <field name="day_of_week_override" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record model="ir.actions.act_window" id="hr_attendance_exception_act_window">
         <field name="name">Exception</field>
         <field name="res_model">hr.attendance.exception</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-
 
     <menuitem
         id="hr_attendance_exception_menu"
@@ -56,5 +54,4 @@
         action="hr_attendance_exception_act_window"
         sequence="16"
     />
-
 </odoo>

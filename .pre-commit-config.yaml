@@ -2,7 +2,6 @@ exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
   ^hr_overtime_report_action_pdf/|
-  ^l10n_br_hr_overtime_custom_multiplier/|
   ^product_contract_period_bo/|
   ^sale_blanket_order_isolated_quotation/|
   ^stock_intercompany_bidirectional_pull/|
