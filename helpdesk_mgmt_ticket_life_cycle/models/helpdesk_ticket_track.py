@@ -67,6 +67,7 @@ class HelpdeskTicketTrack(models.Model):
                 )
         return res
 
+    @api.depends("stage_id", "stage_duration_ids.duration_seconds")
     def _compute_current_stage_total_duration(self):
         for ticket in self:
             ticket.current_stage_total_duration = ""
