@@ -66,9 +66,9 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://www.kmee.com.br>``\ \_:
+- ``KMEE <https://www.kmee.com.br>``\ \_:
 
-   -  Tiago Amaral
+  - Tiago Amaral
 
 Maintainers
 -----------

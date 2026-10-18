@@ -9,7 +9,7 @@
         id="report_delivery_document_declaration"
         inherit_id="stock.report_delivery_document"
     >
-        <xpath expr="//t[@t-if='o.backorder_ids and backorders']" position="after">
+        <xpath expr="//t[@t-set='backorders']" position="after">
             <p t-field="o.company_id.declaration_receipt" />
         </xpath>
     </template>
