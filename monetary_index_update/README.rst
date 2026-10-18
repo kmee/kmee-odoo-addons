@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =====================
 Monetary Index Update
 =====================
@@ -17,7 +13,7 @@ Monetary Index Update
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
@@ -111,11 +107,11 @@ Managing Monetary Indexes
 2. Click **Create** to add a new index
 3. Fill in the fields:
 
-   -  **Name**: Index name (e.g., "SELIC")
-   -  **Code**: Unique code (e.g., "selic")
-   -  **Authority**: Issuing authority (e.g., "BACEN", "IBGE")
-   -  **Country**: Country associated with the index
-   -  **Description**: Detailed information about the index
+   - **Name**: Index name (e.g., "SELIC")
+   - **Code**: Unique code (e.g., "selic")
+   - **Authority**: Issuing authority (e.g., "BACEN", "IBGE")
+   - **Country**: Country associated with the index
+   - **Description**: Detailed information about the index
 
 Managing Historical Rates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,10 +120,10 @@ Managing Historical Rates
 2. Go to the **Rates** tab
 3. Add historical rates:
 
-   -  **Date**: Effective date of the rate
-   -  **Value**: Percentage value of the rate
-   -  **Source**: Data source (optional)
-   -  **Note**: Additional notes (optional)
+   - **Date**: Effective date of the rate
+   - **Value**: Percentage value of the rate
+   - **Source**: Data source (optional)
+   - **Note**: Additional notes (optional)
 
 For Developers
 --------------
@@ -215,15 +211,15 @@ You can also use the monetary update service directly in your code:
 Key Points
 ~~~~~~~~~~
 
--  The ``_fields_to_track`` attribute defines which monetary fields can
-   be updated
--  The wizard (``monetary_update_fields_by_index_wizard``) is
-   automatically available once you inherit from
-   ``monetary.update.service``
--  Users need appropriate permissions to see and use the monetary update
-   functionality
--  The wizard provides a preview before applying changes, allowing users
-   to review the updated values
+- The ``_fields_to_track`` attribute defines which monetary fields can
+  be updated
+- The wizard (``monetary_update_fields_by_index_wizard``) is
+  automatically available once you inherit from
+  ``monetary.update.service``
+- Users need appropriate permissions to see and use the monetary update
+  functionality
+- The wizard provides a preview before applying changes, allowing users
+  to review the updated values
 
 Refer to the source code and tests for complete implementation examples.
 
