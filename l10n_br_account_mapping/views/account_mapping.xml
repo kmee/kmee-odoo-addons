@@ -36,13 +36,13 @@
                     <notebook>
                         <page string="Contas do plano" name="accounts">
                             <field name="account_ids">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="code" />
                                     <field name="name" />
                                     <field name="account_ids" widget="many2many_tags" />
                                     <field name="date_start" optional="hide" />
                                     <field name="date_end" optional="hide" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -52,21 +52,21 @@
     </record>
 
     <record id="mapping_plan_tree" model="ir.ui.view">
-        <field name="name">l10n_br_account_mapping.plan.tree</field>
+        <field name="name">l10n_br_account_mapping.plan.list</field>
         <field name="model">l10n_br_account_mapping.plan</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="account_count" string="Contas" />
                 <field name="mapped_count" string="Mapeadas" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="mapping_plan_action" model="ir.actions.act_window">
         <field name="name">Planos de Contas de Destino</field>
         <field name="res_model">l10n_br_account_mapping.plan</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem
