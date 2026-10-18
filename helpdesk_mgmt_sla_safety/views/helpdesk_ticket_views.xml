@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_helpdesk_ticket_form_inherit_sla_safety" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.inherit.sla.safety</field>
+        <field name="model">helpdesk.ticket</field>
+        <field
+            name="inherit_id"
+            ref="helpdesk_mgmt_sla.inherit_helpdesk_ticket_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="sla_deadline" position="after">
+                <field name="sla_safety_deadline" />
+                <field name="sla_safety_alert" widget="boolean_toggle" />
+            </field>
+        </field>
+    </record>
+</odoo>

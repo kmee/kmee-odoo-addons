@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_helpdesk_sla_form_inherit_safety" model="ir.ui.view">
+        <field name="name">helpdesk.sla.form.inherit.safety</field>
+        <field name="model">helpdesk.sla</field>
+        <field name="inherit_id" ref="helpdesk_mgmt_sla.helpdesk_ticket_sla_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group/group[2]" position="inside">
+                    <label for="safety_days" string="Safety Margin" />
+                    <div class="o_row">
+                        <field name="safety_days" />
+                        days
+                        <br />
+                        <field name="safety_hours" />
+                        hours
+                        <br />
+                    </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
