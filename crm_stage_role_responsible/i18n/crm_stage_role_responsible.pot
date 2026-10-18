@@ -1,0 +1,106 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* crm_stage_role_responsible
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_stage_role_responsible
+#: model:ir.model,name:crm_stage_role_responsible.model_crm_stage
+msgid "CRM Stages"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__closer_id
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_sale_order__closer_id
+#: model:ir.model.fields.selection,name:crm_stage_role_responsible.selection__crm_stage__role_responsible__closer
+msgid "Closer"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields.selection,name:crm_stage_role_responsible.selection__crm_stage__role_responsible__default
+msgid "Default"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__farmer_id
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_sale_order__farmer_id
+#: model:ir.model.fields.selection,name:crm_stage_role_responsible.selection__crm_stage__role_responsible__farmer
+msgid "Farmer"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__hide_closer
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_team__hide_closer
+msgid "Hide Closer"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__hide_farmer
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_team__hide_farmer
+msgid "Hide Farmer"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__hide_hunter
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_team__hide_hunter
+msgid "Hide Hunter"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__hide_sdr_bdr
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_team__hide_sdr_bdr
+msgid "Hide SDR/BDR"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__hunter_id
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_sale_order__hunter_id
+#: model:ir.model.fields.selection,name:crm_stage_role_responsible.selection__crm_stage__role_responsible__hunter
+msgid "Hunter"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model,name:crm_stage_role_responsible.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__user_id
+msgid "Responsável"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model_terms:ir.ui.view,arch_db:crm_stage_role_responsible.crm_team_form_view
+msgid "Roles"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_lead__sdr_bdr_id
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_sale_order__sdr_bdr_id
+#: model:ir.model.fields.selection,name:crm_stage_role_responsible.selection__crm_stage__role_responsible__sdr_bdr
+msgid "SDR/BDR"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model,name:crm_stage_role_responsible.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model,name:crm_stage_role_responsible.model_crm_team
+msgid "Sales Team"
+msgstr ""
+
+#. module: crm_stage_role_responsible
+#: model:ir.model.fields,field_description:crm_stage_role_responsible.field_crm_stage__role_responsible
+msgid "Stage Responsible"
+msgstr ""
