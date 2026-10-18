@@ -22,27 +22,15 @@ class MailComposer(models.TransientModel):
                 self.email_from = False
                 self.reply_to = False
 
-    @api.model
-    def create(self, vals):
-        if vals.get("active_no_reply") and self.env.user.company_id.email_no_reply:
-            vals["email_from"] = self.env.user.company_id.email_no_reply
-            vals["reply_to"] = self.env.user.company_id.email_no_reply
-        return super(MailComposer, self).create(vals)
-
-    def send_mail_message(self, auto_commit=False):
-        if self.active_no_reply and self.env.user.company_id.email_no_reply:
-            self.email_from = self.env.user.company_id.email_no_reply
-            self.reply_to = self.env.user.company_id.email_no_reply
-        message = super(MailComposer, self).send_mail_message(auto_commit=auto_commit)
-        if self.active_no_reply:
-            mail_message = self.env["mail.message"].browse(message)
-            mail_message.sudo().write(
-                {
-                    "email_from": self.env.user.company_id.email_no_reply,
-                    "reply_to": self.env.user.company_id.email_no_reply,
-                }
-            )
-        return message
+    @api.model_create_multi
+    def create(self, vals_list):
+        no_reply = self.env.user.company_id.email_no_reply
+        if no_reply:
+            for vals in vals_list:
+                if vals.get("active_no_reply"):
+                    vals["email_from"] = no_reply
+                    vals["reply_to"] = no_reply
+        return super().create(vals_list)
 
     def _action_send_mail(self, auto_commit=False):
         result_mails_su, result_messages = super(MailComposer, self)._action_send_mail(
