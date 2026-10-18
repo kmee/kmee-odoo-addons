@@ -7,12 +7,10 @@
     layout cheguem pelo update do modulo; para customizar, duplique o registro.
 -->
 <odoo>
-
     <record id="config_calima" model="l10n_br.account.export.config">
         <field name="name">Calima ERP Contabil</field>
         <field name="layout">calima</field>
         <field name="encoding">cp1252</field>
         <field name="company_id" eval="False" />
     </record>
-
 </odoo>
