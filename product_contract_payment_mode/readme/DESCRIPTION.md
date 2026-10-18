@@ -1,1 +1,0 @@
-This module synchronizes the payment mode of the sale order with the payment mode of the contracts generated from it.
