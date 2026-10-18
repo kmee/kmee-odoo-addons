@@ -42,10 +42,10 @@
                     <notebook>
                         <page string="Pisos por Cargo" name="wage_floors">
                             <field name="wage_floor_job_ids">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="job_id" />
                                     <field name="wage_floor" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Observa&#231;&#245;es" name="notes">
@@ -58,24 +58,24 @@
     </record>
 
     <record id="view_collective_convention_tree" model="ir.ui.view">
-        <field name="name">l10n.br.hr.collective.convention.tree</field>
+        <field name="name">l10n.br.hr.collective.convention.list</field>
         <field name="model">l10n.br.hr.collective.convention</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="partner_union_id" />
                 <field name="date_start" />
                 <field name="date_end" />
                 <field name="dissidio_month" />
                 <field name="wage_floor" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_collective_convention" model="ir.actions.act_window">
         <field name="name">Conven&#231;&#245;es Coletivas</field>
         <field name="res_model">l10n.br.hr.collective.convention</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem
@@ -135,10 +135,10 @@
     </record>
 
     <record id="view_syndicate_contribution_tree" model="ir.ui.view">
-        <field name="name">l10n.br.hr.syndicate.contribution.tree</field>
+        <field name="name">l10n.br.hr.syndicate.contribution.list</field>
         <field name="model">l10n.br.hr.syndicate.contribution</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="partner_union_id" />
                 <field name="year" />
                 <field name="month" />
@@ -146,14 +146,14 @@
                 <field name="calc_method" />
                 <field name="percentage" />
                 <field name="fixed_amount" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_syndicate_contribution" model="ir.actions.act_window">
         <field name="name">Contribui&#231;&#245;es Sindicais</field>
         <field name="res_model">l10n.br.hr.syndicate.contribution</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem
