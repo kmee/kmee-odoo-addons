@@ -1,0 +1,1 @@
+Access the work record, click "Share" and copy the link
