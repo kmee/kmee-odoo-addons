@@ -16,7 +16,6 @@ exclude: |
   ^hr_recruitment_job_share/|
   ^hr_recruitment_reject_mail_editable/|
   ^hr_work_entry_holidays_natural_period/|
-  ^l10n_br_cnpj_search_minha_receita/|
   ^l10n_br_hr_holidays_public/|
   ^l10n_br_hr_overtime_custom_multiplier/|
   ^l10n_br_hr_recruitment/|
