@@ -1,6 +1,6 @@
 {
     "name": "Helpdesk Date Range",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Helpdesk",
     "summary": "Add date range support to helpdesk tickets",
     "author": "Akretion",
@@ -13,6 +13,6 @@
     "data": [
         "views/helpdesk_ticket_views.xml",
     ],
-    'installable': False,
+    "installable": True,
     "auto_install": False,
 }
