@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="quick_create_task_form">
+        <field
+            name="name"
+        >quick.create.task.form (in project_task_service_class)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.quick_create_task_form" />
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field name="service_class_id" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_task_form2">
+        <field
+            name="name"
+        >quick.create.task.form (in project_task_service_class)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field name="service_class_id" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_task_search_form">
+        <field name="name">project.task.search (in project_task_service_class)</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_create_date']" position="after">
+                <filter
+                    string="Service Class"
+                    name="group_service_class"
+                    context="{'group_by': 'service_class_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_task_project_user_search">
+        <field
+            name="name"
+        >report.project.task.user.search (in project_task_service_class)</field>
+        <field name="model">report.project.task.user</field>
+        <field name="inherit_id" ref="project.view_task_project_user_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_create_date']" position="after">
+                <filter
+                    string="Service Class"
+                    name="group_service_class"
+                    context="{'group_by': 'service_class_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
