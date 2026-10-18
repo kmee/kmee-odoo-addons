@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
     Copyright (C) 2026 KMEE Informatica LTDA
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
@@ -14,8 +14,8 @@
                 <field name="sped_referential" />
                 <field
                     name="sped_plan_code"
-                    attrs="{'invisible': [('sped_referential', '=', False)],
-                            'required': [('sped_referential', '=', True)]}"
+                    invisible="not sped_referential"
+                    required="sped_referential"
                 />
             </field>
         </field>
