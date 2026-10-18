@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <record id="history_venda" model="l10n_br.account.history">
         <field name="name">Venda de mercadoria</field>
         <field name="template">Venda cf. doc. %{DOC} a %{PARCEIRO}</field>
@@ -16,5 +15,4 @@
         <field name="template">%{CAMPO} s/ doc. %{DOC} de %{MM}/%{AAAA}</field>
         <field name="code">30</field>
     </record>
-
 </odoo>
