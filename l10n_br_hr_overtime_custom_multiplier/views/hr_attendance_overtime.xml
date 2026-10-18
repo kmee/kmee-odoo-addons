@@ -10,22 +10,9 @@
                 <group>
                     <group>
                         <field name="date" />
-                        <field
-                            name="employee_id"
-                            modifiers="{&quot;required&quot;: true}"
-                            can_create="true"
-                            can_write="true"
-                        />
-                        <field
-                            name="duration"
-                            widget="float_time"
-                            modifiers="{&quot;required&quot;: true}"
-                        />
-                        <field
-                            name="duration_real"
-                            widget="float_time"
-                            modifiers="{&quot;required&quot;: true}"
-                        />
+                        <field name="employee_id" can_create="true" can_write="true" />
+                        <field name="duration" widget="float_time" />
+                        <field name="duration_real" widget="float_time" />
                     </group>
                     <group>
                         <field name="attendance_id" />
@@ -46,28 +33,11 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="date" />
-                <field
-                    name="employee_id"
-                    modifiers="{&quot;required&quot;: true}"
-                    can_create="true"
-                    can_write="true"
-                />
-                <field
-                    name="extra_hours_without_multiplier"
-                    widget="float_time"
-                    modifiers="{&quot;required&quot;: true}"
-                />
+                <field name="employee_id" can_create="true" can_write="true" />
+                <field name="extra_hours_without_multiplier" widget="float_time" />
                 <field name="overtime_range_id" />
-                <field
-                    name="applied_multiplier"
-                    widget="float_time"
-                    modifiers="{&quot;required&quot;: true}"
-                />
-                <field
-                    name="duration"
-                    widget="float_time"
-                    modifiers="{&quot;required&quot;: true}"
-                />
+                <field name="applied_multiplier" widget="float_time" />
+                <field name="duration" widget="float_time" />
                 <field name="adjustment" readonly="1" invisible="1" force_save="1" />
                 <field name="note" />
             </tree>
