@@ -4,7 +4,7 @@
 {
     "name": "Sale Timesheet Invoice From Project",
     "summary": "Create invoices from the project list",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Project",
     "license": "AGPL-3",
     "author": "KMEE",
