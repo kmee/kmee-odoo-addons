@@ -16,7 +16,7 @@ class HrEmployee(models.Model):
         default_allocation_id = self._get_default_hr_leave_allocation_id()["id"]
         return {
             "name": _("Holiday Sales"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "hr.leave.abono",
             "target": "current",
             "type": "ir.actions.act_window",
