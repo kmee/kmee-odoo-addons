@@ -13,7 +13,6 @@ class ContractContract(models.Model):
         compute="_compute_period_values",
         store=True,
         help="Valor total para todo o período contratado",
-        sequence=10,  # Mostrar primeiro
     )
 
     current_month_value = fields.Monetary(
@@ -21,7 +20,6 @@ class ContractContract(models.Model):
         compute="_compute_period_values",
         store=True,
         help="Valor do período atual do contrato",
-        sequence=20,
     )
 
     monthly_value = fields.Monetary(
@@ -29,7 +27,6 @@ class ContractContract(models.Model):
         compute="_compute_period_values",
         store=True,
         help="Valor médio por período do contrato",
-        sequence=30,
     )
 
     @api.depends(
