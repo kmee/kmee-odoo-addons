@@ -6,7 +6,6 @@ from odoo.exceptions import ValidationError
 
 
 class HrLeaveAbono(models.Model):
-
     _name = "hr.leave.abono"
     _description = "Hr Leave Abono"
 
@@ -25,8 +24,8 @@ class HrLeaveAbono(models.Model):
     holiday_allocation_period = fields.Char(
         compute="_compute_holiday_allocation_period"
     )
-    date = fields.Date(help="Date", required=True)
-    days_sold = fields.Float(string="Days sold", help="Days sold", required=True)
+    date = fields.Date(required=True)
+    days_sold = fields.Float(string="Days sold", required=True)
     state = fields.Selection(
         selection=[("draft", "Draft"), ("paid", "Paid")],
         required=True,
@@ -58,6 +57,20 @@ class HrLeaveAbono(models.Model):
                 )
             abono.holiday_allocation_id.sell_days(abono.days_sold)
             abono.state = "paid"
+
+    def _restore_days(self):
+        for abono in self:
+            if abono.state == "paid" and abono.holiday_allocation_id:
+                abono.holiday_allocation_id.number_of_days_sold -= abono.days_sold
+                abono.holiday_allocation_id.number_of_days += abono.days_sold
+
+    def unlink(self):
+        self._restore_days()
+        return super().unlink()
+
+    def action_archive(self):
+        self._restore_days()
+        return super().action_archive()
 
     @api.depends("holiday_allocation_id")
     def _compute_holiday_allocation_period(self):

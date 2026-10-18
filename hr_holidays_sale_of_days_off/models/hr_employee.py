@@ -16,7 +16,7 @@ class HrEmployee(models.Model):
         default_allocation_id = self._get_default_hr_leave_allocation_id()["id"]
         return {
             "name": _("Holiday Sales"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "hr.leave.abono",
             "target": "current",
             "type": "ir.actions.act_window",
@@ -24,7 +24,7 @@ class HrEmployee(models.Model):
                 "default_employee_id": self.id,
                 "default_holiday_allocation_id": default_allocation_id,
                 "default_date": date.today(),
-                "create_name_button": "Register Vacation Sale”",
+                "create_name_button": "Register Vacation Sale",
             },
             "domain": [("employee_id", "=", self.id)],
         }
@@ -42,7 +42,11 @@ class HrEmployee(models.Model):
         return {"id": allocation.id, "allocation_id": allocation}
 
     def _compute_days_off_sold_display(self):
-        self.ensure_one()
-        current_allocation = self._get_default_hr_leave_allocation_id()["allocation_id"]
-        value = current_allocation.number_of_days_sold
-        self.days_off_sold_display = int(value) if value == int(value) else value
+        for employee in self:
+            current_allocation = employee._get_default_hr_leave_allocation_id()[
+                "allocation_id"
+            ]
+            value = current_allocation.number_of_days_sold
+            employee.days_off_sold_display = (
+                int(value) if value == int(value) else value
+            )

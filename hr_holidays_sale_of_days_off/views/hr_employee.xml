@@ -16,13 +16,13 @@
                     type="object"
                     class="oe_stat_button"
                     icon="fa-dollar"
-                    context="{'search_default_employee_ids': active_id}"
-                    groups="hr_holidays.group_hr_holidays_user"
+                    context="{'search_default_employee_ids': id}"
+                    groups="base.group_user"
                     help="Vacation days sold"
                 >
                     <div
                         class="o_field_widget o_stat_info"
-                        attrs="{'invisible': [('allocation_display', '=', '0')]}"
+                        invisible="allocation_display == '0'"
                     >
                         <span class="o_stat_value">
                             <field name="days_off_sold_display" /> Days Sold

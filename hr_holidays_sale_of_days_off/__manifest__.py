@@ -4,7 +4,7 @@
 {
     "name": "Hr Holidays Sale Of Days Off",
     "summary": """hr_holidays_sale_of_days_off""",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -19,5 +19,5 @@
         "views/hr_employee.xml",
     ],
     "demo": [],
-    'installable': False,
+    "installable": True,
 }

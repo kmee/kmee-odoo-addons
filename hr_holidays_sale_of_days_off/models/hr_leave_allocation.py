@@ -24,7 +24,7 @@ class HrLeaveAllocation(models.Model):
     def action_sale_of_days_off(self):
         return {
             "name": _("Holiday Sales"),
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "hr.leave.abono",
             "target": "current",
             "type": "ir.actions.act_window",
@@ -32,7 +32,7 @@ class HrLeaveAllocation(models.Model):
                 "default_employee_id": self.employee_id.id,
                 "default_holiday_allocation_id": self.id,
                 "default_date": date.today(),
-                "create_name_button": "Register Vacation Sale”",
+                "create_name_button": "Register Vacation Sale",
             },
             "domain": [
                 ("employee_id", "=", self.employee_id.id),
@@ -42,6 +42,8 @@ class HrLeaveAllocation(models.Model):
 
     @api.depends("number_of_days_sold")
     def _compute_days_off_sold_display(self):
-        self.ensure_one()
-        value = self.number_of_days_sold
-        self.days_off_sold_display = int(value) if value == int(value) else value
+        for allocation in self:
+            value = allocation.number_of_days_sold
+            allocation.days_off_sold_display = (
+                int(value) if value == int(value) else value
+            )
