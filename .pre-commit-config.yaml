@@ -1,7 +1,6 @@
 exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
-  ^hr_overtime_report_action_pdf/|
   ^product_contract_period_bo/|
   ^sac/|
   ^sale_blanket_order_isolated_quotation/|
