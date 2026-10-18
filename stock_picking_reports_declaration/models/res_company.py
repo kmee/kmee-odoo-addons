@@ -10,5 +10,5 @@ class ResCompany(models.Model):
 
     declaration_receipt = fields.Html(
         string="Declaration of Receipt",
-        help="Text displayed in the declaration area of ​​the report.",
+        help="Text displayed in the declaration area of the report.",
     )
