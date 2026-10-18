@@ -7,7 +7,7 @@
         priority="999"
     >
         <xpath
-            expr="//a[@role='button' and contains(@class, 'btn-primary')]"
+            expr="//a[@role='button' and hasclass('btn-primary')]"
             position="replace"
         >
             <a
