@@ -5,7 +5,7 @@
     "name": "Planos de Contas de Destino",
     "summary": "Mapeia as contas do Odoo para planos de contas externos: o "
     "plano do escritorio de contabilidade e o plano referencial da RFB",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
@@ -14,9 +14,8 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["account"],
     "data": [
-        "security/ir.model.access.csv",
-        "security/ir_rule.xml",
         "views/account_mapping.xml",
+        "security/ir.access.csv",
     ],
     "demo": ["demo/account_mapping_demo.xml"],
     "installable": True,
