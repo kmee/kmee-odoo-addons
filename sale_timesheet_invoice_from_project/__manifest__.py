@@ -3,8 +3,8 @@
 
 {
     "name": "Sale Timesheet Invoice From Project",
-    "summary": """sale_timesheet_invoice_from_project""",
-    "version": "18.0.1.0.0",
+    "summary": "Create invoices from the project list",
+    "version": "19.0.1.0.0",
     "category": "Project",
     "license": "AGPL-3",
     "author": "KMEE",
