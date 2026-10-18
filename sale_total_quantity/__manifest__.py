@@ -1,7 +1,7 @@
 {
     "name": "Sale Total Quantity",
     "summary": "Displays the total quantity of products in the sale order.",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales",
     "author": "KMEE, Odoo Community Association (OCA)",
     "license": "AGPL-3",
