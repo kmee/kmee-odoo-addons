@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8' ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="hr_holidays_required_support_document" model="ir.ui.view">
         <field name="name">hr holidays force support document</field>
@@ -8,7 +8,7 @@
             <field name="support_document" position="after">
                 <field
                     name="required_support_document"
-                    attrs="{'invisible': [('support_document', '=', False)]}"
+                    invisible="not support_document"
                 />
             </field>
         </field>
