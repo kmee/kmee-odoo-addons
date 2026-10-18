@@ -115,9 +115,7 @@ class ESocialS1200(models.Model):
         company = self.company_id
 
         # Build establishment CNPJ
-        cnpj_estab = "".join(
-            c for c in (company.partner_id.cnpj_cpf or "") if c.isdigit()
-        )
+        cnpj_estab = "".join(c for c in (company.partner_id.vat or "") if c.isdigit())
 
         cod_lotacao = company.l10n_br_esocial_cod_lotacao or "1"
 

@@ -49,7 +49,7 @@ class ESocialBaseIntermediario(models.AbstractModel):
         """Return employer identification dict."""
         company = self.company_id
         partner = company.partner_id
-        cnpj = partner.cnpj_cpf
+        cnpj = partner.vat
         if not cnpj:
             raise UserError(
                 _("Empresa '%(company_name)s' não possui CNPJ/CPF configurado.")

@@ -54,6 +54,6 @@ class HrPayslip(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "l10n_br.esocial.evento",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("id", "in", created_events.ids)],
         }

@@ -33,8 +33,8 @@ class TestESocialIntermediarioBase(TransactionCase):
         cls.addClassCleanup(mute.__exit__, None, None, None)
         cls.company = cls.env.company
         partner = cls.company.partner_id
-        if not partner.cnpj_cpf:
-            partner.write({"cnpj_cpf": "02.546.716/0001-46"})
+        if not partner.vat:
+            partner.write({"vat": "02.546.716/0001-46"})
 
         cls.cat_101 = cls.env.ref("l10n_br_esocial.cat_trab_101")
         cls.class_trib = cls.env.ref("l10n_br_esocial.class_trib_01")

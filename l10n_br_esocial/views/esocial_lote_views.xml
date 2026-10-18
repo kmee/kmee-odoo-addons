@@ -2,10 +2,10 @@
 <odoo>
 
     <record id="view_esocial_lote_tree" model="ir.ui.view">
-        <field name="name">l10n_br.esocial.lote.tree</field>
+        <field name="name">l10n_br.esocial.lote.list</field>
         <field name="model">l10n_br.esocial.lote</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-danger="state == 'error'"
                 decoration-success="state == 'done'"
                 decoration-info="state in ('sent', 'processing')"
@@ -23,7 +23,7 @@
                 />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="create_date" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -87,13 +87,13 @@
                     <notebook>
                         <page string="Eventos" name="eventos">
                             <field name="evento_ids">
-                                <tree>
+                                <list>
                                     <field name="tipo" />
                                     <field name="operacao" />
                                     <field name="per_apur" />
                                     <field name="state" widget="badge" />
                                     <field name="nr_recibo" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -105,7 +105,7 @@
     <record id="action_esocial_lote" model="ir.actions.act_window">
         <field name="name">Lotes de Transmiss&#227;o</field>
         <field name="res_model">l10n_br.esocial.lote</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>

@@ -2,10 +2,10 @@
 <odoo>
 
     <record id="view_esocial_evento_tree" model="ir.ui.view">
-        <field name="name">l10n_br.esocial.evento.tree</field>
+        <field name="name">l10n_br.esocial.evento.list</field>
         <field name="model">l10n_br.esocial.evento</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-danger="state == 'error'"
                 decoration-success="state == 'success'"
                 decoration-info="state == 'sent'"
@@ -26,7 +26,7 @@
                     decoration-danger="state == 'error'"
                 />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -97,20 +97,17 @@
                         </page>
                         <page string="Ocorr&#234;ncias" name="ocorrencias">
                             <field name="ocorrencia_ids">
-                                <tree>
+                                <list>
                                     <field name="tipo" />
                                     <field name="codigo" />
                                     <field name="descricao" />
                                     <field name="localizacao" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -170,7 +167,7 @@
     <record id="action_esocial_evento" model="ir.actions.act_window">
         <field name="name">Eventos eSocial</field>
         <field name="res_model">l10n_br.esocial.evento</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_esocial_evento_search" />
     </record>
 

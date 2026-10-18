@@ -35,8 +35,8 @@ class TestS1010XML(TransactionCase):
         # Ensure company has CNPJ
         cls.company = cls.env.company
         partner = cls.company.partner_id
-        if not partner.cnpj_cpf:
-            partner.write({"cnpj_cpf": "02.546.716/0001-46"})
+        if not partner.vat:
+            partner.write({"vat": "02.546.716/0001-46"})
 
         # Get a salary rule and configure eSocial fields
         cls.rule = cls.env["hr.salary.rule"].search([], limit=1)

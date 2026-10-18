@@ -52,8 +52,8 @@ class TestRF14IdEvento(TransactionCase):
         cls.addClassCleanup(mute.__exit__, None, None, None)
         cls.company = cls.env.company
         partner = cls.company.partner_id
-        if not partner.cnpj_cpf:
-            partner.write({"cnpj_cpf": "02.546.716/0001-46"})
+        if not partner.vat:
+            partner.write({"vat": "02.546.716/0001-46"})
         cls.class_trib = cls.env.ref("l10n_br_esocial.class_trib_01")
         cls.company.write({"l10n_br_esocial_class_trib_id": cls.class_trib.id})
 
