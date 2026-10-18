@@ -34,7 +34,7 @@
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_search_form" />
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='group_create_date']" position="after">
+            <xpath expr="//filter[@name='create_date']" position="after">
                 <filter
                     string="Service Class"
                     name="group_service_class"
@@ -51,7 +51,7 @@
         <field name="model">report.project.task.user</field>
         <field name="inherit_id" ref="project.view_task_project_user_search" />
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='group_create_date']" position="after">
+            <xpath expr="//filter[@name='create_date']" position="after">
                 <filter
                     string="Service Class"
                     name="group_service_class"

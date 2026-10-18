@@ -13,7 +13,6 @@ exclude: |
   ^l10n_br_website_hr_recruitment_form/|
   ^mail_role_filter/|
   ^product_contract_period_bo/|
-  ^project_task_service_class/|
   ^sac/|
   ^sale_blanket_order_isolated_quotation/|
   ^sale_partial_lock/|
