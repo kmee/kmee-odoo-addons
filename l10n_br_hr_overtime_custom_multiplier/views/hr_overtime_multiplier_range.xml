@@ -30,11 +30,7 @@
                 <field name="holiday" />
                 <field name="overtime_from" />
                 <field name="overtime_to" />
-                <field
-                    name="multiplier"
-                    widget="float_time"
-                    modifiers="{&quot;required&quot;: true}"
-                />
+                <field name="multiplier" widget="float_time" />
             </tree>
         </field>
     </record>

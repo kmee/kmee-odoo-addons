@@ -10,15 +10,15 @@ class HrAttendanceOvertime(models.Model):
     note = fields.Text()
 
     extra_hours_without_multiplier = fields.Float(
-        string="Extra Hours without Multiplier", readonly="1"
+        string="Extra Hours without Multiplier", readonly=True
     )
 
-    applied_multiplier = fields.Float(default=1.0, readonly="1")
+    applied_multiplier = fields.Float(default=1.0, readonly=True)
 
     adjustment_overtime_id = fields.Many2one(
-        "hr.attendance.overtime", readonly="1", ondelete="cascade"
+        "hr.attendance.overtime", readonly=True, ondelete="cascade"
     )
-    attendance_id = fields.Many2one("hr.attendance", readonly="1", ondelete="cascade")
+    attendance_id = fields.Many2one("hr.attendance", readonly=True, ondelete="cascade")
 
     overtime_range_id = fields.Many2one(
         "hr.overtime.multiplier.range", string="Multiplier", readonly=True
