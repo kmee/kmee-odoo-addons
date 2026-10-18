@@ -34,7 +34,10 @@ class AccountPaymentTerm(models.Model):
         :return: The newly created record.
         """
         self.ensure_one()
-        custom_term_id = self.copy({"is_custom": True, "active": False})
-        # In 17.0 copy_data() appends "(copy)" to the name, so set it afterwards
-        custom_term_id.name = name
-        return custom_term_id
+        # Bypass account.payment.term.copy_data(): in 18.0 it calls _() inside a
+        # list comprehension, which logs "no translation language detected".
+        vals = models.Model.copy_data(
+            self.with_context(active_test=False),
+            {"is_custom": True, "active": False, "name": name},
+        )[0]
+        return self.create(vals)
