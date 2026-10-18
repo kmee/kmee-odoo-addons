@@ -1,0 +1,1 @@
+Every time a contract is generated through a sale order, its payment mode will be the same as the sale order. And when the payment mode is changed in the sale order, the payment mode of the contract will also be changed, becoming the same as the sale order.
