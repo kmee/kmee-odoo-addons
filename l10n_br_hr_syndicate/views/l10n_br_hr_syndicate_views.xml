@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+         CONVEN&#199;&#195;O COLETIVA
+         &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+
+    <record id="view_collective_convention_form" model="ir.ui.view">
+        <field name="name">l10n.br.hr.collective.convention.form</field>
+        <field name="model">l10n.br.hr.collective.convention</field>
+        <field name="arch" type="xml">
+            <form string="Conven&#231;&#227;o Coletiva">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="Nome da Conven&#231;&#227;o"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_union_id" />
+                            <field name="dissidio_month" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                        </group>
+                    </group>
+                    <group string="Piso Salarial">
+                        <group>
+                            <field name="wage_floor" />
+                        </group>
+                        <group>
+                            <field name="contribution_employee_pct" />
+                            <field name="contribution_employer_pct" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Pisos por Cargo" name="wage_floors">
+                            <field name="wage_floor_job_ids">
+                                <tree editable="bottom">
+                                    <field name="job_id" />
+                                    <field name="wage_floor" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Observa&#231;&#245;es" name="notes">
+                            <field name="notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_collective_convention_tree" model="ir.ui.view">
+        <field name="name">l10n.br.hr.collective.convention.tree</field>
+        <field name="model">l10n.br.hr.collective.convention</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="partner_union_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="dissidio_month" />
+                <field name="wage_floor" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_collective_convention" model="ir.actions.act_window">
+        <field name="name">Conven&#231;&#245;es Coletivas</field>
+        <field name="res_model">l10n.br.hr.collective.convention</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_syndicate_root"
+        name="Sindicato"
+        parent="hr.menu_hr_root"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_collective_convention"
+        name="Conven&#231;&#245;es Coletivas"
+        parent="menu_syndicate_root"
+        action="action_collective_convention"
+        sequence="10"
+    />
+
+    <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+         CONTRIBUI&#199;&#195;O SINDICAL
+         &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+
+    <record id="view_syndicate_contribution_form" model="ir.ui.view">
+        <field name="name">l10n.br.hr.syndicate.contribution.form</field>
+        <field name="model">l10n.br.hr.syndicate.contribution</field>
+        <field name="arch" type="xml">
+            <form string="Contribui&#231;&#227;o Sindical">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_union_id" />
+                            <field name="contribution_type" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="year" />
+                            <field name="month" />
+                        </group>
+                    </group>
+                    <group string="C&#225;lculo">
+                        <group>
+                            <field name="calc_method" />
+                        </group>
+                        <group>
+                            <field
+                                name="percentage"
+                                invisible="calc_method not in ['percent']"
+                            />
+                            <field
+                                name="fixed_amount"
+                                invisible="calc_method not in ['fixed']"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_syndicate_contribution_tree" model="ir.ui.view">
+        <field name="name">l10n.br.hr.syndicate.contribution.tree</field>
+        <field name="model">l10n.br.hr.syndicate.contribution</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_union_id" />
+                <field name="year" />
+                <field name="month" />
+                <field name="contribution_type" />
+                <field name="calc_method" />
+                <field name="percentage" />
+                <field name="fixed_amount" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_syndicate_contribution" model="ir.actions.act_window">
+        <field name="name">Contribui&#231;&#245;es Sindicais</field>
+        <field name="res_model">l10n.br.hr.syndicate.contribution</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_syndicate_contribution"
+        name="Contribui&#231;&#245;es Sindicais"
+        parent="menu_syndicate_root"
+        action="action_syndicate_contribution"
+        sequence="20"
+    />
+
+</odoo>
