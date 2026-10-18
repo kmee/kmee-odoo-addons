@@ -30,13 +30,10 @@ class CrmLeadStageDuration(models.Model):
     _description = "CRM Lead Stage Duration"
     _order = "start_date desc, id desc"
 
-    _sql_constraints = [
-        (
-            "check_end_after_start",
-            "CHECK(end_date IS NULL OR end_date >= start_date)",
-            "The end date must be greater than or equal to start date.",
-        ),
-    ]
+    _check_end_after_start = models.Constraint(
+        'CHECK(end_date IS NULL OR end_date >= start_date)',
+        "The end date must be greater than or equal to start date.",
+    )
 
     lead_id = fields.Many2one(
         comodel_name="crm.lead",
