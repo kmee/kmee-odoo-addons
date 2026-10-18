@@ -18,10 +18,10 @@
                             <field name="l10n_br_molestia_grave" />
                             <field
                                 name="l10n_br_cid_molestia"
-                                attrs="{'invisible': [('l10n_br_molestia_grave', '=', False)]}"
+                                invisible="not l10n_br_molestia_grave"
                             />
                         </group>
-                        <group string="Salário Família">
+                        <group string="Sal&#225;rio Fam&#237;lia">
                             <field name="l10n_br_num_filhos_sf" />
                             <field name="l10n_br_filhos_invalidos_sf" />
                         </group>
