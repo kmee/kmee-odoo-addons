@@ -27,7 +27,7 @@ class AccountExport(models.Model):
                     fh.zero_pad(0, 8),
                     fh.clean_text(line.name or move.ref, 200, sep=","),
                     fh.clean_text(move.ref, 20, sep=","),
-                    fh.only_digits(line.partner_id.cnpj_cpf),
+                    fh.only_digits(line.partner_id.vat),
                     "",
                     "",
                 ]
