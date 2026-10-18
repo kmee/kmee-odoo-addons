@@ -24,13 +24,13 @@
 
             <!-- tree odoo/addons/sale/views/sale_order_views.xml:384 -->
             <xpath
-                expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                expr="//field[@name='order_line']/list//field[@name='price_unit']"
                 position="after"
             >
                 <field name="can_edit_price_sale" invisible="1" />
             </xpath>
             <xpath
-                expr="//field[@name='order_line']/tree//field[@name='price_unit']"
+                expr="//field[@name='order_line']/list//field[@name='price_unit']"
                 position="attributes"
             >
                 <attribute name="readonly">not can_edit_price_sale</attribute></xpath>
