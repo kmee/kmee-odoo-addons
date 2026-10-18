@@ -18,21 +18,21 @@
     </record>
 
     <record id="view_mail_block_role_tree" model="ir.ui.view">
-        <field name="name">mail.role.filter.tree</field>
+        <field name="name">mail.role.filter.list</field>
         <field name="model">mail.role.filter</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="role_id" />
                 <field name="model_id" />
                 <field name="active" />
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_mail_role_filter" model="ir.actions.act_window">
         <field name="name">Filter Email by Role</field>
         <field name="res_model">mail.role.filter</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <!-- <menuitem id="menu_mail_filter_role_root" name="Mail Filter Rules" parent="base.menu_administration"/> -->
