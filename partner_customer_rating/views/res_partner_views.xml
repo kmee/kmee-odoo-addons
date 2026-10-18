@@ -8,14 +8,15 @@
                 <field name="customer_rating_id" options="{'no_open': True}" />
             </xpath>
 
-            <xpath expr="//div[hasclass('oe_title', 'mb24')]/h1" position="attributes">
-                <attribute name="class">d-flex align-items-center gap-2</attribute>
+            <xpath expr="//h1" position="attributes">
+                <attribute
+                    name="class"
+                    add="d-flex align-items-center gap-2"
+                    separator=" "
+                />
             </xpath>
 
-            <xpath
-                expr="//div[hasclass('oe_title', 'mb24')]/h1/field[1]"
-                position="before"
-            >
+            <xpath expr="//h1/field[@name='name'][1]" position="before">
                 <field
                     name="image_rating"
                     widget="image"
