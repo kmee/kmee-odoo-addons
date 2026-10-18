@@ -1,0 +1,533 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_holidays_allocation_plan
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid ""
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
+"title=\"Arrow\"/>"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__allocation_type__accrual
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Accrual"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__accrual_plan_id
+msgid "Accrual Plan"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__active
+msgid "Active"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Add a reason..."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__allocation_ids
+msgid "Allocation"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocation Confirm"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocation Delete"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocation Draft"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__holiday_type
+msgid "Allocation Mode"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.actions.act_window,name:hr_holidays_allocation_plan.hr_leave_allocation_act_window
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation__allocation_plan_id
+#: model:ir.ui.menu,name:hr_holidays_allocation_plan.hr_leave_allocation_menu
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocation Plan"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocation Refuse"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__allocation_type
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocation Type"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Allocations"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__holiday_type
+msgid ""
+"Allow to create requests in batchs:\n"
+"- By Employee: for a specific employee\n"
+"- By Company: all employees of the specified company\n"
+"- By Department: all employees of the specified department\n"
+"- By Employee Tag: all employees of the specific employee group category"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__auto_run
+msgid "Auto Run"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Back to Draft"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__holiday_type__company
+msgid "By Company"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__holiday_type__department
+msgid "By Department"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__holiday_type__category
+msgid "By Employee Tag"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__holiday_type__category_and
+msgid "By all Employee Tags (AND)"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__holiday_type__category_or
+msgid "By any of Employee Tags (OR)"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__state__cancel
+msgid "Cancelled"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__state__check
+msgid "Check"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__mode_company_id
+msgid "Company Mode"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__validity_period
+msgid ""
+"Defines how long the allocated leave is valid from the allocation date."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__department_id
+msgid "Department"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__name
+msgid "Description"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model,name:hr_holidays_allocation_plan.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__category_id
+msgid "Employee Tag"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__category_ids
+msgid "Employee Tags"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Employess"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__date_to
+msgid "End Date"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__approver_id
+msgid "First Approval"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Go to"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__id
+msgid "ID"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__immediate_allocation
+msgid "Immediate Allocation"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "No Limit"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "No limit"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__number_of_days
+msgid "Number of Days"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_employee__plan_allocation_ids
+msgid "Plan Allocation"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__plan_employee_ids
+msgid "Plan Employee"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Re/Compute Employees"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__notes
+msgid "Reasons"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Recurrent"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__allocation_type__recurrent
+msgid "Recurrent Allocation"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__recurring_renewal_frequency
+msgid "Recurring Renewal Frequency"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Regular"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__allocation_type__regular
+msgid "Regular / Fixed"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Run until"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Run/Update"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields.selection,name:hr_holidays_allocation_plan.selection__hr_leave_allocation_plan__state__running
+msgid "Running"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__date_from
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "Start Date"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__state
+msgid "Status"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__approver_id
+msgid ""
+"This area is automatically filled by the user who validates the allocation"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model,name:hr_holidays_allocation_plan.model_hr_leave_allocation
+msgid "Time Off Allocation"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model,name:hr_holidays_allocation_plan.model_hr_leave_allocation_plan
+msgid "Time Off Allocation Plan"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__holiday_status_id
+msgid "Time Off Type"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__validity_period
+msgid "Validity Period (years)"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,field_description:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model:ir.model.fields,help:hr_holidays_allocation_plan.field_hr_leave_allocation_plan__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: hr_holidays_allocation_plan
+#: model_terms:ir.ui.view,arch_db:hr_holidays_allocation_plan.hr_leave_allocation_form_view
+msgid "e.g. Time Off type (From validity start to validity end / no limit)"
+msgstr ""
