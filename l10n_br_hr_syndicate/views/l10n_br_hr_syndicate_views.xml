@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
-    <!-- ══════════════════════════════════════════════════════════════
-         CONVENÇÃO COLETIVA
-         ══════════════════════════════════════════════════════════════ -->
+    <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+         CONVEN&#199;&#195;O COLETIVA
+         &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
     <record id="view_collective_convention_form" model="ir.ui.view">
         <field name="name">l10n.br.hr.collective.convention.form</field>
         <field name="model">l10n.br.hr.collective.convention</field>
         <field name="arch" type="xml">
-            <form string="Convenção Coletiva">
+            <form string="Conven&#231;&#227;o Coletiva">
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name" placeholder="Nome da Convenção" />
+                            <field
+                                name="name"
+                                placeholder="Nome da Conven&#231;&#227;o"
+                            />
                         </h1>
                     </div>
                     <group>
@@ -45,7 +48,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Observações" name="notes">
+                        <page string="Observa&#231;&#245;es" name="notes">
                             <field name="notes" />
                         </page>
                     </notebook>
@@ -70,7 +73,7 @@
     </record>
 
     <record id="action_collective_convention" model="ir.actions.act_window">
-        <field name="name">Convenções Coletivas</field>
+        <field name="name">Conven&#231;&#245;es Coletivas</field>
         <field name="res_model">l10n.br.hr.collective.convention</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -84,21 +87,21 @@
 
     <menuitem
         id="menu_collective_convention"
-        name="Convenções Coletivas"
+        name="Conven&#231;&#245;es Coletivas"
         parent="menu_syndicate_root"
         action="action_collective_convention"
         sequence="10"
     />
 
-    <!-- ══════════════════════════════════════════════════════════════
-         CONTRIBUIÇÃO SINDICAL
-         ══════════════════════════════════════════════════════════════ -->
+    <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;
+         CONTRIBUI&#199;&#195;O SINDICAL
+         &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 
     <record id="view_syndicate_contribution_form" model="ir.ui.view">
         <field name="name">l10n.br.hr.syndicate.contribution.form</field>
         <field name="model">l10n.br.hr.syndicate.contribution</field>
         <field name="arch" type="xml">
-            <form string="Contribuição Sindical">
+            <form string="Contribui&#231;&#227;o Sindical">
                 <sheet>
                     <group>
                         <group>
@@ -111,18 +114,18 @@
                             <field name="month" />
                         </group>
                     </group>
-                    <group string="Cálculo">
+                    <group string="C&#225;lculo">
                         <group>
                             <field name="calc_method" />
                         </group>
                         <group>
                             <field
                                 name="percentage"
-                                attrs="{'invisible': [('calc_method', 'not in', ['percent'])]}"
+                                invisible="calc_method not in ['percent']"
                             />
                             <field
                                 name="fixed_amount"
-                                attrs="{'invisible': [('calc_method', 'not in', ['fixed'])]}"
+                                invisible="calc_method not in ['fixed']"
                             />
                         </group>
                     </group>
@@ -148,14 +151,14 @@
     </record>
 
     <record id="action_syndicate_contribution" model="ir.actions.act_window">
-        <field name="name">Contribuições Sindicais</field>
+        <field name="name">Contribui&#231;&#245;es Sindicais</field>
         <field name="res_model">l10n.br.hr.syndicate.contribution</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem
         id="menu_syndicate_contribution"
-        name="Contribuições Sindicais"
+        name="Contribui&#231;&#245;es Sindicais"
         parent="menu_syndicate_root"
         action="action_syndicate_contribution"
         sequence="20"
