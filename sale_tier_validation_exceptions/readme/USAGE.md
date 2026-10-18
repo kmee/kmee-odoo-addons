@@ -1,1 +1,0 @@
-Now every time a user tries to confirm a sale order containing an exception defined by a rule, these exceptions are displayed on the screen and the REQUEST VALIDATION button appears.
