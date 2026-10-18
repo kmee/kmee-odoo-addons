@@ -1,1 +1,0 @@
-This module marks an opportunity as Won, when the quotation created through it has been confirmed.
