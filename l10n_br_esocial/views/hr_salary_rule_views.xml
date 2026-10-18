@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_hr_salary_rule_form_esocial" model="ir.ui.view">
+        <field name="name">hr.salary.rule.form.esocial</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="payroll.hr_salary_rule_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="eSocial" name="esocial">
+                    <group>
+                        <group string="Identificação">
+                            <field name="l10n_br_esocial_cod_rubr" />
+                            <field name="l10n_br_esocial_ide_tab_rubr" />
+                            <field name="l10n_br_esocial_nat_rubr_id" />
+                            <field name="l10n_br_esocial_tp_rubr" />
+                        </group>
+                        <group string="Incidências Tributárias">
+                            <field name="l10n_br_esocial_cod_inc_cp" />
+                            <field name="l10n_br_esocial_cod_inc_irrf" />
+                            <field name="l10n_br_esocial_cod_inc_fgts" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
