@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
-
         <!-- Categories -->
         <record id="module_category_monetary_update" model="ir.module.category">
             <field name="name">Monetary Index Update</field>
@@ -25,12 +24,10 @@
                 name="comment"
             >Manager can create, edit and delete monetary indexes and rates</field>
         </record>
-
     </data>
 
     <!-- Record Rules -->
     <data noupdate="1">
-
         <!-- Multi-company rule for monetary.index -->
         <record id="monetary_index_company_rule" model="ir.rule">
             <field name="name">Monetary Index Update: multi-company</field>
@@ -54,6 +51,5 @@
             ]</field>
             <field name="global" eval="True" />
         </record>
-
     </data>
 </odoo>
