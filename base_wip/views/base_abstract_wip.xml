@@ -2,7 +2,7 @@
 <!-- Copyright 2020 KMEE INFORMATICA LTDA
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-<!--
+    <!--
     <record model="ir.ui.view" id="base_wip_abstract_form_view">
         <field name="name">base.wip.abstract.form (in base_wip)</field>
         <field name="model">base.wip.abstract</field>
@@ -73,42 +73,46 @@
                         <div t-attf-class="oe_kanban_global_click">
                             <div>
                                 <span class="o_kanban_record_title">
-                                    <strong><a type="object" name="open_form"><t
-                                                t-esc="record.reference_id.value"
-                                            /> - <t
-                                                t-esc="record.model_id.value"
-                                            /></a></strong>
+                                    <strong>
+                                        <a type="object" name="open_form"><t
+                                            t-esc="record.reference_id.value"
+                                        /> - <t t-esc="record.model_id.value" /></a>
+                                    </strong>
                                 </span>
                             </div>
                             <hr class="mt4 mb8" />
                             <div class="o_kanban_record_subtitle">
                                 <div>
-                                    <span><strong><t
-                                                t-esc="record.reaction_time.string"
-                                            />:</strong> <t
-                                            t-esc="record.reaction_time.value"
-                                        /></span>
+                                    <span>
+                                        <strong><t
+                                            t-esc="record.reaction_time.string"
+                                        />:</strong>
+                                        <t t-esc="record.reaction_time.value" />
+                                    </span>
                                 </div>
                                 <div>
-                                    <span><strong><t
-                                                t-esc="record.lead_time.string"
-                                            />:</strong> <t
-                                            t-esc="record.lead_time.value"
-                                        /></span>
+                                    <span>
+                                        <strong><t
+                                            t-esc="record.lead_time.string"
+                                        />:</strong>
+                                        <t t-esc="record.lead_time.value" />
+                                    </span>
                                 </div>
                                 <div>
-                                    <span><strong><t
-                                                t-esc="record.cycle_time.string"
-                                            />:</strong> <t
-                                            t-esc="record.cycle_time.value"
-                                        /></span>
+                                    <span>
+                                        <strong><t
+                                            t-esc="record.cycle_time.string"
+                                        />:</strong>
+                                        <t t-esc="record.cycle_time.value" />
+                                    </span>
                                 </div>
                                 <div>
-                                    <span><strong><t
-                                                t-esc="record.logged_time.string"
-                                            />:</strong> <t
-                                            t-esc="record.logged_time.value"
-                                        /></span>
+                                    <span>
+                                        <strong><t
+                                            t-esc="record.logged_time.string"
+                                        />:</strong>
+                                        <t t-esc="record.logged_time.value" />
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +127,7 @@
         <field name="model">base.wip.report</field>
         <field name="arch" type="xml">
             <list>
-            <!-- <list> -->
+                <!-- <list> -->
                 <field name="reference_id" />
                 <field name="state" />
                 <field name="res_id" />
@@ -164,5 +168,4 @@
         <field name="action" ref="base_wip_view_act_window" />
         <field name="sequence" eval="20" />
     </record>
-
 </odoo>
