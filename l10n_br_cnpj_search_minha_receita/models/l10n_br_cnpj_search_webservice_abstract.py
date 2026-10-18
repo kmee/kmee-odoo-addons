@@ -1,7 +1,7 @@
 # Copyright 2025 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 MINHARECEITA_URL = "https://search-br-data.kmee.dev.br/"  # TODO tornar url configurável
@@ -11,20 +11,24 @@ class L10nBrCnpjSearchWebserviceAbstract(models.AbstractModel):
 
     _inherit = "l10n_br_cnpj_search.webservice.abstract"
 
+    @api.model
     def minhareceita_get_api_url(self, cnpj):
         return MINHARECEITA_URL + cnpj
 
-    def minhareceita_get_api_headers(self):
+    @api.model
+    def minhareceita_get_headers(self):
         return {"Accept": "application/json"}
 
+    @api.model
     def minhareceita_validate(self, response):
         self._validate(response)
         data = response.json()
         if data.get("status") == "ERROR":
-            raise ValidationError(_(data.get("message")))
+            raise ValidationError(data.get("message"))
 
         return data
 
+    @api.model
     def _minhareceita_import_data(self, data):
         legal_name = self.get_data(data, "razao_social", title=True)
         fantasy_name = self.get_data(data, "nome_fantasia", title=True)
