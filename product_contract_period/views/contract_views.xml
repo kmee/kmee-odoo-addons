@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <!-- Adicionar campos de período na visualização da linha de contrato -->
     <record id="contract_line_form_inherit_period" model="ir.ui.view">
         <field name="name">contract.line.form.inherit.period</field>
@@ -13,7 +12,6 @@
             </xpath>
         </field>
     </record>
-
 
     <!-- Adicionar campos de período à visualização de árvore da linha de contrato -->
     <record id="contract_line_tree_inherit_period" model="ir.ui.view">
@@ -98,5 +96,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

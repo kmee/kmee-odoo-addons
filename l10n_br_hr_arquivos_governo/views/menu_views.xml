@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <menuitem
         id="menu_hr_arquivos_governo"
         name="Arquivos do Governo"
@@ -31,5 +30,4 @@
         action="l10n_br_hr_caged_action"
         sequence="30"
     />
-
 </odoo>

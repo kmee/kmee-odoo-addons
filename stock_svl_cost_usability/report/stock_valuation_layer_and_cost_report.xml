@@ -4,7 +4,6 @@ Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="stock_valuation_layer_and_cost_view_tree" model="ir.ui.view">
         <field name="name">stock.valuation.layer.cost.report.view.list</field>
         <field name="model">stock.valuation.layer.cost.report</field>

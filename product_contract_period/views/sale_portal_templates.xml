@@ -61,18 +61,18 @@
             <td id="period_label" class="text-end" t-if="period_count">
                 <t t-if="line.recurring_rule_type == 'yearly'">
                     <t t-esc="line.period_count" /> ANO<t
-                        t-if="line.period_count &gt; 1"
-                    >S</t>
+                    t-if="line.period_count &gt; 1"
+                >S</t>
                 </t>
                 <t t-elif="line.recurring_rule_type == 'monthly'">
-                    <t t-esc="line.period_count" /> <t
-                        t-if="line.period_count == 1"
-                    >MÊS</t><t t-else="">MESES</t>
+                    <t t-esc="line.period_count" />
+                    <t t-if="line.period_count == 1">MÊS</t>
+                    <t t-else="">MESES</t>
                 </t>
                 <t t-elif="line.recurring_rule_type == 'weekly'">
-                    <t t-esc="line.period_count" /> <t
-                        t-if="line.period_count == 1"
-                    >SEMANA</t><t t-else="">SEMANAS</t>
+                    <t t-esc="line.period_count" />
+                    <t t-if="line.period_count == 1">SEMANA</t>
+                    <t t-else="">SEMANAS</t>
                 </t>
                 <t t-else="">
                     <t t-esc="line.period_count" />
@@ -177,21 +177,27 @@
                                             <t
                                                 t-if="line.recurring_rule_type == 'yearly'"
                                             ><t t-esc="line.period_count" /> ANO<t
-                                                    t-if="line.period_count &gt; 1"
-                                                >S</t></t>
+                                                t-if="line.period_count &gt; 1"
+                                            >S</t></t>
                                             <t
                                                 t-elif="line.recurring_rule_type == 'monthly'"
-                                            ><t t-esc="line.period_count" /> <t
-                                                    t-if="line.period_count == 1"
-                                                >MÊS</t><t t-else="">MESES</t></t>
+                                            >
+                                                <t t-esc="line.period_count" />
+                                                <t t-if="line.period_count == 1">MÊS</t>
+                                                <t t-else="">MESES</t>
+                                            </t>
                                             <t
                                                 t-elif="line.recurring_rule_type == 'weekly'"
-                                            ><t t-esc="line.period_count" /> <t
+                                            >
+                                                <t t-esc="line.period_count" />
+                                                <t
                                                     t-if="line.period_count == 1"
-                                                >SEMANA</t><t t-else="">SEMANAS</t></t>
-                                            <t t-else=""><t
-                                                    t-esc="line.period_count"
-                                                /></t>
+                                                >SEMANA</t>
+                                                <t t-else="">SEMANAS</t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="line.period_count" />
+                                            </t>
                                         </td>
                                         <td
                                             class="text-end"
@@ -296,21 +302,27 @@
                                             <t
                                                 t-if="line.recurring_rule_type == 'yearly'"
                                             ><t t-esc="line.period_count" /> ANO<t
-                                                    t-if="line.period_count &gt; 1"
-                                                >S</t></t>
+                                                t-if="line.period_count &gt; 1"
+                                            >S</t></t>
                                             <t
                                                 t-elif="line.recurring_rule_type == 'monthly'"
-                                            ><t t-esc="line.period_count" /> <t
-                                                    t-if="line.period_count == 1"
-                                                >MÊS</t><t t-else="">MESES</t></t>
+                                            >
+                                                <t t-esc="line.period_count" />
+                                                <t t-if="line.period_count == 1">MÊS</t>
+                                                <t t-else="">MESES</t>
+                                            </t>
                                             <t
                                                 t-elif="line.recurring_rule_type == 'weekly'"
-                                            ><t t-esc="line.period_count" /> <t
+                                            >
+                                                <t t-esc="line.period_count" />
+                                                <t
                                                     t-if="line.period_count == 1"
-                                                >SEMANA</t><t t-else="">SEMANAS</t></t>
-                                            <t t-else=""><t
-                                                    t-esc="line.period_count"
-                                                /></t>
+                                                >SEMANA</t>
+                                                <t t-else="">SEMANAS</t>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="line.period_count" />
+                                            </t>
                                         </td>
                                         <td
                                             class="text-end"

@@ -2,7 +2,6 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="view_mail_block_role_form" model="ir.ui.view">
         <field name="name">mail.role.filter.form</field>
         <field name="model">mail.role.filter</field>
@@ -42,5 +41,4 @@
         parent="mail.mail_menu_technical"
         action="action_mail_role_filter"
     />
-
 </odoo>

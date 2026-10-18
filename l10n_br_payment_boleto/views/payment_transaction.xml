@@ -2,13 +2,12 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="payment_transaction_form_view">
         <field name="model">payment.transaction</field>
         <field name="inherit_id" ref="payment.payment_transaction_form" />
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
-                    <group string="Boleto" name="boleto">
+                <group string="Boleto" name="boleto">
                     <group name="boleto_info" invisible="not is_boleto_payment">
                         <field name="is_boleto_payment" invisible="1" />
                         <field name="due_date" />
@@ -22,9 +21,9 @@
                         <field name="boleto_instructions" />
                     </group>
                     <group name="technical_info" groups="base.group_no_one">
-                      <field name="provider_technical_info" />
-                      </group>
+                        <field name="provider_technical_info" />
                     </group>
+                </group>
             </xpath>
         </field>
     </record>
@@ -38,5 +37,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

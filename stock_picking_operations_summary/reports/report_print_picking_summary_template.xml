@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <template
         id="picking_summary"
         inherit_id="stock.report_picking"
@@ -94,7 +93,6 @@
                     </t>
                 </tbody>
             </table>
-
         </xpath>
     </template>
 </odoo>

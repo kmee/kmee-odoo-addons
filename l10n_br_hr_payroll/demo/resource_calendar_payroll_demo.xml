@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <!--
         Jornada padrão CLT: 44 horas semanais (art. 7º, XIII, CF/88).
 
@@ -29,5 +28,4 @@
         <field name="hour_to">12.0</field>
         <field name="day_period">morning</field>
     </record>
-
 </odoo>
