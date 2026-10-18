@@ -16,7 +16,7 @@
     </record>
 
     <record id="view_partner_tree_custom" model="ir.ui.view">
-        <field name="name">res.partner.tree.customer.tier</field>
+        <field name="name">res.partner.list.customer.tier</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">
