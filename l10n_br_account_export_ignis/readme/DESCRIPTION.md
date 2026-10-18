@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **IGNIS**.
 
 Híbrido: os campos são delimitados, mas cada um tem largura fixa própria.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -19,17 +19,17 @@ Híbrido: os campos são delimitados, mas cada um tem largura fixa própria.
 | 5 | documento | 10 |
 | 6 | histórico | 66 |
 
-## Exemplo
+**Exemplo**
 
 ```
 05/08/2026;1101                ;2201                ;            1500,00;DOC123    ;Venda de agosto...
 ```
 
-## Observações
+**Observações**
 
 - Débito e crédito na mesma linha; partidas múltiplas usam o lado vazio.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
