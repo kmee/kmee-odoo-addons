@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-  Copyright (C) 2025 KMEE Informatica LTDA - Luis Felipe Mil&#233;o
-  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
--->
 <odoo>
     <record id="account_move_template_tree" model="ir.ui.view">
         <field name="name">l10n_br.account.move.template.list</field>
@@ -94,7 +90,7 @@
                     name="inactive"
                     domain="[('active', '=', False)]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Operation Type"
                         name="group_operation_type"
@@ -130,7 +126,7 @@
     <menuitem
         id="account_move_template_menu"
         name="Double Entry Templates"
-        parent="account.account_management_menu"
+        parent="account.account_account_menu"
         action="account_move_template_action"
         sequence="30"
     />
