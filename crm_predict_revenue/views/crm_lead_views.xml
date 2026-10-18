@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_view_form_inherit_predict_revenue" model="ir.ui.view">
+        <field name="name">crm.lead.view.form.inherit.predict.revenue</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="source_channel" />
+            </field>
+            <field name="day_close" position="after">
+                    <field name="won_sales_cycle_days" />
+                    <field name="lost_sales_cycle_days" />
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="Analytics" name="predictive_analysis">
+                    <group name="analytics">
+                    </group>
+                    <group>
+                        <group string="Métricas de Previsão">
+                            <field name="weighted_revenue" widget="monetary" />
+                            <field name="outreach_count" />
+                            <field name="meeting_count" />
+                        </group>
+                        <group string="Métricas de Atividade">
+                            <field name="last_activity_date" />
+                            <field name="days_since_last_activity" />
+                            <field name="days_in_current_stage" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath
+                expr="//page[@name='predictive_analysis']/group[@name='analytics']"
+                position="inside"
+            >
+                <xpath
+                    expr="//page[@name='lead']/group/group/field[@name='campaign_id']/ancestor::group[1]"
+                    position="move"
+                />
+            </xpath>
+            <xpath
+                expr="//page[@name='predictive_analysis']/group[@name='analytics']"
+                position="inside"
+            >
+                <xpath
+                    expr="//page[@name='lead']/group/group[@name='Misc']"
+                    position="move"
+                />
+            </xpath>
+
+
+        </field>
+    </record>
+
+    <record id="action_crm_revenue_prediction_report" model="ir.actions.act_window">
+        <field name="name">Previsão de Receita</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">pivot,graph</field>
+        <field name="domain">[('type','=','opportunity')]</field>
+        <field name="context">{
+            'pivot_measures': ['weighted_revenue'],
+            'pivot_column_groupby': ['stage_id'],
+            'pivot_row_groupby': ['team_id']
+        }</field>
+    </record>
+
+    <menuitem
+        id="menu_crm_revenue_prediction"
+        name="Previsão de Receita"
+        parent="crm.crm_menu_report"
+        action="action_crm_revenue_prediction_report"
+        sequence="20"
+    />
+</odoo>
