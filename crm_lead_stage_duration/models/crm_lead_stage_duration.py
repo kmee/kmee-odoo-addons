@@ -31,7 +31,7 @@ class CrmLeadStageDuration(models.Model):
     _order = "start_date desc, id desc"
 
     _check_end_after_start = models.Constraint(
-        'CHECK(end_date IS NULL OR end_date >= start_date)',
+        "CHECK(end_date IS NULL OR end_date >= start_date)",
         "The end date must be greater than or equal to start date.",
     )
 
