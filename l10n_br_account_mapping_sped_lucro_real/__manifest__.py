@@ -5,7 +5,7 @@
     "name": "Plano Referencial RFB 1 - PJ em Geral - Lucro Real",
     "summary": "Tabela oficial do plano referencial 1 da RFB "
     "(L100A, L300A, leiaute 12) para o registro I051 da ECD",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
