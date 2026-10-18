@@ -4,7 +4,7 @@
 {
     "name": "Exportacao Contabil - SCI (Visual Sucessor / Unico)",
     "summary": "Exporta lancamentos contabeis no layout do SCI (Visual Sucessor / Unico)",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
