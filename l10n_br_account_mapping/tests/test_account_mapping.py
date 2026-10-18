@@ -16,7 +16,7 @@ class TestAccountMapping(TransactionCase):
                 "name": "Despesa com frete",
                 "code": "MAPTEST1",
                 "account_type": "expense",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.conta_b = Account.create(
@@ -24,7 +24,7 @@ class TestAccountMapping(TransactionCase):
                 "name": "Despesa com seguro",
                 "code": "MAPTEST2",
                 "account_type": "expense",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.conta_fora = Account.create(
@@ -32,7 +32,7 @@ class TestAccountMapping(TransactionCase):
                 "name": "Conta nao mapeada",
                 "code": "MAPTEST9",
                 "account_type": "expense",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.plan = cls.env["l10n_br_account_mapping.plan"].create(
