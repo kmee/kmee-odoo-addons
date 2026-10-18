@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+hr_leave_abono_access_name,hr.leave.abono user,hr.leave.abono,base.group_user,cru,
+hr_leave_abono_access_manager,hr.leave.abono manager,hr.leave.abono,hr_holidays.group_hr_holidays_user,crud,
