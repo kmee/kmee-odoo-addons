@@ -7,7 +7,6 @@
         <field name="code">model.cron_check_for_authorized_boletos()</field>
         <field name="interval_number">30</field>
         <field name="interval_type">minutes</field>
-        <field name="numbercall">-1</field>
         <field name="active">True</field>
     </record>
 
@@ -18,7 +17,6 @@
         <field name="code">model.cron_check_for_paid_boletos()</field>
         <field name="interval_number">30</field>
         <field name="interval_type">minutes</field>
-        <field name="numbercall">-1</field>
         <field name="active">True</field>
     </record>
 </odoo>

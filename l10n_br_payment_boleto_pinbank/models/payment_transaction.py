@@ -69,7 +69,7 @@ class PaymentTransaction(models.Model):
                 "Valor": int(self.amount * 100),
                 "Email": self.partner_email,
                 "DadosSacado": {
-                    "CpfCnpj": int(re.sub("[^0-9]", "", self.partner_id.cnpj_cpf or 0)),
+                    "CpfCnpj": int(re.sub("[^0-9]", "", self.partner_id.vat or "0")),
                     "Nome": self.partner_id.legal_name,
                     "Endereco": self.partner_id.street_name,
                     "Bairro": self.partner_id.district,
@@ -141,21 +141,23 @@ class PaymentTransaction(models.Model):
 
         return refund_tx
 
-    def _send_capture_request(self):
+    def _send_capture_request(self, amount_to_capture=None):
         """Override of `payment` to send a capture request to PinBank.
 
         Note: self.ensure_one()
 
-        :return: None
+        :param float amount_to_capture: The amount to capture.
+        :return: The capture child transaction, if any.
         """
-        super()._send_capture_request()
+        child_tx = super()._send_capture_request(amount_to_capture=amount_to_capture)
         if self.provider_code != "boleto_pinbank":
-            return
+            return child_tx
 
         response_content = self._pinbank_check_boleto_status()
 
         # Handle the capture request response.
         self._handle_notification_data("boleto_pinbank", response_content)
+        return child_tx
 
     def _pinbank_check_boleto_status(self):
         payload = {
@@ -169,14 +171,15 @@ class PaymentTransaction(models.Model):
             CONSULTAR_BOLETO_ENDPOINT, payload=payload
         )
 
-    def _send_void_request(self):
+    def _send_void_request(self, amount_to_void=None):
         """Override of `payment` to cancel a Pinbank transaction.
 
         Note: self.ensure_one()
 
-        :return: None
+        :param float amount_to_void: The amount to void.
+        :return: The void child transaction, if any.
         """
-        res = super()._send_void_request()
+        res = super()._send_void_request(amount_to_void=amount_to_void)
         if self.provider_code != "boleto_pinbank":
             return res
 

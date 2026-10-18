@@ -1,4 +1,12 @@
 <odoo noupdate="1">
+    <record id="payment_method_boleto_pinbank" model="payment.method">
+        <field name="name">Boleto PinBank</field>
+        <field name="code">boleto_pinbank</field>
+        <field name="sequence">50</field>
+        <field name="active">True</field>
+        <field name="support_refund">full_only</field>
+    </record>
+
     <record id="payment_acquirer_boleto_pinbank" model="payment.provider">
         <field name="name">Boleto PinBank</field>
         <field name="code">boleto_pinbank</field>
@@ -8,5 +16,9 @@
             file="l10n_br_payment_boleto_pinbank/static/description/icon.png"
         />
         <field name="module_id" ref="base.module_l10n_br_payment_boleto_pinbank" />
+        <field
+            name="payment_method_ids"
+            eval="[Command.set([ref('payment_method_boleto_pinbank')])]"
+        />
     </record>
 </odoo>
