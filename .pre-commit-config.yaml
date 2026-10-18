@@ -37,7 +37,6 @@ exclude: |
   ^product_contract_period/|
   ^product_contract_period_bo/|
   ^project_task_service_class/|
-  ^project_tech_lead/|
   ^sac/|
   ^sale_blanket_order_isolated_quotation/|
   ^sale_crm_auto_won/|
