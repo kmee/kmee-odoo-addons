@@ -26,7 +26,7 @@
     </record>
 
     <record id="view_partner_tree_custom" model="ir.ui.view">
-        <field name="name">res.partner.tree.customer.rating</field>
+        <field name="name">res.partner.list.customer.rating</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">
@@ -45,10 +45,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.res_partner_kanban_view" />
         <field name="arch" type="xml">
-            <xpath
-                expr="//div[hasclass('oe_kanban_partner_categories')]"
-                position="inside"
-            >
+            <xpath expr="//field[@name='email']" position="before">
                 <span>
                     <field
                         name="image_rating"
