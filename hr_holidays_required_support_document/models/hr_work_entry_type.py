@@ -1,8 +1,8 @@
 from odoo import fields, models
 
 
-class HolidaysType(models.Model):
-    _inherit = "hr.leave.type"
+class HrWorkEntryType(models.Model):
+    _inherit = "hr.work.entry.type"
 
     required_support_document = fields.Boolean(
         string="Required Supported Document",

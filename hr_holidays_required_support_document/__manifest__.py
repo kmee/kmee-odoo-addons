@@ -5,7 +5,7 @@
     "name": "Hr Holidays Required Support Document",
     "summary": """
         Required support document""",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -13,7 +13,7 @@
         "hr_holidays",
     ],
     "data": [
-        "views/hr_leave_type.xml",
+        "views/hr_work_entry_type.xml",
     ],
     "demo": [],
 }

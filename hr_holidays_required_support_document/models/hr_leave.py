@@ -10,7 +10,7 @@ class HolidaysRequest(models.Model):
         holidays = super(HolidaysRequest, self).create(vals_list)
         for holiday in holidays:
             if (
-                holiday.holiday_status_id.required_support_document
+                holiday.work_entry_type_id.required_support_document
                 and not holiday.supported_attachment_ids
             ):
                 raise ValidationError(
