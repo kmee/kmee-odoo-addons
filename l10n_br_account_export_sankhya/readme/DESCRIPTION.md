@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Sankhya**.
 
 Uma linha por partida, com cabeçalho de colunas.
 
-## Estrutura
+**Estrutura**
 
-### Cabeçalho
+**Cabeçalho**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -19,18 +19,18 @@ Uma linha por partida, com cabeçalho de colunas.
 | E | Historico |  |
 | F | Documento |  |
 
-## Exemplo
+**Exemplo**
 
 ```
 Data | Conta | Debito | Credito | Historico | Documento
 ```
 
-## Observações
+**Observações**
 
 - Requer a biblioteca `xlsxwriter` no servidor.
 - Valores gravados como número, com formato de moeda na planilha.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
