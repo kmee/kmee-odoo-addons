@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
 
             <xpath
-                expr="//field[@name='order_line']/tree//field[@name='product_uom_qty']"
+                expr="//field[@name='order_line']/list//field[@name='product_uom_qty']"
                 position="before"
             >
                 <field name="period_qty" string="Qtd/Per." />
@@ -16,7 +16,7 @@
                 <field name="recurring_rule_type" string="Tipo" />
             </xpath>
             <xpath
-                expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                expr="//field[@name='order_line']/list//field[@name='price_subtotal']"
                 position="before"
             >
                 <field name="period_amount" string="Período" />
@@ -49,6 +49,7 @@
             <!-- Add contract summary fields -->
             <xpath expr="//group[@name='sale_total']" position="inside">
                 <field name="period_contract_value" widget="monetary" />
+                <field name="contract_annual_value" widget="monetary" />
                 <field name="contract_periods" />
                 <field name="contract_average_value" widget="monetary" />
                 <field name="contract_period_details" />

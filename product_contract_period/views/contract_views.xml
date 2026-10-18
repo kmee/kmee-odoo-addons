@@ -17,7 +17,7 @@
 
     <!-- Adicionar campos de período à visualização de árvore da linha de contrato -->
     <record id="contract_line_tree_inherit_period" model="ir.ui.view">
-        <field name="name">contract.line.tree.inherit.period</field>
+        <field name="name">contract.line.list.inherit.period</field>
         <field name="model">contract.line</field>
         <field name="inherit_id" ref="contract.contract_line_tree_view" />
         <field name="arch" type="xml">
@@ -30,11 +30,11 @@
 
     <!-- Adicionar resumo de valores de período ao relatório de contrato -->
     <!-- <template id="report_contract_document_inherit_period" inherit_id="contract.report_contract_document">
-        <xpath expr="//table[@class='table table-sm o_main_table']/thead/tr" position="inside">
+        <xpath expr="//table[hasclass('table', 'table-sm', 'o_main_table')]/thead/tr" position="inside">
             <th class="text-right">Qtd/Período</th>
             <th class="text-right">Num. Períodos</th>
         </xpath>
-        <xpath expr="//table[@class='table table-sm o_main_table']/tbody/t/tr/td[2]" position="after">
+        <xpath expr="//table[hasclass('table', 'table-sm', 'o_main_table')]/tbody/t/tr/td[2]" position="after">
             <td class="text-right">
                 <span t-field="line.period_qty"/>
             </td>
