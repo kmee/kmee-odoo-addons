@@ -60,14 +60,14 @@ class CrmLead(models.Model):
                     else:
                         role_display = role.replace("_", "/").upper()
                         raise exceptions.UserError(
-                            _(f"Current stage requires a {role_display} assignment.")
+                            _("Current stage requires a %s assignment.", role_display)
                         )
 
-    @api.model
-    def create(self, vals):
-        lead = super().create(vals)
-        lead._assign_user_from_role()
-        return lead
+    @api.model_create_multi
+    def create(self, vals_list):
+        leads = super().create(vals_list)
+        leads._assign_user_from_role()
+        return leads
 
     def write(self, vals):
         res = super().write(vals)

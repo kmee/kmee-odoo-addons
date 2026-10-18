@@ -1,6 +1,6 @@
 {
     "name": "CRM Stage Role Responsible",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Sales/CRM",
     "summary": "Manage role responsibilities for CRM stages",
     "author": "KMEE",

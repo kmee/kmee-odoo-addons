@@ -9,9 +9,10 @@ class SaleOrder(models.Model):
     closer_id = fields.Many2one("res.users", string="Closer")
     farmer_id = fields.Many2one("res.users", string="Farmer")
 
-    @api.model
-    def create(self, vals):
-        order = super().create(vals)
-        if not order.user_id and order.opportunity_id:
-            order.user_id = order.opportunity_id.user_id
-        return order
+    @api.model_create_multi
+    def create(self, vals_list):
+        orders = super().create(vals_list)
+        for order in orders:
+            if not order.user_id and order.opportunity_id:
+                order.user_id = order.opportunity_id.user_id
+        return orders

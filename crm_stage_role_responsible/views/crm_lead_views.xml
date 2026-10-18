@@ -14,34 +14,34 @@
                 <field
                     name="sdr_bdr_id"
                     widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_sdr_bdr', '=', True)]}"
+                    invisible="hide_sdr_bdr"
                 />
                 <field
                     name="hunter_id"
                     widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_hunter', '=', True)]}"
+                    invisible="hide_hunter"
                 />
                 <field
                     name="farmer_id"
                     widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_farmer', '=', True)]}"
+                    invisible="hide_farmer"
                 />
             </field>
             <field name="team_id" position="before">
                 <field
                     name="sdr_bdr_id"
                     widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_sdr_bdr', '=', True)]}"
+                    invisible="hide_sdr_bdr"
                 />
                 <field
                     name="hunter_id"
                     widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_hunter', '=', True)]}"
+                    invisible="hide_hunter"
                 />
                 <field
                     name="farmer_id"
                     widget="many2one_avatar_user"
-                    attrs="{'invisible': [('hide_farmer', '=', True)]}"
+                    invisible="hide_farmer"
                 />
             </field>
         </field>
