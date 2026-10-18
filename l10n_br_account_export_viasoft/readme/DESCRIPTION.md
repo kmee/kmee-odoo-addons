@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Viasoft**.
 
 Sequencial, data compacta, contas e valor em largura fixa.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -21,13 +21,13 @@ Sequencial, data compacta, contas e valor em largura fixa.
 | 62-64 | reservado | espaços |
 | 65-164 | histórico | 100 |
 
-## Exemplo
+**Exemplo**
 
 ```
 001001050820261101           2201                     1500,00   Venda de agosto
 ```
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

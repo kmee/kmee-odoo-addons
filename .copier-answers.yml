@@ -25,6 +25,6 @@ repo_description: Welcome to our repository, dedicated to incubating OCA modules
 repo_name: KMEE Odoo Addons
 repo_slug: kmee-odoo-addons
 repo_website: https://github.com/KMEE/kmee-odoo-addons
-use_pyproject_toml: false
+use_pyproject_toml: true
 use_ruff: false
 

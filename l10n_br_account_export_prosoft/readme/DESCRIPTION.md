@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Prosoft**.
 
 Um cabeçalho por lançamento (`LC1`) e um detalhe por partida (`LC2`).
 
-## Estrutura
+**Estrutura**
 
-### Registro `LC1` (cabeçalho do lançamento)
+**Registro `LC1` (cabeçalho do lançamento)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -20,7 +20,7 @@ Um cabeçalho por lançamento (`LC1`) e um detalhe por partida (`LC2`).
 | 30-34 | reservado | espaços |
 | 35-64 | origem | `Omie` |
 
-### Registro `LC2` (partida)
+**Registro `LC2` (partida)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -32,18 +32,18 @@ Um cabeçalho por lançamento (`LC1`) e um detalhe por partida (`LC2`).
 | 33-52 | valor | 20, à direita, ponto decimal |
 | 53-152 | histórico | 100 |
 
-## Exemplo
+**Exemplo**
 
 ```
 LC100001   05082026DOC123         Omie
 LC200001001D1101                             1500.00Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - A natureza da partida vai no campo `D`/`C`, e não por coluna.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

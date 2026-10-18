@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Master Contábil**.
 
 Data no início, valor com ponto decimal e sufixo fixo.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -21,17 +21,17 @@ Data no início, valor com ponto decimal e sufixo fixo.
 | 70-117 | histórico | 48 |
 | 118-121 | sufixo | `0000` |
 
-## Exemplo
+**Exemplo**
 
 ```
 20260805DOC123  1101             2201                      1500.00   Venda de agosto                       0000
 ```
 
-## Observações
+**Observações**
 
 - O arquivo de referência usa a extensão `.D26` (ano da competência).
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

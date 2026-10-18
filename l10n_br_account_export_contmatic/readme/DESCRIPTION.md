@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Contmatic Phoenix**.
 
 Prefixo fixo `68`, data sem ano e valor com três decimais.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -21,18 +21,18 @@ Prefixo fixo `68`, data sem ano e valor com três decimais.
 | 51-54 | reservado | espaços |
 | 55-254 | histórico | 200 |
 
-## Exemplo
+**Exemplo**
 
 ```
 680000105/081101   2201                    1500.000    Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - O ano não vai na linha: vem do período da exportação.
 - Três casas decimais, diferente do restante da série.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
