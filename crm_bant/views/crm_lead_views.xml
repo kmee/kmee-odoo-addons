@@ -26,11 +26,11 @@
                             <field name="bant_budget_status" />
                             <field
                                 name="bant_budget_amount"
-                                attrs="{'invisible': [('bant_budget_status', 'in', ['undefined', 'no_budget'])]}"
+                                invisible="bant_budget_status in ['undefined', 'no_budget']"
                             />
                             <field
                                 name="bant_budget_timeframe"
-                                attrs="{'invisible': [('bant_budget_status', 'in', ['undefined', 'no_budget'])]}"
+                                invisible="bant_budget_status in ['undefined', 'no_budget']"
                             />
                             <field name="bant_budget_score" widget="badge" />
                         </group>
@@ -38,11 +38,11 @@
                             <field name="bant_authority_status" />
                             <field
                                 name="bant_authority_contact"
-                                attrs="{'invisible': [('bant_authority_status', '=', 'undefined')]}"
+                                invisible="bant_authority_status == 'undefined'"
                             />
                             <field
                                 name="bant_authority_role"
-                                attrs="{'invisible': [('bant_authority_status', '=', 'undefined')]}"
+                                invisible="bant_authority_status == 'undefined'"
                             />
                             <field name="bant_authority_score" widget="badge" />
                         </group>
@@ -50,15 +50,15 @@
                             <field name="bant_need_status" />
                             <field
                                 name="bant_need_description"
-                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                                invisible="bant_need_status == 'undefined'"
                             />
                             <field
                                 name="bant_need_pain_points"
-                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                                invisible="bant_need_status == 'undefined'"
                             />
                             <field
                                 name="bant_need_success_criteria"
-                                attrs="{'invisible': [('bant_need_status', '=', 'undefined')]}"
+                                invisible="bant_need_status == 'undefined'"
                             />
                             <field name="bant_need_score" widget="badge" />
                         </group>
@@ -66,11 +66,11 @@
                             <field name="bant_timeline_status" />
                             <field
                                 name="bant_timeline_date"
-                                attrs="{'invisible': [('bant_timeline_status', 'in', ['undefined', 'no_timeline'])]}"
+                                invisible="bant_timeline_status in ['undefined', 'no_timeline']"
                             />
                             <field
                                 name="bant_timeline_reason"
-                                attrs="{'invisible': [('bant_timeline_status', 'in', ['undefined', 'no_timeline'])]}"
+                                invisible="bant_timeline_status in ['undefined', 'no_timeline']"
                             />
                             <field name="bant_timeline_score" widget="badge" />
                         </group>
@@ -98,15 +98,14 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
         <field name="arch" type="xml">
-            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
+            <xpath expr="//field[@name='lead_properties']" position="after">
                 <field
                     name="bant_qualification_status"
-                    widget="label_selection"
-                    options="{'classes': {
-                    'unqualified': 'danger',
-                    'partially_qualified': 'warning',
-                    'qualified': 'info',
-                    'fully_qualified': 'success'}}"
+                    widget="badge"
+                    decoration-success="bant_qualification_status == 'fully_qualified'"
+                    decoration-info="bant_qualification_status == 'qualified'"
+                    decoration-warning="bant_qualification_status == 'partially_qualified'"
+                    decoration-danger="bant_qualification_status == 'unqualified'"
                 />
             </xpath>
         </field>
@@ -114,7 +113,7 @@
 
     <!-- BANT List View for Opportunities -->
     <record id="crm_case_tree_view_oppor_bant" model="ir.ui.view">
-        <field name="name">crm.lead.tree.opportunity.bant</field>
+        <field name="name">crm.lead.list.opportunity.bant</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
         <field name="arch" type="xml">
@@ -139,7 +138,7 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter" />
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='won']" position="before">
+            <xpath expr="//filter[@name='filter_won']" position="before">
                 <filter
                     string="BANT Qualified"
                     name="bant_qualified"
