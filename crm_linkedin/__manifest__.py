@@ -1,7 +1,7 @@
 {
     "name": "CRM LinkedIn",
     "summary": "Add LinkedIn field to CRM Leads",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Sales/CRM",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",

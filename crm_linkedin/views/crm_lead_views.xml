@@ -8,12 +8,6 @@
             <xpath expr="//field[@name='function']" position="after">
                 <field name="linkedin_url" widget="url" />
             </xpath>
-            <xpath
-                expr="//page[@name='lead']//field[@name='function']"
-                position="after"
-            >
-                <field name="linkedin_url" widget="url" />
-            </xpath>
         </field>
     </record>
 </odoo>
