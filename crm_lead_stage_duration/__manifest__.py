@@ -1,6 +1,6 @@
 {
     "name": "CRM Lead Stage Duration",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "summary": "Track time spent by opportunities in each CRM stage",
     "category": "Sales/CRM",
     "author": "KMEE",
