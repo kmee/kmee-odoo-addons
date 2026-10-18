@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Nasajon**.
 
 Uma linha por partida, data curta no início.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -21,17 +21,17 @@ Uma linha por partida, data curta no início.
 | 97 | separador | espaço |
 | 98-117 | documento | 20 |
 
-## Exemplo
+**Exemplo**
 
 ```
 050801101                    Venda de agosto                            1500,00 DOC123
 ```
 
-## Observações
+**Observações**
 
 - O Nasajon aceita várias variantes de arquivo; esta cobre o movimento contábil.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
