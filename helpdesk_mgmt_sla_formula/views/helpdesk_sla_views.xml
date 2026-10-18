@@ -9,22 +9,15 @@
                 <field name="use_formula" />
                 <field
                     name="sla_deadline_formula"
-                    attrs="{
-                        'invisible': [('use_formula', '=', False)],
-                        'required': [('use_formula', '=', True)]}"
                     widget="ace"
+                    invisible="not use_formula"
+                    required="use_formula"
                 />
             </field>
             <field name="days" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('use_formula', '=', True)]}</attribute>
-            </field>
+                <attribute name="invisible">use_formula</attribute></field>
             <field name="hours" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('use_formula', '=', True)]}</attribute>
-            </field>
+                <attribute name="invisible">use_formula</attribute></field>
         </field>
     </record>
 </odoo>
