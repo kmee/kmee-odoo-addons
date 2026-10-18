@@ -108,7 +108,7 @@ class TestRessarcimentoAccount(PayrollCommon):
                 "name": "Despesa Teste",
                 "employee_id": employee.id,
                 "product_id": self.product_expense.id,
-                "unit_amount": amount,
+                "total_amount_currency": amount,
                 "payment_mode": "own_account",
             }
         )
@@ -121,7 +121,7 @@ class TestRessarcimentoAccount(PayrollCommon):
             }
         )
         sheet.action_submit_sheet()
-        sheet.approve_expense_sheets()
+        sheet.action_approve_expense_sheets()
         return sheet
 
     def _create_payslip_with_journal(self, employee, contract):
