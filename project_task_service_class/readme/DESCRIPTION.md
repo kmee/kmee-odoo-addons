@@ -1,1 +1,0 @@
-Allows you to define service classes for tasks.
