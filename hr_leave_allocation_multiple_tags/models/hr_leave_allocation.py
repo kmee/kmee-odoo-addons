@@ -25,11 +25,6 @@ class HrLeaveAllocation(models.Model):
         store=True,
         string="Employee Tags",
         readonly=False,
-        states={
-            "cancel": [("readonly", True)],
-            "refuse": [("readonly", True)],
-            "validate": [("readonly", True)],
-        },
     )
 
     @api.depends("holiday_type")
@@ -42,26 +37,29 @@ class HrLeaveAllocation(models.Model):
         return res
 
     def _action_validate_create_childs(self):
-        childs = super(HrLeaveAllocation, self)._action_validate_create_childs()
-        employees = self.env["hr.employee"]
-        # Continuando a lógica específica deste método
-        if self.state == "validate" and (
-            self.holiday_type in ["category_and", "category_or"]
-        ):
-            if self.holiday_type == "category_and":
+        childs = (
+            super()._action_validate_create_childs() or self.env["hr.leave.allocation"]
+        )
+        for allocation in self:
+            if allocation.state != "validate" or allocation.holiday_type not in (
+                "category_and",
+                "category_or",
+            ):
+                continue
+            employees = self.env["hr.employee"]
+            if allocation.holiday_type == "category_and":
                 employees = self.env["hr.employee"].search([])
-                for category in self.category_ids:
+                for category in allocation.category_ids:
                     employees = employees.filtered(lambda e: category in e.category_ids)
-            elif self.holiday_type == "category_or":
-                for category_id in self.category_ids:
-                    employees |= category_id.employee_ids
+            else:
+                for category in allocation.category_ids:
+                    employees |= category.employee_ids
             if employees:
-                allocation_create_vals = self._prepare_holiday_values(employees)
-                childs += self.with_context(
+                new_childs = allocation.with_context(
                     mail_notify_force_send=False, mail_activity_automation_skip=True
-                ).create(allocation_create_vals)
-                if childs:
-                    childs.action_validate()
+                ).create(allocation._prepare_holiday_values(employees))
+                new_childs.action_validate()
+                childs += new_childs
         return childs
 
     @api.constrains(
