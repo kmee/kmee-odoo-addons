@@ -21,9 +21,8 @@
                 position="attributes"
             >
                 <attribute
-                    name="attrs"
-                >{'readonly': [('can_edit_price_purchase', '=', False)]}</attribute>
-            </xpath>
+                    name="readonly"
+                >not can_edit_price_purchase</attribute></xpath>
             <xpath expr="//field[@name='order_line']/tree" position="attributes">
                 <attribute name="editable" />
             </xpath>
