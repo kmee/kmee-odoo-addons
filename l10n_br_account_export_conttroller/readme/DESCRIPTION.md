@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Conttroller**.
 
 Uma linha por partida, com débito e crédito em **colunas separadas**.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -23,18 +23,18 @@ Uma linha por partida, com débito e crédito em **colunas separadas**.
 | 9 | valor a crédito | preenchido só se credora |
 | 10 | reservado | vazio |
 
-## Exemplo
+**Exemplo**
 
 ```
 202608;1;1101;000;000000;05/08/2026;Venda de agosto;1500,00;;
 202608;2;2201;000;000000;05/08/2026;Venda de agosto;;1500,00;
 ```
 
-## Observações
+**Observações**
 
 - O valor aparece na coluna do lado correspondente, e a outra fica vazia.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;

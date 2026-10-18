@@ -13,11 +13,11 @@ Exportacao Contabil - Conttroller
 .. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
     :target: https://odoo-community.org/page/development-status
     :alt: Alpha
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_account_export_conttroller
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/18.0/l10n_br_account_export_conttroller
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
@@ -30,11 +30,9 @@ Exporta lançamentos contábeis no layout do **Conttroller**.
 
 Uma linha por partida, com débito e crédito em **colunas separadas**.
 
-Estrutura
----------
+**Estrutura**
 
-Partida
-~~~~~~~
+**Partida**
 
 ===== =============== =========================
 Campo Conteúdo        Formato
@@ -51,22 +49,19 @@ Campo Conteúdo        Formato
 10    reservado       vazio
 ===== =============== =========================
 
-Exemplo
--------
+**Exemplo**
 
 ::
 
    202608;1;1101;000;000000;05/08/2026;Venda de agosto;1500,00;;
    202608;2;2201;000;000000;05/08/2026;Venda de agosto;;1500,00;
 
-Observações
------------
+**Observações**
 
 - O valor aparece na coluna do lado correspondente, e a outra fica
   vazia.
 
-O que o layout usa do Odoo
---------------------------
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (``l10n_br_export_code``) de
   cada conta, não o código do plano do Odoo;
@@ -102,7 +97,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_account_export_conttroller%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_account_export_conttroller%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -130,6 +125,6 @@ Current maintainer:
 
 |maintainer-mileo| 
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_account_export_conttroller>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/18.0/l10n_br_account_export_conttroller>`_ project on GitHub.
 
 You are welcome to contribute.
