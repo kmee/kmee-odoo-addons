@@ -9,14 +9,14 @@
             <xpath expr="//notebook" position="inside">
                 <page name="wip_page" string="WIP">
                     <field name="wip_ids" readonly="1">
-                        <tree>
+                        <list>
                             <field name="state" />
                             <field name="date_hour_start" />
                             <field name="date_hour_stop" />
                             <field name="lead_time" />
                             <field name="state" />
                             <field name="user_id" />
-                        </tree>
+                        </list>
                     </field>
                     <group>
                         <group>
@@ -37,7 +37,7 @@
     </record>
 
     <record id="crm_lead_wip_tree" model="ir.ui.view">
-        <field name="name">crm.lead.wip.tree</field>
+        <field name="name">crm.lead.wip.list</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_case_tree_view_leads" />
         <field name="arch" type="xml">
