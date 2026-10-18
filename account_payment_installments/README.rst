@@ -138,16 +138,14 @@ This file may contain ONE level of section titles, underlined with the ~
 break the structure of the README.rst or other documents where this
 fragment is included. ]
 
-11.0.x.y.z (YYYY-MM-DD)
------------------------
+**11.0.x.y.z (YYYY-MM-DD)**
 
 - [BREAKING] Breaking changes come first.
   (`#70 <https://github.com/OCA/repo/issues/70>`__)
 - [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
 - [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
 
-11.0.x.y.z (YYYY-MM-DD)
------------------------
+**11.0.x.y.z (YYYY-MM-DD)**
 
 - ...
 
