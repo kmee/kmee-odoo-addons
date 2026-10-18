@@ -1,4 +1,4 @@
-## Configuration Guide
+**Configuration Guide**
 
 To configure the Customer Satisfaction module, follow these steps:
 
