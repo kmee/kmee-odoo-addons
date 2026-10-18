@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Equipe de Geração de Leads (SDRs Outbound) -->
+        <record id="team_sdr_outbound" model="crm.team">
+            <field name="name">SDRs Outbound</field>
+            <field name="use_leads">True</field>
+            <field name="use_opportunities">False</field>
+            <field name="assignment_domain">[('email_state', '=', 'correct')]</field>
+            <field name="assignment_max">50</field>
+            <field name="alias_name">leads</field>
+            <field name="alias_user_id" ref="base.user_admin" />
+        </record>
+
+        <!-- Equipe de Qualificação (SDRs Inbound) -->
+        <record id="team_sdr_inbound" model="crm.team">
+            <field name="name">SDRs Inbound</field>
+            <field name="use_leads">True</field>
+            <field name="use_opportunities">True</field>
+            <field name="assignment_domain">[('source_id.name', '=', 'Website')]</field>
+            <field name="assignment_max">40</field>
+            <field name="alias_name">qualificar</field>
+            <field name="alias_user_id" ref="base.user_admin" />
+        </record>
+
+        <!-- Equipe de Fechamento (Account Executives) -->
+        <record id="team_account_executives" model="crm.team">
+            <field name="name">Account Executives</field>
+            <field name="use_leads">False</field>
+            <field name="use_opportunities">True</field>
+            <field name="assignment_domain">[('type', '=', 'opportunity')]</field>
+            <field name="assignment_max">20</field>
+            <field name="alias_name">oportunidades</field>
+            <field name="alias_user_id" ref="base.user_admin" />
+        </record>
+</odoo>

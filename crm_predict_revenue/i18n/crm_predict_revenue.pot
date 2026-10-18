@@ -1,0 +1,400 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* crm_predict_revenue
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_predict_revenue
+#: model:mail.template,body_html:crm_predict_revenue.mail_template_followup
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Olá <t t-out=\"object.contact_name or 'Prezado(a)'\"></t>,\n"
+"                        <br><br>\n"
+"                        Estou fazendo um acompanhamento sobre nosso contato anterior.\n"
+"                        <br><br>\n"
+"                        Gostaria de saber se teve a oportunidade de analisar minha mensagem e se tem interesse em conversarmos sobre como podemos ajudar sua empresa.\n"
+"                        <br><br>\n"
+"                        Estou à disposição para esclarecer qualquer dúvida.\n"
+"                        <br><br>\n"
+"                        Atenciosamente,\n"
+"                        <br><br>\n"
+"                        <t t-if=\"object.user_id\">\n"
+"                            <t t-out=\"object.user_id.name or ''\"></t>\n"
+"                            <br>\n"
+"                            <t t-out=\"object.user_id.phone or ''\"></t>\n"
+"                        </t>\n"
+"                        <t t-else=\"\">\n"
+"                            Equipe <t t-out=\"object.company_id.name or ''\"></t>\n"
+"                        </t>\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,body_html:crm_predict_revenue.mail_template_discovery_followup
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Olá <t t-out=\"object.contact_name or 'Prezado(a)'\"></t>,\n"
+"                        <br><br>\n"
+"                        Muito obrigado pela nossa reunião de descoberta. Foi muito produtivo entender mais sobre suas necessidades e desafios.\n"
+"                        <br><br>\n"
+"                        Conforme prometido, estou enviando materiais adicionais que podem ser úteis:\n"
+"                        <br><br>\n"
+"                        1. Apresentação detalhada de nossa solução<br>\n"
+"                        2. Casos de sucesso de clientes similares<br>\n"
+"                        3. White paper sobre os benefícios e ROI<br>\n"
+"                        4. FAQ com perguntas comuns<br>\n"
+"                        <br>\n"
+"                        Gostaria de agendar uma apresentação personalizada para demonstrar como nossa solução pode atender especificamente aos desafios que você mencionou? Podemos programar para a próxima semana.\n"
+"                        <br><br>\n"
+"                        Aguardo seu retorno e continuo à disposição para qualquer esclarecimento.\n"
+"                        <br><br>\n"
+"                        Atenciosamente,\n"
+"                        <br><br>\n"
+"                        <t t-if=\"object.user_id\">\n"
+"                            <t t-out=\"object.user_id.name or ''\"></t>\n"
+"                            <br>\n"
+"                            <t t-out=\"object.user_id.phone or ''\"></t>\n"
+"                        </t>\n"
+"                        <t t-else=\"\">\n"
+"                            Equipe <t t-out=\"object.company_id.name or ''\"></t>\n"
+"                        </t>\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,body_html:crm_predict_revenue.mail_template_initial_contact
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Olá <t t-out=\"object.contact_name or 'Prezado(a)'\"></t>,\n"
+"                        <br><br>\n"
+"                        Obrigado por seu interesse na <t t-out=\"object.company_id.name or 'nossa empresa'\"></t>.\n"
+"                        <br><br>\n"
+"                        Gostaria de entender melhor suas necessidades e como podemos ajudar sua empresa a alcançar seus objetivos.\n"
+"                        <br><br>\n"
+"                        Teria disponibilidade para uma breve conversa nos próximos dias? Posso ligar ou enviar um convite para uma reunião virtual, como preferir.\n"
+"                        <br><br>\n"
+"                        Aguardo seu retorno e estou à disposição.\n"
+"                        <br><br>\n"
+"                        Atenciosamente,\n"
+"                        <br><br>\n"
+"                        <t t-if=\"object.user_id\">\n"
+"                            <t t-out=\"object.user_id.name or ''\"></t>\n"
+"                            <br>\n"
+"                            <t t-out=\"object.user_id.phone or ''\"></t>\n"
+"                        </t>\n"
+"                        <t t-else=\"\">\n"
+"                            Equipe <t t-out=\"object.company_id.name or ''\"></t>\n"
+"                        </t>\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,body_html:crm_predict_revenue.mail_template_notify_ae
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Olá <t t-out=\"object.user_id.name or 'Prezado(a)'\"></t>,\n"
+"                        <br><br>\n"
+"                        Uma nova oportunidade qualificada foi designada para você:\n"
+"                        <br><br>\n"
+"                        <b>Nome:</b> <t t-out=\"object.name or ''\"></t><br>\n"
+"                        <b>Empresa:</b> <t t-out=\"object.partner_name or ''\"></t><br>\n"
+"                        <b>Contato:</b> <t t-out=\"object.contact_name or ''\"></t><br>\n"
+"                        <b>Email:</b> <t t-out=\"object.email_from or ''\"></t><br>\n"
+"                        <b>Telefone:</b> <t t-out=\"object.phone or ''\"></t><br>\n"
+"                        <b>Receita Esperada:</b> <t t-out=\"object.expected_revenue or ''\"></t><br>\n"
+"                        <br>\n"
+"                        <b>Qualificação BANT:</b><br>\n"
+"                        <b>Budget:</b> <t t-out=\"object.x_budget_value or 'Não definido'\"></t><br>\n"
+"                        <b>Authority:</b> <t t-out=\"object.x_decision_maker or 'Não definido'\"></t> (<t t-out=\"object.x_decision_maker_role or ''\"></t>)<br>\n"
+"                        <b>Need:</b> <t t-out=\"object.x_need_description or 'Não definido'\"></t><br>\n"
+"                        <b>Timeline:</b> <t t-out=\"object.x_purchase_date or 'Não definido'\"></t><br>\n"
+"                        <br>\n"
+"                        É recomendado entrar em contato em até 24 horas para agendar a próxima etapa.\n"
+"                        <br><br>\n"
+"                        Atenciosamente,\n"
+"                        <br>\n"
+"                        Equipe de SDRs\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.team,name:crm_predict_revenue.team_account_executives
+msgid "Account Executives"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,subject:crm_predict_revenue.mail_template_followup
+msgid "Acompanhamento: {{ object.name }}"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model_terms:ir.ui.view,arch_db:crm_predict_revenue.crm_lead_view_form_inherit_predict_revenue
+msgid "Analytics"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.actions.server,name:crm_predict_revenue.action_update_to_presentation
+msgid "Atualizar para Fase de Apresentação"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.actions.server,name:crm_predict_revenue.action_update_to_negotiation
+msgid "Atualizar para Fase de Negociação"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.actions.server,name:crm_predict_revenue.action_update_to_proposal
+msgid "Atualizar para Fase de Proposta"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.activity.type,name:crm_predict_revenue.activity_type_bant_assessment
+msgid "Avaliação BANT"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__source_channel
+msgid "Canal de Origem"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.activity.type,name:crm_predict_revenue.activity_type_qualification_call
+msgid "Chamada de Qualificação"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__last_activity_date
+msgid "Data da Última Atividade"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_authority_decision_maker
+msgid "Decisor"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__days_since_last_activity
+msgid "Dias Desde Última Atividade"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__won_sales_cycle_days
+msgid "Dias até Ganhar"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__lost_sales_cycle_days
+msgid "Dias até Perder"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__days_in_current_stage
+msgid "Dias no Estágio Atual"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.activity.type,name:crm_predict_revenue.mail_activity_demo_make_quote
+msgid "Elaborar Proposta"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields.selection,name:crm_predict_revenue.selection__crm_lead__source_channel__inbound_internal
+msgid "Inbound - Direcionamento Interno"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields.selection,name:crm_predict_revenue.selection__crm_lead__source_channel__inbound_organic
+msgid "Inbound - Orgânico/Desconhecido"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields.selection,name:crm_predict_revenue.selection__crm_lead__source_channel__inbound_call
+msgid "Inbound – Ligação Recebida"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_authority_influencer
+msgid "Influenciador"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,subject:crm_predict_revenue.mail_template_discovery_followup
+msgid "Informações adicionais sobre {{ object.company_id.name }}"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,name:crm_predict_revenue.mail_template_initial_contact
+msgid "Lead - Contato Inicial"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,name:crm_predict_revenue.mail_template_followup
+msgid "Lead - Follow-up"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model,name:crm_predict_revenue.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields.selection,name:crm_predict_revenue.selection__crm_lead__source_channel__migration_saraiva
+msgid "Migração Saraiva"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model_terms:ir.ui.view,arch_db:crm_predict_revenue.crm_lead_view_form_inherit_predict_revenue
+msgid "Métricas de Atividade"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model_terms:ir.ui.view,arch_db:crm_predict_revenue.crm_lead_view_form_inherit_predict_revenue
+msgid "Métricas de Previsão"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_need_identified
+msgid "Necessidade Identificada"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_need_developing
+msgid "Necessidade em Desenvolvimento"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,name:crm_predict_revenue.mail_template_notify_ae
+msgid "Notificação de Nova Oportunidade para AE"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,subject:crm_predict_revenue.mail_template_notify_ae
+msgid "Nova Oportunidade Qualificada: {{ object.name }}"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__outreach_count
+msgid "Número de Atividades"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__meeting_count
+msgid "Número de Reuniões"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,help:crm_predict_revenue.field_crm_lead__won_sales_cycle_days
+msgid "Número de dias desde a criação até ganhar a oportunidade"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,help:crm_predict_revenue.field_crm_lead__lost_sales_cycle_days
+msgid "Número de dias desde a criação até perder a oportunidade"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,help:crm_predict_revenue.field_crm_lead__days_in_current_stage
+msgid "Número de dias que o lead está no estágio atual"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,help:crm_predict_revenue.field_crm_lead__outreach_count
+msgid "Número total de atividades registradas"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,help:crm_predict_revenue.field_crm_lead__meeting_count
+msgid "Número total de reuniões agendadas"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,name:crm_predict_revenue.mail_template_discovery_followup
+msgid "Oportunidade - Material pós-Descoberta"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_budget_defined
+msgid "Orçamento Definido"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_budget_pending
+msgid "Orçamento Pendente"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields.selection,name:crm_predict_revenue.selection__crm_lead__source_channel__outbound_segmented
+msgid "Outbound - Prospecção Segmentada"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields.selection,name:crm_predict_revenue.selection__crm_lead__source_channel__outbound_events
+msgid "Outbound – Eventos"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_timeline_urgent
+msgid "Prazo Urgente"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_timeline_3_months
+msgid "Prazo até 3 meses"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.tag,name:crm_predict_revenue.tag_timeline_6_months
+msgid "Prazo até 6 meses"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.actions.act_window,name:crm_predict_revenue.action_crm_revenue_prediction_report
+#: model:ir.ui.menu,name:crm_predict_revenue.menu_crm_revenue_prediction
+msgid "Previsão de Receita"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:ir.model.fields,field_description:crm_predict_revenue.field_crm_lead__weighted_revenue
+msgid "Receita Ponderada"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.activity.type,name:crm_predict_revenue.activity_type_handoff_meeting
+msgid "Reunião de Transferência"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.team,name:crm_predict_revenue.team_sdr_inbound
+msgid "SDRs Inbound"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.team,name:crm_predict_revenue.team_sdr_outbound
+msgid "SDRs Outbound"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:mail.template,subject:crm_predict_revenue.mail_template_initial_contact
+msgid "{{ object.company_id.name }}: Vamos conversar sobre suas necessidades?"
+msgstr ""

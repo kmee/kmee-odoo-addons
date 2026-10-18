@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Automação para Fase de Descoberta -->
+        <record id="automation_discovery_phase" model="automation.configuration">
+            <field name="name">Processo de Descoberta</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_discovery'))]</field>
+            <field name="filter_id" ref="filter_discovery_opportunities" />
+            <field name="state">periodic</field>
+            <field name="is_periodic">True</field>
+            <field
+            name="tag_ids"
+            eval="[(4, ref('automation_tag_opportunity_follow'))]"
+        />
+        </record>
+
+        <!-- Etapa 1: Agendar reunião de descoberta -->
+        <record
+        id="automation_step_schedule_discovery"
+        model="automation.configuration.step"
+    >
+            <field name="name">Agendar Reunião de Descoberta</field>
+            <field name="configuration_id" ref="automation_discovery_phase" />
+            <field name="step_type">activity</field>
+            <field name="trigger_type">start</field>
+            <field name="domain">[]</field>
+            <field name="activity_type_id" ref="mail.mail_activity_data_meeting" />
+            <field name="activity_summary">Reunião de Descoberta</field>
+            <field
+            name="activity_note"
+        >Realizar reunião de descoberta para entender melhor a necessidade do cliente.
+- Aprofundar no problema que ele está tentando resolver
+- Verificar processos atuais
+- Identificar pontos de dor
+- Entender expectativas de ROI</field>
+            <field name="activity_user_type">specific</field>
+            <field name="activity_user_id" ref="base.user_admin" />
+            <field name="activity_date_deadline_range">2</field>
+            <field name="activity_date_deadline_range_type">days</field>
+        </record>
+
+        <!-- Etapa 2: Após descoberta, enviar material adicional -->
+        <record
+        id="automation_step_send_materials"
+        model="automation.configuration.step"
+    >
+            <field name="name">Enviar Material Adicional</field>
+            <field name="configuration_id" ref="automation_discovery_phase" />
+            <field name="step_type">mail</field>
+            <field name="trigger_type">activity_done</field>
+            <field name="parent_id" ref="automation_step_schedule_discovery" />
+            <field name="domain">[]</field>
+            <field name="mail_template_id" ref="mail_template_discovery_followup" />
+            <field name="mail_author_id" ref="base.partner_admin" />
+        </record>
+
+        <!-- Etapa 3: Atualizar para fase de apresentação -->
+        <record
+        id="automation_step_update_to_presentation"
+        model="automation.configuration.step"
+    >
+            <field name="name">Atualizar para Fase de Apresentação</field>
+            <field name="configuration_id" ref="automation_discovery_phase" />
+            <field name="step_type">action</field>
+            <field name="trigger_type">after_step</field>
+            <field name="parent_id" ref="automation_step_send_materials" />
+            <field name="domain">[]</field>
+            <field name="server_action_id" ref="action_update_to_presentation" />
+        </record>
+
+        <!-- Automação para Fase de Apresentação -->
+        <record id="automation_presentation_phase" model="automation.configuration">
+            <field name="name">Processo de Apresentação</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="domain"
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_presentation'))]</field>
+            <field name="filter_id" ref="filter_presentation_opportunities" />
+            <field name="state">periodic</field>
+            <field name="is_periodic">True</field>
+            <field
+            name="tag_ids"
+            eval="[(4, ref('automation_tag_opportunity_follow'))]"
+        />
+        </record>
+
+        <!-- Etapa 1: Agendar apresentação da solução -->
+        <record
+        id="automation_step_schedule_presentation"
+        model="automation.configuration.step"
+    >
+            <field name="name">Agendar Apresentação da Solução</field>
+            <field name="configuration_id" ref="automation_presentation_phase" />
+            <field name="step_type">activity</field>
+            <field name="trigger_type">start</field>
+            <field name="domain">[]</field>
+            <field name="activity_type_id" ref="mail.mail_activity_data_meeting" />
+            <field name="activity_summary">Apresentação da Solução</field>
+            <field
+            name="activity_note"
+        >Apresentar solução personalizada com base nas necessidades identificadas.
+- Demonstrar como o produto/serviço resolve os problemas específicos
+- Apresentar casos de sucesso similares
+- Abordar ROI esperado
+- Responder perguntas técnicas</field>
+            <field name="activity_user_type">specific</field>
+            <field name="activity_user_id" ref="base.user_admin" />
+            <field name="activity_date_deadline_range">3</field>
+            <field name="activity_date_deadline_range_type">days</field>
+        </record>
+
+        <!-- Etapa 2: Após apresentação, enviar proposta -->
+        <record
+        id="automation_step_create_proposal_activity"
+        model="automation.configuration.step"
+    >
+            <field name="name">Criar Proposta</field>
+            <field name="configuration_id" ref="automation_presentation_phase" />
+            <field name="step_type">activity</field>
+            <field name="trigger_type">activity_done</field>
+            <field name="parent_id" ref="automation_step_schedule_presentation" />
+            <field name="domain">[]</field>
+            <field name="activity_type_id" ref="mail_activity_demo_make_quote" />
+            <field name="activity_summary">Elaborar Proposta</field>
+            <field
+            name="activity_note"
+        >Elaborar proposta comercial com base nas necessidades e na apresentação realizada.
+- Incluir escopo detalhado
+- Detalhar preços e condições
+- Incluir SLA e cronograma
+- Preparar documentos complementares</field>
+            <field name="activity_user_type">specific</field>
+            <field name="activity_user_id" ref="base.user_admin" />
+            <field name="activity_date_deadline_range">2</field>
+            <field name="activity_date_deadline_range_type">days</field>
+        </record>
+</odoo>

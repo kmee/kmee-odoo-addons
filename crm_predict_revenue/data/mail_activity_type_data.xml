@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Tipos de atividade para passagem de bastão -->
+        <record id="activity_type_qualification_call" model="mail.activity.type">
+            <field name="name">Chamada de Qualificação</field>
+            <field name="icon">fa-phone</field>
+            <field name="res_model">crm.lead</field>
+            <field name="delay_count">1</field>
+            <field name="category">phonecall</field>
+        </record>
+
+        <record id="activity_type_handoff_meeting" model="mail.activity.type">
+            <field name="name">Reunião de Transferência</field>
+            <field name="icon">fa-exchange</field>
+            <field name="res_model">crm.lead</field>
+            <field name="delay_count">1</field>
+        </record>
+
+        <record id="activity_type_bant_assessment" model="mail.activity.type">
+            <field name="name">Avaliação BANT</field>
+            <field name="icon">fa-check-square-o</field>
+            <field name="res_model">crm.lead</field>
+            <field name="delay_count">2</field>
+        </record>
+
+        <record id="mail_activity_demo_make_quote" model="mail.activity.type">
+            <field name="name">Elaborar Proposta</field>
+            <field name="icon">fa-check-square-o</field>
+            <field name="res_model">crm.lead</field>
+            <field name="delay_count">2</field>
+        </record>
+
+        <!-- Configuração de cron para atribuição de leads -->
+        <!-- <record id="crm.ir_cron_crm_lead_assign" model="ir.cron">
+            <field name="active" eval="True" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record> -->
+
+        <!-- Parâmetro de sistema para ativar atribuição automática -->
+        <!-- <record id="param_lead_auto_assignment" model="ir.config_parameter">
+            <field name="key">crm.lead.auto.assignment</field>
+            <field name="value">True</field>
+        </record> -->
+</odoo>
