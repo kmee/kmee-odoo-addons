@@ -1,6 +1,6 @@
 {
     "name": "Monetary Index Update - SELIC",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "summary": "Fetch and update SELIC rates from Banco Central do Brasil",
