@@ -31,7 +31,7 @@ class MailThread(models.AbstractModel):
                     .sudo()
                     .search([("partner_id", "=", partner_id.id)])
                 )
-                if role.id in user_id.role_ids.mapped("id"):
+                if role in user_id.user_role_ids:
                     recipients_data_filtered.append(recipient)
 
         seen = set()
