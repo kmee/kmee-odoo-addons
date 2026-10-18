@@ -2,14 +2,14 @@
 <odoo>
 
     <record id="view_sale_order_cover_pdf_tree" model="ir.ui.view">
-        <field name="name">sale.order.cover.pdf.tree</field>
+        <field name="name">sale.order.cover.pdf.list</field>
         <field name="model">sale.order.cover.pdf</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="display_name" />
                 <field name="cover_pdf_filename" />
                 <field name="active" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -65,7 +65,7 @@
     <record id="action_sale_order_cover_pdf" model="ir.actions.act_window">
         <field name="name">PDF Cover</field>
         <field name="res_model">sale.order.cover.pdf</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Configure o PDF de capa para pedidos de venda
