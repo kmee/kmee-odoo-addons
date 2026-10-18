@@ -2,6 +2,5 @@
 <odoo>
     <record id="group_purchase_order_price_editor" model="res.groups">
         <field name="name">Can Edit The Price in Purchase</field>
-        <field name="category_id" ref="base.module_category_usability" />
     </record>
 </odoo>
