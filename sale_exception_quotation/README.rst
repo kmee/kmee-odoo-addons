@@ -51,16 +51,16 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://kmee.com.br/>``\ \_:
+- ``KMEE <https://kmee.com.br/>``\ \_:
 
-   -  Tiago Amaral tiago.amaral@kmee.com.br
+  - Tiago Amaral tiago.amaral@kmee.com.br
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------
