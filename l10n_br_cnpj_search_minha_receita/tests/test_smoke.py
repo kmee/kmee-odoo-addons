@@ -36,6 +36,9 @@ class TestModuleSmoke(TransactionCase):
     def test_models_are_usable(self):
         for name in self.model_names:
             model = self.env[name]
+            if not model._fields:
+                # abstract model owned by a dependency, extended here with methods only
+                continue
             self.assertTrue(model.fields_get(), name)
             if not model._abstract and not model._transient:
                 model.search([], limit=1)
