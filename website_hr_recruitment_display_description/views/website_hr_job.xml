@@ -3,7 +3,7 @@
         id="default_website_description"
         inherit_id="website_hr_recruitment.detail"
     >
-        <xpath expr="//h5[@class='fw-light o_not_editable']" position="after">
+        <xpath expr="//h5[hasclass('fw-light', 'o_not_editable')]" position="after">
             <t t-if="job.website_display_description">
                 <section class="pt32">
                     <div class="container">
