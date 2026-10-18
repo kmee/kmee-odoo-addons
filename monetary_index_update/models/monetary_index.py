@@ -33,13 +33,10 @@ class MonetaryIndex(models.Model):
         help="Historical rates for this index",
     )
 
-    _sql_constraints = [
-        (
-            "code_company_unique",
-            "UNIQUE(company_id, code)",
-            "The code must be unique per company!",
-        )
-    ]
+    _code_company_unique = models.Constraint(
+        "UNIQUE(company_id, code)",
+        "The code must be unique per company!",
+    )
 
     @api.constrains("code", "company_id")
     def _check_code_unique(self):

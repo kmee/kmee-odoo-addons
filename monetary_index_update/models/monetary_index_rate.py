@@ -39,13 +39,10 @@ class MonetaryIndexRate(models.Model):
     )
     note = fields.Char(help="Optional note or comment")
 
-    _sql_constraints = [
-        (
-            "index_date_unique",
-            "UNIQUE(index_id, date)",
-            "There can only be one rate per index and date!",
-        )
-    ]
+    _index_date_unique = models.Constraint(
+        "UNIQUE(index_id, date)",
+        "There can only be one rate per index and date!",
+    )
 
     @api.constrains("value")
     def _check_value(self):
