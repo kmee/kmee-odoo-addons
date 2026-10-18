@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="account_payment_register_form_view">
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="arch" type="xml">
+            <field name="payment_date" position="before">
+                <label for="change_rate" />
+                <div name="change_rate_div" class="o_row">
+                    <field name="original_rate" />
+                    <field name="change_rate" />
+                    <field
+                        name="change_rate_percent"
+                        widget="percentage"
+                        readonly="1"
+                    />
+                </div>
+            </field>
+        </field>
+    </record>
+
+</odoo>
