@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_crm_lead_stage_duration_tree" model="ir.ui.view">
-        <field name="name">crm.lead.stage.duration.tree</field>
+        <field name="name">crm.lead.stage.duration.list</field>
         <field name="model">crm.lead.stage.duration</field>
         <field name="arch" type="xml">
-            <tree create="false" delete="false" edit="false">
+            <list create="false" delete="false" edit="false">
                 <field name="lead_id" />
                 <field name="stage_id" />
                 <field name="team_id" />
@@ -14,7 +14,7 @@
                 <field name="duration_seconds" />
                 <field name="running" />
                 <field name="user_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -64,16 +64,16 @@
     <record id="action_crm_lead_stage_duration" model="ir.actions.act_window">
         <field name="name">Stage Duration Records</field>
         <field name="res_model">crm.lead.stage.duration</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="domain">[('lead_id.type', '=', 'opportunity')]</field>
         <field name="search_view_id" ref="view_crm_lead_stage_duration_search" />
     </record>
 
     <record id="view_crm_lead_stage_duration_report_tree" model="ir.ui.view">
-        <field name="name">crm.lead.stage.duration.report.tree</field>
+        <field name="name">crm.lead.stage.duration.report.list</field>
         <field name="model">crm.lead.stage.duration.report</field>
         <field name="arch" type="xml">
-            <tree create="false" edit="false" delete="false">
+            <list create="false" edit="false" delete="false">
                 <field name="team_id" />
                 <field name="stage_id" />
                 <field name="line_count" />
@@ -85,7 +85,7 @@
                 <field name="max_duration_seconds" />
                 <field name="closed_line_count" />
                 <field name="running_line_count" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -134,7 +134,7 @@
                 <field name="running_line_count" />
                 <field name="closed_line_count" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_card oe_kanban_global_click">
                             <div class="oe_kanban_content">
                                 <div class="o_kanban_record_title">
@@ -191,7 +191,7 @@
     <record id="action_crm_lead_stage_duration_report" model="ir.actions.act_window">
         <field name="name">Stage Duration Analysis</field>
         <field name="res_model">crm.lead.stage.duration.report</field>
-        <field name="view_mode">graph,pivot,kanban,tree</field>
+        <field name="view_mode">graph,pivot,kanban,list</field>
         <field name="search_view_id" ref="view_crm_lead_stage_duration_report_search" />
         <field name="context">{'search_default_group_report_team': 1}</field>
     </record>
