@@ -32,7 +32,7 @@ class ResPartnerTier(models.Model):
         return {
             "name": "Partners",
             "type": "ir.actions.act_window",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "res_model": "res.partner",
             "domain": [("tier_id", "=", self.id)],
         }
