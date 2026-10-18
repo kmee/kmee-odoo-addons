@@ -15,7 +15,7 @@
                     string="Refuse"
                     type="object"
                     class="btn-primary"
-                    attrs="{'invisible': [('send_mail', '=', False)]}"
+                    invisible="not send_mail"
                 />
             </button>
         </field>

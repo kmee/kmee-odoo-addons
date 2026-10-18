@@ -3,7 +3,6 @@ exclude: |
   # NOT INSTALLABLE ADDONS
   ^crm_wip/|
   ^hr_overtime_report_action_pdf/|
-  ^hr_recruitment_reject_mail_editable/|
   ^l10n_br_cnpj_search_minha_receita/|
   ^l10n_br_hr_holidays_public/|
   ^l10n_br_hr_overtime_custom_multiplier/|
