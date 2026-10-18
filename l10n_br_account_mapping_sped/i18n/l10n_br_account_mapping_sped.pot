@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_account_mapping_sped
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model,name:l10n_br_account_mapping_sped.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields.selection,name:l10n_br_account_mapping_sped.selection__l10n_br_account_mapping_account__sped_account_type__a
+msgid "Analitica"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_parent_code
+msgid "Codigo da conta superior na hierarquia da tabela referencial."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_plan_code
+msgid ""
+"Codigo do plano na tabela de planos referenciais da RFB (campo COD_PLAN_REF "
+"do registro I051 da ECD). Exemplos da tabela oficial: 1 para PJ em geral do "
+"Lucro Real, 2 para PJ em geral do Lucro Presumido. Consulte a tabela "
+"dinamica do SPED vigente no ano da escrituracao."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_plan_code
+msgid "Codigo do plano referencial"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model,name:l10n_br_account_mapping_sped.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model,name:l10n_br_account_mapping_sped.model_l10n_br_account_mapping_account
+msgid "Conta do Plano de Destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_parent_code
+msgid "Conta superior (RFB)"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_layout_version
+msgid "Leiaute de origem"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_referential
+msgid ""
+"Marque quando este plano de destino representar um plano referencial da "
+"Receita Federal. E o mapeamento que alimenta o registro I051 do SPED "
+"Contabil (ECD)."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_nature
+msgid "Natureza (RFB)"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_nature
+msgid ""
+"Natureza da conta na tabela referencial (1 ativo, 2 passivo, 3 patrimonio "
+"liquido, 4 resultado, 9 outras)."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_level
+msgid "Nivel (RFB)"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_level
+msgid ""
+"Nivel da conta na hierarquia da tabela referencial (coluna NIVEL da tabela "
+"dinamica). Os registros P100/P150 da ECF e o E010 exigem o nivel oficial, "
+"que nem sempre e a profundidade do codigo."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#. odoo-python
+#: code:addons/l10n_br_account_mapping_sped/models/account_mapping.py:0
+#, python-format
+msgid ""
+"O plano %s esta marcado como referencial da RFB e precisa do codigo do plano"
+" (COD_PLAN_REF)."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model,name:l10n_br_account_mapping_sped.model_l10n_br_account_mapping_plan
+msgid "Plano de Contas de Destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_referential
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_res_company__l10n_br_sped_referential_plan_id
+msgid "Plano referencial da RFB"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_res_company__l10n_br_sped_referential_plan_id
+msgid ""
+"Plano referencial usado por esta empresa na ECD (registro I051). Depende do "
+"regime: PJ em geral do Lucro Real usa o plano 1, do Lucro Presumido o plano "
+"2, e assim por diante."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping_sped.view_company_form_sped_referential
+msgid "SPED Contabil"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields.selection,name:l10n_br_account_mapping_sped.selection__l10n_br_account_mapping_account__sped_account_type__s
+msgid "Sintetica"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,field_description:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_account_type
+msgid "Tipo (RFB)"
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_account__sped_account_type
+msgid ""
+"Tipo da conta na tabela referencial: sintetica (agrupadora) ou analitica "
+"(recebe mapeamento). O I051 so referencia analiticas."
+msgstr ""
+
+#. module: l10n_br_account_mapping_sped
+#: model:ir.model.fields,help:l10n_br_account_mapping_sped.field_l10n_br_account_mapping_plan__sped_layout_version
+msgid ""
+"Versao do leiaute da tabela dinamica da RFB de onde este plano foi carregado"
+" (auditoria da carga)."
+msgstr ""
