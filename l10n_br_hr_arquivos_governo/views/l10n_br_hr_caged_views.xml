@@ -11,31 +11,31 @@
                         name="action_gerar_caged"
                         string="Gerar CAGED (descontinuado)"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_sent"
                         string="Marcar como Enviado"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'open')]}"
+                        invisible="state != 'open'"
                     />
                     <button
                         name="action_draft"
                         string="Voltar para Rascunho"
                         type="object"
-                        attrs="{'invisible': [('state', '=', 'draft')]}"
+                        invisible="state == 'draft'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="alert alert-warning" role="alert">
                         <strong>CAGED extinto.</strong> Pela Portaria SEPRT
-                        1.127/2019, quem presta informações pelo eSocial está
+                        1.127/2019, quem presta informa&#231;&#245;es pelo eSocial est&#225;
                         dispensado do CAGED desde janeiro de 2020: as
-                        movimentações vão pelos eventos S-2200 (admissão) e
-                        S-2299 (desligamento). A geração de arquivo está
+                        movimenta&#231;&#245;es v&#227;o pelos eventos S-2200 (admiss&#227;o) e
+                        S-2299 (desligamento). A gera&#231;&#227;o de arquivo est&#225;
                         desativada; esta tela serve apenas para consultar o
-                        histórico já gerado.
+                        hist&#243;rico j&#225; gerado.
                     </div>
                     <group>
                         <group>
@@ -51,7 +51,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Movimentações">
+                        <page string="Movimenta&#231;&#245;es">
                             <field name="contract_ids" />
                         </page>
                         <page string="Arquivo CAGED">

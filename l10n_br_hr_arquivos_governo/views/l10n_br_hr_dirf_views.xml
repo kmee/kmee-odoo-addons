@@ -9,27 +9,27 @@
                 <header>
                     <button
                         name="action_buscar_funcionarios"
-                        string="Buscar Funcionários"
+                        string="Buscar Funcion&#225;rios"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_gerar_dirf"
                         string="Gerar DIRF (descontinuado)"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_sent"
                         string="Marcar como Enviado"
                         type="object"
-                        attrs="{'invisible': [('state', '!=', 'open')]}"
+                        invisible="state != 'open'"
                     />
                     <button
                         name="action_draft"
                         string="Voltar para Rascunho"
                         type="object"
-                        attrs="{'invisible': [('state', '=', 'draft')]}"
+                        invisible="state == 'draft'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -37,10 +37,10 @@
                     <div class="alert alert-warning" role="alert">
                         <strong>DIRF extinta.</strong> A IN RFB 2.181/2024
                         encerrou a DIRF: os fatos ocorridos a partir de
-                        01/01/2025 são informados pela EFD-Reinf (série R-4000)
-                        e pelo eSocial, com confissão e recolhimento na DCTFWeb.
-                        A geração de arquivo está desativada; esta tela serve
-                        apenas para consultar o histórico já gerado.
+                        01/01/2025 s&#227;o informados pela EFD-Reinf (s&#233;rie R-4000)
+                        e pelo eSocial, com confiss&#227;o e recolhimento na DCTFWeb.
+                        A gera&#231;&#227;o de arquivo est&#225; desativada; esta tela serve
+                        apenas para consultar o hist&#243;rico j&#225; gerado.
                     </div>
                     <group>
                         <group>
@@ -50,14 +50,11 @@
                         </group>
                         <group>
                             <field name="retificadora" />
-                            <field
-                                name="numero_recibo"
-                                attrs="{'invisible': [('retificadora', '=', False)]}"
-                            />
+                            <field name="numero_recibo" invisible="not retificadora" />
                         </group>
                     </group>
                     <notebook>
-                        <page string="Funcionários">
+                        <page string="Funcion&#225;rios">
                             <field name="employee_ids" />
                         </page>
                         <page string="Arquivo DIRF">
