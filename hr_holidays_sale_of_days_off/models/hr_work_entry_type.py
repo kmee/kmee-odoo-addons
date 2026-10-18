@@ -4,8 +4,8 @@
 from odoo import fields, models
 
 
-class HrLeaveType(models.Model):
+class HrWorkEntryType(models.Model):
 
-    _inherit = "hr.leave.type"
+    _inherit = "hr.work.entry.type"
 
     hr_holidays_sale_of_days_off = fields.Boolean()

@@ -12,9 +12,10 @@ class TestSaleOfDaysOff(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.employee = cls.env["hr.employee"].create({"name": "Abono Employee"})
-        cls.leave_type = cls.env["hr.leave.type"].create(
+        cls.leave_type = cls.env["hr.work.entry.type"].create(
             {
                 "name": "Vacation Abono",
+                "code": "ABONO",
                 "requires_allocation": True,
                 "employee_requests": False,
                 "allocation_validation_type": "hr",
@@ -24,7 +25,7 @@ class TestSaleOfDaysOff(TransactionCase):
         cls.allocation = cls.env["hr.leave.allocation"].create(
             {
                 "name": "Vacation",
-                "holiday_status_id": cls.leave_type.id,
+                "work_entry_type_id": cls.leave_type.id,
                 "employee_id": cls.employee.id,
                 "number_of_days": 30,
                 "date_from": "2020-01-01",
