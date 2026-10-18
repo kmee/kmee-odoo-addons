@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2025 KMEE Informatica LTDA - Luis Felipe Miléo
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+    <!-- ============================================================ -->
+    <!-- Contas contábeis para partida dobrada                        -->
+    <!-- ============================================================ -->
+
+    <!-- Impostos sobre Vendas (Debit) -->
+    <record id="account_icms_sobre_vendas" model="account.account">
+        <field name="name">ICMS s/ Vendas</field>
+        <field name="code">3.1.1.01.001</field>
+        <field name="account_type">expense</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_pis_sobre_vendas" model="account.account">
+        <field name="name">PIS s/ Vendas</field>
+        <field name="code">3.1.1.01.002</field>
+        <field name="account_type">expense</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_cofins_sobre_vendas" model="account.account">
+        <field name="name">COFINS s/ Vendas</field>
+        <field name="code">3.1.1.01.003</field>
+        <field name="account_type">expense</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_ipi_sobre_vendas" model="account.account">
+        <field name="name">IPI s/ Vendas</field>
+        <field name="code">3.1.1.01.004</field>
+        <field name="account_type">expense</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Impostos a Recolher (Credit) -->
+    <record id="account_icms_a_recolher" model="account.account">
+        <field name="name">ICMS a Recolher</field>
+        <field name="code">2.1.1.01.001</field>
+        <field name="account_type">liability_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_pis_a_recolher" model="account.account">
+        <field name="name">PIS a Recolher</field>
+        <field name="code">2.1.1.01.002</field>
+        <field name="account_type">liability_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_cofins_a_recolher" model="account.account">
+        <field name="name">COFINS a Recolher</field>
+        <field name="code">2.1.1.01.003</field>
+        <field name="account_type">liability_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_ipi_a_recolher" model="account.account">
+        <field name="name">IPI a Recolher</field>
+        <field name="code">2.1.1.01.004</field>
+        <field name="account_type">liability_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Impostos a Recuperar (Compras - Debit) -->
+    <record id="account_icms_a_recuperar" model="account.account">
+        <field name="name">ICMS a Recuperar</field>
+        <field name="code">1.1.5.01.001</field>
+        <field name="account_type">asset_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_pis_a_recuperar" model="account.account">
+        <field name="name">PIS a Recuperar</field>
+        <field name="code">1.1.5.01.002</field>
+        <field name="account_type">asset_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_cofins_a_recuperar" model="account.account">
+        <field name="name">COFINS a Recuperar</field>
+        <field name="code">1.1.5.01.003</field>
+        <field name="account_type">asset_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_ipi_a_recuperar" model="account.account">
+        <field name="name">IPI a Recuperar</field>
+        <field name="code">1.1.5.01.004</field>
+        <field name="account_type">asset_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Custo das mercadorias vendidas / Estoque -->
+    <record id="account_custo_mercadorias" model="account.account">
+        <field name="name">Custo das Mercadorias Vendidas</field>
+        <field name="code">3.1.2.01.001</field>
+        <field name="account_type">expense</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <record id="account_estoque_mercadorias" model="account.account">
+        <field name="name">Estoque de Mercadorias</field>
+        <field name="code">1.1.4.01.001</field>
+        <field name="account_type">asset_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Receita de vendas -->
+    <record id="account_receita_vendas" model="account.account">
+        <field name="name">Receita de Vendas</field>
+        <field name="code">4.1.1.01.001</field>
+        <field name="account_type">income</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Fornecedores -->
+    <record id="account_fornecedores" model="account.account">
+        <field name="name">Fornecedores Nacionais</field>
+        <field name="code">2.1.2.01.001</field>
+        <field name="account_type">liability_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- ICMS ST a Recolher -->
+    <record id="account_icmsst_a_recolher" model="account.account">
+        <field name="name">ICMS ST a Recolher</field>
+        <field name="code">2.1.1.01.005</field>
+        <field name="account_type">liability_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- ICMS ST a Recuperar -->
+    <record id="account_icmsst_a_recuperar" model="account.account">
+        <field name="name">ICMS ST a Recuperar</field>
+        <field name="code">1.1.5.01.005</field>
+        <field name="account_type">asset_current</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Template pai: Impostos comuns (base para herança)            -->
+    <!-- ============================================================ -->
+
+    <record id="template_impostos_comuns" model="l10n_br.account.move.template">
+        <field name="name">Impostos Comuns - Lucro Presumido</field>
+        <field name="fiscal_operation_type">all</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- PIS -->
+    <record id="template_item_pis_venda" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_impostos_comuns" />
+        <field name="sequence">30</field>
+        <field name="fiscal_field">pis_value</field>
+        <field name="tax_domain">pis</field>
+        <field name="account_debit_id" ref="account_pis_sobre_vendas" />
+        <field name="account_credit_id" ref="account_pis_a_recolher" />
+    </record>
+
+    <!-- COFINS -->
+    <record id="template_item_cofins_venda" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_impostos_comuns" />
+        <field name="sequence">40</field>
+        <field name="fiscal_field">cofins_value</field>
+        <field name="tax_domain">cofins</field>
+        <field name="account_debit_id" ref="account_cofins_sobre_vendas" />
+        <field name="account_credit_id" ref="account_cofins_a_recolher" />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Template de Venda (herda impostos comuns)                    -->
+    <!-- ============================================================ -->
+
+    <record id="template_venda_lp" model="l10n_br.account.move.template">
+        <field name="name">Venda - Lucro Presumido</field>
+        <field name="fiscal_operation_type">out</field>
+        <field name="parent_id" ref="template_impostos_comuns" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Valor da operação (Receita) -->
+    <record id="template_item_venda_receita" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_venda_lp" />
+        <field name="sequence">10</field>
+        <field name="fiscal_field">amount_fiscal</field>
+        <field name="account_debit_id" eval="False" />
+        <field name="account_credit_id" ref="account_receita_vendas" />
+    </record>
+
+    <!-- ICMS s/ Vendas -->
+    <record id="template_item_venda_icms" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_venda_lp" />
+        <field name="sequence">20</field>
+        <field name="fiscal_field">icms_value</field>
+        <field name="tax_domain">icms</field>
+        <field name="account_debit_id" ref="account_icms_sobre_vendas" />
+        <field name="account_credit_id" ref="account_icms_a_recolher" />
+    </record>
+
+    <!-- IPI s/ Vendas -->
+    <record id="template_item_venda_ipi" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_venda_lp" />
+        <field name="sequence">50</field>
+        <field name="fiscal_field">ipi_value</field>
+        <field name="tax_domain">ipi</field>
+        <field name="account_debit_id" ref="account_ipi_sobre_vendas" />
+        <field name="account_credit_id" ref="account_ipi_a_recolher" />
+    </record>
+
+    <!-- ICMS ST s/ Vendas -->
+    <record id="template_item_venda_icmsst" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_venda_lp" />
+        <field name="sequence">25</field>
+        <field name="fiscal_field">icmsst_value</field>
+        <field name="tax_domain">icmsst</field>
+        <field name="account_debit_id" ref="account_icms_sobre_vendas" />
+        <field name="account_credit_id" ref="account_icmsst_a_recolher" />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Template de Compra (herda impostos comuns)                   -->
+    <!-- ============================================================ -->
+
+    <record id="template_compra_lp" model="l10n_br.account.move.template">
+        <field name="name">Compra - Lucro Presumido</field>
+        <field name="fiscal_operation_type">in</field>
+        <field name="parent_id" ref="template_impostos_comuns" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+    </record>
+
+    <!-- Valor da operação (Estoque) -->
+    <record
+        id="template_item_compra_estoque"
+        model="l10n_br.account.move.template.item"
+    >
+        <field name="template_id" ref="template_compra_lp" />
+        <field name="sequence">10</field>
+        <field name="fiscal_field">amount_fiscal</field>
+        <field name="account_debit_id" ref="account_estoque_mercadorias" />
+        <field name="account_credit_id" eval="False" />
+    </record>
+
+    <!-- ICMS a Recuperar (requer crédito) -->
+    <record id="template_item_compra_icms" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_compra_lp" />
+        <field name="sequence">20</field>
+        <field name="fiscal_field">icms_value</field>
+        <field name="tax_domain">icms</field>
+        <field name="require_tax_credit" eval="True" />
+        <field name="account_debit_id" ref="account_icms_a_recuperar" />
+        <field name="account_credit_id" ref="account_fornecedores" />
+    </record>
+
+    <!-- IPI a Recuperar (requer crédito) -->
+    <record id="template_item_compra_ipi" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_compra_lp" />
+        <field name="sequence">50</field>
+        <field name="fiscal_field">ipi_value</field>
+        <field name="tax_domain">ipi</field>
+        <field name="require_tax_credit" eval="True" />
+        <field name="account_debit_id" ref="account_ipi_a_recuperar" />
+        <field name="account_credit_id" ref="account_fornecedores" />
+    </record>
+
+    <!-- PIS a Recuperar (override do pai, com require_tax_credit) -->
+    <record id="template_item_compra_pis" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_compra_lp" />
+        <field name="sequence">30</field>
+        <field name="fiscal_field">pis_value</field>
+        <field name="tax_domain">pis</field>
+        <field name="require_tax_credit" eval="True" />
+        <field name="account_debit_id" ref="account_pis_a_recuperar" />
+        <field name="account_credit_id" ref="account_fornecedores" />
+    </record>
+
+    <!-- COFINS a Recuperar (override do pai, com require_tax_credit) -->
+    <record id="template_item_compra_cofins" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_compra_lp" />
+        <field name="sequence">40</field>
+        <field name="fiscal_field">cofins_value</field>
+        <field name="tax_domain">cofins</field>
+        <field name="require_tax_credit" eval="True" />
+        <field name="account_debit_id" ref="account_cofins_a_recuperar" />
+        <field name="account_credit_id" ref="account_fornecedores" />
+    </record>
+
+    <!-- ICMS ST a Recuperar -->
+    <record id="template_item_compra_icmsst" model="l10n_br.account.move.template.item">
+        <field name="template_id" ref="template_compra_lp" />
+        <field name="sequence">25</field>
+        <field name="fiscal_field">icmsst_value</field>
+        <field name="tax_domain">icmsst</field>
+        <field name="require_tax_credit" eval="True" />
+        <field name="account_debit_id" ref="account_icmsst_a_recuperar" />
+        <field name="account_credit_id" ref="account_fornecedores" />
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- Vincula templates às operações fiscais                       -->
+    <!-- ============================================================ -->
+
+    <record id="l10n_br_fiscal.fo_venda" model="l10n_br_fiscal.operation">
+        <field name="account_move_template_id" ref="template_venda_lp" />
+    </record>
+
+    <record id="l10n_br_fiscal.fo_compras" model="l10n_br_fiscal.operation">
+        <field name="account_move_template_id" ref="template_compra_lp" />
+    </record>
+
+</odoo>
