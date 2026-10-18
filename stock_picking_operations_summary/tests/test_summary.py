@@ -25,7 +25,6 @@ class TestPickingSummary(TransactionCase):
     def _add_move(self, qty):
         return self.env["stock.move"].create(
             {
-                "name": self.product.name,
                 "product_id": self.product.id,
                 "product_uom_qty": qty,
                 "product_uom": self.product.uom_id.id,

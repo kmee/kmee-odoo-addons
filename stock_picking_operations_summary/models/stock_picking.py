@@ -44,7 +44,7 @@ class StockPicking(models.Model):
                     "location_dest_id": False,
                 }
             )
-            for move in picking.move_ids_without_package:
+            for move in picking.move_ids:
                 key = (
                     move.product_id.id,
                     move.product_uom.id,
@@ -83,7 +83,7 @@ class StockPicking(models.Model):
     )
     def _compute_has_summary(self):
         for picking in self:
-            moves = picking.move_ids_without_package
+            moves = picking.move_ids
             if not moves:
                 picking.has_summary = False
                 continue
