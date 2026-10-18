@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <!-- Menu raiz eSocial (separado da Folha) -->
     <menuitem
         id="menu_esocial_root"
@@ -530,5 +529,4 @@
         sequence="81"
         action="action_esocial_cnae_mei"
     />
-
 </odoo>

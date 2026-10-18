@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_esocial_lote_tree" model="ir.ui.view">
         <field name="name">l10n_br.esocial.lote.list</field>
         <field name="model">l10n_br.esocial.lote</field>
@@ -107,5 +106,4 @@
         <field name="res_model">l10n_br.esocial.lote</field>
         <field name="view_mode">list,form</field>
     </record>
-
 </odoo>

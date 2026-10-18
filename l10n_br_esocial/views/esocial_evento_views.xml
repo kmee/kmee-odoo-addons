@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_esocial_evento_tree" model="ir.ui.view">
         <field name="name">l10n_br.esocial.evento.list</field>
         <field name="model">l10n_br.esocial.evento</field>
@@ -107,7 +106,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <chatter/>
+                <chatter />
             </form>
         </field>
     </record>
@@ -170,5 +169,4 @@
         <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_esocial_evento_search" />
     </record>
-
 </odoo>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_hr_salary_rule_form_esocial" model="ir.ui.view">
         <field name="name">hr.salary.rule.form.esocial</field>
         <field name="model">hr.salary.rule</field>
@@ -25,5 +24,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
