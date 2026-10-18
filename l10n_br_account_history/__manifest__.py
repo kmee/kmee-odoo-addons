@@ -5,7 +5,7 @@
     "name": "Historico Padrao Contabil",
     "summary": "Historicos padrao com template de variaveis para as partidas "
     "dos lancamentos contabeis",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
@@ -14,8 +14,8 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["account"],
     "data": [
-        "security/ir.model.access.csv",
         "views/account_history.xml",
+        "security/ir.access.csv",
     ],
     "demo": ["demo/account_history_demo.xml"],
     "installable": True,
