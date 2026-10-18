@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Oracle GL Interface**.
 
 Colunas no vocabulário da interface do General Ledger.
 
-## Estrutura
+**Estrutura**
 
-### Cabeçalho
+**Cabeçalho**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -19,18 +19,18 @@ Colunas no vocabulário da interface do General Ledger.
 | E | REFERENCE | histórico |
 | F | CURRENCY_CODE | moeda da empresa |
 
-## Exemplo
+**Exemplo**
 
 ```
 ACCOUNTING_DATE | SEGMENT | ENTERED_DR | ENTERED_CR | REFERENCE | CURRENCY_CODE
 ```
 
-## Observações
+**Observações**
 
 - Requer a biblioteca `xlsxwriter` no servidor.
 - A aba da planilha se chama `GL_INTERFACE`.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
