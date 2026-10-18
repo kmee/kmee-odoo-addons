@@ -25,7 +25,7 @@ class TestPublicHolidaysWizard(TransactionCase):
             }
         )
         self.assertTrue(wizard.import_brazilian_holidays())
-        year = self.env["hr.holidays.public"].search(
+        year = self.env["calendar.public.holiday"].search(
             [("year", "=", 2026), ("country_id", "=", self.env.ref("base.br").id)]
         )
         self.assertTrue(year)

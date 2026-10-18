@@ -65,16 +65,18 @@ class L10n_brPublicHolidaysWizard(models.TransientModel):
         return True
 
     def _create_holiday_record(self, holiday, tz_br):
-        year_id = self.env["hr.holidays.public"].search(
-            [("year", "=", holiday.data.year)], limit=1
+        brazil = self.env.ref("base.br")
+        year_id = self.env["calendar.public.holiday"].search(
+            [("year", "=", holiday.date.year), ("country_id", "=", brazil.id)],
+            limit=1,
         )
         if not year_id:
-            year_id = self.env["hr.holidays.public"].create(
-                {"year": holiday.data.year, "country_id": self.env.ref("base.br").id}
+            year_id = self.env["calendar.public.holiday"].create(
+                {"year": holiday.date.year, "country_id": brazil.id}
             )
 
         # Prepare and localize the holiday date
-        utc_dt = fields.Datetime.to_datetime(fields.Datetime.to_datetime(holiday.data))
+        utc_dt = fields.Datetime.to_datetime(fields.Datetime.to_datetime(holiday.date))
         user_dt = tz_br.localize(utc_dt)
         holiday_date = utc_dt - relativedelta(
             seconds=user_dt.utcoffset().total_seconds()
@@ -82,28 +84,28 @@ class L10n_brPublicHolidaysWizard(models.TransientModel):
 
         # Create the holiday line
         line_values = {
-            "name": holiday.nome,
+            "name": holiday.name,
             "date": fields.Date.to_date(holiday_date),
-            "year_id": year_id.id,
+            "public_holiday_id": year_id.id,
             "variable_date": False,
         }
 
-        if holiday.estado_ibge:
+        if holiday.state_ibge:
             state = self.env["res.country.state"].search(
-                [("ibge_code", "=", holiday.estado_ibge)], limit=1
+                [("ibge_code", "=", holiday.state_ibge)], limit=1
             )
             if state and state == self.state_id:
                 line_values.update({"state_ids": [(6, 0, [state.id])]})
             else:
                 return
 
-            if holiday.municipio_ibge:
+            if holiday.city_ibge:
                 city = self.env["res.city"].search(
-                    [("ibge_code", "=", holiday.municipio_ibge)], limit=1
+                    [("ibge_code", "=", holiday.city_ibge)], limit=1
                 )
                 if city and city == self.city_id:
                     line_values.update({"city_ids": [(6, 0, [city.id])]})
                 else:
                     return
 
-        self.env["hr.holidays.public.line"].create(line_values)
+        self.env["calendar.public.holiday.line"].create(line_values)

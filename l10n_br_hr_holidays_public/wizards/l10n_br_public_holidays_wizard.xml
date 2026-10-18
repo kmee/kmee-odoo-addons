@@ -2,29 +2,28 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="l10n_br_public_holidays_wizard_form_view">
         <field name="model">l10n_br.public.holidays.wizard</field>
         <field name="arch" type="xml">
             <form>z
                 <group>
-                    <field name="start_date" />
-                    <field name="end_date" />
-                    <field name="interval_number" />
-                    <field name="interval_type" />
-                    <field name="state_id" />
-                    <field name="city_id" />
-                </group>
+                <field name="start_date" />
+                <field name="end_date" />
+                <field name="interval_number" />
+                <field name="interval_type" />
+                <field name="state_id" />
+                <field name="city_id" />
+            </group>
                 <footer>
-                    <button
-                        name="import_brazilian_holidays"
-                        string="Importar"
-                        class="btn-primary"
-                        type="object"
-                    />
+                <button
+                    name="import_brazilian_holidays"
+                    string="Importar"
+                    class="btn-primary"
+                    type="object"
+                />
 
-                    <button string="Cancel" class="btn-default" special="cancel" />
-                </footer>
+                <button string="Cancel" class="btn-default" special="cancel" />
+            </footer>
             </form>
         </field>
     </record>
@@ -46,5 +45,4 @@
     >
         <field name="action" ref="l10n_br_public_holidays_wizard_act_window" />
     </record>
-
 </odoo>
