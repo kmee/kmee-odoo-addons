@@ -1,0 +1,1 @@
+This module checks for exceptions in a sale order before sending a quote via email.
