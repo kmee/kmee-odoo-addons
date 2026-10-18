@@ -14,7 +14,6 @@ class AccountPaymentRegister(models.TransientModel):
     )
     original_rate = fields.Float(
         digits=(12, 6),
-        default=1,
         related="currency_id.rate",
         readonly=True,
     )
