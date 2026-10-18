@@ -14,7 +14,6 @@ exclude: |
   ^l10n_br_website_hr_recruitment_form/|
   ^mail_no_reply/|
   ^mail_role_filter/|
-  ^partner_customer_rating/|
   ^partner_tier/|
   ^product_contract_payment_mode/|
   ^product_contract_period/|
