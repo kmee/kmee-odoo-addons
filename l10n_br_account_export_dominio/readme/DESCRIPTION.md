@@ -6,16 +6,16 @@ Exporta lançamentos contábeis no layout do **Domínio (Thomson Reuters)**.
 
 Cada linha começa **e termina** com o separador. Registros hierárquicos.
 
-## Estrutura
+**Estrutura**
 
-### Registro `0000` (abertura do arquivo)
+**Registro `0000` (abertura do arquivo)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
 | 1 | tipo de registro | `0000` |
 | 2 | CNPJ da empresa | só dígitos |
 
-### Registro `6000` (abertura do lançamento)
+**Registro `6000` (abertura do lançamento)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -23,7 +23,7 @@ Cada linha começa **e termina** com o separador. Registros hierárquicos.
 | 2 | indicador | `X` (lançamento com partidas) |
 | 3-5 | reservados | vazios |
 
-### Registro `6100` (partida)
+**Registro `6100` (partida)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -36,7 +36,7 @@ Cada linha começa **e termina** com o separador. Registros hierárquicos.
 | 7 | histórico | texto, até 512 |
 | 8-10 | reservados | vazios |
 
-## Exemplo
+**Exemplo**
 
 ```
 |0000|12345678000195|
@@ -44,13 +44,13 @@ Cada linha começa **e termina** com o separador. Registros hierárquicos.
 |6100|05/08/2026|1101|2201|1500,00||Venda de agosto||||
 ```
 
-## Observações
+**Observações**
 
 - **Débito e crédito na mesma linha**: um lançamento simples gera um único `6100`.
 - **Partidas múltiplas**: sem par único, cada linha detalha um lado e o outro recebe a conta `0`.
 - Conferido campo a campo contra arquivo real gerado pelo próprio Domínio.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
