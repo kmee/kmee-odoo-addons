@@ -48,7 +48,7 @@ class TestRessarcimento(PayrollCommon):
                 "name": "Despesa Teste",
                 "employee_id": employee.id,
                 "product_id": self.product_expense.id,
-                "unit_amount": amount,
+                "total_amount": amount,
                 "payment_mode": "own_account",
             }
         )
@@ -62,7 +62,7 @@ class TestRessarcimento(PayrollCommon):
         )
         # Approve the sheet
         sheet.action_submit_sheet()
-        sheet.approve_expense_sheets()
+        sheet.action_approve_expense_sheets()
         return sheet
 
     def test_expense_sheet_refund_flag(self):
