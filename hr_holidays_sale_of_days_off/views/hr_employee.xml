@@ -2,7 +2,6 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="view_employee_form_leave_inherit">
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr_holidays.view_employee_form_leave_inherit" />
@@ -32,9 +31,7 @@
                         </span>
                     </div>
                 </button>
-
             </xpath>
         </field>
     </record>
-
 </odoo>

@@ -2,7 +2,6 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_leave_allocation_form_view">
         <field name="model">hr.leave.allocation</field>
         <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form" />
@@ -28,5 +27,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
