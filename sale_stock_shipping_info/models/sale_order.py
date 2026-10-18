@@ -42,7 +42,7 @@ class SaleOrder(models.Model):
     @api.depends(
         "order_line.product_id",
         "order_line.product_uom_qty",
-        "order_line.product_uom",
+        "order_line.product_uom_id",
     )
     def _compute_shipping_info(self):
         uom_meter = self.env.ref("uom.product_uom_meter", raise_if_not_found=False)
@@ -51,10 +51,12 @@ class SaleOrder(models.Model):
             volume = 0.0
             max_dim = 0.0
             for line in order.order_line.filtered(
-                lambda l: l.product_id and not l.display_type and l.product_uom_qty > 0
+                lambda ln: ln.product_id
+                and not ln.display_type
+                and ln.product_uom_qty > 0
             ):
                 product = line.product_id
-                qty_in_base_uom = line.product_uom._compute_quantity(
+                qty_in_base_uom = line.product_uom_id._compute_quantity(
                     line.product_uom_qty, product.uom_id
                 )
                 weight += product.weight * qty_in_base_uom
