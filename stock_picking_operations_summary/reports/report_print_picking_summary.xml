@@ -12,9 +12,6 @@
         ><![CDATA[
             'Picking Summary - %s - %s' % (object.partner_id.name or '', object.name)]]>
         </field>
-        <field
-            name="report_file"
-        >stock_picking_operations_summary.picking_summary</field>
         <field name="binding_model_id" ref="stock.model_stock_picking" />
         <field name="binding_type">report</field>
     </record>

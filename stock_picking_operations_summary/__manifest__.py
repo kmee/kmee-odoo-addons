@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Picking Operations Summary",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "summary": "Grouped summary of stock moves by product and UoM on pickings",
     "category": "Inventory/Inventory",
     "author": "KMEE",
@@ -14,10 +14,10 @@
         "stock",
     ],
     "data": [
-        "security/ir.model.access.csv",
         "reports/report_print_picking_summary.xml",
         "reports/report_print_picking_summary_template.xml",
         "views/stock_picking_views.xml",
+        "security/ir.access.csv",
     ],
     "installable": True,
     "application": False,

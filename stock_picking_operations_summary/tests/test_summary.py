@@ -27,7 +27,7 @@ class TestPickingSummary(TransactionCase):
             {
                 "product_id": self.product.id,
                 "product_uom_qty": qty,
-                "product_uom": self.product.uom_id.id,
+                "uom_id": self.product.uom_id.id,
                 "picking_id": self.picking.id,
                 "location_id": self.picking.location_id.id,
                 "location_dest_id": self.picking.location_dest_id.id,

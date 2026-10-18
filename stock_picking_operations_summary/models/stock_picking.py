@@ -47,13 +47,13 @@ class StockPicking(models.Model):
             for move in picking.move_ids:
                 key = (
                     move.product_id.id,
-                    move.product_uom.id,
+                    move.uom_id.id,
                     move.location_id.id,
                     move.location_dest_id.id,
                 )
                 g = groups[key]
                 g["product_id"] = move.product_id.id
-                g["product_uom"] = move.product_uom.id
+                g["product_uom"] = move.uom_id.id
                 g["product_uom_qty"] += move.product_uom_qty
                 g["quantity"] += move.quantity
                 g["location_id"] = move.location_id.id
@@ -79,7 +79,7 @@ class StockPicking(models.Model):
     @api.depends(
         "move_ids",
         "move_ids.product_id",
-        "move_ids.product_uom",
+        "move_ids.uom_id",
     )
     def _compute_has_summary(self):
         for picking in self:
@@ -87,5 +87,5 @@ class StockPicking(models.Model):
             if not moves:
                 picking.has_summary = False
                 continue
-            keys = {(m.product_id.id, m.product_uom.id) for m in moves}
+            keys = {(m.product_id.id, m.uom_id.id) for m in moves}
             picking.has_summary = len(keys) < len(moves)
