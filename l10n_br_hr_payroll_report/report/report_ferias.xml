@@ -29,7 +29,7 @@
                                 </td>
                                 <td>
                                     <strong>CNPJ:</strong>
-                                    <span t-field="o.company_id.cnpj_cpf" />
+                                    <span t-field="o.company_id.vat" />
                                 </td>
                             </tr>
                         </table>

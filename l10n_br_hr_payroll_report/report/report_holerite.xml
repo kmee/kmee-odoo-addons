@@ -30,7 +30,7 @@
                                 </td>
                                 <td colspan="2">
                                     <strong>CNPJ:</strong>
-                                    <span t-field="o.company_id.cnpj_cpf" />
+                                    <span t-field="o.company_id.vat" />
                                 </td>
                             </tr>
                             <tr>
@@ -88,8 +88,8 @@
                                 <td colspan="3">
                                     <strong>Competência:</strong>
                                     <span t-field="o.date_from" /> a <span
-                                        t-field="o.date_to"
-                                    />
+                                    t-field="o.date_to"
+                                />
                                 </td>
                                 <td colspan="3">
                                     <strong>Salário Base:</strong>
@@ -254,13 +254,13 @@
                                 />
                                 <td class="text-right">
                                     <span
-                                        t-esc="base_fgts_line.total if base_fgts_line else 0.0"
-                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
-                                    /> /
+                                    t-esc="base_fgts_line.total if base_fgts_line else 0.0"
+                                    t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                /> /
                                     <span
-                                        t-esc="fgts_line.total if fgts_line else 0.0"
-                                        t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
-                                    />
+                                    t-esc="fgts_line.total if fgts_line else 0.0"
+                                    t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                />
                                 </td>
                             </tr>
                         </table>
