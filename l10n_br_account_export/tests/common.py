@@ -8,7 +8,7 @@ class AccountExportCommon(AccountTestInvoicingCommon):
     """Base compartilhada: empresa com CNPJ, contas com de-para e lancamentos."""
 
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
+    def setUpClass(cls, chart_template_ref="generic_coa"):
         super().setUpClass(chart_template_ref=chart_template_ref)
         cls.company = cls.company_data["company"]
         cls.company.write(

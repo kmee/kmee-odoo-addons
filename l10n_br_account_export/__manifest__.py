@@ -5,7 +5,7 @@
     "name": "Exportacao Contabil Brasileira",
     "summary": "Envia lancamentos contabeis aos sistemas usados pelos "
     "escritorios de contabilidade brasileiros",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",

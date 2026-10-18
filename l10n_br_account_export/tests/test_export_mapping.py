@@ -1,6 +1,8 @@
 # Copyright (C) 2026 KMEE Informatica LTDA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import unittest
+
 from odoo.exceptions import UserError
 from odoo.tests import tagged
 
@@ -17,8 +19,16 @@ class TestExportMapping(AccountExportCommon):
     """
 
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
+    def setUpClass(cls, chart_template_ref="generic_coa"):
         super().setUpClass(chart_template_ref=chart_template_ref)
+        layouts = dict(
+            cls.env["l10n_br.account.export.config"]._fields["layout"].selection
+        )
+        if "dominio" not in layouts:
+            raise unittest.SkipTest(
+                "Layout 'dominio' is provided by a separate module that is not "
+                "installed; this suite needs it as the mapping vehicle"
+            )
         cls.plan = cls.env["l10n_br_account_mapping.plan"].create(
             {"name": "Escritorio Mapping", "company_id": cls.company.id}
         )

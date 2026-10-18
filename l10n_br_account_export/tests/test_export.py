@@ -16,7 +16,7 @@ class TestAccountExport(AccountExportCommon):
     """
 
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
+    def setUpClass(cls, chart_template_ref="generic_coa"):
         super().setUpClass(chart_template_ref=chart_template_ref)
         # registra um layout minimo so para os testes do chassi
         cls.env["l10n_br.account.export.config"]._fields["layout"].selection.append(

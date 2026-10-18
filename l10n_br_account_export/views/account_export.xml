@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
     Copyright 2026 KMEE INFORMATICA LTDA
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
@@ -15,21 +15,21 @@
                         name="action_get_moves"
                         type="object"
                         string="Buscar lancamentos"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_generate"
                         type="object"
                         string="Gerar arquivo"
                         class="btn-primary"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_back_to_draft"
                         type="object"
                         string="Voltar para rascunho"
                         confirm="Isto apaga os arquivos gerados e libera os lancamentos para uma nova exportacao. Confirma?"
-                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                        invisible="state != 'done'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -39,15 +39,15 @@
                     </div>
                     <group>
                         <group>
-                            <field name="company_id" />
-                            <field name="config_id" />
+                            <field name="company_id" readonly="state != 'draft'" />
+                            <field name="config_id" readonly="state != 'draft'" />
                             <field name="layout" />
                         </group>
                         <group>
-                            <field name="date_start" />
-                            <field name="date_end" />
-                            <field name="target_move" />
-                            <field name="partial_export" />
+                            <field name="date_start" readonly="state != 'draft'" />
+                            <field name="date_end" readonly="state != 'draft'" />
+                            <field name="target_move" readonly="state != 'draft'" />
+                            <field name="partial_export" readonly="state != 'draft'" />
                         </group>
                     </group>
                     <group string="Resultado">
@@ -56,10 +56,7 @@
                             <field name="line_count" />
                         </group>
                     </group>
-                    <group
-                        string="Criticas"
-                        attrs="{'invisible': [('critica', '=', False)]}"
-                    >
+                    <group string="Criticas" invisible="not critica">
                         <field name="critica" nolabel="1" readonly="1" />
                     </group>
                     <notebook>
@@ -82,7 +79,11 @@
                             </field>
                         </page>
                         <page string="Diarios" name="journals">
-                            <field name="journal_ids" widget="many2many_tags" />
+                            <field
+                                name="journal_ids"
+                                widget="many2many_tags"
+                                readonly="state != 'draft'"
+                            />
                         </page>
                     </notebook>
                 </sheet>
@@ -101,8 +102,8 @@
             <tree>
                 <field name="name" />
                 <field name="layout" />
-                <field name="date_start" />
-                <field name="date_end" />
+                <field name="date_start" readonly="state != 'draft'" />
+                <field name="date_end" readonly="state != 'draft'" />
                 <field name="move_count" />
                 <field name="state" />
             </tree>

@@ -30,17 +30,13 @@ class AccountExport(models.Model):
     company_id = fields.Many2one(
         "res.company",
         required=True,
-        readonly=True,
         default=lambda self: self.env.company,
-        states={"draft": [("readonly", False)]},
     )
     config_id = fields.Many2one(
         "l10n_br.account.export.config",
         string="Configuracao",
         required=True,
         check_company=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     layout = fields.Selection(
         related="config_id.layout",
@@ -50,29 +46,21 @@ class AccountExport(models.Model):
     date_start = fields.Date(
         string="De",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     date_end = fields.Date(
         string="Ate",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     journal_ids = fields.Many2many(
         "account.journal",
         string="Diarios",
         check_company=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Vazio exporta todos os diarios da empresa.",
     )
     target_move = fields.Selection(
         [("posted", "Somente lancados"), ("all", "Todos")],
         default="posted",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     move_ids = fields.One2many(
         "account.move",
@@ -103,8 +91,6 @@ class AccountExport(models.Model):
     )
     partial_export = fields.Boolean(
         string="Exportar validos e listar rejeitados",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Sem esta opcao nenhum arquivo e gerado enquanto houver critica. "
         "Com ela, os lancamentos criticados saem do lote.",
     )
