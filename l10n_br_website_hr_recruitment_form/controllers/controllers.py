@@ -50,7 +50,7 @@ class HRApplicationController(http.Controller):
         )
 
     @http.route(
-        ["/application/<int:applicant_id>/form/submit"], type="json", auth="public"
+        ["/application/<int:applicant_id>/form/submit"], type="jsonrpc", auth="public"
     )
     def portal_application_form_submit(self, applicant_id, *args, **kwargs):
         applicant_sudo = (
