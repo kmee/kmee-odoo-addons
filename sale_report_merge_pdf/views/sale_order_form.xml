@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record id="sale_view_order_form_inherit_pdf_cover" model="ir.ui.view">
+        <field name="name">sale.view.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='origin']" position="before">
+                <field name="merge_pdf" class="oe_inline" />
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
