@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_slide_slide_form" model="ir.ui.view">
         <field name="name">slide.slide.form.inherit.sharepoint</field>
         <field name="model">slide.slide</field>
         <field name="inherit_id" ref="website_slides.view_slide_slide_form" />
         <field name="arch" type="xml">
-
             <field name="document_google_url" position="after">
                 <field
                     name="document_sharepoint_url"
@@ -39,24 +37,26 @@
             <field name="document_binary_content" position="attributes">
                 <attribute
                     name="invisible"
-                >(source_type != 'local_file' or slide_category != 'document')</attribute><attribute
+                >(source_type != 'local_file' or slide_category != 'document')</attribute>
+                <attribute
                     name="readonly"
-                >(source_type != 'local_file' or slide_category != 'document')</attribute></field>
+                >(source_type != 'local_file' or slide_category != 'document')</attribute>
+            </field>
 
             <field name="image_binary_content" position="attributes">
                 <attribute
                     name="invisible"
-                >(source_type != 'local_file' or slide_category != 'infographic')</attribute><attribute
+                >(source_type != 'local_file' or slide_category != 'infographic')</attribute>
+                <attribute
                     name="readonly"
-                >(source_type != 'local_file' or slide_category != 'infographic')</attribute></field>
+                >(source_type != 'local_file' or slide_category != 'infographic')</attribute>
+            </field>
 
             <field name="video_url" position="attributes">
                 <attribute
                     name="placeholder"
                 >e.g "www.youtube.com/watch?v=ebBez6bcSEc" or "contoso.sharepoint.com/:v:/s/team/..."</attribute>
             </field>
-
         </field>
     </record>
-
 </odoo>

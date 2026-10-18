@@ -1,0 +1,2 @@
+odoo-addon-l10n_br_hr==18.0.*
+odoo==18.0.*

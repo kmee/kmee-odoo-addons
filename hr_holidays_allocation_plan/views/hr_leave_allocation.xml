@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="hr_leave_allocation_form_view">
         <field name="model">hr.leave.allocation.plan</field>
         <field name="arch" type="xml">
@@ -32,8 +31,7 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                    </div>
+                    <div class="oe_button_box" name="button_box" />
                     <div id="title" class="oe_title">
                         <h2>
                             <field
@@ -208,7 +206,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <chatter/>
+                <chatter />
             </form>
         </field>
     </record>
@@ -227,5 +225,4 @@
         <field name="action" ref="hr_leave_allocation_act_window" />
         <field name="sequence" eval="16" />
     </record>
-
 </odoo>

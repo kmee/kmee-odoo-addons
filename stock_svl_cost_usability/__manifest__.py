@@ -9,6 +9,7 @@
     "license": "LGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "installable": False,  # web_widget_json_graph does not exist in OCA/web 18.0
     "depends": [
         "stock",
         "stock_account",

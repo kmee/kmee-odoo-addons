@@ -2,7 +2,6 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <menuitem
         name="Create Product MRP Area"
         id="menu_create_product_mrp_area"
@@ -10,5 +9,4 @@
         parent="mrp.mrp_planning_menu_root"
         sequence="50"
     />
-
 </odoo>

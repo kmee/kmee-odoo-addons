@@ -9,13 +9,12 @@
                 <field name="source_channel" />
             </field>
             <field name="day_close" position="after">
-                    <field name="won_sales_cycle_days" />
-                    <field name="lost_sales_cycle_days" />
+                <field name="won_sales_cycle_days" />
+                <field name="lost_sales_cycle_days" />
             </field>
             <xpath expr="//notebook" position="inside">
                 <page string="Analytics" name="predictive_analysis">
-                    <group name="analytics">
-                    </group>
+                    <group name="analytics" />
                     <group>
                         <group string="Métricas de Previsão">
                             <field name="weighted_revenue" widget="monetary" />
@@ -49,8 +48,6 @@
                     position="move"
                 />
             </xpath>
-
-
         </field>
     </record>
 

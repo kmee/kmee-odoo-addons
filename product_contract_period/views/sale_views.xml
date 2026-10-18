@@ -6,7 +6,6 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="product_contract.view_order_form" />
         <field name="arch" type="xml">
-
             <xpath
                 expr="//field[@name='order_line']/list//field[@name='product_uom_qty']"
                 position="before"
@@ -27,23 +26,19 @@
                 expr="//field[@name='order_line']/form//label[@for='product_uom_qty']"
                 position="before"
             >
-
                 <field name="period_qty" />
                 <field name="period_count" />
                 <field name="recurring_rule_type" />
-
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/form//field[@name='date_end']"
                 position="after"
             >
-
                 <field name="period_amount" />
                 <field name="price_subtotal" />
                 <field name="price_tax" />
                 <field name="price_total" />
                 <separator />
-
             </xpath>
 
             <!-- Add contract summary fields -->
@@ -54,9 +49,6 @@
                 <field name="contract_average_value" widget="monetary" />
                 <field name="contract_period_details" />
             </xpath>
-
-
         </field>
     </record>
-
 </odoo>

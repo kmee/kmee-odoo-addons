@@ -51,7 +51,9 @@ class SaleOrder(models.Model):
             volume = 0.0
             max_dim = 0.0
             for line in order.order_line.filtered(
-                lambda l: l.product_id and not l.display_type and l.product_uom_qty > 0
+                lambda line: line.product_id
+                and not line.display_type
+                and line.product_uom_qty > 0
             ):
                 product = line.product_id
                 qty_in_base_uom = line.product_uom._compute_quantity(

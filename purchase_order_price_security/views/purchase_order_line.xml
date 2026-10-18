@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="purchase_order_line_form_view">
         <field
             name="name"
@@ -20,9 +19,8 @@
                 expr="//field[@name='order_line']/form//field[@name='price_unit']"
                 position="attributes"
             >
-                <attribute
-                    name="readonly"
-                >not can_edit_price_purchase</attribute></xpath>
+                <attribute name="readonly">not can_edit_price_purchase</attribute>
+            </xpath>
             <xpath expr="//field[@name='order_line']/list" position="attributes">
                 <attribute name="editable" />
             </xpath>

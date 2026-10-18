@@ -2,7 +2,6 @@
 <!-- Copyright 2025 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="product_mrp_area_create_form_view">
         <field name="model">product.mrp.area.create</field>
         <field name="arch" type="xml">
@@ -21,7 +20,8 @@
     </record>
 
     <record model="ir.actions.act_window" id="product_mrp_area_create_act_window">
-        <field name="name">Product Mrp Area Create</field> <!-- TODO -->
+        <field name="name">Product Mrp Area Create</field>
+        <!-- TODO -->
         <field name="res_model">product.mrp.area.create</field>
         <field name="view_mode">form</field>
         <field name="context">{}</field>
@@ -34,5 +34,4 @@
         <field name="value" eval="'ir.actions.act_window,' +str(ref('product_mrp_area_create_act_window'))" />
         <field name="model">source.model</field>
     </record> -->
-
 </odoo>

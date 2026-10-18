@@ -34,5 +34,4 @@
         <field name="binding_model_id" ref="stock.model_stock_picking" />
         <field name="binding_type">report</field>
     </record>
-
 </odoo>

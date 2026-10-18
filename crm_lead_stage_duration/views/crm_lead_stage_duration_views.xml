@@ -138,7 +138,9 @@
                         <div class="oe_kanban_card oe_kanban_global_click">
                             <div class="oe_kanban_content">
                                 <div class="o_kanban_record_title">
-                                    <strong><field name="team_id" /></strong>
+                                    <strong>
+                                        <field name="team_id" />
+                                    </strong>
                                 </div>
                                 <div class="o_kanban_record_subtitle">
                                     <field name="stage_id" />

@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -12,6 +12,7 @@ _logger = logging.getLogger(__name__)
 class ProductMrpAreaCreate(models.TransientModel):
 
     _name = "product.mrp.area.create"
+    _description = "Create MRP areas for products"
 
     product_ids = fields.Many2many("product.product", string="Produtos")
     mrp_area_id = fields.Many2one("mrp.area", string="Área MRP", required=True)

@@ -45,23 +45,26 @@
         <field name="model">helpdesk.ticket</field>
         <field name="inherit_id" ref="helpdesk_mgmt.view_helpdesk_ticket_kanban" />
         <field name="arch" type="xml">
-        <xpath expr="//kanban" position="inside">
-            <field name="current_stage_total_duration" />
-        </xpath>
-        <xpath expr="//small[hasclass('o_kanban_record_subtitle')]" position="after">
+            <xpath expr="//kanban" position="inside">
+                <field name="current_stage_total_duration" />
+            </xpath>
+            <xpath
+                expr="//small[hasclass('o_kanban_record_subtitle')]"
+                position="after"
+            >
                 <div class="row mt-2 text-muted small">
                     <div class="col-6">
-                        <div><i
-                            class="fa fa-clock-o"
-                            aria-hidden="true"
-                            title="Current stage duration"
-                        /> <t
-                                t-out="record.current_stage_total_duration.raw_value"
-                            /></div>
+                        <div>
+                            <i
+                                class="fa fa-clock-o"
+                                aria-hidden="true"
+                                title="Current stage duration"
+                            />
+                            <t t-out="record.current_stage_total_duration.raw_value" />
+                        </div>
                     </div>
                 </div>
             </xpath>
         </field>
     </record>
-
 </odoo>

@@ -5,7 +5,7 @@
 
 from random import randint
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -26,6 +26,8 @@ class StockPickingTag(models.Model):
     _sql_constraints = [
         ("tag_name_uniq", "unique (name)", "Tag name already exists!"),
     ]
+
+    display_name = fields.Char(recursive=True)
 
     @api.depends("name", "parent_id.display_name")
     def _compute_display_name(self):

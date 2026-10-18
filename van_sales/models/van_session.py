@@ -132,19 +132,19 @@ class VanSession(models.Model):
     pos_payment_ids = fields.One2many(
         "pos.payment",
         compute="_compute_pos_payment_ids",
-        string="Pagamentos POS",
+        string="Registros de pagamento POS",
     )
     pos_payment_count = fields.Integer(
         compute="_compute_pos_counts",
     )
 
-    @api.depends("pos_order_ids", "pos_payment_ids")
+    @api.depends("pos_order_ids", "pos_order_ids.payment_ids")
     def _compute_pos_counts(self):
         for session in self:
             session.pos_order_count = len(session.pos_order_ids)
             session.pos_payment_count = len(session.pos_payment_ids)
 
-    @api.depends("pos_order_ids.amount_total", "pos_payment_ids.amount")
+    @api.depends("pos_order_ids.amount_total", "pos_order_ids.payment_ids.amount")
     def _compute_pos_totals(self):
         for session in self:
             sales = session.pos_order_ids.filtered(lambda o: o.amount_total >= 0)

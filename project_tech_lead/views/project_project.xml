@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="project_project_form_view">
         <field name="name">project.project.form (in project_tech_lead)</field>
         <field name="model">project.project</field>
@@ -13,5 +12,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

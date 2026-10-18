@@ -4,7 +4,6 @@ Copyright (C) 2025-Today - KMEE (<http://www.kmee.com.br>).
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="product_template_form_view_slv_button" model="ir.ui.view">
         <field name="model">product.template</field>
         <field
@@ -12,7 +11,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
             ref="stock.product_template_form_view_procurement_button"
         />
         <field name="arch" type="xml">
-
             <div name="button_box" position="inside">
                 <button
                     class="oe_stat_button"
@@ -21,8 +19,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                     icon="fa-usd"
                     type="object"
                     invisible="type != 'consu'"
-                >
-                </button>
+                />
             </div>
 
             <xpath expr="//notebook" position="inside">
@@ -38,5 +35,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
             </xpath>
         </field>
     </record>
-
 </odoo>

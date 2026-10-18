@@ -15,9 +15,11 @@
                 />
             </field>
             <field name="days" position="attributes">
-                <attribute name="invisible">use_formula</attribute></field>
+                <attribute name="invisible">use_formula</attribute>
+            </field>
             <field name="hours" position="attributes">
-                <attribute name="invisible">use_formula</attribute></field>
+                <attribute name="invisible">use_formula</attribute>
+            </field>
         </field>
     </record>
 </odoo>

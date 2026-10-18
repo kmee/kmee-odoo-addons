@@ -2,7 +2,6 @@
 <!-- Copyright 2024 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="quick_create_task_form">
         <field name="name">quick.create.task.form (in project_tech_lead)</field>
         <field name="model">project.task</field>
@@ -39,5 +38,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
