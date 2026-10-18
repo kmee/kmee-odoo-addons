@@ -42,7 +42,7 @@ jobs:
             exclude: ""
     services:
       postgres:
-        image: postgres:12.0
+        image: postgres:13
         env:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
