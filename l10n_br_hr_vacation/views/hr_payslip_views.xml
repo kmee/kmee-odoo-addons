@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_payslip_view_form_vacation" model="ir.ui.view">
+        <field name="name">hr.payslip.form.vacation</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="l10n_br_hr_payroll.view_payslip_form_br" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='l10n_br_faltas_injustificadas']"
+                position="after"
+            >
+                <field name="l10n_br_abono_pecuniario" />
+                <field name="l10n_br_dias_ferias_gozadas" />
+                <field name="l10n_br_avos_13" />
+                <field name="l10n_br_primeira_parcela_13_paga" />
+                <field name="l10n_br_liquido_13" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
