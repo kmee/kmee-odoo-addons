@@ -1,1 +1,0 @@
-It enables the user to edit the email that will be sent to the rejected candidate.
