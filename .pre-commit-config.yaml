@@ -42,7 +42,6 @@ exclude: |
   ^sale_blanket_order_isolated_quotation/|
   ^sale_exception_quotation/|
   ^sale_hide_internal_reference/|
-  ^sale_order_template_pricelist/|
   ^sale_partial_lock/|
   ^sale_report_merge_pdf/|
   ^sale_tier_validation_exceptions/|
