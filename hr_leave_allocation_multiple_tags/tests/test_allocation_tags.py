@@ -20,44 +20,52 @@ class TestAllocationTags(TransactionCase):
         cls.emp_2 = cls.env["hr.employee"].create(
             {"name": "Emp 2", "category_ids": [(6, 0, (cls.tag_a | cls.tag_b).ids)]}
         )
-        cls.leave_type = cls.env["hr.leave.type"].create(
+        cls.work_entry_type = cls.env["hr.work.entry.type"].create(
             {
                 "name": "Tagged leave",
-                "requires_allocation": "yes",
-                "employee_requests": "no",
+                "code": "TAGGED",
+                "requires_allocation": True,
+                "employee_requests": False,
                 "allocation_validation_type": "hr",
             }
         )
 
-    def _generate(self, mode, tags):
-        wizard = self.env["hr.leave.allocation.generate.multi.wizard"].create(
+    def _wizard(self, mode, tags):
+        return self.env["hr.leave.allocation.generate.multi.wizard"].create(
             {
                 "name": "Tag allocation",
-                "holiday_status_id": self.leave_type.id,
-                "allocation_mode": mode,
+                "work_entry_type_id": self.work_entry_type.id,
+                "category_mode": mode,
                 "category_ids": [(6, 0, tags.ids)],
                 "duration": 5,
             }
         )
+
+    def _employees(self, wizard):
+        return self.env["hr.employee"].search(wizard._get_employee_domain())
+
+    def test_category_any_matches_any_tag(self):
+        wizard = self._wizard("any", self.tag_b)
+        self.assertEqual(
+            self._employees(wizard) & (self.emp_1 | self.emp_2), self.emp_2
+        )
+        wizard = self._wizard("any", self.tag_a | self.tag_b)
+        self.assertEqual(
+            self._employees(wizard) & (self.emp_1 | self.emp_2), self.emp_1 | self.emp_2
+        )
+
+    def test_category_all_matches_every_tag(self):
+        wizard = self._wizard("all", self.tag_a | self.tag_b)
+        self.assertEqual(
+            self._employees(wizard) & (self.emp_1 | self.emp_2), self.emp_2
+        )
+
+    def test_generate_allocations_by_tags(self):
+        wizard = self._wizard("all", self.tag_a | self.tag_b)
         action = wizard.action_generate_allocations()
-        return self.env["hr.leave.allocation"].search(action["domain"])
-
-    def test_category_or_allocates_any_tag(self):
-        allocations = self._generate("category_or", self.tag_a | self.tag_b)
-        self.assertEqual(allocations.employee_id, self.emp_1 | self.emp_2)
-
-    def test_category_and_allocates_all_tags(self):
-        allocations = self._generate("category_and", self.tag_a | self.tag_b)
+        allocations = self.env["hr.leave.allocation"].search(action["domain"])
         self.assertEqual(allocations.employee_id, self.emp_2)
 
-    def test_standard_mode_still_works(self):
-        wizard = self.env["hr.leave.allocation.generate.multi.wizard"].create(
-            {
-                "name": "Employee allocation",
-                "holiday_status_id": self.leave_type.id,
-                "allocation_mode": "employee",
-                "employee_ids": [(6, 0, self.emp_1.ids)],
-                "duration": 2,
-            }
-        )
-        self.assertEqual(wizard._get_employees_from_allocation_mode(), self.emp_1)
+    def test_no_tags_keeps_standard_domain(self):
+        wizard = self._wizard("any", self.env["hr.employee.category"])
+        self.assertIn(self.emp_1, self._employees(wizard))

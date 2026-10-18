@@ -9,14 +9,10 @@
             ref="hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form"
         />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='category_id']" position="after">
-                <field
-                    name="category_ids"
-                    widget="many2many_tags"
-                    invisible="allocation_mode not in ('category_and', 'category_or')"
-                    required="allocation_mode in ('category_and', 'category_or')"
-                />
-            </xpath>
+            <field name="employee_ids" position="after">
+                <field name="category_mode" />
+                <field name="category_ids" widget="many2many_tags" />
+            </field>
         </field>
     </record>
 </odoo>

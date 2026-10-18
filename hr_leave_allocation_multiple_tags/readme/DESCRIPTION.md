@@ -1,4 +1,4 @@
 This module extends the multiple employees time off allocation wizard
-(hr.leave.allocation.generate.multi.wizard) with two new allocation modes based on
-employee tags: all of the selected tags (AND) or any of the selected tags (OR).
-The category_ids field is introduced to select the employee tags.
+(hr.leave.allocation.generate.multi.wizard) with an employee tags filter. When no
+employee is chosen, the allocations are generated for the employees that have any
+of the selected tags (OR) or all of the selected tags (AND).
