@@ -9,7 +9,6 @@ exclude: |
   ^crm_stage_role_responsible/|
   ^crm_wip/|
   ^helpdesk_date_range/|
-  ^helpdesk_mgmt_index_content/|
   ^helpdesk_mgmt_sla_formula/|
   ^helpdesk_mgmt_sla_safety/|
   ^helpdesk_mgmt_ticket_life_cycle/|
