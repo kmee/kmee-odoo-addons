@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Bronze Tier -->
+    <record id="partner_tier_bronze" model="res.partner.tier">
+        <field name="name">Bronze</field>
+        <field
+            name="description"
+        >Clientes iniciantes com potencial de crescimento.</field>
+        <field name="sequence">30</field>
+        <field name="priority">0</field>
+        <field name="color">1</field>
+    </record>
+
+    <!-- Silver Tier -->
+    <record id="partner_tier_silver" model="res.partner.tier">
+        <field name="name">Silver</field>
+        <field
+            name="description"
+        >Clientes estabelecidos com bom histórico de negócios.</field>
+        <field name="sequence">20</field>
+        <field name="priority">1</field>
+        <field name="color">2</field>
+    </record>
+
+    <!-- Gold Tier -->
+    <record id="partner_tier_gold" model="res.partner.tier">
+        <field name="name">Gold</field>
+        <field name="description">Clientes premium com alto volume de negócios.</field>
+        <field name="sequence">10</field>
+        <field name="priority">2</field>
+        <field name="color">3</field>
+    </record>
+
+    <!-- Platinum Tier -->
+    <record id="partner_tier_platinum" model="res.partner.tier">
+        <field name="name">Platinum</field>
+        <field name="description">Parceiros estratégicos e clientes VIP.</field>
+        <field name="sequence">5</field>
+        <field name="priority">3</field>
+        <field name="color">4</field>
+    </record>
+
+    <!-- Assign tiers to some demo partners if they exist -->
+    <record id="base.res_partner_1" model="res.partner">
+        <field name="tier_id" ref="partner_tier_gold" />
+    </record>
+
+    <record id="base.res_partner_2" model="res.partner">
+        <field name="tier_id" ref="partner_tier_silver" />
+    </record>
+
+    <record id="base.res_partner_3" model="res.partner">
+        <field name="tier_id" ref="partner_tier_platinum" />
+    </record>
+
+    <record id="base.res_partner_4" model="res.partner">
+        <field name="tier_id" ref="partner_tier_bronze" />
+    </record>
+</odoo>
