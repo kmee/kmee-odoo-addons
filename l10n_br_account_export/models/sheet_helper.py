@@ -1,0 +1,84 @@
+# Copyright 2026 KMEE INFORMATICA LTDA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+"""Geracao das planilhas dos layouts que exportam em XLSX.
+
+Fica no chassi para que os layouts de planilha declarem apenas as suas colunas.
+O `xlsxwriter` e importado de forma preguicosa: quem precisa dele declara a
+dependencia no proprio manifest, e o chassi continua instalavel sem a
+biblioteca.
+"""
+
+import datetime
+import io
+
+from odoo import _, models
+from odoo.exceptions import UserError
+
+try:
+    import xlsxwriter
+except ImportError:  # pragma: no cover
+    xlsxwriter = None
+
+
+class AccountExport(models.Model):
+    _inherit = "l10n_br.account.export"
+
+    def _sheet_rows(self, colunas):
+        """Uma linha de planilha por partida, na ordem das colunas pedidas."""
+        self.ensure_one()
+        linhas = []
+        for move in self.move_ids:
+            for line in self._get_export_lines(move):
+                valores = {
+                    "data": move.date and move.date.strftime("%d/%m/%Y") or "",
+                    "lancamento": move.name or "",
+                    "conta": self._resolve_account(line.account_id)[0],
+                    "conta_odoo": line.account_id.code or "",
+                    "debito": line.debit,
+                    "credito": line.credit,
+                    "historico": line.name or move.ref or "",
+                    "documento": move.ref or "",
+                    "parceiro": line.partner_id.display_name or "",
+                    "diario": move.journal_id.code or "",
+                    "moeda": self.company_id.currency_id.name,
+                }
+                linhas.append([valores.get(c, "") for c in colunas])
+        return linhas
+
+    def _sheet_created_date(self):
+        """Data de criacao gravada na planilha.
+
+        O xlsxwriter grava a data corrente nas propriedades do arquivo, o que
+        faz duas geracoes da mesma exportacao produzirem bytes diferentes. Como
+        o determinismo e requisito (mesma entrada, mesmo arquivo), a data e
+        derivada do proprio lote em vez do relogio.
+        """
+        self.ensure_one()
+        fim = self.date_end or self.date_start
+        return datetime.datetime(fim.year, fim.month, fim.day)
+
+    def _build_xlsx(self, titulos, colunas, aba="Lancamentos"):
+        if xlsxwriter is None:
+            raise UserError(
+                _(
+                    "A biblioteca xlsxwriter e necessaria para os layouts em "
+                    "planilha. Instale-a no servidor."
+                )
+            )
+        buffer = io.BytesIO()
+        workbook = xlsxwriter.Workbook(buffer, {"in_memory": True})
+        workbook.set_properties({"created": self._sheet_created_date()})
+        sheet = workbook.add_worksheet(aba)
+        negrito = workbook.add_format({"bold": True})
+        moeda = workbook.add_format({"num_format": "#,##0.00"})
+        for col, titulo in enumerate(titulos):
+            sheet.write(0, col, titulo, negrito)
+        for idx, linha in enumerate(self._sheet_rows(colunas), start=1):
+            for col, valor in enumerate(linha):
+                if isinstance(valor, float):
+                    sheet.write_number(idx, col, valor, moeda)
+                else:
+                    sheet.write(idx, col, valor)
+        workbook.close()
+        buffer.seek(0)
+        return buffer.read()
