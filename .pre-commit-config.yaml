@@ -45,7 +45,6 @@ exclude: |
   ^sale_order_template_pricelist/|
   ^sale_partial_lock/|
   ^sale_report_merge_pdf/|
-  ^sale_tier_validation_exceptions/|
   ^sale_timesheet_invoice_from_project/|
   ^stock_intercompany_bidirectional_pull/|
   ^stock_picking_reports_declaration/|
