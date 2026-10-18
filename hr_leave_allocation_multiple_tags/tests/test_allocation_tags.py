@@ -25,33 +25,39 @@ class TestAllocationTags(TransactionCase):
                 "name": "Tagged leave",
                 "requires_allocation": "yes",
                 "employee_requests": "no",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
             }
         )
 
-    def _allocation(self, holiday_type, tags):
-        return self.env["hr.leave.allocation"].create(
+    def _generate(self, mode, tags):
+        wizard = self.env["hr.leave.allocation.generate.multi.wizard"].create(
             {
                 "name": "Tag allocation",
                 "holiday_status_id": self.leave_type.id,
-                "holiday_type": holiday_type,
+                "allocation_mode": mode,
                 "category_ids": [(6, 0, tags.ids)],
-                "number_of_days": 5,
+                "duration": 5,
             }
         )
+        action = wizard.action_generate_allocations()
+        return self.env["hr.leave.allocation"].search(action["domain"])
 
     def test_category_or_allocates_any_tag(self):
-        allocation = self._allocation("category_or", self.tag_a | self.tag_b)
-        allocation.action_validate()
-        childs = self.env["hr.leave.allocation"].search(
-            [("parent_id", "=", allocation.id)]
-        )
-        self.assertEqual(childs.employee_id, self.emp_1 | self.emp_2)
+        allocations = self._generate("category_or", self.tag_a | self.tag_b)
+        self.assertEqual(allocations.employee_id, self.emp_1 | self.emp_2)
 
     def test_category_and_allocates_all_tags(self):
-        allocation = self._allocation("category_and", self.tag_a | self.tag_b)
-        allocation.action_validate()
-        childs = self.env["hr.leave.allocation"].search(
-            [("parent_id", "=", allocation.id)]
+        allocations = self._generate("category_and", self.tag_a | self.tag_b)
+        self.assertEqual(allocations.employee_id, self.emp_2)
+
+    def test_standard_mode_still_works(self):
+        wizard = self.env["hr.leave.allocation.generate.multi.wizard"].create(
+            {
+                "name": "Employee allocation",
+                "holiday_status_id": self.leave_type.id,
+                "allocation_mode": "employee",
+                "employee_ids": [(6, 0, self.emp_1.ids)],
+                "duration": 2,
+            }
         )
-        self.assertEqual(childs.employee_id, self.emp_2)
+        self.assertEqual(wizard._get_employees_from_allocation_mode(), self.emp_1)
