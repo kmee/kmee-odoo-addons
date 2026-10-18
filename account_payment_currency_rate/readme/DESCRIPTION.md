@@ -1,1 +1,0 @@
-The module allows users to adjust the amount of a payment based on exchange rate fluctuations, ensuring that exchange rate differences are correctly recorded as profit or loss and automatically reconciled. This improves accounting accuracy in international transactions, where exchange rates may vary between the time of invoice and the time of payment.
