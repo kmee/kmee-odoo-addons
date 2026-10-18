@@ -42,7 +42,7 @@
 # 1ª parcela = 50% do 13º projetado para 31/12 (proporcional aos avos).
 # Para empregado de ano cheio, avos=12 => 50% do salário.
 # Para admitido no meio do ano, proporcional aos meses trabalhados.
-ref = payslip.date_to + tools.relativedelta(month=12, day=31)
+ref = payslip.date_to.replace(month=12, day=31)
 avos = tools.br.calc_decimo_avos(contract.date_start, ref)
 result = tools.br.round_money(contract.wage * avos / 12 * 0.5)
         </field>
