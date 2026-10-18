@@ -16,9 +16,9 @@ class HrLeaveAllocation(models.Model):
     )
 
     @api.depends("l10n_br_faltas_periodo_aquisitivo")
-    def _compute_from_holiday_status_id(self):
+    def _compute_number_of_days(self):
         """Extend to compute vacation days based on absences (CLT art. 130)."""
-        super()._compute_from_holiday_status_id()
+        super()._compute_number_of_days()
         vacation_type = self.env.ref(
             "l10n_br_hr_vacation.leave_type_ferias", raise_if_not_found=False
         )
