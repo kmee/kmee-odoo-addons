@@ -11,9 +11,9 @@ class MailComposeMessage(models.TransientModel):
         if the wizard has been opened by the same
         """
         result = super(MailComposeMessage, self).action_send_mail()
-        if self.env.context.get("default_model") == "hr.applicant" and self.env.context.get(
-            "refuse_reason_wizard_id"
-        ):
+        if self.env.context.get(
+            "default_model"
+        ) == "hr.applicant" and self.env.context.get("refuse_reason_wizard_id"):
             refuse_wizard = self.env["applicant.get.refuse.reason"].browse(
                 self.env.context["refuse_reason_wizard_id"]
             )
