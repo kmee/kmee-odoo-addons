@@ -125,13 +125,10 @@ class AccountMappingAccount(models.Model):
         "(varias contas podem cair na mesma).",
     )
 
-    _sql_constraints = [
-        (
-            "code_plan_uniq",
-            "unique (plan_id, code)",
-            "Ja existe uma conta com este codigo neste plano de destino.",
-        )
-    ]
+    _code_plan_uniq = models.Constraint(
+        'unique (plan_id, code)',
+        "Ja existe uma conta com este codigo neste plano de destino.",
+    )
 
     @api.depends("code", "name")
     def _compute_display_code_name(self):
