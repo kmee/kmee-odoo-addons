@@ -17,14 +17,14 @@
                             <t t-foreach="docs" t-as="overtime">
                                 <tr>
                                     <td style="text-align: right;">
-                                        <span t-esc="overtime.date" />
+                                        <span t-out="overtime.date" />
                                     </td>
                                     <td style="text-align: left;">
-                                        <span t-esc="overtime.employee_id.name or ''" />
+                                        <span t-out="overtime.employee_id.name or ''" />
                                     </td>
                                     <td style="text-align: right;">
                                         <span
-                                            t-esc="overtime.extra_hours_without_multiplier or 0"
+                                            t-out="overtime.extra_hours_without_multiplier or 0"
                                         />
                                     </td>
                                 </tr>
@@ -35,13 +35,16 @@
             </main>
         </t>
     </template>
-    <report
-        id="action_report_overtime"
-        model="hr.attendance.overtime"
-        string="Overtime Report"
-        report_type="qweb-pdf"
-        name="hr_overtime_report_action_pdf.report_overtime_document"
-        file="hr_overtime_report_action_pdf.report_overtime_document"
-        attachment_use="False"
-    />
+    <record id="action_report_overtime" model="ir.actions.report">
+        <field name="name">Overtime Report</field>
+        <field name="model">hr.attendance.overtime</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >hr_overtime_report_action_pdf.report_overtime_document</field>
+        <field
+            name="report_file"
+        >hr_overtime_report_action_pdf.report_overtime_document</field>
+        <field name="binding_type">report</field>
+    </record>
 </odoo>
