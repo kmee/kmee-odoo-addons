@@ -1,0 +1,230 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_account_mapping
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_account_mapping
+#: model:ir.model,name:l10n_br_account_mapping.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__account_count
+msgid "Account Count"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#. odoo-python
+#: code:addons/l10n_br_account_mapping/models/account_mapping.py:0
+#, python-format
+msgid ""
+"As contas %(contas)s ja estao vinculadas a outra conta do plano %(plano)s. "
+"Uma conta do Odoo so pode desaguar em uma conta por plano de destino."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__code
+msgid "Codigo no destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__company_id
+msgid "Company"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model,name:l10n_br_account_mapping.model_l10n_br_account_mapping_account
+msgid "Conta do Plano de Destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping.mapping_plan_tree
+msgid "Contas"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_account_account__l10n_br_mapping_account_ids
+msgid "Contas de destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__account_ids
+msgid "Contas do Odoo"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping.mapping_plan_form
+msgid "Contas do Odoo mapeadas"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__account_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping.mapping_plan_form
+msgid "Contas do plano"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_account__account_ids
+msgid ""
+"Contas do plano do Odoo que desaguam nesta conta do destino (varias contas "
+"podem cair na mesma)."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping.mapping_plan_form
+msgid "Contas no destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__create_uid
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__create_date
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__display_code_name
+msgid "Display Code Name"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__display_name
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_account_account__l10n_br_mapping_account_ids
+msgid "Em quais contas dos planos de destino esta conta desagua."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_end
+msgid "Fim de vigencia; vazio quando a conta segue vigente."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__id
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_start
+msgid "Inicio de vigencia da conta no destino. Vazio vale desde sempre."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.constraint,message:l10n_br_account_mapping.constraint_l10n_br_account_mapping_account_code_plan_uniq
+msgid "Ja existe uma conta com este codigo neste plano de destino."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account____last_update
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__write_uid
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__write_date
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping.mapping_plan_tree
+msgid "Mapeadas"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__mapped_count
+msgid "Mapped Count"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_account__name
+msgid ""
+"Nome da conta como o destino a conhece. E o que sai no plano de contas "
+"exportado e no I051 do SPED."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__name
+msgid "Nome no destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__plan_id
+msgid "Plano"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model,name:l10n_br_account_mapping.model_l10n_br_account_mapping_plan
+msgid "Plano de Contas de Destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model_terms:ir.ui.view,arch_db:l10n_br_account_mapping.mapping_plan_form
+msgid "Plano do Escritorio X"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.actions.act_window,name:l10n_br_account_mapping.mapping_plan_action
+msgid "Planos de Contas de Destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.ui.menu,name:l10n_br_account_mapping.menu_mapping_plan
+msgid "Planos de Destino"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__mapped_count
+msgid "Quantas contas do Odoo estao vinculadas a alguma conta deste plano."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,help:l10n_br_account_mapping.field_l10n_br_account_mapping_plan__company_id
+msgid "Vazio vale para todas as empresas."
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_end
+msgid "Vigencia final"
+msgstr ""
+
+#. module: l10n_br_account_mapping
+#: model:ir.model.fields,field_description:l10n_br_account_mapping.field_l10n_br_account_mapping_account__date_start
+msgid "Vigencia inicial"
+msgstr ""
