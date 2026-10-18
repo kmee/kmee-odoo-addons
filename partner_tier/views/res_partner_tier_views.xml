@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_partner_tier_view_tree" model="ir.ui.view">
+        <field name="name">res.partner.tier.tree</field>
+        <field name="model">res.partner.tier</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="priority" widget="priority" />
+                <field name="partner_count" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_partner_tier_view_form" model="ir.ui.view">
+        <field name="name">res.partner.tier.form</field>
+        <field name="model">res.partner.tier</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_partners"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-users"
+                        >
+                            <field
+                                name="partner_count"
+                                widget="statinfo"
+                                string="Partners"
+                            />
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="priority" widget="priority" />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <field name="color" widget="color_picker" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_res_partner_tier" model="ir.actions.act_window">
+        <field name="name">Customer Tiers</field>
+        <field name="res_model">res.partner.tier</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_res_partner_tier"
+        name="Customer Tiers"
+        parent="contacts.res_partner_menu_config"
+        action="action_res_partner_tier"
+        sequence="40"
+    />
+</odoo>
