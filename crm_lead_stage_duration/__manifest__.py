@@ -1,6 +1,6 @@
 {
     "name": "CRM Lead Stage Duration",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "summary": "Track time spent by opportunities in each CRM stage",
     "category": "Sales/CRM",
     "author": "KMEE",
@@ -10,9 +10,9 @@
         "crm",
     ],
     "data": [
-        "security/ir.model.access.csv",
         "views/crm_lead_views.xml",
         "views/crm_lead_stage_duration_views.xml",
+        "security/ir.access.csv",
     ],
     "installable": True,
     "application": False,
