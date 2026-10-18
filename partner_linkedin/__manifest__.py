@@ -1,7 +1,7 @@
 {
     "name": "Partner LinkedIn",
     "summary": "Add LinkedIn field to partners",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Tools",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
