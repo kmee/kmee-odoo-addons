@@ -2,7 +2,6 @@ exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
   ^crm_wip/|
-  ^helpdesk_mgmt_ticket_life_cycle/|
   ^hr_overtime_report_action_pdf/|
   ^hr_recruitment_reject_mail_editable/|
   ^l10n_br_cnpj_search_minha_receita/|
