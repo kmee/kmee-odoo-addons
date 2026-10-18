@@ -1,7 +1,7 @@
 {
     "name": "Website Slides - SharePoint / Microsoft 365",
     "summary": "Use SharePoint / OneDrive videos and documents as eLearning content",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Website/eLearning",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
