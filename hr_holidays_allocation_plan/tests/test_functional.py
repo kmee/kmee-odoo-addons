@@ -28,7 +28,7 @@ class TestAllocationPlan(TransactionCase):
                 "name": "Plan Leave",
                 "requires_allocation": "yes",
                 "employee_requests": "no",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
             }
         )
 

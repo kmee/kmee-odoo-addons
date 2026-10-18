@@ -318,12 +318,10 @@ class HrLeaveAllocationPlan(models.Model):
                 allocation = self.env["hr.leave.allocation"].create(
                     {
                         "name": self.name,
-                        "holiday_type": "employee",
                         "holiday_status_id": self.holiday_status_id.id,
                         "notes": self.notes,
                         "number_of_days": self.number_of_days,
                         "employee_id": employee.id,
-                        "employee_ids": [(6, 0, [employee.id])],
                         "state": "confirm",
                         "allocation_type": "regular",
                         "date_from": date_from,
@@ -346,12 +344,10 @@ class HrLeaveAllocationPlan(models.Model):
             allocation = self.env["hr.leave.allocation"].create(
                 {
                     "name": self.name,
-                    "holiday_type": "employee",
                     "holiday_status_id": self.holiday_status_id.id,
                     "notes": self.notes,
                     "number_of_days": self.number_of_days,
                     "employee_id": employee.id,
-                    "employee_ids": [(6, 0, [employee.id])],
                     "state": "confirm",
                     "allocation_type": "regular",
                     "date_from": date_from,
@@ -374,12 +370,10 @@ class HrLeaveAllocationPlan(models.Model):
         allocation = self.env["hr.leave.allocation"].create(
             {
                 "name": self.name,
-                "holiday_type": "employee",
                 "holiday_status_id": self.holiday_status_id.id,
                 "notes": self.notes,
                 "number_of_days": self.number_of_days,
                 "employee_id": employee.id,
-                "employee_ids": [(6, 0, [employee.id])],
                 "state": "confirm",
                 "allocation_type": "accrual",
                 "date_from": date_from,

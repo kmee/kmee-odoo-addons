@@ -179,7 +179,7 @@
                                 type="object"
                             />
                             <field name="allocation_ids" nolabel="1">
-                                <tree>
+                                <list>
                                     <field name="create_date" />
                                     <field name="employee_id" />
                                     <field name="holiday_status_id" />
@@ -203,16 +203,12 @@
                                         string="Go to"
                                         class="btn-primary"
                                     />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -220,7 +216,7 @@
     <record model="ir.actions.act_window" id="hr_leave_allocation_act_window">
         <field name="name">Allocation Plan</field>
         <field name="res_model">hr.leave.allocation.plan</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
