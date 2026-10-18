@@ -9,7 +9,6 @@ exclude: |
   ^crm_wip/|
   ^helpdesk_date_range/|
   ^helpdesk_mgmt_index_content/|
-  ^helpdesk_mgmt_ticket_life_cycle/|
   ^hr_holidays_allocation_plan/|
   ^hr_holidays_required_support_document/|
   ^hr_holidays_sale_of_days_off/|
