@@ -13,5 +13,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
             name="code"
         >action = records.action_new_custom_term_from_current()</field>
     </record>
-
 </odoo>
