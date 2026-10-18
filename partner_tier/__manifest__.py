@@ -1,6 +1,6 @@
 {
     "name": "Partner Tier",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Sales/CRM",
     "summary": "Add tier classification to partners",
     "author": "KMEE",
