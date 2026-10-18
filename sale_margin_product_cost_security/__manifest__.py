@@ -4,7 +4,7 @@
 {
     "name": "Sale Product Cost Security",
     "summary": "Restrict access to purchase_price field based on product cost security group",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "maintainers": ["mileo"],
