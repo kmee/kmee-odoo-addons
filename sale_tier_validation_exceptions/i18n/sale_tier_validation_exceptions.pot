@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_tier_validation_exceptions
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_tier_validation_exceptions
+#: model:ir.model,name:sale_tier_validation_exceptions.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_tier_validation_exceptions
+#: model:tier.definition,name:sale_tier_validation_exceptions.sales_order_exceptions_approver
+msgid "Sales Order Exceptions Approver"
+msgstr ""
+
+#. module: sale_tier_validation_exceptions
+#. odoo-python
+#: code:addons/sale_tier_validation_exceptions/controllers/main.py:0
+#, python-format
+msgid ""
+"The report cannot be generated because the quote has exceptions that need to"
+" be validated."
+msgstr ""
