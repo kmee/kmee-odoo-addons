@@ -26,7 +26,7 @@ class TestRessarcimentoAccount(PayrollCommon):
                 "name": "Despesas com Ressarcimento",
                 "code": "6.1.9.01",
                 "account_type": "expense",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.account_ress_pagar = cls.env["account.account"].create(
@@ -34,7 +34,7 @@ class TestRessarcimentoAccount(PayrollCommon):
                 "name": "Ressarcimento a Pagar",
                 "code": "2.1.9.01",
                 "account_type": "liability_current",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.account_salarios = cls.env["account.account"].create(
@@ -42,7 +42,7 @@ class TestRessarcimentoAccount(PayrollCommon):
                 "name": "Despesas com Salários",
                 "code": "6.1.1.01.T",
                 "account_type": "expense",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
         cls.account_salarios_pagar = cls.env["account.account"].create(
@@ -50,7 +50,7 @@ class TestRessarcimentoAccount(PayrollCommon):
                 "name": "Salários a Pagar",
                 "code": "2.1.1.01.T",
                 "account_type": "liability_current",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
 
