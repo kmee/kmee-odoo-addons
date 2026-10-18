@@ -1,7 +1,6 @@
 exclude: |
   (?x)
   # NOT INSTALLABLE ADDONS
-  ^crm_wip/|
   ^hr_overtime_report_action_pdf/|
   ^l10n_br_hr_overtime_custom_multiplier/|
   ^l10n_br_payment_boleto_pinbank/|
