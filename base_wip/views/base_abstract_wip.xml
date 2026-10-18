@@ -75,8 +75,8 @@
                                 <span class="o_kanban_record_title">
                                     <strong>
                                         <a type="object" name="open_form"><t
-                                            t-esc="record.reference_id.value"
-                                        /> - <t t-esc="record.model_id.value" /></a>
+                                            t-out="record.reference_id.value"
+                                        /> - <t t-out="record.model_id.value" /></a>
                                     </strong>
                                 </span>
                             </div>
@@ -85,33 +85,33 @@
                                 <div>
                                     <span>
                                         <strong><t
-                                            t-esc="record.reaction_time.string"
+                                            t-out="record.reaction_time.string"
                                         />:</strong>
-                                        <t t-esc="record.reaction_time.value" />
+                                        <t t-out="record.reaction_time.value" />
                                     </span>
                                 </div>
                                 <div>
                                     <span>
                                         <strong><t
-                                            t-esc="record.lead_time.string"
+                                            t-out="record.lead_time.string"
                                         />:</strong>
-                                        <t t-esc="record.lead_time.value" />
+                                        <t t-out="record.lead_time.value" />
                                     </span>
                                 </div>
                                 <div>
                                     <span>
                                         <strong><t
-                                            t-esc="record.cycle_time.string"
+                                            t-out="record.cycle_time.string"
                                         />:</strong>
-                                        <t t-esc="record.cycle_time.value" />
+                                        <t t-out="record.cycle_time.value" />
                                     </span>
                                 </div>
                                 <div>
                                     <span>
                                         <strong><t
-                                            t-esc="record.logged_time.string"
+                                            t-out="record.logged_time.string"
                                         />:</strong>
-                                        <t t-esc="record.logged_time.value" />
+                                        <t t-out="record.logged_time.value" />
                                     </span>
                                 </div>
                             </div>

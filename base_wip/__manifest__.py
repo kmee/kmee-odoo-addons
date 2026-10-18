@@ -5,7 +5,7 @@
     "name": "Base Wip",
     "summary": """
         Base Work In Progress""",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -14,10 +14,9 @@
         "spreadsheet_dashboard",
     ],
     "data": [
-        "security/base_wip.xml",
-        "security/base_wip_report.xml",
         "views/base_abstract_wip.xml",
         "views/base_wip.xml",
+        "security/ir.access.csv",
     ],
     "demo": [],
 }
