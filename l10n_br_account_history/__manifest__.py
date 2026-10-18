@@ -5,7 +5,7 @@
     "name": "Historico Padrao Contabil",
     "summary": "Historicos padrao com template de variaveis para as partidas "
     "dos lancamentos contabeis",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Localisation",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
