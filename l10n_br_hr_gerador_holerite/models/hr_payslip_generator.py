@@ -145,7 +145,7 @@ class HrPayslipGenerator(models.TransientModel):
             "type": "ir.actions.act_window",
             "name": "Holerites Gerados",
             "res_model": "hr.payslip",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("id", "in", payslips.ids)],
             "target": "current",
         }
