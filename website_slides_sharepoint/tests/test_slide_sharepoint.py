@@ -246,7 +246,7 @@ class TestSlideSharepoint(TransactionCase):
             {
                 "name": "Attendee",
                 "login": "attendee@example.com",
-                "groups_id": [(6, 0, [self.env.ref("base.group_portal").id])],
+                "group_ids": [(6, 0, [self.env.ref("base.group_portal").id])],
             }
         )
         attendee_slide = slide.with_user(attendee)
