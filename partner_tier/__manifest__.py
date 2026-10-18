@@ -1,12 +1,12 @@
 {
     "name": "Partner Tier",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Sales/CRM",
     "summary": "Add tier classification to partners",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "maintainers": ["mileo"],
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "depends": ["base_partner_company_group", "contacts"],
     "data": [
         "security/ir.model.access.csv",
@@ -16,7 +16,7 @@
     "demo": [
         "demo/res_partner_tier_demo.xml",
     ],
-    'installable': False,
+    "installable": True,
     "application": False,
     "auto_install": False,
 }
