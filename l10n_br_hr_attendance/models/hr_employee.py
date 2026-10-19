@@ -10,7 +10,7 @@ class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
     # Fontes de CPF no cadastro, em ordem de precedência. No l10n_br_hr o
-    # ``cpf`` é related ao ``vat`` do endereço particular, e nem todo cadastro
+    # ``cpf`` é related ao ``vat`` do contato de trabalho, e nem todo cadastro
     # tem esse partner; o ``cnpj_cpf`` fica no próprio funcionário. Conciliar
     # por uma fonte só deixaria marcação pendente por detalhe de cadastro.
     _L10N_BR_CAMPOS_CPF = ("cpf", "cnpj_cpf")

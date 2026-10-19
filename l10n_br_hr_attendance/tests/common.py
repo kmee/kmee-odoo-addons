@@ -23,7 +23,7 @@ class PontoCommon(TransactionCase):
                 "atestado_date_end": "2099-12-31",
             }
         )
-        # O CPF do funcionário mora no endereço particular (related ao ``vat``
+        # O CPF do funcionário mora no contato de trabalho (related ao ``vat``
         # do partner) no l10n_br_hr; criar o partner reproduz o cadastro real.
         cls.partner_maria = cls.env["res.partner"].create(
             {
@@ -36,7 +36,7 @@ class PontoCommon(TransactionCase):
             {
                 "name": "Maria da Silva",
                 "company_id": cls.company.id,
-                "address_home_id": cls.partner_maria.id,
+                "work_contact_id": cls.partner_maria.id,
                 "pis_pasep": "120.45678.90-5",
                 "tz": "America/Sao_Paulo",
             }

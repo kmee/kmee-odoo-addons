@@ -156,8 +156,8 @@ class L10nBrHrRep(models.Model):
         return [("id", "in" if procura_vigente else "not in", ids_vigentes)]
 
     def _compute_marcacao_count(self):
-        agrupado = self.env["l10n_br.hr.marcacao"].read_group(
-            [("rep_id", "in", self.ids)], ["rep_id"], ["rep_id"]
+        agrupado = self.env["l10n_br.hr.marcacao"]._read_group(
+            [("rep_id", "in", self.ids)], ["rep_id"], ["__count"]
         )
         contagem = {g["rep_id"][0]: g["rep_id_count"] for g in agrupado}
         for rec in self:

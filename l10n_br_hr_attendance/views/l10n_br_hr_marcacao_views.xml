@@ -37,7 +37,7 @@
                         name="web_ribbon"
                         title="Desconsiderada"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('state', '!=', 'desconsiderada')]}"
+                        invisible="state != 'desconsiderada'"
                     />
                     <div class="oe_title">
                         <h1>NSR <field name="nsr" readonly="1" class="oe_inline" /></h1>
@@ -51,7 +51,7 @@
                             <field name="coletor" readonly="1" />
                             <field name="offline" readonly="1" />
                         </group>
-                        <group string="Identificação">
+                        <group string="Identifica&#231;&#227;o">
                             <field name="employee_id" />
                             <field name="cpf" readonly="1" />
                             <field name="pis_pasep" readonly="1" />
@@ -98,7 +98,7 @@
                 <field name="rep_id" />
                 <filter
                     name="filter_pendente"
-                    string="Sem funcionário (pendente)"
+                    string="Sem funcion&#225;rio (pendente)"
                     domain="[('employee_id', '=', False)]"
                 />
                 <filter
@@ -108,7 +108,7 @@
                 />
                 <filter
                     name="filter_manual"
-                    string="Incluídas manualmente"
+                    string="Inclu&#237;das manualmente"
                     domain="[('origem', '=', 'manual')]"
                 />
                 <separator />
@@ -120,7 +120,7 @@
                 <group expand="0" string="Agrupar por">
                     <filter
                         name="group_employee"
-                        string="Funcionário"
+                        string="Funcion&#225;rio"
                         context="{'group_by': 'employee_id'}"
                     />
                     <filter
@@ -144,23 +144,27 @@
     </record>
 
     <record id="l10n_br_hr_marcacao_action" model="ir.actions.act_window">
-        <field name="name">Marcações de Ponto</field>
+        <field name="name">Marca&#231;&#245;es de Ponto</field>
         <field name="res_model">l10n_br.hr.marcacao</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_group_employee': 1}</field>
     </record>
 
     <record id="l10n_br_hr_marcacao_action_pendente" model="ir.actions.act_window">
-        <field name="name">Marcações Pendentes de Conciliação</field>
+        <field
+            name="name"
+        >Marca&#231;&#245;es Pendentes de Concilia&#231;&#227;o</field>
         <field name="res_model">l10n_br.hr.marcacao</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('employee_id', '=', False)]</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Nenhuma marcação pendente</p>
+            <p
+                class="o_view_nocontent_smiling_face"
+            >Nenhuma marca&#231;&#227;o pendente</p>
             <p>
-                Marcação cujo CPF ou PIS não bateu com nenhum funcionário fica aqui
-                em vez de ser descartada. Cadastre o documento no funcionário e
-                reprocesse a importação, ou vincule manualmente.
+                Marca&#231;&#227;o cujo CPF ou PIS n&#227;o bateu com nenhum funcion&#225;rio fica aqui
+                em vez de ser descartada. Cadastre o documento no funcion&#225;rio e
+                reprocesse a importa&#231;&#227;o, ou vincule manualmente.
             </p>
         </field>
     </record>
