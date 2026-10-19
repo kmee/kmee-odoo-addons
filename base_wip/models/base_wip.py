@@ -93,13 +93,13 @@ class BaseWip(models.Model):
     lead_time_seconds = fields.Float(
         string="Lead Time Float",
         compute="_compute_lead_time",
+        compute_sudo=True,
     )
 
     lead_time = fields.Char(
-        store="True",
+        store=True,
         compute="_compute_lead_time",
         compute_sudo=True,
-        digits=(12, 6),
         readonly=True,
     )
 
