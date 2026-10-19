@@ -9,3 +9,5 @@ access_l10n_br_sst_exame_complementar_user,l10n_br.sst.exame.complementar user,m
 access_l10n_br_sst_exame_complementar_hr,l10n_br.sst.exame.complementar hr,model_l10n_br_sst_exame_complementar,hr.group_hr_manager,1,1,1,1
 access_l10n_br_sst_exame_complementar_medico,l10n_br.sst.exame.complementar medico,model_l10n_br_sst_exame_complementar,l10n_br_hr_sst_aso.group_sst_medico,1,1,1,1
 access_hr_employee_medical_examination_medico,hr.employee.medical.examination medico,hr_employee_medical_examination.model_hr_employee_medical_examination,l10n_br_hr_sst_aso.group_sst_medico,1,1,1,1
+access_l10n_br_sst_pcmso_hr_user,l10n_br.sst.pcmso hr user,model_l10n_br_sst_pcmso,hr.group_hr_user,1,0,0,0
+access_l10n_br_sst_pcmso_faixa_hr_user,l10n_br.sst.pcmso.faixa hr user,model_l10n_br_sst_pcmso_faixa,hr.group_hr_user,1,0,0,0
