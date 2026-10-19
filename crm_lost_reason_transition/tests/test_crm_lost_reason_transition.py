@@ -143,10 +143,8 @@ class TestCrmLostReasonTransition(TransactionCase):
     def test_wizard_flow_applies_transition(self):
         """Given the lost wizard, applying a reason moves each selected lead."""
         leads = self._lead("W1") | self._lead("W2")
-        wizard = (
-            self.env["crm.lead.lost"]
-            .with_context(active_ids=leads.ids)
-            .create({"lost_reason_id": self.reason_comp.id})
+        wizard = self.env["crm.lead.lost"].create(
+            {"lead_ids": [(6, 0, leads.ids)], "lost_reason_id": self.reason_comp.id}
         )
         wizard.action_lost_reason_apply()
         for lead in leads:
