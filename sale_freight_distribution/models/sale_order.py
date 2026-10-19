@@ -28,9 +28,7 @@ class SaleOrder(models.Model):
                 if line.product_id.type != "product":
                     continue
                 proportion = line.price_subtotal / total_wo_delivery
-                line.freight_value = (
-                    order.amount_freight_value * proportion / line.product_uom_qty
-                )
+                line.freight_value = order.amount_freight_value * proportion
 
 
 class SaleOrderLine(models.Model):
