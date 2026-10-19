@@ -7,10 +7,13 @@ summary, so large bodies render fast while the full content stays available.
 """
 
 import hashlib
+import logging
 import re
 from copy import deepcopy
 
 from lxml import etree, html as lxml_html
+
+_logger = logging.getLogger(__name__)
 
 
 class HtmlSanitizer:
@@ -198,44 +201,77 @@ class HtmlSanitizer:
                 return full_match.rstrip()[:-2] + ' loading="lazy"/>'
             return full_match.rstrip()[:-1] + ' loading="lazy">'
 
-        return re.sub(r"<img\s[^>]*>", add_lazy_to_img, html, flags=re.IGNORECASE)
+        return re.sub(r"<img\s[^<>]*>", add_lazy_to_img, html, flags=re.IGNORECASE)
+
+    DEDUP_TAGS = frozenset(
+        (
+            "div p span section article header footer aside main blockquote "
+            "pre table ul ol li dl dt dd"
+        ).split()
+    )
+    DEDUP_MIN_CHARS = 100
 
     def remove_duplicate_blocks(self, html: str) -> str:
         """Drop blocks with identical text content, keeping the first.
 
-        Only blocks with at least 100 characters of text are considered.
+        Only the outermost blocks with at least 100 characters of text are
+        considered. The HTML is parsed once (linear time) and the result is
+        always well formed; when nothing is removed the input is returned
+        untouched.
         """
         if not html:
             return html
 
-        tag_pattern = (
-            r"<(div|p|span|section|article|header|footer|aside|main|"
-            r"blockquote|pre|table|ul|ol|li|dl|dt|dd)(?:\s[^>]*)?>.*?</\1>"
-        )
-
-        seen_hashes = set()
-        parts = []
-        last_end = 0
-
-        for match in re.finditer(tag_pattern, html, re.DOTALL | re.IGNORECASE):
-            block = match.group(0)
-            text_content = re.sub(r"<[^>]+>", "", block)
-
-            if len(text_content) < 100:
-                continue
-
-            text_hash = hashlib.sha1(text_content.encode("utf-8")).hexdigest()
-            if text_hash in seen_hashes:
-                parts.append(html[last_end : match.start()])
-                last_end = match.end()
-            else:
-                seen_hashes.add(text_hash)
-
-        if not parts:
+        try:
+            root = lxml_html.fragment_fromstring(html, create_parent="div")
+        except (etree.ParserError, etree.LxmlError, ValueError):
             return html
 
-        parts.append(html[last_end:])
-        return "".join(parts)
+        seen_hashes = set()
+        to_remove = []
+        stack = [root]
+        while stack:
+            parent = stack.pop()
+            children = [child for child in parent if isinstance(child.tag, str)]
+            # reversed + pop() keeps the document order of the traversal
+            for child in reversed(children):
+                stack.append(child)
+            if parent is root:
+                continue
+            if parent.tag not in self.DEDUP_TAGS:
+                continue
+            text = parent.text_content()
+            if len(text) < self.DEDUP_MIN_CHARS:
+                continue
+            text_hash = hashlib.sha1(text.encode("utf-8")).hexdigest()
+            if text_hash in seen_hashes:
+                to_remove.append(parent)
+            else:
+                seen_hashes.add(text_hash)
+            # outermost block decided: do not look inside it
+            for _child in children:
+                stack.pop()
+
+        if not to_remove:
+            return html
+
+        for node in to_remove:
+            self._drop_keeping_tail(node)
+        return self._inner_html(root)
+
+    @staticmethod
+    def _drop_keeping_tail(node):
+        parent = node.getparent()
+        if parent is None:
+            return
+        tail = node.tail
+        previous = node.getprevious()
+        if tail:
+            if previous is not None:
+                previous.tail = (previous.tail or "") + tail
+            else:
+                parent.text = (parent.text or "") + tail
+        parent.remove(node)
 
     def collapse_empty_paragraphs(self, html: str) -> str:
         """Reduce runs of empty <p> to MAX_CONSECUTIVE_EMPTY_PARAGRAPHS.
@@ -252,8 +288,6 @@ class HtmlSanitizer:
         replacement = "<p>&nbsp;</p>" * keep
 
         return run.sub(replacement, html)
-
-        return result
 
     def truncate(self, html: str) -> tuple:
         """Truncate HTML above MAX_DESCRIPTION_BYTES to a valid closing tag.
@@ -286,6 +320,6 @@ class HtmlSanitizer:
                 for child in doc
             )
         except Exception:  # pylint: disable=broad-except
-            pass
+            _logger.debug("HTML truncation re-parse failed", exc_info=True)
 
         return (truncated, True)

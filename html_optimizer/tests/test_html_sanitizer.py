@@ -1,6 +1,7 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import sys
+import time
 import unittest
 from pathlib import Path
 
@@ -59,6 +60,30 @@ class TestHtmlSanitizer(unittest.TestCase):
         )
         result = self.s.remove_duplicate_blocks(block * 3)
         self.assertEqual(result.count("Bloco com conteudo"), 1)
+
+    def test_dedup_keeps_html_balanced_with_nested_blocks(self):
+        text = "x" * 120
+        html = "<div><div>%s</div><p>fica</p></div>" "<div><div>%s</div></div>" % (
+            text,
+            text,
+        )
+        result = self.s.remove_duplicate_blocks(html)
+        self.assertEqual(result.count("<div"), result.count("</div>"))
+        self.assertIn("fica", result)
+
+    def test_dedup_keeps_first_and_tail_text(self):
+        text = "y" * 120
+        html = "<div>%s</div>meio<div>%s</div>fim" % (text, text)
+        result = self.s.remove_duplicate_blocks(html)
+        self.assertEqual(result.count(text), 1)
+        self.assertIn("meio", result)
+        self.assertIn("fim", result)
+
+    def test_hostile_markup_is_processed_in_bounded_time(self):
+        for payload in ("<div>" * 30000, "<img " * 20000, "<b " * 30000):
+            started = time.monotonic()
+            self.s.optimize(payload)
+            self.assertLess(time.monotonic() - started, 2.0)
 
     def test_short_blocks_not_deduplicated(self):
         result = self.s.remove_duplicate_blocks("<p>ok</p><p>ok</p><p>ok</p>")
