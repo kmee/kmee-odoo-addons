@@ -1,0 +1,17 @@
+id,name,model_id,group_id/id,operation,domain
+access_monetary_index_user,monetary.index user,monetary.index,monetary_index_update.group_monetary_update_user,r,
+access_monetary_index_manager,monetary.index manager,monetary.index,monetary_index_update.group_monetary_update_manager,crud,
+monetary_index_company_rule,Monetary Index Update: multi-company,monetary.index,,crud,"[
+                '|',
+                    ('company_id', '=', False),
+                    ('company_id', 'in', company_ids)
+            ]"
+access_monetary_index_rate_user,monetary.index.rate user,monetary.index.rate,monetary_index_update.group_monetary_update_user,r,
+access_monetary_index_rate_manager,monetary.index.rate manager,monetary.index.rate,monetary_index_update.group_monetary_update_manager,crud,
+monetary_index_rate_company_rule,Monetary Index Update Rate: multi-company,monetary.index.rate,,crud,"[
+                '|',
+                    ('company_id', '=', False),
+                    ('company_id', 'in', company_ids)
+            ]"
+access_monetary_update_by_index_wizard_user,update.field.by.index.wizard user,monetary.update.by.index.wizard,monetary_index_update.group_monetary_update_user,cru,
+access_monetary_update_by_index_wizard_manager,update.field.by.index.wizard manager,monetary.update.by.index.wizard,monetary_index_update.group_monetary_update_manager,crud,
