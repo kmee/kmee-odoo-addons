@@ -2,13 +2,13 @@ This is a base/technical module that provides the infrastructure for monetary up
 It should be used together with other modules that implement the specific functionality 
 for different system models.
 
-## For End Users
+**For End Users**
 
 The monetary update functionality will be made available through specific modules 
 that extend this base module. Each implementing module may provide different ways 
 to access the monetary correction feature (e.g., buttons, menu items, actions).
 
-### Using Monetary Update on Records
+**Using Monetary Update on Records**
 
 When the functionality is implemented in a model, you will typically use a wizard to 
 apply monetary corrections. The wizard allows you to:
@@ -24,7 +24,7 @@ apply monetary corrections. The wizard allows you to:
 > implements the monetary update functionality. Refer to the documentation of the 
 > module you are using for detailed instructions.
 
-## Viewing Monetary Indexes
+**Viewing Monetary Indexes**
 
 To view the monetary indexes available in the system:
 
@@ -36,9 +36,9 @@ To view the monetary indexes available in the system:
 > Only users with "Monetary Update Manager" permission can create, 
 > edit, or delete indexes.
 
-## For Monetary Update Managers
+**For Monetary Update Managers**
 
-### Managing Monetary Indexes
+**Managing Monetary Indexes**
 
 1. Go to **Settings > Monetary Indexes**
 2. Click **Create** to add a new index
@@ -49,7 +49,7 @@ To view the monetary indexes available in the system:
    - **Country**: Country associated with the index
    - **Description**: Detailed information about the index
 
-### Managing Historical Rates
+**Managing Historical Rates**
 
 1. Open a monetary index form
 2. Go to the **Rates** tab
@@ -59,11 +59,11 @@ To view the monetary indexes available in the system:
    - **Source**: Data source (optional)
    - **Note**: Additional notes (optional)
 
-## For Developers
+**For Developers**
 
 To implement monetary correction in your custom modules, follow these steps:
 
-### 1. Add Dependency
+**1. Add Dependency**
 
 In your module's `__manifest__.py`:
 
@@ -78,7 +78,7 @@ In your module's `__manifest__.py`:
 }
 ```
 
-### 2. Extend Your Model
+**2. Extend Your Model**
 
 Inherit from `monetary.update.service` and specify which fields should be tracked:
 
@@ -95,7 +95,7 @@ class YourModel(models.Model):
     # Your model fields and methods...
 ```
 
-### 3. Add UI Access
+**3. Add UI Access**
 
 Provide a way for users to trigger the monetary update wizard. This can be done through:
 
@@ -119,12 +119,12 @@ Provide a way for users to trigger the monetary update wizard. This can be done 
 
 **Option B - Action in context menu, or any other UI pattern that fits your use case.**
 
-### 4. Using the Service Programmatically (Optional)
+**4. Using the Service Programmatically (Optional)**
 
 You can also use the monetary update service directly in your code:
 
 ```python
-# Calculate updated amount
+**Calculate updated amount**
 updated_amount = self.env["monetary.update.service"].compute_updated_amount(
     index_code="selic",
     amount=1000.00,
@@ -133,7 +133,7 @@ updated_amount = self.env["monetary.update.service"].compute_updated_amount(
 )
 ```
 
-### Key Points
+**Key Points**
 
 - The `_fields_to_track` attribute defines which monetary fields can be updated
 - The wizard (`monetary_update_fields_by_index_wizard`) is automatically available once you inherit from `monetary.update.service`
