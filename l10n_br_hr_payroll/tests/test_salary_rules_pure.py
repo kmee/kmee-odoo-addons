@@ -10,7 +10,8 @@ from datetime import date
 
 from odoo.tests.common import BaseCase
 
-from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
+from ..models.salary_rules_br import (
+    calc_aviso_previo_dias,
     calc_decimo_avos,
     calc_ferias_dias,
     calc_inss as _calc_inss,
@@ -22,7 +23,6 @@ from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
     dias_dsr,
     dias_trabalhados_mes,
 )
-
 from .fixtures import (
     FAIXAS_INSS_2024,
     FAIXAS_IRRF_2024,
@@ -427,10 +427,6 @@ class TestAvisoPrevioProporcional(BaseCase):
     """Aviso previo proporcional (Lei 12.506/2011), calculo puro."""
 
     def test_aviso_dias_por_ano_completo(self):
-        from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
-            calc_aviso_previo_dias,
-        )
-
         adm = date(2020, 3, 10)
         self.assertEqual(calc_aviso_previo_dias(adm, date(2020, 12, 1)), 30)
         self.assertEqual(calc_aviso_previo_dias(adm, date(2023, 3, 9)), 36)
@@ -440,10 +436,6 @@ class TestAvisoPrevioProporcional(BaseCase):
 
     def test_aviso_admissao_em_29_de_fevereiro(self):
         """Admissao em 29/02 nao pode quebrar em ano nao bissexto."""
-        from odoo.addons.l10n_br_hr_payroll.models.salary_rules_br import (
-            calc_aviso_previo_dias,
-        )
-
         adm = date(2020, 2, 29)
         self.assertEqual(calc_aviso_previo_dias(adm, date(2025, 2, 27)), 42)
         self.assertEqual(calc_aviso_previo_dias(adm, date(2025, 3, 1)), 45)
