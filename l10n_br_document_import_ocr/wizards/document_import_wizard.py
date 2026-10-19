@@ -214,9 +214,13 @@ class DocumentImportWizard(models.TransientModel):
             )[:1]
         if not operation_line:
             operation_line = self.fiscal_operation_id.line_ids[:1]
+        product = self.company_id.document_import_default_product_id
+        uom = product.uom_id or self.env.ref("uom.product_uom_unit")
         self.env["l10n_br_fiscal.document.line"].create(
             {
                 "document_id": edoc.id,
+                "product_id": product.id,
+                "uom_id": uom.id,
                 "name": self.service_description
                 or _("Serviço importado (OCR) - NFS-e %s")
                 % (self.document_number or ""),
@@ -260,6 +264,16 @@ class DocumentImportWizard(models.TransientModel):
                     "parceiro e importe novamente."
                 )
                 % (self.issuer_cnpj or "-")
+            )
+        if (
+            self.ocr_destination == "move"
+            and not self.company_id.document_import_default_product_id
+        ):
+            raise UserError(
+                _(
+                    "Para gerar a fatura de fornecedor, configure o produto "
+                    "de serviço padrão nas configurações fiscais da empresa."
+                )
             )
         if self.ocr_destination == "move":
             return self.action_import_and_open_move()

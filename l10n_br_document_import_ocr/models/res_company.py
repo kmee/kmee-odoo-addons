@@ -30,3 +30,10 @@ class ResCompany(models.Model):
         string="Operação fiscal padrão (serviços tomados)",
         domain=[("fiscal_operation_type", "=", "in")],
     )
+    document_import_default_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Produto de serviço padrão (serviços tomados)",
+        domain=[("type", "=", "service")],
+        help="Produto usado na linha do documento fiscal importado por OCR. "
+        "Obrigatório para gerar a fatura de fornecedor.",
+    )
