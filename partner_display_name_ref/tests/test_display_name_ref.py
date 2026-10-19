@@ -8,16 +8,16 @@ class TestDisplayNameRef(TransactionCase):
         super().setUpClass()
         cls.Partner = cls.env["res.partner"].with_context(tracking_disable=True)
 
-    def test_name_get_prefixes_reference(self):
-        """Given a partner with a reference, When reading its name_get,
+    def test_display_name_prefixes_reference(self):
+        """Given a partner with a reference, When reading its display name,
         Then the reference is shown in brackets before the name."""
         partner = self.Partner.create({"name": "Acme", "ref": "C-100"})
-        self.assertEqual(partner.name_get()[0][1], "[C-100] Acme")
+        self.assertEqual(partner.display_name, "[C-100] Acme")
 
-    def test_name_get_without_reference(self):
+    def test_display_name_without_reference(self):
         """Given a partner without reference, Then the name has no brackets."""
         partner = self.Partner.create({"name": "Acme"})
-        self.assertEqual(partner.name_get()[0][1], "Acme")
+        self.assertEqual(partner.display_name, "Acme")
 
     def test_display_name_follows_reference_change(self):
         """Given a partner, When the reference is set and then removed,
@@ -35,7 +35,7 @@ class TestDisplayNameRef(TransactionCase):
         child = self.Partner.create(
             {"name": "John", "parent_id": parent.id, "ref": "J-1"}
         )
-        self.assertEqual(child.name_get()[0][1], "[J-1] Parent Co, John")
+        self.assertEqual(child.display_name, "[J-1] Parent Co, John")
 
     def test_name_search_still_finds_by_name(self):
         """Given a partner with reference, When searching by name,
@@ -44,10 +44,10 @@ class TestDisplayNameRef(TransactionCase):
         result = self.Partner.name_search("Zyxwv")
         self.assertIn((partner.id, "[R-9] Zyxwv Corp"), result)
 
-    def test_multiple_partners_name_get(self):
+    def test_multiple_partners_display_name(self):
         """Given several partners, Then each gets its own prefix."""
         a = self.Partner.create({"name": "A", "ref": "1"})
         b = self.Partner.create({"name": "B"})
-        names = dict((a | b).name_get())
+        names = {p.id: p.display_name for p in a | b}
         self.assertEqual(names[a.id], "[1] A")
         self.assertEqual(names[b.id], "B")
