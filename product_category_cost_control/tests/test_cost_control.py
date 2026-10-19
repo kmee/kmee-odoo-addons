@@ -164,7 +164,7 @@ class TestCategoryCostControl(TransactionCase):
         unit price divides by the done quantity."""
         self.categ.price_control_option = "include_all_taxes"
         self.move._action_confirm()
-        self.move.quantity_done = 4.0
+        self.move.quantity = 4.0
         with self._fiscal(amount_taxed=120.0):
             self.assertAlmostEqual(self.move._get_price_unit(), 30.0)
 

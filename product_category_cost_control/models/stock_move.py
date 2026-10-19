@@ -23,7 +23,7 @@ class StockMove(models.Model):
             if not category or not category.price_control_option:
                 return result
 
-            qty = self.quantity_done or self.product_qty or self.product_uom_qty
+            qty = self.quantity or self.product_qty or self.product_uom_qty
             if not qty:
                 return result
 
