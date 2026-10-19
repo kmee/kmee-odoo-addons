@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <!-- Adicional de GILRAT (financiamento da aposentadoria especial).
+         Encargo PATRONAL: não desconta do trabalhador, incide sobre a
+         remuneração de quem tem exposição ensejadora de aposentadoria
+         especial e alimenta o S-1200. As alíquotas são as da Tabela 02 do
+         eSocial: 12% (15 anos), 9% (20 anos) e 6% (25 anos). -->
+    <record id="hr_rule_gilrat_adicional" model="hr.salary.rule">
+        <field name="name">GILRAT Adicional - Aposentadoria Especial</field>
+        <field name="sequence" eval="205" />
+        <field name="code">GILRAT_ADICIONAL</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="appears_on_payslip" eval="True" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = contract.l10n_br_sst_aliquota_gilrat &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(
+    max(base, 0) * contract.l10n_br_sst_aliquota_gilrat / 100.0
+)
+        </field>
+    </record>
+
+    <!-- A estrutura CLT lista as regras uma a uma; sem entrar nela, a regra
+         existe mas nunca é calculada. -->
+    <record id="l10n_br_hr_payroll.structure_clt" model="hr.payroll.structure">
+        <field name="rule_ids" eval="[(4, ref('hr_rule_gilrat_adicional'))]" />
+    </record>
+
+</odoo>
