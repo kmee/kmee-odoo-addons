@@ -128,12 +128,12 @@ class TestPickingSummary(TransactionCase):
         move2.description_picking = "second"
         self.picking.action_confirm()
         self.assertEqual(len(self.picking.move_ids), 2)
-        move1.quantity_done = 2.0
-        move2.quantity_done = 3.0
+        move1.quantity = 2.0
+        move2.quantity = 3.0
         line = self.picking.summary_line_ids
         self.assertEqual(len(line), 1)
         self.assertEqual(line.product_uom_qty, 10.0)
-        self.assertEqual(line.quantity_done, 5.0)
+        self.assertEqual(line.quantity, 5.0)
 
     def test_summary_follows_changes_in_moves(self):
         """Given a picking with one move, When a second equal move is added,
