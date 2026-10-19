@@ -1,0 +1,16 @@
+# Copyright 2025 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+{
+    "name": "Mail Filter By Role",
+    "version": "19.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "KMEE",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "depends": ["mail", "base", "base_user_role"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/mail_filter_role.xml",
+    ],
+    "demo": [],
+}
