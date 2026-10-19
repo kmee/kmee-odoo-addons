@@ -35,7 +35,8 @@ class TierExceptionsMixin:
         )
         cls.partner = cls.env["res.partner"].create({"name": "Customer"})
         cls.product = cls.env["product.product"].create(
-            {"name": "Product", "list_price": 1.0}
+            # a service: no stock procurement written on the order after validation
+            {"name": "Product", "list_price": 1.0, "type": "service"}
         )
 
     def _order(self, price_unit):
