@@ -4,10 +4,13 @@
 
 import base64
 from datetime import date, datetime, timedelta
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from odoo.exceptions import UserError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
+from odoo.tools import mute_logger
 
 from ..models import aej_layout
 
@@ -19,6 +22,16 @@ class TestAej(TransactionCase):
         super().setUpClass()
         cls.company = cls.env.company
         cls.company.cnpj_cpf = "12.345.678/0001-95"
+        # Com o l10n_br_fiscal_certificate instalado a empresa de demonstração
+        # pode trazer um certificado de teste que não abre; a suíte parte de
+        # "sem certificado" e cada teste de assinatura injeta o seu.
+        patcher = patch.object(
+            type(cls.env["l10n_br.hr.apuracao.periodo"]),
+            "_certificado_ptrp",
+            return_value=None,
+        )
+        patcher.start()
+        cls.addClassCleanup(patcher.stop)
         cls.rep = cls.env["l10n_br.hr.rep"].create(
             {
                 "name": "REP do AEJ",
@@ -310,6 +323,23 @@ class TestAej(TransactionCase):
         self.assertFalse(periodo.aej_p7s)
         mensagens = periodo.message_ids.mapped("body")
         self.assertTrue(any("SEM assinatura" in corpo for corpo in mensagens))
+
+    @mute_logger(
+        "odoo.addons.l10n_br_hr_attendance_aej.models.l10n_br_hr_apuracao_periodo"
+    )
+    def test_certificado_invalido_gera_sem_assinatura_e_avisa(self):
+        """Certificado que não abre não pode impedir a geração do arquivo."""
+        self._marcar(2, (8, 0), (12, 0), (13, 0), (17, 0))
+        periodo = self._periodo()
+        falso = SimpleNamespace(file=base64.b64encode(b"nao e pkcs12"), password="x")
+        with patch.object(
+            type(periodo), "_certificado_ptrp", return_value=falso, create=True
+        ):
+            periodo.action_gerar_aej()
+        self.assertTrue(periodo.aej_file)
+        self.assertFalse(periodo.aej_p7s)
+        mensagens = periodo.message_ids.mapped("body")
+        self.assertTrue(any("Falha ao assinar" in corpo for corpo in mensagens))
 
     def test_espelho_de_ponto_renderiza(self):
         self._marcar(2, (8, 0), (12, 0), (13, 0), (17, 0))
