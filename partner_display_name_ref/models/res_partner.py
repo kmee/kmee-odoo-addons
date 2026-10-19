@@ -9,6 +9,7 @@ class ResPartner(models.Model):
 
     @api.depends("ref")
     def _compute_display_name(self):
-        super()._compute_display_name()
+        res = super()._compute_display_name()
         for partner in self.filtered("ref"):
             partner.display_name = f"[{partner.ref}] {partner.display_name}"
+        return res
