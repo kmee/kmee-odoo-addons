@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_move_template_tree" model="ir.ui.view">
+        <field name="name">l10n_br.account.move.template.list</field>
+        <field name="model">l10n_br.account.move.template</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="fiscal_operation_type" />
+                <field name="parent_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="active" invisible="1" />
+            </list>
+        </field>
+    </record>
+
+    <record id="account_move_template_form" model="ir.ui.view">
+        <field name="name">l10n_br.account.move.template.form</field>
+        <field name="model">l10n_br.account.move.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        invisible="active"
+                    />
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="parent_id" />
+                            <field name="fiscal_operation_type" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="active" invisible="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Items" name="items">
+                            <field name="item_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="fiscal_field" />
+                                    <field name="tax_domain" />
+                                    <field name="account_debit_id" />
+                                    <field name="account_credit_id" />
+                                    <field name="history_id" />
+                                    <field name="require_tax_credit" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Fiscal Operations" name="operations">
+                            <field name="fiscal_operation_ids">
+                                <list>
+                                    <field name="name" />
+                                    <field name="fiscal_operation_type" />
+                                    <field name="fiscal_type" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Child Templates" name="children">
+                            <field name="child_ids">
+                                <list>
+                                    <field name="name" />
+                                    <field name="fiscal_operation_type" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_move_template_search" model="ir.ui.view">
+        <field name="name">l10n_br.account.move.template.search</field>
+        <field name="model">l10n_br.account.move.template</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="fiscal_operation_type" />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+                <group>
+                    <filter
+                        string="Operation Type"
+                        name="group_operation_type"
+                        domain="[]"
+                        context="{'group_by': 'fiscal_operation_type'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="group_company"
+                        domain="[]"
+                        context="{'group_by': 'company_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="account_move_template_action" model="ir.actions.act_window">
+        <field name="name">Double Entry Templates</field>
+        <field name="res_model">l10n_br.account.move.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first double-entry accounting template
+            </p>
+            <p>
+                Templates define how fiscal document values (taxes, amounts)
+                are mapped to debit/credit accounts in double-entry bookkeeping.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="account_move_template_menu"
+        name="Double Entry Templates"
+        parent="account.account_account_menu"
+        action="account_move_template_action"
+        sequence="30"
+    />
+</odoo>
