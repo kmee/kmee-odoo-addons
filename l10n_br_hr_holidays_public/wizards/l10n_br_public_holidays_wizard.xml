@@ -5,7 +5,7 @@
     <record model="ir.ui.view" id="l10n_br_public_holidays_wizard_form_view">
         <field name="model">l10n_br.public.holidays.wizard</field>
         <field name="arch" type="xml">
-            <form>z
+            <form>
                 <group>
                 <field name="start_date" />
                 <field name="end_date" />
