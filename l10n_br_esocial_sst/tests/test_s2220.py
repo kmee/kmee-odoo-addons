@@ -116,3 +116,25 @@ class TestS2220(EsocialSstCommon):
         self.assertEqual(root.find(".//e:exMedOcup/e:tpExameOcup", ns).text, "0")
         self.assertEqual(root.find(".//e:aso/e:resAso", ns).text, "1")
         self.assertEqual(root.find(".//e:medico/e:nmMed", ns).text, "Dr. Examinador")
+
+    def test_medico_conclui_aso_e_gera_o_evento(self):
+        """A saúde ocupacional conclui o ASO sem precisar do perfil de gestor."""
+        grupo = self.env.ref("l10n_br_hr_sst_aso.group_sst_medico")
+        medico = self.env["res.users"].create(
+            {
+                "name": "Medico S-2220",
+                "login": "medico_s2220",
+                "groups_id": [(6, 0, [self.env.ref("base.group_user").id, grupo.id])],
+            }
+        )
+        exame = self.env["hr.employee.medical.examination"].l10n_br_gerar_aso(
+            self.employee, "1", date=self.hoje
+        )
+        exame.write(
+            {
+                "l10n_br_resultado": "1",
+                "l10n_br_medico_nome": "Dr. Examinador",
+            }
+        )
+        exame.with_user(medico).to_done()
+        self.assertTrue(exame.l10n_br_s2220_id)
