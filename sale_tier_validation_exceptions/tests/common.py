@@ -39,19 +39,22 @@ class TierExceptionsMixin:
         )
 
     def _order(self, price_unit):
-        return self.env["sale.order"].create(
-            {
-                "partner_id": self.partner.id,
-                "order_line": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "product_uom_qty": 1.0,
-                            "price_unit": price_unit,
-                        },
-                    )
-                ],
-            }
-        )
+        vals = {
+            "partner_id": self.partner.id,
+            "order_line": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_qty": 1.0,
+                        "price_unit": price_unit,
+                    },
+                )
+            ],
+        }
+        if "order_sequence" in self.env["sale.order"]._fields:
+            # isolated quotation (when installed in the same database) turns
+            # action_confirm of a quotation into a wizard: flag it as an order
+            vals["order_sequence"] = True
+        return self.env["sale.order"].create(vals)
