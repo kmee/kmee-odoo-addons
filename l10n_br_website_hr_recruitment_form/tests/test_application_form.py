@@ -228,9 +228,7 @@ class TestApplicationForm(HttpCase):
         self.assertEqual(applicant.partner_id.city_id, self.city)
         self.assertEqual(applicant.bank_account_id.bank_id, self.bank)
         self.assertEqual(applicant.bank_account_id.acc_number, "12345-6")
-        self.assertEqual(
-            applicant.bank_account_id.partner_id, applicant.partner_id
-        )
+        self.assertEqual(applicant.bank_account_id.partner_id, applicant.partner_id)
         self.assertEqual(
             sorted(applicant.dependent_ids.mapped("name")), ["Filho Dois", "Filho Um"]
         )
