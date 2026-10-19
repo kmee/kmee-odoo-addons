@@ -57,6 +57,14 @@ class SaleOrderLine(models.Model):
             date_end += relativedelta(months=(self.period_count)) - relativedelta(
                 days=1
             )
+        elif rule_type == "quarterly":
+            date_end += relativedelta(months=3 * self.period_count) - relativedelta(
+                days=1
+            )
+        elif rule_type == "semesterly":
+            date_end += relativedelta(months=6 * self.period_count) - relativedelta(
+                days=1
+            )
         elif rule_type == "yearly":
             date_end += relativedelta(years=(self.period_count)) - relativedelta(days=1)
 
@@ -73,7 +81,7 @@ class SaleOrderLine(models.Model):
     @api.onchange("period_qty", "period_count", "price_unit", "discount")
     def _onchange_period(self):
         for record in self:
-            if record.product_id.is_contract:
+            if record.product_id.is_contract and record.date_start:
                 # Recalcular a data de fim com base na nova configuração de períodos
                 record.date_end = record._get_date_end()
 
