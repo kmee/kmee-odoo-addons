@@ -50,7 +50,9 @@ class TestSalePartialLock(TransactionCase):
             }
         )
         if confirmed:
-            order.action_confirm()
+            # write the state: other sale modules (e.g. isolated quotation) may
+            # turn action_confirm into a wizard when installed in the same database
+            order.state = "sale"
         if locked:
             order.action_done()
         return order
