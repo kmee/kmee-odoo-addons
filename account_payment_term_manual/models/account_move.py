@@ -28,10 +28,8 @@ class AccountMove(models.Model):
         "manual_payment_term_id.has_manual_lines",
         "manual_payment_term_id.line_ids.value",
         "manual_payment_term_id.line_ids.value_amount",
-        "manual_payment_term_id.line_ids.months",
-        "manual_payment_term_id.line_ids.days",
-        "manual_payment_term_id.line_ids.end_month",
-        "manual_payment_term_id.line_ids.days_after",
+        "manual_payment_term_id.line_ids.delay_type",
+        "manual_payment_term_id.line_ids.nb_days",
         "manual_payment_term_id.line_ids.fixed_date",
     )
     def _compute_needed_terms(self):  # pylint: disable=missing-return

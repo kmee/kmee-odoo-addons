@@ -39,21 +39,13 @@
                 <field
                     name="manual_payment_term_line_ids"
                     class="oe_read_only"
-                    attrs="{'invisible': [('has_manual_lines', '=', False)]}"
+                    invisible="not has_manual_lines"
                 >
                     <tree editable="bottom">
-                        <field name="value" string="Due Type" />
-                        <field
-                            name="value_amount"
-                            attrs="{'readonly':[('value','=','balance')]}"
-                        />
-                        <field name="months" />
-                        <field name="days" />
-                        <field name="end_month" />
-                        <field
-                            name="days_after"
-                            attrs="{'invisible': [('end_month', '=', False)]}"
-                        />
+                        <field name="value_amount" />
+                        <field name="value" nolabel="1" />
+                        <field name="nb_days" string="After" />
+                        <field name="delay_type" nolabel="1" />
                         <field name="fixed_date" />
                     </tree>
                 </field>
@@ -80,21 +72,13 @@
                 <field
                     name="manual_payment_term_line_ids"
                     class="oe_read_only"
-                    attrs="{'invisible': [('has_manual_lines', '=', False)]}"
+                    invisible="not has_manual_lines"
                 >
                     <tree>
-                        <field name="value" string="Due Type" />
-                        <field
-                            name="value_amount"
-                            attrs="{'readonly':[('value','=','balance')]}"
-                        />
-                        <field name="months" />
-                        <field name="days" />
-                        <field name="end_month" />
-                        <field
-                            name="days_after"
-                            attrs="{'invisible': [('end_month', '=', False)]}"
-                        />
+                        <field name="value_amount" />
+                        <field name="value" nolabel="1" />
+                        <field name="nb_days" string="After" />
+                        <field name="delay_type" nolabel="1" />
                         <field name="fixed_date" />
                     </tree>
                 </field>

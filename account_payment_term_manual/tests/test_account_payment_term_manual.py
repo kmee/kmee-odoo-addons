@@ -16,8 +16,8 @@ class TestAccountPaymentTermManual(TransactionCase):
             {
                 "name": "50% in 30 days, balance in 60 days",
                 "line_ids": [
-                    (0, 0, {"value": "percent", "value_amount": 50.0, "days": 30}),
-                    (0, 0, {"value": "balance", "days": 60}),
+                    (0, 0, {"value": "percent", "value_amount": 50.0, "nb_days": 30}),
+                    (0, 0, {"value": "percent", "value_amount": 50.0, "nb_days": 60}),
                 ],
             }
         )
@@ -63,8 +63,8 @@ class TestAccountPaymentTermManual(TransactionCase):
         self.assertFalse(manual.active)
         self.assertFalse(manual.has_manual_lines)
         self.assertEqual(
-            sorted(manual.line_ids.mapped("days")),
-            sorted(self.term.line_ids.mapped("days")),
+            sorted(manual.line_ids.mapped("nb_days")),
+            sorted(self.term.line_ids.mapped("nb_days")),
         )
         self.assertEqual(
             sorted(manual.line_ids.mapped("value_amount")),
@@ -82,10 +82,9 @@ class TestAccountPaymentTermManual(TransactionCase):
     def test_edited_manual_term_changes_installments(self):
         invoice = self._invoice()
         manual = invoice.manual_payment_term_id
-        percent = manual.line_ids.filtered(lambda x: x.value == "percent")
-        balance = manual.line_ids.filtered(lambda x: x.value == "balance")
+        percent, balance = manual.line_ids
         percent.write({"value_amount": 30.0, "fixed_date": date(2024, 2, 20)})
-        balance.write({"fixed_date": date(2024, 4, 10)})
+        balance.write({"value_amount": 70.0, "fixed_date": date(2024, 4, 10)})
         self.assertTrue(manual.has_manual_lines)
         self.assertTrue(manual.name.endswith("(edited)"))
         invoice.recompute_payment_lines()
@@ -94,7 +93,9 @@ class TestAccountPaymentTermManual(TransactionCase):
             [(date(2024, 2, 20), 300.0), (date(2024, 4, 10), 700.0)],
         )
         # the original term is untouched
-        self.assertEqual(sorted(self.term.line_ids.mapped("value_amount")), [0.0, 50.0])
+        self.assertEqual(
+            sorted(self.term.line_ids.mapped("value_amount")), [50.0, 50.0]
+        )
         invoice.action_post()
         self.assertEqual(
             sorted(invoice.line_ids.filtered("date_maturity").mapped("date_maturity")),
@@ -106,9 +107,7 @@ class TestAccountPaymentTermManual(TransactionCase):
     def test_posted_invoice_keeps_total(self):
         invoice = self._invoice()
         manual = invoice.manual_payment_term_id
-        manual.line_ids.filtered(lambda x: x.value == "percent").write(
-            {"value_amount": 33.33}
-        )
+        manual.line_ids[0].write({"value_amount": 33.33})
         invoice.recompute_payment_lines()
         invoice.action_post()
         total = sum(x[1] for x in self._installments(invoice))
@@ -119,12 +118,14 @@ class TestAccountPaymentTermManual(TransactionCase):
         manual = self.env["account.payment.term.manual"].create({"name": "Manual"})
         line = manual.line_ids
         self.assertEqual(len(line), 1)
-        self.assertEqual(line.value, "balance")
+        self.assertEqual(line.value, "percent")
         base = date(2024, 1, 15)
         self.assertEqual(line._get_due_date(base), base)
-        line.write({"months": 1, "days": 5})
-        self.assertEqual(line._get_due_date(base), date(2024, 2, 20))
-        line.write({"end_month": True, "days_after": 10})
+        line.write({"nb_days": 5})
+        self.assertEqual(line._get_due_date(base), date(2024, 1, 20))
+        line.write({"delay_type": "days_after_end_of_month", "nb_days": 10})
+        self.assertEqual(line._get_due_date(base), date(2024, 2, 10))
+        line.write({"delay_type": "days_after_end_of_next_month"})
         self.assertEqual(line._get_due_date(base), date(2024, 3, 10))
         line.fixed_date = date(2024, 5, 1)
         self.assertEqual(line._get_due_date(base), date(2024, 5, 1))
@@ -132,9 +133,7 @@ class TestAccountPaymentTermManual(TransactionCase):
     def test_change_term_replaces_manual_term(self):
         invoice = self._invoice()
         old_manual = invoice.manual_payment_term_id
-        other = self.env["account.payment.term"].create(
-            {"name": "Immediate", "line_ids": [(0, 0, {"value": "balance"})]}
-        )
+        other = self.env["account.payment.term"].create({"name": "Immediate"})
         invoice.invoice_payment_term_id = other
         invoice._update_manual_payment_term_id(other)
         self.assertEqual(invoice.manual_payment_term_id.origin_term_id, other)

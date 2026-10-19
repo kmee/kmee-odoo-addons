@@ -15,10 +15,9 @@ class AccountPaymentTermManual(models.Model):
                 0,
                 0,
                 {
-                    "value": "balance",
-                    "value_amount": 0.0,
-                    "days": 0,
-                    "end_month": False,
+                    "value": "percent",
+                    "value_amount": 100.0,
+                    "nb_days": 0,
                 },
             )
         ]
@@ -83,8 +82,28 @@ class AccountPaymentTermLineManual(models.Model):
     )
 
     fixed_date = fields.Date(
-        help="When set, it is the due date, regardless of the months and days.",
+        help="When set, it is the due date, regardless of the delay.",
     )
+
+    @api.depends("manual_payment_id")
+    def _compute_days(self):
+        # the manual lines are not linked to a payment term (payment_id)
+        for line in self:
+            if not line.nb_days and len(line.manual_payment_id.line_ids) > 1:
+                line.nb_days = line.manual_payment_id.line_ids[-2].nb_days + 30
+            else:
+                line.nb_days = line.nb_days
+
+    @api.depends("manual_payment_id")
+    def _compute_value_amount(self):
+        for line in self:
+            if line.value == "fixed":
+                line.value_amount = 0
+            else:
+                percents = line.manual_payment_id.line_ids.filtered(
+                    lambda r: r.value == "percent" and r != line
+                )
+                line.value_amount = 100 - sum(percents.mapped("value_amount"))
 
     def _get_due_date(self, date_ref):
         self.ensure_one()
@@ -95,10 +114,8 @@ class AccountPaymentTermLineManual(models.Model):
     @api.constrains(
         "value",
         "value_amount",
-        "months",
-        "days",
-        "end_month",
-        "days_after",
+        "delay_type",
+        "nb_days",
         "fixed_date",
     )
     def _check_manual_payment_term_id(self):

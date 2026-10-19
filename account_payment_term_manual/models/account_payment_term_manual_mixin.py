@@ -42,7 +42,7 @@ class AccountPaymentTermManualMixin(models.AbstractModel):
                 "origin_term_id": term_id.id,
                 "active": False,
                 "note": "",
-                # the lines are created with the term, which needs a balance line
+                # the lines are created with the term, which needs its lines
                 "line_ids": [
                     (0, 0, {k: v for k, v in line[2].items() if k != "payment_id"})
                     for line in vals["line_ids"]
