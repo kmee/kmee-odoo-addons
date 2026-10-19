@@ -103,13 +103,13 @@ class HRApplicationController(http.Controller):
         kwargs = {k: v for k, v in kwargs.items() if k in APPLICATION_FIELDS}
         application_data = self.parse_form_data_to_application_data(kwargs)
         if "address" in application_data:
-            if not applicant_sudo.address_home_id:
-                applicant_sudo.address_home_id = (
+            if not applicant_sudo.partner_id:
+                applicant_sudo.partner_id = (
                     request.env["res.partner"]
                     .sudo()
                     .create({"name": applicant_sudo.partner_name})
                 )
-            applicant_sudo.address_home_id.sudo().write(
+            applicant_sudo.partner_id.sudo().write(
                 self._prepare_address_values(application_data["address"])
             )
             del application_data["address"]
@@ -119,7 +119,7 @@ class HRApplicationController(http.Controller):
                 applicant_sudo.bank_account_id = (
                     request.env["res.partner.bank"]
                     .sudo()
-                    .create({"partner_id": applicant_sudo.address_home_id.id})
+                    .create({"partner_id": applicant_sudo.partner_id.id})
                 )
             bank_values = {
                 key: value

@@ -230,7 +230,7 @@
                                         class="form-control"
                                         id="street"
                                         name="street"
-                                        t-att-value="applicant.address_home_id.street"
+                                        t-att-value="applicant.partner_id.street"
                                     />
                                 </div>
                                 <div class="col-md-2 mb-3">
@@ -243,7 +243,7 @@
                                         class="form-control"
                                         id="street_number"
                                         name="street_number"
-                                        t-att-value="applicant.address_home_id.street_number"
+                                        t-att-value="applicant.partner_id.street_number"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -256,7 +256,7 @@
                                         class="form-control"
                                         id="street_2"
                                         name="street_2"
-                                        t-att-value="applicant.address_home_id.street2"
+                                        t-att-value="applicant.partner_id.street2"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -269,7 +269,7 @@
                                         class="form-control"
                                         id="district"
                                         name="district"
-                                        t-att-value="applicant.address_home_id.district"
+                                        t-att-value="applicant.partner_id.district"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -279,7 +279,7 @@
                                         class="form-control"
                                         id="cep"
                                         name="cep"
-                                        t-att-value="applicant.address_home_id.zip"
+                                        t-att-value="applicant.partner_id.zip"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -289,7 +289,7 @@
                                         class="form-control"
                                         id="city"
                                         name="city"
-                                        t-att-value="applicant.address_home_id.city_id and applicant.address_home_id.city_id.name or ''"
+                                        t-att-value="applicant.partner_id.city_id and applicant.partner_id.city_id.name or ''"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -299,7 +299,7 @@
                                         class="form-control"
                                         id="state"
                                         name="state"
-                                        t-att-value="applicant.address_home_id.state_id and applicant.address_home_id.state_id.name or ''"
+                                        t-att-value="applicant.partner_id.state_id and applicant.partner_id.state_id.name or ''"
                                     />
                                 </div>
                                 <div class="col-md-8 mb-3">
@@ -670,7 +670,7 @@
                                         id="street"
                                         name="street"
                                         required="1"
-                                        t-att-value="applicant.address_home_id.street"
+                                        t-att-value="applicant.partner_id.street"
                                     />
                                 </div>
                                 <div class="col-md-2 mb-3">
@@ -684,7 +684,7 @@
                                         id="street_number"
                                         name="street_number"
                                         required="1"
-                                        t-att-value="applicant.address_home_id.street_number"
+                                        t-att-value="applicant.partner_id.street_number"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -698,7 +698,7 @@
                                         id="street_2"
                                         name="street_2"
                                         required="1"
-                                        t-att-value="applicant.address_home_id.street2"
+                                        t-att-value="applicant.partner_id.street2"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -712,7 +712,7 @@
                                         id="district"
                                         required="1"
                                         name="district"
-                                        t-att-value="applicant.address_home_id.district"
+                                        t-att-value="applicant.partner_id.district"
                                     />
                                 </div>
                                 <div class="col-md-2 mb-3">
@@ -723,7 +723,7 @@
                                         id="cep"
                                         required="1"
                                         name="cep"
-                                        t-att-value="applicant.address_home_id.zip"
+                                        t-att-value="applicant.partner_id.zip"
                                     />
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -734,7 +734,7 @@
                                         required="1"
                                         id="city"
                                         name="city"
-                                        t-att-value="applicant.address_home_id.city_id and applicant.address_home_id.city_id.name or ''"
+                                        t-att-value="applicant.partner_id.city_id and applicant.partner_id.city_id.name or ''"
                                     />
                                 </div>
                                 <div class="col-md-2 mb-3">
@@ -745,7 +745,7 @@
                                         id="state"
                                         required="1"
                                         name="state"
-                                        t-att-value="applicant.address_home_id.state_id and applicant.address_home_id.state_id.name or ''"
+                                        t-att-value="applicant.partner_id.state_id and applicant.partner_id.state_id.name or ''"
                                     />
                                 </div>
                             </div>
