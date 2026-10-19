@@ -4,7 +4,7 @@
 from datetime import timedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import ValidationError
 
 # Códigos da Tabela 71 (tpCAT).
 TIPO_CAT_INICIAL = "1"
@@ -36,6 +36,7 @@ class L10nBrSstCat(models.Model):
         string="Acidente",
         required=True,
         ondelete="cascade",
+        index=True,
         tracking=True,
     )
     company_id = fields.Many2one(
@@ -100,6 +101,12 @@ class L10nBrSstCat(models.Model):
         help="Primeiro dia útil seguinte ao acidente. Em caso de óbito, a "
         "comunicação é imediata e o prazo é o próprio dia do acidente.",
     )
+    alerta_prazo_date = fields.Date(
+        string="Último Alerta de Prazo",
+        readonly=True,
+        copy=False,
+        help="Data do último alerta do cron, para não repetir o aviso no " "mesmo dia.",
+    )
     prazo_situacao = fields.Selection(
         [
             ("no_prazo", "No prazo"),
@@ -125,6 +132,8 @@ class L10nBrSstCat(models.Model):
     @api.depends(
         "acidente_id.date_acidente",
         "acidente_id.houve_obito",
+        "acidente_id.date_obito",
+        "tipo_cat_id",
         "date_emissao",
         "state",
     )
@@ -136,7 +145,16 @@ class L10nBrSstCat(models.Model):
                 rec.date_limite = False
                 rec.prazo_situacao = False
                 continue
-            if acidente.houve_obito:
+            if rec.tipo_cat_codigo == TIPO_CAT_REABERTURA:
+                # A reabertura não nasce da data do acidente: contar o prazo
+                # dele a deixaria sempre "fora do prazo". Sem prazo calculado.
+                rec.date_limite = False
+                rec.prazo_situacao = False
+                continue
+            if rec.tipo_cat_codigo == TIPO_CAT_OBITO and acidente.date_obito:
+                # Comunicação de óbito é imediata, contada do óbito.
+                limite = acidente.date_obito
+            elif acidente.houve_obito:
                 # Óbito é comunicação imediata: não há dia útil seguinte.
                 limite = acidente.date_acidente
             else:
@@ -193,7 +211,7 @@ class L10nBrSstCat(models.Model):
             if rec.tipo_cat_codigo in (TIPO_CAT_REABERTURA, TIPO_CAT_OBITO) and not (
                 rec.cat_origem_id or rec.nr_rec_cat_orig
             ):
-                raise UserError(
+                raise ValidationError(
                     _(
                         "CAT de %(tipo)s exige a CAT de origem ou o recibo da "
                         "comunicação anterior."
@@ -204,6 +222,8 @@ class L10nBrSstCat(models.Model):
     def action_emitir(self):
         """Emite a CAT e avisa quando o prazo legal já passou."""
         for rec in self:
+            if rec.state != "draft":
+                continue
             rec.state = "emitida"
             rec._compute_prazo()
             if rec.prazo_situacao == "atrasada":
@@ -224,13 +244,19 @@ class L10nBrSstCat(models.Model):
     @api.model
     def cron_alerta_prazo(self):
         """Cobra as CATs cujo prazo legal vence hoje ou já venceu."""
-        pendentes = self.search(
-            [
-                ("state", "=", "draft"),
-                ("date_limite", "<=", fields.Date.context_today(self)),
-            ]
+        hoje = fields.Date.context_today(self)
+        rascunhos = self.search(
+            [("state", "=", "draft"), ("acidente_id.state", "!=", "cancelled")]
+        )
+        # O prazo depende do dia de hoje, que não dispara o recálculo sozinho.
+        rascunhos._compute_prazo()
+        pendentes = rascunhos.filtered(
+            lambda c: c.date_limite
+            and c.date_limite <= hoje
+            and c.alerta_prazo_date != hoje
         )
         for cat in pendentes:
+            cat.alerta_prazo_date = hoje
             cat.message_post(
                 body=_(
                     "CAT ainda em rascunho com prazo legal em %(limite)s. A "
