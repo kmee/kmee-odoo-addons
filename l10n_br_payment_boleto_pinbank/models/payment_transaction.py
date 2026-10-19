@@ -273,11 +273,10 @@ class PaymentTransaction(models.Model):
         :return: The dict of provider-specific rendering values.
         :rtype: dict
         """
-        super()._get_specific_rendering_values(processing_values)
+        res = super()._get_specific_rendering_values(processing_values)
+        if self.provider_code != "boleto_pinbank":
+            return res
 
-        boleto_data = self._generate_boleto_pinbank()
-
-        # Initiate the payment
         base_url = self.provider_id.get_base_url()
         return_url_params = {"reference": self.reference}
 
@@ -287,7 +286,7 @@ class PaymentTransaction(models.Model):
             "company_logo": url_join(
                 base_url, f"web/image/res.company/{self.company_id.id}/logo"
             ),
-            "order_id": boleto_data.get("Data", {}).get("NossoNumero"),
+            "order_id": self.our_number,
             "amount": self.amount,
             "currency": self.currency_id.name,
             "partner_name": self.partner_name,
