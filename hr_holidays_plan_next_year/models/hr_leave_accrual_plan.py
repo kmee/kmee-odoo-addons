@@ -12,16 +12,15 @@ class HrLeaveAllocation(models.Model):
     _inherit = "hr.leave.allocation"
 
     def _end_of_year_accrual(self):
-        today = fields.Date.today()
-        first_day_this_year = today + relativedelta(month=1, day=1)
-        for allocation in self:
-            current_level = allocation._get_current_accrual_plan_level_id(
-                first_day_this_year
-            )[0]
-            if current_level and current_level.frequency == "next_year":
-                continue
-            else:
-                return super(HrLeaveAllocation, allocation)._end_of_year_accrual()
+        first_day = fields.Date.today() + relativedelta(month=1, day=1)
+
+        def _is_next_year(allocation):
+            level = allocation._get_current_accrual_plan_level_id(first_day)[0]
+            return bool(level) and level.frequency == "next_year"
+
+        # allocations with a next_year level keep their balance
+        to_process = self.filtered(lambda allocation: not _is_next_year(allocation))
+        return super(HrLeaveAllocation, to_process)._end_of_year_accrual()
 
 
 class HrLeaveAccrualPlan(models.Model):
