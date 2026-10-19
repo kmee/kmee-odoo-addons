@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Exactus**.
 
 Campos numéricos zero-padded, data compacta no fim.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -20,17 +20,17 @@ Campos numéricos zero-padded, data compacta no fim.
 | 148-162 | valor | 15, centavos |
 | 163-168 | data | `ddmmaa` |
 
-## Exemplo
+**Exemplo**
 
 ```
 0000001000000000001101000000000002201DOC123    Venda de agosto...000000000150000050826
 ```
 
-## Observações
+**Observações**
 
 - Data no formato curto `ddmmaa`.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
