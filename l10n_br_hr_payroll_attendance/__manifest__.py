@@ -16,6 +16,8 @@
         "l10n_br_hr_attendance_apuracao",
     ],
     "data": [
+        "security/ir.model.access.csv",
+        "security/l10n_br_hr_payroll_attendance_security.xml",
         "data/hr_salary_rule_category_data.xml",
         "data/hr_salary_rule_data.xml",
         "views/hr_payslip_views.xml",
