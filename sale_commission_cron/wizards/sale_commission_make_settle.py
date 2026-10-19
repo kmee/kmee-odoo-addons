@@ -24,7 +24,6 @@ class SaleCommissionCron(models.AbstractModel):
             {
                 "settlement_type": "sale_invoice",
                 "date_to": next_month_date,
-                "settlement_type": "sale_invoice",
             }
         )
 

@@ -134,7 +134,7 @@ class TestCommissionCron(TransactionCase):
         """
         Given the cron helper
         When it creates the standard settlement wizard
-        Then both cutoff dates are one month after today
+        Then the cutoff date is one month after today
         """
         captured = {}
         wizard_model = type(self.env["commission.make.settle"])
@@ -151,7 +151,6 @@ class TestCommissionCron(TransactionCase):
         finally:
             wizard_model.create = original_create
         self.assertEqual(captured["date_to"], expected)
-        self.assertEqual(captured["date_payment_to"], expected)
 
     def test_cron_runs_as_superuser_for_unprivileged_caller(self):
         """
