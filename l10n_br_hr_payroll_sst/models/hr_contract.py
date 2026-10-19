@@ -106,8 +106,9 @@ class HrContract(models.Model):
                 continue
             laudo = rec._l10n_br_sst_adicionais_do_laudo()
             if laudo["insalubridade"] and laudo["periculosidade"]:
-                # Súmula 364 do TST: não acumulam. Fica a insalubridade, e a
-                # divergência aparece para decisão humana.
+                # Art. 193, par. 2, da CLT: o empregado opta, não acumulam.
+                # Fica a insalubridade, e a divergência aparece para decisão
+                # humana.
                 laudo["periculosidade"] = False
             rec.l10n_br_insalubridade = laudo["insalubridade"]
             rec.l10n_br_grau_insalubridade = laudo["grau"]
