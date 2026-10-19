@@ -18,6 +18,9 @@ class MailComposeMessage(models.TransientModel):
                 self.env.context["refuse_reason_wizard_id"]
             )
             if refuse_wizard:
+                # O e-mail (editado) ja foi enviado pelo compositor: sem isto o
+                # wizard enviaria o modelo original uma segunda vez.
+                refuse_wizard.send_mail = False
                 refuse_wizard.action_refuse_reason_apply()
 
         return result
