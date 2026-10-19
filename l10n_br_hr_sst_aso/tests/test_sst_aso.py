@@ -284,3 +284,74 @@ class TestSstAso(SstCommon):
         self.assertEqual(
             exame_medico.l10n_br_observacao_clinica, "Audiometria alterada."
         )
+
+    def test_rh_nao_le_observacao_livre_do_exame(self):
+        """A observação da OCA (note) pode ter dado clínico: sai do alcance do RH."""
+        exame = self._cria_exame()
+        exame.sudo().note = "Queixa de zumbido."
+        usuario_rh = self._cria_usuario("rh_note", "hr.group_hr_manager")
+        with self.assertRaises(AccessError):
+            exame.with_user(usuario_rh).read(["note"])
+
+    def test_exame_complementar_so_do_proprio_trabalhador(self):
+        """Qualquer funcionário lia o exame complementar de todos os colegas."""
+        exame = self._cria_exame()
+        linha = self.env["l10n_br.sst.exame.complementar"].create(
+            {
+                "examination_id": exame.id,
+                "procedimento_id": self.procedimento.id,
+                "ind_result": "2",
+            }
+        )
+        colega = self._cria_usuario("colega_sst")
+        dono = self._cria_usuario("dono_sst")
+        self.employee.user_id = dono
+        linhas = self.env["l10n_br.sst.exame.complementar"]
+        self.assertFalse(linhas.with_user(colega).search([("id", "=", linha.id)]))
+        self.assertTrue(linhas.with_user(dono).search([("id", "=", linha.id)]))
+        gestor_rh = self._cria_usuario("gestor_rh_sst", "hr.group_hr_manager")
+        self.assertTrue(linhas.with_user(gestor_rh).search([("id", "=", linha.id)]))
+
+    def test_saude_ocupacional_conclui_exame_com_seu_proprio_usuario(self):
+        """O grupo precisa enxergar PCMSO e risco para calcular o vencimento."""
+        exame = self._cria_exame()
+        exame.write(
+            {
+                "l10n_br_resultado": "1",
+                "l10n_br_medico_nome": "Dr. Examinador",
+            }
+        )
+        medico = self._cria_usuario(
+            "medico_conclui_sst", "l10n_br_hr_sst_aso.group_sst_medico"
+        )
+        exame.with_user(medico).to_done()
+        self.assertEqual(exame.state, "done")
+        self.assertTrue(exame.l10n_br_date_vencimento)
+        self.assertEqual(exame.result, "passed")
+
+    def test_contrato_checa_aso_mesmo_sem_ler_exame_de_terceiros(self):
+        """Quem abre o contrato não lê o exame do colega, mas o ASO existe."""
+        self.env.company.l10n_br_sst_aso_politica = "bloqueia"
+        self._conclui(self._cria_exame())
+        gestor = self._cria_usuario(
+            "gestor_contrato_sst", "hr_contract.group_hr_contract_manager"
+        )
+        contrato = self.contract.with_user(gestor)
+        self.assertTrue(contrato._l10n_br_sst_exige_aso(TIPO_ASO_ADMISSIONAL))
+
+    def test_cron_ignora_exame_superado_por_outro(self):
+        """ASO antigo, já superado por um recente, não gera periódico novo."""
+        self._conclui(self._cria_exame(date=self.hoje - relativedelta(months=24)))
+        self._conclui(self._cria_exame(tipo=TIPO_ASO_PERIODICO))
+        self.assertFalse(self.exame_model.cron_agendar_periodicos())
+
+    def _cria_usuario(self, login, *grupos):
+        return self.env["res.users"].create(
+            {
+                "name": login,
+                "login": login,
+                "groups_id": [
+                    (6, 0, [self.env.ref(g).id for g in ("base.group_user", *grupos)])
+                ],
+            }
+        )

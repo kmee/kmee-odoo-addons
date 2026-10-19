@@ -106,6 +106,9 @@ class HrEmployeeMedicalExamination(models.Model):
         help="Informação clínica sob sigilo médico. Não sai no ASO nem no "
         "evento do eSocial e não é visível ao RH.",
     )
+    # A observação livre do modelo da OCA vira campo clínico: o RH não a lê, e o
+    # rastreamento dela no chatter também fica restrito ao grupo.
+    note = fields.Text(groups="l10n_br_hr_sst_aso.group_sst_medico")
     company_id = fields.Many2one(
         "res.company",
         string="Empresa",
@@ -167,6 +170,8 @@ class HrEmployeeMedicalExamination(models.Model):
     def to_done(self):
         """Conclui o exame exigindo o mínimo que o ASO e o S-2220 pedem."""
         for rec in self:
+            if rec.l10n_br_resultado:
+                rec.result = "passed" if rec.l10n_br_resultado == "1" else "failed"
             faltando = []
             if not rec.l10n_br_tipo_aso_id:
                 faltando.append(_("tipo de ASO"))
@@ -230,24 +235,32 @@ class HrEmployeeMedicalExamination(models.Model):
         )
 
     @api.model
-    def cron_agendar_periodicos(self, dias_antecedencia=30):
+    def cron_agendar_periodicos(self, dias_antecedencia=None):
         """Agenda o exame periódico de quem está com o ASO a vencer (NR-7).
 
         Cria um exame pendente por trabalhador, e nunca um segundo enquanto o
-        primeiro não for concluído ou cancelado.
+        primeiro não for concluído ou cancelado. A antecedência vem da política
+        da empresa, salvo quando informada explicitamente.
         """
         hoje = fields.Date.context_today(self)
-        limite = hoje + relativedelta(days=dias_antecedencia)
-        vencendo = self.search(
-            [
-                ("state", "=", "done"),
-                ("l10n_br_date_vencimento", "!=", False),
-                ("l10n_br_date_vencimento", "<=", limite),
-            ]
+        empregados = self.env["hr.employee"].search(
+            [("l10n_br_sst_aso_vencimento", "!=", False)]
         )
+        # A situação é calculada e armazenada, e o tempo passa sem ninguém
+        # editar o exame: recalcula antes de decidir.
+        empregados._compute_l10n_br_sst_aso()
         criados = self.browse()
-        for exame in vencendo:
-            employee = exame.employee_id
+        for employee in empregados:
+            antecedencia = (
+                dias_antecedencia
+                if dias_antecedencia is not None
+                else employee.company_id.l10n_br_sst_aso_alerta_dias or 30
+            )
+            limite = hoje + relativedelta(days=antecedencia)
+            # Só o ASO mais recente conta: exame antigo já superado por outro
+            # não pode gerar um periódico espúrio.
+            if employee.l10n_br_sst_aso_vencimento > limite:
+                continue
             if not employee.contract_id or employee.contract_id.state != "open":
                 continue
             pendente = self.search_count(
@@ -261,7 +274,7 @@ class HrEmployeeMedicalExamination(models.Model):
             criados |= self.l10n_br_gerar_aso(
                 employee,
                 TIPO_ASO_PERIODICO,
-                date=exame.l10n_br_date_vencimento,
+                date=employee.l10n_br_sst_aso_vencimento,
             )
         return criados
 

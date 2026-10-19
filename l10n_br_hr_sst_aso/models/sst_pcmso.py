@@ -86,7 +86,7 @@ class L10nBrSstPcmso(models.Model):
         string="Exames",
     )
     exame_count = fields.Integer(
-        string="Exames",
+        string="Quantidade de Exames",
         compute="_compute_exame_count",
     )
     relatorio_anual = fields.Text(
@@ -148,6 +148,9 @@ class L10nBrSstPcmso(models.Model):
         """
         self.ensure_one()
         data = data or fields.Date.context_today(self)
+        # sudo: quem calcula o vencimento (médico, RH) nem sempre lê a data de
+        # nascimento e o contrato; aqui só se deriva a faixa, nada é exibido.
+        employee = employee.sudo()
         idade = employee._l10n_br_sst_idade(data)
         exposto = bool(employee._l10n_br_sst_riscos_vigentes(data))
         for faixa in self.faixa_ids.sorted("meses"):
