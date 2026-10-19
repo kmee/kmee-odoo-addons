@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="mapping_plan_form" model="ir.ui.view">
+        <field name="name">l10n_br_account_mapping.plan.form</field>
+        <field name="model">l10n_br_account_mapping.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field
+                                name="name"
+                                placeholder="Plano do Escritorio X"
+                            /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="account_count" string="Contas no destino" />
+                            <field
+                                name="mapped_count"
+                                string="Contas do Odoo mapeadas"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contas do plano" name="accounts">
+                            <field name="account_ids">
+                                <tree editable="bottom">
+                                    <field name="code" />
+                                    <field name="name" />
+                                    <field name="account_ids" widget="many2many_tags" />
+                                    <field name="date_start" optional="hide" />
+                                    <field name="date_end" optional="hide" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mapping_plan_tree" model="ir.ui.view">
+        <field name="name">l10n_br_account_mapping.plan.tree</field>
+        <field name="model">l10n_br_account_mapping.plan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="account_count" string="Contas" />
+                <field name="mapped_count" string="Mapeadas" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mapping_plan_action" model="ir.actions.act_window">
+        <field name="name">Planos de Contas de Destino</field>
+        <field name="res_model">l10n_br_account_mapping.plan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_mapping_plan"
+        name="Planos de Destino"
+        parent="account.account_account_menu"
+        action="mapping_plan_action"
+        sequence="91"
+    />
+
+    <record id="view_account_form_mapping" model="ir.ui.view">
+        <field name="name">account.account.form.l10n_br_mapping</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="l10n_br_mapping_account_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Pedro — Atestado médico (3 dias) -->
+        <record id="demo_leave_pedro_atestado" model="hr.leave">
+            <field name="holiday_status_id" ref="leave_type_atestado_medico" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_pedro" />
+            <field name="date_from">2024-03-04 08:00:00</field>
+            <field name="date_to">2024-03-06 17:00:00</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- Maria — Falta injustificada (1 dia) -->
+        <record id="demo_leave_maria_falta" model="hr.leave">
+            <field name="holiday_status_id" ref="leave_type_falta_injustificada" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_maria" />
+            <field name="date_from">2024-03-15 08:00:00</field>
+            <field name="date_to">2024-03-15 17:00:00</field>
+            <field name="state">confirm</field>
+        </record>
+
+        <!-- João — Doação de sangue (1 dia) -->
+        <record id="demo_leave_joao_sangue" model="hr.leave">
+            <field name="holiday_status_id" ref="leave_type_doacao_sangue" />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="date_from">2024-04-10 08:00:00</field>
+            <field name="date_to">2024-04-10 17:00:00</field>
+            <field name="state">confirm</field>
+        </record>
+
+</odoo>

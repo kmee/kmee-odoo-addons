@@ -68,16 +68,16 @@ Authors
 Contributors
 ------------
 
--  ``KMEE <https://www.kmee.com.br>``\ \_:
+- ``KMEE <https://www.kmee.com.br>``\ \_:
 
-   -  Luis Miléo
+  - Luis Miléo
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  `KMEE <https://kmee.com.br/>`__
+- `KMEE <https://kmee.com.br/>`__
 
 Maintainers
 -----------

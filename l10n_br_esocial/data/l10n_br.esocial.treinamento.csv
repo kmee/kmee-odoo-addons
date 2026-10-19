@@ -1,0 +1,22 @@
+id,codigo,nome,dt_inicio,dt_fim
+treinamento_3701,3701,Treinamento antes do primeiro embarque,2014-01-01,2022-06-15
+treinamento_3702,3702,Treinamento antes do primeiro embarque - Reciclagem,2014-01-01,2022-06-15
+treinamento_3703,3703,Treinamento eventual,2014-01-01,2022-06-15
+treinamento_3704,3704,Treinamento básico,2014-01-01,2022-06-15
+treinamento_3705,3705,Treinamento básico - Reciclagem,2014-01-01,2022-06-15
+treinamento_3706,3706,Treinamento avançado,2014-01-01,2022-06-15
+treinamento_3707,3707,Treinamento avançado - Reciclagem,2014-01-01,2022-06-15
+treinamento_3708,3708,Treinamento específico - Empregado integrante da brigada de incêndio,2014-01-01,2022-06-15
+treinamento_3709,3709,Treinamento específico - Riscos radiológicos da plataforma,2014-01-01,2022-06-15
+treinamento_3710,3710,Treinamento específico - Empregado integrante de equipe de resposta a emergências,2014-01-01,2022-06-15
+treinamento_3711,3711,Treinamento - Sinaleiro (reciclagem),2014-01-01,2022-06-15
+treinamento_3712,3712,Treinamento - Operador de guindaste (reciclagem),2014-01-01,2022-06-15
+treinamento_3713,3713,Treinamento - Curso Básico para Manipulador de Alimentos,2014-01-01,2022-06-15
+treinamento_3714,3714,Treinamento - Curso complementar para serviços em instalações elétricas em alta tensão,2014-01-01,2022-06-15
+treinamento_3715,3715,Treinamento - Curso básico de segurança em operações de movimentação de cargas e transporte de pessoas,2014-01-01,2022-06-15
+treinamento_3716,3716,Treinamento - Curso complementar para operadores de guindastes,2014-01-01,2022-06-15
+treinamento_3717,3717,Treinamento - Curso para indivíduos ocupacionalmente expostos à radiação ionizante,2014-01-01,2022-06-15
+treinamento_3718,3718,Treinamento - Procedimento operacional - Acendimento da chama piloto,2014-01-01,2022-06-15
+treinamento_1006,1006,Autorização para trabalhar em instalações elétricas,2014-01-01,
+treinamento_1207,1207,Operação e realização de intervenções em máquinas,2014-01-01,
+treinamento_3719,3719,Operador do equipamento de guindar,2014-01-01,2022-06-15

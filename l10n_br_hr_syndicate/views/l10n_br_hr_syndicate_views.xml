@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CONVENÇÃO COLETIVA
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="view_collective_convention_form" model="ir.ui.view">
+        <field name="name">l10n.br.hr.collective.convention.form</field>
+        <field name="model">l10n.br.hr.collective.convention</field>
+        <field name="arch" type="xml">
+            <form string="Convenção Coletiva">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nome da Convenção" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_union_id" />
+                            <field name="dissidio_month" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                        </group>
+                    </group>
+                    <group string="Piso Salarial">
+                        <group>
+                            <field name="wage_floor" />
+                        </group>
+                        <group>
+                            <field name="contribution_employee_pct" />
+                            <field name="contribution_employer_pct" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Pisos por Cargo" name="wage_floors">
+                            <field name="wage_floor_job_ids">
+                                <tree editable="bottom">
+                                    <field name="job_id" />
+                                    <field name="wage_floor" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Observações" name="notes">
+                            <field name="notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_collective_convention_tree" model="ir.ui.view">
+        <field name="name">l10n.br.hr.collective.convention.tree</field>
+        <field name="model">l10n.br.hr.collective.convention</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="partner_union_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="dissidio_month" />
+                <field name="wage_floor" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_collective_convention" model="ir.actions.act_window">
+        <field name="name">Convenções Coletivas</field>
+        <field name="res_model">l10n.br.hr.collective.convention</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_syndicate_root"
+        name="Sindicato"
+        parent="hr.menu_hr_root"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_collective_convention"
+        name="Convenções Coletivas"
+        parent="menu_syndicate_root"
+        action="action_collective_convention"
+        sequence="10"
+    />
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CONTRIBUIÇÃO SINDICAL
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="view_syndicate_contribution_form" model="ir.ui.view">
+        <field name="name">l10n.br.hr.syndicate.contribution.form</field>
+        <field name="model">l10n.br.hr.syndicate.contribution</field>
+        <field name="arch" type="xml">
+            <form string="Contribuição Sindical">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_union_id" />
+                            <field name="contribution_type" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="year" />
+                            <field name="month" />
+                        </group>
+                    </group>
+                    <group string="Cálculo">
+                        <group>
+                            <field name="calc_method" />
+                        </group>
+                        <group>
+                            <field
+                                name="percentage"
+                                attrs="{'invisible': [('calc_method', 'not in', ['percent'])]}"
+                            />
+                            <field
+                                name="fixed_amount"
+                                attrs="{'invisible': [('calc_method', 'not in', ['fixed'])]}"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_syndicate_contribution_tree" model="ir.ui.view">
+        <field name="name">l10n.br.hr.syndicate.contribution.tree</field>
+        <field name="model">l10n.br.hr.syndicate.contribution</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_union_id" />
+                <field name="year" />
+                <field name="month" />
+                <field name="contribution_type" />
+                <field name="calc_method" />
+                <field name="percentage" />
+                <field name="fixed_amount" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_syndicate_contribution" model="ir.actions.act_window">
+        <field name="name">Contribuições Sindicais</field>
+        <field name="res_model">l10n.br.hr.syndicate.contribution</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_syndicate_contribution"
+        name="Contribuições Sindicais"
+        parent="menu_syndicate_root"
+        action="action_syndicate_contribution"
+        sequence="20"
+    />
+
+</odoo>

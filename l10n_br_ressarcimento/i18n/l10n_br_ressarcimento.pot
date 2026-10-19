@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_ressarcimento
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,field_description:l10n_br_ressarcimento.field_hr_payslip__l10n_br_expenses_count
+msgid "Despesas"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,field_description:l10n_br_ressarcimento.field_hr_payslip__l10n_br_expense_sheet_ids
+msgid "Despesas Reembolsadas"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model,name:l10n_br_ressarcimento.model_hr_expense_sheet
+msgid "Expense Report"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,field_description:l10n_br_ressarcimento.field_hr_expense_sheet__l10n_br_payslip_id
+msgid "Holerite"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,help:l10n_br_ressarcimento.field_hr_expense_sheet__l10n_br_payslip_id
+msgid "Holerite onde esta despesa foi reembolsada."
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,help:l10n_br_ressarcimento.field_hr_expense_sheet__l10n_br_refund_in_payslip
+msgid ""
+"Marque para incluir este relatório de despesas como ressarcimento na próxima"
+" folha de pagamento."
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model,name:l10n_br_ressarcimento.model_hr_payslip
+msgid "Payslip"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,field_description:l10n_br_ressarcimento.field_hr_expense_sheet__l10n_br_refund_in_payslip
+msgid "Reembolsar via Folha"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:hr.salary.rule,name:l10n_br_ressarcimento.salary_rule_ressarcimento
+msgid "Ressarcimento de Despesas"
+msgstr ""
+
+#. module: l10n_br_ressarcimento
+#: model:ir.model.fields,field_description:l10n_br_ressarcimento.field_hr_payslip__l10n_br_total_ressarcimento
+msgid "Total Ressarcimento"
+msgstr ""

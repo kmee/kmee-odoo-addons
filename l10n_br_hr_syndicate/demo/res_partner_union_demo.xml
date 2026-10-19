@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="demo_partner_sindicato_metalurgicos" model="res.partner">
+            <field name="name">Sindicato dos Metalúrgicos de SP</field>
+            <field name="company_type">company</field>
+            <field name="union_entity_code">000.000.00001/0001-00</field>
+        </record>
+
+        <record id="demo_partner_sindicato_servidores" model="res.partner">
+            <field name="name">Sindicato dos Servidores Públicos</field>
+            <field name="company_type">company</field>
+            <field name="union_entity_code">000.000.00002/0001-00</field>
+        </record>
+
+</odoo>
