@@ -8,43 +8,23 @@ class StockInvoiceOnshipping(models.TransientModel):
     _inherit = "stock.invoice.onshipping"
 
     def _build_invoice_values_from_pickings(self, pickings):
-        """
-        Build dict to create a new invoice from given pickings
-        :param pickings: stock.picking recordset
-        :return: dict
+        """Use the payment term of the sale or purchase order of the picking.
+
+        When the order has a manual payment term, a copy of it goes to the invoice.
+        The order of the first picking is the one used, as the other values of the
+        invoice.
         """
         invoice, values = super()._build_invoice_values_from_pickings(pickings)
-
-        pick = fields.first(pickings)
-
-        if hasattr(pick, "sale_id") and hasattr(pick.sale_id, "payment_mode_id"):
-            term_id = pick.sale_id.payment_term_id.id
-            values["invoice_payment_term_id"] = term_id
-            # Use manual lines from SO
-            if pick.sale_id.manual_payment_term_id:
-                manual_term_id = pick.sale_id.manual_payment_term_id.copy().id
-                values["manual_payment_term_id"] = manual_term_id
-        elif hasattr(pick, "purchase_id") and hasattr(
-            pick.purchase_id, "payment_mode_id"
-        ):
-            term_id = pick.purchase_id.payment_term_id.id
-            values["invoice_payment_term_id"] = term_id
-            # Use manual lines from PO
-            if pick.purchase_id.manual_payment_term_id:
-                manual_term_id = pick.purchase_id.manual_payment_term_id.copy().id
-                values["manual_payment_term_id"] = manual_term_id
-
+        picking = fields.first(pickings)
+        order = picking.sale_id or picking.purchase_id
+        if order.payment_term_id:
+            values["invoice_payment_term_id"] = order.payment_term_id.id
+        if order.manual_payment_term_id:
+            values["manual_payment_term_id"] = order.manual_payment_term_id.copy().id
         return invoice, values
 
     def _action_generate_invoices(self):
-        """
-        Action to generate invoices based on pickings
-        :return: account.move recordset
-        """
+        """Synchronize the payment lines of the invoices that have a manual term."""
         invoices = super()._action_generate_invoices()
-
-        for inv in invoices:
-            if inv.manual_payment_term_id:
-                inv.recompute_payment_lines()
-
+        invoices.filtered("manual_payment_term_id").recompute_payment_lines()
         return invoices

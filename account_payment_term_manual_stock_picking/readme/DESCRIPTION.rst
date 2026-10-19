@@ -1,2 +1,8 @@
-This module customizes the process of creating invoices from product deliveries, adjusting payment terms based on the sale or purchase associated with the delivery. It checks whether there is a specific payment term in the related transaction and, if so, applies that term to the invoice. Additionally, if manual payment terms are defined, these are also copied to the invoice. The module also ensures that when generating invoices, financial lines are updated appropriately, removing any financial lines associated with manual terms when necessary and recalculating them correctly. In short, personalization seeks to ensure that payment terms and financial conditions of transactions are accurately reflected in generated invoices.
+Este módulo leva a condição de pagamento do pedido de venda ou de compra para a
+fatura gerada a partir da expedição ou do recebimento.
 
+Ao faturar as entregas, a fatura recebe a condição de pagamento do pedido de
+origem e, se o pedido tiver uma condição de pagamento manual (parcelas
+ajustadas), uma cópia dela, e as parcelas da fatura seguem esse ajuste. Quando
+vários pedidos são agrupados na mesma fatura, vale o pedido do primeiro
+documento.
