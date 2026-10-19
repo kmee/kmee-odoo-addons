@@ -6,7 +6,7 @@
     <record id="l10n_br_hr_apuracao_periodo_view_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.apuracao.periodo</field>
         <field name="arch" type="xml">
-            <tree decoration-warning="inconsistencia_count > 0">
+            <tree decoration-warning="inconsistencia_count &gt; 0">
                 <field name="name" />
                 <field name="date_from" />
                 <field name="date_to" />
@@ -30,22 +30,22 @@
                         type="object"
                         string="Apurar"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '=', 'fechado')]}"
+                        invisible="state == 'fechado'"
                     />
                     <button
                         name="action_fechar"
                         type="object"
-                        string="Fechar competência"
+                        string="Fechar compet&#234;ncia"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'apurado')]}"
-                        confirm="Fechar a competência trava o recálculo dos dias. Confirma?"
+                        confirm="Fechar a compet&#234;ncia trava o rec&#225;lculo dos dias. Confirma?"
+                        invisible="state != 'apurado'"
                     />
                     <button
                         name="action_reabrir"
                         type="object"
                         string="Reabrir"
-                        attrs="{'invisible': [('state', '!=', 'fechado')]}"
-                        confirm="Reabrir permite recalcular dias que já alimentaram a folha. Confirma?"
+                        confirm="Reabrir permite recalcular dias que j&#225; alimentaram a folha. Confirma?"
+                        invisible="state != 'fechado'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="oe_title">
                         <label for="name" />
-                        <h1><field name="name" placeholder="Março/2026" /></h1>
+                        <h1><field name="name" placeholder="Mar&#231;o/2026" /></h1>
                     </div>
                     <group>
                         <group>
@@ -79,7 +79,7 @@
                             <field name="inconsistencia_count" />
                         </group>
                     </group>
-                    <group string="Funcionários (vazio = todos)">
+                    <group string="Funcion&#225;rios (vazio = todos)">
                         <field
                             name="employee_ids"
                             nolabel="1"
@@ -96,15 +96,17 @@
     </record>
 
     <record id="l10n_br_hr_apuracao_periodo_action" model="ir.actions.act_window">
-        <field name="name">Competências de Apuração</field>
+        <field name="name">Compet&#234;ncias de Apura&#231;&#227;o</field>
         <field name="res_model">l10n_br.hr.apuracao.periodo</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Abra a primeira competência</p>
+            <p
+                class="o_view_nocontent_smiling_face"
+            >Abra a primeira compet&#234;ncia</p>
             <p>
-                A competência agrupa a apuração do mês. Apurar processa as marcações
-                em jornada; fechar trava o recálculo e é o que dá à folha uma
-                referência estável.
+                A compet&#234;ncia agrupa a apura&#231;&#227;o do m&#234;s. Apurar processa as marca&#231;&#245;es
+                em jornada; fechar trava o rec&#225;lculo e &#233; o que d&#225; &#224; folha uma
+                refer&#234;ncia est&#225;vel.
             </p>
         </field>
     </record>

@@ -40,7 +40,7 @@ class TestSegurancaApuracao(TransactionCase):
                         0,
                         [
                             cls.env.ref("base.group_user").id,
-                            cls.env.ref("hr_attendance.group_hr_attendance_user").id,
+                            cls.env.ref("hr_attendance.group_hr_attendance_officer").id,
                         ],
                     )
                 ],

@@ -59,7 +59,7 @@
                         type="object"
                         string="Reapurar"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '=', 'fechado')]}"
+                        invisible="state == 'fechado'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -89,7 +89,7 @@
                             <field name="intrajornada_suprimida" widget="float_time" />
                             <field name="interjornada_ok" />
                         </group>
-                        <group string="Situação do dia">
+                        <group string="Situa&#231;&#227;o do dia">
                             <field name="feriado" />
                             <field name="dia_semana" />
                             <field name="falta" />
@@ -97,19 +97,16 @@
                             <field name="paridade_ok" />
                             <field name="periodo_id" />
                         </group>
-                        <group string="Ocorrências">
+                        <group string="Ocorr&#234;ncias">
                             <field name="ocorrencia_ids" widget="many2many_tags" />
                             <field name="banco_horas_delta" widget="float_time" />
                         </group>
                     </group>
-                    <group
-                        string="Inconsistências"
-                        attrs="{'invisible': [('inconsistencia', '=', False)]}"
-                    >
+                    <group string="Inconsist&#234;ncias" invisible="not inconsistencia">
                         <field name="inconsistencia" nolabel="1" readonly="1" />
                     </group>
                     <notebook>
-                        <page name="marcacoes" string="Marcações">
+                        <page name="marcacoes" string="Marca&#231;&#245;es">
                             <field name="marcacao_ids" nolabel="1" readonly="1">
                                 <tree>
                                     <field name="nsr" />
@@ -122,7 +119,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page name="sessoes" string="Sessões">
+                        <page name="sessoes" string="Sess&#245;es">
                             <field name="attendance_ids" nolabel="1" readonly="1">
                                 <tree>
                                     <field name="check_in" />
@@ -147,7 +144,7 @@
                 <field name="periodo_id" />
                 <filter
                     name="filter_inconsistencia"
-                    string="Com inconsistência"
+                    string="Com inconsist&#234;ncia"
                     domain="[('inconsistencia', '!=', False)]"
                 />
                 <filter
@@ -158,11 +155,11 @@
                 <filter
                     name="filter_he"
                     string="Com horas extras"
-                    domain="[('horas_extras', '>', 0)]"
+                    domain="[('horas_extras', '&gt;', 0)]"
                 />
                 <filter
                     name="filter_impar"
-                    string="Marcação sem par"
+                    string="Marca&#231;&#227;o sem par"
                     domain="[('paridade_ok', '=', False)]"
                 />
                 <separator />
@@ -174,7 +171,7 @@
                 <group expand="0" string="Agrupar por">
                     <filter
                         name="group_employee"
-                        string="Funcionário"
+                        string="Funcion&#225;rio"
                         context="{'group_by': 'employee_id'}"
                     />
                     <filter
@@ -184,7 +181,7 @@
                     />
                     <filter
                         name="group_periodo"
-                        string="Competência"
+                        string="Compet&#234;ncia"
                         context="{'group_by': 'periodo_id'}"
                     />
                 </group>
@@ -193,7 +190,7 @@
     </record>
 
     <record id="l10n_br_hr_apuracao_dia_action" model="ir.actions.act_window">
-        <field name="name">Apuração Diária</field>
+        <field name="name">Apura&#231;&#227;o Di&#225;ria</field>
         <field name="res_model">l10n_br.hr.apuracao.dia</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{'search_default_group_employee': 1}</field>
