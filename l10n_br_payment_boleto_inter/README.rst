@@ -26,15 +26,18 @@ L10n Br Payment Boleto Inter
 
 |badge1| |badge2| |badge3|
 
-[ This file must be max 2-3 paragraphs, and is required.
+Emite boletos de cobrança registrada pela API v3 do Banco Inter e
+acompanha o pagamento, como um provedor de pagamento
+(``payment.provider``) do Odoo.
 
-The goal of this document is to explain quickly the features of this
-module: "what" this module does and "what" it is for. ]
+O boleto é gerado a partir de uma transação de pagamento (fatura ou
+pedido de venda), com os dados do pagador, vencimento, desconto, multa e
+juros do modo de pagamento. O PDF fica guardado na transação e pode ser
+impresso pelo menu Imprimir da fatura e do pedido, ou aberto pelo portal
+com o token de acesso.
 
-Example:
-
-This module extends the functionality of ... to support ... and to allow
-users to ...
+Um agendamento consulta o banco e confirma (ou cancela) a transação
+conforme a situação do boleto, o que dispara a conciliação do pagamento.
 
 **Table of contents**
 
@@ -44,116 +47,77 @@ users to ...
 Use Cases / Context
 ===================
 
-[ This file is optional but strongly suggested to allow end-users to
-evaluate the module's usefulness in their context. ]
+**Necessidade:** a KMEE atende clientes que cobram por boleto no Banco
+Inter e precisam emitir, imprimir e conciliar os boletos sem sair do
+Odoo.
 
-BUSINESS NEED: It should explain the "why" of the module:
+**Abordagem:** integração direta com a API v3 de cobrança do Inter
+(OAuth2 com certificado de cliente), sobre o módulo base
+``l10n_br_payment_boleto``, que já define o contrato dos provedores de
+boleto. É um caminho diferente da remessa CNAB
+(``l10n_br_account_payment_order``): aqui o registro e a baixa são
+online.
 
-- what is the business requirement that generated the need to develop
-  this module
-- in which context or use cases this module can be useful (practical
-  examples are welcome!).
-
-APPROACH: It could also explain the approach to address the mentioned
-need.
-
-USEFUL INFORMATION: It can also inform on related modules:
-
-- modules it depends on and their features
-- other modules that can work well together with this one
-- suggested setups where the module is useful (eg: multicompany,
-  multi-website)
+**Relacionados:** ``l10n_br_payment_boleto`` (base) e
+``l10n_br_payment_boleto_pinbank`` (outro provedor, mesmo contrato).
 
 Installation
 ============
 
-[ This file must only be present if there are very specific installation
-instructions, such as installing non-python dependencies. The audience
-is systems administrators. ]
-
-To install this module, you need to:
-
-1. Do this ...
+O módulo usa a biblioteca ``requests``, já presente em qualquer
+instalação do Odoo. O certificado de cliente do Inter é gravado em
+arquivos temporários durante cada chamada e removido em seguida.
 
 Configuration
 =============
 
-[ This file is not always required; it should explain **how to configure
-the module before using it**; it is aimed at users with administration
-privileges.
+Em Faturamento > Configuração > Provedores de pagamento, abra o provedor
+**Banco Inter** e preencha (apenas usuários administradores veem estes
+campos):
 
-Please be detailed on the path to configuration (eg: do you need to
-activate developer mode?), describe step by step configurations and the
-use of screenshots is strongly recommended.]
+- Conta corrente;
+- Client ID e Client Secret da aplicação criada no Internet Banking do
+  Inter (escopos de cobrança: leitura e escrita);
+- Certificado e chave privada (PEM) emitidos pelo Inter para a
+  aplicação.
 
-To configure this module, you need to:
-
-- Go to *App* > Menu > Menu item
-- Activate boolean... > save
-- ...
+Use o estado *Teste* para o ambiente sandbox do Inter e *Habilitado*
+para produção. Depois, no modo de pagamento (Faturamento > Configuração
+> Modos de pagamento), aponte o provedor Inter e informe desconto, multa
+e juros.
 
 Usage
 =====
 
-[ This file is required and contains the instructions on **"how"** to
-use the module for end-users.
-
-If the module does not have a visible impact on the user interface, just
-add the following sentence:
-
-   This module does not impact the user interface.
-
-If that's not the case, please make sure that every usage step is
-covered and remember that images speak more than words!]
-
-To use this module, you need to:
-
-- Go to *App* > Menu > Menu item
-
-  *insert screenshot!*
-
-- In "Contact" form, add a value to field *xyz* > save
-
-  *insert screenshot!*
-
-- The value of *xyz* is now displayed in the list view.
-
-  *insert screenshot!*
+- Na fatura de cliente, com o modo de pagamento do Inter, ao confirmar a
+  fatura (ou pelo botão de gerar boletos) é criada uma transação para
+  cada vencimento em aberto e o boleto é registrado no Banco Inter.
+  Gerar de novo não duplica boletos que já existem.
+- Imprima o boleto pelo menu Imprimir da fatura ou do pedido de venda;
+  faturas parceladas saem com todos os boletos num só arquivo.
+- Para cancelar, use a ação de cancelar na transação: o boleto é
+  cancelado no banco e a transação fica cancelada.
+- O agendamento *Atualizar status de boletos Inter* confirma a transação
+  quando o boleto é pago.
 
 Known issues / Roadmap
 ======================
 
-[ Enumerate known caveats and future potential improvements. It is
-mostly intended for end-users, and can also help potential new
-contributors discovering new features to implement. ]
-
-- ...
+- Receber a situação do boleto por webhook do Inter, com validação de
+  assinatura, em vez de depender só do agendamento a cada 30 minutos.
+- Conferir o valor recebido (``valorTotalRecebido``) contra o valor da
+  transação antes de confirmar o pagamento.
+- Avaliar se o boleto vencido deve mesmo cancelar a transação, já que o
+  Inter aceita o pagamento até o fim do prazo de agenda.
 
 Changelog
 =========
 
-[ The change log. The goal of this file is to help readers understand
-changes between version. The primary audience is end users and
-integrators. Purely technical changes such as code refactoring must not
-be mentioned here.
+16.0.1.0.0
+----------
 
-This file may contain ONE level of section titles, underlined with the ~
-(tilde) character. Other section markers are forbidden and will likely
-break the structure of the README.rst or other documents where this
-fragment is included. ]
-
-11.0.x.y.z (YYYY-MM-DD)
------------------------
-
-- [BREAKING] Breaking changes come first.
-  (`#70 <https://github.com/OCA/repo/issues/70>`__)
-- [ADD] New feature. (`#74 <https://github.com/OCA/repo/issues/74>`__)
-- [FIX] Correct this. (`#71 <https://github.com/OCA/repo/issues/71>`__)
-
-11.0.x.y.z (YYYY-MM-DD)
------------------------
-
-- ...
+- [ADD] Emissão, consulta, impressão e cancelamento de boleto pela API
+  v3 do Banco Inter.
 
 Bug Tracker
 ===========
@@ -176,20 +140,8 @@ Authors
 Contributors
 ------------
 
-- Firstname Lastname email.address@example.org (optional company website
-  url)
-- Second Person second.person@example.org (optional company website url)
-
-Other credits
--------------
-
-[ This file is optional and contains additional credits, other than
-authors, contributors, and maintainers. ]
-
-The development of this module has been financially supported by:
-
-- Company 1 name
-- Company 2 name
+- Bruno bruno.botti@kmee.com.br (`KMEE <https://kmee.com.br>`__)
+- Luis Felipe Mileo mileo@kmee.com.br (`KMEE <https://kmee.com.br>`__)
 
 Maintainers
 -----------
