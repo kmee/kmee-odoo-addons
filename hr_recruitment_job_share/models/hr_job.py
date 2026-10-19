@@ -34,12 +34,13 @@ class Job(models.Model):
             "context": {"default_job_id": self.id},
         }
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         # Garante que o token de acesso é gerado no momento da criação
-        if "access_token" not in vals:
-            vals["access_token"] = secrets.token_urlsafe(16)
-        return super(Job, self).create(vals)
+        for vals in vals_list:
+            if "access_token" not in vals:
+                vals["access_token"] = secrets.token_urlsafe(16)
+        return super().create(vals_list)
 
     def write(self, vals):
         # Se o trabalho não estiver sendo compartilhado, não altere o token
