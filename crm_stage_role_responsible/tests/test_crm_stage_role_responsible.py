@@ -300,8 +300,10 @@ class TestCrmStageRoleResponsible(TransactionCase):
         )
         for name in ("sdr_bdr_id", "hunter_id", "farmer_id"):
             self.assertTrue(lead.xpath("//field[@name='%s']" % name))
-        order = self.env["sale.order"].get_view(
-            self.env.ref("sale.view_order_form").id
-        )["arch"]
+        order = etree.fromstring(
+            self.env["sale.order"].get_view(self.env.ref("sale.view_order_form").id)[
+                "arch"
+            ]
+        )
         for name in ("sdr_bdr_id", "hunter_id", "closer_id", "farmer_id"):
-            self.assertIn(name, order)
+            self.assertTrue(order.xpath("//field[@name='%s']" % name))
