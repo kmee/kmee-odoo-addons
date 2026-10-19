@@ -134,7 +134,7 @@ class HrPayslip(models.Model):
         verbas rescisórias pela média, não pelo valor do mês de referência.
 
         Lê os holerites de estrutura MENSAL (CLT/Estatutário) do mesmo
-        contrato, já CONFIRMADOS (``state == "done"`` — este motor de folha
+        contrato, já CONFIRMADOS (``state == "done"`` - este motor de folha
         não usa um estado "paid" separado), com competência anterior à deste
         holerite, dentro da janela de `janela_meses` meses (ou desde o início
         do contrato, se mais recente que a janela). Holerites de férias, 13º
@@ -308,7 +308,7 @@ class HrPayslip(models.Model):
             # Média de verbas variáveis habituais (RF-18).
             media_habitual=media_habitual,
             # Aviso prévio proporcional (Lei 12.506/2011) e meses de contrato
-            # (estimativa de saldo do FGTS quando não informado) — RF-06.
+            # (estimativa de saldo do FGTS quando não informado) - RF-06.
             aviso_previo_dias=salary_rules_br.calc_aviso_previo_dias,
             meses_trabalhados=salary_rules_br.calc_meses_trabalhados,
             # Resolvidos por competência (lazy: só falham se a regra usar).

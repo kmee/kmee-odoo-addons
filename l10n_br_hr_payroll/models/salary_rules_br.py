@@ -10,6 +10,8 @@ Injetadas no contexto das regras salariais via `tools.br.*`.
 """
 from decimal import ROUND_HALF_UP, Decimal
 
+from dateutil.relativedelta import relativedelta
+
 
 def round_money(value, places=2):
     """Arredondamento monetário padrão brasileiro (ROUND_HALF_UP).
@@ -625,7 +627,8 @@ def calc_aviso_previo_dias(data_admissao, data_referencia):
         Dias de aviso prévio (int, 30 a 90).
     """
     anos_completos = data_referencia.year - data_admissao.year
-    aniversario = data_admissao.replace(year=data_admissao.year + anos_completos)
+    # relativedelta: admissao em 29/02 nao quebra em ano nao bissexto.
+    aniversario = data_admissao + relativedelta(years=anos_completos)
     if aniversario > data_referencia:
         anos_completos -= 1
     anos_completos = max(anos_completos, 0)
@@ -637,7 +640,7 @@ def calc_meses_trabalhados(data_admissao, data_referencia):
 
     Usado apenas para ESTIMAR o saldo do FGTS na conta vinculada quando ele
     não é informado manualmente (ver base da multa de 40%, Lei 8.036/90 art.
-    18 §1º) — uma aproximação de "8% × meses" sem juros/correção, que NÃO
+    18 §1º) - uma aproximação de "8% x meses" sem juros/correção, que NÃO
     substitui o extrato oficial do FGTS quando disponível.
 
     Args:
