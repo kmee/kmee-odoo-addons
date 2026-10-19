@@ -78,7 +78,7 @@ class TestRejectMailEditable(TransactionCase):
         self.assertEqual(action["target"], "new")
         context = action["context"]
         self.assertEqual(context["default_model"], "hr.applicant")
-        self.assertEqual(context["default_res_id"], self.applicant.id)
+        self.assertEqual(context["default_res_ids"], self.applicant.ids)
         self.assertEqual(context["default_template_id"], self.template.id)
         self.assertEqual(context["refuse_reason_wizard_id"], wizard.id)
 
@@ -147,7 +147,7 @@ class TestRejectMailEditable(TransactionCase):
         composer = (
             self.env["mail.compose.message"]
             .with_context(
-                default_model="hr.applicant", default_res_id=self.applicant.id
+                default_model="hr.applicant", default_res_ids=self.applicant.ids
             )
             .create({"subject": "Oi", "body": "<p>Ola</p>"})
         )
