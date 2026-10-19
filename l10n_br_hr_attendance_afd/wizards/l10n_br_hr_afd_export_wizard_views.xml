@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_afd_export_wizard_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.afd.export.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="rep_id" />
+                    <field name="date_from" />
+                    <field name="date_to" />
+                    <field name="fuso_horas" />
+                </group>
+                <group attrs="{'invisible': [('arquivo', '=', False)]}">
+                    <field name="arquivo" filename="arquivo_nome" readonly="1" />
+                    <field name="arquivo_nome" invisible="1" />
+                </group>
+                <footer>
+                    <button
+                        name="action_gerar"
+                        type="object"
+                        string="Gerar AFD"
+                        class="btn-primary"
+                    />
+                    <button string="Fechar" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_afd_export_wizard_action" model="ir.actions.act_window">
+        <field name="name">Gerar AFD</field>
+        <field name="res_model">l10n_br.hr.afd.export.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>
