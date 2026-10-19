@@ -6,7 +6,7 @@
     "summary": """
         Review the payment term installments before confirm the sale order and copy
         the due date to the invoice.""",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "development_status": "Beta",
