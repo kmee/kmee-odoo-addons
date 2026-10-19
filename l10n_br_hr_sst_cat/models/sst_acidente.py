@@ -76,6 +76,7 @@ class L10nBrSstAcidente(models.Model):
         "hr.employee",
         string="Trabalhador",
         required=True,
+        index=True,
         tracking=True,
     )
     state = fields.Selection(
@@ -94,6 +95,7 @@ class L10nBrSstAcidente(models.Model):
     date_acidente = fields.Date(
         string="Data do Acidente",
         required=True,
+        index=True,
         tracking=True,
     )
     hora_acidente = fields.Char(
@@ -220,7 +222,7 @@ class L10nBrSstAcidente(models.Model):
         "acidente_id",
         string="CATs",
     )
-    cat_count = fields.Integer(string="CATs", compute="_compute_cat_count")
+    cat_count = fields.Integer(string="Qtd. de CATs", compute="_compute_cat_count")
     afastamento_id = fields.Many2one(
         "l10n_br.esocial.s2230",
         string="Afastamento (S-2230)",
@@ -370,6 +372,8 @@ class L10nBrSstAcidente(models.Model):
         return afastamento
 
     def action_cancelar(self):
+        # Acidente cancelado não pode deixar CAT pendente cobrando prazo.
+        self.cat_ids.filtered(lambda c: c.state == "draft").action_cancelar()
         self.write({"state": "cancelled"})
 
     def action_view_cats(self):
