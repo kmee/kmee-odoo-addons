@@ -8,7 +8,7 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
-        "product",
+        "sale",
     ],
     "data": [
         "views/product_template.xml",
