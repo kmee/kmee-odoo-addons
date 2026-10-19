@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Fortes AG**.
 
 Registro de abertura seguido de um registro por partida.
 
-## Estrutura
+**Estrutura**
 
-### Registro `0010` (abertura)
+**Registro `0010` (abertura)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -20,7 +20,7 @@ Registro de abertura seguido de um registro por partida.
 | 37-44 | data final | `AAAAMMDD` |
 | 45-84 | descrição | 40 |
 
-### Registro `1004` (partida)
+**Registro `1004` (partida)**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -33,19 +33,19 @@ Registro de abertura seguido de um registro por partida.
 | 53-72 | valor | 20, à direita, ponto decimal e **6 casas** |
 | 73-112 | histórico | 40 |
 
-## Exemplo
+**Exemplo**
 
 ```
 0010AC        OMIE      1   2026080120260831Integracao contabil
 10042026080500000000012026081101                          1500.000000Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - Seis casas decimais no valor, particularidade do layout.
 - O código da empresa vem do campo **Código da empresa no escritório** da configuração.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
