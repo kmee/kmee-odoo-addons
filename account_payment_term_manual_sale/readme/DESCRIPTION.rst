@@ -1,1 +1,7 @@
-The module extends the standard sales order functionality in Odoo by incorporating the ability to manage manual payment terms. It allows the "Payment Terms" field to be changed and, in doing so, automatically adjusts the manual terms associated with the sales order, creating and updating payment lines as needed. Additionally, when generating invoices directly from the sales order, the module ensures that manual payment terms are correctly copied to the invoice, and reprocesses payment lines to reflect changes in terms. It also makes it possible to view and edit manual payment terms within the sales order interface, giving you additional control over payment processing.
+Este módulo leva a condição de pagamento manual para o pedido de venda.
+
+* Ao trocar a condição de pagamento do pedido, o módulo cria uma cópia dela
+  (condição de pagamento manual), que pode ser ajustada parcela a parcela na
+  aba **Payment Terms** do pedido (valores, prazos e datas de vencimento fixas);
+* Ao faturar o pedido, a condição manual é copiada para a fatura, que passa a
+  ter as parcelas e os vencimentos ajustados no pedido.
