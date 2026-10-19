@@ -5,15 +5,10 @@ from odoo import api, models
 
 
 class ResPartner(models.Model):
-
     _inherit = "res.partner"
 
     @api.depends("ref")
     def _compute_display_name(self):
-        return super()._compute_display_name()
-
-    def _get_name(self):
-        name = super()._get_name()
-        if self.ref:
-            name = "[{}] {}".format(self.ref, name)
-        return name
+        super()._compute_display_name()
+        for partner in self.filtered("ref"):
+            partner.display_name = f"[{partner.ref}] {partner.display_name}"
