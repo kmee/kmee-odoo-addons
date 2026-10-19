@@ -175,17 +175,20 @@ class TestPeriodBlanketOrder(TransactionCase):
         line._onchange_period()
         self.assertFalse(line.date_end)
 
-    def test_onchange_period_ignored_for_plain_uom(self):
-        """Given a plain UoM line,
-        When the onchange runs,
-        Then quantity and end date stay as set."""
+    def test_onchange_period_plain_uom_keeps_base_behavior(self):
+        """Given a plain UoM contract line,
+        When the period onchange runs,
+        Then quantity is untouched and the end date still follows the base
+        product_contract_period rule (the override must call super)."""
         line = self._so_line(
             self.product_plain, product_uom_qty=9.0, date_end="2030-01-01"
         )
         line.period_qty = 4.0
+        line.recurring_rule_type = "monthly"
+        line.period_count = 2
         line._onchange_period()
         self.assertEqual(line.product_uom_qty, 9.0)
-        self.assertEqual(line.date_end, date(2030, 1, 1))
+        self.assertEqual(line.date_end, date(2026, 2, 28))
 
     def test_protected_fields_unprotected_for_new_bo_qty(self):
         """Given the context of a line created from a B.O. with zero original qty,
