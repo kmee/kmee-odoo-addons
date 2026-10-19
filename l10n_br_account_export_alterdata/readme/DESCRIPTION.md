@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Alterdata (WCont)**.
 
 Uma linha por partida: o lado sem valor fica com a conta vazia.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -21,18 +21,18 @@ Uma linha por partida: o lado sem valor fica com a conta vazia.
 | 7 | histórico | até 200 |
 | 8 | documento | até 30 |
 
-## Exemplo
+**Exemplo**
 
 ```
 "","1101","","05/08/2026","1500,00","","Venda de agosto","DOC123"
 "","","2201","05/08/2026","1500,00","","Venda de agosto","DOC123"
 ```
 
-## Observações
+**Observações**
 
 - O importador do WCont é configurável: confirme a ordem das colunas com o escritório.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
