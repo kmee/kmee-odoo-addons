@@ -1,7 +1,6 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import json
 
 from lxml import etree
 
@@ -73,8 +72,7 @@ class TestSaleOrderLineQtyFields(TransactionCase):
             for node in tree.xpath(
                 "//field[@name='order_line']/form//field[@name='%s']" % name
             ):
-                modifiers = json.loads(node.get("modifiers") or "{}")
-                if modifiers.get("invisible") is not True:
+                if node.get("invisible") not in ("1", "True", "true"):
                     visible.add(name)
         return visible
 
