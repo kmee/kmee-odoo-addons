@@ -14,9 +14,7 @@ class TestSacBehavior(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(
-            context=dict(
-                cls.env.context, tracking_disable=True, mail_notrack=True
-            )
+            context=dict(cls.env.context, tracking_disable=True, mail_notrack=True)
         )
         cls.sac_model = cls.env["sac"]
         cls.stage_new = cls.env.ref("sac.sac_kanban_new")
@@ -165,7 +163,9 @@ class TestSacBehavior(TransactionCase):
         ).create({"customer_name": "Maria Cliente", "email_from": "maria@example.com"})
         sac.write({"stage_id": self.stage_shipping.id})
         self.env.cr.precommit.run()
-        self.assertNotIn("recebemos o seu chamado", " ".join(sac.message_ids.mapped("body")))
+        self.assertNotIn(
+            "recebemos o seu chamado", " ".join(sac.message_ids.mapped("body"))
+        )
         sac.write({"stage_id": self.stage_analysis.id})
         self.env.cr.precommit.run()
         bodies = " ".join(sac.message_ids.mapped("body"))
