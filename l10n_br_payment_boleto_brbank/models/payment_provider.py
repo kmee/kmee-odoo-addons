@@ -1,0 +1,500 @@
+# Copyright 2026 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+import base64
+import inspect
+import json
+import logging
+import secrets
+
+import httpx
+from brbank import Capacidade, registro
+from brbank.erros import AdapterNaoEncontrado, ErroBrbank
+
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError, ValidationError
+
+from ..utils import config as brbank_config
+from ..utils.runner import run_in_dedicated_loop
+
+_logger = logging.getLogger(__name__)
+
+BRBANK = "brbank"
+WEBHOOK_ROUTE = "/payment/brbank/webhook"
+
+ADAPTER_LABELS = {
+    "bb": "Banco do Brasil (001)",
+    "inter": "Banco Inter (077)",
+    "pinbank": "PinBank",
+    "pix_bacen": "Pix (BACEN API)",
+    "sicoob": "Sicoob (756)",
+    "sicredi": "Sicredi (748)",
+}
+PIX_PROFILE_LABELS = {
+    "bb": "Banco do Brasil",
+    "bradesco": "Bradesco",
+    "efi": "Efí",
+    "inter": "Banco Inter",
+    "itau": "Itaú",
+    "santander": "Santander",
+    "sicoob": "Sicoob",
+    "sicredi": "Sicredi",
+}
+# Generic provider field -> key used by the adapter configurations.
+GENERIC_FIELDS = {
+    "brbank_client_id": "client_id",
+    "brbank_client_secret": "client_secret",
+    "brbank_username": "usuario",
+    "brbank_password": "senha",
+    "brbank_certificate": "certificado_pem",
+    "brbank_private_key": "chave_pem",
+    "brbank_pix_key": "chave_pix",
+}
+SECRET_GROUP = "base.group_system"
+
+
+def _capability_labels():
+    return {
+        Capacidade.HIBRIDO: _("Hybrid boleto (Pix QR code)"),
+        Capacidade.SO_HIBRIDO: _("Hybrid boleto only"),
+        Capacidade.ALTERACAO: _("Instructions (due date, rebate)"),
+        Capacidade.BAIXA: _("Write-off"),
+        Capacidade.PDF: _("Boleto PDF"),
+        Capacidade.WEBHOOK: _("Webhook"),
+        Capacidade.PIX_COB: _("Immediate Pix charge"),
+        Capacidade.PIX_COBV: _("Pix charge with due date"),
+        Capacidade.EMISSAO_ASSINCRONA: _("Asynchronous registration"),
+        Capacidade.INSTRUCAO_ASSINCRONA: _("Asynchronous instructions"),
+        Capacidade.CNAB_REMESSA: _("CNAB remittance"),
+    }
+
+
+class PaymentProvider(models.Model):
+    _inherit = "payment.provider"
+
+    code = fields.Selection(
+        selection_add=[(BRBANK, "Brazilian bank (brbank)")],
+        ondelete={BRBANK: "set default"},
+    )
+    brbank_adapter = fields.Selection(
+        selection="_selection_brbank_adapter",
+        string="Bank Adapter",
+        help="Adapter of the brbank library that talks to the bank.",
+    )
+    brbank_pix_perfil = fields.Selection(
+        selection="_selection_brbank_pix_perfil",
+        string="Pix Profile",
+        help="Bank (PSP) of the Pix BACEN adapter.",
+    )
+
+    # Credentials: readable by system administrators only.
+    brbank_client_id = fields.Char(string="Bank Client ID", groups=SECRET_GROUP)
+    brbank_client_secret = fields.Char(string="Bank Client Secret", groups=SECRET_GROUP)
+    brbank_username = fields.Char(string="API Username", groups=SECRET_GROUP)
+    brbank_password = fields.Char(string="API Password", groups=SECRET_GROUP)
+    brbank_certificate = fields.Binary(
+        string="Certificate (PEM)",
+        attachment=False,
+        groups=SECRET_GROUP,
+        help="mTLS certificate. It only goes to a temporary file in memory "
+        "while the TLS context is built.",
+    )
+    brbank_private_key = fields.Binary(
+        string="Private Key (PEM)", attachment=False, groups=SECRET_GROUP
+    )
+    brbank_pix_key = fields.Char(string="Pix Key", groups=SECRET_GROUP)
+    brbank_extra_config = fields.Text(
+        string="Extra Settings",
+        groups=SECRET_GROUP,
+        help="JSON object with the bank specific settings (agreement, wallet, "
+        "client number...). Use 'Fill settings template' to get the keys.",
+    )
+    brbank_secret_config = fields.Text(
+        string="Extra Secrets",
+        groups=SECRET_GROUP,
+        help="JSON object with the bank specific secrets (developer key, API "
+        "key...).",
+    )
+    brbank_webhook_token = fields.Char(
+        string="Webhook Token",
+        groups=SECRET_GROUP,
+        copy=False,
+        default=lambda self: secrets.token_urlsafe(32),
+    )
+    brbank_webhook_url = fields.Char(
+        string="Webhook URL", compute="_compute_brbank_webhook_url", groups=SECRET_GROUP
+    )
+
+    # What the adapter declares, for the views (O11).
+    brbank_capabilities = fields.Char(
+        string="Bank Capabilities", compute="_compute_brbank_adapter_info"
+    )
+    brbank_supports_pdf = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_supports_webhook = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_supports_instruction = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_supports_write_off = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_sandbox_validated = fields.Boolean(
+        string="Validated in Sandbox", compute="_compute_brbank_adapter_info"
+    )
+    brbank_uses_client_id = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_uses_client_secret = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_uses_username = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_uses_password = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_uses_certificate = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_uses_pix_key = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_is_pix = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_settings_help = fields.Text(
+        string="Settings Keys", compute="_compute_brbank_adapter_info"
+    )
+
+    # === SELECTIONS === #
+
+    @api.model
+    def _selection_brbank_adapter(self):
+        """Adapters installed in the brbank library (entry points)."""
+        return [
+            (name, ADAPTER_LABELS.get(name, name))
+            for name in registro.listar_adapters()
+        ]
+
+    @api.model
+    def _selection_brbank_pix_perfil(self):
+        try:
+            from brbank.adapters.pix_bacen import PERFIS
+        except ImportError:  # pragma: no cover
+            return []
+        return [(name, PIX_PROFILE_LABELS.get(name, name)) for name in sorted(PERFIS)]
+
+    # === COMPUTE METHODS === #
+
+    def _brbank_adapter_class(self):
+        self.ensure_one()
+        if self.code != BRBANK or not self.brbank_adapter:
+            return None
+        try:
+            return registro.obter_classe(self.brbank_adapter)
+        except AdapterNaoEncontrado:
+            return None
+
+    @api.depends("code", "brbank_adapter", "brbank_pix_perfil")
+    def _compute_brbank_adapter_info(self):
+        labels = _capability_labels()
+        for provider in self:
+            adapter_class = provider._brbank_adapter_class()
+            capabilities = (
+                adapter_class.capacidades if adapter_class else Capacidade.NENHUMA
+            )
+            keys = {}
+            if adapter_class:
+                try:
+                    config_cls = brbank_config.config_class(adapter_class)
+                    keys = {k["name"]: k for k in brbank_config.describe(config_cls)}
+                except brbank_config.ConfigError:
+                    keys = {}
+            provider.brbank_capabilities = ", ".join(
+                label for flag, label in labels.items() if flag in capabilities
+            )
+            provider.brbank_supports_pdf = Capacidade.PDF in capabilities
+            provider.brbank_supports_webhook = Capacidade.WEBHOOK in capabilities
+            provider.brbank_supports_instruction = Capacidade.ALTERACAO in capabilities
+            provider.brbank_supports_write_off = Capacidade.BAIXA in capabilities
+            provider.brbank_sandbox_validated = provider._brbank_validated(
+                adapter_class
+            )
+            provider.brbank_uses_client_id = "client_id" in keys
+            provider.brbank_uses_client_secret = "client_secret" in keys
+            provider.brbank_uses_username = "usuario" in keys
+            provider.brbank_uses_password = "senha" in keys
+            provider.brbank_uses_certificate = "certificado_pem" in keys
+            provider.brbank_uses_pix_key = "chave_pix" in keys
+            provider.brbank_is_pix = "perfil" in keys
+            provider.brbank_settings_help = "\n".join(
+                "{name}: {kind}{required}{secret}".format(
+                    name=key["name"],
+                    kind=getattr(key["type"], "__name__", "json"),
+                    required=_(" (required)") if key["required"] else "",
+                    secret=_(" [secret]") if key["secret"] else "",
+                )
+                for key in keys.values()
+                if not key["generic"] and not key["callable"]
+            )
+
+    def _brbank_validated(self, adapter_class):
+        """Whether the library declares the adapter validated in a sandbox."""
+        self.ensure_one()
+        if adapter_class is None:
+            return False
+        if self.brbank_pix_perfil and self.brbank_adapter == "pix_bacen":
+            from brbank.adapters.pix_bacen import PERFIS
+
+            profile = PERFIS.get(self.brbank_pix_perfil)
+            return bool(profile and profile.validado_sandbox)
+        return bool(getattr(adapter_class, "validado_sandbox", False))
+
+    @api.depends("code", "brbank_webhook_token")
+    def _compute_brbank_webhook_url(self):
+        for provider in self:
+            if provider.code != BRBANK or not provider.id:
+                provider.brbank_webhook_url = False
+                continue
+            provider.brbank_webhook_url = "{}{}/{}/{}".format(
+                provider.get_base_url(),
+                WEBHOOK_ROUTE,
+                provider.id,
+                provider.brbank_webhook_token or "",
+            )
+
+    def _compute_feature_support_fields(self):
+        """Override of `payment`: a registered title is an `authorized`
+        transaction, so brbank providers declare manual capture (capture
+        queries the bank, void writes the title off)."""
+        res = super()._compute_feature_support_fields()
+        self.filtered(lambda p: p.code == BRBANK).update(
+            {"support_manual_capture": True}
+        )
+        return res
+
+    @api.depends("code")
+    def _compute_view_configuration_fields(self):
+        """Override of `payment`: brbank providers stay out of the checkout."""
+        res = super()._compute_view_configuration_fields()
+        self.filtered(lambda p: p.code == BRBANK).update(
+            {
+                "show_allow_tokenization": False,
+                "show_allow_express_checkout": False,
+                "show_payment_icon_ids": False,
+                "show_pre_msg": False,
+                "show_pending_msg": False,
+                "show_auth_msg": False,
+                "show_done_msg": False,
+                "show_cancel_msg": False,
+            }
+        )
+        return res
+
+    # === CONSTRAINTS === #
+
+    @api.constrains(
+        "code",
+        "state",
+        "brbank_adapter",
+        "brbank_pix_perfil",
+        "brbank_extra_config",
+        "brbank_secret_config",
+    )
+    def _check_brbank_configuration(self):
+        for provider in self.sudo():
+            if provider.code != BRBANK:
+                continue
+            provider._brbank_load_json("brbank_extra_config")
+            provider._brbank_load_json("brbank_secret_config")
+            if provider.state == "disabled":
+                continue
+            if not provider.brbank_adapter:
+                raise ValidationError(_("Choose the bank adapter of the provider."))
+            try:
+                provider._brbank_prepare_adapter()
+            except UserError as error:
+                raise ValidationError(error.args[0]) from error
+
+    def _brbank_load_json(self, field_name):
+        """Read a JSON settings field as a dict.
+
+        :raise ValidationError: If the text is not a JSON object. The message
+            names the field only, never its content.
+        """
+        self.ensure_one()
+        text = self.sudo()[field_name]
+        if not text or not text.strip():
+            return {}
+        try:
+            value = json.loads(text)
+        except ValueError:
+            value = None
+        if not isinstance(value, dict):
+            raise ValidationError(
+                _(
+                    "The field %s must hold a JSON object.",
+                    self._fields[field_name].string,
+                )
+            )
+        return value
+
+    # === BUSINESS METHODS: CHECKOUT === #
+
+    @api.model
+    def _get_compatible_providers(self, *args, **kwargs):
+        """Override of `payment`: brbank providers never show in the checkout.
+
+        They issue boletos and Pix charges from invoices; the online payment
+        flow (redirect, tokens) is not implemented for them (O9).
+        """
+        providers = super()._get_compatible_providers(*args, **kwargs)
+        return providers.filtered(lambda p: p.code != BRBANK)
+
+    def _get_supported_currencies(self):
+        supported_currencies = super()._get_supported_currencies()
+        if self.code == BRBANK:
+            supported_currencies = supported_currencies.filtered(
+                lambda c: c.name == "BRL"
+            )
+        return supported_currencies
+
+    # === BUSINESS METHODS: ADAPTER === #
+
+    def _brbank_prepare_adapter(self):
+        """Read the provider and build the adapter class and configuration.
+
+        Runs in the calling thread, with sudo: the secrets never leave the
+        configuration object handed to the library.
+
+        :return: The adapter class and its configuration.
+        :rtype: tuple
+        :raise UserError: If the configuration is incomplete. The message
+            names the missing keys, never their values.
+        """
+        self.ensure_one()
+        provider = self.sudo()
+        if provider.code != BRBANK or not provider.brbank_adapter:
+            raise UserError(_("This provider is not a brbank provider."))
+        try:
+            adapter_class = registro.obter_classe(provider.brbank_adapter)
+        except AdapterNaoEncontrado as error:
+            raise UserError(
+                _(
+                    "The bank adapter %s is not installed in the brbank library.",
+                    provider.brbank_adapter,
+                )
+            ) from error
+        generic = {
+            "conta": f"odoo-provider-{provider.id}",
+            "ambiente": "sandbox" if provider.state == "test" else "producao",
+            "perfil": provider.brbank_pix_perfil,
+        }
+        for field_name, key in GENERIC_FIELDS.items():
+            value = provider[field_name]
+            if value and provider._fields[field_name].type == "binary":
+                value = base64.b64decode(value)
+            generic[key] = value
+        try:
+            config_cls = brbank_config.config_class(adapter_class)
+            config = brbank_config.build(
+                config_cls,
+                generic,
+                provider._brbank_load_json("brbank_extra_config"),
+                provider._brbank_load_json("brbank_secret_config"),
+            )
+        except brbank_config.ConfigError as error:
+            parts = []
+            if error.missing:
+                parts.append(_("missing: %s", ", ".join(error.missing)))
+            if error.unknown:
+                parts.append(_("unknown or invalid: %s", ", ".join(error.unknown)))
+            if error.misplaced:
+                parts.append(
+                    _(
+                        "secrets typed in Extra Settings, move them to Extra "
+                        "Secrets: %s",
+                        ", ".join(error.misplaced),
+                    )
+                )
+            raise UserError(
+                _(
+                    "Incomplete configuration of the provider %(name)s (%(details)s).",
+                    name=provider.name,
+                    details="; ".join(parts),
+                )
+            ) from error
+        except ErroBrbank as error:
+            raise UserError(
+                _(
+                    "The bank refused the configuration of the provider "
+                    "%(name)s: %(error)s",
+                    name=provider.name,
+                    error=error,
+                )
+            ) from error
+        return adapter_class, config
+
+    def _brbank_http_transport(self):
+        """HTTP transport given to the adapter; None uses the real network.
+
+        Tests pass an `httpx.MockTransport` in the context key
+        `brbank_http_transport` (or override this method): no test ever
+        reaches a bank. Anything else in that key is ignored.
+        """
+        transport = self.env.context.get("brbank_http_transport")
+        if isinstance(transport, httpx.AsyncBaseTransport):
+            return transport
+        return None
+
+    def _brbank_run(self, operation):
+        """Call the bank through the adapter of the provider.
+
+        The single bridge between the synchronous Odoo and the asynchronous
+        library: the adapter is built, used and closed inside a dedicated
+        event loop (see `utils.runner`).
+
+        :param operation: Callable receiving the adapter and returning a
+            value or an awaitable (e.g. ``lambda a: a.consultar_titulo(x)``).
+        :return: The result of the operation.
+        :raise brbank.erros.ErroBrbank: The canonical errors of the library,
+            for the caller to handle (`Duplicado`, `Validacao`,
+            `Indisponivel`).
+        """
+        self.ensure_one()
+        if self.state == "disabled":
+            raise UserError(_("The payment provider %s is disabled.", self.name))
+        adapter_class, config = self._brbank_prepare_adapter()
+        transport = self._brbank_http_transport()
+
+        async def call():
+            kwargs = {}
+            if transport is not None:
+                kwargs["client"] = httpx.AsyncClient(transport=transport)
+            adapter = adapter_class(config, **kwargs)
+            try:
+                result = operation(adapter)
+                if inspect.isawaitable(result):
+                    result = await result
+                return result
+            finally:
+                await adapter.aclose()
+
+        return run_in_dedicated_loop(call)
+
+    def _brbank_parse_webhook(self, body, headers):
+        """Turn a webhook call into canonical events, without network."""
+        self.ensure_one()
+        return self._brbank_run(lambda adapter: adapter.parse_webhook(body, headers))
+
+    # === ACTIONS === #
+
+    def action_brbank_rotate_webhook_token(self):
+        """Issue a new webhook token: the old URL stops working at once."""
+        self.ensure_one()
+        self.check_access_rights("write")
+        self.sudo().brbank_webhook_token = secrets.token_urlsafe(32)
+
+    def action_brbank_fill_settings_template(self):
+        """Add to the JSON fields the keys the adapter needs, keeping values."""
+        self.ensure_one()
+        provider = self.sudo()
+        adapter_class = provider._brbank_adapter_class()
+        if not adapter_class:
+            raise UserError(_("Choose the bank adapter first."))
+        public = provider._brbank_load_json("brbank_extra_config")
+        secret = provider._brbank_load_json("brbank_secret_config")
+        config_cls = brbank_config.config_class(adapter_class)
+        for key in brbank_config.describe(config_cls):
+            if key["generic"] or key["callable"]:
+                continue
+            target = secret if key["secret"] else public
+            if key["name"] not in public and key["name"] not in secret:
+                target[key["name"]] = brbank_config.placeholder(key)
+        provider.write(
+            {
+                "brbank_extra_config": json.dumps(public, indent=2, sort_keys=True),
+                "brbank_secret_config": json.dumps(secret, indent=2, sort_keys=True),
+            }
+        )
