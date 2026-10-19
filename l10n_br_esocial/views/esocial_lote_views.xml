@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_lote_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.lote.tree</field>
+        <field name="model">l10n_br.esocial.lote</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-danger="state == 'error'"
+                decoration-success="state == 'done'"
+                decoration-info="state in ('sent', 'processing')"
+            >
+                <field name="name" />
+                <field name="protocolo" />
+                <field name="evento_count" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'draft'"
+                    decoration-warning="state in ('sent', 'processing')"
+                    decoration-success="state == 'done'"
+                    decoration-danger="state == 'error'"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="create_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_lote_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.lote.form</field>
+        <field name="model">l10n_br.esocial.lote</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_add_validated_events"
+                        type="object"
+                        string="Adicionar Eventos Validados"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_transmitir"
+                        type="object"
+                        string="Transmitir"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        confirm="Deseja transmitir este lote ao eSocial?"
+                    />
+                    <button
+                        name="action_consultar"
+                        type="object"
+                        string="Consultar Resultado"
+                        attrs="{'invisible': [('state', 'not in', ('sent', 'processing'))]}"
+                    />
+                    <button
+                        name="action_reset_draft"
+                        type="object"
+                        string="Voltar a Rascunho"
+                        attrs="{'invisible': [('state', 'not in', ('sent', 'error'))]}"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,sent,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="protocolo" />
+                            <field name="evento_count" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Eventos" name="eventos">
+                            <field name="evento_ids">
+                                <tree>
+                                    <field name="tipo" />
+                                    <field name="operacao" />
+                                    <field name="per_apur" />
+                                    <field name="state" widget="badge" />
+                                    <field name="nr_recibo" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_lote" model="ir.actions.act_window">
+        <field name="name">Lotes de Transmissão</field>
+        <field name="res_model">l10n_br.esocial.lote</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

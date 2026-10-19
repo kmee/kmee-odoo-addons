@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Menu raiz eSocial (separado da Folha) -->
+    <menuitem
+        id="menu_esocial_root"
+        name="eSocial"
+        sequence="50"
+        web_icon="l10n_br_esocial,static/description/icon.png"
+    />
+
+    <!-- Eventos -->
+    <menuitem
+        id="menu_esocial_eventos"
+        parent="menu_esocial_root"
+        name="Eventos"
+        sequence="10"
+        action="action_esocial_evento"
+    />
+
+    <!-- Lotes -->
+    <menuitem
+        id="menu_esocial_lotes"
+        parent="menu_esocial_root"
+        name="Lotes de Transmissão"
+        sequence="20"
+        action="action_esocial_lote"
+    />
+
+    <!-- ============================================================ -->
+    <!-- Configuração -->
+    <!-- ============================================================ -->
+    <menuitem
+        id="menu_esocial_config"
+        parent="menu_esocial_root"
+        name="Configuração"
+        sequence="90"
+    />
+
+    <!-- Tabelas de Referência (sub-menu de Configuração) -->
+    <menuitem
+        id="menu_esocial_tabelas"
+        parent="menu_esocial_config"
+        name="Tabelas de Referência"
+        sequence="10"
+    />
+
+    <!-- Sub-categorias de tabelas -->
+    <menuitem
+        id="menu_esocial_tab_cadastro"
+        parent="menu_esocial_tabelas"
+        name="Cadastro"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_esocial_tab_contribuicao"
+        parent="menu_esocial_tabelas"
+        name="Contribuição e Tributos"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_esocial_tab_trabalho"
+        parent="menu_esocial_tabelas"
+        name="Trabalho e Benefícios"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_esocial_tab_acidente"
+        parent="menu_esocial_tabelas"
+        name="Acidente de Trabalho"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_esocial_tab_saude"
+        parent="menu_esocial_tabelas"
+        name="Saúde e Segurança"
+        sequence="50"
+    />
+    <menuitem
+        id="menu_esocial_tab_rescisao"
+        parent="menu_esocial_tabelas"
+        name="Rescisão e Cessação"
+        sequence="60"
+    />
+    <menuitem
+        id="menu_esocial_tab_totalizador"
+        parent="menu_esocial_tabelas"
+        name="Totalizadores"
+        sequence="70"
+    />
+    <menuitem
+        id="menu_esocial_tab_referencia"
+        parent="menu_esocial_tabelas"
+        name="Referência e Compatibilidade"
+        sequence="80"
+    />
+
+    <!-- ===== Cadastro ===== -->
+    <menuitem
+        id="menu_esocial_tab_categoria_trabalhador"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 1 - Categoria Trabalhador"
+        sequence="1"
+        action="action_esocial_categoria_trabalhador"
+    />
+    <menuitem
+        id="menu_esocial_tab_financiamento_aposent"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 2 - Financ. Aposentadoria"
+        sequence="2"
+        action="action_esocial_financiamento_aposent"
+    />
+    <menuitem
+        id="menu_esocial_tab_natureza_rubrica"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 3 - Natureza Rubrica"
+        sequence="3"
+        action="action_esocial_natureza_rubrica"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_inscricao"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 5 - Tipo Inscrição"
+        sequence="5"
+        action="action_esocial_tipo_inscricao"
+    />
+    <menuitem
+        id="menu_esocial_tab_pais"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 6 - Países"
+        sequence="6"
+        action="action_esocial_pais"
+    />
+    <menuitem
+        id="menu_esocial_tab_classificacao_tributaria"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 8 - Classificação Tributária"
+        sequence="8"
+        action="action_esocial_classificacao_tributaria"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_arquivo"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 9 - Tipo Arquivo/Evento"
+        sequence="9"
+        action="action_esocial_tipo_arquivo"
+    />
+    <menuitem
+        id="menu_esocial_tab_lotacao_tributaria"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 10 - Lotação Tributária"
+        sequence="10"
+        action="action_esocial_lotacao_tributaria"
+    />
+    <menuitem
+        id="menu_esocial_tab_motivo_afastamento"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 18 - Motivo Afastamento"
+        sequence="18"
+        action="action_esocial_motivo_afastamento"
+    />
+    <menuitem
+        id="menu_esocial_tab_motivo_desligamento"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 19 - Motivo Desligamento"
+        sequence="19"
+        action="action_esocial_motivo_desligamento"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_logradouro"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 20 - Tipo Logradouro"
+        sequence="20"
+        action="action_esocial_tipo_logradouro"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_dependente"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 25 - Tipo Dependente"
+        sequence="25"
+        action="action_esocial_tipo_dependente"
+    />
+    <menuitem
+        id="menu_esocial_tab_horario"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 52 - Horários"
+        sequence="52"
+        action="action_esocial_horario"
+    />
+    <menuitem
+        id="menu_esocial_tab_feriado"
+        parent="menu_esocial_tab_cadastro"
+        name="Tab. 84 - Feriados"
+        sequence="84"
+        action="action_esocial_feriado"
+    />
+
+    <!-- ===== Contribuição e Tributos ===== -->
+    <menuitem
+        id="menu_esocial_tab_fpas_terceiros"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 4 - FPAS/Terceiros"
+        sequence="4"
+        action="action_esocial_fpas_terceiros"
+    />
+    <menuitem
+        id="menu_esocial_tab_incidencia_irrf"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 21 - Incidência IRRF"
+        sequence="21"
+        action="action_esocial_incidencia_irrf"
+    />
+    <menuitem
+        id="menu_esocial_tab_compat_fpas"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 24 - Compat. FPAS"
+        sequence="24"
+        action="action_esocial_compat_fpas"
+    />
+    <menuitem
+        id="menu_esocial_tab_trib_exterior"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 30 - Trib. Exterior"
+        sequence="30"
+        action="action_esocial_trib_exterior"
+    />
+    <menuitem
+        id="menu_esocial_tab_codigo_terceiro"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 51 - Código Terceiro"
+        sequence="51"
+        action="action_esocial_codigo_terceiro"
+    />
+    <menuitem
+        id="menu_esocial_tab_faixa_inss"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 57 - Faixas INSS"
+        sequence="57"
+        action="action_esocial_faixa_inss"
+    />
+    <menuitem
+        id="menu_esocial_tab_faixa_irrf"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 58 - Faixas IRRF"
+        sequence="58"
+        action="action_esocial_faixa_irrf"
+    />
+    <menuitem
+        id="menu_esocial_tab_faixa_sal_familia"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 65 - Salário Família"
+        sequence="65"
+        action="action_esocial_faixa_sal_familia"
+    />
+    <menuitem
+        id="menu_esocial_tab_descricao_fpas"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 85 - Descrição FPAS"
+        sequence="85"
+        action="action_esocial_descricao_fpas"
+    />
+    <menuitem
+        id="menu_esocial_tab_teto_verde_amarela"
+        parent="menu_esocial_tab_contribuicao"
+        name="Tab. 86 - Teto Verde Amarela"
+        sequence="86"
+        action="action_esocial_teto_verde_amarela"
+    />
+
+    <!-- ===== Trabalho e Benefícios ===== -->
+    <menuitem
+        id="menu_esocial_tab_tipo_beneficio"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 35 - Tipo Benefício"
+        sequence="35"
+        action="action_esocial_tipo_beneficio"
+    />
+    <menuitem
+        id="menu_esocial_tab_inst_emprestimo"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 37 - Inst. Empréstimo"
+        sequence="37"
+        action="action_esocial_inst_emprestimo"
+    />
+    <menuitem
+        id="menu_esocial_tab_cbo_oca"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 50 - CBO (OCA)"
+        sequence="50"
+        action="action_esocial_cbo_oca"
+    />
+    <menuitem
+        id="menu_esocial_tab_natureza_juridica_oca"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 53 - Nat. Jurídica (OCA)"
+        sequence="53"
+        action="action_esocial_natureza_juridica_oca"
+    />
+    <menuitem
+        id="menu_esocial_tab_rubrica_padrao"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 54 - Rubrica Padrão"
+        sequence="54"
+        action="action_esocial_rubrica_padrao"
+    />
+    <menuitem
+        id="menu_esocial_tab_cnae_oca"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 56 - CNAE (OCA)"
+        sequence="56"
+        action="action_esocial_cnae_oca"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_decisao"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 59 - Tipo Decisão"
+        sequence="59"
+        action="action_esocial_tipo_decisao"
+    />
+    <menuitem
+        id="menu_esocial_tab_cargo"
+        parent="menu_esocial_tab_trabalho"
+        name="Tab. 61 - Cargos"
+        sequence="61"
+        action="action_esocial_cargo"
+    />
+
+    <!-- ===== Acidente de Trabalho ===== -->
+    <menuitem
+        id="menu_esocial_tab_parte_corpo"
+        parent="menu_esocial_tab_acidente"
+        name="Tab. 13 - Parte do Corpo"
+        sequence="13"
+        action="action_esocial_parte_corpo"
+    />
+    <menuitem
+        id="menu_esocial_tab_agente_causador"
+        parent="menu_esocial_tab_acidente"
+        name="Tab. 14 - Agente Causador"
+        sequence="14"
+        action="action_esocial_agente_causador"
+    />
+    <menuitem
+        id="menu_esocial_tab_situacao_geradora"
+        parent="menu_esocial_tab_acidente"
+        name="Tab. 15 - Situação Geradora"
+        sequence="15"
+        action="action_esocial_situacao_geradora"
+    />
+    <menuitem
+        id="menu_esocial_tab_natureza_lesao"
+        parent="menu_esocial_tab_acidente"
+        name="Tab. 17 - Natureza Lesão"
+        sequence="17"
+        action="action_esocial_natureza_lesao"
+    />
+
+    <!-- ===== Saúde e Segurança ===== -->
+    <menuitem
+        id="menu_esocial_tab_agente_nocivo"
+        parent="menu_esocial_tab_saude"
+        name="Tab. 22 - Agente Nocivo"
+        sequence="22"
+        action="action_esocial_agente_nocivo"
+    />
+    <menuitem
+        id="menu_esocial_tab_aposentadoria_especial"
+        parent="menu_esocial_tab_saude"
+        name="Tab. 23 - Aposentadoria Especial"
+        sequence="23"
+        action="action_esocial_aposentadoria_especial"
+    />
+    <menuitem
+        id="menu_esocial_tab_procedimento_diagnostico"
+        parent="menu_esocial_tab_saude"
+        name="Tab. 27 - Proc. Diagnósticos"
+        sequence="27"
+        action="action_esocial_procedimento_diagnostico"
+    />
+    <menuitem
+        id="menu_esocial_tab_treinamento"
+        parent="menu_esocial_tab_saude"
+        name="Tab. 29 - Treinamentos"
+        sequence="29"
+        action="action_esocial_treinamento"
+    />
+    <menuitem
+        id="menu_esocial_tab_cid"
+        parent="menu_esocial_tab_saude"
+        name="Tab. 60 - CID"
+        sequence="60"
+        action="action_esocial_cid"
+    />
+
+    <!-- ===== Rescisão e Cessação ===== -->
+    <menuitem
+        id="menu_esocial_tab_receita_reclamatoria"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 32 - Receita Reclamatória"
+        sequence="32"
+        action="action_esocial_receita_reclamatoria"
+    />
+    <menuitem
+        id="menu_esocial_tab_motivo_cessacao"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 34 - Motivo Cessação"
+        sequence="34"
+        action="action_esocial_motivo_cessacao"
+    />
+    <menuitem
+        id="menu_esocial_tab_causa_afast_mte"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 67 - Causa Afast. MTE"
+        sequence="67"
+        action="action_esocial_causa_afast_mte"
+    />
+    <menuitem
+        id="menu_esocial_tab_rubrica_rescisoria"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 68 - Rubrica Rescisória"
+        sequence="68"
+        action="action_esocial_rubrica_rescisoria"
+    />
+    <menuitem
+        id="menu_esocial_tab_info_rescisao"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 69 - Info Rescisão"
+        sequence="69"
+        action="action_esocial_info_rescisao"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_admissao_oca"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 70 - Tipo Admissão (OCA)"
+        sequence="70"
+        action="action_esocial_tipo_admissao_oca"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_cat"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 71 - Tipo CAT"
+        sequence="71"
+        action="action_esocial_tipo_cat"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_aso"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 72 - Tipo ASO"
+        sequence="72"
+        action="action_esocial_tipo_aso"
+    />
+    <menuitem
+        id="menu_esocial_tab_tipo_aviso_previo"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 73 - Tipo Aviso Prévio"
+        sequence="73"
+        action="action_esocial_tipo_aviso_previo"
+    />
+    <menuitem
+        id="menu_esocial_tab_motivo_cancel_aviso"
+        parent="menu_esocial_tab_rescisao"
+        name="Tab. 74 - Cancel. Aviso Prévio"
+        sequence="74"
+        action="action_esocial_motivo_cancel_aviso"
+    />
+
+    <!-- ===== Totalizadores ===== -->
+    <menuitem
+        id="menu_esocial_tab_receita_totalizador"
+        parent="menu_esocial_tab_totalizador"
+        name="Tab. 78 - Receita Totalizador"
+        sequence="78"
+        action="action_esocial_receita_totalizador"
+    />
+    <menuitem
+        id="menu_esocial_tab_valor_contrib_prev"
+        parent="menu_esocial_tab_totalizador"
+        name="Tab. 79 - Valor Contrib. Prev."
+        sequence="79"
+        action="action_esocial_valor_contrib_prev"
+    />
+    <menuitem
+        id="menu_esocial_tab_valor_irrf_totalizador"
+        parent="menu_esocial_tab_totalizador"
+        name="Tab. 80 - Valor IRRF Totaliz."
+        sequence="80"
+        action="action_esocial_valor_irrf_totalizador"
+    />
+    <menuitem
+        id="menu_esocial_tab_base_fgts"
+        parent="menu_esocial_tab_totalizador"
+        name="Tab. 82 - Base Cálc. FGTS"
+        sequence="82"
+        action="action_esocial_base_fgts"
+    />
+    <menuitem
+        id="menu_esocial_tab_deposito_fgts"
+        parent="menu_esocial_tab_totalizador"
+        name="Tab. 83 - Depósito FGTS"
+        sequence="83"
+        action="action_esocial_deposito_fgts"
+    />
+
+    <!-- ===== Referência e Compatibilidade ===== -->
+    <menuitem
+        id="menu_esocial_tab_compat_categ_lotacao"
+        parent="menu_esocial_tab_referencia"
+        name="Tab. 11 - Compat. Categ/Lotação"
+        sequence="11"
+        action="action_esocial_compat_categ_lotacao"
+    />
+    <menuitem
+        id="menu_esocial_tab_lotacao_ref"
+        parent="menu_esocial_tab_referencia"
+        name="Tab. 64 - Lotação Referência"
+        sequence="64"
+        action="action_esocial_lotacao_ref"
+    />
+    <menuitem
+        id="menu_esocial_tab_processo_fap"
+        parent="menu_esocial_tab_referencia"
+        name="Tab. 77 - Processo FAP"
+        sequence="77"
+        action="action_esocial_processo_fap"
+    />
+    <menuitem
+        id="menu_esocial_tab_cnae_mei"
+        parent="menu_esocial_tab_referencia"
+        name="Tab. 81 - CNAE MEI"
+        sequence="81"
+        action="action_esocial_cnae_mei"
+    />
+
+</odoo>

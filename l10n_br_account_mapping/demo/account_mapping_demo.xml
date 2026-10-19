@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="plan_escritorio_demo" model="l10n_br_account_mapping.plan">
+        <field name="name">Plano do Escritorio (demo)</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+    <record id="mapping_receita_demo" model="l10n_br_account_mapping.account">
+        <field name="plan_id" ref="plan_escritorio_demo" />
+        <field name="code">31101</field>
+        <field name="name">Receita de vendas</field>
+    </record>
+
+    <record id="mapping_despesa_demo" model="l10n_br_account_mapping.account">
+        <field name="plan_id" ref="plan_escritorio_demo" />
+        <field name="code">41101</field>
+        <field name="name">Despesas operacionais</field>
+    </record>
+
+</odoo>
