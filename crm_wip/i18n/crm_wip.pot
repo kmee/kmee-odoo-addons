@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* crm_wip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_wip
+#: model:ir.model,name:crm_wip.model_crm_stage
+msgid "CRM Stages"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__cycle_time
+msgid "Cycle Time"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__cycle_time_float
+msgid "Cycle Time Float"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__flow_efficience
+msgid "Flow Efficience"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__lead_time
+msgid "Lead Time"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__lead_time_float
+msgid "Lead Time Float"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model,name:crm_wip.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__logged_time
+msgid "Logged Time"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__logged_time_float
+msgid "Logged Time Float"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__reaction_time
+msgid "Reaction Time"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__reaction_time_float
+msgid "Reaction Time Float"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__state
+#: model:ir.model.fields,field_description:crm_wip.field_crm_stage__state
+msgid "State"
+msgstr ""
+
+#. module: crm_wip
+#: model_terms:ir.ui.view,arch_db:crm_wip.crm_lead_wip_form
+msgid "WIP"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__wip_ids
+msgid "Wip"
+msgstr ""
