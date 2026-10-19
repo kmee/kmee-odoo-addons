@@ -17,9 +17,12 @@ class TestInstallments(TransactionCase):
         cls.other_provider = cls.env["payment.provider"].create(
             {"name": "Other Provider", "code": "none"}
         )
+        cls.payment_method = cls.env["payment.method"].create(
+            {"name": "Installment Method", "code": "installment_test"}
+        )
 
     def _term(self, n, rate=0.0, kind="simple", provider=None, installment=True):
-        """Create a term with ``n`` installment lines (n-1 percent + balance)."""
+        """Create a term with ``n`` installment lines (n-1 percent + the remainder)."""
         lines = []
         for i in range(n - 1):
             lines.append(
@@ -29,11 +32,14 @@ class TestInstallments(TransactionCase):
                     {
                         "value": "percent",
                         "value_amount": round(100.0 / n, 2),
-                        "days": 30 * (i + 1),
+                        "nb_days": 30 * (i + 1),
                     },
                 )
             )
-        lines.append((0, 0, {"value": "balance", "days": 30 * n}))
+        last = round(100.0 - round(100.0 / n, 2) * (n - 1), 2)
+        lines.append(
+            (0, 0, {"value": "percent", "value_amount": last, "nb_days": 30 * n})
+        )
         return self.Term.create(
             {
                 "name": "%sx %s %s" % (n, kind, rate),
@@ -136,6 +142,7 @@ class TestInstallments(TransactionCase):
         return self.env["payment.transaction"].create(
             {
                 "provider_id": provider.id,
+                "payment_method_id": self.payment_method.id,
                 "reference": "TX-INST-%s" % provider.id,
                 "amount": 300.0,
                 "currency_id": self.env.company.currency_id.id,
