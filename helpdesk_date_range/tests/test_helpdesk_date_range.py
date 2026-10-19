@@ -43,10 +43,13 @@ class TestHelpdeskDateRange(TransactionCase):
         )
         cls.type_old.active = False
         cls.Ticket = cls.env["helpdesk.ticket"]
+        # a team keeps the tests valid when stage tracking modules are installed
+        cls.team = cls.env["helpdesk.ticket.team"].create({"name": "Date range team"})
         cls.ticket_jan = cls.Ticket.create(
             {
                 "name": "Jan ticket",
                 "description": "d",
+                "team_id": cls.team.id,
                 "date_range_id": cls.range_jan.id,
             }
         )
@@ -54,10 +57,13 @@ class TestHelpdeskDateRange(TransactionCase):
             {
                 "name": "Feb ticket",
                 "description": "d",
+                "team_id": cls.team.id,
                 "date_range_id": cls.range_feb.id,
             }
         )
-        cls.ticket_none = cls.Ticket.create({"name": "No period", "description": "d"})
+        cls.ticket_none = cls.Ticket.create(
+            {"name": "No period", "description": "d", "team_id": cls.team.id}
+        )
 
     def test_ticket_stores_reference_period(self):
         """Given a ticket with no period
