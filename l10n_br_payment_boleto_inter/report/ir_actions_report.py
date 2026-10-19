@@ -30,11 +30,11 @@ class IrActionsReport(models.Model):
         records = self.env[model].browse(res_ids)
         return self._render_boleto_inter(records)
 
-    def _render_qweb_html(self, report_ref, res_ids=None, data=None):
+    def _render_qweb_html(self, report_ref, docids, data=None):
         """O boleto só existe em PDF."""
         if report_ref in BOLETO_REPORTS:
             raise UserError(_("O boleto só pode ser impresso em PDF."))
-        return super()._render_qweb_html(report_ref, res_ids=res_ids, data=data)
+        return super()._render_qweb_html(report_ref, docids, data=data)
 
     def _render_boleto_inter(self, records):
         """Junta os boletos das transações dos registros.
