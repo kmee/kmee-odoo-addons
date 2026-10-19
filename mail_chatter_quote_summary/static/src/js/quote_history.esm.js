@@ -1,20 +1,23 @@
 /** @odoo-module **/
 
-import core from "web.core";
-import rpc from "web.rpc";
+import {_t} from "@web/core/l10n/translation";
+import {jsonrpc} from "@web/core/network/rpc_service";
 
-const _t = core._t;
 const CHUNK_SIZE = 25;
 
 async function _loadHistory(messageId) {
     let offset = 0;
     let html = "";
     while (offset !== false) {
-        const result = await rpc.query({
-            model: "mail.message",
-            method: "load_quote_history_chunk",
-            args: [[messageId], offset, CHUNK_SIZE],
-        });
+        const result = await jsonrpc(
+            "/web/dataset/call_kw/mail.message/load_quote_history_chunk",
+            {
+                model: "mail.message",
+                method: "load_quote_history_chunk",
+                args: [[messageId], offset, CHUNK_SIZE],
+                kwargs: {},
+            }
+        );
         html += result.html || "";
         offset = result.next_offset;
     }
