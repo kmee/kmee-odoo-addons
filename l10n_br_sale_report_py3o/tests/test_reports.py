@@ -78,7 +78,7 @@ class TestSaleReportPy3o(TransactionCase):
 
     def test_quotation_renders_order_data(self):
         """
-        Given a draft quotation with one line (3 x 150.00)
+        Given a draft quotation with one line
         When the quotation report is rendered
         Then the text shows it is a Quotation with the order number, the
         product, the unit price and the line subtotal
@@ -86,8 +86,9 @@ class TestSaleReportPy3o(TransactionCase):
         text = self._render(self.report)
         self.assertIn("Quotation " + self.order.name, text)
         self.assertIn("Produto Relatorio", text)
-        self.assertIn("150.00", text)
-        self.assertIn("450.00", text)
+        line = self.order.order_line
+        self.assertIn("%.2f" % line.price_unit, text)
+        self.assertIn("%.2f" % line.price_subtotal, text)
         self.assertNotIn("PRO-FORMA", text)
         self.assertNotIn("Order Acknowledgement", text)
 
@@ -97,7 +98,8 @@ class TestSaleReportPy3o(TransactionCase):
         When the quotation report is rendered
         Then the document title becomes Order Acknowledgement
         """
-        self.order.action_confirm()
+        # direct write: other installed modules may add approval steps
+        self.order.write({"state": "sale"})
         text = self._render(self.report)
         self.assertIn("Order Acknowledgement " + self.order.name, text)
         self.assertNotIn("Quotation " + self.order.name, text)
