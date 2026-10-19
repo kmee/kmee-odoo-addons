@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_slide_slide_form" model="ir.ui.view">
+        <field name="name">slide.slide.form.inherit.sharepoint</field>
+        <field name="model">slide.slide</field>
+        <field name="inherit_id" ref="website_slides.view_slide_slide_form" />
+        <field name="arch" type="xml">
+            <field name="document_google_url" position="after">
+                <field
+                    name="document_sharepoint_url"
+                    placeholder="e.g &quot;https://contoso.sharepoint.com/:b:/s/team/...&quot;"
+                    widget="url"
+                    invisible="(source_type != 'sharepoint' or slide_category != 'document')"
+                    readonly="(source_type != 'sharepoint' or slide_category != 'document')"
+                />
+            </field>
+
+            <field name="image_google_url" position="after">
+                <field
+                    name="image_sharepoint_url"
+                    placeholder="e.g &quot;https://contoso.sharepoint.com/:i:/s/team/...&quot;"
+                    widget="url"
+                    invisible="(source_type != 'sharepoint' or slide_category != 'infographic')"
+                    readonly="(source_type != 'sharepoint' or slide_category != 'infographic')"
+                />
+                <field name="sharepoint_drive_id" invisible="1" />
+                <field
+                    name="sharepoint_item_id"
+                    groups="base.group_no_one"
+                    invisible="not sharepoint_item_id"
+                />
+                <field name="sharepoint_mimetype" invisible="1" />
+            </field>
+
+            <!-- The native attrs assume "not external means local file", which is
+                 no longer true once SharePoint is an option. -->
+            <field name="document_binary_content" position="attributes">
+                <attribute
+                    name="invisible"
+                >(source_type != 'local_file' or slide_category != 'document')</attribute>
+                <attribute
+                    name="readonly"
+                >(source_type != 'local_file' or slide_category != 'document')</attribute>
+            </field>
+
+            <field name="image_binary_content" position="attributes">
+                <attribute
+                    name="invisible"
+                >(source_type != 'local_file' or slide_category != 'infographic')</attribute>
+                <attribute
+                    name="readonly"
+                >(source_type != 'local_file' or slide_category != 'infographic')</attribute>
+            </field>
+
+            <field name="video_url" position="attributes">
+                <attribute
+                    name="placeholder"
+                >e.g "www.youtube.com/watch?v=ebBez6bcSEc" or "contoso.sharepoint.com/:v:/s/team/..."</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
