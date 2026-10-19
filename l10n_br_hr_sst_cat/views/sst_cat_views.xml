@@ -31,13 +31,13 @@
                         type="object"
                         string="Emitir"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_cancelar"
                         type="object"
                         string="Cancelar"
-                        attrs="{'invisible': [('state', '=', 'cancelled')]}"
+                        invisible="state == 'cancelled'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -46,7 +46,7 @@
                         name="web_ribbon"
                         title="Fora do prazo"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('prazo_situacao', '!=', 'atrasada')]}"
+                        invisible="prazo_situacao != 'atrasada'"
                     />
                     <div class="oe_title">
                         <h1><field name="name" readonly="1" /></h1>
@@ -94,7 +94,7 @@
                 />
                 <filter
                     name="filter_pendente"
-                    string="Pendentes de Emissão"
+                    string="Pendentes de Emiss&#227;o"
                     domain="[('state', '=', 'draft')]"
                 />
                 <group expand="0" string="Agrupar por">
@@ -105,7 +105,7 @@
                     />
                     <filter
                         name="group_state"
-                        string="Situação"
+                        string="Situa&#231;&#227;o"
                         context="{'group_by': 'state'}"
                     />
                 </group>

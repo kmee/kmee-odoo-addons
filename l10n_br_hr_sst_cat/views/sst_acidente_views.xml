@@ -30,31 +30,31 @@
                         type="object"
                         string="Registrar e Abrir CAT"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_criar_cat_reabertura"
                         type="object"
                         string="CAT de Reabertura"
-                        attrs="{'invisible': [('state', 'in', ('draft', 'cancelled'))]}"
+                        invisible="state in ('draft', 'cancelled')"
                     />
                     <button
                         name="action_criar_cat_obito"
                         type="object"
-                        string="CAT de Óbito"
-                        attrs="{'invisible': ['|', ('state', 'in', ('draft', 'cancelled')), ('houve_obito', '=', False)]}"
+                        string="CAT de &#211;bito"
+                        invisible="(state in ('draft', 'cancelled') or not houve_obito)"
                     />
                     <button
                         name="action_gerar_afastamento"
                         type="object"
                         string="Gerar Afastamento (S-2230)"
-                        attrs="{'invisible': ['|', ('houve_afastamento', '=', False), ('afastamento_id', '!=', False)]}"
+                        invisible="(not houve_afastamento or afastamento_id)"
                     />
                     <button
                         name="action_cancelar"
                         type="object"
                         string="Cancelar"
-                        attrs="{'invisible': [('state', '=', 'cancelled')]}"
+                        invisible="state == 'cancelled'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -82,13 +82,14 @@
                             <field name="situacao_geradora_id" />
                             <field name="iniciat_cat" />
                         </group>
-                        <group string="Consequências">
+                        <group string="Consequ&#234;ncias">
                             <field name="houve_afastamento" />
                             <field name="ultimo_dia_trabalhado" />
                             <field name="houve_obito" />
                             <field
                                 name="date_obito"
-                                attrs="{'invisible': [('houve_obito', '=', False)], 'required': [('houve_obito', '=', True)]}"
+                                invisible="not houve_obito"
+                                required="houve_obito"
                             />
                             <field name="comunicacao_policia" />
                             <field name="afastamento_id" readonly="1" />
@@ -116,12 +117,14 @@
                                     <field name="country_id" />
                                 </group>
                             </group>
-                            <group string="Inscrição do Local (quando de terceiros)">
+                            <group
+                                string="Inscri&#231;&#227;o do Local (quando de terceiros)"
+                            >
                                 <field name="tp_insc_local" />
                                 <field name="nr_insc_local" />
                             </group>
                         </page>
-                        <page string="Lesão" name="lesao">
+                        <page string="Les&#227;o" name="lesao">
                             <group>
                                 <group>
                                     <field name="parte_corpo_id" />
@@ -134,7 +137,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Atestado Médico" name="atestado">
+                        <page string="Atestado M&#233;dico" name="atestado">
                             <group>
                                 <group>
                                     <field name="date_atendimento" />
@@ -156,7 +159,7 @@
                                 <field name="observacao_atestado" />
                             </group>
                         </page>
-                        <page string="Observações" name="observacoes">
+                        <page string="Observa&#231;&#245;es" name="observacoes">
                             <group>
                                 <field name="testemunhas" />
                                 <field name="observacao" />
