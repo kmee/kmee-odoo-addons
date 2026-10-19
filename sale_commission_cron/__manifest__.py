@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["commission"],
+    "depends": ["account_commission"],
     "data": [
         "data/cron_generate_commissions.xml",
     ],

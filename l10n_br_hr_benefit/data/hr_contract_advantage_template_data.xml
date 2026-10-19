@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Templates de benefícios brasileiros -->
+
+    <record id="advantage_template_vt" model="hr.contract.advantage.template">
+        <field name="name">Vale-Transporte</field>
+        <field name="code">VT</field>
+        <field name="default_value">0</field>
+        <field name="lower_bound">0</field>
+        <field name="upper_bound">99999</field>
+    </record>
+
+    <record id="advantage_template_vr" model="hr.contract.advantage.template">
+        <field name="name">Vale-Refeição</field>
+        <field name="code">VR</field>
+        <field name="default_value">0</field>
+        <field name="lower_bound">0</field>
+        <field name="upper_bound">99999</field>
+    </record>
+
+    <record id="advantage_template_va" model="hr.contract.advantage.template">
+        <field name="name">Vale-Alimentação</field>
+        <field name="code">VA</field>
+        <field name="default_value">0</field>
+        <field name="lower_bound">0</field>
+        <field name="upper_bound">99999</field>
+    </record>
+
+    <record id="advantage_template_plano_saude" model="hr.contract.advantage.template">
+        <field name="name">Plano de Saúde (Coparticipação)</field>
+        <field name="code">PLANO_SAUDE</field>
+        <field name="default_value">0</field>
+        <field name="lower_bound">0</field>
+        <field name="upper_bound">99999</field>
+    </record>
+</odoo>

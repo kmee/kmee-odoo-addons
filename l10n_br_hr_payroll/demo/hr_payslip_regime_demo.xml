@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        RF-35 - Holerites e lotes da comparação por regime.
+
+        Um lote por empresa, na mesma competência (março do ano corrente, como
+        o restante da demo), para que as telas de lote mostrem o custo total do
+        empregador por regime: com o mesmo salário bruto e o mesmo líquido, o
+        total de encargos patronais muda de R$ 480,00 (Simples anexo III, só
+        FGTS) a R$ 2.208,00 (Lucro Real cheio).
+
+        Os lotes ficam ABERTOS com os holerites calculados, e não confirmados
+        como o lote 03 da empresa principal. Motivo técnico documentado: o
+        mapeamento regra->conta do Odoo 16 (hr.salary.rule.account_debit /
+        account_credit) NÃO é dependente de empresa, então o lançamento
+        contábil de um holerite de outra empresa cairia nas contas e no diário
+        da empresa dona do mapeamento - custo contabilizado na empresa errada,
+        que é pior do que não contabilizar. Ver a pendência de contabilização
+        multiempresa no readme do l10n_br_hr_payroll_account.
+    -->
+
+    <record id="demo_payslip_regime_real" model="hr.payslip">
+        <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Rogério Matos (Lucro Real)')"
+        />
+        <field name="employee_id" ref="demo_employee_regime_real" />
+        <field name="contract_id" ref="demo_contract_regime_real" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_real" />
+        <field name="struct_id" ref="structure_clt" />
+        <field name="date_from" eval="time.strftime('%Y-03-01')" />
+        <field name="date_to" eval="time.strftime('%Y-03-31')" />
+    </record>
+
+    <record id="demo_payslip_regime_presumido" model="hr.payslip">
+        <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Paula Nogueira (Lucro Presumido)')"
+        />
+        <field name="employee_id" ref="demo_employee_regime_presumido" />
+        <field name="contract_id" ref="demo_contract_regime_presumido" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field name="struct_id" ref="structure_clt" />
+        <field name="date_from" eval="time.strftime('%Y-03-01')" />
+        <field name="date_to" eval="time.strftime('%Y-03-31')" />
+    </record>
+
+    <record id="demo_payslip_regime_simples" model="hr.payslip">
+        <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Sandra Lopes (Simples anexo III)')"
+        />
+        <field name="employee_id" ref="demo_employee_regime_simples" />
+        <field name="contract_id" ref="demo_contract_regime_simples" />
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="struct_id" ref="structure_clt" />
+        <field name="date_from" eval="time.strftime('%Y-03-01')" />
+        <field name="date_to" eval="time.strftime('%Y-03-31')" />
+    </record>
+
+    <record id="demo_payslip_regime_anexo4" model="hr.payslip">
+        <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Antônio Vieira (Simples anexo IV)')"
+        />
+        <field name="employee_id" ref="demo_employee_regime_anexo4" />
+        <field name="contract_id" ref="demo_contract_regime_anexo4" />
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="struct_id" ref="structure_clt" />
+        <field name="date_from" eval="time.strftime('%Y-03-01')" />
+        <field name="date_to" eval="time.strftime('%Y-03-31')" />
+    </record>
+
+    <record id="demo_payslip_regime_cprb" model="hr.payslip">
+        <field
+            name="name"
+            eval="time.strftime('Holerite 03/%Y - Cláudio Ferraz (CPRB)')"
+        />
+        <field name="employee_id" ref="demo_employee_regime_cprb" />
+        <field name="contract_id" ref="demo_contract_regime_cprb" />
+        <field name="company_id" ref="demo_company_cprb" />
+        <field name="struct_id" ref="structure_clt" />
+        <field name="date_from" eval="time.strftime('%Y-03-01')" />
+        <field name="date_to" eval="time.strftime('%Y-03-31')" />
+    </record>
+
+    <!-- ═════════════ Lotes por empresa ═════════════ -->
+
+    <record id="demo_payslip_run_regime_real" model="hr.payslip.run">
+        <field name="name" eval="time.strftime('Folha 03/%Y - Lucro Real')" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_real" />
+        <field name="date_start" eval="time.strftime('%Y-03-01')" />
+        <field name="date_end" eval="time.strftime('%Y-03-31')" />
+        <field name="slip_ids" eval="[(6, 0, [ref('demo_payslip_regime_real')])]" />
+    </record>
+
+    <record id="demo_payslip_run_regime_presumido" model="hr.payslip.run">
+        <field name="name" eval="time.strftime('Folha 03/%Y - Lucro Presumido')" />
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field name="date_start" eval="time.strftime('%Y-03-01')" />
+        <field name="date_end" eval="time.strftime('%Y-03-31')" />
+        <field
+            name="slip_ids"
+            eval="[(6, 0, [ref('demo_payslip_regime_presumido')])]"
+        />
+    </record>
+
+    <record id="demo_payslip_run_regime_simples" model="hr.payslip.run">
+        <field name="name" eval="time.strftime('Folha 03/%Y - Simples Nacional')" />
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="date_start" eval="time.strftime('%Y-03-01')" />
+        <field name="date_end" eval="time.strftime('%Y-03-31')" />
+        <field
+            name="slip_ids"
+            eval="[(6, 0, [
+                ref('demo_payslip_regime_simples'),
+                ref('demo_payslip_regime_anexo4'),
+            ])]"
+        />
+    </record>
+
+    <record id="demo_payslip_run_regime_cprb" model="hr.payslip.run">
+        <field name="name" eval="time.strftime('Folha 03/%Y - CPRB')" />
+        <field name="company_id" ref="demo_company_cprb" />
+        <field name="date_start" eval="time.strftime('%Y-03-01')" />
+        <field name="date_end" eval="time.strftime('%Y-03-31')" />
+        <field name="slip_ids" eval="[(6, 0, [ref('demo_payslip_regime_cprb')])]" />
+    </record>
+
+    <!--
+        Recalcula os holerites em rascunho. A chamada do
+        demo/hr_payslip_run_demo.xml roda ANTES deste arquivo (ordem do
+        manifest), então sem esta segunda chamada os holerites por regime
+        ficariam sem linhas e as telas abririam vazias. A rotina é idempotente.
+    -->
+    <function model="hr.payslip" name="_demo_compute_payslips" />
+
+</odoo>

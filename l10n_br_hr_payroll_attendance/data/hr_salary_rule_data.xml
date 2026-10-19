@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- Reflexo das horas extras no repouso semanal remunerado.
+         Lei 605/49, art. 7º, alínea "a" e Súmula 172 do TST: o cálculo é
+         sobre o VALOR das horas extras do mês, dividido pelos dias úteis e
+         multiplicado pelos dias de repouso do período apurado. -->
+    <record id="hr_rule_dsr_he" model="hr.salary.rule">
+        <field name="name">DSR sobre Horas Extras</field>
+        <field name="sequence" eval="7" />
+        <field name="code">DSR_HE</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = (HE_50 + HE_100) &gt; 0 and tools.ponto.dias_uteis &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+valor_he = HE_50 + HE_100
+result = tools.br.round_money(
+    valor_he / tools.ponto.dias_uteis * tools.ponto.dias_repouso
+)
+        </field>
+        <field
+            name="note"
+        >Reflexo das horas extras no DSR (Lei 605/49; Súmula 172 do TST). Os dias úteis e de repouso vêm da apuração de ponto do próprio período, não do mês comercial de 30 dias.</field>
+    </record>
+
+    <!-- Intervalo intrajornada suprimido: art. 71, § 4º da CLT, na redação da
+         Lei 13.467/2017. Paga-se APENAS o período suprimido, com acréscimo de
+         50%, e a verba tem natureza INDENIZATÓRIA - por isso fica fora das
+         bases de INSS e IRRF. -->
+    <record id="hr_rule_intervalo_suprimido" model="hr.salary.rule">
+        <field name="name">Intervalo Intrajornada Suprimido</field>
+        <field name="sequence" eval="8" />
+        <field name="code">INTERV_SUPRIMIDO</field>
+        <field name="category_id" ref="hr_salary_rule_category_ind" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_intervalo_suprimido &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
+result = tools.br.round_money(
+    salario_hora * 1.5 * payslip.l10n_br_intervalo_suprimido
+)
+        </field>
+        <field
+            name="note"
+        >Art. 71, § 4º da CLT (Lei 13.467/2017): apenas o período suprimido, com 50%, de natureza indenizatória - não integra a base de INSS nem de IRRF.</field>
+    </record>
+
+</odoo>

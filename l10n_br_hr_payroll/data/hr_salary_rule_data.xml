@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais da Folha de Pagamento Brasileira.
+
+        Convenções de sinal:
+          - Regras em BASIC, ALW, GROSS: valores POSITIVOS (proventos)
+          - Regras em DED: valores POSITIVOS (descontos)
+          - NET = BASIC + ALW - DED
+          - COMP: valores POSITIVOS (encargos patronais, não afetam NET)
+          - INFO: valores informativos (não afetam NET)
+
+        Variáveis disponíveis no contexto das regras:
+          employee, contract, payslip, payslips, worked_days, inputs,
+          categories, rules, result_rules, payroll, current_contract,
+          tools (tools.br.calc_inss, tools.br.calc_irrf, etc.)
+
+        IMPORTANTE: Para acessar o total de uma regra anterior, usar o
+        CÓDIGO da regra diretamente (ex: FALTAS, INSS), NÃO rules.CÓDIGO.
+        rules.CÓDIGO retorna o record hr.salary.rule, não o valor.
+        Os códigos são pré-populados com 0.0 em _get_baselocaldict.
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PROVENTOS (BASIC + ALW)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 1. Salário Base (compartilhado CLT e Estatutário) -->
+    <record id="hr_rule_salario_base" model="hr.salary.rule">
+        <field name="name">Salário Base</field>
+        <field name="sequence" eval="1" />
+        <field name="code">SALARIO_BASE</field>
+        <field name="category_id" ref="hr_salary_rule_category_basic" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = contract.wage
+        </field>
+    </record>
+
+    <!-- 5. Hora Extra 50% -->
+    <record id="hr_rule_he_50" model="hr.salary.rule">
+        <field name="name">Hora Extra 50%</field>
+        <field name="sequence" eval="5" />
+        <field name="code">HE_50</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_horas_extras_50 > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
+result = tools.br.round_money(salario_hora * 1.5 * payslip.l10n_br_horas_extras_50)
+        </field>
+    </record>
+
+    <!-- 6. Hora Extra 100% -->
+    <record id="hr_rule_he_100" model="hr.salary.rule">
+        <field name="name">Hora Extra 100%</field>
+        <field name="sequence" eval="6" />
+        <field name="code">HE_100</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_horas_extras_100 > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
+result = tools.br.round_money(salario_hora * 2.0 * payslip.l10n_br_horas_extras_100)
+        </field>
+    </record>
+
+    <!-- 10. Adicional Noturno -->
+    <record id="hr_rule_adicional_noturno" model="hr.salary.rule">
+        <field name="name">Adicional Noturno</field>
+        <field name="sequence" eval="10" />
+        <field name="code">ADICIONAL_NOTURNO</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_horas_noturnas > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+salario_hora = contract.wage / contract._l10n_br_divisor_horas_mensais()
+result = tools.br.round_money(salario_hora * 0.20 * payslip.l10n_br_horas_noturnas)
+        </field>
+    </record>
+
+    <!-- 15. Adicional de Periculosidade -->
+    <record id="hr_rule_periculosidade" model="hr.salary.rule">
+        <field name="name">Adicional de Periculosidade</field>
+        <field name="sequence" eval="15" />
+        <field name="code">ADICIONAL_PERICULOSIDADE</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = contract.l10n_br_periculosidade
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(contract.wage * 0.30)
+        </field>
+    </record>
+
+    <!-- 16. Adicional de Insalubridade -->
+    <record id="hr_rule_insalubridade" model="hr.salary.rule">
+        <field name="name">Adicional de Insalubridade</field>
+        <field name="sequence" eval="16" />
+        <field name="code">ADICIONAL_INSALUBRIDADE</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = contract.l10n_br_insalubridade
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+SM = tools.br.salario_minimo()
+grau = contract.l10n_br_grau_insalubridade
+percentuais = {'minimo': 0.10, 'medio': 0.20, 'maximo': 0.40}
+result = tools.br.round_money(SM * percentuais.get(grau, 0.10))
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DESCONTOS (DED) - valores positivos, subtraídos do NET
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 50. Faltas Injustificadas -->
+    <record id="hr_rule_faltas" model="hr.salary.rule">
+        <field name="name">Faltas Injustificadas</field>
+        <field name="sequence" eval="50" />
+        <field name="code">FALTAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_faltas_injustificadas > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas)
+        </field>
+    </record>
+
+    <!-- 51. Desconto de DSR -->
+    <record id="hr_rule_desc_dsr" model="hr.salary.rule">
+        <field name="name">Desconto DSR</field>
+        <field name="sequence" eval="51" />
+        <field name="code">DESC_DSR</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_faltas_injustificadas > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+dias_uteis, dsr_mes = tools.br.dias_dsr()
+result = tools.br.round_money((contract.wage / 30) * payslip.l10n_br_faltas_injustificadas * dsr_mes / dias_uteis)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         BRUTO (GROSS) - subtotal
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 99. Remuneração Bruta -->
+    <record id="hr_rule_gross" model="hr.salary.rule">
+        <field name="name">Remuneração Bruta</field>
+        <field name="sequence" eval="99" />
+        <field name="code">GROSS</field>
+        <field name="category_id" ref="hr_salary_rule_category_gross" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CONTRIBUIÇÕES PREVIDENCIÁRIAS
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 100. INSS (RGPS) - CLT normal -->
+    <record id="hr_rule_inss" model="hr.salary.rule">
+        <field name="name">INSS</field>
+        <field name="sequence" eval="100" />
+        <field name="code">INSS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_inss = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.calc_inss(max(base_inss, 0))
+        </field>
+    </record>
+
+    <!-- 101. INSS Aprendiz (2%) -->
+    <record id="hr_rule_inss_aprendiz" model="hr.salary.rule">
+        <field name="name">INSS Aprendiz</field>
+        <field name="sequence" eval="101" />
+        <field name="code">INSS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato == 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_inss = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(max(base_inss, 0) * 0.02)
+        </field>
+    </record>
+
+    <!-- 105. Contribuição RPPS (Estatutário) -->
+    <record id="hr_rule_contrib_rpps" model="hr.salary.rule">
+        <field name="name">Contribuição RPPS</field>
+        <field name="sequence" eval="105" />
+        <field name="code">CONTRIB_RPPS</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+teto_rgps, teto_valor = tools.br.teto_inss()
+base = categories.GROSS
+if base > teto_rgps:
+    result = tools.br.round_money((base - teto_rgps) * 0.14 + teto_valor)
+else:
+    result = tools.br.calc_inss(base)
+        </field>
+    </record>
+
+    <!-- 106. Pensão Alimentícia (desconto do líquido) -->
+    <record id="hr_rule_pensao_alimenticia" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia</field>
+        <field name="sequence" eval="106" />
+        <field name="code">PENSAO_ALIMENTICIA</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_pensao_alimenticia > 0 or employee.l10n_br_pensao_percentual > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Valor efetivo = parcela fixa + percentual sobre a remuneração bruta.
+# Descontado do líquido (categoria DED) e deduzido da base do IRRF.
+result = tools.br.calc_pensao_alimenticia(
+    categories.GROSS,
+    employee.l10n_br_pensao_alimenticia,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         IRRF
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 110. Base IRRF (informativo) -->
+    <record id="hr_rule_base_irrf" model="hr.salary.rule">
+        <field name="name">Base IRRF</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF</field>
+        <field name="category_id" ref="hr_salary_rule_category_info" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = FALTAS + DESC_DSR + INSS
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
+pensao = PENSAO_ALIMENTICIA
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- 110b. Base IRRF para Estatutário -->
+    <record id="hr_rule_base_irrf_est" model="hr.salary.rule">
+        <field name="name">Base IRRF (Estatutário)</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF</field>
+        <field name="category_id" ref="hr_salary_rule_category_info" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = CONTRIB_RPPS
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
+pensao = PENSAO_ALIMENTICIA
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- 120. IRRF -->
+    <record id="hr_rule_irrf" model="hr.salary.rule">
+        <field name="name">IRRF</field>
+        <field name="sequence" eval="120" />
+        <field name="code">IRRF</field>
+        <field name="category_id" ref="hr_salary_rule_category_ded" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# RF-16: retenção pela forma mais favorável ao contribuinte (menor imposto).
+#  1) Dedução legal: base já calculada em BASE_IRRF (INSS/RPPS, dependentes,
+#     pensão).
+#  2) Desconto simplificado (Lei 9.250/95, art. 4º, § 2º, incluído pela Lei
+#     14.663/2023, art. 6º; na base mensal, IN RFB 1.500/2014, art. 52, § 3º,
+#     incluído pela IN RFB 2.141/2023, reforçado no MAFON 2025, código 0561,
+#     alínea f): parcela fixa por competência, no lugar das deduções legais,
+#     sobre o rendimento tributável.
+# O redutor do IRPF (Lei 9.250/95, art. 3º-A, incluído pela Lei 15.270/2025,
+# desde 01/2026) é aplicado DEPOIS, sobre o imposto da forma mais favorável, em
+# função do rendimento tributável BRUTO do mês (não da base). Tudo isso está em
+# tools.br.irrf_mais_favoravel, comum a todas as apurações (mensal, férias, 13º
+# e rescisão).
+rendimento = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.irrf_mais_favoravel(rendimento, BASE_IRRF)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         SALÁRIO FAMÍLIA (ALW, mas FORA da base tributável)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 130. Salário Família - roda DEPOIS do GROSS (sequência 99).
+         Duas razões:
+           a) a base legal de enquadramento é o SALÁRIO DE CONTRIBUIÇÃO do mês
+              (remuneração mensal: salário + horas extras, adicionais,
+              comissões - Lei 8.213/91 art. 65 c/c Lei 8.212/91 art. 28), que
+              só existe depois do GROSS;
+           b) a cota NÃO integra o salário de contribuição (Lei 8.212/91
+              art. 28 §9º "j"), logo deve ficar fora das bases de
+              INSS/IRRF/FGTS - o que se obtém naturalmente calculando-a
+              depois do GROSS. Continua somada ao NET (categoria ALW). -->
+    <record id="hr_rule_salario_familia" model="hr.salary.rule">
+        <field name="name">Salário Família</field>
+        <field name="sequence" eval="130" />
+        <field name="code">SALARIO_FAMILIA</field>
+        <field name="category_id" ref="hr_salary_rule_category_alw" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_num_filhos_sf > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Base = salário de contribuição do mês (mesma base do INSS), não contract.wage.
+base_sc = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+# Cota proporcional aos dias de vigência do contrato no mês (admissão/demissão).
+dias = tools.br.dias_trabalhados_mes(contract)
+result = tools.br.calc_salario_familia(
+    base_sc,
+    employee.l10n_br_num_filhos_sf,
+    dias,
+)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         ENCARGOS PATRONAIS (COMP)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 150. FGTS (CLT normal) -->
+    <record id="hr_rule_fgts" model="hr.salary.rule">
+        <field name="name">FGTS</field>
+        <field name="sequence" eval="150" />
+        <field name="code">FGTS</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_fgts = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(max(base_fgts, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- 151. FGTS Aprendiz (2%) -->
+    <record id="hr_rule_fgts_aprendiz" model="hr.salary.rule">
+        <field name="name">FGTS Aprendiz</field>
+        <field name="sequence" eval="151" />
+        <field name="code">FGTS</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato == 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_fgts = categories.GROSS - FALTAS - DESC_DSR
+result = tools.br.round_money(max(base_fgts, 0) * 0.02)
+        </field>
+    </record>
+
+    <!--
+        152-154. Encargos patronais previdenciários (RF-31/RF-32/RF-33).
+
+        Custo do EMPREGADOR: não são descontados do empregado e não entram no
+        líquido (categoria COMP, como o FGTS). Aparecem no holerite e no lote
+        como informação de custo e são contabilizados pelo
+        l10n_br_hr_payroll_account (despesa x passivo por tributo).
+
+        Base: a mesma do FGTS/INSS (remuneração do mês). A cota do salário
+        família fica FORA de toda base patronal e do FGTS (Lei 8.212/91,
+        art. 28, §9º, "a"; codIncCP 00 no eSocial) - o que se obtém
+        naturalmente porque a rubrica dela é calculada depois do GROSS. A CPP
+        e o RAT não têm teto: o teto do RGPS limita apenas a contribuição do
+        segurado.
+
+        Todas as três alíquotas vêm de tools.br.aliquotas_patronais(contract),
+        que resolve o regime tributário da empresa do holerite: no Simples
+        Nacional dos anexos I, II, III e V nenhuma delas é devida (CPP e RAT
+        no DAS pelo art. 13, VI; terceiros dispensados pelo art. 13, §3º da
+        LC 123/2006) e as regras nem geram linha. Ver models/res_company.py.
+    -->
+
+    <!-- 152. CPP - contribuição previdenciária patronal (20%) -->
+    <record id="hr_rule_cpp_patronal" model="hr.salary.rule">
+        <field name="name">INSS Patronal (CPP)</field>
+        <field name="sequence" eval="152" />
+        <field name="code">CPP</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = tools.br.aliquotas_patronais(contract).cpp &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Lei 8.212/91, art. 22, I: 20% sobre o total das remunerações, sem teto.
+# Optante pela CPRB: alíquota reduzida pela proporção do ano na transição da
+# Lei 14.973/2024 (a redução alcança SÓ este inciso - ver RAT e terceiros).
+base_patronal = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.round_money(base_patronal * tools.br.aliquotas_patronais(contract).cpp)
+        </field>
+    </record>
+
+    <!-- 153. RAT ajustado (RAT x FAP) -->
+    <record id="hr_rule_rat_patronal" model="hr.salary.rule">
+        <field name="name">RAT Ajustado (GILRAT)</field>
+        <field name="sequence" eval="153" />
+        <field name="code">RAT</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = tools.br.aliquotas_patronais(contract).rat &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Lei 8.212/91, art. 22, II (riscos ambientais do trabalho): 1%, 2% ou 3%
+# pelo CNAE preponderante, multiplicado pelo FAP (Decreto 3.048/99,
+# art. 202-A). INTEGRAL mesmo para optante da CPRB e INTEGRAL sobre o 13º.
+# Só alcança segurado empregado: remuneração de contribuinte individual
+# (pró-labore) é art. 22, III, sem RAT.
+base_patronal = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.round_money(base_patronal * tools.br.aliquotas_patronais(contract).rat)
+        </field>
+    </record>
+
+    <!-- 154. Terceiros / outras entidades (código FPAS) -->
+    <record id="hr_rule_terceiros_patronal" model="hr.salary.rule">
+        <field name="name">Terceiros (Outras Entidades)</field>
+        <field name="sequence" eval="154" />
+        <field name="code">TERCEIROS</field>
+        <field name="category_id" ref="hr_salary_rule_category_comp" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = tools.br.aliquotas_patronais(contract).terceiros &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Contribuições a outras entidades e fundos, pela alíquota do código FPAS
+# (indústria, FPAS 507: 5,8%). INTEGRAIS para optante da CPRB.
+base_patronal = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.round_money(base_patronal * tools.br.aliquotas_patronais(contract).terceiros)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         PROVISÕES TRABALHISTAS (PROV) - competência, não caixa
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!--
+        160-163. Provisões mensais de férias + 1/3 e de 13º salário, com os
+        encargos patronais incidentes sobre a própria provisão (RF-34).
+
+        Reconhecimento por competência: o direito é adquirido mês a mês (CLT
+        art. 130; Lei 4.090/62 art. 1º), então o custo pertence ao mês, não ao
+        pagamento (Lei 6.404/76, art. 177; CPC 33). Sem isso o resultado do mês
+        do gozo/pagamento fica distorcido e o custo por regime tributário sai
+        subavaliado. Dedutibilidade fiscal da provisão com encargos:
+        arts. 342 (férias) e 343 (13º) do RIR/2018.
+
+        Os encargos sobre a provisão seguem o MESMO regime das rubricas
+        patronais: no Simples dos anexos I, II, III e V sobra apenas o FGTS.
+        Na provisão do 13º de optante da CPRB a proporção usada é a do 13º
+        (sem CPP de 2025 a 2027, Lei 12.546/2011 art. 9º-A, §1º), mas RAT e
+        terceiros continuam integrais. Na provisão de férias, a parcela que se
+        espera pagar como verba INDENIZATÓRIA é excluída da base dos encargos
+        (parâmetro por empresa), porque férias indenizadas não têm INSS nem
+        FGTS.
+    -->
+
+    <!-- 160. Provisão de férias + 1/3 -->
+    <record id="hr_rule_provisao_ferias" model="hr.salary.rule">
+        <field name="name">Provisão de Férias + 1/3</field>
+        <field name="sequence" eval="160" />
+        <field name="code">PROV_FERIAS</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# 1/12 da remuneração + 1/3 constitucional = remuneração x 4 / 36.
+base_provisao = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.calc_provisao_ferias(base_provisao)
+        </field>
+    </record>
+
+    <!-- 161. Encargos patronais sobre a provisão de férias -->
+    <record id="hr_rule_provisao_ferias_encargos" model="hr.salary.rule">
+        <field name="name">Encargos sobre Provisão de Férias</field>
+        <field name="sequence" eval="161" />
+        <field name="code">PROV_FERIAS_ENC</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = PROV_FERIAS &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# CPP + RAT ajustado + terceiros + FGTS, conforme o regime da empresa.
+# A parcela esperada de férias INDENIZADAS sai da base (sem INSS nem FGTS).
+aliquotas = tools.br.aliquotas_patronais(contract)
+company = payslip.company_id or contract.company_id
+result = tools.br.calc_encargos_sobre_provisao(
+    PROV_FERIAS,
+    aliquotas.total_com_fgts,
+    company.l10n_br_hr_prov_ferias_perc_indenizado,
+)
+        </field>
+    </record>
+
+    <!-- 162. Provisão de 13º salário -->
+    <record id="hr_rule_provisao_decimo" model="hr.salary.rule">
+        <field name="name">Provisão de 13º Salário</field>
+        <field name="sequence" eval="162" />
+        <field name="code">PROV_13</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+base_provisao = max(categories.GROSS - FALTAS - DESC_DSR, 0)
+result = tools.br.calc_provisao_decimo_terceiro(base_provisao)
+        </field>
+    </record>
+
+    <!-- 163. Encargos patronais sobre a provisão de 13º -->
+    <record id="hr_rule_provisao_decimo_encargos" model="hr.salary.rule">
+        <field name="name">Encargos sobre Provisão de 13º</field>
+        <field name="sequence" eval="163" />
+        <field name="code">PROV_13_ENC</field>
+        <field name="category_id" ref="hr_salary_rule_category_provisao" />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = PROV_13 &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# A CPRB tem cronograma PRÓPRIO para o 13º (sem CPP de 2025 a 2027), por isso
+# a alíquota do 13º é resolvida com decimo_terceiro=True.
+aliquotas = tools.br.aliquotas_patronais(contract, decimo_terceiro=True)
+result = tools.br.calc_encargos_sobre_provisao(PROV_13, aliquotas.total_com_fgts)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         LÍQUIDO (NET)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 200. Salário Líquido -->
+    <record id="hr_rule_net" model="hr.salary.rule">
+        <field name="name">Salário Líquido</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field name="category_id" ref="hr_salary_rule_category_net" />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_br_sst_acidente_user,l10n_br.sst.acidente user,model_l10n_br_sst_acidente,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_acidente_manager,l10n_br.sst.acidente manager,model_l10n_br_sst_acidente,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_acidente_hr,l10n_br.sst.acidente hr,model_l10n_br_sst_acidente,hr.group_hr_manager,1,1,1,0
+access_l10n_br_sst_cat_user,l10n_br.sst.cat user,model_l10n_br_sst_cat,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_cat_manager,l10n_br.sst.cat manager,model_l10n_br_sst_cat,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_cat_hr,l10n_br.sst.cat hr,model_l10n_br_sst_cat,hr.group_hr_manager,1,1,1,0

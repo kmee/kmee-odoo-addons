@@ -183,6 +183,7 @@ class HrApplicant(models.Model):
 
 class HrApplicantDependent(models.Model):
     _name = "hr.applicant.dependent"
+    _description = "Applicant Dependent"
 
     applicant_id = fields.Many2one(comodel_name="hr.applicant")
 
