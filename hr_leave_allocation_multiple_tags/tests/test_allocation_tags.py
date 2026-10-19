@@ -62,9 +62,9 @@ class TestAllocationTags(TransactionCase):
         Entao existem 'category_and' e 'category_or' alem dos modos do core
         """
         selection = dict(
-            self.env["hr.leave.allocation"]._fields["holiday_type"]._description_selection(
-                self.env
-            )
+            self.env["hr.leave.allocation"]
+            ._fields["holiday_type"]
+            ._description_selection(self.env)
         )
         self.assertIn("category_and", selection)
         self.assertIn("category_or", selection)
