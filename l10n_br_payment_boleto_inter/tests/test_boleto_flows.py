@@ -114,9 +114,9 @@ class TestBoletoInterFlows(BancoInterCommon):
 
         self.partner.email = False
         self.partner.mobile = "+55 (35) 99876-5432"
-        pagador = self._create_transaction(reference="BOL-0009")._prepare_boleto_data_inter()[
-            "pagador"
-        ]
+        pagador = self._create_transaction(
+            reference="BOL-0009"
+        )._prepare_boleto_data_inter()["pagador"]
         self.assertNotIn("email", pagador)
         self.assertEqual(pagador["ddd"], "35")
         self.assertEqual(pagador["telefone"], "998765432")
