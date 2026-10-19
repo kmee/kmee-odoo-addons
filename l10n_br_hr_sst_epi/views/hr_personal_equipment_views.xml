@@ -29,16 +29,16 @@
                             class="btn-secondary"
                         />
                     </group>
-                    <group string="Devolução ou Troca">
+                    <group string="Devolu&#231;&#227;o ou Troca">
                         <field name="l10n_br_sst_motivo_devolucao" />
                         <field name="l10n_br_sst_data_devolucao" />
                         <field name="l10n_br_sst_observacao_devolucao" />
                         <button
                             name="action_devolver"
                             type="object"
-                            string="Registrar Devolução"
+                            string="Registrar Devolu&#231;&#227;o"
                             class="btn-secondary"
-                            attrs="{'invisible': [('state', '!=', 'valid')]}"
+                            invisible="state != 'valid'"
                         />
                     </group>
                 </group>
