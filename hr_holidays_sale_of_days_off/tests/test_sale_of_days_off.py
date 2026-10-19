@@ -242,7 +242,9 @@ class TestSaleOfDaysOff(TransactionCase):
         """
         action = self.allocation.action_sale_of_days_off()
         self.assertEqual(action["res_model"], "hr.leave.abono")
-        self.assertIn(("holiday_allocation_id", "=", self.allocation.id), action["domain"])
+        self.assertIn(
+            ("holiday_allocation_id", "=", self.allocation.id), action["domain"]
+        )
         self.assertEqual(
             action["context"]["default_holiday_allocation_id"], self.allocation.id
         )
