@@ -462,7 +462,16 @@ class TestPinbankInvoice(PinbankCase):
                 "invoice_date": "2025-01-01",
                 "payment_mode_id": mode.id,
                 "invoice_line_ids": [
-                    (0, 0, {"name": "Servico", "quantity": 1, "price_unit": 100.0})
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Servico",
+                            "quantity": 1,
+                            "price_unit": 100.0,
+                            "tax_ids": [(6, 0, [])],
+                        },
+                    )
                 ],
             }
         )
