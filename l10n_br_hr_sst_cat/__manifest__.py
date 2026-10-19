@@ -4,7 +4,7 @@
 {
     "name": "SST - Acidente de Trabalho e CAT",
     "summary": "Registro de acidente, CAT e prazo do art. 22 da Lei 8.213/91",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
