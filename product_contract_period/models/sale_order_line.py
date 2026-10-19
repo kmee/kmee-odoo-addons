@@ -47,7 +47,10 @@ class SaleOrderLine(models.Model):
     def _get_date_end(self):
         self.ensure_one()
         date_end = self.date_start
-        rule_type = self._get_auto_renew_rule_type()
+        # 17.0: the line has no _get_auto_renew_rule_type any more
+        rule_type = self.recurring_rule_type
+        if rule_type == "monthlylastday":
+            rule_type = "monthly"
 
         if rule_type == "daily":
             date_end += relativedelta(days=(self.period_count)) - relativedelta(days=1)
