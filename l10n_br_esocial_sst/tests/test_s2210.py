@@ -109,3 +109,17 @@ class TestS2210(EsocialSstCommon):
         self.assertEqual(
             root.find(".//e:emitente/e:nmEmit", ns).text, "Dr. Plantonista"
         )
+
+    def test_recibo_volta_para_a_cat(self):
+        """O recibo do eSocial chega à CAT e libera a CAT de reabertura."""
+        self.cat.action_emitir()
+        evento = self.env["l10n_br.esocial.evento"].create(
+            {"tipo": "S-2210", "company_id": self.cat.company_id.id}
+        )
+        evento.registrar_aceite(nr_recibo="1.1.1234567890123456789")
+        self.cat.s2210_id.evento_id = evento
+        self.env["l10n_br.sst.cat"]._atualizar_recibo()
+        self.assertEqual(self.cat.state, "transmitida")
+        self.assertEqual(self.cat.numero_recibo, "1.1.1234567890123456789")
+        reabertura = self.acidente._criar_cat("2")
+        self.assertEqual(reabertura.nr_rec_cat_orig, "1.1.1234567890123456789")
