@@ -13,23 +13,23 @@
                 <div
                     class="alert alert-warning"
                     role="alert"
-                    attrs="{'invisible': [('low_confidence_fields', 'in', [False, ''])]}"
+                    invisible="low_confidence_fields in [False, '']"
                 >
-                    <strong>Confira com atenção:</strong>
+                    <strong>Confira com aten&#231;&#227;o:</strong>
                     <field name="low_confidence_fields" class="oe_inline" />
                 </div>
                 <div
                     class="alert alert-danger"
                     role="alert"
-                    attrs="{'invisible': ['|', ('is_ocr_import', '=', False), ('document_id', '=', False)]}"
+                    invisible="(not is_ocr_import or not document_id)"
                 >
-                    Já existe um documento com este número deste fornecedor.
+                    J&#225; existe um documento com este n&#250;mero deste fornecedor.
                 </div>
             </field>
             <field name="document_key" position="after">
                 <group
-                    string="Dados do serviço (OCR)"
-                    attrs="{'invisible': [('is_ocr_import', '=', False)]}"
+                    string="Dados do servi&#231;o (OCR)"
+                    invisible="not is_ocr_import"
                 >
                     <group>
                         <field name="document_date" />
@@ -52,7 +52,7 @@
                     string="Importar (OCR)"
                     type="object"
                     class="btn-primary"
-                    attrs="{'invisible': [('is_ocr_import', '=', False)]}"
+                    invisible="not is_ocr_import"
                 />
             </xpath>
         </field>
