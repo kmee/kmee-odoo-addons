@@ -32,19 +32,19 @@
                         type="object"
                         string="Colocar em Vigor"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_voltar_rascunho"
                         type="object"
                         string="Voltar a Rascunho"
-                        attrs="{'invisible': [('state', 'in', ('draft', 'cancelled'))]}"
+                        invisible="state in ('draft', 'cancelled')"
                     />
                     <button
                         name="action_cancelar"
                         type="object"
                         string="Cancelar"
-                        attrs="{'invisible': [('state', '=', 'cancelled')]}"
+                        invisible="state == 'cancelled'"
                     />
                     <field
                         name="state"
@@ -110,7 +110,7 @@
                                 readonly="1"
                             />
                         </page>
-                        <page string="Observações" name="observacao">
+                        <page string="Observa&#231;&#245;es" name="observacao">
                             <field name="observacao" nolabel="1" />
                         </page>
                     </notebook>

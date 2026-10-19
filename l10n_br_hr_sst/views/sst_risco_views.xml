@@ -32,14 +32,14 @@
                         <h1><field name="name" readonly="1" /></h1>
                     </div>
                     <group>
-                        <group string="Identificação">
+                        <group string="Identifica&#231;&#227;o">
                             <field name="ambiente_id" />
                             <field name="agente_nocivo_id" />
                             <field name="ausencia_de_risco" />
                             <field name="laudo_id" />
                             <field name="job_ids" widget="many2many_tags" />
                         </group>
-                        <group string="Vigência">
+                        <group string="Vig&#234;ncia">
                             <field name="date_from" />
                             <field name="date_to" />
                             <field name="active" />
@@ -50,7 +50,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Avaliação" name="avaliacao">
+                        <page string="Avalia&#231;&#227;o" name="avaliacao">
                             <group>
                                 <group>
                                     <field name="tp_aval" />
@@ -63,31 +63,31 @@
                                     <field name="nr_proc_jud" />
                                 </group>
                             </group>
-                            <group string="Descrição Complementar">
+                            <group string="Descri&#231;&#227;o Complementar">
                                 <field name="descricao" nolabel="1" />
                             </group>
                         </page>
-                        <page string="Proteção (EPC/EPI)" name="protecao">
+                        <page string="Prote&#231;&#227;o (EPC/EPI)" name="protecao">
                             <group>
                                 <group>
                                     <field name="utiliz_epc" />
                                     <field
                                         name="efic_epc"
-                                        attrs="{'invisible': [('utiliz_epc', '!=', '2')]}"
+                                        invisible="utiliz_epc != '2'"
                                     />
                                 </group>
                                 <group>
                                     <field name="utiliz_epi" />
                                     <field
                                         name="efic_epi"
-                                        attrs="{'invisible': [('utiliz_epi', '!=', '2')]}"
+                                        invisible="utiliz_epi != '2'"
                                     />
                                 </group>
                             </group>
                         </page>
-                        <page string="Consequências" name="consequencias">
+                        <page string="Consequ&#234;ncias" name="consequencias">
                             <group>
-                                <group string="Previdenciário">
+                                <group string="Previdenci&#225;rio">
                                     <field name="aposentadoria_especial_id" />
                                     <field name="financiamento_aposent_id" />
                                 </group>
@@ -95,7 +95,8 @@
                                     <field name="insalubridade" />
                                     <field
                                         name="grau_insalubridade"
-                                        attrs="{'invisible': [('insalubridade', '=', False)], 'required': [('insalubridade', '=', True)]}"
+                                        invisible="not insalubridade"
+                                        required="insalubridade"
                                     />
                                     <field name="periculosidade" />
                                 </group>

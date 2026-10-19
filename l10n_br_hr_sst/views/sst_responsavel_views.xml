@@ -39,7 +39,8 @@
                             <field name="ide_oc" />
                             <field
                                 name="dsc_oc"
-                                attrs="{'invisible': [('ide_oc', '!=', '9')], 'required': [('ide_oc', '=', '9')]}"
+                                invisible="ide_oc != '9'"
+                                required="ide_oc == '9'"
                             />
                             <field name="nr_oc" />
                             <field name="uf_oc" />
@@ -52,7 +53,7 @@
     </record>
 
     <record id="l10n_br_sst_responsavel_action" model="ir.actions.act_window">
-        <field name="name">Responsáveis Técnicos</field>
+        <field name="name">Respons&#225;veis T&#233;cnicos</field>
         <field name="res_model">l10n_br.sst.responsavel</field>
         <field name="view_mode">tree,form</field>
     </record>
