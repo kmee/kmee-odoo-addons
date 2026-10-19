@@ -43,7 +43,7 @@ class TestMailRoleFilter(TransactionCase):
         )
         cls.record = cls.env["res.partner"].create({"name": "Record"})
         cls.model = cls.env["ir.model"]._get("res.partner")
-        cls.other_model = cls.env["ir.model"]._get("res.partner.category")
+        cls.other_model = cls.env["ir.model"]._get("mail.blacklist")
         cls.partners = (
             cls.user_with_role.partner_id
             | cls.user_both_roles.partner_id
@@ -106,12 +106,12 @@ class TestMailRoleFilter(TransactionCase):
         self.assertIn(self.user_without_role.partner_id.id, self._recipient_ids())
 
     def test_filter_applies_to_the_configured_model(self):
-        """Given a filter for res.partner.category
-        When a message is posted on a category record
+        """Given a filter for mail.blacklist
+        When a message is posted on a mail.blacklist record
         Then users without the role are removed there."""
         self._filter(model=self.other_model)
-        category = self.env["res.partner.category"].create({"name": "Cat"})
-        ids = self._recipient_ids(category)
+        blacklisted = self.env["mail.blacklist"].create({"email": "bl@example.com"})
+        ids = self._recipient_ids(blacklisted)
         self.assertNotIn(self.user_without_role.partner_id.id, ids)
         self.assertIn(self.user_with_role.partner_id.id, ids)
 
