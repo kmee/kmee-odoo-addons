@@ -123,7 +123,9 @@ class TestProjectInvoiceMenus(TransactionCase):
                 ],
             }
         )
-        order.action_confirm()
+        # write the state: other sale modules (e.g. isolated quotation) may turn
+        # action_confirm into a wizard when installed in the same database
+        order.state = "sale"
         project = self.env["project.project"].create({"name": "Billable project"})
         self.env["project.task"].create(
             {
