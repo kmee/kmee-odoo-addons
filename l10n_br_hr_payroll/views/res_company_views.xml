@@ -16,7 +16,7 @@
                 <page
                     name="l10n_br_hr_encargos"
                     string="Encargos da Folha"
-                    attrs="{'invisible': [('country_id', '!=', %(base.br)d)]}"
+                    invisible="country_id != %(base.br)d"
                 >
                     <group>
                         <group string="Regime Tributário (somente leitura)">
@@ -24,7 +24,7 @@
                             <field name="profit_calculation" readonly="1" />
                             <field
                                 name="l10n_br_hr_simples_anexo"
-                                attrs="{'invisible': [('tax_framework', 'not in', ['1', '2', '4'])]}"
+                                invisible="tax_framework not in ['1', '2', '4']"
                             />
                         </group>
                         <group string="RAT / FAP (eSocial S-1005)">
@@ -40,7 +40,7 @@
                             <field name="l10n_br_hr_cprb_optante" />
                             <field
                                 name="l10n_br_hr_cprb_perc_contrib_nao_desonerada"
-                                attrs="{'invisible': [('l10n_br_hr_cprb_optante', '=', False)]}"
+                                invisible="not l10n_br_hr_cprb_optante"
                             />
                         </group>
                         <group string="Provisões">
