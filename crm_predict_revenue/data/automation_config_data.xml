@@ -6,7 +6,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_discovery'))]</field>
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('crm_predict_revenue.stage_opportunity_discovery').id)]</field>
             <field name="filter_id" ref="filter_discovery_opportunities" />
             <field name="state">periodic</field>
             <field name="is_periodic">True</field>
@@ -76,7 +76,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_presentation'))]</field>
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('crm_predict_revenue.stage_opportunity_presentation').id)]</field>
             <field name="filter_id" ref="filter_presentation_opportunities" />
             <field name="state">periodic</field>
             <field name="is_periodic">True</field>
