@@ -7,9 +7,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='section_ids']" position="attributes">
                 <attribute
-                    name="attrs"
-                >{'invisible': [('commission_type', 'not in', ['section', 'period_section'])]}</attribute>
-            </xpath>
+                    name="invisible"
+                >commission_type not in ['section', 'period_section']</attribute></xpath>
         </field>
     </record>
 
@@ -23,7 +22,7 @@
                     string="Recalculate Period Commission"
                     name="action_recalculate_period_commission"
                     type="object"
-                    states="settled"
+                    invisible="state != 'settled'"
                 />
             </button>
         </field>

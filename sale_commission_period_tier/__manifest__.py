@@ -3,7 +3,7 @@
 
 {
     "name": "Commission Period Tiers",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Sales",
     "license": "AGPL-3",
     "summary": "Commission rates by sales tiers in the settlement period",
