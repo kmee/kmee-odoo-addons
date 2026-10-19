@@ -1,7 +1,8 @@
-from odoo.tests.common import BaseCommon
+from odoo.tests.common import TransactionCase, tagged
 
 
-class TestSac(BaseCommon):
+@tagged("post_install", "-at_install")
+class TestSac(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -18,7 +19,7 @@ class TestSac(BaseCommon):
                 "phone": "1234567890",
             }
         )
-        self.assertTrue(sac.name.startswith("New"))
+        self.assertTrue(sac.name.startswith("SAC/"))
         self.assertEqual(sac.customer_name, "Test Customer")
 
     def test_compute_display_name(self):
