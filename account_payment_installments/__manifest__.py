@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["account"],
+    "depends": ["account", "payment"],
     "data": [
         "views/account_payment_term.xml",
     ],
