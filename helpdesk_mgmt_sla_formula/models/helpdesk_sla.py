@@ -1,6 +1,6 @@
 import ast
 import logging
-from datetime import datetime, timedelta
+from datetime import date, datetime, time, timedelta
 
 from dateutil.relativedelta import relativedelta
 
@@ -55,6 +55,9 @@ class HelpdeskSLAFormula(models.Model):
                     self.sla_deadline_formula, {"__builtins__": {}}, safe_dict
                 )
 
+                if not isinstance(deadline, datetime) and isinstance(deadline, date):
+                    # plain date: use its start of day to compare with now()
+                    deadline = datetime.combine(deadline, time.min)
                 ticket.sla_deadline = deadline
                 ticket.sla_expired = deadline < datetime.now()
 
