@@ -109,13 +109,19 @@ class PaymentTransaction(models.Model):
 
     def _prepare_transaction_boleto_info(self, boleto_response):
         if self.provider_code == "boleto_pinbank":
+            # A resposta da baixa e algumas consultas nao trazem todos os campos
+            # do boleto: so atualiza o que veio.
+            data = boleto_response.get("Data", {})
+            fields_map = {
+                "our_number": "NossoNumero",
+                "digitable_line": "LinhaDigitavel",
+                "barcode": "CodigoBarras",
+            }
             boleto_info = {
-                "our_number": boleto_response["Data"]["NossoNumero"],
-                "digitable_line": boleto_response["Data"]["LinhaDigitavel"],
-                "barcode": boleto_response["Data"]["CodigoBarras"],
+                field: data[key] for field, key in fields_map.items() if data.get(key)
             }
 
-            boleto_pdf = boleto_response.get("Data", {}).pop("Base64", False)
+            boleto_pdf = data.pop("Base64", False)
             if boleto_pdf:
                 boleto_info["boleto_pdf"] = boleto_pdf
 
@@ -148,8 +154,29 @@ class PaymentTransaction(models.Model):
             return [self._pinbank_redact(item) for item in data]
         return data
 
+    def _boleto_pinbank_prepare_our_number_payload(self):
+        """Monta o payload das operacoes sobre um boleto ja emitido.
+
+        Consulta e baixa identificam o boleto pelo nosso numero devolvido pelo
+        PinBank na emissao, nunca pela referencia da transacao no Odoo.
+
+        :return: O payload da requisicao.
+        :rtype: dict
+        """
+        self.ensure_one()
+        return {
+            "Data": {
+                "CodigoCanal": self.provider_id.pinbank_channel,
+                "CodigoCliente": self.provider_id.pinbank_client,
+                "NossoNumero": self.our_number,
+            }
+        }
+
     def _send_refund_request(self, amount_to_refund=None):
         """Override of `payment` to send a refund request to PinBank.
+
+        O PinBank nao estorna boleto: o pedido de estorno vira a baixa do boleto
+        no banco, como a anulacao (ver o USAGE do l10n_br_payment_boleto).
 
         Note: self.ensure_one()
 
@@ -162,11 +189,7 @@ class PaymentTransaction(models.Model):
             return refund_tx
 
         # Make the refund request to PinBank.
-        payload = {
-            "CodigoCanal": self.provider_id.pinbank_channel,
-            "CodigoCliente": self.provider_id.pinbank_client,
-            "NossoNumero": self.reference,
-        }
+        payload = self._boleto_pinbank_prepare_our_number_payload()
 
         response_content = refund_tx.provider_id._boleto_pinbank_make_request(
             CANCELAR_BOLETO_ENDPOINT, payload=payload
@@ -179,6 +202,9 @@ class PaymentTransaction(models.Model):
 
     def _send_capture_request(self):
         """Override of `payment` to send a capture request to PinBank.
+
+        Boleto nao tem captura: aqui a captura consulta o status do boleto no
+        banco e atualiza a transacao. E o que o cron e o retorno usam.
 
         Note: self.ensure_one()
 
@@ -194,19 +220,15 @@ class PaymentTransaction(models.Model):
         self._handle_notification_data("boleto_pinbank", response_content)
 
     def _pinbank_check_boleto_status(self):
-        payload = {
-            "Data": {
-                "CodigoCanal": self.provider_id.pinbank_channel,
-                "CodigoCliente": self.provider_id.pinbank_client,
-                "NossoNumero": self.our_number,
-            }
-        }
         return self.provider_id._boleto_pinbank_make_request(
-            CONSULTAR_BOLETO_ENDPOINT, payload=payload
+            CONSULTAR_BOLETO_ENDPOINT,
+            payload=self._boleto_pinbank_prepare_our_number_payload(),
         )
 
     def _send_void_request(self):
         """Override of `payment` to cancel a Pinbank transaction.
+
+        A anulacao pede a baixa do boleto no banco e depois reconsulta o status.
 
         Note: self.ensure_one()
 
@@ -216,13 +238,7 @@ class PaymentTransaction(models.Model):
         if self.provider_code != "boleto_pinbank":
             return res
 
-        payload = {
-            "Data": {
-                "CodigoCanal": self.provider_id.pinbank_channel,
-                "CodigoCliente": self.provider_id.pinbank_client,
-                "NossoNumero": self.our_number,
-            }
-        }
+        payload = self._boleto_pinbank_prepare_our_number_payload()
 
         try:
             # Attempt to cancel the boleto in PinBank.
@@ -296,46 +312,34 @@ class PaymentTransaction(models.Model):
         if provider_code != "boleto_pinbank" or len(tx) == 1:
             return tx
 
+        # O PinBank so conhece o boleto pelo nosso numero que ele mesmo devolveu
+        # na emissao; a referencia da transacao nunca sai do Odoo.
+        our_number = notification_data.get("Data", {}).get("NossoNumero")
+        if not our_number:
+            raise ValidationError(
+                _("Boleto PinBank: Received data with missing reference.")
+            )
+        source_tx = self.search(
+            [
+                ("our_number", "=", our_number),
+                ("provider_code", "=", "boleto_pinbank"),
+                ("operation", "!=", "refund"),
+            ],
+            limit=1,
+        )
+
         entity_type = notification_data.get("entity_type", "payment")
         if entity_type == "payment":
-            reference = notification_data.get("Data", {}).get("NossoNumero", "")
-            if not reference:
-                raise ValidationError(
-                    _("Boleto PinBank: Received data with missing reference.")
-                )
-            tx = self.search(
-                [
-                    ("reference", "=", reference),
-                    ("provider_code", "=", "boleto_pinbank"),
-                ]
+            tx = source_tx
+        elif source_tx:
+            # Estorno iniciado no banco: as transacoes de estorno criadas pelo
+            # Odoo nao passam por aqui, porque sao processadas direto nelas.
+            tx = self._boleto_pinbank_create_refund_tx_from_notification_data(
+                source_tx, notification_data
             )
-        else:  # 'refund'
-            reference = notification_data.get("Data", {}).get("NossoNumero", "")
-            if reference:  # The refund was initiated from Odoo.
-                tx = self.search(
-                    [
-                        ("reference", "=", reference),
-                        ("provider_code", "=", "boleto_pinbank"),
-                    ]
-                )
-            else:  # The refund was initiated from PinBank.
-                # Find the source transaction based on its provider reference.
-                source_tx = self.search(
-                    [
-                        ("provider_reference", "=", notification_data["payment_id"]),
-                        ("provider_code", "=", "boleto_pinbank"),
-                    ]
-                )
-                if source_tx:
-                    # Manually create a refund transaction with a new reference.
-                    tx = self._boleto_pinbank_create_refund_tx_from_notification_data(
-                        source_tx, notification_data
-                    )
-                else:  # The refund was initiated for an unknown source transaction.
-                    pass  # Don't do anything with the refund notification.
         if not tx:
             raise ValidationError(
-                _("Pinbank: No transaction found matching reference %s.", reference)
+                _("Pinbank: No transaction found matching reference %s.", our_number)
             )
 
         return tx
