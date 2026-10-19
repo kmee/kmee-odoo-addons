@@ -12,7 +12,6 @@ class SaleOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         orders = super().create(vals_list)
-        for order in orders:
-            if not order.user_id and order.opportunity_id:
-                order.user_id = order.opportunity_id.user_id
+        for order in orders.filtered(lambda o: not o.user_id and o.opportunity_id):
+            order.user_id = order.opportunity_id.user_id
         return orders
