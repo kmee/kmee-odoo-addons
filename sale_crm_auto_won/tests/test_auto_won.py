@@ -37,6 +37,9 @@ class TestSaleCrmAutoWon(TransactionCase):
         }
         if lead:
             vals["opportunity_id"] = lead.id
+        if "order_sequence" in self.env["sale.order"]._fields:
+            # sale_isolated_quotation: quotations are only confirmed through a wizard
+            vals["order_sequence"] = True
         return self.env["sale.order"].create(vals)
 
     def test_confirm_marks_opportunity_won(self):
@@ -77,17 +80,18 @@ class TestSaleCrmAutoWon(TransactionCase):
         self.assertEqual(order.state, "sale")
         self.assertFalse(other_lead.stage_id.is_won)
 
-    def test_confirm_many_orders_marks_only_linked_opportunities(self):
+    def test_confirm_marks_only_linked_opportunities(self):
         """
         Given two quotations, one linked to an opportunity and one not
-        When both are confirmed together
+        When both are confirmed
         Then only the linked opportunity is won
         """
         lead = self._lead()
         untouched = self._lead("Untouched")
-        orders = self._order(lead) | self._order()
-        orders.action_confirm()
-        self.assertEqual(orders.mapped("state"), ["sale", "sale"])
+        linked, unlinked = self._order(lead), self._order()
+        linked.action_confirm()
+        unlinked.action_confirm()
+        self.assertEqual((linked | unlinked).mapped("state"), ["sale", "sale"])
         self.assertTrue(lead.stage_id.is_won)
         self.assertFalse(untouched.stage_id.is_won)
 
