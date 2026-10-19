@@ -94,7 +94,8 @@ class TestMatchPicking(AccountTestInvoicingCommon):
             picking.action_assign()
             if state == "done":
                 for move in picking.move_ids:
-                    move.quantity_done = move.product_uom_qty
+                    move.quantity = move.product_uom_qty
+                    move.picked = True
                 picking._action_done()
         return picking
 
@@ -218,7 +219,7 @@ class TestMatchPicking(AccountTestInvoicingCommon):
         action = wizard.action_exact_match()
         self.assertEqual(action["res_id"], wizard.id)
         line_a = invoice.invoice_line_ids.filtered(
-            lambda l: l.product_id == self.prod_a
+            lambda line: line.product_id == self.prod_a
         )
         line_b = invoice.invoice_line_ids - line_a
         self.assertEqual(wizard.matching_invoice_line_ids, line_a)
