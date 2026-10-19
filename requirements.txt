@@ -1,5 +1,4 @@
 # generated from manifests external_dependencies
-erpbrasil.assinatura
 erpbrasil.base
 esociallib
 pypdf
