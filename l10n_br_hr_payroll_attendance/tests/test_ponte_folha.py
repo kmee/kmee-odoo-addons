@@ -244,6 +244,37 @@ class TestPonteFolha(TransactionCase):
         self.assertAlmostEqual(tools["ponto"].he_50, 2.0, places=2)
         self.assertGreater(tools["ponto"].dias_uteis, 0)
 
+    def test_usuario_de_folha_le_a_apuracao_do_funcionario(self):
+        """Quem calcula a folha enxerga a apuração sem ser do ponto."""
+        self._marcar(2, (8, 0), (12, 0), (13, 0), (17, 0))
+        self._apurar_marco()
+        usuario = (
+            self.env["res.users"]
+            .with_context(no_reset_password=True, tracking_disable=True)
+            .create(
+                {
+                    "name": "Analista de folha",
+                    "login": "analista_folha_ponte",
+                    "groups_id": [
+                        (
+                            6,
+                            0,
+                            [
+                                self.env.ref("base.group_user").id,
+                                self.env.ref("payroll.group_payroll_user").id,
+                            ],
+                        )
+                    ],
+                }
+            )
+        )
+        dias = (
+            self.env["l10n_br.hr.apuracao.dia"]
+            .with_user(usuario)
+            .search([("employee_id", "=", self.employee.id)])
+        )
+        self.assertTrue(dias)
+
     # ------------------------------------------------------------------
     # Divergência
     # ------------------------------------------------------------------
