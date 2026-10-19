@@ -69,7 +69,7 @@ class TestFracionamentoFerias(VacationCommon):
     def test_dias_direito_sem_write_explicito_nas_faltas(self):
         """Regressão: alocação criada SEM write() explícito em
         l10n_br_faltas_periodo_aquisitivo (só create() com holiday_status_id
-        e datas) precisa computar os 30 dias de direito mesmo assim — o
+        e datas) precisa computar os 30 dias de direito mesmo assim - o
         @api.depends do compute não pode depender apenas do campo de faltas,
         senão a criação direta (sem tocar nas faltas) nunca recomputa e o
         valor fica no default nativo do hr_holidays (1 dia)."""

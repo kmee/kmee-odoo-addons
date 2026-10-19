@@ -28,7 +28,7 @@
             §9º "d"; Lei 8.036/90 art. 15 §6º; IN RFB 1.500/2014 art. 62
             §1º VII/X; Súmulas 125 e 386 do STJ). DEVIDAS em qualquer
             hipótese de rescisão, "qualquer que seja a causa" (CLT art.
-            146, caput) — inclusive na justa causa. Pagas em DOBRO
+            146, caput) - inclusive na justa causa. Pagas em DOBRO
             (CLT art. 137, caput) quando o período concessivo (os 12 meses
             seguintes ao término do período aquisitivo, CLT art. 134,
             caput) já tiver expirado sem gozo.
@@ -39,18 +39,18 @@
             rescisão sem justa causa ou por acordo (CLT art. 484-A); NÃO há
             aviso indenizado devido pelo empregador em pedido de demissão
             (CLT art. 487 §1º x §2º) nem em justa causa. NÃO incide INSS
-            (fundamento hoje é jurisprudencial — STJ, Tema 478 dos
-            repetitivos, REsp 1.230.957/RS — já que a Lei 9.528/97 retirou
+            (fundamento hoje é jurisprudencial - STJ, Tema 478 dos
+            repetitivos, REsp 1.230.957/RS - já que a Lei 9.528/97 retirou
             o aviso indenizado da lista de isenções do art. 28 §9º da Lei
             8.212/91; norma administrativa vigente: IN RFB 2.110/2022 art.
             34). NÃO incide IRRF (Lei 7.713/88 art. 6º, caput, V). O FGTS
             (8%) INCIDE sobre o aviso indenizado (Lei 8.036/90 art. 15,
-            caput; CLT art. 487 §§1º e 6º; Súmula 305 TST) — e por isso
+            caput; CLT art. 487 §§1º e 6º; Súmula 305 TST) - e por isso
             também compõe a base da multa de 40%. O REFLEXO do aviso no 13º
             (avos adicionais projetados) segue a tributação normal do 13º
-            desta rescisão (INS/IRRF/FGTS): a IN RFB 2.110/2022 art. 34
+            desta rescisão (INSS/IRRF/FGTS): a IN RFB 2.110/2022 art. 34
             ressalva que esse reflexo sofre INSS; a incidência do IRRF sobre
-            ele é ponto controvertido nas soluções de consulta da RFB — não
+            ele é ponto controvertido nas soluções de consulta da RFB - não
             criamos aqui uma exceção não fundamentada, e o simplesmente
             tributamos como o restante do 13º proporcional (mais
             conservador que presumir isenção sem base clara).
@@ -59,7 +59,7 @@
             §1º) e não devida em pedido de demissão ou justa causa. Base:
             total depositado na conta vinculada durante o contrato
             (informado manualmente, campo l10n_br_fgts_saldo_conta); sem
-            informação, uma ESTIMATIVA 8% × salário × meses trabalhados
+            informação, uma ESTIMATIVA 8% x salário x meses trabalhados
             (sem juros/correção, documentada como fallback). INDENIZATÓRIA:
             não incide INSS (Lei 8.212/91 art. 28 §9º "e", item 1, que
             remete ao art. 10, I, do ADCT) nem IRRF (Lei 7.713/88 art. 6º V;
@@ -70,10 +70,10 @@
             20%; pedido de demissão e justa causa: nenhum dos dois) e exclui
             as férias proporcionais na justa causa (mas não o 13º
             proporcional, que só é excluído na justa causa por dispositivo
-            próprio — Lei 4.090/62 art. 3º — nem as férias vencidas, sempre
+            próprio - Lei 4.090/62 art. 3º - nem as férias vencidas, sempre
             devidas por força do art. 146 caput da CLT).
 
-        MÉDIA DE VERBAS VARIÁVEIS HABITUAIS (RF-18) — mesma regra do
+        MÉDIA DE VERBAS VARIÁVEIS HABITUAIS (RF-18) - mesma regra do
         cabeçalho de hr_salary_rule_ferias_data.xml: 13º da rescisão, férias
         proporcionais e férias vencidas somam a média das horas extras
         habituais e do adicional noturno dos últimos 12 meses (Súmula 45
@@ -83,7 +83,7 @@
 
         LACUNA REMANESCENTE (fora desta onda, documentada no relatório):
         desconto do aviso prévio não cumprido pelo empregado em pedido de
-        demissão (CLT art. 487 §2º) — este módulo não gera esse desconto.
+        demissão (CLT art. 487 §2º) - este módulo não gera esse desconto.
 
         Convenção de sinais: proventos positivos; DED positivo subtraído;
         NET = proventos - descontos. FGTS é COMP (não afeta o NET).
@@ -120,7 +120,7 @@
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
 # Dias de vigência do contrato dentro do período do holerite (mês
-# comercial de 30 dias) — cobre tanto a rescisão em qualquer dia do mês
+# comercial de 30 dias) - cobre tanto a rescisão em qualquer dia do mês
 # quanto o contrato iniciado no MEIO do mês (tools.br.dias_trabalhados_mes
 # já balanceia contra contract.date_start e contract.date_end).
 dias = tools.br.dias_trabalhados_mes(contract)
@@ -171,7 +171,7 @@ result = tools.br.round_money(FERIAS_INDENIZADAS / 3)
     </record>
 
     <!-- Férias VENCIDAS (período aquisitivo completo e não gozado),
-         devidas em QUALQUER hipótese de rescisão (CLT art. 146, caput) —
+         devidas em QUALQUER hipótese de rescisão (CLT art. 146, caput) -
          inclusive na justa causa. Paga em dobro se o período concessivo já
          expirou sem gozo (CLT art. 137, caput). INDENIZATÓRIA: mesmas
          isenções das proporcionais (ver cabeçalho). -->
@@ -253,14 +253,15 @@ result = AVISO_PREVIO_INDENIZADO > 0
         </field>
         <field name="amount_select">code</field>
         <field name="amount_python_compute">
-result = tools.br.round_money(AVISO_PREVIO_INDENIZADO * 0.08)
+# 2% no contrato de aprendizagem (Lei 8.036/90, art. 15, par. 7).
+result = tools.br.round_money(AVISO_PREVIO_INDENIZADO * (0.02 if employee.l10n_br_tipo_contrato == 'aprendiz' else 0.08))
         </field>
     </record>
 
     <!-- Multa de 40% do FGTS (Lei 8.036/90 art. 18 §1º), 20% no acordo
          (CLT art. 484-A, I, "b"). Base: saldo informado da conta vinculada
-         ou, na ausência, estimativa 8% × salário × meses trabalhados
-         (fallback documentado, sem juros/correção — subestima o saldo
+         ou, na ausência, estimativa 8% x salário x meses trabalhados
+         (fallback documentado, sem juros/correção - subestima o saldo
          real). INDENIZATÓRIA: sem INSS (Lei 8.212/91 art. 28 §9º "e", 1,
          c/c ADCT art. 10, I) nem IRRF (Lei 7.713/88 art. 6º V; Lei
          8.036/90 art. 28). -->
@@ -279,11 +280,12 @@ if payslip.l10n_br_fgts_saldo_conta:
     base = payslip.l10n_br_fgts_saldo_conta
 else:
     # Fallback documentado: 8% do salário por mês trabalhado, sem
-    # juros/correção monetária — subestima o saldo real da conta
+    # juros/correção monetária - subestima o saldo real da conta
     # vinculada. Preencher l10n_br_fgts_saldo_conta com o extrato do FGTS
     # Digital sempre que disponível.
     meses = tools.br.meses_trabalhados(contract.date_start, payslip.date_to)
-    base = tools.br.round_money(contract.wage * 0.08 * meses)
+    aliq_fgts = 0.02 if employee.l10n_br_tipo_contrato == 'aprendiz' else 0.08
+    base = tools.br.round_money(contract.wage * aliq_fgts * meses)
 percentual = 0.20 if payslip.l10n_br_tipo_rescisao == 'acordo' else 0.40
 result = tools.br.round_money(base * percentual)
         </field>
@@ -309,7 +311,7 @@ result = tools.br.calc_inss(max(SALDO_SALARIO, 0))
     </record>
 
     <!-- INSS sobre o 13º proporcional (incidência separada). Só dispara
-         quando o 13º é devido (não devido na justa causa — ver
+         quando o 13º é devido (não devido na justa causa - ver
          hr_rule_decimo_rescisao): DECIMO_RESCISAO já vem 0 nesse caso. -->
     <record id="hr_rule_inss_13_rescisao" model="hr.salary.rule">
         <field name="name">INSS (13º Rescisão)</field>

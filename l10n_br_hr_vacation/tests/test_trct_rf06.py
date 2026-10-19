@@ -1,12 +1,12 @@
 # Copyright 2024 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 """
-Testes: TRCT completo (RF-06) — verbas rescisórias por tipo de rescisão.
+Testes: TRCT completo (RF-06) - verbas rescisórias por tipo de rescisão.
 
 Cada teste confere o TRCT LINHA A LINHA: os valores esperados são
 recalculados de forma INDEPENDENTE (funções puras de salary_rules_br +
 tabelas fiscais vigentes lidas do banco), não apenas repetindo a fórmula da
-regra XML. Isso valida que a regra usa a variável/condição corretas — não
+regra XML. Isso valida que a regra usa a variável/condição corretas - não
 só que a função pura está certa (essa é coberta em outro lugar).
 """
 from datetime import date
@@ -45,7 +45,7 @@ class TestTRCTSemJustaCausa(VacationCommon):
         # Divisor da jornada do próprio ambiente (RF-26); lido em vez de
         # fixado, para não presumir 220 se o calendário padrão for outro.
         self.divisor = self.contract._l10n_br_divisor_horas_mensais()
-        # 12 meses anteriores com hora extra 50% HABITUAL (8h/mês) — RF-18.
+        # 12 meses anteriores com hora extra 50% HABITUAL (8h/mês) - RF-18.
         self.valores_he = []
         for i in range(12, 0, -1):
             ref = self.date_to - relativedelta(months=i)
@@ -116,7 +116,7 @@ class TestTRCTSemJustaCausa(VacationCommon):
         self.assertEqual(self.rescisao._l10n_br_dias_aviso_previo(), 36)
 
     def test_02_saldo_de_salario(self):
-        """Saldo = dias de vigência no mês (1 a 20/08) × salário/30. Sem média."""
+        """Saldo = dias de vigência no mês (1 a 20/08) x salário/30. Sem média."""
         dias = dias_trabalhados_mes(
             self.rescisao.date_from, self.rescisao.date_to, self.date_start, None
         )
@@ -193,7 +193,7 @@ class TestTRCTSemJustaCausa(VacationCommon):
         self.assertAlmostEqualMoney(self.g("FGTS_AVISO"), round_money(esperado * 0.08))
 
     def test_08_multa_40_por_cento_fgts_fallback(self):
-        """Sem saldo informado: fallback 8% × salário × meses trabalhados."""
+        """Sem saldo informado: fallback 8% x salário x meses trabalhados."""
         meses = calc_meses_trabalhados(self.date_start, self.date_to)
         base_esperada = round_money(self.wage * 0.08 * meses)
         multa_esperada = round_money(base_esperada * 0.40)
@@ -305,7 +305,7 @@ class TestTiposDeRescisao(VacationCommon):
 
     def test_justa_causa_ferias_vencidas_continuam_devidas(self):
         """CLT art. 146, caput: vencidas são devidas "qualquer que seja a
-        causa" — inclusive na justa causa."""
+        causa" - inclusive na justa causa."""
         emp = self._create_employee("Justa Causa Vencidas")
         contract = self._create_contract(emp, wage=3000.00, date_start=date(2023, 1, 1))
         alloc = self.env["hr.leave.allocation"].create(

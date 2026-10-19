@@ -82,7 +82,7 @@ class TestRescisao(VacationCommon):
         ferias = self._get_line_total(rescisao, "FERIAS_INDENIZADAS")
         adicional = self._get_line_total(rescisao, "ADICIONAL_FERIAS_INDENIZADAS")
         self.assertEqual(rescisao.l10n_br_avos_ferias, 9)
-        self.assertAlmostEqualMoney(ferias, 2250.00)  # 9/12 × 3000
+        self.assertAlmostEqualMoney(ferias, 2250.00)  # 9/12 x 3000
         self.assertAlmostEqualMoney(adicional, 750.00)  # 1/3 de 2250
 
     def test_ferias_indenizadas_isentas(self):

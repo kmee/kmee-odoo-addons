@@ -25,7 +25,7 @@ class HrLeaveAllocation(models.Model):
         holiday_status_id``) mas com ``default=1`` do próprio hr_holidays.
         No ``create()``, o Odoo preenche esse default ANTES do compute
         (``_add_missing_default_values``) e PROTEGE o valor já presente em
-        vals contra recômputo (``env.protecting``) — então uma alocação
+        vals contra recômputo (``env.protecting``) - então uma alocação
         criada só com ``holiday_status_id``/datas (sem tocar em
         ``l10n_br_faltas_periodo_aquisitivo`` à parte) ficava travada em 1
         dia, em vez dos 30/24/18/12 dias de direito (CLT art. 130). Um

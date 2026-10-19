@@ -45,7 +45,7 @@ class TestMediaHabitual(VacationCommon):
         return payslip
 
     def _valor_he_50(self, contract, horas):
-        """Valor da HE 50% (salário-hora × 1,5 × horas), como as regras calculam."""
+        """Valor da HE 50% (salário-hora x 1,5 x horas), como as regras calculam."""
         divisor = contract._l10n_br_divisor_horas_mensais()
         return round(contract.wage / divisor * 1.5 * horas, 2)
 
@@ -176,7 +176,7 @@ class TestMediaHabitual(VacationCommon):
         )
         decimo.compute_sheet()
         # avos_13 conta só os meses do ANO CIVIL da referência (date_to):
-        # com date_to em janeiro/2025, só janeiro conta (1 avo) — não é o
+        # com date_to em janeiro/2025, só janeiro conta (1 avo) - não é o
         # 13º anual cheio (esse seria calculado com referência em 31/12).
         avos = decimo.l10n_br_avos_13
         self.assertGreater(avos, 0)
