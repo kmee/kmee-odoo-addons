@@ -15,7 +15,7 @@
         "base_sparse_field",
     ],
     "data": [
-        "security/payment_term_manual.xml",
+        "security/ir.model.access.csv",
         "views/account_invoice_view.xml",
         "views/account_payment_term_manual_views.xml",
     ],

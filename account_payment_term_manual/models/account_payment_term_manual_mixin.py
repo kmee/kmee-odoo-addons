@@ -26,32 +26,29 @@ class AccountPaymentTermManualMixin(models.AbstractModel):
     )
 
     def _update_manual_payment_term_id(self, term_id):
-        """Check if invoice term has changed and replace manual term if needed."""
-        if self.manual_payment_term_id.mapped("origin_term_id") == term_id:
+        """Replace the manual term by a copy of term_id, if it is not a copy of it."""
+        self.ensure_one()
+        old_manual_term = self.manual_payment_term_id
+        if old_manual_term.origin_term_id == term_id:
             # Do nothing if manual term is already based on current term_id
             return
-
-        self = self.with_context(skip_manual_term_onchange=True)
-
-        # THIS SECTION IS ORDER SENSITIVE!
-        new_manual_term = term_id.copy_data()[0]
-        new_manual_term["origin_term_id"] = term_id.id
-        new_manual_term["active"] = False
-        new_manual_term["note"] = ""
-        # Split creation for term and term.lines
-        new_line_ids = new_manual_term.pop("line_ids")
-        new_manual_term["line_ids"] = False
-
-        # DO NOT MOVE THIS UNLINK
-        self.manual_payment_term_id.line_ids.unlink()
-        self.manual_payment_term_id.unlink()
-        # DO NOT MOVE THIS CREATE
-        manual_term_id = self.manual_payment_term_id.create(new_manual_term)
-        for line in new_line_ids:
-            line[2]["manual_payment_id"] = manual_term_id.id
-        manual_term_id.line_ids = manual_term_id.line_ids.create(
-            nl[2] for nl in new_line_ids
+        manual_term_model = self.env["account.payment.term.manual"].with_context(
+            skip_manual_term_onchange=True
         )
-        self.with_context(skip_manual_term_onchange=True).manual_payment_term_id = (
-            manual_term_id
+
+        vals = term_id.copy_data()[0]
+        vals.update(
+            {
+                "origin_term_id": term_id.id,
+                "active": False,
+                "note": "",
+                # the lines are created with the term, which needs a balance line
+                "line_ids": [
+                    (0, 0, {k: v for k, v in line[2].items() if k != "payment_id"})
+                    for line in vals["line_ids"]
+                ],
+            }
         )
+        self.manual_payment_term_id = manual_term_model.create(vals)
+        # the lines are deleted with the term (ondelete cascade)
+        old_manual_term.unlink()

@@ -5,7 +5,6 @@ from odoo import api, models
 
 
 class AccountMove(models.Model):
-
     _name = "account.move"
     _inherit = [
         "account.move",
@@ -24,15 +23,36 @@ class AccountMove(models.Model):
             self._update_manual_payment_term_id(self.invoice_payment_term_id)
             self.invoice_payment_term_id = new_inv_term_id
 
-    def _compute_needed_terms(self):
-        return super(
-            AccountMove,
-            self.with_context(manual_payment_term_id=self.manual_payment_term_id),
-        )._compute_needed_terms()
-
-    @api.onchange("manual_payment_term_id")
-    def _onchange_manual_payment_term_id(self):
-        self._compute_needed_terms()
+    @api.depends(
+        "manual_payment_term_id",
+        "manual_payment_term_id.has_manual_lines",
+        "manual_payment_term_id.line_ids.value",
+        "manual_payment_term_id.line_ids.value_amount",
+        "manual_payment_term_id.line_ids.months",
+        "manual_payment_term_id.line_ids.days",
+        "manual_payment_term_id.line_ids.end_month",
+        "manual_payment_term_id.line_ids.days_after",
+        "manual_payment_term_id.line_ids.fixed_date",
+    )
+    def _compute_needed_terms(self):  # pylint: disable=missing-return
+        for move in self:
+            super(
+                AccountMove,
+                move.with_context(
+                    manual_payment_term_id=move.manual_payment_term_id.id
+                ),
+            )._compute_needed_terms()
 
     def recompute_payment_lines(self):
-        self._compute_needed_terms()
+        """Synchronize the payment term lines with the manual payment term.
+
+        The sync of the dynamic lines compares the needed terms before and after a
+        change. The change here is in the manual term, which was already
+        considered, so the needed terms are reset to be recomputed inside the sync.
+        """
+        for move in self.filtered(lambda m: m.state == "draft" and m.is_invoice(True)):
+            self.env.cache.set(move, move._fields["needed_terms"], {})
+            self.env.cache.set(move, move._fields["needed_terms_dirty"], True)
+            container = {"records": move}
+            with move._check_balanced(container), move._sync_dynamic_lines(container):
+                move.invalidate_recordset(["needed_terms", "needed_terms_dirty"])

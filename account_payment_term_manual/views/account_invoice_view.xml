@@ -19,7 +19,7 @@
             </xpath>
 
             <xpath
-                expr="//page[@name='receivable_move_line_tab']/field[@name='financial_move_line_ids']"
+                expr="//page[@name='receivable_move_line_tab']/field[@name='due_line_ids']"
                 position="before"
             >
                 <group>
@@ -47,15 +47,20 @@
                             name="value_amount"
                             attrs="{'readonly':[('value','=','balance')]}"
                         />
-                        <field name="nb_days" />
-                        <field name="delay_type" />
+                        <field name="months" />
+                        <field name="days" />
+                        <field name="end_month" />
+                        <field
+                            name="days_after"
+                            attrs="{'invisible': [('end_month', '=', False)]}"
+                        />
                         <field name="fixed_date" />
                     </tree>
                 </field>
             </xpath>
 
             <xpath
-                expr="//page[@name='payable_move_line_tab']/field[@name='financial_move_line_ids']"
+                expr="//page[@name='payable_move_line_tab']/field[@name='due_line_ids']"
                 position="before"
             >
                 <group>
@@ -83,8 +88,13 @@
                             name="value_amount"
                             attrs="{'readonly':[('value','=','balance')]}"
                         />
-                        <field name="nb_days" />
-                        <field name="delay_type" />
+                        <field name="months" />
+                        <field name="days" />
+                        <field name="end_month" />
+                        <field
+                            name="days_after"
+                            attrs="{'invisible': [('end_month', '=', False)]}"
+                        />
                         <field name="fixed_date" />
                     </tree>
                 </field>
