@@ -22,7 +22,7 @@
                     type="object"
                     class="oe_highlight"
                     groups="account.group_account_invoice"
-                    states="settled,except_invoice"
+                    invisible="state not in ('settled', 'except_invoice')"
                 />
                 <button
                     name="action_confirm"
@@ -30,21 +30,21 @@
                     type="object"
                     class="oe_highlight"
                     groups="account.group_account_invoice"
-                    states="invoiced"
+                    invisible="state != 'invoiced'"
                 />
                 <button
                     name="action_except_invoice"
                     string="Invoice Exception"
                     type="object"
                     groups="account.group_account_invoice"
-                    states="settled,invoiced"
+                    invisible="state not in ('settled', 'invoiced')"
                 />
                 <button
                     name="action_settle"
                     string="Set to Settled"
                     type="object"
                     groups="account.group_account_invoice"
-                    states="paid,invoiced,except_invoice,cancel"
+                    invisible="state not in ('paid', 'invoiced', 'except_invoice', 'cancel')"
                 />
             </xpath>
         </field>
