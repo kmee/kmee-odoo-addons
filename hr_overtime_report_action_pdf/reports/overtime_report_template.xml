@@ -46,7 +46,10 @@
             name="report_file"
         >hr_overtime_report_action_pdf.report_overtime_document</field>
         <field name="attachment_use" eval="False" />
-        <field name="binding_model_id" ref="hr_attendance.model_hr_attendance_overtime" />
+        <field
+            name="binding_model_id"
+            ref="hr_attendance.model_hr_attendance_overtime"
+        />
         <field name="binding_type">report</field>
     </record>
 </odoo>
