@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* crm_wip
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-25 14:08+0000\n"
+"PO-Revision-Date: 2025-03-25 14:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: crm_wip
+#: model:ir.model,name:crm_wip.model_crm_stage
+msgid "CRM Stages"
+msgstr "Estágios do CRM"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__cycle_time
+msgid "Cycle Time"
+msgstr "Tempo de Ciclo"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__cycle_time_float
+msgid "Cycle Time Float"
+msgstr "Tempo de Ciclo (Float)"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__flow_efficience
+msgid "Flow Efficience"
+msgstr "Eficiência do Fluxo"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__lead_time
+msgid "Lead Time"
+msgstr "Tempo Total"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__lead_time_float
+msgid "Lead Time Float"
+msgstr "Tempo Total (Float)"
+
+#. module: crm_wip
+#: model:ir.model,name:crm_wip.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Lead/Oportunidade"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__logged_time
+msgid "Logged Time"
+msgstr "Tempo Registrado"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__logged_time_float
+msgid "Logged Time Float"
+msgstr "Tempo Registrado (Float)"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__reaction_time
+msgid "Reaction Time"
+msgstr "Tempo de Reação"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__reaction_time_float
+msgid "Reaction Time Float"
+msgstr "Tempo de Reação (Float)"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__state
+#: model:ir.model.fields,field_description:crm_wip.field_crm_stage__state
+msgid "State"
+msgstr "Estado"
+
+#. module: crm_wip
+#: model_terms:ir.ui.view,arch_db:crm_wip.crm_lead_wip_form
+msgid "WIP"
+msgstr "WIP"
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__wip_ids
+msgid "Wip"
+msgstr "WIP"
