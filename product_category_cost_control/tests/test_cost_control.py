@@ -1,6 +1,7 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from contextlib import ExitStack, contextmanager
 from types import SimpleNamespace
 from unittest.mock import PropertyMock, patch
 
@@ -46,8 +47,12 @@ class TestCategoryCostControl(TransactionCase):
             }
         )
 
+    @contextmanager
     def _fiscal(self, op_type="in", present=FISCAL_FIELDS, **amounts):
-        """Context manager emulating the l10n_br_stock_account move fields."""
+        """Emulate the l10n_br_stock_account fields on stock.move.
+
+        Only the names in ``present`` exist in ``_fields`` inside the block, even
+        when l10n_br_stock_account is installed (full CI suite)."""
         cls = type(self.move)
         operation = SimpleNamespace(fiscal_operation_type=op_type) if op_type else False
         values = {"fiscal_operation_id": operation, **amounts}
@@ -57,18 +62,22 @@ class TestCategoryCostControl(TransactionCase):
             fake[name].name = name
             fake[name].store = False
             fake[name].prefetch = False
-        stack = [patch.dict(cls._fields, fake)]
-        for name, value in values.items():
-            stack.append(
-                patch.object(
-                    cls,
-                    name,
-                    new_callable=PropertyMock,
-                    return_value=value,
-                    create=True,
+        with ExitStack() as stack:
+            stack.enter_context(patch.dict(cls._fields))
+            for name in FISCAL_FIELDS:
+                cls._fields.pop(name, None)
+            cls._fields.update(fake)
+            for name, value in values.items():
+                stack.enter_context(
+                    patch.object(
+                        cls,
+                        name,
+                        new_callable=PropertyMock,
+                        return_value=value,
+                        create=True,
+                    )
                 )
-            )
-        return _Stack(stack)
+            yield
 
     def _baseline(self):
         return super(type(self.move), self.move)._get_price_unit()
@@ -86,9 +95,10 @@ class TestCategoryCostControl(TransactionCase):
         """Given a category with an option but no fiscal operation field on
         the move, When computing the price unit, Then the core value is kept."""
         self.categ.price_control_option = "include_all_taxes"
-        self.assertNotIn("fiscal_operation_id", self.move._fields)
-        self.assertEqual(self.move._get_price_unit(), 7.0)
-        self.assertEqual(self.move._get_price_unit(), self._baseline())
+        with self._fiscal(present=(), amount_taxed=120.0):
+            self.assertNotIn("fiscal_operation_id", self.move._fields)
+            self.assertEqual(self.move._get_price_unit(), 7.0)
+            self.assertEqual(self.move._get_price_unit(), self._baseline())
 
     def test_include_all_taxes_uses_amount_taxed_per_unit(self):
         """Given an inbound fiscal move and include_all_taxes, When computing
@@ -230,17 +240,3 @@ class TestCategoryCostControl(TransactionCase):
         )
         with self.assertRaises(AccessError):
             self.categ.with_user(employee).price_control_option = "include_all_taxes"
-
-
-class _Stack:
-    def __init__(self, patches):
-        self.patches = patches
-
-    def __enter__(self):
-        for p in self.patches:
-            p.start()
-
-    def __exit__(self, *exc):
-        for p in reversed(self.patches):
-            p.stop()
-        return False
