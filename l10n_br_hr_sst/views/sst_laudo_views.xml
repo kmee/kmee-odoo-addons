@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_sst_laudo_view_tree" model="ir.ui.view">
+        <field name="name">l10n_br.sst.laudo.tree</field>
+        <field name="model">l10n_br.sst.laudo</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-success="state == 'vigente'"
+                decoration-muted="state in ('substituido', 'cancelled')"
+            >
+                <field name="name" />
+                <field name="tipo" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="responsavel_id" />
+                <field name="risco_count" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_laudo_view_form" model="ir.ui.view">
+        <field name="name">l10n_br.sst.laudo.form</field>
+        <field name="model">l10n_br.sst.laudo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_vigente"
+                        type="object"
+                        string="Colocar em Vigor"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_voltar_rascunho"
+                        type="object"
+                        string="Voltar a Rascunho"
+                        attrs="{'invisible': [('state', 'in', ('draft', 'cancelled'))]}"
+                    />
+                    <button
+                        name="action_cancelar"
+                        type="object"
+                        string="Cancelar"
+                        attrs="{'invisible': [('state', '=', 'cancelled')]}"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,vigente,substituido"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_riscos"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-exclamation-triangle"
+                        >
+                            <field
+                                name="risco_count"
+                                widget="statinfo"
+                                string="Riscos"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1><field name="name" placeholder="PGR 2026 - Matriz" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tipo" />
+                            <field name="responsavel_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="laudo_anterior_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Fatores de Risco" name="riscos">
+                            <field name="risco_ids" context="{'default_laudo_id': id}">
+                                <tree editable="bottom">
+                                    <field name="ambiente_id" />
+                                    <field name="agente_nocivo_id" />
+                                    <field name="tp_aval" />
+                                    <field name="intensidade" />
+                                    <field name="un_med" />
+                                    <field name="insalubridade" />
+                                    <field name="grau_insalubridade" />
+                                    <field name="periculosidade" />
+                                    <field name="date_from" />
+                                    <field name="date_to" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Ambientes" name="ambientes">
+                            <field
+                                name="ambiente_ids"
+                                widget="many2many_tags"
+                                readonly="1"
+                            />
+                        </page>
+                        <page string="Observações" name="observacao">
+                            <field name="observacao" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_laudo_action" model="ir.actions.act_window">
+        <field name="name">Laudos</field>
+        <field name="res_model">l10n_br.sst.laudo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
