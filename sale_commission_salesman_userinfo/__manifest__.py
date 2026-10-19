@@ -9,6 +9,6 @@
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["commission_salesman"],
+    "depends": ["sale_commission_salesman"],
     "data": ["views/res_users.xml"],
 }
