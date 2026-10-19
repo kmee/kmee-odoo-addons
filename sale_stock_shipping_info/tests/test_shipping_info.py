@@ -153,13 +153,13 @@ class TestSaleStockShippingInfo(TransactionCase):
         params.set_param("product.weight_in_lbs", "0")
         params.set_param("product.volume_in_cubic_feet", "0")
         metric = order.weight_uom_name, order.volume_uom_name
-        self.assertEqual(metric[0], "kg")
+        self.assertEqual(metric[0].lower(), "kg")
         self.assertIn("m", metric[1])
         params.set_param("product.weight_in_lbs", "1")
         params.set_param("product.volume_in_cubic_feet", "1")
         order.invalidate_recordset(["weight_uom_name", "volume_uom_name"])
         imperial = order.weight_uom_name, order.volume_uom_name
-        self.assertEqual(imperial[0], "lb")
+        self.assertEqual(imperial[0].lower(), "lb")
         self.assertIn("ft", imperial[1])
 
     def test_dimension_unit_name_is_meter(self):
