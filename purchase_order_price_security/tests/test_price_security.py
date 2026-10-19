@@ -121,7 +121,7 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
             "//field[@name='order_line']/form//field[@name='price_unit']"
         )
         self.assertEqual(len(nodes), 1)
-        self.assertIn("can_edit_price_purchase", nodes[0].get("modifiers", ""))
+        self.assertIn("can_edit_price_purchase", nodes[0].get("readonly", ""))
         tree = root.xpath("//field[@name='order_line']/tree")[0]
         self.assertIsNone(tree.get("editable"))
         # control: without this module the core tree is editable inline
