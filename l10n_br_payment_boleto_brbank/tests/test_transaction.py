@@ -146,11 +146,11 @@ class TestBrbankTransaction(BrbankTransactionCase):
     def test_report_shows_the_titles(self):
         """O5: digitable line and Pix copy and paste on the invoice."""
         invoice = self._create_invoice()
-        # Rendered from the report template: `_render_qweb_html` is
-        # overridden with a wrong signature by l10n_br_payment_boleto_inter.
-        report = self.env.ref("account.account_invoices")
-        values = report._get_rendering_context(report, invoice.ids, {})
-        html = report._render_template(report.report_name, values).decode()
+        html = (
+            self.env["ir.actions.report"]
+            ._render_qweb_html("account.account_invoices", invoice.ids)[0]
+            .decode()
+        )
         for tx in self._brbank_txs(invoice):
             self.assertIn(tx.digitable_line, html)
             self.assertIn(tx.pix_copia_cola, html)
