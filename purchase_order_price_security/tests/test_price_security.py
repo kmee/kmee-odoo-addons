@@ -15,7 +15,10 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
         cls.editor_group = cls.env.ref(
             "purchase_order_price_security.group_purchase_order_price_editor"
         )
-        groups = "base.group_user,purchase.group_purchase_user"
+        # account invoice: ACL of models used by other modules in the line form
+        groups = (
+            "base.group_user,purchase.group_purchase_user,account.group_account_invoice"
+        )
         cls.buyer = new_test_user(cls.env, login="price_sec_buyer", groups=groups)
         cls.editor = new_test_user(
             cls.env,
@@ -25,7 +28,11 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
         )
         cls.partner = cls.env["res.partner"].create({"name": "Vendor"})
         cls.product = cls.env["product.product"].create(
-            {"name": "Product", "standard_price": 10.0}
+            {
+                "name": "Product",
+                "standard_price": 10.0,
+                "supplier_taxes_id": [(5, 0, 0)],
+            }
         )
         cls.order = cls.env["purchase.order"].create(
             {
@@ -38,6 +45,7 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
                             "product_id": cls.product.id,
                             "product_qty": 1.0,
                             "price_unit": 10.0,
+                            "taxes_id": [(5, 0, 0)],
                         },
                     ),
                     (
@@ -47,6 +55,7 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
                             "product_id": cls.product.id,
                             "product_qty": 3.0,
                             "price_unit": 10.0,
+                            "taxes_id": [(5, 0, 0)],
                         },
                     ),
                 ],
