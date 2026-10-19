@@ -94,7 +94,8 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         Then the exceptions are ignored and the order can be confirmed
         """
         order = self._order_waiting_validation()
-        self.assertEqual(order.validation_status, "pending")
+        # 17.0 reports a review not yet acted upon as waiting
+        self.assertIn(order.validation_status, ("waiting", "pending"))
         order.with_user(self.approver).validate_tier()
         self.assertEqual(order.validation_status, "validated")
         self.assertTrue(order.ignore_exception)
