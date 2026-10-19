@@ -6,7 +6,7 @@ Ponte entre o inventário de riscos e a folha de pagamento.
   judicial podem obrigar a pagar o que o laudo não aponta. Quando contrato e
   laudo divergem, a divergência fica visível no contrato, com campo para a
   justificativa. Prevalece o grau mais gravoso quando há vários riscos, e a
-  vedação de acúmulo da Súmula 364 do TST é respeitada.
+  vedação de acúmulo da art. 193, § 2º, da CLT é respeitada.
 * **GILRAT adicional (aposentadoria especial).** Regra salarial patronal com a
   alíquota da Tabela 02 do eSocial, 12% para 15 anos, 9% para 20 anos e 6% para
   25 anos de exposição, aplicada a quem tem risco ensejador de aposentadoria
