@@ -3,6 +3,7 @@
 
 from . import salary_rules_br
 from . import fiscal_tables
+from . import res_company
 from . import hr_employee
 from . import hr_contract
 from . import hr_payslip

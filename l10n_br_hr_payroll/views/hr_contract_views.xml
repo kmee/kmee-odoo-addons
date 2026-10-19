@@ -14,6 +14,9 @@
                         attrs="{'invisible': [('l10n_br_insalubridade', '=', False)], 'required': [('l10n_br_insalubridade', '=', True)]}"
                     />
                 </group>
+                <group string="Encargos Patronais" name="l10n_br_hr_encargos">
+                    <field name="l10n_br_hr_simples_anexo" />
+                </group>
             </xpath>
         </field>
     </record>

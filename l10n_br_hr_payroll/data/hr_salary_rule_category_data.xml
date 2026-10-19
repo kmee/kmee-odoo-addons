@@ -30,4 +30,18 @@
         <field name="name">Informativo</field>
         <field name="code">INFO</field>
     </record>
+    <!--
+        Provisões de férias e 13º (com os encargos patronais sobre a
+        provisão). Categoria própria, separada de COMP, por duas razões:
+          - são custo por competência ainda NÃO devido (passivo estimado), e
+            não encargo do mês a recolher; somá-las ao total de encargos
+            patronais do holerite daria custo em dobro na leitura;
+          - a contabilização é outra (despesa de provisão x provisão a pagar),
+            o que fica explícito com a categoria separada.
+        Como as demais categorias fora de BASIC/ALW/DED, não afeta o líquido.
+    -->
+    <record id="hr_salary_rule_category_provisao" model="hr.salary.rule.category">
+        <field name="name">Provisões Trabalhistas</field>
+        <field name="code">PROV</field>
+    </record>
 </odoo>
