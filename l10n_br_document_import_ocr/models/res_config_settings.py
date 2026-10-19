@@ -19,3 +19,7 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.document_import_default_operation_id",
         readonly=False,
     )
+    document_import_default_product_id = fields.Many2one(
+        related="company_id.document_import_default_product_id",
+        readonly=False,
+    )

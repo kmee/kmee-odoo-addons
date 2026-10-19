@@ -10,10 +10,13 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 try:
-    import fitz  # pymupdf
+    import pymupdf as fitz
 except ImportError:
-    fitz = None
-    _logger.info("pymupdf (fitz) not installed; PDF import will be unavailable.")
+    try:
+        import fitz  # pymupdf < 1.24.3
+    except ImportError:
+        fitz = None
+        _logger.info("pymupdf not installed; PDF import will be unavailable.")
 
 try:
     import pytesseract
@@ -28,6 +31,10 @@ MIN_NATIVE_CHARS_PER_PAGE = 80
 # Limite de páginas rasterizadas por documento (performance no onchange).
 MAX_OCR_PAGES = 2
 OCR_DPI = 300
+# Limites defensivos contra arquivo hostil ou gigante (upload não confiável).
+MAX_FILE_BYTES = 20 * 1024 * 1024
+MAX_NATIVE_PAGES = 30
+OCR_TIMEOUT_SECONDS = 60
 
 PDF_MAGIC = b"%PDF"
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
@@ -55,6 +62,11 @@ class OcrEngine(models.AbstractModel):
         :return: (text, method) onde method é "native_text" ou "ocr".
         """
         company = company or self.env.company
+        if len(raw) > MAX_FILE_BYTES:
+            raise UserError(
+                _("O arquivo excede o limite de %d MB para importação.")
+                % (MAX_FILE_BYTES // (1024 * 1024))
+            )
         if mimetype == "application/pdf":
             text = self._pdf_native_text(raw)
             if text is not None:
@@ -81,7 +93,10 @@ class OcrEngine(models.AbstractModel):
         if fitz is None:
             raise UserError(_("A biblioteca pymupdf não está instalada no servidor."))
         with fitz.open(stream=raw, filetype="pdf") as doc:
-            pages = [page.get_text() for page in doc]
+            pages = [
+                doc.load_page(index).get_text()
+                for index in range(min(doc.page_count, MAX_NATIVE_PAGES))
+            ]
         text = "\n".join(pages)
         if pages and len(text) / len(pages) >= MIN_NATIVE_CHARS_PER_PAGE:
             return text
@@ -91,8 +106,8 @@ class OcrEngine(models.AbstractModel):
         """Rasteriza as primeiras páginas do PDF (PNG bytes)."""
         images = []
         with fitz.open(stream=raw, filetype="pdf") as doc:
-            for page in list(doc)[:MAX_OCR_PAGES]:
-                pix = page.get_pixmap(dpi=OCR_DPI)
+            for index in range(min(doc.page_count, MAX_OCR_PAGES)):
+                pix = doc.load_page(index).get_pixmap(dpi=OCR_DPI)
                 images.append(pix.tobytes("png"))
         return images
 
@@ -109,7 +124,11 @@ class OcrEngine(models.AbstractModel):
         texts = []
         for image_bytes in images:
             image = Image.open(io.BytesIO(image_bytes))
-            texts.append(pytesseract.image_to_string(image, lang="por"))
+            texts.append(
+                pytesseract.image_to_string(
+                    image, lang="por", timeout=OCR_TIMEOUT_SECONDS
+                )
+            )
         return "\n".join(texts)
 
     def _ocr_rapidocr(self, images, company):
