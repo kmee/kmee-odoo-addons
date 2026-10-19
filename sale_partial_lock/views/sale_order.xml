@@ -13,7 +13,7 @@
                     name="action_cancel"
                     type="object"
                     string="Cancel"
-                    invisible="state != 'done'"
+                    invisible="not locked or state == 'cancel'"
                 />
             </xpath>
             <xpath
@@ -24,7 +24,7 @@
                     name="%(sale.action_view_sale_advance_payment_inv)d"
                     string="Create Invoice"
                     type="action"
-                    invisible="invoice_status != 'to invoice' and state != 'done'"
+                    invisible="invoice_status != 'to invoice' and not locked"
                 />
             </xpath>
         </field>
