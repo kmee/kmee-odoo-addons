@@ -68,6 +68,7 @@ class TestBoletoInterFlows(BancoInterCommon):
         return self.env["payment.transaction"].create(
             {
                 "provider_id": self.provider.id,
+                "payment_method_id": self.env.ref("payment.payment_method_boleto").id,
                 "reference": values.pop("reference", "BOL-0001"),
                 "amount": values.pop("amount", 150.0),
                 "currency_id": self.currency.id,
@@ -249,6 +250,7 @@ class TestBoletoInterAccess(BancoInterCommon, HttpCase):
         self.tx = self.env["payment.transaction"].create(
             {
                 "provider_id": self.provider.id,
+                "payment_method_id": self.env.ref("payment.payment_method_boleto").id,
                 "reference": "BOL-ACCESS",
                 "amount": 10.0,
                 "currency_id": self.env.ref("base.BRL").id,
@@ -307,6 +309,7 @@ class TestBoletoInterReport(BancoInterCommon):
         return self.env["payment.transaction"].create(
             {
                 "provider_id": self.provider.id,
+                "payment_method_id": self.env.ref("payment.payment_method_boleto").id,
                 "reference": reference,
                 "amount": 10.0,
                 "currency_id": self.env.ref("base.BRL").id,

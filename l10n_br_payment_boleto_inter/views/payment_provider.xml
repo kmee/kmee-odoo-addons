@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_payment_provider_form_inter" model="ir.ui.view">
         <field name="name">payment.provider.form.inter</field>
@@ -5,7 +6,7 @@
         <field name="inherit_id" ref="payment.payment_provider_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='credentials']" position="inside">
-                <group attrs="{'invisible':[('code','!=','inter')]}">
+                <group invisible="code != 'inter'">
                     <field name="inter_conta_corrente" />
                     <field name="inter_client_id" />
                     <field name="inter_client_secret" />
