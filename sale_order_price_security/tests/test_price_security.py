@@ -114,8 +114,7 @@ class TestSaleOrderPriceSecurity(TransactionCase):
         nodes = self._line_nodes(self.salesman)
         self.assertEqual(len(nodes), 2)
         for node in nodes:
-            self.assertIn("can_edit_price_sale", node.get("modifiers", ""))
-            self.assertIn("readonly", node.get("modifiers", ""))
+            self.assertIn("can_edit_price_sale", node.get("readonly", ""))
         # control: the core view alone has no such rule
         core = self.env.ref("sale.view_order_form").arch_db
         self.assertNotIn("can_edit_price_sale", core)
