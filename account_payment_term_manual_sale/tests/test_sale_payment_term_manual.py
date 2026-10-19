@@ -32,8 +32,14 @@ class TestSalePaymentTermManual(TransactionCase):
         )
 
     def _sale_order(self):
+        vals = {}
+        if "fiscal_operation_id" in self.env["sale.order"]._fields:
+            # com o l10n_br_sale instalado (suite completa) o faturamento segue o
+            # caminho fiscal; estes testes cobrem o fluxo padrao do Odoo
+            vals["fiscal_operation_id"] = False
         order = self.env["sale.order"].create(
             {
+                **vals,
                 "partner_id": self.customer.id,
                 "payment_term_id": self.term.id,
                 "order_line": [
