@@ -100,8 +100,7 @@ class HelpdeskTicketStageDurationReport(models.Model):
     def init(self):
         """Initialize the report view"""
         tools.drop_view_if_exists(self._cr, "helpdesk_ticket_stage_duration_report")
-        self._cr.execute(
-            """
+        self._cr.execute("""
             CREATE OR REPLACE VIEW helpdesk_ticket_stage_duration_report AS (
                 WITH stage_stats AS (
                     SELECT
@@ -154,5 +153,4 @@ class HelpdeskTicketStageDurationReport(models.Model):
                 WHERE ticket_count > 0
                 ORDER BY team_id, stage_id
             )
-            """
-        )
+            """)
