@@ -48,6 +48,9 @@ class TestStockInvoiceOnshipping(TransactionCase):
             # com o l10n_br_sale instalado (suite completa) o faturamento segue o
             # caminho fiscal; estes testes cobrem o fluxo padrao do Odoo
             vals["fiscal_operation_id"] = False
+        if "order_sequence" in self.env["sale.order"]._fields:
+            # com a cotacao isolada instalada, so o pedido com sequencia propria confirma
+            vals["order_sequence"] = True
         order = self.env["sale.order"].create(
             {
                 **vals,
