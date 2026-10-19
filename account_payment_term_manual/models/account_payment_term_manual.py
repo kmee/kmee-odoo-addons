@@ -17,15 +17,15 @@ class AccountPaymentTermManual(models.Model):
                 {
                     "value": "balance",
                     "value_amount": 0.0,
-                    "nb_days": 0,
-                    "delay_type": "days_after",
+                    "days": 0,
+                    "end_month": False,
                 },
             )
         ]
 
     origin_term_id = fields.Many2one(
         comodel_name="account.payment.term",
-        string="Payment Terms",
+        string="Original Payment Terms",
         required=False,
     )
 
@@ -41,17 +41,26 @@ class AccountPaymentTermManual(models.Model):
         default=_default_line_ids,
     )
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_referenced_terms(self):
+        """The ids of this model are not ids of payment terms.
+
+        The check of the payment term would block the deletion of manual terms that
+        have the same id of a payment term used in an invoice.
+        """
+
     def unlink(self):
+        # skip the cleanup of ir.property, it is made for payment terms only
         return super(models.Model, self).unlink()
 
     def set_as_edited(self):
-        if self.has_manual_lines:
-            return
-        if self.env.context.get("skip_manual_term_onchange"):
-            return
-
-        self.has_manual_lines = True
-        self.name += " (edited)"
+        for term in self:
+            if term.has_manual_lines or self.env.context.get(
+                "skip_manual_term_onchange"
+            ):
+                continue
+            term.has_manual_lines = True
+            term.name += " (edited)"
 
 
 class AccountPaymentTermLineManual(models.Model):
@@ -61,7 +70,7 @@ class AccountPaymentTermLineManual(models.Model):
 
     manual_payment_id = fields.Many2one(
         "account.payment.term.manual",
-        string="Payment Terms",
+        string="Manual Payment Terms",
         required=True,
         index=True,
         ondelete="cascade",
@@ -73,30 +82,24 @@ class AccountPaymentTermLineManual(models.Model):
         required=False,
     )
 
-    fixed_date = fields.Date()
-
-    delay_type = fields.Selection(
-        selection_add=[("custom", "Custom")],
-        ondelete={
-            "custom": "set default",
-        },
+    fixed_date = fields.Date(
+        help="When set, it is the due date, regardless of the months and days.",
     )
+
+    def _get_due_date(self, date_ref):
+        self.ensure_one()
+        if self.fixed_date:
+            return self.fixed_date
+        return super()._get_due_date(date_ref)
 
     @api.constrains(
         "value",
         "value_amount",
-        "nb_days",
-        "delay_type",
+        "months",
+        "days",
+        "end_month",
+        "days_after",
         "fixed_date",
     )
     def _check_manual_payment_term_id(self):
-        for record in self:
-            if record.fixed_date and record.delay_type != "custom":
-                record.delay_type = "custom"
         self.manual_payment_id.set_as_edited()
-
-    @api.onchange("fixed_date")
-    def _onchange_fixed_date(self):
-        for record in self:
-            if record.fixed_date:
-                record.delay_type = "custom"

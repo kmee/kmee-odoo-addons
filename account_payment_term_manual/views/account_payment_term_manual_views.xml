@@ -9,11 +9,16 @@
                 <tree editable="bottom">
                     <field name="value" string="Due Type" />
                     <field
-                        name="value_amount"
-                        attrs="{'readonly':[('value','=','balance')]}"
-                    />
-                    <field name="nb_days" />
-                    <field name="delay_type" />
+                    name="value_amount"
+                    attrs="{'readonly':[('value','=','balance')]}"
+                />
+                    <field name="months" />
+                    <field name="days" />
+                    <field name="end_month" />
+                    <field
+                    name="days_after"
+                    attrs="{'invisible': [('end_month', '=', False)]}"
+                />
                     <field name="fixed_date" />
                 </tree>
             </field>
@@ -31,18 +36,18 @@
                         </group>
                         <group>
                             <div
-                                attrs="{'invisible':[('value','=', 'balance')]}"
-                                class="o_row"
-                            >
+                            attrs="{'invisible':[('value','=', 'balance')]}"
+                            class="o_row"
+                        >
                                 <label
-                                    for="value_amount"
-                                    attrs="{'invisible':[('value','=', 'balance')]}"
-                                />
+                                for="value_amount"
+                                attrs="{'invisible':[('value','=', 'balance')]}"
+                            />
                                 <field name="value_amount" class="oe_inline" />
                                 <span
-                                    class="o_form_label oe_inline"
-                                    attrs="{'invisible':[('value','!=','percent')]}"
-                                >%</span>
+                                class="o_form_label oe_inline"
+                                attrs="{'invisible':[('value','!=','percent')]}"
+                            >%</span>
                             </div>
                         </group>
                     </group>
@@ -51,11 +56,17 @@
                         <group colspan="2">
                             <h2>Due Date Computation</h2>
                             <div colspan="2">
-                                <label for="nb_days" string="Due" />
-                                <field name="nb_days" class="oe_inline" />
-                                <label for="delay_type" string="" />
-                                <field name="delay_type" class="oe_inline" />
+                                <label for="months" string="Due" />
+                                <field name="months" class="oe_inline" />
+                                <span class="o_form_label oe_inline"> months, </span>
+                                <field name="days" class="oe_inline" />
+                                <span class="o_form_label oe_inline"> days</span>
                             </div>
+                            <field name="end_month" />
+                            <field
+                            name="days_after"
+                            attrs="{'invisible': [('end_month', '=', False)]}"
+                        />
                         </group>
 
                         <group colspan="2">
