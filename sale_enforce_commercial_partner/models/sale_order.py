@@ -11,7 +11,7 @@ class SaleOrder(models.Model):
     def _compute_partner_invoice_id(self):
         result = super()._compute_partner_invoice_id()
         for order in self:
-            if order.partner_invoice_id.company_type == "person":
+            if not order.partner_invoice_id.is_company:
                 addr = order.partner_id.commercial_partner_id.address_get(["invoice"])
                 if addr.get("invoice"):
                     order.partner_invoice_id = addr["invoice"]
@@ -21,7 +21,7 @@ class SaleOrder(models.Model):
     def _compute_partner_shipping_id(self):
         result = super()._compute_partner_shipping_id()
         for order in self:
-            if order.partner_shipping_id.company_type == "person":
+            if not order.partner_shipping_id.is_company:
                 addr = order.partner_id.commercial_partner_id.address_get(["delivery"])
                 if addr.get("delivery"):
                     order.partner_shipping_id = addr["delivery"]
