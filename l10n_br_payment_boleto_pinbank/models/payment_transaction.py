@@ -258,7 +258,7 @@ class PaymentTransaction(models.Model):
         """
         super()._get_specific_rendering_values(processing_values)
 
-        boleto_data = self._generate_boleto_pinbank()
+        boleto_data = self._send_payment_request()
 
         # Initiate the payment
         base_url = self.provider_id.get_base_url()
