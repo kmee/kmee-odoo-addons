@@ -5,7 +5,7 @@
     "name": "Sale Commission Settlement Report Xlsx",
     "summary": """
         Settings to customize the settlement report in xlsx""",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
