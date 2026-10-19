@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_employee_view_form_sst_epi" model="ir.ui.view">
+        <field name="name">hr.employee.form (in l10n_br_hr_sst_epi)</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_l10n_br_sst_epi"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-shield"
+                    groups="hr.group_hr_user"
+                >
+                    <field
+                        name="l10n_br_sst_epi_count"
+                        widget="statinfo"
+                        string="EPIs"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

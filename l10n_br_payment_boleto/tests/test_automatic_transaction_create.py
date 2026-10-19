@@ -1,5 +1,6 @@
 from unittest.mock import patch
 
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, tagged
 
 
@@ -23,7 +24,13 @@ class TestL10nBrPaymentBoleto(TransactionCase):
                 "name": "Test Payment Mode",
                 "bank_account_link": "fixed",
                 "fixed_journal_id": self.env["account.journal"]
-                .search([("code", "=", "CSH1")])
+                .search(
+                    [
+                        ("type", "in", ("bank", "cash")),
+                        ("company_id", "=", self.env.company.id),
+                    ],
+                    limit=1,
+                )
                 .id,
                 "generate_boletos_on_invoice": True,
                 "payment_provider_id": self.payment_provider.id,
@@ -110,3 +117,38 @@ class TestL10nBrPaymentBoleto(TransactionCase):
 
             # Assert that generate_boletos was not called
             mock_generate_boletos.assert_not_called()
+
+    def test_generate_boletos_of_several_invoices(self):
+        """
+        Test the generation of boletos when several invoices are posted at once.
+
+        `action_post` receives a recordset whenever the user confirms invoices
+        from the list view or a job posts them in batch. Reading
+        `payment_mode_id` off the whole recordset raised a singleton error, so
+        no boleto was generated and the posting itself failed.
+
+        Expected Result:
+        - `generate_boletos` is called once for each invoice of the recordset.
+        """
+        other_move = self.account_move.copy()
+        moves = self.account_move | other_move
+
+        with patch(
+            "odoo.addons.l10n_br_payment_boleto.models.account_move."
+            "AccountMove.generate_boletos"
+        ) as mock_generate_boletos:
+            moves.action_post()
+
+            self.assertEqual(mock_generate_boletos.call_count, 2)
+
+    def test_generate_boletos_without_provider(self):
+        """
+        Test that a payment mode without provider is reported to the user.
+
+        Expected Result:
+        - Posting the invoice raises a UserError naming the missing provider.
+        """
+        self.payment_mode.payment_provider_id = False
+
+        with self.assertRaises(UserError):
+            self.account_move.action_post()

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        Lotes de holerite (hr.payslip.run) da demonstração.
+
+        Dois meses consecutivos, deliberadamente em estados diferentes para que
+        a demo mostre o ciclo de vida completo e não só o rascunho:
+
+          - Lote 03: FECHADO, com todos os holerites confirmados (done).
+          - Lote 04: ABERTO, com os holerites já calculados (verify), pronto
+            para o roteiro "revisar e confirmar" na tela.
+
+        A competência é sempre o ano corrente (time.strftime), de modo que as
+        tabelas fiscais resolvidas sejam as vigentes (INSS, IRRF, salário
+        família), sem precisar reeditar a demo a cada virada de ano.
+    -->
+
+    <record id="demo_payslip_run_03" model="hr.payslip.run">
+        <field name="name" eval="time.strftime('Folha 03/%Y')" />
+        <field name="date_start" eval="time.strftime('%Y-03-01')" />
+        <field name="date_end" eval="time.strftime('%Y-03-31')" />
+        <field
+            name="slip_ids"
+            eval="[(6, 0, [
+                ref('demo_payslip_joao'),
+                ref('demo_payslip_maria'),
+                ref('demo_payslip_pedro'),
+                ref('demo_payslip_ana'),
+                ref('demo_payslip_lucas'),
+                ref('demo_payslip_carla'),
+                ref('demo_payslip_renata'),
+                ref('demo_payslip_josefa'),
+            ])]"
+        />
+    </record>
+
+    <record id="demo_payslip_run_04" model="hr.payslip.run">
+        <field name="name" eval="time.strftime('Folha 04/%Y')" />
+        <field name="date_start" eval="time.strftime('%Y-04-01')" />
+        <field name="date_end" eval="time.strftime('%Y-04-30')" />
+        <field
+            name="slip_ids"
+            eval="[(6, 0, [
+                ref('demo_payslip_joao_04'),
+                ref('demo_payslip_maria_04'),
+                ref('demo_payslip_pedro_04'),
+                ref('demo_payslip_ana_04'),
+                ref('demo_payslip_lucas_04'),
+                ref('demo_payslip_carla_04'),
+                ref('demo_payslip_renata_04'),
+                ref('demo_payslip_josefa_04'),
+            ])]"
+        />
+    </record>
+
+    <!--
+        Calcula TODOS os holerites da demo (inclusive os meses do João fora dos
+        lotes). Sem isto os holerites ficam em rascunho e sem linhas: as telas
+        de folha abrem vazias. Até aqui a chamada só existia no demo do
+        l10n_br_hr_vacation, então instalar apenas este módulo não calculava nada.
+    -->
+    <function model="hr.payslip" name="_demo_compute_payslips" />
+
+    <!-- Fecha o lote de março (holerites confirmados). -->
+    <function
+        model="hr.payslip.run"
+        name="_demo_confirm_runs"
+        eval="[[ref('demo_payslip_run_03')]]"
+    />
+
+</odoo>

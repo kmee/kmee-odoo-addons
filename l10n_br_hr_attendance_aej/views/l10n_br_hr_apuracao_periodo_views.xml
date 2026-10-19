@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_apuracao_periodo_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.periodo</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_gerar_aej"
+                    type="object"
+                    string="Gerar AEJ"
+                    class="oe_highlight"
+                    attrs="{'invisible': [('state', '!=', 'fechado')]}"
+                />
+                <button
+                    name="action_imprimir_espelho"
+                    type="object"
+                    string="Espelho de ponto"
+                    attrs="{'invisible': [('state', '=', 'aberto')]}"
+                />
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group string="Arquivos da fiscalização (arts. 82 a 85)">
+                    <group>
+                        <field name="fuso_horas" />
+                        <field name="aej_date" />
+                    </group>
+                    <group>
+                        <field
+                            name="aej_file"
+                            filename="aej_filename"
+                            attrs="{'invisible': [('aej_file', '=', False)]}"
+                        />
+                        <field name="aej_filename" invisible="1" />
+                        <field
+                            name="aej_p7s"
+                            filename="aej_p7s_filename"
+                            attrs="{'invisible': [('aej_p7s', '=', False)]}"
+                        />
+                        <field name="aej_p7s_filename" invisible="1" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

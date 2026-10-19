@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_br_sst_ca_user,l10n_br.sst.ca user,model_l10n_br_sst_ca,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_ca_manager,l10n_br.sst.ca manager,model_l10n_br_sst_ca,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_ca_hr_user,l10n_br.sst.ca hr user,model_l10n_br_sst_ca,hr.group_hr_user,1,1,1,0
+access_l10n_br_sst_ca_employee,l10n_br.sst.ca employee,model_l10n_br_sst_ca,base.group_user,1,0,0,0

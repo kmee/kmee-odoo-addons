@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_hr_sefip_form" model="ir.ui.view">
+        <field name="name">l10n_br.hr.sefip.form</field>
+        <field name="model">l10n_br.hr.sefip</field>
+        <field name="arch" type="xml">
+            <form string="SEFIP">
+                <header>
+                    <button
+                        name="action_gerar_sefip"
+                        string="Gerar SEFIP (descontinuado)"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_sent"
+                        string="Marcar como Enviado"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'open')]}"
+                    />
+                    <button
+                        name="action_draft"
+                        string="Voltar para Rascunho"
+                        type="object"
+                        attrs="{'invisible': [('state', '=', 'draft')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="alert alert-warning" role="alert">
+                        <strong>SEFIP substituída pelo FGTS Digital.</strong>
+                        Pela Portaria MTE 3.240/2023, desde a competência
+                        03/2024 a guia do FGTS (GFD) é emitida pelo FGTS Digital
+                        a partir dos eventos do eSocial, e as contribuições
+                        previdenciárias vão pela DCTFWeb. A geração de arquivo
+                        está desativada; esta tela serve apenas para consultar o
+                        histórico já gerado.
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" />
+                            <field name="mes" />
+                            <field name="ano" />
+                        </group>
+                        <group>
+                            <field name="codigo_recolhimento" />
+                            <field name="modalidade_arquivo" />
+                            <field name="recolhimento_fgts" />
+                            <field name="recolhimento_gps" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="codigo_fpas" />
+                            <field name="codigo_outras_entidades" />
+                            <field name="centralizadora" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Holerites">
+                            <field name="payslip_ids" />
+                        </page>
+                        <page string="Arquivo SEFIP">
+                            <field name="file_binary" filename="file_name" />
+                            <field name="file_name" invisible="1" />
+                            <field name="file_content" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_sefip_tree" model="ir.ui.view">
+        <field name="name">l10n_br.hr.sefip.tree</field>
+        <field name="model">l10n_br.hr.sefip</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="mes" />
+                <field name="ano" />
+                <field name="company_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_sefip_action" model="ir.actions.act_window">
+        <field name="name">SEFIP</field>
+        <field name="res_model">l10n_br.hr.sefip</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

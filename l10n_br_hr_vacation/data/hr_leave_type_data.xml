@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Tipo de ausência: Férias CLT -->
+    <record id="leave_type_ferias" model="hr.leave.type">
+        <field name="name">Férias</field>
+        <field name="requires_allocation">yes</field>
+        <field name="request_unit">day</field>
+    </record>
+</odoo>

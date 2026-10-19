@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_totalizador_linha_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.totalizador.linha.tree</field>
+        <field name="model">l10n_br.esocial.totalizador.linha</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0">
+                <field name="tipo" optional="show" />
+                <field name="per_apur" optional="show" />
+                <field name="employee_id" optional="hide" />
+                <field name="grupo" />
+                <field name="codigo" />
+                <field name="descricao" />
+                <field name="matricula" optional="hide" />
+                <field name="cod_categ" optional="hide" />
+                <field name="cod_lotacao" optional="hide" />
+                <field name="nr_insc" optional="hide" />
+                <field name="ind_13" optional="hide" />
+                <field name="per_ref" optional="hide" />
+                <field name="valor" sum="Total" />
+                <field name="currency_id" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_totalizador_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.totalizador.tree</field>
+        <field name="model">l10n_br.esocial.totalizador</field>
+        <field name="arch" type="xml">
+            <tree create="0">
+                <field name="tipo" />
+                <field name="per_apur" />
+                <field name="employee_id" />
+                <field name="cpf_trab" optional="hide" />
+                <field name="nr_rec_arq_base" />
+                <field name="evento_id" />
+                <field name="linha_count" string="Valores" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_totalizador_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.totalizador.form</field>
+        <field name="model">l10n_br.esocial.totalizador</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Identificação">
+                            <field name="tipo" readonly="1" />
+                            <field name="per_apur" readonly="1" />
+                            <field name="ind_apuracao" readonly="1" />
+                            <field name="nr_rec_arq_base" readonly="1" />
+                            <field name="ind_exist_info" readonly="1" />
+                            <field name="id_evento" readonly="1" />
+                        </group>
+                        <group string="Origem">
+                            <field name="evento_id" readonly="1" />
+                            <field name="evento_tipo" readonly="1" />
+                            <field name="employee_id" readonly="1" />
+                            <field name="cpf_trab" readonly="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                                readonly="1"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Valores Apurados" name="linhas">
+                            <field name="linha_ids" readonly="1">
+                                <tree>
+                                    <field name="grupo" />
+                                    <field name="codigo" />
+                                    <field name="descricao" />
+                                    <field name="matricula" optional="hide" />
+                                    <field name="cod_categ" optional="hide" />
+                                    <field name="cod_lotacao" optional="hide" />
+                                    <field name="ind_13" optional="hide" />
+                                    <field name="per_ref" optional="hide" />
+                                    <field name="valor" sum="Total" />
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="XML" name="xml">
+                            <field
+                                name="xml"
+                                widget="ace"
+                                options="{'mode': 'xml'}"
+                                readonly="1"
+                            />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_esocial_totalizador_search" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.totalizador.search</field>
+        <field name="model">l10n_br.esocial.totalizador</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="per_apur" />
+                <field name="cpf_trab" />
+                <field name="employee_id" />
+                <field name="nr_rec_arq_base" />
+                <filter
+                    name="por_trabalhador"
+                    string="Por Trabalhador"
+                    domain="[('tipo', 'in', ('S-5001', 'S-5002', 'S-5003'))]"
+                />
+                <filter
+                    name="consolidados"
+                    string="Consolidados"
+                    domain="[('tipo', 'in', ('S-5011', 'S-5012', 'S-5013'))]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_tipo"
+                        string="Tipo"
+                        context="{'group_by': 'tipo'}"
+                    />
+                    <filter
+                        name="group_per_apur"
+                        string="Competência"
+                        context="{'group_by': 'per_apur'}"
+                    />
+                    <filter
+                        name="group_employee"
+                        string="Trabalhador"
+                        context="{'group_by': 'employee_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_esocial_totalizador" model="ir.actions.act_window">
+        <field name="name">Totalizadores eSocial</field>
+        <field name="res_model">l10n_br.esocial.totalizador</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_esocial_totalizador_search" />
+        <field name="context">{'search_default_group_per_apur': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Nenhum totalizador recebido ainda
+            </p>
+            <p>
+                Os totalizadores (S-5001, S-5002, S-5011, S-5012) chegam do
+                governo quando um evento periódico é processado. Eles são a
+                fonte oficial do que foi apurado para a DCTFWeb.
+            </p>
+        </field>
+    </record>
+
+</odoo>
