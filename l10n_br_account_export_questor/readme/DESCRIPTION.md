@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Questor**.
 
 Campos numéricos com zeros à esquerda e a data em dois formatos.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -26,18 +26,18 @@ Campos numéricos com zeros à esquerda e a data em dois formatos.
 | 93-104 | valor | 12, centavos |
 | 105-304 | histórico | 200 |
 
-## Exemplo
+**Exemplo**
 
 ```
  00001000000000000000000000000101202608050 5/08/2026LN DOC123     000000001101000000002201000000150000Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - A data aparece duas vezes, em formatos diferentes.
 - O Questor tem 13 layouts no mercado: este cobre o de lançamentos contábeis.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
