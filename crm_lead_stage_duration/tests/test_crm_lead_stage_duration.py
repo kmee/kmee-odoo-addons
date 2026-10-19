@@ -312,21 +312,23 @@ class TestCrmLeadStageDuration(TransactionCase):
         self.assertEqual(row.avg_duration_display, "3 min, 20 sec")
 
     def test_report_counts_running_lines_up_to_now(self):
-        """Given a line open for an hour, the report counts it as running."""
+        """Given a line open for two hours, the report counts it as running."""
         lead = self._lead(self.stage_c, name="Run")
         self.Line.create(
             {
                 "lead_id": lead.id,
                 "stage_id": self.stage_a.id,
                 "team_id": self.team2.id,
-                "start_date": fields.Datetime.now() - timedelta(hours=1),
+                "start_date": fields.Datetime.now() - timedelta(hours=2),
             }
         )
         row = self._report(self.team2, self.stage_a)
         self.assertEqual(row.running_line_count, 1)
         self.assertEqual(row.closed_line_count, 0)
+        # the view uses the database NOW(), a bit earlier than the python clock
         self.assertGreaterEqual(row.avg_duration_seconds, 3600)
-        self.assertTrue(row.avg_duration_display.startswith("1 hour"))
+        self.assertLess(row.avg_duration_seconds, 7300)
+        self.assertIn("hour", row.avg_duration_display)
 
     def test_report_separates_teams(self):
         """Given the same stage in two teams, the report has one row per team."""
