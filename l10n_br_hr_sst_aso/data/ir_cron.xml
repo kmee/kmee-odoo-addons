@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="cron_agendar_aso_periodico" model="ir.cron">
+        <field name="name">SST: agendar exames periódicos do PCMSO</field>
+        <field
+            name="model_id"
+            ref="hr_employee_medical_examination.model_hr_employee_medical_examination"
+        />
+        <field name="state">code</field>
+        <field name="code">model.cron_agendar_periodicos()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="True" />
+    </record>
+</odoo>
