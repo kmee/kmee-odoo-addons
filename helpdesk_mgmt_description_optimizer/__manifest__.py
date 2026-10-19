@@ -14,8 +14,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "helpdesk_mgmt_description_optimizer/static/src/js/description_optimizer_field.js",
-            "helpdesk_mgmt_description_optimizer/static/src/xml/description_optimizer_field.xml",
+            "helpdesk_mgmt_description_optimizer/static/src/js/description_optimizer_field.js",  # noqa: B950
+            "helpdesk_mgmt_description_optimizer/static/src/xml/description_optimizer_field.xml",  # noqa: B950
         ],
     },
     "installable": True,

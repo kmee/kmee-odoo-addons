@@ -87,6 +87,7 @@ class MailMessage(models.Model):
         summarized, so no stored data is lost.
         """
         self.ensure_one()
+        self.check_access_rights("read")
         self.check_access_rule("read")
         split = split_history(self.body or "")
         if not split:

@@ -22,26 +22,40 @@ _MARKER_REGEX = {
 }
 
 _OUTLOOK_HEADER_TAG = r"(?:b|strong)"
-_OUTLOOK_INNER_TAGS = r"(?:<[^>]+>|\s)*"
+# limitado: evita backtracking quadratico em corpo de e-mail hostil
+_OUTLOOK_INNER_TAGS = r"(?:<[^>]{1,200}>|\s){0,20}"
+_OUTLOOK_OPEN_TAG = r"<" + _OUTLOOK_HEADER_TAG + r"(?:\s[^<>]{0,200})?>"
 
 _OUTLOOK_FROM_LABEL_RE = re.compile(
-    rf"<{_OUTLOOK_HEADER_TAG}[^>]*>{_OUTLOOK_INNER_TAGS}"
-    r"(?:from|de)\s*:"
-    rf"{_OUTLOOK_INNER_TAGS}</{_OUTLOOK_HEADER_TAG}>",
+    _OUTLOOK_OPEN_TAG
+    + _OUTLOOK_INNER_TAGS
+    + r"(?:from|de)\s*:"
+    + _OUTLOOK_INNER_TAGS
+    + "</"
+    + _OUTLOOK_HEADER_TAG
+    + ">",
     re.IGNORECASE | re.DOTALL,
 )
 
 _OUTLOOK_SENT_LABEL_RE = re.compile(
-    rf"<{_OUTLOOK_HEADER_TAG}[^>]*>{_OUTLOOK_INNER_TAGS}"
-    r"(?:sent|enviad[oa](?:\s+em)?)\s*:"
-    rf"{_OUTLOOK_INNER_TAGS}</{_OUTLOOK_HEADER_TAG}>",
+    _OUTLOOK_OPEN_TAG
+    + _OUTLOOK_INNER_TAGS
+    + r"(?:sent|enviad[oa](?:\s+em)?)\s*:"
+    + _OUTLOOK_INNER_TAGS
+    + "</"
+    + _OUTLOOK_HEADER_TAG
+    + ">",
     re.IGNORECASE | re.DOTALL,
 )
 
 _OUTLOOK_TO_LABEL_RE = re.compile(
-    rf"<{_OUTLOOK_HEADER_TAG}[^>]*>{_OUTLOOK_INNER_TAGS}"
-    r"(?:to|para)\s*:"
-    rf"{_OUTLOOK_INNER_TAGS}</{_OUTLOOK_HEADER_TAG}>",
+    _OUTLOOK_OPEN_TAG
+    + _OUTLOOK_INNER_TAGS
+    + r"(?:to|para)\s*:"
+    + _OUTLOOK_INNER_TAGS
+    + "</"
+    + _OUTLOOK_HEADER_TAG
+    + ">",
     re.IGNORECASE | re.DOTALL,
 )
 
@@ -87,8 +101,7 @@ def _evaluate_signal(scenario, body):
 def collect_quote_signals(html_body):
     body = html_body or ""
     return {
-        scenario: _evaluate_signal(scenario, body)
-        for scenario in QUOTE_SCENARIO_ORDER
+        scenario: _evaluate_signal(scenario, body) for scenario in QUOTE_SCENARIO_ORDER
     }
 
 
