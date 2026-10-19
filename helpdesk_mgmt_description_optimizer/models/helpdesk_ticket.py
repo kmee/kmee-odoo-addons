@@ -8,8 +8,6 @@ class HelpdeskTicket(models.Model):
     _inherit = ["helpdesk.ticket", "html.optimizer.mixin"]
 
     description_summary = fields.Html(
-        string="Description Summary",
-        sanitize=False,
         compute="_compute_description_summary",
         store=True,
         copy=False,
