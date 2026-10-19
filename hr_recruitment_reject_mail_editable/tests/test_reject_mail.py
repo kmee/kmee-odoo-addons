@@ -48,9 +48,11 @@ class TestRejectMailEditable(TransactionCase):
 
     def _composer(self, wizard):
         action = wizard.action_open_selected_mail_template()
-        composer = self.env["mail.compose.message"].with_context(
-            mail_notify_force_send=False, **action["context"]
-        ).create({})
+        composer = (
+            self.env["mail.compose.message"]
+            .with_context(mail_notify_force_send=False, **action["context"])
+            .create({})
+        )
         # destinatario explicito: sem ele o composer nao enfileira e-mail
         composer.partner_ids = self.partner
         return composer
@@ -144,7 +146,9 @@ class TestRejectMailEditable(TransactionCase):
         """
         composer = (
             self.env["mail.compose.message"]
-            .with_context(default_model="hr.applicant", default_res_id=self.applicant.id)
+            .with_context(
+                default_model="hr.applicant", default_res_id=self.applicant.id
+            )
             .create({"subject": "Oi", "body": "<p>Ola</p>"})
         )
         composer.action_send_mail()
