@@ -60,7 +60,7 @@ class CrmLead(models.Model):
                     else:
                         role_display = role.replace("_", "/").upper()
                         raise exceptions.UserError(
-                            _(f"Current stage requires a {role_display} assignment.")
+                            _("Current stage requires a %s assignment.", role_display)
                         )
 
     @api.model
