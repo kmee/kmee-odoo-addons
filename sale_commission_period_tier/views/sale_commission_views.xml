@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- Extend commission form view -->
     <record id="sale_commission_form_period" model="ir.ui.view">
         <field name="name">commission.form.period</field>
         <field name="model">commission</field>
@@ -14,7 +13,6 @@
         </field>
     </record>
 
-    <!-- Extend settlement form view -->
     <record id="view_settlement_form_period" model="ir.ui.view">
         <field name="name">commission.settlement.form.period</field>
         <field name="model">commission.settlement</field>
@@ -25,10 +23,9 @@
                     string="Recalculate Period Commission"
                     name="action_recalculate_period_commission"
                     type="object"
-                    class="oe_highlight"
+                    states="settled"
                 />
             </button>
         </field>
     </record>
-
 </odoo>
