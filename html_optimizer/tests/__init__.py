@@ -3,3 +3,4 @@
 from . import test_html_sanitizer
 from . import test_quote_detection
 from . import test_quote_boundary
+from . import test_odoo_collect
