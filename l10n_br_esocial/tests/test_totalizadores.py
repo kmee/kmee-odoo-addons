@@ -57,13 +57,14 @@ class TestTotalizadores(ESocialCicloCommon):
         totalizador = self._consumir(evento, retorno_s5001(self.cpf_employee))
         grupos = set(totalizador.linha_ids.mapped("grupo"))
         self.assertEqual(grupos, {"info_cp_calc", "base_cs", "calc_terc"})
-        base = totalizador.linha_ids.filtered(lambda l: l.grupo == "base_cs")
+        base = totalizador.linha_ids.filtered(lambda linha: linha.grupo == "base_cs")
         self.assertAlmostEqual(base.valor, 3000.0, places=2)
         self.assertEqual(base.matricula, "MAT001")
         self.assertEqual(base.cod_categ, "101")
         self.assertEqual(base.cod_lotacao, "LOT001")
         desc = totalizador.linha_ids.filtered(
-            lambda l: l.grupo == "info_cp_calc" and l.descricao == "vrDescSeg"
+            lambda linha: linha.grupo == "info_cp_calc"
+            and linha.descricao == "vrDescSeg"
         )
         self.assertAlmostEqual(desc.valor, 330.0, places=2)
 
@@ -74,7 +75,7 @@ class TestTotalizadores(ESocialCicloCommon):
         self.assertEqual(totalizador.tipo, "S-5011")
         self.assertEqual(totalizador.ind_exist_info, "1")
         patronal = totalizador.linha_ids.filtered(
-            lambda l: l.grupo == "cr_contrib" and l.codigo == "115101"
+            lambda linha: linha.grupo == "cr_contrib" and linha.codigo == "115101"
         )
         self.assertAlmostEqual(patronal.valor, 600.0, places=2)
 

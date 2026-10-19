@@ -48,10 +48,7 @@
                             <field name="nr_insc_estab" />
                             <field name="cnae_prep" />
                             <field name="cnpj_resp" />
-                            <field
-                                name="tp_caepf"
-                                invisible="tp_insc_estab != '3'"
-                            />
+                            <field name="tp_caepf" invisible="tp_insc_estab != '3'" />
                             <field name="ind_subst_patr_obra" />
                         </group>
                         <group string="Validade">
@@ -212,7 +209,8 @@
                             <field name="ind_retif" />
                             <field
                                 name="nr_recibo"
-                                invisible="ind_retif != '2'" required="ind_retif == '2'"
+                                invisible="ind_retif != '2'"
+                                required="ind_retif == '2'"
                             />
                             <field
                                 name="company_id"
