@@ -1,11 +1,10 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import json
-
 from lxml import etree
 
 from odoo.tests.common import TransactionCase, tagged
+from odoo.tools.safe_eval import safe_eval
 
 
 @tagged("post_install", "-at_install")
@@ -54,24 +53,24 @@ class TestSalePartialLock(TransactionCase):
             # turn action_confirm into a wizard when installed in the same database
             order.state = "sale"
         if locked:
-            order.action_done()
+            order.action_lock()
         return order
 
     def _is_visible(self, node, order):
-        """Evaluate the invisible modifier of a button against one order."""
-        invisible = json.loads(node.get("modifiers", "{}")).get("invisible", False)
-        if isinstance(invisible, bool):
-            return not invisible
-        hidden = self.env["sale.order"].search_count(
-            [("id", "=", order.id)] + [tuple(leaf) for leaf in invisible]
-        )
-        return not hidden
+        """Evaluate the invisible expression of a button against one order."""
+        invisible = node.get("invisible")
+        if not invisible:
+            return True
+        values = {
+            name: order[name] for name in ("id", "state", "locked", "invoice_status")
+        }
+        return not safe_eval(invisible, values)
 
     def test_cancel_button_is_only_visible_on_locked_orders(self):
         """
         Given the extra Cancel button added by the module
         When it is evaluated against orders in each state
-        Then it is visible only for locked (done) orders
+        Then it is visible only for locked orders
         """
         draft = self._order(self.to_invoice, confirmed=False)
         sale = self._order(self.to_invoice)
@@ -85,11 +84,12 @@ class TestSalePartialLock(TransactionCase):
         """
         Given the core Cancel buttons of the form
         When we read the states they are shown for
-        Then none of them includes done, which is why the module adds one
+        Then all of them are hidden on locked orders, which is why the module
+        adds one
         """
         self.assertTrue(self.core_cancel_buttons)
         for button in self.core_cancel_buttons:
-            self.assertNotIn("done", (button.get("states") or "").split(","))
+            self.assertIn("locked", button.get("invisible") or "")
 
     def test_invoice_button_visible_on_locked_order_with_nothing_to_invoice(self):
         """
@@ -139,7 +139,8 @@ class TestSalePartialLock(TransactionCase):
         locked = self._order(self.to_invoice, locked=True)
         action = locked.action_cancel()
         self.assertEqual(action["res_model"], "sale.order.cancel")
-        self.assertEqual(locked.state, "done")
+        self.assertEqual(locked.state, "sale")
+        self.assertTrue(locked.locked)
         locked.with_context(disable_cancel_warning=True).action_cancel()
         self.assertEqual(locked.state, "cancel")
 
@@ -157,4 +158,4 @@ class TestSalePartialLock(TransactionCase):
         )
         self.assertEqual(wizard.count, 1)
         self.assertEqual(wizard.advance_payment_method, "delivered")
-        self.assertEqual(locked.state, "done")
+        self.assertTrue(locked.locked)
