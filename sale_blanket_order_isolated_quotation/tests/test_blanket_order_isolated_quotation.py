@@ -441,3 +441,38 @@ class TestBlanketOrderIsolatedQuotation(TransactionCase):
         order.order_line.create_blanket_order_line()
         self.assertEqual(len(blanket.line_ids), before + 1)
         self.assertIn(80.0, blanket.line_ids.mapped("price_unit"))
+
+    def test_line_quantity_change_does_not_reprice(self):
+        """
+        Given a quotation line whose price was set from the blanket order
+        When the quantity/UoM change handler runs
+        Then the price is kept (the standard pricelist repricing is disabled)
+        """
+        blanket = self._blanket_order()
+        line = self._reference_quotation(blanket).order_line
+        line.price_unit = 77.0
+        line.product_uom_change()
+        self.assertEqual(line.price_unit, 77.0)
+
+    def test_reference_confirmation_ignores_lines_without_blanket_line(self):
+        """
+        Given a reference quotation with an extra line not tied to the blanket
+        When the balance is validated on confirmation
+        Then only blanket lines are checked, so the extra quantity is not blocked
+        """
+        blanket = self._blanket_order()
+        quotation = self._reference_quotation(blanket)
+        quotation.order_line.product_uom_qty = 2.0
+        self.env["sale.order.line"].create(
+            {
+                "order_id": quotation.id,
+                "product_id": self.product_2.id,
+                "product_uom_qty": 99.0,
+                "price_unit": 50.0,
+            }
+        )
+        quotation._validate_bo_quantities()
+        action = quotation.action_confirm()
+        order = self.env["sale.order"].browse(action["res_id"])
+        self.assertEqual(order.order_line.product_uom_qty, 2.0)
+
