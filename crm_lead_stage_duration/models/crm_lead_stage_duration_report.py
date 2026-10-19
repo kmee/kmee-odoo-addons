@@ -106,7 +106,7 @@ class CrmLeadStageDurationReport(models.Model):
                     GROUP BY team_id, stage_id
                 )
                 SELECT
-                    ROW_NUMBER() OVER () AS id,
+                    ROW_NUMBER() OVER (ORDER BY team_id, stage_id) AS id,
                     team_id,
                     stage_id,
                     line_count,
