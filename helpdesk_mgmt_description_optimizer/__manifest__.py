@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Helpdesk Mgmt Description Optimizer",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "summary": "Summarize heavy helpdesk ticket descriptions, full content on demand",
     "category": "After-Sales",
     "author": "KMEE",
