@@ -7,18 +7,10 @@
             <field name="model">account.payment.term.line.manual</field>
             <field name="arch" type="xml">
                 <tree editable="bottom">
-                    <field name="value" string="Due Type" />
-                    <field
-                    name="value_amount"
-                    attrs="{'readonly':[('value','=','balance')]}"
-                />
-                    <field name="months" />
-                    <field name="days" />
-                    <field name="end_month" />
-                    <field
-                    name="days_after"
-                    attrs="{'invisible': [('end_month', '=', False)]}"
-                />
+                    <field name="value_amount" />
+                    <field name="value" nolabel="1" />
+                    <field name="nb_days" string="After" />
+                    <field name="delay_type" nolabel="1" />
                     <field name="fixed_date" />
                 </tree>
             </field>
@@ -35,18 +27,12 @@
                             <field name="value" widget="radio" />
                         </group>
                         <group>
-                            <div
-                            attrs="{'invisible':[('value','=', 'balance')]}"
-                            class="o_row"
-                        >
-                                <label
-                                for="value_amount"
-                                attrs="{'invisible':[('value','=', 'balance')]}"
-                            />
+                            <div class="o_row">
+                                <label for="value_amount" />
                                 <field name="value_amount" class="oe_inline" />
                                 <span
                                 class="o_form_label oe_inline"
-                                attrs="{'invisible':[('value','!=','percent')]}"
+                                invisible="value != 'percent'"
                             >%</span>
                             </div>
                         </group>
@@ -55,18 +41,8 @@
                     <group col="4">
                         <group colspan="2">
                             <h2>Due Date Computation</h2>
-                            <div colspan="2">
-                                <label for="months" string="Due" />
-                                <field name="months" class="oe_inline" />
-                                <span class="o_form_label oe_inline"> months, </span>
-                                <field name="days" class="oe_inline" />
-                                <span class="o_form_label oe_inline"> days</span>
-                            </div>
-                            <field name="end_month" />
-                            <field
-                            name="days_after"
-                            attrs="{'invisible': [('end_month', '=', False)]}"
-                        />
+                            <field name="nb_days" />
+                            <field name="delay_type" />
                         </group>
 
                         <group colspan="2">
@@ -102,10 +78,9 @@
                 </xpath>
 
                 <xpath expr="//widget[@name='web_ribbon']" position="attributes">
-                    <attribute name="attrs">{
-                        'invisible': ['|', ('active', '=', True),('origin_term_id','!=',False)]
-                        }</attribute>
-                </xpath>
+                    <attribute
+                    name="invisible"
+                >(active or origin_term_id)</attribute></xpath>
             </field>
         </record>
 
