@@ -8,7 +8,6 @@
     Sem noupdate: a atualizacao da tabela chega pelo -u do modulo.
 -->
 <odoo>
-
     <record id="plan_referencial_2_l12" model="l10n_br_account_mapping.plan">
         <field
             name="name"
@@ -18,5 +17,4 @@
         <field name="sped_layout_version">12</field>
         <field name="company_id" eval="False" />
     </record>
-
 </odoo>
