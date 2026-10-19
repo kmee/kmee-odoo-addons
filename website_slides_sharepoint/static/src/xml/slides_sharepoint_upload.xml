@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t
+        t-inherit="website_slides.website.slide.upload.modal.video"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//input[@id='video_url']" position="attributes">
+            <attribute
+                name="placeholder"
+            >e.g "https://contoso.sharepoint.com/:v:/s/team/EaBc..."</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_slide_tutorial')]" position="inside">
+            <br />
+            <div class="h6">On SharePoint / OneDrive</div>
+            <div>
+                <span>Open the video in SharePoint, Teams or OneDrive, then use the
+                    <strong>Copy link</strong> button and paste the link here.</span>
+                <br />
+                <span>The link is read by this Odoo server with its own Microsoft
+                    credentials, so you do <strong>not</strong> need to share the video
+                    with "Anyone with the link": keep your default sharing
+                    settings.</span>
+                <br />
+                <span>It should look similar to</span>
+                <span
+                    class="fst-italic"
+                >https://contoso.sharepoint.com/:v:/s/team/EaBc123?e=xYz</span>
+            </div>
+        </xpath>
+    </t>
+
+    <t
+        t-inherit="website_slides.website.slide.upload.modal.document"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//label[@for='source_type_external']" position="replace">
+            <label class="form-check-label fw-normal" for="source_type_external">
+                Retrieve from Google Drive or SharePoint
+            </label>
+        </xpath>
+        <xpath expr="//input[@id='document_google_url']" position="attributes">
+            <attribute
+                name="placeholder"
+            >e.g "https://contoso.sharepoint.com/:b:/s/team/EaBc..."</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_slide_tutorial')]" position="inside">
+            <br />
+            <div>
+                <span>SharePoint and OneDrive links are supported too: use the
+                    <strong>Copy link</strong> button of the Microsoft interface.
+                    Word, Excel and PowerPoint files are converted to PDF
+                    automatically.</span>
+            </div>
+        </xpath>
+    </t>
+
+    <t
+        t-inherit="website_slides.website.slide.upload.modal.infographic"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//label[@for='source_type_external']" position="replace">
+            <label class="form-check-label fw-normal" for="source_type_external">
+                Retrieve from Google Drive or SharePoint
+            </label>
+        </xpath>
+        <xpath expr="//input[@id='image_google_url']" position="attributes">
+            <attribute
+                name="placeholder"
+            >e.g "https://contoso.sharepoint.com/:i:/s/team/EaBc..."</attribute>
+        </xpath>
+    </t>
+
+</templates>
