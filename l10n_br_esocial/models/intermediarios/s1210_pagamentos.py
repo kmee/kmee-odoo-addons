@@ -4,7 +4,7 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
-# Tabela 22 do leiaute — tipos de pagamento relevantes ao ciclo mínimo.
+# Domínio de tpPgto do leiaute S-1.3 relevante ao ciclo mínimo.
 TP_PGTO = [
     ("1", "1 - Pagamento de remuneração (S-1200)"),
     ("2", "2 - Pagamento de benefício previdenciário (S-1202)"),

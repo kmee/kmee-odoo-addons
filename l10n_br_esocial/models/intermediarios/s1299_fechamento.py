@@ -221,6 +221,7 @@ class ESocialS1299(models.Model):
                     "detalhe": detalhe,
                 }
             )
+        self._check_declaracao_stale()
         if self.evt_remun == "S" and not self.env[
             "l10n_br.esocial.evento"
         ].search_count(
@@ -233,6 +234,34 @@ class ESocialS1299(models.Model):
                 )
                 % {"per": self.per_apur}
             )
+
+    def _check_declaracao_stale(self):
+        """Recusa declarar "N" quando a competência tem evento aceito.
+
+        ``evt_remun``/``evt_pgtos`` são calculados na criação e ficam gravados:
+        um S-1200 ou S-1210 aceito depois disso deixaria o fechamento
+        declarando que não há movimento, e o governo apuraria a DCTFWeb sem
+        ele.
+        """
+        self.ensure_one()
+        eventos = self.env["l10n_br.esocial.evento"]
+        for campo, tipo, rotulo in (
+            ("evt_remun", "S-1200", _("remuneração")),
+            ("evt_pgtos", "S-1210", _("pagamento")),
+        ):
+            if self[campo] != "N":
+                continue
+            if eventos.search_count(
+                self._dominio_eventos_periodicos([tipo]) + [("state", "=", "success")]
+            ):
+                raise UserError(
+                    _(
+                        "O fechamento declara que não há eventos de %(rotulo)s, "
+                        "mas existe %(tipo)s aceito na competência %(per)s. "
+                        "Atualize o campo antes de gerar o S-1299."
+                    )
+                    % {"rotulo": rotulo, "tipo": tipo, "per": self.per_apur}
+                )
 
     def action_gerar_evento(self):
         """Valida as pendências da competência antes de gerar o fechamento."""

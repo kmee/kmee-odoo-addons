@@ -91,6 +91,16 @@ class TestS1299Fechamento(ESocialCicloCommon):
         with self.assertRaises(UserError):
             s1299.action_gerar_evento()
 
+    def test_declara_sem_remuneracao_com_s1200_aceito_depois(self):
+        """S-1200 aceito após a criação do fechamento não pode ser ignorado."""
+        s1299 = self._criar_s1299()
+        self.assertEqual(s1299.evt_remun, "N")
+        self._criar_evento("S-1200", per_apur="2024-03", nr_recibo=RECIBO_S1200)
+        with self.assertRaises(UserError) as erro:
+            s1299.action_gerar_evento()
+        self.assertIn("S-1200", str(erro.exception))
+        self.assertFalse(s1299.evento_id)
+
     def test_fecha_competencia_sem_movimento(self):
         """Competência sem evento periódico fecha declarando 'N'."""
         if not HAS_ESOCIALLIB:
