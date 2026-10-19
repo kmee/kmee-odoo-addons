@@ -7,10 +7,10 @@
         Settings to customize the settlement report in xlsx""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "author": "KMEE,Odoo Community Association (OCA)",
+    "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
-        "commission",
+        "account_commission",
         "report_xlsx",
     ],
     "data": ["report/report_settlement_xlsx.xml"],
