@@ -234,3 +234,84 @@ class TestPaymentTransaction(TransactionCase):
                 self.payment_transaction.barcode,
                 "12345678901234567890123456789012345678901234",
             )
+
+
+@tagged("at_install", "post_install")
+class TestPinbankToken(TransactionCase):
+    """O token e emitido por conta e volta do parametro como texto."""
+
+    def setUp(self):
+        super().setUp()
+        self.provider = self.env.ref(
+            "l10n_br_payment_boleto_pinbank.payment_acquirer_boleto_pinbank"
+        )
+
+    def test_token_is_saved_per_provider(self):
+        other_provider = self.provider.copy({"name": "Outra conta PinBank"})
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+        other_provider._boleto_pinbank_save_token("token-dois", 600)
+
+        self.assertEqual(
+            self.provider._boleto_pinbank_check_existing_token(), "token-um"
+        )
+        self.assertEqual(
+            other_provider._boleto_pinbank_check_existing_token(), "token-dois"
+        )
+
+    def test_saved_token_is_reused(self):
+        """A segunda requisicao nao pode estourar comparando texto com data."""
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+
+        self.assertEqual(
+            self.provider._boleto_pinbank_check_existing_token(),
+            "token-um",
+            "o token guardado nao foi reaproveitado",
+        )
+
+    def test_expired_token_is_discarded(self):
+        self.provider._boleto_pinbank_save_token("token-velho", 600)
+        _token_key, expiration_key = self.provider._boleto_pinbank_token_param_names()
+        self.env["ir.config_parameter"].sudo().set_param(
+            expiration_key, "2020-01-01T00:00:00"
+        )
+
+        self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
+
+    def test_invalid_expiration_is_discarded(self):
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+        _token_key, expiration_key = self.provider._boleto_pinbank_token_param_names()
+        self.env["ir.config_parameter"].sudo().set_param(expiration_key, "nao-e-data")
+
+        self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
+
+
+@tagged("at_install", "post_install")
+class TestPinbankRedaction(TransactionCase):
+    """O boleto carrega nome, documento e endereco do sacado."""
+
+    def test_personal_data_is_dropped(self):
+        redacted = self.env["payment.transaction"]._pinbank_redact(
+            {
+                "Data": {
+                    "NossoNumero": "12345",
+                    "DadosSacado": {
+                        "CpfCnpj": "23130935000198",
+                        "Nome": "Cliente Boleto",
+                        "Endereco": "Rua das Flores",
+                    },
+                }
+            }
+        )
+
+        self.assertNotIn("23130935000198", str(redacted))
+        self.assertNotIn("Cliente Boleto", str(redacted))
+        self.assertNotIn("Rua das Flores", str(redacted))
+        self.assertEqual(redacted["Data"]["NossoNumero"], "12345")
+
+    def test_pdf_is_dropped(self):
+        """O PDF em base64 nao tem porque ficar no campo tecnico."""
+        redacted = self.env["payment.transaction"]._pinbank_redact(
+            {"Base64": "JVBERi0xLjQ="}
+        )
+
+        self.assertEqual(redacted["Base64"], "***")

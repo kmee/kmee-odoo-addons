@@ -93,7 +93,7 @@ class HrPayslip(models.Model):
         A pré-população é EXTENSÍVEL: em vez de depender só de uma tupla fixa
         mantida à mão (que já causou bugs quando uma regra satélite
         referenciava um código fora da lista), os defaults são derivados das
-        PRÓPRIAS regras das estruturas do holerite — qualquer código presente
+        PRÓPRIAS regras das estruturas do holerite - qualquer código presente
         na estrutura fica disponível desde o início do cálculo, sem manutenção.
 
         Mantém-se ainda uma baseline mínima
@@ -115,7 +115,7 @@ class HrPayslip(models.Model):
 
         Convenção: fim do período do holerite (``date_to``), com fallback para
         ``date_from``. Para holerites mensais ambos caem no mesmo mês; em
-        períodos que cruzam a virada de uma vigência (ex.: férias abril→maio),
+        períodos que cruzam a virada de uma vigência (ex.: férias abril->maio),
         vale a tabela vigente no encerramento/pagamento.
         """
         return self.date_to or self.date_from
@@ -124,11 +124,12 @@ class HrPayslip(models.Model):
         tools = super()._get_tools_dict()
         # `self` é único aqui (chamado a partir de _get_baselocaldict, que faz
         # ensure_one). Resolvemos a competência do holerite e vinculamos
-        # funções que já carregam a tabela vigente — as regras continuam
+        # funções que já carregam a tabela vigente - as regras continuam
         # chamando tools.br.calc_inss(base) sem passar o ano.
         competencia = self._get_competencia()
         inss_model = self.env["l10n_br.hr.payroll.inss.faixa"]
         irrf_model = self.env["l10n_br.hr.payroll.irrf.faixa"]
+        redutor_model = self.env["l10n_br.hr.payroll.irrf.redutor"]
         sf_model = self.env["l10n_br.hr.payroll.sal.familia.faixa"]
         dep_model = self.env["l10n_br.hr.payroll.irrf.dependente"]
 
@@ -140,9 +141,53 @@ class HrPayslip(models.Model):
         def calc_irrf(base_irrf):
             return salary_rules_br.calc_irrf(base_irrf, irrf_model._tabela(competencia))
 
-        def calc_salario_familia(remuneracao, num_filhos):
+        def redutor_irrf(rendimento_bruto, imposto_apurado):
+            """Redutor do IRPF (Lei 15.270/2025) vigente na competência."""
+            return salary_rules_br.calc_redutor_irrf(
+                rendimento_bruto, imposto_apurado, redutor_model._tabela(competencia)
+            )
+
+        def irrf_apos_redutor(rendimento_bruto, imposto_apurado):
+            """Imposto do mês já abatido o redutor vigente na competência.
+
+            Competências anteriores a 01/2026 não têm redutor cadastrado e o
+            imposto retorna inalterado (comportamento antigo preservado).
+            """
+            return salary_rules_br.calc_irrf_apos_redutor(
+                rendimento_bruto, imposto_apurado, redutor_model._tabela(competencia)
+            )
+
+        def irrf_mais_favoravel(rendimento_tributavel, base_legal):
+            """IRRF pela forma mais favorável, com as tabelas da competência.
+
+            Usada por TODAS as apurações (mensal, férias, 13º e rescisão):
+            compara dedução legal x desconto simplificado (Lei 9.250/95,
+            art. 4º, § 2º) e aplica o redutor da Lei 9.250/95, art. 3º-A,
+            sobre o resultado.
+            """
+            return salary_rules_br.calc_irrf_mais_favoravel(
+                rendimento_tributavel,
+                base_legal,
+                irrf_model._tabela(competencia),
+                irrf_model._desconto_simplificado(competencia),
+                redutor_model._tabela(competencia),
+            )
+
+        def calc_salario_familia(remuneracao, num_filhos, dias_trabalhados=30):
             return salary_rules_br.calc_salario_familia(
-                remuneracao, num_filhos, sf_model._tabela(competencia)
+                remuneracao,
+                num_filhos,
+                sf_model._tabela(competencia),
+                dias_trabalhados,
+            )
+
+        def dias_trabalhados_mes(contrato):
+            """Dias de vigência do ``contrato`` no período deste holerite."""
+            return salary_rules_br.dias_trabalhados_mes(
+                self.date_from,
+                self.date_to,
+                contrato.date_start,
+                contrato.date_end,
             )
 
         def dias_dsr():
@@ -152,10 +197,17 @@ class HrPayslip(models.Model):
             round_money=salary_rules_br.round_money,
             calc_inss=calc_inss,
             calc_irrf=calc_irrf,
+            # Redutor do IRPF da Lei 15.270/2025 (só a partir de 01/2026).
+            redutor_irrf=redutor_irrf,
+            irrf_apos_redutor=irrf_apos_redutor,
+            # Apuração completa do IRRF (legal x simplificado + redutor).
+            irrf_mais_favoravel=irrf_mais_favoravel,
             calc_ferias_dias=salary_rules_br.calc_ferias_dias,
             calc_decimo_avos=salary_rules_br.calc_decimo_avos,
             calc_vt=salary_rules_br.calc_vt,
             calc_salario_familia=calc_salario_familia,
+            # Dias de vigência do contrato no mês (verbas proporcionais).
+            dias_trabalhados_mes=dias_trabalhados_mes,
             calc_pensao_alimenticia=salary_rules_br.calc_pensao_alimenticia,
             # Dias úteis/DSR da competência (RF-26).
             dias_dsr=dias_dsr,
