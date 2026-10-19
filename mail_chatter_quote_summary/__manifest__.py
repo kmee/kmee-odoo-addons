@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Mail Chatter Quote Summary",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "summary": "Collapse quoted email history in chatter messages, loaded on demand",
     "category": "Discuss",
     "author": "KMEE",
