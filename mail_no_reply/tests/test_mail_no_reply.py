@@ -106,9 +106,9 @@ class TestMailNoReply(TransactionCase):
         """Given a composer opened from a template
         When the toggle is switched on
         Then the template gets the flag and the no-reply addresses."""
-        composer = self.Composer.with_context(
-            default_template_id=self.template.id
-        ).new({"active_no_reply": True})
+        composer = self.Composer.with_context(default_template_id=self.template.id).new(
+            {"active_no_reply": True}
+        )
         composer._onchange_active_no_reply()
         self.assertTrue(self.template.active_no_reply)
         self.assertEqual(self.template.email_from, NO_REPLY)
