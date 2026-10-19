@@ -36,14 +36,16 @@ class TestSaleOrderLineQtyFields(TransactionCase):
         )
 
     def _order(self, qty=1.0):
-        return self.env["sale.order"].create(
-            {
-                "partner_id": self.partner.id,
-                "order_line": [
-                    (0, 0, {"product_id": self.product.id, "product_uom_qty": qty})
-                ],
-            }
-        )
+        vals = {
+            "partner_id": self.partner.id,
+            "order_line": [
+                (0, 0, {"product_id": self.product.id, "product_uom_qty": qty})
+            ],
+        }
+        if "order_sequence" in self.env["sale.order"]._fields:
+            # sale_isolated_quotation: quotations are only confirmed through a wizard
+            vals["order_sequence"] = True
+        return self.env["sale.order"].create(vals)
 
     def _user(self, login, xmlids):
         groups = [self.env.ref("base.group_user").id]
@@ -151,16 +153,20 @@ class TestSaleOrderLineQtyFields(TransactionCase):
         """
         Given a salesman without any quantity group
         When the order form is rendered
-        Then none of the three quantity fields is in the line form
+        Then the free quantity fields are not in the line form
+        (qty_available_today may be shown by sale_order_qty_available_today)
         """
-        self.assertEqual(self._visible_line_fields(self._user("qty_plain", [])), set())
+        visible = self._visible_line_fields(self._user("qty_plain", []))
+        self.assertFalse(visible & {"free_qty_today", "free_qty"})
 
     def test_each_group_reveals_only_its_field(self):
         """
         Given salesmen that belong to one quantity group each
         When the order form is rendered for each of them
-        Then only the field tied to their group is shown
+        Then the field tied to their group appears and no other one is added
         """
+        baseline = self._visible_line_fields(self._user("qty_base", []))
         for name, xmlid in QTY_GROUPS.items():
             visible = self._visible_line_fields(self._user("qty_%s" % name, [xmlid]))
-            self.assertEqual(visible, {name})
+            self.assertIn(name, visible)
+            self.assertEqual(visible, baseline | {name})
