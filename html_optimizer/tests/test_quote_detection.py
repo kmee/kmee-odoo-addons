@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 try:
+    # pylint: disable=odoo-addons-relative-import
     from odoo.addons.html_optimizer.tools.quote_detection import (
         classify_quote_scenario,
         collect_quote_signals,
@@ -110,10 +111,12 @@ class TestQuoteDetection(unittest.TestCase):
         html = """
             <div>
                 <p>Mensagem principal.</p>
-                <div style="border:none; border-top:solid #E1E1E1 1.0pt; padding:3.0pt 0cm 0cm 0cm">
+                <div style="border:none; border-top:solid #E1E1E1 1.0pt;
+                padding:3.0pt 0cm 0cm 0cm">
                     <p>
                         <b><span>De:</span></b><span> Remetente</span><br/>
-                        <b><span>Enviada em:</span></b><span> segunda-feira, 13 de abril de 2026 11:45</span><br/>
+                        <b><span>Enviada em:</span></b>
+                        <span> segunda-feira, 13 de abril de 2026 11:45</span><br/>
                         <b><span>Para:</span></b><span> destinatario@example.com</span>
                     </p>
                 </div>
