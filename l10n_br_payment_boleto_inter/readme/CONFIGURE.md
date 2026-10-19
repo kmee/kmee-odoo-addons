@@ -1,10 +1,11 @@
-[ This file is not always required; it should explain **how to configure the module before using it**; it is aimed at users with administration privileges. 
+Em Faturamento > Configuração > Provedores de pagamento, abra o provedor
+**Banco Inter** e preencha (apenas usuários administradores veem estes campos):
 
-Please be detailed on the path to configuration (eg: do you need to activate developer mode?), describe step by step configurations and the use of screenshots is strongly recommended.]
+- Conta corrente;
+- Client ID e Client Secret da aplicação criada no Internet Banking do Inter
+  (escopos de cobrança: leitura e escrita);
+- Certificado e chave privada (PEM) emitidos pelo Inter para a aplicação.
 
-
-To configure this module, you need to:
-
-- Go to *App* > Menu > Menu item
-- Activate boolean... > save
-- ...
+Use o estado *Teste* para o ambiente sandbox do Inter e *Habilitado* para
+produção. Depois, no modo de pagamento (Faturamento > Configuração > Modos de
+pagamento), aponte o provedor Inter e informe desconto, multa e juros.

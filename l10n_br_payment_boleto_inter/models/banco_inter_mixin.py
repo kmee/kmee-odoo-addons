@@ -1,6 +1,5 @@
 import base64
 import contextlib
-import json
 import logging
 import os
 import tempfile
@@ -192,7 +191,6 @@ class BancoInterMixin(models.AbstractModel):
 
         try:
             _logger.info("Enviando requisição para: %s", url)
-            _logger.debug("Payload: %s", json.dumps(vals, indent=2))
             with self._inter_session(provider_id) as session:
                 response = session.post(url, headers=headers, json=vals, timeout=30)
             _logger.info("Resposta HTTP: %s", response.status_code)

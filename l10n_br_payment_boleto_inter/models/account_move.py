@@ -37,9 +37,28 @@ class AccountMove(models.Model):
         for index, moveline in enumerate(
             self.due_line_ids.filtered(lambda x: not x.reconciled), start=1
         ):
+            if self._has_active_boleto_inter(moveline):
+                continue
             transaction_vals = self._prepare_boleto_payload(moveline, index)
             transaction = self.env["payment.transaction"].create(transaction_vals)
             transaction.generate_boleto()
+
+    def _has_active_boleto_inter(self, moveline):
+        """Diz se o vencimento já tem boleto Inter vivo (idempotência).
+
+        Gerar os boletos de novo não pode duplicar a cobrança no banco.
+        """
+        self.ensure_one()
+        return bool(
+            self.transaction_ids.filtered(
+                lambda t: t.provider_code == "inter"
+                and t.codigo_solicitacao
+                and t.state in ("draft", "pending", "authorized", "done")
+                and t.due_date == moveline.date_maturity
+                and t.currency_id.compare_amounts(t.amount, moveline.amount_residual)
+                == 0
+            )
+        )
 
     def _prepare_boleto_payload(self, moveline, index):
         """Prepara os campos do payment.transaction"""

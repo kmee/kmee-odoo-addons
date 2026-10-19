@@ -104,6 +104,32 @@ class TestBoletoInterFlows(BancoInterCommon):
         self.assertEqual(payload["pagador"]["tipoPessoa"], "JURIDICA")
         self.assertEqual(payload["pagador"]["cep"], "37540000")
 
+    def test_payload_does_not_invent_contact_data(self):
+        """Sem telefone no cadastro, o payload não leva telefone inventado."""
+        payload = self._create_transaction()._prepare_boleto_data_inter()
+        pagador = payload["pagador"]
+        self.assertEqual(pagador["email"], "cliente@example.com")
+        self.assertNotIn("telefone", pagador)
+        self.assertNotIn("ddd", pagador)
+
+        self.partner.email = False
+        self.partner.mobile = "+55 (35) 99876-5432"
+        pagador = self._create_transaction(reference="BOL-0009")._prepare_boleto_data_inter()[
+            "pagador"
+        ]
+        self.assertNotIn("email", pagador)
+        self.assertEqual(pagador["ddd"], "35")
+        self.assertEqual(pagador["telefone"], "998765432")
+
+    def test_generate_boleto_is_idempotent(self):
+        """Chamar duas vezes não registra um segundo boleto no banco."""
+        tx = self._create_transaction()
+        with self._patch_session(self._created_boleto_responses()) as session:
+            tx.generate_boleto()
+            tx.generate_boleto()
+        posts = [c for c in session.calls if c["url"].endswith("cobrancas")]
+        self.assertEqual(len(posts), 1)
+
     def test_boleto_is_registered_and_pending(self):
         """A transação guarda o código de solicitação e fica pendente."""
         tx = self._create_transaction()

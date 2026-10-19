@@ -1,16 +1,10 @@
-[ This file is optional but strongly suggested to allow end-users to evaluate the
-module's usefulness in their context. ]
+**Necessidade:** a KMEE atende clientes que cobram por boleto no Banco Inter e
+precisam emitir, imprimir e conciliar os boletos sem sair do Odoo.
 
-BUSINESS NEED: 
-It should explain the "why" of the module: 
-- what is the business requirement that generated the need to develop this module
-- in which context or use cases this module can be useful (practical examples are welcome!). 
+**Abordagem:** integração direta com a API v3 de cobrança do Inter (OAuth2 com
+certificado de cliente), sobre o módulo base `l10n_br_payment_boleto`, que já
+define o contrato dos provedores de boleto. É um caminho diferente da remessa
+CNAB (`l10n_br_account_payment_order`): aqui o registro e a baixa são online.
 
-APPROACH:
-It could also explain the approach to address the mentioned need.
-
-USEFUL INFORMATION:
-It can also inform on related modules:
-- modules it depends on and their features
-- other modules that can work well together with this one
-- suggested setups where the module is useful (eg: multicompany, multi-website)
+**Relacionados:** `l10n_br_payment_boleto` (base) e
+`l10n_br_payment_boleto_pinbank` (outro provedor, mesmo contrato).

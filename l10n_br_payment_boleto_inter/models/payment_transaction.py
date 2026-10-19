@@ -24,6 +24,14 @@ class PaymentTransaction(models.Model):
         if self.provider_code != "inter":
             return super().generate_boleto()
 
+        if self.codigo_solicitacao:
+            # Idempotência: o boleto já foi registrado no banco.
+            _logger.info(
+                "Boleto %s já registrado no Banco Inter, nada a fazer.",
+                self.codigo_solicitacao,
+            )
+            return
+
         if self.state not in ["draft", "pending"]:
             raise UserError(
                 _("Boleto só pode ser gerado para transações em rascunho ou pendentes")
@@ -167,9 +175,6 @@ class PaymentTransaction(models.Model):
                 ),
                 "uf": partner.state_id.code if partner.state_id else "MG",
                 "cep": re.sub(r"\D", "", partner.zip or "00000000"),
-                "email": partner.email or "teste@teste.com",
-                "ddd": "31",
-                "telefone": "999999999",
             },
             "beneficiarioFinal": {
                 "cpfCnpj": re.sub(r"\D", "", company.cnpj_cpf or ""),
@@ -183,6 +188,8 @@ class PaymentTransaction(models.Model):
                 "cep": re.sub(r"\D", "", company.zip or "00000000"),
             },
         }
+
+        boleto_data["pagador"].update(self._prepare_inter_contact(partner))
 
         # Desconto
         if (
@@ -219,6 +226,23 @@ class PaymentTransaction(models.Model):
             boleto_data["mensagem"] = mensagem
 
         return boleto_data
+
+    @staticmethod
+    def _prepare_inter_contact(partner):
+        """E-mail e telefone do pagador, só quando o cadastro os tem.
+
+        Nunca se envia dado inventado ao banco: sem o dado, a chave é omitida.
+        """
+        contact = {}
+        if partner.email:
+            contact["email"] = partner.email
+        digits = re.sub(r"\D", "", partner.mobile or partner.phone or "")
+        if digits.startswith("55") and len(digits) > 11:
+            digits = digits[2:]
+        if len(digits) in (10, 11):
+            contact["ddd"] = digits[:2]
+            contact["telefone"] = digits[2:]
+        return contact
 
     def action_download_boleto_pdf(self):
         self.ensure_one()
