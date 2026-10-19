@@ -31,7 +31,10 @@ odoo.define("guep_sale.ApplicationForm", function (require) {
 
             return this._rpc({
                 route: `/application/${this.applicationId}/form/submit`,
-                params: {...(await this._getSerializedFormData())},
+                params: {
+                    ...(await this._getSerializedFormData()),
+                    access_token: this.$('input[name="access_token"]').val(),
+                },
             }).then((result) => {
                 let $dialogTitle = "";
                 let $dialogContentMessage = "";
