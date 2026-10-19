@@ -38,7 +38,7 @@ class TestMailNoReply(TransactionCase):
         vals = {
             "composition_mode": "comment",
             "model": "res.partner",
-            "res_id": self.partner.id,
+            "res_ids": self.partner.ids,
             "subject": "Test",
             "body": "<p>Test</p>",
         }
@@ -49,7 +49,7 @@ class TestMailNoReply(TransactionCase):
         vals = {
             "composition_mode": "mass_mail",
             "model": "res.partner",
-            "res_id": self.partner.id,
+            "res_ids": self.partner.ids,
             "template_id": self.template.id,
             "auto_delete": False,
         }
