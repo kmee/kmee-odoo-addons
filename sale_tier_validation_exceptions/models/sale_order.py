@@ -18,9 +18,13 @@ class SaleOrder(models.Model):
         return super().action_quotation_send()
 
     def validate_tier(self):
-        super(SaleOrder, self).validate_tier()
-        self.action_ignore_exceptions()
-        return True
+        res = super(SaleOrder, self).validate_tier()
+        # only a completed approval may ignore the exceptions, otherwise any
+        # user able to call validate_tier would bypass the reviewers
+        self.filtered(
+            lambda o: o.validation_status == "validated"
+        ).action_ignore_exceptions()
+        return res or True
 
     def restart_validation(self):
         super(SaleOrder, self).restart_validation()
