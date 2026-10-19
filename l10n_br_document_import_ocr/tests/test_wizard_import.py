@@ -38,6 +38,10 @@ class TestOcrImportWizard(TransactionCase):
             }
         )
         cls.text = fixture("nfse_sp_texto.txt")
+        cls.service_product = cls.env["product.product"].create(
+            {"name": "Serviço tomado (teste OCR)", "type": "service"}
+        )
+        cls.company.document_import_default_product_id = cls.service_product
 
     def _make_wizard(self):
         return (
@@ -97,8 +101,18 @@ class TestOcrImportWizard(TransactionCase):
         move = self.env["account.move"].browse(action["res_id"])
         self.assertEqual(move.move_type, "in_invoice")
         self.assertEqual(move.partner_id, self.partner)
+        self.assertEqual(move.invoice_line_ids.product_id, self.service_product)
         self.assertTrue(move.fiscal_document_id)
         self.assertEqual(move.fiscal_document_id, wizard.document_id)
+
+    def test_destino_move_exige_produto_padrao(self):
+        self.company.document_import_default_product_id = False
+        wizard = self._make_wizard()
+        self._fill(wizard)
+        wizard.ocr_destination = "move"
+        with self.assertRaises(UserError):
+            wizard.action_confirm_ocr_import()
+        self.assertFalse(wizard.document_id)
 
     def test_cache_extrai_uma_vez(self):
         """Entre o onchange e a confirmação, o OCR roda uma única vez."""
