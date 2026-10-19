@@ -52,7 +52,7 @@
         <xpath expr="//kanban" position="inside">
             <field name="current_stage_total_duration" />
         </xpath>
-        <xpath expr="//div[@class='o_kanban_record_top']" position="after">
+        <xpath expr="//div[hasclass('o_kanban_record_top')]" position="after">
                 <div class="row mt-2 text-muted small">
                     <div class="col-6">
                         <div><i class="fa fa-clock-o" aria-hidden="true" /> <t
