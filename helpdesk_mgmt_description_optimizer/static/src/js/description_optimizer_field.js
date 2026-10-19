@@ -24,7 +24,7 @@ export class DescriptionOptimizerField extends HtmlField {
     }
 
     get toggleLabel() {
-        return this.descriptionState.expanded ? _t("Read Less") : _t("Read More");
+        return this.descriptionState.expanded ? _t("Ler menos") : _t("Ler mais");
     }
 
     async toggleExpanded() {
