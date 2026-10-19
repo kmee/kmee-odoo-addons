@@ -25,6 +25,7 @@
         <field name="arch" type="xml">
             <field name="user_ids" position="after">
                 <field name="service_class_id" />
+                <field name="color" invisible="1" />
             </field>
         </field>
     </record>
