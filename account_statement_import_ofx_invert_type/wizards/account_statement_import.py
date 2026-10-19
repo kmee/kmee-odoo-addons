@@ -21,7 +21,9 @@ class AccountStatementImport(models.TransientModel):
         if ofx and journal_id:
             if ignore_ofx_balance:
                 last_statement = self.env["account.bank.statement"].search(
-                    [("journal_id", "=", journal_id.id)], limit=1, order="date desc, id desc"
+                    [("journal_id", "=", journal_id.id)],
+                    limit=1,
+                    order="date desc, id desc",
                 )
                 balance = Decimal(last_statement.balance_end_real)
             for transaction in ofx.account.statement.transactions:
