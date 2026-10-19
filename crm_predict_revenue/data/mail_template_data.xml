@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <!-- Template de Email de Follow-up após Descoberta -->
-    <record id="mail_template_discovery_followup" model="mail.template">
-        <field name="name">Oportunidade - Material pós-Descoberta</field>
-        <field name="model_id" ref="crm.model_crm_lead" />
-        <field
+
+
+  <!-- Template de Email de Follow-up após Descoberta -->
+        <record id="mail_template_discovery_followup" model="mail.template">
+            <field name="name">Oportunidade - Material pós-Descoberta</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
             name="subject"
         >Informações adicionais sobre {{ object.company_id.name }}</field>
-        <field
+            <field
             name="email_from"
         >{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
-        <field name="email_to">{{ object.email_from }}</field>
-        <field name="body_html" type="html">
-            <div style="margin: 0px; padding: 0px;">
-                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Olá <t t-out="object.contact_name or 'Prezado(a)'" />,
                         <br /><br />
                         Muito obrigado pela nossa reunião de descoberta. Foi muito produtivo entender mais sobre suas necessidades e desafios.
@@ -32,39 +34,39 @@
                         Atenciosamente,
                         <br /><br />
                         <t t-if="object.user_id">
-                    <t t-out="object.user_id.name or ''" />
-                    <br />
-                    <t t-out="object.user_id.phone or ''" />
-                </t>
+                            <t t-out="object.user_id.name or ''" />
+                            <br />
+                            <t t-out="object.user_id.phone or ''" />
+                        </t>
                         <t t-else="">
                             Equipe <t t-out="object.company_id.name or ''" />
                         </t>
                     </p>
-            </div>
-        </field>
-        <field name="lang">{{ object.lang_id.code or '' }}</field>
-        <field name="auto_delete" eval="True" />
-    </record>
+                </div>
+            </field>
+            <field name="lang">{{ object.lang_id.code or '' }}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
 
-    <!-- Template de Email Inicial -->
-    <record id="mail_template_initial_contact" model="mail.template">
-        <field name="name">Lead - Contato Inicial</field>
-        <field name="model_id" ref="crm.model_crm_lead" />
-        <field
+        <!-- Template de Email Inicial -->
+        <record id="mail_template_initial_contact" model="mail.template">
+            <field name="name">Lead - Contato Inicial</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
             name="subject"
         >{{ object.company_id.name }}: Vamos conversar sobre suas necessidades?</field>
-        <field
+            <field
             name="email_from"
         >{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
-        <field name="email_to">{{ object.email_from }}</field>
-        <field name="body_html" type="html">
-            <div style="margin: 0px; padding: 0px;">
-                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Olá <t t-out="object.contact_name or 'Prezado(a)'" />,
                         <br /><br />
                         Obrigado por seu interesse na <t
-                    t-out="object.company_id.name or 'nossa empresa'"
-                />.
+                        t-out="object.company_id.name or 'nossa empresa'"
+                    />.
                         <br /><br />
                         Gostaria de entender melhor suas necessidades e como podemos ajudar sua empresa a alcançar seus objetivos.
                         <br /><br />
@@ -75,32 +77,32 @@
                         Atenciosamente,
                         <br /><br />
                         <t t-if="object.user_id">
-                    <t t-out="object.user_id.name or ''" />
-                    <br />
-                    <t t-out="object.user_id.phone or ''" />
-                </t>
+                            <t t-out="object.user_id.name or ''" />
+                            <br />
+                            <t t-out="object.user_id.phone or ''" />
+                        </t>
                         <t t-else="">
                             Equipe <t t-out="object.company_id.name or ''" />
                         </t>
                     </p>
-            </div>
-        </field>
-        <field name="lang">{{ object.lang_id.code or '' }}</field>
-        <field name="auto_delete" eval="True" />
-    </record>
+                </div>
+            </field>
+            <field name="lang">{{ object.lang_id.code or '' }}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
 
-    <!-- Template de Email de Follow-up -->
-    <record id="mail_template_followup" model="mail.template">
-        <field name="name">Lead - Follow-up</field>
-        <field name="model_id" ref="crm.model_crm_lead" />
-        <field name="subject">Acompanhamento: {{ object.name }}</field>
-        <field
+        <!-- Template de Email de Follow-up -->
+        <record id="mail_template_followup" model="mail.template">
+            <field name="name">Lead - Follow-up</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field name="subject">Acompanhamento: {{ object.name }}</field>
+            <field
             name="email_from"
         >{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
-        <field name="email_to">{{ object.email_from }}</field>
-        <field name="body_html" type="html">
-            <div style="margin: 0px; padding: 0px;">
-                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+            <field name="email_to">{{ object.email_from }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Olá <t t-out="object.contact_name or 'Prezado(a)'" />,
                         <br /><br />
                         Estou fazendo um acompanhamento sobre nosso contato anterior.
@@ -112,30 +114,32 @@
                         Atenciosamente,
                         <br /><br />
                         <t t-if="object.user_id">
-                    <t t-out="object.user_id.name or ''" />
-                    <br />
-                    <t t-out="object.user_id.phone or ''" />
-                </t>
+                            <t t-out="object.user_id.name or ''" />
+                            <br />
+                            <t t-out="object.user_id.phone or ''" />
+                        </t>
                         <t t-else="">
                             Equipe <t t-out="object.company_id.name or ''" />
                         </t>
                     </p>
-            </div>
-        </field>
-        <field name="lang">{{ object.lang_id.code or '' }}</field>
-        <field name="auto_delete" eval="True" />
-    </record>
+                </div>
+            </field>
+            <field name="lang">{{ object.lang_id.code or '' }}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
 
-    <!-- Template de Notificação para AEs -->
-    <record id="mail_template_notify_ae" model="mail.template">
-        <field name="name">Notificação de Nova Oportunidade para AE</field>
-        <field name="model_id" ref="crm.model_crm_lead" />
-        <field name="subject">Nova Oportunidade Qualificada: {{ object.name }}</field>
-        <field name="email_from">{{ (user.email_formatted) }}</field>
-        <field name="email_to">{{ object.user_id.email_formatted }}</field>
-        <field name="body_html" type="html">
-            <div style="margin: 0px; padding: 0px;">
-                <p style="margin: 0px; padding: 0px; font-size: 13px;">
+        <!-- Template de Notificação para AEs -->
+        <record id="mail_template_notify_ae" model="mail.template">
+            <field name="name">Notificação de Nova Oportunidade para AE</field>
+            <field name="model_id" ref="crm.model_crm_lead" />
+            <field
+            name="subject"
+        >Nova Oportunidade Qualificada: {{ object.name }}</field>
+            <field name="email_from">{{ (user.email_formatted) }}</field>
+            <field name="email_to">{{ object.user_id.email_formatted }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         Olá <t t-out="object.user_id.name or 'Prezado(a)'" />,
                         <br /><br />
                         Uma nova oportunidade qualificada foi designada para você:
@@ -146,22 +150,24 @@
                         <b>Email:</b> <t t-out="object.email_from or ''" /><br />
                         <b>Telefone:</b> <t t-out="object.phone or ''" /><br />
                         <b>Receita Esperada:</b> <t
-                    t-out="object.expected_revenue or ''"
-                /><br />
+                        t-out="object.expected_revenue or ''"
+                    /><br />
                         <br />
-                        <b>Qualificação BANT:</b><br />
-                        <b>Budget:</b> <t
-                    t-out="object.x_budget_value or 'Não definido'"
-                /><br />
-                        <b>Authority:</b> <t
-                    t-out="object.x_decision_maker or 'Não definido'"
-                /> (<t t-out="object.x_decision_maker_role or ''" />)<br />
-                        <b>Need:</b> <t
-                    t-out="object.x_need_description or 'Não definido'"
-                /><br />
-                        <b>Timeline:</b> <t
-                    t-out="object.x_purchase_date or 'Não definido'"
-                /><br />
+                        <t t-if="'bant_budget_amount' in object._fields">
+                            <b>Qualificação BANT:</b><br />
+                            <b>Budget:</b> <t
+                            t-out="object.bant_budget_amount or 'Não definido'"
+                        /><br />
+                            <b>Authority:</b> <t
+                            t-out="object.bant_authority_contact or 'Não definido'"
+                        /> (<t t-out="object.bant_authority_role or ''" />)<br />
+                            <b>Need:</b> <t
+                            t-out="object.bant_need_description or 'Não definido'"
+                        /><br />
+                            <b>Timeline:</b> <t
+                            t-out="object.bant_timeline_date or 'Não definido'"
+                        /><br />
+                        </t>
                         <br />
                         É recomendado entrar em contato em até 24 horas para agendar a próxima etapa.
                         <br /><br />
@@ -169,9 +175,10 @@
                         <br />
                         Equipe de SDRs
                     </p>
-            </div>
-        </field>
-        <field name="lang">{{ object.user_id.lang or '' }}</field>
-        <field name="auto_delete" eval="True" />
-    </record>
+                </div>
+            </field>
+            <field name="lang">{{ object.user_id.lang or '' }}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
 </odoo>
