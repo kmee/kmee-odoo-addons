@@ -6,9 +6,9 @@ Exporta lançamentos contábeis no layout do **Systempro**.
 
 Uma linha por partida, competência no início.
 
-## Estrutura
+**Estrutura**
 
-### Partida
+**Partida**
 
 | Campo | Conteúdo | Formato |
 |---|---|---|
@@ -18,17 +18,17 @@ Uma linha por partida, competência no início.
 | 13-17 | conta | 5, à direita |
 | 18-217 | histórico | 200 |
 
-## Exemplo
+**Exemplo**
 
 ```
 20260805000  1101Venda de agosto
 ```
 
-## Observações
+**Observações**
 
 - O layout de referência não traz o valor na linha de movimento: confirme com o escritório antes do primeiro envio.
 
-## O que o layout usa do Odoo
+**O que o layout usa do Odoo**
 
 - **conta**: o campo *Código no escritório* (`l10n_br_export_code`) de cada conta, não o código do plano do Odoo;
 - **histórico**: o rótulo da partida (`name`), ou a referência do lançamento quando vazio;
