@@ -69,7 +69,10 @@ class StockPicking(models.Model):
         """
         Obtém os valores para criar o picking de entrega ou recebimento.
         """
-        warehouse = company.intercompany_out_type_id.warehouse_id
+        if incoming:
+            warehouse = company.intercompany_in_type_id.warehouse_id
+        else:
+            warehouse = company.intercompany_out_type_id.warehouse_id
         if incoming:
             return {
                 "partner_id": self.env.user.company_id.partner_id.id,
