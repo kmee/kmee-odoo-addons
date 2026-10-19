@@ -20,6 +20,6 @@
 #     o oca_init_test_database.
 #
 # pyopenssl==22.1.0 já fixa transitivamente o cryptography em 38.x (>=38,<39).
-lxml==4.6.5
+lxml==6.1.0
 pyopenssl==22.1.0
 signxml<3.1.0
