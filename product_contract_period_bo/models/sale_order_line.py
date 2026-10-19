@@ -34,7 +34,8 @@ class SaleOrderLine(models.Model):
 
     @api.onchange("period_qty", "period_count", "price_unit", "discount")
     def _onchange_period(self):
-        res = super()._onchange_period()
+        # the base onchange needs a start date to compute the end date
+        res = super(SaleOrderLine, self.filtered("date_start"))._onchange_period()
         for record in self:
             if record.use_period_quantity:
                 record.product_uom_qty = record.period_qty * record.period_count
