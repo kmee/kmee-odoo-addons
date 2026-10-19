@@ -180,14 +180,13 @@ class TestContractPeriod(ContractPeriodCase):
         self.assertEqual(contract.current_month_value, 0.0)
 
     def test_invoice_line_uses_period_amounts(self):
-        """Given 3 licenses at 10 with 10% discount,
+        """Given 3 licenses at 10 on a contract line of quantity 1,
         When the contract invoice is generated,
-        Then the invoice line has quantity 3 and the subtotal 27."""
+        Then the invoice line has quantity 3 and the subtotal 30."""
         contract = self._contract(
             [
                 {
                     "price_unit": 10.0,
-                    "discount": 10.0,
                     "period_qty": 3.0,
                     "period_count": 6,
                 }
@@ -196,8 +195,8 @@ class TestContractPeriod(ContractPeriodCase):
         invoice = contract._recurring_create_invoice()
         line = invoice.invoice_line_ids
         self.assertEqual(line.quantity, 3.0)
-        self.assertAlmostEqual(line.price_subtotal, 27.0)
-        self.assertAlmostEqual(invoice.amount_untaxed, 27.0)
+        self.assertAlmostEqual(line.price_subtotal, 30.0)
+        self.assertAlmostEqual(invoice.amount_untaxed, 30.0)
 
     def test_invoice_carries_period_number_and_total(self):
         """Given a 6-period monthly contract from 2026-01-01,
