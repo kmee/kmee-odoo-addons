@@ -194,7 +194,7 @@ class TestCrmBant(TransactionCase):
             [
                 ("mail_message_id.model", "=", "crm.lead"),
                 ("mail_message_id.res_id", "=", lead.id),
-                ("field.name", "=", "bant_budget_status"),
+                ("field_id.name", "=", "bant_budget_status"),
             ]
         )
         self.assertEqual(len(tracked), 1)
