@@ -65,7 +65,7 @@ class HrLeaveAccrualPlan(models.Model):
         return result
 
     _check_dates = models.Constraint(
-        'CHECK(1=1)',
+        "CHECK(1=1)",
         "The employee, department, company,\n"
         "            or employee category of this request is missing.\n"
         "             Please make sure that your user login is linked to an employee.",
