@@ -13,8 +13,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
         />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='property_cost_method']/following-sibling::field[@name='property_valuation']"
-                position="after"
+                expr="//group[field[@name='property_cost_method']]"
+                position="inside"
             >
                 <field
                     name="price_control_option"
