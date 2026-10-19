@@ -5,7 +5,7 @@
     "name": "Registro de Ponto Brasileiro (base)",
     "summary": "Marcacao de ponto imutavel com NSR e cadastro de REP "
     "(Portaria MTP 671/2021)",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Human Resources/Attendances",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
