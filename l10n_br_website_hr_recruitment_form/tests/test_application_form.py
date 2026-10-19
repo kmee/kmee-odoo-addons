@@ -137,7 +137,7 @@ class TestApplicationForm(HttpCase):
         root = etree.fromstring(arch.encode())
         buttons = root.xpath("//header/button[@name='action_share_applicant_form']")
         self.assertEqual(len(buttons), 1)
-        self.assertIn("date_closed", buttons[0].get("modifiers"))
+        self.assertIn("date_closed", buttons[0].get("invisible"))
 
     # ------------------------------------------------------------------
     # GET form
@@ -220,16 +220,16 @@ class TestApplicationForm(HttpCase):
         self.assertEqual(applicant.father_name, "Pai Candidato")
         self.assertEqual(applicant.mother_name, "Mae Candidata")
         self.assertEqual(applicant.certificate, "bachelor")
-        self.assertEqual(applicant.address_home_id.name, "Maria Candidata")
-        self.assertEqual(applicant.address_home_id.street_name, "Rua das Flores")
-        self.assertEqual(applicant.address_home_id.street_number, "100")
-        self.assertEqual(applicant.address_home_id.district, "Centro")
-        self.assertEqual(applicant.address_home_id.state_id, self.state)
-        self.assertEqual(applicant.address_home_id.city_id, self.city)
+        self.assertEqual(applicant.partner_id.name, "Maria Candidata")
+        self.assertEqual(applicant.partner_id.street_name, "Rua das Flores")
+        self.assertEqual(applicant.partner_id.street_number, "100")
+        self.assertEqual(applicant.partner_id.district, "Centro")
+        self.assertEqual(applicant.partner_id.state_id, self.state)
+        self.assertEqual(applicant.partner_id.city_id, self.city)
         self.assertEqual(applicant.bank_account_id.bank_id, self.bank)
         self.assertEqual(applicant.bank_account_id.acc_number, "12345-6")
         self.assertEqual(
-            applicant.bank_account_id.partner_id, applicant.address_home_id
+            applicant.bank_account_id.partner_id, applicant.partner_id
         )
         self.assertEqual(
             sorted(applicant.dependent_ids.mapped("name")), ["Filho Dois", "Filho Um"]
@@ -244,12 +244,12 @@ class TestApplicationForm(HttpCase):
         address = {"street": "Rua A", "street_number": "1", "zip": "01001-000"}
         bank = {"bank_id": self.bank.id, "bra_number": "0001", "acc_number": "111"}
         self._submit(self.applicant, address=address, bank=bank)
-        partner = self.applicant.address_home_id
+        partner = self.applicant.partner_id
         account = self.applicant.bank_account_id
         address = dict(address, street="Rua B", state_id="sp")
         bank = dict(bank, acc_number="222")
         self.assertTrue(self._submit(self.applicant, address=address, bank=bank))
-        self.assertEqual(self.applicant.address_home_id, partner)
+        self.assertEqual(self.applicant.partner_id, partner)
         self.assertEqual(partner.street_name, "Rua B")
         self.assertEqual(partner.state_id, self.state)
         self.assertEqual(self.applicant.bank_account_id, account)
