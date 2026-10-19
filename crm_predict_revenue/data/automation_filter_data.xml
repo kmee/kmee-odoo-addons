@@ -6,7 +6,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'lead'), ('stage_id', '=', ref('stage_lead_new'))]</field>
+        >[('type', '=', 'lead'), ('stage_id', '=', ref('crm_predict_revenue.stage_lead_new').id)]</field>
         </record>
 
         <!-- Filtro para leads qualificados -->
@@ -15,7 +15,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'lead'), ('stage_id', '=', ref('stage_lead_qualified'))]</field>
+        >[('type', '=', 'lead'), ('stage_id', '=', ref('crm_predict_revenue.stage_lead_qualified').id)]</field>
         </record>
 
         <!-- Filtro para oportunidades na fase de descoberta -->
@@ -24,7 +24,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_discovery'))]</field>
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('crm_predict_revenue.stage_opportunity_discovery').id)]</field>
         </record>
 
         <!-- Filtro para oportunidades na fase de apresentação -->
@@ -33,7 +33,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_presentation'))]</field>
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('crm_predict_revenue.stage_opportunity_presentation').id)]</field>
         </record>
 
         <!-- Filtro para oportunidades na fase de proposta -->
@@ -42,7 +42,7 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_proposal'))]</field>
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('crm_predict_revenue.stage_opportunity_proposal').id)]</field>
         </record>
 
         <!-- Filtro para oportunidades na fase de negociação -->
@@ -51,6 +51,6 @@
             <field name="model_id" ref="crm.model_crm_lead" />
             <field
             name="domain"
-        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('stage_opportunity_negotiation'))]</field>
+        >[('type', '=', 'opportunity'), ('stage_id', '=', ref('crm_predict_revenue.stage_opportunity_negotiation').id)]</field>
         </record>
 </odoo>

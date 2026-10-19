@@ -7,6 +7,7 @@
     "license": "AGPL-3",
     "depends": ["crm", "sales_team", "mail", "automation_oca"],
     "data": [
+        "data/crm_stage_data.xml",
         "data/ir_action_server_data.xml",
         "data/mail_activity_type_data.xml",
         "data/mail_template_data.xml",
