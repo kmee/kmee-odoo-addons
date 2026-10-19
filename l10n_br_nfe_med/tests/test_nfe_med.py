@@ -102,7 +102,7 @@ class TestNfeMed(TransactionCase):
             len(with_med),
             len(
                 self.nfe.fiscal_line_ids.filtered(
-                    lambda l: l.product_id == self.line.product_id
+                    lambda line: line.product_id == self.line.product_id
                 )
             ),
         )
