@@ -5,7 +5,7 @@
     "name": "Registro de Ponto Brasileiro - AFD",
     "summary": "Importação e geração do Arquivo Fonte de Dados (Anexo V da "
     "Portaria MTP 671/2021 e leiaute legado da 1.510/2009)",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Human Resources/Attendances",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
