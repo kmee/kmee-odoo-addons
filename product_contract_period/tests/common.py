@@ -28,8 +28,31 @@ class ContractPeriodCase(TransactionCase):
         )
         cls.partner = cls.env["res.partner"].create({"name": "Customer"})
 
+    def _rule_product(self, line):
+        """17.0: recurring_rule_type is related to the product on the order
+        line, so each recurrence needs its own product."""
+        line = dict(line)
+        rule = line.pop("recurring_rule_type", None)
+        if rule and "product_id" not in line:
+            line["product_id"] = (
+                self.env["product.product"]
+                .create(
+                    {
+                        "name": "License %s" % rule,
+                        "type": "service",
+                        "is_contract": True,
+                        "list_price": 100.0,
+                        "property_contract_template_id": self.template.id,
+                        "recurring_rule_type": rule,
+                    }
+                )
+                .id
+            )
+        return line
+
     def _order(self, lines):
         """lines: list of dicts merged over sane defaults."""
+        lines = [self._rule_product(line) for line in lines]
         vals = {
             "partner_id": self.partner.id,
             "order_line": [
