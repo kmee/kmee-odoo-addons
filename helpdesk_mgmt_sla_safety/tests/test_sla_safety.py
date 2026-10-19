@@ -1,13 +1,20 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 
+from freezegun import freeze_time
 from lxml import etree
 
 from odoo import fields
 from odoo.tests.common import TransactionCase, tagged
 
+# The 24x7 calendar ends each day at 23:59:59.999999, so a deadline that
+# crosses midnight drifts by microseconds. Fixed dates keep it deterministic.
+CREATE_DATE = datetime(2026, 1, 7, 8, 0, 0)
+NOW = "2026-01-07 08:05:00"
 
+
+@freeze_time(NOW)
 @tagged("post_install", "-at_install")
 class TestSlaSafety(TransactionCase):
     @classmethod
@@ -46,6 +53,11 @@ class TestSlaSafety(TransactionCase):
         cls.ticket = cls.Ticket.create(
             {"name": "T", "description": "d", "team_id": cls.team.id}
         )
+        cls.env.cr.execute(
+            "UPDATE helpdesk_ticket SET create_date=%s WHERE id=%s",
+            (CREATE_DATE, cls.ticket.id),
+        )
+        cls.ticket.invalidate_recordset()
 
     def _sla(self, **kw):
         vals = {"name": "SLA safety", "team_ids": [(6, 0, self.team.ids)]}
