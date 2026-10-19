@@ -56,7 +56,10 @@ class TestNaturalPeriod(TransactionCase):
         Quando se calcula o numero de dias em lote
         Entao contam 4 dias (finais de semana incluidos)
         """
-        leave_model = self.env["hr.leave"].with_context(natural_period=True)
+        # 17.0: hr_holidays_natural_period also passes the original request unit
+        leave_model = self.env["hr.leave"].with_context(
+            natural_period=True, old_request_unit="natural_day"
+        )
         result = leave_model._get_number_of_days_batch(
             self.date_from, self.date_to, self.employee.ids
         )
