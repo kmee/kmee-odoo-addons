@@ -27,14 +27,20 @@ class Sac(models.Model):
         for record in self:
             record.create_date_date = record.create_date or False
 
-    def name_get(self):
-        result = []
+    def _get_display_name(self):
+        self.ensure_one()
+        name = self.name
+        if self.customer_name:
+            name = "%s - %s" % (name, self.customer_name)
+        return name
+
+    @api.depends("name", "customer_name")
+    def _compute_display_name(self):
         for record in self:
-            name = record.name
-            if record.customer_name:
-                name = "%s - %s" % (name, record.customer_name)
-            result.append((record.id, name))
-        return result
+            record.display_name = record._get_display_name()
+
+    def name_get(self):
+        return [(record.id, record._get_display_name()) for record in self]
 
     @api.depends("price", "qty")
     def _compute_price_total(self):
@@ -43,7 +49,9 @@ class Sac(models.Model):
             if record.price and record.qty:
                 record.price_total = record.price * record.qty
 
-    display_name = fields.Char("Name", readonly=True, store=True)
+    display_name = fields.Char(
+        "Name", compute="_compute_display_name", readonly=True, store=True
+    )
     active = fields.Boolean(
         readonly=True,
         default=True,
@@ -213,6 +221,16 @@ class Sac(models.Model):
         string="Impresso",
     )
 
+    @api.model
+    def _default_stage_id(self):
+        # SAC users cannot read ir.model, which the stage domain traverses
+        return super(Sac, self.sudo())._default_stage_id()
+
+    def _read_group_stage_ids(self, stages, domain, order):
+        return super(Sac, self.sudo())._read_group_stage_ids(
+            stages.sudo(), domain, order
+        )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
@@ -225,11 +243,9 @@ class Sac(models.Model):
         result = super(Sac, self).create(vals_list)
         return result
 
-    @api.depends("create_date")
-    def _track_template(self, tracking):
-        res = super(Sac, self)._track_template(tracking)
+    def _track_template(self, changes):
+        res = super()._track_template(changes)
         test_record = self[0]
-        changes, tracking_value_ids = tracking[test_record.id]
         if "stage_id" in changes and test_record.stage_id.mail_template_id:
             res["stage_id"] = (
                 test_record.stage_id.mail_template_id,
@@ -313,8 +329,8 @@ class Sac(models.Model):
             self.state_id = zip_code.state_id
             self.l10n_br_city_id = zip_code.l10n_br_city_id
 
-    def message_get_suggested_recipients(self):
-        recipients = super(Sac, self).message_get_suggested_recipients()
+    def _message_get_suggested_recipients(self):
+        recipients = super()._message_get_suggested_recipients()
         try:
             for record in self:
                 if record.email_from:
@@ -328,5 +344,5 @@ class Sac(models.Model):
     @api.ondelete(at_uninstall=False)
     def _unlink_if_not_done(self):
         """Prevent deletion of SAC records that are in done state"""
-        if any(record.stage_id.done for record in self):
+        if any(record.stage_id.fold for record in self):
             raise UserError(_("You cannot delete a SAC record that is in done state."))
