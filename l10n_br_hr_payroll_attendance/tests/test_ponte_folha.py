@@ -61,6 +61,7 @@ class TestPonteFolha(TransactionCase):
         cls.employee = cls.env["hr.employee"].create(
             {
                 "name": "Carlos Folha",
+                "cnpj_cpf": "111.444.777-35",
                 "tz": "America/Sao_Paulo",
                 "resource_calendar_id": cls.calendario.id,
                 "l10n_br_tipo_contrato": "clt",
