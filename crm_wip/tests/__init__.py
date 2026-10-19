@@ -1,0 +1,2 @@
+from . import test_smoke
+from . import test_crm_wip
