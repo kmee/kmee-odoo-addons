@@ -1,135 +1,78 @@
-import logging
+# Copyright 2025 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 from datetime import date
 
-from odoo.tests.common import TransactionCase
-
-_logger = logging.getLogger(__name__)
+from odoo.tests import TransactionCase, tagged
 
 
+@tagged("post_install", "-at_install")
 class TestPeriodCommission(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-
-        # Models
-        cls.commission_model = cls.env["commission"]
-        cls.agent_model = cls.env["res.partner"]
-        cls.product_model = cls.env["product.product"]
-        cls.sale_order_model = cls.env["sale.order"]
-        cls.settlement_model = cls.env["commission.settlement"]
-
-        # Products setup
-        cls.product = cls.env.ref("product.product_product_5")
-        cls.product.invoice_policy = "order"
-        cls.product.list_price = 5
-        cls.product.flush_recordset()
-        assert cls.product.invoice_policy == "order"
-
-        cls.commission_product = cls.env["product.product"].create(
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.company = cls.env.company
+        cls.commission = cls.env["commission"].create(
             {
-                "name": "Commission test product",
-                "type": "service",
-                "list_price": 1.0,
-            }
-        )
-
-        # Commission tiers setup
-        cls.period_commission = cls.commission_model.create(
-            {
-                "name": "Period Commission Test",
+                "name": "Period tiers",
                 "commission_type": "period_section",
-                "invoice_state": "open",  # Only settled when invoice is open
-                "amount_base_type": "gross_amount",  # Commission based on gross amount
+                "invoice_state": "open",
+                "amount_base_type": "gross_amount",
                 "section_ids": [
-                    (0, 0, {"amount_from": 0.0, "amount_to": 100000.0, "percent": 1.0}),
+                    (0, 0, {"amount_from": 0.0, "amount_to": 1000.0, "percent": 1.0}),
                     (
                         0,
                         0,
-                        {
-                            "amount_from": 100000.0,
-                            "amount_to": 200000.0,
-                            "percent": 2.0,
-                        },
+                        {"amount_from": 1000.01, "amount_to": 2000.0, "percent": 2.0},
                     ),
                     (
                         0,
                         0,
                         {
-                            "amount_from": 200000.0,
-                            "amount_to": 300000.0,
+                            "amount_from": 2000.01,
+                            "amount_to": 99999999.0,
                             "percent": 3.0,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "amount_from": 300000.0,
-                            "amount_to": 400000.0,
-                            "percent": 4.0,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "amount_from": 400000.0,
-                            "amount_to": 99999999,
-                            "percent": 5.0,
                         },
                     ),
                 ],
             }
         )
-
-        # Agents setup
-        cls.agent = cls.agent_model.create(
+        cls.agent = cls.env["res.partner"].create(
             {
-                "name": "Test Agent",
+                "name": "Agent Period",
                 "agent": True,
-                "commission_id": cls.period_commission.id,
+                "settlement": "monthly",
+                "commission_id": cls.commission.id,
             }
         )
-
-        cls.agent2 = cls.agent_model.create(
-            {
-                "name": "Test Agent 2",
-                "agent": True,
-                "commission_id": cls.period_commission.id,
-            }
+        cls.customer = cls.env["res.partner"].create({"name": "Customer Period"})
+        cls.product = cls.env["product.product"].create(
+            {"name": "Product Period", "list_price": 100.0, "standard_price": 40.0}
         )
 
-        # Company and partner setup
-        cls.company = cls.env.ref("base.main_company")
-        cls.partner = cls.env.ref("base.res_partner_2")
-        cls.partner.write({"agent": False})
-
-    def _create_sale_order(self, date_order, amount, agent=None):
-        """Helper to create a sale order with commission"""
-        if agent is None:
-            agent = self.agent
-
-        return self.sale_order_model.create(
+    def _invoice(self, amount, invoice_date, move_type="out_invoice", qty=1.0):
+        invoice = self.env["account.move"].create(
             {
-                "partner_id": self.partner.id,
-                "date_order": date_order,
-                "order_line": [
+                "move_type": move_type,
+                "partner_id": self.customer.id,
+                "invoice_date": invoice_date,
+                "date": invoice_date,
+                "invoice_line_ids": [
                     (
                         0,
                         0,
                         {
-                            "name": self.product.name,
                             "product_id": self.product.id,
-                            "product_uom_qty": amount / self.product.list_price,
-                            "product_uom": self.env.ref("uom.product_uom_unit").id,
-                            "price_unit": self.product.list_price,
+                            "quantity": qty,
+                            "price_unit": amount / qty,
                             "agent_ids": [
                                 (
                                     0,
                                     0,
                                     {
-                                        "agent_id": agent.id,
-                                        "commission_id": self.period_commission.id,
+                                        "agent_id": self.agent.id,
+                                        "commission_id": self.commission.id,
                                     },
                                 )
                             ],
@@ -138,121 +81,125 @@ class TestPeriodCommission(TransactionCase):
                 ],
             }
         )
-
-    def _confirm_and_invoice_sale_order(self, sale_order, invoice_date):
-        """Helper to confirm and invoice a sale order"""
-        sale_order.action_confirm()
-        invoice = sale_order._create_invoices()
-        invoice.invoice_date = invoice_date
         invoice.action_post()
         return invoice
 
-    def _create_settlement(self, agent, date_to):
-        """Helper to create settlement"""
+    def _settle(self, date_to=None):
         wizard = self.env["commission.make.settle"].create(
             {
-                "date_to": date_to,
-                "agent_ids": [(4, agent.id)],
+                "date_to": date_to or date(2024, 2, 15),
+                "agent_ids": [(4, self.agent.id)],
+                "settlement_type": "sale_invoice",
             }
         )
-        settlements = wizard.action_settle()
-        return self.settlement_model.browse(settlements)
+        action = wizard.action_settle()
+        return self.env["commission.settlement"].search(action["domain"])
 
-    def test_01_basic_period_commission(self):
-        """Test basic commission calculation for a single period"""
-        order_date = date(2023, 1, 15)
-        amount = 50000
+    def test_calculate_period_section(self):
+        self.assertEqual(self.commission.calculate_period_section(), 1.0)
+        self.assertEqual(self.commission.calculate_period_section(500), 1.0)
+        self.assertEqual(self.commission.calculate_period_section(1000), 1.0)
+        self.assertEqual(self.commission.calculate_period_section(1500), 2.0)
+        self.assertEqual(self.commission.calculate_period_section(999999), 3.0)
+        # no section contains the total (negative period)
+        self.assertEqual(self.commission.calculate_period_section(-10), 0.0)
 
-        # Create and process sale order
-        self._create_sale_order(order_date, amount)
-        # self._confirm_and_invoice_sale_order(sale_order, order_date)
+    def test_calculate_period_section_other_type(self):
+        fixed = self.env["commission"].create({"name": "Fixed", "fix_qty": 5.0})
+        self.assertEqual(fixed.calculate_period_section(500), 0.0)
 
-        # Create settlement
-        self._create_settlement(self.agent, date(2023, 1, 31))
+    def test_invoice_line_provisional_amount(self):
+        """Before the settlement the rate of the first tier is used."""
+        invoice = self._invoice(500.0, date(2024, 1, 10))
+        self.assertAlmostEqual(invoice.invoice_line_ids.agent_ids.amount, 5.0)
 
-        # Verify commission calculation (1% of 50000)
-        # self.assertEqual(len(settlement), 1)
-        # self.assertAlmostEqual(settlement.total, 500.0, places=2)
+    def test_single_invoice_first_tier(self):
+        self._invoice(500.0, date(2024, 1, 10))
+        settlement = self._settle()
+        self.assertAlmostEqual(settlement.total, 5.0)
 
-    # def test_02_progressive_tiers(self):
-    #     """Test commission calculation with progressive sales in same period"""
-    #     order_date = date(2023, 2, 15)
+    def test_tier_reached_by_period_total(self):
+        """The rate of the tier of the sum of the invoices applies to all lines."""
+        self._invoice(500.0, date(2024, 1, 10))
+        self._invoice(700.0, date(2024, 1, 20))
+        settlement = self._settle()
+        self.assertEqual(len(settlement.line_ids), 2)
+        # total 1200 -> 2% on every line
+        self.assertAlmostEqual(
+            sorted(settlement.line_ids.mapped("settled_amount")), [10.0, 14.0]
+        )
+        self.assertAlmostEqual(settlement.total, 24.0)
 
-    #     # First sale - Tier 1
-    #     sale1 = self._create_sale_order(order_date, 50000)
-    #     self._confirm_and_invoice_sale_order(sale1, order_date)
+    def test_last_tier(self):
+        self._invoice(3000.0, date(2024, 1, 10))
+        self.assertAlmostEqual(self._settle().total, 90.0)
 
-    #     # Second sale - Should move to Tier 2
-    #     sale2 = self._create_sale_order(order_date, 100000)
-    #     self._confirm_and_invoice_sale_order(sale2, order_date)
+    def test_invoices_of_other_period_do_not_add_up(self):
+        self._invoice(1500.0, date(2024, 1, 10))
+        self._invoice(1500.0, date(2024, 2, 10))
+        settlements = self._settle(date_to=date(2024, 3, 15))
+        self.assertEqual(len(settlements), 2)
+        # each month has its own total: 1500 -> 2% in both
+        self.assertEqual(settlements.mapped("total"), [30.0, 30.0])
 
-    #     settlement = self._create_settlement(self.agent, date(2023, 2, 28))
+    def test_total_counts_each_invoice_line_once(self):
+        """An invoice with several lines does not count its total once per line."""
+        invoice = self._invoice(600.0, date(2024, 1, 10), qty=3.0)
+        self.assertEqual(len(invoice.invoice_line_ids), 1)
+        self.assertAlmostEqual(self._settle().total, 6.0)
 
-    #     # Total sales 150000 should use 2% tier
-    #     self.assertAlmostEqual(settlement.total, 3000.0, places=2)  # 2% of 150000
+    def test_refund_reduces_the_total(self):
+        self._invoice(1500.0, date(2024, 1, 10))
+        self._invoice(600.0, date(2024, 1, 15), move_type="out_refund")
+        settlement = self._settle()
+        # total 900 -> 1%: 15.0 of the invoice and -6.0 of the refund
+        self.assertAlmostEqual(
+            sorted(settlement.line_ids.mapped("settled_amount")), [-6.0, 15.0]
+        )
 
-    # def test_03_multiple_periods(self):
-    #     """Test commission calculation across different periods"""
-    #     test_data = [
-    #         {"date": date(2023, 3, 15), "amount": 250000, "expected_rate": 0.03},
-    #         {"date": date(2023, 4, 15), "amount": 350000, "expected_rate": 0.04},
-    #         {"date": date(2023, 5, 15), "amount": 450000, "expected_rate": 0.05},
-    #     ]
+    def test_net_amount_base(self):
+        """Margin based commission: the cost of the product is discounted."""
+        self.commission.amount_base_type = "net_amount"
+        self._invoice(1000.0, date(2024, 1, 10), qty=10.0)
+        # base = 1000 - 40 * 10 = 600 -> first tier (1%)
+        self.assertAlmostEqual(self._settle().total, 6.0)
 
-    #     for data in test_data:
-    #         sale = self._create_sale_order(data["date"], data["amount"])
-    #         self._confirm_and_invoice_sale_order(sale, data["date"])
+    def test_commission_free_product(self):
+        self.product.commission_free = True
+        self._invoice(500.0, date(2024, 1, 10))
+        settlement = self._settle()
+        self.assertAlmostEqual(settlement.total, 0.0)
 
-    #         settlement = self._create_settlement(
-    #             self.agent,
-    #             data["date"] + relativedelta(day=31)
-    #         )
+    def test_second_settlement_run_recalculates_whole_period(self):
+        self._invoice(600.0, date(2024, 1, 10))
+        settlement = self._settle()
+        self.assertAlmostEqual(settlement.total, 6.0)
+        self._invoice(600.0, date(2024, 1, 25))
+        settlement_2 = self._settle()
+        self.assertEqual(settlement, settlement_2)
+        # total 1200 -> 2% on both lines, including the one already settled
+        self.assertAlmostEqual(settlement.total, 24.0)
 
-    #         expected_commission = data["amount"] * data["expected_rate"]
-    #         self.assertAlmostEqual(
-    #             settlement.total,
-    #             expected_commission,
-    #             places=2,
-    #             msg=f"Wrong commission for {data['date']}"
-    #         )
+    def test_recalculate_button(self):
+        self._invoice(600.0, date(2024, 1, 10))
+        settlement = self._settle()
+        settlement.line_ids.settled_amount = 0.0
+        settlement.action_recalculate_period_commission()
+        self.assertAlmostEqual(settlement.total, 6.0)
 
-    # def test_04_commission_recalculation(self):
-    #     """Test commission recalculation after additional sales"""
-    #     order_date = date(2023, 6, 15)
+    def test_cancelled_settlement_is_not_recalculated(self):
+        self._invoice(600.0, date(2024, 1, 10))
+        settlement = self._settle()
+        settlement.action_cancel()
+        settlement.line_ids.settled_amount = 1.0
+        settlement.recalculate_period_commission()
+        self.assertAlmostEqual(settlement.total, 1.0)
 
-    #     # Initial sale
-    #     sale1 = self._create_sale_order(order_date, 90000)
-    #     self._confirm_and_invoice_sale_order(sale1, order_date)
-
-    #     settlement = self._create_settlement(self.agent, date(2023, 6, 30))
-    #     initial_commission = settlement.total
-
-    #     # Additional sale in same period
-    #     sale2 = self._create_sale_order(order_date, 160000)
-    #     self._confirm_and_invoice_sale_order(sale2, order_date)
-
-    #     # Recalculate commission
-    #     settlement.action_recalculate_period_commission()
-
-    #     # Verify commission was updated (250000 total should use 3% tier)
-    #     self.assertNotEqual(settlement.total, initial_commission)
-    #     self.assertAlmostEqual(settlement.total, 7500.0, places=2)  # 3% of 250000
-
-    # def test_05_multiple_agents_same_period(self):
-    #     """Test commission calculation for multiple agents in same period"""
-    #     order_date = date(2023, 7, 15)
-
-    #     # Create sales for both agents
-    #     sale1 = self._create_sale_order(order_date, 200000, self.agent)
-    #     sale2 = self._create_sale_order(order_date, 300000, self.agent2)
-
-    #     self._confirm_and_invoice_sale_order(sale1, order_date)
-    #     self._confirm_and_invoice_sale_order(sale2, order_date)
-
-    #     # Create settlements
-    #     settlement1 = self._create_settlement(self.agent, date(2023, 7, 31))
-    #     settlement2 = self._create_settlement(self.agent2, date(2023, 7, 31))
-
-    #     # Verify independent commission calculations
-    #     self.assertAlmostEqual(settlement1.total, 6000.0, places=2)  # 3% of 200000
-    #     self.assertAlmostEqual(settlement2.total, 12000.0, places=2)  # 4% of 300000
+    def test_other_commission_types_untouched(self):
+        fixed = self.env["commission"].create({"name": "Fixed", "fix_qty": 10.0})
+        self.agent.commission_id = fixed
+        invoice = self._invoice(500.0, date(2024, 1, 10))
+        invoice.invoice_line_ids.agent_ids.commission_id = fixed
+        invoice.invoice_line_ids.agent_ids._compute_amount()
+        settlement = self._settle()
+        self.assertAlmostEqual(settlement.total, 50.0)

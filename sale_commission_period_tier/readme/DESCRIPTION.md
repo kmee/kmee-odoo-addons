@@ -1,26 +1,16 @@
-# Sale Commission Period Tier
+Este módulo adiciona o tipo de comissão **Faixas por período** (*period
+section*). A porcentagem não depende de cada linha isolada, e sim do total
+vendido pelo agente dentro do período da liquidação: quanto maior o total,
+maior a faixa atingida, e a porcentagem dessa faixa vale para todas as linhas
+do período.
 
-This module extends the functionality of sale commissions to add tiered commission rates based on periodic sales performance.
+Exemplo de faixas:
 
-## Features
+* Até R$ 10.000,00: 2%
+* De R$ 10.000,01 até R$ 20.000,00: 3%
+* De R$ 20.000,01 até R$ 99.999.999,00: 4% (a última faixa precisa de um limite alto)
 
-* Define commission tiers based on sales volume within a period
-* Automatically calculate commission rates according to achieved sales targets
-* Support for multiple period types (monthly, quarterly, yearly)
-* Dynamic commission rates that adjust based on sales performance
-* Integration with existing sale commission settlement process
-
-## How it works
-
-The module allows you to set up different commission rates that are applied based on the total sales amount achieved by a salesperson within a defined period. For example:
-
-* Sales up to $10,000: 2% commission
-* Sales from $10,001 to $20,000: 3% commission
-* Sales above $20,000: 4% commission
-
-When settlements are generated, the system automatically:
-1. Calculates the total sales for the period
-2. Determines the appropriate commission tier
-3. Applies the corresponding commission rate
-
-This encourages sales performance by offering higher commission rates as sales targets are achieved.
+Ao gerar a liquidação, o sistema soma a base de todas as linhas da liquidação
+(valor bruto ou margem, conforme a comissão), descobre a faixa atingida e
+grava o valor liquidado de cada linha. Devoluções entram com sinal negativo.
+Até a liquidação, a fatura mostra a comissão provisória pela primeira faixa.
