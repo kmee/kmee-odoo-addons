@@ -1,0 +1,76 @@
+<odoo>
+    <record id="view_partner_form_custom" model="ir.ui.view">
+        <field name="name">res.partner.form.customer.rating</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="customer_rating_id" options="{'no_open': True}" />
+            </xpath>
+
+            <xpath expr="//h1" position="attributes">
+                <attribute
+                    name="class"
+                    add="d-flex align-items-center gap-2"
+                    separator=" "
+                />
+            </xpath>
+
+            <xpath expr="//h1/field[@name='name'][1]" position="before">
+                <field
+                    name="image_rating"
+                    widget="image"
+                    class="customer-rating-icon"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree_custom" model="ir.ui.view">
+        <field name="name">res.partner.list.customer.rating</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_name']" position="before">
+                <field
+                    name="image_rating"
+                    widget="image"
+                    class="customer-rating-icon"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_kanban_view" model="ir.ui.view">
+        <field name="name">res.partner.kanban.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="before">
+                <span>
+                    <field
+                        name="image_rating"
+                        widget="image"
+                        class="customer-rating-icon"
+                    />
+                </span>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_view_search" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='group_by_properties']" position="after">
+                <filter
+                    name="customer_rating_id"
+                    string="Customer Rating"
+                    domain="[]"
+                    context="{'group_by' : 'customer_rating_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
