@@ -125,7 +125,7 @@ class TestStockReportPy3o(TransactionCase):
         """
         picking = self._deliver()
         self.assertEqual(picking.state, "assigned")
-        picking.move_ids.quantity_done = 4
+        picking.move_ids.quantity = 4
         picking.button_validate()
         self.assertEqual(picking.state, "done")
         text = self._render(self.delivery)
