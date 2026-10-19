@@ -1,0 +1,1 @@
+When the Picking Operations and Delivery Slip reports are generated, they will contain the text of the statement.
