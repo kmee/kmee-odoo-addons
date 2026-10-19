@@ -53,12 +53,8 @@ class ContractLine(models.Model):
                     - relativedelta(days=1)
                 )
             elif rec.recurring_rule_type == "monthlylastday":
-                date_end = (
-                    rec.date_start
-                    + relativedelta(
-                        months=(rec.recurring_interval * rec.period_count), day=31
-                    )
-                    - relativedelta(days=1)
+                date_end = rec.date_start + relativedelta(
+                    months=(rec.recurring_interval * rec.period_count) - 1, day=31
                 )
             elif rec.recurring_rule_type == "quarterly":
                 date_end = (
