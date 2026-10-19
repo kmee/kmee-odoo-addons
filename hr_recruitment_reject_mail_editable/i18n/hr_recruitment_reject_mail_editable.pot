@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* hr_recruitment_reject_mail_editable
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: hr_recruitment_reject_mail_editable
+#: model:ir.model,name:hr_recruitment_reject_mail_editable.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr ""
+
+#. module: hr_recruitment_reject_mail_editable
+#: model:ir.model,name:hr_recruitment_reject_mail_editable.model_applicant_get_refuse_reason
+msgid "Get Refuse Reason"
+msgstr ""
+
+#. module: hr_recruitment_reject_mail_editable
+#: model_terms:ir.ui.view,arch_db:hr_recruitment_reject_mail_editable.hr_applicant_reject_mail_editable
+msgid "Refuse"
+msgstr ""
