@@ -409,7 +409,8 @@ class TestAllocationPlan(TransactionCase):
         """
         Dado um plano com alocacoes validadas
         Quando as alocacoes sao recusadas, voltam a rascunho e sao confirmadas
-        Entao passam por refuse -> draft -> confirm
+        Entao passam por refuse -> confirm (na 17.0 alocacao nao tem rascunho:
+        voltar a rascunho devolve ao primeiro estado, a aprovar)
         """
         confirm_type = self.env["hr.leave.type"].create(
             {
@@ -426,7 +427,8 @@ class TestAllocationPlan(TransactionCase):
         plan.action_allocation_refuse()
         self.assertEqual(allocation.state, "refuse")
         plan.action_allocation_draft()
-        self.assertEqual(allocation.state, "draft")
+        self.assertEqual(allocation.state, "confirm")
+        allocation.action_refuse()
         plan.action_allocation_confirm()
         self.assertEqual(allocation.state, "confirm")
 
