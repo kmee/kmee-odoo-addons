@@ -6,6 +6,7 @@ from odoo import api, models
 
 class SaleOrder(models.Model):
 
+    _name = "sale.order"
     _inherit = [
         "sale.order",
         "account.payment.term.manual.mixin",

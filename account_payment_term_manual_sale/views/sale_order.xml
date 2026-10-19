@@ -44,8 +44,13 @@
                                 name="value_amount"
                                 attrs="{'readonly':[('value','=','balance')]}"
                             />
-                            <field name="nb_days" />
-                            <field name="delay_type" />
+                            <field name="months" />
+                            <field name="days" />
+                            <field name="end_month" />
+                            <field
+                                name="days_after"
+                                attrs="{'invisible': [('end_month', '=', False)]}"
+                            />
                             <field name="fixed_date" />
                         </tree>
                     </field>
