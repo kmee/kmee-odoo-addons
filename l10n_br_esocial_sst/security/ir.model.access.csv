@@ -11,3 +11,4 @@ access_l10n_br_esocial_s2221_hr,l10n_br.esocial.s2221 hr,model_l10n_br_esocial_s
 access_l10n_br_esocial_s2240_user,l10n_br.esocial.s2240 user,model_l10n_br_esocial_s2240,l10n_br_hr_sst.group_sst_user,1,0,0,0
 access_l10n_br_esocial_s2240_manager,l10n_br.esocial.s2240 manager,model_l10n_br_esocial_s2240,l10n_br_hr_sst.group_sst_manager,1,1,1,1
 access_l10n_br_esocial_s2240_hr,l10n_br.esocial.s2240 hr,model_l10n_br_esocial_s2240,hr.group_hr_manager,1,1,1,1
+access_l10n_br_esocial_s2220_medico,l10n_br.esocial.s2220 medico,model_l10n_br_esocial_s2220,l10n_br_hr_sst_aso.group_sst_medico,1,1,1,0

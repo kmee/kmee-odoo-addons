@@ -49,10 +49,20 @@ class L10nBrSstCat(models.Model):
 
     @api.model
     def _atualizar_recibo(self):
-        """Copia para a CAT o recibo devolvido pelo eSocial."""
-        for rec in self.search([("s2210_id", "!=", False)]):
+        """Copia para a CAT o recibo devolvido pelo eSocial.
+
+        Sem isso a CAT nunca sai de "emitida" e a CAT de reabertura ou de óbito
+        não encontra o recibo da comunicação anterior, que o S-2210 exige.
+        """
+        pendentes = self.search(
+            [
+                ("state", "in", ("emitida", "transmitida")),
+                ("s2210_id.evento_id.nr_recibo", "!=", False),
+            ]
+        )
+        for rec in pendentes:
             recibo = rec.s2210_id.evento_id.nr_recibo
-            if recibo and rec.numero_recibo != recibo:
+            if rec.numero_recibo != recibo or rec.state != "transmitida":
                 rec.write({"numero_recibo": recibo, "state": "transmitida"})
         return True
 
