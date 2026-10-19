@@ -1,1 +1,7 @@
-This module customizes the payment terms management behavior in Odoo Purchase Orders. It extends purchase order functionality to allow the use of manual payment terms related to the invoicing process. When the payment term is changed on the purchase order, the module automatically updates the associated manual payment term. Additionally, when creating or viewing an invoice from the purchase order, it ensures that manual payment terms are correctly set up by creating or updating payment lines as needed. The module also adds a "Payment Terms" tab to the purchase order form, where you can view and edit these manual terms.
+Este módulo leva a condição de pagamento manual para o pedido de compra.
+
+* Ao trocar a condição de pagamento do pedido, o módulo cria uma cópia dela
+  (condição de pagamento manual), que pode ser ajustada parcela a parcela na
+  aba **Payment Terms** do pedido (valores, prazos e datas de vencimento fixas);
+* Ao gerar a fatura do pedido, a condição manual é copiada para a fatura, que
+  passa a ter as parcelas e os vencimentos ajustados no pedido.
