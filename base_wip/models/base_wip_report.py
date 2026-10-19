@@ -32,9 +32,14 @@ class BaseWipReport(models.Model):
 
     reference_id = fields.Reference(
         string="Record",
-        selection=[("project.task", "Project Task")],
+        selection="_selection_reference_model",
         compute="_compute_time",
     )
+
+    @api.model
+    def _selection_reference_model(self):
+        models = self.env["ir.model"].sudo().search([])
+        return [(model.model, model.name) for model in models]
 
     lead_time_float = fields.Float(
         compute="_compute_time",
