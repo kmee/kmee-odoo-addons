@@ -39,6 +39,12 @@ class TestIntegridadePtrp(TransactionCase):
             "l10n_br_hr_attendance_apuracao/models/regras_jornada.py",
             "l10n_br_hr_attendance_aej/models/aej_layout.py",
         ):
+            modulo = arquivo.split("/")[0]
+            if modulo in self.verificador._modulos_do_escopo_ausentes():
+                # O AFD não é dependência do módulo: com ele fora da base o
+                # manifesto registra a ausência em vez de omitir o módulo.
+                self.assertIn(ptrp_escopo.marca_de_ausencia(modulo), manifesto)
+                continue
             self.assertIn(arquivo, manifesto)
             self.assertEqual(len(manifesto[arquivo]), 64)
 
