@@ -5,7 +5,15 @@ from datetime import date
 
 from odoo.tests.common import tagged
 
+from odoo.addons.product_contract_period.models.sale_order_line import (
+    SaleOrderLine as PeriodSaleOrderLine,
+)
+
 from .common import ContractPeriodCase
+
+# The module's own methods are called through its class: other installed modules
+# (l10n_br_sale fiscal amounts, product_contract_period_bo onchange) override
+# the same methods in the full CI database.
 
 
 @tagged("post_install", "-at_install")
@@ -74,6 +82,7 @@ class TestSalePeriod(ContractPeriodCase):
             ]
         )
         line = order.order_line
+        PeriodSaleOrderLine._compute_amount(line)
         self.assertAlmostEqual(line.price_subtotal, 300.0)
         self.assertAlmostEqual(line.price_tax, 30.0)
         self.assertAlmostEqual(line.price_total, 330.0)
@@ -117,7 +126,7 @@ class TestSalePeriod(ContractPeriodCase):
         line = order.order_line
         line.recurring_rule_type = "monthly"
         line.period_count = 6
-        line._onchange_period()
+        PeriodSaleOrderLine._onchange_period(line)
         self.assertEqual(line.date_end, date(2026, 6, 30))
 
     def test_onchange_period_without_start_date_does_not_crash(self):
@@ -127,7 +136,7 @@ class TestSalePeriod(ContractPeriodCase):
         order = self._order([{"price_unit": 1.0}])
         line = order.order_line
         line.write({"date_start": False, "date_end": False})
-        line._onchange_period()
+        PeriodSaleOrderLine._onchange_period(line)
         self.assertFalse(line.date_end)
 
     def test_onchange_period_ignores_non_contract_product(self):
@@ -139,7 +148,7 @@ class TestSalePeriod(ContractPeriodCase):
             [{"product_id": plain.id, "price_unit": 1.0, "date_end": "2030-01-01"}]
         )
         line = order.order_line
-        line._onchange_period()
+        PeriodSaleOrderLine._onchange_period(line)
         self.assertEqual(line.date_end, date(2030, 1, 1))
 
     def test_order_period_totals(self):
