@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mapping_plan_user,mapping.plan user,model_l10n_br_account_mapping_plan,account.group_account_user,1,0,0,0
+access_mapping_plan_manager,mapping.plan manager,model_l10n_br_account_mapping_plan,account.group_account_manager,1,1,1,1
+access_mapping_account_user,mapping.account user,model_l10n_br_account_mapping_account,account.group_account_user,1,0,0,0
+access_mapping_account_manager,mapping.account manager,model_l10n_br_account_mapping_account,account.group_account_manager,1,1,1,1
