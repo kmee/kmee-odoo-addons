@@ -80,7 +80,8 @@ class PaymentTransaction(models.Model):
                 "CodigoCanal": self.provider_id.pinbank_channel,
                 "CodigoCliente": self.provider_id.pinbank_client,
                 "DataVencimento": self.due_date.strftime("%Y%m%d"),
-                "Valor": int(self.amount * 100),
+                # round, e nao int: 2.05 * 100 vale 204.99999999999997.
+                "Valor": round(self.amount * 100),
                 "Email": self.partner_email,
                 "DadosSacado": {
                     "CpfCnpj": int(re.sub("[^0-9]", "", self.partner_id.cnpj_cpf or 0)),
@@ -93,8 +94,8 @@ class PaymentTransaction(models.Model):
                 },
                 "RetornarBase64": True,
                 "Instrucoes": self.boleto_instructions or "",
-                "Juros": {"Valor": int(self.boleto_interest * 10000)},
-                "Multa": {"Valor": int(self.boleto_penalty * 10000)},
+                "Juros": {"Valor": round(self.boleto_interest * 10000)},
+                "Multa": {"Valor": round(self.boleto_penalty * 10000)},
             }
         }
 
