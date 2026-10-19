@@ -22,13 +22,20 @@ class HrContract(models.Model):
         politica = self.company_id.l10n_br_sst_aso_politica
         if politica == "ignora":
             return True
-        exame = self.env["hr.employee.medical.examination"].search(
-            [
-                ("employee_id", "=", self.employee_id.id),
-                ("l10n_br_tipo_aso_codigo", "=", tipo_codigo),
-                ("state", "=", "done"),
-            ],
-            limit=1,
+        # sudo: a regra de acesso do exame limita o usuário comum aos próprios
+        # exames, e quem abre ou encerra o contrato não os enxergaria. Só a
+        # existência do ASO interessa aqui, nunca o conteúdo.
+        exame = (
+            self.env["hr.employee.medical.examination"]
+            .sudo()
+            .search(
+                [
+                    ("employee_id", "=", self.employee_id.id),
+                    ("l10n_br_tipo_aso_codigo", "=", tipo_codigo),
+                    ("state", "=", "done"),
+                ],
+                limit=1,
+            )
         )
         if exame:
             return True
