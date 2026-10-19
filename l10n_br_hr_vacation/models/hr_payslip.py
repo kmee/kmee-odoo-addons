@@ -25,6 +25,7 @@ class HrPayslip(models.Model):
     l10n_br_ferias_allocation_id = fields.Many2one(
         comodel_name="hr.leave.allocation",
         string="Período Aquisitivo (Férias)",
+        index=True,
         domain="[('employee_id', '=', employee_id)]",
         help="Alocação de férias (período aquisitivo, CLT art. 130) cujo "
         "direito está sendo pago neste holerite. Define os dias de "
@@ -42,7 +43,7 @@ class HrPayslip(models.Model):
     )
     l10n_br_dias_periodo_gozado = fields.Integer(
         string="Dias Gozados neste Período",
-        help="Dias corridos efetivamente GOZADOS neste holerite — uma das "
+        help="Dias corridos efetivamente GOZADOS neste holerite - uma das "
         "até 3 frações do período aquisitivo vinculado (CLT art. 134 §1º). "
         "Só tem efeito quando l10n_br_ferias_allocation_id está definido; "
         "sem alocação, usa-se o caminho legado (l10n_br_abono_pecuniario).",
@@ -98,7 +99,7 @@ class HrPayslip(models.Model):
         "proporcionais excluídas na justa causa (Súmula 171 TST; CLT art. "
         "146 parágrafo único e art. 147); 13º proporcional excluído "
         "SOMENTE na justa causa (Lei 4.090/62 art. 3º; Decreto 57.155/65 "
-        "art. 7º) — devido inclusive no pedido de demissão (Súmula 157 "
+        "art. 7º) - devido inclusive no pedido de demissão (Súmula 157 "
         "TST); férias vencidas devidas em qualquer hipótese (CLT art. 146, "
         "caput).",
     )
@@ -122,7 +123,7 @@ class HrPayslip(models.Model):
         "8.036/90 art. 18 §1º; CLT art. 484-A, I, 'b'): "
         "total depositado na conta vinculada durante o contrato, conforme "
         "o extrato oficial (FGTS Digital). Quando deixado em branco (0), a "
-        "regra usa o FALLBACK 8% × salário × meses trabalhados — uma "
+        "regra usa o FALLBACK 8% x salário x meses trabalhados - uma "
         "ESTIMATIVA sem juros/correção monetária, que subestima o saldo "
         "real; preencher com o extrato sempre que disponível.",
     )
@@ -185,7 +186,7 @@ class HrPayslip(models.Model):
         """Valida direito, indivisibilidade do abono e fracionamento (RF-19).
 
         CLT art. 130: dias gozados + vendidos não pode superar o direito do
-        período aquisitivo. CLT art. 143 §2º: o abono é indivisível — só uma
+        período aquisitivo. CLT art. 143 §2º: o abono é indivisível - só uma
         fração pode vendê-lo, e o limite é 1/3 do direito (não fixo em 10
         dias). CLT art. 134 §1º (Lei 13.467/2017): até 3 períodos por
         período aquisitivo, um deles com pelo menos 14 dias corridos e os
@@ -295,7 +296,7 @@ class HrPayslip(models.Model):
         igual ou superior a 15 dias, desde o início do período aquisitivo
         em curso (último aniversário de admissão <= referência) até a data
         de referência (rescisão, já projetada pelo aviso indenizado quando
-        aplicável — ver ``_l10n_br_data_projetada_rescisao``). Máximo de 12
+        aplicável - ver ``_l10n_br_data_projetada_rescisao``). Máximo de 12
         avos.
 
         Nota: NÃO considera férias vencidas de períodos aquisitivos
@@ -325,8 +326,8 @@ class HrPayslip(models.Model):
         Súmula 45 TST / CLT art. 142: parcelas variáveis habituais (horas
         extras habituais, adicional noturno) integram pela MÉDIA dos
         últimos meses. Adicionais CONTRATUAIS fixos (periculosidade,
-        insalubridade) são um percentual constante do salário — não variam
-        mês a mês — e por isso ficam FORA desta lista; sua integração às
+        insalubridade) são um percentual constante do salário - não variam
+        mês a mês - e por isso ficam FORA desta lista; sua integração às
         apurações separadas é uma lacuna distinta (fora desta onda),
         documentada no relatório.
         """
@@ -375,7 +376,7 @@ class HrPayslip(models.Model):
 
         CLT art. 146: na cessação do contrato, qualquer que seja a causa,
         são devidas as férias de período aquisitivo já COMPLETO e ainda não
-        gozado ("vencidas") — diferente das proporcionais do período em
+        gozado ("vencidas") - diferente das proporcionais do período em
         curso (``l10n_br_avos_ferias``). CLT art. 137: pagas após o período
         concessivo (os 12 meses seguintes ao término do período aquisitivo,
         CLT art. 134), o pagamento é em DOBRO.
@@ -467,7 +468,7 @@ class HrPayslip(models.Model):
             "FERIAS_INDENIZADAS",
             "ADICIONAL_FERIAS_INDENIZADAS",
             # RF-06: verbas rescisórias novas (aviso, multa do FGTS, férias
-            # vencidas) — pré-populadas para as regras condicionais que
+            # vencidas) - pré-populadas para as regras condicionais que
             # referenciam estes códigos quando a verba não é devida.
             "FERIAS_VENCIDAS",
             "ADICIONAL_FERIAS_VENCIDAS",
