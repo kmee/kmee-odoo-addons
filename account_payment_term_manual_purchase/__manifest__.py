@@ -8,7 +8,7 @@
         the due date to the invoice.""",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
-    "author": "KMEE,Odoo Community Association (OCA)",
+    "author": "KMEE, Odoo Community Association (OCA)",
     "development_status": "Beta",
     "maintainers": ["mileo"],
     "website": "https://github.com/KMEE/kmee-odoo-addons",
@@ -17,10 +17,6 @@
         "account_payment_term_manual",
     ],
     "data": [
-        # "security/purchase_payment_term_manual.xml",
         "views/purchase_order.xml",
-    ],
-    "demo": [
-        "demo/purchase_payment_term_manual.xml",
     ],
 }
