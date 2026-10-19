@@ -9,9 +9,8 @@
                 <header>
                     <button
                         name="action_gerar_sefip"
-                        string="Gerar SEFIP"
+                        string="Gerar SEFIP (descontinuado)"
                         type="object"
-                        class="btn-primary"
                         attrs="{'invisible': [('state', '!=', 'draft')]}"
                     />
                     <button
@@ -29,6 +28,15 @@
                     <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
+                    <div class="alert alert-warning" role="alert">
+                        <strong>SEFIP substituída pelo FGTS Digital.</strong>
+                        Pela Portaria MTE 3.240/2023, desde a competência
+                        03/2024 a guia do FGTS (GFD) é emitida pelo FGTS Digital
+                        a partir dos eventos do eSocial, e as contribuições
+                        previdenciárias vão pela DCTFWeb. A geração de arquivo
+                        está desativada; esta tela serve apenas para consultar o
+                        histórico já gerado.
+                    </div>
                     <group>
                         <group>
                             <field name="company_id" />

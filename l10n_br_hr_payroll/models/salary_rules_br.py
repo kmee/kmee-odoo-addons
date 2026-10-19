@@ -10,6 +10,8 @@ Injetadas no contexto das regras salariais via `tools.br.*`.
 """
 from decimal import ROUND_HALF_UP, Decimal
 
+from dateutil.relativedelta import relativedelta
+
 
 def round_money(value, places=2):
     """Arredondamento monetário padrão brasileiro (ROUND_HALF_UP).
@@ -29,7 +31,7 @@ def round_money(value, places=2):
     return float(d.quantize(Decimal(10) ** -places, rounding=ROUND_HALF_UP))
 
 
-# ── INSS — Tabela Progressiva ─────────────────────────────────────────
+# ── INSS - Tabela Progressiva ─────────────────────────────────────────
 
 
 def calc_inss(salario_bruto, faixas):
@@ -86,7 +88,7 @@ def calc_redutor_irrf(rendimento_bruto, imposto_apurado, faixas):
     A lei NÃO alterou a tabela progressiva mensal (a faixa de isenção continua
     em R$ 2.428,80): a isenção efetiva até R$ 5.000,00 e a redução parcial até
     R$ 7.350,00 operam EXCLUSIVAMENTE por um redutor aplicado **depois** do
-    imposto já apurado pela tabela — seja pelo caminho das deduções legais,
+    imposto já apurado pela tabela - seja pelo caminho das deduções legais,
     seja pelo desconto simplificado (o mais favorável, ver a regra IRRF).
 
     Pontos sensíveis da apuração (fonte frequente de erro):
@@ -157,14 +159,18 @@ def calc_irrf_mais_favoravel(
       1. **Dedução legal** (Lei 9.250/95 art. 4º): imposto sobre a base já
          deduzida de contribuição previdenciária, dependentes e pensão
          alimentícia - a base vem calculada de fora (rubrica ``BASE_IRRF``).
-      2. **Desconto simplificado** (Lei 14.663/2023): no lugar de TODAS as
-         deduções legais, abate-se uma parcela fixa do rendimento tributável.
-         Vale para cada apuração isoladamente, inclusive para o imposto
-         exclusivo de fonte do 13º salário, cuja tabela é aplicada em
-         separado dos demais rendimentos.
-      3. **Redutor do IRPF** (Lei 15.270/2025, desde 01/2026): aplicado
-         DEPOIS de escolhida a forma mais favorável, em função do rendimento
-         tributável BRUTO da apuração.
+      2. **Desconto simplificado** (Lei 9.250/95, art. 4º, § 2º, incluído pela
+         Lei 14.663/2023, art. 6º): no lugar de TODAS as deduções legais,
+         abate-se uma parcela fixa do rendimento tributável. Vale para cada
+         apuração isoladamente, porque a IN RFB 2.141/2023 inseriu o
+         dispositivo em cada base da IN RFB 1.500/2014: art. 13, § 8º (13º
+         salário), art. 29, § 5º (férias) e art. 52, § 3º (folha mensal).
+         Alcança, portanto, também o imposto exclusivo de fonte do 13º, cuja
+         tabela é aplicada em separado dos demais rendimentos.
+      3. **Redutor do IRPF** (Lei 9.250/95, art. 3º-A, incluído pela Lei
+         15.270/2025, desde 01/2026; para o 13º há dispositivo expresso no
+         § 3º do mesmo artigo): aplicado DEPOIS de escolhida a forma mais
+         favorável, em função do rendimento tributável BRUTO da apuração.
 
     A retenção é o MENOR imposto entre (1) e (2): a opção pelo desconto
     simplificado é do contribuinte, e a fonte pagadora deve adotar de ofício
@@ -205,8 +211,8 @@ def calc_pensao_alimenticia(remuneracao, valor_fixo=0.0, percentual=0.0):
     a parcela percentual sobre a remuneração bruta do mês. Isso cobre os três
     cenários usuais das decisões judiciais:
 
-      - só valor fixo   → ``percentual = 0``;
-      - só percentual   → ``valor_fixo = 0``;
+      - só valor fixo   -> ``percentual = 0``;
+      - só percentual   -> ``valor_fixo = 0``;
       - fixo + percentual (ex.: 1 salário mínimo + 10% do que exceder).
 
     Args:
@@ -490,7 +496,7 @@ def dias_dsr(ano, mes):
     para fins do rateio do desconto de DSR.
 
     Limitação conhecida: feriados NÃO são computados como DSR (exigiria um
-    calendário de feriados por localidade — ver ``l10n_br_resource``). Para a
+    calendário de feriados por localidade - ver ``l10n_br_resource``). Para a
     maioria das competências o erro é pequeno; quando houver feriado no mês o
     desconto de DSR fica marginalmente subestimado. Documentado como
     pendência de evolução (RF-26).
@@ -535,7 +541,7 @@ def calc_decimo_avos(data_admissao, data_referencia):
 
     Regra dos 15 dias (Lei 4.090/62, art. 1º §2º): "a fração igual ou superior
     a 15 (quinze) dias de trabalho será havida como mês integral". A regra vale
-    para **qualquer** mês do ano-base — o de admissão E o do desligamento
+    para **qualquer** mês do ano-base - o de admissão E o do desligamento
     (art. 3º, que manda pagar o 13º proporcional na extinção do contrato).
 
     Por isso o mês da ``data_referencia`` também é medido pelos dias
@@ -544,7 +550,7 @@ def calc_decimo_avos(data_admissao, data_referencia):
 
     Args:
         data_admissao: Data de admissão (date).
-        data_referencia: Último dia considerado (date) — 31/12 no 13º anual,
+        data_referencia: Último dia considerado (date) - 31/12 no 13º anual,
             data do desligamento no 13º proporcional da rescisão.
 
     Returns:
@@ -576,6 +582,82 @@ def calc_decimo_avos(data_admissao, data_referencia):
     return min(avos, 12)
 
 
+def calc_media_habitual(valores_mensais, janela_meses=12):
+    """Média de verba variável habitual (Súmula 45 TST / CLT art. 142).
+
+    Parcelas variáveis habituais (horas extras habituais, adicional noturno
+    quando variável mês a mês) integram férias, 13º salário e as verbas
+    rescisórias pela MÉDIA dos últimos meses, e não pelo valor do mês de
+    referência (que pode estar zerado ou atípico).
+
+    Args:
+        valores_mensais: lista de totais mensais já ordenada do mais antigo
+            para o mais recente (tipicamente extraída dos holerites MENSAIS
+            confirmados anteriores do mesmo contrato). Meses sem a verba
+            entram com 0.0 (a média é sobre o PERÍODO, não só sobre os meses
+            em que houve a verba).
+        janela_meses: tamanho da janela em meses (padrão 12, Súmula 45 TST).
+            Quando o empregado tem menos meses de casa que a janela, a média
+            é feita apenas sobre os meses efetivamente trabalhados: basta
+            que ``valores_mensais`` já venha recortado a esses meses.
+
+    Returns:
+        Média aritmética dos valores (0.0 se a lista estiver vazia).
+    """
+    if not valores_mensais:
+        return 0.0
+    janela = valores_mensais[-janela_meses:] if janela_meses else valores_mensais
+    if not janela:
+        return 0.0
+    return round_money(sum(janela) / len(janela))
+
+
+def calc_aviso_previo_dias(data_admissao, data_referencia):
+    """Dias de aviso prévio proporcional ao tempo de serviço (Lei 12.506/2011).
+
+    30 dias corridos, acrescidos de 3 dias por ano completo de serviço no
+    mesmo empregador, até o máximo de 60 dias adicionais (90 dias no total).
+    Vale tanto para o aviso prévio trabalhado quanto para o indenizado.
+
+    Args:
+        data_admissao: Data de admissão (date).
+        data_referencia: Data do desligamento (date).
+
+    Returns:
+        Dias de aviso prévio (int, 30 a 90).
+    """
+    anos_completos = data_referencia.year - data_admissao.year
+    # relativedelta: admissao em 29/02 nao quebra em ano nao bissexto.
+    aniversario = data_admissao + relativedelta(years=anos_completos)
+    if aniversario > data_referencia:
+        anos_completos -= 1
+    anos_completos = max(anos_completos, 0)
+    return min(30 + 3 * anos_completos, 90)
+
+
+def calc_meses_trabalhados(data_admissao, data_referencia):
+    """Meses completos de contrato entre a admissão e a referência.
+
+    Usado apenas para ESTIMAR o saldo do FGTS na conta vinculada quando ele
+    não é informado manualmente (ver base da multa de 40%, Lei 8.036/90 art.
+    18 §1º) - uma aproximação de "8% x meses" sem juros/correção, que NÃO
+    substitui o extrato oficial do FGTS quando disponível.
+
+    Args:
+        data_admissao: Data de admissão (date).
+        data_referencia: Data de referência, tipicamente o desligamento.
+
+    Returns:
+        Meses completos (int, >= 0).
+    """
+    meses = (data_referencia.year - data_admissao.year) * 12 + (
+        data_referencia.month - data_admissao.month
+    )
+    if data_referencia.day < data_admissao.day:
+        meses -= 1
+    return max(meses, 0)
+
+
 def calc_vt(salario, valor_vt):
     """Calcula o desconto de Vale-Transporte do empregado.
 
@@ -599,7 +681,7 @@ def calc_salario_familia(remuneracao, num_filhos, faixas, dias_trabalhados=30):
         remuneracao: **Salário de contribuição do mês** (remuneração mensal:
             salário + horas extras, adicionais, comissões etc.), que é a base
             legal de enquadramento (Lei 8.213/91 art. 65 c/c Lei 8.212/91
-            art. 28) — NÃO o salário contratual.
+            art. 28) - NÃO o salário contratual.
         num_filhos: Número de filhos elegíveis (até 14 anos ou inválidos).
         faixas: Lista ``[(base_max, valor), ...]`` ascendente, resolvida pela
             competência (ver ``l10n_br.hr.payroll.sal.familia.faixa._tabela``).

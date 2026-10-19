@@ -1,3 +1,6 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import base64
 import calendar
 import io
@@ -24,8 +27,17 @@ def _format_value(value):
 
 
 class HrDirf(models.Model):
+    """DIRF descontinuada.
+
+    A obrigação foi extinta pela IN RFB 2.181/2024 (fatos a partir de
+    01/01/2025 vão por EFD-Reinf/eSocial, com confissão e recolhimento na
+    DCTFWeb). O modelo é mantido apenas para consulta do histórico já
+    gerado: a ação de geração está bloqueada e o código de montagem do
+    arquivo abaixo não é mais executado.
+    """
+
     _name = "l10n_br.hr.dirf"
-    _description = "DIRF - Declaração do IR Retido na Fonte"
+    _description = "DIRF - Declaração do IR Retido na Fonte (descontinuada)"
     _order = "ano_referencia desc"
 
     name = fields.Char(
@@ -217,7 +229,29 @@ class HrDirf(models.Model):
         return lines
 
     def action_gerar_dirf(self):
-        """Gera o arquivo DIRF."""
+        """Bloqueado: a DIRF foi extinta (ver docstring da classe)."""
+        raise UserError(
+            _(
+                "A DIRF foi extinta e este gerador foi descontinuado.\n\n"
+                "Norma: IN RFB 2.181/2024, que encerrou a DIRF. Para os fatos "
+                "ocorridos a partir de 1o de janeiro de 2025 não há mais "
+                "entrega de DIRF.\n\n"
+                "Caminho atual: as retenções de imposto de renda na fonte são "
+                "informadas pela EFD-Reinf (eventos da série R-4000) e pelo "
+                "eSocial, e a confissão e o recolhimento passam pela DCTFWeb. "
+                "O comprovante anual de rendimentos ao beneficiário continua "
+                "devido e não depende deste gerador.\n\n"
+                "Os registros de DIRF já existentes continuam disponíveis "
+                "somente para consulta de histórico."
+            )
+        )
+
+    def _gerar_dirf_descontinuado(self):
+        """Código morto mantido como referência do leiaute antigo da DIRF.
+
+        Não é chamado por nenhuma ação: a geração está bloqueada em
+        :meth:`action_gerar_dirf`.
+        """
         self.ensure_one()
         if not self.employee_ids:
             raise UserError(_("Busque os funcionários antes de gerar a DIRF."))
