@@ -15,6 +15,7 @@
                     >
                         <field name="is_boleto_payment" invisible="1" />
                         <field name="due_date" />
+                        <field name="move_line_id" />
                         <field name="our_number" />
                         <field name="digitable_line" />
                         <field name="barcode" />
