@@ -63,6 +63,13 @@ class PaymentProvider(models.Model):
                     )
                 )
 
+    def _get_default_payment_method_codes(self):
+        """Override of `payment` to return the default payment method codes."""
+        default_codes = super()._get_default_payment_method_codes()
+        if self.code != "inter":
+            return default_codes
+        return ["boleto"]
+
     def _get_supported_currencies(self):
         """Retorna moedas suportadas pelo provider"""
         supported_currencies = super()._get_supported_currencies()
