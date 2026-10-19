@@ -16,6 +16,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/ir_rule.xml",
         "views/res_config_settings_view.xml",
         "views/document_import_extraction_view.xml",
         "wizards/document_import_wizard.xml",
