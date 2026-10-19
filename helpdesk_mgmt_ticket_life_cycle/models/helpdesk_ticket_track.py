@@ -106,7 +106,7 @@ class HelpdeskTicketTrackStageDuration(models.Model):
         "helpdesk.ticket", string="ticket", required=True, ondelete="cascade"
     )
     stage_id = fields.Many2one("helpdesk.ticket.stage", string="Stage", required=True)
-    team_id = fields.Many2one("helpdesk.ticket.team", string="Team", required=True)
+    team_id = fields.Many2one("helpdesk.ticket.team", string="Team")
     start_date = fields.Datetime(required=True)
     end_date = fields.Datetime()
 
