@@ -20,28 +20,25 @@ class SaleOrderCoverPdf(models.Model):
     @api.constrains("active")
     def _check_single_record(self):
         """Garante que só existe um registro ativo por vez"""
-        if self.active:
-            other_active = self.search([("id", "!=", self.id), ("active", "=", True)])
-            if other_active:
-                raise ValidationError(
-                    _(
-                        "Só pode existir um registro ativo de capa PDF por vez. "
-                        "Desative o registro atual antes de ativar outro."
-                    )
+        if self.search_count([("active", "=", True)]) > 1:
+            raise ValidationError(
+                _(
+                    "Só pode existir um registro ativo de capa PDF por vez. "
+                    "Desative o registro atual antes de ativar outro."
                 )
+            )
 
     @api.model_create_multi
     def create(self, vals_list):
-        for vals in vals_list:
-            if vals.get("active", True):
-                existing_active = self.search([("active", "=", True)])
-                if existing_active:
-                    raise ValidationError(
-                        _(
-                            "Já existe um registro ativo de capa PDF. "
-                            "Desative-o antes de criar um novo."
-                        )
+        if any(vals.get("active", True) for vals in vals_list):
+            existing_active = self.search([("active", "=", True)], limit=1)
+            if existing_active:
+                raise ValidationError(
+                    _(
+                        "Já existe um registro ativo de capa PDF. "
+                        "Desative-o antes de criar um novo."
                     )
+                )
         return super().create(vals_list)
 
     @api.model
