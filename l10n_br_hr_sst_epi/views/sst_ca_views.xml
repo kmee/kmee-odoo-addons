@@ -29,10 +29,10 @@
                         name="web_ribbon"
                         title="Vencido"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('state', '!=', 'vencido')]}"
+                        invisible="state != 'vencido'"
                     />
                     <div class="oe_title">
-                        <label for="numero" string="Número do CA" />
+                        <label for="numero" string="N&#250;mero do CA" />
                         <h1><field name="numero" placeholder="12345" /></h1>
                     </div>
                     <group>
@@ -77,7 +77,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Observações" name="observacao">
+                        <page string="Observa&#231;&#245;es" name="observacao">
                             <field name="observacao" nolabel="1" />
                         </page>
                     </notebook>
@@ -112,7 +112,7 @@
                 <group expand="0" string="Agrupar por">
                     <filter
                         name="group_state"
-                        string="Situação"
+                        string="Situa&#231;&#227;o"
                         context="{'group_by': 'state'}"
                     />
                     <filter
@@ -126,7 +126,7 @@
     </record>
 
     <record id="l10n_br_sst_ca_action" model="ir.actions.act_window">
-        <field name="name">Certificados de Aprovação</field>
+        <field name="name">Certificados de Aprova&#231;&#227;o</field>
         <field name="res_model">l10n_br.sst.ca</field>
         <field name="view_mode">tree,form</field>
     </record>

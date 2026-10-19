@@ -10,12 +10,9 @@
                 <field name="l10n_br_sst_ca_id" />
                 <field
                     name="l10n_br_sst_ca_validade"
-                    attrs="{'invisible': [('l10n_br_sst_ca_id', '=', False)]}"
+                    invisible="not l10n_br_sst_ca_id"
                 />
-                <field
-                    name="l10n_br_sst_ca_state"
-                    attrs="{'invisible': [('l10n_br_sst_ca_id', '=', False)]}"
-                />
+                <field name="l10n_br_sst_ca_state" invisible="not l10n_br_sst_ca_id" />
             </field>
         </field>
     </record>
