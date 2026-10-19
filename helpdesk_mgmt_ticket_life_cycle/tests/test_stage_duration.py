@@ -2,6 +2,7 @@
 
 from datetime import timedelta
 
+from freezegun import freeze_time
 from lxml import etree
 
 from odoo import fields
@@ -84,7 +85,12 @@ class TestStageDuration(TransactionCase):
         When it is created and changes stage
         Then it does not break and durations are tracked without team."""
         ticket = self.Ticket.create(
-            {"name": "No team", "description": "d", "stage_id": self.stage_new.id}
+            {
+                "name": "No team",
+                "description": "d",
+                "stage_id": self.stage_new.id,
+                "team_id": False,
+            }
         )
         self.assertFalse(ticket.team_id)
         self.assertEqual(len(ticket.stage_duration_ids), 1)
@@ -162,8 +168,9 @@ class TestStageDuration(TransactionCase):
                     "end_date": end,
                 }
             )
-        ticket.invalidate_recordset()
-        self.assertEqual(ticket.current_stage_total_duration, "2 hours")
+        with freeze_time(now):
+            ticket.invalidate_recordset()
+            self.assertEqual(ticket.current_stage_total_duration, "2 hours")
 
     def test_current_stage_total_empty_without_history(self):
         """Given a ticket whose history was removed
@@ -228,7 +235,9 @@ class TestStageDuration(TransactionCase):
         self.assertAlmostEqual(row.completion_rate, 200 / 3, places=3)
         self.assertEqual(row.min_duration_seconds, 3600)
         self.assertGreaterEqual(row.max_duration_seconds, 10800)
-        self.assertGreaterEqual(row.total_duration_seconds, 3600 + 10800 + 7200)
+        # the running visit is measured with the SQL NOW() (transaction start),
+        # which can be a little earlier than the python now used above
+        self.assertGreaterEqual(row.total_duration_seconds, 3600 + 10800 + 7200 - 60)
         self.assertTrue(row.avg_duration_display)
 
     def test_report_display_empty_without_average(self):
