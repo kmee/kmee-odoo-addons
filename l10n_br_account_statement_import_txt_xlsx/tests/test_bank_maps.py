@@ -17,13 +17,10 @@ class TestBankMaps(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        if not cls.env.company.chart_template_id:
-            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
-            if not coa:
-                coa = cls.env["account.chart.template"].search(
-                    [("visible", "=", True)], limit=1
-                )
-            coa.try_loading(company=cls.env.company, install_demo=False)
+        if not cls.env.company.chart_template:
+            cls.env["account.chart.template"].try_loading(
+                "generic_coa", company=cls.env.company, install_demo=False
+            )
         cls.brl = cls.env.ref("base.BRL")
         cls.brl.active = True
         cls.suspense = cls.env["account.account"].create(
