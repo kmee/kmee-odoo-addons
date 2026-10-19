@@ -356,7 +356,7 @@ def aliquotas_patronais(
         incluídos no DAS (LC 123/2006, art. 13, VI) e as contribuições de
         terceiros são expressamente dispensadas (art. 13, §3º). NÃO se gera
         CPP, RAT nem terceiros - apenas o FGTS, que não é tributo e é devido
-        em qualquer anexo (Súmula 353 do STJ).
+        em qualquer anexo (nao integra o DAS).
       - **Simples Nacional, anexo IV** (construção civil, vigilância,
         limpeza): o DAS não inclui a CPP, que é recolhida por fora na forma
         do art. 22 da Lei 8.212/91 (LC 123/2006, art. 18, §5º-C) - logo CPP
