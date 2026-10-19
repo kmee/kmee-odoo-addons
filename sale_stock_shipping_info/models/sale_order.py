@@ -79,6 +79,9 @@ class SaleOrder(models.Model):
                         max_dim = max(max_dim, dim_in_m)
             order.shipping_weight = weight
             order.shipping_volume = volume
+            if max_dim:
+                # without dimension data the manually typed value is kept
+                order.longest_dimension = max_dim
 
     def _compute_weight_uom_name(self):
         self.weight_uom_name = self.env[
