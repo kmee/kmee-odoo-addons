@@ -13,6 +13,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/esocial_security.xml",
         # Tabelas de referência — Cadastro
         "data/l10n_br.esocial.financiamento.aposent.csv",
         "data/l10n_br.esocial.tipo.inscricao.csv",

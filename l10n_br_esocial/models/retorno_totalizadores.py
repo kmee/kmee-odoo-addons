@@ -345,8 +345,14 @@ def parse_totalizadores(retorno_xml):
     if not retorno_xml:
         return []
     try:
+        # Sem entidades externas nem rede: o retorno vem do governo, mas o XML
+        # é entrada de terceiro e não precisa de DTD.
+        parser = etree.XMLParser(resolve_entities=False, no_network=True)
         root = etree.fromstring(
-            retorno_xml.encode("utf-8") if isinstance(retorno_xml, str) else retorno_xml
+            retorno_xml.encode("utf-8")
+            if isinstance(retorno_xml, str)
+            else retorno_xml,
+            parser,
         )
     except (etree.XMLSyntaxError, ValueError):
         _logger.warning("eSocial: retorno ilegível ao procurar eventos totalizadores.")
