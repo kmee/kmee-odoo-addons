@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <menuitem
         id="menu_account_export_root"
         name="Exportacao Contabil"
@@ -26,5 +25,4 @@
         sequence="20"
         groups="account.group_account_manager"
     />
-
 </odoo>

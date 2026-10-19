@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <record id="account_export_form" model="ir.ui.view">
         <field name="name">l10n_br.account.export.form</field>
         <field name="model">l10n_br.account.export</field>
@@ -35,7 +34,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -87,7 +88,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <chatter/>
+                <chatter />
             </form>
         </field>
     </record>
@@ -112,5 +113,4 @@
         <field name="res_model">l10n_br.account.export</field>
         <field name="view_mode">list,form</field>
     </record>
-
 </odoo>

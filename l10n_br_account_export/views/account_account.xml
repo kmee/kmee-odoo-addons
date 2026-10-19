@@ -4,7 +4,6 @@
     License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
 -->
 <odoo>
-
     <record id="view_account_form_export_code" model="ir.ui.view">
         <field name="name">account.account.form.l10n_br_export</field>
         <field name="model">account.account</field>
@@ -26,5 +25,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

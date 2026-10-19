@@ -1,4 +1,4 @@
-## Layouts disponíveis
+**Layouts disponíveis**
 
 Cada layout é um módulo próprio, instalado conforme o sistema do escritório:
 
@@ -26,7 +26,7 @@ Cada layout é um módulo próprio, instalado conforme o sistema do escritório:
 | `..._oracle_gl` | Oracle GL Interface | planilha XLSX |
 | `..._sap` | SAP | planilha XLSX |
 
-## Como acrescentar um layout
+**Como acrescentar um layout**
 
 1. Crie um módulo que dependa de `l10n_br_account_export`.
 2. Acrescente o identificador ao campo `layout` da configuração, com
@@ -38,7 +38,7 @@ Cada layout é um módulo próprio, instalado conforme o sistema do escritório:
    `_fixed_width`. O contrato do chassi já cobre geração, determinismo,
    codificação, vazamento de separador, partidas múltiplas e conta sem de-para.
 
-## Pendências gerais
+**Pendências gerais**
 
 - de-para de códigos de histórico padrão;
 - centro de custo;
