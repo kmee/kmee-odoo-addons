@@ -236,6 +236,10 @@ class TestApplyMerge(CoverPdfCase):
         """
         Report = self.Report.with_context(force_report_rendering=True)
         ref = "sale.action_report_saleorder"
+        company = self.order.company_id
+        if "sale_header" in company._fields:
+            # keep the auto installed sale_pdf_quote_builder pages out of the count
+            company.write({"sale_header": False, "sale_footer": False})
         self.order.merge_pdf = False
         # wkhtmltopdf warns when it cannot fetch assets in the sandbox
         with mute_logger("odoo.addons.base.models.ir_actions_report"):
