@@ -14,6 +14,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/l10n_br_hr_sst_cat_security.xml",
         "data/ir_cron.xml",
         "views/sst_acidente_views.xml",
         "views/sst_cat_views.xml",

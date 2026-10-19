@@ -152,3 +152,39 @@ class TestSstCat(SstCommon):
         self._cria_acidente()
         self.employee.invalidate_recordset()
         self.assertEqual(self.employee.l10n_br_sst_acidente_count, 1)
+
+    # ── Revisão: prazo de reabertura e óbito, cron sem repetição ───────────
+
+    def test_reabertura_nao_tem_prazo_do_acidente(self):
+        acidente = self._cria_acidente()
+        acidente.action_registrar()
+        reabertura = acidente.action_criar_cat_reabertura()
+        self.assertFalse(reabertura.date_limite)
+        self.assertFalse(reabertura.prazo_situacao)
+
+    def test_cat_de_obito_conta_do_obito(self):
+        acidente = self._cria_acidente()
+        acidente.action_registrar()
+        acidente.write({"houve_obito": True, "date_obito": date(2026, 6, 17)})
+        cat_obito = acidente.action_criar_cat_obito()
+        self.assertEqual(cat_obito.date_limite, date(2026, 6, 17))
+
+    def test_cron_nao_repete_alerta_no_mesmo_dia(self):
+        acidente = self._cria_acidente()
+        acidente.action_registrar()
+        cat = acidente.cat_ids
+        cron = self.env["l10n_br.sst.cat"].cron_alerta_prazo
+        self.assertIn(cat, cron())
+        self.assertNotIn(cat, cron())
+
+    def test_cancelar_acidente_cancela_cat_pendente(self):
+        acidente = self._cria_acidente()
+        acidente.action_registrar()
+        acidente.action_cancelar()
+        self.assertEqual(acidente.cat_ids.state, "cancelled")
+        pendentes = self.env["l10n_br.sst.cat"].cron_alerta_prazo()
+        self.assertNotIn(acidente.cat_ids, pendentes)
+
+    def test_regra_multiempresa(self):
+        regra = self.env.ref("l10n_br_hr_sst_cat.l10n_br_sst_cat_company_rule")
+        self.assertEqual(regra.model_id.model, "l10n_br.sst.cat")
