@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <menuitem
         id="menu_l10n_br_ponto"
         name="Ponto (Portaria 671)"
@@ -34,5 +33,4 @@
         groups="hr_attendance.group_hr_attendance_manager"
         sequence="90"
     />
-
 </odoo>

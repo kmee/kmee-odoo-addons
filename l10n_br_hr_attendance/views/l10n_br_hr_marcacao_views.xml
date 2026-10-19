@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="l10n_br_hr_marcacao_view_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.marcacao</field>
         <field name="arch" type="xml">
@@ -168,5 +167,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

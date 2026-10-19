@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="group_l10n_br_ponto_auditor" model="res.groups">
         <field name="name">Ponto: auditor (somente leitura)</field>
         <field name="category_id" ref="base.module_category_human_resources" />
@@ -37,5 +36,4 @@
         <field name="model_id" ref="model_l10n_br_hr_rep" />
         <field name="domain_force">[('company_id', 'in', company_ids)]</field>
     </record>
-
 </odoo>

@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="l10n_br_hr_rep_view_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.rep</field>
         <field name="arch" type="xml">
@@ -41,10 +40,9 @@
                     </div>
                     <div class="oe_title">
                         <label for="name" />
-                        <h1><field
-                                name="name"
-                                placeholder="Rel&#243;gio da portaria"
-                            /></h1>
+                        <h1>
+                            <field name="name" placeholder="Rel&#243;gio da portaria" />
+                        </h1>
                     </div>
                     <group>
                         <group string="Registrador">
@@ -137,5 +135,4 @@
             </p>
         </field>
     </record>
-
 </odoo>
