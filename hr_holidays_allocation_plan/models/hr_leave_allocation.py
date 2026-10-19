@@ -3,7 +3,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class HrLeaveAllocation(models.Model):
@@ -248,6 +248,31 @@ class HrLeaveAllocationPlan(models.Model):
         default=1,
         help="Defines how long the allocated leave is valid from the allocation date.",
     )
+
+    @api.depends("holiday_type")
+    def _compute_from_holiday_type(self):
+        for plan in self:
+            if plan.holiday_type == "company":
+                plan.mode_company_id = plan.mode_company_id or self.env.company
+                plan.category_id = False
+            elif plan.holiday_type == "category":
+                plan.mode_company_id = False
+            else:
+                plan.mode_company_id = False
+                plan.category_id = False
+
+    @api.depends("holiday_type")
+    def _compute_department_id(self):
+        for plan in self:
+            if plan.holiday_type != "department":
+                plan.department_id = False
+
+    @api.depends("holiday_status_id")
+    def _compute_from_holiday_status_id(self):
+        for plan in self:
+            accrual_type = plan.accrual_plan_id.time_off_type_id
+            if accrual_type and accrual_type != plan.holiday_status_id:
+                plan.accrual_plan_id = False
 
     def action_recompute_plan(self):
         for record in self:
