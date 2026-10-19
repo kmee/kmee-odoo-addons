@@ -17,6 +17,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/l10n_br_hr_apuracao_security.xml",
         "data/l10n_br_hr_ocorrencia_data.xml",
         "views/l10n_br_hr_ocorrencia_views.xml",
         "views/l10n_br_hr_apuracao_dia_views.xml",
