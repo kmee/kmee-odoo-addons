@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <template
+        id="purchase_report_hide_date"
+        name="purchase_hide_date"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="100"
+    >
+        <xpath expr="//div[@t-if='o.date_planned']" position="replace" />
+    </template>
+</odoo>
