@@ -14,8 +14,11 @@ class TestAttachmentIndexContent(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.Ticket = cls.env["helpdesk.ticket"]
-        cls.ticket = cls.Ticket.create({"name": "Ticket", "description": "d"})
-        cls.other = cls.Ticket.create({"name": "Other", "description": "d"})
+        # a team keeps the tests valid when stage tracking modules are installed
+        team = cls.env["helpdesk.ticket.team"].create({"name": "Index team"})
+        vals = {"description": "d", "team_id": team.id}
+        cls.ticket = cls.Ticket.create(dict(vals, name="Ticket"))
+        cls.other = cls.Ticket.create(dict(vals, name="Other"))
 
     def _attach(self, ticket, text, name="note.txt"):
         return self.env["ir.attachment"].create(
