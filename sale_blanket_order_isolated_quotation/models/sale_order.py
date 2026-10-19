@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
     )
     blanket_order_referenced_id = fields.Many2one(
         comodel_name="sale.blanket.order",
-        string="Related Blanket Order",
+        string="Referenced Blanket Order",
         states={"draft": [("readonly", False)]},
         copy=False,
     )
