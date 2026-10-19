@@ -6,6 +6,7 @@
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
+        "l10n_br_nfe",
         "l10n_br_stock_account",
         "product_expiry",
         "stock_lot_production_date",
