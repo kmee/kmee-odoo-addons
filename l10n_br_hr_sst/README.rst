@@ -16,9 +16,9 @@ SST - Riscos Ocupacionais
 .. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-kmee%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst
-    :alt: kmee/kmee-odoo-addons
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst
+    :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
@@ -31,15 +31,15 @@ periculosidade na folha e o adicional de GILRAT da aposentadoria especial.
 
 Modelos principais:
 
-* **Ambiente de trabalho** (``l10n_br.sst.ambiente``) — corresponde ao grupo
+* **Ambiente de trabalho** (``l10n_br.sst.ambiente``) - corresponde ao grupo
   ``infoAmb`` do S-2240: setor, local e inscrição do estabelecimento.
-* **Fator de risco** (``l10n_br.sst.risco``) — grupo ``agNoc``: agente nocivo da
+* **Fator de risco** (``l10n_br.sst.risco``) - grupo ``agNoc``: agente nocivo da
   Tabela 22, avaliação quantitativa ou qualitativa, proteção coletiva e
   individual, enquadramento em aposentadoria especial e consequência trabalhista
   (insalubridade e periculosidade).
-* **Laudo** (``l10n_br.sst.laudo``) — PGR, LTCAT, PCMSO ou AET, com vigência,
+* **Laudo** (``l10n_br.sst.laudo``) - PGR, LTCAT, PCMSO ou AET, com vigência,
   responsável técnico e substituição do laudo anterior.
-* **Responsável técnico** (``l10n_br.sst.responsavel``) — grupo ``respReg``,
+* **Responsável técnico** (``l10n_br.sst.responsavel``) - grupo ``respReg``,
   obrigatório no S-2240.
 
 O contrato passa a apontar para o ambiente de trabalho, e daí se derivam os
@@ -67,10 +67,10 @@ Usage
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/kmee/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/kmee/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_sst%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_sst%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -92,6 +92,6 @@ Contributors
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `kmee/kmee-odoo-addons <https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst>`_ project on GitHub.
 
 You are welcome to contribute.
