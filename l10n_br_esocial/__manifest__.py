@@ -13,6 +13,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/esocial_security.xml",
         # Tabelas de referência — Cadastro
         "data/l10n_br.esocial.financiamento.aposent.csv",
         "data/l10n_br.esocial.tipo.inscricao.csv",
@@ -84,6 +85,9 @@
         "views/res_company_views.xml",
         "views/esocial_evento_views.xml",
         "views/esocial_lote_views.xml",
+        "views/esocial_ciclo_views.xml",
+        "views/esocial_totalizador_views.xml",
+        "views/esocial_conferencia_views.xml",
         "views/hr_payslip_views.xml",
         "views/menu_views.xml",
     ],

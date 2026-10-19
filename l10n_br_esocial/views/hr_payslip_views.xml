@@ -13,15 +13,23 @@
                     string="Gerar S-1200 eSocial"
                     attrs="{'invisible': [('state', '!=', 'done')]}"
                 />
+                <button
+                    name="action_esocial_gerar_s1210"
+                    type="object"
+                    string="Gerar S-1210 eSocial"
+                    attrs="{'invisible': ['|', ('state', '!=', 'done'), ('l10n_br_esocial_s1200_id', '=', False)]}"
+                />
             </xpath>
             <xpath expr="//notebook" position="inside">
-                <page
-                    string="eSocial"
-                    name="esocial"
-                    attrs="{'invisible': [('l10n_br_esocial_s1200_id', '=', False)]}"
-                >
+                <page string="eSocial" name="esocial">
                     <group>
-                        <field name="l10n_br_esocial_s1200_id" />
+                        <group string="Eventos">
+                            <field name="l10n_br_esocial_s1200_id" />
+                            <field name="l10n_br_esocial_s1210_id" />
+                        </group>
+                        <group string="Pagamento (regime de caixa)">
+                            <field name="l10n_br_esocial_data_pagamento" />
+                        </group>
                     </group>
                 </page>
             </xpath>

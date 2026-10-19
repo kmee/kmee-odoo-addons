@@ -78,6 +78,10 @@
                             />
                             <field name="origem_model" />
                             <field name="origem_id" />
+                            <field
+                                name="evento_excluido_id"
+                                attrs="{'invisible': [('evento_excluido_id', '=', False)]}"
+                            />
                         </group>
                     </group>
                     <notebook>
@@ -94,6 +98,22 @@
                                 widget="ace"
                                 options="{'mode': 'xml'}"
                             />
+                        </page>
+                        <page
+                            string="Totalizadores"
+                            name="totalizadores"
+                            attrs="{'invisible': [('totalizador_count', '=', 0)]}"
+                        >
+                            <field name="totalizador_count" invisible="1" />
+                            <field name="totalizador_ids" readonly="1">
+                                <tree>
+                                    <field name="tipo" />
+                                    <field name="per_apur" />
+                                    <field name="employee_id" />
+                                    <field name="nr_rec_arq_base" />
+                                    <field name="linha_count" string="Valores" />
+                                </tree>
+                            </field>
                         </page>
                         <page string="Ocorrências" name="ocorrencias">
                             <field name="ocorrencia_ids">
