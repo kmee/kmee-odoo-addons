@@ -74,7 +74,7 @@ class TestExportMapping(AccountExportCommon):
                 "name": "Conta fora do plano",
                 "code": self._free_account_code(),
                 "account_type": "expense",
-                "company_id": self.company.id,
+                "company_ids": [(6, 0, self.company.ids)],
                 # tem o campo 1:1, mas o perfil usa plano: nao vale
                 "l10n_br_export_code": "77777",
             }
