@@ -34,7 +34,8 @@ class HrApplicant(models.Model):
         template_id = self.env.ref(
             "l10n_br_website_hr_recruitment_form.send_applicant_form"
         )
-        return self.with_context(force_send=True).message_post_with_template(
-            template_id.id,
-            composition_mode="comment",
+        return self.with_context(force_send=True).message_post_with_source(
+            template_id,
+            message_type="comment",
+            subtype_xmlid="mail.mt_comment",
         )
