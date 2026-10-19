@@ -34,11 +34,12 @@ class SaleOrderLine(models.Model):
 
     @api.onchange("period_qty", "period_count", "price_unit", "discount")
     def _onchange_period(self):
-        super()._onchange_period()
+        res = super()._onchange_period()
         for record in self:
             if record.use_period_quantity:
                 record.product_uom_qty = record.period_qty * record.period_count
                 record.date_end = record._get_date_end() if record.date_start else False
+        return res
 
     def write(self, vals):
         for record in self:
