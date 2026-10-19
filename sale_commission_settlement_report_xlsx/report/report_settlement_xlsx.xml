@@ -8,10 +8,7 @@
         <field name="report_name">sale_commission.settlement_xls</field>
         <field name="report_file">sale_commission_xls</field>
         <field name="attachment_use">False</field>
-        <field
-            name="binding_model_id"
-            ref="commission.model_commission_settlement"
-        />
+        <field name="binding_model_id" ref="commission.model_commission_settlement" />
         <field name="binding_type">report</field>
     </record>
 
