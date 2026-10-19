@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_commission_settlement_report_xlsx
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-07 12:14+0000\n"
+"PO-Revision-Date: 2025-03-07 12:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Agent"
+msgstr "Agente"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Amount Invoice"
+msgstr "Valor da Fatura"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Amount Settled"
+msgstr "Valor Liquidado"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Commission"
+msgstr "Comissão"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Customer"
+msgstr ""
+
+#. module: sale_commission_settlement_report_xlsx
+#: model:ir.model.fields,field_description:sale_commission_settlement_report_xlsx.field_report_sale_commission_settlement_xls__display_name
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "From"
+msgstr "De"
+
+#. module: sale_commission_settlement_report_xlsx
+#: model:ir.model.fields,field_description:sale_commission_settlement_report_xlsx.field_report_sale_commission_settlement_xls__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Invoice"
+msgstr ""
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Invoice Date"
+msgstr ""
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Invoice Line"
+msgstr "Linha de Fatura"
+
+#. module: sale_commission_settlement_report_xlsx
+#: model:ir.model.fields,field_description:sale_commission_settlement_report_xlsx.field_report_sale_commission_settlement_xls____last_update
+msgid "Last Modified on"
+msgstr "Última Modificação"
+
+#. module: sale_commission_settlement_report_xlsx
+#: model:ir.actions.report,name:sale_commission_settlement_report_xlsx.action_report_settlement_xlsx
+msgid "Settlement Report (xlsx)"
+msgstr "Relatório de Liquidação (xlsx)"
+
+#. module: sale_commission_settlement_report_xlsx
+#: model:ir.model.fields,field_description:sale_commission_settlement_report_xlsx.field_report_sale_commission_settlement_xls__smart_search
+msgid "Smart Search"
+msgstr "Pesquisa Inteligente"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "To"
+msgstr "Para"
+
+#. module: sale_commission_settlement_report_xlsx
+#: code:addons/sale_commission_settlement_report_xlsx/report/report_settlement_xlsx.py:0
+#, python-format
+msgid "Total Commissions"
+msgstr "Comissões Totais"
+
+#. module: sale_commission_settlement_report_xlsx
+#: model:ir.model,name:sale_commission_settlement_report_xlsx.model_report_sale_commission_settlement_xls
+msgid "XLSX Report to show commission settlements"
+msgstr "Relatório XLSX para mostrar liquidações de comissões"
