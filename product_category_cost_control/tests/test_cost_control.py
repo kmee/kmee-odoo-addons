@@ -79,8 +79,21 @@ class TestCategoryCostControl(TransactionCase):
                 )
             yield
 
-    def _baseline(self):
-        return super(type(self.move), self.move)._get_price_unit()
+    def _assert_option_ignored(self, option, **fiscal):
+        """The category option must not change the price unit in this context.
+
+        The reference is taken with the option unset in the same context, so the
+        check holds whatever other modules (l10n_br_stock_account) do to the
+        core value; the amounts used would give 12.0 / 8.15 if they were applied.
+        """
+        self.categ.price_control_option = False
+        with self._fiscal(**fiscal):
+            reference = self.move._get_price_unit()
+        self.assertNotAlmostEqual(reference, 12.0)
+        self.assertNotAlmostEqual(reference, 8.15)
+        self.categ.price_control_option = option
+        with self._fiscal(**fiscal):
+            self.assertEqual(self.move._get_price_unit(), reference)
 
     def test_category_option_selection_values(self):
         """Given a category, When choosing the cost option, Then only the two
@@ -94,11 +107,7 @@ class TestCategoryCostControl(TransactionCase):
     def test_non_brazilian_move_keeps_standard_price_unit(self):
         """Given a category with an option but no fiscal operation field on
         the move, When computing the price unit, Then the core value is kept."""
-        self.categ.price_control_option = "include_all_taxes"
-        with self._fiscal(present=(), amount_taxed=120.0):
-            self.assertNotIn("fiscal_operation_id", self.move._fields)
-            self.assertEqual(self.move._get_price_unit(), 7.0)
-            self.assertEqual(self.move._get_price_unit(), self._baseline())
+        self._assert_option_ignored("include_all_taxes", present=(), amount_taxed=120.0)
 
     def test_include_all_taxes_uses_amount_taxed_per_unit(self):
         """Given an inbound fiscal move and include_all_taxes, When computing
@@ -117,35 +126,38 @@ class TestCategoryCostControl(TransactionCase):
 
     def test_no_option_on_category_keeps_core_value(self):
         """Given a Brazilian inbound move and a category without option, Then
-        the core price unit is untouched."""
+        the core price unit is untouched; with the option the taxed value wins."""
         with self._fiscal(amount_taxed=120.0):
-            self.assertEqual(self.move._get_price_unit(), 7.0)
+            self.assertNotAlmostEqual(self.move._get_price_unit(), 12.0)
+        self.categ.price_control_option = "include_all_taxes"
+        with self._fiscal(amount_taxed=120.0):
+            self.assertAlmostEqual(self.move._get_price_unit(), 12.0)
 
     def test_outbound_operation_is_ignored(self):
         """Given an outbound fiscal operation, Then the category option does
         not change the price unit."""
-        self.categ.price_control_option = "include_all_taxes"
-        with self._fiscal(op_type="out", amount_taxed=120.0):
-            self.assertEqual(self.move._get_price_unit(), 7.0)
+        self._assert_option_ignored(
+            "include_all_taxes", op_type="out", amount_taxed=120.0
+        )
 
     def test_move_without_fiscal_operation_is_ignored(self):
         """Given a move whose fiscal operation is empty, Then the core value
         is kept."""
-        self.categ.price_control_option = "include_all_taxes"
-        with self._fiscal(op_type=False, amount_taxed=120.0):
-            self.assertEqual(self.move._get_price_unit(), 7.0)
+        self._assert_option_ignored(
+            "include_all_taxes", op_type=False, amount_taxed=120.0
+        )
 
     def test_missing_amount_fields_fall_back_to_core(self):
         """Given the fiscal operation but no amount fields on the move, Then
         neither option breaks and the core value is kept."""
-        self.categ.price_control_option = "include_all_taxes"
-        with self._fiscal(present=("fiscal_operation_id",)):
-            self.assertEqual(self.move._get_price_unit(), 7.0)
-        self.categ.price_control_option = "remove_included_taxes"
-        with self._fiscal(
-            present=("fiscal_operation_id", "amount_untaxed"), amount_untaxed=100.0
-        ):
-            self.assertEqual(self.move._get_price_unit(), 7.0)
+        self._assert_option_ignored(
+            "include_all_taxes", present=("fiscal_operation_id",), amount_taxed=120.0
+        )
+        self._assert_option_ignored(
+            "remove_included_taxes",
+            present=("fiscal_operation_id", "amount_untaxed"),
+            amount_untaxed=100.0,
+        )
 
     def test_quantity_done_has_precedence_over_demand(self):
         """Given a move with 10 demanded and 4 done, When computing, Then the
@@ -159,10 +171,8 @@ class TestCategoryCostControl(TransactionCase):
     def test_zero_quantity_does_not_divide_by_zero(self):
         """Given a move with no quantity at all, Then the core value is
         returned instead of a ZeroDivisionError."""
-        self.categ.price_control_option = "include_all_taxes"
         self.move.product_uom_qty = 0.0
-        with self._fiscal(amount_taxed=120.0):
-            self.assertEqual(self.move._get_price_unit(), self._baseline())
+        self._assert_option_ignored("include_all_taxes", amount_taxed=120.0)
 
     def test_product_without_category_option_follows_its_own_category(self):
         """Given two categories, When moving products of each, Then only the
@@ -171,7 +181,7 @@ class TestCategoryCostControl(TransactionCase):
         self.categ.price_control_option = "include_all_taxes"
         self.product.categ_id = other
         with self._fiscal(amount_taxed=120.0):
-            self.assertEqual(self.move._get_price_unit(), 7.0)
+            self.assertNotAlmostEqual(self.move._get_price_unit(), 12.0)
         self.product.categ_id = self.categ
         with self._fiscal(amount_taxed=120.0):
             self.assertAlmostEqual(self.move._get_price_unit(), 12.0)
