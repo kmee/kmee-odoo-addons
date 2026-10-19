@@ -82,4 +82,4 @@ class TestSaleMarginCostSecurity(TransactionCase):
             .with_user(self.salesman)
             .get_view(view_type="form")["arch"]
         )
-        self.assertIn('name="margin"', arch)
+        self.assertTrue(etree.fromstring(arch).xpath("//field[@name='margin']"))
