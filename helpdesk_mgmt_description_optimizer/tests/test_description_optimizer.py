@@ -31,8 +31,8 @@ class TestDescriptionOptimizer(TransactionCase):
         )
 
     def _text_len(self, html):
-        return self.env["helpdesk.ticket"]._optimizer_sanitizer().text_content_length(
-            html
+        return (
+            self.env["helpdesk.ticket"]._optimizer_sanitizer().text_content_length(html)
         )
 
     def test_source_kept_intact_and_summary_shorter(self):
@@ -77,3 +77,8 @@ class TestDescriptionOptimizer(TransactionCase):
         ticket.write({"description": self._big_description()})
         self.assertTrue(ticket.has_description_full)
         self.assertIn("Linha 0", ticket.description)
+
+    def test_summary_is_sanitized_even_when_written_directly(self):
+        ticket = self._create_ticket(self._big_description())
+        ticket.write({"description_summary": "<p>ok</p><script>alert(1)</script>"})
+        self.assertNotIn("<script", ticket.description_summary)

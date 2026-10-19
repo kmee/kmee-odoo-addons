@@ -22,7 +22,11 @@
                     />
                 </t>
                 <t t-else="">
-                    <div t-ref="readonlyElement" class="o_readonly" t-out="markupValue" />
+                    <div
+                        t-ref="readonlyElement"
+                        class="o_readonly"
+                        t-out="markupValue"
+                    />
                 </t>
             </t>
             <t t-else="">
