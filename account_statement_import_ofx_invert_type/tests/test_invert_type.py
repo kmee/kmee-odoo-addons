@@ -77,6 +77,15 @@ class TestOfxInvertType(TransactionCase):
         self.assertEqual(statement.balance_end_real, end_balance)
         return statement
 
+    def _import_wizard(self):
+        """A real wizard record (other statement importers call ensure_one)."""
+        return self.wizard_model.with_context(journal_id=self.journal.id).create(
+            {
+                "statement_file": base64.b64encode(self.ofx_data),
+                "statement_filename": "x.ofx",
+            }
+        )
+
     def _transactions(self, journal=None):
         wiz = self.wizard_model.with_context(
             journal_id=journal.id if journal else False
@@ -116,7 +125,7 @@ class TestOfxInvertType(TransactionCase):
         """Given the reverse flag, When the file is parsed, Then the line
         amounts handed to the importer are negated and the start balance
         follows the file balance minus the inverted total."""
-        wiz = self.wizard_model.with_context(journal_id=self.journal.id)
+        wiz = self._import_wizard()
         normal = wiz._parse_file(self.ofx_data)[0][2][0]
         self.journal.reverse_balance_of_entries_ofx = True
         reverted = wiz._parse_file(self.ofx_data)[0][2][0]
@@ -131,7 +140,7 @@ class TestOfxInvertType(TransactionCase):
         """Given ignore_ofx_balance and no earlier statement, When parsed,
         Then the file balance is discarded (zero end balance)."""
         self.journal.ignore_ofx_balance = True
-        wiz = self.wizard_model.with_context(journal_id=self.journal.id)
+        wiz = self._import_wizard()
         res = wiz._parse_file(self.ofx_data)[0][2][0]
         self.assertEqual(res["balance_end_real"], 0.0)
         self.assertAlmostEqual(res["balance_start"], -70.25)
@@ -142,7 +151,7 @@ class TestOfxInvertType(TransactionCase):
         instead of the (wrong) balance written in the OFX."""
         self._previous_statement(1000.0)
         self.journal.ignore_ofx_balance = True
-        wiz = self.wizard_model.with_context(journal_id=self.journal.id)
+        wiz = self._import_wizard()
         res = wiz._parse_file(self.ofx_data)[0][2][0]
         self.assertAlmostEqual(res["balance_end_real"], 1070.25)
         self.assertNotAlmostEqual(res["balance_end_real"], 500.0)
@@ -155,7 +164,7 @@ class TestOfxInvertType(TransactionCase):
         self._previous_statement(200.0, date="2023-01-01")
         self._previous_statement(1000.0, date="2024-01-01")
         self.journal.ignore_ofx_balance = True
-        wiz = self.wizard_model.with_context(journal_id=self.journal.id)
+        wiz = self._import_wizard()
         res = wiz._parse_file(self.ofx_data)[0][2][0]
         self.assertAlmostEqual(res["balance_end_real"], 1070.25)
 
@@ -166,14 +175,14 @@ class TestOfxInvertType(TransactionCase):
         self.journal.write(
             {"ignore_ofx_balance": True, "reverse_balance_of_entries_ofx": True}
         )
-        wiz = self.wizard_model.with_context(journal_id=self.journal.id)
+        wiz = self._import_wizard()
         res = wiz._parse_file(self.ofx_data)[0][2][0]
         self.assertAlmostEqual(res["balance_end_real"], 1000.0 - 70.25)
 
     def test_invalid_file_is_not_ofx(self):
         """Given garbage content, When checked with a journal, Then it is
         not treated as OFX (False) and no error is raised."""
-        wiz = self.wizard_model.with_context(journal_id=self.journal.id)
+        wiz = self._import_wizard()
         self.assertFalse(wiz._check_ofx(b"not an ofx file"))
 
     def test_full_import_creates_inverted_lines(self):
