@@ -12,7 +12,9 @@ class TestPurchaseReportHideDate(TransactionCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.view = cls.env.ref("purchase_report_hide_date.purchase_report_hide_date")
         partner = cls.env["res.partner"].create({"name": "Vendor"})
-        product = cls.env["product.product"].create({"name": "Report Product"})
+        product = cls.env["product.product"].create(
+            {"name": "Report Product", "supplier_taxes_id": [(5, 0, 0)]}
+        )
         cls.order = cls.env["purchase.order"].create(
             {
                 "partner_id": partner.id,
@@ -25,6 +27,7 @@ class TestPurchaseReportHideDate(TransactionCase):
                             "product_qty": 2,
                             "price_unit": 10,
                             "date_planned": "2031-07-22 12:00:00",
+                            "taxes_id": [(5, 0, 0)],
                         },
                     )
                 ],
