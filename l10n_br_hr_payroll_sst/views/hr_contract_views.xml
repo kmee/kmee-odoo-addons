@@ -17,11 +17,11 @@
                 <field
                     name="l10n_br_sst_divergencia"
                     readonly="1"
-                    attrs="{'invisible': [('l10n_br_sst_divergencia', '=', False)]}"
+                    invisible="not l10n_br_sst_divergencia"
                 />
                 <field
                     name="l10n_br_sst_justificativa"
-                    attrs="{'invisible': [('l10n_br_sst_divergencia', '=', False)]}"
+                    invisible="not l10n_br_sst_divergencia"
                 />
             </xpath>
         </field>
