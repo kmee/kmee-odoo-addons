@@ -233,7 +233,7 @@ class L10nBrHrRep(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Marcações"),
             "res_model": "l10n_br.hr.marcacao",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("rep_id", "=", self.id)],
             "context": {"default_rep_id": self.id},
         }

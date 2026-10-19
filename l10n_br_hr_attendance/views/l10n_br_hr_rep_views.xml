@@ -6,7 +6,7 @@
     <record id="l10n_br_hr_rep_view_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.rep</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="not atestado_valido">
+            <list decoration-danger="not atestado_valido">
                 <field name="name" />
                 <field name="tipo" />
                 <field name="cnpj_cpf" />
@@ -16,7 +16,7 @@
                 <field name="atestado_date_end" />
                 <field name="atestado_valido" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -127,7 +127,7 @@
     <record id="l10n_br_hr_rep_action" model="ir.actions.act_window">
         <field name="name">Registradores de Ponto (REP)</field>
         <field name="res_model">l10n_br.hr.rep</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Cadastre o primeiro REP</p>
             <p>
