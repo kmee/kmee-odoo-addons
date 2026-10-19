@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_contract_view_form_payroll_sst" model="ir.ui.view">
+        <field name="name">hr.contract.form (in l10n_br_hr_payroll_sst)</field>
+        <field name="model">hr.contract</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_hr_payroll.view_contract_form_payroll_br"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='risk_additionals']" position="inside">
+                <field name="l10n_br_sst_insalubridade_laudo" readonly="1" />
+                <field name="l10n_br_sst_grau_laudo" readonly="1" />
+                <field name="l10n_br_sst_periculosidade_laudo" readonly="1" />
+                <field name="l10n_br_sst_aliquota_gilrat" readonly="1" />
+                <field
+                    name="l10n_br_sst_divergencia"
+                    readonly="1"
+                    attrs="{'invisible': [('l10n_br_sst_divergencia', '=', False)]}"
+                />
+                <field
+                    name="l10n_br_sst_justificativa"
+                    attrs="{'invisible': [('l10n_br_sst_divergencia', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

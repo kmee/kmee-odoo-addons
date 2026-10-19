@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="hr_attendance_view_form" model="ir.ui.view">
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form" />
+        <field name="arch" type="xml">
+            <field name="check_out" position="after">
+                <field name="l10n_br_origem" />
+                <field name="l10n_br_seq_par" />
+                <field name="l10n_br_marcacao_entrada_id" readonly="1" />
+                <field name="l10n_br_marcacao_saida_id" readonly="1" />
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_attendance_view_tree" model="ir.ui.view">
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree" />
+        <field name="arch" type="xml">
+            <field name="worked_hours" position="after">
+                <field name="l10n_br_origem" optional="show" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_payment_provider_form_inter" model="ir.ui.view">
+        <field name="name">payment.provider.form.inter</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='credentials']" position="inside">
+                <group attrs="{'invisible':[('code','!=','inter')]}">
+                    <field name="inter_conta_corrente" />
+                    <field name="inter_client_id" />
+                    <field name="inter_client_secret" />
+                    <field name="inter_certificate" />
+                    <field name="inter_private_key" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

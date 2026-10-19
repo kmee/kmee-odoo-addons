@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_document_import_extraction_user,l10n_br.document.import.extraction user,model_l10n_br_document_import_extraction,account.group_account_invoice,1,1,1,0
+access_document_import_extraction_manager,l10n_br.document.import.extraction manager,model_l10n_br_document_import_extraction,account.group_account_manager,1,1,1,1

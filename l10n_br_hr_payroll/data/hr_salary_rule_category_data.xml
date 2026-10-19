@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Categorias base (criadas caso demo do OCA payroll não esteja carregado) -->
+    <record id="hr_salary_rule_category_basic" model="hr.salary.rule.category">
+        <field name="name">Salário Base</field>
+        <field name="code">BASIC</field>
+    </record>
+    <record id="hr_salary_rule_category_alw" model="hr.salary.rule.category">
+        <field name="name">Provento</field>
+        <field name="code">ALW</field>
+    </record>
+    <record id="hr_salary_rule_category_gross" model="hr.salary.rule.category">
+        <field name="name">Remuneração Bruta</field>
+        <field name="code">GROSS</field>
+    </record>
+    <record id="hr_salary_rule_category_ded" model="hr.salary.rule.category">
+        <field name="name">Desconto</field>
+        <field name="code">DED</field>
+    </record>
+    <record id="hr_salary_rule_category_net" model="hr.salary.rule.category">
+        <field name="name">Líquido</field>
+        <field name="code">NET</field>
+    </record>
+    <record id="hr_salary_rule_category_comp" model="hr.salary.rule.category">
+        <field name="name">Encargos Patronais</field>
+        <field name="code">COMP</field>
+    </record>
+    <!-- Categoria informativa para valores intermediários -->
+    <record id="hr_salary_rule_category_info" model="hr.salary.rule.category">
+        <field name="name">Informativo</field>
+        <field name="code">INFO</field>
+    </record>
+    <!--
+        Provisões de férias e 13º (com os encargos patronais sobre a
+        provisão). Categoria própria, separada de COMP, por duas razões:
+          - são custo por competência ainda NÃO devido (passivo estimado), e
+            não encargo do mês a recolher; somá-las ao total de encargos
+            patronais do holerite daria custo em dobro na leitura;
+          - a contabilização é outra (despesa de provisão x provisão a pagar),
+            o que fica explícito com a categoria separada.
+        Como as demais categorias fora de BASIC/ALW/DED, não afeta o líquido.
+    -->
+    <record id="hr_salary_rule_category_provisao" model="hr.salary.rule.category">
+        <field name="name">Provisões Trabalhistas</field>
+        <field name="code">PROV</field>
+    </record>
+</odoo>

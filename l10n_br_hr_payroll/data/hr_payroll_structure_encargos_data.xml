@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+        Vínculo das rubricas patronais e das provisões (RF-31 a RF-34) à
+        estrutura CLT.
+
+        Este arquivo NÃO é noupdate, ao contrário de
+        hr_payroll_structure_data.xml, e usa o comando (4, id) em vez de
+        (6, 0, [...]):
+
+          - noupdate="1" impediria que uma base JÁ INSTALADA recebesse as
+            rubricas novas num simples ``-u`` do módulo (o registro da
+            estrutura não seria reescrito), o que deixaria a folha sem custo
+            patronal exatamente nas bases que já estão em uso;
+          - (4, id) é aditivo e idempotente: reaplicar não remove rubricas
+            adicionadas manualmente pelo cliente na estrutura, o que um
+            (6, 0, [...]) faria.
+
+        Estrutura Estatutário: deliberadamente FORA. A contribuição patronal
+        do RPPS é de ente federativo, com alíquota própria por lei local
+        (EC 103/2019), e não a CPP/RAT/terceiros do RGPS - modelar isso exige
+        parametrização de ente, que não é escopo desta onda.
+    -->
+    <record id="structure_clt" model="hr.payroll.structure">
+        <field
+            name="rule_ids"
+            eval="[
+                (4, ref('hr_rule_cpp_patronal')),
+                (4, ref('hr_rule_rat_patronal')),
+                (4, ref('hr_rule_terceiros_patronal')),
+                (4, ref('hr_rule_provisao_ferias')),
+                (4, ref('hr_rule_provisao_ferias_encargos')),
+                (4, ref('hr_rule_provisao_decimo')),
+                (4, ref('hr_rule_provisao_decimo_encargos')),
+            ]"
+        />
+    </record>
+</odoo>

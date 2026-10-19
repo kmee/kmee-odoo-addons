@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_ficha_epi">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="employee">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Ficha de Controle de Entrega de EPI</h2>
+                        <p class="text-muted">
+                            Registro de entrega de Equipamento de Proteção Individual,
+                            nos termos da NR-6 e da Portaria SIT 107/2009.
+                        </p>
+                        <div class="row mt32 mb32">
+                            <div class="col-6">
+                                <strong>Trabalhador:</strong>
+                                <span t-field="employee.name" />
+                                <br />
+                                <strong>CPF:</strong>
+                                <span t-field="employee.cnpj_cpf" />
+                                <br />
+                                <strong>Função:</strong>
+                                <span t-field="employee.job_id.name" />
+                            </div>
+                            <div class="col-6">
+                                <strong>Empresa:</strong>
+                                <span t-field="employee.company_id.name" />
+                                <br />
+                                <strong>Ambiente:</strong>
+                                <span t-field="employee.l10n_br_sst_ambiente_id.name" />
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Equipamento</th>
+                                    <th>CA</th>
+                                    <th>Validade do CA</th>
+                                    <th class="text-end">Qtd.</th>
+                                    <th>Entrega</th>
+                                    <th>Validade</th>
+                                    <th>Devolução</th>
+                                    <th>Motivo</th>
+                                    <th>Assinatura</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="employee.l10n_br_sst_epi_ids" t-as="epi">
+                                    <td><span t-field="epi.product_id" /></td>
+                                    <td><span t-field="epi.certification" /></td>
+                                    <td>
+                                        <span t-field="epi.l10n_br_sst_ca_validade" />
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="epi.quantity" />
+                                    </td>
+                                    <td><span t-field="epi.start_date" /></td>
+                                    <td><span t-field="epi.expiry_date" /></td>
+                                    <td>
+                                        <span
+                                            t-field="epi.l10n_br_sst_data_devolucao"
+                                        />
+                                    </td>
+                                    <td>
+                                        <span
+                                            t-field="epi.l10n_br_sst_motivo_devolucao"
+                                        />
+                                    </td>
+                                    <td>
+                                        <img
+                                            t-if="epi.l10n_br_sst_assinatura"
+                                            t-att-src="image_data_uri(epi.l10n_br_sst_assinatura)"
+                                            style="max-height: 40px;"
+                                            alt="Assinatura"
+                                        />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt32">
+                            Declaro ter recebido os equipamentos acima, gratuitamente,
+                            bem como o treinamento sobre o uso, a guarda e a conservação,
+                            e me comprometo a usá-los durante toda a jornada e a comunicar
+                            qualquer dano ou extravio.
+                        </p>
+                        <div class="row mt64">
+                            <div class="col-6">
+                                <div
+                                    style="border-top: 1px solid black;"
+                                >Trabalhador</div>
+                            </div>
+                            <div class="col-6">
+                                <div
+                                    style="border-top: 1px solid black;"
+                                >Responsável pela entrega</div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

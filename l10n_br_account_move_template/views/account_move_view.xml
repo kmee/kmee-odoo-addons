@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2025 KMEE Informatica LTDA - Luis Felipe Miléo
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_move_form_double_entry" model="ir.ui.view">
+        <field name="name">account.move.form.double.entry</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='other_tab']" position="before">
+                <page
+                    string="Double Entry Lines"
+                    name="double_entry_lines"
+                    attrs="{'invisible': [('fiscal_operation_id', '=', False)]}"
+                >
+                    <field
+                        name="line_ids"
+                        mode="tree"
+                        domain="[('is_double_entry_line', '=', True)]"
+                        context="{'default_is_double_entry_line': True}"
+                        attrs="{'readonly': [('state', '!=', 'draft')]}"
+                    >
+                        <tree create="false" delete="false">
+                            <field name="is_double_entry_line" invisible="1" />
+                            <field name="company_id" invisible="1" />
+                            <field name="name" />
+                            <field name="account_id" />
+                            <field name="partner_id" />
+                            <field name="debit" sum="Total Debit" />
+                            <field name="credit" sum="Total Credit" />
+                            <field name="currency_id" invisible="1" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_payment_term_manual_user,account.payment.term.manual user,model_account_payment_term_manual,base.group_user,1,1,1,1
+access_account_payment_term_line_manual_user,account.payment.term.line.manual user,model_account_payment_term_line_manual,base.group_user,1,1,1,1

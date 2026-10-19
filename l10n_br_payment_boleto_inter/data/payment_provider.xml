@@ -1,0 +1,12 @@
+<odoo noupdate="1">
+    <record id="payment_provider_boleto_inter" model="payment.provider">
+        <field name="name">Boleto inter</field>
+        <field name="code">inter</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_inter/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_inter" />
+    </record>
+</odoo>

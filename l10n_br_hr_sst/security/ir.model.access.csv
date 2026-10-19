@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_l10n_br_sst_responsavel_user,l10n_br.sst.responsavel user,model_l10n_br_sst_responsavel,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_responsavel_manager,l10n_br.sst.responsavel manager,model_l10n_br_sst_responsavel,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_ambiente_user,l10n_br.sst.ambiente user,model_l10n_br_sst_ambiente,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_ambiente_manager,l10n_br.sst.ambiente manager,model_l10n_br_sst_ambiente,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_laudo_user,l10n_br.sst.laudo user,model_l10n_br_sst_laudo,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_laudo_manager,l10n_br.sst.laudo manager,model_l10n_br_sst_laudo,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_risco_user,l10n_br.sst.risco user,model_l10n_br_sst_risco,l10n_br_hr_sst.group_sst_user,1,0,0,0
+access_l10n_br_sst_risco_manager,l10n_br.sst.risco manager,model_l10n_br_sst_risco,l10n_br_hr_sst.group_sst_manager,1,1,1,1
+access_l10n_br_sst_risco_hr_user,l10n_br.sst.risco hr user,model_l10n_br_sst_risco,hr.group_hr_user,1,0,0,0
+access_l10n_br_sst_ambiente_hr_user,l10n_br.sst.ambiente hr user,model_l10n_br_sst_ambiente,hr.group_hr_user,1,0,0,0
