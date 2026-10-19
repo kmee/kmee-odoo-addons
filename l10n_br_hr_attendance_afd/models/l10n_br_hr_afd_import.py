@@ -29,23 +29,17 @@ class L10nBrHrAfdImport(models.Model):
     name = fields.Char(
         required=True,
         default=lambda self: _("Nova importação"),
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     arquivo = fields.Binary(
         string="Arquivo AFD",
         required=True,
         attachment=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     arquivo_nome = fields.Char(string="Nome do arquivo")
     rep_id = fields.Many2one(
         comodel_name="l10n_br.hr.rep",
         string="REP de origem",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
@@ -60,14 +54,10 @@ class L10nBrHrAfdImport(models.Model):
         ],
         default="auto",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     fuso_horas = fields.Float(
         string="Fuso do estabelecimento",
         default=-3.0,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         help="Usado somente no leiaute 1.510, que grava hora local sem fuso. "
         "No leiaute 671 o fuso vem em cada marcação.",
     )

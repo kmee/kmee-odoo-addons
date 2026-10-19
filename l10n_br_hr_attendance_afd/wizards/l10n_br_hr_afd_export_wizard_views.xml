@@ -13,7 +13,7 @@
                     <field name="date_to" />
                     <field name="fuso_horas" />
                 </group>
-                <group attrs="{'invisible': [('arquivo', '=', False)]}">
+                <group invisible="not arquivo">
                     <field name="arquivo" filename="arquivo_nome" readonly="1" />
                     <field name="arquivo_nome" invisible="1" />
                 </group>

@@ -29,7 +29,7 @@ class TestAfdImport(TransactionCase):
         cls.employee = cls.env["hr.employee"].create(
             {
                 "name": "Maria da Silva",
-                "address_home_id": cls.env["res.partner"]
+                "work_contact_id": cls.env["res.partner"]
                 .create(
                     {
                         "name": "Maria da Silva",

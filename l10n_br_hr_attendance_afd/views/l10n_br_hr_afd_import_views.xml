@@ -33,21 +33,21 @@
                         type="object"
                         string="Analisar arquivo"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '=', 'importado')]}"
+                        invisible="state == 'importado'"
                     />
                     <button
                         name="action_importar"
                         type="object"
-                        string="Importar marcações"
+                        string="Importar marca&#231;&#245;es"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'not in', ('analisado', 'erro'))]}"
-                        confirm="Confirma a importação das marcações deste arquivo?"
+                        confirm="Confirma a importa&#231;&#227;o das marca&#231;&#245;es deste arquivo?"
+                        invisible="state not in ('analisado', 'erro')"
                     />
                     <button
                         name="action_reconciliar_pendentes"
                         type="object"
                         string="Reconciliar pendentes"
-                        attrs="{'invisible': [('qtd_pendentes', '=', 0)]}"
+                        invisible="qtd_pendentes == 0"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -58,7 +58,7 @@
                             type="object"
                             class="oe_stat_button"
                             icon="fa-user-times"
-                            attrs="{'invisible': [('qtd_pendentes', '=', 0)]}"
+                            invisible="qtd_pendentes == 0"
                         >
                             <field
                                 name="qtd_pendentes"
@@ -68,7 +68,7 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <h1><field name="name" /></h1>
+                        <h1><field name="name" readonly="state != 'draft'" /></h1>
                     </div>
                     <group>
                         <group string="Arquivo">
@@ -76,13 +76,15 @@
                                 name="arquivo"
                                 filename="arquivo_nome"
                                 widget="binary"
+                                readonly="state != 'draft'"
                             />
                             <field name="arquivo_nome" invisible="1" />
-                            <field name="rep_id" />
-                            <field name="leiaute" />
+                            <field name="rep_id" readonly="state != 'draft'" />
+                            <field name="leiaute" readonly="state != 'draft'" />
                             <field
                                 name="fuso_horas"
-                                attrs="{'invisible': [('leiaute', '=', '671')]}"
+                                invisible="leiaute == '671'"
+                                readonly="state != 'draft'"
                             />
                             <field name="hash_arquivo" />
                         </group>
@@ -101,10 +103,10 @@
                             <field name="tem_lacuna" invisible="1" />
                             <field name="lacunas_nsr" nolabel="1" readonly="1" />
                         </page>
-                        <page name="log" string="Ocorrências">
+                        <page name="log" string="Ocorr&#234;ncias">
                             <field name="log" nolabel="1" readonly="1" />
                         </page>
-                        <page name="marcacoes" string="Marcações">
+                        <page name="marcacoes" string="Marca&#231;&#245;es">
                             <field name="marcacao_ids" nolabel="1" readonly="1">
                                 <tree>
                                     <field name="nsr" />
@@ -126,15 +128,15 @@
     </record>
 
     <record id="l10n_br_hr_afd_import_action" model="ir.actions.act_window">
-        <field name="name">Importação de AFD</field>
+        <field name="name">Importa&#231;&#227;o de AFD</field>
         <field name="res_model">l10n_br.hr.afd.import</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Importe o primeiro AFD</p>
             <p>
-                Anexe o arquivo coletado do relógio, analise e importe. A análise
+                Anexe o arquivo coletado do rel&#243;gio, analise e importe. A an&#225;lise
                 confere CRC-16, continuidade de NSR e as contagens do trailer antes
-                de gravar qualquer marcação.
+                de gravar qualquer marca&#231;&#227;o.
             </p>
         </field>
     </record>
