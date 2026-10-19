@@ -28,13 +28,13 @@
                         type="object"
                         string="Colocar em Vigor"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="action_encerrar"
                         type="object"
                         string="Encerrar"
-                        attrs="{'invisible': [('state', '!=', 'vigente')]}"
+                        invisible="state != 'vigente'"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -70,7 +70,10 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Relatório Analítico Anual" name="relatorio">
+                        <page
+                            string="Relat&#243;rio Anal&#237;tico Anual"
+                            name="relatorio"
+                        >
                             <field name="relatorio_anual" nolabel="1" />
                         </page>
                     </notebook>

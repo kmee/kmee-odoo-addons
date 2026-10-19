@@ -19,10 +19,7 @@
             <field name="result" position="before">
                 <field name="l10n_br_resultado" />
                 <field name="l10n_br_com_restricao" />
-                <field
-                    name="l10n_br_restricao"
-                    attrs="{'invisible': [('l10n_br_com_restricao', '=', False)]}"
-                />
+                <field name="l10n_br_restricao" invisible="not l10n_br_com_restricao" />
             </field>
             <field name="result" position="attributes">
                 <attribute name="readonly">1</attribute>
@@ -51,7 +48,7 @@
                         </field>
                     </page>
                     <page
-                        string="Sigilo Médico"
+                        string="Sigilo M&#233;dico"
                         name="sigilo"
                         groups="l10n_br_hr_sst_aso.group_sst_medico"
                     >
