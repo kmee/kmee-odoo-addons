@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_monetary_index_provider_user,monetary.index.provider user,monetary.index.provider,base.group_user,r,
+access_monetary_index_selic_update_wizard,monetary.index.selic.update.wizard,monetary.index.selic.update.wizard,monetary_index_update.group_monetary_update_manager,crud,
