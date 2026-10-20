@@ -30,7 +30,7 @@
                         type="object"
                         string="Gerar Evento"
                         class="oe_highlight"
-                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                        invisible="evento_id"
                     />
                 </header>
                 <sheet>
@@ -38,7 +38,7 @@
                         <h1><field name="name" readonly="1" /></h1>
                     </div>
                     <group>
-                        <group string="Vínculo">
+                        <group string="V&#237;nculo">
                             <field name="employee_id" />
                             <field name="contract_id" />
                             <field name="ambiente_id" />
@@ -48,18 +48,19 @@
                                 groups="base.group_multi_company"
                             />
                         </group>
-                        <group string="Condição">
+                        <group string="Condi&#231;&#227;o">
                             <field name="dt_ini_condicao" />
                             <field name="dt_fim_condicao" />
                             <field name="ind_retif" />
                             <field
                                 name="nr_recibo"
-                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                                invisible="ind_retif == '1'"
+                                required="ind_retif == '2'"
                             />
                             <field name="evento_id" readonly="1" />
                         </group>
                     </group>
-                    <group string="Descrição das Atividades">
+                    <group string="Descri&#231;&#227;o das Atividades">
                         <field name="dsc_ativ_des" nolabel="1" />
                     </group>
                     <notebook>
@@ -77,7 +78,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Responsáveis" name="responsaveis">
+                        <page string="Respons&#225;veis" name="responsaveis">
                             <field name="responsavel_ids">
                                 <tree>
                                     <field name="name" />
@@ -88,7 +89,7 @@
                                 </tree>
                             </field>
                         </page>
-                        <page string="Observações" name="obs">
+                        <page string="Observa&#231;&#245;es" name="obs">
                             <field name="obs_compl" nolabel="1" />
                         </page>
                     </notebook>
@@ -98,7 +99,7 @@
     </record>
 
     <record id="action_esocial_s2240" model="ir.actions.act_window">
-        <field name="name">S-2240 - Condições Ambientais</field>
+        <field name="name">S-2240 - Condi&#231;&#245;es Ambientais</field>
         <field name="res_model">l10n_br.esocial.s2240</field>
         <field name="view_mode">tree,form</field>
     </record>
