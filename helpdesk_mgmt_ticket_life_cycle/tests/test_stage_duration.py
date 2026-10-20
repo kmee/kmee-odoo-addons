@@ -84,7 +84,12 @@ class TestStageDuration(TransactionCase):
         When it is created and changes stage
         Then it does not break and durations are tracked without team."""
         ticket = self.Ticket.create(
-            {"name": "No team", "description": "d", "stage_id": self.stage_new.id}
+            {
+                "name": "No team",
+                "description": "d",
+                "stage_id": self.stage_new.id,
+                "team_id": False,
+            }
         )
         self.assertFalse(ticket.team_id)
         self.assertEqual(len(ticket.stage_duration_ids), 1)
@@ -228,7 +233,9 @@ class TestStageDuration(TransactionCase):
         self.assertAlmostEqual(row.completion_rate, 200 / 3, places=3)
         self.assertEqual(row.min_duration_seconds, 3600)
         self.assertGreaterEqual(row.max_duration_seconds, 10800)
-        self.assertGreaterEqual(row.total_duration_seconds, 3600 + 10800 + 7200)
+        # the open duration runs until the SQL now(), the transaction start,
+        # which can be a little earlier than the python now used above
+        self.assertGreaterEqual(row.total_duration_seconds, 3600 + 10800 + 7200 - 60)
         self.assertTrue(row.avg_duration_display)
 
     def test_report_display_empty_without_average(self):
@@ -251,6 +258,6 @@ class TestStageDuration(TransactionCase):
         kanban = self.Ticket.get_view(view_type="kanban")["arch"]
         self.assertIn("current_stage_total_duration", kanban)
         report = self.env["helpdesk.ticket.stage.duration.report"]
-        for vtype in ("tree", "pivot", "graph", "kanban", "search"):
+        for vtype in ("list", "pivot", "graph", "kanban", "search"):
             view = report.get_view(view_type=vtype)
             self.assertIn("<field", view["arch"], vtype)
