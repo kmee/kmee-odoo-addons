@@ -3,7 +3,7 @@
 
 from lxml import etree
 
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 
 URL_A = "https://www.linkedin.com/in/ana-example"
 URL_B = "https://www.linkedin.com/in/bruno-example"
