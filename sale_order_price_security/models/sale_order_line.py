@@ -19,6 +19,6 @@ class SaleOrderLine(models.Model):
         self._compute_can_edit_price_sale()
 
     def _compute_can_edit_price_sale(self):
-        self.can_edit_price_sale = self.env["res.users"].has_group(
+        self.can_edit_price_sale = self.env.user.has_group(
             "sale_order_price_security.group_sale_order_price_editor"
         )
