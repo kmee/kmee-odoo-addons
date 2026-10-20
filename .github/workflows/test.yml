@@ -66,9 +66,12 @@ jobs:
       - name: Check development status
         if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: manifestoo -d . check-dev-status --default-dev-status=Beta
-      - name: Install the Brazilian chart of accounts used by the l10n_br dependencies
+      # l10n_br_crm is the auto_install glue between l10n_br_base and crm: without it,
+      # l10n_br_base puts its address view (street_name, district...) into the crm.lead
+      # form while crm.lead lacks those fields, and every crm.lead Form test fails.
+      - name: Install the Brazilian chart of accounts and auto_install glue used by the l10n_br dependencies
         if: ${{ matrix.coa == 'true' && hashFiles('*/__manifest__.py') != '' }}
-        run: pip install --pre "odoo-addon-l10n_br_coa_generic==19.0.*" "odoo-addon-l10n_br_coa==19.0.*" xsdata
+        run: pip install --pre "odoo-addon-l10n_br_coa_generic==19.0.*" "odoo-addon-l10n_br_coa==19.0.*" "odoo-addon-l10n_br_crm==19.0.*" xsdata
       - name: Initialize test db
         if: ${{ hashFiles('*/__manifest__.py') != '' }}
         run: |
