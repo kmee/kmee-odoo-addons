@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import fields
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -38,7 +38,7 @@ class TestPaymentCurrencyRate(TransactionCase):
                 "code": "RATE.P",
                 "name": "FX Gain",
                 "account_type": "income_other",
-                "company_id": cls.company.id,
+                "company_ids": [(6, 0, cls.company.ids)],
             }
         )
         cls.loss = cls.env["account.account"].create(
@@ -46,7 +46,7 @@ class TestPaymentCurrencyRate(TransactionCase):
                 "code": "RATE.L",
                 "name": "FX Loss",
                 "account_type": "expense",
-                "company_id": cls.company.id,
+                "company_ids": [(6, 0, cls.company.ids)],
             }
         )
         cls.journal = cls.env["account.journal"].search(
