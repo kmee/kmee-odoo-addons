@@ -22,7 +22,12 @@ class TestSaleOrderLineQtyFields(TransactionCase):
             context=dict(cls.env.context, tracking_disable=True, no_reset_password=True)
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Stored Product", "type": "product", "list_price": 10.0}
+            {
+                "name": "Stored Product",
+                "type": "consu",
+                "is_storable": True,
+                "list_price": 10.0,
+            }
         )
         cls.warehouse = cls.env["stock.warehouse"].search(
             [("company_id", "=", cls.env.company.id)], limit=1
