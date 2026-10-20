@@ -265,14 +265,17 @@ class ESocialLote(models.Model):
                         evt_result.event_id,
                     )
                     continue
+                retorno_xml = getattr(evt_result, "retorno_xml", None)
                 if evt_result.aceito:
-                    evento.write(
-                        {
-                            "state": "success",
-                            "nr_recibo": evt_result.nr_recibo,
-                        }
+                    # registrar_aceite concentra recibo, XML de retorno,
+                    # totalizadores devolvidos e propagação do S-3000.
+                    evento.registrar_aceite(
+                        nr_recibo=evt_result.nr_recibo,
+                        retorno_xml=retorno_xml,
                     )
                 else:
+                    if retorno_xml:
+                        evento.xml_retorno = retorno_xml
                     evento.write({"state": "error"})
                     self.env["l10n_br.esocial.ocorrencia"].create(
                         {

@@ -11,6 +11,7 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "l10n_br_sale",
+        "stock",
     ],
     "data": [],
     "demo": [],

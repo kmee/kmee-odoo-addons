@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_job_view_form_sst" model="ir.ui.view">
+        <field name="name">hr.job.form.sst</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="SST" name="sst">
+                    <field name="l10n_br_sst_risco_ids" nolabel="1">
+                        <tree>
+                            <field name="ambiente_id" />
+                            <field name="agente_nocivo_id" />
+                            <field name="insalubridade" />
+                            <field name="grau_insalubridade" />
+                            <field name="periculosidade" />
+                            <field name="date_from" />
+                            <field name="date_to" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -35,6 +35,7 @@ class AccountPaymentTerm(models.Model):
         """
         self.ensure_one()
         custom_term_id = self.copy({"is_custom": True, "active": False})
-        # In 17.0 copy_data() appends "(copy)" to the name, so set it afterwards
+        # account.payment.term.copy() forces "<name> (copy)" and drops the
+        # name passed in default, so the requested name is written afterwards.
         custom_term_id.name = name
         return custom_term_id
