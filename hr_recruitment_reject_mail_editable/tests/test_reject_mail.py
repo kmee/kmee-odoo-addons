@@ -30,12 +30,15 @@ class TestRejectMailEditable(TransactionCase):
         cls.partner = cls.env["res.partner"].create(
             {"name": "Candidato Teste", "email": "candidato@example.com"}
         )
-        cls.applicant = cls.env["hr.applicant"].create(
+        # 18.0: nome e e-mail moram no hr.candidate, a candidatura aponta para ele
+        cls.candidate = cls.env["hr.candidate"].create(
             {
-                "name": "Candidatura",
                 "partner_name": "Candidato Teste",
                 "email_from": "candidato@example.com",
             }
+        )
+        cls.applicant = cls.env["hr.applicant"].create(
+            {"candidate_id": cls.candidate.id}
         )
 
     def _wizard(self, **extra):
