@@ -3,7 +3,7 @@
 
 from lxml import etree
 
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 from odoo.tools.safe_eval import safe_eval
 
 
@@ -194,7 +194,7 @@ class TestCrmBant(TransactionCase):
             [
                 ("mail_message_id.model", "=", "crm.lead"),
                 ("mail_message_id.res_id", "=", lead.id),
-                ("field.name", "=", "bant_budget_status"),
+                ("field_id.name", "=", "bant_budget_status"),
             ]
         )
         self.assertEqual(len(tracked), 1)
