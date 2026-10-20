@@ -1,7 +1,8 @@
 # Copyright 2019 KMEE INFORMATICA LTDA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 
 class SacPrint(models.TransientModel):
@@ -22,8 +23,13 @@ class SacPrint(models.TransientModel):
         )
 
         if to_print:
-            to_print.write({"is_printed": True})
-            return self.env["report"].get_action(
-                to_print, "sac.sac_declaracao_conteudo"
+            report = self.env["ir.actions.report"]._get_report_from_name(
+                "sac.sac_declaracao_conteudo"
             )
+            if not report:
+                raise UserError(
+                    _("The report 'sac.sac_declaracao_conteudo' is not installed.")
+                )
+            to_print.write({"is_printed": True})
+            return report.report_action(to_print)
         return False
