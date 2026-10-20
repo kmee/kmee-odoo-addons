@@ -29,36 +29,24 @@ class AccountMove(models.Model):
         return super().generate_boletos()
 
     def _create_boletos_inter(self):
-        """Cria transactions para cada linha de vencimento não conciliada"""
+        """Emite um boleto por parcela em aberto.
+
+        A parcela que já tem boleto vivo fica de fora, para gerar de novo não
+        cobrar o cliente em dobro. O índice segue a posição da parcela entre
+        todas as parcelas da fatura, e não entre as abertas, para não mudar
+        quando uma parcela é paga.
+        """
         provider = self.payment_mode_id.payment_provider_id
         if not provider:
             raise UserError(_("Configure o modo de pagamento do Boleto Inter"))
 
-        for index, moveline in enumerate(
-            self.due_line_ids.filtered(lambda x: not x.reconciled), start=1
-        ):
-            if self._has_active_boleto_inter(moveline):
+        installments = self.due_line_ids.sorted(lambda x: (x.date_maturity, x.id))
+        for index, moveline in enumerate(installments, start=1):
+            if moveline.reconciled or self._boleto_get_active_transactions(moveline):
                 continue
             transaction_vals = self._prepare_boleto_payload(moveline, index)
             transaction = self.env["payment.transaction"].create(transaction_vals)
             transaction.generate_boleto()
-
-    def _has_active_boleto_inter(self, moveline):
-        """Diz se o vencimento já tem boleto Inter vivo (idempotência).
-
-        Gerar os boletos de novo não pode duplicar a cobrança no banco.
-        """
-        self.ensure_one()
-        return bool(
-            self.transaction_ids.filtered(
-                lambda t: t.provider_code == "inter"
-                and t.codigo_solicitacao
-                and t.state in ("draft", "pending", "authorized", "done")
-                and t.due_date == moveline.date_maturity
-                and t.currency_id.compare_amounts(t.amount, moveline.amount_residual)
-                == 0
-            )
-        )
 
     def _prepare_boleto_payload(self, moveline, index):
         """Prepara os campos do payment.transaction"""
@@ -73,10 +61,11 @@ class AccountMove(models.Model):
             "amount": moveline.amount_residual,
             "currency_id": moveline.move_id.currency_id.id,
             "due_date": moveline.date_maturity,
-            "our_number": f"{moveline.name}/{index}",
+            "our_number": f"{moveline.name or self.name}/{index}",
             "boleto_penalty": self.payment_mode_id.payment_boleto_penalty or 0.0,
             "boleto_interest": self.payment_mode_id.payment_boleto_interest or 0.0,
             "boleto_instructions": self.payment_mode_id.payment_boleto_instructions
             or "",
             "invoice_ids": [(6, 0, self.ids)],
+            "move_line_id": moveline.id,
         }

@@ -336,6 +336,21 @@ class TestBoletoInterReport(BancoInterCommon):
                 self.report_ref, self.invoice.ids
             )
 
+    def test_other_reports_still_render_in_html(self):
+        """O portal mostra a fatura num iframe em HTML."""
+        content, content_type = self.env["ir.actions.report"]._render_qweb_html(
+            "account.account_invoices", self.invoice.ids
+        )
+
+        self.assertEqual(content_type, "html")
+        self.assertTrue(content)
+
+    def test_report_is_not_rendered_in_html(self):
+        with self.assertRaises(UserError):
+            self.env["ir.actions.report"]._render_qweb_html(
+                self.report_ref, self.invoice.ids
+            )
+
     def test_report_is_bound_to_the_print_menu(self):
         """O boleto aparece no menu Imprimir da fatura, como os demais."""
         report = self.env.ref(self.report_ref)
