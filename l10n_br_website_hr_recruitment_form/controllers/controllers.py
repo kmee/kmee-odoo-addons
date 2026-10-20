@@ -182,6 +182,10 @@ class HRApplicationController(http.Controller):
                 field_name = "dependent_ids"
                 value = self.parse_dependants(value)
 
+            if field_name == "name":
+                # 18.0: the person's name is the candidate name of the application
+                field_name = "partner_name"
+
             if field_name == "nationality_id" or field_name == "ethnicity":
                 value = int(value)
 
