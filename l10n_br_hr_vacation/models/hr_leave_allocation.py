@@ -21,8 +21,8 @@ class HrLeaveAllocation(models.Model):
         direito em alocações de férias criadas SEM passar por um write()
         posterior a ``l10n_br_faltas_periodo_aquisitivo``.
 
-        ``number_of_days`` é um campo computado (``_compute_from_
-        holiday_status_id``) mas com ``default=1`` do próprio hr_holidays.
+        ``number_of_days`` é um campo computado (``_compute_number_of_days``)
+        mas com ``default=1`` do próprio hr_holidays.
         No ``create()``, o Odoo preenche esse default ANTES do compute
         (``_add_missing_default_values``) e PROTEGE o valor já presente em
         vals contra recômputo (``env.protecting``) - então uma alocação
@@ -42,7 +42,7 @@ class HrLeaveAllocation(models.Model):
                 lambda alloc: alloc.holiday_status_id == vacation_type
             )
             if a_recomputar:
-                a_recomputar._compute_from_holiday_status_id()
+                a_recomputar._compute_number_of_days()
         return records
 
     @api.depends("l10n_br_faltas_periodo_aquisitivo")
