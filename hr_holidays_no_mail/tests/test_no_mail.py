@@ -36,7 +36,7 @@ class TestHolidaysNoMail(TransactionCase):
                 "name": "No Mail Allocation",
                 "requires_allocation": "yes",
                 "employee_requests": "no",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
             }
         )
 
@@ -55,9 +55,7 @@ class TestHolidaysNoMail(TransactionCase):
         return {
             "name": "Allocation",
             "holiday_status_id": self.alloc_type.id,
-            "holiday_type": "employee",
             "employee_id": self.employee.id,
-            "employee_ids": [(6, 0, self.employee.ids)],
             "number_of_days": 3,
         }
 
