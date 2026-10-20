@@ -27,7 +27,7 @@ class TestAllocationPlan(TransactionCase):
                 "name": "Plan Leave",
                 "requires_allocation": "yes",
                 "employee_requests": "no",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
             }
         )
 
@@ -409,14 +409,15 @@ class TestAllocationPlan(TransactionCase):
         """
         Dado um plano com alocacoes validadas
         Quando as alocacoes sao recusadas, voltam a rascunho e sao confirmadas
-        Entao passam por refuse -> draft -> confirm
+        Entao passam por refuse -> confirm (desde a 17.0 alocacao nao tem rascunho:
+        voltar a rascunho devolve ao primeiro estado, a aprovar)
         """
         confirm_type = self.env["hr.leave.type"].create(
             {
                 "name": "Plan Leave (needs confirm)",
                 "requires_allocation": "yes",
                 "employee_requests": "yes",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
             }
         )
         plan = self._plan(holiday_status_id=confirm_type.id)
@@ -426,7 +427,8 @@ class TestAllocationPlan(TransactionCase):
         plan.action_allocation_refuse()
         self.assertEqual(allocation.state, "refuse")
         plan.action_allocation_draft()
-        self.assertEqual(allocation.state, "draft")
+        self.assertEqual(allocation.state, "confirm")
+        allocation.action_refuse()
         plan.action_allocation_confirm()
         self.assertEqual(allocation.state, "confirm")
 
