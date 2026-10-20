@@ -26,6 +26,7 @@ DUMMY_BY_ADAPTER = {
     "banrisul": {"codigo_beneficiario": "1234567890123", "especie": "02"},
     "safra": {"especie": "01"},
     "santander": {"tipo_chave_pix": "EVP"},
+    "sicoob": {"codigo_especie_documento": "DM"},
 }
 # A random Pix key (EVP): the C6 refuses any other kind.
 PIX_KEY = "123e4567-e89b-42d3-a456-426614174000"

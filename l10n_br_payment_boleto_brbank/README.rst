@@ -83,11 +83,14 @@ Configuration
 =============
 
 1. Install the ``brbank`` Python library in the Odoo environment
-   (``pip install "brbank>=0.0.3"``). It needs Python 3.10 or later.
-   Version 0.0.3 is the minimum: it brings the adapters of Itaú,
+   (``pip install "brbank>=0.0.4"``). It needs Python 3.10 or later.
+   Version 0.0.4 is the minimum: it brings the adapters of Itaú,
    Bradesco, Santander, BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa
-   and Safra (the manifest only names the package, so the version is not
-   checked at install).
+   and Safra, and the Sicoob contract checked in the bank sandbox (the
+   manifest only names the package, so the version is not checked at
+   install). For Sicoob, the document kind
+   (``codigo_especie_documento``) is the acronym, for instance ``DM``,
+   and no longer a number.
 2. Go to *Invoicing > Configuration > Payment Providers* and open the
    provider of the bank (for instance *Sicoob (Boleto)* or *Pix Itaú*).
 3. In the *Credentials* tab:
@@ -226,18 +229,17 @@ Moving from ``l10n_br_payment_boleto_inter`` or
 Known issues / Roadmap
 ======================
 
-- **No adapter of the brbank library has been validated in a bank
-  sandbox yet** (``validado_sandbox = False`` in all of them). Inter and
-  PinBank were ported from modules running in production, the others
-  were built from public documentation. The provider form and the
-  payment mode warn about it. Test each bank with low amounts before
-  production.
-- The minimum version of brbank is 0.0.3 (adapters of Itaú, Bradesco,
-  Santander, BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa and Safra),
-  not on PyPI yet; 0.0.2, on PyPI, runs on Python 3.10 but has the first
-  five banks only. The manifest names the package without a version (a
-  specifier there breaks the import check), so the minimum is not
-  enforced at install.
+- **Only Sicoob (boleto and Pix) has been validated in a bank sandbox**,
+  the public one of Sicoob, which checks the requests against the API
+  contract but keeps no state; the production OAuth, mTLS and scopes are
+  still unproven. All the other adapters have
+  ``validado_sandbox = False``: Inter and PinBank were ported from
+  modules running in production, the others were built from public
+  documentation. The provider form and the payment mode warn about it.
+  Test each bank with low amounts before production.
+- The minimum version of brbank is 0.0.4. The manifest names the package
+  without a version (a specifier there breaks the import check), so the
+  minimum is not enforced at install.
 - The registration runs in the transaction that posts the invoice. If
   that transaction is rolled back after the bank answered, the bank
   keeps the title; the next attempt sends the same idempotency key (Pix
