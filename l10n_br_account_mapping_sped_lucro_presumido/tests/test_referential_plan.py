@@ -22,7 +22,7 @@ class TestReferentialPlan(TransactionCase):
                 "name": "Caixa teste referencial",
                 "code": "REFTEST1",
                 "account_type": "asset_cash",
-                "company_id": cls.env.company.id,
+                "company_ids": [(6, 0, cls.env.company.ids)],
             }
         )
 
