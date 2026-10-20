@@ -277,6 +277,11 @@ class PaymentTransaction(models.Model):
         if self.provider_code != "boleto_pinbank":
             return res
 
+        # No checkout o boleto e emitido aqui, uma vez so: a transacao que ja
+        # tem nosso numero nao emite outro boleto.
+        if not self.our_number:
+            self._send_payment_request()
+
         base_url = self.provider_id.get_base_url()
         return_url_params = {"reference": self.reference}
 
