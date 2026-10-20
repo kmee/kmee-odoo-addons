@@ -29,6 +29,7 @@ class AccountPaymentRegister(models.TransientModel):
     def onchange_currency_id(self):
         if self.original_rate:
             self.change_rate = self.original_rate
+            self.change_rate_percent = 1.0
 
     @api.onchange("change_rate_percent")
     def onchange_change_rate_percent(self):

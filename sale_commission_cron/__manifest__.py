@@ -11,7 +11,6 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["account_commission"],
     "data": [
-        "security/ir.model.access.csv",
         "data/cron_generate_commissions.xml",
     ],
 }
