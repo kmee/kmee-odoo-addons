@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        RF-35 - Funcionários da comparação de custo patronal por regime.
+
+        Um funcionário por cenário, TODOS com o mesmo perfil (CLT, sem
+        dependentes, sem filhos para salário família, sem adicionais) e, nos
+        contratos, o mesmo salário. Assim a única variável entre os holerites é
+        o regime tributário da empresa - que é o ponto da demonstração.
+
+        Todo registro traz company_id EXPLÍCITO (o defeito apontado no PRD era
+        justamente o demo mono-empresa, com funcionários caindo na empresa
+        principal). Departamento e cargo são omitidos de propósito: os da demo
+        do l10n_br_hr pertencem à empresa principal e referenciá-los aqui
+        criaria vínculo entre empresas diferentes.
+    -->
+
+    <record id="demo_employee_regime_real" model="hr.employee">
+        <field name="name">Rogério Matos (Lucro Real)</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_real" />
+        <field name="gender">male</field>
+        <field name="birthday">1985-06-10</field>
+        <field name="country_id" ref="base.br" />
+        <field name="l10n_br_tipo_contrato">clt</field>
+        <field name="l10n_br_irrf_dependentes">0</field>
+    </record>
+
+    <record id="demo_employee_regime_presumido" model="hr.employee">
+        <field name="name">Paula Nogueira (Lucro Presumido)</field>
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field name="gender">female</field>
+        <field name="birthday">1988-02-22</field>
+        <field name="country_id" ref="base.br" />
+        <field name="l10n_br_tipo_contrato">clt</field>
+        <field name="l10n_br_irrf_dependentes">0</field>
+    </record>
+
+    <record id="demo_employee_regime_simples" model="hr.employee">
+        <field name="name">Sandra Lopes (Simples anexo III)</field>
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="gender">female</field>
+        <field name="birthday">1991-09-05</field>
+        <field name="country_id" ref="base.br" />
+        <field name="l10n_br_tipo_contrato">clt</field>
+        <field name="l10n_br_irrf_dependentes">0</field>
+    </record>
+
+    <!--
+        Mesma empresa optante do Simples, atividade do anexo IV (vigilância):
+        a CPP e o RAT são recolhidos POR FORA do DAS (LC 123/2006, art. 18,
+        §5º-C), mas terceiros continuam dispensados. É o eixo da atividade
+        concomitante, independente da desoneração/CPRB.
+    -->
+    <record id="demo_employee_regime_anexo4" model="hr.employee">
+        <field name="name">Antônio Vieira (Simples anexo IV)</field>
+        <field name="company_id" ref="l10n_br_base.empresa_simples_nacional" />
+        <field name="gender">male</field>
+        <field name="birthday">1983-11-17</field>
+        <field name="country_id" ref="base.br" />
+        <field name="l10n_br_tipo_contrato">clt</field>
+        <field name="l10n_br_irrf_dependentes">0</field>
+    </record>
+
+    <record id="demo_employee_regime_cprb" model="hr.employee">
+        <field name="name">Cláudio Ferraz (CPRB)</field>
+        <field name="company_id" ref="demo_company_cprb" />
+        <field name="gender">male</field>
+        <field name="birthday">1979-03-30</field>
+        <field name="country_id" ref="base.br" />
+        <field name="l10n_br_tipo_contrato">clt</field>
+        <field name="l10n_br_irrf_dependentes">0</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Etapas do funil Predictable Revenue usadas pelos filtros, automacoes e acoes -->
+    <record id="stage_lead_new" model="crm.stage">
+        <field name="name">Lead Novo</field>
+        <field name="sequence">11</field>
+    </record>
+
+    <record id="stage_lead_qualified" model="crm.stage">
+        <field name="name">Lead Qualificado</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="stage_opportunity_discovery" model="crm.stage">
+        <field name="name">Descoberta</field>
+        <field name="sequence">13</field>
+    </record>
+
+    <record id="stage_opportunity_presentation" model="crm.stage">
+        <field name="name">Apresentação</field>
+        <field name="sequence">14</field>
+    </record>
+
+    <record id="stage_opportunity_proposal" model="crm.stage">
+        <field name="name">Proposta</field>
+        <field name="sequence">15</field>
+    </record>
+
+    <record id="stage_opportunity_negotiation" model="crm.stage">
+        <field name="name">Negociação</field>
+        <field name="sequence">16</field>
+    </record>
+</odoo>

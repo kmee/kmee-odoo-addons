@@ -378,20 +378,44 @@ trabalhistas ao governo federal brasileiro.</p>
 <li>Extensões em regras salariais, empregado, contrato e empresa</li>
 <li>Gestão de eventos e lotes com máquina de estados</li>
 <li>Preparação para transmissão via esociallib</li>
+<li>Ciclo mínimo até a DCTFWeb: S-1005 (estabelecimento, RAT e FAP), S-1020
+(lotação, FPAS e terceiros), S-1200 (remuneração), S-1210 (pagamentos em
+regime de caixa), S-1299/S-1298 (fechamento e reabertura) e S-3000
+(exclusão de eventos)</li>
+<li>Leitura dos totalizadores devolvidos pelo governo (S-5001, S-5002, S-5003,
+S-5011, S-5012 e S-5013) e conferência da competência contra a folha</li>
+<li>Acesso restrito ao pessoal de folha e regra multiempresa nos eventos, que
+carregam CPF e remuneração dos trabalhadores</li>
 </ul>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-1">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-2">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-3">Authors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-4">Maintainers</a></li>
+<li><a class="reference internal" href="#usage" id="toc-entry-1">Usage</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-2">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-3">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-4">Authors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-5">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="usage">
+<h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
+<p>Ciclo de uma competência:</p>
+<ol class="arabic simple">
+<li>Cadastre o estabelecimento (S-1005) e as lotações (S-1020) e transmita-os.</li>
+<li>Gere o S-1200 dos holerites confirmados.</li>
+<li>Informe a <strong>Data de Pagamento</strong> nos holerites pagos e use a ação <strong>Gerar
+S-1210</strong> (o evento é por regime de caixa).</li>
+<li>Aguarde o aceite de todos os eventos periódicos: o fechamento é bloqueado
+enquanto houver evento da competência sem aceite.</li>
+<li>Gere o S-1299. Para corrigir uma competência fechada, transmita antes a
+reabertura (S-1298).</li>
+<li>Evento aceito por engano é desfeito com o S-3000.</li>
+</ol>
+</div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -399,15 +423,15 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-2">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-3">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-3">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-4">Authors</a></h2>
 <ul class="simple">
 <li>KMEE</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-4">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-5">Maintainers</a></h2>
 <p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/17.0/l10n_br_esocial">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
 </div>

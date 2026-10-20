@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="module_category_l10n_br_hr_sst" model="ir.module.category">
+        <field name="name">Saúde e Segurança do Trabalho</field>
+        <field
+            name="description"
+        >Gestão de riscos ocupacionais, EPI, exames e acidentes de trabalho.</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="group_sst_user" model="res.groups">
+        <field name="name">Usuário</field>
+        <field name="category_id" ref="module_category_l10n_br_hr_sst" />
+        <field
+            name="comment"
+        >Consulta o inventário de riscos, laudos e ambientes.</field>
+    </record>
+
+    <record id="group_sst_manager" model="res.groups">
+        <field name="name">Gestor</field>
+        <field name="category_id" ref="module_category_l10n_br_hr_sst" />
+        <field name="implied_ids" eval="[(4, ref('group_sst_user'))]" />
+        <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+        <field
+            name="comment"
+        >Mantém laudos, ambientes e fatores de risco, e responde pelos eventos de SST.</field>
+    </record>
+
+    <record id="l10n_br_sst_ambiente_company_rule" model="ir.rule">
+        <field name="name">Ambiente SST: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_sst_ambiente" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="l10n_br_sst_laudo_company_rule" model="ir.rule">
+        <field name="name">Laudo SST: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_sst_laudo" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="l10n_br_sst_risco_company_rule" model="ir.rule">
+        <field name="name">Risco SST: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_sst_risco" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+
+    <record id="l10n_br_sst_responsavel_company_rule" model="ir.rule">
+        <field name="name">Responsável SST: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_sst_responsavel" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

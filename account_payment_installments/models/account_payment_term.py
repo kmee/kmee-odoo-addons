@@ -53,9 +53,10 @@ class AccountPaymentTerm(models.Model):
         if self.installment_type == "simple":
             total = amount * (1 + r * (n - 1))
             per = total / n
+        elif r:
+            per = amount * (r * (1 + r) ** n) / ((1 + r) ** n - 1)
         else:
-            pmt = amount * (r * (1 + r) ** n) / ((1 + r) ** n - 1)
-            per = pmt
+            per = amount / n
 
         if self.installment_rate > 0:
             results.append(f"{n}x de R$ {per:.2f} com juros")
