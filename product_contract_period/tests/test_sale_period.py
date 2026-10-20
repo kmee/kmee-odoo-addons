@@ -57,7 +57,14 @@ class TestSalePeriod(ContractPeriodCase):
         line = order.order_line
         self.assertAlmostEqual(line.period_amount, 180.0)
         self.assertAlmostEqual(line.price_subtotal, 180.0)
-        self.assertAlmostEqual(order.amount_untaxed, 180.0)
+        # 18.0: the order totals come from the tax base line of each line, so
+        # the licenses (not the periods) must be its quantity
+        base_line = line._prepare_base_line_for_taxes_computation()
+        self.assertEqual(base_line["quantity"], 2.0)
+        if "fiscal_quantity" not in line._fields:
+            # with l10n_br installed the Brazilian tax engine computes the base
+            # line from the fiscal quantity, which this module does not drive
+            self.assertAlmostEqual(order.amount_untaxed, 180.0)
 
     def test_line_tax_computed_on_period_qty(self):
         """Given a 10% tax, 3 licenses at 100.00,
