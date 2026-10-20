@@ -173,13 +173,10 @@ class TestCrmBant(TransactionCase):
             domain + [("bant_qualification_status", "=", "fully_qualified")]
         )
         self.assertEqual(found, strong)
-        groups = self.Lead.read_group(
-            domain, ["bant_total_score:sum"], ["bant_qualification_status"]
+        groups = self.Lead._read_group(
+            domain, ["bant_qualification_status"], ["__count", "bant_total_score:sum"]
         )
-        by_status = {
-            g["bant_qualification_status"]: g["bant_qualification_status_count"]
-            for g in groups
-        }
+        by_status = {status: count for status, count, _score in groups}
         self.assertEqual(by_status, {"unqualified": 1, "fully_qualified": 1})
 
     # tracking ----------------------------------------------------------
@@ -321,12 +318,11 @@ class TestCrmBant(TransactionCase):
         for view in ("bant_qualification_graph", "bant_qualification_pivot"):
             arch = self.env["crm.lead"].get_view(self.env.ref("crm_bant.%s" % view).id)
             self.assertIn("bant_qualification_status", arch["arch"])
-        groups = self.Lead.read_group(
+        groups = self.Lead._read_group(
             [("team_id", "=", self.team.id)],
-            ["expected_revenue:sum", "bant_total_score:sum"],
             ["team_id", "bant_qualification_status"],
-            lazy=False,
+            ["__count", "expected_revenue:sum", "bant_total_score:sum"],
         )
-        counts = {g["bant_qualification_status"]: g["__count"] for g in groups}
+        counts = {status: count for _team, status, count, _rev, _score in groups}
         self.assertEqual(counts, {"unqualified": 1, "fully_qualified": 1})
         self.assertTrue(self.env.ref("crm_bant.menu_bant_dashboard").action)
