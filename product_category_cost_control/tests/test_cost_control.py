@@ -30,7 +30,8 @@ class TestCategoryCostControl(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Cost control product",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "categ_id": cls.categ.id,
             }
         )
