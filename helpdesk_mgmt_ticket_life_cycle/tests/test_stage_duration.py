@@ -208,7 +208,8 @@ class TestStageDuration(TransactionCase):
         Then counts, min, max, average and completion rate match."""
         team = self.env["helpdesk.ticket.team"].create({"name": "LC Report team"})
         stage = self.env["helpdesk.ticket.stage"].create({"name": "LC Report stage"})
-        now = fields.Datetime.now()
+        # The report measures open stages with SQL NOW(), the transaction start.
+        now = self.env.cr.now()
         for hours, closed in ((1, True), (3, True), (2, False)):
             ticket = self._ticket(team_id=team.id, stage_id=stage.id)
             ticket.stage_duration_ids.write(
