@@ -13,12 +13,12 @@ SST - ASO e PCMSO
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-kmee%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst_aso
-    :alt: kmee/kmee-odoo-addons
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/17.0/l10n_br_hr_sst_aso
+    :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
@@ -50,10 +50,10 @@ geração em massa. Este módulo acrescenta o que a NR-7 e o evento S-2220 exige
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/kmee/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/kmee/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_sst_aso%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_sst_aso%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -75,6 +75,6 @@ Contributors
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `kmee/kmee-odoo-addons <https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst_aso>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/17.0/l10n_br_hr_sst_aso>`_ project on GitHub.
 
 You are welcome to contribute.
