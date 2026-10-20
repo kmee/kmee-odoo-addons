@@ -4,7 +4,7 @@
 from datetime import date
 
 from odoo.exceptions import AccessError, ValidationError
-from odoo.tests.common import Form, TransactionCase, new_test_user, tagged
+from odoo.tests import Form, TransactionCase, new_test_user, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -19,7 +19,7 @@ class TestSaleOfDaysOff(TransactionCase):
                 "name": "Vacation Abono",
                 "requires_allocation": "yes",
                 "employee_requests": "no",
-                "allocation_validation_type": "officer",
+                "allocation_validation_type": "hr",
                 "hr_holidays_sale_of_days_off": True,
             }
         )
@@ -31,9 +31,7 @@ class TestSaleOfDaysOff(TransactionCase):
             {
                 "name": "Vacation",
                 "holiday_status_id": leave_type.id,
-                "holiday_type": "employee",
                 "employee_id": employee.id,
-                "employee_ids": [(6, 0, employee.ids)],
                 "number_of_days": days,
                 "date_from": "2020-01-01",
                 "date_to": "2099-12-31",
