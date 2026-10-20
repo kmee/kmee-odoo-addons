@@ -14,13 +14,22 @@ from odoo.tests import new_test_user, tagged
 from ..utils import config as brbank_config
 from .common import FAKE, BrbankTransactionCase
 
-# The 13 providers delivered as data: one per bank adapter and Pix profile.
+# The 22 providers delivered as data: one per bank adapter and Pix profile.
 DATA_PROVIDERS = {
     "payment_provider_brbank_inter": "inter",
     "payment_provider_brbank_pinbank": "pinbank",
     "payment_provider_brbank_sicoob": "sicoob",
     "payment_provider_brbank_sicredi": "sicredi",
     "payment_provider_brbank_bb": "bb",
+    "payment_provider_brbank_itau": "itau",
+    "payment_provider_brbank_bradesco": "bradesco",
+    "payment_provider_brbank_santander": "santander",
+    "payment_provider_brbank_btg": "btg",
+    "payment_provider_brbank_c6": "c6",
+    "payment_provider_brbank_banrisul": "banrisul",
+    "payment_provider_brbank_unicred": "unicred",
+    "payment_provider_brbank_caixa": "caixa",
+    "payment_provider_brbank_safra": "safra",
     "payment_provider_brbank_pix_inter": "pix_inter",
     "payment_provider_brbank_pix_bb": "pix_bb",
     "payment_provider_brbank_pix_sicoob": "pix_sicoob",
@@ -38,12 +47,29 @@ SECRET_FIELDS = (
     "brbank_certificate",
     "brbank_private_key",
     "brbank_pix_key",
+    "brbank_refresh_token",
     "brbank_extra_config",
     "brbank_secret_config",
     "brbank_webhook_token",
     "brbank_webhook_url",
 )
 DUMMY_BY_TYPE = {bool: False, int: 1, float: 1.0, str: "1234567", bytes: b"x"}
+# Dummy values the validation of the library accepts, where the type is not
+# enough: by key, then by adapter.
+DUMMY_BY_KEY = {
+    "agencia": "1234",
+    "cnpj_empresa": "11222333000181",
+    "digito_conta": "1",
+    "documento_beneficiario": "11222333000181",
+}
+DUMMY_BY_ADAPTER = {
+    "banrisul": {"codigo_beneficiario": "1234567890123", "especie": "02"},
+    "safra": {"especie": "01"},
+    "santander": {"tipo_chave_pix": "EVP"},
+}
+# A random Pix key (EVP): the C6 refuses any other kind.
+PIX_KEY = "123e4567-e89b-42d3-a456-426614174000"
+CALLABLE_KEYS = ("gerar_nosso_numero", "ao_renovar_refresh_token")
 
 
 def _no_network(request):
@@ -81,10 +107,16 @@ class TestBrbankProvider(BrbankTransactionCase):
         )
         public = json.loads(provider.brbank_extra_config)
         secret = json.loads(provider.brbank_secret_config)
+        overrides = DUMMY_BY_ADAPTER.get(provider.brbank_adapter, {})
         for key in brbank_config.describe(config_cls):
             target = secret if key["secret"] else public
-            if key["required"] and not key["generic"]:
-                target[key["name"]] = DUMMY_BY_TYPE.get(key["type"], "1234567")
+            name = key["name"]
+            if name in overrides:
+                target[name] = overrides[name]
+            elif key["required"] and not key["generic"]:
+                target[name] = DUMMY_BY_KEY.get(
+                    name, DUMMY_BY_TYPE.get(key["type"], "1234567")
+                )
         provider.write(
             {
                 "brbank_client_id": "client-id",
@@ -92,7 +124,8 @@ class TestBrbankProvider(BrbankTransactionCase):
                 "brbank_username": "usuario",
                 # The PinBank password is also its AES key: 16 bytes.
                 "brbank_password": "0123456789abcdef",
-                "brbank_pix_key": "pix@example.com",
+                "brbank_pix_key": PIX_KEY,
+                "brbank_refresh_token": "refresh-token",
                 "brbank_extra_config": json.dumps(public),
                 "brbank_secret_config": json.dumps(secret),
                 "state": "enabled",
@@ -100,7 +133,8 @@ class TestBrbankProvider(BrbankTransactionCase):
         )
 
     def test_every_data_provider_builds_its_adapter(self):
-        """O1: each of the 13 data providers instantiates its adapter."""
+        """O1: each of the 22 data providers instantiates its adapter."""
+        self.assertEqual(len(DATA_PROVIDERS), 22)
         transport = httpx.MockTransport(_no_network)
         for xmlid, bank in DATA_PROVIDERS.items():
             with self.subTest(provider=xmlid):
@@ -109,6 +143,11 @@ class TestBrbankProvider(BrbankTransactionCase):
                 self.assertEqual(provider.state, "disabled")
                 self.assertFalse(provider.is_published)
                 self._fill_for_test(provider)
+                # Callable keys never go to the JSON settings.
+                settings = json.loads(provider.brbank_extra_config)
+                settings.update(json.loads(provider.brbank_secret_config))
+                for name in CALLABLE_KEYS:
+                    self.assertNotIn(name, settings)
                 with patch.object(
                     type(provider), "_brbank_http_transport", lambda self: transport
                 ):
@@ -116,7 +155,31 @@ class TestBrbankProvider(BrbankTransactionCase):
                         lambda adapter: (adapter.banco, type(adapter).__name__)
                     )
                 self.assertEqual(built[0], bank)
-                self.assertTrue(provider.brbank_capabilities)
+                adapter_class = registro.obter_classe(provider.brbank_adapter)
+                self.assertEqual(
+                    bool(provider.brbank_capabilities), bool(adapter_class.capacidades)
+                )
+                _adapter_class, config = provider._brbank_prepare_adapter()
+                # The number generators keep the library default (None: the
+                # numeric seu_numero of the transaction).
+                if hasattr(config, "gerar_nosso_numero"):
+                    self.assertIsNone(config.gerar_nosso_numero)
+                if hasattr(config, "ao_renovar_refresh_token"):
+                    self.assertTrue(callable(config.ao_renovar_refresh_token))
+                    self.assertEqual(config.refresh_token, "refresh-token")
+                    self.assertTrue(provider.brbank_uses_refresh_token)
+                else:
+                    self.assertFalse(provider.brbank_uses_refresh_token)
+
+    def test_adapter_without_test_environment_refuses_test_mode(self):
+        """Caixa has no sandbox: the test mode would reach production."""
+        provider = self.env.ref(
+            "l10n_br_payment_boleto_brbank.payment_provider_brbank_caixa"
+        )
+        self._fill_for_test(provider)
+        self.assertEqual(provider.state, "enabled")
+        with self.assertRaisesRegex(ValidationError, "no test environment"):
+            provider.state = "test"
 
     def test_incomplete_configuration_is_refused(self):
         provider = self.env.ref(

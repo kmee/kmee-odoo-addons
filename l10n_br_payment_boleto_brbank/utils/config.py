@@ -7,6 +7,10 @@ Each adapter of the library takes a dataclass (`InterConfig`, `BBConfig`,
 few generic credentials plus two JSON dictionaries (public settings and
 secrets), and this module reads the dataclass of the chosen adapter to know
 which keys it needs. A new bank in the library needs no Python here.
+
+Keys typed as a callable (`gerar_nosso_numero`, `ao_renovar_refresh_token`)
+never come from the settings: they keep the default of the library, unless
+the caller hands a function for them in `callbacks`.
 """
 
 import dataclasses
@@ -26,6 +30,7 @@ GENERIC_KEYS = (
     "chave_pem",
     "perfil",
     "chave_pix",
+    "refresh_token",
 )
 SCALAR_TYPES = (bool, int, float, str, bytes)
 NONE_TYPE = types.NoneType
@@ -146,15 +151,18 @@ def _coerce(key, value):
         ) from error
 
 
-def build(config_cls, generic, public, secret):
+def build(config_cls, generic, public, secret, callbacks=None):
     """Instantiate `config_cls` from the provider values.
 
     :param dict generic: Values of the generic provider fields, by key name;
         falsy values are ignored.
     :param dict public: Extra non secret settings (JSON of the provider).
     :param dict secret: Extra secrets (JSON of the provider).
+    :param dict callbacks: Functions for the callable keys the caller serves,
+        by key name; the other callable keys keep the library default.
     :raise ConfigError: On missing, unknown or misplaced keys.
     """
+    callbacks = callbacks or {}
     keys = {key["name"]: key for key in describe(config_cls)}
     unknown = sorted((set(public) | set(secret)) - set(keys))
     misplaced = sorted(name for name in public if keys.get(name, {}).get("secret"))
@@ -167,6 +175,8 @@ def build(config_cls, generic, public, secret):
     values = {}
     for name, key in keys.items():
         if key["callable"]:
+            if callbacks.get(name) is not None:
+                values[name] = callbacks[name]
             continue
         if name in secret:
             value = secret[name]

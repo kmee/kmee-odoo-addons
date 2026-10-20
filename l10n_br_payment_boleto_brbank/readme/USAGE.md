@@ -20,6 +20,8 @@ Following up, in the transaction:
   bureau report; *Write off at the bank* cancels the title. The buttons only
   show when the bank declares the capability; a command the bank refuses stays
   recorded as rejected, with the reason.
+- For BTG Pactual, the *Refresh Token* of the provider changes by itself after
+  the calls to the bank: the provider keeps the last token the bank returned.
 - *Invoicing > Customers > Boleto Instructions* lists every instruction, and
   *Invoicing > Configuration > Payments > Bank Webhook Events* every event
   received (managers only).

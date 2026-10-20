@@ -131,6 +131,11 @@ msgid "BAIXADO"
 msgstr "BAIXADO"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_btg
+msgid "BTG Pactual (Boleto)"
+msgstr "BTG Pactual (Boleto)"
+
+#. module: l10n_br_payment_boleto_brbank
 #: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_inter
 msgid "Banco Inter (Boleto)"
 msgstr "Banco Inter (Boleto)"
@@ -231,6 +236,11 @@ msgid "Bank unavailable, send it again later: %s"
 msgstr "Banco indisponível, envie de novo mais tarde: %s"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_banrisul
+msgid "Banrisul (Boleto)"
+msgstr "Banrisul (Boleto)"
+
+#. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.report_invoice_document_brbank
 msgid "Boleto / Pix"
 msgstr "Boleto / Pix"
@@ -265,6 +275,11 @@ msgstr "Boleto brbank: processar eventos de webhook dos bancos"
 #: model:ir.cron,cron_name:l10n_br_payment_boleto_brbank.ir_cron_brbank_reconcile
 msgid "Boleto brbank: reconcile titles with the banks"
 msgstr "Boleto brbank: conferir os títulos com os bancos"
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_bradesco
+msgid "Bradesco (Boleto)"
+msgstr "Bradesco (Boleto)"
 
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields.selection,name:l10n_br_payment_boleto_brbank.selection__payment_provider__code__brbank
@@ -325,9 +340,19 @@ msgid "Brbank Uses Pix Key"
 msgstr "Usa Chave Pix (brbank)"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_refresh_token
+msgid "Brbank Uses Refresh Token"
+msgstr "Usa Refresh Token (brbank)"
+
+#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_username
 msgid "Brbank Uses Username"
 msgstr "Usa Usuário (brbank)"
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_c6
+msgid "C6 Bank (Boleto)"
+msgstr "C6 Bank (Boleto)"
 
 #. module: l10n_br_payment_boleto_brbank
 #. odoo-python
@@ -342,6 +367,11 @@ msgstr "Remessa CNAB"
 #, python-format
 msgid "CPF/CNPJ"
 msgstr "CPF/CNPJ"
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_caixa
+msgid "Caixa (Boleto)"
+msgstr "Caixa (Boleto)"
 
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_certificate
@@ -524,6 +554,11 @@ msgid "Instructions (due date, rebate)"
 msgstr "Instruções (prorrogação, abatimento)"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_itau
+msgid "Itaú (Boleto)"
+msgstr "Itaú (Boleto)"
+
+#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_secret_config
 msgid ""
 "JSON object with the bank specific secrets (developer key, API key...)."
@@ -604,6 +639,17 @@ msgstr "Novo Vencimento"
 #, python-format
 msgid "No transaction found."
 msgstr "Nenhuma transação encontrada."
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_refresh_token
+msgid ""
+"OAuth refresh token obtained once at the bank (authorization code flow). The"
+" bank may return a new one at each renewal: the provider keeps it up to date"
+" by itself."
+msgstr ""
+"Refresh token OAuth obtido uma vez no banco (fluxo authorization code). O "
+"banco pode devolver um novo a cada renovação: o provedor o mantém atualizado"
+" sozinho."
 
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__occurred_at
@@ -781,6 +827,11 @@ msgid "Reference"
 msgstr "Referência"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_refresh_token
+msgid "Refresh Token"
+msgstr "Refresh Token"
+
+#. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_transaction_form_brbank
 msgid "Register at the bank"
 msgstr "Registrar no banco"
@@ -805,6 +856,16 @@ msgstr "Resultado"
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
 msgid "Rotate webhook token"
 msgstr "Trocar o token do webhook"
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_safra
+msgid "Safra (Boleto)"
+msgstr "Safra (Boleto)"
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_santander
+msgid "Santander (Boleto)"
+msgstr "Santander (Boleto)"
 
 #. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.boleto_instruction_form
@@ -841,6 +902,19 @@ msgstr "Situação"
 #, python-format
 msgid "Street"
 msgstr "Logradouro"
+
+#. module: l10n_br_payment_boleto_brbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
+#, python-format
+msgid ""
+"The bank adapter %s has no test environment: every call reaches production. "
+"Enable the provider instead of using the test mode, and validate it with a "
+"low amount."
+msgstr ""
+"O adaptador do banco %s não tem ambiente de teste: toda chamada vai para "
+"produção. Habilite o provedor em vez de usar o modo de teste e valide com um"
+" valor baixo."
 
 #. module: l10n_br_payment_boleto_brbank
 #. odoo-python
@@ -1046,6 +1120,11 @@ msgid "Transaction"
 msgstr "Transação"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_unicred
+msgid "Unicred (Boleto)"
+msgstr "Unicred (Boleto)"
+
+#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_account_payment_mode__brbank_sandbox_validated
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_sandbox_validated
 msgid "Validated in Sandbox"
@@ -1090,8 +1169,14 @@ msgid "Written off at the bank."
 msgstr "Baixado no banco."
 
 #. module: l10n_br_payment_boleto_brbank
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_banrisul
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bb
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bradesco
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_btg
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_c6
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_caixa
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_inter
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_itau
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pinbank
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bb
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bradesco
@@ -1101,14 +1186,23 @@ msgstr "Baixado no banco."
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_santander
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicoob
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicredi
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_safra
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_santander
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicoob
 #: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicredi
+#: model_terms:payment.provider,auth_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_unicred
 msgid "Your payment has been authorized."
 msgstr "Seu pagamento foi autorizado."
 
 #. module: l10n_br_payment_boleto_brbank
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_banrisul
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bb
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bradesco
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_btg
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_c6
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_caixa
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_inter
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_itau
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pinbank
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bb
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bradesco
@@ -1118,14 +1212,23 @@ msgstr "Seu pagamento foi autorizado."
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_santander
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicoob
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicredi
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_safra
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_santander
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicoob
 #: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicredi
+#: model_terms:payment.provider,cancel_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_unicred
 msgid "Your payment has been cancelled."
 msgstr "Seu pagamento foi cancelado."
 
 #. module: l10n_br_payment_boleto_brbank
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_banrisul
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bb
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bradesco
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_btg
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_c6
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_caixa
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_inter
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_itau
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pinbank
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bb
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bradesco
@@ -1135,15 +1238,24 @@ msgstr "Seu pagamento foi cancelado."
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_santander
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicoob
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicredi
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_safra
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_santander
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicoob
 #: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicredi
+#: model_terms:payment.provider,pending_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_unicred
 msgid ""
 "Your payment has been successfully processed but is waiting for approval."
 msgstr "Seu pagamento foi processado e aguarda aprovação."
 
 #. module: l10n_br_payment_boleto_brbank
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_banrisul
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bb
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_bradesco
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_btg
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_c6
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_caixa
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_inter
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_itau
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pinbank
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bb
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_bradesco
@@ -1153,8 +1265,11 @@ msgstr "Seu pagamento foi processado e aguarda aprovação."
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_santander
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicoob
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_pix_sicredi
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_safra
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_santander
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicoob
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_sicredi
+#: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_brbank.payment_provider_brbank_unicred
 msgid "Your payment has been successfully processed. Thank you!"
 msgstr "Seu pagamento foi processado. Obrigado!"
 

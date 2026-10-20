@@ -35,7 +35,9 @@ module.
 
 Banks delivered as providers (all disabled until configured):
 
-- Boleto: Banco Inter, PinBank, Sicoob, Sicredi and Banco do Brasil.
+- Boleto: Banco Inter, PinBank, Sicoob, Sicredi, Banco do Brasil, Itaú,
+  Bradesco, Santander, BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa
+  and Safra.
 - Pix (BACEN API, ``/cob`` and ``/cobv``): Banco Inter, Banco do Brasil,
   Sicoob, Sicredi, Itaú, Bradesco, Santander and Efí.
 
@@ -81,7 +83,11 @@ Configuration
 =============
 
 1. Install the ``brbank`` Python library in the Odoo environment
-   (``pip install brbank``). It needs Python 3.10 or later.
+   (``pip install "brbank>=0.0.3"``). It needs Python 3.10 or later.
+   Version 0.0.3 is the minimum: it brings the adapters of Itaú,
+   Bradesco, Santander, BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa
+   and Safra (the manifest only names the package, so the version is not
+   checked at install).
 2. Go to *Invoicing > Configuration > Payment Providers* and open the
    provider of the bank (for instance *Sicoob (Boleto)* or *Pix Itaú*).
 3. In the *Credentials* tab:
@@ -98,6 +104,11 @@ Configuration
    - if the bank has a webhook, register the *Webhook URL* at the bank.
      *Rotate webhook token* issues a new URL and stops the old one at
      once.
+   - keys typed as a function in the library (``gerar_nosso_numero``,
+     ``ao_renovar_refresh_token``) never go in the JSON: the nosso
+     numero is the numeric reference of the transaction (installment and
+     attempt), and the refresh token is handled by the provider (see
+     below).
 
 4. Set the provider to *Test Mode* (bank sandbox) or *Enabled*
    (production) and choose its journal in the *Configuration* tab. The
@@ -105,6 +116,37 @@ Configuration
 5. In the payment mode (*Invoicing > Configuration > Payment Modes*),
    tick *Generate boletos on invoice?* and choose the provider. The
    payment mode shows what the bank supports.
+
+Notes per bank:
+
+- **BTG Pactual**: the API only accepts tokens of the authorization code
+  flow, done once at the BTG Id outside Odoo. Paste the refresh token it
+  gives in *Refresh Token*. The bank may return a new refresh token at
+  each renewal and invalidate the old one: the provider saves it at
+  once, in a database transaction of its own, so an error or a rollback
+  of the operation never loses it. A refresh token unused for more than
+  10 days expires and the consent must be done again. Use each BTG
+  credential in one database only. Fill ``dias_expiracao`` (days after
+  the due date until the title expires), or the bank refuses titles
+  without an automatic write-off term.
+- **Caixa**: there is no public test environment, so the provider
+  refuses the *Test Mode*. Enable it and validate with a title of low
+  amount. ``documento_beneficiario`` is a secret key (*Extra Secrets*).
+- **C6 Bank**: the Pix key must be a random key (EVP); the bank silently
+  issues a boleto without Pix with any other kind.
+- **Itaú**: ``bolecode`` (hybrid boleto) is on by default and needs the
+  Pix key.
+- **Santander**: the Pix key needs ``tipo_chave_pix`` (EMAIL, CPF, CNPJ,
+  CELULAR or EVP); ``workspace_id`` is the billing workspace created at
+  the bank.
+- **Bradesco**: ``documento_beneficiario`` is a secret key (*Extra
+  Secrets*).
+- **Banrisul**: without ``gerar_nosso_numero`` the bank generates the
+  nosso numero.
+- **Unicred**: ``api_key`` and the two webhook keys go in *Extra
+  Secrets*.
+- **Safra**: the bank declares no capability (no write-off, instruction,
+  PDF nor webhook): titles are followed by the reconciliation cron only.
 
 Only users of *Administration / Settings* see and edit the credentials.
 The webhook token travels in the URL: mask it in the logs of the reverse
@@ -146,6 +188,9 @@ Following up, in the transaction:
   a credit bureau report; *Write off at the bank* cancels the title. The
   buttons only show when the bank declares the capability; a command the
   bank refuses stays recorded as rejected, with the reason.
+- For BTG Pactual, the *Refresh Token* of the provider changes by itself
+  after the calls to the bank: the provider keeps the last token the
+  bank returned.
 - *Invoicing > Customers > Boleto Instructions* lists every instruction,
   and *Invoicing > Configuration > Payments > Bank Webhook Events* every
   event received (managers only).
@@ -178,19 +223,32 @@ Known issues / Roadmap
   were built from public documentation. The provider form and the
   payment mode warn about it. Test each bank with low amounts before
   production.
-- brbank 0.0.1 on PyPI requires Python 3.11 and ``cryptography>=50``,
-  which cannot be installed next to Odoo 16.0 (Python 3.10, pyOpenSSL
-  22). The branch ``fix/py310-odoo16`` of the library makes it run on
-  Python 3.10 with ``cryptography>=38``; a release with it is needed
-  before production.
+- The minimum version of brbank is 0.0.3 (adapters of Itaú, Bradesco,
+  Santander, BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa and Safra),
+  not on PyPI yet; 0.0.2, on PyPI, runs on Python 3.10 but has the first
+  five banks only. The manifest names the package without a version (a
+  specifier there breaks the import check), so the minimum is not
+  enforced at install.
 - The registration runs in the transaction that posts the invoice. If
   that transaction is rolled back after the bank answered, the bank
   keeps the title; the next attempt sends the same idempotency key (Pix
   answers ``Duplicado`` and the title is read back), but a boleto bank
   that does not deduplicate by our reference may keep an orphan title.
 - Webhooks are only parsed for the banks whose adapter declares them
-  (Inter, Sicredi and the Pix profiles); the others rely on the
-  reconciliation cron.
+  (Inter, Sicredi, BTG Pactual, C6 Bank, Unicred and the Pix profiles);
+  the others rely on the reconciliation cron.
+- The nosso numero generators of the adapters (``gerar_nosso_numero``)
+  are not exposed: the numeric reference of the transaction (installment
+  id plus a two digit attempt) is used. Banks with a short nosso numero
+  (Itaú 8 digits, Safra 9, Banco do Brasil 10) refuse it once the ids
+  grow; a sequence per provider is the next step. Banrisul without a
+  generator lets the bank number the title, so a registration repeated
+  after a network failure may issue it twice.
+- BTG Pactual: the authorization code flow (consent at the BTG Id) is
+  done outside Odoo. Two calls renewing the same refresh token at the
+  same time (two workers) may leave one of them with a token the bank
+  already replaced.
+- Caixa has no test environment: the provider cannot use the test mode.
 - The webhook events are processed by ``ir.cron`` with an immediate
   trigger, not by ``queue_job``, so the module adds no dependency; move
   to ``queue_job`` if a bank sends large volumes.

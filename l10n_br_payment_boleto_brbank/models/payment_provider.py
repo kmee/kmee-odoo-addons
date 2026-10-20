@@ -8,10 +8,11 @@ import logging
 import secrets
 
 import httpx
+import psycopg2
 from brbank import Capacidade, registro
 from brbank.erros import AdapterNaoEncontrado, ErroBrbank
 
-from odoo import _, api, fields, models
+from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from ..utils import config as brbank_config
@@ -23,12 +24,21 @@ BRBANK = "brbank"
 WEBHOOK_ROUTE = "/payment/brbank/webhook"
 
 ADAPTER_LABELS = {
+    "banrisul": "Banrisul (041)",
     "bb": "Banco do Brasil (001)",
+    "bradesco": "Bradesco (237)",
+    "btg": "BTG Pactual (208)",
+    "c6": "C6 Bank (336)",
+    "caixa": "Caixa (104)",
     "inter": "Banco Inter (077)",
+    "itau": "Itaú (341)",
     "pinbank": "PinBank",
     "pix_bacen": "Pix (BACEN API)",
+    "safra": "Safra (422)",
+    "santander": "Santander (033)",
     "sicoob": "Sicoob (756)",
     "sicredi": "Sicredi (748)",
+    "unicred": "Unicred (136)",
 }
 PIX_PROFILE_LABELS = {
     "bb": "Banco do Brasil",
@@ -49,8 +59,49 @@ GENERIC_FIELDS = {
     "brbank_certificate": "certificado_pem",
     "brbank_private_key": "chave_pem",
     "brbank_pix_key": "chave_pix",
+    "brbank_refresh_token": "refresh_token",
 }
+# Callable keys of the adapter configurations served by the provider, with
+# the method that builds the function. The other callable keys (such as
+# `gerar_nosso_numero`) keep the library default.
+CALLBACK_FACTORIES = {
+    "ao_renovar_refresh_token": "_brbank_refresh_token_callback",
+}
+# Key of `cr.cache` with the refresh tokens renewed in the current transaction.
+RENEWED_TOKENS = "brbank_renewed_refresh_tokens"
 SECRET_GROUP = "base.group_system"
+
+
+def _save_refresh_token(registry, provider_id, token):
+    """Commit a renewed refresh token in a transaction of its own.
+
+    The bank already invalidated the old token, so the new one must survive a
+    rollback of the transaction that called the bank. Runs in the thread of
+    the bank call, so it never touches the environment of the caller: only
+    the registry and the provider id. `NOWAIT` turns a row locked by another
+    transaction (possibly the caller, which waits for this thread) into an
+    immediate failure instead of a deadlock.
+
+    :return: None when the token was committed, else why it was not.
+    :rtype: str
+    """
+    try:
+        with registry.cursor() as cr:
+            cr.execute(
+                "SELECT id FROM payment_provider WHERE id = %s FOR UPDATE NOWAIT",
+                (provider_id,),
+                log_exceptions=False,
+            )
+            if not cr.fetchone():
+                # Provider created in the caller transaction, not committed.
+                return "provider not committed yet"
+            env = api.Environment(cr, SUPERUSER_ID, {})
+            env["payment.provider"].browse(provider_id).write(
+                {"brbank_refresh_token": token}
+            )
+        return None
+    except psycopg2.Error as error:
+        return type(error).__name__
 
 
 def _capability_labels():
@@ -103,6 +154,14 @@ class PaymentProvider(models.Model):
         string="Private Key (PEM)", attachment=False, groups=SECRET_GROUP
     )
     brbank_pix_key = fields.Char(string="Pix Key", groups=SECRET_GROUP)
+    brbank_refresh_token = fields.Char(
+        string="Refresh Token",
+        groups=SECRET_GROUP,
+        copy=False,
+        help="OAuth refresh token obtained once at the bank (authorization "
+        "code flow). The bank may return a new one at each renewal: the "
+        "provider keeps it up to date by itself.",
+    )
     brbank_extra_config = fields.Text(
         string="Extra Settings",
         groups=SECRET_GROUP,
@@ -142,6 +201,7 @@ class PaymentProvider(models.Model):
     brbank_uses_password = fields.Boolean(compute="_compute_brbank_adapter_info")
     brbank_uses_certificate = fields.Boolean(compute="_compute_brbank_adapter_info")
     brbank_uses_pix_key = fields.Boolean(compute="_compute_brbank_adapter_info")
+    brbank_uses_refresh_token = fields.Boolean(compute="_compute_brbank_adapter_info")
     brbank_is_pix = fields.Boolean(compute="_compute_brbank_adapter_info")
     brbank_settings_help = fields.Text(
         string="Settings Keys", compute="_compute_brbank_adapter_info"
@@ -207,6 +267,7 @@ class PaymentProvider(models.Model):
             provider.brbank_uses_password = "senha" in keys
             provider.brbank_uses_certificate = "certificado_pem" in keys
             provider.brbank_uses_pix_key = "chave_pix" in keys
+            provider.brbank_uses_refresh_token = "refresh_token" in keys
             provider.brbank_is_pix = "perfil" in keys
             provider.brbank_settings_help = "\n".join(
                 "{name}: {kind}{required}{secret}".format(
@@ -342,12 +403,14 @@ class PaymentProvider(models.Model):
 
     # === BUSINESS METHODS: ADAPTER === #
 
-    def _brbank_prepare_adapter(self):
+    def _brbank_prepare_adapter(self, callback_outcome=None):
         """Read the provider and build the adapter class and configuration.
 
         Runs in the calling thread, with sudo: the secrets never leave the
         configuration object handed to the library.
 
+        :param dict callback_outcome: Filled by the callbacks given to the
+            adapter (see `_brbank_after_call`).
         :return: The adapter class and its configuration.
         :rtype: tuple
         :raise UserError: If the configuration is incomplete. The message
@@ -376,13 +439,34 @@ class PaymentProvider(models.Model):
             if value and provider._fields[field_name].type == "binary":
                 value = base64.b64decode(value)
             generic[key] = value
+        renewed = self.env.cr.cache.get(RENEWED_TOKENS, {}).get(provider.id)
+        if renewed:
+            generic["refresh_token"] = renewed
+        if callback_outcome is None:
+            callback_outcome = {}
         try:
             config_cls = brbank_config.config_class(adapter_class)
+            keys = {key["name"] for key in brbank_config.describe(config_cls)}
+            if provider.state == "test" and "ambiente" not in keys:
+                raise UserError(
+                    _(
+                        "The bank adapter %s has no test environment: every call "
+                        "reaches production. Enable the provider instead of using "
+                        "the test mode, and validate it with a low amount.",
+                        provider.brbank_adapter,
+                    )
+                )
+            callbacks = {
+                key: getattr(provider, method)(callback_outcome)
+                for key, method in CALLBACK_FACTORIES.items()
+                if key in keys
+            }
             config = brbank_config.build(
                 config_cls,
                 generic,
                 provider._brbank_load_json("brbank_extra_config"),
                 provider._brbank_load_json("brbank_secret_config"),
+                callbacks=callbacks,
             )
         except brbank_config.ConfigError as error:
             parts = []
@@ -445,7 +529,12 @@ class PaymentProvider(models.Model):
         self.ensure_one()
         if self.state == "disabled":
             raise UserError(_("The payment provider %s is disabled.", self.name))
-        adapter_class, config = self._brbank_prepare_adapter()
+        # Pending writes on the provider become row locks before the call, so
+        # a callback committing apart sees them (NOWAIT) instead of racing a
+        # later flush of this transaction.
+        self.flush_recordset()
+        outcome = {}
+        adapter_class, config = self._brbank_prepare_adapter(callback_outcome=outcome)
         transport = self._brbank_http_transport()
 
         async def call():
@@ -461,7 +550,76 @@ class PaymentProvider(models.Model):
             finally:
                 await adapter.aclose()
 
-        return run_in_dedicated_loop(call)
+        try:
+            return run_in_dedicated_loop(call)
+        finally:
+            self._brbank_after_call(outcome)
+
+    # === BUSINESS METHODS: CALLBACKS === #
+
+    def _brbank_refresh_token_callback(self, outcome):
+        """The `ao_renovar_refresh_token` function given to the adapter.
+
+        The bank (BTG) may return a new refresh token at each renewal and
+        invalidate the old one. The function runs in the thread of the bank
+        call and commits the token at once in a cursor of its own (see
+        `_save_refresh_token`): a rollback of the calling transaction, a later
+        error of the same call or an exception in the caller never loses it.
+        A savepoint would not do: it is undone with the transaction around it.
+
+        :param dict outcome: Receives the token and, when it could not be
+            committed apart, why; read by `_brbank_after_call` in the calling
+            thread.
+        """
+        self.ensure_one()
+        registry = self.env.registry
+        provider_id = self.id
+
+        def renew(token):
+            outcome["refresh_token"] = token
+            # Stays if the save below raises: the caller then writes it.
+            outcome["refresh_token_unsaved"] = "interrupted"
+            outcome["refresh_token_unsaved"] = _save_refresh_token(
+                registry, provider_id, token
+            )
+
+        return renew
+
+    def _brbank_after_call(self, outcome):
+        """Apply in the calling transaction what the callbacks reported.
+
+        - Token committed apart: this transaction still reads the old value
+          (repeatable read snapshot), and writing the row here would fail with
+          a serialization error. The new token stays in `cr.cache` for the
+          next calls of the same transaction, until it ends.
+        - Token not committed apart (provider not committed yet, or row locked
+          by this or another transaction): written in this transaction, the
+          only place left; logged, because a rollback here would lose it.
+        """
+        self.ensure_one()
+        token = outcome.get("refresh_token")
+        if not token:
+            return
+        reason = outcome.get("refresh_token_unsaved")
+        if not reason:
+            cr = self.env.cr
+            renewed = cr.cache.setdefault(RENEWED_TOKENS, {})
+            if not renewed:
+
+                def forget():
+                    cr.cache.pop(RENEWED_TOKENS, None)
+
+                cr.postcommit.add(forget)
+                cr.postrollback.add(forget)
+            renewed[self.id] = token
+            return
+        _logger.warning(
+            "brbank: provider %s: the renewed refresh token is saved in the "
+            "current transaction only (%s); a rollback loses it",
+            self.id,
+            reason,
+        )
+        self.sudo().brbank_refresh_token = token
 
     def _brbank_parse_webhook(self, body, headers):
         """Turn a webhook call into canonical events, without network."""

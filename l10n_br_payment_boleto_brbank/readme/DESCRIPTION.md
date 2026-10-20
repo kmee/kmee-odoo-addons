@@ -6,7 +6,9 @@ credentials screen, not a new module.
 
 Banks delivered as providers (all disabled until configured):
 
-- Boleto: Banco Inter, PinBank, Sicoob, Sicredi and Banco do Brasil.
+- Boleto: Banco Inter, PinBank, Sicoob, Sicredi, Banco do Brasil, Itaú,
+  Bradesco, Santander, BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa and
+  Safra.
 - Pix (BACEN API, `/cob` and `/cobv`): Banco Inter, Banco do Brasil, Sicoob,
   Sicredi, Itaú, Bradesco, Santander and Efí.
 

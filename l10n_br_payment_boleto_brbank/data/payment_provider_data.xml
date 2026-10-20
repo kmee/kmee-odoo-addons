@@ -68,6 +68,123 @@
         />
         <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
     </record>
+    <record id="payment_provider_brbank_itau" model="payment.provider">
+        <field name="name">Itaú (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">itau</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_bradesco" model="payment.provider">
+        <field name="name">Bradesco (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">bradesco</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_santander" model="payment.provider">
+        <field name="name">Santander (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">santander</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_btg" model="payment.provider">
+        <field name="name">BTG Pactual (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">btg</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_c6" model="payment.provider">
+        <field name="name">C6 Bank (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">c6</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_banrisul" model="payment.provider">
+        <field name="name">Banrisul (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">banrisul</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_unicred" model="payment.provider">
+        <field name="name">Unicred (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">unicred</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_caixa" model="payment.provider">
+        <field name="name">Caixa (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">caixa</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
+    <record id="payment_provider_brbank_safra" model="payment.provider">
+        <field name="name">Safra (Boleto)</field>
+        <field name="code">brbank</field>
+        <field name="brbank_adapter">safra</field>
+        <field name="state">disabled</field>
+        <field name="is_published" eval="False" />
+        <field
+            name="image_128"
+            type="base64"
+            file="l10n_br_payment_boleto_brbank/static/description/icon.png"
+        />
+        <field name="module_id" ref="base.module_l10n_br_payment_boleto_brbank" />
+    </record>
     <record id="payment_provider_brbank_pix_inter" model="payment.provider">
         <field name="name">Pix Banco Inter</field>
         <field name="code">brbank</field>

@@ -31,6 +31,7 @@
                     <field name="brbank_uses_password" invisible="1" />
                     <field name="brbank_uses_certificate" invisible="1" />
                     <field name="brbank_uses_pix_key" invisible="1" />
+                    <field name="brbank_uses_refresh_token" invisible="1" />
                     <field name="brbank_is_pix" invisible="1" />
                     <field name="brbank_supports_webhook" invisible="1" />
                     <field
@@ -70,6 +71,11 @@
                     <field
                         name="brbank_pix_key"
                         attrs="{'invisible': [('brbank_uses_pix_key', '=', False)]}"
+                    />
+                    <field
+                        name="brbank_refresh_token"
+                        password="True"
+                        attrs="{'invisible': [('brbank_uses_refresh_token', '=', False)]}"
                     />
                     <field
                         name="brbank_certificate"
