@@ -27,7 +27,7 @@
                         type="object"
                         string="Gerar Evento"
                         class="oe_highlight"
-                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                        invisible="evento_id"
                     />
                 </header>
                 <sheet>
@@ -41,14 +41,15 @@
                             <field name="cnpj_lab" />
                             <field name="cod_seq_exame" placeholder="AB123456789" />
                         </group>
-                        <group string="Médico">
+                        <group string="M&#233;dico">
                             <field name="nm_med" />
                             <field name="nr_crm" />
                             <field name="uf_crm" />
                             <field name="ind_retif" />
                             <field
                                 name="nr_recibo"
-                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                                invisible="ind_retif == '1'"
+                                required="ind_retif == '2'"
                             />
                             <field name="evento_id" readonly="1" />
                         </group>
@@ -59,7 +60,7 @@
     </record>
 
     <record id="action_esocial_s2221" model="ir.actions.act_window">
-        <field name="name">S-2221 - Exame Toxicológico</field>
+        <field name="name">S-2221 - Exame Toxicol&#243;gico</field>
         <field name="res_model">l10n_br.esocial.s2221</field>
         <field name="view_mode">tree,form</field>
     </record>

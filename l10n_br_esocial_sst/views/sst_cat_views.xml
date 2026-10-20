@@ -11,13 +11,13 @@
                     name="action_gerar_s2210"
                     type="object"
                     string="Preparar S-2210"
-                    attrs="{'invisible': ['|', ('state', '=', 'draft'), ('s2210_id', '!=', False)]}"
+                    invisible="(state == 'draft' or s2210_id)"
                 />
                 <button
                     name="action_view_s2210"
                     type="object"
                     string="Ver S-2210"
-                    attrs="{'invisible': [('s2210_id', '=', False)]}"
+                    invisible="not s2210_id"
                 />
             </xpath>
             <field name="numero_recibo" position="after">

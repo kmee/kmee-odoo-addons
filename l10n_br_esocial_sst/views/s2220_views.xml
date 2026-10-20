@@ -27,7 +27,7 @@
                         type="object"
                         string="Gerar Evento"
                         class="oe_highlight"
-                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                        invisible="evento_id"
                     />
                 </header>
                 <sheet>
@@ -48,7 +48,8 @@
                             <field name="ind_retif" />
                             <field
                                 name="nr_recibo"
-                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                                invisible="ind_retif == '1'"
+                                required="ind_retif == '2'"
                             />
                             <field name="evento_id" readonly="1" />
                         </group>
@@ -59,7 +60,7 @@
     </record>
 
     <record id="action_esocial_s2220" model="ir.actions.act_window">
-        <field name="name">S-2220 - Monitoramento da Saúde</field>
+        <field name="name">S-2220 - Monitoramento da Sa&#250;de</field>
         <field name="res_model">l10n_br.esocial.s2220</field>
         <field name="view_mode">tree,form</field>
     </record>

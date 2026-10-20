@@ -27,7 +27,7 @@
                         type="object"
                         string="Gerar Evento"
                         class="oe_highlight"
-                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                        invisible="evento_id"
                     />
                 </header>
                 <sheet>
@@ -48,7 +48,8 @@
                             <field name="ind_retif" />
                             <field
                                 name="nr_recibo"
-                                attrs="{'invisible': [('ind_retif', '=', '1')], 'required': [('ind_retif', '=', '2')]}"
+                                invisible="ind_retif == '1'"
+                                required="ind_retif == '2'"
                             />
                             <field name="evento_id" readonly="1" />
                         </group>
