@@ -19,21 +19,22 @@ class TestInstallments(TransactionCase):
         )
 
     def _term(self, n, rate=0.0, kind="simple", provider=None, installment=True):
-        """Create a term with ``n`` installment lines (n-1 percent + balance)."""
+        """Create a term with ``n`` installment lines (percent lines adding up to 100%)."""
         lines = []
-        for i in range(n - 1):
+        share = round(100.0 / n, 2)
+        for i in range(n):
+            amount = share if i < n - 1 else round(100.0 - share * (n - 1), 2)
             lines.append(
                 (
                     0,
                     0,
                     {
                         "value": "percent",
-                        "value_amount": round(100.0 / n, 2),
-                        "days": 30 * (i + 1),
+                        "value_amount": amount,
+                        "nb_days": 30 * (i + 1),
                     },
                 )
             )
-        lines.append((0, 0, {"value": "balance", "days": 30 * n}))
         return self.Term.create(
             {
                 "name": "%sx %s %s" % (n, kind, rate),
@@ -136,6 +137,7 @@ class TestInstallments(TransactionCase):
         return self.env["payment.transaction"].create(
             {
                 "provider_id": provider.id,
+                "payment_method_id": self.env.ref("payment.payment_method_unknown").id,
                 "reference": "TX-INST-%s" % provider.id,
                 "amount": 300.0,
                 "currency_id": self.env.company.currency_id.id,
