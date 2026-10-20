@@ -1,7 +1,9 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests import TransactionCase, tagged
+
+from odoo.addons.base_exception.exceptions import BaseExceptionError
 
 
 @tagged("post_install", "-at_install")
@@ -31,18 +33,29 @@ class TestSaleExceptionQuotation(TransactionCase):
             }
         )
 
+    def _send(self, order):
+        """Click Send by Email; in 18.0 a detected exception is raised as
+        BaseExceptionError, which the web client turns into the popup.
+        Caught here without a savepoint so the recorded exception is kept."""
+        try:
+            return order.action_quotation_send()
+        except BaseExceptionError:
+            return None
+
     def test_send_blocked_when_exception_detected(self):
         """
         Given a quotation whose customer has no zip code (active exception rule)
         When the user clicks to send the quotation by e-mail
-        Then the exception popup is returned instead of the mail composer
-        and the exception is recorded on the order
+        Then the mail composer is not returned, the exception is recorded on
+        the order and the popup the web client opens is the exception wizard
         """
         self.partner.zip = False
+        self.env.company.sale_exception_show_popup = True
         order = self._order()
-        action = order.action_quotation_send()
-        self.assertEqual(action["res_model"], "sale.exception.confirm")
+        self.assertIsNone(self._send(order))
         self.assertIn(self.rule, order.exception_ids)
+        action = order.action_popup_exceptions()
+        self.assertEqual(action["res_model"], "sale.exception.confirm")
         self.assertEqual(action["context"]["active_ids"], order.ids)
 
     def test_send_allowed_without_exception(self):
@@ -89,5 +102,5 @@ class TestSaleExceptionQuotation(TransactionCase):
         """
         self.partner.zip = False
         order = self._order()
-        order.action_quotation_send()
+        self.assertIsNone(self._send(order))
         self.assertEqual(order.state, "draft")
