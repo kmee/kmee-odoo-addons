@@ -1,6 +1,6 @@
 from psycopg2 import IntegrityError
 
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 from odoo.tools import mute_logger
 
 
