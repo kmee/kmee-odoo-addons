@@ -14,17 +14,12 @@ class TestProjectInvoiceMenus(TransactionCase):
         cls.menu_invoice = cls.env.ref(
             "sale_timesheet_invoice_from_project.menu_project_create_invoice"
         )
-        cls.menu_order = cls.env.ref(
-            "sale_timesheet_invoice_from_project.menu_project_create_sale_order"
-        )
         base = "base.group_user,"
         users = {
             "plain": "",
             "project_manager": "project.group_project_manager",
             "salesman": "sales_team.group_sale_salesman",
             "accountant": "account.group_account_invoice",
-            "manager_salesman": "project.group_project_manager,"
-            "sales_team.group_sale_salesman",
             "accountant_all_leads": "account.group_account_invoice,"
             "sales_team.group_sale_salesman_all_leads",
             "manager_all_leads": "project.group_project_manager,"
@@ -40,30 +35,26 @@ class TestProjectInvoiceMenus(TransactionCase):
     def _visible_menus(self, user):
         return self.env["ir.ui.menu"].with_user(user)._visible_menu_ids()
 
-    def test_menus_live_under_project_configuration(self):
+    def test_menu_lives_under_project_configuration(self):
         """
-        Given the menus created by the module
-        When we read their parent
-        Then both are entries of the Project > Configuration menu
+        Given the menu created by the module
+        When we read its parent
+        Then it is an entry of the Project > Configuration menu
         """
         parent = self.env.ref("project.menu_project_config")
         self.assertEqual(self.menu_invoice.parent_id, parent)
-        self.assertEqual(self.menu_order.parent_id, parent)
 
-    def test_menus_actions_open_the_sale_timesheet_wizards(self):
+    def test_menu_action_opens_the_create_invoice_wizard(self):
         """
-        Given the two menus
-        When we read their actions
-        Then they open the create invoice and create sales order wizards as dialogs
-        for the project model
+        Given the Create Invoice menu
+        When we read its action
+        Then it opens the create invoice wizard as a dialog for the project model
+        (18.0 has no create sales order wizard, so that menu is gone)
         """
-        invoice = self.menu_invoice.action
-        order = self.menu_order.action
-        self.assertEqual(invoice.res_model, "project.create.invoice")
-        self.assertEqual(order.res_model, "project.create.sale.order")
-        for action in (invoice, order):
-            self.assertEqual(action.target, "new")
-            self.assertIn("project.project", action.context)
+        action = self.menu_invoice.action
+        self.assertEqual(action.res_model, "project.create.invoice")
+        self.assertEqual(action.target, "new")
+        self.assertIn("project.project", action.context)
 
     def test_create_invoice_menu_needs_group_and_wizard_access(self):
         """
@@ -83,26 +74,6 @@ class TestProjectInvoiceMenus(TransactionCase):
         self.assertFalse(visible["salesman"])
         # menu group ok but no access to the wizard model
         self.assertFalse(visible["accountant"])
-        self.assertFalse(visible["project_manager"])
-
-    def test_create_sale_order_menu_needs_group_and_wizard_access(self):
-        """
-        Given the Create Sales Order menu (salesmen and project managers) whose
-        wizard model is only accessible to salesmen
-        When different users list their visible menus
-        Then it shows only for users that satisfy both the menu groups and the
-        wizard access, and stays hidden for users that miss either one
-        """
-        visible = {
-            k: self.menu_order.id in self._visible_menus(u)
-            for k, u in self.users.items()
-        }
-        self.assertTrue(visible["salesman"])
-        self.assertTrue(visible["manager_salesman"])
-        self.assertTrue(visible["manager_all_leads"])
-        self.assertFalse(visible["plain"])
-        self.assertFalse(visible["accountant"])
-        # menu group ok but no access to the wizard model
         self.assertFalse(visible["project_manager"])
 
     def _billable_project(self):
