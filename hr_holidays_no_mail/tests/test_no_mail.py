@@ -27,14 +27,14 @@ class TestHolidaysNoMail(TransactionCase):
         cls.leave_type = cls.env["hr.leave.type"].create(
             {
                 "name": "No Mail Leave",
-                "requires_allocation": "no",
+                "requires_allocation": False,
                 "leave_validation_type": "hr",
             }
         )
         cls.alloc_type = cls.env["hr.leave.type"].create(
             {
                 "name": "No Mail Allocation",
-                "requires_allocation": "yes",
+                "requires_allocation": True,
                 "employee_requests": "no",
                 "allocation_validation_type": "hr",
             }
