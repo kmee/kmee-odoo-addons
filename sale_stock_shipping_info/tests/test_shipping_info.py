@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from lxml import etree
 
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -17,10 +17,22 @@ class TestSaleStockShippingInfo(TransactionCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner = cls.env["res.partner"].create({"name": "Customer"})
         cls.heavy = cls.env["product.product"].create(
-            {"name": "Heavy", "type": "product", "weight": 2.0, "volume": 0.5}
+            {
+                "name": "Heavy",
+                "type": "consu",
+                "is_storable": True,
+                "weight": 2.0,
+                "volume": 0.5,
+            }
         )
         cls.light = cls.env["product.product"].create(
-            {"name": "Light", "type": "product", "weight": 0.25, "volume": 0.1}
+            {
+                "name": "Light",
+                "type": "consu",
+                "is_storable": True,
+                "weight": 0.25,
+                "volume": 0.1,
+            }
         )
         cls.uom_dozen = cls.env.ref("uom.product_uom_dozen")
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
