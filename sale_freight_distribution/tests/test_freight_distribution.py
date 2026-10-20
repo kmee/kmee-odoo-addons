@@ -16,10 +16,20 @@ class TestFreightDistribution(TransactionCase):
         cls.partner = cls.env["res.partner"].create({"name": "Freight Customer"})
         Product = cls.env["product.product"]
         cls.prod_a = Product.create(
-            {"name": "Freight A", "type": "product", "list_price": 100.0}
+            {
+                "name": "Freight A",
+                "type": "consu",
+                "is_storable": True,
+                "list_price": 100.0,
+            }
         )
         cls.prod_b = Product.create(
-            {"name": "Freight B", "type": "product", "list_price": 100.0}
+            {
+                "name": "Freight B",
+                "type": "consu",
+                "is_storable": True,
+                "list_price": 100.0,
+            }
         )
         cls.service = Product.create(
             {"name": "Freight Service", "type": "service", "list_price": 500.0}
