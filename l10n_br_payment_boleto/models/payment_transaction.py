@@ -39,6 +39,48 @@ class PaymentTransaction(models.Model):
         string="Technical Information",
         help="Technical information about the payment transaction.",
     )
+    move_line_id = fields.Many2one(
+        comodel_name="account.move.line",
+        string="Installment",
+        readonly=True,
+        index=True,
+        ondelete="restrict",
+        help="Receivable line (installment) charged by this boleto. When set, "
+        "the payment reconciles only this installment.",
+    )
+
+    def _create_payment(self, **extra_create_values):
+        """Override of `account_payment` to settle only the installment of the boleto.
+
+        The core reconciles the payment with every open receivable line of the
+        invoices, and the reconciliation settles the oldest installment first:
+        a boleto of the second installment paid before the first one would
+        settle the first installment.
+
+        Note: self.ensure_one()
+        """
+        payment = super()._create_payment(**extra_create_values)
+        if self.move_line_id:
+            self._boleto_reconcile_installment(payment)
+        return payment
+
+    def _boleto_reconcile_installment(self, payment):
+        """Reconcile the payment with the installment of the boleto only.
+
+        An amount paid above the installment (interest, penalty) stays open on
+        the payment instead of settling the next installment.
+
+        :param recordset payment: The `account.payment` of the transaction.
+        """
+        self.ensure_one()
+        counterpart = payment.line_ids.filtered(
+            lambda line: line.account_id == payment.destination_account_id
+        )
+        counterpart.remove_move_reconcile()
+        installment = self.move_line_id
+        if installment.reconciled or installment.account_id != counterpart.account_id:
+            return
+        (counterpart + installment).reconcile()
 
     def generate_boleto(self):
         raise NotImplementedError

@@ -76,6 +76,24 @@ class TestPaymentTransaction(TransactionCase):
 
         self.assertEqual(payload, GENERATE_BOLETO_PAYLOAD_DECRYPTED)
 
+    def test_payload_amounts_are_rounded(self):
+        """Valores em centavos arredondam, sem truncar a sobra do ponto flutuante.
+
+        2.05 * 100 vale 204.99999999999997 e 0.57 * 10000 vale 5699.999999999999:
+        truncar com int() cobra um centavo a menos no boleto.
+        """
+        self.payment_transaction.write(
+            {"amount": 2.05, "boleto_penalty": 0.69, "boleto_interest": 0.57}
+        )
+
+        data = self.payment_transaction._boleto_pinbank_prepare_order_request_payload()[
+            "Data"
+        ]
+
+        self.assertEqual(data["Valor"], 205)
+        self.assertEqual(data["Multa"]["Valor"], 6900)
+        self.assertEqual(data["Juros"]["Valor"], 5700)
+
     def test_prepare_transaction_boleto_info(self):
         """
         Test the `_prepare_transaction_boleto_info` method of the payment transaction.

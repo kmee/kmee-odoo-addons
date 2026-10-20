@@ -11,6 +11,7 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "payment",
+        "account_payment",
         "account_payment_partner",
         "l10n_br_account_due_list",
         "l10n_br_base",

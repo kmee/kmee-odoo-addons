@@ -308,11 +308,12 @@ class TestPinbankTransaction(PinbankCase):
         self.assertEqual(tx2.state, "error")
 
     def test_notification_finds_transaction_or_refuses(self):
-        """Given notification data, Then the transaction is found by
-        NossoNumero; missing or unknown references raise ValidationError."""
-        tx = self._tx(reference="TXF1")
+        """Given notification data, Then the transaction is found by the
+        NossoNumero PinBank returned, never by the Odoo reference; missing or
+        unknown numbers raise ValidationError."""
+        tx = self._tx(reference="TXF1", our_number="NNF1")
         found = self.env["payment.transaction"]._get_tx_from_notification_data(
-            "boleto_pinbank", {"Data": {"NossoNumero": "TXF1"}}
+            "boleto_pinbank", {"Data": {"NossoNumero": "NNF1"}}
         )
         self.assertEqual(found, tx)
         with self.assertRaises(ValidationError):
@@ -327,18 +328,17 @@ class TestPinbankTransaction(PinbankCase):
     def test_refund_notification_from_pinbank_creates_refund_transaction(self):
         """Given a refund started at PinBank for a known payment, Then a refund
         transaction is created; for an unknown payment ValidationError."""
-        source = self._tx(reference="TXR1", provider_reference="PAY1", state="done")
+        source = self._tx(reference="TXR1", our_number="NNR1", state="done")
         data = {
             "entity_type": "refund",
-            "payment_id": "PAY1",
-            "Data": {"NossoNumero": ""},
+            "Data": {"NossoNumero": "NNR1"},
         }
         refund = self.env["payment.transaction"]._get_tx_from_notification_data(
             "boleto_pinbank", data
         )
         self.assertEqual(refund.source_transaction_id, source)
         self.assertEqual(refund.operation, "refund")
-        data["payment_id"] = "UNKNOWN"
+        data["Data"]["NossoNumero"] = "UNKNOWN"
         with self.assertRaises(ValidationError):
             self.env["payment.transaction"]._get_tx_from_notification_data(
                 "boleto_pinbank", data
@@ -396,14 +396,19 @@ class TestPinbankTransaction(PinbankCase):
 
     def test_rendering_values_generate_the_boleto(self):
         """Given the checkout flow, When rendering values are requested, Then
-        the boleto is generated and its number is the order id."""
-        tx = self._tx()
+        the boleto is generated once and its number is the order id."""
+        tx = self._tx(our_number=False)
         answer = {"Data": dict(FULL_DATA)}
         with patch(
             PROVIDER_MOD + ".Paymentprovider._boleto_pinbank_make_request",
             return_value=answer,
-        ):
+        ) as make:
             values = tx._get_specific_rendering_values({})
+            tx._get_specific_rendering_values({})
+        make.assert_called_once()
+        self.assertEqual(
+            make.call_args.kwargs["endpoint"], "/CashIn/GerarBoletoEncrypted"
+        )
         self.assertEqual(values["order_id"], "123456789")
         self.assertEqual(values["amount"], 100.0)
         self.assertIn("/payment/pinbank/return?reference=TXB1", values["return_url"])
