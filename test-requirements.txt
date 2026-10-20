@@ -23,3 +23,7 @@
 lxml==4.6.5
 pyopenssl==22.1.0
 signxml<3.1.0
+
+# brbank: o l10n_br_payment_boleto_brbank exige a 0.0.4 (especie do documento do
+# Sicoob como sigla); sem o piso, o indice do PyPI pode servir uma versao velha.
+brbank>=0.0.4
