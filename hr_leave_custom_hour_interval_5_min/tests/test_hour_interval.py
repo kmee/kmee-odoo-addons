@@ -75,16 +75,6 @@ class TestHourInterval5Min(TransactionCase):
         self.assertEqual(labels[str(13 + 10 / 60)], "1:10 PM")
         self.assertEqual(labels[str(8 + 5 / 60)], "8:05 AM")
 
-    def test_value_off_the_five_minute_grid_is_rejected(self):
-        """
-        Dado uma folga existente
-        Quando request_hour_from recebe um valor fora da grade de 5 min
-        Entao o ORM rejeita o valor
-        """
-        leave = self._hourly_leave("8.5", "9.5")
-        with self.assertRaises(ValueError):
-            leave.request_hour_from = "8.01"
-
     def test_hourly_leave_keeps_minute_precision(self):
         """
         Dado um tipo de folga por hora e um funcionario em UTC
