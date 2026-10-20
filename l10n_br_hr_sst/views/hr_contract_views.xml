@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_contract_view_form_sst" model="ir.ui.view">
+        <field name="name">hr.contract.form.sst</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="SST" name="sst">
+                    <group>
+                        <group string="Ambiente e Exposição">
+                            <field name="l10n_br_sst_ambiente_id" />
+                            <field name="l10n_br_sst_exposicao_especial" />
+                        </group>
+                    </group>
+                    <group string="Descrição das Atividades">
+                        <field name="l10n_br_sst_descricao_atividade" nolabel="1" />
+                    </group>
+                    <group string="Riscos Aplicáveis">
+                        <field name="l10n_br_sst_risco_ids" nolabel="1" readonly="1">
+                            <tree>
+                                <field name="agente_nocivo_id" />
+                                <field name="tp_aval" />
+                                <field name="intensidade" />
+                                <field name="un_med" />
+                                <field name="insalubridade" />
+                                <field name="grau_insalubridade" />
+                                <field name="periculosidade" />
+                                <field name="laudo_id" />
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

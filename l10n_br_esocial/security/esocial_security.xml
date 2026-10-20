@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <!-- Os eventos carregam CPF e remuneração por trabalhador: cada usuário só
+         enxerga os da(s) empresa(s) em que está habilitado. -->
+    <record id="rule_esocial_evento_multi_company" model="ir.rule">
+        <field name="name">eSocial evento: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_evento" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_lote_multi_company" model="ir.rule">
+        <field name="name">eSocial lote: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_lote" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_totalizador_multi_company" model="ir.rule">
+        <field name="name">eSocial totalizador: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_totalizador" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_totalizador_linha_multi_company" model="ir.rule">
+        <field name="name">eSocial totalizador (linha): multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_totalizador_linha" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_conferencia_multi_company" model="ir.rule">
+        <field name="name">eSocial conferência: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_conferencia" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_conferencia_linha_multi_company" model="ir.rule">
+        <field name="name">eSocial conferência (linha): multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_conferencia_linha" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1000_multi_company" model="ir.rule">
+        <field name="name">eSocial S1000: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1000" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1005_multi_company" model="ir.rule">
+        <field name="name">eSocial S1005: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1005" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1010_multi_company" model="ir.rule">
+        <field name="name">eSocial S1010: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1010" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1020_multi_company" model="ir.rule">
+        <field name="name">eSocial S1020: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1020" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1200_multi_company" model="ir.rule">
+        <field name="name">eSocial S1200: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1200" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1210_multi_company" model="ir.rule">
+        <field name="name">eSocial S1210: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1210" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1210_pagamento_multi_company" model="ir.rule">
+        <field name="name">eSocial S1210 PAGAMENTO: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1210_pagamento" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1298_multi_company" model="ir.rule">
+        <field name="name">eSocial S1298: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1298" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s1299_multi_company" model="ir.rule">
+        <field name="name">eSocial S1299: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s1299" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s2200_multi_company" model="ir.rule">
+        <field name="name">eSocial S2200: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s2200" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s2206_multi_company" model="ir.rule">
+        <field name="name">eSocial S2206: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s2206" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s2230_multi_company" model="ir.rule">
+        <field name="name">eSocial S2230: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s2230" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s2299_multi_company" model="ir.rule">
+        <field name="name">eSocial S2299: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s2299" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_esocial_s3000_multi_company" model="ir.rule">
+        <field name="name">eSocial S3000: multi-empresa</field>
+        <field name="model_id" ref="model_l10n_br_esocial_s3000" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
