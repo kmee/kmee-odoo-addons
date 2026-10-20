@@ -4,7 +4,7 @@
 from psycopg2 import IntegrityError
 
 from odoo.exceptions import AccessError, UserError
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 from odoo.tools import mute_logger
 
 
@@ -143,10 +143,8 @@ class TestCrmLostReasonTransition(TransactionCase):
     def test_wizard_flow_applies_transition(self):
         """Given the lost wizard, applying a reason moves each selected lead."""
         leads = self._lead("W1") | self._lead("W2")
-        wizard = (
-            self.env["crm.lead.lost"]
-            .with_context(active_ids=leads.ids)
-            .create({"lost_reason_id": self.reason_comp.id})
+        wizard = self.env["crm.lead.lost"].create(
+            {"lead_ids": [(6, 0, leads.ids)], "lost_reason_id": self.reason_comp.id}
         )
         wizard.action_lost_reason_apply()
         for lead in leads:
@@ -271,7 +269,7 @@ class TestCrmLostReasonTransition(TransactionCase):
         self.assertEqual(menu.action, action)
         self.assertEqual(menu.parent_id, self.env.ref("crm.menu_crm_config_lead"))
         self.assertEqual(action.res_model, "crm.lost.reason.transition")
-        self.assertEqual(action.view_mode, "tree,form")
-        for mode in ("tree", "form"):
+        self.assertEqual(action.view_mode, "list,form")
+        for mode in ("list", "form"):
             arch = self.Transition.get_view(view_type=mode)["arch"]
             self.assertIn("target_stage_id", arch)
