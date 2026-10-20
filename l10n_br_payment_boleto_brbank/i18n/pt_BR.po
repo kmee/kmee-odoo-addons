@@ -421,6 +421,15 @@ msgid "Company"
 msgstr "Empresa"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_nosso_numero_sequence_id
+msgid ""
+"Created at the first title of a bank whose nosso numero is chosen by the "
+"issuer. Numbers are never reused."
+msgstr ""
+"Criada no primeiro título de um banco em que o beneficiário escolhe o nosso "
+"número. Os números nunca se repetem."
+
+#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_boleto_instruction__create_uid
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__create_uid
 msgid "Created by"
@@ -639,6 +648,23 @@ msgstr "Novo Vencimento"
 #, python-format
 msgid "No transaction found."
 msgstr "Nenhuma transação encontrada."
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_transaction__brbank_nosso_numero
+msgid "Nosso Numero Sent"
+msgstr "Nosso Número Enviado"
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_nosso_numero_sequence_id
+msgid "Nosso Numero Sequence"
+msgstr "Sequência do Nosso Número"
+
+#. module: l10n_br_payment_boleto_brbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
+#, python-format
+msgid "Nosso numero: %s"
+msgstr "Nosso número: %s"
 
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_refresh_token
@@ -904,6 +930,15 @@ msgid "Street"
 msgstr "Logradouro"
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_transaction__brbank_nosso_numero
+msgid ""
+"Taken from the sequence of the provider before the first registration call "
+"and sent again on every retry of this title."
+msgstr ""
+"Tirado da sequência do provedor antes da primeira chamada de registro e "
+"reenviado em toda nova tentativa deste título."
+
+#. module: l10n_br_payment_boleto_brbank
 #. odoo-python
 #: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
 #, python-format
@@ -1051,6 +1086,19 @@ msgstr "A chave de idempotência de uma instrução bancária deve ser única."
 #: model:ir.model.constraint,message:l10n_br_payment_boleto_brbank.constraint_payment_transaction_brbank_idempotency_key_unique
 msgid "The idempotency key of a bank title must be unique."
 msgstr "A chave de idempotência de um título bancário deve ser única."
+
+#. module: l10n_br_payment_boleto_brbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
+#, python-format
+msgid ""
+"The nosso numero sequence of the provider %(name)s reached %(number)s, "
+"beyond the %(digits)s digits the bank accepts. Agree with the bank on a new "
+"wallet or agreement before issuing more boletos."
+msgstr ""
+"A sequência do nosso número do provedor %(name)s chegou a %(number)s, além "
+"dos %(digits)s dígitos que o banco aceita. Combine com o banco uma nova "
+"carteira ou convênio antes de emitir mais boletos."
 
 #. module: l10n_br_payment_boleto_brbank
 #. odoo-python

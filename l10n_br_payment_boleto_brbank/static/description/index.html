@@ -462,10 +462,8 @@ secret;</li>
 <em>Rotate webhook token</em> issues a new URL and stops the old one at
 once.</li>
 <li>keys typed as a function in the library (<tt class="docutils literal">gerar_nosso_numero</tt>,
-<tt class="docutils literal">ao_renovar_refresh_token</tt>) never go in the JSON: the nosso
-numero is the numeric reference of the transaction (installment and
-attempt), and the refresh token is handled by the provider (see
-below).</li>
+<tt class="docutils literal">ao_renovar_refresh_token</tt>) never go in the JSON: the provider
+serves them (see below).</li>
 </ul>
 </li>
 <li>Set the provider to <em>Test Mode</em> (bank sandbox) or <em>Enabled</em>
@@ -499,13 +497,23 @@ CELULAR or EVP); <tt class="docutils literal">workspace_id</tt> is the billing w
 the bank.</li>
 <li><strong>Bradesco</strong>: <tt class="docutils literal">documento_beneficiario</tt> is a secret key (<em>Extra
 Secrets</em>).</li>
-<li><strong>Banrisul</strong>: without <tt class="docutils literal">gerar_nosso_numero</tt> the bank generates the
-nosso numero.</li>
+<li><strong>Banrisul</strong>: the provider sends the 8 free digits of the nosso numero
+and the library adds the check digits.</li>
 <li><strong>Unicred</strong>: <tt class="docutils literal">api_key</tt> and the two webhook keys go in <em>Extra
 Secrets</em>.</li>
 <li><strong>Safra</strong>: the bank declares no capability (no write-off, instruction,
 PDF nor webhook): titles are followed by the reconciliation cron only.</li>
 </ul>
+<p>Nosso numero: for the banks where the issuer chooses it (Banco do
+Brasil, Itaú, Santander, Banrisul, Caixa and Safra) the provider creates
+its own sequence (<em>Nosso Numero Sequence</em>) at the first title, starting
+after the numbers already registered by it. The number is taken before
+the first call to the bank and kept on the transaction (<em>Nosso Numero
+Sent</em>), so a retry sends the same one, and a number is never given
+twice. When the sequence passes the digits of the bank (Itaú 8, Banrisul
+8, Safra 9, Banco do Brasil 10, Santander 12, Caixa 15), the
+registration stops with an error instead of cutting the number: agree
+with the bank on a new wallet or agreement.</p>
 <p>Only users of <em>Administration / Settings</em> see and edit the credentials.
 The webhook token travels in the URL: mask it in the logs of the reverse
 proxy.</p>
@@ -590,17 +598,18 @@ enforced at install.</li>
 that transaction is rolled back after the bank answered, the bank
 keeps the title; the next attempt sends the same idempotency key (Pix
 answers <tt class="docutils literal">Duplicado</tt> and the title is read back), but a boleto bank
-that does not deduplicate by our reference may keep an orphan title.</li>
+that does not deduplicate by our reference may keep an orphan title.
+The nosso numero is kept on the transaction, so a retry of the same
+transaction sends the same number; a transaction undone by the
+rollback takes a new number on the next attempt (the sequence never
+gives a number twice).</li>
 <li>Webhooks are only parsed for the banks whose adapter declares them
 (Inter, Sicredi, BTG Pactual, C6 Bank, Unicred and the Pix profiles);
 the others rely on the reconciliation cron.</li>
-<li>The nosso numero generators of the adapters (<tt class="docutils literal">gerar_nosso_numero</tt>)
-are not exposed: the numeric reference of the transaction (installment
-id plus a two digit attempt) is used. Banks with a short nosso numero
-(Itaú 8 digits, Safra 9, Banco do Brasil 10) refuse it once the ids
-grow; a sequence per provider is the next step. Banrisul without a
-generator lets the bank number the title, so a registration repeated
-after a network failure may issue it twice.</li>
+<li>The digits of the nosso numero of each bank are a map in the module
+(<tt class="docutils literal">NOSSO_NUMERO_DIGITS</tt>), checked by a test against the adapters that
+take <tt class="docutils literal">gerar_nosso_numero</tt>; the library does not publish them in a
+uniform way.</li>
 <li>BTG Pactual: the authorization code flow (consent at the BTG Id) is
 done outside Odoo. Two calls renewing the same refresh token at the
 same time (two workers) may leave one of them with a token the bank

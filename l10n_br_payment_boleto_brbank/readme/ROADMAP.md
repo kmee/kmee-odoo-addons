@@ -12,17 +12,16 @@
   transaction is rolled back after the bank answered, the bank keeps the
   title; the next attempt sends the same idempotency key (Pix answers
   `Duplicado` and the title is read back), but a boleto bank that does not
-  deduplicate by our reference may keep an orphan title.
+  deduplicate by our reference may keep an orphan title. The nosso numero is
+  kept on the transaction, so a retry of the same transaction sends the same
+  number; a transaction undone by the rollback takes a new number on the next
+  attempt (the sequence never gives a number twice).
 - Webhooks are only parsed for the banks whose adapter declares them (Inter,
   Sicredi, BTG Pactual, C6 Bank, Unicred and the Pix profiles); the others
   rely on the reconciliation cron.
-- The nosso numero generators of the adapters (`gerar_nosso_numero`) are not
-  exposed: the numeric reference of the transaction (installment id plus a
-  two digit attempt) is used. Banks with a short nosso numero (Itaú 8 digits,
-  Safra 9, Banco do Brasil 10) refuse it once the ids grow; a sequence per
-  provider is the next step. Banrisul without a generator lets the bank
-  number the title, so a registration repeated after a network failure may
-  issue it twice.
+- The digits of the nosso numero of each bank are a map in the module
+  (`NOSSO_NUMERO_DIGITS`), checked by a test against the adapters that take
+  `gerar_nosso_numero`; the library does not publish them in a uniform way.
 - BTG Pactual: the authorization code flow (consent at the BTG Id) is done
   outside Odoo. Two calls renewing the same refresh token at the same time
   (two workers) may leave one of them with a token the bank already replaced.

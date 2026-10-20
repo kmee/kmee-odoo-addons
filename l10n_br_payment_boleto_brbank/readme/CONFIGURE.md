@@ -17,9 +17,8 @@
    - if the bank has a webhook, register the *Webhook URL* at the bank. *Rotate
      webhook token* issues a new URL and stops the old one at once.
    - keys typed as a function in the library (`gerar_nosso_numero`,
-     `ao_renovar_refresh_token`) never go in the JSON: the nosso numero is the
-     numeric reference of the transaction (installment and attempt), and the
-     refresh token is handled by the provider (see below).
+     `ao_renovar_refresh_token`) never go in the JSON: the provider serves them
+     (see below).
 4. Set the provider to *Test Mode* (bank sandbox) or *Enabled* (production) and
    choose its journal in the *Configuration* tab. The provider refuses to leave
    *Disabled* while a required key is missing.
@@ -47,11 +46,21 @@ Notes per bank:
 - **Santander**: the Pix key needs `tipo_chave_pix` (EMAIL, CPF, CNPJ, CELULAR
   or EVP); `workspace_id` is the billing workspace created at the bank.
 - **Bradesco**: `documento_beneficiario` is a secret key (*Extra Secrets*).
-- **Banrisul**: without `gerar_nosso_numero` the bank generates the nosso
-  numero.
+- **Banrisul**: the provider sends the 8 free digits of the nosso numero and
+  the library adds the check digits.
 - **Unicred**: `api_key` and the two webhook keys go in *Extra Secrets*.
 - **Safra**: the bank declares no capability (no write-off, instruction, PDF
   nor webhook): titles are followed by the reconciliation cron only.
+
+Nosso numero: for the banks where the issuer chooses it (Banco do Brasil,
+Itaú, Santander, Banrisul, Caixa and Safra) the provider creates its own
+sequence (*Nosso Numero Sequence*) at the first title, starting after the
+numbers already registered by it. The number is taken before the first call
+to the bank and kept on the transaction (*Nosso Numero Sent*), so a retry
+sends the same one, and a number is never given twice. When the sequence
+passes the digits of the bank (Itaú 8, Banrisul 8, Safra 9, Banco do Brasil
+10, Santander 12, Caixa 15), the registration stops with an error instead of
+cutting the number: agree with the bank on a new wallet or agreement.
 
 Only users of *Administration / Settings* see and edit the credentials. The
 webhook token travels in the URL: mask it in the logs of the reverse proxy.

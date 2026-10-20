@@ -11,7 +11,7 @@ from brbank import registro
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import new_test_user, tagged
 
-from ..utils import config as brbank_config
+from ..models.payment_provider import NOSSO_NUMERO_DIGITS
 from .common import FAKE, BrbankTransactionCase
 
 # The 22 providers delivered as data: one per bank adapter and Pix profile.
@@ -53,22 +53,6 @@ SECRET_FIELDS = (
     "brbank_webhook_token",
     "brbank_webhook_url",
 )
-DUMMY_BY_TYPE = {bool: False, int: 1, float: 1.0, str: "1234567", bytes: b"x"}
-# Dummy values the validation of the library accepts, where the type is not
-# enough: by key, then by adapter.
-DUMMY_BY_KEY = {
-    "agencia": "1234",
-    "cnpj_empresa": "11222333000181",
-    "digito_conta": "1",
-    "documento_beneficiario": "11222333000181",
-}
-DUMMY_BY_ADAPTER = {
-    "banrisul": {"codigo_beneficiario": "1234567890123", "especie": "02"},
-    "safra": {"especie": "01"},
-    "santander": {"tipo_chave_pix": "EVP"},
-}
-# A random Pix key (EVP): the C6 refuses any other kind.
-PIX_KEY = "123e4567-e89b-42d3-a456-426614174000"
 CALLABLE_KEYS = ("gerar_nosso_numero", "ao_renovar_refresh_token")
 
 
@@ -99,39 +83,6 @@ class TestBrbankProvider(BrbankTransactionCase):
             },
         )
 
-    def _fill_for_test(self, provider):
-        """Dummy credentials and settings typed after the adapter config."""
-        provider.action_brbank_fill_settings_template()
-        config_cls = brbank_config.config_class(
-            registro.obter_classe(provider.brbank_adapter)
-        )
-        public = json.loads(provider.brbank_extra_config)
-        secret = json.loads(provider.brbank_secret_config)
-        overrides = DUMMY_BY_ADAPTER.get(provider.brbank_adapter, {})
-        for key in brbank_config.describe(config_cls):
-            target = secret if key["secret"] else public
-            name = key["name"]
-            if name in overrides:
-                target[name] = overrides[name]
-            elif key["required"] and not key["generic"]:
-                target[name] = DUMMY_BY_KEY.get(
-                    name, DUMMY_BY_TYPE.get(key["type"], "1234567")
-                )
-        provider.write(
-            {
-                "brbank_client_id": "client-id",
-                "brbank_client_secret": "client-secret",
-                "brbank_username": "usuario",
-                # The PinBank password is also its AES key: 16 bytes.
-                "brbank_password": "0123456789abcdef",
-                "brbank_pix_key": PIX_KEY,
-                "brbank_refresh_token": "refresh-token",
-                "brbank_extra_config": json.dumps(public),
-                "brbank_secret_config": json.dumps(secret),
-                "state": "enabled",
-            }
-        )
-
     def test_every_data_provider_builds_its_adapter(self):
         """O1: each of the 22 data providers instantiates its adapter."""
         self.assertEqual(len(DATA_PROVIDERS), 22)
@@ -160,10 +111,10 @@ class TestBrbankProvider(BrbankTransactionCase):
                     bool(provider.brbank_capabilities), bool(adapter_class.capacidades)
                 )
                 _adapter_class, config = provider._brbank_prepare_adapter()
-                # The number generators keep the library default (None: the
-                # numeric seu_numero of the transaction).
+                # The nosso numero comes from the sequence of the provider.
                 if hasattr(config, "gerar_nosso_numero"):
-                    self.assertIsNone(config.gerar_nosso_numero)
+                    self.assertIn(bank, NOSSO_NUMERO_DIGITS)
+                    self.assertTrue(callable(config.gerar_nosso_numero))
                 if hasattr(config, "ao_renovar_refresh_token"):
                     self.assertTrue(callable(config.ao_renovar_refresh_token))
                     self.assertEqual(config.refresh_token, "refresh-token")

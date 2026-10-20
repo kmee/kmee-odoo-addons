@@ -105,10 +105,8 @@ Configuration
      *Rotate webhook token* issues a new URL and stops the old one at
      once.
    - keys typed as a function in the library (``gerar_nosso_numero``,
-     ``ao_renovar_refresh_token``) never go in the JSON: the nosso
-     numero is the numeric reference of the transaction (installment and
-     attempt), and the refresh token is handled by the provider (see
-     below).
+     ``ao_renovar_refresh_token``) never go in the JSON: the provider
+     serves them (see below).
 
 4. Set the provider to *Test Mode* (bank sandbox) or *Enabled*
    (production) and choose its journal in the *Configuration* tab. The
@@ -141,12 +139,23 @@ Notes per bank:
   the bank.
 - **Bradesco**: ``documento_beneficiario`` is a secret key (*Extra
   Secrets*).
-- **Banrisul**: without ``gerar_nosso_numero`` the bank generates the
-  nosso numero.
+- **Banrisul**: the provider sends the 8 free digits of the nosso numero
+  and the library adds the check digits.
 - **Unicred**: ``api_key`` and the two webhook keys go in *Extra
   Secrets*.
 - **Safra**: the bank declares no capability (no write-off, instruction,
   PDF nor webhook): titles are followed by the reconciliation cron only.
+
+Nosso numero: for the banks where the issuer chooses it (Banco do
+Brasil, Itaú, Santander, Banrisul, Caixa and Safra) the provider creates
+its own sequence (*Nosso Numero Sequence*) at the first title, starting
+after the numbers already registered by it. The number is taken before
+the first call to the bank and kept on the transaction (*Nosso Numero
+Sent*), so a retry sends the same one, and a number is never given
+twice. When the sequence passes the digits of the bank (Itaú 8, Banrisul
+8, Safra 9, Banco do Brasil 10, Santander 12, Caixa 15), the
+registration stops with an error instead of cutting the number: agree
+with the bank on a new wallet or agreement.
 
 Only users of *Administration / Settings* see and edit the credentials.
 The webhook token travels in the URL: mask it in the logs of the reverse
@@ -234,16 +243,17 @@ Known issues / Roadmap
   keeps the title; the next attempt sends the same idempotency key (Pix
   answers ``Duplicado`` and the title is read back), but a boleto bank
   that does not deduplicate by our reference may keep an orphan title.
+  The nosso numero is kept on the transaction, so a retry of the same
+  transaction sends the same number; a transaction undone by the
+  rollback takes a new number on the next attempt (the sequence never
+  gives a number twice).
 - Webhooks are only parsed for the banks whose adapter declares them
   (Inter, Sicredi, BTG Pactual, C6 Bank, Unicred and the Pix profiles);
   the others rely on the reconciliation cron.
-- The nosso numero generators of the adapters (``gerar_nosso_numero``)
-  are not exposed: the numeric reference of the transaction (installment
-  id plus a two digit attempt) is used. Banks with a short nosso numero
-  (Itaú 8 digits, Safra 9, Banco do Brasil 10) refuse it once the ids
-  grow; a sequence per provider is the next step. Banrisul without a
-  generator lets the bank number the title, so a registration repeated
-  after a network failure may issue it twice.
+- The digits of the nosso numero of each bank are a map in the module
+  (``NOSSO_NUMERO_DIGITS``), checked by a test against the adapters that
+  take ``gerar_nosso_numero``; the library does not publish them in a
+  uniform way.
 - BTG Pactual: the authorization code flow (consent at the BTG Id) is
   done outside Odoo. Two calls renewing the same refresh token at the
   same time (two workers) may leave one of them with a token the bank

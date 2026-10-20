@@ -51,6 +51,10 @@
                     attrs="{'invisible': [('provider_code', '!=', 'brbank')]}"
                 />
                 <field
+                    name="brbank_nosso_numero"
+                    attrs="{'invisible': [('brbank_nosso_numero', '=', False)]}"
+                />
+                <field
                     name="brbank_bank_status"
                     attrs="{'invisible': [('provider_code', '!=', 'brbank')]}"
                 />

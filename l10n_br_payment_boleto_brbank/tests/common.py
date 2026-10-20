@@ -8,10 +8,27 @@ from brbank import StatusCanonico, registro
 
 from odoo.tests.common import TransactionCase
 
+from ..utils import config as brbank_config
 from .fake_bank import BANK, FakeAdapter, FakeBasicAdapter, reset_bank
 
 FAKE = "brbank_test_fake"
 FAKE_BASIC = "brbank_test_fake_basic"
+DUMMY_BY_TYPE = {bool: False, int: 1, float: 1.0, str: "1234567", bytes: b"x"}
+# Dummy values the validation of the library accepts, where the type is not
+# enough: by key, then by adapter.
+DUMMY_BY_KEY = {
+    "agencia": "1234",
+    "cnpj_empresa": "11222333000181",
+    "digito_conta": "1",
+    "documento_beneficiario": "11222333000181",
+}
+DUMMY_BY_ADAPTER = {
+    "banrisul": {"codigo_beneficiario": "1234567890123", "especie": "02"},
+    "safra": {"especie": "01"},
+    "santander": {"tipo_chave_pix": "EVP"},
+}
+# A random Pix key (EVP): the C6 refuses any other kind.
+PIX_KEY = "123e4567-e89b-42d3-a456-426614174000"
 
 
 def register_fake_adapters(test_class):
@@ -105,6 +122,40 @@ class BrbankCommon:
                 },
                 **values,
             )
+        )
+
+    @classmethod
+    def _fill_for_test(cls, provider):
+        """Dummy credentials and settings typed after the adapter config."""
+        provider.action_brbank_fill_settings_template()
+        config_cls = brbank_config.config_class(
+            registro.obter_classe(provider.brbank_adapter)
+        )
+        public = json.loads(provider.brbank_extra_config)
+        secret = json.loads(provider.brbank_secret_config)
+        overrides = DUMMY_BY_ADAPTER.get(provider.brbank_adapter, {})
+        for key in brbank_config.describe(config_cls):
+            target = secret if key["secret"] else public
+            name = key["name"]
+            if name in overrides:
+                target[name] = overrides[name]
+            elif key["required"] and not key["generic"]:
+                target[name] = DUMMY_BY_KEY.get(
+                    name, DUMMY_BY_TYPE.get(key["type"], "1234567")
+                )
+        provider.write(
+            {
+                "brbank_client_id": "client-id",
+                "brbank_client_secret": "client-secret",
+                "brbank_username": "usuario",
+                # The PinBank password is also its AES key: 16 bytes.
+                "brbank_password": "0123456789abcdef",
+                "brbank_pix_key": PIX_KEY,
+                "brbank_refresh_token": "refresh-token",
+                "brbank_extra_config": json.dumps(public),
+                "brbank_secret_config": json.dumps(secret),
+                "state": "enabled",
+            }
         )
 
     def _create_invoice(self, amount=1000.0, post=True):

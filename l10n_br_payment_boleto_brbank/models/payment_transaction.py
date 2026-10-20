@@ -15,7 +15,7 @@ from odoo import _, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_round
 
-from .payment_provider import BRBANK
+from .payment_provider import BRBANK, NOSSO_NUMERO_CONTEXT
 
 _logger = logging.getLogger(__name__)
 
@@ -68,6 +68,13 @@ class PaymentTransaction(models.Model):
     )
     brbank_seu_numero = fields.Char(
         string="Our Reference at the Bank", readonly=True, copy=False
+    )
+    brbank_nosso_numero = fields.Char(
+        string="Nosso Numero Sent",
+        readonly=True,
+        copy=False,
+        help="Taken from the sequence of the provider before the first "
+        "registration call and sent again on every retry of this title.",
     )
     brbank_bank_status = fields.Char(string="Bank Status", readonly=True, copy=False)
     brbank_paid_amount = fields.Monetary(
@@ -229,6 +236,7 @@ class PaymentTransaction(models.Model):
                 f"tx{self.id}"
             )
         try:
+            self._brbank_reserve_nosso_numero()
             titulo = self._brbank_prepare_titulo()
         except UserError as error:
             if raise_on_error:
@@ -236,6 +244,14 @@ class PaymentTransaction(models.Model):
             self._set_error(error.args[0])
             return False
         provider = self.provider_id
+        if self.brbank_nosso_numero:
+            provider = provider.with_context(
+                **{
+                    NOSSO_NUMERO_CONTEXT: {
+                        titulo.chave_idempotencia: self.brbank_nosso_numero
+                    }
+                }
+            )
         try:
             try:
                 registered = provider._brbank_run(
@@ -271,6 +287,22 @@ class PaymentTransaction(models.Model):
         if self.brbank_supports_pdf and not self.boleto_pdf:
             self._brbank_fetch_pdf()
         return True
+
+    def _brbank_reserve_nosso_numero(self):
+        """Keep on the transaction the nosso numero of its title.
+
+        Taken once, before the first call to the bank, and stored here: a
+        retry of the same title (same idempotency key) sends the same number.
+        A new attempt for the installment is a new transaction, with a new
+        number.
+        """
+        self.ensure_one()
+        if self.brbank_nosso_numero:
+            return self.brbank_nosso_numero
+        number = self.provider_id._brbank_next_nosso_numero()
+        if number:
+            self.brbank_nosso_numero = number
+        return number
 
     def _brbank_fetch_pdf(self):
         """Download the boleto PDF when the bank provides it. Not fatal."""

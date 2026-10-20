@@ -10,7 +10,7 @@ import secrets
 import httpx
 import psycopg2
 from brbank import Capacidade, registro
-from brbank.erros import AdapterNaoEncontrado, ErroBrbank
+from brbank.erros import AdapterNaoEncontrado, ErroBrbank, Validacao
 
 from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -66,7 +66,23 @@ GENERIC_FIELDS = {
 # `gerar_nosso_numero`) keep the library default.
 CALLBACK_FACTORIES = {
     "ao_renovar_refresh_token": "_brbank_refresh_token_callback",
+    "gerar_nosso_numero": "_brbank_nosso_numero_callback",
 }
+# Largest nosso numero (digits) the `gerar_nosso_numero` of each adapter
+# accepts, as validated by the library (Banrisul: the 8 free digits, the
+# adapter adds the check digits; Caixa: without the "14" prefix). An adapter
+# that takes the generator but is missing here keeps the library default.
+NOSSO_NUMERO_DIGITS = {
+    "banrisul": 8,
+    "bb": 10,
+    "caixa": 15,
+    "itau": 8,
+    "safra": 9,
+    "santander": 12,
+}
+# Context key with the nosso numero reserved for each title, by idempotency
+# key, read by the `gerar_nosso_numero` given to the adapter.
+NOSSO_NUMERO_CONTEXT = "brbank_nosso_numeros"
 # Key of `cr.cache` with the refresh tokens renewed in the current transaction.
 RENEWED_TOKENS = "brbank_renewed_refresh_tokens"
 SECRET_GROUP = "base.group_system"
@@ -173,6 +189,14 @@ class PaymentProvider(models.Model):
         groups=SECRET_GROUP,
         help="JSON object with the bank specific secrets (developer key, API "
         "key...).",
+    )
+    brbank_nosso_numero_sequence_id = fields.Many2one(
+        comodel_name="ir.sequence",
+        string="Nosso Numero Sequence",
+        readonly=True,
+        copy=False,
+        help="Created at the first title of a bank whose nosso numero is "
+        "chosen by the issuer. Numbers are never reused.",
     )
     brbank_webhook_token = fields.Char(
         string="Webhook Token",
@@ -554,6 +578,126 @@ class PaymentProvider(models.Model):
             return run_in_dedicated_loop(call)
         finally:
             self._brbank_after_call(outcome)
+
+    # === BUSINESS METHODS: NOSSO NUMERO === #
+
+    def _brbank_nosso_numero_digits(self):
+        """Digits of the nosso numero the provider generates, or None.
+
+        None when the adapter does not take `gerar_nosso_numero` (the bank
+        numbers the title) or is not in `NOSSO_NUMERO_DIGITS`.
+        """
+        self.ensure_one()
+        adapter_class = self._brbank_adapter_class()
+        if not adapter_class or self.brbank_adapter not in NOSSO_NUMERO_DIGITS:
+            return None
+        try:
+            config_cls = brbank_config.config_class(adapter_class)
+        except brbank_config.ConfigError:
+            return None
+        keys = {key["name"] for key in brbank_config.describe(config_cls)}
+        if "gerar_nosso_numero" not in keys:
+            return None
+        return NOSSO_NUMERO_DIGITS[self.brbank_adapter]
+
+    def _brbank_nosso_numero_start(self, digits):
+        """First number of a new sequence: after every number this provider
+        may already have sent, so none is reused.
+
+        Before the sequence, the adapters used the numeric reference of the
+        transaction (`brbank_seu_numero`) as nosso numero: it counts for the
+        titles the bank registered with it.
+        """
+        self.ensure_one()
+        txs = (
+            self.env["payment.transaction"]
+            .sudo()
+            .search(
+                [
+                    ("provider_id", "=", self.id),
+                    "|",
+                    ("brbank_nosso_numero", "!=", False),
+                    ("provider_reference", "!=", False),
+                ]
+            )
+        )
+        used = [0]
+        for tx in txs:
+            value = tx.brbank_nosso_numero or tx.brbank_seu_numero
+            if value and value.isdigit() and len(value) <= digits:
+                used.append(int(value))
+        return max(used) + 1
+
+    def _brbank_nosso_numero_sequence(self, digits):
+        self.ensure_one()
+        provider = self.sudo()
+        if not provider.brbank_nosso_numero_sequence_id:
+            provider.brbank_nosso_numero_sequence_id = (
+                self.env["ir.sequence"]
+                .sudo()
+                .create(
+                    {
+                        "name": _("Nosso numero: %s", provider.name),
+                        # A PostgreSQL sequence: a number taken is never given
+                        # again, even if the transaction that took it is undone.
+                        "implementation": "standard",
+                        "padding": 0,
+                        "number_increment": 1,
+                        "number_next": provider._brbank_nosso_numero_start(digits),
+                        "company_id": provider.company_id.id,
+                    }
+                )
+            )
+        return provider.brbank_nosso_numero_sequence_id
+
+    def _brbank_next_nosso_numero(self):
+        """Take the next nosso numero of the provider.
+
+        :return: The number as text, or None when the bank numbers the title.
+        :raise UserError: When the sequence passed the digits of the bank.
+            Never truncated: a truncated number could repeat an old one.
+        """
+        self.ensure_one()
+        digits = self._brbank_nosso_numero_digits()
+        if not digits:
+            return None
+        sequence = self._brbank_nosso_numero_sequence(digits)
+        number = sequence.next_by_id()
+        if not number.isdigit() or len(number) > digits:
+            raise UserError(
+                _(
+                    "The nosso numero sequence of the provider %(name)s reached "
+                    "%(number)s, beyond the %(digits)s digits the bank accepts. "
+                    "Agree with the bank on a new wallet or agreement before "
+                    "issuing more boletos.",
+                    name=self.name,
+                    number=number,
+                    digits=digits,
+                )
+            )
+        return number
+
+    def _brbank_nosso_numero_callback(self, outcome):
+        """The `gerar_nosso_numero` function given to the adapter.
+
+        It runs in the thread of the bank call, so it only reads the numbers
+        reserved beforehand by the transactions (context key
+        `brbank_nosso_numeros`, by idempotency key).
+
+        :return: The function, or None to keep the library default.
+        """
+        self.ensure_one()
+        if not self._brbank_nosso_numero_digits():
+            return None
+        numbers = dict(self.env.context.get(NOSSO_NUMERO_CONTEXT) or {})
+
+        def generate(titulo):
+            number = numbers.get(titulo.chave_idempotencia)
+            if not number:
+                raise Validacao("no nosso numero reserved for this title")
+            return number
+
+        return generate
 
     # === BUSINESS METHODS: CALLBACKS === #
 
