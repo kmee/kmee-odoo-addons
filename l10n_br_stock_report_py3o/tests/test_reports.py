@@ -28,7 +28,7 @@ class TestStockReportPy3o(TransactionCase):
             {"name": "Cliente Entrega LTDA", "lang": "en_US"}
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Produto Entrega", "detailed_type": "product"}
+            {"name": "Produto Entrega", "type": "consu", "is_storable": True}
         )
         picking_type = cls.env.ref("stock.picking_type_out")
         cls.picking = cls.env["stock.picking"].create(
