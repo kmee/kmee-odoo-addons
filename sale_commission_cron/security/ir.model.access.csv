@@ -1,2 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sale_commission_cron_system,sale.commission.cron system,model_sale_commission_cron,base.group_system,1,1,1,1

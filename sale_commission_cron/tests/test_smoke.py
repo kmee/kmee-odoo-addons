@@ -36,8 +36,11 @@ class TestModuleSmoke(TransactionCase):
     def test_models_are_usable(self):
         for name in self.model_names:
             model = self.env[name]
+            if model._abstract:
+                # abstract helpers may have no fields at all
+                continue
             self.assertTrue(model.fields_get(), name)
-            if not model._abstract and not model._transient:
+            if not model._transient:
                 model.search([], limit=1)
 
     def test_views_are_valid(self):
