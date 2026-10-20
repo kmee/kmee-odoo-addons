@@ -1,8 +1,11 @@
 1. Install the `brbank` Python library in the Odoo environment
-   (`pip install "brbank>=0.0.3"`). It needs Python 3.10 or later. Version
-   0.0.3 is the minimum: it brings the adapters of Itaú, Bradesco, Santander,
-   BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa and Safra (the manifest only
-   names the package, so the version is not checked at install).
+   (`pip install "brbank>=0.0.4"`). It needs Python 3.10 or later. Version
+   0.0.4 is the minimum: it brings the adapters of Itaú, Bradesco, Santander,
+   BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa and Safra, and the Sicoob
+   contract checked in the bank sandbox (the manifest only names the package,
+   so the version is not checked at install). For Sicoob, the document kind
+   (`codigo_especie_documento`) is the acronym, for instance `DM`, and no
+   longer a number.
 2. Go to *Invoicing > Configuration > Payment Providers* and open the provider
    of the bank (for instance *Sicoob (Boleto)* or *Pix Itaú*).
 3. In the *Credentials* tab:
