@@ -10,7 +10,7 @@
                 for record in records:
                     if record.type == 'opportunity':
                         record.write({
-                            'stage_id': env.ref('stage_opportunity_presentation').id
+                            'stage_id': env.ref('crm_predict_revenue.stage_opportunity_presentation').id
                         })
             </field>
     </record>
@@ -25,7 +25,7 @@
                 for record in records:
                     if record.type == 'opportunity':
                         record.write({
-                            'stage_id': env.ref('stage_opportunity_proposal').id
+                            'stage_id': env.ref('crm_predict_revenue.stage_opportunity_proposal').id
                         })
             </field>
     </record>
@@ -40,7 +40,7 @@
                 for record in records:
                     if record.type == 'opportunity':
                         record.write({
-                            'stage_id': env.ref('stage_opportunity_negotiation').id
+                            'stage_id': env.ref('crm_predict_revenue.stage_opportunity_negotiation').id
                         })
             </field>
     </record>

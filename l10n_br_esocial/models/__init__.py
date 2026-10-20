@@ -15,5 +15,7 @@ from . import res_company
 from . import esocial_evento
 from . import esocial_lote
 from . import esocial_ocorrencia
+from . import esocial_totalizador
+from . import esocial_conferencia
 from . import intermediarios
 from . import hr_payslip

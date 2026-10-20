@@ -35,6 +35,36 @@ SEND_CAPTURE_REQUEST_PAYLOAD = {
     }
 }
 
+SEND_CAPTURE_REQUEST_RESPONSE_REGISTRADO = {
+    "Data": {
+        "Status": "REGISTRADO",
+        "Valor": 25875,
+        "ValorPago": 0,
+        "ValorJuros": 0,
+        "ValorMulta": 0,
+        "DataGeracao": "20250422",
+        "DataVencimento": "20250422",
+        "DataPagamento": "",
+        "OrigemBoleto": "Site",
+        "NossoNumero": "123456789",
+        "LinhaDigitavel": "12345.67890 12345.678901 12345.678901 1 23456789012345",
+        "CodigoBarras": "12345678901234567890123456789012345678901234",
+        "IdentificadorCliente": None,
+        "DadosPagador": {
+            "CpfCnpj": 73145637000140,
+            "Nome": "Empresa Teste Boleto LTDA",
+            "Endereco": "Rua Luiz Rubino",
+            "Bairro": "Jardim Wilma Flor",
+            "Cidade": "São Paulo",
+            "Cep": "08473002",
+            "Uf": "SP",
+            "DdiTerceiro": 0,
+            "DddTerceiro": 0,
+            "NumeroCelularTerceiro": 0,
+        },
+    }
+}
+
 SEND_CAPTURE_REQUEST_RESPONSE = {
     "Data": {
         "Status": "PENDENTE",

@@ -149,19 +149,21 @@
                     t-out="object.expected_revenue or ''"
                 /><br />
                         <br />
-                        <b>Qualificação BANT:</b><br />
-                        <b>Budget:</b> <t
-                    t-out="object.x_budget_value or 'Não definido'"
+                        <t t-if="'bant_budget_amount' in object._fields">
+                            <b>Qualificação BANT:</b><br />
+                            <b>Budget:</b> <t
+                    t-out="object.bant_budget_amount or 'Não definido'"
                 /><br />
-                        <b>Authority:</b> <t
-                    t-out="object.x_decision_maker or 'Não definido'"
-                /> (<t t-out="object.x_decision_maker_role or ''" />)<br />
-                        <b>Need:</b> <t
-                    t-out="object.x_need_description or 'Não definido'"
+                            <b>Authority:</b> <t
+                    t-out="object.bant_authority_contact or 'Não definido'"
+                /> (<t t-out="object.bant_authority_role or ''" />)<br />
+                            <b>Need:</b> <t
+                    t-out="object.bant_need_description or 'Não definido'"
                 /><br />
-                        <b>Timeline:</b> <t
-                    t-out="object.x_purchase_date or 'Não definido'"
+                            <b>Timeline:</b> <t
+                    t-out="object.bant_timeline_date or 'Não definido'"
                 /><br />
+                        </t>
                         <br />
                         É recomendado entrar em contato em até 24 horas para agendar a próxima etapa.
                         <br /><br />
