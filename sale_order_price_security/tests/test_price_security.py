@@ -101,7 +101,7 @@ class TestSaleOrderPriceSecurity(TransactionCase):
         )
         root = etree.fromstring(arch)
         return root.xpath(
-            "//field[@name='order_line']/*[self::form or self::tree]"
+            "//field[@name='order_line']/*[self::form or self::list]"
             "//field[@name='price_unit']"
         )
 
