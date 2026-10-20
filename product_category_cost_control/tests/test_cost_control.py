@@ -80,6 +80,12 @@ class TestCategoryCostControl(TransactionCase):
                 )
             yield
 
+    def _price(self):
+        """Unit price of the move: 18.0 returns it per lot, here a single key."""
+        prices = self.move._get_price_unit()
+        self.assertEqual(list(prices), [self.env["stock.lot"]])
+        return prices[self.env["stock.lot"]]
+
     def _assert_option_ignored(self, option, **fiscal):
         """The category option must not change the price unit in this context.
 
@@ -89,12 +95,12 @@ class TestCategoryCostControl(TransactionCase):
         """
         self.categ.price_control_option = False
         with self._fiscal(**fiscal):
-            reference = self.move._get_price_unit()
+            reference = self._price()
         self.assertNotAlmostEqual(reference, 12.0)
         self.assertNotAlmostEqual(reference, 8.15)
         self.categ.price_control_option = option
         with self._fiscal(**fiscal):
-            self.assertEqual(self.move._get_price_unit(), reference)
+            self.assertEqual(self._price(), reference)
 
     def test_category_option_selection_values(self):
         """Given a category, When choosing the cost option, Then only the two
@@ -115,24 +121,24 @@ class TestCategoryCostControl(TransactionCase):
         the price unit, Then it is amount_taxed / quantity (taxes included)."""
         self.categ.price_control_option = "include_all_taxes"
         with self._fiscal(amount_taxed=120.0):
-            self.assertAlmostEqual(self.move._get_price_unit(), 12.0)
-        self.assertEqual(self.move._get_price_unit(), 7.0)
+            self.assertAlmostEqual(self._price(), 12.0)
+        self.assertEqual(self._price(), 7.0)
 
     def test_remove_included_taxes_discounts_recoverable_taxes(self):
         """Given remove_included_taxes, When computing the price unit, Then it
         is (untaxed - tax included) / quantity."""
         self.categ.price_control_option = "remove_included_taxes"
         with self._fiscal(amount_untaxed=100.0, amount_tax_included=18.5):
-            self.assertAlmostEqual(self.move._get_price_unit(), 8.15)
+            self.assertAlmostEqual(self._price(), 8.15)
 
     def test_no_option_on_category_keeps_core_value(self):
         """Given a Brazilian inbound move and a category without option, Then
         the core price unit is untouched; with the option the taxed value wins."""
         with self._fiscal(amount_taxed=120.0):
-            self.assertNotAlmostEqual(self.move._get_price_unit(), 12.0)
+            self.assertNotAlmostEqual(self._price(), 12.0)
         self.categ.price_control_option = "include_all_taxes"
         with self._fiscal(amount_taxed=120.0):
-            self.assertAlmostEqual(self.move._get_price_unit(), 12.0)
+            self.assertAlmostEqual(self._price(), 12.0)
 
     def test_outbound_operation_is_ignored(self):
         """Given an outbound fiscal operation, Then the category option does
@@ -167,7 +173,7 @@ class TestCategoryCostControl(TransactionCase):
         self.move._action_confirm()
         self.move.quantity = 4.0
         with self._fiscal(amount_taxed=120.0):
-            self.assertAlmostEqual(self.move._get_price_unit(), 30.0)
+            self.assertAlmostEqual(self._price(), 30.0)
 
     def test_zero_quantity_does_not_divide_by_zero(self):
         """Given a move with no quantity at all, Then the core value is
@@ -182,10 +188,10 @@ class TestCategoryCostControl(TransactionCase):
         self.categ.price_control_option = "include_all_taxes"
         self.product.categ_id = other
         with self._fiscal(amount_taxed=120.0):
-            self.assertNotAlmostEqual(self.move._get_price_unit(), 12.0)
+            self.assertNotAlmostEqual(self._price(), 12.0)
         self.product.categ_id = self.categ
         with self._fiscal(amount_taxed=120.0):
-            self.assertAlmostEqual(self.move._get_price_unit(), 12.0)
+            self.assertAlmostEqual(self._price(), 12.0)
 
     def test_form_field_visible_only_to_accounting_or_stock_manager(self):
         """Given the category form, When a plain employee loads it, Then the
