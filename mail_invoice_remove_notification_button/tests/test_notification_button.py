@@ -32,6 +32,8 @@ class TestNotificationButton(TransactionCase):
             "signature": "",
             "is_html_empty": is_html_empty,
             "preview": "",
+            # 18.0 only shows the header (and its button) when allowed
+            "email_notification_allow_header": True,
         }
         return str(
             self.env["ir.qweb"]._render(
