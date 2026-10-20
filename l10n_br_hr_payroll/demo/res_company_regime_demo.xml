@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+        RF-35 - Demonstração do CUSTO PATRONAL POR REGIME TRIBUTÁRIO.
+
+        O objetivo é mostrar, lado a lado e com o MESMO salário (R$ 6.000,00),
+        quanto o mesmo empregado custa em cada regime. Sem isso o custo
+        contábil sai idêntico para regimes diferentes, o que é materialmente
+        errado para DRE e precificação.
+
+        Não criamos empresas novas onde já existem: as três primeiras são as
+        empresas de demonstração do l10n_br_base, cujo regime (tax_framework /
+        profit_calculation) é definido pela demo do l10n_br_fiscal. Aqui só
+        acrescentamos o que é da FOLHA (RAT, FAP, FPAS/terceiros da lotação
+        padrão, anexo do Simples, opção pela CPRB). O regime é repetido
+        explicitamente para que a demo permaneça legível e íntegra mesmo se a
+        demo do fiscal mudar.
+
+        FAP = 1,0000 em todas: assim o RAT ajustado é igual ao RAT e as contas
+        do holerite podem ser conferidas de cabeça.
+
+        Cenários (competência 2026, salário R$ 6.000,00):
+
+          Empresa Lucro Real       (normal/real)       CPP 1200,00  RAT 180,00 (3%)  Terceiros 348,00  FGTS 480,00
+          Empresa Lucro Presumido  (normal/presumido)  CPP 1200,00  RAT 120,00 (2%)  Terceiros 348,00  FGTS 480,00
+          Indústria CPRB (nova)    (normal/real+CPRB)  CPP  600,00  RAT 180,00 (3%)  Terceiros 348,00  FGTS 480,00
+          Empresa Simples anexo III                    CPP    0,00  RAT   0,00       Terceiros   0,00  FGTS 480,00
+          Contrato do anexo IV     (mesma empresa)     CPP 1200,00  RAT 120,00 (2%)  Terceiros   0,00  FGTS 480,00
+    -->
+
+    <!-- 1. Lucro Real industrial: encargo patronal CHEIO, RAT 3 (risco grave) -->
+    <record id="l10n_br_base.empresa_lucro_real" model="res.company">
+        <field name="tax_framework">3</field>
+        <field name="profit_calculation">real</field>
+        <field name="is_industry" eval="True" />
+        <field name="l10n_br_hr_rat">3</field>
+        <field name="l10n_br_hr_fap">1.0</field>
+        <field name="l10n_br_hr_fpas_padrao">507</field>
+        <field name="l10n_br_hr_terceiros_padrao">5.8</field>
+    </record>
+
+    <!-- 2. Lucro Presumido: encargo patronal CHEIO, RAT 2 (risco médio) -->
+    <record id="l10n_br_base.empresa_lucro_presumido" model="res.company">
+        <field name="tax_framework">3</field>
+        <field name="profit_calculation">presumed</field>
+        <field name="l10n_br_hr_rat">2</field>
+        <field name="l10n_br_hr_fap">1.0</field>
+        <!-- FPAS 515 (comércio): SESC 1,5 + SENAC 1,0 + SEBRAE 0,6
+             + INCRA 0,2 + Salário-Educação 2,5 = 5,8% -->
+        <field name="l10n_br_hr_fpas_padrao">515</field>
+        <field name="l10n_br_hr_terceiros_padrao">5.8</field>
+    </record>
+
+    <!--
+        3. Simples Nacional, anexo III: a folha NÃO gera CPP, RAT nem
+        terceiros (LC 123/2006, art. 13, VI e §3º) - só FGTS. Os parâmetros de
+        RAT/terceiros ficam preenchidos de propósito, para deixar evidente que
+        são ignorados por força do regime, e não por falta de cadastro.
+    -->
+    <record id="l10n_br_base.empresa_simples_nacional" model="res.company">
+        <field name="tax_framework">1</field>
+        <field name="l10n_br_hr_simples_anexo">iii</field>
+        <field name="l10n_br_hr_rat">2</field>
+        <field name="l10n_br_hr_fap">1.0</field>
+        <field name="l10n_br_hr_fpas_padrao">515</field>
+        <field name="l10n_br_hr_terceiros_padrao">5.8</field>
+    </record>
+
+    <!--
+        4. Empresa optante pela CPRB (desoneração da folha em transição).
+
+        Criada aqui porque nenhuma empresa de demonstração existente é de setor
+        desonerado, e a reoneração gradual da Lei 14.973/2024 é justamente o
+        caso em que o custo patronal não se deduz do regime: mesma tributação
+        do lucro da "Empresa Lucro Real", CPP diferente.
+
+        percRedContrib = 0: toda a receita é desonerada (sem atividade
+        concomitante), então em 2026 a CPP sai a 10% (50% dos 20%), enquanto
+        RAT e terceiros permanecem INTEGRAIS.
+    -->
+    <record id="demo_partner_company_cprb" model="res.partner">
+        <field name="name">Indústria Desonerada CPRB</field>
+        <field name="legal_name">Indústria Desonerada CPRB Ltda</field>
+        <field name="is_company" eval="True" />
+        <field name="country_id" ref="base.br" />
+        <field name="cnpj_cpf">34.567.890/0001-30</field>
+    </record>
+
+    <record id="demo_company_cprb" model="res.company">
+        <field name="name">Indústria Desonerada CPRB</field>
+        <field name="legal_name">Indústria Desonerada CPRB Ltda</field>
+        <field name="partner_id" ref="demo_partner_company_cprb" />
+        <field name="currency_id" ref="base.BRL" />
+        <field name="tax_framework">3</field>
+        <field name="profit_calculation">real</field>
+        <field name="is_industry" eval="True" />
+        <field name="l10n_br_hr_rat">3</field>
+        <field name="l10n_br_hr_fap">1.0</field>
+        <field name="l10n_br_hr_fpas_padrao">507</field>
+        <field name="l10n_br_hr_terceiros_padrao">5.8</field>
+        <field name="l10n_br_hr_cprb_optante" eval="True" />
+        <field name="l10n_br_hr_cprb_perc_contrib_nao_desonerada">0.0</field>
+    </record>
+
+    <!-- Sem isso a empresa nova não aparece no seletor de empresas e a
+         comparação lado a lado não pode ser vista na tela. -->
+    <record id="base.user_admin" model="res.users">
+        <field name="company_ids" eval="[(4, ref('demo_company_cprb'))]" />
+    </record>
+
+</odoo>

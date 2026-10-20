@@ -9,3 +9,5 @@ access_sal_familia_faixa_user,sal.familia.faixa.user,model_l10n_br_hr_payroll_sa
 access_sal_familia_faixa_manager,sal.familia.faixa.manager,model_l10n_br_hr_payroll_sal_familia_faixa,payroll.group_payroll_manager,1,1,1,1
 access_irrf_dependente_user,irrf.dependente.user,model_l10n_br_hr_payroll_irrf_dependente,payroll.group_payroll_user,1,0,0,0
 access_irrf_dependente_manager,irrf.dependente.manager,model_l10n_br_hr_payroll_irrf_dependente,payroll.group_payroll_manager,1,1,1,1
+access_cprb_transicao_user,cprb.transicao.user,model_l10n_br_hr_payroll_cprb_transicao,payroll.group_payroll_user,1,0,0,0
+access_cprb_transicao_manager,cprb.transicao.manager,model_l10n_br_hr_payroll_cprb_transicao,payroll.group_payroll_manager,1,1,1,1
