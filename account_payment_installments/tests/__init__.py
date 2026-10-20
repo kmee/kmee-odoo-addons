@@ -1,2 +1,2 @@
 from . import test_smoke
-from . import test_installments
+from . import test_functional
