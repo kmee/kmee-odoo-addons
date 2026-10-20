@@ -1,7 +1,10 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import date
+
 from dateutil.relativedelta import relativedelta
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.exceptions import AccessError
@@ -83,15 +86,20 @@ class TestAllocationPlan(TransactionCase):
     # ------------------------------------------------------------------
     # defaults e computes
     # ------------------------------------------------------------------
+    # date_from defaults to context_today (the user timezone), so the real clock
+    # near midnight UTC gives a different day than fields.Date.today(). A fixed
+    # instant and a fixed timezone make the expected day deterministic.
+    @freeze_time("2026-01-15 12:00:00")
     def test_defaults(self):
         """
         Dado um plano novo no modo empresa
         Quando e criado
         Entao fica em rascunho, com a empresa corrente e sem departamento
         """
+        self.env = self.env(context=dict(self.env.context, tz="America/Sao_Paulo"))
         plan = self._plan(holiday_type="company", department_id=False)
         self.assertEqual(plan.state, "draft")
-        self.assertEqual(plan.date_from, self.today)
+        self.assertEqual(plan.date_from, date(2026, 1, 15))
         self.assertEqual(plan.mode_company_id, self.company)
         self.assertFalse(plan.department_id)
         self.assertFalse(plan.category_id)
