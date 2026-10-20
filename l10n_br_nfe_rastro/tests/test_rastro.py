@@ -21,7 +21,12 @@ class TestRastro(TransactionCase):
         cls.env.user.company_ids += cls.company
         cls.env.user.company_id = cls.company
         cls.product = cls.env["product.product"].create(
-            {"name": "Tracked product", "detailed_type": "product", "tracking": "lot"}
+            {
+                "name": "Tracked product",
+                "type": "consu",
+                "is_storable": True,
+                "tracking": "lot",
+            }
         )
 
     def _lot(self, name="LOT-001", **vals):
@@ -56,7 +61,7 @@ class TestRastro(TransactionCase):
         """
         lot = self._lot(expiration_date=datetime(2030, 5, 20, 10, 0))
         move_line = self.env["stock.move.line"].new(
-            {"product_id": self.product.id, "lot_id": lot.id, "qty_done": 7.0}
+            {"product_id": self.product.id, "lot_id": lot.id, "quantity": 7.0}
         )
         vals = self.wizard_model._get_move_line_rastro_vals(move_line)
         self.assertEqual(vals["nfe40_nLote"], "LOT-001")
@@ -72,7 +77,7 @@ class TestRastro(TransactionCase):
         """
         lot = self._lot(production_date=datetime(2029, 1, 15, 8, 0))
         move_line = self.env["stock.move.line"].new(
-            {"product_id": self.product.id, "lot_id": lot.id, "qty_done": 1.0}
+            {"product_id": self.product.id, "lot_id": lot.id, "quantity": 1.0}
         )
         vals = self.wizard_model._get_move_line_rastro_vals(move_line)
         self.assertEqual(vals["nfe40_dFab"].isoformat(), "2029-01-15")
@@ -114,13 +119,15 @@ class TestRastro(TransactionCase):
                             "location_dest_id": tracked_move.location_dest_id.id,
                             "picking_id": picking.id,
                             "lot_id": lot.id,
-                            "qty_done": tracked_move.product_uom_qty,
+                            "quantity": tracked_move.product_uom_qty,
+                            "picked": True,
                         },
                     )
                 ]
             }
         )
-        plain_move.quantity_done = plain_move.product_uom_qty
+        plain_move.quantity = plain_move.product_uom_qty
+        plain_move.picked = True
         picking.button_validate()
         self.assertEqual(picking.state, "done")
         return picking, tracked_move, plain_move
