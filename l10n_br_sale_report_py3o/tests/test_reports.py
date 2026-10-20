@@ -131,6 +131,8 @@ class TestSaleReportPy3o(TransactionCase):
         When the quotation and pro-forma reports are rendered
         Then the titles are Portuguese (the template falls back to pt_BR)
         """
+        # 18.0 rejects an inactive language in the context
+        self.env["res.lang"]._activate_lang("pt_BR")
         self.partner.lang = False
         text = self._render(self.report)
         self.assertIn("Cota\u00e7\u00e3o " + self.order.name, text)
