@@ -19,5 +19,5 @@
         "views/sale_order.xml",
     ],
     "demo": [],
-    "installable": True,
+    "installable": False,
 }
