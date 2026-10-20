@@ -207,7 +207,7 @@ class TestMinhaReceita(TransactionCase):
         self.assertTrue(args[0].endswith(CNPJ))
         self.assertEqual(kwargs["headers"], {"Accept": "application/json"})
         self.assertEqual(values["provider_name"], "minhareceita")
-        self.assertEqual(values["cnpj_cpf"], CNPJ)
+        self.assertEqual(values["vat"], CNPJ)
         self.assertEqual(values["legal_name"], "Acme Comercio Ltda")
 
     def test_wizard_updates_partner(self):
@@ -217,7 +217,7 @@ class TestMinhaReceita(TransactionCase):
         Then the partner receives the Minha Receita data
         """
         partner = self.env["res.partner"].create(
-            {"name": "Antigo", "is_company": True, "cnpj_cpf": "44.356.113/0001-08"}
+            {"name": "Antigo", "is_company": True, "vat": "44.356.113/0001-08"}
         )
         response = mock.Mock(status_code=200)
         response.json.return_value = self._data()
