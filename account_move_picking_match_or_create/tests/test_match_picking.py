@@ -10,8 +10,8 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 @tagged("post_install", "-at_install")
 class TestMatchPicking(AccountTestInvoicingCommon):
     @classmethod
-    def setUpClass(cls, chart_template_ref=None):
-        super().setUpClass(chart_template_ref=chart_template_ref)
+    def setUpClass(cls):
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.company
         cls.warehouse = cls.env["stock.warehouse"].search(
@@ -20,9 +20,9 @@ class TestMatchPicking(AccountTestInvoicingCommon):
         cls.stock_location = cls.warehouse.lot_stock_id
         cls.partner = cls.partner_a
         cls.other_partner = cls.partner_b
-        cls.prod_a = cls._create_product("Match Product A")
-        cls.prod_b = cls._create_product("Match Product B")
-        cls.prod_c = cls._create_product("Match Product C")
+        cls.prod_a = cls._create_match_product("Match Product A")
+        cls.prod_b = cls._create_match_product("Match Product B")
+        cls.prod_c = cls._create_match_product("Match Product C")
         cls.env["stock.quant"]._update_available_quantity(
             cls.prod_a, cls.stock_location, 100
         )
@@ -31,9 +31,14 @@ class TestMatchPicking(AccountTestInvoicingCommon):
         )
 
     @classmethod
-    def _create_product(cls, name):
+    def _create_match_product(cls, name):
         return cls.env["product.product"].create(
-            {"name": name, "detailed_type": "product", "list_price": 10.0}
+            {
+                "name": name,
+                "type": "consu",
+                "is_storable": True,
+                "list_price": 10.0,
+            }
         )
 
     @classmethod
@@ -94,7 +99,8 @@ class TestMatchPicking(AccountTestInvoicingCommon):
             picking.action_assign()
             if state == "done":
                 for move in picking.move_ids:
-                    move.quantity_done = move.product_uom_qty
+                    move.quantity = move.product_uom_qty
+                    move.picked = True
                 picking._action_done()
         return picking
 
@@ -218,7 +224,7 @@ class TestMatchPicking(AccountTestInvoicingCommon):
         action = wizard.action_exact_match()
         self.assertEqual(action["res_id"], wizard.id)
         line_a = invoice.invoice_line_ids.filtered(
-            lambda l: l.product_id == self.prod_a
+            lambda line: line.product_id == self.prod_a
         )
         line_b = invoice.invoice_line_ids - line_a
         self.assertEqual(wizard.matching_invoice_line_ids, line_a)
