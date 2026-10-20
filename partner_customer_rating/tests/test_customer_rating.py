@@ -1,5 +1,5 @@
 from odoo.exceptions import AccessError
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 
 ICON_A = "iVBORw0KGgo="
 ICON_B = "R0lGODlhAQABAAAAACw="
