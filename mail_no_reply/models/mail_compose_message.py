@@ -32,35 +32,12 @@ class MailComposer(models.TransientModel):
                     vals["reply_to"] = no_reply
         return super().create(vals_list)
 
-    def _action_send_mail(self, auto_commit=False):
-        result_mails_su, result_messages = super(MailComposer, self)._action_send_mail(
-            auto_commit=auto_commit
-        )
-        for mail in result_mails_su:
-            if mail.template_id and mail.template_id.active_no_reply:
-                no_reply_email = self.env.user.company_id.email_no_reply
-                if no_reply_email:
-                    mail.write(
-                        {
-                            "email_from": no_reply_email,
-                            "reply_to": no_reply_email,
-                        }
-                    )
-                    if not self.env.context.get("mail_return_path"):
-                        self = self.with_context(mail_return_path=no_reply_email)
-        if result_messages:
-            for message in result_messages:
-                if message.mail_ids:
-                    for mail in message.mail_ids:
-                        if (
-                            self.active_no_reply
-                            and self.env.user.company_id.email_no_reply
-                        ):
-                            mail.write(
-                                {
-                                    "email_from": self.env.user.company_id.email_no_reply,
-                                    "reply_to": self.env.user.company_id.email_no_reply,
-                                }
-                            )
-
-        return result_mails_su, result_messages
+    def _prepare_mail_values(self, res_ids):
+        """Force the no-reply address BEFORE the mails are created and sent."""
+        results = super()._prepare_mail_values(res_ids)
+        no_reply = self.env.user.company_id.email_no_reply
+        if no_reply and (self.active_no_reply or self.template_id.active_no_reply):
+            for values in results.values():
+                values["email_from"] = no_reply
+                values["reply_to"] = no_reply
+        return results

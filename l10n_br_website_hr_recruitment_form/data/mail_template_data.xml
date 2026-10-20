@@ -43,7 +43,9 @@
                                                     <span
                                                         style="font-size: 20px; font-weight: bold;"
                                                     >
-                                                        <t t-out="object.name or ''" />
+                                                        <t
+                                                            t-out="object.job_id.name or ''"
+                                                        />
                                                     </span>
                                                 </td>
                                                 <td valign="middle" align="right">
