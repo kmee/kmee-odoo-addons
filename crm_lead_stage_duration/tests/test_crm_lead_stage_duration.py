@@ -438,7 +438,7 @@ class TestCrmLeadStageDuration(TransactionCase):
         self.assertIn("stage_duration_ids", form)
         self.assertIn("current_stage_total_duration", form)
         Report = self.env["crm.lead.stage.duration.report"]
-        for mode in ("graph", "pivot", "kanban", "tree"):
+        for mode in ("graph", "pivot", "kanban", "list"):
             arch = Report.get_view(view_type=mode)["arch"]
             self.assertTrue(arch)
         self.assertIn(
