@@ -40,7 +40,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
         )
 
     def _cost_nodes(self, user):
-        """Return {"form": n, "tree": n}: purchase_price nodes inside order lines."""
+        """Return {"form": n, "list": n}: purchase_price nodes inside order lines."""
         arch = self.env["sale.order"].with_user(user).get_view(view_type="form")["arch"]
         tree = etree.fromstring(arch)
         return {
@@ -50,7 +50,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
                     % kind
                 )
             )
-            for kind in ("form", "tree")
+            for kind in ("form", "list")
         }
 
     def test_purchase_price_hidden_without_cost_group(self):
@@ -60,7 +60,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
         Then the purchase_price (cost) is stripped from the line form and list
         """
         self.assertNotIn(self.cost_group, self.salesman.groups_id)
-        self.assertEqual(self._cost_nodes(self.salesman), {"form": 0, "tree": 0})
+        self.assertEqual(self._cost_nodes(self.salesman), {"form": 0, "list": 0})
 
     def test_purchase_price_visible_with_cost_group(self):
         """
@@ -69,7 +69,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
         Then the purchase_price (cost) is present in the line form and list
         """
         self.assertIn(self.cost_group, self.cost_user.groups_id)
-        self.assertEqual(self._cost_nodes(self.cost_user), {"form": 1, "tree": 1})
+        self.assertEqual(self._cost_nodes(self.cost_user), {"form": 1, "list": 1})
 
     def test_margin_visible_for_salesman_without_cost_group(self):
         """
