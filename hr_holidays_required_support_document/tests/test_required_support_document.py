@@ -23,7 +23,7 @@ class TestRequiredSupportDocument(TransactionCase):
         return cls.env["hr.leave.type"].create(
             {
                 "name": name,
-                "requires_allocation": "no",
+                "requires_allocation": False,
                 "leave_validation_type": "hr",
                 "support_document": support_document,
                 "required_support_document": required,
