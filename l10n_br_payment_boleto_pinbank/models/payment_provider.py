@@ -228,7 +228,7 @@ class Paymentprovider(models.Model):
         super()._compute_feature_support_fields()
         return self.filtered(lambda p: p.code == BOLETO_PINBANK).update(
             {
-                "support_manual_capture": True,
+                "support_manual_capture": "full_only",
                 "support_refund": "full_only",
                 "support_tokenization": True,
             }
