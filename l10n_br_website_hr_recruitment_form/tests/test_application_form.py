@@ -25,18 +25,19 @@ class TestApplicationForm(HttpCase):
         cls.job_pj = cls.env["hr.job"].create(
             {"name": "Consultor", "contract_type_id": cls.pj.id}
         )
+        # 18.0: name and e-mail live on the hr.candidate of the application
+        Candidate = cls.env["hr.candidate"]
         cls.applicant = cls.env["hr.applicant"].create(
             {
-                "name": "Candidatura Analista",
-                "partner_name": "Maria Candidata",
-                "email_from": "maria@example.com",
+                "candidate_id": Candidate.create(
+                    {"partner_name": "Maria Candidata", "email_from": "maria@example.com"}
+                ).id,
                 "job_id": cls.job.id,
             }
         )
         cls.applicant_pj = cls.env["hr.applicant"].create(
             {
-                "name": "Candidatura Consultor",
-                "partner_name": "Consultoria PJ",
+                "candidate_id": Candidate.create({"partner_name": "Consultoria PJ"}).id,
                 "job_id": cls.job_pj.id,
             }
         )
@@ -343,3 +344,12 @@ class TestApplicationForm(HttpCase):
         self.assertNotEqual(self.applicant.stage_id, stage)
         self.assertNotEqual(self.applicant.salary_expected, 999999.0)
         self.assertEqual(self.applicant.access_token, old_token)
+
+    def test_submitted_name_goes_to_the_candidate_name(self):
+        """
+        Given a CLT applicant with a valid token
+        When the form is submitted with the person's name
+        Then it becomes the candidate name of the application
+        """
+        self.assertTrue(self._submit(self.applicant, name="Maria Candidata Silva"))
+        self.assertEqual(self.applicant.partner_name, "Maria Candidata Silva")
