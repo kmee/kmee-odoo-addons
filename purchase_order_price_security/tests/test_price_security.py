@@ -122,12 +122,12 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
         )
         self.assertEqual(len(nodes), 1)
         self.assertIn("can_edit_price_purchase", nodes[0].get("readonly", ""))
-        tree = root.xpath("//field[@name='order_line']/tree")[0]
-        self.assertIsNone(tree.get("editable"))
+        list_node = root.xpath("//field[@name='order_line']/list")[0]
+        self.assertIsNone(list_node.get("editable"))
         # control: without this module the core tree is editable inline
         core = etree.fromstring(self.env.ref("purchase.purchase_order_form").arch_db)
-        core_tree = core.xpath("//field[@name='order_line']/tree")[0]
-        self.assertEqual(core_tree.get("editable"), "bottom")
+        core_list = core.xpath("//field[@name='order_line']/list")[0]
+        self.assertEqual(core_list.get("editable"), "bottom")
 
     def test_form_blocks_price_edit_without_group(self):
         """
