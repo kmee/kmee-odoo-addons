@@ -44,7 +44,8 @@ class TestPublicHolidaysWizard(TransactionCase):
 
     def _lines(self, year=2026):
         return self.env["calendar.public.holiday.line"].search(
-            [("public_holiday_id.year", "=", year),
+            [
+                ("public_holiday_id.year", "=", year),
                 ("public_holiday_id.country_id", "=", self.br.id),
             ]
         )
