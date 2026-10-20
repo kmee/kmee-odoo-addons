@@ -204,7 +204,7 @@ class TestPaymentTransaction(TransactionCase):
         Assertions:
         - The mocked `_boleto_pinbank_make_request` method is called once with the
           expected endpoint and payload.
-        - The `state` of the payment transaction is updated to "pending".
+        - The `state` of the payment transaction is updated to "authorized".
         - The `our_number`, `digitable_line`, and `barcode` fields of the payment
           transaction are updated with the expected values.
         """
@@ -224,8 +224,8 @@ class TestPaymentTransaction(TransactionCase):
                 payload=SEND_CAPTURE_REQUEST_PAYLOAD,
             )
 
-            # Assert that the payment transaction state was updated to "pending"
-            self.assertEqual(self.payment_transaction.state, "pending")
+            # Assert that the payment transaction state was updated to "authorized"
+            self.assertEqual(self.payment_transaction.state, "authorized")
 
             # Assert that the transaction was updated with the boleto info
             self.assertEqual(self.payment_transaction.our_number, "123456789")
