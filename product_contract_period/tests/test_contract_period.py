@@ -85,10 +85,19 @@ class TestContractPeriod(ContractPeriodCase):
         """Given a line without start date,
         When the onchange runs,
         Then date_end is unchanged."""
-        contract = self._contract([{"price_unit": 1.0, "period_count": 2}])
-        line = contract.contract_line_ids
-        line.date_start = False
-        line.date_end = date(2030, 1, 1)
+        # 18.0 forbids a saved line without start date (next invoice date
+        # constraint), so the onchange runs on an unsaved line, as in the form
+        line = self.env["contract.line"].new(
+            {
+                "product_id": self.product.id,
+                "name": "License",
+                "period_count": 2,
+                "recurring_rule_type": "monthly",
+                "recurring_interval": 1,
+                "date_start": False,
+                "date_end": date(2030, 1, 1),
+            }
+        )
         line._onchange_date_start()
         self.assertEqual(line.date_end, date(2030, 1, 1))
 

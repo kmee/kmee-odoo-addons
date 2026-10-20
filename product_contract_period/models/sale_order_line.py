@@ -94,37 +94,14 @@ class SaleOrderLine(models.Model):
             self.period_qty = self.product_id.default_period_qty
             self.period_count = self.product_id.default_period_count
 
-    # Calcular totais da linha considerando apenas a quantidade de licenças contratadas
-    # e não a multiplicação por períodos. Mantemos o comportamento fiscal padrão.
-    @api.depends(
-        "period_qty",
-        "discount",
-        "price_unit",
-        "tax_id",
-        "order_id.currency_id",
-        "order_id.partner_id",
-    )
+    # Calcular totais da linha considerando apenas a quantidade de licencas
+    # contratadas e nao a multiplicacao por periodos. 18.0: a linha e o pedido
+    # calculam os totais pela base line de impostos, entao a quantidade vai nela.
+    @api.depends("period_qty")
     def _compute_amount(self):
-        for line in self:
-            # Preço com desconto por licença
-            price_after_discount = line.price_unit * (
-                1 - (line.discount or 0.0) / 100.0
-            )
+        return super()._compute_amount()
 
-            # Calcular impostos usando a quantidade de licenças contratadas (period_qty)
-            taxes = line.tax_id.compute_all(
-                price_after_discount,
-                currency=line.order_id.currency_id,
-                quantity=line.period_qty or 0.0,
-                product=line.product_id,
-                partner=line.order_id.partner_shipping_id,
-            )
-
-            line.update(
-                {
-                    "price_tax": taxes.get("total_included", 0.0)
-                    - taxes.get("total_excluded", 0.0),
-                    "price_total": taxes.get("total_included", 0.0),
-                    "price_subtotal": taxes.get("total_excluded", 0.0),
-                }
-            )
+    def _prepare_base_line_for_taxes_computation(self, **kwargs):
+        return super()._prepare_base_line_for_taxes_computation(
+            **{"quantity": self.period_qty or 0.0, **kwargs}
+        )
