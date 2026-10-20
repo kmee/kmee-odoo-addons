@@ -38,7 +38,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group string="Estabelecimento">
@@ -47,10 +49,7 @@
                             <field name="nr_insc_estab" />
                             <field name="cnae_prep" />
                             <field name="cnpj_resp" />
-                            <field
-                                name="tp_caepf"
-                                invisible="tp_insc_estab != '3'"
-                            />
+                            <field name="tp_caepf" invisible="tp_insc_estab != '3'" />
                             <field name="ind_subst_patr_obra" />
                         </group>
                         <group string="Validade">
@@ -133,7 +132,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group string="Lotação">
@@ -199,7 +200,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -211,7 +214,8 @@
                             <field name="ind_retif" />
                             <field
                                 name="nr_recibo"
-                                invisible="ind_retif != '2'" required="ind_retif == '2'"
+                                invisible="ind_retif != '2'"
+                                required="ind_retif == '2'"
                             />
                             <field
                                 name="company_id"
@@ -282,7 +286,9 @@
                 <sheet>
                     <field name="pendencia_count" invisible="1" />
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <div
                         class="alert alert-danger"
@@ -365,7 +371,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -427,7 +435,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group string="Evento a Excluir">
