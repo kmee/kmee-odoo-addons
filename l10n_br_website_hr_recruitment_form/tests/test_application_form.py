@@ -30,7 +30,10 @@ class TestApplicationForm(HttpCase):
         cls.applicant = cls.env["hr.applicant"].create(
             {
                 "candidate_id": Candidate.create(
-                    {"partner_name": "Maria Candidata", "email_from": "maria@example.com"}
+                    {
+                        "partner_name": "Maria Candidata",
+                        "email_from": "maria@example.com",
+                    }
                 ).id,
                 "job_id": cls.job.id,
             }
