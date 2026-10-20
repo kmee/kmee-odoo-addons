@@ -200,7 +200,7 @@ class ESocialS1299(models.Model):
                 "- %s %s [%s]"
                 % (
                     evento.tipo,
-                    evento.id_evento or _("sem Id"),
+                    evento.id_evento or self.env._("sem Id"),
                     dict(evento._fields["state"].selection).get(
                         evento.state, evento.state
                     ),
