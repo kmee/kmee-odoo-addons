@@ -82,7 +82,6 @@ class TestMatchPicking(AccountTestInvoicingCommon):
                         0,
                         0,
                         {
-                            "name": product.name,
                             "product_id": product.id,
                             "product_uom_qty": 1.0,
                             "product_uom": product.uom_id.id,
@@ -322,7 +321,7 @@ class TestMatchPicking(AccountTestInvoicingCommon):
             {
                 "name": "Outsider",
                 "login": "match_outsider",
-                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [self.env.ref("base.group_user").id])],
             }
         )
         with self.assertRaises(AccessError):
@@ -333,7 +332,7 @@ class TestMatchPicking(AccountTestInvoicingCommon):
             {
                 "name": "Biller",
                 "login": "match_biller",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,

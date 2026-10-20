@@ -208,7 +208,7 @@ class AccountMoveMatchPicking(models.TransientModel):
                     0,
                     0,
                     {
-                        "name": line.name,
+                        "description_picking": line.name,
                         "product_id": line.product_id.id,
                         "product_uom_qty": line.quantity,
                         "product_uom": line.product_uom_id.id,
