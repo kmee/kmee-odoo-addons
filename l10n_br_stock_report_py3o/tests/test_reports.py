@@ -166,6 +166,8 @@ class TestStockReportPy3o(TransactionCase):
         When the reports are rendered
         Then the titles are Portuguese (templates fall back to pt_BR)
         """
+        # 18.0 rejects an inactive language in the context
+        self.env["res.lang"]._activate_lang("pt_BR")
         self.env.user.lang = False
         self.assertIn("Pedido de entrega", self._render(self.delivery))
         self.assertIn("Separa\u00e7\u00e3o", self._render(self.picking_report))
