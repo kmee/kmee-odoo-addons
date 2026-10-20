@@ -2,7 +2,7 @@
 
 from lxml import etree
 
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tests.common import TransactionCase, tagged
 from odoo.tools.safe_eval import safe_eval
 
@@ -90,12 +90,8 @@ class TestHelpdeskDateRange(TransactionCase):
         domain = [
             ("id", "in", (self.ticket_jan + self.ticket_feb + self.ticket_none).ids)
         ]
-        groups = self.Ticket.read_group(
-            domain, ["date_range_id"], ["date_range_id"], lazy=False
-        )
-        counts = {
-            (g["date_range_id"] and g["date_range_id"][0]): g["__count"] for g in groups
-        }
+        groups = self.Ticket._read_group(domain, ["date_range_id"], ["__count"])
+        counts = {date_range.id: count for date_range, count in groups}
         self.assertEqual(
             counts,
             {self.range_jan.id: 1, self.range_feb.id: 1, False: 1},
@@ -107,9 +103,7 @@ class TestHelpdeskDateRange(TransactionCase):
         Then the period is not selectable but active ones are."""
         domain = safe_eval(self.Ticket._fields["date_range_id"].domain)
         selectable = self.env["date.range"].search(
-            expression.AND(
-                [domain, [("id", "in", (self.range_jan + self.range_old).ids)]]
-            )
+            Domain.AND([domain, [("id", "in", (self.range_jan + self.range_old).ids)]])
         )
         self.assertIn(self.range_jan, selectable)
         self.assertNotIn(self.range_old, selectable)
