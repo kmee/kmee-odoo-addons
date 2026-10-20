@@ -22,15 +22,16 @@ class TestCustomPaymentTerm(TransactionCase):
                         {
                             "value": "percent",
                             "value_amount": 50.0,
-                            "days": 30,
+                            "nb_days": 30,
                         },
                     ),
                     (
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 60,
+                            "value": "percent",
+                            "value_amount": 50.0,
+                            "nb_days": 60,
                         },
                     ),
                 ],
@@ -129,8 +130,8 @@ class TestCustomPaymentTerm(TransactionCase):
         self.assertEqual(custom.name, "Custom X")
         self.assertEqual(len(custom.line_ids), 2)
         self.assertEqual(
-            sorted(custom.line_ids.mapped("days")),
-            sorted(self.term.line_ids.mapped("days")),
+            sorted(custom.line_ids.mapped("nb_days")),
+            sorted(self.term.line_ids.mapped("nb_days")),
         )
         self.assertFalse(self.term.is_custom)
         self.assertTrue(self.term.active)
@@ -149,8 +150,8 @@ class TestCustomPaymentTerm(TransactionCase):
     def test_move_new_custom_term_from_current(self):
         """Given an invoice with a term, When asking for a custom copy,
         Then the invoice points to an archived custom copy named after it."""
+        # the payment term of a posted move is readonly since 17.0
         move = self._invoice(self.term)
-        move.action_post()
         move.action_new_custom_term_from_current()
         new_term = move.invoice_payment_term_id
         self.assertNotEqual(new_term, self.term)
@@ -165,9 +166,9 @@ class TestCustomPaymentTerm(TransactionCase):
         move = self._invoice(self.term)
         move.action_new_custom_term_from_current()
         custom = move.invoice_payment_term_id
-        custom.line_ids.filtered(lambda line: line.value == "balance").days = 90
-        self.assertEqual(max(custom.line_ids.mapped("days")), 90)
-        self.assertEqual(max(self.term.line_ids.mapped("days")), 60)
+        custom.line_ids.filtered(lambda line: line.nb_days == 60).nb_days = 90
+        self.assertEqual(max(custom.line_ids.mapped("nb_days")), 90)
+        self.assertEqual(max(self.term.line_ids.mapped("nb_days")), 60)
 
     def test_move_new_custom_term_without_term_raises(self):
         """Given an invoice without payment term, When asking for a custom copy,
