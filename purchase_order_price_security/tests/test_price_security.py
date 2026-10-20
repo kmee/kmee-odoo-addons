@@ -3,7 +3,7 @@
 
 from lxml import etree
 
-from odoo.tests.common import Form, TransactionCase, new_test_user, tagged
+from odoo.tests import Form, TransactionCase, new_test_user, tagged
 
 
 @tagged("post_install", "-at_install")
