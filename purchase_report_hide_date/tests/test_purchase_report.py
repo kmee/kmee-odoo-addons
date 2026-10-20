@@ -1,7 +1,7 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests import TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -44,22 +44,22 @@ class TestPurchaseReportHideDate(TransactionCase):
         """
         Given a purchase order line planned for 2031-07-22
         When the standard purchase order report is rendered
-        Then neither the "Date Req." column nor the planned date appear
+        Then neither the "Expected Arrival" block nor the planned date appear
         """
         html = self._render()
         self.assertIn("Report Product", html)
-        self.assertNotIn("Date Req.", html)
+        self.assertNotIn("Expected Arrival", html)
         self.assertNotIn("07/22/2031", html)
 
     def test_report_shows_date_when_module_view_is_disabled(self):
         """
         Given the same order
         When the module inheriting view is deactivated
-        Then the report shows the "Date Req." column and the planned date again
+        Then the report shows the "Expected Arrival" block and the planned date again
         """
         self.view.active = False
         html = self._render()
-        self.assertIn("Date Req.", html)
+        self.assertIn("Expected Arrival", html)
         self.assertIn("07/22/2031", html)
 
     def test_other_columns_are_kept(self):
