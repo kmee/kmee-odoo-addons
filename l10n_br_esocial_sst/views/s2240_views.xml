@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_esocial_s2240_tree" model="ir.ui.view">
         <field name="name">l10n_br.esocial.s2240.list</field>
         <field name="model">l10n_br.esocial.s2240</field>
@@ -35,7 +34,9 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group string="V&#237;nculo">
@@ -103,5 +104,4 @@
         <field name="res_model">l10n_br.esocial.s2240</field>
         <field name="view_mode">list,form</field>
     </record>
-
 </odoo>

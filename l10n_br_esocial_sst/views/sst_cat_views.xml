@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="l10n_br_sst_cat_view_form_esocial" model="ir.ui.view">
         <field name="name">l10n_br.sst.cat.form (in l10n_br_esocial_sst)</field>
         <field name="model">l10n_br.sst.cat</field>
@@ -26,5 +25,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
