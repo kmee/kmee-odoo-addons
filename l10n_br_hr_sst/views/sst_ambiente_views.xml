@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="l10n_br_sst_ambiente_view_tree" model="ir.ui.view">
         <field name="name">l10n_br.sst.ambiente.list</field>
         <field name="model">l10n_br.sst.ambiente</field>
@@ -38,7 +37,9 @@
                     </div>
                     <div class="oe_title">
                         <label for="name" />
-                        <h1><field name="name" placeholder="Setor de produção" /></h1>
+                        <h1>
+                            <field name="name" placeholder="Setor de produção" />
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -106,5 +107,4 @@
         <field name="res_model">l10n_br.sst.ambiente</field>
         <field name="view_mode">list,form</field>
     </record>
-
 </odoo>
