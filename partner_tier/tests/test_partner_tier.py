@@ -18,7 +18,7 @@ class TestPartnerTier(TransactionCase):
                 "name": "Tier User",
                 "login": "tier_plain_user",
                 "email": "tier_plain_user@example.com",
-                "groups_id": [(6, 0, [group_user.id])],
+                "group_ids": [(6, 0, [group_user.id])],
             }
         )
         cls.manager = cls.env["res.users"].create(
@@ -26,7 +26,7 @@ class TestPartnerTier(TransactionCase):
                 "name": "Tier Manager",
                 "login": "tier_manager",
                 "email": "tier_manager@example.com",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -111,10 +111,10 @@ class TestPartnerTier(TransactionCase):
         """Given partners in tiers, When grouping by tier, Then counts match."""
         self.Partner.create({"name": "T1", "tier_id": self.gold.id})
         self.Partner.create({"name": "T2", "tier_id": self.gold.id})
-        groups = self.Partner.read_group(
-            [("tier_id", "=", self.gold.id)], ["tier_id"], ["tier_id"]
+        groups = self.Partner._read_group(
+            [("tier_id", "=", self.gold.id)], ["tier_id"], ["__count"]
         )
-        self.assertEqual(groups[0]["tier_id_count"], 2)
+        self.assertEqual(groups[0][1], 2)
 
     def test_internal_user_reads_but_cannot_edit_tiers(self):
         """Given a plain internal user, Then tiers are readable only."""
