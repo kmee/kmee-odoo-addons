@@ -56,14 +56,13 @@ class BaseWipAbstract(models.AbstractModel):
 
     def _compute_wip_ids(self):
         wip_model = self.env["base.wip"]
+        model_id = wip_model._get_model_id(self._name)
         for record in self:
             # a record still being edited in a form has no id yet (NewId),
             # which the 19.0 domains reject; it has no wip either
             res_id = record._origin.id
             record.wip_ids = (
-                wip_model.search(
-                    [("model_id", "=", record._name), ("res_id", "=", res_id)]
-                )
+                wip_model.search([("model_id", "=", model_id), ("res_id", "=", res_id)])
                 if res_id
                 else wip_model
             )
