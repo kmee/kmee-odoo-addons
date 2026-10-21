@@ -254,21 +254,21 @@
     <menuitem
         id="menu_esocial_tab_tipo_dependente"
         parent="menu_esocial_tab_cadastro"
-        name="Tab. 25 - Tipo Dependente"
+        name="Tab. 7 - Tipo Dependente"
         sequence="25"
         action="action_esocial_tipo_dependente"
     />
     <menuitem
         id="menu_esocial_tab_horario"
         parent="menu_esocial_tab_cadastro"
-        name="Tab. 52 - Horários"
+        name="Horários"
         sequence="52"
         action="action_esocial_horario"
     />
     <menuitem
         id="menu_esocial_tab_feriado"
         parent="menu_esocial_tab_cadastro"
-        name="Tab. 84 - Feriados"
+        name="Feriados Nacionais"
         sequence="84"
         action="action_esocial_feriado"
     />
@@ -291,7 +291,7 @@
     <menuitem
         id="menu_esocial_tab_compat_fpas"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 24 - Compat. FPAS"
+        name="Tab. 22 - Compat. FPAS"
         sequence="24"
         action="action_esocial_compat_fpas"
     />
@@ -305,42 +305,42 @@
     <menuitem
         id="menu_esocial_tab_codigo_terceiro"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 51 - Código Terceiro"
+        name="Código Terceiro"
         sequence="51"
         action="action_esocial_codigo_terceiro"
     />
     <menuitem
         id="menu_esocial_tab_faixa_inss"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 57 - Faixas INSS"
+        name="Faixas INSS"
         sequence="57"
         action="action_esocial_faixa_inss"
     />
     <menuitem
         id="menu_esocial_tab_faixa_irrf"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 58 - Faixas IRRF"
+        name="Faixas IRRF"
         sequence="58"
         action="action_esocial_faixa_irrf"
     />
     <menuitem
         id="menu_esocial_tab_faixa_sal_familia"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 65 - Salário Família"
+        name="Salário Família"
         sequence="65"
         action="action_esocial_faixa_sal_familia"
     />
     <menuitem
         id="menu_esocial_tab_descricao_fpas"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 85 - Descrição FPAS"
+        name="Descrição FPAS"
         sequence="85"
         action="action_esocial_descricao_fpas"
     />
     <menuitem
         id="menu_esocial_tab_teto_verde_amarela"
         parent="menu_esocial_tab_contribuicao"
-        name="Tab. 86 - Teto Verde Amarela"
+        name="Teto Verde Amarela"
         sequence="86"
         action="action_esocial_teto_verde_amarela"
     />
@@ -349,56 +349,56 @@
     <menuitem
         id="menu_esocial_tab_tipo_beneficio"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 35 - Tipo Benefício"
+        name="Tab. 25 - Tipo Benefício"
         sequence="35"
         action="action_esocial_tipo_beneficio"
     />
     <menuitem
         id="menu_esocial_tab_inst_emprestimo"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 37 - Inst. Empréstimo"
+        name="Inst. Empréstimo"
         sequence="37"
         action="action_esocial_inst_emprestimo"
     />
     <menuitem
         id="menu_esocial_tab_cbo_oca"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 50 - CBO (OCA)"
+        name="CBO (OCA)"
         sequence="50"
         action="action_esocial_cbo_oca"
     />
     <menuitem
         id="menu_esocial_tab_natureza_juridica_oca"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 53 - Nat. Jurídica (OCA)"
+        name="Nat. Jurídica (OCA)"
         sequence="53"
         action="action_esocial_natureza_juridica_oca"
     />
     <menuitem
         id="menu_esocial_tab_rubrica_padrao"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 54 - Rubrica Padrão"
+        name="Rubrica Padrão"
         sequence="54"
         action="action_esocial_rubrica_padrao"
     />
     <menuitem
         id="menu_esocial_tab_cnae_oca"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 56 - CNAE (OCA)"
+        name="CNAE (OCA)"
         sequence="56"
         action="action_esocial_cnae_oca"
     />
     <menuitem
         id="menu_esocial_tab_tipo_decisao"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 59 - Tipo Decisão"
+        name="Tipo Decisão"
         sequence="59"
         action="action_esocial_tipo_decisao"
     />
     <menuitem
         id="menu_esocial_tab_cargo"
         parent="menu_esocial_tab_trabalho"
-        name="Tab. 61 - Cargos"
+        name="Cargos"
         sequence="61"
         action="action_esocial_cargo"
     />
@@ -437,14 +437,14 @@
     <menuitem
         id="menu_esocial_tab_agente_nocivo"
         parent="menu_esocial_tab_saude"
-        name="Tab. 22 - Agente Nocivo"
+        name="Tab. 24 - Agente Nocivo"
         sequence="22"
         action="action_esocial_agente_nocivo"
     />
     <menuitem
         id="menu_esocial_tab_aposentadoria_especial"
         parent="menu_esocial_tab_saude"
-        name="Tab. 23 - Aposentadoria Especial"
+        name="Aposent. Especial (Dec. 3.048)"
         sequence="23"
         action="action_esocial_aposentadoria_especial"
     />
@@ -458,14 +458,14 @@
     <menuitem
         id="menu_esocial_tab_treinamento"
         parent="menu_esocial_tab_saude"
-        name="Tab. 29 - Treinamentos"
+        name="Tab. 28 - Treinamentos"
         sequence="29"
         action="action_esocial_treinamento"
     />
     <menuitem
         id="menu_esocial_tab_cid"
         parent="menu_esocial_tab_saude"
-        name="Tab. 60 - CID"
+        name="CID-10"
         sequence="60"
         action="action_esocial_cid"
     />
@@ -474,70 +474,70 @@
     <menuitem
         id="menu_esocial_tab_receita_reclamatoria"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 32 - Receita Reclamatória"
+        name="Tab. 29 - Receita Reclamatória"
         sequence="32"
         action="action_esocial_receita_reclamatoria"
     />
     <menuitem
         id="menu_esocial_tab_motivo_cessacao"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 34 - Motivo Cessação"
+        name="Tab. 26 - Motivo Cessação"
         sequence="34"
         action="action_esocial_motivo_cessacao"
     />
     <menuitem
         id="menu_esocial_tab_causa_afast_mte"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 67 - Causa Afast. MTE"
+        name="Causa Afast. MTE"
         sequence="67"
         action="action_esocial_causa_afast_mte"
     />
     <menuitem
         id="menu_esocial_tab_rubrica_rescisoria"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 68 - Rubrica Rescisória"
+        name="Rubrica Rescisória"
         sequence="68"
         action="action_esocial_rubrica_rescisoria"
     />
     <menuitem
         id="menu_esocial_tab_info_rescisao"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 69 - Info Rescisão"
+        name="Info Rescisão"
         sequence="69"
         action="action_esocial_info_rescisao"
     />
     <menuitem
         id="menu_esocial_tab_tipo_admissao_oca"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 70 - Tipo Admissão (OCA)"
+        name="Tipo Admissão (OCA)"
         sequence="70"
         action="action_esocial_tipo_admissao_oca"
     />
     <menuitem
         id="menu_esocial_tab_tipo_cat"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 71 - Tipo CAT"
+        name="Tipo CAT (tpCat)"
         sequence="71"
         action="action_esocial_tipo_cat"
     />
     <menuitem
         id="menu_esocial_tab_tipo_aso"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 72 - Tipo ASO"
+        name="Tipo ASO (tpExameOcup)"
         sequence="72"
         action="action_esocial_tipo_aso"
     />
     <menuitem
         id="menu_esocial_tab_tipo_aviso_previo"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 73 - Tipo Aviso Prévio"
+        name="Tipo Aviso Prévio"
         sequence="73"
         action="action_esocial_tipo_aviso_previo"
     />
     <menuitem
         id="menu_esocial_tab_motivo_cancel_aviso"
         parent="menu_esocial_tab_rescisao"
-        name="Tab. 74 - Cancel. Aviso Prévio"
+        name="Cancel. Aviso Prévio"
         sequence="74"
         action="action_esocial_motivo_cancel_aviso"
     />
@@ -546,35 +546,35 @@
     <menuitem
         id="menu_esocial_tab_receita_totalizador"
         parent="menu_esocial_tab_totalizador"
-        name="Tab. 78 - Receita Totalizador"
+        name="Receita Totalizador"
         sequence="78"
         action="action_esocial_receita_totalizador"
     />
     <menuitem
         id="menu_esocial_tab_valor_contrib_prev"
         parent="menu_esocial_tab_totalizador"
-        name="Tab. 79 - Valor Contrib. Prev."
+        name="Valor Contrib. Prev."
         sequence="79"
         action="action_esocial_valor_contrib_prev"
     />
     <menuitem
         id="menu_esocial_tab_valor_irrf_totalizador"
         parent="menu_esocial_tab_totalizador"
-        name="Tab. 80 - Valor IRRF Totaliz."
+        name="Valor IRRF Totaliz."
         sequence="80"
         action="action_esocial_valor_irrf_totalizador"
     />
     <menuitem
         id="menu_esocial_tab_base_fgts"
         parent="menu_esocial_tab_totalizador"
-        name="Tab. 82 - Base Cálc. FGTS"
+        name="Base Cálc. FGTS"
         sequence="82"
         action="action_esocial_base_fgts"
     />
     <menuitem
         id="menu_esocial_tab_deposito_fgts"
         parent="menu_esocial_tab_totalizador"
-        name="Tab. 83 - Depósito FGTS"
+        name="Depósito FGTS"
         sequence="83"
         action="action_esocial_deposito_fgts"
     />
@@ -590,21 +590,21 @@
     <menuitem
         id="menu_esocial_tab_lotacao_ref"
         parent="menu_esocial_tab_referencia"
-        name="Tab. 64 - Lotação Referência"
+        name="Lotação Referência"
         sequence="64"
         action="action_esocial_lotacao_ref"
     />
     <menuitem
         id="menu_esocial_tab_processo_fap"
         parent="menu_esocial_tab_referencia"
-        name="Tab. 77 - Processo FAP"
+        name="Processo FAP"
         sequence="77"
         action="action_esocial_processo_fap"
     />
     <menuitem
         id="menu_esocial_tab_cnae_mei"
         parent="menu_esocial_tab_referencia"
-        name="Tab. 81 - CNAE MEI"
+        name="CNAE MEI"
         sequence="81"
         action="action_esocial_cnae_mei"
     />
