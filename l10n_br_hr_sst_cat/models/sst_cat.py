@@ -1,15 +1,36 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from datetime import timedelta
+from datetime import date, timedelta
+
+import pytz
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-# Códigos da Tabela 71 (tpCAT).
+# Domínio fixo de tpCat do S-2210 (não é tabela do Anexo I do eSocial).
 TIPO_CAT_INICIAL = "1"
 TIPO_CAT_REABERTURA = "2"
 TIPO_CAT_OBITO = "3"
+
+# Feriados civis nacionais de data fixa: Lei 662/1949 (com a redação da Lei
+# 10.607/2002), Lei 6.802/1980 (12 de outubro) e Lei 14.759/2023 (20 de
+# novembro, a partir de 2024). Não há feriado nacional móvel: Carnaval, Sexta-
+# feira da Paixão e Corpus Christi não são feriados nacionais (os religiosos
+# são municipais, Lei 9.093/1995, art. 1, III), e só contam se configurados no
+# calendário da empresa.
+FERIADOS_NACIONAIS = (
+    (1, 1),
+    (4, 21),
+    (5, 1),
+    (9, 7),
+    (10, 12),
+    (11, 2),
+    (11, 15),
+    (12, 25),
+)
+CONSCIENCIA_NEGRA = (11, 20)
+CONSCIENCIA_NEGRA_DESDE = 2024
 
 
 class L10nBrSstCat(models.Model):
@@ -54,7 +75,8 @@ class L10nBrSstCat(models.Model):
         string="Tipo de CAT",
         required=True,
         tracking=True,
-        help="Tabela 71 do eSocial: inicial, reabertura ou comunicação de óbito.",
+        help="Campo tpCat do S-2210 (domínio do leiaute): inicial, reabertura "
+        "ou comunicação de óbito.",
     )
     tipo_cat_codigo = fields.Char(
         related="tipo_cat_id.codigo",
@@ -98,8 +120,10 @@ class L10nBrSstCat(models.Model):
         string="Prazo Legal",
         compute="_compute_prazo",
         store=True,
-        help="Primeiro dia útil seguinte ao acidente. Em caso de óbito, a "
-        "comunicação é imediata e o prazo é o próprio dia do acidente.",
+        help="Primeiro dia útil seguinte ao acidente (Lei 8.213/91, art. 22). "
+        "Em caso de óbito, a comunicação é imediata, contada da data do óbito. "
+        "Dia útil exclui sábado, domingo, feriado nacional e os feriados "
+        "configurados no calendário da empresa.",
     )
     alerta_prazo_date = fields.Date(
         string="Último Alerta de Prazo",
@@ -154,11 +178,13 @@ class L10nBrSstCat(models.Model):
             if rec.tipo_cat_codigo == TIPO_CAT_OBITO and acidente.date_obito:
                 # Comunicação de óbito é imediata, contada do óbito.
                 limite = acidente.date_obito
-            elif acidente.houve_obito:
-                # Óbito é comunicação imediata: não há dia útil seguinte.
-                limite = acidente.date_acidente
             else:
-                limite = rec._proximo_dia_util(acidente.date_acidente)
+                limite = rec._proximo_dia_util(acidente.date_acidente, rec.company_id)
+                if acidente.houve_obito and acidente.date_obito:
+                    # Morte antes do dia útil seguinte torna a comunicação
+                    # imediata a partir do óbito; morte depois dele não
+                    # antecipa o prazo da CAT inicial.
+                    limite = min(limite, acidente.date_obito)
             rec.date_limite = limite
             referencia = (
                 rec.date_emissao if rec.state in ("emitida", "transmitida") else hoje
@@ -171,16 +197,19 @@ class L10nBrSstCat(models.Model):
                 rec.prazo_situacao = "no_prazo"
 
     @api.model
-    def _proximo_dia_util(self, data):
-        """Primeiro dia útil seguinte à data, pulando fim de semana e feriado.
+    def _proximo_dia_util(self, data, company=None):
+        """Primeiro dia útil seguinte à data.
 
-        Os feriados vêm da Tabela 84 do eSocial, cujo código traz a data no
-        formato DDMMAAAA. Feriado móvel de ano não coberto pela tabela não é
-        adivinhado: nesse caso vale só o fim de semana, que é o mínimo seguro.
+        Dia útil é qualquer dia exceto sábado, domingo, feriado nacional e os
+        feriados configurados no calendário de trabalho da empresa (estaduais
+        e municipais). Nenhuma norma define o calendário da CAT; contar menos
+        feriados antecipa o prazo, que é o lado seguro.
         """
         data = fields.Date.to_date(data)
-        feriados = self._datas_feriado()
+        company = company or self.env.company
         candidato = data + timedelta(days=1)
+        anos = {candidato.year, candidato.year + 1}
+        feriados = self._datas_feriado(anos, company)
         for _tentativa in range(15):
             if candidato.weekday() < 5 and candidato not in feriados:
                 return candidato
@@ -188,20 +217,29 @@ class L10nBrSstCat(models.Model):
         return candidato
 
     @api.model
-    def _datas_feriado(self):
+    def _datas_feriado(self, anos, company=None):
+        """Feriados nacionais dos anos informados e os locais da empresa."""
         datas = set()
-        for feriado in self.env["l10n_br.esocial.feriado"].search([]):
-            codigo = (feriado.codigo or "").strip()
-            if len(codigo) != 8 or not codigo.isdigit():
-                continue
-            try:
-                datas.add(
-                    fields.Date.to_date(
-                        "%s-%s-%s" % (codigo[4:], codigo[2:4], codigo[:2])
-                    )
-                )
-            except ValueError:
-                continue
+        for ano in anos:
+            datas.update(date(ano, mes, dia) for mes, dia in FERIADOS_NACIONAIS)
+            if ano >= CONSCIENCIA_NEGRA_DESDE:
+                datas.add(date(ano, *CONSCIENCIA_NEGRA))
+        calendario = (company or self.env.company).resource_calendar_id
+        if calendario:
+            datas.update(self._datas_feriado_do_calendario(calendario))
+        return datas
+
+    @api.model
+    def _datas_feriado_do_calendario(self, calendario):
+        """Dias cobertos pelas folgas gerais do calendário, no fuso dele."""
+        fuso = pytz.timezone(calendario.tz or "UTC")
+        datas = set()
+        for folga in calendario.global_leave_ids:
+            inicio = pytz.utc.localize(folga.date_from).astimezone(fuso).date()
+            fim = pytz.utc.localize(folga.date_to).astimezone(fuso).date()
+            while inicio <= fim:
+                datas.add(inicio)
+                inicio += timedelta(days=1)
         return datas
 
     @api.constrains("tipo_cat_id", "cat_origem_id")
