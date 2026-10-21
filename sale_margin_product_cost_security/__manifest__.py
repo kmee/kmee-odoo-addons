@@ -3,7 +3,7 @@
 
 {
     "name": "Sale Product Cost Security",
-    "summary": "Restrict access to purchase_price field based on product cost security group",
+    "summary": "Restrict access to the sale cost and margin fields to the product cost group",
     "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE, Odoo Community Association (OCA)",

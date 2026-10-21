@@ -375,8 +375,13 @@ ul.auto-toc {
 !! source digest: sha256:06bd6ea8393e79301b64b06ca859a3e4fdd3901902a285f2c00ab2a3f05fc98c
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_margin_product_cost_security"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
-<p>This module extends the functionality of the product_cost_security module to the purchase_price field of the sale_margin module.</p>
-<p>When the user does not belong to the group product_cost_group, he cannot see the “Cost” field in the Sale Order Line view.</p>
+<p>This module extends the functionality of the product_cost_security module to
+the cost and margin fields of the sale_margin module.</p>
+<p>When the user does not belong to the group product_cost_group, the server
+refuses to read or write the cost (<tt class="docutils literal">purchase_price</tt>) and the margin
+(<tt class="docutils literal">margin</tt>, <tt class="docutils literal">margin_percent</tt>) of sale order lines, the margin of sale
+orders and the margin of the sales report, by RPC or through the ORM,
+including grouped reads. The fields are also removed from the views.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
