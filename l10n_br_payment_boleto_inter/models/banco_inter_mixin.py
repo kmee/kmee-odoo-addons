@@ -338,8 +338,7 @@ class BancoInterMixin(models.AbstractModel):
 
         return self._inter_extract_pdf(response)
 
-    @staticmethod
-    def _inter_extract_pdf(response):
+    def _inter_extract_pdf(self, response):
         """Devolve o PDF em base64 a partir da resposta da API.
 
         :param response: A resposta da requisição do PDF.
@@ -357,12 +356,12 @@ class BancoInterMixin(models.AbstractModel):
                 _logger.error(
                     "JSON não contém chave 'pdf': %s", list(response_json.keys())
                 )
-                raise UserError(_("Resposta da API não contém PDF"))
+                raise UserError(self.env._("Resposta da API não contém PDF"))
             try:
                 pdf_content = base64.b64decode(pdf_base64)
             except Exception as decode_error:
                 _logger.error("Erro ao decodificar base64: %s", str(decode_error))
-                raise UserError(_("PDF retornado está corrompido")) from decode_error
+                raise UserError(self.env._("PDF retornado está corrompido")) from decode_error
             if not pdf_content.startswith(b"%PDF"):
                 _logger.warning("Conteúdo decodificado não parece ser um PDF válido")
             return pdf_base64
@@ -371,4 +370,4 @@ class BancoInterMixin(models.AbstractModel):
             return base64.b64encode(response.content).decode("utf-8")
 
         _logger.error("Conteúdo não é PDF nem JSON válido")
-        raise UserError(_("Resposta da API não contém PDF"))
+        raise UserError(self.env._("Resposta da API não contém PDF"))

@@ -24,7 +24,7 @@ class TestBoletoInterFlows(BancoInterCommon):
                 "name": "Cliente Boleto",
                 "legal_name": "Cliente Boleto LTDA",
                 "is_company": True,
-                "cnpj_cpf": "11.222.333/0001-81",
+                "vat": "11.222.333/0001-81",
                 "street": "Rua das Flores",
                 "street_number": "100",
                 "district": "Centro",

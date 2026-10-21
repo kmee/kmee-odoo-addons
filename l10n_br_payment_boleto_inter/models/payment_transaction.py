@@ -161,7 +161,7 @@ class PaymentTransaction(models.Model):
             "dataVencimento": due_date.strftime("%Y-%m-%d"),
             "numDiasAgenda": 60,
             "pagador": {
-                "cpfCnpj": re.sub(r"\D", "", partner.cnpj_cpf or ""),
+                "cpfCnpj": re.sub(r"\D", "", partner.vat or ""),
                 "tipoPessoa": "JURIDICA" if partner.is_company else "FISICA",
                 "nome": partner.legal_name or partner.name or "Cliente",
                 "endereco": endereco_pagador,
@@ -177,7 +177,7 @@ class PaymentTransaction(models.Model):
                 "cep": re.sub(r"\D", "", partner.zip or "00000000"),
             },
             "beneficiarioFinal": {
-                "cpfCnpj": re.sub(r"\D", "", company.cnpj_cpf or ""),
+                "cpfCnpj": re.sub(r"\D", "", company.vat or ""),
                 "tipoPessoa": "JURIDICA",
                 "nome": company.legal_name or company.name,
                 "endereco": endereco_benef,
@@ -332,7 +332,7 @@ class PaymentTransaction(models.Model):
             errors.append("Endereço - Estado")
         if not (partner.city_id or partner.city):
             errors.append("Endereço - Município")
-        if not partner.cnpj_cpf:
+        if not partner.vat:
             errors.append("CPF/CNPJ")
 
         if errors:

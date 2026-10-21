@@ -68,7 +68,7 @@ class PaymentProvider(models.Model):
         default_codes = super()._get_default_payment_method_codes()
         if self.code != "inter":
             return default_codes
-        return ["boleto"]
+        return {"boleto"}
 
     def _get_supported_currencies(self):
         """Retorna moedas suportadas pelo provider"""
