@@ -150,6 +150,28 @@ class TestCrmWip(TransactionCase):
             self.assertEqual(lead.state, "done")
             self.assertEqual(set(self._wips(lead).mapped("wip_state")), {"closed"})
 
+    def test_salesman_creates_and_moves_lead(self):
+        """Given a salesman without settings rights, the wip history still works."""
+        salesman = self.env["res.users"].create(
+            {
+                "name": "WIP salesman",
+                "login": "wip_salesman",
+                "groups_id": [
+                    (6, 0, self.env.ref("sales_team.group_sale_salesman").ids)
+                ],
+            }
+        )
+        lead = self.Lead.with_user(salesman).create(
+            {
+                "name": "Salesman lead",
+                "type": "opportunity",
+                "stage_id": self.stage_open.id,
+            }
+        )
+        lead.write({"stage_id": self.stage_pending.id})
+        self.assertEqual(lead.wip_ids.mapped("state"), ["open", "pending"])
+        self.assertEqual(lead.wip_ids.mapped("user_id"), salesman)
+
     # metrics ------------------------------------------------------------
 
     def test_metrics_reflect_wip_history(self):
