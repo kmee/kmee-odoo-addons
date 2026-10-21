@@ -231,8 +231,8 @@ class TestApplyMerge(CoverPdfCase):
     def test_rendered_sale_report_gets_the_cover(self):
         """
         Given an active cover
-        When the standard sale order report is rendered as a real PDF
-        Then it has one more page than the same report without cover
+        When the standard sale order report goes through the PDF rendering
+        Then the cover page comes before the rendered report pages
         """
         Report = self.Report.with_context(force_report_rendering=True)
         ref = "sale.action_report_saleorder"
@@ -240,16 +240,23 @@ class TestApplyMerge(CoverPdfCase):
         if "sale_header" in company._fields:
             # keep the auto installed sale_pdf_quote_builder pages out of the count
             company.write({"sale_header": False, "sale_footer": False})
-        self.order.merge_pdf = False
-        # wkhtmltopdf warns when it cannot fetch assets in the sandbox
-        with mute_logger("odoo.addons.base.models.ir_actions_report"):
+        # mocked as in the core report tests: the binary hangs in CI
+        with patch.object(
+            type(self.Report), "_run_wkhtmltopdf", return_value=self.report
+        ) as wkhtmltopdf:
+            self.order.merge_pdf = False
             plain, _fmt = Report._render_qweb_pdf(ref, self.order.ids)
             self.make_cover(pages=1)
             self.order.merge_pdf = True
             merged, report_format = Report._render_qweb_pdf(ref, self.order.ids)
+        self.assertEqual(wkhtmltopdf.call_count, 2)
+        self.assertIn(self.order.name, wkhtmltopdf.call_args.args[0][0])
+        self.assertEqual(plain, self.report)
         self.assertEqual(report_format, "pdf")
-        self.assertEqual(len(page_texts(merged)), len(page_texts(plain)) + 1)
-        self.assertIn("cover 1", page_texts(merged)[0])
+        texts = page_texts(merged)
+        self.assertEqual(len(texts), 2)
+        self.assertIn("cover 1", texts[0])
+        self.assertIn("report 1", texts[1])
 
     def test_is_sale_order_report_detection(self):
         """
