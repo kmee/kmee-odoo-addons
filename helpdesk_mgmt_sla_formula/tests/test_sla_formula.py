@@ -5,9 +5,8 @@ from datetime import timedelta
 from lxml import etree
 
 from odoo import fields
-from odoo.exceptions import ValidationError
-from odoo.tests.common import TransactionCase, tagged
-from odoo.tools import mute_logger
+from odoo.exceptions import AccessError, ValidationError
+from odoo.tests.common import TransactionCase, new_test_user, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -123,12 +122,87 @@ class TestSlaFormula(TransactionCase):
 
     def test_formula_cannot_import_modules(self):
         """Given a formula trying to import os
-        When the SLA is checked
-        Then builtins are disabled and nothing is written."""
-        sla = self._sla("__import__('os').getcwd()")
-        with mute_logger("odoo.addons.helpdesk_mgmt_sla_formula.models.helpdesk_sla"):
+        When the SLA is saved
+        Then it is rejected before it can ever run."""
+        with self.assertRaises(ValidationError):
+            self._sla("__import__('os').getcwd()")
+
+    def test_formula_cannot_reach_the_orm(self):
+        """Given a formula that goes from the ticket to the environment
+        When the SLA is checked (the scheduler runs it as superuser)
+        Then the ORM is not reachable and nothing is written."""
+        sla = self._sla(
+            "record.create_date"
+            " + timedelta(days=record.env['res.users'].search_count([]))"
+        )
+        with self.assertLogs(
+            "odoo.addons.helpdesk_mgmt_sla_formula.models.helpdesk_sla", "ERROR"
+        ):
             sla.check_ticket_sla(self.ticket)
         self.assertFalse(self.ticket.sla_deadline)
+
+    def test_formula_cannot_write_through_the_record(self):
+        """Given a formula that calls a method of the ticket
+        When the SLA is checked
+        Then the method is not reachable and the ticket is unchanged."""
+        sla = self._sla("record.write({'name': 'changed'}) or record.create_date")
+        with self.assertLogs(
+            "odoo.addons.helpdesk_mgmt_sla_formula.models.helpdesk_sla", "ERROR"
+        ):
+            sla.check_ticket_sla(self.ticket)
+        self.assertEqual(self.ticket.name, "T")
+        self.assertFalse(self.ticket.sla_deadline)
+
+    def test_formula_reads_related_fields(self):
+        """Given a formula reading a field through a many2one of the ticket
+        When the SLA is checked
+        Then field values are still available to the formula."""
+        sla = self._sla("record.create_date + timedelta(days=len(record.team_id.name))")
+        sla.check_ticket_sla(self.ticket)
+        self.assertEqual(
+            self.ticket.sla_deadline,
+            self.ticket.create_date + timedelta(days=len("Formula team")),
+        )
+
+    def test_formula_fields_are_restricted_to_helpdesk_managers(self):
+        """Given a helpdesk user that another module allowed to edit SLAs
+        When he writes the formula fields
+        Then the server refuses, while a helpdesk manager can do it."""
+        user = new_test_user(
+            self.env,
+            login="sla_formula_user",
+            groups="base.group_user,helpdesk_mgmt.group_helpdesk_user",
+        )
+        manager = new_test_user(
+            self.env,
+            login="sla_formula_manager",
+            groups="base.group_user,helpdesk_mgmt.group_helpdesk_manager",
+        )
+        self.env["ir.model.access"].create(
+            {
+                "name": "helpdesk sla user write (test)",
+                "model_id": self.env["ir.model"]._get_id("helpdesk.sla"),
+                "group_id": self.env.ref("helpdesk_mgmt.group_helpdesk_user").id,
+                "perm_read": True,
+                "perm_write": True,
+            }
+        )
+        sla = self._sla("record.create_date")
+        # control: the user can edit the SLA itself
+        sla.with_user(user).write({"name": "Renamed by user"})
+        self.assertEqual(sla.name, "Renamed by user")
+        for vals in (
+            {"sla_deadline_formula": "record.create_date + timedelta(days=1)"},
+            {"use_formula": False},
+        ):
+            with self.assertRaises(AccessError):
+                sla.with_user(user).write(vals)
+        sla.with_user(manager).write(
+            {"sla_deadline_formula": "record.create_date + timedelta(days=1)"}
+        )
+        self.assertEqual(
+            sla.sla_deadline_formula, "record.create_date + timedelta(days=1)"
+        )
 
     def test_without_formula_falls_back_to_standard_delay(self):
         """Given an SLA with hours but without formula
