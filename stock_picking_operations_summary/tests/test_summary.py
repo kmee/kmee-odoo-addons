@@ -1,6 +1,8 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from unittest.mock import patch
+
 from odoo.exceptions import AccessError
 from odoo.tests.common import TransactionCase, tagged
 from odoo.tools.safe_eval import safe_eval
@@ -42,7 +44,7 @@ class TestPickingSummary(TransactionCase):
             {
                 "product_id": product.id,
                 "product_uom_qty": qty,
-                "product_uom": (uom or product.uom_id).id,
+                "uom_id": (uom or product.uom_id).id,
                 "picking_id": picking.id,
                 "location_id": picking.location_id.id,
                 "location_dest_id": (dest or picking.location_dest_id).id,
@@ -204,13 +206,12 @@ class TestPickingSummary(TransactionCase):
         quantity under the Products Summary heading."""
         self._add_move(2.0)
         self._add_move(3.0)
-        html = (
-            self.env["ir.actions.report"]
-            ._render_qweb_html(
+        Report = self.env["ir.actions.report"]
+        # the oca-ci image has no reportlab PNG backend for the picking barcode
+        with patch.object(type(Report), "barcode", return_value=b""):
+            html = Report._render_qweb_html(
                 "stock_picking_operations_summary.picking_summary", self.picking.ids
-            )[0]
-            .decode()
-        )
+            )[0].decode()
         self.assertIn("Products Summary", html)
         self.assertEqual(html.count("Summary Product A"), 1)
         self.assertIn("5.00", html)
