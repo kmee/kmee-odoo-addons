@@ -68,10 +68,6 @@ class HrLeaveAbono(models.Model):
         self._restore_days()
         return super().unlink()
 
-    def action_archive(self):
-        self._restore_days()
-        return super().action_archive()
-
     @api.depends("holiday_allocation_id")
     def _compute_holiday_allocation_period(self):
         for record in self:
