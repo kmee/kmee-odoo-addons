@@ -110,8 +110,6 @@ Known issues / Roadmap
   assinatura, em vez de depender só do agendamento a cada 30 minutos.
 - Conferir o valor recebido (``valorTotalRecebido``) contra o valor da
   transação antes de confirmar o pagamento.
-- Avaliar se o boleto vencido deve mesmo cancelar a transação, já que o
-  Inter aceita o pagamento até o fim do prazo de agenda.
 
 Changelog
 =========
