@@ -6,7 +6,6 @@ from odoo.tests.common import TransactionCase, tagged
 
 NO_REPLY = "no-reply@example.com"
 SALES = "sales@example.com"
-SEND_EMAIL = "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
 
 
 @tagged("post_install", "-at_install")
@@ -159,7 +158,15 @@ class TestMailNoReply(TransactionCase):
         When a mass mail is sent
         Then the RFC822 message handed to the SMTP layer is From the no-reply address."""
         self.template.active_no_reply = True
-        with mock.patch(SEND_EMAIL, return_value="<id@x>") as send:
+        # 19.0: mail.mail skips sending during tests unless _disable_send is
+        # patched on the registry class (no SMTP connection either), as the
+        # core mail tests do
+        mail_server_cls = type(self.env["ir.mail_server"])
+        with (
+            mock.patch.object(mail_server_cls, "_disable_send", lambda _: False),
+            mock.patch.object(mail_server_cls, "_connect__", return_value=None),
+            mock.patch.object(mail_server_cls, "send_email", return_value="<id@x>") as send,
+        ):
             self._mass_composer()._action_send_mail()
         self.assertTrue(send.called)
         sent_from = [call.args[0]["From"] for call in send.call_args_list]
