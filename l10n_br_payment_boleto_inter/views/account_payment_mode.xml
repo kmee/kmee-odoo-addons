@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <record id="inherit_view_id_l10n_br_payment_boleto" model="ir.ui.view">
+        <field name="name">model.name.view.form.inherit</field>
+        <field name="model">account.payment.mode</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_payment_boleto.account_payment_mode_form_view"
+        />
+        <field name="arch" type="xml">
+            <group name="boleto-fees" position="after">
+                <group name="boleto-discount">
+                    <field name="payment_boleto_discount" widget="percentage" />
+                    <field name="payment_boleto_discount_days" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
