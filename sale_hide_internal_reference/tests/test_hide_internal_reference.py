@@ -64,14 +64,16 @@ class TestHideInternalReference(TransactionCase):
         plain.product_tmpl_id.hide_internal_reference = True
         self.assertEqual(plain.get_product_multiline_description_sale(), "Plain")
 
-    def test_sale_line_name_uses_the_flag(self):
+    def test_sale_line_name_never_carries_the_reference(self):
         """
-        Given a sale order line for a product with the flag on
-        When the line description is computed
-        Then it does not contain the internal reference
+        Given a sale order line for a product with a sales description
+        When the line description is computed, with the flag off and on
+        Then it holds only the sales description (in 20.0 the product is shown
+        in its own column and the core asks for it without the display name)
         """
         partner = self.env["res.partner"].create({"name": "Customer"})
         order = self.env["sale.order"].create({"partner_id": partner.id})
+        self.product.description_sale = "Blue edition"
 
         def line_name():
             line = self.env["sale.order.line"].create(
@@ -79,9 +81,24 @@ class TestHideInternalReference(TransactionCase):
             )
             return line.name
 
-        self.assertIn("[WDG-001]", line_name())
+        self.assertEqual(line_name(), "Blue edition")
         self.product.product_tmpl_id.hide_internal_reference = True
-        self.assertNotIn("WDG-001", line_name())
+        self.assertEqual(line_name(), "Blue edition")
+
+    def test_without_display_name_skips_the_name(self):
+        """
+        Given the flag on and a sales description
+        When the description is asked without the display name
+        Then only the sales description comes back
+        """
+        self.product.description_sale = "Blue edition"
+        self.product.product_tmpl_id.hide_internal_reference = True
+        self.assertEqual(
+            self.product.get_product_multiline_description_sale(
+                with_display_name=False
+            ),
+            "Blue edition",
+        )
 
     def test_flag_is_exposed_in_product_form(self):
         """
