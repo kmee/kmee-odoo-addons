@@ -162,13 +162,13 @@ class TestSaleStockShippingInfo(TransactionCase):
         """
         order = self._order([])
         params = self.env["ir.config_parameter"].sudo()
-        params.set_param("product.weight_in_lbs", "0")
-        params.set_param("product.volume_in_cubic_feet", "0")
+        params.set_str("product.weight_in_lbs", "0")
+        params.set_str("product.volume_in_cubic_feet", "0")
         metric = order.weight_uom_name, order.volume_uom_name
         self.assertEqual(metric[0].lower(), "kg")
         self.assertIn("m", metric[1])
-        params.set_param("product.weight_in_lbs", "1")
-        params.set_param("product.volume_in_cubic_feet", "1")
+        params.set_str("product.weight_in_lbs", "1")
+        params.set_str("product.volume_in_cubic_feet", "1")
         order.invalidate_recordset(["weight_uom_name", "volume_uom_name"])
         imperial = order.weight_uom_name, order.volume_uom_name
         self.assertEqual(imperial[0].lower(), "lb")
