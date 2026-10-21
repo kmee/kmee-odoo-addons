@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="res_company_view_form_sst_aso" model="ir.ui.view">
         <field name="name">res.company.form (in l10n_br_hr_sst_aso)</field>
         <field name="model">res.company</field>
@@ -12,5 +11,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

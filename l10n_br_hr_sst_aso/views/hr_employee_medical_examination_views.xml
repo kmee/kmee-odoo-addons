@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="hr_employee_medical_examination_form_view_sst" model="ir.ui.view">
         <field
             name="name"
@@ -96,5 +95,4 @@
             </search>
         </field>
     </record>
-
 </odoo>
