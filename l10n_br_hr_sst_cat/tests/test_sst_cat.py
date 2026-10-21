@@ -34,6 +34,8 @@ class TestSstCat(SstCommon):
             "agente_causador_id": self.agente_causador.id,
         }
         valores.update(kwargs)
+        # None tira o campo dos valores, para valer o cálculo do modelo.
+        valores = {k: v for k, v in valores.items() if v is not None}
         return self.env["l10n_br.sst.acidente"].create(valores)
 
     # ── Acidente ────────────────────────────────────────────────────────────
@@ -184,6 +186,95 @@ class TestSstCat(SstCommon):
         self.assertEqual(acidente.cat_ids.state, "cancelled")
         pendentes = self.env["l10n_br.sst.cat"].cron_alerta_prazo()
         self.assertNotIn(acidente.cat_ids, pendentes)
+
+    # ── Decisões normativas de 19/10/2026 ───────────────────────────────────
+
+    def test_carnaval_nao_e_feriado_nacional(self):
+        """Carnaval não é feriado nacional: a segunda de Carnaval é dia útil."""
+        acidente = self._cria_acidente(date_acidente=date(2026, 2, 13))
+        acidente.action_registrar()
+        self.assertEqual(acidente.cat_ids.date_limite, date(2026, 2, 16))
+
+    def test_sexta_da_paixao_nao_e_feriado_nacional(self):
+        """Feriado religioso é municipal (Lei 9.093/1995, art. 1, III)."""
+        acidente = self._cria_acidente(date_acidente=date(2026, 4, 2))
+        acidente.action_registrar()
+        self.assertEqual(acidente.cat_ids.date_limite, date(2026, 4, 3))
+
+    def test_feriado_nacional_e_pulado(self):
+        """20 de novembro é feriado nacional desde 2024 (Lei 14.759/2023)."""
+        acidente = self._cria_acidente(date_acidente=date(2026, 11, 19))
+        acidente.action_registrar()
+        self.assertEqual(acidente.cat_ids.date_limite, date(2026, 11, 23))
+
+    def test_feriado_nacional_fora_da_tabela(self):
+        """O feriado nacional não depende de tabela carregada até um ano."""
+        acidente = self._cria_acidente(date_acidente=date(2035, 9, 6))
+        acidente.action_registrar()
+        # 06/09/2035 é quinta; 07/09 é feriado; 08 e 09 são fim de semana.
+        self.assertEqual(acidente.cat_ids.date_limite, date(2035, 9, 10))
+
+    def test_feriado_local_vem_do_calendario_da_empresa(self):
+        """Feriado estadual ou municipal só conta se configurado."""
+        calendario = self.company.resource_calendar_id
+        self.env["resource.calendar.leaves"].create(
+            {
+                "name": "Feriado municipal",
+                "calendar_id": calendario.id,
+                "date_from": "2026-06-11 03:00:00",
+                "date_to": "2026-06-12 02:59:59",
+            }
+        )
+        calendario.tz = "America/Sao_Paulo"
+        acidente = self._cria_acidente()
+        acidente.action_registrar()
+        self.assertEqual(acidente.cat_ids.date_limite, date(2026, 6, 12))
+
+    def test_obito_posterior_nao_antecipa_a_cat_inicial(self):
+        """Óbito dias depois não torna atrasada a CAT inicial já no prazo."""
+        acidente = self._cria_acidente()
+        acidente.action_registrar()
+        inicial = acidente.cat_ids
+        acidente.write({"houve_obito": True, "date_obito": date(2026, 6, 19)})
+        self.assertEqual(inicial.date_limite, date(2026, 6, 11))
+
+    def test_obito_antes_do_dia_util_e_imediato(self):
+        """Morte antes do dia útil seguinte: comunicação imediata, do óbito."""
+        acidente = self._cria_acidente(
+            date_acidente=date(2026, 6, 12),
+            houve_obito=True,
+            date_obito=date(2026, 6, 13),
+        )
+        acidente.action_registrar()
+        self.assertEqual(acidente.cat_ids.date_limite, date(2026, 6, 13))
+
+    def test_data_da_doenca_e_a_primeira_ocorrencia(self):
+        """Lei 8.213/91, art. 23: o que ocorrer primeiro entre as três datas."""
+        acidente = self._cria_acidente(
+            tp_acid="2",
+            date_acidente=None,
+            hora_acidente=None,
+            date_diagnostico=date(2026, 6, 20),
+            date_inicio_incapacidade=date(2026, 6, 15),
+            date_segregacao=date(2026, 6, 18),
+        )
+        self.assertEqual(acidente.date_acidente, date(2026, 6, 15))
+        acidente.date_segregacao = date(2026, 6, 12)
+        self.assertEqual(acidente.date_acidente, date(2026, 6, 12))
+
+    def test_horas_trabalhadas_aceitam_mais_de_24(self):
+        """hrsTrabAntesAcid é TS_hora_99 no S-1.3: de 0000 a 9959."""
+        acidente = self._cria_acidente(hrs_trab_antes_acid="2530")
+        self.assertEqual(acidente.hrs_trab_antes_acid, "2530")
+
+    def test_horas_trabalhadas_minutos_ate_59(self):
+        with self.assertRaises(ValidationError):
+            self._cria_acidente(hrs_trab_antes_acid="1060")
+
+    def test_doenca_nao_informa_horas_trabalhadas(self):
+        """O leiaute manda não informar hrsTrabAntesAcid na doença (tpAcid 2)."""
+        with self.assertRaises(ValidationError):
+            self._cria_acidente(tp_acid="2", hrs_trab_antes_acid="0300")
 
     def test_regra_multiempresa(self):
         regra = self.env.ref("l10n_br_hr_sst_cat.l10n_br_sst_cat_company_rule")
