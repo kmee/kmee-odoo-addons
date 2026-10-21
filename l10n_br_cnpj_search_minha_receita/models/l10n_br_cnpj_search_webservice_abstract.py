@@ -43,8 +43,10 @@ class L10nBrCnpjSearchWebserviceAbstract(models.AbstractModel):
             "street_number": self.get_data(data, "numero"),
             "zip": self.get_data(data, "cep"),
             "legal_nature_id": self._minhareceita_get_legal_nature(data),
-            "phone": self.get_data(data, "ddd_telefone_1"),
-            "mobile": self.get_data(data, "ddd_telefone_2"),
+            # 19.0: res.partner has no mobile field, the second number is the
+            # fallback for the phone
+            "phone": self.get_data(data, "ddd_telefone_1")
+            or self.get_data(data, "ddd_telefone_2"),
             "state_id": state_id,
             "city_id": city_id,
             "equity_capital": self.get_data(data, "capital_social"),
