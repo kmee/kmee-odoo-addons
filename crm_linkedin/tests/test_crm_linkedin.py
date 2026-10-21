@@ -3,7 +3,7 @@
 
 from lxml import etree
 
-from odoo.tests import Form, TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, new_test_user, tagged
 
 URL_A = "https://www.linkedin.com/in/ana-example"
 URL_B = "https://www.linkedin.com/in/bruno-example"
@@ -148,25 +148,36 @@ class TestCrmLinkedin(TransactionCase):
 
     # views -----------------------------------------------------------------
 
-    def test_form_shows_profile_after_job_position(self):
-        """Given the lead form, the profile field follows the job position field."""
+    def _salesman(self):
+        """A salesman without debug mode (no base.group_no_one)."""
+        user = new_test_user(
+            self.env,
+            login="crm_linkedin_salesman",
+            groups="sales_team.group_sale_salesman,base.group_partner_manager",
+        )
+        self.assertFalse(user.has_group("base.group_no_one"))
+        return user
+
+    def test_form_shows_profile_after_phone_without_debug(self):
+        """Given a salesman without debug mode, the profile follows the phone."""
         arch = etree.fromstring(
-            self.Lead.get_view(self.env.ref("crm.crm_lead_view_form").id)["arch"]
+            self.Lead.with_user(self._salesman()).get_view(
+                self.env.ref("crm.crm_lead_view_form").id
+            )["arch"]
         )
         fields = arch.xpath("//field[@name='linkedin_url']")
-        self.assertTrue(fields)
-        self.assertTrue(all(f.get("widget") == "url" for f in fields))
-        self.assertTrue(all(f.getprevious().get("name") == "function" for f in fields))
+        self.assertEqual(len(fields), 1)
+        self.assertEqual(fields[0].get("widget"), "url")
+        self.assertTrue(fields[0].getprevious().xpath("field[@name='phone']"))
 
     def test_form_fills_profile_from_chosen_partner_and_saves_edit(self):
         """Given the form, picking a partner fills the profile, and edits reach the partner."""
-        form = Form(self.Lead.with_context(default_type="opportunity"))
+        lead_model = self.Lead.with_user(self._salesman())
+        form = Form(lead_model.with_context(default_type="opportunity"))
         form.name = "Form LinkedIn"
         form.partner_id = self.partner_with
         self.assertEqual(form.linkedin_url, URL_A)
+        form.linkedin_url = URL_B
         lead = form.save()
-        # 20.0 shows the job position (and the profile after it) only in debug
-        # mode, so the edit is written on the record instead of the form
-        lead.linkedin_url = URL_B
         self.assertEqual(lead.linkedin_url, URL_B)
         self.assertEqual(self.partner_with.linkedin_url, URL_B)

@@ -5,7 +5,12 @@
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='function']" position="after">
+            <!-- 20.0 shows the job position only in debug mode (base.group_no_one),
+                 so the profile goes after the phone, visible to every user -->
+            <xpath
+                expr="//group[@name='lead_partner']/div[field[@name='phone']]"
+                position="after"
+            >
                 <field name="linkedin_url" widget="url" />
             </xpath>
         </field>
