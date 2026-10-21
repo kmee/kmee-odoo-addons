@@ -369,53 +369,63 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:df94c8a1081f6ca5c974a89f90bbc0345ef7e0105f9b7efc29b98a60d607c543
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/17.0/crm_bant"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
-<p>It allows you to reverse transactions from debit to credit and vice
-versa, and also ignore the balance.</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/17.0/crm_bant"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
+<p>Qualificação de oportunidades do CRM pelo método BANT (Budget,
+Authority, Need, Timeline: orçamento, autoridade, necessidade e prazo).</p>
+<p>Cada oportunidade ganha a aba <strong>BANT</strong>, com o status de cada dimensão e
+os campos de apoio: valor e período do orçamento, contato e papel de
+quem decide, descrição da necessidade, dores, critérios de sucesso,
+data-alvo e justificativa do prazo.</p>
+<p>Cada status vale de 0 a 3 pontos e a soma das quatro dimensões (até 12)
+define a qualificação da oportunidade:</p>
+<ul class="simple">
+<li>0 ponto: não qualificada;</li>
+<li>1 a 5 pontos: parcialmente qualificada;</li>
+<li>6 a 9 pontos: qualificada;</li>
+<li>10 a 12 pontos: totalmente qualificada (só é possível com as quatro
+dimensões preenchidas).</li>
+</ul>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#use-cases-context" id="toc-entry-1">Use Cases / Context</a></li>
-<li><a class="reference internal" href="#configuration" id="toc-entry-2">Configuration</a></li>
-<li><a class="reference internal" href="#usage" id="toc-entry-3">Usage</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-4">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-5">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-6">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-7">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-8">Maintainers</a></li>
+<li><a class="reference internal" href="#usage" id="toc-entry-2">Usage</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-3">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-4">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-5">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-6">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-7">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="use-cases-context">
 <h1><a class="toc-backref" href="#toc-entry-1">Use Cases / Context</a></h1>
-<p>Some customers use OFX files converted from PDF files which have some
-problems. Two possible anomalies are: - Transactions that should be
-credit are saved as debit and vice versa. - The balance in the OFX file
-is not consistent with reality.</p>
-</div>
-<div class="section" id="configuration">
-<h1><a class="toc-backref" href="#toc-entry-2">Configuration</a></h1>
-<p>To configure this module, you need to:</p>
-<ol class="arabic simple">
-<li>Go to *Accounting &gt; Configuration &gt; Journals.</li>
-<li>Inside the bank account journal, in the <strong>Advanced Settings</strong> tab,
-check the <strong>Reverse Balance Of Entries OFX</strong> and <strong>Ignore OFX
-Balance</strong> fields.</li>
-</ol>
+<p>O BANT é um roteiro de qualificação comercial: antes de investir tempo
+numa oportunidade, o vendedor confirma se o cliente tem orçamento, se
+fala com quem decide, se a necessidade é real e se existe prazo para a
+compra. Registrar essas respostas no próprio CRM deixa a qualificação
+visível para a equipe e permite comparar o funil por equipe e por nível
+de qualificação.</p>
 </div>
 <div class="section" id="usage">
-<h1><a class="toc-backref" href="#toc-entry-3">Usage</a></h1>
-<p>To use this module, you need to:</p>
+<h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
+<p>Para usar este módulo:</p>
 <ol class="arabic simple">
-<li>Go to <strong>Account</strong>.</li>
-<li>Click on the <strong>Import(OCA)</strong> button for the bank account.</li>
-<li>Click on the <strong>UPLOAD YOUR FILE</strong> button and select the file.</li>
-<li>Click on the <strong>IMPORT AND VIEW</strong> button.</li>
+<li>Abra uma oportunidade em <strong>CRM &gt; Vendas &gt; Meu funil</strong> e vá à aba
+<strong>BANT</strong>.</li>
+<li>Preencha o status de orçamento, autoridade, necessidade e prazo; a
+pontuação e a qualificação são recalculadas na hora e a qualificação
+aparece também ao lado das etiquetas da oportunidade.</li>
+<li>No kanban e na lista do funil aparece a qualificação BANT. Na busca
+há os filtros <strong>BANT Qualified</strong> e <strong>BANT Unqualified</strong> e os
+agrupamentos por qualificação e pelo status de cada dimensão.</li>
+<li>Em <strong>CRM &gt; Relatórios &gt; BANT</strong> ficam o gráfico e a tabela dinâmica da
+qualificação por equipe de vendas.</li>
 </ol>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-3">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -423,21 +433,21 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-5">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-4">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-6">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-5">Authors</a></h2>
 <ul class="simple">
 <li>KMEE</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-7">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-6">Contributors</a></h2>
 <ul class="simple">
 <li>Tiago Amaral <a class="reference external" href="mailto:tiago.amaral&#64;kmee.com.br">tiago.amaral&#64;kmee.com.br</a></li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-8">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-7">Maintainers</a></h2>
 <p>This module is part of the <a class="reference external" href="https://github.com/KMEE/kmee-odoo-addons/tree/17.0/crm_bant">KMEE/kmee-odoo-addons</a> project on GitHub.</p>
 <p>You are welcome to contribute.</p>
 </div>
