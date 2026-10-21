@@ -374,7 +374,7 @@ class TestCrmLeadStageDuration(TransactionCase):
                 "name": login,
                 "login": login,
                 "email": "%s@example.com" % login,
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -429,8 +429,8 @@ class TestCrmLeadStageDuration(TransactionCase):
         report = self.env.ref(
             "crm_lead_stage_duration.menu_crm_lead_stage_duration_report"
         )
-        self.assertIn(self.env.ref("sales_team.group_sale_manager"), records.groups_id)
-        self.assertFalse(report.groups_id)
+        self.assertIn(self.env.ref("sales_team.group_sale_manager"), records.group_ids)
+        self.assertFalse(report.group_ids)
 
     def test_views_are_loadable(self):
         """Given the module views, the lead form shows the history and the report views load."""
