@@ -16,8 +16,10 @@ class ResCompany(models.Model):
         string="Política de ASO",
         default="alerta",
         required=True,
-        help="O que fazer quando o contrato é aberto ou encerrado sem o ASO "
-        "correspondente concluído (NR-7).",
+        help="O que fazer quando o contrato é aberto sem o ASO admissional "
+        "concluído (NR-7, item 7.5.8, I). O demissional nunca bloqueia: tem "
+        "prazo de 10 dias depois do término e é cobrado por atividade, salvo "
+        "a dispensa do item 7.5.11. 'Não verificar' desliga as duas coisas.",
     )
     l10n_br_sst_aso_alerta_dias = fields.Integer(
         string="Antecedência do Periódico (dias)",
