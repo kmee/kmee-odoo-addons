@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="l10n_br_sst_pcmso_view_tree" model="ir.ui.view">
+        <field name="name">l10n_br.sst.pcmso.list</field>
+        <field name="model">l10n_br.sst.pcmso</field>
+        <field name="arch" type="xml">
+            <list decoration-success="state == 'vigente'">
+                <field name="name" />
+                <field name="medico_coordenador_id" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="periodicidade_meses" />
+                <field name="exame_count" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_pcmso_view_form" model="ir.ui.view">
+        <field name="name">l10n_br.sst.pcmso.form</field>
+        <field name="model">l10n_br.sst.pcmso</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_vigente"
+                        type="object"
+                        string="Colocar em Vigor"
+                        class="oe_highlight"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_encerrar"
+                        type="object"
+                        string="Encerrar"
+                        invisible="state != 'vigente'"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="PCMSO 2026" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="medico_coordenador_id" />
+                            <field name="nr_insc" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="periodicidade_meses" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Periodicidade por Faixa" name="faixas">
+                            <field name="faixa_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="idade_de" />
+                                    <field name="idade_ate" />
+                                    <field name="exige_exposicao" />
+                                    <field name="meses" />
+                                </list>
+                            </field>
+                        </page>
+                        <page
+                            string="Relat&#243;rio Anal&#237;tico Anual"
+                            name="relatorio"
+                        >
+                            <field name="relatorio_anual" nolabel="1" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_sst_pcmso_action" model="ir.actions.act_window">
+        <field name="name">PCMSO</field>
+        <field name="res_model">l10n_br.sst.pcmso</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
