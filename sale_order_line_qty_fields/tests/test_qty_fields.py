@@ -63,7 +63,7 @@ class TestSaleOrderLineQtyFields(TransactionCase):
                     "name": login,
                     "login": login,
                     "email": "%s@example.com" % login,
-                    "groups_id": [(6, 0, groups)],
+                    "group_ids": [(6, 0, groups)],
                 }
             )
         )
