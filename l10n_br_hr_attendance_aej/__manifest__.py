@@ -5,7 +5,7 @@
     "name": "Registro de Ponto Brasileiro - AEJ e Espelho de Ponto",
     "summary": "Arquivo Eletrônico de Jornada (Anexo VI) e espelho de ponto "
     "do PTRP, com assinatura ICP-Brasil",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Human Resources/Attendances",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
