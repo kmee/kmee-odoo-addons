@@ -30,7 +30,7 @@ class TestCustomerRating(TransactionCase):
         partner = self.Partner.create(
             {"name": "Rated Partner", "customer_rating_id": self.rating.id}
         )
-        self.assertEqual(partner.image_rating, ICON_A.encode())
+        self.assertEqual(partner.image_rating.to_base64(), ICON_A)
         partner.customer_rating_id = False
         self.assertFalse(partner.image_rating)
 
@@ -41,8 +41,8 @@ class TestCustomerRating(TransactionCase):
             {"name": "Rated Partner", "customer_rating_id": self.rating.id}
         )
         self.rating.image = ICON_B
-        self.assertEqual(partner.image_rating, ICON_B.encode())
-        self.assertNotEqual(partner.image_rating, ICON_A.encode())
+        self.assertEqual(partner.image_rating.to_base64(), ICON_B)
+        self.assertNotEqual(partner.image_rating.to_base64(), ICON_A)
 
     def test_image_rating_when_switching_rating(self):
         """Given two ratings, When the partner switches, Then the icon switches."""
@@ -51,7 +51,7 @@ class TestCustomerRating(TransactionCase):
             {"name": "Switcher", "customer_rating_id": self.rating.id}
         )
         partner.customer_rating_id = other
-        self.assertEqual(partner.image_rating, ICON_B.encode())
+        self.assertEqual(partner.image_rating.to_base64(), ICON_B)
 
     def test_rating_without_icon(self):
         """Given a rating without icon, Then the partner icon is empty."""
@@ -102,7 +102,7 @@ class TestCustomerRating(TransactionCase):
         form.customer_rating_id = self.rating
         partner = form.save()
         self.assertEqual(partner.customer_rating_id, self.rating)
-        self.assertEqual(partner.image_rating, ICON_A.encode())
+        self.assertEqual(partner.image_rating.to_base64(), ICON_A)
 
     def test_internal_user_can_read_but_not_write_rating(self):
         """Given an internal user, Then reading ratings works but writing and
