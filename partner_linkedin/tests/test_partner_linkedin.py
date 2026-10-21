@@ -56,6 +56,11 @@ class TestPartnerLinkedin(TransactionCase):
         """Given the partner form view
         When the user fills the LinkedIn field in the form
         Then the value is saved in the record."""
+        # 19.0: Form needs onchange(), which lives in the web module
+        if not self.env["ir.module.module"].search_count(
+            [("name", "=", "web"), ("state", "=", "installed")]
+        ):
+            self.skipTest("web is not installed")
         form = Form(self.Partner)
         form.name = "Form partner"
         form.linkedin_url = self.url
