@@ -15,9 +15,10 @@ class TestHourInterval5Min(TransactionCase):
         cls.employee = cls.env["hr.employee"].create(
             {"name": "Hour Employee", "tz": "UTC"}
         )
-        cls.leave_type = cls.env["hr.leave.type"].create(
+        cls.leave_type = cls.env["hr.work.entry.type"].create(
             {
                 "name": "Hourly leave",
+                "code": "HOUR5MIN",
                 "requires_allocation": False,
                 "leave_validation_type": "hr",
                 "request_unit": "hour",
@@ -33,8 +34,8 @@ class TestHourInterval5Min(TransactionCase):
             {
                 "name": "Hourly",
                 "employee_id": self.employee.id,
-                "holiday_status_id": self.leave_type.id,
-                "request_unit_hours": True,
+                "work_entry_type_id": self.leave_type.id,
+                "request_duration": "specific",
                 "request_date_from": "2026-03-02",
                 "request_date_to": "2026-03-02",
                 "request_hour_from": hour_from,
@@ -81,13 +82,8 @@ class TestHourInterval5Min(TransactionCase):
         Quando a folga e pedida de 08:05 ate 09:10
         Entao date_from/date_to saem 08:05 e 09:10 (nao arredondados a 30 min)
         """
-        leave = self._hourly_leave("8.5", "9.5")
-        leave.write(
-            {
-                "request_hour_from": str(8 + 5 / 60),
-                "request_hour_to": str(9 + 10 / 60),
-            }
-        )
+        # 20.0 approves the leave on creation, so the hours are set there
+        leave = self._hourly_leave(str(8 + 5 / 60), str(9 + 10 / 60))
         self.assertEqual(leave.request_hour_from, str(8 + 5 / 60))
         self.assertEqual(leave.date_from, datetime(2026, 3, 2, 8, 5))
         self.assertEqual(leave.date_to, datetime(2026, 3, 2, 9, 10))
