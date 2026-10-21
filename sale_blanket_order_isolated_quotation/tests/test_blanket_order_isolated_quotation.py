@@ -4,7 +4,7 @@
 from datetime import timedelta
 
 from odoo import fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase, tagged
 
 
@@ -112,6 +112,50 @@ class TestBlanketOrderIsolatedQuotation(TransactionCase):
         order.order_sequence = True
         order.action_confirm()
         self.assertEqual(order.state, "sale")
+
+    def test_batch_confirm_of_numbered_orders(self):
+        """
+        Given two quotations already converted into numbered sale orders
+        When they are confirmed together (list action, server action, other module)
+        Then both go through the standard confirmation
+        """
+        orders = self._quotation() | self._quotation(qty=2.0)
+        orders.write({"order_sequence": True})
+        orders.action_confirm()
+        self.assertEqual(orders.mapped("state"), ["sale", "sale"])
+
+    def test_batch_confirm_of_reference_quotations(self):
+        """
+        Given two reference quotations of 3 and 2 units of a 10 unit blanket order
+        When they are confirmed together
+        Then each one generates its confirmed sale order and the balance drops to 5
+        """
+        blanket = self._blanket_order()
+        first = self._reference_quotation(blanket)
+        first.order_line.product_uom_qty = 3.0
+        second = self._reference_quotation(blanket)
+        second.order_line.product_uom_qty = 2.0
+        (first | second).action_confirm()
+        orders = self.env["sale.order"].search(
+            [("quote_id", "in", (first | second).ids)]
+        )
+        self.assertEqual(orders.mapped("state"), ["sale", "sale"])
+        self.assertEqual(blanket.line_ids.ordered_uom_qty, 5.0)
+        self.assertEqual(blanket.line_ids.remaining_uom_qty, 5.0)
+
+    def test_batch_confirm_with_plain_quotation_is_refused(self):
+        """
+        Given a plain quotation (it needs the choice wizard) and a numbered order
+        When they are confirmed together
+        Then a user error asks to confirm the quotation alone and nothing changes
+        """
+        quotation = self._quotation()
+        order = self._quotation(qty=2.0)
+        order.order_sequence = True
+        with self.assertRaises(UserError):
+            (quotation | order).action_confirm()
+        self.assertEqual(order.state, "draft")
+        self.assertEqual(quotation.state, "draft")
 
     def test_wizard_create_normal_order(self):
         """
@@ -475,4 +519,3 @@ class TestBlanketOrderIsolatedQuotation(TransactionCase):
         action = quotation.action_confirm()
         order = self.env["sale.order"].browse(action["res_id"])
         self.assertEqual(order.order_line.product_uom_qty, 2.0)
-
