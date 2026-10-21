@@ -91,7 +91,7 @@ class TestAllocationPlan(TransactionCase):
         """
         plan = self._plan(holiday_type="company", department_id=False)
         self.assertEqual(plan.state, "draft")
-        self.assertEqual(plan.date_from, self.today)
+        self.assertEqual(plan.date_from, fields.Date.context_today(plan))
         self.assertEqual(plan.mode_company_id, self.company)
         self.assertFalse(plan.department_id)
         self.assertFalse(plan.category_id)
