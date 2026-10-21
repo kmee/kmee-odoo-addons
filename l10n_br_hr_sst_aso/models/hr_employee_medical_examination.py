@@ -194,6 +194,18 @@ class HrEmployeeMedicalExamination(models.Model):
                 )
         res = super().to_done()
         self._l10n_br_calcula_vencimento()
+        demissionais = self.filtered(
+            lambda e: e.l10n_br_tipo_aso_codigo == TIPO_ASO_DEMISSIONAL
+        )
+        if demissionais:
+            # sudo: quem conclui o exame (saúde ocupacional) não precisa ter
+            # acesso de escrita ao contrato para encerrar a cobrança.
+            self.env["hr.contract"].sudo().search(
+                [
+                    ("employee_id", "in", demissionais.employee_id.ids),
+                    ("l10n_br_sst_demissional", "=", "cobrado"),
+                ]
+            )._l10n_br_sst_demissional_concluido()
         return res
 
     @api.model
@@ -233,6 +245,29 @@ class HrEmployeeMedicalExamination(models.Model):
                 "l10n_br_pcmso_id": pcmso.id if pcmso else False,
             }
         )
+
+    @api.model
+    def cron_cobrar_demissional(self):
+        """Avalia o demissional dos contratos encerrados nos últimos 10 dias.
+
+        A janela é o prazo do item 7.5.11 da NR-7: contrato encerrado antes
+        disso (por exemplo, na instalação do módulo numa base antiga) não gera
+        cobrança retroativa.
+        """
+        limite = fields.Date.context_today(self) - relativedelta(days=10)
+        contratos = self.env["hr.contract"].search(
+            [
+                ("state", "=", "close"),
+                ("l10n_br_sst_demissional", "=", False),
+                "|",
+                ("date_end", ">=", limite),
+                "&",
+                ("date_end", "=", False),
+                ("write_date", ">=", fields.Datetime.to_datetime(limite)),
+            ]
+        )
+        contratos.l10n_br_sst_cobrar_demissional()
+        return contratos
 
     @api.model
     def cron_agendar_periodicos(self, dias_antecedencia=None):

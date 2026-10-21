@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =================
 SST - ASO e PCMSO
 =================
@@ -16,9 +20,9 @@ SST - ASO e PCMSO
 .. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-kmee%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst_aso
-    :alt: kmee/kmee-odoo-addons
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst_aso
+    :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
@@ -37,8 +41,14 @@ geração em massa. Este módulo acrescenta o que a NR-7 e o evento S-2220 exige
 * **Agendamento automático** do exame periódico a partir do vencimento do ASO
   anterior, e geração do exame de retorno ao trabalho para afastamento acima de
   30 dias.
-* **Bloqueio ou alerta** na abertura e no encerramento do contrato sem o ASO
-  correspondente concluído, conforme a política escolhida pela empresa.
+* **Bloqueio ou alerta** na abertura do contrato sem o ASO admissional
+  concluído, conforme a política escolhida pela empresa (NR-7, item 7.5.8, I).
+* **Demissional sem bloqueio** (NR-7, item 7.5.11): o encerramento do contrato
+  não trava. Um cron diário avalia os contratos encerrados: dispensa o exame
+  quando o último exame clínico ocupacional tem menos de 135 dias (graus de
+  risco 1 e 2 da NR-4) ou de 90 dias (graus 3 e 4, e também sem grau
+  informado), e fora da dispensa abre uma atividade com prazo no término mais
+  10 dias, encerrada quando o demissional é concluído.
 * **Sigilo (LGPD art. 11)**: o grupo *Saúde Ocupacional* é distinto do RH, e a
   observação clínica só é visível a ele. O ASO em si não guarda diagnóstico.
 
@@ -50,10 +60,10 @@ geração em massa. Este módulo acrescenta o que a NR-7 e o evento S-2220 exige
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/kmee/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/kmee/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_sst_aso%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_sst_aso%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -75,6 +85,6 @@ Contributors
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `kmee/kmee-odoo-addons <https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst_aso>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_sst_aso>`_ project on GitHub.
 
 You are welcome to contribute.
