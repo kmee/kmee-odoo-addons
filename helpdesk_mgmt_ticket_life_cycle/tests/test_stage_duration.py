@@ -197,7 +197,7 @@ class TestStageDuration(TransactionCase):
             {
                 "name": "LC helpdesk user",
                 "login": "lc_helpdesk_user",
-                "groups_id": [
+                "group_ids": [
                     (6, 0, self.env.ref("helpdesk_mgmt.group_helpdesk_user").ids),
                     (4, self.env.ref("base.group_user").id),
                 ],
