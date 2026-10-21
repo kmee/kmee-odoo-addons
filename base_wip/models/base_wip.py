@@ -142,13 +142,18 @@ class BaseWip(models.Model):
                 }
             )
 
+    @api.model
+    def _get_model_id(self, model_name):
+        # internal users cannot read ir.model: only this lookup runs as sudo
+        return (
+            self.env["ir.model"].sudo().search([("model", "=", model_name)], limit=1).id
+        )
+
     def start(self, model_id, res_id, state="draft"):
         if state not in ["cancelled", "done"]:
             self.env["base.wip"].create(
                 {
-                    "model_id": self.env["ir.model"]
-                    .search([("model", "=", model_id)])
-                    .id,
+                    "model_id": self._get_model_id(model_id),
                     "res_id": res_id,
                     "state": state,
                 }
