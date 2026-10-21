@@ -11,7 +11,7 @@ class TestJobShare(HttpCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.base_url_param = (
-            cls.env["ir.config_parameter"].sudo().get_param("web.base.url")
+            cls.env["ir.config_parameter"].sudo().get_str("web.base.url")
         )
         cls.job = cls.env["hr.job"].create(
             {
