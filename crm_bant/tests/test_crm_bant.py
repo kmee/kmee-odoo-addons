@@ -324,3 +324,14 @@ class TestCrmBant(TransactionCase):
         counts = {status: count for _team, status, count, _rev, _score in groups}
         self.assertEqual(counts, {"unqualified": 1, "fully_qualified": 1})
         self.assertTrue(self.env.ref("crm_bant.menu_bant_dashboard").action)
+
+    # module metadata --------------------------------------------------
+
+    def test_module_metadata_matches_the_module(self):
+        """Given the installed module, then it is AGPL-3 like the repository,
+        depends only on crm and its description talks about BANT."""
+        module = self.env["ir.module.module"].search([("name", "=", "crm_bant")])
+        self.assertEqual(module.license, "AGPL-3")
+        self.assertEqual(module.dependencies_id.mapped("name"), ["crm"])
+        self.assertIn("BANT", module.description_html)
+        self.assertNotIn("OFX", module.description_html)

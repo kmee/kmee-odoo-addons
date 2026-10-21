@@ -1,5 +1,6 @@
 from psycopg2 import IntegrityError
 
+from odoo.exceptions import AccessError
 from odoo.tests import Form, TransactionCase, tagged
 from odoo.tools import mute_logger
 
@@ -92,10 +93,40 @@ class TestProjectTaskServiceClass(TransactionCase):
         )
         self.assertEqual(len(groups), 2)
 
-    def test_project_user_can_manage_service_classes(self):
-        """Given an internal user (module ACL grants all internal users),
-        Then they can create, edit and delete service classes."""
-        sc = self.ServiceClass.with_user(self.user).create({"name": "By user"})
+    def test_project_user_only_reads_service_classes(self):
+        """Given a project user, Then they read the service classes to pick one
+        on a task, but cannot create, edit or delete them."""
+        ServiceClass = self.ServiceClass.with_user(self.user)
+        self.assertIn(self.expedite, ServiceClass.search([]))
+        with self.assertRaises(AccessError):
+            ServiceClass.create({"name": "By user"})
+        with self.assertRaises(AccessError):
+            self.expedite.with_user(self.user).write({"color": 9})
+        with self.assertRaises(AccessError):
+            self.expedite.with_user(self.user).unlink()
+
+    def test_project_user_sets_service_class_on_task(self):
+        """Given a project user, When they pick a class on a task form, Then the
+        task keeps it (reading the classes is enough)."""
+        form = Form(self.env["project.task"].with_user(self.user))
+        form.name = "By project user"
+        form.project_id = self.project
+        form.service_class_id = self.standard
+        self.assertEqual(form.save().service_class_id, self.standard)
+
+    def test_project_manager_manages_service_classes(self):
+        """Given a project manager, Then they create, edit and delete classes."""
+        manager = self.env["res.users"].create(
+            {
+                "name": "Project Manager",
+                "login": "sc_project_manager",
+                "email": "sc_project_manager@example.com",
+                "group_ids": [
+                    (6, 0, [self.env.ref("project.group_project_manager").id])
+                ],
+            }
+        )
+        sc = self.ServiceClass.with_user(manager).create({"name": "By manager"})
         sc.write({"color": 9})
         self.assertEqual(sc.color, 9)
         sc.unlink()

@@ -7,7 +7,7 @@ from odoo import fields, models
 class ProjectTaskServiceClass(models.Model):
 
     _name = "project.task.service.class"
-    _description = "Project Task Service Class"  # TODO
+    _description = "Project Task Service Class"
 
     name = fields.Char(required=True)
     color = fields.Integer()
