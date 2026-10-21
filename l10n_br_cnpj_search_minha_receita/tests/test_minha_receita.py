@@ -139,6 +139,15 @@ class TestMinhaReceita(TransactionCase):
         with self.assertRaisesRegex(ValidationError, "Server error"):
             self.webservice.validate(response)
 
+    def test_import_data_second_phone_is_the_fallback(self):
+        """
+        Given a payload without the first phone
+        When it is imported
+        Then the second phone fills the partner phone (no mobile field in 19.0)
+        """
+        values = self.webservice.import_data(self._data(ddd_telefone_1=""))
+        self.assertEqual(values["phone"], "11988887777")
+
     def test_import_data_maps_fields(self):
         """
         Given a full Minha Receita payload
@@ -156,7 +165,7 @@ class TestMinhaReceita(TransactionCase):
         self.assertEqual(values["street_number"], "10")
         self.assertEqual(values["zip"], "01001000")
         self.assertEqual(values["phone"], "1133334444")
-        self.assertEqual(values["mobile"], "11988887777")
+        self.assertNotIn("mobile", values)
         self.assertEqual(values["equity_capital"], 5000.0)
         self.assertEqual(values["cnae_main_id"], self.cnae_main.id)
         self.assertEqual(values["cnae_secondary_ids"], [self.cnae_sec.id])
