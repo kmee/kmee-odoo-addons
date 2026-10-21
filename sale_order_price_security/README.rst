@@ -59,6 +59,10 @@ To configure this module, you need to:
    sale order, in the **Access Rights** tab click on **Can Edit The
    Price in Sale**.
 
+Sales administrators (*Sales: Administrator*, which includes the admin
+user) belong to the group automatically and are never price locked.
+Plain salesmen stay locked unless they are added to the group.
+
 Usage
 =====
 

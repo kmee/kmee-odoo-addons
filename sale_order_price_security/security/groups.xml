@@ -4,4 +4,11 @@
         <field name="name">Can Edit The Price in Sale</field>
         <field name="category_id" ref="base.module_category_usability" />
     </record>
+    <!-- sales administrators (and the admin user) are never price locked -->
+    <record id="sales_team.group_sale_manager" model="res.groups">
+        <field
+            name="implied_ids"
+            eval="[(4, ref('sale_order_price_security.group_sale_order_price_editor'))]"
+        />
+    </record>
 </odoo>

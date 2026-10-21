@@ -26,6 +26,11 @@ class TestSaleOrderPriceSecurity(TransactionCase):
             groups=base_groups
             + ",sale_order_price_security.group_sale_order_price_editor",
         )
+        cls.manager = new_test_user(
+            cls.env,
+            login="price_sec_manager",
+            groups="base.group_user,sales_team.group_sale_manager",
+        )
         cls.partner = cls.env["res.partner"].create({"name": "Customer"})
         cls.product = cls.env["product.product"].create(
             {"name": "Product", "list_price": 100.0}
@@ -204,6 +209,24 @@ class TestSaleOrderPriceSecurity(TransactionCase):
             )
         )
         self.assertEqual(new_line.price_unit, 42.0)
+
+    def test_sales_manager_can_edit_price_salesman_cannot(self):
+        """
+        Given a sales administrator (and the admin user) and a plain salesman
+        When each one writes price_unit on a line by RPC/ORM
+        Then the administrators store the price through the implied price
+        editor group, while the salesman is still refused
+        """
+        self.assertIn(self.editor_group, self.manager.groups_id)
+        self.assertIn(self.editor_group, self.env.ref("base.user_admin").groups_id)
+        line = self.order.order_line[0]
+        line.with_user(self.manager).write({"price_unit": 55.0})
+        self.assertEqual(line.price_unit, 55.0)
+        line.with_user(self.env.ref("base.user_admin")).write({"price_unit": 60.0})
+        self.assertEqual(line.price_unit, 60.0)
+        with self.assertRaises(AccessError):
+            line.with_user(self.salesman).write({"price_unit": 1.0})
+        self.assertEqual(line.price_unit, 60.0)
 
     def test_salesman_sale_flow_keeps_working(self):
         """
