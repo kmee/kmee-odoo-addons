@@ -14,11 +14,12 @@ class TestSaleOfDaysOff(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.employee = cls.env["hr.employee"].create({"name": "Abono Employee"})
-        cls.leave_type = cls.env["hr.leave.type"].create(
+        cls.leave_type = cls.env["hr.work.entry.type"].create(
             {
                 "name": "Vacation Abono",
+                "code": "SODABONO",
                 "requires_allocation": True,
-                "employee_requests": "no",
+                "employee_requests": False,
                 "allocation_validation_type": "hr",
                 "hr_holidays_sale_of_days_off": True,
             }
@@ -30,7 +31,7 @@ class TestSaleOfDaysOff(TransactionCase):
         allocation = cls.env["hr.leave.allocation"].create(
             {
                 "name": "Vacation",
-                "holiday_status_id": leave_type.id,
+                "work_entry_type_id": leave_type.id,
                 "employee_id": employee.id,
                 "number_of_days": days,
                 "date_from": "2020-01-01",
@@ -58,7 +59,9 @@ class TestSaleOfDaysOff(TransactionCase):
         Entao hr_holidays_sale_of_days_off da alocacao e verdadeiro
         """
         self.assertTrue(self.allocation.hr_holidays_sale_of_days_off)
-        other = self.env["hr.leave.type"].create({"name": "Sem venda"})
+        other = self.env["hr.work.entry.type"].create(
+            {"name": "Sem venda", "code": "SODNONE"}
+        )
         self.assertFalse(other.hr_holidays_sale_of_days_off)
 
     def test_new_abono_defaults(self):
@@ -267,7 +270,7 @@ class TestSaleOfDaysOff(TransactionCase):
             self.env.ref("hr_holidays.hr_leave_allocation_view_form").id, "form"
         )["arch"]
         self.assertIn("days_off_sold_display", alloc_arch)
-        type_arch = self.env["hr.leave.type"].get_view(
-            self.env.ref("hr_holidays.edit_holiday_status_form").id, "form"
+        type_arch = self.env["hr.work.entry.type"].get_view(
+            self.env.ref("hr_holidays.hr_work_entry_type_view_form").id, "form"
         )["arch"]
         self.assertIn("hr_holidays_sale_of_days_off", type_arch)
