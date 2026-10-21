@@ -19,7 +19,7 @@ class TestCustomerRating(TransactionCase):
                 "name": "Plain User",
                 "login": "rating_plain_user",
                 "email": "rating_plain_user@example.com",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("base.group_user").id])],
             }
         )
 
@@ -77,13 +77,13 @@ class TestCustomerRating(TransactionCase):
         """Given rated partners, When grouping by rating, Then each group counts."""
         self.Partner.create({"name": "A", "customer_rating_id": self.rating.id})
         self.Partner.create({"name": "B", "customer_rating_id": self.rating.id})
-        groups = self.Partner.read_group(
+        groups = self.Partner._read_group(
             [("customer_rating_id", "=", self.rating.id)],
             ["customer_rating_id"],
-            ["customer_rating_id"],
+            ["__count"],
         )
         self.assertEqual(len(groups), 1)
-        self.assertEqual(groups[0]["customer_rating_id_count"], 2)
+        self.assertEqual(groups[0][1], 2)
 
     def test_rating_field_is_tracked(self):
         """Given the partner chatter, Then the rating is a tracked field, so
