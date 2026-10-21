@@ -68,7 +68,7 @@ class L10nBrSstLaudo(models.Model):
             "name": _("Eventos S-2240"),
             "type": "ir.actions.act_window",
             "res_model": "l10n_br.esocial.s2240",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("id", "in", criados.ids)],
         }
 
@@ -78,6 +78,6 @@ class L10nBrSstLaudo(models.Model):
             "name": _("Eventos S-2240"),
             "type": "ir.actions.act_window",
             "res_model": "l10n_br.esocial.s2240",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("laudo_id", "=", self.id)],
         }

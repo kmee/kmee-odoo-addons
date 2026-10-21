@@ -2,17 +2,17 @@
 <odoo>
 
     <record id="view_esocial_s2221_tree" model="ir.ui.view">
-        <field name="name">l10n_br.esocial.s2221.tree</field>
+        <field name="name">l10n_br.esocial.s2221.list</field>
         <field name="model">l10n_br.esocial.s2221</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="employee_id" />
                 <field name="dt_exame" />
                 <field name="cnpj_lab" />
                 <field name="cod_seq_exame" />
                 <field name="evento_id" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -62,7 +62,7 @@
     <record id="action_esocial_s2221" model="ir.actions.act_window">
         <field name="name">S-2221 - Exame Toxicol&#243;gico</field>
         <field name="res_model">l10n_br.esocial.s2221</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>
