@@ -9,7 +9,7 @@ from odoo.addons.report_py3o.controllers import main as report
 
 
 class ReportController(report.ReportController):
-    @route()
+    @route(readonly=False)
     def report_routes(self, reportname, docids=None, converter=None, **data):
         report_action = request.env["ir.actions.report"]._get_report_from_name(
             reportname
