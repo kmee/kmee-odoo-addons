@@ -8,8 +8,13 @@ from odoo.tools.translate import _
 from odoo.addons.report_py3o.controllers import main as report
 
 
+def _report_routes_readonly(controller):
+    # detect_exceptions writes the exceptions found on the order
+    return False
+
+
 class ReportController(report.ReportController):
-    @route()
+    @route(readonly=_report_routes_readonly)
     def report_routes(self, reportname, docids=None, converter=None, **data):
         report_action = request.env["ir.actions.report"]._get_report_from_name(
             reportname

@@ -20,17 +20,15 @@ class SaleOrder(models.Model):
             total_wo_delivery = sum(
                 line.price_subtotal
                 for line in order.order_line
-                if line.product_id.type == "product"
+                if line.product_id.is_storable
             )
             if total_wo_delivery == 0:
                 continue
             for line in order.order_line:
-                if line.product_id.type != "product":
+                if not line.product_id.is_storable:
                     continue
                 proportion = line.price_subtotal / total_wo_delivery
-                line.freight_value = (
-                    order.amount_freight_value * proportion / line.product_uom_qty
-                )
+                line.freight_value = order.amount_freight_value * proportion
 
 
 class SaleOrderLine(models.Model):
