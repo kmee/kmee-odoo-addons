@@ -45,8 +45,8 @@ class TestSaleOrderPriceSecurity(TransactionCase):
         When we look at the plain salesman user
         Then he is not a member, while the editor user is
         """
-        self.assertNotIn(self.editor_group, self.salesman.groups_id)
-        self.assertIn(self.editor_group, self.editor.groups_id)
+        self.assertNotIn(self.editor_group, self.salesman.group_ids)
+        self.assertIn(self.editor_group, self.editor.group_ids)
 
     def test_cannot_edit_price_without_group(self):
         """
@@ -75,7 +75,7 @@ class TestSaleOrderPriceSecurity(TransactionCase):
         """
         line = self.order.order_line[0]
         self.assertFalse(line.with_user(self.salesman).can_edit_price_sale)
-        self.salesman.write({"groups_id": [(4, self.editor_group.id)]})
+        self.salesman.write({"group_ids": [(4, self.editor_group.id)]})
         self.assertTrue(line.with_user(self.salesman).can_edit_price_sale)
 
     def test_product_onchange_refreshes_flag_for_current_user(self):
