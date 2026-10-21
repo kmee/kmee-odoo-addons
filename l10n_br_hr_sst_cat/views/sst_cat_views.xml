@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="l10n_br_sst_cat_view_tree" model="ir.ui.view">
         <field name="name">l10n_br.sst.cat.list</field>
         <field name="model">l10n_br.sst.cat</field>
@@ -49,7 +48,9 @@
                         invisible="prazo_situacao != 'atrasada'"
                     />
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -71,7 +72,7 @@
                         </group>
                     </group>
                 </sheet>
-                <chatter/>
+                <chatter />
             </form>
         </field>
     </record>
@@ -114,5 +115,4 @@
         <field name="res_model">l10n_br.sst.cat</field>
         <field name="view_mode">list,form</field>
     </record>
-
 </odoo>
