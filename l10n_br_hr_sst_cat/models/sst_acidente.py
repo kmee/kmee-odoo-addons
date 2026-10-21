@@ -13,6 +13,12 @@ from odoo.addons.l10n_br_hr_sst.models.sst_dominios import (
 )
 
 RE_HORA = re.compile(r"^([01]\d|2[0-3])[0-5]\d$")
+# hrsTrabAntesAcid é TS_hora_99 no leiaute S-1.3: de 0000 a 9959, com os
+# minutos limitados a 59.
+RE_HORA_99 = re.compile(r"^\d\d[0-5]\d$")
+
+# evtCat/cat/tpAcid de doença ocupacional.
+TIPO_ACIDENTE_DOENCA = "2"
 
 # evtCat/cat/tpAcid
 TIPO_ACIDENTE = [
@@ -97,6 +103,28 @@ class L10nBrSstAcidente(models.Model):
         required=True,
         index=True,
         tracking=True,
+        compute="_compute_date_acidente",
+        store=True,
+        readonly=False,
+        precompute=True,
+        help="Na doença ocupacional, é a primeira entre o início da "
+        "incapacidade, a segregação compulsória e o diagnóstico (Lei "
+        "8.213/91, art. 23), calculada a partir dessas datas.",
+    )
+    date_inicio_incapacidade = fields.Date(
+        string="Início da Incapacidade",
+        help="Doença ocupacional: início da incapacidade laborativa para a "
+        "atividade habitual (Lei 8.213/91, art. 23).",
+    )
+    date_segregacao = fields.Date(
+        string="Segregação Compulsória",
+        help="Doença ocupacional: dia da segregação compulsória (Lei "
+        "8.213/91, art. 23).",
+    )
+    date_diagnostico = fields.Date(
+        string="Diagnóstico",
+        help="Doença ocupacional: dia em que foi feito o diagnóstico (Lei "
+        "8.213/91, art. 23).",
     )
     hora_acidente = fields.Char(
         string="Hora do Acidente",
@@ -113,7 +141,8 @@ class L10nBrSstAcidente(models.Model):
     hrs_trab_antes_acid = fields.Char(
         string="Horas Trabalhadas Antes",
         size=4,
-        help="Formato HHMM.",
+        help="Formato HHMM, de 0000 a 9959. Obrigatório no acidente típico e "
+        "no de trajeto; não se informa na doença ocupacional.",
     )
     iniciat_cat = fields.Selection(
         INICIATIVA_CAT,
@@ -239,22 +268,61 @@ class L10nBrSstAcidente(models.Model):
             ]
             rec.name = " - ".join(p for p in partes if p)
 
+    @api.depends(
+        "tp_acid",
+        "date_inicio_incapacidade",
+        "date_segregacao",
+        "date_diagnostico",
+    )
+    def _compute_date_acidente(self):
+        """Na doença ocupacional, o dia do acidente é o que ocorrer primeiro.
+
+        Lei 8.213/91, art. 23: início da incapacidade laborativa, segregação
+        compulsória ou diagnóstico. Sem nenhuma das três, ou fora da doença,
+        vale a data informada.
+        """
+        for rec in self:
+            datas = [
+                d
+                for d in (
+                    rec.date_inicio_incapacidade,
+                    rec.date_segregacao,
+                    rec.date_diagnostico,
+                )
+                if d
+            ]
+            if rec.tp_acid == TIPO_ACIDENTE_DOENCA and datas:
+                rec.date_acidente = min(datas)
+            else:
+                rec.date_acidente = rec.date_acidente
+
     @api.depends("cat_ids")
     def _compute_cat_count(self):
         for rec in self:
             rec.cat_count = len(rec.cat_ids)
 
-    @api.constrains("hora_acidente", "hrs_trab_antes_acid", "hora_atendimento")
+    @api.constrains(
+        "hora_acidente", "hrs_trab_antes_acid", "hora_atendimento", "tp_acid"
+    )
     def _check_horas(self):
         rotulos = {
-            "hora_acidente": _("Hora do Acidente"),
-            "hrs_trab_antes_acid": _("Horas Trabalhadas Antes"),
-            "hora_atendimento": _("Hora do Atendimento"),
+            "hora_acidente": (_("Hora do Acidente"), RE_HORA),
+            "hrs_trab_antes_acid": (_("Horas Trabalhadas Antes"), RE_HORA_99),
+            "hora_atendimento": (_("Hora do Atendimento"), RE_HORA),
         }
         for rec in self:
-            for campo, rotulo in rotulos.items():
+            if rec.tp_acid == TIPO_ACIDENTE_DOENCA and rec.hrs_trab_antes_acid:
+                raise ValidationError(
+                    _(
+                        "Acidente de %(nome)s: na doença ocupacional o eSocial "
+                        "não aceita as horas trabalhadas antes do acidente "
+                        "(hrsTrabAntesAcid)."
+                    )
+                    % {"nome": rec.employee_id.name}
+                )
+            for campo, (rotulo, padrao) in rotulos.items():
                 valor = rec[campo]
-                if valor and not RE_HORA.match(valor):
+                if valor and not padrao.match(valor):
                     raise ValidationError(
                         _(
                             "%(rotulo)s inválida: %(valor)r. O eSocial espera o "
