@@ -6,6 +6,7 @@ from freezegun import freeze_time
 from lxml import etree
 
 from odoo import fields
+from odoo.exceptions import AccessError
 from odoo.tests.common import TransactionCase, tagged
 
 from ..models.helpdesk_ticket_stage_duration_report import (
@@ -209,13 +210,92 @@ class TestStageDuration(TransactionCase):
         ticket.write({"stage_id": self.stage_wip.id})
         self.assertEqual(len(ticket.sudo().stage_duration_ids), 2)
 
+    def _user(self, login, *groups):
+        return (
+            self.env["res.users"]
+            .with_context(no_reset_password=True)
+            .create(
+                {
+                    "name": login,
+                    "login": login,
+                    "groups_id": [(6, 0, [self.env.ref(g).id for g in groups])],
+                }
+            )
+        )
+
+    def test_personal_helpdesk_user_records_and_reads_history(self):
+        """Given a helpdesk user limited to his own tickets
+        When he creates a ticket and moves its stage
+        Then the history is recorded and he can read it on the ticket."""
+        user = self._user("lc_own_user", "helpdesk_mgmt.group_helpdesk_user_own")
+        ticket = self.Ticket.with_user(user).create(
+            {
+                "name": "Own ticket",
+                "description": "d",
+                "team_id": self.team.id,
+                "stage_id": self.stage_new.id,
+                "user_id": user.id,
+            }
+        )
+        ticket.write({"stage_id": self.stage_wip.id})
+        durations = ticket.stage_duration_ids
+        self.assertEqual(durations.mapped("stage_id"), self.stage_wip | self.stage_new)
+        self.assertEqual(len(durations.filtered(lambda d: not d.end_date)), 1)
+
+    def test_helpdesk_user_cannot_forge_history(self):
+        """Given a helpdesk user that is not a manager
+        When he tries to create, edit or delete a duration directly
+        Then access is denied; only helpdesk managers manage the history."""
+        user = self._user("lc_forger", "helpdesk_mgmt.group_helpdesk_user")
+        duration = self.ticket.stage_duration_ids.with_user(user)
+        self.assertTrue(duration.read(["stage_id"]))
+        with self.assertRaises(AccessError):
+            self.Duration.with_user(user).create(
+                {
+                    "ticket_id": self.ticket.id,
+                    "stage_id": self.stage_done.id,
+                    "start_date": fields.Datetime.now(),
+                }
+            )
+        with self.assertRaises(AccessError):
+            duration.write({"start_date": fields.Datetime.now() - timedelta(days=9)})
+        with self.assertRaises(AccessError):
+            duration.unlink()
+        manager = self._user("lc_manager", "helpdesk_mgmt.group_helpdesk_manager")
+        for operation in ("read", "write", "create", "unlink"):
+            with self.subTest(operation=operation):
+                self.assertTrue(
+                    self.Duration.with_user(manager).check_access_rights(
+                        operation, raise_exception=False
+                    )
+                )
+
+    def test_outsiders_cannot_read_history_or_report(self):
+        """Given an internal user outside the helpdesk groups and a portal user
+        Then neither of them reads the durations or the report."""
+        internal = self._user("lc_internal", "base.group_user")
+        portal = self._user("lc_portal", "base.group_portal")
+        models = (
+            "helpdesk.ticket.stage.duration",
+            "helpdesk.ticket.stage.duration.report",
+        )
+        for user in (internal, portal):
+            for model in models:
+                with self.subTest(user=user.login, model=model):
+                    self.assertFalse(
+                        self.env[model]
+                        .with_user(user)
+                        .check_access_rights("read", raise_exception=False)
+                    )
+
     def test_report_aggregates_per_team_and_stage(self):
         """Given tickets that stayed in a stage for known periods
         When the report is read
         Then counts, min, max, average and completion rate match."""
         team = self.env["helpdesk.ticket.team"].create({"name": "LC Report team"})
         stage = self.env["helpdesk.ticket.stage"].create({"name": "LC Report stage"})
-        now = fields.Datetime.now()
+        # The report measures open stages with SQL NOW(), the transaction start.
+        now = self.env.cr.now()
         for hours, closed in ((1, True), (3, True), (2, False)):
             ticket = self._ticket(team_id=team.id, stage_id=stage.id)
             ticket.stage_duration_ids.write(

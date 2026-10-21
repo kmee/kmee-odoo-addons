@@ -77,12 +77,18 @@ class HrContract(models.Model):
 
     @api.constrains("l10n_br_periculosidade", "l10n_br_insalubridade")
     def _check_periculosidade_insalubridade(self):
-        """Periculosidade e insalubridade não acumulam (Súmula 364 TST)."""
+        """Periculosidade e insalubridade não se acumulam.
+
+        CLT, art. 193, par. 2, e TST IRR Tema 17 (IRR-239-55.2011.5.02.0319):
+        a vedação vale mesmo com fatos geradores distintos, e o empregado opta
+        por um dos adicionais.
+        """
         for rec in self:
             if rec.l10n_br_periculosidade and rec.l10n_br_insalubridade:
                 raise ValidationError(
                     _(
                         "Não é permitido acumular periculosidade e insalubridade "
-                        "(Súmula 364 do TST)."
+                        "(CLT, art. 193, par. 2, e TST IRR Tema 17): o "
+                        "empregado opta por um dos adicionais."
                     )
                 )

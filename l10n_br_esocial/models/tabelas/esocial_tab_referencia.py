@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 class ESocialCompatCategLotacao(models.Model):
     _name = "l10n_br.esocial.compat.categ.lotacao"
-    _description = "eSocial Tab 11 - Compatibilidade Categoria/ClassTrib/Lotação"
+    _description = "eSocial Tabela 11 - Compatibilidade Categoria/ClassTrib/Lotação"
     _order = "cod_categ, class_trib"
 
     cod_categ = fields.Char(required=True, index=True)
@@ -32,7 +32,7 @@ class ESocialCompatCategLotacao(models.Model):
 class ESocialLotacaoRef(models.Model):
     _name = "l10n_br.esocial.lotacao.ref"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 64 - Lotações Tributárias (Referência)"
+    _description = "eSocial - Lotações Tributárias (Referência)"
 
     tp_lotacao = fields.Char()
     tp_insc = fields.Char()
@@ -43,7 +43,7 @@ class ESocialLotacaoRef(models.Model):
 
 class ESocialProcessoFap(models.Model):
     _name = "l10n_br.esocial.processo.fap"
-    _description = "eSocial Tab 77 - Processo FAP"
+    _description = "eSocial - Processo FAP"
     _order = "processo"
 
     processo = fields.Char(required=True, index=True)
@@ -62,6 +62,6 @@ class ESocialProcessoFap(models.Model):
 class ESocialCnaeMei(models.Model):
     _name = "l10n_br.esocial.cnae.mei"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 81 - CNAE MEI Web"
+    _description = "eSocial - CNAE MEI Web"
 
     cod_cnae = fields.Char()

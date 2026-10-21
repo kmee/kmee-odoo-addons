@@ -1,6 +1,8 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from unittest.mock import patch
+
 from psycopg2 import IntegrityError
 
 from odoo.exceptions import AccessError, UserError
@@ -121,6 +123,43 @@ class TestCrmLostReasonTransition(TransactionCase):
         self.assertEqual(lead.team_id, self.team_rec)
         self.assertEqual(lead.stage_id, self.stage_rec)
         self.assertEqual(lead.lost_reason_id, self.reason_price)
+
+    def test_set_lost_applies_the_transition_once(self):
+        """Given a lead lost with a configured reason, the transition runs once:
+        write() routes the lead when it receives the reason, action_set_lost
+        must not route it again."""
+        lead = self._lead()
+        Lead = type(lead)
+        original = Lead._apply_lost_reason_transition
+        with patch.object(
+            Lead,
+            "_apply_lost_reason_transition",
+            autospec=True,
+            side_effect=original,
+        ) as apply:
+            lead.action_set_lost(lost_reason_id=self.reason_price.id)
+        self.assertEqual(apply.call_count, 1)
+        self.assertTrue(lead.active)
+        self.assertEqual(lead.stage_id, self.stage_rec)
+
+    def test_set_lost_with_reason_already_on_lead_applies_transition(self):
+        """Given a lead that already has a reason, losing it without passing the
+        reason again still routes it, once."""
+        lead = self._lead()
+        lead.lost_reason_id = self.reason_price
+        Lead = type(lead)
+        original = Lead._apply_lost_reason_transition
+        with patch.object(
+            Lead,
+            "_apply_lost_reason_transition",
+            autospec=True,
+            side_effect=original,
+        ) as apply:
+            lead.action_set_lost()
+        self.assertEqual(apply.call_count, 1)
+        self.assertTrue(lead.active)
+        self.assertEqual(lead.team_id, self.team_rec)
+        self.assertEqual(lead.stage_id, self.stage_rec)
 
     def test_lost_lead_without_transition_stays_archived(self):
         """Given a reason without transition, the lead is simply lost."""

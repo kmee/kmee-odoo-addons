@@ -98,7 +98,7 @@ IDE_ORGAO_CLASSE_EMITENTE = [
     ("3", "3 - RMS"),
 ]
 
-# Código de ausência de agente nocivo (Tabela 22). Quem não tem exposição
+# Código de ausência de agente nocivo (Tabela 24). Quem não tem exposição
 # informa este código no S-2240, e não a omissão do grupo agNoc.
 COD_AGENTE_NOCIVO_AUSENCIA = "09.01.001"
 

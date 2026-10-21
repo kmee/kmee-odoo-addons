@@ -47,6 +47,60 @@ class ESocialBaseIntermediario(models.AbstractModel):
         default=lambda self: self.env.company,
     )
 
+    # ------------------------------------------------------------------
+    # Multiempresa por padrão
+    # ------------------------------------------------------------------
+
+    def _register_hook(self):
+        """Garante a regra multiempresa de todo intermediário instalado.
+
+        Os eventos carregam CPF e remuneração (dados pessoais, LGPD, art. 46):
+        o seguro é nascer isolado por empresa. A regra vale também para
+        intermediário de outro módulo (por exemplo, os eventos de SST), sem que
+        cada um precise lembrar de declarar a sua.
+        """
+        res = super()._register_hook()
+        if self._name == "l10n_br.esocial.base.intermediario":
+            self._l10n_br_esocial_garantir_regras_multiempresa()
+        return res
+
+    @api.model
+    def _l10n_br_esocial_garantir_regras_multiempresa(self):
+        """Cria a regra multiempresa dos intermediários que não têm nenhuma.
+
+        Regra existente, mesmo desativada, é respeitada: desativar é decisão
+        de quem administra a base, e a regra não volta sozinha.
+        """
+        base = self.env.registry[self._name]
+        regras = self.env["ir.rule"].sudo().with_context(active_test=False)
+        for nome, modelo in self.env.registry.items():
+            if (
+                nome == self._name
+                or modelo._abstract
+                or modelo._transient
+                or not issubclass(modelo, base)
+            ):
+                continue
+            ir_model = self.env["ir.model"].sudo()._get(nome)
+            if not ir_model:
+                continue
+            if regras.search_count(
+                [
+                    ("model_id", "=", ir_model.id),
+                    ("global", "=", True),
+                    ("domain_force", "ilike", "company_ids"),
+                ]
+            ):
+                continue
+            regras.create(
+                {
+                    "name": "eSocial %s: multi-empresa" % ir_model.name,
+                    "model_id": ir_model.id,
+                    "domain_force": "['|', ('company_id', '=', False), "
+                    "('company_id', 'in', company_ids)]",
+                }
+            )
+
     def _get_tp_amb(self):
         """Return environment string for esociallib."""
         tp_amb = self.company_id.l10n_br_esocial_tp_amb or "2"

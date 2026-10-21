@@ -180,6 +180,26 @@ class TestSaleOfDaysOff(TransactionCase):
         self.assertEqual(self.allocation.number_of_days, 30)
         self.assertEqual(self.allocation.number_of_days_sold, 0)
 
+    def test_archive_is_refused_without_touching_balance(self):
+        """
+        Dado um abono pago de 5 dias (o modelo nao tem o campo active)
+        Quando alguem tenta arquiva-lo
+        Entao o ORM recusa e os dias vendidos continuam na alocacao
+        """
+        abono = self._abono(5)
+        abono.action_confirm()
+        self.assertFalse(abono._active_name)
+        # No savepoint here on purpose: a refused archive must not have touched
+        # the allocation before failing (the ORM fails on models without active).
+        refused = False
+        try:
+            abono.action_archive()
+        except (AssertionError, TypeError):
+            refused = True
+        self.assertTrue(refused, "an abono has no active field to archive")
+        self.assertEqual(self.allocation.number_of_days_sold, 5)
+        self.assertEqual(self.allocation.number_of_days, 25)
+
     def test_only_holidays_officer_can_unlink(self):
         """
         Dado um abono e dois usuarios (interno comum e oficial de ferias)
