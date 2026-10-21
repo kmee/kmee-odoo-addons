@@ -31,7 +31,6 @@ class TestDeclaration(TransactionCase):
         )
         cls.env["stock.move"].create(
             {
-                "name": cls.product.name,
                 "product_id": cls.product.id,
                 "product_uom_qty": 1.0,
                 "product_uom": cls.product.uom_id.id,
@@ -128,7 +127,7 @@ class TestDeclaration(TransactionCase):
             {
                 "name": "Declaration employee",
                 "login": "declaration_employee",
-                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [self.env.ref("base.group_user").id])],
             }
         )
         with self.assertRaises(AccessError):
