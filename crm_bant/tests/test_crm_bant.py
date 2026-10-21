@@ -187,16 +187,14 @@ class TestCrmBant(TransactionCase):
         self.env.cr.precommit.run()  # records created in this transaction are not tracked
         lead.write({"bant_budget_status": "budget_defined"})
         self.env.cr.precommit.run()  # tracking is finalized before commit
-        tracked = self.env["mail.tracking.value"].search(
-            [
-                ("mail_message_id.model", "=", "crm.lead"),
-                ("mail_message_id.res_id", "=", lead.id),
-                ("field_id.name", "=", "bant_budget_status"),
-            ]
+        # 20.0 renders the tracked change in the message body (mail.tracking.value
+        # moved to the optional mail_tracking module)
+        messages = self.env["mail.message"].search(
+            [("model", "=", "crm.lead"), ("res_id", "=", lead.id)]
         )
+        tracked = messages.filtered(lambda m: "Budget Defined" in (m.body or ""))
         self.assertEqual(len(tracked), 1)
-        self.assertEqual(tracked.new_value_char, "Budget Defined")
-        self.assertEqual(tracked.old_value_char, "Undefined")
+        self.assertIn("Undefined", tracked.body)
 
     # form view behaviour -------------------------------------------------
 
