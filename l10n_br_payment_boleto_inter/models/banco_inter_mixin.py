@@ -361,7 +361,9 @@ class BancoInterMixin(models.AbstractModel):
                 pdf_content = base64.b64decode(pdf_base64)
             except Exception as decode_error:
                 _logger.error("Erro ao decodificar base64: %s", str(decode_error))
-                raise UserError(self.env._("PDF retornado está corrompido")) from decode_error
+                raise UserError(
+                    self.env._("PDF retornado está corrompido")
+                ) from decode_error
             if not pdf_content.startswith(b"%PDF"):
                 _logger.warning("Conteúdo decodificado não parece ser um PDF válido")
             return pdf_base64

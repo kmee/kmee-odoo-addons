@@ -26,9 +26,7 @@ class TestInterProvider(BancoInterCommon):
         self.assertEqual(self.provider._get_default_payment_method_codes(), {"boleto"})
         other = self.env["payment.provider"].search([("code", "!=", "inter")], limit=1)
         if other:
-            self.assertNotEqual(
-                other._get_default_payment_method_codes(), {"boleto"}
-            )
+            self.assertNotEqual(other._get_default_payment_method_codes(), {"boleto"})
 
     def test_only_brl_is_supported(self):
         currencies = self.provider._get_supported_currencies()
