@@ -55,9 +55,17 @@ class BaseWipAbstract(models.AbstractModel):
             record.reaction_time = display_time(reaction_time, 5)
 
     def _compute_wip_ids(self):
+        wip_model = self.env["base.wip"]
         for record in self:
-            record.wip_ids = record.wip_ids.search(
-                [("model_id", "=", record._name), ("res_id", "=", record.id)]
+            # a record still being edited in a form has no id yet (NewId),
+            # which the 19.0 domains reject; it has no wip either
+            res_id = record._origin.id
+            record.wip_ids = (
+                wip_model.search(
+                    [("model_id", "=", record._name), ("res_id", "=", res_id)]
+                )
+                if res_id
+                else wip_model
             )
 
     wip_ids = fields.One2many(comodel_name="base.wip", compute="_compute_wip_ids")
