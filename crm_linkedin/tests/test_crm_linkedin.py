@@ -123,7 +123,9 @@ class TestCrmLinkedin(TransactionCase):
         form.name = "Form LinkedIn"
         form.partner_id = self.partner_with
         self.assertEqual(form.linkedin_url, URL_A)
-        form.linkedin_url = URL_B
         lead = form.save()
+        # 20.0 shows the job position (and the profile after it) only in debug
+        # mode, so the edit is written on the record instead of the form
+        lead.linkedin_url = URL_B
         self.assertEqual(lead.linkedin_url, URL_B)
         self.assertEqual(self.partner_with.linkedin_url, URL_B)
