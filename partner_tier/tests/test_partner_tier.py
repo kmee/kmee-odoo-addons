@@ -1,5 +1,6 @@
 from odoo.exceptions import AccessError
 from odoo.tests import Form, TransactionCase, tagged
+from odoo.tools import mute_logger
 
 
 @tagged("post_install", "-at_install")
@@ -92,6 +93,9 @@ class TestPartnerTier(TransactionCase):
         company.tier_id = self.silver
         self.assertEqual(contact.tier_id, self.silver)
 
+    # 19.0: with the whole repository installed, another module warns that its
+    # partner_id child_of domain gets the NewId of the form record
+    @mute_logger("odoo.domains")
     def test_form_tier_readonly_for_contact_of_company(self):
         """Given a contact with a parent, Then the form makes the tier read-only
         (it comes from the company); a standalone partner can edit it."""
