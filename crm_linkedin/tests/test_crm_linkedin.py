@@ -53,6 +53,47 @@ class TestCrmLinkedin(TransactionCase):
         lead.partner_id = self.partner_with
         self.assertEqual(lead.linkedin_url, URL_A)
 
+    def test_lead_clears_profile_when_partner_profile_is_removed(self):
+        """Given a linked lead, when the partner profile is erased, the lead
+        does not keep the old URL."""
+        lead = self._lead(partner_id=self.partner_with.id)
+        self.partner_with.linkedin_url = False
+        self.assertFalse(lead.linkedin_url)
+
+    def test_lead_clears_profile_when_partner_without_profile_is_chosen(self):
+        """Given a lead of a partner with a profile, when the partner is replaced
+        by one without profile, the old URL (of another person) is dropped and
+        the new partner is not touched."""
+        lead = self._lead(partner_id=self.partner_with.id)
+        lead.partner_id = self.partner_without
+        self.assertFalse(lead.linkedin_url)
+        self.assertFalse(self.partner_without.linkedin_url)
+        self.assertEqual(self.partner_with.linkedin_url, URL_A)
+
+    def test_lead_clears_profile_when_partner_is_removed(self):
+        """Given a linked lead, when the partner is removed from it or deleted,
+        the URL that came from the partner goes away too."""
+        lead = self._lead(partner_id=self.partner_with.id)
+        lead.partner_id = False
+        self.assertFalse(lead.linkedin_url)
+        other = self.env["res.partner"].create({"name": "Gone", "linkedin_url": URL_B})
+        lead_of_other = self._lead(partner_id=other.id)
+        other.unlink()
+        self.assertFalse(lead_of_other.partner_id)
+        self.assertFalse(lead_of_other.linkedin_url)
+
+    def test_form_clears_profile_when_partner_changes(self):
+        """Given the form, switching to a partner without profile clears it."""
+        form = Form(self.Lead.with_context(default_type="opportunity"))
+        form.name = "Form switch"
+        form.partner_id = self.partner_with
+        self.assertEqual(form.linkedin_url, URL_A)
+        form.partner_id = self.partner_without
+        self.assertFalse(form.linkedin_url)
+        lead = form.save()
+        self.assertFalse(lead.linkedin_url)
+        self.assertEqual(self.partner_with.linkedin_url, URL_A)
+
     # lead -> partner -------------------------------------------------------
 
     def test_editing_lead_profile_updates_partner(self):
