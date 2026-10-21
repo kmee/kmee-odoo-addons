@@ -4,7 +4,9 @@
 from lxml import etree
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests import TransactionCase, tagged
+
+from odoo.addons.base_exception.exceptions import BaseExceptionError
 
 from .common import TierExceptionsMixin
 
@@ -16,9 +18,27 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         super().setUpClass()
         cls._setup_tier_exceptions()
 
+    @staticmethod
+    def _call(method, *args):
+        """Run a method that may detect exceptions; in 18.0 base_exception
+        raises BaseExceptionError when it finds one and the web client turns it
+        into the popup. Caught without a savepoint so the recorded exceptions
+        are kept."""
+        try:
+            return method(*args)
+        except BaseExceptionError:
+            return None
+
+    def _assert_popup(self, order):
+        self.env.company.sale_exception_show_popup = True
+        action = order.action_popup_exceptions()
+        self.assertEqual(action["res_model"], "sale.exception.confirm")
+        self.assertEqual(action["context"]["active_ids"], order.ids)
+
     def _order_waiting_validation(self, price_unit=5000.0):
         order = self._order(price_unit)
-        self.assertEqual(order.detect_exceptions(), [self.rule.id])
+        self._call(order.detect_exceptions)
+        self.assertEqual(order.exception_ids, self.rule)
         order.request_validation()
         return order
 
@@ -31,7 +51,7 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         self.assertEqual(self.tier.model, "sale.order")
         order = self._order(5000.0)
         self.assertFalse(order.evaluate_tier(self.tier))
-        order.detect_exceptions()
+        self._call(order.detect_exceptions)
         self.assertEqual(order.evaluate_tier(self.tier), order)
 
     def test_order_without_exception_needs_no_validation(self):
@@ -51,7 +71,7 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         Then the order needs tier validation
         """
         order = self._order(5000.0)
-        order.detect_exceptions()
+        self._call(order.detect_exceptions)
         self.assertEqual(order.exception_ids, self.rule)
         self.assertTrue(order.need_validation)
 
@@ -62,9 +82,8 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         Then the exceptions popup opens instead of the e-mail composer
         """
         order = self._order(5000.0)
-        action = order.action_quotation_send()
-        self.assertEqual(action["res_model"], "sale.exception.confirm")
-        self.assertEqual(action["context"]["active_ids"], order.ids)
+        self.assertIsNone(self._call(order.action_quotation_send))
+        self._assert_popup(order)
 
     def test_quotation_send_works_without_exceptions(self):
         """
@@ -83,8 +102,8 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         Then the exceptions popup is shown and the order stays a quotation
         """
         order = self._order_waiting_validation()
-        action = order.action_confirm()
-        self.assertEqual(action["res_model"], "sale.exception.confirm")
+        self.assertIsNone(self._call(order.action_confirm))
+        self._assert_popup(order)
         self.assertEqual(order.state, "draft")
 
     def test_approver_validation_ignores_exceptions_and_unblocks_confirm(self):
@@ -112,8 +131,8 @@ class TestTierValidationExceptions(TierExceptionsMixin, TransactionCase):
         order.with_user(self.salesman).validate_tier()
         self.assertEqual(order.validation_status, "pending")
         self.assertFalse(order.ignore_exception)
-        action = order.action_confirm()
-        self.assertEqual(action["res_model"], "sale.exception.confirm")
+        self.assertIsNone(self._call(order.action_confirm))
+        self._assert_popup(order)
         self.assertEqual(order.state, "draft")
 
     def test_blocking_exception_cannot_be_ignored_by_approval(self):
