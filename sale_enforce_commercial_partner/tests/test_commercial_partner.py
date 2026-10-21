@@ -62,8 +62,8 @@ class TestEnforceCommercialPartner(TransactionCase):
         When a quotation is created for the person
         Then the invoice address is the commercial partner billing address
         """
-        self.assertEqual(self.person.company_type, "person")
-        self.assertEqual(self.person_invoice.company_type, "person")
+        self.assertFalse(self.person.is_company)
+        self.assertFalse(self.person_invoice.is_company)
         order = self._order(self.person)
         self.assertEqual(order.partner_invoice_id, self.corp_invoice)
         self.assertNotEqual(order.partner_invoice_id, self.person_invoice)
