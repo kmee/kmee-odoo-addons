@@ -13,6 +13,7 @@
     "maintainers": ["mileo"],
     "depends": [
         "l10n_br_hr_attendance_aej",
+        "l10n_br_hr_attendance_afd",
     ],
     "data": [
         "views/l10n_br_hr_apuracao_periodo_views.xml",
