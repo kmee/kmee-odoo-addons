@@ -377,6 +377,14 @@ ul.auto-toc {
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/KMEE/kmee-odoo-addons/tree/16.0/sale_order_price_security"><img alt="KMEE/kmee-odoo-addons" src="https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github" /></a></p>
 <p>This module creates a group in which only those in this group can edit
 the sales price in a sale order.</p>
+<p>The restriction is enforced by the server, not only by the view: a user
+outside the group cannot set the unit price of a sale order line by RPC
+or through the ORM (create or write). From such a user a price is
+accepted only when it is unchanged or equal to the price computed by the
+pricelist, so internal flows that send the computed price keep working.
+Sections, notes, down payments, re-invoiced expenses, delivery and
+reward lines are not restricted. When such a user duplicates an order,
+the copied lines are priced again by the pricelist.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
