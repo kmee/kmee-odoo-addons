@@ -34,7 +34,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
                     "name": login,
                     "login": login,
                     "email": "%s@example.com" % login,
-                    "groups_id": [(6, 0, group_ids)],
+                    "group_ids": [(6, 0, group_ids)],
                 }
             )
         )
@@ -59,7 +59,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
         When the sale order form is rendered
         Then the purchase_price (cost) is stripped from the line form and list
         """
-        self.assertNotIn(self.cost_group, self.salesman.groups_id)
+        self.assertNotIn(self.cost_group, self.salesman.group_ids)
         self.assertEqual(self._cost_nodes(self.salesman), {"form": 0, "list": 0})
 
     def test_purchase_price_visible_with_cost_group(self):
@@ -68,7 +68,7 @@ class TestSaleMarginCostSecurity(TransactionCase):
         When the sale order form is rendered
         Then the purchase_price (cost) is present in the line form and list
         """
-        self.assertIn(self.cost_group, self.cost_user.groups_id)
+        self.assertIn(self.cost_group, self.cost_user.group_ids)
         self.assertEqual(self._cost_nodes(self.cost_user), {"form": 1, "list": 1})
 
     def test_margin_visible_for_salesman_without_cost_group(self):
