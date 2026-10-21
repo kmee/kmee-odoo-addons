@@ -82,7 +82,7 @@ class DocumentExtractor(models.AbstractModel):
 
     def _extract_partners(self, text, company, data, confidence):
         """CNPJs com DV válido; o que difere do CNPJ da empresa é o emissor."""
-        company_cnpj = punctuation_rm(company.cnpj_cpf or "")
+        company_cnpj = punctuation_rm(company.vat or "")
         seen = []
         for match in CNPJ_CPF_RE.finditer(text):
             digits = punctuation_rm(re.sub(r"\s", "", match.group(1)))

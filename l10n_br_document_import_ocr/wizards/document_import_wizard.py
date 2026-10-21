@@ -35,8 +35,10 @@ class DocumentImportWizard(models.TransientModel):
     is_ocr_import = fields.Boolean(readonly=True)
     document_date = fields.Date()
     verify_code = fields.Char(string="Código de verificação")
+    # Na 18.0 o rps_number saiu do l10n_br_fiscal para o l10n_br_nfse.
+    rps_number = fields.Char(string="Número do RPS")
     amount_untaxed = fields.Float(string="Valor dos serviços")
-    amount_total = fields.Float(string="Valor total")
+    amount_total = fields.Monetary(string="Valor total")
     issqn_value = fields.Float(string="Valor do ISS")
     issqn_wh_value = fields.Float(string="ISS retido")
     service_type_id = fields.Many2one(
@@ -189,7 +191,7 @@ class DocumentImportWizard(models.TransientModel):
                     "configurações fiscais."
                 )
             )
-        return {
+        vals = {
             "company_id": self.company_id.id,
             "fiscal_operation_id": self.fiscal_operation_id.id,
             "fiscal_operation_type": "in",
@@ -197,11 +199,13 @@ class DocumentImportWizard(models.TransientModel):
             "document_type_id": self.document_type_id.id,
             "partner_id": self.issuer_partner_id.id,
             "document_number": self.document_number,
-            "rps_number": self.rps_number,
             "document_serie": self.document_serie or "1",
             "document_date": self.document_date,
             "imported_document": True,
         }
+        if "rps_number" in self.env["l10n_br_fiscal.document"]._fields:
+            vals["rps_number"] = self.rps_number
+        return vals
 
     def _create_ocr_edoc_line(self, edoc):
         operation_line = self.fiscal_operation_id.line_definition(
