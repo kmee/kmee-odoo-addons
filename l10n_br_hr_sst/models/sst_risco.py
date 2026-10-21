@@ -66,7 +66,8 @@ class L10nBrSstRisco(models.Model):
         string="Agente Nocivo",
         required=True,
         tracking=True,
-        help="Tabela 22 do eSocial. Ausência de exposição é o código "
+        help="Tabela 24 do eSocial (agentes nocivos e atividades, "
+        "aposentadoria especial). Ausência de exposição é o código "
         "09.01.001, e não a falta de registro.",
     )
     cod_ag_noc = fields.Char(
@@ -130,8 +131,10 @@ class L10nBrSstRisco(models.Model):
     # ── Consequências previdenciárias e trabalhistas ───────────────────────
     aposentadoria_especial_id = fields.Many2one(
         "l10n_br.esocial.aposentadoria.especial",
-        string="Enquadramento (Tabela 23)",
-        help="Enquadramento do agente para fins de aposentadoria especial.",
+        string="Enquadramento (Anexo IV do Decreto 3.048/1999)",
+        help="Classificação do agente nocivo no Anexo IV do Decreto "
+        "3.048/1999, para fins de aposentadoria especial. Não é tabela do "
+        "eSocial: no S-2240 o agente vai pelo código da Tabela 24.",
     )
     financiamento_aposent_id = fields.Many2one(
         "l10n_br.esocial.financiamento.aposent",
@@ -151,6 +154,13 @@ class L10nBrSstRisco(models.Model):
     periculosidade = fields.Boolean(
         string="Gera Periculosidade",
         tracking=True,
+    )
+    aviso_adicionais = fields.Char(
+        string="Aviso sobre os Adicionais",
+        compute="_compute_aviso_adicionais",
+        help="O mesmo agente pode ser insalubre e perigoso (radiação "
+        "ionizante, por exemplo, está no Anexo 5 da NR-15 e na NR-16). O "
+        "laudo registra os dois; o que não se acumula é o pagamento.",
     )
     # ── Vigência ───────────────────────────────────────────────────────────
     date_from = fields.Date(
@@ -187,27 +197,37 @@ class L10nBrSstRisco(models.Model):
                     % {"nome": rec.name or rec.agente_nocivo_id.name}
                 )
 
-    @api.constrains("insalubridade", "grau_insalubridade", "periculosidade")
-    def _check_adicionais(self):
-        """Insalubridade exige grau, e os dois adicionais não se acumulam.
+    @api.depends("insalubridade", "periculosidade")
+    def _compute_aviso_adicionais(self):
+        """Avisa que insalubridade e periculosidade não se pagam juntas.
 
-        A vedação do acúmulo é da Súmula 364 do TST e já existe no contrato;
-        repeti-la aqui evita que o laudo proponha o que a folha vai recusar.
+        O laudo descreve o ambiente e pode apontar os dois (NR-15, item 15.3, e
+        NR-16, item 16.2.1). A vedação é do pagamento: CLT, art. 193, par. 2,
+        e TST IRR Tema 17 (IRR-239-55.2011.5.02.0319), que valem mesmo quando
+        os fatos geradores são distintos. Bloquear o cadastro esconderia do
+        laudo uma exposição real; a escolha do adicional é feita no contrato.
         """
+        for rec in self:
+            rec.aviso_adicionais = (
+                _(
+                    "Este risco gera insalubridade e periculosidade. Os dois "
+                    "adicionais não se acumulam (CLT, art. 193, par. 2, e TST "
+                    "IRR Tema 17): o empregado opta por um deles, e sem opção "
+                    "a folha paga o de maior valor."
+                )
+                if rec.insalubridade and rec.periculosidade
+                else False
+            )
+
+    @api.constrains("insalubridade", "grau_insalubridade")
+    def _check_adicionais(self):
+        """Insalubridade exige o grau apurado no laudo (NR-15, item 15.2)."""
         for rec in self:
             if rec.insalubridade and not rec.grau_insalubridade:
                 raise ValidationError(
                     _(
                         "Risco %(nome)s: informe o grau de insalubridade "
                         "(mínimo, médio ou máximo) apurado no laudo."
-                    )
-                    % {"nome": rec.name or rec.agente_nocivo_id.name}
-                )
-            if rec.insalubridade and rec.periculosidade:
-                raise ValidationError(
-                    _(
-                        "Risco %(nome)s: o mesmo fator de risco não pode gerar "
-                        "insalubridade e periculosidade (Súmula 364 do TST)."
                     )
                     % {"nome": rec.name or rec.agente_nocivo_id.name}
                 )

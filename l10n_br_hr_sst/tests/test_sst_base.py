@@ -82,19 +82,48 @@ class TestSstBase(SstCommon):
                 }
             )
 
-    def test_risco_nao_acumula_adicionais(self):
-        """Súmula 364 do TST já no laudo, antes de chegar à folha."""
-        with self.assertRaises(ValidationError):
-            self.env["l10n_br.sst.risco"].create(
-                {
-                    "ambiente_id": self.ambiente.id,
-                    "agente_nocivo_id": self.agente_ruido.id,
-                    "insalubridade": True,
-                    "grau_insalubridade": "maximo",
-                    "periculosidade": True,
-                    "date_from": "2026-01-01",
-                }
-            )
+    def test_risco_insalubre_e_perigoso_e_aviso(self):
+        """O mesmo agente pode ser insalubre e perigoso: é aviso, não bloqueio.
+
+        Radiação ionizante, por exemplo, está no Anexo 5 da NR-15 e na NR-16.
+        O laudo registra os dois; quem não acumula é o pagamento (CLT, art.
+        193, par. 2, e TST IRR Tema 17), decidido pela opção do empregado.
+        """
+        risco = self.env["l10n_br.sst.risco"].create(
+            {
+                "ambiente_id": self.ambiente.id,
+                "agente_nocivo_id": self.agente_ruido.id,
+                "insalubridade": True,
+                "grau_insalubridade": "maximo",
+                "periculosidade": True,
+                "date_from": "2026-01-01",
+            }
+        )
+        self.assertIn("art. 193", risco.aviso_adicionais)
+        self.assertIn("Tema 17", risco.aviso_adicionais)
+        self.assertNotIn("364", risco.aviso_adicionais)
+
+    def test_risco_so_insalubre_sem_aviso(self):
+        self.assertFalse(self.risco.aviso_adicionais)
+
+    def test_numeros_de_tabela_do_esocial(self):
+        """Agentes nocivos são a Tabela 24; a Tabela 23 do eSocial é do FGTS."""
+        campos = self.env["l10n_br.sst.risco"]._fields
+        self.assertIn("Tabela 24", campos["agente_nocivo_id"].help)
+        self.assertNotIn("Tabela 22", campos["agente_nocivo_id"].help)
+        self.assertNotIn("Tabela 23", campos["aposentadoria_especial_id"].string)
+        self.assertIn("Tabela 02", campos["financiamento_aposent_id"].help)
+
+    # ── Grau de risco (NR-4) ────────────────────────────────────────────────
+
+    def test_grau_de_risco_da_organizacao(self):
+        """Grau de risco do Quadro I da NR-4, de 1 a 4, guardado na empresa."""
+        campo = self.env["res.company"]._fields["l10n_br_sst_grau_risco"]
+        self.assertEqual(
+            [valor for valor, _rotulo in campo.selection], ["1", "2", "3", "4"]
+        )
+        self.company.l10n_br_sst_grau_risco = "3"
+        self.assertEqual(self.company.l10n_br_sst_grau_risco, "3")
 
     def test_risco_ausencia_bloqueia_epi(self):
         """Ausência de agente nocivo não convive com EPI utilizado."""

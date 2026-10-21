@@ -21,6 +21,7 @@
         "views/sst_risco_views.xml",
         "views/hr_job_views.xml",
         "views/hr_contract_views.xml",
+        "views/res_company_views.xml",
         "views/menu_views.xml",
     ],
     "installable": True,
