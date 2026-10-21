@@ -16,6 +16,10 @@ class TestSaleOrderPriceSecurity(TransactionCase):
             "sale_order_price_security.group_sale_order_price_editor"
         )
         base_groups = "base.group_user,sales_team.group_sale_salesman_all_leads"
+        # with the Brazilian localization installed in the same database the
+        # order line form reads fiscal fields restricted to the fiscal users
+        if cls.env.ref("l10n_br_fiscal.group_user", raise_if_not_found=False):
+            base_groups += ",l10n_br_fiscal.group_user"
         cls.salesman = new_test_user(
             cls.env, login="price_sec_salesman", groups=base_groups
         )
