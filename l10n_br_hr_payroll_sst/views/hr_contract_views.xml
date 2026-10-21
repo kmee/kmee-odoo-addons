@@ -13,6 +13,15 @@
                 <field name="l10n_br_sst_insalubridade_laudo" readonly="1" />
                 <field name="l10n_br_sst_grau_laudo" readonly="1" />
                 <field name="l10n_br_sst_periculosidade_laudo" readonly="1" />
+                <field
+                    name="l10n_br_sst_opcao_adicional"
+                    invisible="not l10n_br_sst_insalubridade_laudo or not l10n_br_sst_periculosidade_laudo"
+                />
+                <field
+                    name="l10n_br_sst_opcao_data"
+                    invisible="not l10n_br_sst_opcao_adicional"
+                    required="l10n_br_sst_opcao_adicional"
+                />
                 <field name="l10n_br_sst_aliquota_gilrat" readonly="1" />
                 <field
                     name="l10n_br_sst_divergencia"
