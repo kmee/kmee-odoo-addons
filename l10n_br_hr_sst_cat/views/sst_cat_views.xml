@@ -2,10 +2,10 @@
 <odoo>
 
     <record id="l10n_br_sst_cat_view_tree" model="ir.ui.view">
-        <field name="name">l10n_br.sst.cat.tree</field>
+        <field name="name">l10n_br.sst.cat.list</field>
         <field name="model">l10n_br.sst.cat</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-danger="prazo_situacao == 'atrasada'"
                 decoration-warning="prazo_situacao == 'hoje'"
             >
@@ -16,7 +16,7 @@
                 <field name="prazo_situacao" />
                 <field name="numero_recibo" optional="show" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -71,11 +71,7 @@
                         </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -116,7 +112,7 @@
     <record id="l10n_br_sst_cat_action" model="ir.actions.act_window">
         <field name="name">CATs</field>
         <field name="res_model">l10n_br.sst.cat</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>

@@ -30,7 +30,7 @@ class HrEmployee(models.Model):
             "name": _("Acidentes de Trabalho"),
             "type": "ir.actions.act_window",
             "res_model": "l10n_br.sst.acidente",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("employee_id", "=", self.id)],
             "context": {"default_employee_id": self.id},
         }

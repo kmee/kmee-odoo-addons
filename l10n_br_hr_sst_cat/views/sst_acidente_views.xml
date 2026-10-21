@@ -2,10 +2,10 @@
 <odoo>
 
     <record id="l10n_br_sst_acidente_view_tree" model="ir.ui.view">
-        <field name="name">l10n_br.sst.acidente.tree</field>
+        <field name="name">l10n_br.sst.acidente.list</field>
         <field name="model">l10n_br.sst.acidente</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="houve_obito">
+            <list decoration-danger="houve_obito">
                 <field name="date_acidente" />
                 <field name="employee_id" />
                 <field name="tp_acid" />
@@ -15,7 +15,7 @@
                 <field name="houve_obito" />
                 <field name="cat_count" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -177,11 +177,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -189,7 +185,7 @@
     <record id="l10n_br_sst_acidente_action" model="ir.actions.act_window">
         <field name="name">Acidentes de Trabalho</field>
         <field name="res_model">l10n_br.sst.acidente</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>
