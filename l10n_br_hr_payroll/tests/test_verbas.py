@@ -173,10 +173,14 @@ class TestPericulosidadeInsalubridade(PayrollCommon):
         self.assertAlmostEqualMoney(adicional, self.SALARIO_MINIMO_2024 * 0.40)
 
     def test_periculosidade_e_insalubridade_nao_acumulam(self):
-        """Periculosidade e insalubridade não acumulam (Súmula 364 TST)."""
+        """Não acumulam: CLT, art. 193, par. 2, e TST IRR Tema 17.
+
+        A Súmula 364 do TST trata de exposição eventual ou intermitente, não do
+        acúmulo, e não pode ser a citação da mensagem.
+        """
         emp = self._create_employee()
         contract = self._create_contract(emp, wage=5000.00)
-        with self.assertRaises(ValidationError):
+        with self.assertRaisesRegex(ValidationError, "art. 193") as erro:
             contract.write(
                 {
                     "l10n_br_periculosidade": True,
@@ -184,6 +188,7 @@ class TestPericulosidadeInsalubridade(PayrollCommon):
                     "l10n_br_grau_insalubridade": "maximo",
                 }
             )
+        self.assertNotIn("364", str(erro.exception))
 
 
 class TestSalarioFamilia(PayrollCommon):
