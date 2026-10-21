@@ -47,7 +47,10 @@ class SaleOrderLine(models.Model):
     def _get_date_end(self):
         self.ensure_one()
         date_end = self.date_start
-        rule_type = self._get_auto_renew_rule_type()
+        # 17.0: the line has no _get_auto_renew_rule_type any more
+        rule_type = self.recurring_rule_type
+        if rule_type == "monthlylastday":
+            rule_type = "monthly"
 
         if rule_type == "daily":
             date_end += relativedelta(days=(self.period_count)) - relativedelta(days=1)
@@ -55,6 +58,14 @@ class SaleOrderLine(models.Model):
             date_end += relativedelta(weeks=(self.period_count)) - relativedelta(days=1)
         elif rule_type == "monthly":
             date_end += relativedelta(months=(self.period_count)) - relativedelta(
+                days=1
+            )
+        elif rule_type == "quarterly":
+            date_end += relativedelta(months=3 * self.period_count) - relativedelta(
+                days=1
+            )
+        elif rule_type == "semesterly":
+            date_end += relativedelta(months=6 * self.period_count) - relativedelta(
                 days=1
             )
         elif rule_type == "yearly":
@@ -73,7 +84,7 @@ class SaleOrderLine(models.Model):
     @api.onchange("period_qty", "period_count", "price_unit", "discount")
     def _onchange_period(self):
         for record in self:
-            if record.product_id.is_contract:
+            if record.product_id.is_contract and record.date_start:
                 # Recalcular a data de fim com base na nova configuração de períodos
                 record.date_end = record._get_date_end()
 
@@ -83,37 +94,14 @@ class SaleOrderLine(models.Model):
             self.period_qty = self.product_id.default_period_qty
             self.period_count = self.product_id.default_period_count
 
-    # Calcular totais da linha considerando apenas a quantidade de licenças contratadas
-    # e não a multiplicação por períodos. Mantemos o comportamento fiscal padrão.
-    @api.depends(
-        "period_qty",
-        "discount",
-        "price_unit",
-        "tax_id",
-        "order_id.currency_id",
-        "order_id.partner_id",
-    )
+    # Calcular totais da linha considerando apenas a quantidade de licencas
+    # contratadas e nao a multiplicacao por periodos. 18.0: a linha e o pedido
+    # calculam os totais pela base line de impostos, entao a quantidade vai nela.
+    @api.depends("period_qty")
     def _compute_amount(self):
-        for line in self:
-            # Preço com desconto por licença
-            price_after_discount = line.price_unit * (
-                1 - (line.discount or 0.0) / 100.0
-            )
+        return super()._compute_amount()
 
-            # Calcular impostos usando a quantidade de licenças contratadas (period_qty)
-            taxes = line.tax_id.compute_all(
-                price_after_discount,
-                currency=line.order_id.currency_id,
-                quantity=line.period_qty or 0.0,
-                product=line.product_id,
-                partner=line.order_id.partner_shipping_id,
-            )
-
-            line.update(
-                {
-                    "price_tax": taxes.get("total_included", 0.0)
-                    - taxes.get("total_excluded", 0.0),
-                    "price_total": taxes.get("total_included", 0.0),
-                    "price_subtotal": taxes.get("total_excluded", 0.0),
-                }
-            )
+    def _prepare_base_line_for_taxes_computation(self, **kwargs):
+        return super()._prepare_base_line_for_taxes_computation(
+            **{"quantity": self.period_qty or 0.0, **kwargs}
+        )
