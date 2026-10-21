@@ -133,15 +133,11 @@ class TestSalePartialLock(TransactionCase):
     def test_locked_order_can_be_cancelled(self):
         """
         Given a locked order
-        When the Cancel button method runs (without the confirmation wizard)
-        Then the order is cancelled; with the wizard it asks for confirmation first
+        When the Cancel button method runs
+        Then the order is cancelled (19.0 has no cancel confirmation wizard)
         """
         locked = self._order(self.to_invoice, locked=True)
-        action = locked.action_cancel()
-        self.assertEqual(action["res_model"], "sale.order.cancel")
-        self.assertEqual(locked.state, "sale")
-        self.assertTrue(locked.locked)
-        locked.with_context(disable_cancel_warning=True).action_cancel()
+        locked.action_cancel()
         self.assertEqual(locked.state, "cancel")
 
     def test_locked_order_can_still_be_invoiced_through_the_wizard(self):
