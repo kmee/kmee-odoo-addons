@@ -13,7 +13,8 @@ class ApplicantGetRefuseReason(models.TransientModel):
                 "target": "new",
                 "context": {
                     "default_model": "hr.applicant",
-                    "default_res_id": self.applicant_ids[0].id,
+                    "default_res_ids": self.applicant_ids[:1].ids,
+                    "default_composition_mode": "comment",
                     "default_template_id": self.template_id.id,
                     "force_email": True,
                     "refuse_reason_wizard_id": self.id,
