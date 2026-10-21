@@ -75,10 +75,26 @@
                     <group>
                         <group string="Acidente">
                             <field name="employee_id" />
+                            <field name="tp_acid" />
+                            <field
+                                name="date_inicio_incapacidade"
+                                attrs="{'invisible': [('tp_acid', '!=', '2')]}"
+                            />
+                            <field
+                                name="date_segregacao"
+                                attrs="{'invisible': [('tp_acid', '!=', '2')]}"
+                            />
+                            <field
+                                name="date_diagnostico"
+                                attrs="{'invisible': [('tp_acid', '!=', '2')]}"
+                            />
                             <field name="date_acidente" />
                             <field name="hora_acidente" placeholder="1430" />
-                            <field name="hrs_trab_antes_acid" placeholder="0600" />
-                            <field name="tp_acid" />
+                            <field
+                                name="hrs_trab_antes_acid"
+                                placeholder="0600"
+                                attrs="{'invisible': [('tp_acid', '=', '2')]}"
+                            />
                             <field name="situacao_geradora_id" />
                             <field name="iniciat_cat" />
                         </group>
