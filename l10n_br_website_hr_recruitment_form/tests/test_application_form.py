@@ -25,24 +25,16 @@ class TestApplicationForm(HttpCase):
         cls.job_pj = cls.env["hr.job"].create(
             {"name": "Consultor", "contract_type_id": cls.pj.id}
         )
-        # 18.0: name and e-mail live on the hr.candidate of the application
-        Candidate = cls.env["hr.candidate"]
+        # 19.0: name and e-mail are back on the application (no hr.candidate)
         cls.applicant = cls.env["hr.applicant"].create(
             {
-                "candidate_id": Candidate.create(
-                    {
-                        "partner_name": "Maria Candidata",
-                        "email_from": "maria@example.com",
-                    }
-                ).id,
+                "partner_name": "Maria Candidata",
+                "email_from": "maria@example.com",
                 "job_id": cls.job.id,
             }
         )
         cls.applicant_pj = cls.env["hr.applicant"].create(
-            {
-                "candidate_id": Candidate.create({"partner_name": "Consultoria PJ"}).id,
-                "job_id": cls.job_pj.id,
-            }
+            {"partner_name": "Consultoria PJ", "job_id": cls.job_pj.id}
         )
         cls.state = cls.env["res.country.state"].search(
             [("code", "=", "SP"), ("country_id.code", "=", "BR")], limit=1
@@ -117,9 +109,14 @@ class TestApplicationForm(HttpCase):
         Then an e-mail with the form link is sent to the applicant and the
         message is logged on the applicant
         """
-        with patch(
-            "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email",
-            return_value="<msg-id>",
+        # 19.0: mail.mail skips sending during tests unless _disable_send is
+        # patched on the registry class (no SMTP connection either), as the
+        # core mail tests do
+        mail_server_cls = type(self.env["ir.mail_server"])
+        with patch.object(
+            mail_server_cls, "_disable_send", lambda _: False
+        ), patch.object(mail_server_cls, "_connect__", return_value=None), patch.object(
+            mail_server_cls, "send_email", return_value="<msg-id>"
         ) as send_email:
             self.applicant.action_share_applicant_form()
         self.assertTrue(send_email.called)
