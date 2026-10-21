@@ -27,7 +27,7 @@ class TestPurchaseReportHideDate(TransactionCase):
                             "product_qty": 2,
                             "price_unit": 10,
                             "date_planned": "2031-07-22 12:00:00",
-                            "taxes_id": [(5, 0, 0)],
+                            "tax_ids": [(5, 0, 0)],
                         },
                     )
                 ],
