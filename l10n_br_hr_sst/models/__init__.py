@@ -9,3 +9,4 @@ from . import sst_risco
 from . import hr_job
 from . import hr_contract
 from . import hr_employee
+from . import res_company

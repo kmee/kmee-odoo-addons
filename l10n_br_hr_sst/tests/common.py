@@ -3,7 +3,7 @@
 
 from odoo.tests.common import TransactionCase
 
-# Agentes nocivos usados nos cenários (Tabela 22 do eSocial).
+# Agentes nocivos usados nos cenários (Tabela 24 do eSocial).
 AGENTE_RUIDO = "l10n_br_esocial.agente_noc_02_01_001"
 AGENTE_AUSENCIA = "l10n_br_esocial.agente_noc_09_01_001"
 
