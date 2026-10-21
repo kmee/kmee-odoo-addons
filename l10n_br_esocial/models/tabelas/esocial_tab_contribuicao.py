@@ -6,7 +6,7 @@ from odoo import api, fields, models
 
 class ESocialFpasTerceiros(models.Model):
     _name = "l10n_br.esocial.fpas.terceiros"
-    _description = "eSocial Tab 04 - FPAS/Terceiros"
+    _description = "eSocial Tabela 04 - FPAS/Terceiros"
     _order = "cod_fpas"
 
     cod_fpas = fields.Char(required=True, index=True)
@@ -28,13 +28,13 @@ class ESocialFpasTerceiros(models.Model):
 class ESocialIncidenciaIrrf(models.Model):
     _name = "l10n_br.esocial.incidencia.irrf"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 21 - Incidência Tributária IRRF"
+    _description = "eSocial Tabela 21 - Incidência Tributária IRRF"
 
 
 class ESocialCompatFpas(models.Model):
     _name = "l10n_br.esocial.compat.fpas"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 24 - Compatibilidade FPAS/Classificação Tributária"
+    _description = "eSocial Tabela 22 - Compatibilidade FPAS/Classificação Tributária"
 
     nome = fields.Char(required=False)
     class_trib_list = fields.Char(string="Classificações Tributárias")
@@ -43,20 +43,20 @@ class ESocialCompatFpas(models.Model):
 class ESocialTribExterior(models.Model):
     _name = "l10n_br.esocial.trib.exterior"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 30 - Tributação Beneficiários Exterior"
+    _description = "eSocial Tabela 30 - Tributação Beneficiários Exterior"
 
 
 class ESocialCodigoTerceiro(models.Model):
     _name = "l10n_br.esocial.codigo.terceiro"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 51 - Códigos de Terceiro"
+    _description = "eSocial - Códigos de Terceiro"
 
     obriga = fields.Char()
 
 
 class ESocialFaixaInss(models.Model):
     _name = "l10n_br.esocial.faixa.inss"
-    _description = "eSocial Tab 57 - Contribuição Previdenciária Empregado"
+    _description = "eSocial - Contribuição Previdenciária Empregado"
     _order = "dt_inicio, inf_sal_cont"
 
     inf_sal_cont = fields.Char(required=True)
@@ -82,7 +82,7 @@ class ESocialFaixaInss(models.Model):
 
 class ESocialFaixaIrrf(models.Model):
     _name = "l10n_br.esocial.faixa.irrf"
-    _description = "eSocial Tab 58 - Retenção IRRF"
+    _description = "eSocial - Retenção IRRF"
     _order = "dt_inicio, inf_base_calc"
 
     inf_base_calc = fields.Char(required=True)
@@ -108,7 +108,7 @@ class ESocialFaixaIrrf(models.Model):
 
 class ESocialFaixaSalFamilia(models.Model):
     _name = "l10n_br.esocial.faixa.sal.familia"
-    _description = "eSocial Tab 65 - Salário Família"
+    _description = "eSocial - Salário Família"
     _order = "dt_inicio, inf_base_calc"
 
     inf_base_calc = fields.Char(required=True)
@@ -134,10 +134,10 @@ class ESocialFaixaSalFamilia(models.Model):
 class ESocialDescricaoFpas(models.Model):
     _name = "l10n_br.esocial.descricao.fpas"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 85 - Descrição FPAS"
+    _description = "eSocial - Descrição FPAS"
 
 
 class ESocialTetoVerdeAmarela(models.Model):
     _name = "l10n_br.esocial.teto.verde.amarela"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 86 - Teto Isenção Programa Verde e Amarela"
+    _description = "eSocial - Teto Isenção Programa Verde e Amarela"
