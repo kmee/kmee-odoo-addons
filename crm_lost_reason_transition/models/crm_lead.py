@@ -20,7 +20,10 @@ class CrmLead(models.Model):
                 raise UserError(
                     _("Please, select a lost reason before mark lead as lost.")
                 )
-            lead._apply_lost_reason_transition()
+        if "lost_reason_id" not in kwargs:
+            # When the reason comes in kwargs, super() writes it on the archived
+            # leads and write() already applied the transition.
+            self._apply_lost_reason_transition()
         return res
 
     def _apply_lost_reason_transition(self):
