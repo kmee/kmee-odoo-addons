@@ -55,9 +55,10 @@ class BaseWipAbstract(models.AbstractModel):
             record.reaction_time = display_time(reaction_time, 5)
 
     def _compute_wip_ids(self):
+        model_id = self.env["base.wip"]._get_model_id(self._name)
         for record in self:
             record.wip_ids = record.wip_ids.search(
-                [("model_id", "=", record._name), ("res_id", "=", record.id)]
+                [("model_id", "=", model_id), ("res_id", "=", record.id)]
             )
 
     wip_ids = fields.One2many(comodel_name="base.wip", compute="_compute_wip_ids")
