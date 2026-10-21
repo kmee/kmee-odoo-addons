@@ -38,13 +38,13 @@
                 <notebook>
                     <page string="Exames Complementares" name="exames">
                         <field name="l10n_br_exame_ids">
-                            <tree editable="bottom">
+                            <list editable="bottom">
                                 <field name="procedimento_id" />
                                 <field name="date" />
                                 <field name="ord_exame" />
                                 <field name="ind_result" />
                                 <field name="observacao" />
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page
@@ -65,7 +65,7 @@
     >
         <field name="name">Vencimentos de ASO</field>
         <field name="res_model">hr.employee.medical.examination</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('state', '=', 'done')]</field>
         <field name="context">{'search_default_group_tipo': 1}</field>
     </record>
