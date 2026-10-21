@@ -30,6 +30,7 @@ class TestAllocationTags(TransactionCase):
             {
                 "name": "Tagged leave",
                 "code": "TAGGED",
+                "unit_of_measure": "day",
                 "requires_allocation": True,
                 "employee_requests": False,
                 "allocation_validation_type": "hr",
