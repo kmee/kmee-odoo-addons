@@ -12,9 +12,14 @@ class TestSaleOrderTemplatePricelist(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        # make the pricelist field visible in the sale order form
+        # make the pricelist and template fields visible in the sale order form
         cls.env.user.write(
-            {"groups_id": [(4, cls.env.ref("product.group_product_pricelist").id)]}
+            {
+                "group_ids": [
+                    (4, cls.env.ref("product.group_product_pricelist").id),
+                    (4, cls.env.ref("sale_management.group_sale_order_template").id),
+                ]
+            }
         )
         Pricelist = cls.env["product.pricelist"]
         cls.pricelist_customer = Pricelist.create({"name": "Customer pricelist"})
