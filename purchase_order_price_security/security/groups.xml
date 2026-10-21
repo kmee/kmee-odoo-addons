@@ -4,4 +4,11 @@
         <field name="name">Can Edit The Price in Purchase</field>
         <field name="category_id" ref="base.module_category_usability" />
     </record>
+    <!-- purchase administrators (and the admin user) are never price locked -->
+    <record id="purchase.group_purchase_manager" model="res.groups">
+        <field
+            name="implied_ids"
+            eval="[(4, ref('purchase_order_price_security.group_purchase_order_price_editor'))]"
+        />
+    </record>
 </odoo>

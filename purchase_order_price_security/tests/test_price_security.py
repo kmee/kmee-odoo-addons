@@ -27,6 +27,12 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
             groups=groups
             + ",purchase_order_price_security.group_purchase_order_price_editor",
         )
+        cls.manager = new_test_user(
+            cls.env,
+            login="price_sec_buyer_manager",
+            groups="base.group_user,purchase.group_purchase_manager,"
+            "account.group_account_invoice",
+        )
         cls.partner = cls.env["res.partner"].create({"name": "Vendor"})
         cls.product = cls.env["product.product"].create(
             {
@@ -210,6 +216,25 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
             .create(self._line_vals(price_unit=99.0))
         )
         self.assertEqual(new_line.price_unit, 99.0)
+
+    def test_purchase_manager_can_edit_price_buyer_cannot(self):
+        """
+        Given a purchase administrator (and the admin user) and a plain buyer
+        When each one writes price_unit on a line by RPC/ORM
+        Then the administrators store the price through the implied price
+        editor group, while the buyer is still refused
+        """
+        admin = self.env.ref("base.user_admin")
+        self.assertIn(self.editor_group, self.manager.groups_id)
+        self.assertIn(self.editor_group, admin.groups_id)
+        line = self.order.order_line[0]
+        line.with_user(self.manager).write({"price_unit": 7.5})
+        self.assertEqual(line.price_unit, 7.5)
+        line.with_user(admin).write({"price_unit": 8.5})
+        self.assertEqual(line.price_unit, 8.5)
+        with self.assertRaises(AccessError):
+            line.with_user(self.buyer).write({"price_unit": 1.0})
+        self.assertEqual(line.price_unit, 8.5)
 
     def test_buyer_purchase_flow_keeps_working(self):
         """
