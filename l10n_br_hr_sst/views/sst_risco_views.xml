@@ -49,6 +49,13 @@
                             />
                         </group>
                     </group>
+                    <div
+                        class="alert alert-warning"
+                        role="alert"
+                        invisible="not aviso_adicionais"
+                    >
+                        <field name="aviso_adicionais" readonly="1" />
+                    </div>
                     <notebook>
                         <page string="Avalia&#231;&#227;o" name="avaliacao">
                             <group>
