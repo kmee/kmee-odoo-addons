@@ -218,9 +218,11 @@ class Lead(models.Model):
                 # Only fully qualified if all dimensions have values and total score is high
                 if has_all_dimensions:
                     lead.bant_qualification_status = "fully_qualified"
-                else:
+                else:  # pragma: no cover
+                    # unreachable: with a zero dimension the maximum total is 9
                     lead.bant_qualification_status = "qualified"
 
+    @api.depends("bant_total_score")
     def _compute_bant_progress(self):
         for lead in self:
             # Maximum possible score is 12 (3 points per dimension * 4 dimensions)
