@@ -2,10 +2,10 @@
 <odoo>
 
     <record id="document_import_extraction_tree" model="ir.ui.view">
-        <field name="name">l10n_br.document.import.extraction.tree</field>
+        <field name="name">l10n_br.document.import.extraction.list</field>
         <field name="model">l10n_br.document.import.extraction</field>
         <field name="arch" type="xml">
-            <tree create="false">
+            <list create="false">
                 <field name="create_date" />
                 <field name="name" />
                 <field name="partner_id" />
@@ -13,7 +13,7 @@
                 <field name="state" />
                 <field name="duration" widget="float_time" optional="hide" />
                 <field name="document_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -54,7 +54,7 @@
     <record id="document_import_extraction_action" model="ir.actions.act_window">
         <field name="name">Extrações de importação</field>
         <field name="res_model">l10n_br.document.import.extraction</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <menuitem

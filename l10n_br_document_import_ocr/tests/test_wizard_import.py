@@ -5,10 +5,9 @@ import base64
 import os
 from unittest import mock
 
-from xsdata.exceptions import ParserError
-
 from odoo.exceptions import UserError
 from odoo.tests import TransactionCase, tagged
+from odoo.tools import mute_logger
 
 from odoo.addons.l10n_br_document_import_ocr.models.ocr_engine import OcrEngine
 
@@ -27,13 +26,13 @@ class TestOcrImportWizard(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.company
-        cls.company.cnpj_cpf = "30.360.463/0001-25"
+        cls.company.vat = "30.360.463/0001-25"
         cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Servicos Digitais Exemplo",
                 "legal_name": "SERVICOS DIGITAIS EXEMPLO LTDA",
                 "is_company": True,
-                "cnpj_cpf": "04.391.789/0001-00",
+                "vat": "04.391.789/0001-00",
                 "country_id": cls.env.ref("base.br").id,
             }
         )
@@ -137,11 +136,12 @@ class TestOcrImportWizard(TransactionCase):
         with self.assertRaises(UserError):
             duplicate.action_confirm_ocr_import()
 
+    @mute_logger("odoo.addons.l10n_br_fiscal.wizards.document_import_wizard")
     def test_xml_segue_para_o_fluxo_padrao(self):
         """Arquivo XML não entra no pipeline OCR (vai para o XmlParser)."""
         wizard = self._make_wizard()
         xml = base64.b64encode(b"<?xml version='1.0'?><nota><x>1</x></nota>")
-        with self.assertRaises(ParserError):
+        with self.assertRaises(UserError):
             # sem módulo de NF-e instalado, a cadeia base rejeita o binding;
             # o essencial é NÃO cair no fluxo OCR
             wizard.file = xml

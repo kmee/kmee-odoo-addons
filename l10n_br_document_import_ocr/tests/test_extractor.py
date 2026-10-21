@@ -20,7 +20,7 @@ class TestDocumentExtractor(TransactionCase):
         super().setUpClass()
         cls.extractor = cls.env["l10n_br.document.extractor"]
         cls.company = cls.env.company
-        cls.company.cnpj_cpf = "30.360.463/0001-25"
+        cls.company.vat = "30.360.463/0001-25"
 
     def _extract(self, name="nfse_sp_texto.txt"):
         data, confidence, method = self.extractor.extract(fixture(name), self.company)
