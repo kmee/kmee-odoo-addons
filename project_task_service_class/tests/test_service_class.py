@@ -19,7 +19,7 @@ class TestProjectTaskServiceClass(TransactionCase):
                 "name": "Project User",
                 "login": "sc_project_user",
                 "email": "sc_project_user@example.com",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -75,9 +75,8 @@ class TestProjectTaskServiceClass(TransactionCase):
         report = self.env["report.project.task.user"]
         found = report.search([("service_class_id", "=", self.expedite.id)])
         self.assertEqual(len(found), 1)
-        groups = report.read_group(
+        groups = report._read_group(
             [("service_class_id", "in", (self.expedite | self.standard).ids)],
-            ["service_class_id"],
             ["service_class_id"],
         )
         self.assertEqual(len(groups), 2)
@@ -87,9 +86,8 @@ class TestProjectTaskServiceClass(TransactionCase):
         groups appear."""
         self._task(service_class_id=self.expedite.id)
         self._task(service_class_id=self.standard.id)
-        groups = self.env["project.task"].read_group(
+        groups = self.env["project.task"]._read_group(
             [("project_id", "=", self.project.id)],
-            ["service_class_id"],
             ["service_class_id"],
         )
         self.assertEqual(len(groups), 2)
