@@ -207,7 +207,7 @@ class TestCrmLostReasonTransition(TransactionCase):
                 "name": login,
                 "login": login,
                 "email": "%s@example.com" % login,
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
