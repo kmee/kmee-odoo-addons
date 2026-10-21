@@ -1,13 +1,9 @@
-import sys
-import unittest
+from odoo.tests.common import BaseCase
 
-# Importe direto para evitar carregar o modelo Odoo
-SYS_PATH_INSERT = "/opt/odoo/custom/src/private/helpdesk_description_optimizer/models"
-sys.path.insert(0, SYS_PATH_INSERT)
-from html_sanitizer import HtmlSanitizer  # noqa: E402
+from ..models.html_sanitizer import HtmlSanitizer
 
 
-class TestRemoveZeroWidthChars(unittest.TestCase):
+class TestRemoveZeroWidthChars(BaseCase):
     def setUp(self):
         super().setUp()
         self.s = HtmlSanitizer()
@@ -37,7 +33,7 @@ class TestRemoveZeroWidthChars(unittest.TestCase):
         self.assertEqual(self.s.remove_zero_width_chars(""), "")
 
 
-class TestNormalizeImageStyles(unittest.TestCase):
+class TestNormalizeImageStyles(BaseCase):
     def setUp(self):
         super().setUp()
         self.s = HtmlSanitizer()
@@ -80,7 +76,7 @@ class TestNormalizeImageStyles(unittest.TestCase):
         self.assertNotIn("5in", result)
 
 
-class TestRemoveDuplicateBlocks(unittest.TestCase):
+class TestRemoveDuplicateBlocks(BaseCase):
     def setUp(self):
         super().setUp()
         self.s = HtmlSanitizer()
@@ -118,11 +114,9 @@ class TestRemoveDuplicateBlocks(unittest.TestCase):
 
     def test_different_blocks_preserved(self):
         html = (
-            "<div>Bloco A com conteúdo suficientemente longo para ser considerado "
-            * 3
+            "<div>Bloco A com conteúdo suficientemente longo para ser considerado " * 3
             + "</div>"
-            "<div>Bloco B com conteúdo diferente suficientemente longo aqui  "
-            * 3
+            "<div>Bloco B com conteúdo diferente suficientemente longo aqui  " * 3
             + "</div>"
         )
         result = self.s.remove_duplicate_blocks(html)
@@ -130,7 +124,7 @@ class TestRemoveDuplicateBlocks(unittest.TestCase):
         self.assertIn("Bloco B", result)
 
 
-class TestCollapseEmptyParagraphs(unittest.TestCase):
+class TestCollapseEmptyParagraphs(BaseCase):
     def setUp(self):
         super().setUp()
         self.s = HtmlSanitizer()
@@ -167,7 +161,7 @@ class TestCollapseEmptyParagraphs(unittest.TestCase):
         self.assertIn("<p>C</p>", result)
 
 
-class TestTruncate(unittest.TestCase):
+class TestTruncate(BaseCase):
     def setUp(self):
         super().setUp()
         self.s = HtmlSanitizer()
@@ -218,7 +212,7 @@ class TestTruncate(unittest.TestCase):
         self.assertFalse(was_truncated)
 
 
-class TestSanitizePipeline(unittest.TestCase):
+class TestSanitizePipeline(BaseCase):
     def setUp(self):
         super().setUp()
         self.s = HtmlSanitizer()
@@ -280,22 +274,22 @@ class TestSanitizePipeline(unittest.TestCase):
         """
         html = """
         <div class="note-editable odoo-editor-editable" id="description">
-            <p><span style="font-size:12.0pt; font-family:&quot;Aptos&quot;,sans-serif">
-                Bom dia <a href="mailto:anne.fake@agcapital.com.br">@Anne Fake</a>, tudo bem?
+            <p><span style="font-size:12.0pt">
+                Bom dia <a href="mailto:anne.fake@example.com">@Anne Fake</a>, tudo bem?
             </span></p>
-            <p><span style="font-size:12.0pt; font-family:&quot;Aptos&quot;,sans-serif">&nbsp;</span></p>
-            <p><span style="font-size:12.0pt; font-family:&quot;Aptos&quot;,sans-serif">
-                Precisamos fazer o levantamento dos valores e créditos apurados nos últimos anos.
+            <p><span style="font-size:12.0pt">&nbsp;</span></p>
+            <p><span style="font-size:12.0pt">
+                Precisamos levantar os valores e créditos apurados nos últimos anos.
             </span></p>
-            <p><span style="font-size:12.0pt; font-family:&quot;Aptos&quot;,sans-serif">&nbsp;</span></p>
-            <p><span style="font-size:12.0pt; font-family:&quot;Aptos&quot;,sans-serif">Att,</span></p>
+            <p><span style="font-size:12.0pt">&nbsp;</span></p>
+            <p><span style="font-size:12.0pt">Att,</span></p>
             <div>
                 <p><b><span style="font-size:8.0pt">DENISE FAKE</span></b></p>
                 <p><span style="font-size:8.0pt">Finance - tax</span></p>
             </div>
             <p>&nbsp;</p>
             <div>
-                <p><b>De:</b> Anne Fake &lt;anne.fake@agcapital.com.br&gt;</p>
+                <p><b>De:</b> Anne Fake &lt;anne.fake@example.com&gt;</p>
                 <p><b>Enviada em:</b> terça-feira, 18 de março de 2025 14:40</p>
                 <p><b>Assunto:</b> [External] RES: Ciência do processo</p>
             </div>
@@ -341,7 +335,7 @@ class TestSanitizePipeline(unittest.TestCase):
         # Verifica que conteúdo real foi preservado
         self.assertIn("Bom dia", result)
         self.assertIn("Anne Fake", result)
-        self.assertIn("Precisamos fazer o levantamento", result)
+        self.assertIn("Precisamos levantar", result)
         self.assertIn("DENISE FAKE", result)
         self.assertIn("Finance - tax", result)
 

@@ -9,6 +9,8 @@
  */
 
 odoo.define("helpdesk_description_optimizer.description_optimizer", function (require) {
+    "use strict";
+
     const rpc = require("web.rpc");
     const initializedContainers = new WeakSet();
     const initializedRecords = new Set();

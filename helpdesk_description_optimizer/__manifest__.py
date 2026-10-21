@@ -3,7 +3,7 @@
     "version": "16.0.1.0.0",
     "category": "Tools",
     "summary": "Otimiza parsing e renderização do campo description",
-    "depends": ["ag_helpdesk", "queue_job"],
+    "depends": ["helpdesk_mgmt", "queue_job"],
     "data": [
         "security/ir.model.access.csv",
         "views/helpdesk_reprocess_wizard.xml",
@@ -16,4 +16,5 @@
     "installable": True,
     "license": "LGPL-3",
     "author": "KMEE",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
 }

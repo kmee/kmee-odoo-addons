@@ -150,7 +150,6 @@ class HelpdeskTicket(models.Model):
                     vals["description"] = sanitized
                     vals["description_full"] = original
 
-        # Chama o super() que pode ser ag_helpdesk ou helpdesk
         return super().create(vals_list)
 
     def write(self, vals):
@@ -164,5 +163,4 @@ class HelpdeskTicket(models.Model):
             vals["description"] = sanitized
             vals["description_full"] = original
 
-        # Chama o super() que pode ser ag_helpdesk ou helpdesk
         return super().write(vals)

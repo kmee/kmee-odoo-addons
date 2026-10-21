@@ -11,7 +11,7 @@ class TestHelpdeskReprocessWizard(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, test_queue_job_no_delay=True))
+        cls.env = cls.env(context=dict(cls.env.context, queue_job__no_delay=True))
         cls.team = cls.env["helpdesk.ticket.team"].create(
             {
                 "name": "Reprocess Wizard Team",

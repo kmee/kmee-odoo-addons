@@ -134,7 +134,8 @@ class HelpdeskReprocessWizard(models.Model):
                     {
                         "validation_state": "success",
                         "validation_message": _(
-                            "Validação concluída com sucesso. O queue_job está processando jobs."
+                            "Validação concluída com sucesso. "
+                            "O queue_job está processando jobs."
                         ),
                     }
                 )
@@ -152,7 +153,8 @@ class HelpdeskReprocessWizard(models.Model):
                     {
                         "validation_state": "testing",
                         "validation_message": _(
-                            "Validação em andamento. Aguarde a execução do job de teste e atualize o status."
+                            "Validação em andamento. Aguarde a execução do job "
+                            "de teste e atualize o status."
                         ),
                     }
                 )
@@ -175,9 +177,9 @@ class HelpdeskReprocessWizard(models.Model):
 
         delayed_wizard = self.with_user(SUPERUSER_ID)
         try:
-            delayed_wizard.with_delay(description=description)._queue_job_smoke_test(
-                token
-            )
+            job = delayed_wizard.with_delay(
+                description=description
+            )._queue_job_smoke_test(token)
         except Exception:
             self._set_jobrunner_enabled_param(False)
             self.write(
@@ -190,18 +192,12 @@ class HelpdeskReprocessWizard(models.Model):
             )
             raise
 
-        job = (
-            self.env["queue.job"]
-            .sudo()
-            .search(
-                [("name", "=", description)],
-                order="id desc",
-                limit=1,
-            )
-        )
-        if job:
-            self.write({"validation_job_uuid": job.uuid})
-        else:
+        # with_delay devolve o job enfileirado; sem fila (queue_job__no_delay)
+        # o smoke test ja rodou e deixou a validacao como success.
+        job_uuid = getattr(job, "uuid", False)
+        if job_uuid:
+            self.write({"validation_job_uuid": job_uuid})
+        elif self.validation_state != "success":
             self._set_jobrunner_enabled_param(False)
             self.write(
                 {
@@ -213,7 +209,8 @@ class HelpdeskReprocessWizard(models.Model):
             )
             raise UserError(
                 _(
-                    "Erro validação do job. Verifique se o queue_job está instalado e configurado."
+                    "Erro validação do job. Verifique se o queue_job está "
+                    "instalado e configurado."
                 )
             )
 
@@ -286,7 +283,8 @@ class HelpdeskReprocessWizard(models.Model):
             raise UserError(
                 _(
                     "A validação do queue_job ainda está em andamento.\n\n"
-                    "Clique em 'Atualizar Status da Fila' e tente novamente quando a validação concluir."
+                    "Clique em 'Atualizar Status da Fila' e tente novamente "
+                    "quando a validação concluir."
                 )
             )
 
@@ -294,8 +292,10 @@ class HelpdeskReprocessWizard(models.Model):
             wizard._enqueue_validation_job()
             raise UserError(
                 _(
-                    "Antes do reprocessamento, foi enfileirado um job de teste para validar a fila.\n\n"
-                    "Aguarde a conclusão, clique em 'Atualizar Status da Fila' e tente iniciar o reprocessamento."
+                    "Antes do reprocessamento, foi enfileirado um job de teste "
+                    "para validar a fila.\n\n"
+                    "Aguarde a conclusão, clique em 'Atualizar Status da Fila' "
+                    "e tente iniciar o reprocessamento."
                 )
             )
 

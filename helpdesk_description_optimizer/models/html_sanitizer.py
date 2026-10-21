@@ -1,9 +1,11 @@
 import hashlib
+import logging
 import re
 from copy import deepcopy
 
-from lxml import etree
-from lxml import html as lxml_html
+from lxml import etree, html as lxml_html
+
+_logger = logging.getLogger(__name__)
 
 
 class HtmlSanitizer:
@@ -161,22 +163,22 @@ class HtmlSanitizer:
                 new_style += "max-width:100%; height:auto;"
                 new_style = new_style.strip()
 
-            return f'<img style="{new_style}"'
+            return f'style="{new_style}"'
 
-        # Pattern para capturar <img style="...">
-        result = re.sub(
-            r'<img\s+style="([^"]*)"', replace_img_style, html, flags=re.IGNORECASE
-        )
+        def normalize_img_tag(match):
+            tag = match.group(0)
+            # O style pode vir em qualquer posicao entre os atributos
+            if re.search(r'\sstyle="', tag, flags=re.IGNORECASE):
+                return re.sub(
+                    r'(?<=\s)style="([^"]*)"',
+                    replace_img_style,
+                    tag,
+                    count=1,
+                    flags=re.IGNORECASE,
+                )
+            return '<img style="max-width:100%; height:auto;"' + tag[4:]
 
-        # Adiciona style em imgs sem style attribute
-        def add_style_to_img(match):
-            return '<img style="max-width:100%; height:auto;"' + match.group(0)[5:]
-
-        result = re.sub(
-            r"<img(?!\s+style=)", add_style_to_img, result, flags=re.IGNORECASE
-        )
-
-        return result
+        return re.sub(r"<img\b[^>]*>", normalize_img_tag, html, flags=re.IGNORECASE)
 
     def add_lazy_load_to_images(self, html: str) -> str:
         """
@@ -331,6 +333,6 @@ class HtmlSanitizer:
             )
         except Exception:  # pylint: disable=broad-except
             # Se não conseguir parsear, mantém o que temos
-            pass  # pylint: disable=unnecessary-pass
+            _logger.debug("Resumo truncado sem reparo de tags", exc_info=True)
 
         return (truncated, True)
