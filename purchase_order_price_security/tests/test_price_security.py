@@ -45,7 +45,7 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
                             "product_id": cls.product.id,
                             "product_qty": 1.0,
                             "price_unit": 10.0,
-                            "taxes_id": [(5, 0, 0)],
+                            "tax_ids": [(5, 0, 0)],
                         },
                     ),
                     (
@@ -55,7 +55,7 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
                             "product_id": cls.product.id,
                             "product_qty": 3.0,
                             "price_unit": 10.0,
-                            "taxes_id": [(5, 0, 0)],
+                            "tax_ids": [(5, 0, 0)],
                         },
                     ),
                 ],
@@ -68,8 +68,8 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
         When we look at a plain buyer and at the editor user
         Then only the editor belongs to the group
         """
-        self.assertNotIn(self.editor_group, self.buyer.groups_id)
-        self.assertIn(self.editor_group, self.editor.groups_id)
+        self.assertNotIn(self.editor_group, self.buyer.group_ids)
+        self.assertIn(self.editor_group, self.editor.group_ids)
 
     def test_cannot_edit_price_without_group(self):
         """
@@ -98,7 +98,7 @@ class TestPurchaseOrderPriceSecurity(TransactionCase):
         """
         line = self.order.order_line[0]
         self.assertFalse(line.with_user(self.buyer).can_edit_price_purchase)
-        self.buyer.write({"groups_id": [(4, self.editor_group.id)]})
+        self.buyer.write({"group_ids": [(4, self.editor_group.id)]})
         self.assertTrue(line.with_user(self.buyer).can_edit_price_purchase)
 
     def _order_view_arch(self):
