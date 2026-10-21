@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ========================
 SST - Folha de Pagamento
 ========================
@@ -16,9 +20,9 @@ SST - Folha de Pagamento
 .. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
-.. |badge3| image:: https://img.shields.io/badge/github-kmee%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_payroll_sst
-    :alt: kmee/kmee-odoo-addons
+.. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_payroll_sst
+    :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
@@ -29,12 +33,19 @@ Ponte entre o inventário de riscos e a folha de pagamento.
   filtrado pela função, mas continuam editáveis: convenção coletiva e decisão
   judicial podem obrigar a pagar o que o laudo não aponta. Quando contrato e
   laudo divergem, a divergência fica visível no contrato, com campo para a
-  justificativa. Prevalece o grau mais gravoso quando há vários riscos, e a
-  vedação de acúmulo da art. 193, § 2º, da CLT é respeitada.
+  justificativa. Prevalece o grau mais gravoso quando há vários riscos.
+* **Insalubridade ou periculosidade, nunca as duas** (CLT, art. 193, par. 2, e
+  TST IRR Tema 17). Quando o laudo aponta as duas, vale a opção do empregado,
+  registrada e datada no contrato; sem opção, a folha paga a de maior valor
+  (percentual do grau sobre o salário mínimo x 30% do salário-base). Pagar só
+  uma das duas não aparece como divergência.
 * **GILRAT adicional (aposentadoria especial).** Regra salarial patronal com a
   alíquota da Tabela 02 do eSocial, 12% para 15 anos, 9% para 20 anos e 6% para
-  25 anos de exposição, aplicada a quem tem risco ensejador de aposentadoria
-  especial. A regra entra na estrutura CLT e aparece no holerite como encargo.
+  25 anos de exposição, cheia e sem FAP, pelos riscos vigentes no período do
+  holerite. Só gera o adicional quem a lei manda: empregado (categorias 1xx),
+  avulso (2xx) e cooperado de cooperativa de produção (738); contribuinte
+  individual sem cooperativa, não. A regra entra na estrutura CLT e aparece no
+  holerite como encargo.
 
 Contrato sem ambiente de trabalho informado mantém o que já estava marcado: quem
 ainda não implantou o inventário de riscos não pode perder o adicional que já
@@ -48,10 +59,10 @@ pagava por causa da instalação do módulo.
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/kmee/kmee-odoo-addons/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/kmee/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_payroll_sst%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20l10n_br_hr_payroll_sst%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -73,6 +84,6 @@ Contributors
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `kmee/kmee-odoo-addons <https://github.com/kmee/kmee-odoo-addons/tree/16.0/l10n_br_hr_payroll_sst>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/16.0/l10n_br_hr_payroll_sst>`_ project on GitHub.
 
 You are welcome to contribute.

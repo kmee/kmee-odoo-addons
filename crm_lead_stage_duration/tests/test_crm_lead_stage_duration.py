@@ -402,6 +402,40 @@ class TestCrmLeadStageDuration(TransactionCase):
         with self.assertRaises(AccessError):
             report.search([])[:1].write({"line_count": 1})
 
+    def test_salesman_cannot_forge_history(self):
+        """Given a salesman, creating or editing a stage line directly is denied:
+        the history is written only by the lead itself."""
+        salesman = self._user("bant_dur_forger", "sales_team.group_sale_salesman")
+        lead = self._lead(user_id=salesman.id)
+        line = self._lines(lead).with_user(salesman)
+        with self.assertRaises(AccessError):
+            self.Line.with_user(salesman).create(
+                {
+                    "lead_id": lead.id,
+                    "stage_id": self.stage_c.id,
+                    "start_date": fields.Datetime.now() - timedelta(days=30),
+                }
+            )
+        with self.assertRaises(AccessError):
+            line.write({"start_date": fields.Datetime.now() - timedelta(days=30)})
+        with self.assertRaises(AccessError):
+            line.write({"user_id": self.env.ref("base.user_admin").id})
+
+    def test_salesman_moves_lead_twice_and_history_is_recorded(self):
+        """Given a salesman, moving a lead twice closes his own line and opens
+        a new one, all under his name, though he cannot write lines himself."""
+        salesman = self._user("bant_dur_mover", "sales_team.group_sale_salesman")
+        lead = self._lead(user_id=salesman.id).with_user(salesman)
+        lead.write({"stage_id": self.stage_b.id})
+        lead.write({"stage_id": self.stage_c.id})
+        lines = self._lines(lead)
+        self.assertEqual(
+            lines.mapped("stage_id"), self.stage_a | self.stage_b | self.stage_c
+        )
+        self.assertEqual(lines[1:].mapped("user_id"), salesman)
+        self.assertTrue(lines[1].end_date)
+        self.assertFalse(lines[2].end_date)
+
     def test_sales_manager_can_delete_history_lines(self):
         """Given a sales manager, deleting a stage line is allowed."""
         manager = self._user("bant_dur_mgr", "sales_team.group_sale_manager")

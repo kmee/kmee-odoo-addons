@@ -19,6 +19,7 @@ from datetime import date
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import tagged
 
+from ..models import salary_rules_br
 from .common import PayrollCommon
 
 SALARIO = 6000.00
@@ -126,6 +127,16 @@ class TestEncargosPorRegime(EncargosPatronaisCommon):
         self.assertAlmostEqual(company.l10n_br_hr_rat_ajustado, 2.2917, places=4)
         payslip = self._holerite()
         self.assertAlmostEqualMoney(self._get_line_total(payslip, "RAT"), 137.50)
+
+    def test_fap_truncado_na_quarta_casa(self):
+        """O FAP é truncado (não arredondado) na quarta casa decimal."""
+        company = self._config_empresa(tax_framework="3", rat="3", fap=0.76399)
+        self.assertEqual(company.l10n_br_hr_fap, 0.7639)
+        self.assertAlmostEqual(company.l10n_br_hr_rat_ajustado, 2.2917, places=4)
+
+    def test_rat_ajustado_trunca_o_fap(self):
+        self.assertEqual(salary_rules_br.aliquota_rat_ajustado(3.0, 0.76399), 2.2917)
+        self.assertEqual(salary_rules_br.aliquota_rat_ajustado(2.0, 1.99999), 3.9998)
 
     def test_fap_fora_da_faixa_legal_e_recusado(self):
         """FAP só existe entre 0,5 e 2,0 (Decreto 3.048/99, art. 202-A)."""

@@ -68,8 +68,9 @@ class ResCompany(models.Model):
         default=1.0,
         help="Fator Acidentário de Prevenção, de 0,5000 a 2,0000, publicado "
         "anualmente pela Previdência por CNPJ (Lei 10.666/2003, art. 10; "
-        "Decreto 3.048/99, art. 202-A). Multiplica o RAT. Declarado no "
-        "eSocial S-1005 (fap).",
+        "Decreto 3.048/99, art. 202-A). Multiplica só o RAT; o adicional da "
+        "aposentadoria especial entra sem FAP. Truncado, e não arredondado, "
+        "na quarta casa decimal. Declarado no eSocial S-1005 (fap).",
     )
     l10n_br_hr_rat_ajustado = fields.Float(
         string="RAT Ajustado (%)",
@@ -140,6 +141,23 @@ class ResCompany(models.Model):
         "a proporcionalização e a CPRB incide sobre a receita inteira "
         "(Lei 12.546/2011, art. 9º, §§5º e 6º): informar zero.",
     )
+
+    @api.model
+    def _l10n_br_hr_truncar_fap(self, vals):
+        """Trunca o FAP antes de gravar: o campo arredondaria na 4a casa."""
+        if vals.get("l10n_br_hr_fap"):
+            vals = dict(
+                vals,
+                l10n_br_hr_fap=salary_rules_br.fap_truncado(vals["l10n_br_hr_fap"]),
+            )
+        return vals
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        return super().create([self._l10n_br_hr_truncar_fap(v) for v in vals_list])
+
+    def write(self, vals):
+        return super().write(self._l10n_br_hr_truncar_fap(vals))
 
     @api.depends("l10n_br_hr_rat", "l10n_br_hr_fap")
     def _compute_l10n_br_hr_rat_ajustado(self):

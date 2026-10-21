@@ -25,7 +25,8 @@ Rubricas patronais (categoria COMP, informativas: são custo, não descontam do
 empregado e não entram no líquido):
 
 * **CPP** - contribuição previdenciária patronal de 20% (Lei 8.212/91, art. 22, I)
-* **RAT** - RAT ajustado, isto é, RAT x FAP (art. 22, II; Decreto 3.048/99, art. 202-A)
+* **RAT** - RAT ajustado, isto é, RAT x FAP (art. 22, II; Decreto 3.048/99, art. 202-A),
+  com o FAP truncado, e não arredondado, na quarta casa decimal
 * **TERCEIROS** - outras entidades e fundos, pela alíquota do código FPAS
   (indústria, FPAS 507: 5,8%)
 

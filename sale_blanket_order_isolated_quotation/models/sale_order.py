@@ -38,27 +38,58 @@ class SaleOrder(models.Model):
         copy=False,
     )
 
-    def action_confirm(self):
-        """Override to handle blanket order operations"""
+    def _needs_confirm_choice(self):
+        """A plain quotation is confirmed through the choice wizard."""
         self.ensure_one()
-        if self.blanket_order_type == "reference":
-            return self.with_context(
-                so_reference_id=self.id
-            )._confirm_blanket_order_reference()
-        elif self.blanket_order_type == "amendment":
-            return self._confirm_blanket_order_increment()
-        elif not self.order_sequence:  # É um orçamento
-            return {
-                "name": _("Confirmar"),
-                "type": "ir.actions.act_window",
-                "res_model": "sale.order.confirm",
-                "view_mode": "form",
-                "target": "new",
-                "context": {
-                    "default_sale_id": self.id,
-                },
-            }
-        return super().action_confirm()
+        return self.blanket_order_type not in ("reference", "amendment") and (
+            not self.order_sequence
+        )
+
+    def action_confirm(self):
+        """Route each order by its blanket order operation.
+
+        A single order returns the action of its flow (choice wizard, generated
+        sale order or blanket order). In batch every order is processed on its
+        own: the standard confirmation is also called per order because
+        sale_quotation_number reads its fields as a singleton.
+        """
+        quotations = self.filtered(lambda order: order._needs_confirm_choice())
+        if quotations and len(self) > 1:
+            raise exceptions.UserError(
+                _(
+                    "Quotations must be confirmed one at a time, choosing between a "
+                    "sale order and a blanket order: %s"
+                )
+                % ", ".join(quotations.mapped("name"))
+            )
+        actions = []
+        for order in self:
+            if order.blanket_order_type == "reference":
+                actions.append(
+                    order.with_context(
+                        so_reference_id=order.id
+                    )._confirm_blanket_order_reference()
+                )
+            elif order.blanket_order_type == "amendment":
+                actions.append(order._confirm_blanket_order_increment())
+            elif order._needs_confirm_choice():
+                actions.append(order._get_confirm_choice_action())
+            else:
+                actions.append(super(SaleOrder, order).action_confirm())
+        return actions[0] if len(self) == 1 else True
+
+    def _get_confirm_choice_action(self):
+        self.ensure_one()
+        return {
+            "name": _("Confirmar"),
+            "type": "ir.actions.act_window",
+            "res_model": "sale.order.confirm",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_sale_id": self.id,
+            },
+        }
 
     def _confirm_blanket_order_reference(self):
         """Create sale order from B.O. reference and consume quantities"""

@@ -295,30 +295,30 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Agente Nocivo (Tab 22) ===== -->
+    <!-- ===== Agente Nocivo (Tab 24) ===== -->
     <record id="action_esocial_agente_nocivo" model="ir.actions.act_window">
-        <field name="name">Agentes Nocivos (Tab. 22)</field>
+        <field name="name">Agentes Nocivos (Tab. 24)</field>
         <field name="res_model">l10n_br.esocial.agente.nocivo</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Aposentadoria Especial (Tab 23) ===== -->
+    <!-- ===== Aposentadoria Especial (Anexo IV do Decreto 3.048/1999) ===== -->
     <record id="action_esocial_aposentadoria_especial" model="ir.actions.act_window">
-        <field name="name">Aposentadoria Especial (Tab. 23)</field>
+        <field name="name">Aposentadoria Especial (Anexo IV do Decreto 3.048)</field>
         <field name="res_model">l10n_br.esocial.aposentadoria.especial</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Compatibilidade FPAS (Tab 24) ===== -->
+    <!-- ===== Compatibilidade FPAS (Tab 22) ===== -->
     <record id="action_esocial_compat_fpas" model="ir.actions.act_window">
-        <field name="name">Compatibilidade FPAS (Tab. 24)</field>
+        <field name="name">Compatibilidade FPAS (Tab. 22)</field>
         <field name="res_model">l10n_br.esocial.compat.fpas</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo Dependente (Tab 25) ===== -->
+    <!-- ===== Tipo Dependente (Tab 07) ===== -->
     <record id="action_esocial_tipo_dependente" model="ir.actions.act_window">
-        <field name="name">Tipos de Dependente (Tab. 25)</field>
+        <field name="name">Tipos de Dependente (Tab. 7)</field>
         <field name="res_model">l10n_br.esocial.tipo.dependente</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -330,9 +330,9 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Treinamento (Tab 29) ===== -->
+    <!-- ===== Treinamento (Tab 28) ===== -->
     <record id="action_esocial_treinamento" model="ir.actions.act_window">
-        <field name="name">Treinamentos (Tab. 29)</field>
+        <field name="name">Treinamentos (Tab. 28)</field>
         <field name="res_model">l10n_br.esocial.treinamento</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -344,77 +344,77 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Receita Reclamatória (Tab 32) ===== -->
+    <!-- ===== Receita Reclamatória (Tab 29) ===== -->
     <record id="action_esocial_receita_reclamatoria" model="ir.actions.act_window">
-        <field name="name">Receita Reclamatória (Tab. 32)</field>
+        <field name="name">Receita Reclamatória (Tab. 29)</field>
         <field name="res_model">l10n_br.esocial.receita.reclamatoria</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Motivo Cessação (Tab 34) ===== -->
+    <!-- ===== Motivo Cessação (Tab 26) ===== -->
     <record id="action_esocial_motivo_cessacao" model="ir.actions.act_window">
-        <field name="name">Motivos Cessação Benefício (Tab. 34)</field>
+        <field name="name">Motivos Cessação Benefício (Tab. 26)</field>
         <field name="res_model">l10n_br.esocial.motivo.cessacao</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo Benefício (Tab 35) ===== -->
+    <!-- ===== Tipo Benefício (Tab 25) ===== -->
     <record id="action_esocial_tipo_beneficio" model="ir.actions.act_window">
-        <field name="name">Tipos de Benefício (Tab. 35)</field>
+        <field name="name">Tipos de Benefício (Tab. 25)</field>
         <field name="res_model">l10n_br.esocial.tipo.beneficio</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Inst. Empréstimo (Tab 37) ===== -->
+    <!-- ===== Inst. Empréstimo (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_inst_emprestimo" model="ir.actions.act_window">
-        <field name="name">Instituições Empréstimo (Tab. 37)</field>
+        <field name="name">Instituições Empréstimo</field>
         <field name="res_model">l10n_br.esocial.inst.emprestimo</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== CBO (Tab 50) — Referência OCA l10n_br_hr.cbo ===== -->
+    <!-- ===== CBO (sem tabela no Anexo I) — Referência OCA l10n_br_hr.cbo ===== -->
     <record id="action_esocial_cbo_oca" model="ir.actions.act_window">
-        <field name="name">CBO (Tab. 50) - via OCA</field>
+        <field name="name">CBO - via OCA</field>
         <field name="res_model">l10n_br_hr.cbo</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Código Terceiro (Tab 51) ===== -->
+    <!-- ===== Código Terceiro (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_codigo_terceiro" model="ir.actions.act_window">
-        <field name="name">Códigos de Terceiro (Tab. 51)</field>
+        <field name="name">Códigos de Terceiro</field>
         <field name="res_model">l10n_br.esocial.codigo.terceiro</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Horário (Tab 52) ===== -->
+    <!-- ===== Horário (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_horario" model="ir.actions.act_window">
-        <field name="name">Horários (Tab. 52)</field>
+        <field name="name">Horários</field>
         <field name="res_model">l10n_br.esocial.horario</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Natureza Jurídica (Tab 53) — Referência OCA l10n_br_fiscal.legal.nature ===== -->
+    <!-- ===== Natureza Jurídica (sem tabela no Anexo I) — Referência OCA l10n_br_fiscal.legal.nature ===== -->
     <record id="action_esocial_natureza_juridica_oca" model="ir.actions.act_window">
-        <field name="name">Natureza Jurídica (Tab. 53) - via OCA</field>
+        <field name="name">Natureza Jurídica - via OCA</field>
         <field name="res_model">l10n_br_fiscal.legal.nature</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Rubrica Padrão (Tab 54) ===== -->
+    <!-- ===== Rubrica Padrão (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_rubrica_padrao" model="ir.actions.act_window">
-        <field name="name">Rubricas Padrão (Tab. 54)</field>
+        <field name="name">Rubricas Padrão</field>
         <field name="res_model">l10n_br.esocial.rubrica.padrao</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== CNAE (Tab 56) — Referência OCA l10n_br_fiscal.cnae ===== -->
+    <!-- ===== CNAE (sem tabela no Anexo I) — Referência OCA l10n_br_fiscal.cnae ===== -->
     <record id="action_esocial_cnae_oca" model="ir.actions.act_window">
-        <field name="name">CNAE (Tab. 56) - via OCA</field>
+        <field name="name">CNAE - via OCA</field>
         <field name="res_model">l10n_br_fiscal.cnae</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Faixa INSS (Tab 57) ===== -->
+    <!-- ===== Faixa INSS (sem tabela no Anexo I) ===== -->
     <record id="view_esocial_faixa_inss_tree" model="ir.ui.view">
         <field name="name">l10n_br.esocial.faixa.inss.tree</field>
         <field name="model">l10n_br.esocial.faixa.inss</field>
@@ -430,12 +430,12 @@
     </record>
 
     <record id="action_esocial_faixa_inss" model="ir.actions.act_window">
-        <field name="name">Faixas INSS (Tab. 57)</field>
+        <field name="name">Faixas INSS</field>
         <field name="res_model">l10n_br.esocial.faixa.inss</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Faixa IRRF (Tab 58) ===== -->
+    <!-- ===== Faixa IRRF (sem tabela no Anexo I) ===== -->
     <record id="view_esocial_faixa_irrf_tree" model="ir.ui.view">
         <field name="name">l10n_br.esocial.faixa.irrf.tree</field>
         <field name="model">l10n_br.esocial.faixa.irrf</field>
@@ -451,40 +451,40 @@
     </record>
 
     <record id="action_esocial_faixa_irrf" model="ir.actions.act_window">
-        <field name="name">Faixas IRRF (Tab. 58)</field>
+        <field name="name">Faixas IRRF</field>
         <field name="res_model">l10n_br.esocial.faixa.irrf</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo Decisão (Tab 59) ===== -->
+    <!-- ===== Tipo Decisão (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_tipo_decisao" model="ir.actions.act_window">
-        <field name="name">Tipo Decisão (Tab. 59)</field>
+        <field name="name">Tipo Decisão</field>
         <field name="res_model">l10n_br.esocial.tipo.decisao</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== CID (Tab 60) ===== -->
+    <!-- ===== CID (CID-10) ===== -->
     <record id="action_esocial_cid" model="ir.actions.act_window">
-        <field name="name">CID (Tab. 60)</field>
+        <field name="name">CID</field>
         <field name="res_model">l10n_br.esocial.cid</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Cargos (Tab 61) ===== -->
+    <!-- ===== Cargos (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_cargo" model="ir.actions.act_window">
-        <field name="name">Cargos eSocial (Tab. 61)</field>
+        <field name="name">Cargos eSocial</field>
         <field name="res_model">l10n_br.esocial.cargo</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Lotação Referência (Tab 64) ===== -->
+    <!-- ===== Lotação Referência (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_lotacao_ref" model="ir.actions.act_window">
-        <field name="name">Lotação Referência (Tab. 64)</field>
+        <field name="name">Lotação Referência</field>
         <field name="res_model">l10n_br.esocial.lotacao.ref</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Faixa Salário Família (Tab 65) ===== -->
+    <!-- ===== Faixa Salário Família (sem tabela no Anexo I) ===== -->
     <record id="view_esocial_faixa_sal_familia_tree" model="ir.ui.view">
         <field name="name">l10n_br.esocial.faixa.sal.familia.tree</field>
         <field name="model">l10n_br.esocial.faixa.sal.familia</field>
@@ -500,133 +500,133 @@
     </record>
 
     <record id="action_esocial_faixa_sal_familia" model="ir.actions.act_window">
-        <field name="name">Faixas Salário Família (Tab. 65)</field>
+        <field name="name">Faixas Salário Família</field>
         <field name="res_model">l10n_br.esocial.faixa.sal.familia</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Causa Afastamento MTE (Tab 67) ===== -->
+    <!-- ===== Causa Afastamento MTE (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_causa_afast_mte" model="ir.actions.act_window">
-        <field name="name">Causas Afastamento MTE (Tab. 67)</field>
+        <field name="name">Causas Afastamento MTE</field>
         <field name="res_model">l10n_br.esocial.causa.afast.mte</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Rubrica Rescisória (Tab 68) ===== -->
+    <!-- ===== Rubrica Rescisória (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_rubrica_rescisoria" model="ir.actions.act_window">
-        <field name="name">Rubricas Rescisórias (Tab. 68)</field>
+        <field name="name">Rubricas Rescisórias</field>
         <field name="res_model">l10n_br.esocial.rubrica.rescisoria</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Info Rescisão (Tab 69) ===== -->
+    <!-- ===== Info Rescisão (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_info_rescisao" model="ir.actions.act_window">
-        <field name="name">Info Rescisão (Tab. 69)</field>
+        <field name="name">Info Rescisão</field>
         <field name="res_model">l10n_br.esocial.info.rescisao</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo Admissão (Tab 70) — Referência OCA hr.contract.admission.type ===== -->
+    <!-- ===== Tipo Admissão (sem tabela no Anexo I) — Referência OCA hr.contract.admission.type ===== -->
     <record id="action_esocial_tipo_admissao_oca" model="ir.actions.act_window">
-        <field name="name">Tipo Admissão (Tab. 70) - via OCA</field>
+        <field name="name">Tipo Admissão - via OCA</field>
         <field name="res_model">hr.contract.admission.type</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo CAT (Tab 71) ===== -->
+    <!-- ===== Tipo CAT (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_tipo_cat" model="ir.actions.act_window">
-        <field name="name">Tipos de CAT (Tab. 71)</field>
+        <field name="name">Tipos de CAT</field>
         <field name="res_model">l10n_br.esocial.tipo.cat</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo ASO (Tab 72) ===== -->
+    <!-- ===== Tipo ASO (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_tipo_aso" model="ir.actions.act_window">
-        <field name="name">Tipos de ASO (Tab. 72)</field>
+        <field name="name">Tipos de ASO</field>
         <field name="res_model">l10n_br.esocial.tipo.aso</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Tipo Aviso Prévio (Tab 73) ===== -->
+    <!-- ===== Tipo Aviso Prévio (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_tipo_aviso_previo" model="ir.actions.act_window">
-        <field name="name">Tipos de Aviso Prévio (Tab. 73)</field>
+        <field name="name">Tipos de Aviso Prévio</field>
         <field name="res_model">l10n_br.esocial.tipo.aviso.previo</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Motivo Cancel. Aviso (Tab 74) ===== -->
+    <!-- ===== Motivo Cancel. Aviso (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_motivo_cancel_aviso" model="ir.actions.act_window">
-        <field name="name">Motivos Cancelamento Aviso (Tab. 74)</field>
+        <field name="name">Motivos Cancelamento Aviso</field>
         <field name="res_model">l10n_br.esocial.motivo.cancel.aviso</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Processo FAP (Tab 77) ===== -->
+    <!-- ===== Processo FAP (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_processo_fap" model="ir.actions.act_window">
-        <field name="name">Processos FAP (Tab. 77)</field>
+        <field name="name">Processos FAP</field>
         <field name="res_model">l10n_br.esocial.processo.fap</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Receita Totalizador (Tab 78) ===== -->
+    <!-- ===== Receita Totalizador (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_receita_totalizador" model="ir.actions.act_window">
-        <field name="name">Receita Totalizador (Tab. 78)</field>
+        <field name="name">Receita Totalizador</field>
         <field name="res_model">l10n_br.esocial.receita.totalizador</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Valor Contrib Prev (Tab 79) ===== -->
+    <!-- ===== Valor Contrib Prev (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_valor_contrib_prev" model="ir.actions.act_window">
-        <field name="name">Tipo Valor Contrib. Prev. (Tab. 79)</field>
+        <field name="name">Tipo Valor Contrib. Prev.</field>
         <field name="res_model">l10n_br.esocial.valor.contrib.prev</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Valor IRRF Totalizador (Tab 80) ===== -->
+    <!-- ===== Valor IRRF Totalizador (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_valor_irrf_totalizador" model="ir.actions.act_window">
-        <field name="name">Tipo Valor IRRF Totaliz. (Tab. 80)</field>
+        <field name="name">Tipo Valor IRRF Totaliz.</field>
         <field name="res_model">l10n_br.esocial.valor.irrf.totalizador</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== CNAE MEI (Tab 81) ===== -->
+    <!-- ===== CNAE MEI (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_cnae_mei" model="ir.actions.act_window">
-        <field name="name">CNAE MEI (Tab. 81)</field>
+        <field name="name">CNAE MEI</field>
         <field name="res_model">l10n_br.esocial.cnae.mei</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Base FGTS (Tab 82) ===== -->
+    <!-- ===== Base FGTS (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_base_fgts" model="ir.actions.act_window">
-        <field name="name">Bases de Cálculo FGTS (Tab. 82)</field>
+        <field name="name">Bases de Cálculo FGTS</field>
         <field name="res_model">l10n_br.esocial.base.fgts</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Depósito FGTS (Tab 83) ===== -->
+    <!-- ===== Depósito FGTS (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_deposito_fgts" model="ir.actions.act_window">
-        <field name="name">Tipos Depósito FGTS (Tab. 83)</field>
+        <field name="name">Tipos Depósito FGTS</field>
         <field name="res_model">l10n_br.esocial.deposito.fgts</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Feriado (Tab 84) ===== -->
+    <!-- ===== Feriado (feriados nacionais) ===== -->
     <record id="action_esocial_feriado" model="ir.actions.act_window">
-        <field name="name">Feriados eSocial (Tab. 84)</field>
+        <field name="name">Feriados Nacionais</field>
         <field name="res_model">l10n_br.esocial.feriado</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Descrição FPAS (Tab 85) ===== -->
+    <!-- ===== Descrição FPAS (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_descricao_fpas" model="ir.actions.act_window">
-        <field name="name">Descrição FPAS (Tab. 85)</field>
+        <field name="name">Descrição FPAS</field>
         <field name="res_model">l10n_br.esocial.descricao.fpas</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- ===== Teto Verde e Amarela (Tab 86) ===== -->
+    <!-- ===== Teto Verde e Amarela (sem tabela no Anexo I) ===== -->
     <record id="action_esocial_teto_verde_amarela" model="ir.actions.act_window">
-        <field name="name">Teto Verde e Amarela (Tab. 86)</field>
+        <field name="name">Teto Verde e Amarela</field>
         <field name="res_model">l10n_br.esocial.teto.verde.amarela</field>
         <field name="view_mode">tree,form</field>
     </record>

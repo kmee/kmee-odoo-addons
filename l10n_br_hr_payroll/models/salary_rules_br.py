@@ -8,7 +8,7 @@ independentemente com pytest puro (sem banco de dados).
 
 Injetadas no contexto das regras salariais via `tools.br.*`.
 """
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_DOWN, ROUND_HALF_UP, Decimal
 
 from dateutil.relativedelta import relativedelta
 
@@ -249,6 +249,22 @@ TAX_FRAMEWORK_SIMPLES = ("1", "2", "4")
 SIMPLES_ANEXO_CPP_POR_FORA = ("iv",)
 
 
+def truncar(value, places):
+    """Trunca (não arredonda) o valor na casa decimal informada."""
+    quantum = Decimal(1).scaleb(-places)
+    return float(Decimal(str(value or 0.0)).quantize(quantum, rounding=ROUND_DOWN))
+
+
+def fap_truncado(fap):
+    """FAP com quatro casas decimais, truncado e não arredondado.
+
+    O FAP é publicado com quatro casas (de 0,5000 a 2,0000, Decreto 3.048/99,
+    art. 202-A, par. 1). Valor digitado com mais casas é truncado, para que o
+    RAT ajustado nunca saia acima do que o FAP publicado permite.
+    """
+    return truncar(fap, 4)
+
+
 def aliquota_rat_ajustado(rat, fap):
     """RAT ajustado = RAT x FAP, em pontos percentuais.
 
@@ -267,9 +283,10 @@ def aliquota_rat_ajustado(rat, fap):
 
     Returns:
         Alíquota ajustada em pontos percentuais, com 4 casas decimais (o FAP
-        é publicado com 4 casas, ex.: 0,7639 x 3 = 2,2917).
+        é publicado com 4 casas, ex.: 0,7639 x 3 = 2,2917). O FAP e o
+        produto são truncados, não arredondados, na quarta casa.
     """
-    return round_money((rat or 0.0) * (fap or 0.0), 4)
+    return truncar((rat or 0.0) * fap_truncado(fap), 4)
 
 
 def aliquota_fgts(aprendiz=False):

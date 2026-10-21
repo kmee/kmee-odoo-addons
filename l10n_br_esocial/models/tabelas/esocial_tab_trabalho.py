@@ -7,7 +7,7 @@ from odoo import fields, models
 class ESocialTipoBeneficio(models.Model):
     _name = "l10n_br.esocial.tipo.beneficio"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 35 - Tipos de Benefícios"
+    _description = "eSocial Tabela 25 - Tipos de Benefícios"
 
     grupo = fields.Char()
     desc_grupo = fields.Char()
@@ -17,7 +17,7 @@ class ESocialTipoBeneficio(models.Model):
 class ESocialInstEmprestimo(models.Model):
     _name = "l10n_br.esocial.inst.emprestimo"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 37 - Instituições Empréstimo Consignado"
+    _description = "eSocial - Instituições Empréstimo Consignado"
 
     cnpj = fields.Char()
 
@@ -25,7 +25,7 @@ class ESocialInstEmprestimo(models.Model):
 class ESocialRubricaPadrao(models.Model):
     _name = "l10n_br.esocial.rubrica.padrao"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 54 - Rubricas Padrão eSocial"
+    _description = "eSocial - Rubricas Padrão eSocial"
 
     nat_rubr = fields.Char()
     tp_rubr = fields.Char()
@@ -44,7 +44,7 @@ class ESocialRubricaPadrao(models.Model):
 class ESocialTipoDecisao(models.Model):
     _name = "l10n_br.esocial.tipo.decisao"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 59 - Tipo Decisão Judicial/Administrativa"
+    _description = "eSocial - Tipo Decisão Judicial/Administrativa"
 
     tp_suspensao = fields.Char()
 
@@ -52,7 +52,7 @@ class ESocialTipoDecisao(models.Model):
 class ESocialCargo(models.Model):
     _name = "l10n_br.esocial.cargo"
     _inherit = ["l10n_br.esocial.tabela.mixin"]
-    _description = "eSocial Tab 61 - Cargos"
+    _description = "eSocial - Cargos"
 
     cod_grupo = fields.Char()
     cod_cbo = fields.Char()

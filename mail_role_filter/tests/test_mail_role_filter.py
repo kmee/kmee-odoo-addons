@@ -136,3 +136,37 @@ class TestMailRoleFilter(TransactionCase):
         rule = self._filter(role=role)
         role.unlink()
         self.assertFalse(rule.exists())
+
+    def test_internal_user_cannot_manage_filters(self):
+        """Given a plain internal user
+        When the access rights on the filters are checked
+        Then only the settings administrators manage them."""
+        Filter = self.env["mail.role.filter"]
+        internal = self.user_without_role
+        self.assertTrue(internal.has_group("base.group_user"))
+        admin = self.env.ref("base.user_admin")
+        for operation in ("read", "write", "create", "unlink"):
+            with self.subTest(operation=operation):
+                self.assertFalse(
+                    Filter.with_user(internal).check_access_rights(
+                        operation, raise_exception=False
+                    )
+                )
+                self.assertTrue(
+                    Filter.with_user(admin).check_access_rights(
+                        operation, raise_exception=False
+                    )
+                )
+
+    def test_filter_applies_when_the_poster_cannot_read_filters(self):
+        """Given a filter and a recipient computation run by a plain user
+        When the recipients are computed
+        Then the filter still applies (it is read as superuser)."""
+        self._filter()
+        message = self.record.message_post(body="Hi", partner_ids=self.partners.ids)
+        data = self.record.with_user(self.user_without_role)._notify_get_recipients(
+            message, {}
+        )
+        ids = [d["id"] for d in data]
+        self.assertIn(self.user_with_role.partner_id.id, ids)
+        self.assertNotIn(self.user_without_role.partner_id.id, ids)

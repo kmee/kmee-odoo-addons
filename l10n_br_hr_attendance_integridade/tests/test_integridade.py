@@ -31,6 +31,15 @@ class TestIntegridadePtrp(TransactionCase):
         self.assertEqual(len(resumo), 64)
         int(resumo, 16)
 
+    def test_todo_o_escopo_atestado_e_dependencia(self):
+        """Instalar a integridade instala o escopo inteiro, AFD incluído.
+
+        Sem o AFD no ``depends``, o manifesto de uma base sem o módulo
+        registrava a ausência e o resumo mudava conforme a composição da
+        instalação, não conforme o código atestado.
+        """
+        self.assertEqual(self.verificador._modulos_do_escopo_ausentes(), [])
+
     def test_manifesto_cobre_o_nucleo_declarado(self):
         manifesto = dict(self.verificador._manifesto_fonte())
         for arquivo in (
@@ -39,12 +48,6 @@ class TestIntegridadePtrp(TransactionCase):
             "l10n_br_hr_attendance_apuracao/models/regras_jornada.py",
             "l10n_br_hr_attendance_aej/models/aej_layout.py",
         ):
-            modulo = arquivo.split("/")[0]
-            if modulo in self.verificador._modulos_do_escopo_ausentes():
-                # O AFD não é dependência do módulo: com ele fora da base o
-                # manifesto registra a ausência em vez de omitir o módulo.
-                self.assertIn(ptrp_escopo.marca_de_ausencia(modulo), manifesto)
-                continue
             self.assertIn(arquivo, manifesto)
             self.assertEqual(len(manifesto[arquivo]), 64)
 
