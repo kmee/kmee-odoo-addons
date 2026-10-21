@@ -11,4 +11,6 @@
     "depends": ["hr_holidays"],
     "data": [],
     "demo": [],
+    # Deprecated: Odoo core covers it since 18.0, see readme/DESCRIPTION.md
+    "installable": False,
 }
