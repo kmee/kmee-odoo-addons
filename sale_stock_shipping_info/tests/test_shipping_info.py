@@ -80,7 +80,7 @@ class TestSaleStockShippingInfo(TransactionCase):
             [
                 {
                     "product_id": self.light.id,
-                    "product_uom": self.uom_dozen.id,
+                    "product_uom_id": self.uom_dozen.id,
                     "product_uom_qty": 2.0,
                 }
             ]
@@ -117,7 +117,7 @@ class TestSaleStockShippingInfo(TransactionCase):
         self.assertAlmostEqual(order.shipping_weight, 10.0)
         order.order_line.product_id = self.light
         self.assertAlmostEqual(order.shipping_weight, 1.25)
-        order.order_line.product_uom = self.uom_dozen
+        order.order_line.product_uom_id = self.uom_dozen
         self.assertAlmostEqual(order.shipping_weight, 15.0)
         order.order_line.unlink()
         self.assertEqual(order.shipping_weight, 0.0)
