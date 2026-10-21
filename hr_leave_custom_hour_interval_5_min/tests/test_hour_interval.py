@@ -18,7 +18,7 @@ class TestHourInterval5Min(TransactionCase):
         cls.leave_type = cls.env["hr.leave.type"].create(
             {
                 "name": "Hourly leave",
-                "requires_allocation": "no",
+                "requires_allocation": False,
                 "leave_validation_type": "hr",
                 "request_unit": "hour",
             }
