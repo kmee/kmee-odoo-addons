@@ -14,15 +14,18 @@ class TestRequiredSupportDocument(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.employee = cls.env["hr.employee"].create({"name": "Support Employee"})
-        cls.required_type = cls._leave_type("Atestado", True, True)
-        cls.optional_type = cls._leave_type("Folga com anexo opcional", True, False)
-        cls.plain_type = cls._leave_type("Folga simples", False, False)
+        cls.required_type = cls._leave_type("Atestado", "RSDREQ", True, True)
+        cls.optional_type = cls._leave_type(
+            "Folga com anexo opcional", "RSDOPT", True, False
+        )
+        cls.plain_type = cls._leave_type("Folga simples", "RSDPLN", False, False)
 
     @classmethod
-    def _leave_type(cls, name, support_document, required):
-        return cls.env["hr.leave.type"].create(
+    def _leave_type(cls, name, code, support_document, required):
+        return cls.env["hr.work.entry.type"].create(
             {
                 "name": name,
+                "code": code,
                 "requires_allocation": False,
                 "leave_validation_type": "hr",
                 "support_document": support_document,
@@ -34,7 +37,7 @@ class TestRequiredSupportDocument(TransactionCase):
         vals = {
             "name": "Leave",
             "employee_id": self.employee.id,
-            "holiday_status_id": leave_type.id,
+            "work_entry_type_id": leave_type.id,
             "date_from": datetime(2026, 3, day, 8, 0),
             "date_to": datetime(2026, 3, day, 17, 0),
             "request_date_from": "2026-03-%02d" % day,
@@ -58,7 +61,7 @@ class TestRequiredSupportDocument(TransactionCase):
             self.env["hr.leave"].create(self._vals(self.required_type))
         self.assertFalse(
             self.env["hr.leave"].search(
-                [("holiday_status_id", "=", self.required_type.id)]
+                [("work_entry_type_id", "=", self.required_type.id)]
             )
         )
 
@@ -114,7 +117,7 @@ class TestRequiredSupportDocument(TransactionCase):
             self.env["hr.leave"].search(
                 [
                     ("employee_id", "=", self.employee.id),
-                    ("holiday_status_id", "in", self.plain_type.ids),
+                    ("work_entry_type_id", "in", self.plain_type.ids),
                 ]
             )
         )
@@ -125,7 +128,9 @@ class TestRequiredSupportDocument(TransactionCase):
         Quando nada e informado
         Entao required_support_document e falso
         """
-        leave_type = self.env["hr.leave.type"].create({"name": "Default"})
+        leave_type = self.env["hr.work.entry.type"].create(
+            {"name": "Default", "code": "RSDDEF"}
+        )
         self.assertFalse(leave_type.required_support_document)
         self.assertTrue(self.required_type.required_support_document)
 
@@ -135,8 +140,8 @@ class TestRequiredSupportDocument(TransactionCase):
         Quando a view e montada
         Entao o campo required_support_document aparece logo apos support_document
         """
-        arch = self.env["hr.leave.type"].get_view(
-            self.env.ref("hr_holidays.edit_holiday_status_form").id, "form"
+        arch = self.env["hr.work.entry.type"].get_view(
+            self.env.ref("hr_holidays.hr_work_entry_type_view_form").id, "form"
         )["arch"]
         self.assertIn("required_support_document", arch)
         self.assertLess(
