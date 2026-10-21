@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="document_import_extraction_tree" model="ir.ui.view">
         <field name="name">l10n_br.document.import.extraction.list</field>
         <field name="model">l10n_br.document.import.extraction</field>
@@ -64,5 +63,4 @@
         action="document_import_extraction_action"
         sequence="90"
     />
-
 </odoo>
