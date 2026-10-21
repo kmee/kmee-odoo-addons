@@ -35,13 +35,21 @@
             </main>
         </t>
     </template>
-    <report
-        id="action_report_overtime"
-        model="hr.attendance.overtime"
-        string="Overtime Report"
-        report_type="qweb-pdf"
-        name="hr_overtime_report_action_pdf.report_overtime_document"
-        file="hr_overtime_report_action_pdf.report_overtime_document"
-        attachment_use="False"
-    />
+    <record id="action_report_overtime" model="ir.actions.report">
+        <field name="name">Overtime Report</field>
+        <field name="model">hr.attendance.overtime</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >hr_overtime_report_action_pdf.report_overtime_document</field>
+        <field
+            name="report_file"
+        >hr_overtime_report_action_pdf.report_overtime_document</field>
+        <field name="attachment_use" eval="False" />
+        <field
+            name="binding_model_id"
+            ref="hr_attendance.model_hr_attendance_overtime"
+        />
+        <field name="binding_type">report</field>
+    </record>
 </odoo>

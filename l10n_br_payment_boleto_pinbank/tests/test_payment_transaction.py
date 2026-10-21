@@ -10,7 +10,7 @@ from .fixtures import (
 )
 
 
-@tagged("at_install", "post_install")
+@tagged("post_install", "-at_install")
 class TestPaymentTransaction(TransactionCase):
     def setUp(self):
         super().setUp()
@@ -75,6 +75,24 @@ class TestPaymentTransaction(TransactionCase):
         )
 
         self.assertEqual(payload, GENERATE_BOLETO_PAYLOAD_DECRYPTED)
+
+    def test_payload_amounts_are_rounded(self):
+        """Valores em centavos arredondam, sem truncar a sobra do ponto flutuante.
+
+        2.05 * 100 vale 204.99999999999997 e 0.57 * 10000 vale 5699.999999999999:
+        truncar com int() cobra um centavo a menos no boleto.
+        """
+        self.payment_transaction.write(
+            {"amount": 2.05, "boleto_penalty": 0.69, "boleto_interest": 0.57}
+        )
+
+        data = self.payment_transaction._boleto_pinbank_prepare_order_request_payload()[
+            "Data"
+        ]
+
+        self.assertEqual(data["Valor"], 205)
+        self.assertEqual(data["Multa"]["Valor"], 6900)
+        self.assertEqual(data["Juros"]["Valor"], 5700)
 
     def test_prepare_transaction_boleto_info(self):
         """
@@ -234,3 +252,84 @@ class TestPaymentTransaction(TransactionCase):
                 self.payment_transaction.barcode,
                 "12345678901234567890123456789012345678901234",
             )
+
+
+@tagged("post_install", "-at_install")
+class TestPinbankToken(TransactionCase):
+    """O token e emitido por conta e volta do parametro como texto."""
+
+    def setUp(self):
+        super().setUp()
+        self.provider = self.env.ref(
+            "l10n_br_payment_boleto_pinbank.payment_acquirer_boleto_pinbank"
+        )
+
+    def test_token_is_saved_per_provider(self):
+        other_provider = self.provider.copy({"name": "Outra conta PinBank"})
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+        other_provider._boleto_pinbank_save_token("token-dois", 600)
+
+        self.assertEqual(
+            self.provider._boleto_pinbank_check_existing_token(), "token-um"
+        )
+        self.assertEqual(
+            other_provider._boleto_pinbank_check_existing_token(), "token-dois"
+        )
+
+    def test_saved_token_is_reused(self):
+        """A segunda requisicao nao pode estourar comparando texto com data."""
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+
+        self.assertEqual(
+            self.provider._boleto_pinbank_check_existing_token(),
+            "token-um",
+            "o token guardado nao foi reaproveitado",
+        )
+
+    def test_expired_token_is_discarded(self):
+        self.provider._boleto_pinbank_save_token("token-velho", 600)
+        _token_key, expiration_key = self.provider._boleto_pinbank_token_param_names()
+        self.env["ir.config_parameter"].sudo().set_param(
+            expiration_key, "2020-01-01T00:00:00"
+        )
+
+        self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
+
+    def test_invalid_expiration_is_discarded(self):
+        self.provider._boleto_pinbank_save_token("token-um", 600)
+        _token_key, expiration_key = self.provider._boleto_pinbank_token_param_names()
+        self.env["ir.config_parameter"].sudo().set_param(expiration_key, "nao-e-data")
+
+        self.assertFalse(self.provider._boleto_pinbank_check_existing_token())
+
+
+@tagged("post_install", "-at_install")
+class TestPinbankRedaction(TransactionCase):
+    """O boleto carrega nome, documento e endereco do sacado."""
+
+    def test_personal_data_is_dropped(self):
+        redacted = self.env["payment.transaction"]._pinbank_redact(
+            {
+                "Data": {
+                    "NossoNumero": "12345",
+                    "DadosSacado": {
+                        "CpfCnpj": "23130935000198",
+                        "Nome": "Cliente Boleto",
+                        "Endereco": "Rua das Flores",
+                    },
+                }
+            }
+        )
+
+        self.assertNotIn("23130935000198", str(redacted))
+        self.assertNotIn("Cliente Boleto", str(redacted))
+        self.assertNotIn("Rua das Flores", str(redacted))
+        self.assertEqual(redacted["Data"]["NossoNumero"], "12345")
+
+    def test_pdf_is_dropped(self):
+        """O PDF em base64 nao tem porque ficar no campo tecnico."""
+        redacted = self.env["payment.transaction"]._pinbank_redact(
+            {"Base64": "JVBERi0xLjQ="}
+        )
+
+        self.assertEqual(redacted["Base64"], "***")

@@ -46,6 +46,7 @@ class SaleOrder(models.Model):
             _logger.error(f"[{self.name}] Erro ao adicionar relatório principal: {e}")
             return report_pdf
 
+        default_terms_text = ""
         try:
             company = self.env.company
             if company.terms_type == "html":

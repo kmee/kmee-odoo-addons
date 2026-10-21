@@ -9,7 +9,7 @@
             <!-- Hide original pricing table -->
             <attribute name="t-if">False</attribute>
         </xpath>
-        <xpath expr="//table[contains(@class, 'table')]" position="attributes">
+        <xpath expr="//table[hasclass('table')]" position="attributes">
             <attribute name="class" add=" table-bordered" separator=" " />
         </xpath>
         <xpath

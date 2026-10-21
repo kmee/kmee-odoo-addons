@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- S-1005 — Tabela de Estabelecimentos -->
+    <!-- ============================================================ -->
+    <record id="view_esocial_s1005_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1005.tree</field>
+        <field name="model">l10n_br.esocial.s1005</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nr_insc_estab" />
+                <field name="ini_valid" />
+                <field name="fim_valid" />
+                <field name="cnae_prep" />
+                <field name="aliq_rat" />
+                <field name="fap" />
+                <field name="aliq_rat_ajust" />
+                <field name="operacao" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s1005_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1005.form</field>
+        <field name="model">l10n_br.esocial.s1005</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Evento"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Estabelecimento">
+                            <field name="operacao" />
+                            <field name="tp_insc_estab" />
+                            <field name="nr_insc_estab" />
+                            <field name="cnae_prep" />
+                            <field name="cnpj_resp" />
+                            <field
+                                name="tp_caepf"
+                                attrs="{'invisible': [('tp_insc_estab', '!=', '3')]}"
+                            />
+                            <field name="ind_subst_patr_obra" />
+                        </group>
+                        <group string="Validade">
+                            <field name="ini_valid" />
+                            <field name="fim_valid" />
+                            <field
+                                name="nova_ini_valid"
+                                attrs="{'invisible': [('operacao', '!=', 'alteracao')]}"
+                            />
+                            <field
+                                name="nova_fim_valid"
+                                attrs="{'invisible': [('operacao', '!=', 'alteracao')]}"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="GILRAT (aliqGilrat)">
+                        <group>
+                            <field name="aliq_rat" />
+                            <field name="fap" />
+                            <field name="aliq_rat_ajust" readonly="1" />
+                        </group>
+                        <group>
+                            <p class="text-muted">
+                                FPAS, código de terceiros e terceiros suspensos
+                                são da lotação tributária (S-1020), não do
+                                estabelecimento.
+                            </p>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s1005" model="ir.actions.act_window">
+        <field name="name">S-1005 - Estabelecimentos</field>
+        <field name="res_model">l10n_br.esocial.s1005</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- S-1020 — Lotações Tributárias (FPAS e terceiros) -->
+    <!-- ============================================================ -->
+    <record id="view_esocial_s1020_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1020.tree</field>
+        <field name="model">l10n_br.esocial.s1020</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="cod_lotacao" />
+                <field name="ini_valid" />
+                <field name="fim_valid" />
+                <field name="fpas" />
+                <field name="cod_tercs" />
+                <field name="cod_tercs_susp" optional="hide" />
+                <field name="operacao" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s1020_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1020.form</field>
+        <field name="model">l10n_br.esocial.s1020</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Evento"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Lotação">
+                            <field name="operacao" />
+                            <field name="cod_lotacao" />
+                            <field name="ini_valid" />
+                            <field name="fim_valid" />
+                        </group>
+                        <group string="FPAS e Terceiros (fpasLotacao)">
+                            <field name="fpas" />
+                            <field name="cod_tercs" />
+                            <field name="cod_tercs_susp" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s1020" model="ir.actions.act_window">
+        <field name="name">S-1020 - Lotações Tributárias</field>
+        <field name="res_model">l10n_br.esocial.s1020</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- S-1210 — Pagamentos -->
+    <!-- ============================================================ -->
+    <record id="view_esocial_s1210_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1210.tree</field>
+        <field name="model">l10n_br.esocial.s1210</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="per_apur" />
+                <field name="ind_retif" />
+                <field name="vr_liq_total" sum="Total" />
+                <field name="evento_id" />
+                <field name="currency_id" invisible="1" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s1210_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1210.form</field>
+        <field name="model">l10n_br.esocial.s1210</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Evento"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="per_apur" />
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="ind_retif" />
+                            <field
+                                name="nr_recibo"
+                                attrs="{'invisible': [('ind_retif', '!=', '2')], 'required': [('ind_retif', '=', '2')]}"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                    <field name="pagamento_ids">
+                        <tree editable="bottom">
+                            <field name="dt_pgto" />
+                            <field name="tp_pgto" />
+                            <field name="per_ref" />
+                            <field name="ide_dm_dev" />
+                            <field name="vr_liq" sum="Total" />
+                            <field name="payslip_id" />
+                            <field name="s1200_id" />
+                            <field name="currency_id" invisible="1" />
+                        </tree>
+                    </field>
+                    <group class="oe_subtotal_footer">
+                        <field name="vr_liq_total" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s1210" model="ir.actions.act_window">
+        <field name="name">S-1210 - Pagamentos</field>
+        <field name="res_model">l10n_br.esocial.s1210</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- S-1299 — Fechamento -->
+    <!-- ============================================================ -->
+    <record id="view_esocial_s1299_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1299.tree</field>
+        <field name="model">l10n_br.esocial.s1299</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="pendencia_count > 0">
+                <field name="per_apur" />
+                <field name="ind_apuracao" />
+                <field name="evt_remun" />
+                <field name="evt_pgtos" />
+                <field name="pendencia_count" string="Pendências" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s1299_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1299.form</field>
+        <field name="model">l10n_br.esocial.s1299</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Fechar Competência"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <field name="pendencia_count" invisible="1" />
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        attrs="{'invisible': [('pendencia_count', '=', 0)]}"
+                    >
+                        Existem eventos periódicos desta competência sem aceite
+                        do eSocial. Fechar assim faz o governo apurar sobre folha
+                        incompleta, e o valor errado vai para a DCTFWeb.
+                    </div>
+                    <group>
+                        <group string="Competência">
+                            <field name="per_apur" />
+                            <field name="ind_apuracao" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                        <group string="Declaração de Conteúdo">
+                            <field name="evt_remun" />
+                            <field name="evt_pgtos" />
+                            <field name="evt_com_prod" />
+                            <field name="evt_contrat_av_np" />
+                            <field name="evt_info_compl_per" />
+                            <field name="trans_dctf_web" />
+                            <field name="nao_valid" />
+                        </group>
+                    </group>
+                    <field name="pendencia_ids" readonly="1">
+                        <tree>
+                            <field name="tipo" />
+                            <field name="id_evento" />
+                            <field name="per_apur" />
+                            <field name="state" />
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s1299" model="ir.actions.act_window">
+        <field name="name">S-1299 - Fechamento</field>
+        <field name="res_model">l10n_br.esocial.s1299</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- S-1298 — Reabertura -->
+    <!-- ============================================================ -->
+    <record id="view_esocial_s1298_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1298.tree</field>
+        <field name="model">l10n_br.esocial.s1298</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="per_apur" />
+                <field name="ind_apuracao" />
+                <field name="fechamento_evento_id" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s1298_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s1298.form</field>
+        <field name="model">l10n_br.esocial.s1298</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Reabrir Competência"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="per_apur" />
+                            <field name="ind_apuracao" />
+                        </group>
+                        <group>
+                            <field name="fechamento_evento_id" readonly="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s1298" model="ir.actions.act_window">
+        <field name="name">S-1298 - Reabertura</field>
+        <field name="res_model">l10n_br.esocial.s1298</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- ============================================================ -->
+    <!-- S-3000 — Exclusão -->
+    <!-- ============================================================ -->
+    <record id="view_esocial_s3000_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s3000.tree</field>
+        <field name="model">l10n_br.esocial.s3000</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="tp_evento" />
+                <field name="nr_rec_evt" />
+                <field name="per_apur" />
+                <field name="cpf_trab" />
+                <field name="evento_origem_id" />
+                <field name="evento_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_s3000_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.s3000.form</field>
+        <field name="model">l10n_br.esocial.s3000</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_gerar_evento"
+                        type="object"
+                        string="Gerar Exclusão"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('evento_id', '!=', False)]}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Evento a Excluir">
+                            <field name="evento_origem_id" />
+                            <field name="tp_evento" readonly="1" />
+                            <field name="nr_rec_evt" readonly="1" />
+                        </group>
+                        <group string="Identificação Complementar">
+                            <field name="per_apur" />
+                            <field name="ind_apuracao" />
+                            <field name="cpf_trab" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="evento_id" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="Auditoria">
+                        <field name="motivo" nolabel="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_s3000" model="ir.actions.act_window">
+        <field name="name">S-3000 - Exclusão</field>
+        <field name="res_model">l10n_br.esocial.s3000</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Despesas do João -->
+        <record id="demo_expense_joao_taxi" model="hr.expense">
+            <field name="name">Táxi para reunião externa</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="product_id" ref="hr_expense.expense_product_mileage" />
+            <field name="total_amount">85.50</field>
+            <field name="date">2024-03-10</field>
+        </record>
+
+        <record id="demo_expense_joao_estacionamento" model="hr.expense">
+            <field name="name">Estacionamento</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="product_id" ref="hr_expense.expense_product_mileage" />
+            <field name="total_amount">35.00</field>
+            <field name="date">2024-03-10</field>
+        </record>
+
+        <!-- Relatório de despesas -->
+        <record id="demo_expense_sheet_joao" model="hr.expense.sheet">
+            <field name="name">Despesas março 2024 - João</field>
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field
+            name="expense_line_ids"
+            eval="[(6, 0, [ref('demo_expense_joao_taxi'), ref('demo_expense_joao_estacionamento')])]"
+        />
+            <field name="l10n_br_refund_in_payslip" eval="True" />
+        </record>
+
+</odoo>

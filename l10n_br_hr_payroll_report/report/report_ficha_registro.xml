@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_ficha_registro">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .ficha-table { width: 100%; border-collapse: collapse; font-size: 10px; }
+                            .ficha-table td, .ficha-table th { border: 1px solid #333; padding: 3px 5px; }
+                            .ficha-header { background-color: #e9e9e9; font-weight: bold; }
+                            .ficha-title { font-size: 14px; font-weight: bold; text-align: center; padding: 6px; }
+                            .text-right { text-align: right; }
+                            .text-center { text-align: center; }
+                        </style>
+
+                        <!-- CABEÇALHO -->
+                        <table class="ficha-table">
+                            <tr>
+                                <td colspan="4" class="ficha-title">
+                                    FICHA DE REGISTRO DE EMPREGADO
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- EMPRESA -->
+                        <table class="ficha-table">
+                            <tr class="ficha-header">
+                                <td colspan="4">EMPRESA</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Razão Social:</strong>
+                                    <span t-field="o.company_id.name" />
+                                </td>
+                                <td>
+                                    <strong>CNPJ:</strong>
+                                    <span t-field="o.company_id.cnpj_cpf" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <strong>Endereço:</strong>
+                                    <t t-if="o.company_id.street">
+                                        <span t-field="o.company_id.street" />
+                                    </t>
+                                    <t t-if="o.company_id.city">
+                                        - <span t-field="o.company_id.city" />
+                                    </t>
+                                    <t t-if="o.company_id.state_id">
+                                        / <span t-field="o.company_id.state_id.code" />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- DADOS PESSOAIS -->
+                        <table class="ficha-table">
+                            <tr class="ficha-header">
+                                <td colspan="4">DADOS PESSOAIS</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Nome:</strong>
+                                    <span t-field="o.name" />
+                                </td>
+                                <td>
+                                    <strong>Data Nascimento:</strong>
+                                    <span t-field="o.birthday" />
+                                </td>
+                                <td>
+                                    <strong>Sexo:</strong>
+                                    <span t-field="o.gender" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>CPF:</strong>
+                                    <span t-field="o.cnpj_cpf" />
+                                </td>
+                                <td>
+                                    <strong>Documento:</strong>
+                                    <t t-if="o.identity_type_id">
+                                        <span t-field="o.identity_type_id" />
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong>PIS/PASEP:</strong>
+                                    <span t-field="o.pis_pasep" />
+                                </td>
+                                <td>
+                                    <strong>Estado Civil:</strong>
+                                    <span t-field="o.marital" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>CTPS:</strong>
+                                    <span t-field="o.ctps" />
+                                    <t t-if="o.ctps_series">
+                                        - Série: <span t-field="o.ctps_series" />
+                                    </t>
+                                </td>
+                                <td colspan="2">
+                                    <strong>Nacionalidade:</strong>
+                                    <span t-field="o.country_id" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Nome do Pai:</strong>
+                                    <span t-field="o.father_name" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>Nome da Mãe:</strong>
+                                    <span t-field="o.mother_name" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- ENDEREÇO -->
+                        <table class="ficha-table">
+                            <tr class="ficha-header">
+                                <td colspan="4">ENDEREÇO</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Logradouro:</strong>
+                                    <t t-if="o.address_home_id.street">
+                                        <span t-field="o.address_home_id.street" />
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong>Cidade:</strong>
+                                    <t t-if="o.address_home_id.city">
+                                        <span t-field="o.address_home_id.city" />
+                                    </t>
+                                </td>
+                                <td>
+                                    <strong>UF:</strong>
+                                    <t t-if="o.address_home_id.state_id">
+                                        <span
+                                            t-field="o.address_home_id.state_id.code"
+                                        />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- DADOS DO CONTRATO -->
+                        <table class="ficha-table">
+                            <tr class="ficha-header">
+                                <td colspan="4">CONTRATO DE TRABALHO</td>
+                            </tr>
+                            <t
+                                t-set="contracts"
+                                t-value="o.contract_ids.sorted(key=lambda c: c.date_start)"
+                            />
+                            <t t-foreach="contracts" t-as="contract">
+                                <tr>
+                                    <td>
+                                        <strong>Admissão:</strong>
+                                        <span t-field="contract.date_start" />
+                                    </td>
+                                    <td>
+                                        <strong>Cargo:</strong>
+                                        <span t-field="contract.job_id" />
+                                    </td>
+                                    <td>
+                                        <strong>Salário:</strong>
+                                        <span
+                                            t-esc="contract.wage"
+                                            t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'
+                                        />
+                                    </td>
+                                    <td>
+                                        <strong>Depto:</strong>
+                                        <span t-field="contract.department_id" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+
+                        <br />
+
+                        <!-- DEPENDENTES -->
+                        <table class="ficha-table">
+                            <tr class="ficha-header">
+                                <td colspan="4">DEPENDENTES (IRRF/SALÁRIO-FAMÍLIA)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <strong>Dependentes IRRF:</strong>
+                                    <span t-field="o.l10n_br_irrf_dependentes" />
+                                </td>
+                                <td colspan="2">
+                                    <strong>Filhos Salário-Família:</strong>
+                                    <span t-field="o.l10n_br_num_filhos_sf" />
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+
+                        <!-- OBSERVAÇÕES -->
+                        <table class="ficha-table">
+                            <tr class="ficha-header">
+                                <td>OBSERVAÇÕES</td>
+                            </tr>
+                            <tr>
+                                <td style="height: 60px; vertical-align: top;">
+                                    <t t-if="o.l10n_br_pcd">
+                                        Pessoa com Deficiência (PCD)<br />
+                                    </t>
+                                    <t t-if="o.l10n_br_molestia_grave">
+                                        Portador de Moléstia Grave — CID:
+                                        <span t-field="o.l10n_br_cid_molestia" /><br />
+                                    </t>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <br />
+                        <br />
+
+                        <!-- ASSINATURAS -->
+                        <table style="width:100%;">
+                            <tr>
+                                <td
+                                    style="width:50%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Empregador
+                                </td>
+                                <td
+                                    style="width:50%; text-align:center; padding-top:30px; border-top:1px solid #333;"
+                                >
+                                    Empregado
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

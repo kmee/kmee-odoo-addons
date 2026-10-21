@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_apuracao_dia_payroll_user,l10n_br.hr.apuracao.dia.payroll.user,l10n_br_hr_attendance_apuracao.model_l10n_br_hr_apuracao_dia,payroll.group_payroll_user,1,0,0,0

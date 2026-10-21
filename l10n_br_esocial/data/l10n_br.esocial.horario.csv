@@ -1,0 +1,9 @@
+id,codigo,nome,dt_inicio,dt_fim,hr_entrada,hr_saida,dur_jornada,tp_intervalo,dur_intervalo,ini_intervalo,term_intervalo,horario_flexivel,qtd_hrs_semana
+horario_esocial100,eSocial100,Jornada diurna de 7 h e 20 min com 100 min de intervalo.,2014-01-01,,0800,1700,440,2,100,,,S,
+horario_esocial110,eSocial110,Jornada diurna de 8 h e 48 min com 72 min de intervalo.,2014-01-01,,0800,1800,528,2,72,,,S,
+horario_esocial120,eSocial120,Jornada diurna de 8 h com 120 min de intervalo.,2014-01-01,,0800,1800,480,2,120,,,S,
+horario_esocial130,eSocial130,Jornada diurna de 9 h com 60 min de intervalo.,2014-01-01,,0800,1800,540,2,60,,,S,
+horario_esocial140,eSocial140,Jornada diurna de 8 h com 60 min de intervalo.,2014-01-01,,0800,1700,480,2,60,,,S,
+horario_esocial150,eSocial150,Jornada diurna de 4 h sem intervalo.,2014-01-01,,0800,1200,240,,,,,S,
+horario_esocial160,eSocial160,Jornada diurna de 6 h com 15 min de intervalo.,2014-01-01,,0900,1515,360,2,15,,,S,
+horario_esocial200,eSocial200,12 h de trabalho - Jornada especial,2014-01-01,,0800,2000,660,2,60,,,S,42

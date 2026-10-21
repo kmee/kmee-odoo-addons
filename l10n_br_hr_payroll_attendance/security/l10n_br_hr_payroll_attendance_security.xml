@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- O holerite lê a apuração do funcionário. Sem esta regra, quem calcula
+         a folha mas não é do ponto veria só a própria apuração e o cálculo
+         voltaria, em silêncio, ao comportamento sem apuração. -->
+    <record id="apuracao_dia_rule_folha" model="ir.rule">
+        <field name="name">Apuração: folha lê as da empresa</field>
+        <field
+            name="model_id"
+            ref="l10n_br_hr_attendance_apuracao.model_l10n_br_hr_apuracao_dia"
+        />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field name="groups" eval="[(4, ref('payroll.group_payroll_user'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+
+</odoo>

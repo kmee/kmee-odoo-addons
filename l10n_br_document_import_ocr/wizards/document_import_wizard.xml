@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="document_import_wizard_form_ocr" model="ir.ui.view">
+        <field name="name">l10n_br_fiscal.document.import.wizard.form.ocr</field>
+        <field name="model">l10n_br_fiscal.document.import.wizard</field>
+        <field name="inherit_id" ref="l10n_br_fiscal.document_import_wizard_form" />
+        <field name="arch" type="xml">
+            <field name="document_key" position="before">
+                <field name="is_ocr_import" invisible="1" />
+                <field name="extraction_id" invisible="1" />
+                <field name="document_id" invisible="1" />
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    attrs="{'invisible': [('low_confidence_fields', 'in', [False, ''])]}"
+                >
+                    <strong>Confira com atenção:</strong>
+                    <field name="low_confidence_fields" class="oe_inline" />
+                </div>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    attrs="{'invisible': ['|', ('is_ocr_import', '=', False), ('document_id', '=', False)]}"
+                >
+                    Já existe um documento com este número deste fornecedor.
+                </div>
+            </field>
+            <field name="document_key" position="after">
+                <group
+                    string="Dados do serviço (OCR)"
+                    attrs="{'invisible': [('is_ocr_import', '=', False)]}"
+                >
+                    <group>
+                        <field name="document_date" />
+                        <field name="verify_code" />
+                        <field name="service_type_id" />
+                        <field name="service_description" />
+                    </group>
+                    <group>
+                        <field name="amount_untaxed" />
+                        <field name="amount_total" />
+                        <field name="issqn_value" />
+                        <field name="issqn_wh_value" />
+                        <field name="ocr_destination" widget="radio" />
+                    </group>
+                </group>
+            </field>
+            <xpath expr="//footer" position="inside">
+                <button
+                    name="action_confirm_ocr_import"
+                    string="Importar (OCR)"
+                    type="object"
+                    class="btn-primary"
+                    attrs="{'invisible': [('is_ocr_import', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_esocial_conferencia_tree" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.conferencia.tree</field>
+        <field name="model">l10n_br.esocial.conferencia</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-danger="state == 'divergente'"
+                decoration-success="state == 'ok'"
+            >
+                <field name="per_apur" />
+                <field name="ind_apuracao" />
+                <field name="divergencia_count" string="Divergências" />
+                <field name="payslip_sem_evento_count" string="Holerites sem S-1200" />
+                <field name="data_apuracao" />
+                <field name="state" widget="badge" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_esocial_conferencia_form" model="ir.ui.view">
+        <field name="name">l10n_br.esocial.conferencia.form</field>
+        <field name="model">l10n_br.esocial.conferencia</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_apurar"
+                        type="object"
+                        string="Apurar"
+                        class="oe_highlight"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <field name="payslip_sem_evento_count" invisible="1" />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_ver_holerites_sem_evento"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-exclamation-triangle"
+                            attrs="{'invisible': [('payslip_sem_evento_count', '=', 0)]}"
+                        >
+                            <field
+                                name="payslip_sem_evento_count"
+                                widget="statinfo"
+                                string="Holerites sem S-1200"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group string="Competência">
+                            <field name="per_apur" />
+                            <field name="ind_apuracao" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group string="Apuração">
+                            <field name="tolerancia" />
+                            <field name="data_apuracao" />
+                            <field name="divergencia_count" />
+                            <field name="currency_id" invisible="1" />
+                        </group>
+                    </group>
+                    <div
+                        class="alert alert-warning"
+                        role="alert"
+                        attrs="{'invisible': [('payslip_sem_evento_count', '=', 0)]}"
+                    >
+                        Há holerites confirmados nesta competência sem S-1200
+                        aceito pelo eSocial. Enquanto isso não for resolvido, a
+                        folha calculada e o totalizador devolvido não podem
+                        fechar.
+                    </div>
+                    <notebook>
+                        <page string="Indicadores" name="indicadores">
+                            <field name="linha_ids" readonly="1">
+                                <tree
+                                    decoration-danger="divergente == True"
+                                    decoration-muted="comparativo == False"
+                                >
+                                    <field name="indicador" />
+                                    <field name="valor_folha" />
+                                    <field name="valor_totalizador" />
+                                    <field name="diferenca" />
+                                    <field name="divergente" />
+                                    <field name="comparativo" optional="show" />
+                                    <field name="sem_totalizador" optional="hide" />
+                                    <field name="fonte_folha" optional="hide" />
+                                    <field name="fonte_totalizador" optional="hide" />
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                            <p class="text-muted">
+                                Indicadores marcados como não comparativos só
+                                existem do lado do governo (encargos patronais e
+                                bases consolidadas): eles são exibidos para
+                                conferência manual e nunca acusam divergência.
+                            </p>
+                        </page>
+                        <page string="Totalizadores" name="totalizadores">
+                            <field name="totalizador_ids" readonly="1">
+                                <tree>
+                                    <field name="tipo" />
+                                    <field name="employee_id" />
+                                    <field name="nr_rec_arq_base" />
+                                    <field name="evento_id" />
+                                    <field name="linha_count" string="Valores" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Holerites" name="holerites">
+                            <field name="payslip_ids" readonly="1">
+                                <tree>
+                                    <field name="number" />
+                                    <field name="employee_id" />
+                                    <field name="date_from" />
+                                    <field name="date_to" />
+                                    <field name="l10n_br_esocial_s1200_id" />
+                                    <field name="l10n_br_esocial_s1210_id" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_esocial_conferencia" model="ir.actions.act_window">
+        <field name="name">Conferência da Competência</field>
+        <field name="res_model">l10n_br.esocial.conferencia</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

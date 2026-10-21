@@ -6,7 +6,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import api, fields, models
 
 
-class SaleCommissionCron(models.TransientModel):
+class SaleCommissionCron(models.AbstractModel):
     _name = "sale.commission.cron"
     _description = "Sale Commission Cron Helper"
 
@@ -22,6 +22,7 @@ class SaleCommissionCron(models.TransientModel):
         # Create the wizard record
         wizard = settle_wizard_model.create(
             {
+                "settlement_type": "sale_invoice",
                 "date_to": next_month_date,
                 "date_payment_to": next_month_date,
             }

@@ -14,7 +14,8 @@ class L10nBrCnpjSearchWebserviceAbstract(models.AbstractModel):
     def minhareceita_get_api_url(self, cnpj):
         return MINHARECEITA_URL + cnpj
 
-    def minhareceita_get_api_headers(self):
+    @api.model
+    def minhareceita_get_headers(self):
         return {"Accept": "application/json"}
 
     def minhareceita_validate(self, response):

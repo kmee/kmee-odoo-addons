@@ -5,7 +5,11 @@
         <field name="inherit_id" ref="helpdesk_mgmt.ticket_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Stage Durations" name="stage_durations">
+                <page
+                    string="Stage Durations"
+                    name="stage_durations"
+                    groups="helpdesk_mgmt.group_helpdesk_user_own"
+                >
                     <field
                         name="stage_duration_ids"
                         context="{'default_ticket_id': active_id}"
@@ -52,7 +56,7 @@
         <xpath expr="//kanban" position="inside">
             <field name="current_stage_total_duration" />
         </xpath>
-        <xpath expr="//div[@class='o_kanban_record_top']" position="after">
+        <xpath expr="//div[hasclass('o_kanban_record_top')]" position="after">
                 <div class="row mt-2 text-muted small">
                     <div class="col-6">
                         <div><i class="fa fa-clock-o" aria-hidden="true" /> <t

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_hr_substituicao_form" model="ir.ui.view">
+        <field name="name">hr.substituicao.form</field>
+        <field name="model">hr.substituicao</field>
+        <field name="arch" type="xml">
+            <form string="Substituição de Funcionário">
+                <header>
+                    <button
+                        name="action_confirm"
+                        string="Confirmar"
+                        type="object"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        name="action_done"
+                        string="Encerrar"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'confirmed')]}"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancelar"
+                        type="object"
+                        attrs="{'invisible': [('state', 'in', ['done', 'cancelled'])]}"
+                    />
+                    <button
+                        name="action_draft"
+                        string="Voltar a Rascunho"
+                        type="object"
+                        attrs="{'invisible': [('state', '!=', 'cancelled')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="substitute_employee_id" />
+                            <field name="leave_id" />
+                        </group>
+                        <group>
+                            <field name="department_id" />
+                            <field name="job_id" />
+                            <field name="date_start" />
+                            <field name="date_end" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="reason" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_hr_substituicao_tree" model="ir.ui.view">
+        <field name="name">hr.substituicao.tree</field>
+        <field name="model">hr.substituicao</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id" />
+                <field name="substitute_employee_id" />
+                <field name="department_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_substituicao" model="ir.actions.act_window">
+        <field name="name">Substituições</field>
+        <field name="res_model">hr.substituicao</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_hr_substituicao"
+        name="Substituições"
+        parent="hr.menu_hr_root"
+        action="action_hr_substituicao"
+        sequence="55"
+    />
+
+</odoo>

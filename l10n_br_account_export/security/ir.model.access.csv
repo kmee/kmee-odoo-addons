@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_export_user,l10n_br.account.export user,model_l10n_br_account_export,account.group_account_user,1,1,1,0
+access_account_export_manager,l10n_br.account.export manager,model_l10n_br_account_export,account.group_account_manager,1,1,1,1
+access_account_export_config_user,l10n_br.account.export.config user,model_l10n_br_account_export_config,account.group_account_user,1,0,0,0
+access_account_export_config_manager,l10n_br.account.export.config manager,model_l10n_br_account_export_config,account.group_account_manager,1,1,1,1

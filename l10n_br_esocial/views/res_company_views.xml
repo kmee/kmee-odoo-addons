@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_company_form_esocial" model="ir.ui.view">
+        <field name="name">res.company.form.esocial</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="eSocial" name="esocial">
+                    <group>
+                        <group string="Configuração">
+                            <field name="l10n_br_esocial_tp_amb" />
+                            <field name="l10n_br_esocial_class_trib_id" />
+                            <field name="l10n_br_esocial_lotacao_id" />
+                            <field name="l10n_br_esocial_cod_lotacao" />
+                            <field name="l10n_br_esocial_processo_emissao" />
+                        </group>
+                        <group string="Indicativos">
+                            <field name="l10n_br_esocial_ind_coop" />
+                            <field name="l10n_br_esocial_ind_constr" />
+                        </group>
+                    </group>
+                    <group string="Contato eSocial">
+                        <group>
+                            <field name="l10n_br_esocial_nm_ctt" />
+                            <field name="l10n_br_esocial_cpf_ctt" />
+                            <field name="l10n_br_esocial_email" />
+                        </group>
+                        <group>
+                            <field name="l10n_br_esocial_fone_fixo" />
+                            <field name="l10n_br_esocial_fone_cel" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,2 +1,8 @@
 # generated from manifests external_dependencies
+brbank
+erpbrasil.assinatura
+erpbrasil.base
+esociallib
+pymupdf
 pypdf
+xlsxwriter

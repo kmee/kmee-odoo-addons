@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="account_history_form" model="ir.ui.view">
+        <field name="name">l10n_br.account.history.form</field>
+        <field name="model">l10n_br.account.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field
+                                name="name"
+                                placeholder="Pagamento de fornecedor"
+                            /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="template"
+                                placeholder="Pagamento ref. %{DOC} de %{PARCEIRO} em %{MM}/%{AAAA}"
+                            />
+                            <field name="code" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="active" invisible="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_history_tree" model="ir.ui.view">
+        <field name="name">l10n_br.account.history.tree</field>
+        <field name="model">l10n_br.account.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="template" />
+                <field name="code" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="account_history_action" model="ir.actions.act_window">
+        <field name="name">Historicos Padrao</field>
+        <field name="res_model">l10n_br.account.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_account_history"
+        name="Historicos Padrao"
+        parent="account.account_account_menu"
+        action="account_history_action"
+        sequence="90"
+    />
+
+</odoo>

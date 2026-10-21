@@ -1,0 +1,14 @@
+id,codigo,nome,dt_inicio,dt_fim,obriga
+cod_terc_0001,0001,Salário Educação,2014-01-01,,S
+cod_terc_0002,0002,Incra,2014-01-01,,N
+cod_terc_0004,0004,Senai,2014-01-01,,N
+cod_terc_0008,0008,Sesi,2014-01-01,,N
+cod_terc_0016,0016,Senac,2014-01-01,,N
+cod_terc_0032,0032,Sesc,2014-01-01,,N
+cod_terc_0064,0064,Sebrae,2014-01-01,,N
+cod_terc_0128,0128,DPC,2014-01-01,,N
+cod_terc_0256,0256,Fundo Aerov.,2014-01-01,,N
+cod_terc_0512,0512,Senar,2014-01-01,,N
+cod_terc_1024,1024,Sest,2014-01-01,,N
+cod_terc_2048,2048,Senat,2014-01-01,,N
+cod_terc_4096,4096,Sescoop,2014-01-01,,N

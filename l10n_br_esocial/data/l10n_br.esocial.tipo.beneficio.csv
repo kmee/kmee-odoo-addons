@@ -1,0 +1,66 @@
+id,codigo,nome,dt_inicio,dt_fim,grupo,desc_grupo,permite_alt_grupo
+tipo_benef_0101,0101,"Aposentadoria por idade e tempo de contribuição - Proventos com integralidade, revisão pela paridade",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0102,0102,"Aposentadoria por idade e tempo de contribuição - Proventos pela média, reajuste manter valor real",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0103,0103,"Aposentadoria por idade - Proventos proporcionais calculado sobre integralidade, revisão pela paridade",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0104,0104,"Aposentadoria por idade - Proventos proporcionais calculado sobre a média, reajuste manter valor real",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0105,0105,"Aposentadoria compulsória - Proventos proporcionais calculado sobre integralidade, revisão pela paridade",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0106,0106,"Aposentadoria compulsória - Proventos proporcionais calculado sobre a média, reajuste manter valor real",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0107,0107,"Aposentadoria de professor - Proventos com integralidade, revisão pela paridade",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0108,0108,"Aposentadoria de professor - Proventos pela média, reajuste manter valor real",2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0109,0109,Aposentadoria de servidor vinculado a RPC - Proventos limitados ao teto do RGPS,2014-01-01,,01,Aposentadoria por Idade e Tempo de Contribuição,01;02;03
+tipo_benef_0201,0201,Aposentadoria especial - Risco,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0202,0202,Aposentadoria especial - Exposição a agentes nocivos,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0203,0203,Aposentadoria da pessoa com deficiência,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0204,0204,Aposentadoria especial do policial civil,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0205,0205,Aposentadoria especial - Risco - Servidor vinculado a RPC - Proventos limitados ao teto do RGPS,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0206,0206,Aposentadoria especial - Exposição a agentes nocivos - Servidor vinculado a RPC - Proventos limitados ao teto do RGPS,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0207,0207,Aposentadoria da pessoa com deficiência - Servidor vinculado a RPC - Proventos limitados ao teto do RGPS,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0208,0208,Aposentadoria especial de policial - Servidor vinculado a RPC - Proventos limitados ao teto do RGPS,2014-01-01,,02,Aposentadoria Especial,01;02;03
+tipo_benef_0301,0301,"Aposentadoria por invalidez - Proventos com integralidade, revisão pela paridade",2014-01-01,,03,Aposentadoria por Invalidez/Incapacidade Permanente,01;02;03
+tipo_benef_0302,0302,"Aposentadoria por invalidez - Proventos pela média, reajuste manter valor real",2014-01-01,,03,Aposentadoria por Invalidez/Incapacidade Permanente,01;02;03
+tipo_benef_0303,0303,"Aposentadoria por invalidez - Proventos proporcionais calculado sobre integralidade, revisão pela paridade",2014-01-01,,03,Aposentadoria por Invalidez/Incapacidade Permanente,01;02;03
+tipo_benef_0304,0304,"Aposentadoria por invalidez - Proventos proporcionais calculado sobre a média, reajuste manter valor real",2014-01-01,,03,Aposentadoria por Invalidez/Incapacidade Permanente,01;02;03
+tipo_benef_0305,0305,Aposentadoria por invalidez - Servidor vinculado a RPC - Proventos limitados ao teto do RGPS,2014-01-01,,03,Aposentadoria por Invalidez/Incapacidade Permanente,01;02;03
+tipo_benef_0401,0401,Reforma por invalidez,2014-01-01,,04,Militares (Reforma),04;05
+tipo_benef_0402,0402,Reforma,2014-01-01,,04,Militares (Reforma),04;05
+tipo_benef_0403,0403,Reforma compulsória proporcional,2014-01-01,,04,Militares (Reforma),04;05
+tipo_benef_0404,0404,Reforma compulsória integral,2014-01-01,,04,Militares (Reforma),04;05
+tipo_benef_0405,0405,Reforma por incapacidade definitiva,2014-01-01,,04,Militares (Reforma),04;05
+tipo_benef_0501,0501,Reserva remunerada compulsória integral,2014-01-01,,05,Militares (Reserva),04;05
+tipo_benef_0502,0502,Reserva remunerada integral,2014-01-01,,05,Militares (Reserva),04;05
+tipo_benef_0503,0503,Reserva remunerada proporcional,2014-01-01,,05,Militares (Reserva),04;05
+tipo_benef_0504,0504,Reserva remunerada compulsória proporcional,2014-01-01,,05,Militares (Reserva),04;05
+tipo_benef_0601,0601,"Pensão por morte (art. 40, § 7º, da CF/1988)",2014-01-01,,06,Pensão por Morte,06
+tipo_benef_0602,0602,"Pensão por morte com paridade, decorrente do art. 6º-A da EC 41/2003",2014-01-01,,06,Pensão por Morte,06
+tipo_benef_0603,0603,"Pensão por morte com paridade, decorrente do art. 3º da EC 47/2005",2014-01-01,,06,Pensão por Morte,06
+tipo_benef_0604,0604,Pensão por morte militar,2014-01-01,,06,Pensão por Morte,06
+tipo_benef_0605,0605,Pensão por morte - Plano próprio,2014-01-01,,06,Pensão por Morte,06
+tipo_benef_0606,0606,Pensão por morte - EC 103/2019,2014-01-01,,06,Pensão por Morte,06
+tipo_benef_0701,0701,Complementação de aposentadoria do RGPS,2014-01-01,,07,Complementação do Benefício do Regime Geral de Previdência Social (RGPS),07
+tipo_benef_0702,0702,Complementação de pensão por morte do RGPS,2014-01-01,,07,Complementação do Benefício do Regime Geral de Previdência Social (RGPS),07
+tipo_benef_0801,0801,Aposentadoria sem paridade concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0802,0802,Aposentadoria com paridade concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0803,0803,Aposentadoria por invalidez com paridade concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0804,0804,Aposentadoria por invalidez sem paridade concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0805,0805,Transferência para reserva concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0806,0806,Reforma concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0807,0807,Pensão por morte com paridade concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0808,0808,Pensão por morte sem paridade concedida antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0809,0809,Outros benefícios previdenciários concedidos antes da obrigatoriedade de envio dos eventos não periódicos para entes públicos no eSocial,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0810,0810,Aposentadoria de parlamentar - Plano próprio,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0811,0811,Aposentadoria de servidor vinculado ao Poder Legislativo - Plano próprio,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0812,0812,Pensão por morte - Plano próprio,2014-01-01,,08,Benefícios Concedidos Antes da Obrigatoriedade de Envio dos Eventos Não Periódicos para Entes Públicos no eSocial (Carga Inicial),08
+tipo_benef_0901,0901,Benefício especial proporcional - Servidor pertencente a RPPS que opta pelo RPC da União,2014-01-01,,09,Benefícios Especiais com Vínculo Previdenciário,09
+tipo_benef_0902,0902,"Benefício especial proporcional - Servidor pertencente a RPPS que opta pelo RPC - Demais entes da Federação, de acordo com as disposições das leis específicas",2014-01-01,,09,Benefícios Especiais com Vínculo Previdenciário,09
+tipo_benef_0909,0909,Outros benefícios especiais com vínculo previdenciário,2014-01-01,,09,Benefícios Especiais com Vínculo Previdenciário,09
+tipo_benef_1001,1001,Pensão especial sem vínculo previdenciário,2014-01-01,,10,Benefícios Especiais sem Vínculo Previdenciário,10
+tipo_benef_1002,1002,Anistiado político (Lei 10.559/2002),2014-01-01,,10,Benefícios Especiais sem Vínculo Previdenciário,10
+tipo_benef_1009,1009,Outros benefícios sem vínculo previdenciário,2014-01-01,,10,Benefícios Especiais sem Vínculo Previdenciário,10
+tipo_benef_1101,1101,Aposentadoria voluntária com proventos proporcionais ao tempo de mandato - Leis próprias,2014-01-01,,11,Parlamentares,11
+tipo_benef_1102,1102,Aposentadoria voluntária com proventos integrais ao tempo de mandato - Leis próprias,2014-01-01,,11,Parlamentares,11
+tipo_benef_1103,1103,Aposentadoria por invalidez permanente - Proventos integrais - Leis próprias,2014-01-01,,11,Parlamentares,11
+tipo_benef_1104,1104,Aposentadoria por invalidez permanente - Proventos proporcionais ao tempo de mandato - Leis próprias,2014-01-01,,11,Parlamentares,11
+tipo_benef_1105,1105,Pensão por morte de parlamentar - Lei específica,2014-01-01,,11,Parlamentares,11
+tipo_benef_1106,1106,Pensão por morte de parlamentar - Planos anteriores à EC 20/1998,2014-01-01,,11,Parlamentares,11
+tipo_benef_1201,1201,Pensão por morte ficta,2014-01-01,,12,Benefícios Específicos do Sistema de Proteção Social dos Militares das Forças Armadas - SPSMFA,12
+tipo_benef_1202,1202,Pensão especial,2014-01-01,,12,Benefícios Específicos do Sistema de Proteção Social dos Militares das Forças Armadas - SPSMFA,12

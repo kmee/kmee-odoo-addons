@@ -1,0 +1,5 @@
+id,codigo,nome,dt_inicio,dt_fim
+fin_aposent_1,1,Não ensejador de aposentadoria especial,2014-01-01,
+fin_aposent_2,2,Ensejador de aposentadoria especial - FAE15_12% (15 anos de contribuição e alíquota de 12%),2014-01-01,
+fin_aposent_3,3,Ensejador de aposentadoria especial - FAE20_09% (20 anos de contribuição e alíquota de 9%),2014-01-01,
+fin_aposent_4,4,Ensejador de aposentadoria especial - FAE25_06% (25 anos de contribuição e alíquota de 6%),2014-01-01,

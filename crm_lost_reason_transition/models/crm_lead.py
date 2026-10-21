@@ -7,7 +7,7 @@ class CrmLead(models.Model):
 
     def write(self, vals):
         res = super().write(vals)
-        if "lost_reason" in vals:
+        if "lost_reason_id" in vals:
             for lead in self:
                 if not lead.active:
                     lead._apply_lost_reason_transition()
@@ -20,13 +20,16 @@ class CrmLead(models.Model):
                 raise UserError(
                     _("Please, select a lost reason before mark lead as lost.")
                 )
-            lead._apply_lost_reason_transition()
+        if "lost_reason_id" not in kwargs:
+            # When the reason comes in kwargs, super() writes it on the archived
+            # leads and write() already applied the transition.
+            self._apply_lost_reason_transition()
         return res
 
     def _apply_lost_reason_transition(self):
         for lead in self:
             if not lead.lost_reason_id:
-                return
+                continue
             transition = self.env["crm.lost.reason.transition"].search(
                 [
                     ("lost_reason_id", "=", lead.lost_reason_id.id),

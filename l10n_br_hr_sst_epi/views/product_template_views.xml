@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="product_template_form_view_sst" model="ir.ui.view">
+        <field name="name">product.template.form (in l10n_br_hr_sst_epi)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="hr_employee_ppe.product_template_form_view" />
+        <field name="arch" type="xml">
+            <field name="is_ppe" position="after">
+                <field name="l10n_br_sst_ca_id" />
+                <field
+                    name="l10n_br_sst_ca_validade"
+                    attrs="{'invisible': [('l10n_br_sst_ca_id', '=', False)]}"
+                />
+                <field
+                    name="l10n_br_sst_ca_state"
+                    attrs="{'invisible': [('l10n_br_sst_ca_id', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,88 @@
+id,codigo,nome,dt_inicio,dt_fim
+inc_irrf_0,0,Rendimento não tributável,2015-10-01,2021-06-30
+inc_irrf_1,1,Rendimento não tributável em função de acordos internacionais de bitributação,2015-10-01,2021-06-30
+inc_irrf_9,9,"Verba transitada pela folha de pagamento de natureza diversa de rendimento ou retenção/isenção/dedução de IR (exemplo: desconto de convênio farmácia, desconto de consignações, etc.)",2015-10-01,
+inc_irrf_11,11,Remuneração mensal,2015-10-01,
+inc_irrf_12,12,13º salário,2015-10-01,
+inc_irrf_13,13,Férias,2015-10-01,
+inc_irrf_14,14,PLR,2015-10-01,
+inc_irrf_15,15,Rendimentos Recebidos Acumuladamente - RRA,2015-10-01,2021-06-30
+inc_irrf_31,31,Remuneração mensal,2015-10-01,
+inc_irrf_32,32,13º salário,2015-10-01,
+inc_irrf_33,33,Férias,2015-10-01,
+inc_irrf_34,34,PLR,2015-10-01,
+inc_irrf_35,35,Rendimentos Recebidos Acumuladamente - RRA,2015-10-01,2021-06-30
+inc_irrf_41,41,Previdência Social Oficial - PSO - Remuneração mensal,2015-10-01,
+inc_irrf_42,42,PSO - 13º salário,2015-10-01,
+inc_irrf_43,43,PSO - Férias,2015-10-01,
+inc_irrf_44,44,PSO - RRA,2015-10-01,2021-06-30
+inc_irrf_46,46,Previdência complementar - Salário mensal,2015-10-01,
+inc_irrf_47,47,Previdência complementar - 13º salário,2015-10-01,
+inc_irrf_48,48,Previdência complementar - Férias,2015-10-01,
+inc_irrf_51,51,Pensão alimentícia - Remuneração mensal,2015-10-01,
+inc_irrf_52,52,Pensão alimentícia - 13º salário,2015-10-01,
+inc_irrf_53,53,Pensão alimentícia - Férias,2015-10-01,
+inc_irrf_54,54,Pensão alimentícia - PLR,2015-10-01,
+inc_irrf_55,55,Pensão alimentícia - RRA,2015-10-01,2021-06-30
+inc_irrf_61,61,Fundo de Aposentadoria Programada Individual - FAPI - Remuneração mensal,2015-10-01,
+inc_irrf_62,62,Fundo de Aposentadoria Programada Individual - FAPI - 13º salário,2015-10-01,
+inc_irrf_63,63,Fundação de previdência complementar do servidor público - Remuneração mensal,2015-10-01,
+inc_irrf_64,64,Fundação de previdência complementar do servidor público - 13º salário,2015-10-01,
+inc_irrf_65,65,Fundação de previdência complementar do servidor público - Férias,2015-10-01,
+inc_irrf_66,66,Fundo de Aposentadoria Programada Individual - FAPI - Férias,2015-10-01,
+inc_irrf_67,67,Plano privado coletivo de assistência à saúde,2015-10-01,
+inc_irrf_68,68,Desconto Simplificado Mensal,2023-05-01,
+inc_irrf_70,70,Parcela isenta 65 anos - Remuneração mensal,2015-10-01,
+inc_irrf_71,71,Parcela isenta 65 anos - 13º salário,2015-10-01,
+inc_irrf_72,72,Diárias,2015-10-01,
+inc_irrf_73,73,Ajuda de custo,2015-10-01,
+inc_irrf_74,74,"Indenização e rescisão de contrato, inclusive a título de PDV e acidentes de trabalho",2015-10-01,
+inc_irrf_75,75,Abono pecuniário,2015-10-01,
+inc_irrf_76,76,Rendimento de beneficiário com moléstia grave ou acidente em serviço - Remuneração mensal,2015-10-01,
+inc_irrf_77,77,Rendimento de beneficiário com moléstia grave ou acidente em serviço - 13º salário,2015-10-01,
+inc_irrf_78,78,"Valores pagos a titular ou sócio de microempresa ou empresa de pequeno porte, exceto pró-labore e aluguéis",2015-10-01,2021-06-30
+inc_irrf_700,700,Auxílio moradia,2015-10-01,
+inc_irrf_701,701,Parte não tributável do valor de serviço de transporte de passageiros ou cargas,2015-10-01,
+inc_irrf_702,702,Bolsa médico residente - Remuneração mensal,2015-10-01,
+inc_irrf_703,703,Bolsa médico residente - 13º salário,2015-10-01,
+inc_irrf_704,704,"Juros de mora recebidos, devidos pelo atraso no pagamento de remuneração por exercício de emprego, cargo ou função",2015-10-01,
+inc_irrf_79,79,Outras isenções (o nome da rubrica deve ser claro para identificação da natureza dos valores),2015-10-01,
+inc_irrf_81,81,Depósito judicial,2015-10-01,2021-06-30
+inc_irrf_82,82,Compensação judicial do ano-calendário,2015-10-01,2021-06-30
+inc_irrf_83,83,Compensação judicial de anos anteriores,2015-10-01,2021-06-30
+inc_irrf_91,91,Remuneração mensal,2015-10-01,2021-06-30
+inc_irrf_92,92,13º salário,2015-10-01,2021-06-30
+inc_irrf_93,93,Férias,2015-10-01,2021-06-30
+inc_irrf_94,94,PLR,2015-10-01,2021-06-30
+inc_irrf_95,95,RRA,2015-10-01,2021-06-30
+inc_irrf_9011,9011,Remuneração mensal,2015-10-01,
+inc_irrf_9012,9012,13º salário,2015-10-01,
+inc_irrf_9013,9013,Férias,2015-10-01,
+inc_irrf_9014,9014,PLR,2015-10-01,
+inc_irrf_9031,9031,Remuneração mensal,2015-10-01,
+inc_irrf_9032,9032,13º salário,2015-10-01,
+inc_irrf_9033,9033,Férias,2015-10-01,
+inc_irrf_9034,9034,PLR,2015-10-01,
+inc_irrf_9831,9831,Depósito judicial - Mensal,2015-10-01,
+inc_irrf_9832,9832,Depósito judicial - 13º salário,2015-10-01,
+inc_irrf_9833,9833,Depósito judicial - Férias,2015-10-01,
+inc_irrf_9834,9834,Depósito judicial - PLR,2015-10-01,
+inc_irrf_9041,9041,Previdência Social Oficial - PSO - Remuneração mensal,2015-10-01,
+inc_irrf_9042,9042,PSO - 13º salário,2015-10-01,
+inc_irrf_9043,9043,PSO - Férias,2015-10-01,
+inc_irrf_9046,9046,Previdência complementar - Salário mensal,2015-10-01,
+inc_irrf_9047,9047,Previdência complementar - 13º salário,2015-10-01,
+inc_irrf_9048,9048,Previdência complementar - Férias,2015-10-01,
+inc_irrf_9051,9051,Pensão alimentícia - Remuneração mensal,2015-10-01,
+inc_irrf_9052,9052,Pensão alimentícia - 13º salário,2015-10-01,
+inc_irrf_9053,9053,Pensão alimentícia - Férias,2015-10-01,
+inc_irrf_9054,9054,Pensão alimentícia - PLR,2015-10-01,
+inc_irrf_9061,9061,Fundo de Aposentadoria Programada Individual - FAPI - Remuneração mensal,2015-10-01,
+inc_irrf_9062,9062,Fundo de Aposentadoria Programada Individual - FAPI - 13º salário,2015-10-01,
+inc_irrf_9063,9063,Fundação de previdência complementar do servidor público - Remuneração mensal,2015-10-01,
+inc_irrf_9064,9064,Fundação de previdência complementar do servidor público - 13º salário,2015-10-01,
+inc_irrf_9065,9065,Fundação de previdência complementar do servidor público - Férias,2015-10-01,
+inc_irrf_9066,9066,Fundo de Aposentadoria Programada Individual - FAPI - Férias,2015-10-01,
+inc_irrf_9067,9067,Plano privado coletivo de assistência à saúde,2015-10-01,
+inc_irrf_9082,9082,Compensação judicial do ano-calendário,2015-10-01,
+inc_irrf_9083,9083,Compensação judicial de anos anteriores,2015-10-01,

@@ -19,10 +19,8 @@ class AccountMove(models.Model):
 
     # Adicionar informações de períodos ao criar faturas a partir de contratos
     @api.model
-    def _prepare_invoice_from_contract(self, contract, date_invoice):
-        vals = super(AccountMove, self)._prepare_invoice_from_contract(
-            contract, date_invoice
-        )
+    def _prepare_contract_period_vals(self, contract, date_invoice):
+        vals = {}
 
         # Adicionar período atual
         active_lines = contract.contract_line_ids.filtered(
@@ -84,9 +82,7 @@ class AccountMove(models.Model):
             vals.update(
                 {
                     "contract_period_number": period_count,
-                    "contract_period_total": period_total // len(active_lines)
-                    if active_lines
-                    else 0,
+                    "contract_period_total": period_total // len(active_lines),
                 }
             )
 

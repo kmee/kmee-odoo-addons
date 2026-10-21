@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="website_slides_sharepoint.fullscreen.video">
+        <div class="player ratio ratio-16x9 embed-responsive-item h-100">
+            <video
+                t-att-src="widget.slide.embedUrl"
+                class="o_wslides_sharepoint_video"
+                controls="controls"
+                controlsList="nodownload"
+                preload="metadata"
+                playsinline="playsinline"
+                autoplay="autoplay"
+            />
+        </div>
+    </t>
+
+</templates>

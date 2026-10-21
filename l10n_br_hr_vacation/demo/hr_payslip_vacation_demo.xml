@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--
+            Holerites de demonstração — Férias, 13º Salário e Rescisão.
+            Depende do l10n_br_hr_payroll demo (empregados e contratos).
+        -->
+
+        <!-- ===== Férias — João, Julho ===== -->
+        <record id="demo_payslip_ferias_joao" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Férias 07/%Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_ferias" />
+            <field name="date_from" eval="time.strftime('%Y-07-01')" />
+            <field name="date_to" eval="time.strftime('%Y-07-30')" />
+        </record>
+
+        <!-- ===== 13º Salário — 1ª Parcela, João, Novembro ===== -->
+        <record id="demo_payslip_13_1parcela_joao" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('13º 1ª Parcela %Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_13_primeira_parcela" />
+            <field name="date_from" eval="time.strftime('%Y-11-01')" />
+            <field name="date_to" eval="time.strftime('%Y-11-30')" />
+        </record>
+
+        <!-- ===== 13º Salário — 2ª Parcela, João, Dezembro ===== -->
+        <record id="demo_payslip_13_2parcela_joao" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('13º 2ª Parcela %Y - João Carlos da Silva')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_joao" />
+            <field name="struct_id" ref="structure_13_segunda_parcela" />
+            <field name="date_from" eval="time.strftime('%Y-12-01')" />
+            <field name="date_to" eval="time.strftime('%Y-12-31')" />
+            <field name="l10n_br_primeira_parcela_13_paga">2250.00</field>
+        </record>
+
+        <!-- ===== Rescisão — Pedro, Setembro ===== -->
+        <record id="demo_payslip_rescisao_pedro" model="hr.payslip">
+            <field
+            name="name"
+            eval="time.strftime('Rescisão 09/%Y - Pedro Henrique Oliveira')"
+        />
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_pedro" />
+            <field name="contract_id" ref="l10n_br_hr_contract.demo_contract_pedro" />
+            <field name="struct_id" ref="structure_rescisao" />
+            <field name="date_from" eval="time.strftime('%Y-09-01')" />
+            <field name="date_to" eval="time.strftime('%Y-09-30')" />
+        </record>
+
+        <!-- Calcular todos os holerites demo (payroll + vacation) -->
+        <function model="hr.payslip" name="_demo_compute_payslips" />
+
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- João substituído por Maria — férias do titular -->
+        <record id="demo_substituicao_joao_maria" model="hr.substituicao">
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_joao" />
+            <field name="substitute_employee_id" ref="l10n_br_hr.demo_employee_maria" />
+            <field name="date_start">2024-07-01</field>
+            <field name="date_end">2024-07-30</field>
+            <field name="reason">Férias do titular</field>
+            <field name="state">confirmed</field>
+        </record>
+
+        <!-- Carla substituída por Pedro — licença médica -->
+        <record id="demo_substituicao_carla_pedro" model="hr.substituicao">
+            <field name="employee_id" ref="l10n_br_hr.demo_employee_carla" />
+            <field name="substitute_employee_id" ref="l10n_br_hr.demo_employee_pedro" />
+            <field name="date_start">2024-09-01</field>
+            <field name="date_end">2024-09-15</field>
+            <field name="reason">Licença médica do titular</field>
+            <field name="state">draft</field>
+        </record>
+
+</odoo>

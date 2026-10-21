@@ -1,0 +1,95 @@
+id,codigo,nome,dt_inicio,dt_fim,tipo
+agente_noc_01_01_001,01.01.001,Arsênio e seus compostos,2014-01-01,,QUÍMICOS
+agente_noc_01_02_001,01.02.001,Asbestos (ou amianto),2014-01-01,,QUÍMICOS
+agente_noc_01_03_001,01.03.001,"Benzeno e seus compostos tóxicos (exceto os abaixo especificados, que constam expressamente no Anexo IV do Decreto 3.048/1999)",2014-01-01,,QUÍMICOS
+agente_noc_01_03_002,01.03.002,Estireno (vinilbenzeno),2014-01-01,,QUÍMICOS
+agente_noc_01_04_001,01.04.001,Berílio e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_05_001,01.05.001,Bromo e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_06_001,01.06.001,Cádmio e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_07_001,01.07.001,Carvão mineral e seus derivados,2014-01-01,,QUÍMICOS
+agente_noc_01_08_001,01.08.001,Chumbo e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_09_001,01.09.001,"Cloro e seus compostos tóxicos (exceto os abaixo especificados, que constam expressamente no Anexo IV do Decreto 3.048/1999)",2014-01-01,,QUÍMICOS
+agente_noc_01_09_002,01.09.002,"Metileno-ortocloroanilina, MOCA® (4,4'-metileno-bis-(2-cloroanilina), MBOCA®)",2014-01-01,,QUÍMICOS
+agente_noc_01_09_003,01.09.003,"Bis (cloro metil) éter, clorometileter, (éter bis (clorometílico) ou éter metílico de clorometila), bisclorometil",2014-01-01,,QUÍMICOS
+agente_noc_01_09_004,01.09.004,Biscloroetileter (éter dicloroetílico),2014-01-01,,QUÍMICOS
+agente_noc_01_09_005,01.09.005,Clorambucil (cloroambucil),2014-01-01,,QUÍMICOS
+agente_noc_01_09_006,01.09.006,Cloropreno,2014-01-01,,QUÍMICOS
+agente_noc_01_10_001,01.10.001,Cromo e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_11_001,01.11.001,Dissulfeto de carbono,2014-01-01,,QUÍMICOS
+agente_noc_01_12_001,01.12.001,Fósforo e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_13_001,01.13.001,Iodo,2014-01-01,,QUÍMICOS
+agente_noc_01_14_001,01.14.001,Manganês e seus compostos,2014-01-01,,QUÍMICOS
+agente_noc_01_15_001,01.15.001,Mercúrio e seus compostos,2014-01-01,,QUÍMICOS
+agente_noc_01_16_001,01.16.001,Níquel e seus compostos tóxicos,2014-01-01,,QUÍMICOS
+agente_noc_01_17_001,01.17.001,"Petróleo, xisto betuminoso, gás natural e seus derivados",2014-01-01,,QUÍMICOS
+agente_noc_01_18_001,01.18.001,Sílica livre,2014-01-01,,QUÍMICOS
+agente_noc_01_19_001,01.19.001,Butadieno-estireno,2014-01-01,,QUÍMICOS
+agente_noc_01_19_002,01.19.002,Acrilonitrila,2014-01-01,,QUÍMICOS
+agente_noc_01_19_003,01.19.003,1-3-butadieno,2014-01-01,,QUÍMICOS
+agente_noc_01_19_004,01.19.004,Mercaptanos (tióis),2014-01-01,,QUÍMICOS
+agente_noc_01_19_005,01.19.005,n-hexano,2014-01-01,,QUÍMICOS
+agente_noc_01_19_006,01.19.006,Diisocianato de tolueno (TDI),2014-01-01,,QUÍMICOS
+agente_noc_01_19_007,01.19.007,Aminas aromáticas,2014-01-01,,QUÍMICOS
+agente_noc_01_19_008,01.19.008,Aminobifenila (4-aminodifenil),2014-01-01,,QUÍMICOS
+agente_noc_01_19_009,01.19.009,Auramina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_010,01.19.010,Azatioprina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_011,01.19.011,1-4-butanodiol,2014-01-01,,QUÍMICOS
+agente_noc_01_19_012,01.19.012,Dimetanosulfonato (MIRELAN),2014-01-01,,QUÍMICOS
+agente_noc_01_19_013,01.19.013,Ciclofosfamida,2014-01-01,,QUÍMICOS
+agente_noc_01_19_014,01.19.014,Dietiletil-bestrol,2014-01-01,,QUÍMICOS
+agente_noc_01_19_015,01.19.015,Acronitrila,2014-01-01,,QUÍMICOS
+agente_noc_01_19_016,01.19.016,Nitronaftilamina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_017,01.19.017,4-dimetil-aminoazobenzeno,2014-01-01,,QUÍMICOS
+agente_noc_01_19_018,01.19.018,Benzopireno,2014-01-01,,QUÍMICOS
+agente_noc_01_19_019,01.19.019,Beta-pbiscloromeropiolactona (beta-propiolactona),2014-01-01,,QUÍMICOS
+agente_noc_01_19_020,01.19.020,Bisclorometil,2014-01-01,2022-06-15,QUÍMICOS
+agente_noc_01_19_021,01.19.021,Dianizidina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_022,01.19.022,Dietilsulfato,2014-01-01,,QUÍMICOS
+agente_noc_01_19_023,01.19.023,Dimetilsulfato,2014-01-01,,QUÍMICOS
+agente_noc_01_19_024,01.19.024,Etilenoamina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_025,01.19.025,Etilenotiureia,2014-01-01,,QUÍMICOS
+agente_noc_01_19_026,01.19.026,Fenacetina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_027,01.19.027,Iodeto de metila,2014-01-01,,QUÍMICOS
+agente_noc_01_19_028,01.19.028,Etilnitrosureia,2014-01-01,,QUÍMICOS
+agente_noc_01_19_029,01.19.029,Nitrosamina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_030,01.19.030,Ortotoluidina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_031,01.19.031,Oximetalona (oxime-talona),2014-01-01,,QUÍMICOS
+agente_noc_01_19_032,01.19.032,Procarbazina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_033,01.19.033,Propanosultona,2014-01-01,,QUÍMICOS
+agente_noc_01_19_034,01.19.034,Óxido de etileno,2014-01-01,,QUÍMICOS
+agente_noc_01_19_035,01.19.035,Estilbenzeno (etilbenzeno),2014-01-01,,QUÍMICOS
+agente_noc_01_19_036,01.19.036,Creosoto,2014-01-01,,QUÍMICOS
+agente_noc_01_19_037,01.19.037,4-aminodifenil,2014-01-01,2022-06-15,QUÍMICOS
+agente_noc_01_19_038,01.19.038,Benzidina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_039,01.19.039,Betanaftilamina,2014-01-01,,QUÍMICOS
+agente_noc_01_19_040,01.19.040,"1-cloro-2,4-nitrodifenil",2014-01-01,,QUÍMICOS
+agente_noc_01_19_041,01.19.041,3-poxipro-pano,2014-01-01,,QUÍMICOS
+agente_noc_02_01_001,02.01.001,Ruído,2014-01-01,,FÍSICOS
+agente_noc_02_01_002,02.01.002,Vibrações localizadas (mão-braço),2014-01-01,,FÍSICOS
+agente_noc_02_01_003,02.01.003,Vibração de corpo inteiro (aceleração resultante de exposição normalizada - aren),2014-01-01,,FÍSICOS
+agente_noc_02_01_004,02.01.004,Vibração de corpo inteiro (Valor da Dose de Vibração Resultante - VDVR),2014-01-01,,FÍSICOS
+agente_noc_02_01_005,02.01.005,Trabalhos com perfuratrizes e marteletes pneumáticos,2014-01-01,,FÍSICOS
+agente_noc_02_01_006,02.01.006,Radiações ionizantes,2014-01-01,,FÍSICOS
+agente_noc_02_01_007,02.01.007,Extração e beneficiamento de minerais radioativos,2014-01-01,,FÍSICOS
+agente_noc_02_01_008,02.01.008,Atividades em minerações com exposição ao radônio,2014-01-01,,FÍSICOS
+agente_noc_02_01_009,02.01.009,"Realização de manutenção e supervisão em unidades de extração, tratamento e beneficiamento de minerais radioativos com exposição às radiações ionizantes",2014-01-01,,FÍSICOS
+agente_noc_02_01_010,02.01.010,Operações com reatores nucleares ou com fontes radioativas,2014-01-01,,FÍSICOS
+agente_noc_02_01_011,02.01.011,"Trabalhos realizados com exposição aos raios Alfa, Beta, Gama e X, aos nêutrons e às substâncias radioativas para fins industriais, terapêuticos e diagnósticos",2014-01-01,,FÍSICOS
+agente_noc_02_01_012,02.01.012,Fabricação e manipulação de produtos radioativos,2014-01-01,,FÍSICOS
+agente_noc_02_01_013,02.01.013,Pesquisas e estudos com radiações ionizantes em laboratórios,2014-01-01,,FÍSICOS
+agente_noc_02_01_014,02.01.014,"Trabalhos com exposição ao calor nos termos da NR-15, da Portaria 3.214/1978",2014-01-01,,FÍSICOS
+agente_noc_02_01_015,02.01.015,Pressão atmosférica anormal,2014-01-01,,FÍSICOS
+agente_noc_02_01_016,02.01.016,Trabalhos em caixões ou câmaras hiperbáricas,2014-01-01,,FÍSICOS
+agente_noc_02_01_017,02.01.017,Trabalhos em tubulões ou túneis sob ar comprimido,2014-01-01,,FÍSICOS
+agente_noc_02_01_018,02.01.018,Operações de mergulho com o uso de escafandros ou outros equipamentos,2014-01-01,,FÍSICOS
+agente_noc_03_01_001,03.01.001,Trabalhos em estabelecimentos de saúde com contato com pacientes portadores de doenças infectocontagiosas ou com manuseio de materiais contaminados,2014-01-01,,BIOLÓGICOS
+agente_noc_03_01_002,03.01.002,"Trabalhos com animais infectados para tratamento ou para o preparo de soro, vacinas e outros produtos",2014-01-01,,BIOLÓGICOS
+agente_noc_03_01_003,03.01.003,"Trabalhos em laboratórios de autópsia, de anatomia e anátomo-histologia",2014-01-01,,BIOLÓGICOS
+agente_noc_03_01_004,03.01.004,Trabalho de exumação de corpos e manipulação de resíduos de animais deteriorados,2014-01-01,,BIOLÓGICOS
+agente_noc_03_01_005,03.01.005,"Trabalhos em galerias, fossas e tranques de esgoto",2014-01-01,,BIOLÓGICOS
+agente_noc_03_01_006,03.01.006,Esvaziamento de biodigestores,2014-01-01,,BIOLÓGICOS
+agente_noc_03_01_007,03.01.007,Coleta e industrialização do lixo,2014-01-01,,BIOLÓGICOS
+agente_noc_04_01_001,04.01.001,Mineração subterrânea cujas atividades sejam exercidas afastadas das frentes de produção,2014-01-01,,"ASSOCIAÇÃO DE AGENTES NOCIVOS FÍSICOS, QUÍMICOS E BIOLÓGICOS"
+agente_noc_04_01_002,04.01.002,Trabalhos em atividades permanentes no subsolo de minerações subterrâneas em frente de produção,2014-01-01,,"ASSOCIAÇÃO DE AGENTES NOCIVOS FÍSICOS, QUÍMICOS E BIOLÓGICOS"
+agente_noc_05_01_001,05.01.001,Agentes nocivos não constantes no Anexo IV do Decreto 3.048/1999 e incluídos por força de decisão judicial ou administrativa,2014-01-01,,OUTROS AGENTES NOCIVOS
+agente_noc_09_01_001,09.01.001,Ausência de agente nocivo ou de atividades previstas no Anexo IV do Decreto 3.048/1999,2014-01-01,,AUSÊNCIA DE AGENTES NOCIVOS OU ATIVIDADES ESPECIAIS

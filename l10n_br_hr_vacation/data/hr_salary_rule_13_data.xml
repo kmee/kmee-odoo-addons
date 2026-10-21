@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais do 13º Salário.
+
+        Estruturas:
+          - structure_13_primeira_parcela: 50% do salário, sem descontos
+          - structure_13_segunda_parcela: integral - 1ª parcela, com INSS/IRRF
+          - structure_13: 13º proporcional (usado em cálculos genéricos)
+          - structure_rescisao: 13º proporcional na rescisão
+
+        Tributação: o 13º é apurado EM SEPARADO, com incidência EXCLUSIVA na
+        fonte (não se soma aos demais rendimentos do mês e não é ajustado na
+        declaração anual). Consequências implementadas aqui:
+          - INSS, IRRF e pensão alimentícia percentual recaem integralmente
+            sobre o 13º INTEGRAL, na apuração que o fecha (2ª parcela ou 13º
+            proporcional) - a 1ª parcela é adiantamento e não sofre nenhum
+            desses descontos;
+          - a comparação dedução legal x desconto simplificado (RF-16) é feita
+            DENTRO da própria apuração do 13º, com a tabela mensal aplicada
+            isoladamente;
+          - da base do 13º deduz-se a pensão RETIDA sobre o próprio 13º
+            (percentual). A parcela fixa da pensão é obrigação mensal e não se
+            repete aqui - ver o cabeçalho de hr_salary_rule_ferias_data.xml.
+
+        MÉDIA DE VERBAS VARIÁVEIS HABITUAIS (RF-18) - mesma regra do
+        cabeçalho de hr_salary_rule_ferias_data.xml: a base do 13º (1ª
+        parcela, 13º bruto e 13º da rescisão) soma a média das horas extras
+        habituais e do adicional noturno dos últimos 12 meses (Súmula 45
+        TST / CLT art. 142), via tools.br.media_habitual.
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         1ª PARCELA DO 13º (adiantamento)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="hr_rule_adiantamento_13" model="hr.salary.rule">
+        <field name="name">Adiantamento 13º Salário</field>
+        <field name="sequence" eval="1" />
+        <field name="code">ADIANTAMENTO_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_basic"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# 1ª parcela = 50% do 13º projetado para 31/12 (proporcional aos avos).
+# Para empregado de ano cheio, avos=12 => 50% do salário.
+# Para admitido no meio do ano, proporcional aos meses trabalhados.
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
+ref = payslip.date_to + tools.relativedelta(month=12, day=31)
+avos = tools.br.calc_decimo_avos(contract.date_start, ref)
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12 * 0.5)
+        </field>
+    </record>
+
+    <!-- NET para 1ª parcela (sem descontos) -->
+    <record id="hr_rule_net_13_primeira" model="hr.salary.rule">
+        <field name="name">Líquido (1ª Parcela 13º)</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_net"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         13º PROPORCIONAL / 2ª PARCELA
+         ══════════════════════════════════════════════════════════════ -->
+
+    <!-- 13º Bruto (proporcional por avos) -->
+    <record id="hr_rule_decimo_bruto" model="hr.salary.rule">
+        <field name="name">13º Salário Bruto</field>
+        <field name="sequence" eval="1" />
+        <field name="code">DECIMO_TERCEIRO_BRUTO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_basic"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
+avos = payslip.l10n_br_avos_13
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12)
+        </field>
+    </record>
+
+    <!-- GROSS 13º -->
+    <record id="hr_rule_gross_13" model="hr.salary.rule">
+        <field name="name">Remuneração Bruta (13º)</field>
+        <field name="sequence" eval="99" />
+        <field name="code">GROSS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_gross"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW
+        </field>
+    </record>
+
+    <!-- INSS sobre 13º -->
+    <record id="hr_rule_inss_13" model="hr.salary.rule">
+        <field name="name">INSS (13º)</field>
+        <field name="sequence" eval="100" />
+        <field name="code">INSS_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.calc_inss(max(categories.GROSS, 0))
+        </field>
+    </record>
+
+    <!-- Pensão alimentícia retida sobre o 13º (RF-03).
+         SOMENTE a parcela percentual, sobre o 13º bruto desta apuração: a
+         parcela fixa é obrigação mensal, quitada na folha mensal. -->
+    <record id="hr_rule_pensao_13" model="hr.salary.rule">
+        <field name="name">Pensão Alimentícia (13º)</field>
+        <field name="sequence" eval="106" />
+        <field name="code">PENSAO_ALIMENTICIA_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_pensao_percentual &gt; 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Percentual sobre o 13º bruto (GROSS desta estrutura). Retido uma única vez,
+# na apuração que fecha o 13º - a 1ª parcela não tem esta rubrica.
+result = tools.br.calc_pensao_alimenticia(
+    categories.GROSS,
+    0.0,
+    employee.l10n_br_pensao_percentual,
+)
+        </field>
+    </record>
+
+    <!-- Base IRRF 13º -->
+    <record id="hr_rule_base_irrf_13" model="hr.salary.rule">
+        <field name="name">Base IRRF (13º)</field>
+        <field name="sequence" eval="110" />
+        <field name="code">BASE_IRRF_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+gross = categories.GROSS
+deducoes = INSS_13
+dependentes = employee.l10n_br_irrf_dependentes * tools.br.irrf_deducao_dependente()
+# Só a pensão EFETIVAMENTE RETIDA sobre o 13º reduz a base do 13º.
+pensao = PENSAO_ALIMENTICIA_13
+result = gross - deducoes - dependentes - pensao
+        </field>
+    </record>
+
+    <!-- IRRF sobre 13º -->
+    <record id="hr_rule_irrf_13" model="hr.salary.rule">
+        <field name="name">IRRF (13º)</field>
+        <field name="sequence" eval="120" />
+        <field name="code">IRRF_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = not employee.l10n_br_molestia_grave
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# RF-16: forma mais favorável DENTRO da apuração exclusiva do 13º: dedução
+# legal (BASE_IRRF_13) x desconto simplificado sobre o 13º bruto. A opção pelo
+# simplificado na base do 13º é expressa: IN RFB 1.500/2014, art. 13, § 8º
+# (incluído pela IN RFB 2.141/2023); reforço no MAFON 2025, alínea e.7.
+# O redutor do IRPF alcança o imposto exclusivo de fonte do 13º por dispositivo
+# EXPRESSO: Lei 9.250/95, art. 3º-A, § 3º (incluído pela Lei 15.270/2025). A
+# base do redutor é o BRUTO do 13º; sem redutor cadastrado (até 12/2025) o
+# imposto não muda.
+result = tools.br.irrf_mais_favoravel(max(categories.GROSS, 0), BASE_IRRF_13)
+        </field>
+    </record>
+
+    <!-- FGTS sobre 13º (8% do 13º bruto) -->
+    <record id="hr_rule_fgts_13" model="hr.salary.rule">
+        <field name="name">FGTS (13º)</field>
+        <field name="sequence" eval="150" />
+        <field name="code">FGTS</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_comp"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = employee.l10n_br_tipo_contrato != 'aprendiz'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = tools.br.round_money(max(categories.GROSS, 0) * 0.08)
+        </field>
+    </record>
+
+    <!-- Dedução da 1ª parcela (adiantamento) já paga -->
+    <record id="hr_rule_desconto_adiantamento_13" model="hr.salary.rule">
+        <field name="name">Adiantamento 13º (1ª parcela)</field>
+        <field name="sequence" eval="160" />
+        <field name="code">ADIANTAMENTO_13</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+result = payslip.l10n_br_primeira_parcela_13_paga > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# Deduz o adiantamento (1ª parcela) para não pagar em dobro.
+result = payslip.l10n_br_primeira_parcela_13_paga
+        </field>
+    </record>
+
+    <!-- NET 13º (2ª parcela) -->
+    <record id="hr_rule_net_13" model="hr.salary.rule">
+        <field name="name">Líquido (13º)</field>
+        <field name="sequence" eval="200" />
+        <field name="code">NET</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_net"
+        />
+        <field name="condition_select">none</field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = categories.BASIC + categories.ALW - categories.DED
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         13º NA RESCISÃO
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="hr_rule_decimo_rescisao" model="hr.salary.rule">
+        <field name="name">13º Salário (Rescisão)</field>
+        <field name="sequence" eval="5" />
+        <field name="code">DECIMO_RESCISAO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_alw"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+# RF-06: o 13º proporcional NÃO é devido na dispensa por JUSTA CAUSA
+# (Lei 4.090/62 art. 3º: "ocorrendo rescisão, SEM justa causa..."; Decreto
+# 57.155/65 art. 7º: "salvo na hipótese de rescisão com justa causa"). É
+# devido em qualquer outra hipótese, inclusive pedido de demissão
+# (Súmula 157 TST).
+result = payslip.l10n_br_tipo_rescisao != 'justa_causa'
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+# RF-18: base soma a média de horas extras/adicional noturno habituais.
+avos = payslip.l10n_br_avos_13
+media = tools.br.media_habitual(payslip._l10n_br_codes_media_habitual())
+result = tools.br.round_money((contract.wage + media) * avos / 12)
+        </field>
+    </record>
+</odoo>

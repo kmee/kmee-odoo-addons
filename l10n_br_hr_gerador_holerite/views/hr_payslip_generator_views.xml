@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="hr_payslip_generator_form" model="ir.ui.view">
+        <field name="name">hr.payslip.generator.form</field>
+        <field name="model">hr.payslip.generator</field>
+        <field name="arch" type="xml">
+            <form string="Gerador de Holerites">
+                <group>
+                    <field name="contract_id" />
+                    <field name="mes_do_ano" />
+                    <field name="ano" />
+                    <field name="quantity" />
+                </group>
+                <footer>
+                    <button
+                        name="action_generate"
+                        string="Gerar Holerites"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancelar" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_payslip_generator_action" model="ir.actions.act_window">
+        <field name="name">Gerador de Holerites</field>
+        <field name="res_model">hr.payslip.generator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_hr_payslip_generator"
+        name="Gerador de Holerites"
+        parent="payroll.payroll_menu_root"
+        action="hr_payslip_generator_action"
+        sequence="50"
+    />
+
+</odoo>

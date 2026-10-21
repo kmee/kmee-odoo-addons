@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        id="menu_hr_arquivos_governo"
+        name="Arquivos do Governo"
+        parent="payroll.payroll_menu_root"
+        sequence="60"
+    />
+
+    <menuitem
+        id="menu_hr_dirf"
+        name="DIRF"
+        parent="menu_hr_arquivos_governo"
+        action="l10n_br_hr_dirf_action"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_hr_sefip"
+        name="SEFIP"
+        parent="menu_hr_arquivos_governo"
+        action="l10n_br_hr_sefip_action"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_hr_caged"
+        name="CAGED"
+        parent="menu_hr_arquivos_governo"
+        action="l10n_br_hr_caged_action"
+        sequence="30"
+    />
+
+</odoo>

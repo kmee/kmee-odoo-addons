@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="l10n_br_sst_cat_view_form_esocial" model="ir.ui.view">
+        <field name="name">l10n_br.sst.cat.form (in l10n_br_esocial_sst)</field>
+        <field name="model">l10n_br.sst.cat</field>
+        <field name="inherit_id" ref="l10n_br_hr_sst_cat.l10n_br_sst_cat_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_gerar_s2210"
+                    type="object"
+                    string="Preparar S-2210"
+                    attrs="{'invisible': ['|', ('state', '=', 'draft'), ('s2210_id', '!=', False)]}"
+                />
+                <button
+                    name="action_view_s2210"
+                    type="object"
+                    string="Ver S-2210"
+                    attrs="{'invisible': [('s2210_id', '=', False)]}"
+                />
+            </xpath>
+            <field name="numero_recibo" position="after">
+                <field name="s2210_id" readonly="1" />
+                <field name="esocial_state" readonly="1" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

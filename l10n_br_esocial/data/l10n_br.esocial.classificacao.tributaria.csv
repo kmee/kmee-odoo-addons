@@ -1,0 +1,20 @@
+id,codigo,nome,dt_inicio,dt_fim,tp_insc
+class_trib_01,01,Empresa enquadrada no regime de tributação Simples Nacional com tributação previdenciária substituída,2014-01-01,,1
+class_trib_02,02,Empresa enquadrada no regime de tributação Simples Nacional com tributação previdenciária não substituída,2014-01-01,,1
+class_trib_03,03,Empresa enquadrada no regime de tributação Simples Nacional com tributação previdenciária substituída e não substituída,2014-01-01,,1
+class_trib_04,04,Microempreendedor Individual - MEI,2014-01-01,,1
+class_trib_06,06,Agroindústria,2014-01-01,,1
+class_trib_07,07,Produtor rural Pessoa Jurídica,2014-01-01,,1
+class_trib_08,08,Consórcio simplificado de produtores rurais,2014-01-01,2020-12-31,1
+class_trib_09,09,Órgão Gestor de Mão de Obra - OGMO,2014-01-01,,1
+class_trib_10,10,Entidade sindical a que se refere a Lei 12.023/2009,2014-01-01,,1
+class_trib_11,11,Associação desportiva que mantém clube de futebol profissional,2014-01-01,,1
+class_trib_13,13,"Banco, caixa econômica, sociedade de crédito, financiamento e investimento e demais empresas relacionadas no parágrafo 1º do art. 22 da Lei 8.212/1991",2014-01-01,,1
+class_trib_14,14,"Sindicatos em geral, exceto aquele classificado no código [10]",2014-01-01,,1
+class_trib_21,21,"Pessoa Física, exceto segurado especial",2014-01-01,,2
+class_trib_22,22,"Segurado especial, inclusive quando for empregador doméstico",2014-01-01,,2
+class_trib_60,60,Missão diplomática ou repartição consular de carreira estrangeira,2014-01-01,,1
+class_trib_70,70,Empresa de que trata o Decreto 5.436/2005,2014-01-01,,1
+class_trib_80,80,Entidade beneficente de assistência social isenta de contribuições sociais,2014-01-01,,1
+class_trib_85,85,"Administração direta da União, Estados, Distrito Federal e Municípios; autarquias e fundações públicas",2014-01-01,,1
+class_trib_99,99,Pessoas Jurídicas em geral,2014-01-01,,1

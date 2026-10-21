@@ -14,12 +14,11 @@ class AccountPaymentTerm(models.Model):
         help="Indicates if this payment term is record-specific and editable.",
     )
 
-    @api.model
-    def create(self, vals):
-        term = super().create(vals)
-        if term.is_custom:
-            term.active = False
-        return term
+    @api.model_create_multi
+    def create(self, vals_list):
+        terms = super().create(vals_list)
+        terms.filtered("is_custom").write({"active": False})
+        return terms
 
     def write(self, vals):
         res = super().write(vals)
@@ -35,5 +34,8 @@ class AccountPaymentTerm(models.Model):
         :return: The newly created record.
         """
         self.ensure_one()
-        custom_term_id = self.copy({"name": name, "is_custom": True, "active": False})
+        custom_term_id = self.copy({"is_custom": True, "active": False})
+        # account.payment.term.copy() forces "<name> (copy)" and drops the
+        # name passed in default, so the requested name is written afterwards.
+        custom_term_id.name = name
         return custom_term_id

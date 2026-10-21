@@ -404,8 +404,8 @@ type of payment.</p>
 <p>To enable the automatic creation of a payment transaction upon invoice
 validation:</p>
 <ul class="simple">
-<li>On the payment mode associated with the automatic creation, enable
-the field <strong>Generate boletos on invoice</strong>.</li>
+<li>On the payment mode associated with the automatic creation, enable the
+field <strong>Generate boletos on invoice</strong>.</li>
 <li>Select the <strong>Payment Provider</strong> that will be used to issue the
 payments.</li>
 </ul>
@@ -414,6 +414,23 @@ payments.</li>
 <h2><a class="toc-backref" href="#toc-entry-2">Usage</a></h2>
 <p>In the form view of the <strong>Payment Transaction</strong>, boleto-related fields
 will be displayed if the transaction corresponds to a boleto payment.</p>
+<p>Each boleto charges one installment of the invoice, shown in the field
+<strong>Installment</strong>. When the boleto is paid, the payment is reconciled with
+that installment only, so a boleto paid out of order does not settle
+another installment. Generating the boletos again skips the installments
+that already have a live boleto (draft, pending, authorized or done); an
+installment whose boleto failed or was canceled gets a new one.</p>
+<p>A boleto is not a card payment, and the provider modules reuse the
+actions of the payment transaction with another meaning:</p>
+<ul class="simple">
+<li><strong>Capture</strong> queries the status of the boleto in the bank and updates
+the transaction (registered, paid, written off). Nothing is captured.</li>
+<li><strong>Void</strong> and <strong>Refund</strong> ask the bank to write off (cancel) the boleto.
+A boleto that was already paid is not refunded by the bank: the money
+must be returned to the payer outside the boleto.</li>
+</ul>
+<p>This mapping is temporary, until a dedicated model of bank instructions
+(write-off, due date extension, discount, protest) replaces it.</p>
 </div>
 <div class="section" id="known-issues-roadmap">
 <h2><a class="toc-backref" href="#toc-entry-3">Known issues / Roadmap</a></h2>

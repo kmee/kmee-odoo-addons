@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 KMEE INFORMATICA LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+
+    Configuracao pronta. Nasce atualizavel (sem noupdate) para que correcoes de
+    layout cheguem pelo update do modulo; para customizar, duplique o registro.
+-->
+<odoo>
+
+    <record id="config_oracle_gl" model="l10n_br.account.export.config">
+        <field name="name">Oracle GL Interface</field>
+        <field name="layout">oracle_gl</field>
+        <field name="encoding">cp1252</field>
+        <field name="company_id" eval="False" />
+    </record>
+
+</odoo>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="l10n_br_hr_apuracao_dia_view_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.dia</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-danger="inconsistencia != False"
+                decoration-warning="falta_injustificada"
+                decoration-muted="state == 'fechado'"
+                create="0"
+            >
+                <field name="date" />
+                <field name="employee_id" />
+                <field name="dia_semana" optional="show" />
+                <field name="jornada_prevista" sum="Previsto" widget="float_time" />
+                <field name="jornada_realizada" sum="Realizado" widget="float_time" />
+                <field name="horas_extras" sum="HE" widget="float_time" />
+                <field name="he_50" sum="HE 50%" widget="float_time" optional="show" />
+                <field
+                    name="he_100"
+                    sum="HE 100%"
+                    widget="float_time"
+                    optional="show"
+                />
+                <field name="atraso" sum="Atraso" widget="float_time" />
+                <field name="noturno" widget="float_time" optional="hide" />
+                <field
+                    name="noturno_computado"
+                    sum="Noturno"
+                    widget="float_time"
+                    optional="show"
+                />
+                <field
+                    name="intrajornada_suprimida"
+                    widget="float_time"
+                    optional="hide"
+                />
+                <field name="feriado" optional="hide" />
+                <field name="falta" optional="hide" />
+                <field name="falta_injustificada" optional="show" />
+                <field name="paridade_ok" optional="hide" />
+                <field name="interjornada_ok" optional="hide" />
+                <field name="inconsistencia" optional="hide" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_apuracao_dia_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.dia</field>
+        <field name="arch" type="xml">
+            <form create="0">
+                <header>
+                    <button
+                        name="apurar"
+                        type="object"
+                        string="Reapurar"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', '=', 'fechado')]}"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="employee_id" readonly="1" class="oe_inline" />
+                            <span> - </span>
+                            <field name="date" readonly="1" class="oe_inline" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Jornada">
+                            <field name="contract_id" />
+                            <field name="jornada_prevista" widget="float_time" />
+                            <field name="jornada_realizada" widget="float_time" />
+                            <field name="horas_extras" widget="float_time" />
+                            <field name="he_50" widget="float_time" />
+                            <field name="he_100" widget="float_time" />
+                            <field name="atraso" widget="float_time" />
+                        </group>
+                        <group string="Adicional noturno e intervalos">
+                            <field name="noturno" widget="float_time" />
+                            <field name="noturno_computado" widget="float_time" />
+                            <field name="intrajornada_gozada" widget="float_time" />
+                            <field name="intrajornada_devida" widget="float_time" />
+                            <field name="intrajornada_suprimida" widget="float_time" />
+                            <field name="interjornada_ok" />
+                        </group>
+                        <group string="Situação do dia">
+                            <field name="feriado" />
+                            <field name="dia_semana" />
+                            <field name="falta" />
+                            <field name="falta_injustificada" />
+                            <field name="paridade_ok" />
+                            <field name="periodo_id" />
+                        </group>
+                        <group string="Ocorrências">
+                            <field name="ocorrencia_ids" widget="many2many_tags" />
+                            <field name="banco_horas_delta" widget="float_time" />
+                        </group>
+                    </group>
+                    <group
+                        string="Inconsistências"
+                        attrs="{'invisible': [('inconsistencia', '=', False)]}"
+                    >
+                        <field name="inconsistencia" nolabel="1" readonly="1" />
+                    </group>
+                    <notebook>
+                        <page name="marcacoes" string="Marcações">
+                            <field name="marcacao_ids" nolabel="1" readonly="1">
+                                <tree>
+                                    <field name="nsr" />
+                                    <field name="datetime_marcacao" />
+                                    <field name="tipo_marcacao" />
+                                    <field name="seq_par" />
+                                    <field name="origem" />
+                                    <field name="state" />
+                                    <field name="motivo" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="sessoes" string="Sessões">
+                            <field name="attendance_ids" nolabel="1" readonly="1">
+                                <tree>
+                                    <field name="check_in" />
+                                    <field name="check_out" />
+                                    <field name="worked_hours" widget="float_time" />
+                                    <field name="l10n_br_seq_par" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_apuracao_dia_view_search" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.dia</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" />
+                <field name="date" />
+                <field name="periodo_id" />
+                <filter
+                    name="filter_inconsistencia"
+                    string="Com inconsistência"
+                    domain="[('inconsistencia', '!=', False)]"
+                />
+                <filter
+                    name="filter_falta"
+                    string="Falta injustificada"
+                    domain="[('falta_injustificada', '=', True)]"
+                />
+                <filter
+                    name="filter_he"
+                    string="Com horas extras"
+                    domain="[('horas_extras', '>', 0)]"
+                />
+                <filter
+                    name="filter_impar"
+                    string="Marcação sem par"
+                    domain="[('paridade_ok', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="filter_fechado"
+                    string="Fechados"
+                    domain="[('state', '=', 'fechado')]"
+                />
+                <group expand="0" string="Agrupar por">
+                    <filter
+                        name="group_employee"
+                        string="Funcionário"
+                        context="{'group_by': 'employee_id'}"
+                    />
+                    <filter
+                        name="group_date"
+                        string="Dia"
+                        context="{'group_by': 'date'}"
+                    />
+                    <filter
+                        name="group_periodo"
+                        string="Competência"
+                        context="{'group_by': 'periodo_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_apuracao_dia_action" model="ir.actions.act_window">
+        <field name="name">Apuração Diária</field>
+        <field name="res_model">l10n_br.hr.apuracao.dia</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_group_employee': 1}</field>
+    </record>
+
+</odoo>

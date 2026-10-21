@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Adiciona regras de benefícios às estruturas CLT e Estatutário.
+    -->
+
+    <!-- Regras de benefícios na estrutura CLT -->
+    <record id="l10n_br_hr_payroll.structure_clt" model="hr.payroll.structure">
+        <field
+            name="rule_ids"
+            eval="[
+            (4, ref('hr_rule_desc_vt')),
+            (4, ref('hr_rule_desc_plano_saude')),
+            (4, ref('hr_rule_vr_info')),
+            (4, ref('hr_rule_va_info')),
+        ]"
+        />
+    </record>
+
+    <!-- Regras de benefícios na estrutura Estatutário -->
+    <record id="l10n_br_hr_payroll.structure_estatuto" model="hr.payroll.structure">
+        <field
+            name="rule_ids"
+            eval="[
+            (4, ref('hr_rule_desc_vt')),
+            (4, ref('hr_rule_desc_plano_saude')),
+            (4, ref('hr_rule_vr_info')),
+            (4, ref('hr_rule_va_info')),
+        ]"
+        />
+    </record>
+
+    <!--
+        NOTA FISCAL: este módulo NÃO sobrescreve a regra BASE_IRRF.
+        Na retenção mensal do IRRF na fonte (art. 4º da Lei 9.250/95;
+        art. 677 do RIR/2018; art. 52 da IN RFB 1.500/2014) o rol de
+        deduções é taxativo: previdência oficial (INSS/RPPS), dependentes,
+        pensão alimentícia e previdência complementar privada. Plano de
+        saúde só é dedutível na Declaração de Ajuste Anual, e o desconto de
+        vale-transporte não é dedução tributária. Logo, DESC_PLANO_SAUDE e
+        DESC_VT permanecem apenas como descontos do líquido (categoria DED),
+        sem afetar a base do IRRF — a regra base original do
+        l10n_br_hr_payroll é a fiscalmente correta.
+    -->
+</odoo>

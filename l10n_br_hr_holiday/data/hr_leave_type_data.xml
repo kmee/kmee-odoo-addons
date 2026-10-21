@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Tipos de afastamento CLT brasileiros.
+        Referências: CLT arts. 473, 392, 392-A, 395, 396, 60 §3.
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DOENÇA / ACIDENTE
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="leave_type_atestado_medico" model="hr.leave.type">
+        <field name="name">Atestado Medico (ate 15 dias)</field>
+        <field name="code">ATESTADO_MED</field>
+        <field name="l10n_br_category">disease</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">15</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_auxilio_doenca" model="hr.leave.type">
+        <field name="name">Auxilio-Doenca (INSS, a partir do 16o dia)</field>
+        <field name="code">AUXILIO_DOENCA</field>
+        <field name="l10n_br_category">disease</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_acidente_trabalho" model="hr.leave.type">
+        <field name="name">Acidente de Trabalho</field>
+        <field name="code">ACIDENTE_TRAB</field>
+        <field name="l10n_br_category">disease</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_atestado_odonto" model="hr.leave.type">
+        <field name="name">Tratamento Odontologico</field>
+        <field name="code">ATESTADO_ODONTO</field>
+        <field name="l10n_br_category">disease</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         MATERNIDADE / PATERNIDADE
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="leave_type_maternidade" model="hr.leave.type">
+        <field name="name">Licenca-Maternidade (120 dias)</field>
+        <field name="code">MATERNIDADE</field>
+        <field name="l10n_br_category">maternity</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">120</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_maternidade_prorrogacao" model="hr.leave.type">
+        <field name="name">Prorrogacao Licenca-Maternidade (60 dias)</field>
+        <field name="code">MATERNIDADE_PRORROG</field>
+        <field name="l10n_br_category">maternity</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">60</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_paternidade" model="hr.leave.type">
+        <field name="name">Licenca-Paternidade (5 dias)</field>
+        <field name="code">PATERNIDADE</field>
+        <field name="l10n_br_category">maternity</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">5</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_paternidade_prorrogacao" model="hr.leave.type">
+        <field name="name">Prorrogacao Licenca-Paternidade (15 dias)</field>
+        <field name="code">PATERNIDADE_PRORROG</field>
+        <field name="l10n_br_category">maternity</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">15</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_adocao" model="hr.leave.type">
+        <field name="name">Adocao Legal (5 dias uteis)</field>
+        <field name="code">ADOCAO</field>
+        <field name="l10n_br_category">maternity</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">5</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_amamentacao" model="hr.leave.type">
+        <field name="name">Amamentacao (2 intervalos de 30 min)</field>
+        <field name="code">AMAMENTACAO</field>
+        <field name="l10n_br_category">maternity</field>
+        <field name="l10n_br_need_attachment" eval="False" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         EVENTOS FAMILIARES (CLT art. 473)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="leave_type_casamento" model="hr.leave.type">
+        <field name="name">Casamento (3 dias consecutivos)</field>
+        <field name="code">CASAMENTO</field>
+        <field name="l10n_br_category">family</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">3</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_falecimento" model="hr.leave.type">
+        <field name="name">Falecimento de Familiar (2 dias consecutivos)</field>
+        <field name="code">FALECIMENTO</field>
+        <field name="l10n_br_category">family</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">2</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_acomp_filho" model="hr.leave.type">
+        <field
+            name="name"
+        >Acompanhamento de Filho Hospitalizado (2 dias uteis/ano)</field>
+        <field name="code">ACOMP_FILHO</field>
+        <field name="l10n_br_category">family</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">2</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_acomp_gestante" model="hr.leave.type">
+        <field name="name">Acompanhamento de Consulta Gestante (2 dias uteis)</field>
+        <field name="code">ACOMP_GESTANTE</field>
+        <field name="l10n_br_category">family</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">2</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         CÍVICO / MILITAR / ELEITORAL (CLT art. 473)
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="leave_type_doacao_sangue" model="hr.leave.type">
+        <field name="name">Doacao de Sangue (1 dia/12 meses)</field>
+        <field name="code">DOACAO_SANGUE</field>
+        <field name="l10n_br_category">civic</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">1</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_titulo_eleitor" model="hr.leave.type">
+        <field name="name">Alistamento Eleitoral (2 dias uteis)</field>
+        <field name="code">TITULO_ELEITOR</field>
+        <field name="l10n_br_category">civic</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">2</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_servico_militar" model="hr.leave.type">
+        <field name="name">Servico Militar Obrigatorio</field>
+        <field name="code">SERVICO_MILITAR</field>
+        <field name="l10n_br_category">civic</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_justica_eleitoral" model="hr.leave.type">
+        <field name="name">Convocacao Justica Eleitoral (2 dias/convocacao)</field>
+        <field name="code">JUSTICA_ELEIT</field>
+        <field name="l10n_br_category">civic</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="l10n_br_days_limit">2</field>
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_exame_vestibular" model="hr.leave.type">
+        <field name="name">Exame Vestibular (dias de prova)</field>
+        <field name="code">VESTIBULAR</field>
+        <field name="l10n_br_category">civic</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         FALTAS
+         ══════════════════════════════════════════════════════════════ -->
+
+    <record id="leave_type_falta_injustificada" model="hr.leave.type">
+        <field name="name">Falta Injustificada</field>
+        <field name="code">FALTA_INJUST</field>
+        <field name="l10n_br_category">unjustified</field>
+        <field name="l10n_br_need_attachment" eval="False" />
+        <field name="l10n_br_payroll_discount" eval="True" />
+        <field name="l10n_br_discount_dsr" eval="True" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_falta_justificada" model="hr.leave.type">
+        <field name="name">Falta Justificada (sem desconto)</field>
+        <field name="code">FALTA_JUST</field>
+        <field name="l10n_br_category">justified</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="False" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+    <record id="leave_type_falta_justificada_desconto" model="hr.leave.type">
+        <field name="name">Falta Justificada (com desconto)</field>
+        <field name="code">FALTA_JUST_DESC</field>
+        <field name="l10n_br_category">justified</field>
+        <field name="l10n_br_need_attachment" eval="True" />
+        <field name="l10n_br_payroll_discount" eval="True" />
+        <field name="l10n_br_discount_dsr" eval="False" />
+        <field name="leave_validation_type">hr</field>
+        <field name="requires_allocation">no</field>
+    </record>
+
+</odoo>

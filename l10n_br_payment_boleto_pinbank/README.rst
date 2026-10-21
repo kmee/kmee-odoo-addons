@@ -37,17 +37,17 @@ payment provider integration with Pinbank for boleto generation.
 Configuration
 =============
 
--  Go to Invoice -> Configuration -> Payment Providers and configure the
-   Pinbank provider with the following information provided by the
-   provider:
+- Go to Invoice -> Configuration -> Payment Providers and configure the
+  Pinbank provider with the following information provided by the
+  provider:
 
-   -  Pinbank Username
-   -  Pinbank Password
-   -  Pinbank Channel Code
-   -  Pinbank Client Code
-   -  Pinbank Request Origin
+  - Pinbank Username
+  - Pinbank Password
+  - Pinbank Channel Code
+  - Pinbank Client Code
+  - Pinbank Request Origin
 
--  Activate the payment provider
+- Activate the payment provider
 
 Usage
 =====
@@ -58,7 +58,15 @@ Providers.
 Known issues / Roadmap
 ======================
 
--  ...
+- The status of the boletos is updated by the crons, which query the
+  bank every 30 minutes. The route ``/payment/pinbank/return`` ignores
+  the data it receives and queries the bank as well. The PinBank API
+  used here has no documented notification (webhook) nor a signature for
+  the data sent to Odoo; if PinBank provides one, it should replace the
+  polling, with the data validated before use.
+- Capture, void and refund keep the meaning described in the usage of
+  ``l10n_br_payment_boleto`` (query the status, write off the boleto)
+  until a model of bank instructions replaces them.
 
 Changelog
 =========
@@ -66,9 +74,9 @@ Changelog
 16.0.1.0.0 (2025-04-17)
 -----------------------
 
--  [ADD] Initial release of the module.
+- [ADD] Initial release of the module.
 
--  ...
+- ...
 
 Bug Tracker
 ===========
@@ -91,14 +99,14 @@ Authors
 Contributors
 ------------
 
--  Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
+- Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  KMEE
+- KMEE
 
 Maintainers
 -----------

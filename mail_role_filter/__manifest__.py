@@ -7,7 +7,7 @@
     "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
-    "depends": ["mail", "base"],
+    "depends": ["mail", "base", "base_user_role"],
     "data": [
         "security/ir.model.access.csv",
         "views/mail_filter_role.xml",

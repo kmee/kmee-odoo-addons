@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!--
+        Regras salariais para benefícios brasileiros.
+
+        Usa current_contract.advantages.CÓDIGO do OCA payroll_contract_advantages.
+        Os valores são configurados por contrato via advantage templates.
+
+        Convenções:
+          - DESC_VT: desconto limitado a 6% (DED)
+          - DESC_PLANO_SAUDE: desconto dedutível do IRRF (DED)
+          - VR_INFO, VA_INFO: informativos, não tributáveis (INFO)
+    -->
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DESCONTO VALE-TRANSPORTE (DED)
+         6% do salário, limitado ao valor do VT
+         ══════════════════════════════════════════════════════════════ -->
+    <record id="hr_rule_desc_vt" model="hr.salary.rule">
+        <field name="name">Desconto Vale-Transporte</field>
+        <field name="sequence" eval="52" />
+        <field name="code">DESC_VT</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+vt = current_contract.advantages.VT
+result = vt and vt > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+vt = current_contract.advantages.VT
+result = tools.br.calc_vt(contract.wage, vt)
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DESCONTO PLANO DE SAÚDE (DED)
+         Coparticipação do empregado — dedutível do IRRF
+         ══════════════════════════════════════════════════════════════ -->
+    <record id="hr_rule_desc_plano_saude" model="hr.salary.rule">
+        <field name="name">Desconto Plano de Saúde</field>
+        <field name="sequence" eval="53" />
+        <field name="code">DESC_PLANO_SAUDE</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_ded"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+ps = current_contract.advantages.PLANO_SAUDE
+result = ps and ps > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = current_contract.advantages.PLANO_SAUDE
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         VALE-REFEIÇÃO (INFO — não tributável)
+         ══════════════════════════════════════════════════════════════ -->
+    <record id="hr_rule_vr_info" model="hr.salary.rule">
+        <field name="name">Vale-Refeição</field>
+        <field name="sequence" eval="25" />
+        <field name="code">VR_INFO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+vr = current_contract.advantages.VR
+result = vr and vr > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = current_contract.advantages.VR
+        </field>
+    </record>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         VALE-ALIMENTAÇÃO (INFO — não tributável)
+         ══════════════════════════════════════════════════════════════ -->
+    <record id="hr_rule_va_info" model="hr.salary.rule">
+        <field name="name">Vale-Alimentação</field>
+        <field name="sequence" eval="26" />
+        <field name="code">VA_INFO</field>
+        <field
+            name="category_id"
+            ref="l10n_br_hr_payroll.hr_salary_rule_category_info"
+        />
+        <field name="condition_select">python</field>
+        <field name="condition_python">
+va = current_contract.advantages.VA
+result = va and va > 0
+        </field>
+        <field name="amount_select">code</field>
+        <field name="amount_python_compute">
+result = current_contract.advantages.VA
+        </field>
+    </record>
+</odoo>

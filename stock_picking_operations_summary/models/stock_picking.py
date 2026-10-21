@@ -10,11 +10,11 @@ from odoo import api, fields, models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    summary_line_ids = fields.One2many(
+    summary_line_ids = fields.Many2many(
         "stock.picking.summary.line",
-        "picking_id",
         string="Summary",
         compute="_compute_summary_line_ids",
+        store=False,
         help="Moves grouped by product and UoM (computed when form is opened).",
     )
     has_summary = fields.Boolean(
@@ -34,8 +34,6 @@ class StockPicking(models.Model):
     def _compute_summary_line_ids(self):
         SummaryLine = self.env["stock.picking.summary.line"].sudo()
         for picking in self:
-            existing = SummaryLine.search([("picking_id", "=", picking.id)])
-            existing.unlink()
             groups = defaultdict(
                 lambda: {
                     "product_id": False,
@@ -60,21 +58,23 @@ class StockPicking(models.Model):
                 g["quantity_done"] += move.quantity_done
                 g["location_id"] = move.location_id.id
                 g["location_dest_id"] = move.location_dest_id.id
-            lines = SummaryLine.create(
-                [
-                    {
-                        "picking_id": picking.id,
-                        "product_id": g["product_id"],
-                        "product_uom": g["product_uom"],
-                        "product_uom_qty": g["product_uom_qty"],
-                        "quantity_done": g["quantity_done"],
-                        "location_id": g["location_id"],
-                        "location_dest_id": g["location_dest_id"],
-                    }
-                    for g in groups.values()
-                ]
+            picking.summary_line_ids = (
+                SummaryLine.create(
+                    [
+                        {
+                            "product_id": g["product_id"],
+                            "product_uom": g["product_uom"],
+                            "product_uom_qty": g["product_uom_qty"],
+                            "quantity_done": g["quantity_done"],
+                            "location_id": g["location_id"],
+                            "location_dest_id": g["location_dest_id"],
+                        }
+                        for g in groups.values()
+                    ]
+                )
+                if groups
+                else SummaryLine
             )
-            picking.summary_line_ids = lines
 
     @api.depends(
         "move_ids",

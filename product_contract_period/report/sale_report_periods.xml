@@ -4,7 +4,7 @@
         id="report_saleorder_document_inherit_periods"
         inherit_id="sale.report_saleorder_document"
     >
-        <xpath expr="//table[contains(@class, 'o_main_table')]" position="after">
+        <xpath expr="//table[hasclass('o_main_table')]" position="after">
             <t t-if="doc.contract_period_details">
                 <div
                     style="float: right;

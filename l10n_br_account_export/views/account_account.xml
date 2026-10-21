@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 KMEE INFORMATICA LTDA
+    License AGPL-3 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo>
+
+    <record id="view_account_form_export_code" model="ir.ui.view">
+        <field name="name">account.account.form.l10n_br_export</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="l10n_br_export_code" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_list_export_code" model="ir.ui.view">
+        <field name="name">account.account.list.l10n_br_export</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="l10n_br_export_code" optional="show" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

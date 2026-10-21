@@ -1,0 +1,40 @@
+# Copyright 2024 KMEE
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
+from odoo import fields, models
+
+
+class ESocialReceitaReclamatoria(models.Model):
+    _name = "l10n_br.esocial.receita.reclamatoria"
+    _inherit = ["l10n_br.esocial.tabela.mixin"]
+    _description = "eSocial Tabela 29 - Receita Reclamatória Trabalhista"
+
+
+class ESocialMotivoCessacao(models.Model):
+    _name = "l10n_br.esocial.motivo.cessacao"
+    _inherit = ["l10n_br.esocial.tabela.mixin"]
+    _description = "eSocial Tabela 26 - Motivos Cessação de Benefícios"
+
+
+class ESocialCausaAfastMte(models.Model):
+    _name = "l10n_br.esocial.causa.afast.mte"
+    _inherit = ["l10n_br.esocial.tabela.mixin"]
+    _description = "eSocial - Causas de Afastamento MTE"
+
+    cod_esocial = fields.Char()
+
+
+class ESocialRubricaRescisoria(models.Model):
+    _name = "l10n_br.esocial.rubrica.rescisoria"
+    _inherit = ["l10n_br.esocial.tabela.mixin"]
+    _description = "eSocial - Rubricas Rescisórias MTE"
+
+    cod_rubrica_esocial = fields.Char()
+    campo_fixo = fields.Char()
+    restricao_nao_exibir = fields.Char()
+
+
+class ESocialInfoRescisao(models.Model):
+    _name = "l10n_br.esocial.info.rescisao"
+    _inherit = ["l10n_br.esocial.tabela.mixin"]
+    _description = "eSocial - Informações Adicionais Rescisão MTE"

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="hr_payslip_view_form" model="ir.ui.view">
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="payroll.hr_payslip_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Apuração de ponto (Portaria 671)">
+                    <group>
+                        <field name="l10n_br_tem_apuracao" />
+                        <field name="l10n_br_apuracao_count" />
+                        <field name="l10n_br_apuracao_fechada" />
+                        <button
+                            name="action_ver_apuracao"
+                            type="object"
+                            string="Ver apuração"
+                            class="btn-link"
+                            attrs="{'invisible': [('l10n_br_tem_apuracao', '=', False)]}"
+                        />
+                    </group>
+                    <group>
+                        <field name="l10n_br_intervalo_suprimido" widget="float_time" />
+                        <field name="l10n_br_semanas_com_falta" />
+                        <field
+                            name="l10n_br_justificativa_divergencia"
+                            attrs="{'invisible': [('l10n_br_apuracao_fechada', '=', False)]}"
+                        />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

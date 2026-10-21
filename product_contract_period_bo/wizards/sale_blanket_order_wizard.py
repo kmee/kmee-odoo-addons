@@ -49,9 +49,9 @@ class SaleBlanketOrderWizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         defaults = super().default_get(fields_list)
-        if "order_line" in fields_list:
+        if "line_ids" in fields_list:
             base_lines = self._default_lines()
-            defaults["order_line"] = self._default_lines_custom(base_lines)
+            defaults["line_ids"] = self._default_lines_custom(base_lines)
         return defaults
 
 

@@ -43,10 +43,10 @@ Configuration
 To enable the automatic creation of a payment transaction upon invoice
 validation:
 
--  On the payment mode associated with the automatic creation, enable
-   the field **Generate boletos on invoice**.
--  Select the **Payment Provider** that will be used to issue the
-   payments.
+- On the payment mode associated with the automatic creation, enable the
+  field **Generate boletos on invoice**.
+- Select the **Payment Provider** that will be used to issue the
+  payments.
 
 Usage
 =====
@@ -54,10 +54,29 @@ Usage
 In the form view of the **Payment Transaction**, boleto-related fields
 will be displayed if the transaction corresponds to a boleto payment.
 
+Each boleto charges one installment of the invoice, shown in the field
+**Installment**. When the boleto is paid, the payment is reconciled with
+that installment only, so a boleto paid out of order does not settle
+another installment. Generating the boletos again skips the installments
+that already have a live boleto (draft, pending, authorized or done); an
+installment whose boleto failed or was canceled gets a new one.
+
+A boleto is not a card payment, and the provider modules reuse the
+actions of the payment transaction with another meaning:
+
+- **Capture** queries the status of the boleto in the bank and updates
+  the transaction (registered, paid, written off). Nothing is captured.
+- **Void** and **Refund** ask the bank to write off (cancel) the boleto.
+  A boleto that was already paid is not refunded by the bank: the money
+  must be returned to the payer outside the boleto.
+
+This mapping is temporary, until a dedicated model of bank instructions
+(write-off, due date extension, discount, protest) replaces it.
+
 Known issues / Roadmap
 ======================
 
--  ...
+- ...
 
 Changelog
 =========
@@ -65,9 +84,9 @@ Changelog
 16.0.1.0.0 (2025-04-17)
 -----------------------
 
--  [ADD] Initial release of the module.
+- [ADD] Initial release of the module.
 
--  ...
+- ...
 
 Bug Tracker
 ===========
@@ -90,14 +109,14 @@ Authors
 Contributors
 ------------
 
--  Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
+- Luis Malta luis.malta@kmee.com.br (https://kmee.com.br/)
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
--  KMEE
+- KMEE
 
 Maintainers
 -----------

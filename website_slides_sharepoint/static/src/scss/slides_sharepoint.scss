@@ -1,0 +1,8 @@
+// The SharePoint player is a plain <video>: make it behave like the iframes of
+// the native YouTube / Vimeo players inside the ratio containers.
+.o_wslides_sharepoint_video {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    object-fit: contain;
+}

@@ -23,7 +23,7 @@ class ProductTemplate(models.Model):
     @api.onchange("expected_margin_percent")
     def _onchange_expected_margin_percent(self):
         """Calcula o markup esperado baseado na margem esperada."""
-        if self.expected_margin_percent and self.expected_margin_percent != 100:
+        if self.expected_margin_percent != 100:
             # Fórmula: Markup = Margem / (100 - Margem) * 100
             self.expected_markup_percent = (
                 self.expected_margin_percent
@@ -34,7 +34,7 @@ class ProductTemplate(models.Model):
     @api.onchange("expected_markup_percent")
     def _onchange_expected_markup_percent(self):
         """Calcula a margem esperada baseada no markup esperado."""
-        if self.expected_markup_percent:
+        if self.expected_markup_percent != -100:
             # Fórmula: Margem = Markup / (100 + Markup) * 100
             self.expected_margin_percent = (
                 self.expected_markup_percent

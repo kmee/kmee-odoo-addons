@@ -1,0 +1,15 @@
+id,codigo,nome,dt_inicio,dt_fim,tp_suspensao
+tipo_dec_01,01,Liminar em Mandado de Segurança,2014-01-01,,2
+tipo_dec_02,02,Depósito Judicial do Montante Integral,2014-01-01,,2
+tipo_dec_03,03,Depósito Administrativo do Montante Integral,2014-01-01,,1
+tipo_dec_04,04,Antecipação de Tutela,2014-01-01,,2
+tipo_dec_05,05,Liminar em Medida Cautelar,2014-01-01,,2
+tipo_dec_08,08,Sentença em Mandado de Segurança Favorável ao Contribuinte,2014-01-01,,2
+tipo_dec_09,09,Sentença em Ação Ordinária Favorável ao Contribuinte e Confirmada pelo TRF,2014-01-01,,2
+tipo_dec_10,10,Acórdão do TRF Favorável ao Contribuinte,2014-01-01,,2
+tipo_dec_11,11,Acórdão do STJ em Recurso Especial Favorável ao Contribuinte,2014-01-01,,2
+tipo_dec_12,12,Acórdão do STF em Recurso Extraordinário Favorável ao Contribuinte,2014-01-01,,2
+tipo_dec_13,13,Sentença 1ª instância não transitada em julgado com efeito suspensivo,2014-01-01,,2
+tipo_dec_14,14,Contestação Administrativa FAP,2014-01-01,,1;4
+tipo_dec_90,90,Decisão Definitiva a favor do contribuinte,2014-01-01,,2
+tipo_dec_92,92,Sem suspensão da exigibilidade,2014-01-01,,1;2

@@ -1,0 +1,210 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_holiday
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_acidente_trabalho
+msgid "Acidente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_acomp_gestante
+msgid "Acompanhamento de Consulta Gestante (2 dias uteis)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_acomp_filho
+msgid "Acompanhamento de Filho Hospitalizado (2 dias uteis/ano)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_adocao
+msgid "Adocao Legal (5 dias uteis)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_titulo_eleitor
+msgid "Alistamento Eleitoral (2 dias uteis)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_amamentacao
+msgid "Amamentacao (2 intervalos de 30 min)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_atestado_medico
+msgid "Atestado Medico (ate 15 dias)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_auxilio_doenca
+msgid "Auxilio-Doenca (INSS, a partir do 16o dia)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_casamento
+msgid "Casamento (3 dias consecutivos)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,field_description:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_category
+msgid "Categoria CLT"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_holiday.view_hr_leave_type_form_inherit_br
+msgid "Configuracao CLT"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_justica_eleitoral
+msgid "Convocacao Justica Eleitoral (2 dias/convocacao)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,field_description:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_discount_dsr
+msgid "Desconta DSR"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,field_description:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_payroll_discount
+msgid "Desconta em Folha"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_doacao_sangue
+msgid "Doacao de Sangue (1 dia/12 meses)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__disease
+msgid "Doenca / Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__family
+msgid "Evento Familiar (casamento, obito)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_exame_vestibular
+msgid "Exame Vestibular (dias de prova)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,field_description:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_need_attachment
+msgid "Exige Atestado/Comprovante"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,help:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_need_attachment
+msgid "Exige anexo de atestado medico ou comprovante para validacao."
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_falecimento
+msgid "Falecimento de Familiar (2 dias consecutivos)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_falta_injustificada
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__unjustified
+msgid "Falta Injustificada"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__justified
+msgid "Falta Justificada"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_falta_justificada_desconto
+msgid "Falta Justificada (com desconto)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_falta_justificada
+msgid "Falta Justificada (sem desconto)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_maternidade
+msgid "Licenca-Maternidade (120 dias)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_paternidade
+msgid "Licenca-Paternidade (5 dias)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,field_description:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_days_limit
+msgid "Limite de Dias"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,help:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_days_limit
+msgid "Limite de dias por periodo (12 meses). Zero = sem limite."
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__maternity
+msgid "Maternidade / Paternidade"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__other
+msgid "Outros"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_maternidade_prorrogacao
+msgid "Prorrogacao Licenca-Maternidade (60 dias)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_paternidade_prorrogacao
+msgid "Prorrogacao Licenca-Paternidade (15 dias)"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,help:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_discount_dsr
+msgid "Quando marcado, faltas tambem descontam o Descanso Semanal Remunerado."
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields,help:l10n_br_hr_holiday.field_hr_leave_type__l10n_br_payroll_discount
+msgid "Quando marcado, os dias de afastamento sao descontados do salario."
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model.fields.selection,name:l10n_br_hr_holiday.selection__hr_leave_type__l10n_br_category__civic
+msgid "Servico Civico / Militar / Eleitoral"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_servico_militar
+msgid "Servico Militar Obrigatorio"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:ir.model,name:l10n_br_hr_holiday.model_hr_leave_type
+msgid "Time Off Type"
+msgstr ""
+
+#. module: l10n_br_hr_holiday
+#: model:hr.leave.type,name:l10n_br_hr_holiday.leave_type_atestado_odonto
+msgid "Tratamento Odontologico"
+msgstr ""

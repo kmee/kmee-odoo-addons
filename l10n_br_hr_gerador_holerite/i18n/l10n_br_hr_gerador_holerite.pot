@@ -1,0 +1,172 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_gerador_holerite
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_gerador_holerite
+#. odoo-python
+#: code:addons/l10n_br_hr_gerador_holerite/models/hr_payslip_generator.py:0
+#, python-format
+msgid ""
+"A quantidade de holerites (%(qty)s) excede o limite de %(max)s competências "
+"por geração."
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#. odoo-python
+#: code:addons/l10n_br_hr_gerador_holerite/models/hr_payslip_generator.py:0
+#, python-format
+msgid "A quantidade de holerites deve ser maior que zero."
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__4
+msgid "Abril"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__8
+msgid "Agosto"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__ano
+msgid "Ano"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_gerador_holerite.hr_payslip_generator_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__contract_id
+msgid "Contrato"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__12
+msgid "Dezembro"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__2
+msgid "Fevereiro"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.actions.act_window,name:l10n_br_hr_gerador_holerite.hr_payslip_generator_action
+#: model:ir.ui.menu,name:l10n_br_hr_gerador_holerite.menu_hr_payslip_generator
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_gerador_holerite.hr_payslip_generator_form
+msgid "Gerador de Holerites"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model,name:l10n_br_hr_gerador_holerite.model_hr_payslip_generator
+msgid "Gerador de Holerites em Lote"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_gerador_holerite.hr_payslip_generator_form
+msgid "Gerar Holerites"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__payslip_ids
+msgid "Holerites Gerados"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__1
+msgid "Janeiro"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__7
+msgid "Julho"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__6
+msgid "Junho"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__5
+msgid "Maio"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__3
+msgid "Março"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__mes_do_ano
+msgid "Mês Inicial"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__11
+msgid "Novembro"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__10
+msgid "Outubro"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator__quantity
+msgid "Quantidade de Holerites"
+msgstr ""
+
+#. module: l10n_br_hr_gerador_holerite
+#: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__9
+msgid "Setembro"
+msgstr ""
