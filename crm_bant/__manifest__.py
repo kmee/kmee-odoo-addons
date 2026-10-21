@@ -6,7 +6,6 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "crm",
-        "spreadsheet_dashboard",
     ],
     "data": [
         "views/crm_lead_views.xml",
@@ -15,5 +14,5 @@
     "installable": True,
     "application": False,
     "auto_install": False,
-    "license": "LGPL-3",
+    "license": "AGPL-3",
 }
