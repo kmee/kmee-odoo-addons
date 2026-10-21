@@ -421,25 +421,20 @@ class TestCrmLeadStageDuration(TransactionCase):
         with self.assertRaises(AccessError):
             line.write({"user_id": self.env.ref("base.user_admin").id})
 
-    def test_salesman_creates_lead_and_history_is_recorded(self):
-        """Given a salesman, creating a lead and moving it records the history
-        under his name, even though he cannot write the lines himself."""
-        salesman = self._user("bant_dur_creator", "sales_team.group_sale_salesman")
-        lead = self.Lead.with_user(salesman).create(
-            {
-                "name": "Salesman lead",
-                "type": "opportunity",
-                "team_id": self.team.id,
-                "stage_id": self.stage_a.id,
-                "user_id": salesman.id,
-            }
-        )
+    def test_salesman_moves_lead_twice_and_history_is_recorded(self):
+        """Given a salesman, moving a lead twice closes his own line and opens
+        a new one, all under his name, though he cannot write lines himself."""
+        salesman = self._user("bant_dur_mover", "sales_team.group_sale_salesman")
+        lead = self._lead(user_id=salesman.id).with_user(salesman)
         lead.write({"stage_id": self.stage_b.id})
+        lead.write({"stage_id": self.stage_c.id})
         lines = self._lines(lead)
-        self.assertEqual(lines.mapped("stage_id"), self.stage_a | self.stage_b)
-        self.assertEqual(lines.mapped("user_id"), salesman)
-        self.assertTrue(lines[0].end_date)
-        self.assertFalse(lines[1].end_date)
+        self.assertEqual(
+            lines.mapped("stage_id"), self.stage_a | self.stage_b | self.stage_c
+        )
+        self.assertEqual(lines[1:].mapped("user_id"), salesman)
+        self.assertTrue(lines[1].end_date)
+        self.assertFalse(lines[2].end_date)
 
     def test_sales_manager_can_delete_history_lines(self):
         """Given a sales manager, deleting a stage line is allowed."""
