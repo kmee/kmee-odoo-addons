@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Wizard Form -->
+    <record id="helpdesk_ticket_reprocess_wizard_form" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.reprocess.wizard.form</field>
+        <field name="model">helpdesk.ticket.reprocess.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reprocessar Descrições dos Tickets">
+                <sheet>
+                    <div
+                        class="alert alert-info"
+                        role="alert"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    >
+                        <p>
+                            <strong
+                            >Atenção:</strong> Este assistente vai reprocessar todas as descrições de tickets existentes.
+                        </p>
+                        <ul>
+                            <li
+                            >O processo vai aplicar as sanitizações em todas as descrições</li>
+                            <li>O HTML original será salvo no campo <code
+                                >description_full</code></li>
+                            <li
+                            >Pode demorar alguns minutos dependendo da quantidade de tickets</li>
+                        </ul>
+                        <p class="mb-0">
+                            <strong>Total de tickets com descrição:</strong>
+                            <field name="ticket_count" class="font-weight-bold" />
+                        </p>
+                    </div>
+
+                    <div
+                        class="alert alert-success"
+                        role="alert"
+                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                    >
+                        <p class="mb-0">
+                            <strong>Reprocessamento concluído com sucesso!</strong>
+                        </p>
+                    </div>
+
+                    <group attrs="{'invisible': [('state', '=', 'draft')]}">
+                        <group>
+                            <field name="processed_count" />
+                            <field name="updated_count" />
+                        </group>
+                    </group>
+
+                    <group string="Validação da Fila">
+                        <group>
+                            <field name="validation_state" readonly="1" />
+                            <field
+                                name="validation_job_uuid"
+                                readonly="1"
+                                invisible="1"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="validation_message"
+                                nolabel="1"
+                                readonly="1"
+                                colspan="2"
+                            />
+                        </group>
+                    </group>
+
+                    <field name="state" invisible="1" />
+
+                    <group attrs="{'invisible': [('state', '=', 'draft')]}">
+                        <field
+                            name="log_text"
+                            nolabel="1"
+                            colspan="2"
+                            readonly="1"
+                            style="height: 300px; font-family: monospace;"
+                        />
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button
+                        string="Validar Queue Job"
+                        type="object"
+                        name="action_validate_queue_job"
+                        class="btn-secondary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        string="Atualizar Status da Fila"
+                        type="object"
+                        name="action_refresh_queue_job_validation"
+                        class="btn-secondary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                    <button
+                        string="Iniciar Reprocessamento"
+                        type="object"
+                        name="action_start_reprocess"
+                        class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                        confirm="Tem certeza que deseja iniciar o reprocessamento de todos os tickets? Este processo pode demorar alguns minutos."
+                    />
+                    <button
+                        string="Fechar"
+                        type="object"
+                        name="action_close"
+                        class="btn-secondary"
+                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                    />
+                    <button
+                        string="Cancelar"
+                        type="object"
+                        name="action_close"
+                        class="btn-secondary"
+                        attrs="{'invisible': [('state', '!=', 'draft')]}"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="helpdesk_ticket_reprocess_action" model="ir.actions.act_window">
+        <field name="name">Reprocessar Descrições</field>
+        <field name="res_model">helpdesk.ticket.reprocess.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu raiz em Configurações > Helpdesk -->
+
+    <menuitem
+        id="menu_helpdesk_reprocess"
+        name="Reprocessar Descrições (Helpdesk)"
+        parent="helpdesk_mgmt.helpdesk_ticket_config_main_menu"
+        action="helpdesk_ticket_reprocess_action"
+        sequence="100"
+    />
+
+</odoo>
