@@ -191,12 +191,13 @@ class AccountMoveMatchPicking(models.TransientModel):
         )
         if not picking_type:
             return self._reopen()
+        location_src, location_dest = self._get_picking_locations(picking_type)
         picking_vals = {
             "partner_id": move.partner_id.id,
             "picking_type_id": picking_type.id,
             "origin": move.name,
-            "location_id": picking_type.default_location_src_id.id,
-            "location_dest_id": picking_type.default_location_dest_id.id,
+            "location_id": location_src.id,
+            "location_dest_id": location_dest.id,
             "move_ids": [],
         }
         for line in self.unmatched_invoice_line_ids:
@@ -207,12 +208,12 @@ class AccountMoveMatchPicking(models.TransientModel):
                     0,
                     0,
                     {
-                        "name": line.name,
+                        "description_picking": line.name,
                         "product_id": line.product_id.id,
                         "product_uom_qty": line.quantity,
                         "product_uom": line.product_uom_id.id,
-                        "location_id": picking_type.default_location_src_id.id,
-                        "location_dest_id": picking_type.default_location_dest_id.id,
+                        "location_id": location_src.id,
+                        "location_dest_id": location_dest.id,
                     },
                 )
             )
@@ -221,6 +222,24 @@ class AccountMoveMatchPicking(models.TransientModel):
             self.new_stock_picking_ids |= picking
             self.matching_invoice_line_ids |= self.unmatched_invoice_line_ids
         return self._reopen()
+
+    def _get_picking_locations(self, picking_type):
+        """Source and destination of the picking to create.
+
+        The operation type only has the warehouse side as default (the other
+        side is the partner location), so fall back to the partner locations.
+        """
+        partner = self.account_move_id.partner_id
+        src = picking_type.default_location_src_id
+        dest = picking_type.default_location_dest_id
+        stock = picking_type.warehouse_id.lot_stock_id
+        if picking_type.code == "outgoing":
+            src = src or stock
+            dest = dest or partner.property_stock_customer
+        else:
+            src = src or partner.property_stock_supplier
+            dest = dest or stock
+        return src, dest
 
     def _reopen(self):
         return {
