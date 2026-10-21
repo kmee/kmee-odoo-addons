@@ -14,7 +14,7 @@ class TestTechLead(TransactionCase):
                 "name": "Lead One",
                 "login": "tech_lead_one",
                 "email": "tech_lead_one@example.com",
-                "groups_id": [(6, 0, [group_user.id])],
+                "group_ids": [(6, 0, [group_user.id])],
             }
         )
         cls.lead2 = Users.create(
@@ -22,7 +22,7 @@ class TestTechLead(TransactionCase):
                 "name": "Lead Two",
                 "login": "tech_lead_two",
                 "email": "tech_lead_two@example.com",
-                "groups_id": [(6, 0, [group_user.id])],
+                "group_ids": [(6, 0, [group_user.id])],
             }
         )
         cls.project = cls.env["project.project"].create(
@@ -93,9 +93,8 @@ class TestTechLead(TransactionCase):
         Task.create(
             {"name": "B", "project_id": self.project.id, "tech_lead_id": self.lead2.id}
         )
-        groups = Task.read_group(
+        groups = Task._read_group(
             [("project_id", "=", self.project.id)],
-            ["tech_lead_id"],
             ["tech_lead_id"],
         )
         self.assertEqual(len(groups), 2)
