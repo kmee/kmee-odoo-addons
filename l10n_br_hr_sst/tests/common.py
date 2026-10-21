@@ -16,8 +16,8 @@ class SstCommon(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.company = cls.env.company
-        if not cls.company.partner_id.cnpj_cpf:
-            cls.company.partner_id.write({"cnpj_cpf": "02.546.716/0001-46"})
+        if not cls.company.partner_id.vat:
+            cls.company.partner_id.write({"vat": "02.546.716/0001-46"})
 
         cls.agente_ruido = cls.env.ref(AGENTE_RUIDO)
         cls.agente_ausencia = cls.env.ref(AGENTE_AUSENCIA)

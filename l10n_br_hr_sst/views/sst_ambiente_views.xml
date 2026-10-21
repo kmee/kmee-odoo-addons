@@ -2,17 +2,17 @@
 <odoo>
 
     <record id="l10n_br_sst_ambiente_view_tree" model="ir.ui.view">
-        <field name="name">l10n_br.sst.ambiente.tree</field>
+        <field name="name">l10n_br.sst.ambiente.list</field>
         <field name="model">l10n_br.sst.ambiente</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="dsc_setor" />
                 <field name="local_amb" />
                 <field name="nr_insc" />
                 <field name="risco_count" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -61,14 +61,14 @@
                     <notebook>
                         <page string="Fatores de Risco" name="riscos">
                             <field name="risco_ids">
-                                <tree>
+                                <list>
                                     <field name="agente_nocivo_id" />
                                     <field name="tp_aval" />
                                     <field name="intensidade" />
                                     <field name="date_from" />
                                     <field name="date_to" />
                                     <field name="laudo_id" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -104,7 +104,7 @@
     <record id="l10n_br_sst_ambiente_action" model="ir.actions.act_window">
         <field name="name">Ambientes de Trabalho</field>
         <field name="res_model">l10n_br.sst.ambiente</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>

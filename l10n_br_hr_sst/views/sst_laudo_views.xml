@@ -2,10 +2,10 @@
 <odoo>
 
     <record id="l10n_br_sst_laudo_view_tree" model="ir.ui.view">
-        <field name="name">l10n_br.sst.laudo.tree</field>
+        <field name="name">l10n_br.sst.laudo.list</field>
         <field name="model">l10n_br.sst.laudo</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-success="state == 'vigente'"
                 decoration-muted="state in ('substituido', 'cancelled')"
             >
@@ -17,7 +17,7 @@
                 <field name="risco_count" />
                 <field name="state" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -89,7 +89,7 @@
                     <notebook>
                         <page string="Fatores de Risco" name="riscos">
                             <field name="risco_ids" context="{'default_laudo_id': id}">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="ambiente_id" />
                                     <field name="agente_nocivo_id" />
                                     <field name="tp_aval" />
@@ -100,7 +100,7 @@
                                     <field name="periculosidade" />
                                     <field name="date_from" />
                                     <field name="date_to" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Ambientes" name="ambientes">
@@ -115,11 +115,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -127,7 +123,7 @@
     <record id="l10n_br_sst_laudo_action" model="ir.actions.act_window">
         <field name="name">Laudos</field>
         <field name="res_model">l10n_br.sst.laudo</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>
