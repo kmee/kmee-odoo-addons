@@ -36,9 +36,11 @@ class HelpdeskTicketTrack(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         tickets = super(HelpdeskTicketTrack, self).create(vals_list)
+        # The history is written by the system: users only read it
+        Duration = self.env["helpdesk.ticket.stage.duration"].sudo()
         for ticket in tickets:
             if ticket.stage_id:
-                ticket.stage_duration_ids.create(
+                Duration.create(
                     {
                         "ticket_id": ticket.id,
                         "stage_id": ticket.stage_id.id,
@@ -51,13 +53,15 @@ class HelpdeskTicketTrack(models.Model):
     def write(self, vals):
         res = super(HelpdeskTicketTrack, self).write(vals)
         if "stage_id" in vals:
+            # The history is written by the system: users only read it
+            Duration = self.env["helpdesk.ticket.stage.duration"].sudo()
             for ticket in self:
-                previous_stage = ticket.stage_duration_ids.filtered(
+                previous_stage = ticket.sudo().stage_duration_ids.filtered(
                     lambda s: not s.end_date
                 )
                 if previous_stage:
                     previous_stage.end_date = fields.Datetime.now()
-                ticket.stage_duration_ids.create(
+                Duration.create(
                     {
                         "ticket_id": ticket.id,
                         "stage_id": vals["stage_id"],
