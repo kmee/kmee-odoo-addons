@@ -17,6 +17,16 @@ class TestInstallments(TransactionCase):
         cls.other_provider = cls.env["payment.provider"].create(
             {"name": "Other Provider", "code": "none"}
         )
+        # 20.0 has no generic payment method: each one belongs to a provider
+        for provider in cls.provider | cls.other_provider:
+            cls.env["payment.method"].create(
+                {
+                    "name": "Installment Method",
+                    "code": "installment_test_%s" % provider.id,
+                    "active": True,
+                    "provider_id": provider.id,
+                }
+            )
 
     def _term(self, n, rate=0.0, kind="simple", provider=None, installment=True):
         """Create a term with ``n`` installment lines (percent lines adding up to 100%)."""
@@ -137,7 +147,7 @@ class TestInstallments(TransactionCase):
         return self.env["payment.transaction"].create(
             {
                 "provider_id": provider.id,
-                "payment_method_id": self.env.ref("payment.payment_method_unknown").id,
+                "payment_method_id": provider.payment_method_ids[:1].id,
                 "reference": "TX-INST-%s" % provider.id,
                 "amount": 300.0,
                 "currency_id": self.env.company.currency_id.id,
