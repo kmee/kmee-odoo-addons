@@ -13,17 +13,31 @@ CRM BANT Qualification
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
-    :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
-    :alt: License: LGPL-3
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
     :target: https://github.com/KMEE/kmee-odoo-addons/tree/20.0/crm_bant
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
-It allows you to reverse transactions from debit to credit and vice
-versa, and also ignore the balance.
+Qualificação de oportunidades do CRM pelo método BANT (Budget,
+Authority, Need, Timeline: orçamento, autoridade, necessidade e prazo).
+
+Cada oportunidade ganha a aba **BANT**, com o status de cada dimensão e
+os campos de apoio: valor e período do orçamento, contato e papel de
+quem decide, descrição da necessidade, dores, critérios de sucesso,
+data-alvo e justificativa do prazo.
+
+Cada status vale de 0 a 3 pontos e a soma das quatro dimensões (até 12)
+define a qualificação da oportunidade:
+
+- 0 ponto: não qualificada;
+- 1 a 5 pontos: parcialmente qualificada;
+- 6 a 9 pontos: qualificada;
+- 10 a 12 pontos: totalmente qualificada (só é possível com as quatro
+  dimensões preenchidas).
 
 **Table of contents**
 
@@ -33,30 +47,28 @@ versa, and also ignore the balance.
 Use Cases / Context
 ===================
 
-Some customers use OFX files converted from PDF files which have some
-problems. Two possible anomalies are: - Transactions that should be
-credit are saved as debit and vice versa. - The balance in the OFX file
-is not consistent with reality.
-
-Configuration
-=============
-
-To configure this module, you need to:
-
-1. Go to \*Accounting > Configuration > Journals.
-2. Inside the bank account journal, in the **Advanced Settings** tab,
-   check the **Reverse Balance Of Entries OFX** and **Ignore OFX
-   Balance** fields.
+O BANT é um roteiro de qualificação comercial: antes de investir tempo
+numa oportunidade, o vendedor confirma se o cliente tem orçamento, se
+fala com quem decide, se a necessidade é real e se existe prazo para a
+compra. Registrar essas respostas no próprio CRM deixa a qualificação
+visível para a equipe e permite comparar o funil por equipe e por nível
+de qualificação.
 
 Usage
 =====
 
-To use this module, you need to:
+Para usar este módulo:
 
-1. Go to **Account**.
-2. Click on the **Import(OCA)** button for the bank account.
-3. Click on the **UPLOAD YOUR FILE** button and select the file.
-4. Click on the **IMPORT AND VIEW** button.
+1. Abra uma oportunidade em **CRM > Vendas > Meu funil** e vá à aba
+   **BANT**.
+2. Preencha o status de orçamento, autoridade, necessidade e prazo; a
+   pontuação e a qualificação são recalculadas na hora e a qualificação
+   aparece também ao lado das etiquetas da oportunidade.
+3. No kanban e na lista do funil aparece a qualificação BANT. Na busca
+   há os filtros **BANT Qualified** e **BANT Unqualified** e os
+   agrupamentos por qualificação e pelo status de cada dimensão.
+4. Em **CRM > Relatórios > BANT** ficam o gráfico e a tabela dinâmica da
+   qualificação por equipe de vendas.
 
 Bug Tracker
 ===========
