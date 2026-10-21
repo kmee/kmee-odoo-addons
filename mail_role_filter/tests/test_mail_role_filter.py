@@ -17,7 +17,7 @@ class TestMailRoleFilter(TransactionCase):
                 "name": "With role",
                 "login": "with_role",
                 "email": "with_role@example.com",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("base.group_user").id])],
                 "role_line_ids": [(0, 0, {"role_id": cls.role.id})],
             }
         )
@@ -26,7 +26,7 @@ class TestMailRoleFilter(TransactionCase):
                 "name": "Both roles",
                 "login": "both_roles",
                 "email": "both_roles@example.com",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("base.group_user").id])],
                 "role_line_ids": [
                     (0, 0, {"role_id": cls.role.id}),
                     (0, 0, {"role_id": cls.role2.id}),
@@ -38,7 +38,7 @@ class TestMailRoleFilter(TransactionCase):
                 "name": "Without role",
                 "login": "without_role",
                 "email": "without_role@example.com",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("base.group_user").id])],
             }
         )
         cls.record = cls.env["res.partner"].create({"name": "Record"})
