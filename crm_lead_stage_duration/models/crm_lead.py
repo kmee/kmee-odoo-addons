@@ -48,9 +48,13 @@ class CrmLead(models.Model):
                 display_duration(total_seconds, 4) if total_seconds else ""
             )
 
+    def _stage_duration_model(self):
+        """The stage history is written by the system: users only read it."""
+        return self.env["crm.lead.stage.duration"].sudo()
+
     def _close_stage_duration_line(self, end_date=None):
         end_date = end_date or fields.Datetime.now()
-        open_lines = self.env["crm.lead.stage.duration"].search(
+        open_lines = self._stage_duration_model().search(
             [("lead_id", "in", self.ids), ("end_date", "=", False)]
         )
         if open_lines:
@@ -70,7 +74,7 @@ class CrmLead(models.Model):
                 }
             )
         if values:
-            self.env["crm.lead.stage.duration"].create(values)
+            self._stage_duration_model().create(values)
 
     @api.model_create_multi
     def create(self, vals_list):
