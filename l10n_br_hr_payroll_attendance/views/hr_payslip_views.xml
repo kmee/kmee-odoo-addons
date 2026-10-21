@@ -18,7 +18,7 @@
                             type="object"
                             string="Ver apuração"
                             class="btn-link"
-                            attrs="{'invisible': [('l10n_br_tem_apuracao', '=', False)]}"
+                            invisible="not l10n_br_tem_apuracao"
                         />
                     </group>
                     <group>
@@ -26,7 +26,7 @@
                         <field name="l10n_br_semanas_com_falta" />
                         <field
                             name="l10n_br_justificativa_divergencia"
-                            attrs="{'invisible': [('l10n_br_apuracao_fechada', '=', False)]}"
+                            invisible="not l10n_br_apuracao_fechada"
                         />
                     </group>
                 </group>

@@ -3,8 +3,6 @@
 
 import logging
 
-from odoo import SUPERUSER_ID, api
-
 _logger = logging.getLogger(__name__)
 
 # A regra de líquido do l10n_br_hr_payroll soma apenas BASIC e ALW. Verba
@@ -20,14 +18,13 @@ REGRAS_NOVAS = (
 )
 
 
-def post_init_hook(cr, registry):
+def post_init_hook(env):
     """Liga as rubricas de jornada à estrutura CLT e ao líquido.
 
     Os dados do ``l10n_br_hr_payroll`` são ``noupdate="1"``, então a estrutura
     e a regra de líquido não podem ser alteradas por XML de outro módulo. O
     ajuste vai por código, é idempotente e registra o que fez.
     """
-    env = api.Environment(cr, SUPERUSER_ID, {})
     _adiciona_regras_a_estrutura(env)
     _inclui_indenizatorias_no_liquido(env)
 

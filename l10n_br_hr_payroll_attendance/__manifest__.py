@@ -5,7 +5,7 @@
     "name": "Folha Brasileira - Integração com o Ponto",
     "summary": "Horas extras, adicional noturno, faltas e dias trabalhados "
     "derivados da apuração de ponto, sem digitação manual",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Human Resources/Payroll",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
