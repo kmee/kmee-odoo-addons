@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <menuitem
         id="menu_sst_epi"
         parent="l10n_br_hr_sst.menu_sst_root"
@@ -21,5 +20,4 @@
         sequence="20"
         action="hr_personal_equipment_request.hr_personal_equipment_act_window"
     />
-
 </odoo>

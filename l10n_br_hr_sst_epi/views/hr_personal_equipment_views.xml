@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="hr_personal_equipment_form_view_sst" model="ir.ui.view">
         <field name="name">hr.personal.equipment.form (in l10n_br_hr_sst_epi)</field>
         <field name="model">hr.personal.equipment</field>
@@ -69,5 +68,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

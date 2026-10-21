@@ -45,16 +45,24 @@
                             </thead>
                             <tbody>
                                 <tr t-foreach="employee.l10n_br_sst_epi_ids" t-as="epi">
-                                    <td><span t-field="epi.product_id" /></td>
-                                    <td><span t-field="epi.certification" /></td>
+                                    <td>
+                                        <span t-field="epi.product_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="epi.certification" />
+                                    </td>
                                     <td>
                                         <span t-field="epi.l10n_br_sst_ca_validade" />
                                     </td>
                                     <td class="text-end">
                                         <span t-field="epi.quantity" />
                                     </td>
-                                    <td><span t-field="epi.start_date" /></td>
-                                    <td><span t-field="epi.expiry_date" /></td>
+                                    <td>
+                                        <span t-field="epi.start_date" />
+                                    </td>
+                                    <td>
+                                        <span t-field="epi.expiry_date" />
+                                    </td>
                                     <td>
                                         <span
                                             t-field="epi.l10n_br_sst_data_devolucao"
