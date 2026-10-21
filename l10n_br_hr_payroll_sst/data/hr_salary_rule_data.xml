@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-
     <!-- Adicional de GILRAT (financiamento da aposentadoria especial).
          Encargo PATRONAL: não desconta do trabalhador, incide sobre a
          remuneração de quem tem exposição ensejadora de aposentadoria
@@ -38,5 +37,4 @@ result = tools.br.round_money(max(base, 0) * aliquota / 100.0)
     <record id="l10n_br_hr_payroll.structure_clt" model="hr.payroll.structure">
         <field name="rule_ids" eval="[(4, ref('hr_rule_gilrat_adicional'))]" />
     </record>
-
 </odoo>
