@@ -20,7 +20,7 @@
             <xpath expr="//sheet" position="inside">
                 <group
                     string="Integridade do PTRP (art. 89)"
-                    attrs="{'invisible': [('ptrp_resumo', '=', False)]}"
+                    invisible="not ptrp_resumo"
                 >
                     <group>
                         <field name="ptrp_integridade_ok" />
