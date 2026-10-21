@@ -222,10 +222,87 @@ class TestSstAso(SstCommon):
         self.contract.state = "open"
         self.assertEqual(self.contract.state, "open")
 
-    def test_rescisao_sem_aso_demissional_bloqueia(self):
+    # ── Demissional (NR-7, item 7.5.11) ─────────────────────────────────────
+
+    def _encerra(self, termino=None):
+        """Encerra o contrato na data informada, sem esperar o cron do core."""
+        self.contract.write({"date_end": termino or self.hoje, "state": "close"})
+        return self.contract
+
+    def _atividades_demissional(self):
+        tipo = self.env.ref("l10n_br_hr_sst_aso.mail_activity_type_aso_demissional")
+        return self.contract.activity_ids.filtered(lambda a: a.activity_type_id == tipo)
+
+    def test_rescisao_sem_demissional_nao_bloqueia(self):
+        """O demissional tem prazo de 10 dias após o término: não trava a rescisão.
+
+        O bloqueio da política só vale para o admissional, que a NR-7 exige
+        antes de o empregado assumir as atividades.
+        """
         self.env.company.l10n_br_sst_aso_politica = "bloqueia"
-        with self.assertRaises(UserError):
-            self.contract.state = "close"
+        self._encerra()
+        self.assertEqual(self.contract.state, "close")
+
+    def test_dispensa_grau_1_e_2_ate_135_dias(self):
+        self.env.company.l10n_br_sst_grau_risco = "2"
+        self._conclui(self._cria_exame(date=self.hoje - relativedelta(days=100)))
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertEqual(self.contract.l10n_br_sst_demissional, "dispensado")
+        self.assertFalse(self._atividades_demissional())
+
+    def test_grau_3_e_4_dispensa_so_ate_90_dias(self):
+        self.env.company.l10n_br_sst_grau_risco = "3"
+        self._conclui(self._cria_exame(date=self.hoje - relativedelta(days=100)))
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertEqual(self.contract.l10n_br_sst_demissional, "cobrado")
+        atividade = self._atividades_demissional()
+        self.assertEqual(len(atividade), 1)
+        self.assertEqual(atividade.date_deadline, self.hoje + relativedelta(days=10))
+
+    def test_grau_3_dispensa_abaixo_de_90_dias(self):
+        self.env.company.l10n_br_sst_grau_risco = "4"
+        self._conclui(self._cria_exame(date=self.hoje - relativedelta(days=89)))
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertEqual(self.contract.l10n_br_sst_demissional, "dispensado")
+
+    def test_sem_grau_de_risco_usa_o_prazo_menor(self):
+        """Sem grau informado, vale o prazo mais restritivo (90 dias)."""
+        self.env.company.l10n_br_sst_grau_risco = False
+        self._conclui(self._cria_exame(date=self.hoje - relativedelta(days=100)))
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertEqual(self.contract.l10n_br_sst_demissional, "cobrado")
+
+    def test_sem_exame_anterior_cobra(self):
+        self.env.company.l10n_br_sst_grau_risco = "1"
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertEqual(self.contract.l10n_br_sst_demissional, "cobrado")
+
+    def test_cobranca_nao_duplica(self):
+        self.env.company.l10n_br_sst_grau_risco = "3"
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertEqual(len(self._atividades_demissional()), 1)
+
+    def test_demissional_concluido_fecha_a_cobranca(self):
+        self.env.company.l10n_br_sst_grau_risco = "3"
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self._conclui(self._cria_exame(tipo=TIPO_ASO_DEMISSIONAL))
+        self.assertEqual(self.contract.l10n_br_sst_demissional, "realizado")
+        self.assertFalse(self._atividades_demissional())
+
+    def test_politica_ignora_nao_cobra(self):
+        self.env.company.l10n_br_sst_aso_politica = "ignora"
+        self._encerra()
+        self.exame_model.cron_cobrar_demissional()
+        self.assertFalse(self.contract.l10n_br_sst_demissional)
+        self.assertFalse(self._atividades_demissional())
 
     # ── Agendamento automático (RS-10) ──────────────────────────────────────
 
