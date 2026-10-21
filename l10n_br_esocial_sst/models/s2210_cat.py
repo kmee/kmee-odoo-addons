@@ -1,8 +1,17 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from datetime import date
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+# evtCAT/cat/tpAcid
+TIPO_ACIDENTE_TIPICO = "1"
+TIPO_ACIDENTE_TRAJETO = "3"
+# Leiaute S-1.3, hrsTrabAntesAcid: obrigatório no acidente típico e, a partir
+# desta data, no de trajeto.
+INICIO_HRS_TRAB_TRAJETO = date(2022, 7, 20)
 
 
 class ESocialS2210(models.Model):
@@ -38,6 +47,24 @@ class ESocialS2210(models.Model):
 
     def _get_event_type(self):
         return "S-2210"
+
+    def _validar_hrs_trab_antes_acid(self):
+        self.ensure_one()
+        acidente = self.acidente_id
+        if acidente.hrs_trab_antes_acid:
+            return
+        if acidente.tp_acid == TIPO_ACIDENTE_TIPICO or (
+            acidente.tp_acid == TIPO_ACIDENTE_TRAJETO
+            and acidente.date_acidente >= INICIO_HRS_TRAB_TRAJETO
+        ):
+            raise UserError(
+                _(
+                    "S-2210 de %(nome)s: informe as horas trabalhadas antes do "
+                    "acidente (hrsTrabAntesAcid). O eSocial as exige no acidente "
+                    "típico e, desde 20/07/2022, no de trajeto."
+                )
+                % {"nome": self.employee_id.name}
+            )
 
     def _validar_antes_do_envio(self):
         for rec in self:
@@ -76,6 +103,7 @@ class ESocialS2210(models.Model):
                         "campos": ", ".join(faltando),
                     }
                 )
+            rec._validar_hrs_trab_antes_acid()
             if acidente.houve_obito and not acidente.date_obito:
                 raise UserError(
                     _("S-2210 de %(nome)s: informe a data do óbito.")
