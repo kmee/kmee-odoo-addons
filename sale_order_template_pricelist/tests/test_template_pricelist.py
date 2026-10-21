@@ -17,7 +17,6 @@ class TestSaleOrderTemplatePricelist(TransactionCase):
             {
                 "group_ids": [
                     (4, cls.env.ref("product.group_product_pricelist").id),
-                    (4, cls.env.ref("sale_management.group_sale_order_template").id),
                 ]
             }
         )
