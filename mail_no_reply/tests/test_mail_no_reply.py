@@ -165,7 +165,9 @@ class TestMailNoReply(TransactionCase):
         with (
             mock.patch.object(mail_server_cls, "_disable_send", lambda _: False),
             mock.patch.object(mail_server_cls, "_connect__", return_value=None),
-            mock.patch.object(mail_server_cls, "send_email", return_value="<id@x>") as send,
+            mock.patch.object(
+                mail_server_cls, "send_email", return_value="<id@x>"
+            ) as send,
         ):
             self._mass_composer()._action_send_mail()
         self.assertTrue(send.called)
