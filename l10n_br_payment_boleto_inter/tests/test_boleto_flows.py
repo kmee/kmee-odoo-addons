@@ -211,21 +211,35 @@ class TestBoletoInterFlows(BancoInterCommon):
 
         self.assertEqual(tx.state, "done")
 
-    def test_cron_cancels_an_expired_boleto(self):
-        tx = self._create_transaction(reference="BOL-0002")
+    def _run_cron_with_cobranca(self, reference, cobranca):
+        tx = self._create_transaction(reference=reference)
         with self._patch_session(self._created_boleto_responses()):
             tx.generate_boleto()
 
         self._clear_token_cache()
         with self._patch_session(
-            [
-                self.token_response,
-                ResponseStub(json_data={"cobranca": {"situacao": "VENCIDO"}}),
-            ]
+            [self.token_response, ResponseStub(json_data={"cobranca": cobranca})]
         ):
             self.env["payment.transaction"].cron_update_boleto_status()
+        return tx
 
+    def test_cron_keeps_an_overdue_boleto_pending(self):
+        """The bank still accepts an overdue boleto until the agenda ends."""
+        tx = self._run_cron_with_cobranca("BOL-0002", {"situacao": "VENCIDO"})
+        self.assertEqual(tx.state, "pending")
+
+    def test_cron_cancels_a_canceled_boleto_without_payment(self):
+        tx = self._run_cron_with_cobranca(
+            "BOL-0004", {"situacao": "CANCELADO", "valorTotalRecebido": 0}
+        )
         self.assertEqual(tx.state, "cancel")
+
+    @mute_logger(_TX_LOGGER)
+    def test_cron_does_not_cancel_a_boleto_with_amount_received(self):
+        tx = self._run_cron_with_cobranca(
+            "BOL-0005", {"situacao": "CANCELADO", "valorTotalRecebido": 10.0}
+        )
+        self.assertEqual(tx.state, "pending")
 
     @mute_logger(_TX_LOGGER)
     def test_cron_survives_a_failing_request(self):
