@@ -40,7 +40,6 @@ class TestPickingSummary(TransactionCase):
         picking = picking or self.picking
         return self.env["stock.move"].create(
             {
-                "name": product.name,
                 "product_id": product.id,
                 "product_uom_qty": qty,
                 "product_uom": (uom or product.uom_id).id,
@@ -170,7 +169,7 @@ class TestPickingSummary(TransactionCase):
             {
                 "name": "Stock user",
                 "login": "summary_stock_user",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -186,7 +185,7 @@ class TestPickingSummary(TransactionCase):
             {
                 "name": "Employee",
                 "login": "summary_employee",
-                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [self.env.ref("base.group_user").id])],
             }
         )
         picking = self.picking.with_user(user)
@@ -223,7 +222,7 @@ class TestPickingSummary(TransactionCase):
         self.assertEqual(report.model, "stock.picking")
         self.assertEqual(report.binding_type, "report")
         self.assertTrue(report.binding_model_id)
-        self.picking.partner_id = self.env.ref("base.res_partner_1")
+        self.picking.partner_id = self.env["res.partner"].create({"name": "Partner"})
         self.assertIn(
             report,
             self.env["ir.actions.report"].search([("model", "=", "stock.picking")]),
