@@ -1,5 +1,6 @@
 from odoo.exceptions import AccessError
 from odoo.tests import Form, TransactionCase, tagged
+from odoo.tools import mute_logger
 
 ICON_A = "iVBORw0KGgo="
 ICON_B = "R0lGODlhAQABAAAAACw="
@@ -91,6 +92,9 @@ class TestCustomerRating(TransactionCase):
         self.assertIn("customer_rating_id", self.Partner._track_get_fields())
         self.assertTrue(self.Partner._fields["customer_rating_id"].tracking)
 
+    # 19.0: with the whole repository installed, another module warns that its
+    # partner_id child_of domain gets the NewId of the form record
+    @mute_logger("odoo.domains")
     def test_form_sets_rating(self):
         """Given the partner form, When selecting a rating, Then it is saved."""
         form = Form(self.Partner)
