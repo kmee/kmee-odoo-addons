@@ -4,7 +4,7 @@
 {
     "name": "SST - EPI e Certificado de Aprovação",
     "summary": "Certificado de Aprovação (CA), ficha de entrega de EPI e NR-6",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "website": "https://github.com/KMEE/kmee-odoo-addons",

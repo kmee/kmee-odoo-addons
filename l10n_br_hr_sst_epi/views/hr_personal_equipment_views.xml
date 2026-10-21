@@ -44,10 +44,10 @@
                 </group>
                 <group string="Riscos Neutralizados" name="l10n_br_sst_riscos">
                     <field name="l10n_br_sst_risco_ids" nolabel="1" readonly="1">
-                        <tree>
+                        <list>
                             <field name="ambiente_id" />
                             <field name="agente_nocivo_id" />
-                        </tree>
+                        </list>
                     </field>
                 </group>
             </xpath>

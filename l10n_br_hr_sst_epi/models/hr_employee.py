@@ -48,6 +48,6 @@ class HrEmployee(models.Model):
             "name": _("EPIs"),
             "type": "ir.actions.act_window",
             "res_model": "hr.personal.equipment",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("employee_id", "=", self.id)],
         }
