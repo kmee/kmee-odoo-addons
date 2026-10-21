@@ -37,6 +37,11 @@ class ContractContract(models.Model):
         "contract_line_ids.recurring_rule_type",
         "contract_line_ids.date_start",
         "contract_line_ids.date_end",
+        "contract_line_ids.is_canceled",
+        "contract_line_ids.discount",
+        "contract_line_ids.total_amount",
+        "contract_line_ids.period_amount",
+        "recurring_next_date",
     )
     def _compute_period_values(self):
         for contract in self:
@@ -59,7 +64,7 @@ class ContractContract(models.Model):
                     months = line.period_count / 30
                 elif line.recurring_rule_type == "weekly":
                     months = line.period_count / 4.33
-                elif line.recurring_rule_type == "monthly":
+                elif line.recurring_rule_type in ("monthly", "monthlylastday"):
                     months = line.period_count
                 elif line.recurring_rule_type == "quarterly":
                     months = line.period_count * 3
@@ -90,6 +95,13 @@ class ContractContract(models.Model):
             contract.current_month_value = sum(
                 line.period_amount for line in current_period_lines
             )
+
+    def _prepare_invoice(self, date_invoice, journal=None):
+        vals = super()._prepare_invoice(date_invoice, journal=journal)
+        vals.update(
+            self.env["account.move"]._prepare_contract_period_vals(self, date_invoice)
+        )
+        return vals
 
     # Relatório de distribuição de valor por período
     def generate_period_distribution_report(self):

@@ -44,7 +44,13 @@ class HrPayslip(models.Model):
             raise_if_not_found=False,
         )
         if journal:
-            slips = self.search([("state", "=", "draft")])
+            # Somente os holerites da empresa DONA do FOPAG: os das demais
+            # empresas (demo por regime) têm de ficar no diário da própria
+            # empresa, ou o custo cairia na empresa errada.
+            company = journal.company_id or self.env.company
+            slips = self.search(
+                [("state", "=", "draft"), ("company_id", "=", company.id)]
+            )
             to_fix = slips.filtered(lambda s: s.journal_id != journal)
             if to_fix:
                 to_fix.write({"journal_id": journal.id})

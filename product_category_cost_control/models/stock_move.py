@@ -9,6 +9,8 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     def _get_price_unit(self):
+        """18.0: the core returns the unit price per lot ({lot: price}); the
+        category option replaces the price of every lot of the move."""
         self.ensure_one()
         result = super()._get_price_unit()
 
@@ -23,7 +25,7 @@ class StockMove(models.Model):
             if not category or not category.price_control_option:
                 return result
 
-            qty = self.quantity_done or self.product_qty or self.product_uom_qty
+            qty = self.quantity or self.product_qty or self.product_uom_qty
             if not qty:
                 return result
 
@@ -31,13 +33,15 @@ class StockMove(models.Model):
             if option == "include_all_taxes":
                 if "amount_taxed" not in self._fields:
                     return result
-                return self.amount_taxed / qty
+                return dict.fromkeys(result, self.amount_taxed / qty)
             if option == "remove_included_taxes":
                 if (
                     "amount_untaxed" not in self._fields
                     or "amount_tax_included" not in self._fields
                 ):
                     return result
-                return (self.amount_untaxed - self.amount_tax_included) / qty
+                return dict.fromkeys(
+                    result, (self.amount_untaxed - self.amount_tax_included) / qty
+                )
 
         return result

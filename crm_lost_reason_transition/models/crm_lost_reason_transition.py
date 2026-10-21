@@ -19,7 +19,11 @@ class CrmLostReasonTransition(models.Model):
     team_id = fields.Many2one("crm.team", required=True, string="Target Team")
     target_stage_id = fields.Many2one("crm.stage", required=True, string="Target Stage")
 
-    @api.depends("lost_reason_id", "team_id", "target_stage_id")
+    @api.depends(
+        "lost_reason_id.name",
+        "team_id.name",
+        "target_stage_id.name",
+    )
     def _compute_name(self):
         for record in self:
             reason = record.lost_reason_id.name or "Unknown Reason"
