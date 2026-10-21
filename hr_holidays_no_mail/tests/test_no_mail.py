@@ -24,19 +24,27 @@ class TestHolidaysNoMail(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.employee = cls.env["hr.employee"].create({"name": "No Mail Employee"})
-        cls.leave_type = cls.env["hr.leave.type"].create(
+        cls.leave_type = cls.env["hr.work.entry.type"].create(
             {
                 "name": "No Mail Leave",
+                "code": "NOMAILLEAVE",
+                "count_as": "absence",
                 "requires_allocation": False,
                 "leave_validation_type": "hr",
+                "request_unit": "day",
+                "unit_of_measure": "day",
             }
         )
-        cls.alloc_type = cls.env["hr.leave.type"].create(
+        cls.alloc_type = cls.env["hr.work.entry.type"].create(
             {
                 "name": "No Mail Allocation",
+                "code": "NOMAILALLOC",
+                "count_as": "absence",
                 "requires_allocation": True,
-                "employee_requests": "no",
+                "employee_requests": False,
                 "allocation_validation_type": "hr",
+                "request_unit": "day",
+                "unit_of_measure": "day",
             }
         )
 
@@ -44,7 +52,7 @@ class TestHolidaysNoMail(TransactionCase):
         return {
             "name": "Leave",
             "employee_id": self.employee.id,
-            "holiday_status_id": self.leave_type.id,
+            "work_entry_type_id": self.leave_type.id,
             "date_from": datetime(2026, 3, 2, 8, 0),
             "date_to": datetime(2026, 3, 3, 17, 0),
             "request_date_from": "2026-03-02",
@@ -54,7 +62,7 @@ class TestHolidaysNoMail(TransactionCase):
     def _allocation_vals(self):
         return {
             "name": "Allocation",
-            "holiday_status_id": self.alloc_type.id,
+            "work_entry_type_id": self.alloc_type.id,
             "employee_id": self.employee.id,
             "number_of_days": 3,
         }
