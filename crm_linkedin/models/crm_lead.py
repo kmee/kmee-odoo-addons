@@ -24,11 +24,9 @@ class CrmLead(models.Model):
             if lead.partner_id:
                 lead.partner_id.linkedin_url = lead.linkedin_url
 
-    def _prepare_customer_values(self, partner_name, is_company=False, parent_id=False):
+    def _prepare_customer_values(self, partner_name, parent_id=False):
         """Adiciona o campo linkedin_url aos valores do cliente"""
-        values = super()._prepare_customer_values(
-            partner_name, is_company=is_company, parent_id=parent_id
-        )
+        values = super()._prepare_customer_values(partner_name, parent_id=parent_id)
         if self.linkedin_url:
             values["linkedin_url"] = self.linkedin_url
         return values
