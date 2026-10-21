@@ -1,8 +1,12 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from contextlib import suppress
+
 from odoo.tests.common import HttpCase, tagged
 from odoo.tools import mute_logger
+
+from odoo.addons.base_exception.exceptions import BaseExceptionError
 
 from .common import TierExceptionsMixin
 
@@ -57,7 +61,9 @@ class TestReportController(TierExceptionsMixin, HttpCase):
         When the report route is opened
         Then the sale exception check does not interfere
         """
-        self._order(5000.0).detect_exceptions()
+        # 18.0 raises once an exception is found; it stays recorded
+        with suppress(BaseExceptionError):
+            self._order(5000.0).detect_exceptions()
         self.authenticate("admin", "admin")
         module = self.env.ref("base.module_sale")
         response = self.url_open(
