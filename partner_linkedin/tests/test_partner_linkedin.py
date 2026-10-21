@@ -4,6 +4,7 @@ from lxml import etree
 
 from odoo.tests import Form
 from odoo.tests.common import TransactionCase, tagged
+from odoo.tools import mute_logger
 
 
 @tagged("post_install", "-at_install")
@@ -52,6 +53,9 @@ class TestPartnerLinkedin(TransactionCase):
         self.assertIn(with_url, found)
         self.assertNotIn(without, found)
 
+    # 19.0: with the whole repository installed, another module warns that its
+    # partner_id child_of domain gets the NewId of the form record
+    @mute_logger("odoo.domains")
     def test_form_view_edits_linkedin_url(self):
         """Given the partner form view
         When the user fills the LinkedIn field in the form
