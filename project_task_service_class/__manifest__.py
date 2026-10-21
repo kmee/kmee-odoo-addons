@@ -9,7 +9,7 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": ["project"],
     "data": [
-        "security/project_task_service_class.xml",
+        "security/ir.model.access.csv",
         "views/project_task_service_class.xml",
         "views/project_task.xml",
     ],
