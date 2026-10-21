@@ -14,10 +14,10 @@ class TestStockInvoiceOnshipping(TransactionCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.term = cls.env["account.payment.term"].create(
             {
-                "name": "50% in 30 days, balance in 60 days",
+                "name": "50% in 30 days, 50% in 60 days",
                 "line_ids": [
-                    (0, 0, {"value": "percent", "value_amount": 50.0, "days": 30}),
-                    (0, 0, {"value": "balance", "days": 60}),
+                    (0, 0, {"value": "percent", "value_amount": 50.0, "nb_days": 30}),
+                    (0, 0, {"value": "percent", "value_amount": 50.0, "nb_days": 60}),
                 ],
             }
         )
@@ -35,11 +35,11 @@ class TestStockInvoiceOnshipping(TransactionCase):
 
     def _edit_manual_term(self, order):
         manual = order.manual_payment_term_id
-        manual.line_ids.filtered(lambda x: x.value == "percent").write(
+        manual.line_ids.filtered(lambda x: x.nb_days == 30).write(
             {"value_amount": 30.0, "fixed_date": date(2024, 2, 20)}
         )
-        manual.line_ids.filtered(lambda x: x.value == "balance").write(
-            {"fixed_date": date(2024, 4, 10)}
+        manual.line_ids.filtered(lambda x: x.nb_days == 60).write(
+            {"value_amount": 70.0, "fixed_date": date(2024, 4, 10)}
         )
 
     def _sale_order(self):
@@ -100,7 +100,8 @@ class TestStockInvoiceOnshipping(TransactionCase):
         picking.move_ids.write({"invoice_state": "2binvoiced"})
         picking.action_assign()
         for move in picking.move_ids:
-            move.quantity_done = move.product_uom_qty
+            move.quantity = move.product_uom_qty
+            move.picked = True
         picking.button_validate()
         wizard_model = self.env["stock.invoice.onshipping"].with_context(
             active_ids=picking.ids, active_model="stock.picking"
