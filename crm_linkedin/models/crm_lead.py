@@ -15,9 +15,12 @@ class CrmLead(models.Model):
 
     @api.depends("partner_id.linkedin_url")
     def _compute_linkedin_url(self):
+        # Mirror the partner, empty profile included: a URL left over from a
+        # previous or removed partner would point to another person. A lead
+        # without partner keeps the value typed on it (only a partner change
+        # triggers this compute).
         for lead in self:
-            if lead.partner_id and lead.partner_id.linkedin_url:
-                lead.linkedin_url = lead.partner_id.linkedin_url
+            lead.linkedin_url = lead.partner_id.linkedin_url
 
     def _inverse_linkedin_url(self):
         for lead in self:
