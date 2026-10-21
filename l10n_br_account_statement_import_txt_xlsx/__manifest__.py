@@ -11,6 +11,8 @@
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "account_statement_import_sheet_file",
+        # 19.0: reading .xls sheets moved to its own module
+        "account_statement_import_sheet_file_xls",
     ],
     "data": [
         "data/map_data.xml",
