@@ -5,7 +5,7 @@
     "name": "Registro de Ponto Brasileiro - Integridade do PTRP",
     "summary": "Resumo digital do escopo atestado e detecção de sobreposição "
     "em tempo de execução (art. 89 da Portaria MTP 671/2021)",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Human Resources/Attendances",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",

@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="l10n_br_hr_apuracao_periodo_view_form" model="ir.ui.view">
         <field name="model">l10n_br.hr.apuracao.periodo</field>
         <field
@@ -33,5 +32,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
