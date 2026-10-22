@@ -35,15 +35,15 @@ msgid "Shipping Information"
 msgstr ""
 
 #. module: sale_stock_shipping_info
-#: model:ir.model.fields,field_description:sale_stock_shipping_info.field_sale_order__shipping_volume
+#: model:ir.model.fields,field_description:sale_stock_shipping_info.field_sale_order__shipping_weight
 #: model_terms:ir.ui.view,arch_db:sale_stock_shipping_info.view_order_form_shipping_info
-msgid "Total Volume"
+msgid "Shipping Weight"
 msgstr ""
 
 #. module: sale_stock_shipping_info
-#: model:ir.model.fields,field_description:sale_stock_shipping_info.field_sale_order__shipping_weight
+#: model:ir.model.fields,field_description:sale_stock_shipping_info.field_sale_order__shipping_volume
 #: model_terms:ir.ui.view,arch_db:sale_stock_shipping_info.view_order_form_shipping_info
-msgid "Total Weight"
+msgid "Total Volume"
 msgstr ""
 
 #. module: sale_stock_shipping_info
