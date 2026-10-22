@@ -103,3 +103,17 @@ class TestPurchasePaymentTermManual(TransactionCase):
         order.button_confirm()
         order.action_create_invoice()
         self.assertFalse(order.invoice_ids.manual_payment_term_id)
+
+    def test_onchange_payment_term_replaces_the_manual_term(self):
+        order = self._purchase_order()
+        other = self.env["account.payment.term"].create({"name": "Immediate"})
+        order.payment_term_id = other
+        order.with_context(
+            payment_term_id_view_onchange=True
+        )._onchange_payment_term_id()
+        self.assertEqual(order.payment_term_id, other)
+        self.assertEqual(order.manual_payment_term_id.origin_term_id, other)
+        # without a payment term the manual term is kept
+        order.payment_term_id = False
+        order._onchange_payment_term_id()
+        self.assertEqual(order.manual_payment_term_id.origin_term_id, other)
