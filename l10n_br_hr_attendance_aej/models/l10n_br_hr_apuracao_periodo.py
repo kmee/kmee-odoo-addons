@@ -251,7 +251,7 @@ class L10nBrHrApuracaoPeriodo(models.Model):
         cabecalho = {
             "tipoReg": "01",
             "tpIdtEmpregador": "1",
-            "idtEmpregador": punctuation_rm(empresa.cnpj_cpf or ""),
+            "idtEmpregador": punctuation_rm(empresa.vat or ""),
             "caepf": "",
             "cno": "",
             "razaoOuNome": (empresa.name or "")[:150],
@@ -316,7 +316,7 @@ class L10nBrHrApuracaoPeriodo(models.Model):
         conteudo = aej_layout.TERMINADOR_LINHA.join(linhas)
         conteudo += aej_layout.TERMINADOR_LINHA
         nome = aej_layout.nome_arquivo_aej(
-            punctuation_rm(empresa.cnpj_cpf or ""), self.date_from, self.date_to
+            punctuation_rm(empresa.vat or ""), self.date_from, self.date_to
         )
         return nome, conteudo
 

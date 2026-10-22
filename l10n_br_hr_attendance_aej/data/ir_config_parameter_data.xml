@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <!-- Identificação do PTRP no registro 08 do AEJ. Quem preenche é o
          desenvolvedor que assina o Atestado Técnico do art. 89 - por isso os
          valores vêm em branco, para forçar a decisão consciente em vez de
@@ -37,5 +36,4 @@
         <field name="key">l10n_br_hr_attendance_aej.ptrp_email</field>
         <field name="value" />
     </record>
-
 </odoo>

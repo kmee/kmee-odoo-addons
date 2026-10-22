@@ -21,7 +21,7 @@ class TestAej(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.company
-        cls.company.cnpj_cpf = "12.345.678/0001-95"
+        cls.company.vat = "12.345.678/0001-95"
         # Com o l10n_br_fiscal_certificate instalado a empresa de demonstração
         # pode trazer um certificado de teste que não abre; a suíte parte de
         # "sem certificado" e cada teste de assinatura injeta o seu.
