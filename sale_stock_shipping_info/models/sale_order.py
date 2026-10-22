@@ -10,7 +10,6 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     shipping_weight = fields.Float(
-        string="Total Weight",
         compute="_compute_shipping_info",
         store=True,
         readonly=True,
