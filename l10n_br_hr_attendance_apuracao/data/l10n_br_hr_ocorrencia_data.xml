@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <record id="ocorrencia_dsr" model="l10n_br.hr.ocorrencia">
         <field name="name">Descanso Semanal Remunerado</field>
         <field name="codigo">DSR</field>
@@ -55,5 +54,4 @@
         <field name="abona" eval="True" />
         <field name="sequence">70</field>
     </record>
-
 </odoo>

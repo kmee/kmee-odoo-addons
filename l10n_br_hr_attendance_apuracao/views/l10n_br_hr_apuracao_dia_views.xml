@@ -2,11 +2,10 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="l10n_br_hr_apuracao_dia_view_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.apuracao.dia</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-danger="inconsistencia != False"
                 decoration-warning="falta_injustificada"
                 decoration-muted="state == 'fechado'"
@@ -45,7 +44,7 @@
                 <field name="interjornada_ok" optional="hide" />
                 <field name="inconsistencia" optional="hide" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -108,7 +107,7 @@
                     <notebook>
                         <page name="marcacoes" string="Marca&#231;&#245;es">
                             <field name="marcacao_ids" nolabel="1" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="nsr" />
                                     <field name="datetime_marcacao" />
                                     <field name="tipo_marcacao" />
@@ -116,17 +115,17 @@
                                     <field name="origem" />
                                     <field name="state" />
                                     <field name="motivo" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="sessoes" string="Sess&#245;es">
                             <field name="attendance_ids" nolabel="1" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="check_in" />
                                     <field name="check_out" />
                                     <field name="worked_hours" widget="float_time" />
                                     <field name="l10n_br_seq_par" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -192,8 +191,7 @@
     <record id="l10n_br_hr_apuracao_dia_action" model="ir.actions.act_window">
         <field name="name">Apura&#231;&#227;o Di&#225;ria</field>
         <field name="res_model">l10n_br.hr.apuracao.dia</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'search_default_group_employee': 1}</field>
     </record>
-
 </odoo>

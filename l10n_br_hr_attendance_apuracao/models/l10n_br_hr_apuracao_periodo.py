@@ -176,7 +176,7 @@ class L10nBrHrApuracaoPeriodo(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Dias apurados"),
             "res_model": "l10n_br.hr.apuracao.dia",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("periodo_id", "=", self.id)],
             "context": {"search_default_group_employee": 1},
         }
