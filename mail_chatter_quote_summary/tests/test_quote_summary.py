@@ -42,15 +42,15 @@ class TestQuoteSummary(TransactionCase):
         settings.execute()
 
     def _formatted_body(self, message=None):
-        store = Store().add(message or self.message)
-        kind, body = store.get_result()["mail.message"][0]["body"]
+        store = Store().add(message or self.message, "_store_message_fields")
+        kind, body = store._build_result()["mail.message"][0]["body"]
         self.assertEqual(kind, "markup")
         return body
 
     def test_disable_persists(self):
         self._set_enabled(False)
         self.assertFalse(self.env["mail.message"]._quote_summary_enabled())
-        self.assertIs(self.params.get_param(ENABLED_PARAM), False)
+        self.assertIs(self.params.get_bool(ENABLED_PARAM, None), False)
         reopened = self.env["res.config.settings"].default_get(
             ["quote_summary_enabled"]
         )
@@ -80,7 +80,7 @@ class TestQuoteSummary(TransactionCase):
 
     def test_to_store_restricted_to_other_models(self):
         self._set_enabled(True)
-        self.params.set_param(MODELS_PARAM, "res.users")
+        self.params.set_str(MODELS_PARAM, "res.users")
         body = self._formatted_body()
         self.assertNotIn("o_quote_history_btn", body)
 

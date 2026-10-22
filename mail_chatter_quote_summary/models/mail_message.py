@@ -18,11 +18,10 @@ class MailMessage(models.Model):
     _inherit = "mail.message"
 
     def _quote_summary_enabled(self):
-        param = self.env["ir.config_parameter"].sudo().get_param(ENABLED_PARAM, "False")
-        return param not in ("False", "0", "", False)
+        return self.env["ir.config_parameter"].sudo().get_bool(ENABLED_PARAM)
 
     def _quote_summary_models(self):
-        raw = self.env["ir.config_parameter"].sudo().get_param(MODELS_PARAM, "") or ""
+        raw = self.env["ir.config_parameter"].sudo().get_str(MODELS_PARAM)
         return {name.strip() for name in raw.split(",") if name.strip()}
 
     def _quote_summary_applies(self, allowed_models):
@@ -61,18 +60,18 @@ class MailMessage(models.Model):
         )
         return Markup(compact) if compact != body else body
 
-    def _to_store(self, store, fields, **kwargs):
-        if "body" in fields and self._quote_summary_enabled():
-            allowed_models = self._quote_summary_models()
-            sanitizer = HtmlSanitizer()
-            body_attr = Store.Attr(
-                "body",
-                lambda message: message._quote_summary_render(
-                    allowed_models, sanitizer
-                ),
-            )
-            fields = [body_attr if field == "body" else field for field in fields]
-        return super()._to_store(store, fields, **kwargs)
+    def _store_message_fields(self, res, **kwargs):
+        super()._store_message_fields(res, **kwargs)
+        if "body" not in res or not self._quote_summary_enabled():
+            return
+        allowed_models = self._quote_summary_models()
+        sanitizer = HtmlSanitizer()
+        body_attr = Store.Attr(
+            res.store,
+            "body",
+            lambda message: message._quote_summary_render(allowed_models, sanitizer),
+        )
+        res[res.index("body")] = body_attr
 
     def _quote_history_blocks(self, history_html):
         try:
