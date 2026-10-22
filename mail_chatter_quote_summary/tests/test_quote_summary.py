@@ -42,9 +42,10 @@ class TestQuoteSummary(TransactionCase):
         settings.execute()
 
     def _formatted_body(self, message=None):
-        store = Store()
-        (message or self.message)._to_store(store)
-        return store.get_result()["mail.message"][0]["body"]
+        store = Store().add(message or self.message)
+        kind, body = store.get_result()["mail.message"][0]["body"]
+        self.assertEqual(kind, "markup")
+        return body
 
     def test_disable_persists(self):
         self._set_enabled(False)
