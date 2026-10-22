@@ -288,7 +288,7 @@ class L10nBrHrAfdImport(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Marcações sem funcionário"),
             "res_model": "l10n_br.hr.marcacao",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [
                 ("afd_import_id", "=", self.id),
                 ("employee_id", "=", False),

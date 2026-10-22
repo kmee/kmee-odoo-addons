@@ -2,11 +2,10 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="l10n_br_hr_afd_import_view_tree" model="ir.ui.view">
         <field name="model">l10n_br.hr.afd.import</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="state == 'erro'" decoration-warning="tem_lacuna">
+            <list decoration-danger="state == 'erro'" decoration-warning="tem_lacuna">
                 <field name="name" />
                 <field name="rep_id" />
                 <field name="leiaute_detectado" />
@@ -19,7 +18,7 @@
                 <field name="tem_lacuna" />
                 <field name="state" />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -68,7 +67,9 @@
                         </button>
                     </div>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="state != 'draft'" /></h1>
+                        <h1>
+                            <field name="name" readonly="state != 'draft'" />
+                        </h1>
                     </div>
                     <group>
                         <group string="Arquivo">
@@ -108,21 +109,18 @@
                         </page>
                         <page name="marcacoes" string="Marca&#231;&#245;es">
                             <field name="marcacao_ids" nolabel="1" readonly="1">
-                                <tree>
+                                <list>
                                     <field name="nsr" />
                                     <field name="datetime_marcacao" />
                                     <field name="employee_id" />
                                     <field name="cpf" />
                                     <field name="pis_pasep" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -130,7 +128,7 @@
     <record id="l10n_br_hr_afd_import_action" model="ir.actions.act_window">
         <field name="name">Importa&#231;&#227;o de AFD</field>
         <field name="res_model">l10n_br.hr.afd.import</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Importe o primeiro AFD</p>
             <p>
@@ -140,5 +138,4 @@
             </p>
         </field>
     </record>
-
 </odoo>
