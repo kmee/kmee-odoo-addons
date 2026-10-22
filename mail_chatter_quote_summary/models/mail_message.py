@@ -1,6 +1,7 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from lxml import etree, html as lxml_html
+from markupsafe import Markup
 
 from odoo import _, models
 
@@ -45,28 +46,28 @@ class MailMessage(models.Model):
         )
         return main + toggle
 
-    def _message_format(self, fnames, format_reply=True):
-        formatted = super()._message_format(fnames, format_reply=format_reply)
+    def _to_store(self, store, /, *, fields=None, **kwargs):
+        res = super()._to_store(store, fields=fields, **kwargs)
+        if fields is not None and "body" not in fields:
+            return res
         if not self._quote_summary_enabled():
-            return formatted
+            return res
         allowed_models = self._quote_summary_models()
         sanitizer = HtmlSanitizer()
-        by_id = {message.id: message for message in self}
-        for vals in formatted:
-            message = by_id.get(vals.get("id"))
-            if message is None or not message._quote_summary_applies(allowed_models):
+        for message in self:
+            if not message._quote_summary_applies(allowed_models):
                 continue
-            body = vals.get("body") or ""
+            body = message.body or ""
             summary = message._quote_summary_body(body)
             if summary is not None:
-                vals["body"] = summary
+                store.add(message, {"body": Markup(summary)})
                 continue
             compact = sanitizer.collapse_empty_paragraphs(
                 sanitizer.remove_zero_width_chars(body)
             )
             if compact != body:
-                vals["body"] = compact
-        return formatted
+                store.add(message, {"body": Markup(compact)})
+        return res
 
     def _quote_history_blocks(self, history_html):
         try:
@@ -87,8 +88,7 @@ class MailMessage(models.Model):
         summarized, so no stored data is lost.
         """
         self.ensure_one()
-        self.check_access_rights("read")
-        self.check_access_rule("read")
+        self.check_access("read")
         split = split_history(self.body or "")
         if not split:
             return {"html": "", "next_offset": False, "offset": 0}
