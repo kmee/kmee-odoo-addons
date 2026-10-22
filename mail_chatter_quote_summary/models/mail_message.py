@@ -7,6 +7,7 @@ from odoo import _, models
 
 from odoo.addons.html_optimizer.tools.html_sanitizer import HtmlSanitizer
 from odoo.addons.html_optimizer.tools.quote_boundary import split_history
+from odoo.addons.mail.tools.discuss import Store
 
 ENABLED_PARAM = "mail_chatter_quote_summary.enabled"
 MODELS_PARAM = "mail_chatter_quote_summary.models"
@@ -46,28 +47,32 @@ class MailMessage(models.Model):
         )
         return main + toggle
 
-    def _to_store(self, store, /, *, fields=None, **kwargs):
-        res = super()._to_store(store, fields=fields, **kwargs)
-        if fields is not None and "body" not in fields:
-            return res
-        if not self._quote_summary_enabled():
-            return res
-        allowed_models = self._quote_summary_models()
-        sanitizer = HtmlSanitizer()
-        for message in self:
-            if not message._quote_summary_applies(allowed_models):
-                continue
-            body = message.body or ""
-            summary = message._quote_summary_body(body)
-            if summary is not None:
-                store.add(message, {"body": Markup(summary)})
-                continue
-            compact = sanitizer.collapse_empty_paragraphs(
-                sanitizer.remove_zero_width_chars(body)
+    def _quote_summary_render(self, allowed_models, sanitizer):
+        """Return the body to send to the web client."""
+        self.ensure_one()
+        body = self.body or ""
+        if not self._quote_summary_applies(allowed_models):
+            return body
+        summary = self._quote_summary_body(body)
+        if summary is not None:
+            return Markup(summary)
+        compact = sanitizer.collapse_empty_paragraphs(
+            sanitizer.remove_zero_width_chars(body)
+        )
+        return Markup(compact) if compact != body else body
+
+    def _to_store(self, store, fields, **kwargs):
+        if "body" in fields and self._quote_summary_enabled():
+            allowed_models = self._quote_summary_models()
+            sanitizer = HtmlSanitizer()
+            body_attr = Store.Attr(
+                "body",
+                lambda message: message._quote_summary_render(
+                    allowed_models, sanitizer
+                ),
             )
-            if compact != body:
-                store.add(message, {"body": Markup(compact)})
-        return res
+            fields = [body_attr if field == "body" else field for field in fields]
+        return super()._to_store(store, fields, **kwargs)
 
     def _quote_history_blocks(self, history_html):
         try:
