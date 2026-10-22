@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="l10n_br_hr_apuracao_periodo_view_tree" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.periodo</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="inconsistencia_count &gt; 0">
+                <field name="name" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="dia_count" />
+                <field name="horas_extras" widget="float_time" />
+                <field name="faltas" />
+                <field name="inconsistencia_count" />
+                <field name="state" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </list>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_apuracao_periodo_view_form" model="ir.ui.view">
+        <field name="model">l10n_br.hr.apuracao.periodo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_apurar"
+                        type="object"
+                        string="Apurar"
+                        class="oe_highlight"
+                        invisible="state == 'fechado'"
+                    />
+                    <button
+                        name="action_fechar"
+                        type="object"
+                        string="Fechar compet&#234;ncia"
+                        class="oe_highlight"
+                        confirm="Fechar a compet&#234;ncia trava o rec&#225;lculo dos dias. Confirma?"
+                        invisible="state != 'apurado'"
+                    />
+                    <button
+                        name="action_reabrir"
+                        type="object"
+                        string="Reabrir"
+                        confirm="Reabrir permite recalcular dias que j&#225; alimentaram a folha. Confirma?"
+                        invisible="state != 'fechado'"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_ver_dias"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-calendar"
+                        >
+                            <field name="dia_count" widget="statinfo" string="Dias" />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Mar&#231;o/2026" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="horas_extras" widget="float_time" />
+                            <field name="faltas" />
+                            <field name="inconsistencia_count" />
+                        </group>
+                    </group>
+                    <group string="Funcion&#225;rios (vazio = todos)">
+                        <field
+                            name="employee_ids"
+                            nolabel="1"
+                            widget="many2many_tags"
+                        />
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="l10n_br_hr_apuracao_periodo_action" model="ir.actions.act_window">
+        <field name="name">Compet&#234;ncias de Apura&#231;&#227;o</field>
+        <field name="res_model">l10n_br.hr.apuracao.periodo</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p
+                class="o_view_nocontent_smiling_face"
+            >Abra a primeira compet&#234;ncia</p>
+            <p>
+                A compet&#234;ncia agrupa a apura&#231;&#227;o do m&#234;s. Apurar processa as marca&#231;&#245;es
+                em jornada; fechar trava o rec&#225;lculo e &#233; o que d&#225; &#224; folha uma
+                refer&#234;ncia est&#225;vel.
+            </p>
+        </field>
+    </record>
+</odoo>
