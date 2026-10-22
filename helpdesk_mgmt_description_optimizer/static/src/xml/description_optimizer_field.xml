@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="helpdesk_mgmt_description_optimizer.DescriptionOptimizerField"
+        t-inherit="html_editor.HtmlField"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//t[@t-if='this.displayReadonly']" position="before">
+            <t t-if="isCollapsed">
+                <div
+                    class="o_readonly o_description_optimizer_summary"
+                    t-out="markupSummary"
+                />
+            </t>
+        </xpath>
+        <xpath expr="//t[@t-if='this.displayReadonly']" position="attributes">
+            <attribute name="t-if" />
+            <attribute name="t-elif">this.displayReadonly</attribute>
+        </xpath>
+        <xpath expr="//div[@id='codeview-btn-group']" position="after">
+            <button
+                t-if="hasMore"
+                type="button"
+                class="btn btn-link p-0 o_description_optimizer_toggle"
+                t-on-click="() => this.toggleExpanded()"
+                t-out="toggleLabel"
+            />
+        </xpath>
+    </t>
+</templates>
