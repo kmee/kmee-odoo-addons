@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- A jornada apurada é dado pessoal do trabalhador: sem regra, a ACL de
+         leitura do grupo interno exporia a apuração de todos. -->
+    <record id="apuracao_dia_rule_empregado" model="ir.rule">
+        <field name="name">Apuração: funcionário vê apenas a própria</field>
+        <field name="model_id" ref="model_l10n_br_hr_apuracao_dia" />
+        <field name="domain_force">[('employee_id.user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+
+    <record id="apuracao_dia_rule_rh" model="ir.rule">
+        <field name="name">Apuração: RH e auditoria veem as da empresa</field>
+        <field name="model_id" ref="model_l10n_br_hr_apuracao_dia" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('hr_attendance.group_hr_attendance_officer')), (4, ref('l10n_br_hr_attendance.group_l10n_br_ponto_auditor'))]"
+        />
+    </record>
+
+    <record id="apuracao_periodo_rule_company" model="ir.rule">
+        <field name="name">Competência de apuração: multiempresa</field>
+        <field name="model_id" ref="model_l10n_br_hr_apuracao_periodo" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+
+</odoo>
