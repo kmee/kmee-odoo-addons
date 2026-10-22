@@ -17,6 +17,9 @@
             "helpdesk_mgmt_description_optimizer/static/src/js/description_optimizer_field.esm.js",  # noqa: B950
             "helpdesk_mgmt_description_optimizer/static/src/xml/description_optimizer_field.xml",  # noqa: B950
         ],
+        "web.assets_tests": [
+            "helpdesk_mgmt_description_optimizer/static/tests/tours/*.esm.js",
+        ],
     },
     "installable": True,
 }
