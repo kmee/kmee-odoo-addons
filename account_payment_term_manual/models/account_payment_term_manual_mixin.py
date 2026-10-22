@@ -36,7 +36,9 @@ class AccountPaymentTermManualMixin(models.AbstractModel):
             skip_manual_term_onchange=True
         )
 
-        vals = term_id.copy_data()[0]
+        # the generic copy: account.payment.term.copy_data adds a translated
+        # " (copy)" suffix to the name, which the manual term must not have
+        vals = models.BaseModel.copy_data(term_id)[0]
         vals.update(
             {
                 "origin_term_id": term_id.id,

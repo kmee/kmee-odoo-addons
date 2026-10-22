@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="invoice_form" model="ir.ui.view">
         <field name="name">account_installments_review.invoice.form</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="l10n_br_account_due_list.invoice_form" />
         <field name="arch" type="xml">
-
             <xpath
                 expr="//field[@name='invoice_payment_term_id']"
                 position="attributes"
@@ -41,13 +39,13 @@
                     class="oe_read_only"
                     invisible="not has_manual_lines"
                 >
-                    <tree editable="bottom">
+                    <list editable="bottom">
                         <field name="value_amount" />
                         <field name="value" nolabel="1" />
                         <field name="nb_days" string="After" />
                         <field name="delay_type" nolabel="1" />
                         <field name="fixed_date" />
-                    </tree>
+                    </list>
                 </field>
             </xpath>
 
@@ -74,17 +72,15 @@
                     class="oe_read_only"
                     invisible="not has_manual_lines"
                 >
-                    <tree>
+                    <list>
                         <field name="value_amount" />
                         <field name="value" nolabel="1" />
                         <field name="nb_days" string="After" />
                         <field name="delay_type" nolabel="1" />
                         <field name="fixed_date" />
-                    </tree>
+                    </list>
                 </field>
             </xpath>
-
         </field>
     </record>
-
 </odoo>

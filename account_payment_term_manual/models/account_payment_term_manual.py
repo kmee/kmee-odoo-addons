@@ -48,9 +48,10 @@ class AccountPaymentTermManual(models.Model):
         have the same id of a payment term used in an invoice.
         """
 
-    def unlink(self):
-        # skip the cleanup of ir.property, it is made for payment terms only
-        return super(models.Model, self).unlink()
+    def copy_data(self, default=None):
+        # the copy goes to another document and keeps the name, without the
+        # translated " (copy)" suffix that account.payment.term adds
+        return models.BaseModel.copy_data(self, default=default)
 
     def set_as_edited(self):
         for term in self:
