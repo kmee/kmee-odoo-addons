@@ -5,7 +5,7 @@ A dedicated **Shipping Information** section is added to the **Other Info** tab 
 the Sales Order, allowing users to quickly visualize important logistics metrics
 associated with the order:
 
-- **Total Weight** – combined shipping weight of all products in the order
+- **Shipping Weight** – combined shipping weight of all products in the order
 - **Total Volume** – combined shipping volume of all products in the order
 - **Longest Dimension** – largest single dimension detected among the order's products
 
