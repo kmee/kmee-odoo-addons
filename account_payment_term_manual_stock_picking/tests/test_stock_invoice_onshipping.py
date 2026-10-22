@@ -25,7 +25,8 @@ class TestStockInvoiceOnshipping(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Product",
-                "detailed_type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "list_price": 1000.0,
                 "standard_price": 1000.0,
                 "invoice_policy": "order",
