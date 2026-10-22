@@ -1,11 +1,11 @@
-/** @odoo-module **/
-
-import {registry} from "@web/core/registry";
-import {HtmlField} from "@web_editor/js/backend/html_field";
-import {_t} from "@web/core/l10n/translation";
+import {HtmlField, htmlField} from "@html_editor/fields/html_field";
 import {markup, useState} from "@odoo/owl";
+import {_t} from "@web/core/l10n/translation";
+import {registry} from "@web/core/registry";
 
 export class DescriptionOptimizerField extends HtmlField {
+    static template = "helpdesk_mgmt_description_optimizer.DescriptionOptimizerField";
+
     setup() {
         super.setup();
         this.descriptionState = useState({expanded: false});
@@ -35,8 +35,9 @@ export class DescriptionOptimizerField extends HtmlField {
     }
 }
 
-DescriptionOptimizerField.template =
-    "helpdesk_mgmt_description_optimizer.DescriptionOptimizerField";
-DescriptionOptimizerField.components = {...HtmlField.components};
+export const descriptionOptimizerField = {
+    ...htmlField,
+    component: DescriptionOptimizerField,
+};
 
-registry.category("fields").add("description_optimizer", DescriptionOptimizerField);
+registry.category("fields").add("description_optimizer", descriptionOptimizerField);
