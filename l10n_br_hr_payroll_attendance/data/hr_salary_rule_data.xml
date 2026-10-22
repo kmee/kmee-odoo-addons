@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- Reflexo das horas extras no repouso semanal remunerado.
          Lei 605/49, art. 7º, alínea "a" e Súmula 172 do TST: o cálculo é
          sobre o VALOR das horas extras do mês, dividido pelos dias úteis e
@@ -55,5 +54,4 @@ result = tools.br.round_money(
             name="note"
         >Art. 71, § 4º da CLT (Lei 13.467/2017): apenas o período suprimido, com 50%, de natureza indenizatória - não integra a base de INSS nem de IRRF.</field>
     </record>
-
 </odoo>

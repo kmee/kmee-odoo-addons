@@ -281,8 +281,12 @@ class HrPayslip(models.Model):
             ),
         )
         return [
-            _("%(campo)s: holerite %(holerite)s, apuração %(apuracao)s.")
-            % {"campo": campo, "holerite": no_holerite, "apuracao": apurado}
+            self.env._(
+                "%(campo)s: holerite %(holerite)s, apuração %(apuracao)s.",
+                campo=campo,
+                holerite=no_holerite,
+                apuracao=apurado,
+            )
             for campo, no_holerite, apurado in comparacoes
             if abs(float(no_holerite) - float(apurado)) > 0.01
         ]
@@ -326,6 +330,6 @@ class HrPayslip(models.Model):
             "type": "ir.actions.act_window",
             "name": _("Apuração de jornada"),
             "res_model": "l10n_br.hr.apuracao.dia",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("id", "in", self.l10n_br_apuracao_dia_ids.ids)],
         }

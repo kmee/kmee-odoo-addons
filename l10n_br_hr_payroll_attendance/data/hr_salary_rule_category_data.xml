@@ -2,7 +2,6 @@
 <!-- Copyright 2026 KMEE
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <!-- Verbas de natureza INDENIZATÓRIA: entram no líquido, mas ficam fora
          do bruto e, por consequência, fora das bases de INSS e de IRRF. É o
          caso do intervalo intrajornada suprimido depois da Lei 13.467/2017
@@ -11,5 +10,4 @@
         <field name="name">Verba Indenizatória</field>
         <field name="code">IND</field>
     </record>
-
 </odoo>
