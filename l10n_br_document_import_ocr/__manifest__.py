@@ -10,7 +10,7 @@
     "maintainers": ["mileo"],
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "development_status": "Beta",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "depends": [
         "l10n_br_account",
     ],
