@@ -2,7 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests.common import TransactionCase
 
-from ..models.mail_message import ENABLED_PARAM
+from odoo.addons.mail.tools.discuss import Store
+
+from ..models.mail_message import ENABLED_PARAM, MODELS_PARAM
 
 GMAIL_BODY = """
 <div dir="auto">Reply 2, sending to support</div>
@@ -39,6 +41,11 @@ class TestQuoteSummary(TransactionCase):
         )
         settings.execute()
 
+    def _formatted_body(self, message=None):
+        store = Store()
+        (message or self.message)._to_store(store)
+        return store.get_result()["mail.message"][0]["body"]
+
     def test_disable_persists(self):
         self._set_enabled(False)
         self.assertFalse(self.env["mail.message"]._quote_summary_enabled())
@@ -53,18 +60,43 @@ class TestQuoteSummary(TransactionCase):
         self._set_enabled(True)
         self.assertTrue(self.env["mail.message"]._quote_summary_enabled())
 
-    def test_message_format_summarizes_and_keeps_body(self):
+    def test_to_store_summarizes_and_keeps_body(self):
         self._set_enabled(True)
-        formatted = self.message.message_format()[0]
-        self.assertIn("o_quote_history_btn", formatted["body"])
-        self.assertNotIn("Conteudo citado anterior", formatted["body"])
+        body = self._formatted_body()
+        self.assertIn("o_quote_history_btn", body)
+        self.assertNotIn("Conteudo citado anterior", body)
         self.assertIn("Conteudo citado anterior", self.message.body)
 
-    def test_message_format_untouched_when_disabled(self):
+    def test_to_store_untouched_when_disabled(self):
         self._set_enabled(False)
-        formatted = self.message.message_format()[0]
-        self.assertNotIn("o_quote_history_btn", formatted["body"])
+        body = self._formatted_body()
+        self.assertNotIn("o_quote_history_btn", body)
+        self.assertIn("Conteudo citado anterior", body)
 
     def test_load_history_chunk_reconstructs(self):
         chunk = self.message.load_quote_history_chunk(0, 25)
         self.assertIn("Conteudo citado anterior", chunk["html"])
+
+    def test_to_store_restricted_to_other_models(self):
+        self._set_enabled(True)
+        self.params.set_param(MODELS_PARAM, "res.users")
+        body = self._formatted_body()
+        self.assertNotIn("o_quote_history_btn", body)
+
+    def test_to_store_compacts_body_without_history(self):
+        self._set_enabled(True)
+        message = self.env["mail.message"].create(
+            {
+                "model": "res.partner",
+                "res_id": self.partner.id,
+                "message_type": "comment",
+                "body": "<p>Short\u200b reply</p>" + "<p><br></p>" * 6,
+            }
+        )
+        body = self._formatted_body(message)
+        self.assertNotIn("\u200b", body)
+        self.assertIn("Short reply", body)
+        self.assertEqual(
+            message.load_quote_history_chunk(0, 25),
+            {"html": "", "next_offset": False, "offset": 0},
+        )

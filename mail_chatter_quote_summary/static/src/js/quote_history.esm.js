@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import {_t} from "@web/core/l10n/translation";
-import {jsonrpc} from "@web/core/network/rpc_service";
+import {rpc} from "@web/core/network/rpc";
 
 const CHUNK_SIZE = 25;
 
@@ -9,7 +9,7 @@ async function _loadHistory(messageId) {
     let offset = 0;
     let html = "";
     while (offset !== false) {
-        const result = await jsonrpc(
+        const result = await rpc(
             "/web/dataset/call_kw/mail.message/load_quote_history_chunk",
             {
                 model: "mail.message",
