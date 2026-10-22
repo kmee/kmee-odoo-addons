@@ -14,7 +14,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
                 position="after"
             >
                 <group string="Shipping Information" name="sale_shipping_info">
-                    <label for="shipping_weight" string="Total Weight" />
+                    <label for="shipping_weight" string="Shipping Weight" />
                     <div>
                         <field name="shipping_weight" class="oe_inline" readonly="1" />
                         <field
