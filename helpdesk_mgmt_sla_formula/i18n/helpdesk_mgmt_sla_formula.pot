@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,9 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: helpdesk_mgmt_sla_formula
+#: model:ir.model.fields,field_description:helpdesk_mgmt_sla_formula.field_helpdesk_sla__display_name
+#: model:ir.model.fields,field_description:helpdesk_mgmt_sla_formula.field_helpdesk_ticket_sla__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: helpdesk_mgmt_sla_formula
 #. odoo-python
 #: code:addons/helpdesk_mgmt_sla_formula/models/helpdesk_sla.py:0
-#, python-format
 msgid "Erro de sintaxe na fórmula Python: %s"
 msgstr ""
 
@@ -31,6 +36,12 @@ msgid "Helpdesk SLA"
 msgstr ""
 
 #. module: helpdesk_mgmt_sla_formula
+#: model:ir.model.fields,field_description:helpdesk_mgmt_sla_formula.field_helpdesk_sla__id
+#: model:ir.model.fields,field_description:helpdesk_mgmt_sla_formula.field_helpdesk_ticket_sla__id
+msgid "ID"
+msgstr ""
+
+#. module: helpdesk_mgmt_sla_formula
 #: model:ir.model.fields,help:helpdesk_mgmt_sla_formula.field_helpdesk_sla__sla_deadline_formula
 msgid ""
 "Permite definir a data de deadline usando Python.\n"
@@ -42,6 +53,11 @@ msgstr ""
 #. module: helpdesk_mgmt_sla_formula
 #: model:ir.model.fields,help:helpdesk_mgmt_sla_formula.field_helpdesk_sla__use_formula
 msgid "Se marcado, a fórmula Python será usada ao invés do delay padrão"
+msgstr ""
+
+#. module: helpdesk_mgmt_sla_formula
+#: model:ir.model,name:helpdesk_mgmt_sla_formula.model_helpdesk_ticket_sla
+msgid "Ticket Sla"
 msgstr ""
 
 #. module: helpdesk_mgmt_sla_formula
