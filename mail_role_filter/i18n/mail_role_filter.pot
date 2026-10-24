@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -52,11 +52,6 @@ msgstr ""
 #. module: mail_role_filter
 #: model:ir.model.fields,field_description:mail_role_filter.field_mail_role_filter__id
 msgid "ID"
-msgstr ""
-
-#. module: mail_role_filter
-#: model:ir.model.fields,field_description:mail_role_filter.field_mail_role_filter____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_role_filter
