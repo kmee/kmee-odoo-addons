@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: helpdesk_mgmt_sla_formula
 #. odoo-python
 #: code:addons/helpdesk_mgmt_sla_formula/models/helpdesk_sla.py:0
-#, python-format
 msgid "Erro de sintaxe na fórmula Python: %s"
 msgstr ""
 
