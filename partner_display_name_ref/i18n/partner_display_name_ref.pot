@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,4 +16,14 @@ msgstr ""
 #. module: partner_display_name_ref
 #: model:ir.model,name:partner_display_name_ref.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: partner_display_name_ref
+#: model:ir.model.fields,field_description:partner_display_name_ref.field_res_partner__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: partner_display_name_ref
+#: model:ir.model.fields,field_description:partner_display_name_ref.field_res_partner__id
+msgid "ID"
 msgstr ""
