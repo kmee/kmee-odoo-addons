@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -17,12 +17,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_slides_sharepoint.res_config_settings_view_form
 msgid ""
 "<span class=\"fa fa-arrow-right\"/>\n"
-"                                        Register an application in Azure AD"
-msgstr ""
-
-#. module: website_slides_sharepoint
-#: model_terms:ir.ui.view,arch_db:website_slides_sharepoint.res_config_settings_view_form
-msgid "<span class=\"o_form_label\">SharePoint Content</span>"
+"                                    Register an application in Azure AD"
 msgstr ""
 
 #. module: website_slides_sharepoint
@@ -56,15 +51,12 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "Copy link"
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid ""
 "Could not authenticate against Microsoft 365. Please check the Tenant ID, "
 "Application (client) ID and Client Secret."
@@ -73,7 +65,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid "Could not reach Microsoft 365. Please try again later."
 msgstr ""
 
@@ -100,7 +91,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "It should look similar to"
 msgstr ""
 
@@ -119,21 +109,18 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid "Microsoft 365 did not return a usable file for this link."
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid "Microsoft 365 did not return an access token."
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid "Microsoft 365 returned an error (%s)."
 msgstr ""
 
@@ -160,14 +147,12 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "On SharePoint / OneDrive"
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "Open the video in SharePoint, Teams or OneDrive, then use the"
 msgstr ""
 
@@ -179,8 +164,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "Retrieve from Google Drive or SharePoint"
 msgstr ""
 
@@ -192,16 +175,20 @@ msgstr ""
 #. module: website_slides_sharepoint
 #: model_terms:ir.ui.view,arch_db:website_slides_sharepoint.res_config_settings_view_form
 msgid ""
-"Serve videos and documents stored on SharePoint / OneDrive\n"
-"                                to your attendees, including anonymous ones. Register an\n"
-"                                application in Azure AD with the\n"
-"                                <em>Files.Read.All</em> and <em>Sites.Read.All</em>\n"
-"                                application permissions, granted with admin consent."
+"Serve videos and documents stored on SharePoint / OneDrive to your "
+"attendees, including anonymous ones. Register an application in Azure AD "
+"with the Files.Read.All and Sites.Read.All application permissions, granted "
+"with admin consent."
 msgstr ""
 
 #. module: website_slides_sharepoint
 #: model:ir.model.fields.selection,name:website_slides_sharepoint.selection__slide_slide__video_source_type__sharepoint
 msgid "SharePoint"
+msgstr ""
+
+#. module: website_slides_sharepoint
+#: model_terms:ir.ui.view,arch_db:website_slides_sharepoint.res_config_settings_view_form
+msgid "SharePoint Content"
 msgstr ""
 
 #. module: website_slides_sharepoint
@@ -252,7 +239,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "SharePoint and OneDrive links are supported too: use the"
 msgstr ""
 
@@ -292,7 +278,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_slides_sharepoint/controllers/main.py:0
 #: code:addons/website_slides_sharepoint/models/slide_slide.py:0
-#, python-format
 msgid ""
 "The Microsoft 365 integration is not configured. Please contact your "
 "administrator."
@@ -301,7 +286,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid ""
 "The Microsoft 365 integration is not configured. Please set the Tenant ID, "
 "Application (client) ID and Client Secret in Website > Configuration > "
@@ -311,7 +295,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/ms_graph_client.py:0
-#, python-format
 msgid ""
 "The file could not be found on SharePoint, or the Odoo application does not "
 "have permission to read it. Make sure the Azure AD application has the "
@@ -322,7 +305,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid ""
 "The link is read by this Odoo server with its own Microsoft\n"
 "                    credentials, so you do"
@@ -331,7 +313,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/controllers/main.py:0
-#, python-format
 msgid "This video already exists in this channel on the following content: %s"
 msgstr ""
 
@@ -343,7 +324,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-python
 #: code:addons/website_slides_sharepoint/models/slide_slide.py:0
-#, python-format
 msgid "Unknown SharePoint error."
 msgstr ""
 
@@ -355,14 +335,12 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "button and paste the link here."
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid ""
 "button of the Microsoft interface.\n"
 "                    Word, Excel and PowerPoint files are converted to PDF\n"
@@ -377,7 +355,6 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "e.g \"https://contoso.sharepoint.com/:b:/s/team/EaBc...\""
 msgstr ""
 
@@ -389,14 +366,12 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "e.g \"https://contoso.sharepoint.com/:i:/s/team/EaBc...\""
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "e.g \"https://contoso.sharepoint.com/:v:/s/team/EaBc...\""
 msgstr ""
 
@@ -410,14 +385,12 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "https://contoso.sharepoint.com/:v:/s/team/EaBc123?e=xYz"
 msgstr ""
 
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid ""
 "need to share the video\n"
 "                    with \"Anyone with the link\": keep your default sharing\n"
@@ -427,6 +400,5 @@ msgstr ""
 #. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
-#, python-format
 msgid "not"
 msgstr ""
