@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_attendance_aej
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.actions.report,print_report_name:l10n_br_hr_attendance_aej.action_report_espelho_ponto
+msgid "'Espelho de Ponto - %s' % (object.name)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "<strong>CNPJ</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "<strong>CPF</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "<strong>Empregador</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "<strong>Jornada contratual</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "<strong>Período</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "<strong>Trabalhador</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__aej_file
+msgid "AEJ"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_aej/models/l10n_br_hr_apuracao_periodo.py:0
+msgid ""
+"AEJ gerado SEM assinatura: não há certificado A1 válido cadastrado. Os arts."
+" 86 a 88 da Portaria 671/2021 exigem assinatura com certificado ICP-Brasil "
+"para a entrega oficial."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__aej_date
+msgid "AEJ gerado em"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_aej/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "AEJ gerado: %s"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__aej_filename
+msgid "Aej Filename"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__aej_p7s_filename
+msgid "Aej P7S Filename"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.l10n_br_hr_apuracao_periodo_view_form
+msgid "Arquivos da fiscalização (arts. 82 a 85)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Art. 84 da Portaria MTP nº 671/2021"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,help:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__aej_p7s
+msgid ""
+"Assinatura CAdES destacada, gerada com o certificado ICP-Brasil do "
+"desenvolvedor do PTRP (arts. 86 a 88)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__aej_p7s
+msgid "Assinatura do AEJ (.p7s)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Atraso"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model,name:l10n_br_hr_attendance_aej.model_l10n_br_hr_apuracao_periodo
+msgid "Competência de Apuração de Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,help:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__fuso_horas
+msgid "Deslocamento gravado nos campos de data e hora do AEJ."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.actions.report,name:l10n_br_hr_attendance_aej.action_report_espelho_ponto
+msgid "Espelho de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Espelho de Ponto Eletrônico"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.l10n_br_hr_apuracao_periodo_view_form
+msgid "Espelho de ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Extras"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_aej/models/l10n_br_hr_apuracao_periodo.py:0
+msgid ""
+"Falha ao assinar o AEJ com o certificado cadastrado. O arquivo foi gerado "
+"sem assinatura; verifique o certificado antes da entrega."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Falta"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid ""
+"Fonte da marcação: O = original do REP;\n"
+"                                I = incluída manualmente; P = pré-assinalada;\n"
+"                                X = ponto por exceção; T = outras fontes.\n"
+"                                Marcações riscadas foram desconsideradas no\n"
+"                                tratamento, com o motivo registrado no sistema."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_aej.field_l10n_br_hr_apuracao_periodo__fuso_horas
+msgid "Fuso do estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.l10n_br_hr_apuracao_periodo_view_form
+msgid "Gerar AEJ"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_aej/models/l10n_br_hr_apuracao_periodo.py:0
+msgid ""
+"Gere o AEJ a partir de competência fechada: o arquivo entregue à "
+"fiscalização não pode mudar depois de emitido."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_aej/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "Marcação sem par no dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Marcações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Noturno"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Ocorrências"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Previsto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Sem."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Totais do período"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "Trabalhado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_aej
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_aej.report_espelho_ponto
+msgid "a"
+msgstr ""
