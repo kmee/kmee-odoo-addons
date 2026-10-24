@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/sheet_helper.py:0
-#, python-format
 msgid ""
 "A biblioteca xlsxwriter e necessaria para os layouts em planilha. Instale-a "
 "no servidor."
@@ -25,7 +24,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid ""
 "A exportacao tem %(qtd)s critica(s) e nenhum arquivo foi gerado:\n"
 "\n"
@@ -165,7 +163,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "Conta %(code)s (%(name)s) sem codigo %(destino)s: %(qtd)s partida(s)."
 msgstr ""
 
@@ -217,14 +214,12 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "Este lote ja foi gerado."
 msgstr ""
 
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid ""
 "Este periodo ja teve exportacao gerada (%(lotes)s). Confirme com o "
 "escritorio para nao duplicar lancamentos no destino."
@@ -233,7 +228,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "Exportacao"
 msgstr ""
 
@@ -247,7 +241,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #: model:ir.model.fields,field_description:l10n_br_account_export.field_account_bank_statement_line__l10n_br_account_export_id
 #: model:ir.model.fields,field_description:l10n_br_account_export.field_account_move__l10n_br_account_export_id
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_account_payment__l10n_br_account_export_id
 msgid "Exportacao contabil"
 msgstr ""
 
@@ -342,7 +335,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "Lancamento %(name)s desbalanceado (diferenca de %(saldo)s)."
 msgstr ""
 
@@ -350,12 +342,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export__move_ids
 #: model_terms:ir.ui.view,arch_db:l10n_br_account_export.account_export_form
 msgid "Lancamentos"
-msgstr ""
-
-#. module: l10n_br_account_export
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export____last_update
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export_config____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_br_account_export
@@ -388,15 +374,9 @@ msgstr ""
 #. module: l10n_br_account_export
 #: model:ir.model.fields,help:l10n_br_account_export.field_account_bank_statement_line__l10n_br_account_export_id
 #: model:ir.model.fields,help:l10n_br_account_export.field_account_move__l10n_br_account_export_id
-#: model:ir.model.fields,help:l10n_br_account_export.field_account_payment__l10n_br_account_export_id
 msgid ""
 "Lote em que este lancamento foi enviado ao escritorio. Enquanto preenchido, "
 "o lancamento nao entra em nenhuma outra exportacao."
-msgstr ""
-
-#. module: l10n_br_account_export
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: l10n_br_account_export
@@ -428,14 +408,12 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "Nao sobrou lancamento valido para exportar."
 msgstr ""
 
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "Nenhum lancamento encontrado para o periodo e os filtros informados."
 msgstr ""
 
@@ -482,7 +460,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid ""
 "O layout %s nao esta implementado nesta base. Instale o modulo de layouts "
 "correspondente."
@@ -491,7 +468,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "O layout nao produziu nenhum arquivo."
 msgstr ""
 
@@ -511,6 +487,11 @@ msgstr ""
 #. module: l10n_br_account_export
 #: model:ir.model.fields.selection,name:l10n_br_account_export.selection__l10n_br_account_export__state__draft
 msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_account_export
+#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export__rating_ids
+msgid "Ratings"
 msgstr ""
 
 #. module: l10n_br_account_export
@@ -541,7 +522,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "So e possivel buscar lancamentos em rascunho."
 msgstr ""
 
@@ -597,7 +577,6 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid ""
 "Volte o lote para rascunho antes de apagar, para liberar os lancamentos "
 "vinculados."
@@ -621,13 +600,11 @@ msgstr ""
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "no plano %s"
 msgstr ""
 
 #. module: l10n_br_account_export
 #. odoo-python
 #: code:addons/l10n_br_account_export/models/account_export.py:0
-#, python-format
 msgid "no sistema do escritorio"
 msgstr ""
