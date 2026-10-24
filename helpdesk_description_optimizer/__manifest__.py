@@ -14,7 +14,7 @@
         ],
     },
     "installable": True,
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
 }
