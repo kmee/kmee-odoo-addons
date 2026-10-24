@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: l10n_br_hr_gerador_holerite
 #. odoo-python
 #: code:addons/l10n_br_hr_gerador_holerite/models/hr_payslip_generator.py:0
-#, python-format
 msgid ""
 "A quantidade de holerites (%(qty)s) excede o limite de %(max)s competências "
 "por geração."
@@ -25,7 +24,6 @@ msgstr ""
 #. module: l10n_br_hr_gerador_holerite
 #. odoo-python
 #: code:addons/l10n_br_hr_gerador_holerite/models/hr_payslip_generator.py:0
-#, python-format
 msgid "A quantidade de holerites deve ser maior que zero."
 msgstr ""
 
@@ -119,11 +117,6 @@ msgstr ""
 #. module: l10n_br_hr_gerador_holerite
 #: model:ir.model.fields.selection,name:l10n_br_hr_gerador_holerite.selection__hr_payslip_generator__mes_do_ano__6
 msgid "Junho"
-msgstr ""
-
-#. module: l10n_br_hr_gerador_holerite
-#: model:ir.model.fields,field_description:l10n_br_hr_gerador_holerite.field_hr_payslip_generator____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_br_hr_gerador_holerite
