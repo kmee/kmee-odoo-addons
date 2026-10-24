@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,6 +21,18 @@ msgstr ""
 #. module: account_custom_payment_term
 #: model:ir.model.fields,field_description:account_custom_payment_term.field_account_payment_term__is_custom
 msgid "Custom Term"
+msgstr ""
+
+#. module: account_custom_payment_term
+#: model:ir.model.fields,field_description:account_custom_payment_term.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_custom_payment_term.field_account_payment_term__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_custom_payment_term
+#: model:ir.model.fields,field_description:account_custom_payment_term.field_account_move__id
+#: model:ir.model.fields,field_description:account_custom_payment_term.field_account_payment_term__id
+msgid "ID"
 msgstr ""
 
 #. module: account_custom_payment_term
@@ -41,6 +53,5 @@ msgstr ""
 #. module: account_custom_payment_term
 #. odoo-python
 #: code:addons/account_custom_payment_term/models/account_move.py:0
-#, python-format
 msgid "The invoice has no payment term to copy!"
 msgstr ""
