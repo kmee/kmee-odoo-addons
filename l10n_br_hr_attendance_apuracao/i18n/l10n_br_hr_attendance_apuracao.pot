@@ -1,0 +1,898 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_attendance_apuracao
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "%d dia(s) com marcação sem par (número ímpar de registros)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid ""
+"%d importação(ões) de AFD com lacuna de NSR. Lacuna é indício de marcação "
+"suprimida e precisa ser explicada antes do fechamento."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "%d marcação(ões) do período sem funcionário identificado."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_ocorrencia__tipo_aej__1
+msgid "1 - Descanso Semanal Remunerado (DSR)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_ocorrencia__tipo_aej__2
+msgid "2 - Falta não justificada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_ocorrencia__tipo_aej__3
+msgid "3 - Movimento no banco de horas"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_ocorrencia__tipo_aej__4
+msgid "4 - Folga compensatória de feriado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "<span> - </span>"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_action
+msgid ""
+"A competência agrupa a apuração do mês. Apurar processa as marcações\n"
+"                em jornada; fechar trava o recálculo e é o que dá à folha uma\n"
+"                referência estável."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_dia.py:0
+msgid ""
+"A competência de %(nome)s em %(dia)s está fechada. Reabra a competência para"
+" reapurar."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "A data final da competência é anterior à inicial."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_periodo__state__aberto
+msgid "Aberto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__abona
+msgid "Abona o dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_action
+msgid "Abra a primeira competência"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Adicional noturno e intervalos"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Agrupar por"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__state__apurado
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_periodo__state__apurado
+msgid "Apurado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Apurar"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_action
+msgid "Apuração Diária"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model,name:l10n_br_hr_attendance_apuracao.model_l10n_br_hr_apuracao_dia
+msgid "Apuração Diária de Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.res_company_view_form
+msgid "Apuração de ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.ui.menu,name:l10n_br_hr_attendance_apuracao.menu_l10n_br_apuracao_dia
+msgid "Apuração diária"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_hr_attendance__l10n_br_apuracao_dia_id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_marcacao__apuracao_dia_id
+msgid "Apuração do dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_hr_attendance__l10n_br_apuracao_dia_id
+msgid ""
+"Apuração que gerou esta sessão. Sessões geradas pela apuração são refeitas a"
+" cada reprocessamento."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_tolerancia_diaria
+msgid ""
+"Art. 58, § 1º da CLT. O padrão legal é 10 minutos no dia. Ultrapassado o "
+"limite, computa-se o tempo integral (Súmula 366 do TST)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_tolerancia_marcacao
+msgid "Art. 58, § 1º da CLT. O padrão legal é 5 minutos por marcação."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__interjornada_ok
+msgid "Art. 66 da CLT."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "Atraso"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__atraso
+msgid "Atraso/saída antecipada (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model,name:l10n_br_hr_attendance_apuracao.model_hr_attendance
+msgid "Attendance"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__date_to
+msgid "Até"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__banco_horas_delta
+msgid "Banco de horas (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_bloqueia_holerite_divergente
+msgid "Bloquear holerite divergente da apuração"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__codigo
+msgid "Codigo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Com horas extras"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Com inconsistência"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model,name:l10n_br_hr_attendance_apuracao.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__company_id
+msgid "Company"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__periodo_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Competência"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model,name:l10n_br_hr_attendance_apuracao.model_l10n_br_hr_apuracao_periodo
+msgid "Competência de Apuração de Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "Competência fechada com %d dias apurados."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "Competência fechada. Reabra antes de reapurar."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid "Competência reaberta por %s."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.ui.menu,name:l10n_br_hr_attendance_apuracao.menu_l10n_br_apuracao_periodo
+msgid "Competências"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_action
+msgid "Competências de Apuração"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__contract_id
+msgid "Contrato"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__codigo
+msgid "Código interno da ocorrência, usado nas regras e nos relatórios."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__tipo_aej
+msgid "Código no AEJ"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__date_from
+msgid "De"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__employee_ids
+msgid ""
+"Deixe vazio para apurar todos os contratos sujeitos a controle de jornada da"
+" empresa."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__tipo_aej
+msgid ""
+"Deixe vazio quando a ocorrência não deva ser exportada no registro 07 do AEJ"
+" (por exemplo, um atraso já refletido na jornada)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__desconta_dsr
+msgid "Desconta DSR"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__desconta_dia
+msgid "Desconta o dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__date
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__dia_semana
+msgid "Dia Semana"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__falta
+msgid "Dia útil sem marcação e sem ocorrência que abone."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__dia_count
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Dias"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__dia_ids
+msgid "Dias apurados"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__inconsistencia_count
+msgid "Dias com inconsistência"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__6
+msgid "Domingo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__jornada_prevista
+msgid "Duração contratual do dia, vinda do calendário de trabalho."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__atraso
+msgid "Déficit de jornada no dia, já descontada a tolerância legal."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__paridade_ok
+msgid ""
+"Falso quando sobra marcação sem par - o dia tem número ímpar de registros e "
+"precisa de tratamento antes do fechamento."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__falta
+msgid "Falta"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__falta_injustificada
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Falta injustificada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__desconta_dsr
+msgid ""
+"Falta injustificada faz perder o repouso semanal remunerado (Lei 605/49, "
+"art. 6º)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__falta_injustificada
+msgid "Falta sem ocorrência que abone: desconta o dia e o DSR."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__faltas
+msgid "Faltas"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__state__fechado
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_periodo__state__fechado
+msgid "Fechado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Fechados"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Fechar a competência trava o recálculo dos dias. Confirma?"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Fechar competência"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__feriado
+msgid "Feriado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__employee_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Funcionário"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__employee_ids
+msgid "Funcionários"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Funcionários (vazio = todos)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__desconta_dia
+msgid "Gera desconto do dia na folha."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "HE"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "HE 100%"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__he_100
+msgid "HE 100% (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "HE 50%"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__he_50
+msgid "HE 50% (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__horas_extras
+msgid "Horas Extras"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__horas_extras
+msgid "Horas extras (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__noturno
+msgid "Horas noturnas (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__noturno_computado
+msgid "Horas noturnas computadas (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__noturno_computado
+msgid "Horas noturnas já convertidas pela hora reduzida de 52min30s."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_bloqueia_holerite_divergente
+msgid ""
+"Impede validar holerite cujos valores de jornada não batem com a apuração "
+"fechada da competência, salvo justificativa registrada."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__inconsistencia
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Inconsistências"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__interjornada_ok
+msgid "Interjornada de 11h respeitada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_dia.py:0
+msgid "Interjornada inferior a 11 horas (art. 66 da CLT)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__intrajornada_devida
+msgid "Intervalo devido (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__intrajornada_gozada
+msgid "Intervalo gozado (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_intrajornada_minima
+msgid "Intervalo intrajornada mínimo (min)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_dia.py:0
+msgid "Intervalo intrajornada suprimido em %d minutos."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__intrajornada_suprimida
+msgid "Intervalo suprimido (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.res_company_view_form
+msgid "Intervalos e folha"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__jornada_prevista
+msgid "Jornada prevista (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__jornada_realizada
+msgid "Jornada realizada (h)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.constraint,message:l10n_br_hr_attendance_apuracao.constraint_l10n_br_hr_apuracao_dia_employee_date_uniq
+msgid "Já existe apuração deste funcionário para este dia."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.constraint,message:l10n_br_hr_attendance_apuracao.constraint_l10n_br_hr_ocorrencia_codigo_uniq
+msgid "Já existe uma ocorrência com este código nesta empresa."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model,name:l10n_br_hr_attendance_apuracao.model_l10n_br_hr_marcacao
+msgid "Marcação de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_search
+msgid "Marcação sem par"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_dia.py:0
+msgid "Marcação sem par às %s: o dia tem número ímpar de registros."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__marcacao_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Marcações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__paridade_ok
+msgid "Marcações pareadas"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Março/2026"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_intrajornada_minima
+msgid ""
+"Mínimo para jornadas acima de 6h. Convenção ou acordo coletivo pode reduzir "
+"até 30 minutos (art. 611-A, III da CLT); abaixo disso o sistema mantém o "
+"piso de 30."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__name
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "Noturno"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_apuracao/models/l10n_br_hr_apuracao_periodo.py:0
+msgid ""
+"Não é possível fechar a competência %(nome)s:\n"
+"%(lista)s"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__inconsistencia
+msgid "O que impede considerar a apuração deste dia confiável."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__abona
+msgid ""
+"Ocorrência que justifica a ausência: o dia não vira falta e a jornada "
+"prevista não gera débito."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__ocorrencia_ids
+#: model:ir.ui.menu,name:l10n_br_hr_attendance_apuracao.menu_l10n_br_ocorrencia
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Ocorrências"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance_apuracao.l10n_br_hr_ocorrencia_action
+msgid "Ocorrências de Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__intrajornada_suprimida
+msgid ""
+"Período suprimido do intervalo, indenizável com 50% (art. 71, § 4º da CLT)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "Previsto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__2
+msgid "Quarta"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__3
+msgid "Quinta"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__state__rascunho
+msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Reabrir"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_periodo_view_form
+msgid "Reabrir permite recalcular dias que já alimentaram a folha. Confirma?"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_tree
+msgid "Realizado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Reapurar"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__banco_horas_delta
+msgid ""
+"Saldo do dia quando a compensação está ativa: positivo credita, negativo "
+"debita."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__0
+msgid "Segunda"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_ocorrencia__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__attendance_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Sessões"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__4
+msgid "Sexta"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.l10n_br_hr_apuracao_dia_view_form
+msgid "Situação do dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__state
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__state
+msgid "State"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__5
+msgid "Sábado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_dia__noturno
+msgid "Tempo cronológico trabalhado entre 22h e 5h."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_apuracao.selection__l10n_br_hr_apuracao_dia__dia_semana__1
+msgid "Terça"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model,name:l10n_br_hr_attendance_apuracao.model_l10n_br_hr_ocorrencia
+msgid "Tipo de Ocorrência de Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_apuracao.res_company_view_form
+msgid "Tolerância (art. 58, § 1º da CLT)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_tolerancia_diaria
+msgid "Tolerância diária (min)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_res_company__l10n_br_tolerancia_marcacao
+msgid "Tolerância por marcação (min)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_apuracao
+#: model:ir.model.fields,help:l10n_br_hr_attendance_apuracao.field_l10n_br_hr_apuracao_periodo__website_message_ids
+msgid "Website communication history"
+msgstr ""
