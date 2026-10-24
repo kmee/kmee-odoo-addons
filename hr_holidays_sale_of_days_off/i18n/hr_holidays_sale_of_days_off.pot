@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 20.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,6 +20,43 @@ msgid ""
 "<span class=\"o_stat_text\">\n"
 "                            Holiday Sale\n"
 "                        </span>"
+msgstr ""
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.module.module,description:base.module_hr_holidays_sale_of_days_off
+msgid ""
+"============================\n"
+"Hr Holidays Sale Of Days Off\n"
+"============================\n"
+"\n"
+"hr_holidays_sale_of_days_off\n"
+"\n"
+"Purpose\n"
+"=======\n"
+"\n"
+"This module does this and that...\n"
+"\n"
+"Explain the use case.\n"
+"\n"
+"Configuration\n"
+"=============\n"
+"\n"
+"To configure this module, you need to:\n"
+"\n"
+"#. Go to ...\n"
+"\n"
+"Usage\n"
+"=====\n"
+"\n"
+"To use this module, you need to:\n"
+"\n"
+"#. Go to ...\n"
+"\n"
+"\n"
+"How to test\n"
+"===========\n"
+"\n"
+"...\n"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
@@ -77,7 +114,10 @@ msgid "Days sold"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__display_name
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_allocation__display_name
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_work_entry_type__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -108,13 +148,13 @@ msgstr ""
 #: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_allocation.py:0
 #: model:ir.actions.act_window,name:hr_holidays_sale_of_days_off.action_hr_leave_abono
 #: model:ir.ui.menu,name:hr_holidays_sale_of_days_off.menu_hr_leave_abono
-#, python-format
 msgid "Holiday Sales"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
 #: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_allocation__hr_holidays_sale_of_days_off
-#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_type__hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_work_entry_type__hr_holidays_sale_of_days_off
+#: model:ir.module.module,shortdesc:base.module_hr_holidays_sale_of_days_off
 msgid "Hr Holidays Sale Of Days Off"
 msgstr ""
 
@@ -124,13 +164,11 @@ msgid "Hr Leave Abono"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_employee__id
 #: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono__id
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_allocation__id
+#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_work_entry_type__id
 msgid "ID"
-msgstr ""
-
-#. module: hr_holidays_sale_of_days_off
-#: model:ir.model.fields,field_description:hr_holidays_sale_of_days_off.field_hr_leave_abono____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
@@ -161,15 +199,12 @@ msgstr ""
 #. module: hr_holidays_sale_of_days_off
 #. odoo-python
 #: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_abono.py:0
-#, python-format
 msgid "The requested number of days sold cannot be 0."
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
 #. odoo-python
 #: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_abono.py:0
-#: code:addons/hr_holidays_sale_of_days_off/models/hr_leave_abono.py:0
-#, python-format
 msgid "The requested quantity is not available for sale."
 msgstr ""
 
@@ -179,11 +214,16 @@ msgid "Time Off Allocation"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
-#: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_leave_type
-msgid "Time Off Type"
+#: model:ir.model,name:hr_holidays_sale_of_days_off.model_hr_work_entry_type
+msgid "Time Type"
 msgstr ""
 
 #. module: hr_holidays_sale_of_days_off
 #: model_terms:ir.ui.view,arch_db:hr_holidays_sale_of_days_off.view_employee_form_leave_inherit
 msgid "Vacation days sold"
+msgstr ""
+
+#. module: hr_holidays_sale_of_days_off
+#: model:ir.module.module,summary:base.module_hr_holidays_sale_of_days_off
+msgid "hr_holidays_sale_of_days_off"
 msgstr ""
