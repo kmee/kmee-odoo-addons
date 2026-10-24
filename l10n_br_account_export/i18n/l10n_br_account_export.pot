@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -353,12 +353,6 @@ msgid "Lancamentos"
 msgstr ""
 
 #. module: l10n_br_account_export
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export____last_update
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export_config____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: l10n_br_account_export
 #: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export__write_uid
 #: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export_config__write_uid
 msgid "Last Updated by"
@@ -392,11 +386,6 @@ msgstr ""
 msgid ""
 "Lote em que este lancamento foi enviado ao escritorio. Enquanto preenchido, "
 "o lancamento nao entra em nenhuma outra exportacao."
-msgstr ""
-
-#. module: l10n_br_account_export
-#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: l10n_br_account_export
@@ -511,6 +500,11 @@ msgstr ""
 #. module: l10n_br_account_export
 #: model:ir.model.fields.selection,name:l10n_br_account_export.selection__l10n_br_account_export__state__draft
 msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_account_export
+#: model:ir.model.fields,field_description:l10n_br_account_export.field_l10n_br_account_export__rating_ids
+msgid "Ratings"
 msgstr ""
 
 #. module: l10n_br_account_export
