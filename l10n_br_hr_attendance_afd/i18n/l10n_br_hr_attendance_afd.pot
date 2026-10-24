@@ -1,0 +1,496 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_attendance_afd
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#, python-format
+msgid "%s marcações conciliadas."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__arquivo
+msgid "AFD gerado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__state__analisado
+msgid "Analisado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Analisar arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#, python-format
+msgid "Anexe o arquivo AFD antes de analisar."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_action
+msgid ""
+"Anexe o arquivo coletado do relógio, analise e importe. A análise\n"
+"                confere CRC-16, continuidade de NSR e as contagens do trailer antes\n"
+"                de gravar qualquer marcação."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__arquivo
+msgid "Arquivo AFD"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__arquivo_nome
+msgid "Arquivo Nome"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__date_to
+msgid "Até"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__state__erro
+msgid "Com erro"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__company_id
+msgid "Company"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Confirma a importação das marcações deste arquivo?"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__date_from
+msgid "De"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__leiaute__auto
+msgid "Detectar automaticamente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#, python-format
+msgid ""
+"Este arquivo já foi importado em %s. A importação é idempotente: os NSRs "
+"existentes serão ignorados."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_eventos
+msgid "Eventos do REP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model,name:l10n_br_hr_attendance_afd.model_l10n_br_hr_afd_export_wizard
+msgid "Exportação de AFD"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__lacunas_nsr
+msgid ""
+"Faixas ausentes na sequência. Lacuna é indício de marcação suprimida e trava"
+" o fechamento da competência."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_export_wizard_view_form
+msgid "Fechar"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__fuso_horas
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__fuso_horas
+msgid "Fuso do estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__fuso_horas
+msgid "Fuso gravado nos campos de data e hora do arquivo."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance_afd.l10n_br_hr_afd_export_wizard_action
+#: model:ir.ui.menu,name:l10n_br_hr_attendance_afd.menu_l10n_br_afd_export
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_export_wizard_view_form
+msgid "Gerar AFD"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__state__importado
+msgid "Importado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.ui.menu,name:l10n_br_hr_attendance_afd.menu_l10n_br_afd_import
+msgid "Importar AFD"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Importar marcações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#, python-format
+msgid ""
+"Importação concluída: %(novas)s marcações novas, %(dup)s já existentes, "
+"%(pend)s sem funcionário identificado."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_action
+#: model:ir.model,name:l10n_br_hr_attendance_afd.model_l10n_br_hr_afd_import
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_marcacao__afd_import_id
+#, python-format
+msgid "Importação de AFD"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_action
+msgid "Importe o primeiro AFD"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__hash_arquivo
+msgid ""
+"Impressão digital do conteúdo, usada para reconhecer reimportação do mesmo "
+"arquivo."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_duplicadas
+msgid "Já existentes"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__lacunas_nsr
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Lacunas de NSR"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__leiaute
+msgid "Leiaute"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__leiaute_detectado
+msgid "Leiaute Detectado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_marcacao__afd_import_id
+msgid ""
+"Lote em que esta marcação entrou no sistema. Preserva a rastreabilidade até "
+"o arquivo original entregue pelo relógio."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model,name:l10n_br_hr_attendance_afd.model_l10n_br_hr_marcacao
+msgid "Marcação de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Marcações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_pendentes
+msgid "Marcações cujo CPF/PIS não bateu com nenhum funcionário."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__marcacao_ids
+msgid "Marcações do lote"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_importadas
+msgid "Marcações importadas"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_marcacoes
+msgid "Marcações no arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#, python-format
+msgid "Marcações sem funcionário"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_duplicadas
+msgid "NSRs que já estavam na base."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__arquivo_nome
+msgid "Nome do arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_afd_import.py:0
+#, python-format
+msgid "Nova importação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__nsr_final
+msgid "Nsr Final"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__nsr_inicial
+msgid "Nsr Inicial"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_afd/models/l10n_br_hr_rep.py:0
+#, python-format
+msgid "Não há marcações deste REP entre %(inicio)s e %(fim)s."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__log
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Ocorrências"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Pendentes"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__leiaute__1510
+msgid "Portaria 1.510/2009 (legado)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__leiaute__671
+msgid "Portaria 671/2021 (Anexo V)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_export_wizard__rep_id
+msgid "REP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__rep_id
+msgid "REP de origem"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_afd.selection__l10n_br_hr_afd_import__state__draft
+msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Reconciliar pendentes"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model,name:l10n_br_hr_attendance_afd.model_l10n_br_hr_rep
+msgid "Registrador Eletrônico de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_afd.l10n_br_hr_afd_import_view_form
+msgid "Resultado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__hash_arquivo
+msgid "SHA-256 do arquivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__qtd_pendentes
+msgid "Sem funcionário"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__state
+msgid "State"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__tem_lacuna
+msgid "Tem Lacuna"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__fuso_horas
+msgid ""
+"Usado somente no leiaute 1.510, que grava hora local sem fuso. No leiaute "
+"671 o fuso vem em cada marcação."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_afd
+#: model:ir.model.fields,help:l10n_br_hr_attendance_afd.field_l10n_br_hr_afd_import__website_message_ids
+msgid "Website communication history"
+msgstr ""
