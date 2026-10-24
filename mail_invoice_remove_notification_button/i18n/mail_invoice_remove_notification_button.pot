@@ -1,9 +1,10 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* mail_invoice_remove_notification_button
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 20.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,3 +12,50 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: mail_invoice_remove_notification_button
+#: model:ir.module.module,description:base.module_mail_invoice_remove_notification_button
+msgid ""
+"================================\n"
+"Mail Notification Button Control\n"
+"================================\n"
+"\n"
+"KMEE\n"
+"\n"
+"Purpose\n"
+"=======\n"
+"\n"
+"This module does this and that...\n"
+"\n"
+"Explain the use case.\n"
+"\n"
+"Configuration\n"
+"=============\n"
+"\n"
+"To configure this module, you need to:\n"
+"\n"
+"#. Go to ...\n"
+"\n"
+"Usage\n"
+"=====\n"
+"\n"
+"To use this module, you need to:\n"
+"\n"
+"#. Go to ...\n"
+"\n"
+"\n"
+"How to test\n"
+"===========\n"
+"\n"
+"...\n"
+msgstr ""
+
+#. module: mail_invoice_remove_notification_button
+#: model:ir.module.module,summary:base.module_mail_invoice_remove_notification_button
+msgid "KMEE"
+msgstr ""
+
+#. module: mail_invoice_remove_notification_button
+#: model:ir.module.module,shortdesc:base.module_mail_invoice_remove_notification_button
+msgid "Mail Sale Order Remove Notification Button"
+msgstr ""
