@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -57,6 +57,16 @@ msgid "COFINS WH"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_cofins_a_recolher
+msgid "COFINS a Recolher"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_cofins_a_recuperar
+msgid "COFINS a Recuperar"
+msgstr ""
+
+#. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__cofins_value
 msgid "COFINS própria"
 msgstr ""
@@ -64,6 +74,11 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__cofins_wh_value
 msgid "COFINS retida"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_cofins_sobre_vendas
+msgid "COFINS s/ Vendas"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -131,6 +146,11 @@ msgid "Crédito ICMS Simples Nacional"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_custo_mercadorias
+msgid "Custo das Mercadorias Vendidas"
+msgstr ""
+
+#. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icms_destination_value
 msgid "DIFAL - ICMS Destino"
 msgstr ""
@@ -190,6 +210,11 @@ msgid "Error! You cannot create recursive template hierarchies."
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_estoque_mercadorias
+msgid "Estoque de Mercadorias"
+msgstr ""
+
+#. module: l10n_br_account_move_template
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__fiscal_field
 msgid "Fiscal Field"
 msgstr ""
@@ -208,6 +233,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__fiscal_operation_ids
 #: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_form
 msgid "Fiscal Operations"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_fornecedores
+msgid "Fornecedores Nacionais"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -272,8 +302,33 @@ msgid "ICMS ST"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_icmsst_a_recolher
+msgid "ICMS ST a Recolher"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_icmsst_a_recuperar
+msgid "ICMS ST a Recuperar"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_icms_a_recolher
+msgid "ICMS a Recolher"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_icms_a_recuperar
+msgid "ICMS a Recuperar"
+msgstr ""
+
+#. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__icms_value
 msgid "ICMS próprio"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_icms_sobre_vendas
+msgid "ICMS s/ Vendas"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -321,6 +376,21 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__ipi_devol_value
 msgid "IPI Devolvido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_ipi_a_recolher
+msgid "IPI a Recolher"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_ipi_a_recuperar
+msgid "IPI a Recuperar"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_ipi_sobre_vendas
+msgid "IPI s/ Vendas"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -417,12 +487,6 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: l10n_br_account_move_template
-#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template____last_update
-#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: l10n_br_account_move_template
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__write_uid
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__write_uid
 msgid "Last Updated by"
@@ -471,6 +535,16 @@ msgid "PIS ST"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_pis_a_recolher
+msgid "PIS a Recolher"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_pis_a_recuperar
+msgid "PIS a Recuperar"
+msgstr ""
+
+#. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__pis_value
 msgid "PIS próprio"
 msgstr ""
@@ -478,6 +552,11 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__pis_wh_value
 msgid "PIS retido"
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_pis_sobre_vendas
+msgid "PIS s/ Vendas"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -491,6 +570,11 @@ msgid ""
 "Quando definido, o texto das linhas geradas por este item vem do template do"
 " historico (com as variaveis de data, documento e parceiro), em vez do "
 "rotulo padrao."
+msgstr ""
+
+#. module: l10n_br_account_move_template
+#: model:account.account,name:l10n_br_account_move_template.account_receita_vendas
+msgid "Receita de Vendas"
 msgstr ""
 
 #. module: l10n_br_account_move_template
