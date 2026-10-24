@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,11 +16,6 @@ msgstr ""
 #. module: l10n_br_account_history
 #: model:ir.model.fields,field_description:l10n_br_account_history.field_l10n_br_account_history__active
 msgid "Active"
-msgstr ""
-
-#. module: l10n_br_account_history
-#: model:l10n_br.account.history,name:l10n_br_account_history.history_imposto
-msgid "Apropriacao de imposto"
 msgstr ""
 
 #. module: l10n_br_account_history
@@ -72,11 +67,6 @@ msgid "ID"
 msgstr ""
 
 #. module: l10n_br_account_history
-#: model:ir.model.fields,field_description:l10n_br_account_history.field_l10n_br_account_history____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: l10n_br_account_history
 #: model:ir.model.fields,field_description:l10n_br_account_history.field_l10n_br_account_history__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -117,9 +107,4 @@ msgstr ""
 #. module: l10n_br_account_history
 #: model:ir.model.fields,help:l10n_br_account_history.field_l10n_br_account_history__company_id
 msgid "Vazio vale para todas as empresas."
-msgstr ""
-
-#. module: l10n_br_account_history
-#: model:l10n_br.account.history,name:l10n_br_account_history.history_venda
-msgid "Venda de mercadoria"
 msgstr ""
