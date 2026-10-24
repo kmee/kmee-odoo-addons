@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,17 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.fields.selection,name:hr_leave_allocation_multiple_tags.selection__hr_leave_allocation__holiday_type__category_and
-msgid "All Tags (AND)"
-msgstr ""
-
-#. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.fields,field_description:hr_leave_allocation_multiple_tags.field_hr_leave_allocation__holiday_type
+#: model:ir.model.fields,field_description:hr_leave_allocation_multiple_tags.field_hr_leave_allocation_generate_multi_wizard__allocation_mode
 msgid "Allocation Mode"
 msgstr ""
 
 #. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.fields,help:hr_leave_allocation_multiple_tags.field_hr_leave_allocation__holiday_type
+#: model:ir.model.fields,help:hr_leave_allocation_multiple_tags.field_hr_leave_allocation_generate_multi_wizard__allocation_mode
 msgid ""
 "Allow to create requests in batchs:\n"
 "- By Employee: for a specific employee\n"
@@ -34,68 +29,31 @@ msgid ""
 msgstr ""
 
 #. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.fields.selection,name:hr_leave_allocation_multiple_tags.selection__hr_leave_allocation__holiday_type__category_or
-msgid "Any of Tags (OR)"
+#: model:ir.model.fields.selection,name:hr_leave_allocation_multiple_tags.selection__hr_leave_allocation_generate_multi_wizard__allocation_mode__category_and
+msgid "By all Employee Tags (AND)"
 msgstr ""
 
 #. module: hr_leave_allocation_multiple_tags
-#. odoo-python
-#: code:addons/hr_leave_allocation_multiple_tags/models/hr_leave_allocation.py:0
-#, python-format
-msgid ""
-"At least one employee tag must be specified for\n"
-"                            'Category AND/OR' type allocation."
+#: model:ir.model.fields.selection,name:hr_leave_allocation_multiple_tags.selection__hr_leave_allocation_generate_multi_wizard__allocation_mode__category_or
+msgid "By any of Employee Tags (OR)"
 msgstr ""
 
 #. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.fields,field_description:hr_leave_allocation_multiple_tags.field_hr_leave_allocation__category_ids
-#: model_terms:ir.ui.view,arch_db:hr_leave_allocation_multiple_tags.hr_leave_allocation_form_view
+#: model:ir.model.fields,field_description:hr_leave_allocation_multiple_tags.field_hr_leave_allocation_generate_multi_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: hr_leave_allocation_multiple_tags
+#: model:ir.model.fields,field_description:hr_leave_allocation_multiple_tags.field_hr_leave_allocation_generate_multi_wizard__category_ids
 msgid "Employee Tags"
 msgstr ""
 
 #. module: hr_leave_allocation_multiple_tags
-#. odoo-python
-#: code:addons/hr_leave_allocation_multiple_tags/models/hr_leave_allocation.py:0
-#, python-format
-msgid "The category must be specified for 'Category' type allocation."
+#: model:ir.model,name:hr_leave_allocation_multiple_tags.model_hr_leave_allocation_generate_multi_wizard
+msgid "Generate time off allocations for multiple employees"
 msgstr ""
 
 #. module: hr_leave_allocation_multiple_tags
-#. odoo-python
-#: code:addons/hr_leave_allocation_multiple_tags/models/hr_leave_allocation.py:0
-#, python-format
-msgid "The company must be specified for 'Company' type allocation."
-msgstr ""
-
-#. module: hr_leave_allocation_multiple_tags
-#. odoo-python
-#: code:addons/hr_leave_allocation_multiple_tags/models/hr_leave_allocation.py:0
-#, python-format
-msgid ""
-"The department must be specified for\n"
-"                             'Department' type allocation."
-msgstr ""
-
-#. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.constraint,message:hr_leave_allocation_multiple_tags.constraint_hr_leave_allocation_duration_check
-msgid "The duration must be greater than 0."
-msgstr ""
-
-#. module: hr_leave_allocation_multiple_tags
-#. odoo-python
-#: code:addons/hr_leave_allocation_multiple_tags/models/hr_leave_allocation.py:0
-#, python-format
-msgid "The employee must be specified for 'Employee' type allocation."
-msgstr ""
-
-#. module: hr_leave_allocation_multiple_tags
-#: model:ir.model.constraint,message:hr_leave_allocation_multiple_tags.constraint_hr_leave_allocation_type_value
-msgid ""
-"The employee, department, company, or employee category of this request is\n"
-"             missing. Please make sure that your user login is linked to an employee."
-msgstr ""
-
-#. module: hr_leave_allocation_multiple_tags
-#: model:ir.model,name:hr_leave_allocation_multiple_tags.model_hr_leave_allocation
-msgid "Time Off Allocation"
+#: model:ir.model.fields,field_description:hr_leave_allocation_multiple_tags.field_hr_leave_allocation_generate_multi_wizard__id
+msgid "ID"
 msgstr ""
