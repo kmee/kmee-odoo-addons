@@ -1,0 +1,1260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_sst
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__utiliz_epc__0
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__utiliz_epi__0
+msgid "0 - Não se aplica"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_ambiente__tp_insc__1
+msgid "1 - CNPJ"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_responsavel__ide_oc__1
+msgid "1 - CRM"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__tp_aval__1
+msgid "1 - Critério quantitativo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__1
+msgid "1 - Dose diária de ruído"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_ambiente__local_amb__1
+msgid "1 - Estabelecimento do próprio empregador"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__utiliz_epc__1
+msgid "1 - Não implementa"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__utiliz_epi__1
+msgid "1 - Não utilizado"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__10
+msgid "10 - Grau Celsius (C)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__11
+msgid "11 - Metro por segundo (m/s)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__12
+msgid "12 - Porcentual"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__13
+msgid "13 - Lux (lx)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__14
+msgid "14 - Unidade formadora de colônias por metro cúbico (ufc/m3)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__15
+msgid "15 - Dose diária"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__16
+msgid "16 - Dose mensal"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__17
+msgid "17 - Dose trimestral"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__18
+msgid "18 - Dose anual"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__19
+msgid "19 - Watt por metro quadrado (W/m2)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__tp_aval__2
+msgid "2 - Critério qualitativo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__2
+msgid "2 - Decibel linear (dB linear)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_ambiente__local_amb__2
+msgid "2 - Estabelecimento de terceiros"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__utiliz_epc__2
+msgid "2 - Implementa"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__utiliz_epi__2
+msgid "2 - Utilizado"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__20
+msgid "20 - Ampère por metro (A/m)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__21
+msgid "21 - Militesla (mT)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__22
+msgid "22 - Microtesla (uT)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__23
+msgid "23 - Miliampère (mA)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__24
+msgid "24 - Quilovolt por metro (kV/m)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__25
+msgid "25 - Volt por metro (V/m)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__26
+msgid "26 - Joule por metro quadrado (J/m2)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__27
+msgid "27 - Milijoule por centímetro quadrado (mJ/cm2)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__28
+msgid "28 - Milisievert (mSv)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__29
+msgid "29 - Milhão de partículas por decímetro cúbico (mppdc)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_ambiente__tp_insc__3
+msgid "3 - CAEPF"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__3
+msgid "3 - Decibel C (dB(C))"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__30
+msgid "30 - Umidade relativa do ar (UR %)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_ambiente__tp_insc__4
+msgid "4 - CNO"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_responsavel__ide_oc__4
+msgid "4 - CREA"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__4
+msgid "4 - Decibel A (dB(A))"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__5
+msgid "5 - Metro por segundo ao quadrado (m/s2)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__6
+msgid "6 - Metro por segundo elevado a 1,75 (m/s1,75)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__7
+msgid "7 - Parte por milhão (ppm)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__8
+msgid "8 - Miligrama por metro cúbico de ar (mg/m3)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__un_med__9
+msgid "9 - Fibra por centímetro cúbico (f/cm3)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_responsavel__ide_oc__9
+msgid "9 - Outros"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__tipo__aet
+msgid "AET - Análise Ergonômica do Trabalho (NR-17)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_needaction
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__active
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__active
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__agente_nocivo_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Agente Nocivo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_search
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Agrupar por"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__ambiente_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Ambiente"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_ambiente.py:0
+msgid ""
+"Ambiente %(nome)s: a inscrição do estabelecimento deve ter %(esperado)s "
+"dígitos para o tipo informado."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_ambiente_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_employee__l10n_br_sst_ambiente_id
+msgid "Ambiente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.hr_contract_view_form_sst
+msgid "Ambiente e Exposição"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_ambiente_id
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_hr_employee__l10n_br_sst_ambiente_id
+msgid ""
+"Ambiente onde o trabalhador exerce a atividade. É o que liga o contrato ao "
+"inventário de riscos e, por consequência, ao S-2240."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Ambientes"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__ambiente_ids
+msgid "Ambientes Cobertos"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.actions.act_window,name:l10n_br_hr_sst.l10n_br_sst_ambiente_action
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_ambiente
+msgid "Ambientes de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Aposentadoria Especial"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_form
+msgid "Atividades"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_attachment_count
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__ausencia_de_risco
+msgid "Ausência de Agente Nocivo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Avaliação"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__aviso_adicionais
+msgid "Aviso sobre os Adicionais"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_ambiente__nr_insc
+msgid "CNPJ, CAEPF ou CNO do estabelecimento onde fica o ambiente."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__cpf
+msgid "CPF"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_responsavel.py:0
+msgid "CPF do responsável %(nome)s deve ter 11 dígitos."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_responsavel__cpf
+msgid "CPF do responsável, informado no campo cpfResp do S-2240."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__state__cancelled
+msgid "Cancelado"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__aposentadoria_especial_id
+msgid ""
+"Classificação do agente nocivo no Anexo IV do Decreto 3.048/1999, para fins "
+"de aposentadoria especial. Não é tabela do eSocial: no S-2240 o agente vai "
+"pelo código da Tabela 24."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Colocar em Vigor"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_configuracao
+msgid "Configuração"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Consequências"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:res.groups,comment:l10n_br_hr_sst.group_sst_user
+msgid "Consulta o inventário de riscos, laudos e ambientes."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__contract_ids
+msgid "Contratos"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__cod_ag_noc
+msgid "Código do Agente Nocivo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__descricao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Descrição Complementar"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__descricao_atividade
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.hr_contract_view_form_sst
+msgid "Descrição das Atividades"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_descricao_atividade
+msgid "Descrição das Atividades (SST)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_descricao_atividade
+msgid ""
+"Descrição das atividades desempenhadas pelo trabalhador (dscAtivDes do "
+"S-2240). Vazio usa a descrição do ambiente."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_ambiente__dsc_setor
+msgid "Descrição do setor do ambiente, informada em dscSetor."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__dsc_oc
+msgid "Descrição do Órgão de Classe"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__efic_epc
+msgid "EPC Eficaz"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__efic_epi
+msgid "EPI Eficaz"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__company_id
+msgid "Empresa"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__aposentadoria_especial_id
+msgid "Enquadramento (Anexo IV do Decreto 3.048/1999)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_search
+msgid "Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_risco.py:0
+msgid ""
+"Este risco gera insalubridade e periculosidade. Os dois adicionais não se "
+"acumulam (CLT, art. 193, par. 2, e TST IRR Tema 17): o empregado opta por um"
+" deles, e sem opção a folha paga o de maior valor."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_exposicao_especial
+msgid "Exposição Ensejadora de Aposentadoria Especial"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.actions.act_window,name:l10n_br_hr_sst.l10n_br_sst_risco_action
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__risco_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__risco_ids
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_risco
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Fatores de Risco"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__date_to
+msgid "Fim da Exposição"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__date_to
+msgid "Fim da Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__financiamento_aposent_id
+msgid "Financiamento da Aposentadoria Especial"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_follower_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_partner_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__job_ids
+msgid "Funções Expostas"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__insalubridade
+msgid "Gera Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__periculosidade
+msgid "Gera Periculosidade"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Geram Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Geram Periculosidade"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:res.groups,name:l10n_br_hr_sst.group_sst_manager
+msgid "Gestor"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.module.category,description:l10n_br_hr_sst.module_category_l10n_br_hr_sst
+msgid "Gestão de riscos ocupacionais, EPI, exames e acidentes de trabalho."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__grau_insalubridade
+msgid "Grau de Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_res_company__l10n_br_sst_grau_risco
+msgid "Grau de Risco (NR-4)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_res_company__l10n_br_sst_grau_risco
+msgid ""
+"Grau de risco da organização, de 1 a 4, conforme o Quadro I da NR-4 para o "
+"CNAE da atividade. A NR-7 usa esse grau, por exemplo, para o prazo de "
+"dispensa do exame demissional (item 7.5.11). Vazio é tratado como o grau "
+"mais restritivo pelos módulos que o usam."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__has_message
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__name
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Identificação"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_needaction
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_has_error
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__nr_insc
+msgid "Inscrição do Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__intensidade
+msgid "Intensidade / Concentração"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__date_from
+msgid "Início da Exposição"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__date_from
+msgid "Início da Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_is_follower
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_hr_job
+msgid "Job Position"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__tipo__ltcat
+msgid "LTCAT - Laudo Técnico de Condições Ambientais do Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__laudo_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Laudo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_laudo.py:0
+msgid ""
+"Laudo %(nome)s: não é possível colocar em vigor um laudo sem nenhum fator de"
+" risco inventariado. Se o ambiente não tem exposição, registre o risco com o"
+" código de ausência de agente nocivo."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_laudo.py:0
+msgid "Laudo %(nome)s: o fim da vigência é anterior ao início."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__laudo_anterior_id
+msgid "Laudo Substituído"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__laudo_id
+msgid ""
+"Laudo que documenta este risco. Sem laudo, o risco não sustenta adicional na"
+" folha nem informação no S-2240."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.actions.act_window,name:l10n_br_hr_sst.l10n_br_sst_laudo_action
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_laudo
+msgid "Laudos"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__limite_tolerancia
+msgid "Limite de Tolerância"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__local_amb
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_search
+msgid "Local do Ambiente"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:res.groups,comment:l10n_br_hr_sst.group_sst_manager
+msgid ""
+"Mantém laudos, ambientes e fatores de risco, e responde pelos eventos de "
+"SST."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_has_error
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__grau_insalubridade__maximo
+msgid "Máximo (40%)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__grau_insalubridade__medio
+msgid "Médio (20%)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__grau_insalubridade__minimo
+msgid "Mínimo (10%)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__name
+msgid "Nome"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_needaction_counter
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_has_error_counter
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_needaction_counter
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__message_has_error_counter
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__efic_epc__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__efic_epi__n
+msgid "Não"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__nr_oc
+msgid "Número de Inscrição no Órgão"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__nr_proc_jud
+msgid "Número do processo judicial que afasta a exposição, quando houver."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__aviso_adicionais
+msgid ""
+"O mesmo agente pode ser insalubre e perigoso (radiação ionizante, por "
+"exemplo, está no Anexo 5 da NR-15 e na NR-16). O laudo registra os dois; o "
+"que não se acumula é o pagamento."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_responsavel__dsc_oc
+msgid "Obrigatório quando o órgão de classe é 'Outros'."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__observacao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Observações"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_responsavel__partner_id
+msgid "Opcional. Liga o responsável a um cadastro de parceiro."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__tipo__outro
+msgid "Outro"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__tipo__pcmso
+msgid "PCMSO - Programa de Controle Médico de Saúde Ocupacional (NR-7)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__tipo__pgr
+msgid "PGR - Programa de Gerenciamento de Riscos (NR-1)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "PGR 2026 - Matriz"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_ambiente__descricao_atividade
+msgid ""
+"Padrão da descrição das atividades desempenhadas (dscAtivDes). O contrato "
+"pode sobrescrever com a descrição do trabalhador."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__partner_id
+msgid "Parceiro"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__descricao
+msgid "Preenche dscAgNoc quando o agente exige detalhamento."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Previdenciário"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__nr_proc_jud
+msgid "Processo Judicial"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Proteção (EPC/EPI)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__state__draft
+msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__rating_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.actions.act_window,name:l10n_br_hr_sst.l10n_br_sst_responsavel_action
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_responsavel
+msgid "Responsáveis Técnicos"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_responsavel.py:0
+msgid ""
+"Responsável %(nome)s: informe a descrição do órgão de classe quando o órgão "
+"é 'Outros'."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__responsavel_id
+msgid "Responsável Técnico"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__name
+msgid "Risco"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_risco.py:0
+msgid ""
+"Risco %(nome)s: com o código de ausência de agente nocivo (%(codigo)s), a "
+"utilização de EPC e de EPI deve ser 'não se aplica'."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_risco.py:0
+msgid ""
+"Risco %(nome)s: informe o grau de insalubridade (mínimo, médio ou máximo) "
+"apurado no laudo."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_sst/models/sst_risco.py:0
+msgid "Risco %(nome)s: o fim da exposição é anterior ao início."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_job__l10n_br_sst_risco_count
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__risco_count
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__risco_count
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Riscos"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_risco_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.hr_contract_view_form_sst
+msgid "Riscos Aplicáveis"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_riscos
+msgid "Riscos Ocupacionais"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_hr_job__l10n_br_sst_risco_ids
+msgid ""
+"Riscos cadastrados especificamente para esta função. Riscos de ambiente sem "
+"função listada também atingem quem trabalha nele."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_hr_job__l10n_br_sst_risco_ids
+msgid "Riscos da Função"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_hr_contract__l10n_br_sst_risco_ids
+msgid ""
+"Riscos vigentes hoje no ambiente do contrato que atingem a função do "
+"trabalhador."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.ui.menu,name:l10n_br_hr_sst.menu_sst_root
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.hr_contract_view_form_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.hr_job_view_form_sst
+msgid "SST"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_l10n_br_sst_ambiente
+msgid "SST - Ambiente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_l10n_br_sst_risco
+msgid "SST - Fator de Risco"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_l10n_br_sst_laudo
+msgid "SST - Laudo (PGR, LTCAT, PCMSO, AET)"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model,name:l10n_br_hr_sst.model_l10n_br_sst_responsavel
+msgid "SST - Responsável pelos Registros Ambientais"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.module.category,name:l10n_br_hr_sst.module_category_l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.res_company_view_form_sst
+msgid "Saúde e Segurança do Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__dsc_setor
+msgid "Setor"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_ambiente_view_form
+msgid "Setor de produção"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__efic_epc__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_risco__efic_epi__s
+msgid "Sim"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__state
+msgid "Situação"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__state__substituido
+msgid "Substituído"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__financiamento_aposent_id
+msgid ""
+"Tabela 02 do eSocial: define o adicional de GILRAT (12%, 9% ou 6%) devido "
+"pela exposição."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__agente_nocivo_id
+msgid ""
+"Tabela 24 do eSocial (agentes nocivos e atividades, aposentadoria especial)."
+" Ausência de exposição é o código 09.01.001, e não a falta de registro."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__tipo
+msgid "Tipo"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__tp_aval
+msgid "Tipo de Avaliação"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_ambiente__tp_insc
+msgid "Tipo de Inscrição"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Trabalhista"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__tecnica_medicao
+msgid "Técnica de Medição"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__uf_oc
+msgid "UF do Órgão de Classe"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__un_med
+msgid "Unidade de Medida"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:res.groups,name:l10n_br_hr_sst.group_sst_user
+msgid "Usuário"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__utiliz_epc
+msgid "Utilização de EPC"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__utiliz_epi
+msgid "Utilização de EPI"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__job_ids
+msgid "Vazio significa que o risco atinge todas as funções do ambiente."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__date_to
+msgid "Vazio significa vigência em aberto."
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst.selection__l10n_br_sst_laudo__state__vigente
+msgid "Vigente"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_search
+msgid "Vigentes"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_risco_view_form
+msgid "Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst.l10n_br_sst_laudo_view_form
+msgid "Voltar a Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_laudo__website_message_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_risco__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_laudo__website_message_ids
+#: model:ir.model.fields,help:l10n_br_hr_sst.field_l10n_br_sst_risco__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: l10n_br_hr_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_sst.field_l10n_br_sst_responsavel__ide_oc
+msgid "Órgão de Classe"
+msgstr ""
