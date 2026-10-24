@@ -1,0 +1,1281 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* van_sales
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__nbr_lines
+msgid "# Linhas"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__sell_through_rate
+msgid "% Venda"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.report,print_report_name:van_sales.action_report_van_session_summary
+msgid "'Resumo Van - %s' % object.name"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.report,print_report_name:van_sales.action_report_van_load_ticket
+msgid "'Romaneio - %s' % object.name"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "<strong>Almoxarifado</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "<strong>Data:</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "<strong>Estado:</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "<strong>Motorista:</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid ""
+"<strong>Motorista</strong>\n"
+"                                    <br/>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "<strong>POS:</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "<strong>Responsável</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "<strong>Sessão:</strong>"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Abonadas"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__waived
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Abonado"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Abrir POS"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Adicione pelo menos uma linha antes de confirmar."
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Agrupar por"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_graph
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_pivot
+msgid "Análise Van Sales"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.ui.menu,name:van_sales.menu_van_report_analysis
+msgid "Análise de Vendas"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_report_van_session_line
+msgid "Análise de Vendas Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__warehouse_id
+msgid "Armazém Caminhão"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: van_sales
+#: model:account.journal,name:van_sales.journal_bank_van
+msgid "Banco Van"
+msgstr ""
+
+#. module: van_sales
+#: model:account.account,name:van_sales.account_van_cash
+msgid "Caixa Van"
+msgstr ""
+
+#. module: van_sales
+#: model:account.journal,name:van_sales.journal_cash_van_01
+msgid "Caixa Van 01"
+msgstr ""
+
+#. module: van_sales
+#: model:account.journal,name:van_sales.journal_cash_van_02
+msgid "Caixa Van 02"
+msgstr ""
+
+#. module: van_sales
+#: model:account.journal,name:van_sales.journal_cash_van_03
+msgid "Caixa Van 03"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__stock_picking__van_type__load
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__report_van_session_line__state__loaded
+#: model:ir.model.fields.selection,name:van_sales.selection__van_session__state__loaded
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Carregado"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_loaded
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_loaded
+msgid "Carregamento"
+msgstr ""
+
+#. module: van_sales
+#: model:pos.payment.method,name:van_sales.pos_pm_card_van
+msgid "Cartão Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__van_cash_account_id
+msgid "Cash Account"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__categ_id
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Categoria"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Com Diferença"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__company_id
+#: model:ir.model.fields,field_description:van_sales.field_van_session__company_id
+msgid "Company"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Conferir Retorno"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.ui.menu,name:van_sales.menu_van_config_parent
+msgid "Configuração"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Configure o diário de fechamento no POS %s."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Configure o tipo de picking de carga no POS %s."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Configure o tipo de picking de descarga no POS %s."
+msgstr ""
+
+#. module: van_sales
+#: model:pos.payment.method,name:van_sales.pos_pm_customer_account_van
+msgid "Conta Cliente Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_report_van_losses
+#: model:ir.ui.menu,name:van_sales.menu_van_report_losses
+msgid "Controle de Diferenças"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__create_uid
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__create_date
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Data"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Data (Mês)"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__date_close
+msgid "Data Fechamento"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Data: ____/____/________"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__date
+#: model:ir.model.fields,field_description:van_sales.field_van_session__date
+msgid "Date"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_demand
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_demand
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "Demanda"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__stock_picking__van_type__unload
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Descarga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_report_van_driver_performance
+#: model:ir.ui.menu,name:van_sales.menu_van_report_driver
+msgid "Desempenho por Motorista"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__devolution_move_line_ids
+msgid "Devolution Move Lines"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_devolution
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_devolution
+msgid "Devolução"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_pos_refunds
+msgid "Devoluções POS"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__cash_diff
+msgid "Dif. Caixa"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_amount
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Dif. Estoque"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Dif. Estoque:"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_diff
+msgid "Dif. Total"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_qty_diff
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_diff
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Diferença"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_diff
+msgid "Diferença Qtd"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Diferença Total:"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__cash_diff
+msgid "Diferença de Caixa"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Diferença de Caixa:"
+msgstr ""
+
+#. module: van_sales
+#: model:pos.payment.method,name:van_sales.pos_pm_cash_van_01
+msgid "Dinheiro Van 01"
+msgstr ""
+
+#. module: van_sales
+#: model:pos.payment.method,name:van_sales.pos_pm_cash_van_02
+msgid "Dinheiro Van 02"
+msgstr ""
+
+#. module: van_sales
+#: model:pos.payment.method,name:van_sales.pos_pm_cash_van_03
+msgid "Dinheiro Van 03"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__display_name
+#: model:ir.model.fields,field_description:van_sales.field_van_session__display_name
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: van_sales
+#: model:account.journal,name:van_sales.journal_van
+msgid "Diário Van Sales"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__driver_id
+msgid "Driver"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__van_driver_account_id
+msgid "Driver Account"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__report_van_session_line__state__loading
+#: model:ir.model.fields.selection,name:van_sales.selection__van_session__state__loading
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Em Carregamento"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__report_van_session_line__state__in_route
+#: model:ir.model.fields.selection,name:van_sales.selection__van_session__state__in_route
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Em Rota"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Estado"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Este Mês"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_initial
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "Estoque"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_initial
+msgid "Estoque Inicial"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Fechadas"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__report_van_session_line__state__closed
+#: model:ir.model.fields.selection,name:van_sales.selection__van_session__state__closed
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Fechado"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Gerar Picking de Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__id
+#: model:ir.model.fields,field_description:van_sales.field_van_session__id
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__id
+msgid "ID"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__in_move_line_ids
+msgid "In Move Lines"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Iniciar Carregamento"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/pos_config.py:0
+msgid "Ir para Sessões Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__is_van_config
+msgid "Is Van Config"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_res_partner__is_van_driver
+#: model:ir.model.fields,field_description:van_sales.field_res_users__is_van_driver
+msgid "Is Van Driver"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Isso cancelará o carregamento. Continuar?"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Isso cancelará o picking de descarga. Continuar?"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Isso criará o lançamento contábil de fechamento. Continuar?"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__move_id
+msgid "Lançamento de Fechamento"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__write_uid
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__write_date
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__line_ids
+msgid "Line"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Linhas"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pricelist_id
+msgid "Lista de Preços"
+msgstr ""
+
+#. module: van_sales
+#: model:product.pricelist,name:van_sales.pricelist_van
+msgid "Lista de Preços Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__van_load_picking_type_id
+msgid "Load Picking Type"
+msgstr ""
+
+#. module: van_sales
+#: model:res.groups,name:van_sales.group_van_sales_manager
+msgid "Manager"
+msgstr ""
+
+#. module: van_sales
+#: model:account.account,name:van_sales.account_van_transit
+msgid "Mercadoria em Trânsito Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__waive_reason
+msgid "Motivo Abono"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Motivo:"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__driver_id
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Motorista"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_van_drivers
+#: model:ir.ui.menu,name:van_sales.menu_van_drivers
+#: model:ir.ui.menu,name:van_sales.menu_van_drivers_parent
+msgid "Motoristas"
+msgstr ""
+
+#. module: van_sales
+#: model:account.account,name:van_sales.account_van_driver
+msgid "Motoristas Van - A Receber"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_report_van_product_movement
+#: model:ir.ui.menu,name:van_sales.menu_van_report_products
+msgid "Movimentação de Produtos"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Mês Passado"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__name
+msgid "Name"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__notes
+msgid "Notas Internas"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Notas internas..."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "O motivo do abono deve ter pelo menos 20 caracteres."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "O motorista %s já possui uma sessão ativa."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "O picking de descarga deve estar validado antes de fechar a sessão."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "O picking de descarga deve existir antes de fechar a sessão."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__out_move_line_ids
+msgid "Out Move Lines"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__pos_config_id
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "POS"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_van_pos_configs
+#: model:ir.ui.menu,name:van_sales.menu_van_pos_configs
+msgid "POS Caminhões"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Pagamentos"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_pos_payments
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Pagamentos POS"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Pedidos"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pos_order_ids
+msgid "Pedidos POS"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__load_picking_id
+msgid "Picking de Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__unload_picking_id
+msgid "Picking de Descarga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_pos_config
+msgid "Point of Sale Configuration"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_pos_session
+msgid "Point of Sale Session"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pos_config_id
+msgid "Pos Config"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pos_order_count
+msgid "Pos Order Count"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pos_payment_count
+msgid "Pos Payment Count"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pos_session_id
+msgid "Pos Session"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Postar Fechamento"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__price_unit
+msgid "Preço"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__price_unit
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Preço Unit."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__product_id
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__product_id
+msgid "Product"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Produto"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_returned
+msgid "Qtd Retornada"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_out
+msgid "Qtd Saída"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_sold
+msgid "Qtd Vendida"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session_line__qty_initial
+msgid "Quantidade já presente no caminhão antes da carga."
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "RESUMO DE SESSÃO VAN"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "ROMANEIO DE CARGA"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields.selection,name:van_sales.selection__report_van_session_line__state__draft
+#: model:ir.model.fields.selection,name:van_sales.selection__van_session__state__draft
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Rascunho"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__pos_payment_ids
+msgid "Registros de pagamento POS"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.ui.menu,name:van_sales.menu_van_reports_parent
+msgid "Relatórios"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.report,name:van_sales.action_report_van_session_summary
+msgid "Resumo de Sessão Van"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Retornada"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_line_view_search
+msgid "Retornadas"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_qty_returned
+#: model:ir.model.fields.selection,name:van_sales.selection__report_van_session_line__state__returned
+#: model:ir.model.fields.selection,name:van_sales.selection__van_session__state__returned
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_search
+msgid "Retornado"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_returned
+msgid "Retorno"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.report,name:van_sales.action_report_van_load_ticket
+msgid "Romaneio de Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__sale_move_line_ids
+msgid "Sale Move Lines"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_qty_out
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_out
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Saída"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__qty_scrap
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_scrap
+msgid "Scrap"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Selecione o POS antes de iniciar o carregamento."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__session_id
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__session_id
+msgid "Session"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.ui.menu,name:van_sales.menu_van_sessions_parent
+msgid "Sessões"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.actions.act_window,name:van_sales.action_van_session
+#: model:ir.ui.menu,name:van_sales.menu_van_sessions
+msgid "Sessões Van"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Sim"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__state
+#: model:ir.model.fields,field_description:van_sales.field_van_session__state
+msgid "State"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Só é possível abrir o POS com sessão carregada."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Só é possível confirmar sessões em carregamento."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Só é possível fechar sessões retornadas."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Só é possível iniciar carregamento de sessões em rascunho."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid "Só é possível voltar a 'Carregado' a partir de 'Retornado'."
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/van_session.py:0
+msgid ""
+"Só é possível voltar ao rascunho a partir de 'Carregado' ou 'Em "
+"Carregamento'."
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "TOTAIS"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "TOTAL"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Total Abonado:"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: van_sales
+#: model:account.journal,name:van_sales.journal_transfer_van
+#: model:pos.payment.method,name:van_sales.pos_pm_transfer_van
+msgid "Transferência Van"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "Unidade"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__van_unload_picking_type_id
+msgid "Unload Picking Type"
+msgstr ""
+
+#. module: van_sales
+#: model:res.groups,name:van_sales.group_van_sales_user
+msgid "User"
+msgstr ""
+
+#. module: van_sales
+#. odoo-python
+#: code:addons/van_sales/models/pos_config.py:0
+msgid "Valide o carregamento antes de abrir o POS."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__amount_loaded
+msgid "Valor Carregado"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__amount
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Valor Dif."
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__amount
+msgid "Valor Diferença"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_load_ticket_document
+msgid "Valor Total"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_report_van_session_line__amount_sold
+msgid "Valor Vendido"
+msgstr ""
+
+#. module: van_sales
+#: model:stock.picking.type,name:van_sales.picking_type_load_van_01
+msgid "Van 01 - Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:stock.picking.type,name:van_sales.picking_type_unload_van_01
+msgid "Van 01 - Descarga"
+msgstr ""
+
+#. module: van_sales
+#: model:stock.picking.type,name:van_sales.picking_type_load_van_02
+msgid "Van 02 - Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:stock.picking.type,name:van_sales.picking_type_unload_van_02
+msgid "Van 02 - Descarga"
+msgstr ""
+
+#. module: van_sales
+#: model:stock.picking.type,name:van_sales.picking_type_load_van_03
+msgid "Van 03 - Carga"
+msgstr ""
+
+#. module: van_sales
+#: model:stock.picking.type,name:van_sales.picking_type_unload_van_03
+msgid "Van 03 - Descarga"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__van_journal_id
+msgid "Van Journal"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.module.category,name:van_sales.module_category_van_sales
+#: model:ir.ui.menu,name:van_sales.menu_van_sales_root
+#: model_terms:ir.ui.view,arch_db:van_sales.pos_config_view_form_inherit_van
+msgid "Van Sales"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_van_session
+msgid "Van Sales Session"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_session__van_session_id
+#: model:ir.model.fields,field_description:van_sales.field_stock_picking__van_session_id
+msgid "Van Session"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_van_session_line
+msgid "Van Session Line"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model,name:van_sales.model_report_van_session_line
+msgid "Van Session Line Analysis"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_pos_config__van_transit_account_id
+msgid "Van Transit Account"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_stock_picking__van_type
+msgid "Van Type"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__qty_sold
+msgid "Venda"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_pos_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Vendas POS"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.report_van_session_summary_document
+msgid "Vendida"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__total_qty_sold
+msgid "Vendido"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Ver Carregamento"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Voltar a Carregado"
+msgstr ""
+
+#. module: van_sales
+#: model_terms:ir.ui.view,arch_db:van_sales.van_session_view_form
+msgid "Voltar ao Rascunho"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session_line__waived
+msgid "Waived"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,field_description:van_sales.field_van_session__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: van_sales
+#: model:ir.model.fields,help:van_sales.field_van_session__website_message_ids
+msgid "Website communication history"
+msgstr ""
