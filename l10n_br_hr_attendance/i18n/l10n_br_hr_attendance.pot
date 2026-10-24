@@ -1,0 +1,923 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_attendance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid ""
+"A marcação já está vinculada a um funcionário. Trocar o vínculo alteraria o "
+"registro original; desconsidere a marcação com motivo e inclua o tratamento "
+"correto."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:res.groups,comment:l10n_br_hr_attendance.group_l10n_br_ponto_auditor
+msgid ""
+"Acesso de leitura a marcações, REPs e apurações, sem poder de alteração. "
+"Atende o art. 85 da Portaria 671/2021 (fornecimento de arquivos ao Auditor-"
+"Fiscal) sem abrir escrita."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_search
+msgid "Agrupar por"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__coletor__03
+msgid "Aplicativo desktop"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__coletor__01
+msgid "Aplicativo mobile"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_hr_contract__l10n_br_dispensado_controle_jornada
+msgid ""
+"Art. 62 da CLT: atividade externa incompatível com fixação de horário, cargo"
+" de gestão ou teletrabalho por produção/tarefa. Contratos assim não geram "
+"apuração nem entram no AEJ."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_hr_contract__l10n_br_registro_por_excecao
+msgid ""
+"Art. 74, § 4º da CLT: registro apenas das exceções à jornada contratual, "
+"mediante acordo individual escrito, convenção ou acordo coletivo. Exige o "
+"acordo anexado ao contrato."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+msgid "Atestado técnico (art. 89)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__atestado_date_end
+msgid "Atestado técnico - fim"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__atestado_date_start
+msgid "Atestado técnico - início"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_search
+msgid "Atestado vencido"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__atestado_valido
+msgid "Atestado vigente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__tipo_marcacao
+msgid ""
+"Atribuído pelo tratamento (pareamento). Marcação desconsiderada permanece no"
+" arquivo com o motivo, nunca é apagada."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model,name:l10n_br_hr_attendance.model_hr_attendance
+msgid "Attendance"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__coletor__02
+msgid "Browser (navegador internet)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__caepf_cno
+msgid "CAEPF/CNO"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__fabricante_tipo_inscricao__1
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__tipo_inscricao__1
+msgid "CNPJ"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__cnpj_cpf
+msgid "CNPJ/CPF do estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__fabricante_cnpj_cpf
+msgid "CNPJ/CPF do fabricante"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__fabricante_tipo_inscricao__2
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__tipo_inscricao__2
+msgid "CPF"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__cpf
+msgid "CPF (arquivo)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__cpf
+msgid "CPF exatamente como veio do REP, usado na conciliação."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance.l10n_br_hr_rep_action
+msgid "Cadastre o primeiro REP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__caepf_cno
+msgid ""
+"Cadastro de Atividade Econômica da Pessoa Física ou Cadastro Nacional de "
+"Obras, quando existir."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__certificacao_inmetro
+msgid "Certificação INMETRO"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__pis_pasep
+msgid "Chave de conciliação dos REPs no leiaute da Portaria 1.510/2009."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__coletor
+msgid "Coletor"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__company_id
+msgid "Company"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.hr_contract_view_form
+msgid "Controle de jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__hash_registro
+msgid "Código hash do registro tipo 7 do AFD (REP-P)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__datetime_gravacao
+msgid "Data/hora da gravação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__datetime_marcacao
+msgid "Data/hora da marcação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__state__desconsiderada
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__tipo_marcacao__d
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_form
+msgid "Desconsiderada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Desconsideradas"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__date_marcacao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Dia"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__date_marcacao
+msgid "Dia da marcação no fuso do funcionário, base da apuração diária."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_contract__l10n_br_dispensado_controle_jornada
+msgid "Dispensado do controle de jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__coletor__04
+msgid "Dispositivo eletrônico"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model,name:l10n_br_hr_attendance.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model,name:l10n_br_hr_attendance.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_contract__l10n_br_motivo_dispensa_jornada
+msgid "Enquadramento do art. 62"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__tipo_marcacao__e
+msgid "Entrada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_search
+msgid "Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+msgid "Fabricante / desenvolvedor"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__fabricante_nome
+msgid "Fabricante/desenvolvedor"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__atestado_valido
+msgid "Falso quando não há atestado cadastrado ou ele está vencido."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_rep.py:0
+msgid "Filtro não suportado para o campo 'Atestado vigente'."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__fonte_aej
+msgid "Fonte (AEJ)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__employee_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Funcionário"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__hash_registro
+msgid "Hash SHA-256"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__hash_anterior
+msgid "Hash anterior"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__hash_anterior
+msgid "Hash do registro imediatamente anterior, que encadeia a série."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Hoje"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__hr_contract__l10n_br_motivo_dispensa_jornada__externo
+msgid "I - atividade externa incompatível"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__fonte_aej__i
+msgid "I - incluída manualmente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__id
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__hr_contract__l10n_br_motivo_dispensa_jornada__gestao
+msgid "II - cargo de gestão"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__hr_contract__l10n_br_motivo_dispensa_jornada__teletrabalho
+msgid "III - teletrabalho por produção ou tarefa"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_form
+msgid "Identificação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__name
+msgid "Identificação interna do registrador."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__manual
+msgid "Incluída manualmente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Incluídas manualmente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid "Informe o motivo da desconsideração (Anexo VI, registro 05)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid ""
+"Informe o motivo: marcações desconsideradas ou incluídas manualmente exigem "
+"justificativa (Portaria 671/2021, art. 82)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__cnpj_cpf
+msgid ""
+"Inscrição do estabelecimento ao qual o REP está vinculado. O NSR é "
+"sequencial por estabelecimento (Anexo V)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_form
+msgid "Integridade"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.hr_contract_view_form
+msgid "Jornada (Portaria 671)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.constraint,message:l10n_br_hr_attendance.constraint_l10n_br_hr_rep_numero_fabricacao_uniq
+msgid "Já existe um REP com este número de fabricação nesta empresa."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__hr_attendance__l10n_br_origem__manual
+msgid "Lançamento manual"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__offline
+msgid "Marcação coletada off-line (campo 7 do registro tipo 7)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance.l10n_br_hr_marcacao_action_pendente
+msgid ""
+"Marcação cujo CPF ou PIS não bateu com nenhum funcionário fica aqui\n"
+"                em vez de ser descartada. Cadastre o documento no funcionário e\n"
+"                reprocesse a importação, ou vincule manualmente."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model,name:l10n_br_hr_attendance.model_l10n_br_hr_marcacao
+msgid "Marcação de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__hr_attendance__l10n_br_origem__rep
+msgid "Marcação de REP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_attendance__l10n_br_marcacao_entrada_id
+msgid "Marcação de entrada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__marcacao_origem_id
+msgid "Marcação de origem"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid ""
+"Marcação de ponto não pode ser excluída (Portaria 671/2021, art. 74, IV). "
+"Use a desconsideração com motivo, que preserva o registro e explica a "
+"correção."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid ""
+"Marcação de ponto é registro imutável (Portaria 671/2021, art. 74, IV e art. 82). Campos recusados: %s.\n"
+"Para corrigir, registre um tratamento vinculado ao original."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_attendance__l10n_br_marcacao_saida_id
+msgid "Marcação de saída"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_rep.py:0
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__marcacao_ids
+#: model:ir.ui.menu,name:l10n_br_hr_attendance.menu_l10n_br_marcacao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+msgid "Marcações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance.l10n_br_hr_marcacao_action_pendente
+msgid "Marcações Pendentes de Conciliação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance.l10n_br_hr_marcacao_action
+msgid "Marcações de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__modelo
+msgid "Modelo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__modelo
+msgid "Modelo do equipamento (REP-C)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__datetime_gravacao
+msgid "Momento em que o REP-P gravou o registro (Anexo V, tipo 7)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__motivo
+msgid "Motivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__motivo
+msgid ""
+"Motivo da desconsideração ou da inclusão manual. Obrigatório quando o tipo é"
+" 'Desconsiderada' ou a fonte é 'incluída manualmente' (Anexo VI, registro "
+"05, campo motivo)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__nsr
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_form
+msgid "NSR"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance.l10n_br_hr_marcacao_action_pendente
+msgid "Nenhuma marcação pendente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__marcacao_count
+msgid "Nº de marcações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__nsr
+msgid "Número Sequencial de Registro atribuído pelo REP."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__certificacao_inmetro
+msgid "Número da certificação/homologação publicada no DOU (REP-C)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__numero_fabricacao
+msgid "Número de fabricação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__numero_fabricacao
+msgid "Número de fabricação do equipamento (REP-C)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__numero_inpi
+msgid "Número de registro do programa no INPI (REP-P)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__numero_acordo
+msgid "Número do acordo coletivo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__numero_acordo
+msgid ""
+"Número do processo do último acordo ou convenção coletiva depositado "
+"(REP-A). Sem acordo depositado, o AFD é gerado com '99999999999999999'."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__seq_par
+msgid "Número sequencial do par entrada/saída no dia (registro 05 do AEJ)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__fonte_aej__o
+msgid "O - original do REP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid "O NSR deve iniciar em 1 e ser sempre positivo (Anexo V)."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.constraint,message:l10n_br_hr_attendance.constraint_l10n_br_hr_marcacao_nsr_rep_uniq
+msgid "O NSR deve ser único por REP: já existe marcação com este número."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.actions.act_window,help:l10n_br_hr_attendance.l10n_br_hr_rep_action
+msgid ""
+"O REP é o equipamento (REP-C), o conjunto autorizado (REP-A) ou o\n"
+"                programa (REP-P) que captura a marcação. Ele define o estabelecimento\n"
+"                e a sequência de NSR exigidos pela Portaria MTP 671/2021."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__note
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+msgid "Observações"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__offline
+msgid "Offline"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_hr_attendance__l10n_br_seq_par
+msgid "Ordem do par no dia, usada no registro 05 do AEJ."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_attendance__l10n_br_origem
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__origem
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Origem"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__state__original
+msgid "Original"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_rep.py:0
+msgid ""
+"Os REPs abaixo estão sem Atestado Técnico vigente (art. 89, § 4º da Portaria 671/2021):\n"
+"%s"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__outra
+msgid "Outra fonte"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__coletor__05
+msgid "Outro dispositivo eletrônico"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__fonte_aej__p
+msgid "P - pré-assinalada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__pis_pasep
+msgid "PIS/PASEP (arquivo)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_attendance__l10n_br_seq_par
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__seq_par
+msgid "Par entrada/saída"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__attendance_id
+msgid "Par entrada/saída derivado desta marcação."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.ui.menu,name:l10n_br_hr_attendance.menu_l10n_br_marcacao_pendente
+msgid "Pendências de conciliação"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.ui.menu,name:l10n_br_hr_attendance.menu_l10n_br_ponto
+msgid "Ponto (Portaria 671)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__excecao
+msgid "Ponto por exceção"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:res.groups,name:l10n_br_hr_attendance.group_l10n_br_ponto_auditor
+msgid "Ponto: auditor (somente leitura)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__employee_id
+msgid ""
+"Preenchido pela conciliação por CPF/PIS. Marcação sem funcionário fica "
+"pendente e nunca é descartada."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__pre_assinalada
+msgid "Pré-assinalada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__rep_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "REP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_contract__l10n_br_rep_id
+msgid "REP padrão"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__rep_a
+msgid "REP-A"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__tipo__rep_a
+msgid "REP-A (alternativo, art. 77)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__rep_c
+msgid "REP-C"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__tipo__rep_c
+msgid "REP-C (convencional, art. 76)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_rep.py:0
+msgid "REP-C exige o número de fabricação do equipamento."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__origem__rep_p
+msgid "REP-P"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_rep__tipo__rep_p
+msgid "REP-P (via programa, art. 78)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_rep.py:0
+msgid "REP-P exige o número de registro do programa no INPI."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.hr_contract_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+msgid "Registrador"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model,name:l10n_br_hr_attendance.model_l10n_br_hr_rep
+msgid "Registrador Eletrônico de Ponto"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_hr_contract__l10n_br_rep_id
+msgid ""
+"Registrador em que este contrato marca ponto. Define o estabelecimento usado"
+" no AFD e no AEJ."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.ui.menu,name:l10n_br_hr_attendance.menu_l10n_br_rep
+msgid "Registradores (REP)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.actions.act_window,name:l10n_br_hr_attendance.l10n_br_hr_rep_action
+msgid "Registradores de Ponto (REP)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__numero_inpi
+msgid "Registro no INPI"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_form
+msgid "Registro original"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__marcacao_origem_id
+msgid ""
+"Registro original que este tratamento corrige ou complementa (art. 82). O "
+"original permanece intacto."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_hr_contract__l10n_br_registro_por_excecao
+msgid "Registro por exceção"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_form
+msgid "Relógio da portaria"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__user_tratamento_id
+msgid "Responsável pelo tratamento"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__tipo_marcacao__s
+msgid "Saída"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_search
+msgid "Sem funcionário (pendente)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__attendance_id
+msgid "Sessão (hr.attendance)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_hr_attendance__l10n_br_origem
+msgid ""
+"Sessões derivadas de marcação de REP têm lastro no AFD; as manuais precisam "
+"de justificativa no espelho de ponto."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__state
+msgid "State"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__fonte_aej__t
+msgid "T - outras fontes"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__tipo_marcacao
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__tipo
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_rep_view_search
+msgid "Tipo"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__tipo_inscricao
+msgid "Tipo de inscrição do empregador"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__fabricante_tipo_inscricao
+msgid "Tipo de inscrição do fabricante"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__state__tratada
+msgid "Tratada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance.l10n_br_hr_marcacao_view_form
+msgid "Tratamento (art. 82)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_marcacao__tratamento_ids
+msgid "Tratamentos"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__atestado_date_start
+msgid ""
+"Vigência do Atestado Técnico e Termo de Responsabilidade (art. 89). O "
+"empregador só pode usar sistema com atestado válido."
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance.selection__l10n_br_hr_marcacao__fonte_aej__x
+msgid "X - ponto por exceção"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance/models/l10n_br_hr_marcacao.py:0
+msgid "pendente"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance.field_l10n_br_hr_rep__nsr_ultimo
+msgid "Último NSR"
+msgstr ""
+
+#. module: l10n_br_hr_attendance
+#: model:ir.model.fields,help:l10n_br_hr_attendance.field_l10n_br_hr_rep__nsr_ultimo
+msgid ""
+"Último NSR consumido neste REP. O próximo registro recebe nsr_ultimo + 1 (a "
+"Portaria exige início em 1, sem lacunas)."
+msgstr ""
