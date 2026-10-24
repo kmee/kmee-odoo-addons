@@ -1,0 +1,178 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_payroll_attendance
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "%(campo)s: holerite %(holerite)s, apuração %(apuracao)s."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Apuração de jornada"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_attendance.hr_payslip_view_form
+msgid "Apuração de ponto (Portaria 671)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_apuracao_fechada
+msgid "Apuração fechada"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,help:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_apuracao_dia_ids
+msgid "Apurações de jornada que sustentam os números deste holerite."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Ausências abonadas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:hr.salary.rule,name:l10n_br_hr_payroll_attendance.hr_rule_dsr_he
+msgid "DSR sobre Horas Extras"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_apuracao_dia_ids
+msgid "Dias apurados"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_apuracao_count
+msgid "Dias com apuração"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Dias trabalhados (apuração de ponto)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Faltas injustificadas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid ""
+"Holerite validado com divergência justificada (%(motivo)s):\n"
+"%(lista)s"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Horas extras 100%"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Horas extras 50%"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid "Horas noturnas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:hr.salary.rule,name:l10n_br_hr_payroll_attendance.hr_rule_intervalo_suprimido
+msgid "Intervalo Intrajornada Suprimido"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_intervalo_suprimido
+msgid "Intervalo suprimido (h)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_justificativa_divergencia
+msgid "Justificativa da divergência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,help:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_justificativa_divergencia
+msgid ""
+"Motivo para o holerite divergir da apuração fechada. Exigida quando a "
+"empresa bloqueia holerite divergente."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_attendance/models/hr_payslip.py:0
+msgid ""
+"O holerite de %(nome)s diverge da apuração de ponto fechada:\n"
+"%(lista)s\n"
+"\n"
+"Corrija os valores ou registre a justificativa da divergência."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model,name:l10n_br_hr_payroll_attendance.model_hr_payslip
+msgid "Payslip"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,help:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_intervalo_suprimido
+msgid ""
+"Período de intervalo intrajornada suprimido, pago com 50% e de natureza "
+"indenizatória (art. 71, § 4º da CLT)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,help:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_semanas_com_falta
+msgid ""
+"Semanas atingidas por falta injustificada, base do desconto do DSR (Lei "
+"605/49, art. 6º)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_semanas_com_falta
+msgid "Semanas com falta"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_tem_apuracao
+msgid "Tem apuração de jornada"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll_attendance.hr_payslip_view_form
+msgid "Ver apuração"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll_attendance.hr_salary_rule_category_ind
+msgid "Verba Indenizatória"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_attendance
+#: model:ir.model.fields,help:l10n_br_hr_payroll_attendance.field_hr_payslip__l10n_br_apuracao_fechada
+msgid ""
+"Verdadeiro quando toda a jornada do período está em competência fechada - é "
+"o estado em que a folha pode confiar nos números."
+msgstr ""
