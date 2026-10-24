@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -99,11 +99,6 @@ msgid "Company"
 msgstr ""
 
 #. module: l10n_br_account_move_template
-#: model:l10n_br.account.move.template,name:l10n_br_account_move_template.template_compra_lp
-msgid "Compra - Lucro Presumido"
-msgstr ""
-
-#. module: l10n_br_account_move_template
 #: model_terms:ir.actions.act_window,help:l10n_br_account_move_template.account_move_template_action
 msgid "Create your first double-entry accounting template"
 msgstr ""
@@ -156,8 +151,11 @@ msgid "Despesas Aduaneiras"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_account_move__display_name
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__display_name
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__display_name
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_fiscal_operation__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -185,7 +183,6 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #. odoo-python
 #: code:addons/l10n_br_account_move_template/models/account_move_template.py:0
-#, python-format
 msgid "Error! You cannot create recursive template hierarchies."
 msgstr ""
 
@@ -213,11 +210,6 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__freight_value
 msgid "Frete"
-msgstr ""
-
-#. module: l10n_br_account_move_template
-#: model_terms:ir.ui.view,arch_db:l10n_br_account_move_template.account_move_template_search
-msgid "Group By"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -277,8 +269,11 @@ msgid "ICMS próprio"
 msgstr ""
 
 #. module: l10n_br_account_move_template
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_account_move__id
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_account_move_line__id
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template__id
 #: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item__id
+#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_fiscal_operation__id
 msgid "ID"
 msgstr ""
 
@@ -375,11 +370,6 @@ msgid "Imposto de Importação"
 msgstr ""
 
 #. module: l10n_br_account_move_template
-#: model:l10n_br.account.move.template,name:l10n_br_account_move_template.template_impostos_comuns
-msgid "Impostos Comuns - Lucro Presumido"
-msgstr ""
-
-#. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__amount_tax_included
 msgid "Impostos incluídos no preço"
 msgstr ""
@@ -414,12 +404,6 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model,name:l10n_br_account_move_template.model_account_move_line
 msgid "Journal Item"
-msgstr ""
-
-#. module: l10n_br_account_move_template
-#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template____last_update
-#: model:ir.model.fields,field_description:l10n_br_account_move_template.field_l10n_br_account_move_template_item____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_br_account_move_template
@@ -569,11 +553,6 @@ msgstr ""
 #. module: l10n_br_account_move_template
 #: model:ir.model.fields.selection,name:l10n_br_account_move_template.selection__l10n_br_account_move_template_item__fiscal_field__fiscal_amount_total
 msgid "Valor total fiscal"
-msgstr ""
-
-#. module: l10n_br_account_move_template
-#: model:l10n_br.account.move.template,name:l10n_br_account_move_template.template_venda_lp
-msgid "Venda - Lucro Presumido"
 msgstr ""
 
 #. module: l10n_br_account_move_template
