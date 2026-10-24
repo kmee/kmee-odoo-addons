@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_back2draft_security
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_back2draft_security
+#: model:res.groups,name:account_back2draft_security.group_user_hide_back_to_draft_button
+msgid "Hide"
+msgstr ""
+
+#. module: account_back2draft_security
+#: model:ir.module.category,name:account_back2draft_security.hide_button_module_category
+msgid "Hide invoice back to draft button"
+msgstr ""
+
+#. module: account_back2draft_security
+#: model:ir.model,name:account_back2draft_security.model_account_move
+msgid "Journal Entry"
+msgstr ""
