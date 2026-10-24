@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -46,7 +46,6 @@ msgstr ""
 #. module: l10n_br_hr_overtime_custom_multiplier
 #. odoo-python
 #: code:addons/l10n_br_hr_overtime_custom_multiplier/models/hr_attendance_exception.py:0
-#, python-format
 msgid "An exception already exists for this employee on this date."
 msgstr ""
 
@@ -75,7 +74,6 @@ msgstr ""
 #. module: l10n_br_hr_overtime_custom_multiplier
 #. odoo-python
 #: code:addons/l10n_br_hr_overtime_custom_multiplier/models/hr_attendance.py:0
-#, python-format
 msgid "Automaticamente gerado com base no registro de horas."
 msgstr ""
 
@@ -130,7 +128,6 @@ msgstr ""
 #. module: l10n_br_hr_overtime_custom_multiplier
 #. odoo-python
 #: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
-#, python-format
 msgid "Employee Overtimes"
 msgstr ""
 
@@ -181,13 +178,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard__id
 #: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range__id
 msgid "ID"
-msgstr ""
-
-#. module: l10n_br_hr_overtime_custom_multiplier
-#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_exception____last_update
-#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_attendance_overtime_payment_wizard____last_update
-#: model:ir.model.fields,field_description:l10n_br_hr_overtime_custom_multiplier.field_hr_overtime_multiplier_range____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_br_hr_overtime_custom_multiplier
@@ -286,14 +276,12 @@ msgstr ""
 #. module: l10n_br_hr_overtime_custom_multiplier
 #. odoo-python
 #: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
-#, python-format
 msgid "The payment total cannot be greater than the total overtime."
 msgstr ""
 
 #. module: l10n_br_hr_overtime_custom_multiplier
 #. odoo-python
 #: code:addons/l10n_br_hr_overtime_custom_multiplier/wizards/hr_attendance_overtime_payment_wizard.py:0
-#, python-format
 msgid "The payment total must be greater than zero."
 msgstr ""
 
