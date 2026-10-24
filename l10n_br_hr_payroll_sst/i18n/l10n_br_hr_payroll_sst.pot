@@ -1,0 +1,157 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_payroll_sst
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,help:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_periculosidade
+msgid "Adicional de periculosidade (30% do salário base)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,help:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_aliquota_gilrat
+msgid ""
+"Alíquota adicional de financiamento da aposentadoria especial: 12% para 15 "
+"anos, 9% para 20 anos e 6% para 25 anos de exposição."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_sst/models/hr_contract.py:0
+msgid ""
+"Contrato %(nome)s: informe a data em que o empregado optou pelo adicional."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,help:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_justificativa
+msgid ""
+"Convenção coletiva, decisão judicial ou outro fundamento para o contrato "
+"divergir do laudo."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_opcao_data
+msgid "Data da Opção"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,help:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_opcao_data
+msgid "Data em que o empregado manifestou a opção pelo adicional."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_divergencia
+msgid "Divergência com o Laudo"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model,name:l10n_br_hr_payroll_sst.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_aliquota_gilrat
+msgid "GILRAT Adicional (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:hr.salary.rule,name:l10n_br_hr_payroll_sst.hr_rule_gilrat_adicional
+msgid "GILRAT Adicional - Aposentadoria Especial"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_grau_insalubridade
+msgid "Grau de Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_grau_laudo
+msgid "Grau no Laudo"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_insalubridade
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll_sst.selection__hr_contract__l10n_br_sst_opcao_adicional__insalubridade
+msgid "Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_insalubridade_laudo
+msgid "Insalubridade no Laudo"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_justificativa
+msgid "Justificativa da Divergência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_opcao_adicional
+msgid "Opção do Empregado"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_periculosidade
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll_sst.selection__hr_contract__l10n_br_sst_opcao_adicional__periculosidade
+msgid "Periculosidade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_periculosidade_laudo
+msgid "Periculosidade no Laudo"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,help:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_divergencia
+msgid ""
+"Preenchido quando o contrato paga adicional que o laudo não aponta, ou deixa"
+" de pagar o que ele aponta."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#: model:ir.model.fields,help:l10n_br_hr_payroll_sst.field_hr_contract__l10n_br_sst_opcao_adicional
+msgid ""
+"Quando o laudo aponta insalubridade e periculosidade, os dois adicionais não"
+" se acumulam (CLT, art. 193, par. 2, e TST IRR Tema 17): o empregado opta "
+"por um deles. Sem opção registrada, a folha paga o de maior valor."
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_sst/models/hr_contract.py:0
+msgid "grau de insalubridade divergente do laudo"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_sst/models/hr_contract.py:0
+msgid "insalubridade paga: %(contrato)s; laudo: %(laudo)s"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_sst/models/hr_contract.py:0
+msgid "não"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_sst/models/hr_contract.py:0
+msgid "periculosidade paga: %(contrato)s; laudo: %(laudo)s"
+msgstr ""
+
+#. module: l10n_br_hr_payroll_sst
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll_sst/models/hr_contract.py:0
+msgid "sim"
+msgstr ""
