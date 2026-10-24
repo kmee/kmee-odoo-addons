@@ -1,0 +1,78 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_landed_cost_programmed
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model.fields.selection,name:stock_landed_cost_programmed.selection__stock_landed_cost__programmed_state__applied
+msgid "Applied"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model_terms:ir.ui.view,arch_db:stock_landed_cost_programmed.view_stock_landed_cost_form_programmed
+msgid "Apply Programmed Pickings"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#. odoo-python
+#: code:addons/stock_landed_cost_programmed/models/stock_landed_cost.py:0
+msgid ""
+"Cannot apply programmed pickings because the following pickings are not "
+"done: %s"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model.fields,help:stock_landed_cost_programmed.field_stock_landed_cost__programmed_picking_ids
+msgid ""
+"Pickings that are scheduled (not applied) to this landed cost. They can be "
+"pickings not yet done; once all are done you can 'Apply Programmed "
+"Pickings'."
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model.fields.selection,name:stock_landed_cost_programmed.selection__stock_landed_cost__programmed_state__programmed
+msgid "Programmed"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model.fields,field_description:stock_landed_cost_programmed.field_stock_landed_cost__programmed_picking_ids
+msgid "Programmed Pickings"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model.fields,field_description:stock_landed_cost_programmed.field_stock_landed_cost__programmed_state
+msgid "Programmed State"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model.fields.selection,name:stock_landed_cost_programmed.selection__stock_landed_cost__programmed_state__ready
+msgid "Ready"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#: model:ir.model,name:stock_landed_cost_programmed.model_stock_landed_cost
+msgid "Stock Landed Cost"
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#. odoo-python
+#: code:addons/stock_landed_cost_programmed/models/stock_landed_cost.py:0
+msgid "There are no programmed pickings to apply."
+msgstr ""
+
+#. module: stock_landed_cost_programmed
+#. odoo-python
+#: code:addons/stock_landed_cost_programmed/models/stock_landed_cost.py:0
+msgid ""
+"You cannot validate a landed cost with programmed pickings not yet applied."
+msgstr ""
