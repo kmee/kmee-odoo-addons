@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_commission_manual_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_commission_manual_invoice
+#. odoo-python
+#: code:addons/sale_commission_manual_invoice/models/sale_commission_settlement.py:0
+#, python-format
+msgid "Automatic invoice creation is disabled. Handle invoicing manually."
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#. odoo-python
+#: code:addons/sale_commission_manual_invoice/models/sale_commission_settlement.py:0
+#, python-format
+msgid ""
+"Automatic invoice generation is disabled. Create invoices manually and mark "
+"settlements as invoiced."
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Invoice Exception"
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Mark as Invoiced"
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Mark as Paid"
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model:ir.model.fields.selection,name:sale_commission_manual_invoice.selection__commission_settlement__state__paid
+msgid "Paid"
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model_terms:ir.ui.view,arch_db:sale_commission_manual_invoice.view_settlement_form_manual_invoice
+msgid "Set to Settled"
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model:ir.model,name:sale_commission_manual_invoice.model_commission_settlement
+msgid "Settlement"
+msgstr ""
+
+#. module: sale_commission_manual_invoice
+#: model:ir.model.fields,field_description:sale_commission_manual_invoice.field_commission_settlement__state
+msgid "State"
+msgstr ""
