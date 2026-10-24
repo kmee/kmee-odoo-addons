@@ -1,0 +1,1039 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_sst_cat
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid ""
+"%(rotulo)s inválida: %(valor)r. O eSocial espera o formato HHMM, por exemplo"
+" 1430."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__lateralidade__0
+msgid "0 - Não aplicável"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_insc_local__1
+msgid "1 - CNPJ"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ide_oc_emit__1
+msgid "1 - CRM"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__lateralidade__1
+msgid "1 - Esquerda"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__1
+msgid "1 - Estabelecimento do empregador no Brasil"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__iniciat_cat__1
+msgid "1 - Iniciativa do empregador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_acid__1
+msgid "1 - Típico"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ide_oc_emit__2
+msgid "2 - CRO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__lateralidade__2
+msgid "2 - Direita"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_acid__2
+msgid "2 - Doença ocupacional"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__2
+msgid "2 - Estabelecimento do empregador no exterior"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__iniciat_cat__2
+msgid "2 - Ordem judicial"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__lateralidade__3
+msgid "3 - Ambas"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_insc_local__3
+msgid "3 - CAEPF"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__iniciat_cat__3
+msgid "3 - Determinação de órgão fiscalizador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__3
+msgid "3 - Estabelecimento de terceiros onde o empregador presta serviços"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ide_oc_emit__3
+msgid "3 - RMS"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_acid__3
+msgid "3 - Trajeto"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_insc_local__4
+msgid "4 - CNO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__4
+msgid "4 - Via pública"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__5
+msgid "5 - Área rural"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__6
+msgid "6 - Embarcação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__tp_local__9
+msgid "9 - Outros"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__acidente_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid ""
+"Acidente de %(nome)s: emita a CAT inicial antes da CAT de reabertura ou de "
+"comunicação de óbito."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid "Acidente de %(nome)s: informe a data do óbito."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid ""
+"Acidente de %(nome)s: marque o óbito e informe a data antes de emitir a CAT "
+"de comunicação de óbito."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid ""
+"Acidente de %(nome)s: marque que houve afastamento antes de gerar o S-2230."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid ""
+"Acidente de %(nome)s: na doença ocupacional o eSocial não aceita as horas "
+"trabalhadas antes do acidente (hrsTrabAntesAcid)."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid "Acidente de %(nome)s: o óbito é anterior ao acidente."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_hr_employee__l10n_br_sst_acidente_count
+#: model:ir.ui.menu,name:l10n_br_hr_sst_cat.menu_sst_acidentes
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.hr_employee_view_form_sst_cat
+msgid "Acidentes"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/hr_employee.py:0
+#: model:ir.actions.act_window,name:l10n_br_hr_sst_cat.l10n_br_sst_acidente_action
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_hr_employee__l10n_br_sst_acidente_ids
+#: model:ir.ui.menu,name:l10n_br_hr_sst_cat.menu_sst_acidente
+msgid "Acidentes de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_needaction
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_exception_decoration
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_state
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_type_icon
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__afastamento_id
+msgid "Afastamento (S-2230)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__ind_afast
+msgid "Afastamento do Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__afastamento_id
+msgid "Afastamento gerado a partir deste acidente."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__agente_causador_id
+msgid "Agente Causador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_search
+msgid "Agrupar por"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Atestado Médico"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_attachment_count
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__bairro_local
+msgid "Bairro"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_cat.py:0
+msgid ""
+"CAT ainda em rascunho com prazo legal em %(limite)s. A comunicação do "
+"acidente é obrigatória até o primeiro dia útil seguinte."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__cat_origem_id
+msgid "CAT anterior, obrigatória na reabertura e na comunicação de óbito."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_cat.py:0
+msgid ""
+"CAT de %(tipo)s exige a CAT de origem ou o recibo da comunicação anterior."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__cat_origem_id
+msgid "CAT de Origem"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "CAT de Reabertura"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "CAT de Óbito"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_cat.py:0
+msgid ""
+"CAT emitida fora do prazo do art. 22 da Lei 8.213/91: o limite era "
+"%(limite)s e a emissão foi em %(emissao)s."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.actions.act_window,name:l10n_br_hr_sst_cat.l10n_br_sst_cat_action
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__cat_ids
+#: model:ir.ui.menu,name:l10n_br_hr_sst_cat.menu_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "CATs"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__cep_local
+msgid "CEP"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__cid_id
+msgid "CID"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__tipo_cat_id
+msgid ""
+"Campo tpCat do S-2210 (domínio do leiaute): inicial, reabertura ou "
+"comunicação de óbito."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__state__cancelled
+msgid "Cancelada"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__state__cancelled
+msgid "Cancelado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_form
+msgid "Cancelar"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__tipo_cat_codigo
+msgid "Codigo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__complemento_local
+msgid "Complemento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__state__comunicado
+msgid "Comunicado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Consequências"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__date_emissao
+msgid "Data de Emissão"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_acidente
+msgid "Data do Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_atendimento
+msgid "Data do Atendimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_obito
+msgid "Data do Óbito"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__alerta_prazo_date
+msgid "Data do último alerta do cron, para não repetir o aviso no mesmo dia."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__dsc_comp_lesao
+msgid "Descrição Complementar da Lesão"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_diagnostico
+msgid "Diagnóstico"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__diagnostico_provavel
+msgid "Diagnóstico Provável"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_segregacao
+msgid ""
+"Doença ocupacional: dia da segregação compulsória (Lei 8.213/91, art. 23)."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_diagnostico
+msgid ""
+"Doença ocupacional: dia em que foi feito o diagnóstico (Lei 8.213/91, art. "
+"23)."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_inicio_incapacidade
+msgid ""
+"Doença ocupacional: início da incapacidade laborativa para a atividade "
+"habitual (Lei 8.213/91, art. 23)."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__dur_trat
+msgid "Duração do Tratamento (dias)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__nm_emit
+msgid "Emitente do Atestado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__state__emitida
+msgid "Emitida"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_form
+msgid "Emitir"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model,name:l10n_br_hr_sst_cat.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__company_id
+msgid "Empresa"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__dsc_local
+msgid "Especificação do Local"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_follower_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_partner_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_type_icon
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_search
+msgid "Fora do Prazo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__prazo_situacao__atrasada
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_form
+msgid "Fora do prazo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__hora_acidente
+msgid "Formato HHMM, como no campo hrAcid do S-2210."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__hrs_trab_antes_acid
+msgid ""
+"Formato HHMM, de 0000 a 9959. Obrigatório no acidente típico e no de "
+"trajeto; não se informa na doença ocupacional."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__hora_atendimento
+msgid "Formato HHMM."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Gerar Afastamento (S-2230)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__has_message
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__hora_acidente
+msgid "Hora do Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__hora_atendimento
+msgid "Hora do Atendimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__hrs_trab_antes_acid
+msgid "Horas Trabalhadas Antes"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__houve_afastamento
+msgid "Houve Afastamento do Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__comunicacao_policia
+msgid "Houve Comunicação à Polícia"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__ind_internacao
+msgid "Houve Internação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__houve_obito
+msgid "Houve Óbito"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_exception_icon
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_exception_icon
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__name
+msgid "Identificação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_needaction
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_has_error
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__iniciat_cat
+msgid "Iniciativa da CAT"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__nr_insc_local
+msgid "Inscrição do Local"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Inscrição do Local (quando de terceiros)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_inicio_incapacidade
+msgid "Início da Incapacidade"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_is_follower
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__lateralidade
+msgid "Lateralidade"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Lesão"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Local do Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__dsc_lograd
+msgid "Logradouro"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_has_error
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__city_id
+msgid "Município"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__my_activity_date_deadline
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_acidente
+msgid ""
+"Na doença ocupacional, é a primeira entre o início da incapacidade, a "
+"segregação compulsória e o diagnóstico (Lei 8.213/91, art. 23), calculada a "
+"partir dessas datas."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__natureza_lesao_id
+msgid "Natureza da Lesão"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_calendar_event_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_date_deadline
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_summary
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_type_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__prazo_situacao__no_prazo
+msgid "No prazo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_needaction_counter
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_has_error_counter
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_needaction_counter
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__message_has_error_counter
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ind_afast__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ind_internacao__n
+msgid "Não"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__nr_lograd
+msgid "Número"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__nr_oc_emit
+msgid "Número no Órgão de Classe"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__observacao_atestado
+msgid "Observação do Atestado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Observações"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__observacao
+msgid "Observações do Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__parte_corpo_id
+msgid "Parte do Corpo Atingida"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__country_id
+msgid "País"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_search
+msgid "Pendentes de Emissão"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__date_limite
+msgid "Prazo Legal"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__date_limite
+msgid ""
+"Primeiro dia útil seguinte ao acidente (Lei 8.213/91, art. 22). Em caso de "
+"óbito, a comunicação é imediata, contada da data do óbito. Dia útil exclui "
+"sábado, domingo, feriado nacional e os feriados configurados no calendário "
+"da empresa."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__cat_count
+msgid "Qtd. de CATs"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__state__draft
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__state__draft
+msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__rating_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__nr_rec_cat_orig
+msgid "Recibo da CAT de Origem"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__numero_recibo
+msgid "Recibo do eSocial"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__state__registrado
+msgid "Registrado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_acidente_view_form
+msgid "Registrar e Abrir CAT"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_user_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model,name:l10n_br_hr_sst_cat.model_l10n_br_sst_acidente
+msgid "SST - Acidente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model,name:l10n_br_hr_sst_cat.model_l10n_br_sst_cat
+msgid "SST - Comunicação de Acidente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.actions.server,name:l10n_br_hr_sst_cat.cron_cat_alerta_prazo_ir_actions_server
+msgid "SST: alerta de prazo da CAT"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__date_segregacao
+msgid "Segregação Compulsória"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ind_afast__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_acidente__ind_internacao__s
+msgid "Sim"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__state
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__state
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_search
+msgid "Situação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__situacao_geradora_id
+msgid "Situação Geradora"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__prazo_situacao
+msgid "Situação do Prazo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_state
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__parte_corpo_id
+msgid "Tabela 13 do eSocial."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__agente_causador_id
+msgid "Tabela 14 do eSocial."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__situacao_geradora_id
+msgid "Tabela 15 do eSocial."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__natureza_lesao_id
+msgid "Tabela 17 do eSocial."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__testemunhas
+msgid "Testemunhas"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__tipo_cat_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_cat.l10n_br_sst_cat_view_search
+msgid "Tipo de CAT"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_cat/models/sst_acidente.py:0
+msgid "Tipo de CAT %(codigo)s não encontrado na tabela do eSocial."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__tp_insc_local
+msgid "Tipo de Inscrição do Local"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__tp_acid
+msgid "Tipo do Acidente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__tp_local
+msgid "Tipo do Local"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__employee_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__employee_id
+msgid "Trabalhador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__state__transmitida
+msgid "Transmitida"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__activity_exception_decoration
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__state_id
+msgid "UF"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__uf_oc_emit
+msgid "UF do Órgão de Classe"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_cat.selection__l10n_br_sst_cat__prazo_situacao__hoje
+msgid "Vence hoje"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__website_message_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__website_message_ids
+#: model:ir.model.fields,help:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__ide_oc_emit
+msgid "Órgão de Classe do Emitente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_cat__alerta_prazo_date
+msgid "Último Alerta de Prazo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_cat
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_cat.field_l10n_br_sst_acidente__ultimo_dia_trabalhado
+msgid "Último Dia Trabalhado"
+msgstr ""
