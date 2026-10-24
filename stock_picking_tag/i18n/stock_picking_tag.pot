@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_tag
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__child_ids
+msgid "Child"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__color
+msgid "Color"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model_terms:ir.actions.act_window,help:stock_picking_tag.stock_picking_tag_action
+msgid "Create new tags for your stock pickings"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__parent_id
+msgid "Parent"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__parent_path
+msgid "Parent Path"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.ui.menu,name:stock_picking_tag.menu_stock_picking_tag_config
+msgid "Picking Tags"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model,name:stock_picking_tag.model_stock_picking_tag
+msgid "Stock Picking Tag"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking_tag__name
+msgid "Tag Name"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model.constraint,message:stock_picking_tag.constraint_stock_picking_tag_tag_name_uniq
+msgid "Tag name already exists!"
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.actions.act_window,name:stock_picking_tag.stock_picking_tag_action
+#: model:ir.model.fields,field_description:stock_picking_tag.field_stock_picking__tag_ids
+#: model_terms:ir.ui.view,arch_db:stock_picking_tag.stock_picking_tag_view_form
+msgid "Tags"
+msgstr ""
+
+#. module: stock_picking_tag
+#. odoo-python
+#: code:addons/stock_picking_tag/models/stock_picking_tag.py:0
+msgid "Tags cannot be recursive."
+msgstr ""
+
+#. module: stock_picking_tag
+#: model:ir.model,name:stock_picking_tag.model_stock_picking
+msgid "Transfer"
+msgstr ""
