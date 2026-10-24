@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,17 +14,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_timesheet_invoice_from_project
-#: model:ir.actions.act_window,name:sale_timesheet_invoice_from_project.project_project_action_multi_create_invoice
-#: model:ir.ui.menu,name:sale_timesheet_invoice_from_project.menu_project_create_invoice
+#: model:ir.actions.server,name:sale_timesheet_invoice_from_project.project_project_action_multi_create_invoice
 msgid "Create Invoice"
 msgstr ""
 
 #. module: sale_timesheet_invoice_from_project
-#: model:ir.ui.menu,name:sale_timesheet_invoice_from_project.menu_project_create_sale_order
-msgid "Create Sales Order"
+#: model:ir.model.fields,field_description:sale_timesheet_invoice_from_project.field_project_project__display_name
+msgid "Display Name"
 msgstr ""
 
 #. module: sale_timesheet_invoice_from_project
-#: model:ir.actions.act_window,name:sale_timesheet_invoice_from_project.project_project_action_multi_create_sale_order
-msgid "Create a Sales Order"
+#: model:ir.model.fields,field_description:sale_timesheet_invoice_from_project.field_project_project__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_timesheet_invoice_from_project
+#: model:ir.model,name:sale_timesheet_invoice_from_project.model_project_project
+msgid "Project"
 msgstr ""
