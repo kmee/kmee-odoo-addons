@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -160,13 +160,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_collective_convention__dissidio_month__6
 #: model:ir.model.fields.selection,name:l10n_br_hr_syndicate.selection__l10n_br_hr_syndicate_contribution__month__6
 msgid "Junho"
-msgstr ""
-
-#. module: l10n_br_hr_syndicate
-#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_collective_convention____last_update
-#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_convention_wage_floor____last_update
-#: model:ir.model.fields,field_description:l10n_br_hr_syndicate.field_l10n_br_hr_syndicate_contribution____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_br_hr_syndicate
