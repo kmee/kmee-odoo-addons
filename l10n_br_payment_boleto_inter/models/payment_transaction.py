@@ -286,7 +286,9 @@ class PaymentTransaction(models.Model):
         for tx in transactions:
             try:
                 data = tx.get_boleto_status_inter(tx.provider_id, tx.codigo_solicitacao)
-                situacao = data.get("cobranca", {}).get("situacao")
+                cobranca = data.get("cobranca", {})
+                situacao = cobranca.get("situacao")
+                received = float(cobranca.get("valorTotalRecebido") or 0)
                 _logger.info(
                     "Transação %s - CódigoSolicitacao %s - Situação: %s",
                     tx.reference,
@@ -297,12 +299,19 @@ class PaymentTransaction(models.Model):
                     # _set_done dispara a conciliação do account_payment.
                     tx._set_done()
                     _logger.info("Boleto %s marcado como pago.", tx.codigo_solicitacao)
-                elif situacao in ["CANCELADO", "VENCIDO"]:
+                elif situacao == "CANCELADO" and received:
+                    _logger.warning(
+                        "Boleto %s cancelado com valor recebido %s: mantido pendente.",
+                        tx.codigo_solicitacao,
+                        received,
+                    )
+                elif situacao == "CANCELADO":
                     tx._set_canceled(state_message=situacao)
                     _logger.info(
                         "Boleto %s marcado como cancelado.", tx.codigo_solicitacao
                     )
-                # outros status podem permanecer como pending
+                # VENCIDO fica pendente: o banco aceita o pagamento ate o fim do
+                # prazo de agenda.
             except Exception as e:
                 _logger.error(
                     "Erro ao atualizar boleto %s: %s", tx.codigo_solicitacao, str(e)

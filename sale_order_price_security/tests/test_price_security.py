@@ -3,6 +3,7 @@
 
 from lxml import etree
 
+from odoo.exceptions import AccessError
 from odoo.tests.common import Form, TransactionCase, new_test_user, tagged
 
 
@@ -24,6 +25,11 @@ class TestSaleOrderPriceSecurity(TransactionCase):
             login="price_sec_editor",
             groups=base_groups
             + ",sale_order_price_security.group_sale_order_price_editor",
+        )
+        cls.manager = new_test_user(
+            cls.env,
+            login="price_sec_manager",
+            groups="base.group_user,sales_team.group_sale_manager",
         )
         cls.partner = cls.env["res.partner"].create({"name": "Customer"})
         cls.product = cls.env["product.product"].create(
@@ -142,3 +148,126 @@ class TestSaleOrderPriceSecurity(TransactionCase):
             with form.order_line.edit(0) as line:
                 line.price_unit = 55.0
         self.assertEqual(self.order.order_line[0].price_unit, 55.0)
+
+    def test_orm_write_of_price_refused_without_group(self):
+        """
+        Given a salesman outside the price editor group
+        When he writes price_unit by RPC/ORM, on the line or through the order
+        Then the server refuses and the price stays at the list price
+        """
+        line = self.order.order_line[0]
+        with self.assertRaises(AccessError):
+            line.with_user(self.salesman).write({"price_unit": 1.0})
+        with self.assertRaises(AccessError):
+            self.order.with_user(self.salesman).write(
+                {"order_line": [(1, line.id, {"price_unit": 1.0})]}
+            )
+        self.assertEqual(line.price_unit, 100.0)
+
+    def test_orm_create_with_price_refused_without_group(self):
+        """
+        Given a salesman outside the price editor group
+        When he creates a line or an order with a price of his own
+        Then the server refuses
+        """
+        with self.assertRaises(AccessError):
+            self.env["sale.order.line"].with_user(self.salesman).create(
+                {
+                    "order_id": self.order.id,
+                    "product_id": self.product.id,
+                    "price_unit": 1.0,
+                }
+            )
+        with self.assertRaises(AccessError):
+            self.env["sale.order"].with_user(self.salesman).create(
+                {
+                    "partner_id": self.partner.id,
+                    "order_line": [
+                        (0, 0, {"product_id": self.product.id, "price_unit": 1.0})
+                    ],
+                }
+            )
+
+    def test_orm_price_allowed_with_group(self):
+        """
+        Given a user of the price editor group
+        When he creates and writes lines with a price of his own by RPC/ORM
+        Then the prices are stored (negative control of the restriction)
+        """
+        line = self.order.order_line[0]
+        line.with_user(self.editor).write({"price_unit": 55.0})
+        self.assertEqual(line.price_unit, 55.0)
+        new_line = (
+            self.env["sale.order.line"]
+            .with_user(self.editor)
+            .create(
+                {
+                    "order_id": self.order.id,
+                    "product_id": self.product.id,
+                    "price_unit": 42.0,
+                }
+            )
+        )
+        self.assertEqual(new_line.price_unit, 42.0)
+
+    def test_sales_manager_can_edit_price_salesman_cannot(self):
+        """
+        Given a sales administrator (and the admin user) and a plain salesman
+        When each one writes price_unit on a line by RPC/ORM
+        Then the administrators store the price through the implied price
+        editor group, while the salesman is still refused
+        """
+        self.assertIn(self.editor_group, self.manager.groups_id)
+        self.assertIn(self.editor_group, self.env.ref("base.user_admin").groups_id)
+        line = self.order.order_line[0]
+        line.with_user(self.manager).write({"price_unit": 55.0})
+        self.assertEqual(line.price_unit, 55.0)
+        line.with_user(self.env.ref("base.user_admin")).write({"price_unit": 60.0})
+        self.assertEqual(line.price_unit, 60.0)
+        with self.assertRaises(AccessError):
+            line.with_user(self.salesman).write({"price_unit": 1.0})
+        self.assertEqual(line.price_unit, 60.0)
+
+    def test_salesman_sale_flow_keeps_working(self):
+        """
+        Given a salesman outside the price editor group
+        When he quotes, changes quantities, sends the computed price, adds a
+        note and a down payment line, confirms and duplicates an order
+        Then everything works and prices come from the pricelist
+        """
+        Order = self.env["sale.order"].with_user(self.salesman)
+        order = Order.create(
+            {
+                "partner_id": self.partner.id,
+                "order_line": [
+                    (0, 0, {"product_id": self.product.id, "product_uom_qty": 1.0}),
+                    # internal flows send the price the system computes
+                    (0, 0, {"product_id": self.product.id, "price_unit": 100.0}),
+                    (0, 0, {"display_type": "line_note", "name": "A note"}),
+                ],
+            }
+        )
+        line = order.order_line[0]
+        line.write({"product_uom_qty": 4.0, "price_unit": 100.0})
+        self.assertEqual(line.price_unit, 100.0)
+        self.env["sale.order.line"].with_user(self.salesman).create(
+            {
+                "order_id": order.id,
+                "product_id": self.product.id,
+                "is_downpayment": True,
+                "product_uom_qty": 0.0,
+                "price_unit": 30.0,
+            }
+        )
+        # confirming must not trip the price lock (other modules installed in
+        # the same database may hold the order for validation, so the state is
+        # not asserted here)
+        order.action_confirm()
+        # an order priced by an editor is duplicated by the salesman: the copy
+        # takes the pricelist price instead of the custom one
+        self.order.order_line.with_user(self.editor).write({"price_unit": 55.0})
+        copy = self.order.with_user(self.salesman).copy()
+        self.assertEqual(copy.order_line.mapped("price_unit"), [100.0, 100.0])
+        # while the editor keeps the custom price on his copies
+        copy = self.order.with_user(self.editor).copy()
+        self.assertEqual(copy.order_line.mapped("price_unit"), [55.0, 55.0])
