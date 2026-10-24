@@ -1,0 +1,144 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_attendance_integridade
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid ""
+"ATENÇÃO: o escopo atestado DIVERGE do homologado (esperado %s). O Atestado "
+"Técnico não cobre esta versão."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Automação sobre %(modelo)s: %(nome)s."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Ação de servidor com código sobre %(modelo)s: %(nome)s."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model,name:l10n_br_hr_attendance_integridade.model_l10n_br_hr_apuracao_periodo
+msgid "Competência de Apuração de Jornada"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_integridade.selection__l10n_br_hr_apuracao_periodo__ptrp_integridade_ok__confere
+msgid "Confere com o homologado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_integridade.field_l10n_br_hr_apuracao_periodo__ptrp_diagnostico
+msgid "Diagnóstico da integridade"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_integridade.selection__l10n_br_hr_apuracao_periodo__ptrp_integridade_ok__diverge
+msgid "Diverge do homologado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Escopo atestado confere com o homologado."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Extensões encontradas sobre o PTRP:"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_apuracao_periodo.py:0
+#: model:ir.model,name:l10n_br_hr_attendance_integridade.model_l10n_br_hr_ptrp_integridade
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_integridade.field_l10n_br_hr_apuracao_periodo__ptrp_integridade_ok
+#, python-format
+msgid "Integridade do PTRP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_integridade.l10n_br_hr_apuracao_periodo_view_form
+msgid "Integridade do PTRP (art. 89)"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Modelo %(modelo)s estendido pelo módulo %(modulo)s."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid ""
+"Módulos do escopo não instalados neste servidor (o resumo homologado tem que"
+" ser o da mesma composição): %s"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid ""
+"Não há resumo homologado configurado: a conferência contra o Atestado "
+"Técnico não pôde ser feita."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model.fields,help:l10n_br_hr_attendance_integridade.field_l10n_br_hr_apuracao_periodo__ptrp_resumo
+msgid "Resumo digital do escopo atestado vigente quando o AEJ foi gerado."
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model.fields,field_description:l10n_br_hr_attendance_integridade.field_l10n_br_hr_apuracao_periodo__ptrp_resumo
+msgid "Resumo do PTRP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Resumo do escopo atestado: %s"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model:ir.model.fields.selection,name:l10n_br_hr_attendance_integridade.selection__l10n_br_hr_apuracao_periodo__ptrp_integridade_ok__nao_configurado
+msgid "Sem resumo homologado configurado"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_attendance_integridade.l10n_br_hr_apuracao_periodo_view_form
+msgid "Verificar integridade do PTRP"
+msgstr ""
+
+#. module: l10n_br_hr_attendance_integridade
+#. odoo-python
+#: code:addons/l10n_br_hr_attendance_integridade/models/l10n_br_hr_ptrp_integridade.py:0
+#, python-format
+msgid "Versão atestada: %s"
+msgstr ""
