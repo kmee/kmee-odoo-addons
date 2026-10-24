@@ -1,0 +1,203 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_commission_team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__active
+msgid "Active"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team__agent_ids
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__agent_id
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__agent_id
+#: model:ir.model.fields,field_description:sale_commission_team.field_sale_commission_team_mixin__agent_id
+msgid "Agent"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner__agent_team_ids
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_users__agent_team_ids
+msgid "Agent Team"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_sale_commission_team_mixin
+msgid "Agent Team Mixin"
+msgstr ""
+
+#. module: sale_commission_team
+#: model_terms:ir.ui.view,arch_db:sale_commission_team.crm_team_form_view
+#: model_terms:ir.ui.view,arch_db:sale_commission_team.res_partner_form_view
+msgid "Agents"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__code
+msgid "Code"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__commission_id
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__commission_id
+#: model:ir.model.fields,field_description:sale_commission_team.field_sale_commission_team_mixin__commission_id
+msgid "Commission"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_commission_rule
+msgid "Commission Rule"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team__commission_rule_ids
+msgid "Commission Rules"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__create_uid
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__create_uid
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__create_date
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__create_date
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__display_name
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__display_name
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__id
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__id
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__write_uid
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__write_uid
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__write_date
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__write_date
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_commission_mixin
+msgid ""
+"Mixin model for applying to any object that wants to handle commissions"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__name
+msgid "Name"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team__only_team_agents
+msgid "Only Team Agents"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_res_partner_agent_team
+msgid "Partner Agent Team"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:commission.rule,name:sale_commission_team.commission_rule_partner
+#: model:ir.model.fields.selection,name:sale_commission_team.selection__commission_rule__code__partner
+msgid "Partner Commission"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_crm_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__team_id
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__team_id
+#: model:ir.model.fields,field_description:sale_commission_team.field_sale_commission_team_mixin__team_id
+msgid "Sales Team"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:commission.rule,name:sale_commission_team.commission_rule_salesman
+#: model:ir.model.fields.selection,name:sale_commission_team.selection__commission_rule__code__salesman
+msgid "Salesman Commission"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,field_description:sale_commission_team.field_commission_rule__sequence
+#: model:ir.model.fields,field_description:sale_commission_team.field_crm_team_agent__sequence
+#: model:ir.model.fields,field_description:sale_commission_team.field_res_partner_agent_team__sequence
+#: model:ir.model.fields,field_description:sale_commission_team.field_sale_commission_team_mixin__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model,name:sale_commission_team.model_crm_team_agent
+msgid "Team Agent"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:commission.rule,name:sale_commission_team.commission_rule_team
+#: model:ir.model.fields.selection,name:sale_commission_team.selection__commission_rule__code__team
+msgid "Team Commission"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:commission.rule,name:sale_commission_team.commission_rule_team_partner
+#: model:ir.model.fields.selection,name:sale_commission_team.selection__commission_rule__code__team_partner
+msgid "Team and Partner Commission"
+msgstr ""
+
+#. module: sale_commission_team
+#: model:ir.model.fields,help:sale_commission_team.field_crm_team_agent__commission_id
+#: model:ir.model.fields,help:sale_commission_team.field_res_partner_agent_team__commission_id
+#: model:ir.model.fields,help:sale_commission_team.field_sale_commission_team_mixin__commission_id
+msgid ""
+"This is the default commission used in the sales where this agent is "
+"assigned. It can be changed on each operation if needed."
+msgstr ""
