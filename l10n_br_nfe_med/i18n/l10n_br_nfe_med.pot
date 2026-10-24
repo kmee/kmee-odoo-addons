@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,9 +15,7 @@ msgstr ""
 
 #. module: l10n_br_nfe_med
 #: model:ir.model,name:l10n_br_nfe_med.model_l10n_br_fiscal_document_line
-msgid ""
-"Grupo a ser informado nas vendas interestarduais para consumidor final,\n"
-"não contribuinte de ICMS"
+msgid "Fiscal Document Line"
 msgstr ""
 
 #. module: l10n_br_nfe_med
