@@ -27,3 +27,12 @@ msgstr ""
 #: model:ir.model,name:sale_order_price_security.model_sale_order_line
 msgid "Sales Order Line"
 msgstr ""
+
+#. module: sale_order_price_security
+#. odoo-python
+#: code:addons/sale_order_price_security/models/sale_order_line.py:0
+#, python-format
+msgid ""
+"You are not allowed to change the unit price of the sale order line %(line)s"
+" (%(price)s). Only members of the group %(group)s can do it."
+msgstr ""
