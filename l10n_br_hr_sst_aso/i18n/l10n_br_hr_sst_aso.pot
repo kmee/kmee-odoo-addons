@@ -1,0 +1,855 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_sst_aso
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_employee_medical_examination__l10n_br_resultado__1
+msgid "1 - Apto"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_exame_complementar__ord_exame__1
+msgid "1 - Inicial"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_exame_complementar__ind_result__1
+msgid "1 - Normal"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_exame_complementar__ind_result__2
+msgid "2 - Alterado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_employee_medical_examination__l10n_br_resultado__2
+msgid "2 - Inapto"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_exame_complementar__ord_exame__2
+msgid "2 - Sequencial"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_exame_complementar__ind_result__3
+msgid "3 - Estável"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_exame_complementar__ind_result__4
+msgid "4 - Agravamento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_employee__l10n_br_sst_aso_situacao__a_vencer
+msgid "A vencer"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__examination_id
+msgid "ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "ASO %(tipo)s - %(nome)s"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.hr_employee_medical_examination_search_view_sst
+msgid "ASO Vencido"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:mail.activity.type,name:l10n_br_hr_sst_aso.mail_activity_type_aso_demissional
+msgid "ASO demissional"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:res.groups,comment:l10n_br_hr_sst_aso.group_sst_medico
+msgid ""
+"Acessa dado clínico do trabalhador (LGPD art. 11). Grupo\n"
+"            distinto do RH: quem cuida da folha não precisa, e não deve, enxergar\n"
+"            prontuário."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.hr_employee_medical_examination_search_view_sst
+msgid "Agrupar por"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__res_company__l10n_br_sst_aso_politica__alerta
+msgid "Alertar no chatter"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_res_company__l10n_br_sst_aso_alerta_dias
+msgid ""
+"Antecedência com que o exame periódico é agendado antes do vencimento do ASO"
+" anterior."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_res_company__l10n_br_sst_aso_alerta_dias
+msgid "Antecedência do Periódico (dias)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__exige_exposicao
+msgid "Aplica a faixa apenas a quem tem fator de risco vigente."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_com_restricao
+msgid "Apto com Restrição"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__res_company__l10n_br_sst_aso_politica__bloqueia
+msgid "Bloquear a operação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_crm
+msgid "CRM"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_resultado
+msgid ""
+"Campo resAso do S-2220. O leiaute só admite apto ou inapto; a restrição, "
+"quando houver, é registrada à parte."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_clinica_id
+msgid "Clínica"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_contract__l10n_br_sst_demissional__cobrado
+msgid "Cobrado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.l10n_br_sst_pcmso_view_form
+msgid "Colocar em Vigor"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__create_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__create_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_tipo_aso_codigo
+msgid "Código do Tipo de ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__date
+msgid "Data do Exame"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_date_vencimento
+msgid "Data em que o próximo exame periódico se torna devido."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__name
+msgid "Descrição"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_restricao
+msgid "Descrição da Restrição"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_contract__l10n_br_sst_demissional__dispensado
+msgid "Dispensado (NR-7, item 7.5.11)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__display_name
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_employee__l10n_br_sst_aso_situacao__em_dia
+msgid "Em dia"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.hr_employee_medical_examination_form_view_sst
+msgid "Emitente do ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_hr_contract
+msgid "Employee Contract"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_hr_employee_medical_examination
+msgid "Employee Medical Examination"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__company_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__company_id
+msgid "Empresa"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_pcmso__state__encerrado
+msgid "Encerrado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.l10n_br_sst_pcmso_view_form
+msgid "Encerrar"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__nr_insc
+msgid "Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_contract__l10n_br_sst_demissional
+msgid "Exame Demissional"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid ""
+"Exame de %(nome)s: trabalhador inapto não é apto com restrição. Escolha um "
+"dos dois."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_contract.py:0
+#, python-format
+msgid ""
+"Exame demissional dispensado (NR-7, item 7.5.11): o último exame clínico "
+"ocupacional foi em %(data)s, %(dias)s dias antes do término, abaixo do "
+"limite de %(limite)s dias para o grau de risco da empresa."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__exame_ids
+msgid "Exames"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_exame_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.hr_employee_medical_examination_form_view_sst
+msgid "Exames Complementares"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.ui.menu,name:l10n_br_hr_sst_aso.menu_sst_aso
+msgid "Exames Ocupacionais"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/sst_pcmso.py:0
+#, python-format
+msgid "Faixa %(nome)s: a periodicidade deve ser positiva."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__date_to
+msgid "Fim da Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__idade_ate
+msgid "Idade até"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__idade_de
+msgid "Idade de"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__name
+msgid "Identificação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__ind_result
+msgid "Indicativo do Resultado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_observacao_clinica
+msgid ""
+"Informação clínica sob sigilo médico. Não sai no ASO nem no evento do "
+"eSocial e não é visível ao RH."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__nr_insc
+msgid ""
+"Inscrição do estabelecimento coberto pelo programa. Vazio significa todos os"
+" estabelecimentos da empresa."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__periodicidade_meses
+msgid ""
+"Intervalo padrão entre exames periódicos. Faixas específicas sobrescrevem "
+"este valor."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__date_from
+msgid "Início da Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso____last_update
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__write_uid
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__write_date
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__medico_coordenador_id
+msgid "Médico Coordenador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_medico_nome
+msgid "Médico Emitente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__medico_coordenador_id
+msgid "Médico do trabalho que coordena o programa (CRM)."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__note
+msgid "Note"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__res_company__l10n_br_sst_aso_politica__ignora
+msgid "Não verificar"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "Não é possível concluir o exame de %(nome)s sem informar: %(campos)s."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_res_company__l10n_br_sst_aso_politica
+msgid ""
+"O que fazer quando o contrato é aberto sem o ASO admissional concluído "
+"(NR-7, item 7.5.8, I). O demissional nunca bloqueia: tem prazo de 10 dias "
+"depois do término e é cobrado por atividade, salvo a dispensa do item "
+"7.5.11. 'Não verificar' desliga as duas coisas."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_contract.py:0
+#, python-format
+msgid ""
+"O trabalhador %(nome)s não tem ASO %(tipo)s concluído, exigido pela NR-7."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__observacao
+msgid "Observação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_observacao_clinica
+msgid "Observação Clínica"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__ord_exame
+msgid "Ordem"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.actions.act_window,name:l10n_br_hr_sst_aso.l10n_br_sst_pcmso_action
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_pcmso_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__pcmso_id
+#: model:ir.ui.menu,name:l10n_br_hr_sst_aso.menu_sst_pcmso
+msgid "PCMSO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/sst_pcmso.py:0
+#, python-format
+msgid "PCMSO %(nome)s: a periodicidade deve ser positiva."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/sst_pcmso.py:0
+#, python-format
+msgid "PCMSO %(nome)s: o fim da vigência é anterior ao início."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.l10n_br_sst_pcmso_view_form
+msgid "PCMSO 2026"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__meses
+msgid "Periodicidade (meses)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__periodicidade_meses
+msgid "Periodicidade Padrão (meses)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__faixa_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.l10n_br_sst_pcmso_view_form
+msgid "Periodicidade por Faixa"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_res_company__l10n_br_sst_aso_politica
+msgid "Política de ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__procedimento_id
+msgid "Procedimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_exame_complementar__procedimento_id
+msgid "Procedimento diagnóstico da Tabela 27 do eSocial."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__exame_count
+msgid "Quantidade de Exames"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_pcmso__state__draft
+msgid "Rascunho"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_contract__l10n_br_sst_demissional__realizado
+msgid "Realizado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_contract.py:0
+#: model:mail.activity.type,summary:l10n_br_hr_sst_aso.mail_activity_type_aso_demissional
+#, python-format
+msgid "Realizar o exame demissional (NR-7, item 7.5.11)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__relatorio_anual
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.l10n_br_sst_pcmso_view_form
+msgid "Relatório Analítico Anual"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__relatorio_anual
+msgid "Relatório analítico exigido pela NR-7, item 7.6."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_restricao
+msgid "Restrição funcional comunicada ao empregador, sem diagnóstico."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_resultado
+msgid "Resultado do ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_l10n_br_sst_exame_complementar
+msgid "SST - Exame Complementar do ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_l10n_br_sst_pcmso_faixa
+msgid "SST - Faixa de Periodicidade do PCMSO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model,name:l10n_br_hr_sst_aso.model_l10n_br_sst_pcmso
+msgid "SST - PCMSO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.actions.server,name:l10n_br_hr_sst_aso.cron_agendar_aso_periodico_ir_actions_server
+#: model:ir.cron,cron_name:l10n_br_hr_sst_aso.cron_agendar_aso_periodico
+msgid "SST: agendar exames periódicos do PCMSO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.actions.server,name:l10n_br_hr_sst_aso.cron_cobrar_aso_demissional_ir_actions_server
+#: model:ir.cron,cron_name:l10n_br_hr_sst_aso.cron_cobrar_aso_demissional
+msgid "SST: cobrar o exame demissional (NR-7, 7.5.11)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.ui.menu,name:l10n_br_hr_sst_aso.menu_sst_saude
+#: model:res.groups,name:l10n_br_hr_sst_aso.group_sst_medico
+msgid "Saúde Ocupacional"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_employee__l10n_br_sst_aso_situacao__sem_aso
+msgid "Sem ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.hr_employee_medical_examination_form_view_sst
+msgid "Sigilo Médico"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__state
+msgid "Situação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee__l10n_br_sst_aso_situacao
+msgid "Situação do ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_hr_contract__l10n_br_sst_demissional
+msgid ""
+"Situação do exame demissional depois do encerramento do contrato. Cobrado "
+"significa que há atividade com prazo no término mais 10 dias (NR-7, item "
+"7.5.11)."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso_faixa__exige_exposicao
+msgid "Somente Expostos a Risco"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_tipo_aso_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_aso.hr_employee_medical_examination_search_view_sst
+msgid "Tipo de ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_uf_crm
+msgid "UF do CRM"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__hr_employee__l10n_br_sst_aso_situacao__vencido
+msgid "Vencido"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee_medical_examination__l10n_br_date_vencimento
+msgid "Vencimento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_hr_employee__l10n_br_sst_aso_vencimento
+msgid "Vencimento do ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.actions.act_window,name:l10n_br_hr_sst_aso.hr_employee_medical_examination_action_vencimentos
+msgid "Vencimentos de ASO"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_aso.selection__l10n_br_sst_pcmso__state__vigente
+msgid "Vigente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#: model:ir.model.fields,help:l10n_br_hr_sst_aso.field_l10n_br_sst_pcmso__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_contract.py:0
+#, python-format
+msgid "admissional"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "data do exame"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_contract.py:0
+#, python-format
+msgid "demissional"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "médico emitente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "resultado (apto ou inapto)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_aso
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_aso/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "tipo de ASO"
+msgstr ""
