@@ -61,6 +61,11 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_payment_boleto
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__move_line_id
+msgid "Installment"
+msgstr ""
+
+#. module: l10n_br_payment_boleto
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_account_payment_mode__payment_boleto_instructions
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto.field_payment_transaction__boleto_instructions
 msgid "Instructions"
@@ -130,6 +135,13 @@ msgstr ""
 msgid ""
 "Penalty fee for overdue payments. This value will be added to the total "
 "amount of the invoice."
+msgstr ""
+
+#. module: l10n_br_payment_boleto
+#: model:ir.model.fields,help:l10n_br_payment_boleto.field_payment_transaction__move_line_id
+msgid ""
+"Receivable line (installment) charged by this boleto. When set, the payment "
+"reconciles only this installment."
 msgstr ""
 
 #. module: l10n_br_payment_boleto
