@@ -393,6 +393,7 @@ msgstr ""
 #. module: monetary_index_update
 #. odoo-python
 #: code:addons/monetary_index_update/models/monetary_update_service.py:0
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
 #, python-format
 msgid "Strategy '%s' not found!"
 msgstr ""
