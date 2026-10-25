@@ -173,11 +173,6 @@ msgid "Pending"
 msgstr ""
 
 #. module: base_wip
-#: model:ir.model.fields.selection,name:base_wip.selection__base_wip_report__reference_id__project_task
-msgid "Project Task"
-msgstr ""
-
-#. module: base_wip
 #: model:ir.model.fields,field_description:base_wip.field_base_wip_abstract__reaction_time
 #: model:ir.model.fields,field_description:base_wip.field_base_wip_report__reaction_time
 msgid "Reaction Time"
