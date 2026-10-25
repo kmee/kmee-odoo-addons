@@ -1,0 +1,710 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_esocial_sst
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_base_sst__ind_retif__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2210__ind_retif__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2220__ind_retif__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2221__ind_retif__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2240__ind_retif__1
+msgid "1 - Arquivo original"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_base_sst__ind_retif__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2210__ind_retif__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2220__ind_retif__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2221__ind_retif__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial_sst.selection__l10n_br_esocial_s2240__ind_retif__2
+msgid "2 - Arquivo de retificação"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2221_form
+msgid "AB123456789"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__examination_id
+msgid "ASO"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__acidente_id
+msgid "Acidente"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__ambiente_id
+msgid "Ambiente"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__cat_id
+msgid "CAT"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "CID"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__cnpj_lab
+msgid "CNPJ do Laboratório"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2221_toxicologico.py:0
+#, python-format
+msgid "CNPJ do laboratório deve ter 14 dígitos."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__nr_crm
+msgid "CRM"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Condição"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__contract_id
+msgid "Contrato"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__cod_seq_exame
+msgid "Código do Exame"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2221_toxicologico.py:0
+#, python-format
+msgid ""
+"Código do exame inválido: %(valor)r. O eSocial espera duas letras seguidas "
+"de nove dígitos, por exemplo AB123456789."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__cod_seq_exame
+msgid ""
+"Código sequencial do exame toxicológico: duas letras seguidas de nove "
+"dígitos."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__dt_aso
+msgid "Data do ASO"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__dt_exame
+msgid "Data do Exame"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__dsc_ativ_des
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Descrição das Atividades"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_hr_employee_medical_examination
+msgid "Employee Medical Examination"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_base_sst__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__company_id
+msgid "Empresa"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_base_sst__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__evento_id
+msgid "Evento"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_sst_cat__s2210_id
+msgid "Evento S-2210"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_hr_employee_medical_examination__l10n_br_s2220_id
+msgid "Evento S-2220"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_sst_cat__esocial_evento_id
+msgid "Evento eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/sst_laudo.py:0
+#: code:addons/l10n_br_esocial_sst/models/sst_laudo.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_sst_laudo__s2240_ids
+#, python-format
+msgid "Eventos S-2240"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.ui.menu,name:l10n_br_esocial_sst.menu_esocial_sst
+msgid "Eventos de SST"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2221_form
+msgid "Exame"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__risco_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Fatores de Risco"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__dt_fim_condicao
+msgid "Fim da Condição"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2210_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2220_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2221_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Gerar Evento"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.l10n_br_sst_laudo_view_form_esocial
+msgid "Gerar S-2240 em Massa"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_base_sst__ind_retif
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__ind_retif
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__ind_retif
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__ind_retif
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__ind_retif
+msgid "Indicativo de Retificação"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__dt_ini_condicao
+msgid "Início da Condição"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__laudo_id
+msgid "Laudo"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/sst_laudo.py:0
+#, python-format
+msgid ""
+"Laudo %(nome)s: coloque o laudo em vigor antes de gerar os eventos S-2240."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/sst_laudo.py:0
+#, python-format
+msgid ""
+"Laudo %(nome)s: nenhum contrato aberto está vinculado aos ambientes deste "
+"laudo."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__laudo_id
+msgid "Laudo que originou este evento."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2221_form
+msgid "Médico"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__nm_med
+msgid "Médico Responsável"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__name
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__name
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__name
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__name
+msgid "Name"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_base_sst__nr_recibo
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__nr_recibo
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__nr_recibo
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__nr_recibo
+#: model:ir.model.fields,help:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__nr_recibo
+msgid "Obrigatório na retificação."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__obs_compl
+msgid "Observação Complementar"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Observações"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.l10n_br_sst_cat_view_form_esocial
+msgid "Preparar S-2210"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_base_sst__nr_recibo
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__nr_recibo
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__nr_recibo
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__nr_recibo
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__nr_recibo
+msgid "Recibo do Evento Retificado"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Responsáveis"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__responsavel_ids
+msgid "Responsáveis pelos Registros Ambientais"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/base_sst.py:0
+#, python-format
+msgid ""
+"Retificação do evento %(tipo)s exige o número do recibo do evento "
+"retificado."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/sst_cat.py:0
+#, python-format
+msgid "S-2210"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.actions.act_window,name:l10n_br_esocial_sst.action_esocial_s2210
+#: model:ir.ui.menu,name:l10n_br_esocial_sst.menu_esocial_s2210
+msgid "S-2210 - CAT"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid ""
+"S-2210 de %(nome)s: a CAT de reabertura ou de óbito exige o recibo da "
+"comunicação anterior."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "S-2210 de %(nome)s: informe %(campos)s antes de transmitir a CAT."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "S-2210 de %(nome)s: informe a data do óbito."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid ""
+"S-2210 de %(nome)s: informe as horas trabalhadas antes do acidente "
+"(hrsTrabAntesAcid). O eSocial as exige no acidente típico e, desde "
+"20/07/2022, no de trajeto."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/hr_employee_medical_examination.py:0
+#, python-format
+msgid "S-2220"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.actions.act_window,name:l10n_br_esocial_sst.action_esocial_s2220
+#: model:ir.ui.menu,name:l10n_br_esocial_sst.menu_esocial_s2220
+msgid "S-2220 - Monitoramento da Saúde"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2220_monitoramento_saude.py:0
+#, python-format
+msgid "S-2220 de %(nome)s: informe %(campos)s antes de transmitir."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.actions.act_window,name:l10n_br_esocial_sst.action_esocial_s2221
+#: model:ir.ui.menu,name:l10n_br_esocial_sst.menu_esocial_s2221
+msgid "S-2221 - Exame Toxicológico"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2221_toxicologico.py:0
+#, python-format
+msgid "S-2221 de %(nome)s: o evento exige a matrícula do trabalhador."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_sst_laudo__s2240_count
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.l10n_br_sst_laudo_view_form_esocial
+msgid "S-2240"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.actions.act_window,name:l10n_br_esocial_sst.action_esocial_s2240
+#: model:ir.ui.menu,name:l10n_br_esocial_sst.menu_esocial_s2240
+msgid "S-2240 - Condições Ambientais"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s, agente %(agente)s: informe se o EPC implementado é "
+"eficaz."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s, agente %(agente)s: informe se o EPI utilizado é eficaz."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s, agente %(agente)s: o evento declara uso de EPI, mas não "
+"há entrega válida com Certificado de Aprovação em %(data)s. Registre a "
+"entrega ou corrija a utilização de EPI no fator de risco."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s: com ausência de agente nocivo, a utilização de EPC e de "
+"EPI deve ser 'não se aplica'."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s: informe ao menos um fator de risco. Ausência de "
+"exposição se declara com o código %(codigo)s, e não com a omissão do grupo."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s: o código de ausência de agente nocivo não convive com "
+"outros fatores de risco no mesmo evento."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2240_condicoes_ambientais.py:0
+#, python-format
+msgid ""
+"S-2240 de %(nome)s: o responsável pelos registros ambientais é obrigatório."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_sst_cat
+msgid "SST - Comunicação de Acidente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_sst_laudo
+msgid "SST - Laudo (PGR, LTCAT, PCMSO, AET)"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.actions.server,name:l10n_br_esocial_sst.cron_cat_atualizar_recibo_ir_actions_server
+#: model:ir.cron,cron_name:l10n_br_esocial_sst.cron_cat_atualizar_recibo
+msgid "SST: recibo do eSocial na CAT"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_hr_employee_medical_examination__l10n_br_esocial_state
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_sst_cat__esocial_state
+msgid "Situação no eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_base_sst__employee_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2210__employee_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2220__employee_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__employee_id
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2240__employee_id
+msgid "Trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/base_sst.py:0
+#, python-format
+msgid "Trabalhador '%(name)s' não possui CPF configurado."
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model.fields,field_description:l10n_br_esocial_sst.field_l10n_br_esocial_s2221__uf_crm
+msgid "UF do CRM"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Validar"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.l10n_br_sst_cat_view_form_esocial
+msgid "Ver S-2210"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial_sst.view_esocial_s2240_form
+msgid "Vínculo"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "agente causador"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2220_monitoramento_saude.py:0
+#, python-format
+msgid "ao menos um exame complementar"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2220_monitoramento_saude.py:0
+#, python-format
+msgid "data do ASO"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "data do atendimento"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "duração do tratamento"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_esocial_base_sst
+msgid "eSocial - Base dos Eventos de SST"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_esocial_s2210
+msgid "eSocial S-2210 - Comunicação de Acidente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_esocial_s2220
+msgid "eSocial S-2220 - Monitoramento da Saúde do Trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_esocial_s2221
+msgid "eSocial S-2221 - Exame Toxicológico do Motorista"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#: model:ir.model,name:l10n_br_esocial_sst.model_l10n_br_esocial_s2240
+msgid "eSocial S-2240 - Condições Ambientais do Trabalho"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "emitente do atestado"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "hora do atendimento"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "logradouro e número do local do acidente"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "natureza da lesão"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2220_monitoramento_saude.py:0
+#, python-format
+msgid "nome do médico emitente"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "parte do corpo atingida"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "situação geradora"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2220_monitoramento_saude.py:0
+#, python-format
+msgid "tipo de ASO"
+msgstr ""
+
+#. module: l10n_br_esocial_sst
+#. odoo-python
+#: code:addons/l10n_br_esocial_sst/models/s2210_cat.py:0
+#, python-format
+msgid "órgão de classe e número do emitente"
+msgstr ""
