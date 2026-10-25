@@ -1,0 +1,743 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_hr_sst_epi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_form
+msgid "12345"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid ""
+"<br/>\n"
+"                                <strong>Ambiente:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid ""
+"<br/>\n"
+"                                <strong>CPF:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid ""
+"<br/>\n"
+"                                <strong>Função:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "<strong>Empresa:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "<strong>Trabalhador:</strong>"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__state__a_vencer
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_search
+msgid "A Vencer"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__active
+msgid "Active"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model,name:l10n_br_hr_sst_epi.model_hr_personal_equipment
+msgid "Adds personal equipment information and allocation"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__agente_nocivo_ids
+msgid "Agentes Nocivos"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_search
+msgid "Agrupar por"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/hr_personal_equipment.py:0
+#, python-format
+msgid "Anexe a assinatura do trabalhador antes de confirmar."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Assinatura"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_assinatura
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_personal_equipment_form_view_sst
+msgid "Assinatura do Trabalhador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_assinatura
+msgid ""
+"Assinatura eletrônica do recebimento. A Portaria SIT 107/2009 admite o "
+"registro da entrega em sistema eletrônico."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "CA"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_product_product__l10n_br_sst_ca_id
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_product_template__l10n_br_sst_ca_id
+msgid "CA do equipamento. A validade é do certificado, não da entrega."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__name
+msgid "Certificado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_ca_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_product_product__l10n_br_sst_ca_id
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_product_template__l10n_br_sst_ca_id
+msgid "Certificado de Aprovação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/sst_ca.py:0
+#, python-format
+msgid ""
+"Certificado de Aprovação %(situacao)s em %(validade)s com %(qtd)s entrega(s)"
+" de EPI ainda válidas."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.actions.act_window,name:l10n_br_hr_sst_epi.l10n_br_sst_ca_action
+#: model:ir.ui.menu,name:l10n_br_hr_sst_epi.menu_sst_ca
+msgid "Certificados de Aprovação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__certification
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_hr_personal_equipment__certification
+msgid "Certification Number"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__tipo_epi
+msgid "Classificação do equipamento, por exemplo protetor auricular."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__cond_functo
+msgid "Condições de Funcionamento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_personal_equipment_form_view_sst
+msgid "Confirmar Assinatura"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__hr_personal_equipment__l10n_br_sst_motivo_devolucao__danificado
+msgid "Danificado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_data_assinatura
+msgid "Data da Assinatura"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_data_devolucao
+msgid "Data da Devolução"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid ""
+"Declaro ter recebido os equipamentos acima, gratuitamente,\n"
+"                            bem como o treinamento sobre o uso, a guarda e a conservação,\n"
+"                            e me comprometo a usá-los durante toda a jornada e a comunicar\n"
+"                            qualquer dano ou extravio."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__descricao_epi
+msgid "Descrição do EPI"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__descricao_epi
+msgid "Descrição do equipamento, informada em dscEPI no S-2240."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__hr_personal_equipment__l10n_br_sst_motivo_devolucao__desligamento
+msgid "Desligamento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Devolução"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_personal_equipment_form_view_sst
+msgid "Devolução ou Troca"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.ui.menu,name:l10n_br_hr_sst_epi.menu_sst_epi
+msgid "EPI"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/hr_personal_equipment.py:0
+#, python-format
+msgid ""
+"EPI %(produto)s: informe o Certificado de Aprovação antes de validar a "
+"entrega."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/hr_personal_equipment.py:0
+#, python-format
+msgid ""
+"EPI %(produto)s: o Certificado de Aprovação %(ca)s venceu em %(validade)s e "
+"não pode ser entregue em %(data)s. Substitua o CA ou o equipamento."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/hr_employee.py:0
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_employee__l10n_br_sst_epi_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_employee_view_form_sst_epi
+#, python-format
+msgid "EPIs"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_employee__l10n_br_sst_epi_count
+msgid "EPIs Válidos"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model,name:l10n_br_hr_sst_epi.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__company_id
+msgid "Empresa"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Entrega"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.ui.menu,name:l10n_br_hr_sst_epi.menu_sst_entregas
+msgid "Entregas de EPI"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Equipamento"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__fabricante_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_search
+msgid "Fabricante"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__fabricante
+msgid "Fabricante (texto)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_risco_ids
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__risco_neutralizado_ids
+msgid ""
+"Fatores de risco que este EPI protege. É o que liga a entrega do equipamento"
+" ao grupo epcEpi do S-2240."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Ficha de Controle de Entrega de EPI"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.actions.report,name:l10n_br_hr_sst_epi.action_report_ficha_epi
+msgid "Ficha de EPI (NR-6)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__med_protecao
+msgid ""
+"Foram observadas as condições de funcionamento do EPI ao longo do tempo, "
+"conforme especificação técnica do fabricante."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__higienizacao
+msgid "Higienização Observada"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/hr_personal_equipment.py:0
+#, python-format
+msgid "Informe o motivo da devolução do EPI %(produto)s."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#. odoo-python
+#: code:addons/l10n_br_hr_sst_epi/models/sst_ca.py:0
+#, python-format
+msgid "Informe o número do Certificado de Aprovação."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.constraint,message:l10n_br_hr_sst_epi.constraint_l10n_br_sst_ca_numero_uniq
+msgid "Já existe um Certificado de Aprovação com este número."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__med_protecao
+msgid "Medidas de Proteção Adotadas"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Motivo"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_motivo_devolucao
+msgid "Motivo da Devolução"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__hr_personal_equipment__l10n_br_sst_motivo_devolucao__mudanca_funcao
+msgid "Mudança de função"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_personal_equipment_form_view_sst
+msgid "NR-6"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__cond_functo__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__higienizacao__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__med_protecao__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__periodic_troca__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__prz_valid__n
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__uso_inint__n
+msgid "Não"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__numero
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_form
+msgid "Número do CA"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__numero
+msgid ""
+"Número do Certificado de Aprovação emitido pelo Ministério do Trabalho. "
+"Informado em docAval no S-2240."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_observacao_devolucao
+msgid "Observação da Devolução"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__observacao
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_form
+msgid "Observações"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__hr_personal_equipment__l10n_br_sst_motivo_devolucao__outro
+msgid "Outro"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__periodic_troca
+msgid "Periodicidade de Troca Observada"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__prz_valid
+msgid "Prazo de Validade Observado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__hr_personal_equipment__l10n_br_sst_motivo_devolucao__vencido
+msgid "Prazo de validade vencido"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model,name:l10n_br_hr_sst_epi.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__product_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_form
+msgid "Produtos"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Qtd."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_personal_equipment_form_view_sst
+msgid "Registrar Devolução"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid ""
+"Registro de entrega de Equipamento de Proteção Individual,\n"
+"                            nos termos da NR-6 e da Portaria SIT 107/2009."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Responsável pela entrega"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_risco_ids
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__risco_neutralizado_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.hr_personal_equipment_form_view_sst
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_form
+msgid "Riscos Neutralizados"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model,name:l10n_br_hr_sst_epi.model_l10n_br_sst_ca
+msgid "SST - Certificado de Aprovação (CA)"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.actions.server,name:l10n_br_hr_sst_epi.cron_ca_alerta_vencimento_ir_actions_server
+#: model:ir.cron,cron_name:l10n_br_hr_sst_epi.cron_ca_alerta_vencimento
+msgid "SST: alerta de vencimento de Certificado de Aprovação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__cond_functo__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__higienizacao__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__med_protecao__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__periodic_troca__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__prz_valid__s
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__uso_inint__s
+msgid "Sim"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__state
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_search
+msgid "Situação"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_ca_state
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_product_product__l10n_br_sst_ca_state
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_product_template__l10n_br_sst_ca_state
+msgid "Situação do CA"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__tipo_epi
+msgid "Tipo de EPI"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Trabalhador"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__hr_personal_equipment__l10n_br_sst_motivo_devolucao__troca
+msgid "Troca por desgaste"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__fabricante
+msgid "Use quando o fabricante não tem cadastro de parceiro."
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__uso_inint
+msgid "Uso Ininterrupto"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Validade"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_hr_personal_equipment__l10n_br_sst_ca_validade
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_product_product__l10n_br_sst_ca_validade
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_product_template__l10n_br_sst_ca_validade
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.report_ficha_epi
+msgid "Validade do CA"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__validade
+msgid "Validade do Certificado"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__state__vencido
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_form
+msgid "Vencido"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_sst_epi.l10n_br_sst_ca_view_search
+msgid "Vencidos"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields.selection,name:l10n_br_hr_sst_epi.selection__l10n_br_sst_ca__state__vigente
+msgid "Vigente"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,field_description:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: l10n_br_hr_sst_epi
+#: model:ir.model.fields,help:l10n_br_hr_sst_epi.field_l10n_br_sst_ca__website_message_ids
+msgid "Website communication history"
+msgstr ""
