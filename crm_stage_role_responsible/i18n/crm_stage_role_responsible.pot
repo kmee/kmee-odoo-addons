@@ -26,6 +26,13 @@ msgid "Closer"
 msgstr ""
 
 #. module: crm_stage_role_responsible
+#. odoo-python
+#: code:addons/crm_stage_role_responsible/models/crm_lead.py:0
+#, python-format
+msgid "Current stage requires a %s assignment."
+msgstr ""
+
+#. module: crm_stage_role_responsible
 #: model:ir.model.fields.selection,name:crm_stage_role_responsible.selection__crm_stage__role_responsible__default
 msgid "Default"
 msgstr ""
