@@ -16,7 +16,8 @@ class TestBlanketOrderIsolatedQuotation(TransactionCase):
         cls.env = cls.env(
             context=dict(cls.env.context, tracking_disable=True, no_reset_password=True)
         )
-        cls.today = fields.Date.context_today(cls.env.user)
+        # the model compares the validity date with fields.Date.today() (UTC)
+        cls.today = fields.Date.today()
         cls.partner = cls.env["res.partner"].create({"name": "BO Customer"})
         cls.product = cls.env["product.product"].create(
             {"name": "BO Service", "type": "service", "list_price": 100.0}
