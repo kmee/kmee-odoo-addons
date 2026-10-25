@@ -34,7 +34,7 @@ msgstr ""
 #: model:ir.model.fields,help:helpdesk_mgmt_sla_formula.field_helpdesk_sla__sla_deadline_formula
 msgid ""
 "Permite definir a data de deadline usando Python.\n"
-"Use 'record' como a instância do ticket.\n"
+"Use 'record' para ler os campos do ticket.\n"
 "O valor retornado deve ser uma data (datetime ou date).\n"
 "Exemplo: record.create_date + timedelta(days=2)"
 msgstr ""
