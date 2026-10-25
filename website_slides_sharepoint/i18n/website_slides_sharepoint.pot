@@ -353,6 +353,13 @@ msgid "Video Source"
 msgstr ""
 
 #. module: website_slides_sharepoint
+#. odoo-python
+#: code:addons/website_slides_sharepoint/tests/test_slide_behavior.py:0
+#, python-format
+msgid "boom from graph"
+msgstr ""
+
+#. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
 #, python-format
@@ -367,6 +374,20 @@ msgid ""
 "button of the Microsoft interface.\n"
 "                    Word, Excel and PowerPoint files are converted to PDF\n"
 "                    automatically."
+msgstr ""
+
+#. module: website_slides_sharepoint
+#. odoo-python
+#: code:addons/website_slides_sharepoint/tests/test_controller.py:0
+#, python-format
+msgid "cannot resolve"
+msgstr ""
+
+#. module: website_slides_sharepoint
+#. odoo-python
+#: code:addons/website_slides_sharepoint/tests/test_slide_behavior.py:0
+#, python-format
+msgid "down"
 msgstr ""
 
 #. module: website_slides_sharepoint
@@ -408,6 +429,13 @@ msgid ""
 msgstr ""
 
 #. module: website_slides_sharepoint
+#. odoo-python
+#: code:addons/website_slides_sharepoint/tests/test_controller.py:0
+#, python-format
+msgid "graph down"
+msgstr ""
+
+#. module: website_slides_sharepoint
 #. odoo-javascript
 #: code:addons/website_slides_sharepoint/static/src/xml/slides_sharepoint_upload.xml:0
 #, python-format
@@ -422,6 +450,13 @@ msgid ""
 "need to share the video\n"
 "                    with \"Anyone with the link\": keep your default sharing\n"
 "                    settings."
+msgstr ""
+
+#. module: website_slides_sharepoint
+#. odoo-python
+#: code:addons/website_slides_sharepoint/tests/test_slide_behavior.py:0
+#, python-format
+msgid "no content"
 msgstr ""
 
 #. module: website_slides_sharepoint
