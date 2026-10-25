@@ -19,6 +19,11 @@ msgid "Ano(s)"
 msgstr ""
 
 #. module: l10n_br_hr_holidays_public
+#: model:ir.model,name:l10n_br_hr_holidays_public.model_l10n_br_public_holidays_wizard
+msgid "Assistente de Feriados Públicos"
+msgstr ""
+
+#. module: l10n_br_hr_holidays_public
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_holidays_public.l10n_br_public_holidays_wizard_form_view
 msgid "Cancel"
 msgstr ""
@@ -111,9 +116,4 @@ msgstr ""
 #. module: l10n_br_hr_holidays_public
 #: model:ir.model.fields,field_description:l10n_br_hr_holidays_public.field_l10n_br_public_holidays_wizard__interval_type
 msgid "Tipo"
-msgstr ""
-
-#. module: l10n_br_hr_holidays_public
-#: model:ir.model,name:l10n_br_hr_holidays_public.model_l10n_br_public_holidays_wizard
-msgid "l10n_br.public.holidays.wizard"
 msgstr ""
