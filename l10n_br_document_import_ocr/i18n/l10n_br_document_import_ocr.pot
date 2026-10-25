@@ -1,0 +1,473 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* l10n_br_document_import_ocr
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Destino da importação</span>"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Engine de OCR</span>"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Operação fiscal padrão</span>"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Produto de serviço padrão</span>"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.document_import_wizard_form_ocr
+msgid "<strong>Confira com atenção:</strong>"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid "A biblioteca pymupdf não está instalada no servidor."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__name
+msgid "Arquivo"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__res_company__document_import_ocr_engine__http
+msgid "Backend HTTP (VLM, OpenAI-compatible)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model,name:l10n_br_document_import_ocr.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__company_id
+msgid "Company"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__l10n_br_document_import_extraction__state__done
+msgid "Concluída"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model,name:l10n_br_document_import_ocr.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid ""
+"Criar somente o documento fiscal ou também a\n"
+"                                    fatura de fornecedor."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__service_type_id
+msgid "Código de serviço (LC 116)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__verify_code
+msgid "Código de verificação"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.document_import_wizard_form_ocr
+msgid "Dados do serviço (OCR)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.document_import_extraction_form
+msgid "Dados estruturados"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__service_description
+msgid "Descrição do serviço"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__ocr_destination
+msgid "Destino"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_company__document_import_destination
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_config_settings__document_import_destination
+msgid "Destino da importação"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__document_date
+msgid "Document Date"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__l10n_br_fiscal_document_import_wizard__ocr_destination__move
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__res_company__document_import_destination__move
+msgid "Documento Fiscal + Fatura"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__document_id
+msgid "Documento criado"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__duration
+msgid "Duração (s)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_company__document_import_ocr_engine
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_config_settings__document_import_ocr_engine
+msgid "Engine de OCR"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid "Engine de OCR desconhecido: %s"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__error_message
+msgid "Error Message"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/wizards/document_import_wizard.py:0
+#, python-format
+msgid ""
+"Este documento tem chave de acesso (%s): importe o XML correspondente (via "
+"DF-e ou upload do XML) em vez da imagem."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__extraction_method
+msgid "Extraction Method"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__extraction_id
+msgid "Extração"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model,name:l10n_br_document_import_ocr.model_l10n_br_document_import_extraction
+msgid "Extração de documento importado (cache e auditoria)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model,name:l10n_br_document_import_ocr.model_l10n_br_ocr_engine
+msgid "Extração de texto de PDF/imagem (nativo + OCR)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model,name:l10n_br_document_import_ocr.model_l10n_br_document_extractor
+msgid "Extração estruturada de campos fiscais brasileiros"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.actions.act_window,name:l10n_br_document_import_ocr.document_import_extraction_action
+msgid "Extrações de importação"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.ui.menu,name:l10n_br_document_import_ocr.document_import_extraction_menu
+msgid "Extrações de importação (OCR)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__l10n_br_document_import_extraction__state__failed
+msgid "Falhou"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__field_confidence
+msgid "Field Confidence"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__file_checksum
+msgid "File Checksum"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__partner_id
+msgid "Fornecedor detectado"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/wizards/document_import_wizard.py:0
+#, python-format
+msgid ""
+"Fornecedor não localizado pelo CNPJ %s. Cadastre o parceiro e importe "
+"novamente."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__id
+msgid "ID"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__issqn_wh_value
+msgid "ISS retido"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model,name:l10n_br_document_import_ocr.model_l10n_br_fiscal_document_import_wizard
+msgid "Import Document Wizard"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.document_import_wizard_form_ocr
+msgid "Importar (OCR)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid "Importação OCR (Brasil)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid "Importação de documentos por OCR"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__is_ocr_import
+msgid "Is Ocr Import"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/wizards/document_import_wizard.py:0
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.document_import_wizard_form_ocr
+#, python-format
+msgid "Já existe um documento com este número deste fornecedor."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__low_confidence_fields
+msgid "Low Confidence Fields"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__mimetype
+msgid "Mimetype"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/wizards/document_import_wizard.py:0
+#, python-format
+msgid ""
+"Nenhuma operação fiscal de entrada de serviço encontrada. Configure a "
+"operação padrão nas configurações fiscais."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid "O arquivo excede o limite de %d MB para importação."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid ""
+"O documento não tem camada de texto e o OCR está desativado. Ative um engine"
+" de OCR nas configurações fiscais da empresa."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid "O engine HTTP (VLM) ainda não está disponível nesta versão."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid "O engine RapidOCR ainda não está disponível nesta versão."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/models/ocr_engine.py:0
+#, python-format
+msgid ""
+"O engine Tesseract está configurado mas o pacote pytesseract (e/ou Pillow) "
+"não está instalado no servidor. Instale-os ou mude o engine nas "
+"configurações."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__l10n_br_document_import_extraction__extraction_method__ocr
+msgid "OCR"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_company__document_import_default_operation_id
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_config_settings__document_import_default_operation_id
+msgid "Operação fiscal padrão (serviços tomados)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/wizards/document_import_wizard.py:0
+#, python-format
+msgid ""
+"Para gerar a fatura de fornecedor, configure o produto de serviço padrão nas"
+" configurações fiscais da empresa."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_company__document_import_default_product_id
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_res_config_settings__document_import_default_product_id
+msgid "Produto de serviço padrão (serviços tomados)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,help:l10n_br_document_import_ocr.field_res_company__document_import_default_product_id
+#: model:ir.model.fields,help:l10n_br_document_import_ocr.field_res_config_settings__document_import_default_product_id
+msgid ""
+"Produto usado na linha do documento fiscal importado por OCR. Obrigatório "
+"para gerar a fatura de fornecedor."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__res_company__document_import_ocr_engine__rapidocr
+msgid "RapidOCR / PP-OCR (ONNX)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#. odoo-python
+#: code:addons/l10n_br_document_import_ocr/wizards/document_import_wizard.py:0
+#, python-format
+msgid "Serviço importado (OCR) - NFS-e %s"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__l10n_br_fiscal_document_import_wizard__ocr_destination__fiscal
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__res_company__document_import_destination__fiscal
+msgid "Somente Documento Fiscal"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__res_company__document_import_ocr_engine__none
+msgid "Somente texto nativo do PDF"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__state
+msgid "State"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__structured_data
+msgid "Structured Data"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__structuring_method
+msgid "Structuring Method"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__res_company__document_import_ocr_engine__tesseract
+msgid "Tesseract (local, CPU)"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_document_import_extraction__raw_text
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.document_import_extraction_form
+msgid "Texto extraído"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields.selection,name:l10n_br_document_import_ocr.selection__l10n_br_document_import_extraction__extraction_method__native_text
+msgid "Texto nativo do PDF"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model_terms:ir.ui.view,arch_db:l10n_br_document_import_ocr.res_config_settings_view_form
+msgid ""
+"Usado quando o PDF não tem camada de texto\n"
+"                                    (documento escaneado ou foto)."
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__issqn_value
+msgid "Valor do ISS"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__amount_untaxed
+msgid "Valor dos serviços"
+msgstr ""
+
+#. module: l10n_br_document_import_ocr
+#: model:ir.model.fields,field_description:l10n_br_document_import_ocr.field_l10n_br_fiscal_document_import_wizard__amount_total
+msgid "Valor total"
+msgstr ""
