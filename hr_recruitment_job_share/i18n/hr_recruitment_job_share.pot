@@ -54,6 +54,11 @@ msgid "Job Position"
 msgstr ""
 
 #. module: hr_recruitment_job_share
+#: model:ir.model,name:hr_recruitment_job_share.model_job_share_wizard
+msgid "Job Share Wizard"
+msgstr ""
+
+#. module: hr_recruitment_job_share
 #: model:ir.model.fields,field_description:hr_recruitment_job_share.field_job_share_wizard____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -82,11 +87,6 @@ msgstr ""
 #. module: hr_recruitment_job_share
 #: model:ir.model.fields,field_description:hr_recruitment_job_share.field_job_share_wizard__job_id
 msgid "Vaga"
-msgstr ""
-
-#. module: hr_recruitment_job_share
-#: model:ir.model,name:hr_recruitment_job_share.model_job_share_wizard
-msgid "job.share.wizard"
 msgstr ""
 
 #. module: hr_recruitment_job_share
