@@ -1,5 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
+# 	* sale_margin_product_cost_security
 #
 msgid ""
 msgstr ""
@@ -11,3 +12,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model.fields,field_description:sale_margin_product_cost_security.field_sale_order_line__purchase_price
+msgid "Cost"
+msgstr ""
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model.fields,field_description:sale_margin_product_cost_security.field_sale_order__margin
+#: model:ir.model.fields,field_description:sale_margin_product_cost_security.field_sale_order_line__margin
+#: model:ir.model.fields,field_description:sale_margin_product_cost_security.field_sale_report__margin
+msgid "Margin"
+msgstr ""
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model.fields,field_description:sale_margin_product_cost_security.field_sale_order__margin_percent
+#: model:ir.model.fields,field_description:sale_margin_product_cost_security.field_sale_order_line__margin_percent
+msgid "Margin (%)"
+msgstr ""
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model,name:sale_margin_product_cost_security.model_sale_cost_security_mixin
+msgid "Sale cost access control on grouped reads"
+msgstr ""
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model,name:sale_margin_product_cost_security.model_sale_report
+msgid "Sales Analysis Report"
+msgstr ""
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model,name:sale_margin_product_cost_security.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_margin_product_cost_security
+#: model:ir.model,name:sale_margin_product_cost_security.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
