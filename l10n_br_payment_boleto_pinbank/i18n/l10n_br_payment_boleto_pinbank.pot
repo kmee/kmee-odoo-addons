@@ -161,3 +161,17 @@ msgstr ""
 #: model_terms:payment.provider,done_msg:l10n_br_payment_boleto_pinbank.payment_acquirer_boleto_pinbank
 msgid "Your payment has been successfully processed. Thank you!"
 msgstr ""
+
+#. module: l10n_br_payment_boleto_pinbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_pinbank/tests/test_pinbank_behavior.py:0
+#, python-format
+msgid "down"
+msgstr ""
+
+#. module: l10n_br_payment_boleto_pinbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_pinbank/tests/test_pinbank_behavior.py:0
+#, python-format
+msgid "fail"
+msgstr ""
