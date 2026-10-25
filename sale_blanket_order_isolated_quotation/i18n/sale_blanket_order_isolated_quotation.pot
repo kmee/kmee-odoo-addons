@@ -50,6 +50,16 @@ msgid "Blanket Order Line"
 msgstr ""
 
 #. module: sale_blanket_order_isolated_quotation
+#: model:ir.model,name:sale_blanket_order_isolated_quotation.model_sale_blanket_order_wizard
+msgid "Blanket order wizard"
+msgstr ""
+
+#. module: sale_blanket_order_isolated_quotation
+#: model:ir.model,name:sale_blanket_order_isolated_quotation.model_sale_blanket_order_wizard_line
+msgid "Blanket order wizard line"
+msgstr ""
+
+#. module: sale_blanket_order_isolated_quotation
 #: model_terms:ir.ui.view,arch_db:sale_blanket_order_isolated_quotation.view_sale_order_confirm
 msgid "Cancel"
 msgstr ""
@@ -92,6 +102,11 @@ msgstr ""
 #. module: sale_blanket_order_isolated_quotation
 #: model:ir.model.fields,field_description:sale_blanket_order_isolated_quotation.field_sale_order_confirm__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: sale_blanket_order_isolated_quotation
+#: model:ir.model.fields,field_description:sale_blanket_order_isolated_quotation.field_sale_blanket_order_wizard_line__discount
+msgid "Discount"
 msgstr ""
 
 #. module: sale_blanket_order_isolated_quotation
@@ -155,8 +170,21 @@ msgid "Quotation Data Json"
 msgstr ""
 
 #. module: sale_blanket_order_isolated_quotation
-#: model:ir.model.fields,field_description:sale_blanket_order_isolated_quotation.field_sale_order__blanket_order_id
+#. odoo-python
+#: code:addons/sale_blanket_order_isolated_quotation/models/sale_order.py:0
+#, python-format
+msgid ""
+"Quotations must be confirmed one at a time, choosing between a sale order "
+"and a blanket order: %s"
+msgstr ""
+
+#. module: sale_blanket_order_isolated_quotation
 #: model:ir.model.fields,field_description:sale_blanket_order_isolated_quotation.field_sale_order__blanket_order_referenced_id
+msgid "Referenced Blanket Order"
+msgstr ""
+
+#. module: sale_blanket_order_isolated_quotation
+#: model:ir.model.fields,field_description:sale_blanket_order_isolated_quotation.field_sale_order__blanket_order_id
 msgid "Related Blanket Order"
 msgstr ""
 
