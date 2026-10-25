@@ -122,11 +122,13 @@ msgid ""
 "                        <b>Telefone:</b> <t t-out=\"object.phone or ''\"></t><br>\n"
 "                        <b>Receita Esperada:</b> <t t-out=\"object.expected_revenue or ''\"></t><br>\n"
 "                        <br>\n"
-"                        <b>Qualificação BANT:</b><br>\n"
-"                        <b>Budget:</b> <t t-out=\"object.x_budget_value or 'Não definido'\"></t><br>\n"
-"                        <b>Authority:</b> <t t-out=\"object.x_decision_maker or 'Não definido'\"></t> (<t t-out=\"object.x_decision_maker_role or ''\"></t>)<br>\n"
-"                        <b>Need:</b> <t t-out=\"object.x_need_description or 'Não definido'\"></t><br>\n"
-"                        <b>Timeline:</b> <t t-out=\"object.x_purchase_date or 'Não definido'\"></t><br>\n"
+"                        <t t-if=\"'bant_budget_amount' in object._fields\">\n"
+"                            <b>Qualificação BANT:</b><br>\n"
+"                            <b>Budget:</b> <t t-out=\"object.bant_budget_amount or 'Não definido'\"></t><br>\n"
+"                            <b>Authority:</b> <t t-out=\"object.bant_authority_contact or 'Não definido'\"></t> (<t t-out=\"object.bant_authority_role or ''\"></t>)<br>\n"
+"                            <b>Need:</b> <t t-out=\"object.bant_need_description or 'Não definido'\"></t><br>\n"
+"                            <b>Timeline:</b> <t t-out=\"object.bant_timeline_date or 'Não definido'\"></t><br>\n"
+"                        </t>\n"
 "                        <br>\n"
 "                        É recomendado entrar em contato em até 24 horas para agendar a próxima etapa.\n"
 "                        <br><br>\n"
@@ -151,6 +153,11 @@ msgstr ""
 #. module: crm_predict_revenue
 #: model_terms:ir.ui.view,arch_db:crm_predict_revenue.crm_lead_view_form_inherit_predict_revenue
 msgid "Analytics"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.stage,name:crm_predict_revenue.stage_opportunity_presentation
+msgid "Apresentação"
 msgstr ""
 
 #. module: crm_predict_revenue
@@ -191,6 +198,11 @@ msgstr ""
 #. module: crm_predict_revenue
 #: model:crm.tag,name:crm_predict_revenue.tag_authority_decision_maker
 msgid "Decisor"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.stage,name:crm_predict_revenue.stage_opportunity_discovery
+msgid "Descoberta"
 msgstr ""
 
 #. module: crm_predict_revenue
@@ -254,6 +266,16 @@ msgid "Lead - Follow-up"
 msgstr ""
 
 #. module: crm_predict_revenue
+#: model:crm.stage,name:crm_predict_revenue.stage_lead_new
+msgid "Lead Novo"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.stage,name:crm_predict_revenue.stage_lead_qualified
+msgid "Lead Qualificado"
+msgstr ""
+
+#. module: crm_predict_revenue
 #: model:ir.model,name:crm_predict_revenue.model_crm_lead
 msgid "Lead/Opportunity"
 msgstr ""
@@ -281,6 +303,11 @@ msgstr ""
 #. module: crm_predict_revenue
 #: model:crm.tag,name:crm_predict_revenue.tag_need_developing
 msgid "Necessidade em Desenvolvimento"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.stage,name:crm_predict_revenue.stage_opportunity_negotiation
+msgid "Negociação"
 msgstr ""
 
 #. module: crm_predict_revenue
@@ -372,6 +399,11 @@ msgstr ""
 #: model:ir.actions.act_window,name:crm_predict_revenue.action_crm_revenue_prediction_report
 #: model:ir.ui.menu,name:crm_predict_revenue.menu_crm_revenue_prediction
 msgid "Previsão de Receita"
+msgstr ""
+
+#. module: crm_predict_revenue
+#: model:crm.stage,name:crm_predict_revenue.stage_opportunity_proposal
+msgid "Proposta"
 msgstr ""
 
 #. module: crm_predict_revenue
