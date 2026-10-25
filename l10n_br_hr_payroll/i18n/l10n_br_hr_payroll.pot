@@ -14,6 +14,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_rat__1
+msgid "1% - risco leve"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_rat__2
+msgid "2% - risco médio"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_rat__3
+msgid "3% - risco grave"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__active
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__active
@@ -56,6 +72,53 @@ msgid "Alíquota (%)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_rat
+msgid "Alíquota RAT"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_terceiros_padrao
+msgid "Alíquota Terceiros Padrão (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_terceiros_padrao
+msgid ""
+"Alíquota total das contribuições a outras entidades e fundos (terceiros) do "
+"código FPAS da lotação padrão. Indústria (FPAS 507): 5,8% = Salário-Educação"
+" 2,5 + INCRA 0,2 + SENAI 1,0 + SESI 1,5 + SEBRAE 0,6 (Anexo III da IN RFB "
+"2.110/2022). A composição varia por enquadramento (o SEBRAE em especial), "
+"por isso é parâmetro e não constante do código."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_contract__l10n_br_hr_simples_anexo
+msgid "Anexo do Simples (Atividade)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_simples_anexo
+msgid "Anexo do Simples Nacional"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_contract__l10n_br_hr_simples_anexo
+msgid ""
+"Anexo do Simples Nacional da atividade exercida pelo empregado, quando diferente do anexo preponderante da empresa. Vazio = usa o anexo da empresa.\n"
+"\n"
+"Serve à atividade concomitante do Simples: uma optante com atividade do anexo IV (construção civil, vigilância, limpeza) recolhe a contribuição patronal por fora do DAS (LC 123/2006, art. 18, §5º-C) para os empregados dessa atividade, ainda que o anexo preponderante seja outro. É eixo INDEPENDENTE da desoneração/CPRB."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_simples_anexo
+msgid ""
+"Anexo preponderante quando a empresa é optante pelo Simples Nacional. Só o "
+"anexo IV recolhe a contribuição patronal por fora do DAS (LC 123/2006, art. "
+"18, §5º-C); nos anexos I, II, III e V a folha não gera CPP, RAT nem "
+"terceiros (apenas FGTS)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_employee__l10n_br_tipo_contrato__aprendiz
 msgid "Aprendiz"
 msgstr ""
@@ -68,6 +131,11 @@ msgstr ""
 #. module: l10n_br_hr_payroll
 #: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_base_irrf_est
 msgid "Base IRRF (Estatutário)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__base_legal
+msgid "Base Legal"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -91,11 +159,26 @@ msgid "CLT"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_cprb_perc_contrib_nao_desonerada
+msgid ""
+"Campo percRedContrib do eSocial S-1280: percentual A QUE a contribuição patronal fica reduzida, igual à proporção da receita bruta NÃO desonerada sobre a receita bruta total do mês.\n"
+"\n"
+"Atenção à direção: desoneração TOTAL informa ZERO (e não 100). É dado de competência, porque muda a cada mês com o faturamento.\n"
+"\n"
+"Quando a receita não desonerada é de até 5% do total, a lei dispensa a proporcionalização e a CPRB incide sobre a receita inteira (Lei 12.546/2011, art. 9º, §§5º e 6º): informar zero."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__fator
 msgid ""
 "Coeficiente multiplicado pelo rendimento bruto do mês. Redutor = Parcela "
 "Fixa - Fator x rendimento bruto. Zero = redutor fixo (isenção integral até o"
 " teto da faixa)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_res_company
+msgid "Companies"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -109,6 +192,7 @@ msgid "Contribuição RPPS"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__create_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__create_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__create_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__create_uid
@@ -118,12 +202,26 @@ msgid "Created by"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__create_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_fpas_padrao
+msgid "Código FPAS Padrão"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_fpas_padrao
+msgid ""
+"Código do Fundo de Previdência e Assistência Social da atividade (ex.: 507 = indústria), que define o rol de entidades (terceiros) a que se contribui.\n"
+"\n"
+"No eSocial esse enquadramento pertence à LOTAÇÃO TRIBUTÁRIA (S-1020, grupo fpasLotacao), não ao estabelecimento: uma empresa pode ter lotações com FPAS diferentes (obra própria, cessão de mão de obra, etc.). Aqui o campo é a lotação PADRÃO da empresa, usada enquanto o cadastro de lotações não existir."
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -163,12 +261,23 @@ msgid "Desconto DSR"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_res_company_form_payroll_br
+msgid "Desoneração da Folha (CPRB)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__display_name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__base_legal
+msgid "Dispositivo que fixa a proporção do ano, para auditoria da folha."
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -182,13 +291,43 @@ msgid "Employee Contract"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_cprb_optante
+msgid ""
+"Empresa de setor dos arts. 7º/8º da Lei 12.546/2011 que optou pela "
+"contribuição sobre a receita bruta em substituição (parcial, na transição da"
+" Lei 14.973/2024) à contribuição patronal sobre a folha. A opção é anual e "
+"irretratável (art. 9º, §13)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_comp
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_contract_form_payroll_br
 msgid "Encargos Patronais"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_res_company_form_payroll_br
+msgid "Encargos da Folha"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_provisao_decimo_encargos
+msgid "Encargos sobre Provisão de 13º"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_provisao_ferias_encargos
+msgid "Encargos sobre Provisão de Férias"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
 #: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_employee__l10n_br_tipo_contrato__estatutario
 msgid "Estatutário"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_fap
+msgid "FAP"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -233,6 +372,16 @@ msgid "Faltas Injustificadas"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_fap
+msgid ""
+"Fator Acidentário de Prevenção, de 0,5000 a 2,0000, publicado anualmente "
+"pela Previdência por CNPJ (Lei 10.666/2003, art. 10; Decreto 3.048/99, art. "
+"202-A). Multiplica só o RAT; o adicional da aposentadoria especial entra sem"
+" FAP. Truncado, e não arredondado, na quarta casa decimal. Declarado no "
+"eSocial S-1005 (fap)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__fator
 msgid "Fator sobre o Rendimento"
 msgstr ""
@@ -258,6 +407,7 @@ msgid "Filhos para Salário Família"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_end
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_end
@@ -273,8 +423,21 @@ msgid "Folha de Pagamento"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_prov_ferias_perc_indenizado
+msgid "Férias Indenizadas Esperadas (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_contract__l10n_br_grau_insalubridade
 msgid "Grau de Insalubridade"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_rat
+msgid ""
+"Grau de risco de acidente do trabalho do CNAE preponderante do "
+"estabelecimento (Lei 8.212/91, art. 22, II; Anexo V do Decreto 3.048/99). "
+"Declarado no eSocial S-1005 (aliqRat)."
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -333,12 +496,31 @@ msgid "Horas trabalhadas entre 22h e 05h"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_hr_simples_anexo__i
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_simples_anexo__i
+msgid "I - Comércio"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__id
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__id
 msgid "ID"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_hr_simples_anexo__ii
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_simples_anexo__ii
+msgid "II - Indústria"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_hr_simples_anexo__iii
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_simples_anexo__iii
+msgid "III - Serviços (CPP no DAS)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -352,9 +534,20 @@ msgid "INSS Aprendiz"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_cpp_patronal
+msgid "INSS Patronal (CPP)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_irrf
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_employee_form_payroll_br
 msgid "IRRF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_hr_simples_anexo__iv
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_simples_anexo__iv
+msgid "IV - Serviços com CPP por fora (construção, vigilância, limpeza)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -368,6 +561,7 @@ msgid "Insalubridade"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_start
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_start
@@ -383,6 +577,7 @@ msgid "Isenção de IRRF conforme Lei 7.713/88"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao____last_update
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa____last_update
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente____last_update
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa____last_update
@@ -392,6 +587,7 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__write_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__write_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__write_uid
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__write_uid
@@ -401,6 +597,7 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__write_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__write_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__write_date
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__write_date
@@ -412,6 +609,11 @@ msgstr ""
 #. module: l10n_br_hr_payroll
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__base_max
 msgid "Limite de remuneração para ter direito à cota."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_res_company_form_payroll_br
+msgid "Lotação Padrão (eSocial S-1020)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -435,6 +637,7 @@ msgid "Mínimo (10%)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__name
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__name
@@ -457,7 +660,8 @@ msgstr ""
 #: code:addons/l10n_br_hr_payroll/models/hr_contract.py:0
 #, python-format
 msgid ""
-"Não é permitido acumular periculosidade e insalubridade (Súmula 364 do TST)."
+"Não é permitido acumular periculosidade e insalubridade (CLT, art. 193, par."
+" 2, e TST IRR Tema 17): o empregado opta por um dos adicionais."
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -467,6 +671,27 @@ msgstr ""
 msgid ""
 "Não é possível resolver a %s: o holerite está sem competência "
 "(date_from/date_to)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll/models/res_company.py:0
+#, python-format
+msgid ""
+"O FAP da empresa %(empresa)s deve estar entre 0,5000 e 2,0000 (Decreto "
+"3.048/99, art. 202-A). Valor informado: %(valor)s."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#. odoo-python
+#: code:addons/l10n_br_hr_payroll/models/res_company.py:0
+#, python-format
+msgid "O campo %(campo)s deve estar entre 0 e 100 (empresa %(empresa)s)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_cprb_optante
+msgid "Optante pela CPRB"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -530,6 +755,17 @@ msgid "Pensão Alimentícia (Valor Fixo)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_prov_ferias_perc_indenizado
+msgid ""
+"Percentual da provisão de férias que se espera pagar como verba "
+"INDENIZATÓRIA (rescisões, abono). Férias indenizadas e o respectivo terço "
+"não sofrem contribuição previdenciária (Lei 8.212/91, art. 28, §9º, 'd') nem"
+" FGTS (Lei 8.036/90, art. 15, §6º), então essa parcela é excluída da base "
+"dos encargos sobre a provisão. Zero = provisiona encargos sobre a provisão "
+"inteira (conservador)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_hr_employee__l10n_br_pensao_percentual
 msgid ""
 "Percentual da remuneração bruta destinado à pensão alimentícia (ex.: 30 = "
@@ -553,14 +789,97 @@ msgid "Portador de Moléstia Grave"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__perc_cpp_13
+msgid ""
+"Proporção da CPP devida sobre a gratificação natalina. Zero de 2025 a 2027 "
+"(Lei 12.546/2011, art. 9º-A, §1º)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__perc_cpp
+msgid "Proporção da CPP sobre a Folha (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__perc_cpp_13
+msgid "Proporção da CPP sobre o 13º (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__perc_cprb
+msgid "Proporção da CPRB (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__perc_cprb
+msgid ""
+"Proporção da contribuição sobre a receita bruta mantida no ano (100 = "
+"substituição total, como até 2024)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__perc_cpp
+msgid ""
+"Proporção dos 20% do art. 22, I da Lei 8.212/91 devida sobre a folha no ano."
+" Em 2026: 50 (alíquota efetiva de 10%)."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_alw
 msgid "Provento"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_provisao_decimo
+msgid "Provisão de 13º Salário"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_provisao_ferias
+msgid "Provisão de Férias + 1/3"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_res_company_form_payroll_br
+msgid "Provisões"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule.category,name:l10n_br_hr_payroll.hr_salary_rule_category_provisao
+msgid "Provisões Trabalhistas"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_res_company_form_payroll_br
+msgid "RAT / FAP (eSocial S-1005)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_rat_ajustado
+msgid "RAT Ajustado (%)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_rat_patronal
+msgid "RAT Ajustado (GILRAT)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_res_company__l10n_br_hr_rat_ajustado
+msgid ""
+"RAT x FAP: alíquota efetivamente devida sobre a remuneração. Declarada no "
+"eSocial S-1005 (aliqRatAjust)."
 msgstr ""
 
 #. module: l10n_br_hr_payroll
 #: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_irrf_redutor
 #: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_irrf_redutor
 msgid "Redutor do IRPF"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model_terms:ir.ui.view,arch_db:l10n_br_hr_payroll.view_res_company_form_payroll_br
+msgid "Regime Tributário (somente leitura)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -640,6 +959,11 @@ msgid "Temporário"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:hr.salary.rule,name:l10n_br_hr_payroll.hr_rule_terceiros_patronal
+msgid "Terceiros (Outras Entidades)"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_redutor__rendimento_max
 msgid ""
 "Teto do rendimento tributável BRUTO do mês para a faixa. Acima do maior teto"
@@ -652,8 +976,25 @@ msgid "Tipo de Contrato"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.actions.act_window,name:l10n_br_hr_payroll.action_cprb_transicao
+#: model:ir.ui.menu,name:l10n_br_hr_payroll.menu_cprb_transicao
+msgid "Transição da CPRB"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model,name:l10n_br_hr_payroll.model_l10n_br_hr_payroll_cprb_transicao
+msgid "Transição da Reoneração da Folha (CPRB) por Vigência"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
 #: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_hr_payslip__l10n_br_usar_hora_reduzida
 msgid "Usar Hora Noturna Reduzida"
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__hr_contract__l10n_br_hr_simples_anexo__v
+#: model:ir.model.fields.selection,name:l10n_br_hr_payroll.selection__res_company__l10n_br_hr_simples_anexo__v
+msgid "V - Serviços (CPP no DAS)"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
@@ -662,6 +1003,7 @@ msgid "Valor da Cota"
 msgstr ""
 
 #. module: l10n_br_hr_payroll
+#: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_cprb_transicao__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_inss_faixa__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_dependente__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_irrf_faixa__date_end
@@ -669,4 +1011,9 @@ msgstr ""
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_sal_familia_faixa__date_end
 #: model:ir.model.fields,help:l10n_br_hr_payroll.field_l10n_br_hr_payroll_tabela_mixin__date_end
 msgid "Vazio = vigente por prazo indeterminado."
+msgstr ""
+
+#. module: l10n_br_hr_payroll
+#: model:ir.model.fields,field_description:l10n_br_hr_payroll.field_res_company__l10n_br_hr_cprb_perc_contrib_nao_desonerada
+msgid "percRedContrib (%)"
 msgstr ""
