@@ -1,0 +1,374 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_term_manual
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid ""
+"<span class=\"o_form_label oe_inline\" "
+"attrs=\"{'invisible':[('value','!=','percent')]}\">%</span>"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "<span class=\"o_form_label oe_inline\"> days</span>"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "<span class=\"o_form_label oe_inline\"> months, </span>"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model,name:account_payment_term_manual.model_account_payment_term_manual_mixin
+msgid "Account Payment Term Manual Mixin"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__active
+msgid "Active"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__create_uid
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__create_date
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__is_custom
+msgid "Custom Term"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__example_date
+msgid "Date example"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__days
+msgid "Days"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__days_after
+msgid "Days after End of month"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__days_after
+msgid "Days to add after the end of the month"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__note
+msgid "Description on the Invoice"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__discount_percentage
+msgid "Discount %"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__discount_days
+msgid "Discount Days"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__display_name
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__display_on_invoice
+msgid "Display terms on invoice"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "Due"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "Due Date Computation"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.invoice_form
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_tree
+msgid "Due Type"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__discount_percentage
+msgid "Early Payment Discount granted for this line"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__end_month
+msgid "End of month"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__example_amount
+msgid "Example Amount"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__example_invalid
+msgid "Example Invalid"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__example_preview
+msgid "Example Preview"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__fixed_date
+msgid "Fixed Date"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__value_amount
+msgid "For percent enter a ratio between 0-100."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_bank_statement_line__has_manual_lines
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_move__has_manual_lines
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment__has_manual_lines
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__has_manual_lines
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual_mixin__has_manual_lines
+msgid "Has Manual Lines"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__id
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__id
+msgid "ID"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__display_on_invoice
+msgid ""
+"If set, the payment deadlines and respective due amounts will be detailed on"
+" invoices."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__active
+msgid ""
+"If the active field is set to False, it will allow you to hide the payment "
+"terms without removing it."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__is_installment
+msgid "Indica se este termo de pagamento permite parcelamento."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__is_custom
+msgid "Indicates if this payment term is record-specific and editable."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model,name:account_payment_term_manual.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual____last_update
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__write_uid
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__write_date
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model,name:account_payment_term_manual.model_account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_bank_statement_line__manual_payment_term_id
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_move__manual_payment_term_id
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment__manual_payment_term_id
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual_mixin__manual_payment_term_id
+msgid "Manual Payment Term"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model,name:account_payment_term_manual.model_account_payment_term_line_manual
+msgid "Manual Payment Term Line"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_bank_statement_line__manual_payment_term_line_ids
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_move__manual_payment_term_line_ids
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment__manual_payment_term_line_ids
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual_mixin__manual_payment_term_line_ids
+msgid "Manual Payment Term Lines"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__manual_payment_id
+msgid "Manual Payment Terms"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__months
+msgid "Months"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__discount_days
+msgid "Number of days before the early payment proposition expires"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__origin_term_id
+msgid "Original Payment Terms"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.actions.act_window,name:account_payment_term_manual.action_payment_term_manual_form
+#: model:ir.model,name:account_payment_term_manual.model_account_payment_term
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__payment_id
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__name
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "Payment Terms"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__is_installment
+msgid "Permitir Parcelamento"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__provider_id
+msgid "Provedor de Pagamento"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__provider_id
+msgid ""
+"Provedor de pagamento utilizado para processar os pagamentos com "
+"parcelamento."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__value
+msgid "Select here the kind of valuation related to this payment terms line."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__end_month
+msgid "Switch to end of the month after having added months or days"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__installment_rate
+msgid "Taxa de Parcelamento (%)"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__installment_rate
+msgid "Taxa de parcelamento aplicada sobre o valor total da fatura."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_bank_statement_line__has_manual_lines
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_move__has_manual_lines
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment__has_manual_lines
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__has_manual_lines
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual_mixin__has_manual_lines
+msgid "Technical field to keep track of manual lines"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "Term Type"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__payment_term_id
+msgid "Termo de Pagamento Pai"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__payment_term_id
+msgid "Termo de pagamento pai associado a este termo de pagamento."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__line_ids
+msgid "Terms"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_manual__installment_type
+msgid "Tipo de Juros"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_manual__installment_type
+msgid "Tipo de juros aplicado no parcelamento."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__value
+msgid "Type"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,field_description:account_payment_term_manual.field_account_payment_term_line_manual__value_amount
+msgid "Value"
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model:ir.model.fields,help:account_payment_term_manual.field_account_payment_term_line_manual__fixed_date
+msgid "When set, it is the due date, regardless of the months and days."
+msgstr ""
+
+#. module: account_payment_term_manual
+#: model_terms:ir.ui.view,arch_db:account_payment_term_manual.view_payment_term_line_manual_form
+msgid "or Fixed Date"
+msgstr ""
