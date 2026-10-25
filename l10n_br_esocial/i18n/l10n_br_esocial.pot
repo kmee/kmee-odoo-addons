@@ -14,6 +14,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/base_intermediario.py:0
+#, python-format
+msgid ""
+"%(rotulo)s inválido: %(valor)r. O eSocial espera o formato %(esperado)s."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/base_intermediario.py:0
+#, python-format
+msgid ""
+"%(rotulo)s inválido: %(valor)r. O recibo de entrega do eSocial tem o formato"
+" 1.D.<19 dígitos>, por exemplo 1.2.0000000000000012345."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__res_company__l10n_br_esocial_ind_constr__0
 msgid "0 - Não é construtora"
 msgstr ""
@@ -54,8 +71,23 @@ msgid "09 - Verba transitada pela folha - rendimento tributável"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__aliq_rat__1
+msgid "1 - 1% (risco leve)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__res_company__l10n_br_esocial_processo_emissao__1
 msgid "1 - Aplicativo do empregador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__tp_insc_estab__1
+msgid "1 - CNPJ"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__tp_caepf__1
+msgid "1 - Contribuinte individual"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -66,6 +98,16 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__res_company__l10n_br_esocial_ind_constr__1
 msgid "1 - Empresa construtora"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__ind_subst_patr_obra__1
+msgid "1 - Integralmente substituída"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210_pagamento__tp_pgto__1
+msgid "1 - Pagamento de remuneração (S-1200)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -158,6 +200,11 @@ msgid "16 - Exclusiva do segurado - 13º Salário"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__aliq_rat__2
+msgid "2 - 2% (risco médio)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__res_company__l10n_br_esocial_processo_emissao__2
 msgid "2 - Aplicativo governamental (Simplificado)"
 msgstr ""
@@ -171,6 +218,21 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__hr_payslip_line__l10n_br_esocial_tp_rubr__2
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__hr_salary_rule__l10n_br_esocial_tp_rubr__2
 msgid "2 - Desconto"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__ind_subst_patr_obra__2
+msgid "2 - Não substituída"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210_pagamento__tp_pgto__2
+msgid "2 - Pagamento de benefício previdenciário (S-1202)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__tp_caepf__2
+msgid "2 - Produtor rural"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -209,8 +271,18 @@ msgid "26 - Exclusiva do segurado - Sal. Maternidade 13o"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__aliq_rat__3
+msgid "3 - 3% (risco grave)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__res_company__l10n_br_esocial_processo_emissao__3
 msgid "3 - Aplicativo governamental (Web Geral)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__tp_insc_estab__3
+msgid "3 - CAEPF"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -222,6 +294,21 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__res_company__l10n_br_esocial_ind_coop__3
 msgid "3 - Outras cooperativas"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210_pagamento__tp_pgto__3
+msgid "3 - Pagamento a beneficiário sem vínculo (S-1207)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__ind_subst_patr_obra__3
+msgid "3 - Parcialmente substituída"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__tp_caepf__3
+msgid "3 - Segurado especial"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -279,9 +366,19 @@ msgid "35 - Valor descontado do segurado"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__tp_insc_estab__4
+msgid "4 - CNO"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__hr_payslip_line__l10n_br_esocial_tp_rubr__4
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__hr_salary_rule__l10n_br_esocial_tp_rubr__4
 msgid "4 - Informativa Dedutora"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210_pagamento__tp_pgto__4
+msgid "4 - Pagamento de verbas rescisórias (S-2299)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -312,6 +409,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__hr_payslip_line__l10n_br_esocial_cod_inc_irrf__46
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__hr_salary_rule__l10n_br_esocial_cod_inc_irrf__46
 msgid "46 - Dedução do rendimento tributável do IRRF - RRA"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210_pagamento__tp_pgto__5
+msgid "5 - Pagamento de verbas rescisórias de TSV (S-2399)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -497,6 +599,46 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid ""
+"A competência %(per)s já está fechada (S-1299 aceito, recibo %(recibo)s). "
+"Para enviar um novo fechamento, transmita antes uma reabertura (S-1298)."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1298_reabertura.py:0
+#, python-format
+msgid ""
+"A competência %(per)s não possui fechamento (S-1299) aceito, então não há o "
+"que reabrir."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#, python-format
+msgid "A exclusão de %(tipo)s exige o CPF do trabalhador do evento excluído."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#, python-format
+msgid "A exclusão de %(tipo)s exige o período de apuração do evento excluído."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_conferencia__per_apur
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__per_apur
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1298__per_apur
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1299__per_apur
+msgid "AAAA-MM para a folha mensal, AAAA para o 13º salário."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_acidente
 msgid "Acidente de Trabalho"
 msgstr ""
@@ -579,11 +721,12 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_agente_nocivo
-msgid "Agentes Nocivos (Tab. 22)"
+msgid "Agentes Nocivos (Tab. 24)"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_search
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_search
 msgid "Agrupar por"
 msgstr ""
 
@@ -622,9 +765,20 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__operacao__a
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1000__operacao__alteracao
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__operacao__alteracao
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1010__operacao__alteracao
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1020__operacao__alteracao
 msgid "Alteração"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__aliq_rat
+msgid "Alíquota RAT"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__aliq_rat
+msgid "Alíquota RAT do estabelecimento conforme CNAE preponderante."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -633,7 +787,12 @@ msgid "Ambiente eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia__ind_apuracao__2
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1200__ind_apuracao__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1298__ind_apuracao__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__ind_apuracao__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s3000__ind_apuracao__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__ind_apuracao__2
 msgid "Anual (13º Salário)"
 msgstr ""
 
@@ -685,8 +844,41 @@ msgid "Aplicacao"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_aposentadoria_especial
+msgid "Aposent. Especial (Dec. 3.048)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_aposentadoria_especial
-msgid "Aposentadoria Especial (Tab. 23)"
+msgid "Aposentadoria Especial (Anexo IV do Decreto 3.048)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_aposentadoria_especial
+msgid "Aposentadoria Especial - Anexo IV do Decreto 3.048/1999"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__data_apuracao
+msgid "Apurada em"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+msgid "Apurar"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_apuracao
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+msgid "Apuração"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__s1200_id
+msgid ""
+"Apuração que este pagamento liquida. É dela que sai o identificador do "
+"demonstrativo."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -695,33 +887,118 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s3000_form
+msgid "Auditoria"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__ind_pagto_api
 msgid "Aviso Prévio Indenizado"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_base_fgts
+msgid "Base Cálc. FGTS"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__base_pis_pasep
+msgid "Base PIS/PASEP"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia_linha__indicador__base_cp
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__base_cp
+msgid "Base de contribuição previdenciária"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__base_cp13
+msgid "Base de contribuição previdenciária (13º)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__base_cs
+msgid "Base de contribuição social"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_base_fgts
-msgid "Bases de Cálculo FGTS (Tab. 82)"
+msgid "Bases de Cálculo FGTS"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__employee_id
+msgid "Beneficiário"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#, python-format
+msgid "Beneficiário '%(name)s' não possui CPF configurado."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cbo_oca
+msgid "CBO (OCA)"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_cbo_oca
-msgid "CBO (Tab. 50) - via OCA"
+msgid "CBO - via OCA"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_cid
-msgid "CID (Tab. 60)"
+msgid "CID"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_cid
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cid
+msgid "CID-10"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cnae_oca
+msgid "CNAE (OCA)"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_cnae_oca
-msgid "CNAE (Tab. 56) - via OCA"
+msgid "CNAE - via OCA"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_cnae_mei
-msgid "CNAE MEI (Tab. 81)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cnae_mei
+msgid "CNAE MEI"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__cnae_prep
+msgid "CNAE Preponderante"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__cnae_prep
+msgid "CNAE preponderante do estabelecimento (7 dígitos, sem pontuação)."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__nr_insc_estab
+msgid "CNPJ (14), CAEPF (14) ou CNO (12) do estabelecimento."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__cnpj_resp
+msgid "CNPJ Responsável"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__cnpj_resp
+msgid "CNPJ do responsável pela obra (uso com CNO)."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -730,8 +1007,19 @@ msgid "CPF Contato eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__cpf_trab
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__cpf_trab
+msgid "CPF do Trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cadastro
 msgid "Cadastro"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__descricao
+msgid "Campo"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -740,13 +1028,33 @@ msgid "Campo Fixo"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__descricao
+msgid "Campo do leiaute que originou o valor (ex.: vrBcCp00, vrDescSeg)."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_motivo_cancel_aviso
+msgid "Cancel. Aviso Prévio"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cargo
+msgid "Cargos"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_cargo
-msgid "Cargos eSocial (Tab. 61)"
+msgid "Cargos eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_motivo_desligamento__categ_trab_aplicavel
 msgid "Categ Trab Aplicavel"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__cod_categ
+msgid "Categoria"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -765,8 +1073,13 @@ msgid "Categoria do trabalhador conforme Tabela 1 do eSocial."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_causa_afast_mte
+msgid "Causa Afast. MTE"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_causa_afast_mte
-msgid "Causas Afastamento MTE (Tab. 67)"
+msgid "Causas Afastamento MTE"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -786,6 +1099,11 @@ msgstr ""
 msgid ""
 "Certificado digital A1 não configurado para a empresa '%(company_name)s'. "
 "Instale o módulo l10n_br_fiscal_certificate e configure o certificado."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_ciclo
+msgid "Ciclo Periódico"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -951,13 +1269,45 @@ msgid "Companies"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__comparativo
+msgid "Comparativo"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_compat_categ_lotacao
 msgid "Compatibilidade Categ/Lotação (Tab. 11)"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_compat_fpas
-msgid "Compatibilidade FPAS (Tab. 24)"
+msgid "Compatibilidade FPAS (Tab. 22)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1299_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_search
+msgid "Competência"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__per_ref
+msgid ""
+"Competência da folha que originou o pagamento (AAAA-MM) ou o ano (AAAA) no "
+"caso do 13º salário."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1210__per_apur
+msgid ""
+"Competência do PAGAMENTO (regime de caixa), formato AAAA-MM. Não confundir "
+"com a competência da folha, que vai em cada demonstrativo no campo Período "
+"de Referência."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s3000__per_apur
+msgid "Competência do evento excluído. Obrigatório para eventos periódicos."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -966,9 +1316,37 @@ msgid "Concluído"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia__state__ok
+msgid "Conferida"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__conferencia_id
+msgid "Conferência"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_conferencia.py:0
+#, python-format
+msgid "Conferência %(per)s"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_conferencia
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_conferencia
+msgid "Conferência da Competência"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_config
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_company_form_esocial
 msgid "Configuração"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_search
+msgid "Consolidados"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -996,8 +1374,33 @@ msgid "Contrato"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_contrat_av_np
+msgid "Contratou Avulsos Não Portuários"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__calc_terc
+msgid "Contribuição de terceiros"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia_linha__indicador__cp_contribuinte
+msgid "Contribuição do contribuinte (DCTFWeb)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__cp_seg
+msgid "Contribuição do segurado (consolidada)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_contribuicao
 msgid "Contribuição e Tributos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__info_cp_calc
+msgid "Contribuição previdenciária calculada"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1024,6 +1427,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__create_uid
@@ -1056,13 +1461,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo__create_uid
@@ -1074,6 +1485,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__create_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__create_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__create_uid
@@ -1095,6 +1508,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__create_date
@@ -1127,13 +1542,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo__create_date
@@ -1145,6 +1566,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__create_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__create_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__create_date
@@ -1153,13 +1576,26 @@ msgid "Created on"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__currency_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__currency_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__currency_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__currency_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__currency_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_ocorrencia__codigo
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__codigo
 msgid "Código"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1020__fpas
-msgid "Código FPAS (Fundo de Previdência e Assistência Social)."
+msgid ""
+"Código FPAS da lotação (Tabela 4). Define o conjunto de contribuições de "
+"terceiros devidas."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1177,6 +1613,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_hr_payslip_line__l10n_br_esocial_cod_rubr
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_hr_salary_rule__l10n_br_esocial_cod_rubr
 msgid "Código Rubrica eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_codigo_terceiro
+msgid "Código Terceiro"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1219,8 +1660,44 @@ msgid "Código de lotação para agrupamento de trabalhadores."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__codigo
+msgid ""
+"Código de receita (tpCR/CRMen/CRDia) ou tipo de valor, conforme o grupo."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__cr_dia
+msgid "Código de receita diário (IRRF)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__cr_contrib
+msgid "Código de receita do contribuinte"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__cr_men
+msgid "Código de receita mensal (IRRF)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador_linha__grupo__cr_estab
+msgid "Código de receita por estabelecimento"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1020__cod_tercs
-msgid "Código de terceiros (SESC, SENAI, etc.)."
+msgid ""
+"Código de terceiros associado ao FPAS (SESC/SENAI/SEBRAE/INCRA/salário-"
+"educação). Empresa do Simples Nacional informa 0000: terceiros são "
+"dispensados (LC 123/2006 art. 13, § 3º)."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1020__cod_tercs_susp
+msgid ""
+"Código de terceiros com contribuição suspensa por decisão administrativa ou "
+"judicial."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1234,12 +1711,17 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_codigo_terceiro
-msgid "Códigos de Terceiro (Tab. 51)"
+msgid "Códigos de Terceiro"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__dt_ini_afast
 msgid "Data Início Afastamento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__dt_pgto
+msgid "Data Pagamento"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1258,8 +1740,36 @@ msgid "Data da Alteração"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_hr_payslip__l10n_br_esocial_data_pagamento
+msgid "Data de Pagamento"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__dt_deslig
 msgid "Data do Desligamento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_hr_payslip__l10n_br_esocial_data_pagamento
+msgid ""
+"Data em que o líquido foi efetivamente pago. É o regime de caixa do S-1210: "
+"a competência do evento de pagamento vem desta data, não da competência da "
+"folha."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1299_form
+msgid "Declaração de Conteúdo"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__ide_dm_dev
+msgid "Demonstrativo"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_deposito_fgts
+msgid "Depósito FGTS"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1286,7 +1796,8 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_descricao_fpas
-msgid "Descrição FPAS (Tab. 85)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_descricao_fpas
+msgid "Descrição FPAS"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1297,6 +1808,18 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_lote_form
 msgid "Deseja transmitir este lote ao eSocial?"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__diferenca
+msgid "Diferença"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_conferencia__tolerancia
+msgid ""
+"Diferença absoluta aceita por indicador antes de virar divergência "
+"(arredondamento de centavos)."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1313,6 +1836,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__display_name
@@ -1345,13 +1870,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo__display_name
@@ -1363,11 +1894,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__display_name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__display_name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_irrf_totalizador__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__divergencia_count
+msgid "Divergencia Count"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__divergente
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia__state__divergente
+msgid "Divergente"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_tree
+msgid "Divergências"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1569,16 +2118,26 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_base_intermediario__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_lote__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__company_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__company_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__company_id
 msgid "Empresa"
 msgstr ""
 
@@ -1607,6 +2166,17 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1020_lotacao.py:0
+#, python-format
+msgid ""
+"Empresa enquadrada no Simples Nacional (classificação tributária "
+"%(class_trib)s) não recolhe contribuição para terceiros (LC 123/2006 art. "
+"13, § 3º): o código de terceiros da lotação %(lotacao)s deve ser 0000, e não"
+" %(cod_tercs)s."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_categoria_trabalhador__emprestimo_consignado
 msgid "Emprestimo Consignado"
 msgstr ""
@@ -1622,6 +2192,27 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_ocorrencia__tipo__1
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_search
 msgid "Erro"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1005_form
+msgid "Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#, python-format
+msgid ""
+"Estabelecimento %(estab)s: o CNAE preponderante é obrigatório para inclusão "
+"e alteração do S-1005."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#, python-format
+msgid "Estabelecimento CAEPF exige o Tipo CAEPF preenchido."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1647,13 +2238,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_base_intermediario__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_ocorrencia__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__evento_id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__evento_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__evento_id
 msgid "Evento"
 msgstr ""
 
@@ -1670,9 +2266,43 @@ msgid "Evento Count"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__evento_excluido_id
+msgid "Evento Excluído"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__evento_origem_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s3000_form
+msgid "Evento a Excluir"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__evento_id
+msgid "Evento de Origem"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_evento.py:0
+#, python-format
+msgid "Evento excluído no eSocial pelo S-3000 %(nome)s (recibo %(recibo)s)."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s3000__evento_origem_id
+msgid "Evento já aceito pelo eSocial que se pretende excluir."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador__evento_id
+msgid "Evento periódico cujo processamento gerou este totalizador."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_lote__evento_ids
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_eventos
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_lote_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_hr_payslip_form_esocial
 msgid "Eventos"
 msgstr ""
 
@@ -1682,21 +2312,81 @@ msgid "Eventos eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1299__pendencia_ids
+msgid "Eventos periódicos da competência que ainda não foram aceitos."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_evento__totalizador_ids
+msgid ""
+"Eventos totalizadores (S-5001/S-5002/S-5011/S-5012) devolvidos pelo governo "
+"no processamento deste evento."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_evento__tipo
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s3000__tp_evento
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador__evento_tipo
 msgid "Ex: S-1000, S-1010, S-1200, S-2200, etc."
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__operacao__e
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1000__operacao__exclusao
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__operacao__exclusao
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1010__operacao__exclusao
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1020__operacao__exclusao
 msgid "Exclusão"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__exclusao_evento_id
+msgid "Exclusões"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__state__excluded
+msgid "Excluído"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1299_form
+msgid ""
+"Existem eventos periódicos desta competência sem aceite\n"
+"                        do eSocial. Fechar assim faz o governo apurar sobre folha\n"
+"                        incompleta, e o valor errado vai para a DCTFWeb."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__fap
+msgid "FAP"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#, python-format
+msgid ""
+"FAP inválido (%(fap)s): o Fator Acidentário de Prevenção vai de 0,5000 a "
+"2,0000."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__fpas
 msgid "FPAS"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1020_form
+msgid "FPAS e Terceiros (fpasLotacao)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1005_form
+msgid ""
+"FPAS, código de terceiros e terceiros suspensos\n"
+"                                são da lotação tributária (S-1020), não do\n"
+"                                estabelecimento."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1706,17 +2396,19 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_faixa_inss
-msgid "Faixas INSS (Tab. 57)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_faixa_inss
+msgid "Faixas INSS"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_faixa_irrf
-msgid "Faixas IRRF (Tab. 58)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_faixa_irrf
+msgid "Faixas IRRF"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_faixa_sal_familia
-msgid "Faixas Salário Família (Tab. 65)"
+msgid "Faixas Salário Família"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1736,25 +2428,61 @@ msgid "Falha na assinatura/transmissão do lote: %(erro)s"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__comparativo
+msgid ""
+"Falso nos indicadores que só existem do lado do governo — eles são "
+"informativos e nunca acusam divergência."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__fap
+msgid ""
+"Fator Acidentário de Prevenção (0,5000 a 2,0000) publicado pela Previdência "
+"Social para o estabelecimento."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__fator_rubr
 msgid "Fator Rubr"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_feriado
-msgid "Feriados eSocial (Tab. 84)"
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__fechamento_evento_id
+msgid "Fechamento a Reabrir"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1299_form
+msgid "Fechar Competência"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_feriado
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_feriado
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_feriado
+msgid "Feriados Nacionais"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#: code:addons/l10n_br_esocial/models/intermediarios/s1020_lotacao.py:0
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__fim_valid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__fim_valid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__fim_valid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__fim_valid
+#, python-format
 msgid "Fim Validade"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_financiamento_aposent
 msgid "Financiamento Aposentadoria (Tab. 2)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__valor_folha
+msgid "Folha Calculada"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1765,6 +2493,16 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__message_partner_ids
 msgid "Followers (Partners)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__fonte_folha
+msgid "Fonte (Folha)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__fonte_totalizador
+msgid "Fonte (Totalizador)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1785,8 +2523,23 @@ msgid "Formato AAAA-MM para mensal ou AAAA para 13º."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__ini_valid
+msgid "Formato AAAA-MM."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__fim_valid
+msgid "Formato AAAA-MM. Vazio significa validade em aberto."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_lotacao_ref__fpas
 msgid "Fpas"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1005_form
+msgid "GILRAT (aliqGilrat)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1805,13 +2558,31 @@ msgid "Gera Remuneracao"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1005_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1020_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1210_form
+msgid "Gerar Evento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s3000_form
+msgid "Gerar Exclusão"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_hr_payslip_form_esocial
 msgid "Gerar S-1200 eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_hr_payslip_form_esocial
+msgid "Gerar S-1210 eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_categoria_trabalhador__grupo
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_beneficio__grupo
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__grupo
 msgid "Grupo"
 msgstr ""
 
@@ -1821,8 +2592,55 @@ msgid "Has Message"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__payslip_id
+msgid "Holerite"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"Holerite %(nome)s não possui S-1200 gerado. O S-1210 aponta para o "
+"demonstrativo do S-1200 da competência, então a apuração precisa vir "
+"primeiro."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"Holerite %(nome)s não possui a rubrica de líquido (NET). Sem o líquido pago "
+"não é possível montar o S-1210."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__payslip_ids
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__payslip_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
 msgid "Holerites"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_conferencia__payslip_sem_evento_ids
+msgid ""
+"Holerites confirmados da competência que não foram enviados ao eSocial. São "
+"a causa mais comum de divergência no fechamento."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__payslip_sem_evento_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_tree
+msgid "Holerites sem S-1200"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_conferencia.py:0
+#, python-format
+msgid "Holerites sem S-1200 aceito"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1832,7 +2650,8 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_horario
-msgid "Horários (Tab. 52)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_horario
+msgid "Horários"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1843,6 +2662,15 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_horario__hr_saida
 msgid "Hr Saida"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+msgid ""
+"Há holerites confirmados nesta competência sem S-1200\n"
+"                        aceito pelo eSocial. Enquanto isso não for resolvido, a\n"
+"                        folha calculada e o totalizador devolvido não podem\n"
+"                        fechar."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1859,6 +2687,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__id
@@ -1891,13 +2721,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo__id
@@ -1909,6 +2745,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__id
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__id
@@ -1933,8 +2771,23 @@ msgid "ID Tabela Rubricas"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__id_evento
+msgid "ID do Totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_evento__origem_id
 msgid "ID do registro que originou o evento."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia_linha__indicador__inss_segurado
+msgid "INSS retido do segurado"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia_linha__indicador__irrf
+msgid "IRRF retido"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -1954,14 +2807,27 @@ msgid "Identificador da tabela de rubricas para diferenciação."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__ide_dm_dev
+msgid ""
+"Identificador do demonstrativo (ideDmDev) informado no S-1200 da competência"
+" de referência."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_evento__id_evento
 msgid "Identificador único do evento gerado pelo sistema."
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_form
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_hr_salary_rule_form_esocial
 msgid "Identificação"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s3000_form
+msgid "Identificação Complementar"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2010,6 +2876,7 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__operacao__i
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1000__operacao__inclusao
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1005__operacao__inclusao
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1010__operacao__inclusao
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1020__operacao__inclusao
 msgid "Inclusão"
@@ -2021,8 +2888,34 @@ msgid "Ind Coop"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__indicador
+msgid "Indicador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__linha_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+msgid "Indicadores"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+msgid ""
+"Indicadores marcados como não comparativos só\n"
+"                                existem do lado do governo (encargos patronais e\n"
+"                                bases consolidadas): eles são exibidos para\n"
+"                                conferência manual e nunca acusam divergência."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__ind_13
+msgid "Indicativo 13º"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__ind_retif
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__ind_retif
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__ind_retif
 msgid "Indicativo Retificação"
 msgstr ""
 
@@ -2034,6 +2927,11 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_res_company__l10n_br_esocial_ind_coop
 msgid "Indicativo de Cooperativa"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__ind_exist_info
+msgid "Indicativo de Existência de Informação"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2054,7 +2952,17 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_info_rescisao
-msgid "Info Rescisão (Tab. 69)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_info_rescisao
+msgid "Info Rescisão"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"Informe a Data de Pagamento nos holerites abaixo antes de gerar o S-1210 (o evento é por regime de caixa):\n"
+"%(lista)s"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2065,25 +2973,74 @@ msgid "Informe a data de início ou término do afastamento."
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_conferencia.py:0
+#, python-format
+msgid "Informe o período de apuração."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_horario__ini_intervalo
 msgid "Ini Intervalo"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_inst_emprestimo
-msgid "Instituições Empréstimo (Tab. 37)"
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__nr_insc
+msgid "Inscrição"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__nr_insc_estab
+msgid "Inscrição Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_inst_emprestimo
+msgid "Inst. Empréstimo"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_inst_emprestimo
+msgid "Instituições Empréstimo"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#: code:addons/l10n_br_esocial/models/intermediarios/s1020_lotacao.py:0
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__ini_valid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__ini_valid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__ini_valid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__ini_valid
+#, python-format
 msgid "Início Validade"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__message_is_follower
 msgid "Is Follower"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.constraint,message:l10n_br_esocial.constraint_l10n_br_esocial_s1005_estab_validade_uniq
+msgid "Já existe um S-1005 para este estabelecimento nesta validade."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.constraint,message:l10n_br_esocial.constraint_l10n_br_esocial_s1020_lotacao_validade_uniq
+msgid "Já existe um S-1020 para esta lotação nesta validade."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#, python-format
+msgid "Já existe um S-3000 em andamento ou aceito para o evento %(nome)s."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.constraint,message:l10n_br_esocial.constraint_l10n_br_esocial_conferencia_competencia_uniq
+msgid "Já existe uma conferência para esta competência."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2100,6 +3057,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento____last_update
@@ -2132,13 +3091,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo____last_update
@@ -2150,6 +3115,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador____last_update
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior____last_update
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev____last_update
@@ -2171,6 +3138,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__write_uid
@@ -2203,13 +3172,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo__write_uid
@@ -2221,6 +3196,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__write_uid
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__write_uid
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__write_uid
@@ -2242,6 +3219,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__write_date
@@ -2274,13 +3253,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2200__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2206__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2230__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s2299__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_arquivo__write_date
@@ -2292,11 +3277,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__write_date
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__write_date
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_irrf_totalizador__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__linha_count
+msgid "Linha Count"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2310,8 +3302,33 @@ msgid "Localização do erro no XML (XPath)."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__cod_lotacao
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1020_form
+msgid "Lotação"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1020_lotacao.py:0
+#, python-format
+msgid ""
+"Lotação %(lotacao)s: informe o código FPAS. Ele define as contribuições de "
+"terceiros devidas e não pode ser assumido por padrão."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1020_lotacao.py:0
+#, python-format
+msgid ""
+"Lotação %(lotacao)s: informe o código de terceiros correspondente ao FPAS "
+"%(fpas)s (use 0000 quando não houver contribuição de terceiros devida)."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_lotacao_ref
-msgid "Lotação Referência (Tab. 64)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_lotacao_ref
+msgid "Lotação Referência"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2355,6 +3372,11 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__matricula
+msgid "Matrícula"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_hr_employee__l10n_br_esocial_matricula
 msgid "Matrícula atribuída ao trabalhador pela empresa."
 msgstr ""
@@ -2370,7 +3392,12 @@ msgid "Mei"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia__ind_apuracao__1
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1200__ind_apuracao__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1298__ind_apuracao__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__ind_apuracao__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s3000__ind_apuracao__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__ind_apuracao__1
 msgid "Mensal"
 msgstr ""
 
@@ -2405,6 +3432,11 @@ msgid "Motivo Desligamento eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__motivo
+msgid "Motivo da Exclusão"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_motivo_afastamento
 msgid "Motivo de Afastamento (Tab. 18)"
 msgstr ""
@@ -2421,12 +3453,12 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_motivo_cancel_aviso
-msgid "Motivos Cancelamento Aviso (Tab. 74)"
+msgid "Motivos Cancelamento Aviso"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_motivo_cessacao
-msgid "Motivos Cessação Benefício (Tab. 34)"
+msgid "Motivos Cessação Benefício (Tab. 26)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2460,6 +3492,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_codigo_terceiro__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_categ_lotacao__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_compat_fpas__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_deposito_fgts__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_descricao_fpas__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__name
@@ -2490,6 +3523,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_receita_totalizador__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_padrao__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_situacao_geradora__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tabela_mixin__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_teto_verde_amarela__name
@@ -2502,6 +3541,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_dependente__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_inscricao__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_tipo_logradouro__name
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_treinamento__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_trib_exterior__name
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_valor_contrib_prev__name
@@ -2515,8 +3555,13 @@ msgid "Nat Rubr"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_natureza_juridica_oca
+msgid "Nat. Jurídica (OCA)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_natureza_juridica_oca
-msgid "Natureza Jurídica (Tab. 53) - via OCA"
+msgid "Natureza Jurídica - via OCA"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2546,6 +3591,16 @@ msgstr ""
 #: code:addons/l10n_br_esocial/models/esocial_lote.py:0
 #, python-format
 msgid "Nenhum evento validado no lote. Valide os eventos primeiro."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__sem_totalizador
+msgid "Nenhum totalizador da competência informou este indicador."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.actions.act_window,help:l10n_br_esocial.action_esocial_totalizador
+msgid "Nenhum totalizador recebido ainda"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2623,6 +3678,22 @@ msgid "Nome do modelo Odoo que originou o evento."
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__nova_fim_valid
+#, python-format
+msgid "Nova Validade (Fim)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1005_estabelecimento.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__nova_ini_valid
+#, python-format
+msgid "Nova Validade (Início)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_lotacao_ref__nr_insc
 msgid "Nr Insc"
 msgstr ""
@@ -2658,14 +3729,40 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1200_remuneracao.py:0
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__nr_recibo
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__nr_recibo
+#, python-format
 msgid "Nº Recibo"
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__nr_recibo
+#, python-format
+msgid "Nº Recibo Retificado"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_com_prod__n
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_contrat_av_np__n
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_info_compl_per__n
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_pgtos__n
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_remun__n
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s2299__ind_pagto_api__n
 msgid "Não"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__nao_valid
+msgid "Não Validar Fechamento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia__state__draft
+msgid "Não apurada"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2679,6 +3776,18 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid ""
+"Não é possível fechar a competência %(per)s: %(qtd)s evento(s) periódico(s) ainda não foram aceitos pelo eSocial.\n"
+"\n"
+"%(detalhe)s\n"
+"\n"
+"Transmita e confirme o aceite desses eventos (ou exclua-os com S-3000) antes do fechamento."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1200__nr_recibo
 msgid ""
 "Número do recibo do evento a ser retificado. Obrigatório quando Indicativo "
@@ -2687,7 +3796,54 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_evento__nr_recibo
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s3000__nr_rec_evt
 msgid "Número do recibo retornado pelo governo."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/hr_payslip.py:0
+#, python-format
+msgid ""
+"O S-1200 do holerite %(nome)s ainda não foi aceito pelo eSocial (situação "
+"atual: %(estado)s). O governo rejeita o S-1210 cujo demonstrativo não existe"
+" na base dele."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#, python-format
+msgid ""
+"O evento %(nome)s não possui recibo de entrega. A exclusão identifica o "
+"evento pelo recibo, então ele é obrigatório."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#, python-format
+msgid ""
+"O evento %(nome)s pertence a outra empresa (%(empresa)s): a exclusão tem de "
+"sair do mesmo empregador que transmitiu o evento."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid ""
+"O fechamento declara eventos de remuneração ('Sim') mas não existe nenhum "
+"S-1200 aceito na competência %(per)s."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid ""
+"O fechamento declara que não há eventos de %(rotulo)s, mas existe %(tipo)s "
+"aceito na competência %(per)s. Atualize o campo antes de gerar o S-1299."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2714,6 +3870,23 @@ msgid "Obriga"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s3000__cpf_trab
+msgid ""
+"Obrigatório para eventos não periódicos e para os periódicos por trabalhador"
+" (S-1200 a S-1210)."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__ind_subst_patr_obra
+msgid "Obrigatório para obra de construção civil (CNO) de construtora."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__tp_caepf
+msgid "Obrigatório quando o tipo de inscrição é CAEPF."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__ocorrencia_ids
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_form
 msgid "Ocorrências"
@@ -2722,20 +3895,55 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__operacao
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1000__operacao
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__operacao
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__operacao
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__operacao
 msgid "Operação"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_form
+msgid "Origem"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__ind_retif__1
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1200__ind_retif__1
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210__ind_retif__1
 msgid "Original"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.actions.act_window,help:l10n_br_esocial.action_esocial_totalizador
+msgid ""
+"Os totalizadores (S-5001, S-5002, S-5011, S-5012) chegam do\n"
+"                governo quando um evento periódico é processado. Eles são a\n"
+"                fonte oficial do que foi apurado para a DCTFWeb."
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_motivo_afastamento__paga_sal_familia
 msgid "Paga Sal Familia"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_hr_payslip_form_esocial
+msgid "Pagamento (regime de caixa)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#, python-format
+msgid ""
+"Pagamento de %(data)s: o valor líquido pago deve ser positivo (informado: "
+"%(valor)s). Holerite com líquido zero ou negativo não gera pagamento no "
+"S-1210."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__pagamento_ids
+msgid "Pagamentos"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2755,8 +3963,24 @@ msgid "Payslip"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__payslip_sem_evento_count
+msgid "Payslip Sem Evento Count"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_pais
 msgid "Países eSocial (Tab. 6)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__pendencia_count
+msgid "Pendencia Count"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__pendencia_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1299_tree
+msgid "Pendências"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2775,9 +3999,71 @@ msgid "Período"
 msgstr ""
 
 #. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#: code:addons/l10n_br_esocial/models/intermediarios/s1298_reabertura.py:0
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__per_apur
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__per_apur
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__per_apur
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__per_apur
+#, python-format
 msgid "Período Apuração"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__per_ref
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__per_ref
+#, python-format
+msgid "Período Referência"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_search
+msgid "Por Trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_com_prod
+msgid "Possui Comercialização de Produção"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_pgtos
+msgid "Possui Eventos de Pagamento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_remun
+msgid "Possui Eventos de Remuneração"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_info_compl_per
+msgid "Possui Informação Complementar"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_remun
+msgid "Preenchido a partir dos S-1200 aceitos da competência."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1299__evt_pgtos
+msgid "Preenchido a partir dos S-1210 aceitos da competência."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_evento__evento_excluido_id
+msgid "Preenchido nos eventos S-3000: aponta o evento que a exclusão desfaz."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2796,13 +4082,18 @@ msgid "Processo"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_processo_fap
+msgid "Processo FAP"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_res_company__l10n_br_esocial_processo_emissao
 msgid "Processo de Emissão"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_processo_fap
-msgid "Processos FAP (Tab. 77)"
+msgid "Processos FAP"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2828,6 +4119,16 @@ msgid "Qtd Hrs Semana"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__aliq_rat_ajust
+msgid "RAT Ajustado (%)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__aliq_rat_ajust
+msgid "RAT x FAP — alíquota efetiva do GILRAT devida pelo estabelecimento."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__state__draft
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_lote__state__draft
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_search
@@ -2835,13 +4136,46 @@ msgid "Rascunho"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1298_form
+msgid "Reabrir Competência"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_receita_reclamatoria
-msgid "Receita Reclamatória (Tab. 32)"
+msgid "Receita Reclamatória (Tab. 29)"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_receita_totalizador
-msgid "Receita Totalizador (Tab. 78)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_receita_totalizador
+msgid "Receita Totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__nr_rec_arq_base
+msgid "Recibo do Arquivo Base"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__nr_rec_evt
+#, python-format
+msgid "Recibo do Evento Excluído"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1210__nr_recibo
+msgid ""
+"Recibo do S-1210 a ser retificado. Obrigatório quando o Indicativo de "
+"Retificação for 'Retificação'."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador__nr_rec_arq_base
+msgid ""
+"Recibo do evento que originou o totalizador. É a chave oficial que liga a "
+"apuração do governo ao evento transmitido."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2850,8 +4184,18 @@ msgid "Referência e Compatibilidade"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s3000__motivo
+msgid "Registro interno de auditoria — não é transmitido ao eSocial."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1010__salary_rule_id
 msgid "Regra Salarial"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_conferencia_linha__indicador__remuneracao_bruta
+msgid "Remuneração bruta"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2885,6 +4229,12 @@ msgid "Rescisão e Cessação"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador__employee_id
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__employee_id
+msgid "Resolvido pelo CPF devolvido no totalizador."
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_rubrica_rescisoria__restricao_nao_exibir
 msgid "Restricao Nao Exibir"
 msgstr ""
@@ -2898,7 +4248,17 @@ msgstr ""
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__ind_retif__2
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_evento__operacao__r
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1200__ind_retif__2
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1210__ind_retif__2
 msgid "Retificação"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#, python-format
+msgid ""
+"Retificação (ind_retif=2) exige o Nº do Recibo do S-1210 original a ser "
+"retificado."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2911,13 +4271,40 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_rubrica_padrao
+msgid "Rubrica Padrão"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_rubrica_rescisoria
+msgid "Rubrica Rescisória"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_rubrica_padrao
-msgid "Rubricas Padrão (Tab. 54)"
+msgid "Rubricas Padrão"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_rubrica_rescisoria
-msgid "Rubricas Rescisórias (Tab. 68)"
+msgid "Rubricas Rescisórias"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_s1005
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_s1005
+msgid "S-1005 - Estabelecimentos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_s1020
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_s1020
+msgid "S-1020 - Lotações Tributárias"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__s1200_id
+msgid "S-1200 de Origem"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2926,8 +4313,91 @@ msgid "S-1200 eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__s1210_id
+msgid "S-1210"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_s1210
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_s1210
+msgid "S-1210 - Pagamentos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1210_pagamentos.py:0
+#, python-format
+msgid ""
+"S-1210 de %(name)s (%(per)s) não possui pagamentos. O evento informa "
+"pagamentos efetivamente realizados: gere-o a partir dos holerites pagos."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_hr_payslip__l10n_br_esocial_s1210_id
+msgid "S-1210 eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_s1298
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_s1298
+msgid "S-1298 - Reabertura"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_s1299
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_s1299
+msgid "S-1299 - Fechamento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1298__fechamento_evento_id
+msgid "S-1299 aceito que esta reabertura desfaz."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_s3000
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_s3000
+msgid "S-3000 - Exclusão"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__tipo__s-5001
+msgid "S-5001 - Bases e valores por trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__tipo__s-5002
+msgid "S-5002 - IRRF por beneficiário"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__tipo__s-5003
+msgid "S-5003 - Bases do FGTS por trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__tipo__s-5011
+msgid "S-5011 - Contribuições sociais consolidadas"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__tipo__s-5012
+msgid "S-5012 - IRRF consolidado"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_totalizador__tipo__s-5013
+msgid "S-5013 - FGTS consolidado"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_hr_salary_rule
 msgid "Salary Rule"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_faixa_sal_familia
+msgid "Salário Família"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2943,18 +4413,51 @@ msgstr ""
 #. module: l10n_br_esocial
 #. odoo-python
 #: code:addons/l10n_br_esocial/models/hr_payslip.py:0
+#: code:addons/l10n_br_esocial/models/hr_payslip.py:0
 #, python-format
 msgid "Selecione apenas holerites confirmados (estado 'Feito')."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__sem_totalizador
+msgid "Sem Totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_com_prod__s
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_contrat_av_np__s
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_info_compl_per__s
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_pgtos__s
+#: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s1299__evt_remun__s
 #: model:ir.model.fields.selection,name:l10n_br_esocial.selection__l10n_br_esocial_s2299__ind_pagto_api__s
 msgid "Sim"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__state
+msgid "Situação"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_situacao_geradora
 msgid "Situação Geradora (Tab. 15)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1299__trans_dctf_web
+msgid "Solicita a transmissão imediata da DCTFWeb no fechamento."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1299__nao_valid
+msgid ""
+"Solicita ao governo o fechamento sem as validações de consistência. Use "
+"apenas por orientação do fisco."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,help:l10n_br_esocial.field_l10n_br_esocial_s1005__nova_ini_valid
+msgid "Somente para alteração de período de validade. Formato AAAA-MM."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2968,6 +4471,11 @@ msgstr ""
 #: code:addons/l10n_br_esocial/models/esocial_lote.py:0
 #, python-format
 msgid "Status: %(status)s"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__ind_subst_patr_obra
+msgid "Substituição Patronal (Obra)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -2997,6 +4505,15 @@ msgstr ""
 #: code:addons/l10n_br_esocial/models/esocial_lote.py:0
 #, python-format
 msgid "Só é possível adicionar eventos a lotes em rascunho."
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s3000_exclusao.py:0
+#, python-format
+msgid ""
+"Só é possível excluir evento aceito pelo eSocial. O evento %(nome)s está em "
+"'%(estado)s'."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3060,23 +4577,23 @@ msgid "Tab. 21 - Incidência IRRF"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_agente_nocivo
-msgid "Tab. 22 - Agente Nocivo"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_aposentadoria_especial
-msgid "Tab. 23 - Aposentadoria Especial"
-msgstr ""
-
-#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_compat_fpas
-msgid "Tab. 24 - Compat. FPAS"
+msgid "Tab. 22 - Compat. FPAS"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_dependente
-msgid "Tab. 25 - Tipo Dependente"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_agente_nocivo
+msgid "Tab. 24 - Agente Nocivo"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_beneficio
+msgid "Tab. 25 - Tipo Benefício"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_motivo_cessacao
+msgid "Tab. 26 - Motivo Cessação"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3086,7 +4603,12 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_treinamento
-msgid "Tab. 29 - Treinamentos"
+msgid "Tab. 28 - Treinamentos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_receita_reclamatoria
+msgid "Tab. 29 - Receita Reclamatória"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3100,26 +4622,6 @@ msgid "Tab. 30 - Trib. Exterior"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_receita_reclamatoria
-msgid "Tab. 32 - Receita Reclamatória"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_motivo_cessacao
-msgid "Tab. 34 - Motivo Cessação"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_beneficio
-msgid "Tab. 35 - Tipo Benefício"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_inst_emprestimo
-msgid "Tab. 37 - Inst. Empréstimo"
-msgstr ""
-
-#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_fpas_terceiros
 msgid "Tab. 4 - FPAS/Terceiros"
 msgstr ""
@@ -3130,168 +4632,18 @@ msgid "Tab. 5 - Tipo Inscrição"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cbo_oca
-msgid "Tab. 50 - CBO (OCA)"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_codigo_terceiro
-msgid "Tab. 51 - Código Terceiro"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_horario
-msgid "Tab. 52 - Horários"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_natureza_juridica_oca
-msgid "Tab. 53 - Nat. Jurídica (OCA)"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_rubrica_padrao
-msgid "Tab. 54 - Rubrica Padrão"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cnae_oca
-msgid "Tab. 56 - CNAE (OCA)"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_faixa_inss
-msgid "Tab. 57 - Faixas INSS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_faixa_irrf
-msgid "Tab. 58 - Faixas IRRF"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_decisao
-msgid "Tab. 59 - Tipo Decisão"
-msgstr ""
-
-#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_pais
 msgid "Tab. 6 - Países"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cid
-msgid "Tab. 60 - CID"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cargo
-msgid "Tab. 61 - Cargos"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_lotacao_ref
-msgid "Tab. 64 - Lotação Referência"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_faixa_sal_familia
-msgid "Tab. 65 - Salário Família"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_causa_afast_mte
-msgid "Tab. 67 - Causa Afast. MTE"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_rubrica_rescisoria
-msgid "Tab. 68 - Rubrica Rescisória"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_info_rescisao
-msgid "Tab. 69 - Info Rescisão"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_admissao_oca
-msgid "Tab. 70 - Tipo Admissão (OCA)"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_cat
-msgid "Tab. 71 - Tipo CAT"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_aso
-msgid "Tab. 72 - Tipo ASO"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_aviso_previo
-msgid "Tab. 73 - Tipo Aviso Prévio"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_motivo_cancel_aviso
-msgid "Tab. 74 - Cancel. Aviso Prévio"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_processo_fap
-msgid "Tab. 77 - Processo FAP"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_receita_totalizador
-msgid "Tab. 78 - Receita Totalizador"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_valor_contrib_prev
-msgid "Tab. 79 - Valor Contrib. Prev."
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_dependente
+msgid "Tab. 7 - Tipo Dependente"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_classificacao_tributaria
 msgid "Tab. 8 - Classificação Tributária"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_valor_irrf_totalizador
-msgid "Tab. 80 - Valor IRRF Totaliz."
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_cnae_mei
-msgid "Tab. 81 - CNAE MEI"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_base_fgts
-msgid "Tab. 82 - Base Cálc. FGTS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_deposito_fgts
-msgid "Tab. 83 - Depósito FGTS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_feriado
-msgid "Tab. 84 - Feriados"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_descricao_fpas
-msgid "Tab. 85 - Descrição FPAS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_teto_verde_amarela
-msgid "Tab. 86 - Teto Verde Amarela"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3320,40 +4672,99 @@ msgid "Tempo Contribuicao"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1020__cod_tercs_susp
+msgid "Terceiros Suspensos"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_horario__term_intervalo
 msgid "Term Intervalo"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_teto_verde_amarela
+msgid "Teto Verde Amarela"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_teto_verde_amarela
-msgid "Teto Verde e Amarela (Tab. 86)"
+msgid "Teto Verde e Amarela"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_agente_nocivo__tipo
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_ocorrencia__tipo
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__tipo
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__tipo
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_search
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_search
 msgid "Tipo"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_admissao_oca
-msgid "Tipo Admissão (Tab. 70) - via OCA"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_aso
+msgid "Tipo ASO (tpExameOcup)"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_admissao_oca
+msgid "Tipo Admissão (OCA)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_admissao_oca
+msgid "Tipo Admissão - via OCA"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__ind_apuracao
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1200__ind_apuracao
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1298__ind_apuracao
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__ind_apuracao
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__ind_apuracao
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__ind_apuracao
 msgid "Tipo Apuração"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_aviso_previo
+msgid "Tipo Aviso Prévio"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__tp_caepf
+msgid "Tipo CAEPF"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_cat
+msgid "Tipo CAT (tpCat)"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_decisao
-msgid "Tipo Decisão (Tab. 59)"
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_tipo_decisao
+msgid "Tipo Decisão"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__tipo
 msgid "Tipo Evento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__tp_insc
+msgid "Tipo Inscrição"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1005__tp_insc_estab
+msgid "Tipo Inscrição Estabelecimento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__tp_pgto
+msgid "Tipo Pagamento"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3364,12 +4775,12 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_valor_contrib_prev
-msgid "Tipo Valor Contrib. Prev. (Tab. 79)"
+msgid "Tipo Valor Contrib. Prev."
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_valor_irrf_totalizador
-msgid "Tipo Valor IRRF Totaliz. (Tab. 80)"
+msgid "Tipo Valor IRRF Totaliz."
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3389,13 +4800,23 @@ msgid "Tipo de lotação tributária conforme Tabela 10 do eSocial."
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s3000__tp_evento
+msgid "Tipo do Evento Excluído"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__evento_tipo
+msgid "Tipo do Evento de Origem"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_deposito_fgts
-msgid "Tipos Depósito FGTS (Tab. 83)"
+msgid "Tipos Depósito FGTS"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_aso
-msgid "Tipos de ASO (Tab. 72)"
+msgid "Tipos de ASO"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3405,22 +4826,22 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_aviso_previo
-msgid "Tipos de Aviso Prévio (Tab. 73)"
+msgid "Tipos de Aviso Prévio"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_beneficio
-msgid "Tipos de Benefício (Tab. 35)"
+msgid "Tipos de Benefício (Tab. 25)"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_cat
-msgid "Tipos de CAT (Tab. 71)"
+msgid "Tipos de CAT"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_tipo_dependente
-msgid "Tipos de Dependente (Tab. 25)"
+msgid "Tipos de Dependente (Tab. 7)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3434,8 +4855,55 @@ msgid "Tipos de Logradouro (Tab. 20)"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__tolerancia
+msgid "Tolerância"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1210_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1210_tree
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_linha_tree
+msgid "Total"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210__vr_liq_total
+msgid "Total Líquido Pago"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__totalizador_id
+msgid "Totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__totalizador_count
+msgid "Totalizador Count"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia_linha__valor_totalizador
+msgid "Totalizador eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_conferencia__totalizador_ids
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__totalizador_ids
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_totalizador
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_form
 msgid "Totalizadores"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_totalizador
+msgid "Totalizadores Recebidos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_totalizador
+msgid "Totalizadores eSocial"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3476,6 +4944,13 @@ msgid "Tp Trab"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__employee_id
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__employee_id
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_search
+msgid "Trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_trabalho
 msgid "Trabalho e Benefícios"
 msgstr ""
@@ -3496,8 +4971,13 @@ msgid "Transmitir"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1299__trans_dctf_web
+msgid "Transmitir DCTFWeb Imediatamente"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.actions.act_window,name:l10n_br_esocial.action_esocial_treinamento
-msgid "Treinamentos (Tab. 29)"
+msgid "Treinamentos (Tab. 28)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3508,6 +4988,11 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_lotacao_tributaria__tx_class_trb
 msgid "Tx Class Trb"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_s1005_form
+msgid "Validade"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3527,7 +5012,43 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_faixa_sal_familia__valor
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador_linha__valor
 msgid "Valor"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_valor_contrib_prev
+msgid "Valor Contrib. Prev."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.ui.menu,name:l10n_br_esocial.menu_esocial_tab_valor_irrf_totalizador
+msgid "Valor IRRF Totaliz."
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_s1210_pagamento__vr_liq
+msgid "Valor Líquido"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__linha_ids
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_conferencia_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_form
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_tree
+msgid "Valores"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_form
+msgid "Valores Apurados"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_totalizador.py:0
+#, python-format
+msgid "Valores do Totalizador"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3552,6 +5073,11 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_totalizador_form
+msgid "XML"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__xml_envio
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_form
 msgid "XML Envio"
@@ -3561,6 +5087,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_evento__xml_retorno
 #: model_terms:ir.ui.view,arch_db:l10n_br_esocial.view_esocial_evento_form
 msgid "XML Retorno"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model.fields,field_description:l10n_br_esocial.field_l10n_br_esocial_totalizador__xml
+msgid "XML do Totalizador"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3577,8 +5108,78 @@ msgid "eSocial - Base Intermediário"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_base_fgts
+msgid "eSocial - Bases de Cálculo FGTS"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_cnae_mei
+msgid "eSocial - CNAE MEI Web"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_cargo
+msgid "eSocial - Cargos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_causa_afast_mte
+msgid "eSocial - Causas de Afastamento MTE"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_conferencia
+msgid "eSocial - Conferência da Competência"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_faixa_inss
+msgid "eSocial - Contribuição Previdenciária Empregado"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_codigo_terceiro
+msgid "eSocial - Códigos de Terceiro"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_descricao_fpas
+msgid "eSocial - Descrição FPAS"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_evento
 msgid "eSocial - Evento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_totalizador
+msgid "eSocial - Evento Totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_horario
+msgid "eSocial - Horários"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_conferencia_linha
+msgid "eSocial - Indicador de Conferência"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_info_rescisao
+msgid "eSocial - Informações Adicionais Rescisão MTE"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_inst_emprestimo
+msgid "eSocial - Instituições Empréstimo Consignado"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_lotacao_ref
+msgid "eSocial - Lotações Tributárias (Referência)"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3587,13 +5188,98 @@ msgid "eSocial - Lote de Transmissão"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_motivo_cancel_aviso
+msgid "eSocial - Motivos Cancelamento Aviso Prévio"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_ocorrencia
 msgid "eSocial - Ocorrência de Retorno"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_processo_fap
+msgid "eSocial - Processo FAP"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_receita_totalizador
+msgid "eSocial - Receita dos Totalizadores"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_faixa_irrf
+msgid "eSocial - Retenção IRRF"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_rubrica_padrao
+msgid "eSocial - Rubricas Padrão eSocial"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_rubrica_rescisoria
+msgid "eSocial - Rubricas Rescisórias MTE"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_faixa_sal_familia
+msgid "eSocial - Salário Família"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_teto_verde_amarela
+msgid "eSocial - Teto Isenção Programa Verde e Amarela"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_decisao
+msgid "eSocial - Tipo Decisão Judicial/Administrativa"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_valor_contrib_prev
+msgid "eSocial - Tipo Valor Contribuição Previdenciária"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_valor_irrf_totalizador
+msgid "eSocial - Tipo Valor IRRF Totalizadores"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_aso
+msgid "eSocial - Tipos de ASO (tpExameOcup do S-2220)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_aviso_previo
+msgid "eSocial - Tipos de Aviso Prévio"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_cat
+msgid "eSocial - Tipos de CAT (tpCat do S-2210)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_deposito_fgts
+msgid "eSocial - Tipos de Depósito FGTS"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_totalizador_linha
+msgid "eSocial - Valor de Totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1000
 msgid "eSocial S-1000 - Informações do Empregador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1005
+msgid "eSocial S-1005 - Tabela de Estabelecimentos"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3609,6 +5295,26 @@ msgstr ""
 #. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1200
 msgid "eSocial S-1200 - Remuneração do Trabalhador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1210_pagamento
+msgid "eSocial S-1210 - Pagamento (infoPgto)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1210
+msgid "eSocial S-1210 - Pagamentos de Rendimentos do Trabalho"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1298
+msgid "eSocial S-1298 - Reabertura dos Eventos Periódicos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s1299
+msgid "eSocial S-1299 - Fechamento dos Eventos Periódicos"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3632,253 +5338,38 @@ msgid "eSocial S-2299 - Desligamento"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_s3000
+msgid "eSocial S-3000 - Exclusão de Eventos"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_financiamento_aposent
-msgid "eSocial Tab 02 - Financiamento Aposentadoria Especial"
+msgid "eSocial Tabela 02 - Financiamento Aposentadoria Especial"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_fpas_terceiros
-msgid "eSocial Tab 04 - FPAS/Terceiros"
+msgid "eSocial Tabela 04 - FPAS/Terceiros"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_inscricao
-msgid "eSocial Tab 05 - Tipos de Inscrição"
+msgid "eSocial Tabela 05 - Tipos de Inscrição"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_pais
-msgid "eSocial Tab 06 - Países"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_arquivo
-msgid "eSocial Tab 09 - Tipos de Arquivo/Evento"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_compat_categ_lotacao
-msgid "eSocial Tab 11 - Compatibilidade Categoria/ClassTrib/Lotação"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_parte_corpo
-msgid "eSocial Tab 13 - Parte do Corpo Atingida"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_agente_causador
-msgid "eSocial Tab 14 - Agente Causador de Acidente de Trabalho"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_situacao_geradora
-msgid "eSocial Tab 15 - Situação Geradora de Acidente de Trabalho"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_natureza_lesao
-msgid "eSocial Tab 17 - Natureza da Lesão"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_logradouro
-msgid "eSocial Tab 20 - Tipos de Logradouro"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_incidencia_irrf
-msgid "eSocial Tab 21 - Incidência Tributária IRRF"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_agente_nocivo
-msgid "eSocial Tab 22 - Agentes Nocivos"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_aposentadoria_especial
-msgid "eSocial Tab 23 - Aposentadoria Especial INSS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_compat_fpas
-msgid "eSocial Tab 24 - Compatibilidade FPAS/Classificação Tributária"
+msgid "eSocial Tabela 06 - Países"
 msgstr ""
 
 #. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_dependente
-msgid "eSocial Tab 25 - Tipos de Dependente"
+msgid "eSocial Tabela 07 - Tipos de Dependente"
 msgstr ""
 
 #. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_procedimento_diagnostico
-msgid "eSocial Tab 27 - Procedimentos Diagnósticos"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_treinamento
-msgid "eSocial Tab 29 - Treinamentos e Capacitações"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_trib_exterior
-msgid "eSocial Tab 30 - Tributação Beneficiários Exterior"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_receita_reclamatoria
-msgid "eSocial Tab 32 - Receita Reclamatória Trabalhista"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_motivo_cessacao
-msgid "eSocial Tab 34 - Motivos Cessação de Benefícios"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_beneficio
-msgid "eSocial Tab 35 - Tipos de Benefícios"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_inst_emprestimo
-msgid "eSocial Tab 37 - Instituições Empréstimo Consignado"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_codigo_terceiro
-msgid "eSocial Tab 51 - Códigos de Terceiro"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_horario
-msgid "eSocial Tab 52 - Horários"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_rubrica_padrao
-msgid "eSocial Tab 54 - Rubricas Padrão eSocial"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_faixa_inss
-msgid "eSocial Tab 57 - Contribuição Previdenciária Empregado"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_faixa_irrf
-msgid "eSocial Tab 58 - Retenção IRRF"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_decisao
-msgid "eSocial Tab 59 - Tipo Decisão Judicial/Administrativa"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_cid
-msgid "eSocial Tab 60 - CID"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_cargo
-msgid "eSocial Tab 61 - Cargos"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_lotacao_ref
-msgid "eSocial Tab 64 - Lotações Tributárias (Referência)"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_faixa_sal_familia
-msgid "eSocial Tab 65 - Salário Família"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_causa_afast_mte
-msgid "eSocial Tab 67 - Causas de Afastamento MTE"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_rubrica_rescisoria
-msgid "eSocial Tab 68 - Rubricas Rescisórias MTE"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_info_rescisao
-msgid "eSocial Tab 69 - Informações Adicionais Rescisão MTE"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_cat
-msgid "eSocial Tab 71 - Tipos de CAT"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_aso
-msgid "eSocial Tab 72 - Tipos de ASO"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_aviso_previo
-msgid "eSocial Tab 73 - Tipos de Aviso Prévio"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_motivo_cancel_aviso
-msgid "eSocial Tab 74 - Motivos Cancelamento Aviso Prévio"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_processo_fap
-msgid "eSocial Tab 77 - Processo FAP"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_receita_totalizador
-msgid "eSocial Tab 78 - Receita dos Totalizadores"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_valor_contrib_prev
-msgid "eSocial Tab 79 - Tipo Valor Contribuição Previdenciária"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_valor_irrf_totalizador
-msgid "eSocial Tab 80 - Tipo Valor IRRF Totalizadores"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_cnae_mei
-msgid "eSocial Tab 81 - CNAE MEI Web"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_base_fgts
-msgid "eSocial Tab 82 - Bases de Cálculo FGTS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_deposito_fgts
-msgid "eSocial Tab 83 - Tipos de Depósito FGTS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_feriado
-msgid "eSocial Tab 84 - Feriados"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_descricao_fpas
-msgid "eSocial Tab 85 - Descrição FPAS"
-msgstr ""
-
-#. module: l10n_br_esocial
-#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_teto_verde_amarela
-msgid "eSocial Tab 86 - Teto Isenção Programa Verde e Amarela"
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_arquivo
+msgid "eSocial Tabela 09 - Tipos de Arquivo/Evento"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3892,6 +5383,31 @@ msgid "eSocial Tabela 10 - Tipos de Lotação Tributária"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_compat_categ_lotacao
+msgid "eSocial Tabela 11 - Compatibilidade Categoria/ClassTrib/Lotação"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_parte_corpo
+msgid "eSocial Tabela 13 - Parte do Corpo Atingida"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_agente_causador
+msgid "eSocial Tabela 14 - Agente Causador de Acidente de Trabalho"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_situacao_geradora
+msgid "eSocial Tabela 15 - Situação Geradora de Acidente e Doença"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_natureza_lesao
+msgid "eSocial Tabela 17 - Natureza da Lesão"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_motivo_afastamento
 msgid "eSocial Tabela 18 - Motivos de Afastamento"
 msgstr ""
@@ -3902,8 +5418,58 @@ msgid "eSocial Tabela 19 - Motivos de Desligamento"
 msgstr ""
 
 #. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_logradouro
+msgid "eSocial Tabela 20 - Tipos de Logradouro"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_incidencia_irrf
+msgid "eSocial Tabela 21 - Incidência Tributária IRRF"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_compat_fpas
+msgid "eSocial Tabela 22 - Compatibilidade FPAS/Classificação Tributária"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_agente_nocivo
+msgid "eSocial Tabela 24 - Agentes Nocivos e Atividades"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_tipo_beneficio
+msgid "eSocial Tabela 25 - Tipos de Benefícios"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_motivo_cessacao
+msgid "eSocial Tabela 26 - Motivos Cessação de Benefícios"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_procedimento_diagnostico
+msgid "eSocial Tabela 27 - Procedimentos Diagnósticos"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_treinamento
+msgid "eSocial Tabela 28 - Treinamentos e Capacitações"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_receita_reclamatoria
+msgid "eSocial Tabela 29 - Receita Reclamatória Trabalhista"
+msgstr ""
+
+#. module: l10n_br_esocial
 #: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_natureza_rubrica
 msgid "eSocial Tabela 3 - Natureza da Rubrica"
+msgstr ""
+
+#. module: l10n_br_esocial
+#: model:ir.model,name:l10n_br_esocial.model_l10n_br_esocial_trib_exterior
+msgid "eSocial Tabela 30 - Tributação Beneficiários Exterior"
 msgstr ""
 
 #. module: l10n_br_esocial
@@ -3918,6 +5484,13 @@ msgstr ""
 
 #. module: l10n_br_esocial
 #. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_conferencia.py:0
+#, python-format
+msgid "encargos patronais ainda não calculados (RF-31)"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
 #: code:addons/l10n_br_esocial/models/esocial_lote.py:0
 #, python-format
 msgid "esociallib não está instalada."
@@ -3928,4 +5501,54 @@ msgstr ""
 #: code:addons/l10n_br_esocial/models/esocial_lote.py:0
 #, python-format
 msgid "esociallib não está instalada. Execute: pip install esociallib"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_conferencia.py:0
+#, python-format
+msgid "não calculada pela folha"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid "pagamento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid "remuneração"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid "sem Id"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_conferencia.py:0
+#, python-format
+msgid "sem contrapartida direta no totalizador"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/hr_payslip.py:0
+#, python-format
+msgid "sem evento"
+msgstr ""
+
+#. module: l10n_br_esocial
+#. odoo-python
+#: code:addons/l10n_br_esocial/models/esocial_evento.py:0
+#: code:addons/l10n_br_esocial/models/intermediarios/s1299_fechamento.py:0
+#, python-format
+msgid "sem recibo"
 msgstr ""
