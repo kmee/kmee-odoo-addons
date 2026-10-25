@@ -31,6 +31,11 @@ msgid "Applicant"
 msgstr ""
 
 #. module: l10n_br_hr_recruitment
+#: model:ir.model,name:l10n_br_hr_recruitment.model_hr_applicant_dependent
+msgid "Applicant Dependent"
+msgstr ""
+
+#. module: l10n_br_hr_recruitment
 #: model:ir.model.fields.selection,name:l10n_br_hr_recruitment.selection__hr_applicant__certificate__bachelor
 msgid "Bachelor"
 msgstr ""
@@ -376,9 +381,4 @@ msgstr ""
 #. module: l10n_br_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:l10n_br_hr_recruitment.view_l10n_br_hr_applicant_recruitment_form
 msgid "XXX.XXXXX.XX-X"
-msgstr ""
-
-#. module: l10n_br_hr_recruitment
-#: model:ir.model,name:l10n_br_hr_recruitment.model_hr_applicant_dependent
-msgid "hr.applicant.dependent"
 msgstr ""
