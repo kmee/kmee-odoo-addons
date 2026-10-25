@@ -69,7 +69,6 @@ msgid "Reaction Time Float"
 msgstr ""
 
 #. module: crm_wip
-#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__state
 #: model:ir.model.fields,field_description:crm_wip.field_crm_stage__state
 msgid "State"
 msgstr ""
@@ -77,6 +76,11 @@ msgstr ""
 #. module: crm_wip
 #: model_terms:ir.ui.view,arch_db:crm_wip.crm_lead_wip_form
 msgid "WIP"
+msgstr ""
+
+#. module: crm_wip
+#: model:ir.model.fields,field_description:crm_wip.field_crm_lead__state
+msgid "WIP State"
 msgstr ""
 
 #. module: crm_wip
