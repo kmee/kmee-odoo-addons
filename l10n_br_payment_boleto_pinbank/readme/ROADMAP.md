@@ -1,2 +1,0 @@
-- The status of the boletos is updated by the crons, which query the bank every 30 minutes. The route `/payment/pinbank/return` ignores the data it receives and queries the bank as well. The PinBank API used here has no documented notification (webhook) nor a signature for the data sent to Odoo; if PinBank provides one, it should replace the polling, with the data validated before use.
-- Capture, void and refund keep the meaning described in the usage of `l10n_br_payment_boleto` (query the status, write off the boleto) until a model of bank instructions replaces them.
