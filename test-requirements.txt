@@ -25,9 +25,9 @@ pyopenssl==22.1.0
 signxml<3.1.0
 
 # brbank: o l10n_br_bank_connection exige a 0.0.6 (armazem de token entre processos,
-# funcoes de OAuth e DDA do BTG); o l10n_br_payment_boleto_brbank exige a 0.0.4
+# funcoes de OAuth e DDA do BTG); o l10n_br_payment_brbank exige a 0.0.4
 # (especie do documento do Sicoob como sigla). Sem o piso, o indice do PyPI pode
-# servir uma versao velha. A 0.0.6 ainda precisa ser publicada no PyPI.
+# servir uma versao velha. A 0.0.6 ja esta no PyPI.
 brbank>=0.0.6
 
 # l10n_br_nfe (16.0.20.3.0, de 24/10/2026) passou a importar brazil_fiscal_client mas nao o
