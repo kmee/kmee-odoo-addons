@@ -137,6 +137,12 @@ msgid "DDA bank: process webhook events"
 msgstr ""
 
 #. module: l10n_br_dda_brbank
+#: model:ir.actions.server,name:l10n_br_dda_brbank.ir_cron_dda_purge_events_ir_actions_server
+#: model:ir.cron,cron_name:l10n_br_dda_brbank.ir_cron_dda_purge_events
+msgid "DDA bank: purge processed events"
+msgstr ""
+
+#. module: l10n_br_dda_brbank
 #: model:ir.model,name:l10n_br_dda_brbank.model_l10n_br_dda_debit
 msgid "DDA boleto"
 msgstr ""

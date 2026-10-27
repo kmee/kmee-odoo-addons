@@ -238,3 +238,65 @@ class TestEventQueue(DdaBrbankCommon):
         event = self.event_of("e-2")
         self.assertEqual((event.state, event.attempts), ("error", 1))
         self.assertIn("Indisponivel", event.last_error)
+
+    # === purge === #
+
+    def age(self, events, days):
+        """Move the last write of the events back in time (write_date is magic)."""
+        moment = fields.Datetime.now() - timedelta(days=days)
+        # Pending writes would touch write_date again when they are flushed.
+        self.env.flush_all()
+        self.env.cr.execute(
+            "UPDATE l10n_br_dda_event SET write_date = %s WHERE id IN %s",
+            (moment, tuple(events.ids)),
+        )
+        events.invalidate_recordset(["write_date"])
+
+    def test_purge_deletes_only_old_processed_events(self):
+        self.new_events(5)
+        old_done, recent_done, old_error, old_quarantine, old_new = (
+            self.event_of(f"e-{n}") for n in range(1, 6)
+        )
+        for event, state in (
+            (old_done, "done"),
+            (recent_done, "done"),
+            (old_error, "error"),
+            (old_quarantine, "quarantine"),
+        ):
+            event.state = state
+        self.age(old_done | old_error | old_quarantine | old_new, 45)
+        self.age(recent_done, 5)
+        self.assertEqual(self.Event._cron_purge_events(), 1)
+        remaining = self.Event.search([("connection_id", "=", self.connection.id)])
+        self.assertEqual(
+            sorted(remaining.mapped("event_id")), ["e-2", "e-3", "e-4", "e-5"]
+        )
+
+    def test_purge_follows_the_retention_parameter(self):
+        self.new_events(2)
+        first, second = self.event_of("e-1"), self.event_of("e-2")
+        (first | second).write({"state": "done"})
+        self.age(first, 10)
+        self.age(second, 3)
+        # Default: 30 days, nothing is old enough.
+        self.assertEqual(self.Event._cron_purge_events(), 0)
+        params = self.env["ir.config_parameter"].sudo()
+        params.set_param(dda_event.RETENTION_PARAM, "7")
+        self.assertEqual(self.Event._cron_purge_events(), 1)
+        self.assertFalse(first.exists())
+        self.assertTrue(second.exists())
+        # A broken value falls back to the default.
+        params.set_param(dda_event.RETENTION_PARAM, "abc")
+        self.assertEqual(self.Event._dda_retention_days(), 30)
+
+    def test_purge_works_in_blocks_and_commits_each_one(self):
+        self.new_events(5)
+        events = self.Event.search([("connection_id", "=", self.connection.id)])
+        events.write({"state": "done"})
+        self.age(events, 60)
+        with patch.object(dda_event, "PURGE_BLOCK_SIZE", 2), patch.object(
+            type(self.Event), "_dda_commit"
+        ) as commit:
+            self.assertEqual(self.Event._cron_purge_events(), 5)
+        self.assertEqual(commit.call_count, 3)
+        self.assertFalse(events.exists())

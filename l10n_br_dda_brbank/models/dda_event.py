@@ -27,8 +27,14 @@ BLOCKS_PER_RUN = 5
 MAX_ATTEMPTS = 8
 BACKOFF_CAP_MINUTES = 60
 PAYLOAD_LIMIT = 8000
+# Processed events are kept this many days (system parameter below), then purged.
+PURGE_BLOCK_SIZE = 500
+RETENTION_PARAM = "l10n_br_dda_brbank.event_retention_days"
+DEFAULT_RETENTION_DAYS = 30
 CRON_XMLID = "l10n_br_dda_brbank.ir_cron_dda_process_events"
 EVENT_TYPES = [(kind.value, kind.value) for kind in TipoEventoDda]
+# Notifications of the state of the DDA at the bank, not of a boleto.
+STATE_EVENT_TYPES = (TipoEventoDda.DDA_ATIVADO, TipoEventoDda.DDA_DESATIVADO)
 
 
 def backoff_minutes(attempts):
@@ -116,12 +122,8 @@ class DdaEvent(models.Model):
                     connection.id,
                 )
                 continue
-            if self.search_count(
-                [
-                    ("connection_id", "=", connection.id),
-                    ("event_id", "=", event.id_evento),
-                ]
-            ):
+            event_id = self._dda_event_key(connection, event)
+            if not event_id:
                 continue
             debits = [
                 debit_to_vals(debit)
@@ -133,7 +135,7 @@ class DdaEvent(models.Model):
                 moment = moment.astimezone(tz=None).replace(tzinfo=None)
             values = {
                 "connection_id": connection.id,
-                "event_id": event.id_evento,
+                "event_id": event_id,
                 "event_type": event.tipo.value,
                 "occurred_at": moment or False,
                 "debits_json": json.dumps(debits),
@@ -148,6 +150,37 @@ class DdaEvent(models.Model):
                 # The same event arrived twice at the same time.
                 continue
         return created
+
+    @api.model
+    def _dda_event_key(self, connection, event):
+        """Key to store `event` under, or False when it is a resend to skip.
+
+        The BTG sends no id on the DDA state notifications (enabled, disabled):
+        the library falls back to a hash of the body, so "disabled, enabled,
+        disabled" repeats the first key. A state event whose key exists is a
+        resend only when no other state event arrived since; otherwise it is a
+        new change and gets a suffix, or the last word of the bank would be lost.
+        """
+        key = event.id_evento
+        same = self.search(
+            [("connection_id", "=", connection.id), ("event_id", "=like", key + "%")],
+            order="id desc",
+        ).filtered(lambda ev: ev.event_id == key or ev.event_id.startswith(key + "#"))
+        if not same:
+            return key
+        if event.tipo not in STATE_EVENT_TYPES:
+            return False
+        last_state = self.search(
+            [
+                ("connection_id", "=", connection.id),
+                ("event_type", "in", [t.value for t in STATE_EVENT_TYPES]),
+            ],
+            order="id desc",
+            limit=1,
+        )
+        if last_state in same:
+            return False
+        return "%s#%d" % (key, len(same))
 
     # === QUEUE === #
 
@@ -219,6 +252,44 @@ class DdaEvent(models.Model):
             events._dda_commit()
         if events.search_count(events._dda_due_domain()):
             self.env.ref(CRON_XMLID).sudo()._trigger()
+
+    @api.model
+    def _dda_retention_days(self):
+        value = self.env["ir.config_parameter"].sudo().get_param(RETENTION_PARAM)
+        if not value:
+            return DEFAULT_RETENTION_DAYS
+        try:
+            return max(int(value), 0)
+        except (TypeError, ValueError):
+            return DEFAULT_RETENTION_DAYS
+
+    @api.model
+    def _cron_purge_events(self):
+        """Delete the processed events older than the retention period.
+
+        Only `done` goes: `error`, `quarantine` and the ones still to process
+        are the audit trail of what did not work. Blocks with a commit each, so
+        a big backlog never holds one long transaction.
+
+        :return: The number of events deleted.
+        """
+        events = self.sudo()
+        cutoff = fields.Datetime.now() - timedelta(days=events._dda_retention_days())
+        total = 0
+        while True:
+            block = events.search(
+                [("state", "=", "done"), ("write_date", "<", cutoff)],
+                limit=PURGE_BLOCK_SIZE,
+                order="id",
+            )
+            if not block:
+                break
+            total += len(block)
+            block.unlink()
+            events._dda_commit()
+        if total:
+            _logger.info("DDA events: %s processed events purged", total)
+        return total
 
     def _dda_process_one(self):
         self.ensure_one()

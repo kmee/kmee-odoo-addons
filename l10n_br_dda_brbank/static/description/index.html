@@ -436,6 +436,9 @@ times: read its error, fix the cause and click <em>Process again</em>.</li>
 <em>Invoicing &gt; Configuration &gt; DDA Bank Events</em>. The periods of the
 crons (events, hourly pull, daily reconciliation) are in <em>Settings &gt;
 Technical &gt; Scheduled Actions</em>.</li>
+<li>Processed events are purged by a daily cron after 30 days (system
+parameter <tt class="docutils literal">l10n_br_dda_brbank.event_retention_days</tt>). Events in
+error or in quarantine are never purged.</li>
 </ol>
 <p>For tests and demos, the demo data points the BTG connection at the bank
 simulator of the library (<tt class="docutils literal">python <span class="pre">-m</span> brbank.simulador <span class="pre">--semente</span> demo</tt>,

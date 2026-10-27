@@ -36,6 +36,26 @@ class TestWebhook(DdaBrbankCommon):
         trigger.assert_not_called()
         self.assertEqual(len(self.Event.search([("event_id", "=", "e-1")])), 1)
 
+    def test_a_resent_state_event_is_skipped(self):
+        disabled = make_event("h-off", self.DISABLED, cnpj_pagador=None)
+        self.webhook(disabled)
+        counts, _trigger = self.webhook(disabled)
+        self.assertEqual(counts["dda_new"], 0)
+
+    def test_state_toggles_without_bank_id_are_all_kept(self):
+        """The bank sends no id on state events: the library hashes the body,
+        so "disabled, enabled, disabled" repeats the first key."""
+        disabled = make_event("h-off", self.DISABLED, cnpj_pagador=None)
+        enabled = make_event("h-on", self.ENABLED, cnpj_pagador=None)
+        for event in (disabled, enabled, disabled):
+            counts, _trigger = self.webhook(event)
+            self.assertEqual(counts["dda_new"], 1)
+        stored = self.Event.search(
+            [("connection_id", "=", self.connection.id)], order="id"
+        )
+        self.assertEqual(stored.mapped("event_id"), ["h-off", "h-on", "h-off#1"])
+        self.assertEqual(stored[-1].event_type, self.DISABLED.value)
+
     def test_the_same_event_id_may_exist_in_another_connection(self):
         other = self.new_connection(name="Other")
         event = make_event("e-1", self.NEW, make_debit(1))

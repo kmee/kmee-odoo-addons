@@ -298,6 +298,17 @@ class TestPull(DdaBrbankCommon):
         source = self.sources()[source_key(self.connection)]
         self.assertEqual((source["state"], source["message"]), ("error", "boom"))
 
+    def test_a_connection_turned_off_by_the_bank_stays_as_an_error_source(self):
+        self.enable()
+        self.connection._dda_bank_disabled()
+        self.assertFalse(self.connection.dda_enabled)
+        source = self.sources()[source_key(self.connection)]
+        self.assertEqual(source["state"], "error")
+        self.assertIn("disabled", source["message"])
+        # Once DDA is back, the status is ok and the source is a normal one.
+        self.connection._dda_bank_enabled()
+        self.assertEqual(self.sources()[source_key(self.connection)]["state"], "ok")
+
     def test_the_sources_of_other_companies_are_hidden(self):
         self.enable()
         debit_model = self.Debit.with_context(allowed_company_ids=[self.company_2.id])

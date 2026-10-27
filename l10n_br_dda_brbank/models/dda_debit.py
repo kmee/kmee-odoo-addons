@@ -14,15 +14,25 @@ class DdaDebit(models.Model):
 
     @api.model
     def _dda_source_status(self):
-        """Add the bank connections that have DDA turned on."""
+        """Add the bank connections that have DDA turned on (or that failed)."""
         sources = super()._dda_source_status()
         can_open = self.env.user.has_group(ADMIN_GROUP)
+        # A connection the bank turned off stays on the panel while its DDA
+        # status is an error, so the warning is not lost with the switch.
+        failed = (
+            self.env["l10n_br_bank_connection.sync_status"]
+            .sudo()
+            .search([("domain", "=", "dda"), ("state", "=", "error")])
+            .connection_id
+        )
         connections = (
             self.env[CONNECTION_MODEL]
             .sudo()
             .search(
                 [
+                    "|",
                     ("dda_enabled", "=", True),
+                    ("id", "in", failed.ids),
                     ("company_id", "in", self.env.companies.ids),
                 ]
             )
