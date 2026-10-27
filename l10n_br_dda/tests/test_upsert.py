@@ -54,6 +54,27 @@ class TestUpsert(DdaCommon):
         )
         self.assertFalse(unknown)
 
+    def test_cnpj_display_fields_are_masked(self):
+        debit = self.Debit.create(
+            {
+                "payer_cnpj": PAYER,
+                "digitable_line": "3888" + "9" * 43,
+                "beneficiary_vat": "12ABC34501DE35",
+                "guarantor_vat": "45000001000174",
+                "amount": 10.0,
+            }
+        )
+        self.assertEqual(debit.payer_cnpj_display, "82.688.625/0001-52")
+        self.assertEqual(debit.beneficiary_vat_display, "12.ABC.345/01DE-35")
+        self.assertEqual(debit.guarantor_vat_display, "45.000.001/0001-74")
+        # The raw fields stay digits only, for search and filters.
+        self.assertEqual(debit.beneficiary_vat, "12ABC34501DE35")
+        # A CPF or an empty value is not forced into the CNPJ shape.
+        debit.guarantor_vat = False
+        debit.beneficiary_vat = "12345678901"
+        self.assertFalse(debit.guarantor_vat_display)
+        self.assertEqual(debit.beneficiary_vat_display, "12345678901")
+
     def test_alphanumeric_payer_is_text(self):
         vals = self.boleto(
             "12ABC34501DE35", 10.0, self.day(3), payer_cnpj="99ABC34501DE35"

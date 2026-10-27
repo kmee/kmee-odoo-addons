@@ -43,6 +43,7 @@ from ..constants import (
 )
 from ..utils import (
     cnpj_root,
+    format_cnpj,
     normalize_cnpj,
     normalize_digitable_line,
     normalize_document_number,
@@ -177,6 +178,16 @@ class DdaDebit(models.Model):
     alert_assignment = fields.Boolean(compute="_compute_alert_flags")
     alert_labels = fields.Char(string="Alerts", compute="_compute_alert_flags")
     days_to_due = fields.Integer(compute="_compute_days_to_due")
+    # Masked copies for the screen; the raw fields stay for search and filters.
+    payer_cnpj_display = fields.Char(
+        string="Payer CNPJ", compute="_compute_cnpj_display"
+    )
+    beneficiary_vat_display = fields.Char(
+        string="Beneficiary CNPJ", compute="_compute_cnpj_display"
+    )
+    guarantor_vat_display = fields.Char(
+        string="Guarantor CNPJ", compute="_compute_cnpj_display"
+    )
     link_mode = fields.Selection(
         selection=[("auto", "Automatic rule"), ("manual", "Manual")], copy=False
     )
@@ -267,6 +278,13 @@ class DdaDebit(models.Model):
                 ", ".join(labels[c] for c in labels if c in codes) or False
             )
 
+    @api.depends("payer_cnpj", "beneficiary_vat", "guarantor_vat")
+    def _compute_cnpj_display(self):
+        for debit in self:
+            debit.payer_cnpj_display = format_cnpj(debit.payer_cnpj) or False
+            debit.beneficiary_vat_display = format_cnpj(debit.beneficiary_vat) or False
+            debit.guarantor_vat_display = format_cnpj(debit.guarantor_vat) or False
+
     def _compute_days_to_due(self):
         today = fields.Date.context_today(self)
         for debit in self:
@@ -302,7 +320,10 @@ class DdaDebit(models.Model):
                     label = _("Link %s installments", len(top.move_line_ids))
                 elif top:
                     action = "review"
-                    label = _("Review %s candidates", len(debit.match_ids))
+                    if len(debit.match_ids) > 1:
+                        label = _("Review %s candidates", len(debit.match_ids))
+                    else:
+                        label = _("Review the suggestion")
                 elif (
                     debit.partner_id
                     and debit.company_id.dda_create_bill_mode == "draft"

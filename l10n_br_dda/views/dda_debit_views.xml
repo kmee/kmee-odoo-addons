@@ -17,7 +17,13 @@
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="date_due" />
                 <field name="beneficiary_name" />
-                <field name="beneficiary_vat" optional="hide" />
+                <field name="beneficiary_vat_display" optional="hide" />
+                <field
+                    name="beneficiary_vat"
+                    string="Beneficiary CNPJ (digits)"
+                    groups="base.group_no_one"
+                    optional="hide"
+                />
                 <field name="partner_id" optional="show" />
                 <field name="amount" sum="Total" />
                 <field name="divergence_amount" optional="hide" />
@@ -139,9 +145,19 @@
                             <field name="partner_id" />
                             <field name="beneficiary_name" />
                             <field name="beneficiary_trade_name" />
-                            <field name="beneficiary_vat" />
+                            <field name="beneficiary_vat_display" />
+                            <field
+                                name="beneficiary_vat"
+                                string="Beneficiary CNPJ (digits)"
+                                groups="base.group_no_one"
+                            />
                             <field name="guarantor_name" />
-                            <field name="guarantor_vat" />
+                            <field name="guarantor_vat_display" />
+                            <field
+                                name="guarantor_vat"
+                                string="Guarantor CNPJ (digits)"
+                                groups="base.group_no_one"
+                            />
                             <field name="issuer_bank" />
                         </group>
                         <group string="Boleto">
@@ -149,7 +165,12 @@
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
-                            <field name="payer_cnpj" />
+                            <field name="payer_cnpj_display" />
+                            <field
+                                name="payer_cnpj"
+                                string="Payer CNPJ (digits)"
+                                groups="base.group_no_one"
+                            />
                             <field name="digitable_line" />
                             <field name="barcode" />
                             <field name="document_number" />

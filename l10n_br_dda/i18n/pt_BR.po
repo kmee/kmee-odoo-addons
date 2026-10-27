@@ -328,8 +328,14 @@ msgstr "Beneficiário"
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__beneficiary_vat
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_match_wizard__beneficiary_vat
+#: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__beneficiary_vat_display
 msgid "Beneficiary CNPJ"
 msgstr "CNPJ do beneficiário"
+
+#. module: l10n_br_dda
+#: model_terms:ir.ui.view,arch_db:l10n_br_dda.dda_debit_view_form
+msgid "Beneficiary CNPJ (digits)"
+msgstr "CNPJ do beneficiário (dígitos)"
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__beneficiary_name
@@ -892,8 +898,14 @@ msgstr "Agrupar por"
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__guarantor_vat
+#: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__guarantor_vat_display
 msgid "Guarantor CNPJ"
 msgstr "CNPJ do sacador avalista"
+
+#. module: l10n_br_dda
+#: model_terms:ir.ui.view,arch_db:l10n_br_dda.dda_debit_view_form
+msgid "Guarantor CNPJ (digits)"
+msgstr "CNPJ do sacador avalista (dígitos)"
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__guarantor_name
@@ -1487,8 +1499,14 @@ msgstr "Linhas a pagar"
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__payer_cnpj
+#: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__payer_cnpj_display
 msgid "Payer CNPJ"
 msgstr "CNPJ do pagador"
+
+#. module: l10n_br_dda
+#: model_terms:ir.ui.view,arch_db:l10n_br_dda.dda_debit_view_form
+msgid "Payer CNPJ (digits)"
+msgstr "CNPJ do pagador (dígitos)"
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_import_wizard__payment_method_ids
@@ -2233,3 +2251,10 @@ msgstr "Possível duplicidade"
 #, python-format
 msgid "Assignment: check the assignee"
 msgstr "Cessão: confirme o cessionário"
+
+#. module: l10n_br_dda
+#. odoo-python
+#: code:addons/l10n_br_dda/models/dda_debit.py:0
+#, python-format
+msgid "Review the suggestion"
+msgstr "Revisar a sugestão"

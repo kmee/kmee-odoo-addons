@@ -327,7 +327,13 @@ msgstr ""
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__beneficiary_vat
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_match_wizard__beneficiary_vat
+#: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__beneficiary_vat_display
 msgid "Beneficiary CNPJ"
+msgstr ""
+
+#. module: l10n_br_dda
+#: model_terms:ir.ui.view,arch_db:l10n_br_dda.dda_debit_view_form
+msgid "Beneficiary CNPJ (digits)"
 msgstr ""
 
 #. module: l10n_br_dda
@@ -891,7 +897,13 @@ msgstr ""
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__guarantor_vat
+#: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__guarantor_vat_display
 msgid "Guarantor CNPJ"
+msgstr ""
+
+#. module: l10n_br_dda
+#: model_terms:ir.ui.view,arch_db:l10n_br_dda.dda_debit_view_form
+msgid "Guarantor CNPJ (digits)"
 msgstr ""
 
 #. module: l10n_br_dda
@@ -1486,7 +1498,13 @@ msgstr ""
 
 #. module: l10n_br_dda
 #: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__payer_cnpj
+#: model:ir.model.fields,field_description:l10n_br_dda.field_l10n_br_dda_debit__payer_cnpj_display
 msgid "Payer CNPJ"
+msgstr ""
+
+#. module: l10n_br_dda
+#: model_terms:ir.ui.view,arch_db:l10n_br_dda.dda_debit_view_form
+msgid "Payer CNPJ (digits)"
 msgstr ""
 
 #. module: l10n_br_dda
@@ -2225,4 +2243,11 @@ msgstr ""
 #: code:addons/l10n_br_dda/models/dda_debit.py:0
 #, python-format
 msgid "Assignment: check the assignee"
+msgstr ""
+
+#. module: l10n_br_dda
+#. odoo-python
+#: code:addons/l10n_br_dda/models/dda_debit.py:0
+#, python-format
+msgid "Review the suggestion"
 msgstr ""
