@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- Fictitious vendors, vendor bills and boletos. Every name, CNPJ and amount
+         is invented. The same cases are meant to be served by the bank simulator. -->
+    <function model="l10n_br_dda.debit" name="_dda_demo_load" />
+
+</odoo>
