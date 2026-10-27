@@ -25,13 +25,6 @@
                     attrs="{'invisible': [('code', '!=', 'brbank')]}"
                 >
                     <field name="brbank_sandbox_validated" invisible="1" />
-                    <field name="brbank_uses_client_id" invisible="1" />
-                    <field name="brbank_uses_client_secret" invisible="1" />
-                    <field name="brbank_uses_username" invisible="1" />
-                    <field name="brbank_uses_password" invisible="1" />
-                    <field name="brbank_uses_certificate" invisible="1" />
-                    <field name="brbank_uses_pix_key" invisible="1" />
-                    <field name="brbank_uses_refresh_token" invisible="1" />
                     <field name="brbank_is_pix" invisible="1" />
                     <field name="brbank_supports_webhook" invisible="1" />
                     <field
@@ -42,95 +35,15 @@
                         name="brbank_pix_perfil"
                         attrs="{'invisible': [('brbank_is_pix', '=', False)], 'required': [('brbank_is_pix', '=', True), ('state', '!=', 'disabled')]}"
                     />
+                    <field
+                        name="brbank_connection_id"
+                        attrs="{'required': [('code', '=', 'brbank'), ('state', '!=', 'disabled')]}"
+                        context="{'default_adapter': brbank_adapter, 'default_pix_profile': brbank_pix_perfil, 'default_name': name}"
+                    />
                     <field name="brbank_capabilities" />
                     <field
                         name="brbank_nosso_numero_sequence_id"
                         attrs="{'invisible': [('brbank_nosso_numero_sequence_id', '=', False)]}"
-                    />
-                </group>
-                <group
-                    name="brbank_credentials"
-                    string="Credentials"
-                    attrs="{'invisible': [('code', '!=', 'brbank')]}"
-                    groups="base.group_system"
-                >
-                    <field
-                        name="brbank_client_id"
-                        attrs="{'invisible': [('brbank_uses_client_id', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_client_secret"
-                        password="True"
-                        attrs="{'invisible': [('brbank_uses_client_secret', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_username"
-                        attrs="{'invisible': [('brbank_uses_username', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_password"
-                        password="True"
-                        attrs="{'invisible': [('brbank_uses_password', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_pix_key"
-                        attrs="{'invisible': [('brbank_uses_pix_key', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_refresh_token"
-                        password="True"
-                        attrs="{'invisible': [('brbank_uses_refresh_token', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_certificate"
-                        attrs="{'invisible': [('brbank_uses_certificate', '=', False)]}"
-                    />
-                    <field
-                        name="brbank_private_key"
-                        attrs="{'invisible': [('brbank_uses_certificate', '=', False)]}"
-                    />
-                </group>
-                <group
-                    name="brbank_settings"
-                    string="Bank Settings"
-                    colspan="2"
-                    attrs="{'invisible': [('code', '!=', 'brbank')]}"
-                    groups="base.group_system"
-                >
-                    <field name="brbank_settings_help" />
-                    <field
-                        name="brbank_extra_config"
-                        widget="ace"
-                        options="{'mode': 'python'}"
-                    />
-                    <field
-                        name="brbank_secret_config"
-                        widget="ace"
-                        options="{'mode': 'python'}"
-                    />
-                    <button
-                        name="action_brbank_fill_settings_template"
-                        type="object"
-                        string="Fill settings template"
-                        class="btn-secondary"
-                        colspan="2"
-                    />
-                </group>
-                <group
-                    name="brbank_webhook"
-                    string="Webhook"
-                    colspan="2"
-                    attrs="{'invisible': ['|', ('code', '!=', 'brbank'), ('brbank_supports_webhook', '=', False)]}"
-                    groups="base.group_system"
-                >
-                    <field name="brbank_webhook_url" widget="CopyClipboardChar" />
-                    <button
-                        name="action_brbank_rotate_webhook_token"
-                        type="object"
-                        string="Rotate webhook token"
-                        class="btn-secondary"
-                        confirm="The current webhook URL stops working. Register the new one at the bank. Continue?"
-                        colspan="2"
                     />
                 </group>
             </group>

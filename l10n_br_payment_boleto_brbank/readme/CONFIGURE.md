@@ -1,47 +1,49 @@
 1. Install the `brbank` Python library in the Odoo environment
-   (`pip install "brbank>=0.0.4"`). It needs Python 3.10 or later. Version
-   0.0.4 is the minimum: it brings the adapters of Itaú, Bradesco, Santander,
-   BTG Pactual, C6 Bank, Banrisul, Unicred, Caixa and Safra, and the Sicoob
-   contract checked in the bank sandbox (the manifest only names the package,
-   so the version is not checked at install). For Sicoob, the document kind
-   (`codigo_especie_documento`) is the acronym, for instance `DM`, and no
-   longer a number.
-2. Go to *Invoicing > Configuration > Payment Providers* and open the provider
-   of the bank (for instance *Sicoob (Boleto)* or *Pix Itaú*).
-3. In the *Credentials* tab:
-   - the bank adapter (and the Pix profile) are already set by the data;
-   - fill the credentials the adapter asks for (client id and secret, API
-     user and password, certificate and private key in PEM, Pix key). Only the
-     fields the adapter uses are shown;
-   - click *Fill settings template* and complete the JSON of *Extra Settings*
-     (agreement, wallet, client number and so on) and *Extra Secrets* (developer key,
-     API key and so on). *Settings Keys* lists every key with its type, which ones are
-     required and which ones are secret;
-   - if the bank has a webhook, register the *Webhook URL* at the bank. *Rotate
-     webhook token* issues a new URL and stops the old one at once.
-   - keys typed as a function in the library (`gerar_nosso_numero`,
-     `ao_renovar_refresh_token`) never go in the JSON: the provider serves them
-     (see below).
-4. Set the provider to *Test Mode* (bank sandbox) or *Enabled* (production) and
-   choose its journal in the *Configuration* tab. The provider refuses to leave
-   *Disabled* while a required key is missing.
+   (`pip install "brbank>=0.0.6"`). It needs Python 3.10 or later. Version
+   0.0.6 is the minimum: it adds the token store shared between workers and
+   the OAuth functions used by the bank connection (the manifest only names
+   the package, so the version is not checked at install). For Sicoob, the
+   document kind (`codigo_especie_documento`) is the acronym, for instance
+   `DM`, and no longer a number.
+2. Go to *Invoicing > Configuration > Bank Connections* and create the
+   connection of the bank account (see the module `l10n_br_bank_connection`):
+   adapter, environment (test uses the bank sandbox), CNPJ, credentials, the
+   JSON of *Extra Settings* and *Extra Secrets* (*Fill settings template* lists
+   the keys), and the consent at the bank where the adapter needs one (BTG).
+   The webhook URL to register at the bank is on the connection.
+3. Go to *Invoicing > Configuration > Payment Providers* and open the provider
+   of the bank (for instance *Sicoob (Boleto)* or *Pix Itaú*): the bank
+   adapter (and the Pix profile) are already set by the data; choose the
+   *Bank Connection*. One connection can serve several providers.
+4. Set the provider to *Test Mode* or *Enabled* and choose its journal in the
+   *Configuration* tab. The provider refuses to leave *Disabled* without a
+   connection of the same adapter, or while a required key is missing. Test
+   or production is decided by the *environment* of the connection.
 5. In the payment mode (*Invoicing > Configuration > Payment Modes*), tick
    *Generate boletos on invoice?* and choose the provider. The payment mode
    shows what the bank supports.
 
+The webhook URL of the connection replaces the one of the provider; the old
+`/payment/brbank/webhook/<provider>/<token>` keeps working as an alias, with
+the same token, so nothing has to change at the bank after the upgrade.
+Keys typed as a function in the library (`gerar_nosso_numero`,
+`ao_renovar_refresh_token`) never go in the JSON: the provider and the
+connection serve them.
+
 Notes per bank:
 
-- **BTG Pactual**: the API only accepts tokens of the authorization code flow,
-  done once at the BTG Id outside Odoo. Paste the refresh token it gives in
-  *Refresh Token*. The bank may return a new refresh token at each renewal and
-  invalidate the old one: the provider saves it at once, in a database
+- **BTG Pactual**: the API only accepts tokens of the authorization code flow.
+  Use *Connect* on the bank connection (or paste a refresh token in *Refresh
+  Token*). The bank may return a new refresh token at each renewal and
+  invalidate the old one: the connection saves it at once, in a database
   transaction of its own, so an error or a rollback of the operation never
-  loses it. A refresh token unused for more than 10 days expires and the
+  loses it, and the renewals of the workers are serialized by a lock of the
+  database. A refresh token unused for more than 10 days expires and the
   consent must be done again. Use each BTG credential in one database only.
   Fill `dias_expiracao` (days after the due date until the title expires), or
   the bank refuses titles without an automatic write-off term.
-- **Caixa**: there is no public test environment, so the provider refuses the
-  *Test Mode*. Enable it and validate with a title of low amount.
+- **Caixa**: there is no public test environment, so the connection refuses the
+  test environment. Use production and validate with a title of low amount.
   `documento_beneficiario` is a secret key (*Extra Secrets*).
 - **C6 Bank**: the Pix key must be a random key (EVP); the bank silently issues
   a boleto without Pix with any other kind.
@@ -65,8 +67,9 @@ passes the digits of the bank (Itaú 8, Banrisul 8, Safra 9, Banco do Brasil
 10, Santander 12, Caixa 15), the registration stops with an error instead of
 cutting the number: agree with the bank on a new wallet or agreement.
 
-Only users of *Administration / Settings* see and edit the credentials. The
-webhook token travels in the URL: mask it in the logs of the reverse proxy.
+Only users of *Administration / Settings* see and edit the credentials (on the
+connection). The webhook token travels in the URL: mask it in the logs of the
+reverse proxy.
 
 Crons:
 

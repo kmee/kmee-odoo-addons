@@ -4,7 +4,7 @@
 {
     "name": "L10n Br Payment Boleto Brbank",
     "summary": "Boletos and Pix charges in several Brazilian banks through brbank",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "KMEE,Odoo Community Association (OCA)",
     "maintainers": ["mileo"],
@@ -14,6 +14,7 @@
         "account",
         "payment",
         "l10n_br_payment_boleto",
+        "l10n_br_bank_connection",
     ],
     # Module name only: a version specifier here breaks the import check.
     "external_dependencies": {"python": ["brbank"]},

@@ -6,26 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-27 03:00+0000\n"
+"PO-Revision-Date: 2026-10-27 03:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid " (required)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid " [secret]"
-msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.portal_invoice_page_brbank
@@ -57,16 +45,6 @@ msgstr ""
 #: code:addons/l10n_br_payment_boleto_brbank/models/boleto_instruction.py:0
 #, python-format
 msgid "A due date extension needs the new date."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_password
-msgid "API Password"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_username
-msgid "API Username"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -104,20 +82,6 @@ msgstr ""
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_l10n_br_boleto_instruction__bank_response
 msgid "Answer of the bank, masked: no personal data, no secret."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Asynchronous instructions"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Asynchronous registration"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -168,13 +132,9 @@ msgid "Bank Capabilities"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_client_id
-msgid "Bank Client ID"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_client_secret
-msgid "Bank Client Secret"
+#: model:ir.model,name:l10n_br_payment_boleto_brbank.model_l10n_br_bank_connection_connection
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_connection_id
+msgid "Bank Connection"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -193,11 +153,6 @@ msgstr ""
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_boleto_instruction__bank_response
 msgid "Bank Response"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
-msgid "Bank Settings"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -257,10 +212,7 @@ msgid "Boleto Instructions"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_transaction_form_brbank
-#, python-format
 msgid "Boleto PDF"
 msgstr ""
 
@@ -315,50 +267,8 @@ msgid "Brbank Supports Write Off"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_certificate
-msgid "Brbank Uses Certificate"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_client_id
-msgid "Brbank Uses Client"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_client_secret
-msgid "Brbank Uses Client Secret"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_password
-msgid "Brbank Uses Password"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_pix_key
-msgid "Brbank Uses Pix Key"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_refresh_token
-msgid "Brbank Uses Refresh Token"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_uses_username
-msgid "Brbank Uses Username"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_c6
 msgid "C6 Bank (Boleto)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "CNAB remittance"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -374,11 +284,6 @@ msgid "Caixa (Boleto)"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_certificate
-msgid "Certificate (PEM)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_transaction_form_brbank
 msgid "Check at the bank"
 msgstr ""
@@ -387,14 +292,14 @@ msgstr ""
 #. odoo-python
 #: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
 #, python-format
-msgid "Choose the bank adapter first."
+msgid "Choose the bank adapter of the provider."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
 #. odoo-python
 #: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
 #, python-format
-msgid "Choose the bank adapter of the provider."
+msgid "Choose the bank connection of the provider %s."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -421,6 +326,11 @@ msgid "Company"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__connection_id
+msgid "Connection"
+msgstr ""
+
+#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_nosso_numero_sequence_id
 msgid ""
 "Created at the first title of a bank whose nosso numero is chosen by the "
@@ -440,8 +350,10 @@ msgid "Created on"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
-msgid "Credentials"
+#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_connection_id
+msgid ""
+"Credentials, token and webhook of the bank account this provider uses. One "
+"connection can serve several providers (boleto and Pix, for instance)."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -494,35 +406,6 @@ msgid "Event as received, masked by the library."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_secret_config
-msgid "Extra Secrets"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_extra_config
-msgid "Extra Settings"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
-msgid "Fill settings template"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Hybrid boleto (Pix QR code)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Hybrid boleto only"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_boleto_instruction__id
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__id
 msgid "ID"
@@ -540,42 +423,8 @@ msgid "Ignored"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Immediate Pix charge"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Incomplete configuration of the provider %(name)s (%(details)s)."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Instructions (due date, rebate)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_itau
 msgid "Itaú (Boleto)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_secret_config
-msgid ""
-"JSON object with the bank specific secrets (developer key, API key...)."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_extra_config
-msgid ""
-"JSON object with the bank specific settings (agreement, wallet, client "
-"number...). Use 'Fill settings template' to get the keys."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -658,14 +507,6 @@ msgid "Nosso numero: %s"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_refresh_token
-msgid ""
-"OAuth refresh token obtained once at the bank (authorization code flow). The"
-" bank may return a new one at each renewal: the provider keeps it up to date"
-" by itself."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__occurred_at
 msgid "Occurred At"
 msgstr ""
@@ -743,11 +584,6 @@ msgid "Pix Itaú"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_pix_key
-msgid "Pix Key"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_pix_perfil
 msgid "Pix Profile"
 msgstr ""
@@ -778,18 +614,6 @@ msgid "Pix TXID"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "Pix charge with due date"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_private_key
-msgid "Private Key (PEM)"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.brbank_event_form
 msgid "Process again"
 msgstr ""
@@ -806,8 +630,19 @@ msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
 #: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_boleto_instruction__provider_id
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__provider_id
 msgid "Provider"
+msgstr ""
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__provider_id
+msgid "Provider (legacy)"
+msgstr ""
+
+#. module: l10n_br_payment_boleto_brbank
+#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_l10n_br_brbank_event__provider_id
+msgid ""
+"Provider the event was received for, before the webhook belonged to the "
+"connection. Empty on newer events."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -841,11 +676,6 @@ msgid "Reference"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_refresh_token
-msgid "Refresh Token"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_transaction_form_brbank
 msgid "Register at the bank"
 msgstr ""
@@ -867,11 +697,6 @@ msgid "Result"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
-msgid "Rotate webhook token"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model:payment.provider,name:l10n_br_payment_boleto_brbank.payment_provider_brbank_safra
 msgid "Safra (Boleto)"
 msgstr ""
@@ -884,11 +709,6 @@ msgstr ""
 #. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.boleto_instruction_form
 msgid "Send to the bank"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_settings_help
-msgid "Settings Keys"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -922,23 +742,6 @@ msgstr ""
 msgid ""
 "Taken from the sequence of the provider before the first registration call "
 "and sent again on every retry of this title."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid ""
-"The bank adapter %s has no test environment: every call reaches production. "
-"Enable the provider instead of using the test mode, and validate it with a "
-"low amount."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "The bank adapter %s is not installed in the brbank library."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -992,13 +795,6 @@ msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
 #. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "The bank refused the configuration of the provider %(name)s: %(error)s"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
 #: code:addons/l10n_br_payment_boleto_brbank/models/payment_transaction.py:0
 #, python-format
 msgid "The bank rejected the boleto."
@@ -1032,10 +828,12 @@ msgid "The boleto is not registered at the bank."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
+#, python-format
 msgid ""
-"The current webhook URL stops working. Register the new one at the bank. "
-"Continue?"
+"The connection %(connection)s uses another bank adapter than the provider "
+"%(provider)s."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -1045,13 +843,6 @@ msgstr ""
 msgid ""
 "The customer of the transaction %(ref)s is missing data the bank requires: "
 "%(fields)s."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "The field %s must hold a JSON object."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -1072,6 +863,13 @@ msgid ""
 "The nosso numero sequence of the provider %(name)s reached %(number)s, "
 "beyond the %(digits)s digits the bank accepts. Agree with the bank on a new "
 "wallet or agreement before issuing more boletos."
+msgstr ""
+
+#. module: l10n_br_payment_boleto_brbank
+#. odoo-python
+#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
+#, python-format
+msgid "The payment provider %s has no bank connection."
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
@@ -1116,7 +914,7 @@ msgid ""
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.constraint,message:l10n_br_payment_boleto_brbank.constraint_l10n_br_brbank_event_event_unique
+#: model:ir.model.constraint,message:l10n_br_payment_boleto_brbank.constraint_l10n_br_brbank_event_connection_event_unique
 msgid "This bank event was already received."
 msgstr ""
 
@@ -1151,33 +949,12 @@ msgid "Validated in Sandbox"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_provider_form_brbank
-#, python-format
-msgid "Webhook"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_webhook_token
-msgid "Webhook Token"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,field_description:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_webhook_url
-msgid "Webhook URL"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
 #: model_terms:ir.ui.view,arch_db:l10n_br_payment_boleto_brbank.payment_transaction_form_brbank
 msgid "Write off at the bank"
 msgstr ""
 
 #. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
 #: model:ir.model.fields.selection,name:l10n_br_payment_boleto_brbank.selection__l10n_br_boleto_instruction__command__baixa
-#, python-format
 msgid "Write-off"
 msgstr ""
 
@@ -1298,32 +1075,4 @@ msgstr ""
 #: code:addons/l10n_br_payment_boleto_brbank/models/payment_transaction.py:0
 #, python-format
 msgid "ZIP code"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#: model:ir.model.fields,help:l10n_br_payment_boleto_brbank.field_payment_provider__brbank_certificate
-msgid ""
-"mTLS certificate. It only goes to a temporary file in memory while the TLS "
-"context is built."
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "missing: %s"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "secrets typed in Extra Settings, move them to Extra Secrets: %s"
-msgstr ""
-
-#. module: l10n_br_payment_boleto_brbank
-#. odoo-python
-#: code:addons/l10n_br_payment_boleto_brbank/models/payment_provider.py:0
-#, python-format
-msgid "unknown or invalid: %s"
 msgstr ""

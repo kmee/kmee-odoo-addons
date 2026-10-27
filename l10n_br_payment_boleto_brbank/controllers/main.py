@@ -2,15 +2,16 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
-import hmac
 import logging
 
-from brbank.erros import ErroBrbank
-
 from odoo import http
-from odoo.exceptions import AccessError, MissingError, UserError
+from odoo.exceptions import AccessError, MissingError
 from odoo.http import content_disposition, request
 
+from odoo.addons.l10n_br_bank_connection.controllers.main import (
+    dispatch_webhook,
+    token_matches,
+)
 from odoo.addons.portal.controllers.portal import CustomerPortal
 
 from ..models.payment_provider import BRBANK, WEBHOOK_ROUTE
@@ -28,44 +29,24 @@ class BrbankWebhookController(http.Controller):
         save_session=False,
     )
     def brbank_webhook(self, provider_id, token, **kwargs):
-        """Receive a bank notification (O7): validate, store and answer.
+        """Alias of the webhook of the connection (O7), for the URLs that were
+        registered at the banks before the connection took it over.
 
-        - An unknown provider and a wrong token get the same empty 404, so
-          the route says nothing about which providers exist.
-        - The token is compared in constant time.
-        - The body becomes canonical events (masked by the library) and is
-          stored deduplicated; the processing, which reads the title back
-          from the bank, runs in a cron triggered at once.
+        The provider leads to its connection, and the connection does the
+        rest (see `l10n_br_bank_connection`): an unknown provider, a disabled
+        one and a wrong token get the same empty 404, the token is compared
+        in constant time, the events are stored and processed by a cron.
         """
         provider = request.env["payment.provider"].sudo().browse(provider_id).exists()
-        expected = ""
-        if provider and provider.code == BRBANK and provider.state != "disabled":
-            expected = provider.brbank_webhook_token or ""
-        if not (expected and hmac.compare_digest(expected.encode(), token.encode())):
+        connection = (
+            provider.brbank_connection_id
+            if provider and provider.code == BRBANK and provider.state != "disabled"
+            else provider.brbank_connection_id.browse()
+        )
+        expected = connection.webhook_token if connection.active else ""
+        if not token_matches(expected, token):
             return request.make_response("", status=404)
-
-        body = request.httprequest.get_data()
-        headers = dict(request.httprequest.headers)
-        try:
-            events = provider._brbank_parse_webhook(body, headers)
-        except (ErroBrbank, UserError, ValueError) as error:
-            # Never the body: it may carry personal data.
-            _logger.info(
-                "brbank webhook: provider %s refused a payload (%s)",
-                provider.id,
-                type(error).__name__,
-            )
-            return request.make_response("", status=400)
-        created = (
-            request.env["l10n_br.brbank.event"].sudo()._brbank_store(provider, events)
-        )
-        if created:
-            request.env.ref(
-                "l10n_br_payment_boleto_brbank.ir_cron_brbank_process_events"
-            ).sudo()._trigger()
-        return request.make_json_response(
-            {"received": len(events), "new": len(created)}
-        )
+        return dispatch_webhook(connection)
 
 
 class BrbankPortal(CustomerPortal):

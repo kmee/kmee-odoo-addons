@@ -15,7 +15,7 @@
                 decoration-muted="state == 'ignored'"
             >
                 <field name="create_date" />
-                <field name="provider_id" />
+                <field name="connection_id" />
                 <field name="bank" />
                 <field name="reference" />
                 <field name="event_type" />
@@ -45,7 +45,8 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="provider_id" />
+                            <field name="connection_id" />
+                            <field name="provider_id" groups="base.group_no_one" />
                             <field name="bank" />
                             <field name="reference" />
                             <field name="event_type" />
@@ -72,7 +73,7 @@
         <field name="arch" type="xml">
             <search>
                 <field name="reference" />
-                <field name="provider_id" />
+                <field name="connection_id" />
                 <filter
                     name="filter_new"
                     string="To Process"

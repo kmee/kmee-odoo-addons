@@ -26,9 +26,12 @@ class TestBrbankWebhook(BrbankCommon, HttpCase):
         self.tx = self._brbank_txs(self.invoice)[0]
         self.Event = self.env["l10n_br.brbank.event"]
 
+    def _webhook_token(self, provider):
+        return provider.brbank_connection_id.webhook_token
+
     def _post(self, payload, provider=None, token=None):
         provider = provider or self.provider
-        token = token if token is not None else provider.brbank_webhook_token
+        token = token if token is not None else self._webhook_token(provider)
         return self.url_open(
             f"/payment/brbank/webhook/{provider.id}/{token}",
             data=json.dumps(payload),
@@ -54,15 +57,34 @@ class TestBrbankWebhook(BrbankCommon, HttpCase):
         self.assertEqual(response.text, "")
 
     def test_disabled_provider_is_404(self):
-        token = self.provider.brbank_webhook_token
+        token = self._webhook_token(self.provider)
         self.provider.state = "disabled"
         response = self._post(self._event_payload(), token=token)
         self.assertEqual(response.status_code, 404)
 
+    def test_connection_route_stores_the_same_events(self):
+        """The route of the connection and the alias of the provider lead to
+        the same place; the alias keeps the URLs registered at the banks."""
+        connection = self.provider.brbank_connection_id
+        response = self.url_open(
+            f"/l10n_br_bank_connection/webhook/{connection.id}/"
+            f"{connection.webhook_token}",
+            data=json.dumps(self._event_payload()),
+            headers={"Content-Type": "application/json"},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), {"received": 1, "new": 1})
+        event = self.Event.search([])
+        self.assertEqual(event.connection_id, connection)
+        # The alias answers the same notification as already received.
+        self.assertEqual(
+            self._post(self._event_payload()).json(), {"received": 1, "new": 0}
+        )
+
     def test_unreadable_payload_is_400(self):
         response = self.url_open(
             f"/payment/brbank/webhook/{self.provider.id}/"
-            f"{self.provider.brbank_webhook_token}",
+            f"{self._webhook_token(self.provider)}",
             data="not json",
             headers={"Content-Type": "application/json"},
         )

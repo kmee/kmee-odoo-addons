@@ -8,7 +8,8 @@ from brbank import StatusCanonico, registro
 
 from odoo.tests.common import TransactionCase
 
-from ..utils import config as brbank_config
+from odoo.addons.l10n_br_bank_connection.utils import config as brbank_config
+
 from .fake_bank import BANK, FakeAdapter, FakeBasicAdapter, reset_bank
 
 FAKE = "brbank_test_fake"
@@ -85,7 +86,7 @@ class BrbankCommon:
                 "name": "Cliente Boleto",
                 "is_company": True,
                 "legal_name": "Cliente Boleto Ltda",
-                "cnpj_cpf": "11.222.333/0001-81",
+                "cnpj_cpf": "11.444.777/0001-61",
                 "street_name": "Rua dos Testes",
                 "street_number": "100",
                 "district": "Centro",
@@ -108,18 +109,37 @@ class BrbankCommon:
         )
 
     @classmethod
-    def _create_provider(cls, adapter, **values):
+    def _create_connection(cls, adapter, **values):
+        """A bank connection with dummy credentials (nothing reaches a bank)."""
+        return cls.env["l10n_br_bank_connection.connection"].create(
+            dict(
+                {
+                    "name": f"Conexao de teste {adapter}",
+                    "adapter": adapter,
+                    "environment": "test",
+                    "company_id": cls.env.company.id,
+                    "cnpj": "11222333000181",
+                    "client_id": "client-id",
+                    "client_secret": "client-secret",
+                    "extra_config": json.dumps({"numero_cliente": 42}),
+                    "state": "connected",
+                },
+                **values,
+            )
+        )
+
+    @classmethod
+    def _create_provider(cls, adapter, connection_values=None, **values):
+        connection = cls._create_connection(adapter, **(connection_values or {}))
         return cls.env["payment.provider"].create(
             dict(
                 {
                     "name": f"Banco de teste {adapter}",
                     "code": "brbank",
                     "brbank_adapter": adapter,
+                    "brbank_connection_id": connection.id,
                     "state": "test",
                     "company_id": cls.env.company.id,
-                    "brbank_client_id": "client-id",
-                    "brbank_client_secret": "client-secret",
-                    "brbank_extra_config": json.dumps({"numero_cliente": 42}),
                 },
                 **values,
             )
@@ -127,14 +147,25 @@ class BrbankCommon:
 
     @classmethod
     def _fill_for_test(cls, provider):
-        """Dummy credentials and settings typed after the adapter config."""
-        provider.action_brbank_fill_settings_template()
-        config_cls = brbank_config.config_class(
-            registro.obter_classe(provider.brbank_adapter)
+        """Connection with dummy credentials and settings typed after the
+        adapter config, linked to the (data) provider, which is enabled."""
+        connection = cls.env["l10n_br_bank_connection.connection"].create(
+            {
+                "name": f"Conexao de teste {provider.brbank_adapter}",
+                "adapter": provider.brbank_adapter,
+                "pix_profile": provider.brbank_pix_perfil,
+                "environment": "prod",
+                "company_id": cls.env.company.id,
+                "cnpj": "11222333000181",
+            }
         )
-        public = json.loads(provider.brbank_extra_config)
-        secret = json.loads(provider.brbank_secret_config)
-        overrides = DUMMY_BY_ADAPTER.get(provider.brbank_adapter, {})
+        connection.action_fill_settings_template()
+        config_cls = brbank_config.config_class(
+            registro.obter_classe(connection.adapter)
+        )
+        public = json.loads(connection.extra_config)
+        secret = json.loads(connection.secret_config)
+        overrides = DUMMY_BY_ADAPTER.get(connection.adapter, {})
         for key in brbank_config.describe(config_cls):
             target = secret if key["secret"] else public
             name = key["name"]
@@ -144,20 +175,22 @@ class BrbankCommon:
                 target[name] = DUMMY_BY_KEY.get(
                     name, DUMMY_BY_TYPE.get(key["type"], "1234567")
                 )
-        provider.write(
+        connection.write(
             {
-                "brbank_client_id": "client-id",
-                "brbank_client_secret": "client-secret",
-                "brbank_username": "usuario",
+                "client_id": "client-id",
+                "client_secret": "client-secret",
+                "username": "usuario",
                 # The PinBank password is also its AES key: 16 bytes.
-                "brbank_password": "0123456789abcdef",
-                "brbank_pix_key": PIX_KEY,
-                "brbank_refresh_token": "refresh-token",
-                "brbank_extra_config": json.dumps(public),
-                "brbank_secret_config": json.dumps(secret),
-                "state": "enabled",
+                "password": "0123456789abcdef",
+                "pix_key": PIX_KEY,
+                "refresh_token": "refresh-token",
+                "extra_config": json.dumps(public),
+                "secret_config": json.dumps(secret),
+                "state": "connected",
             }
         )
+        provider.write({"brbank_connection_id": connection.id, "state": "enabled"})
+        return connection
 
     def _create_invoice(self, amount=1000.0, post=True):
         invoice = self.env["account.move"].create(

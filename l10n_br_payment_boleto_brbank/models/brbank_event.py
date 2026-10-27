@@ -35,12 +35,20 @@ class BrbankEvent(models.Model):
     _order = "id desc"
     _rec_name = "reference"
 
-    provider_id = fields.Many2one(
-        comodel_name="payment.provider",
+    connection_id = fields.Many2one(
+        comodel_name="l10n_br_bank_connection.connection",
         required=True,
         ondelete="cascade",
         index=True,
         readonly=True,
+    )
+    provider_id = fields.Many2one(
+        comodel_name="payment.provider",
+        string="Provider (legacy)",
+        ondelete="set null",
+        readonly=True,
+        help="Provider the event was received for, before the webhook belonged "
+        "to the connection. Empty on newer events.",
     )
     bank = fields.Char(required=True, readonly=True)
     reference = fields.Char(required=True, index=True, readonly=True)
@@ -76,17 +84,17 @@ class BrbankEvent(models.Model):
 
     _sql_constraints = [
         (
-            "event_unique",
-            "unique(provider_id, bank, reference, event_type)",
+            "connection_event_unique",
+            "unique(connection_id, bank, reference, event_type)",
             "This bank event was already received.",
         )
     ]
 
     @api.model
-    def _brbank_store(self, provider, events):
+    def _brbank_store(self, connection, events):
         """Persist the canonical events, skipping the ones already received.
 
-        Deduplication by (provider, bank, reference, type): banks resend the
+        Deduplication by (connection, bank, reference, type): banks resend the
         same notification, and a resent event must not be processed again.
 
         :return: The events created.
@@ -94,7 +102,7 @@ class BrbankEvent(models.Model):
         created = self.browse()
         for event in events:
             key = [
-                ("provider_id", "=", provider.id),
+                ("connection_id", "=", connection.id),
                 ("bank", "=", event.banco),
                 ("reference", "=", event.referencia),
                 ("event_type", "=", event.tipo.value),
@@ -102,7 +110,7 @@ class BrbankEvent(models.Model):
             if self.search_count(key):
                 continue
             values = {
-                "provider_id": provider.id,
+                "connection_id": connection.id,
                 "bank": event.banco,
                 "reference": event.referencia,
                 "event_type": event.tipo.value,
@@ -132,7 +140,7 @@ class BrbankEvent(models.Model):
         self.ensure_one()
         return self.env["payment.transaction"].search(
             [
-                ("provider_id", "=", self.provider_id.id),
+                ("provider_id.brbank_connection_id", "=", self.connection_id.id),
                 ("provider_code", "=", BRBANK),
                 "|",
                 "|",

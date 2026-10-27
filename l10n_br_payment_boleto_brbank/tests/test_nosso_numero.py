@@ -104,7 +104,7 @@ class TestNossoNumero(BrbankTransactionCase):
     def test_map_follows_the_library(self):
         from brbank import registro
 
-        from ..utils import config as brbank_config
+        from odoo.addons.l10n_br_bank_connection.utils import config as brbank_config
 
         takes_generator = set()
         for name in registro.listar_adapters():

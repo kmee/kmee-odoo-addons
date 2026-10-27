@@ -1,73 +1,27 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import base64
-import inspect
-import json
 import logging
-import secrets
 
-import httpx
-import psycopg2
 from brbank import Capacidade, registro
-from brbank.erros import AdapterNaoEncontrado, ErroBrbank, Validacao
+from brbank.erros import AdapterNaoEncontrado, Validacao
 
-from odoo import SUPERUSER_ID, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
-from ..utils import config as brbank_config
-from ..utils.runner import run_in_dedicated_loop
+from odoo.addons.l10n_br_bank_connection.models.connection import (
+    ADAPTER_LABELS,
+    PIX_PROFILE_LABELS,
+    capability_flag_labels,
+)
+from odoo.addons.l10n_br_bank_connection.utils import config as brbank_config
 
 _logger = logging.getLogger(__name__)
 
 BRBANK = "brbank"
+# Alias route of the webhook, kept for the URLs already registered at the banks
+# before the connection took the webhook over.
 WEBHOOK_ROUTE = "/payment/brbank/webhook"
-
-ADAPTER_LABELS = {
-    "banrisul": "Banrisul (041)",
-    "bb": "Banco do Brasil (001)",
-    "bradesco": "Bradesco (237)",
-    "btg": "BTG Pactual (208)",
-    "c6": "C6 Bank (336)",
-    "caixa": "Caixa (104)",
-    "inter": "Banco Inter (077)",
-    "itau": "Itaú (341)",
-    "pinbank": "PinBank",
-    "pix_bacen": "Pix (BACEN API)",
-    "safra": "Safra (422)",
-    "santander": "Santander (033)",
-    "sicoob": "Sicoob (756)",
-    "sicredi": "Sicredi (748)",
-    "unicred": "Unicred (136)",
-}
-PIX_PROFILE_LABELS = {
-    "bb": "Banco do Brasil",
-    "bradesco": "Bradesco",
-    "efi": "Efí",
-    "inter": "Banco Inter",
-    "itau": "Itaú",
-    "santander": "Santander",
-    "sicoob": "Sicoob",
-    "sicredi": "Sicredi",
-}
-# Generic provider field -> key used by the adapter configurations.
-GENERIC_FIELDS = {
-    "brbank_client_id": "client_id",
-    "brbank_client_secret": "client_secret",
-    "brbank_username": "usuario",
-    "brbank_password": "senha",
-    "brbank_certificate": "certificado_pem",
-    "brbank_private_key": "chave_pem",
-    "brbank_pix_key": "chave_pix",
-    "brbank_refresh_token": "refresh_token",
-}
-# Callable keys of the adapter configurations served by the provider, with
-# the method that builds the function. The other callable keys (such as
-# `gerar_nosso_numero`) keep the library default.
-CALLBACK_FACTORIES = {
-    "ao_renovar_refresh_token": "_brbank_refresh_token_callback",
-    "gerar_nosso_numero": "_brbank_nosso_numero_callback",
-}
 # Largest nosso numero (digits) the `gerar_nosso_numero` of each adapter
 # accepts, as validated by the library (Banrisul: the 8 free digits, the
 # adapter adds the check digits; Caixa: without the "14" prefix). An adapter
@@ -83,57 +37,6 @@ NOSSO_NUMERO_DIGITS = {
 # Context key with the nosso numero reserved for each title, by idempotency
 # key, read by the `gerar_nosso_numero` given to the adapter.
 NOSSO_NUMERO_CONTEXT = "brbank_nosso_numeros"
-# Key of `cr.cache` with the refresh tokens renewed in the current transaction.
-RENEWED_TOKENS = "brbank_renewed_refresh_tokens"
-SECRET_GROUP = "base.group_system"
-
-
-def _save_refresh_token(registry, provider_id, token):
-    """Commit a renewed refresh token in a transaction of its own.
-
-    The bank already invalidated the old token, so the new one must survive a
-    rollback of the transaction that called the bank. Runs in the thread of
-    the bank call, so it never touches the environment of the caller: only
-    the registry and the provider id. `NOWAIT` turns a row locked by another
-    transaction (possibly the caller, which waits for this thread) into an
-    immediate failure instead of a deadlock.
-
-    :return: None when the token was committed, else why it was not.
-    :rtype: str
-    """
-    try:
-        with registry.cursor() as cr:
-            cr.execute(
-                "SELECT id FROM payment_provider WHERE id = %s FOR UPDATE NOWAIT",
-                (provider_id,),
-                log_exceptions=False,
-            )
-            if not cr.fetchone():
-                # Provider created in the caller transaction, not committed.
-                return "provider not committed yet"
-            env = api.Environment(cr, SUPERUSER_ID, {})
-            env["payment.provider"].browse(provider_id).write(
-                {"brbank_refresh_token": token}
-            )
-        return None
-    except psycopg2.Error as error:
-        return type(error).__name__
-
-
-def _capability_labels():
-    return {
-        Capacidade.HIBRIDO: _("Hybrid boleto (Pix QR code)"),
-        Capacidade.SO_HIBRIDO: _("Hybrid boleto only"),
-        Capacidade.ALTERACAO: _("Instructions (due date, rebate)"),
-        Capacidade.BAIXA: _("Write-off"),
-        Capacidade.PDF: _("Boleto PDF"),
-        Capacidade.WEBHOOK: _("Webhook"),
-        Capacidade.PIX_COB: _("Immediate Pix charge"),
-        Capacidade.PIX_COBV: _("Pix charge with due date"),
-        Capacidade.EMISSAO_ASSINCRONA: _("Asynchronous registration"),
-        Capacidade.INSTRUCAO_ASSINCRONA: _("Asynchronous instructions"),
-        Capacidade.CNAB_REMESSA: _("CNAB remittance"),
-    }
 
 
 class PaymentProvider(models.Model):
@@ -154,41 +57,15 @@ class PaymentProvider(models.Model):
         help="Bank (PSP) of the Pix BACEN adapter.",
     )
 
-    # Credentials: readable by system administrators only.
-    brbank_client_id = fields.Char(string="Bank Client ID", groups=SECRET_GROUP)
-    brbank_client_secret = fields.Char(string="Bank Client Secret", groups=SECRET_GROUP)
-    brbank_username = fields.Char(string="API Username", groups=SECRET_GROUP)
-    brbank_password = fields.Char(string="API Password", groups=SECRET_GROUP)
-    brbank_certificate = fields.Binary(
-        string="Certificate (PEM)",
-        attachment=False,
-        groups=SECRET_GROUP,
-        help="mTLS certificate. It only goes to a temporary file in memory "
-        "while the TLS context is built.",
-    )
-    brbank_private_key = fields.Binary(
-        string="Private Key (PEM)", attachment=False, groups=SECRET_GROUP
-    )
-    brbank_pix_key = fields.Char(string="Pix Key", groups=SECRET_GROUP)
-    brbank_refresh_token = fields.Char(
-        string="Refresh Token",
-        groups=SECRET_GROUP,
-        copy=False,
-        help="OAuth refresh token obtained once at the bank (authorization "
-        "code flow). The bank may return a new one at each renewal: the "
-        "provider keeps it up to date by itself.",
-    )
-    brbank_extra_config = fields.Text(
-        string="Extra Settings",
-        groups=SECRET_GROUP,
-        help="JSON object with the bank specific settings (agreement, wallet, "
-        "client number...). Use 'Fill settings template' to get the keys.",
-    )
-    brbank_secret_config = fields.Text(
-        string="Extra Secrets",
-        groups=SECRET_GROUP,
-        help="JSON object with the bank specific secrets (developer key, API "
-        "key...).",
+    brbank_connection_id = fields.Many2one(
+        comodel_name="l10n_br_bank_connection.connection",
+        string="Bank Connection",
+        domain="[('adapter', '=', brbank_adapter)]",
+        ondelete="restrict",
+        index=True,
+        help="Credentials, token and webhook of the bank account this provider "
+        "uses. One connection can serve several providers (boleto and Pix, "
+        "for instance).",
     )
     brbank_nosso_numero_sequence_id = fields.Many2one(
         comodel_name="ir.sequence",
@@ -198,16 +75,6 @@ class PaymentProvider(models.Model):
         help="Created at the first title of a bank whose nosso numero is "
         "chosen by the issuer. Numbers are never reused.",
     )
-    brbank_webhook_token = fields.Char(
-        string="Webhook Token",
-        groups=SECRET_GROUP,
-        copy=False,
-        default=lambda self: secrets.token_urlsafe(32),
-    )
-    brbank_webhook_url = fields.Char(
-        string="Webhook URL", compute="_compute_brbank_webhook_url", groups=SECRET_GROUP
-    )
-
     # What the adapter declares, for the views (O11).
     brbank_capabilities = fields.Char(
         string="Bank Capabilities", compute="_compute_brbank_adapter_info"
@@ -219,18 +86,7 @@ class PaymentProvider(models.Model):
     brbank_sandbox_validated = fields.Boolean(
         string="Validated in Sandbox", compute="_compute_brbank_adapter_info"
     )
-    brbank_uses_client_id = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_uses_client_secret = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_uses_username = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_uses_password = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_uses_certificate = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_uses_pix_key = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_uses_refresh_token = fields.Boolean(compute="_compute_brbank_adapter_info")
     brbank_is_pix = fields.Boolean(compute="_compute_brbank_adapter_info")
-    brbank_settings_help = fields.Text(
-        string="Settings Keys", compute="_compute_brbank_adapter_info"
-    )
-
     # === SELECTIONS === #
 
     @api.model
@@ -262,7 +118,7 @@ class PaymentProvider(models.Model):
 
     @api.depends("code", "brbank_adapter", "brbank_pix_perfil")
     def _compute_brbank_adapter_info(self):
-        labels = _capability_labels()
+        labels = capability_flag_labels()
         for provider in self:
             adapter_class = provider._brbank_adapter_class()
             capabilities = (
@@ -285,24 +141,7 @@ class PaymentProvider(models.Model):
             provider.brbank_sandbox_validated = provider._brbank_validated(
                 adapter_class
             )
-            provider.brbank_uses_client_id = "client_id" in keys
-            provider.brbank_uses_client_secret = "client_secret" in keys
-            provider.brbank_uses_username = "usuario" in keys
-            provider.brbank_uses_password = "senha" in keys
-            provider.brbank_uses_certificate = "certificado_pem" in keys
-            provider.brbank_uses_pix_key = "chave_pix" in keys
-            provider.brbank_uses_refresh_token = "refresh_token" in keys
             provider.brbank_is_pix = "perfil" in keys
-            provider.brbank_settings_help = "\n".join(
-                "{name}: {kind}{required}{secret}".format(
-                    name=key["name"],
-                    kind=getattr(key["type"], "__name__", "json"),
-                    required=_(" (required)") if key["required"] else "",
-                    secret=_(" [secret]") if key["secret"] else "",
-                )
-                for key in keys.values()
-                if not key["generic"] and not key["callable"]
-            )
 
     def _brbank_validated(self, adapter_class):
         """Whether the library declares the adapter validated in a sandbox."""
@@ -315,19 +154,6 @@ class PaymentProvider(models.Model):
             profile = PERFIS.get(self.brbank_pix_perfil)
             return bool(profile and profile.validado_sandbox)
         return bool(getattr(adapter_class, "validado_sandbox", False))
-
-    @api.depends("code", "brbank_webhook_token")
-    def _compute_brbank_webhook_url(self):
-        for provider in self:
-            if provider.code != BRBANK or not provider.id:
-                provider.brbank_webhook_url = False
-                continue
-            provider.brbank_webhook_url = "{}{}/{}/{}".format(
-                provider.get_base_url(),
-                WEBHOOK_ROUTE,
-                provider.id,
-                provider.brbank_webhook_token or "",
-            )
 
     def _compute_feature_support_fields(self):
         """Override of `payment`: a registered title is an `authorized`
@@ -364,46 +190,39 @@ class PaymentProvider(models.Model):
         "state",
         "brbank_adapter",
         "brbank_pix_perfil",
-        "brbank_extra_config",
-        "brbank_secret_config",
+        "brbank_connection_id",
     )
     def _check_brbank_configuration(self):
         for provider in self.sudo():
-            if provider.code != BRBANK:
-                continue
-            provider._brbank_load_json("brbank_extra_config")
-            provider._brbank_load_json("brbank_secret_config")
-            if provider.state == "disabled":
+            if provider.code != BRBANK or provider.state == "disabled":
                 continue
             if not provider.brbank_adapter:
                 raise ValidationError(_("Choose the bank adapter of the provider."))
+            connection = provider.brbank_connection_id
+            if not connection:
+                raise ValidationError(
+                    _("Choose the bank connection of the provider %s.", provider.name)
+                )
+            if connection.adapter != provider.brbank_adapter:
+                raise ValidationError(
+                    _(
+                        "The connection %(connection)s uses another bank adapter "
+                        "than the provider %(provider)s.",
+                        connection=connection.name,
+                        provider=provider.name,
+                    )
+                )
             try:
                 provider._brbank_prepare_adapter()
             except UserError as error:
                 raise ValidationError(error.args[0]) from error
 
-    def _brbank_load_json(self, field_name):
-        """Read a JSON settings field as a dict.
-
-        :raise ValidationError: If the text is not a JSON object. The message
-            names the field only, never its content.
-        """
-        self.ensure_one()
-        text = self.sudo()[field_name]
-        if not text or not text.strip():
-            return {}
-        try:
-            value = json.loads(text)
-        except ValueError:
-            value = None
-        if not isinstance(value, dict):
-            raise ValidationError(
-                _(
-                    "The field %s must hold a JSON object.",
-                    self._fields[field_name].string,
-                )
-            )
-        return value
+    @api.onchange("brbank_connection_id")
+    def _onchange_brbank_connection_id(self):
+        connection = self.brbank_connection_id
+        if connection:
+            self.brbank_adapter = connection.adapter
+            self.brbank_pix_perfil = connection.pix_profile
 
     # === BUSINESS METHODS: CHECKOUT === #
 
@@ -427,121 +246,44 @@ class PaymentProvider(models.Model):
 
     # === BUSINESS METHODS: ADAPTER === #
 
-    def _brbank_prepare_adapter(self, callback_outcome=None):
-        """Read the provider and build the adapter class and configuration.
+    def _brbank_connection(self):
+        """The bank connection of the provider, as the system.
 
-        Runs in the calling thread, with sudo: the secrets never leave the
-        configuration object handed to the library.
-
-        :param dict callback_outcome: Filled by the callbacks given to the
-            adapter (see `_brbank_after_call`).
-        :return: The adapter class and its configuration.
-        :rtype: tuple
-        :raise UserError: If the configuration is incomplete. The message
-            names the missing keys, never their values.
+        :raise UserError: If the provider is not a brbank provider or has no
+            connection yet.
         """
         self.ensure_one()
-        provider = self.sudo()
-        if provider.code != BRBANK or not provider.brbank_adapter:
+        if self.code != BRBANK or not self.brbank_adapter:
             raise UserError(_("This provider is not a brbank provider."))
-        try:
-            adapter_class = registro.obter_classe(provider.brbank_adapter)
-        except AdapterNaoEncontrado as error:
+        connection = self.sudo().brbank_connection_id
+        if not connection:
             raise UserError(
-                _(
-                    "The bank adapter %s is not installed in the brbank library.",
-                    provider.brbank_adapter,
-                )
-            ) from error
-        generic = {
-            "conta": f"odoo-provider-{provider.id}",
-            "ambiente": "sandbox" if provider.state == "test" else "producao",
-            "perfil": provider.brbank_pix_perfil,
-        }
-        for field_name, key in GENERIC_FIELDS.items():
-            value = provider[field_name]
-            if value and provider._fields[field_name].type == "binary":
-                value = base64.b64decode(value)
-            generic[key] = value
-        renewed = self.env.cr.cache.get(RENEWED_TOKENS, {}).get(provider.id)
-        if renewed:
-            generic["refresh_token"] = renewed
-        if callback_outcome is None:
-            callback_outcome = {}
-        try:
-            config_cls = brbank_config.config_class(adapter_class)
-            keys = {key["name"] for key in brbank_config.describe(config_cls)}
-            if provider.state == "test" and "ambiente" not in keys:
-                raise UserError(
-                    _(
-                        "The bank adapter %s has no test environment: every call "
-                        "reaches production. Enable the provider instead of using "
-                        "the test mode, and validate it with a low amount.",
-                        provider.brbank_adapter,
-                    )
-                )
-            callbacks = {
-                key: getattr(provider, method)(callback_outcome)
-                for key, method in CALLBACK_FACTORIES.items()
-                if key in keys
-            }
-            config = brbank_config.build(
-                config_cls,
-                generic,
-                provider._brbank_load_json("brbank_extra_config"),
-                provider._brbank_load_json("brbank_secret_config"),
-                callbacks=callbacks,
+                _("The payment provider %s has no bank connection.", self.name)
             )
-        except brbank_config.ConfigError as error:
-            parts = []
-            if error.missing:
-                parts.append(_("missing: %s", ", ".join(error.missing)))
-            if error.unknown:
-                parts.append(_("unknown or invalid: %s", ", ".join(error.unknown)))
-            if error.misplaced:
-                parts.append(
-                    _(
-                        "secrets typed in Extra Settings, move them to Extra "
-                        "Secrets: %s",
-                        ", ".join(error.misplaced),
-                    )
-                )
-            raise UserError(
-                _(
-                    "Incomplete configuration of the provider %(name)s (%(details)s).",
-                    name=provider.name,
-                    details="; ".join(parts),
-                )
-            ) from error
-        except ErroBrbank as error:
-            raise UserError(
-                _(
-                    "The bank refused the configuration of the provider "
-                    "%(name)s: %(error)s",
-                    name=provider.name,
-                    error=error,
-                )
-            ) from error
-        return adapter_class, config
+        return connection
 
-    def _brbank_http_transport(self):
-        """HTTP transport given to the adapter; None uses the real network.
+    def _brbank_callbacks(self):
+        """Callable keys of the adapter configuration this provider serves."""
+        self.ensure_one()
+        callback = self._brbank_nosso_numero_callback()
+        return {"gerar_nosso_numero": callback} if callback else {}
 
-        Tests pass an `httpx.MockTransport` in the context key
-        `brbank_http_transport` (or override this method): no test ever
-        reaches a bank. Anything else in that key is ignored.
+    def _brbank_prepare_adapter(self, callback_outcome=None):
+        """Build the adapter class and configuration of the connection.
+
+        :param dict callback_outcome: Filled by the refresh token callback of
+            the connection.
+        :return: The adapter class and its configuration.
+        :rtype: tuple
+        :raise UserError: If the configuration is incomplete.
         """
-        transport = self.env.context.get("brbank_http_transport")
-        if isinstance(transport, httpx.AsyncBaseTransport):
-            return transport
-        return None
+        self.ensure_one()
+        return self._brbank_connection()._l10n_br_bank_prepare_adapter(
+            callbacks=self._brbank_callbacks(), outcome=callback_outcome
+        )
 
     def _brbank_run(self, operation):
-        """Call the bank through the adapter of the provider.
-
-        The single bridge between the synchronous Odoo and the asynchronous
-        library: the adapter is built, used and closed inside a dedicated
-        event loop (see `utils.runner`).
+        """Call the bank through the connection of the provider.
 
         :param operation: Callable receiving the adapter and returning a
             value or an awaitable (e.g. ``lambda a: a.consultar_titulo(x)``).
@@ -553,31 +295,9 @@ class PaymentProvider(models.Model):
         self.ensure_one()
         if self.state == "disabled":
             raise UserError(_("The payment provider %s is disabled.", self.name))
-        # Pending writes on the provider become row locks before the call, so
-        # a callback committing apart sees them (NOWAIT) instead of racing a
-        # later flush of this transaction.
-        self.flush_recordset()
-        outcome = {}
-        adapter_class, config = self._brbank_prepare_adapter(callback_outcome=outcome)
-        transport = self._brbank_http_transport()
-
-        async def call():
-            kwargs = {}
-            if transport is not None:
-                kwargs["client"] = httpx.AsyncClient(transport=transport)
-            adapter = adapter_class(config, **kwargs)
-            try:
-                result = operation(adapter)
-                if inspect.isawaitable(result):
-                    result = await result
-                return result
-            finally:
-                await adapter.aclose()
-
-        try:
-            return run_in_dedicated_loop(call)
-        finally:
-            self._brbank_after_call(outcome)
+        return self._brbank_connection()._l10n_br_bank_run(
+            operation, callbacks=self._brbank_callbacks()
+        )
 
     # === BUSINESS METHODS: NOSSO NUMERO === #
 
@@ -677,7 +397,7 @@ class PaymentProvider(models.Model):
             )
         return number
 
-    def _brbank_nosso_numero_callback(self, outcome):
+    def _brbank_nosso_numero_callback(self):
         """The `gerar_nosso_numero` function given to the adapter.
 
         It runs in the thread of the bank call, so it only reads the numbers
@@ -698,105 +418,3 @@ class PaymentProvider(models.Model):
             return number
 
         return generate
-
-    # === BUSINESS METHODS: CALLBACKS === #
-
-    def _brbank_refresh_token_callback(self, outcome):
-        """The `ao_renovar_refresh_token` function given to the adapter.
-
-        The bank (BTG) may return a new refresh token at each renewal and
-        invalidate the old one. The function runs in the thread of the bank
-        call and commits the token at once in a cursor of its own (see
-        `_save_refresh_token`): a rollback of the calling transaction, a later
-        error of the same call or an exception in the caller never loses it.
-        A savepoint would not do: it is undone with the transaction around it.
-
-        :param dict outcome: Receives the token and, when it could not be
-            committed apart, why; read by `_brbank_after_call` in the calling
-            thread.
-        """
-        self.ensure_one()
-        registry = self.env.registry
-        provider_id = self.id
-
-        def renew(token):
-            outcome["refresh_token"] = token
-            # Stays if the save below raises: the caller then writes it.
-            outcome["refresh_token_unsaved"] = "interrupted"
-            outcome["refresh_token_unsaved"] = _save_refresh_token(
-                registry, provider_id, token
-            )
-
-        return renew
-
-    def _brbank_after_call(self, outcome):
-        """Apply in the calling transaction what the callbacks reported.
-
-        - Token committed apart: this transaction still reads the old value
-          (repeatable read snapshot), and writing the row here would fail with
-          a serialization error. The new token stays in `cr.cache` for the
-          next calls of the same transaction, until it ends.
-        - Token not committed apart (provider not committed yet, or row locked
-          by this or another transaction): written in this transaction, the
-          only place left; logged, because a rollback here would lose it.
-        """
-        self.ensure_one()
-        token = outcome.get("refresh_token")
-        if not token:
-            return
-        reason = outcome.get("refresh_token_unsaved")
-        if not reason:
-            cr = self.env.cr
-            renewed = cr.cache.setdefault(RENEWED_TOKENS, {})
-            if not renewed:
-
-                def forget():
-                    cr.cache.pop(RENEWED_TOKENS, None)
-
-                cr.postcommit.add(forget)
-                cr.postrollback.add(forget)
-            renewed[self.id] = token
-            return
-        _logger.warning(
-            "brbank: provider %s: the renewed refresh token is saved in the "
-            "current transaction only (%s); a rollback loses it",
-            self.id,
-            reason,
-        )
-        self.sudo().brbank_refresh_token = token
-
-    def _brbank_parse_webhook(self, body, headers):
-        """Turn a webhook call into canonical events, without network."""
-        self.ensure_one()
-        return self._brbank_run(lambda adapter: adapter.parse_webhook(body, headers))
-
-    # === ACTIONS === #
-
-    def action_brbank_rotate_webhook_token(self):
-        """Issue a new webhook token: the old URL stops working at once."""
-        self.ensure_one()
-        self.check_access_rights("write")
-        self.sudo().brbank_webhook_token = secrets.token_urlsafe(32)
-
-    def action_brbank_fill_settings_template(self):
-        """Add to the JSON fields the keys the adapter needs, keeping values."""
-        self.ensure_one()
-        provider = self.sudo()
-        adapter_class = provider._brbank_adapter_class()
-        if not adapter_class:
-            raise UserError(_("Choose the bank adapter first."))
-        public = provider._brbank_load_json("brbank_extra_config")
-        secret = provider._brbank_load_json("brbank_secret_config")
-        config_cls = brbank_config.config_class(adapter_class)
-        for key in brbank_config.describe(config_cls):
-            if key["generic"] or key["callable"]:
-                continue
-            target = secret if key["secret"] else public
-            if key["name"] not in public and key["name"] not in secret:
-                target[key["name"]] = brbank_config.placeholder(key)
-        provider.write(
-            {
-                "brbank_extra_config": json.dumps(public, indent=2, sort_keys=True),
-                "brbank_secret_config": json.dumps(secret, indent=2, sort_keys=True),
-            }
-        )
