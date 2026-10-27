@@ -24,10 +24,6 @@ lxml==4.6.5
 pyopenssl==22.1.0
 signxml<3.1.0
 
-# brbank: o l10n_br_payment_boleto_brbank exige a 0.0.4 (especie do documento do
-# Sicoob como sigla); sem o piso, o indice do PyPI pode servir uma versao velha.
-brbank>=0.0.4
-
 # l10n_br_nfe (16.0.20.3.0, de 24/10/2026) passou a importar brazil_fiscal_client mas nao o
 # declara em external_dependencies nem no wheel (so o requirements.txt da OCA o lista), entao
 # o oca_init_test_database aborta com "No module named 'brazil_fiscal_client'".
