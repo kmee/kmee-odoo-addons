@@ -31,7 +31,7 @@ class TestBoletoInterInstallments(BancoInterCommon):
                 "name": "Cliente Parcelado",
                 "legal_name": "Cliente Parcelado LTDA",
                 "is_company": True,
-                "cnpj_cpf": "11.444.777/0001-61",
+                "cnpj_cpf": "98.016.373/0001-55",
                 "street": "Rua das Flores",
                 "street_number": "100",
                 "district": "Centro",

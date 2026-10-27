@@ -19,9 +19,9 @@ DUMMY_BY_TYPE = {bool: False, int: 1, float: 1.0, str: "1234567", bytes: b"x"}
 # enough: by key, then by adapter.
 DUMMY_BY_KEY = {
     "agencia": "1234",
-    "cnpj_empresa": "11222333000181",
+    "cnpj_empresa": "91300766000147",
     "digito_conta": "1",
-    "documento_beneficiario": "11222333000181",
+    "documento_beneficiario": "91300766000147",
 }
 DUMMY_BY_ADAPTER = {
     "banrisul": {"codigo_beneficiario": "1234567890123", "especie": "02"},
@@ -86,7 +86,7 @@ class BrbankCommon:
                 "name": "Cliente Boleto",
                 "is_company": True,
                 "legal_name": "Cliente Boleto Ltda",
-                "cnpj_cpf": "11.444.777/0001-61",
+                "cnpj_cpf": "98.016.373/0001-55",
                 "street_name": "Rua dos Testes",
                 "street_number": "100",
                 "district": "Centro",
@@ -118,7 +118,7 @@ class BrbankCommon:
                     "adapter": adapter,
                     "environment": "test",
                     "company_id": cls.env.company.id,
-                    "cnpj": "11222333000181",
+                    "cnpj": "91300766000147",
                     "client_id": "client-id",
                     "client_secret": "client-secret",
                     "extra_config": json.dumps({"numero_cliente": 42}),
@@ -156,7 +156,7 @@ class BrbankCommon:
                 "pix_profile": provider.brbank_pix_perfil,
                 "environment": "prod",
                 "company_id": cls.env.company.id,
-                "cnpj": "11222333000181",
+                "cnpj": "91300766000147",
             }
         )
         connection.action_fill_settings_template()

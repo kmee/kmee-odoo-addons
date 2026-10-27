@@ -33,7 +33,7 @@ class ConnectionCommon:
                     "name": "Fake bank",
                     "adapter": FAKE,
                     "environment": "test",
-                    "cnpj": "11.222.333/0001-81",
+                    "cnpj": "91.300.766/0001-47",
                     "client_id": "client-id",
                     "client_secret": "client-secret",
                 },

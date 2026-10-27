@@ -9,7 +9,7 @@ from odoo.modules.module import get_module_resource
 
 from .common import PAYER, DdaCommon
 
-FILE_PAYER = "11222333000181"
+FILE_PAYER = "91300766000147"
 
 
 class TestCnabImport(DdaCommon):

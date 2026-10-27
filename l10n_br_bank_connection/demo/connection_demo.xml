@@ -13,7 +13,7 @@
         <field name="name">BTG Pactual (simulator)</field>
         <field name="adapter">btg</field>
         <field name="environment">test</field>
-        <field name="cnpj">11222333000181</field>
+        <field name="cnpj">91300766000147</field>
         <field name="api_base_url_override">http://localhost:8899</field>
         <field name="token_url_override">http://localhost:8899/oauth2/token</field>
         <field name="client_id">demo-client</field>

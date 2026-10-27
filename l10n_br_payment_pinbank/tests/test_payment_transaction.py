@@ -313,7 +313,7 @@ class TestPinbankRedaction(TransactionCase):
                 "Data": {
                     "NossoNumero": "12345",
                     "DadosSacado": {
-                        "CpfCnpj": "23130935000198",
+                        "CpfCnpj": "98757092000153",
                         "Nome": "Cliente Boleto",
                         "Endereco": "Rua das Flores",
                     },
@@ -321,7 +321,7 @@ class TestPinbankRedaction(TransactionCase):
             }
         )
 
-        self.assertNotIn("23130935000198", str(redacted))
+        self.assertNotIn("98757092000153", str(redacted))
         self.assertNotIn("Cliente Boleto", str(redacted))
         self.assertNotIn("Rua das Flores", str(redacted))
         self.assertEqual(redacted["Data"]["NossoNumero"], "12345")

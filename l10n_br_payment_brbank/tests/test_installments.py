@@ -41,7 +41,7 @@ class TestBrbankInstallments(BrbankTransactionCase):
         title = self._bank_title(first)
         self.assertEqual(title["valor"], Decimal("300.00"))
         self.assertEqual(title["vencimento"], first.move_line_id.date_maturity)
-        self.assertEqual(title["pagador_documento"], "11444777000161")
+        self.assertEqual(title["pagador_documento"], "98016373000155")
         titulo = first._brbank_prepare_titulo()
         self.assertEqual(titulo.encargos.multa_percentual, Decimal("2"))
         self.assertEqual(titulo.encargos.juros_mensal_percentual, Decimal("1"))
@@ -135,6 +135,6 @@ class TestBrbankInstallments(BrbankTransactionCase):
         message = str(error.exception)
         # English source or the pt_BR translation, depending on the database.
         self.assertTrue("ZIP code" in message or "CEP" in message, message)
-        self.assertNotIn("11444777000161", message)
+        self.assertNotIn("98016373000155", message)
         self.assertNotIn("11.444.777", message)
         self.assertNotIn("Cliente Boleto", message)

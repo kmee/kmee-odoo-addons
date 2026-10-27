@@ -20,7 +20,7 @@ from .fake_dda import FAKE_DDA, STATE, FakeDdaAdapter, reset_state
 CRON_TRIGGER = "odoo.addons.base.models.ir_cron.ir_cron._trigger"
 EVENT_LOGGER = "odoo.addons.l10n_br_dda_brbank.models.dda_event"
 CONNECTION_LOGGER = "odoo.addons.l10n_br_dda_brbank.models.bank_connection"
-VENDOR = "45000001000174"
+VENDOR = "94623756000130"
 
 
 def make_debit(number, **values):

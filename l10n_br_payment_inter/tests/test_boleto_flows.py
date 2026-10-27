@@ -24,7 +24,7 @@ class TestBoletoInterFlows(BancoInterCommon):
                 "name": "Cliente Boleto",
                 "legal_name": "Cliente Boleto LTDA",
                 "is_company": True,
-                "cnpj_cpf": "11.444.777/0001-61",
+                "cnpj_cpf": "98.016.373/0001-55",
                 "street": "Rua das Flores",
                 "street_number": "100",
                 "district": "Centro",
@@ -100,7 +100,7 @@ class TestBoletoInterFlows(BancoInterCommon):
         self.assertEqual(payload["seuNumero"], "BOL-0001")
         self.assertEqual(payload["valorNominal"], 150.0)
         self.assertEqual(payload["dataVencimento"], "2026-09-10")
-        self.assertEqual(payload["pagador"]["cpfCnpj"], "11444777000161")
+        self.assertEqual(payload["pagador"]["cpfCnpj"], "98016373000155")
         self.assertEqual(payload["pagador"]["tipoPessoa"], "JURIDICA")
         self.assertEqual(payload["pagador"]["cep"], "37540000")
 

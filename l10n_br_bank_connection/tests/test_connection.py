@@ -68,18 +68,18 @@ class TestConnection(ConnectionCommon, TransactionCase):
         with patch.object(
             type(self.Connection),
             "_l10n_br_bank_company_cnpj",
-            lambda self, company: "11222333000181",
+            lambda self, company: "91300766000147",
         ):
             connection = self.Connection.create(
                 {"name": "No CNPJ", "adapter": FAKE, "company_id": self.env.company.id}
             )
-        self.assertEqual(connection.cnpj, "11222333000181")
+        self.assertEqual(connection.cnpj, "91300766000147")
 
     def test_config_built_from_the_connection(self):
         _adapter_class, config = self.connection._l10n_br_bank_prepare_adapter()
         self.assertEqual(config.conta, f"odoo-connection-{self.connection.id}")
         self.assertEqual(config.ambiente, "sandbox")
-        self.assertEqual(config.cnpj_empresa, "11222333000181")
+        self.assertEqual(config.cnpj_empresa, "91300766000147")
         self.assertNotIn("client-secret", repr(config))
         self.connection.environment = "prod"
         _adapter_class, config = self.connection._l10n_br_bank_prepare_adapter()

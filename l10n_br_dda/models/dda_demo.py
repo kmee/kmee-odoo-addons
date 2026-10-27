@@ -11,19 +11,19 @@ from ..utils import build_digitable_line, format_cnpj, normalize_cnpj
 
 _logger = logging.getLogger(__name__)
 
-DEMO_PAYER = "11222333000181"
+DEMO_PAYER = "91300766000147"
 # Fictitious vendors (same CNPJs and amounts as the seed of the bank simulator
 # of brbank, docs/simulador.md). Every name and CNPJ is invented.
 DEMO_VENDORS = {
-    "alfa": ("ALFA EMBALAGENS LTDA", "45000001000174"),
-    "beta": ("BETA PAPEIS S.A.", "45000002000119"),
-    "gama": ("GAMA LOGISTICA LTDA", "45000003000163"),
-    "delta": ("DELTA LOCACOES LTDA", "45000004000108"),
-    "epsilon": ("EPSILON INDUSTRIA LTDA", "45000006000105"),
-    "zeta": ("ZETA METALURGICA LTDA", "45000008000196"),
-    "eta": ("ETA SUPRIMENTOS LTDA", "45000009000130"),
-    "teta": ("TETA MANUTENCAO LTDA", "45000010000165"),
-    "iota": ("IOTA GRAFICA LTDA", "45000011000100"),
+    "alfa": ("ALFA EMBALAGENS LTDA", "94623756000130"),
+    "beta": ("BETA PAPEIS S.A.", "92455101000175"),
+    "gama": ("GAMA LOGISTICA LTDA", "93449834000160"),
+    "delta": ("DELTA LOCACOES LTDA", "91428659000107"),
+    "epsilon": ("EPSILON INDUSTRIA LTDA", "95564920000149"),
+    "zeta": ("ZETA METALURGICA LTDA", "93685439000186"),
+    "eta": ("ETA SUPRIMENTOS LTDA", "90889030000193"),
+    "teta": ("TETA MANUTENCAO LTDA", "97282349000103"),
+    "iota": ("IOTA GRAFICA LTDA", "93493719000192"),
 }
 # Issuing bank of each boleto of the simulator seed, by order.
 DEMO_BANKS = {
@@ -40,7 +40,7 @@ DEMO_BANKS = {
     11: "104",
     12: "104",
 }
-DEMO_ASSIGNEE = ("OMEGA SECURITIZADORA DE CREDITOS S.A.", "45000005000152")
+DEMO_ASSIGNEE = ("OMEGA SECURITIZADORA DE CREDITOS S.A.", "95916996000196")
 DEMO_UNKNOWN = ("SIGMA SERVICOS LTDA", "45000007000141")
 
 
@@ -111,7 +111,7 @@ class DdaDebitDemo(models.Model):
         if normalize_cnpj(company.partner_id.cnpj_cpf) != DEMO_PAYER:
             company.partner_id.cnpj_cpf = format_cnpj(DEMO_PAYER)
         partner_model = self.env["res.partner"]
-        if partner_model.search_count([("cnpj_cpf_stripped", "=", "45000001000174")]):
+        if partner_model.search_count([("cnpj_cpf_stripped", "=", "94623756000130")]):
             return False
         company.dda_create_bill_mode = "draft"
         vendors = {

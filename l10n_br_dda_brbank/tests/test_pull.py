@@ -97,7 +97,7 @@ class TestPull(DdaBrbankCommon):
         self.assertEqual(self.debits_of().state, "paid_elsewhere")
 
     def test_a_boleto_of_another_payer_is_not_taken(self):
-        STATE["pages"] = [[make_debit(1, cnpj_pagador="45823449000198")]]
+        STATE["pages"] = [[make_debit(1, cnpj_pagador="98585666000153")]]
         self.assertEqual(self.connection._dda_pull(full=True), 0)
         self.assertFalse(self.debits_of())
 

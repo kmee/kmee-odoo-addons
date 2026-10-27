@@ -12,7 +12,7 @@ from odoo.tests import HttpCase, tagged
 from ..utils import source_key
 from .common import DdaBrbankCommon
 
-SIMULATED_PAYER = "11222333000181"
+SIMULATED_PAYER = "91300766000147"
 
 
 @tagged("post_install", "-at_install")
@@ -72,7 +72,7 @@ class TestSimulator(HttpCase, DdaBrbankCommon):
             self.assertTrue(connection.dda_last_full)
             self.assertEqual(connection.dda_sync_status_ids.state, "ok")
 
-            alfa = debits.filtered(lambda d: d.beneficiary_vat == "45000001000174")
+            alfa = debits.filtered(lambda d: d.beneficiary_vat == "94623756000130")
             self.assertEqual((alfa.amount, alfa.issuer_bank), (1240.0, "341"))
             self.assertTrue(alfa.beneficiary_name.startswith("ALFA"))
             self.assertEqual(len(alfa.digitable_line), 47)

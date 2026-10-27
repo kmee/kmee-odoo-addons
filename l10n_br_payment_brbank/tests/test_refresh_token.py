@@ -27,7 +27,7 @@ LOCK_TIMEOUT = (
     "odoo.addons.l10n_br_bank_connection.models.connection.APART_LOCK_TIMEOUT_MS"
 )
 BTG_SETTINGS = {
-    "cnpj_empresa": "11222333000181",
+    "cnpj_empresa": "91300766000147",
     "agencia": "1234",
     "conta_corrente": "1234567",
 }

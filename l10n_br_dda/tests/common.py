@@ -12,7 +12,7 @@ from odoo.addons.l10n_br_dda.utils import normalize_cnpj
 
 CHART = "l10n_br_coa_generic.l10n_br_coa_generic_template"
 PAYER = "82688625000152"
-PAYER_2 = "45823449000198"
+PAYER_2 = "98585666000153"
 _COUNTER = count(1)
 
 
