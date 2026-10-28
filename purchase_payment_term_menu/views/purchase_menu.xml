@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- The Configuration menu is manager-only in the standard module; the new
+         group is added to it so its members can reach the new entry. Its other
+         entries keep their own groups/ACLs.
+         The link survives -u purchase: upgrading purchase also reloads its
+         installed dependents, so this file is loaded again afterwards. -->
+    <record id="purchase.menu_purchase_config" model="ir.ui.menu">
+        <field
+            name="groups_id"
+            eval="[(4, ref('purchase_payment_term_menu.group_purchase_payment_term_manager'))]"
+        />
+    </record>
+
+    <menuitem
+        id="menu_purchase_payment_term"
+        name="Payment Terms"
+        parent="purchase.menu_purchase_config"
+        action="account.action_payment_term_form"
+        groups="purchase_payment_term_menu.group_purchase_payment_term_manager"
+        sequence="20"
+    />
+</odoo>
