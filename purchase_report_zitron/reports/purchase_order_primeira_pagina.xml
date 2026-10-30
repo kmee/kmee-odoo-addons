@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Company and fiscal data only on the first page of the purchase order.
+
+         wkhtmltopdf prints the header of the external layout on every page, so
+         the block cannot be hidden on pages 2+ from inside the header. Instead:
+         1. a private copy (primary view) of web.external_layout_folder, with
+            all its extensions (including the l10n_br_fiscal ones), keeps only
+            the logo and the title shape in the header;
+         2. the purchase order body prints the company block once, at the top
+            of the first page;
+         3. only the purchase order document calls that private layout. The
+            shared web.external_layout_folder is not modified, so invoices,
+            sale orders and other reports are not affected. -->
+    <template
+        id="external_layout_purchase_first_page"
+        inherit_id="web.external_layout_folder"
+        primary="True"
+    >
+        <!-- the extra height was reserved for the fiscal lines of the header,
+             that are now printed in the body -->
+        <xpath expr="//t[@t-set='header_shape_height']" position="attributes">
+            <attribute name="t-value">'174'</attribute>
+        </xpath>
+        <xpath expr="//div[@name='company_address']" position="replace" />
+    </template>
+
+    <template
+        id="report_purchaseorder_document_first_page"
+        inherit_id="purchase.report_purchaseorder_document"
+    >
+        <!-- the primary layout is not reached through web.external_layout, so
+             set the company it expects; keep the company layout choice for
+             layouts other than the folder -->
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute
+                name="t-call"
+            >{{'purchase_report_zitron.external_layout_purchase_first_page' if o.company_id.sudo().external_report_layout_id.key == 'web.external_layout_folder' else 'web.external_layout'}}</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='o']" position="after">
+            <t t-set="company" t-value="o.company_id.sudo()" />
+        </xpath>
+        <xpath expr="//div[hasclass('page')]/div[hasclass('oe_structure')]" position="after">
+            <div
+                t-if="o.company_id.external_report_layout_id.sudo().key == 'web.external_layout_folder'"
+                name="company_first_page"
+                class="mb-3"
+            >
+                <ul class="list-unstyled mb-0" name="company_first_page_list">
+                    <li t-if="o.company_id.is_company_details_empty">
+                        <span
+                            t-field="o.company_id.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                        />
+                    </li>
+                    <li t-else="">
+                        <span t-field="o.company_id.company_details" />
+                    </li>
+                    <li
+                        t-if="o.company_id.vat and not o.company_id._get_report_option('report_company_fiscal_data')"
+                    >
+                        <t t-out="o.company_id.country_id.vat_label or 'Tax ID'" />:
+                        <span t-out="o.company_id.vat" />
+                    </li>
+                    <t t-call="l10n_br_fiscal.report_company_fiscal_data">
+                        <t t-set="company" t-value="o.company_id" />
+                    </t>
+                </ul>
+            </div>
+        </xpath>
+    </template>
+</odoo>
