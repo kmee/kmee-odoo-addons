@@ -22,7 +22,10 @@ class PurchaseOrderLine(models.Model):
                 [int(x) for x in str(key).split(",") if x]
             )
             name = ", ".join(
-                " ".join(filter(None, [acc.code, acc.name])) for acc in accounts
+                acc.name
+                if not acc.code or (acc.name or "").startswith(acc.code)
+                else " ".join([acc.code, acc.name])
+                for acc in accounts
             )
             if not name:
                 continue

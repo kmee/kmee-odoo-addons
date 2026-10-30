@@ -14,6 +14,7 @@
         "purchase_stock",
         "l10n_br_purchase",
         "purchase_order_line_sequence",
+        "project_purchase",
     ],
     "data": [
         "data/report_paperformat.xml",

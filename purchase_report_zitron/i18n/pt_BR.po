@@ -17,16 +17,12 @@ msgstr ""
 
 #. module: purchase_report_zitron
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_zitron_cabecalho
-msgid "<strong>Payment Terms</strong>"
-msgstr "<strong>Condição de pagamento</strong>"
-
-#. module: purchase_report_zitron
-#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_zitron_cabecalho
 msgid "<strong>Project</strong>"
 msgstr "<strong>Projeto</strong>"
 
 #. module: purchase_report_zitron
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_enderecos
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.external_layout_purchase_first_page
 msgid "<strong>Billing Address:</strong>"
 msgstr "<strong>Endereço de faturamento:</strong>"
 

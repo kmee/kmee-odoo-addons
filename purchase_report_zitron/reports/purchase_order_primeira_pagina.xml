@@ -9,8 +9,8 @@
          1. a private copy (primary view) of web.external_layout_folder, with
             all its extensions (including the l10n_br_fiscal ones), keeps only
             the logo and the title shape in the header;
-         2. the purchase order body prints the company block once, at the top
-            of the first page;
+         2. the same layout prints the company block (billing address) once,
+            beside the shipping address, in the body of the first page;
          3. only the purchase order document calls that private layout. The
             shared web.external_layout_folder is not modified, so invoices,
             sale orders and other reports are not affected. -->
@@ -27,6 +27,43 @@
             <attribute name="t-value">'110'</attribute>
         </xpath>
         <xpath expr="//div[@name='company_address']" position="replace" />
+        <!-- Billing address (the company identity block) beside the shipping
+             address, in the left half of the address row. It lives in the
+             layout body, so it is printed once, on the first page only. -->
+        <xpath expr="//t[@t-call='web.address_layout']" position="before">
+            <t t-set="information_block">
+                <div class="row">
+                    <div class="col-6" name="shipping_block">
+                        <t t-out="information_block" />
+                    </div>
+                    <div
+                        class="col-6"
+                        name="company_first_page"
+                        t-if="o and o._name == 'purchase.order'"
+                    >
+                        <div class="mt-3"><strong>Billing Address:</strong></div>
+                        <ul class="list-unstyled mb-0" name="company_first_page_list">
+                            <li t-if="company.is_company_details_empty">
+                                <span
+                                    t-field="company.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                                />
+                            </li>
+                            <li t-else="">
+                                <span t-field="company.company_details" />
+                            </li>
+                            <li
+                                t-if="company.vat and not company._get_report_option('report_company_fiscal_data')"
+                            >
+                                <t t-out="company.country_id.vat_label or 'Tax ID'" />:
+                                <span t-out="company.vat" />
+                            </li>
+                            <t t-call="l10n_br_fiscal.report_company_fiscal_data" />
+                        </ul>
+                    </div>
+                </div>
+            </t>
+        </xpath>
     </template>
 
     <template
@@ -43,34 +80,6 @@
         </xpath>
         <xpath expr="//t[@t-set='o']" position="after">
             <t t-set="company" t-value="o.company_id.sudo()" />
-        </xpath>
-        <xpath expr="//div[hasclass('page')]/div[hasclass('oe_structure')]" position="after">
-            <div
-                t-if="o.company_id.external_report_layout_id.sudo().key == 'web.external_layout_folder'"
-                name="company_first_page"
-                class="mb-3"
-            >
-                <ul class="list-unstyled mb-0" name="company_first_page_list">
-                    <li t-if="o.company_id.is_company_details_empty">
-                        <span
-                            t-field="o.company_id.partner_id"
-                            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
-                        />
-                    </li>
-                    <li t-else="">
-                        <span t-field="o.company_id.company_details" />
-                    </li>
-                    <li
-                        t-if="o.company_id.vat and not o.company_id._get_report_option('report_company_fiscal_data')"
-                    >
-                        <t t-out="o.company_id.country_id.vat_label or 'Tax ID'" />:
-                        <span t-out="o.company_id.vat" />
-                    </li>
-                    <t t-call="l10n_br_fiscal.report_company_fiscal_data">
-                        <t t-set="company" t-value="o.company_id" />
-                    </t>
-                </ul>
-            </div>
         </xpath>
     </template>
 </odoo>

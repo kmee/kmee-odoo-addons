@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- Billing address: the company identity block of the first page
-         (purchase_order_primeira_pagina.xml: company details, tax ID and tax
-         regime) is where the vendor must send the invoice, so it is labelled
-         "Billing Address:" instead of printing the company address a second
-         time. This file must be loaded after purchase_order_primeira_pagina.xml.
-         Companies not using the folder layout have no such block; for them the
-         address is printed here. Delivery address is printed by the core
-         "Shipping address" block (purchase / purchase_stock). -->
+    <!-- Billing address: with the folder layout it is printed beside the
+         shipping address by the private layout of
+         purchase_order_primeira_pagina.xml (company identity block). Companies
+         using another layout get the company address here, below the
+         header. Delivery address is printed by the core "Shipping address"
+         block (purchase / purchase_stock). -->
     <template
         id="report_purchaseorder_document_enderecos"
         inherit_id="purchase.report_purchaseorder_document"
     >
-        <xpath expr="//ul[@name='company_first_page_list']" position="before">
-            <strong>Billing Address:</strong>
-        </xpath>
         <xpath
             expr="//div[hasclass('page')]/div[hasclass('oe_structure')]"
             position="after"
