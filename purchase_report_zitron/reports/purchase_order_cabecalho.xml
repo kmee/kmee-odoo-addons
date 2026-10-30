@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+        Header of the purchase order PDF (report 551): buyer contact, payment
+        term in bold and linked project. Inherits the core template, which
+        l10n_br_purchase and purchase_stock also extend.
+    -->
+    <template
+        id="report_purchaseorder_document_zitron_cabecalho"
+        inherit_id="purchase.report_purchaseorder_document"
+    >
+        <!-- Core prints "Payment Terms:" at the end of the page; it moves to the header. -->
+        <!-- Structural match: the label text is translated, so it cannot be used. -->
+        <xpath
+            expr="//strong[following-sibling::span[1][@t-field='o.payment_term_id']]"
+            position="replace"
+        />
+        <xpath
+            expr="//span[@t-field='o.payment_term_id'][hasclass('mt-4')]"
+            position="replace"
+        />
+
+        <!-- Buyer: name, e-mail and phone -->
+        <xpath
+            expr="//div[@id='informations']/div[@t-if='o.user_id']/div[@t-field='o.user_id']"
+            position="replace"
+        >
+            <div t-field="o.user_id" name="zitron_buyer_name" />
+            <t t-foreach="o._zitron_report_buyer_contact()" t-as="contact_line">
+                <div t-out="contact_line" name="zitron_buyer_contact" />
+            </t>
+        </xpath>
+
+        <!-- Payment term (bold) and project, right after the buyer -->
+        <xpath
+            expr="//div[@id='informations']/div[@t-if='o.user_id']"
+            position="after"
+        >
+            <div t-if="o.payment_term_id" class="col" name="zitron_payment_term">
+                <strong>Payment Terms</strong>
+                <div><strong t-field="o.payment_term_id" /></div>
+            </div>
+            <t t-set="zitron_project" t-value="o._zitron_report_project_name()" />
+            <div t-if="zitron_project" class="col" name="zitron_project">
+                <strong>Project</strong>
+                <div t-out="zitron_project" />
+            </div>
+        </xpath>
+    </template>
+</odoo>
