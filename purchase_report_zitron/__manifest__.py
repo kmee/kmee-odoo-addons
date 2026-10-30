@@ -17,8 +17,9 @@
     ],
     "data": [
         "data/report_paperformat.xml",
-        "reports/purchase_order_primeira_pagina.xml",
         "reports/purchase_order_cabecalho.xml",
+        # primeira_pagina creates the company block that enderecos labels
+        "reports/purchase_order_primeira_pagina.xml",
         "reports/purchase_order_enderecos.xml",
         "reports/purchase_order_linhas.xml",
     ],

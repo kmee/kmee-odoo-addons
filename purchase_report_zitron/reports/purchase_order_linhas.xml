@@ -2,7 +2,7 @@
 <odoo>
     <!--
         Purchase Order PDF, line table (group "linhas"):
-        - taxes in columns (IPI, ICMS, PIS, COFINS: % and value);
+        - cost center per line and taxes in columns (IPI, ICMS, PIS, COFINS: % over value in one cell, to fit landscape A4);
         - delivery date per line in place of the Discount column;
         - quantity without decimals when integer;
         - table font 9pt;
@@ -28,21 +28,18 @@
             </style>
         </xpath>
 
-        <!-- Header: Discount becomes delivery date; Taxes becomes 8 tax columns -->
+        <!-- Header: Discount becomes delivery date; Taxes becomes cost center + 4 tax columns (percent over amount) -->
         <xpath expr="//th[@name='th_discount']" position="replace">
             <th name="th_date_planned" class="text-center">
-                <strong>Entrega</strong>
+                <strong>Delivery</strong>
             </th>
         </xpath>
         <xpath expr="//th[@name='th_taxes']" position="replace">
-            <th name="th_ipi_percent" class="text-end"><strong>IPI %</strong></th>
-            <th name="th_ipi_value" class="text-end"><strong>IPI Valor</strong></th>
-            <th name="th_icms_percent" class="text-end"><strong>ICMS %</strong></th>
-            <th name="th_icms_value" class="text-end"><strong>ICMS Valor</strong></th>
-            <th name="th_pis_percent" class="text-end"><strong>PIS %</strong></th>
-            <th name="th_pis_value" class="text-end"><strong>PIS Valor</strong></th>
-            <th name="th_cofins_percent" class="text-end"><strong>COFINS %</strong></th>
-            <th name="th_cofins_value" class="text-end"><strong>COFINS Valor</strong></th>
+            <th name="th_cost_center"><strong>Cost Center</strong></th>
+            <th name="th_ipi" class="text-end"><strong>IPI</strong></th>
+            <th name="th_icms" class="text-end"><strong>ICMS</strong></th>
+            <th name="th_pis" class="text-end"><strong>PIS</strong></th>
+            <th name="th_cofins" class="text-end"><strong>COFINS</strong></th>
         </xpath>
 
         <!-- Quantity: no decimals when the value is an integer -->
@@ -81,46 +78,56 @@
             </td>
         </xpath>
 
-        <!-- Body: Taxes cell becomes 8 cells (fields of l10n_br_fiscal.document.line.mixin) -->
+        <!-- Body: Taxes cell becomes cost center + 4 cells (fields of l10n_br_fiscal.document.line.mixin).
+             Currency of the fiscal amounts: the mixin declares currency_id as
+             the company currency, but on purchase.order.line the core field
+             (related to the order currency) wins, and the fiscal engine
+             computes the amounts from price_unit with no conversion. So the
+             stored amounts are in the order currency (checked on a EUR order:
+             ICMS is derived from the EUR price) and line.currency_id, the
+             currency_field of these Monetary fields, is the right label. -->
         <xpath
             expr="//td[span[contains(@t-out, 'line.taxes_id')]]"
             position="replace"
         >
-            <td name="td_ipi_percent" class="text-end o_zitron_num">
-                <span t-field="line.ipi_percent" t-options="{'precision': 2}" />
+            <td name="td_cost_center">
+                <span t-out="line._zitron_report_cost_center()" />
             </td>
-            <td name="td_ipi_value" class="text-end o_zitron_num">
-                <span
-                    t-field="line.ipi_value"
-                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                />
+            <td name="td_ipi" class="text-end o_zitron_num">
+                <div><span t-field="line.ipi_percent" t-options="{'precision': 2}" />%</div>
+                <div>
+                    <span
+                        t-field="line.ipi_value"
+                        t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"
+                    />
+                </div>
             </td>
-            <td name="td_icms_percent" class="text-end o_zitron_num">
-                <span t-field="line.icms_percent" t-options="{'precision': 2}" />
+            <td name="td_icms" class="text-end o_zitron_num">
+                <div><span t-field="line.icms_percent" t-options="{'precision': 2}" />%</div>
+                <div>
+                    <span
+                        t-field="line.icms_value"
+                        t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"
+                    />
+                </div>
             </td>
-            <td name="td_icms_value" class="text-end o_zitron_num">
-                <span
-                    t-field="line.icms_value"
-                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                />
+            <td name="td_pis" class="text-end o_zitron_num">
+                <div><span t-field="line.pis_percent" t-options="{'precision': 2}" />%</div>
+                <div>
+                    <span
+                        t-field="line.pis_value"
+                        t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"
+                    />
+                </div>
             </td>
-            <td name="td_pis_percent" class="text-end o_zitron_num">
-                <span t-field="line.pis_percent" t-options="{'precision': 2}" />
-            </td>
-            <td name="td_pis_value" class="text-end o_zitron_num">
-                <span
-                    t-field="line.pis_value"
-                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                />
-            </td>
-            <td name="td_cofins_percent" class="text-end o_zitron_num">
-                <span t-field="line.cofins_percent" t-options="{'precision': 2}" />
-            </td>
-            <td name="td_cofins_value" class="text-end o_zitron_num">
-                <span
-                    t-field="line.cofins_value"
-                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                />
+            <td name="td_cofins" class="text-end o_zitron_num">
+                <div><span t-field="line.cofins_percent" t-options="{'precision': 2}" />%</div>
+                <div>
+                    <span
+                        t-field="line.cofins_value"
+                        t-options="{'widget': 'monetary', 'display_currency': line.currency_id}"
+                    />
+                </div>
             </td>
         </xpath>
 
@@ -130,7 +137,7 @@
         <!-- TO CONFIRM with the client (Nathalia, 30/10): exact wording of the note -->
         <xpath expr="//div[@id='total']" position="before">
             <p class="small text-muted mb-1 o_zitron_price_note">
-                Preço unitário com ICMS, PIS e Cofins inclusos; IPI destacado.
+                Unit price includes ICMS, PIS and COFINS; IPI is shown separately.
             </p>
         </xpath>
     </template>

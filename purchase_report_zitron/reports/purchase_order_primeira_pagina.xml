@@ -19,10 +19,12 @@
         inherit_id="web.external_layout_folder"
         primary="True"
     >
-        <!-- the extra height was reserved for the fiscal lines of the header,
-             that are now printed in the body -->
+        <!-- the header only has the logo and the title now (the address and
+             fiscal lines moved to the body), so the shape is shorter than the
+             174 px of the original layout; keep it in sync with the top
+             margin of the paperformat (data/report_paperformat.xml) -->
         <xpath expr="//t[@t-set='header_shape_height']" position="attributes">
-            <attribute name="t-value">'174'</attribute>
+            <attribute name="t-value">'110'</attribute>
         </xpath>
         <xpath expr="//div[@name='company_address']" position="replace" />
     </template>
