@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+        Purchase Order PDF, line table (group "linhas"):
+        - taxes in columns (IPI, ICMS, PIS, COFINS: % and value);
+        - delivery date per line in place of the Discount column;
+        - quantity without decimals when integer;
+        - table font 9pt;
+        - note about tax inclusion in the unit price.
+        The line number column comes from purchase_order_line_sequence
+        (td_line_number / th_line_number) and is not touched here.
+    -->
+    <template
+        id="report_purchaseorder_document_linhas"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="99"
+    >
+        <!-- Font size of the table (9pt) -->
+        <xpath expr="//table[hasclass('o_main_table')]" position="attributes">
+            <attribute name="class" add="o_zitron_lines" separator=" " />
+        </xpath>
+        <xpath expr="//table[hasclass('o_main_table')]" position="before">
+            <style>
+                table.o_zitron_lines { font-size: 9pt; }
+                table.o_zitron_lines th,
+                table.o_zitron_lines td { padding: 2px 4px; }
+                table.o_zitron_lines td.o_zitron_num { white-space: nowrap; }
+            </style>
+        </xpath>
+
+        <!-- Header: Discount becomes delivery date; Taxes becomes 8 tax columns -->
+        <xpath expr="//th[@name='th_discount']" position="replace">
+            <th name="th_date_planned" class="text-center">
+                <strong>Entrega</strong>
+            </th>
+        </xpath>
+        <xpath expr="//th[@name='th_taxes']" position="replace">
+            <th name="th_ipi_percent" class="text-end"><strong>IPI %</strong></th>
+            <th name="th_ipi_value" class="text-end"><strong>IPI Valor</strong></th>
+            <th name="th_icms_percent" class="text-end"><strong>ICMS %</strong></th>
+            <th name="th_icms_value" class="text-end"><strong>ICMS Valor</strong></th>
+            <th name="th_pis_percent" class="text-end"><strong>PIS %</strong></th>
+            <th name="th_pis_value" class="text-end"><strong>PIS Valor</strong></th>
+            <th name="th_cofins_percent" class="text-end"><strong>COFINS %</strong></th>
+            <th name="th_cofins_value" class="text-end"><strong>COFINS Valor</strong></th>
+        </xpath>
+
+        <!-- Quantity: no decimals when the value is an integer -->
+        <xpath
+            expr="//td[span[@t-field='line.product_qty']]/span[@t-field='line.product_qty']"
+            position="replace"
+        >
+            <span
+                t-if="abs(line.product_qty - round(line.product_qty)) &lt; 0.000001"
+                t-field="line.product_qty"
+                t-options="{'precision': 0}"
+            />
+            <span
+                t-else=""
+                t-field="line.product_qty"
+                t-options="{'min_precision': 1}"
+            />
+        </xpath>
+        <xpath
+            expr="//td[span[@t-field='line.product_qty']]"
+            position="attributes"
+        >
+            <attribute name="class">text-end o_zitron_num</attribute>
+        </xpath>
+
+        <!-- Body: Discount cell becomes delivery date per line -->
+        <xpath
+            expr="//td[span/span[@t-field='line.discount']]"
+            position="replace"
+        >
+            <td name="td_date_planned" class="text-center o_zitron_num">
+                <span
+                    t-field="line.date_planned"
+                    t-options="{'date_only': 'true'}"
+                />
+            </td>
+        </xpath>
+
+        <!-- Body: Taxes cell becomes 8 cells (fields of l10n_br_fiscal.document.line.mixin) -->
+        <xpath
+            expr="//td[span[contains(@t-out, 'line.taxes_id')]]"
+            position="replace"
+        >
+            <td name="td_ipi_percent" class="text-end o_zitron_num">
+                <span t-field="line.ipi_percent" t-options="{'precision': 2}" />
+            </td>
+            <td name="td_ipi_value" class="text-end o_zitron_num">
+                <span
+                    t-field="line.ipi_value"
+                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                />
+            </td>
+            <td name="td_icms_percent" class="text-end o_zitron_num">
+                <span t-field="line.icms_percent" t-options="{'precision': 2}" />
+            </td>
+            <td name="td_icms_value" class="text-end o_zitron_num">
+                <span
+                    t-field="line.icms_value"
+                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                />
+            </td>
+            <td name="td_pis_percent" class="text-end o_zitron_num">
+                <span t-field="line.pis_percent" t-options="{'precision': 2}" />
+            </td>
+            <td name="td_pis_value" class="text-end o_zitron_num">
+                <span
+                    t-field="line.pis_value"
+                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                />
+            </td>
+            <td name="td_cofins_percent" class="text-end o_zitron_num">
+                <span t-field="line.cofins_percent" t-options="{'precision': 2}" />
+            </td>
+            <td name="td_cofins_value" class="text-end o_zitron_num">
+                <span
+                    t-field="line.cofins_value"
+                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                />
+            </td>
+        </xpath>
+
+        <!-- Expected Arrival (order level, earliest line date) is replaced by the per-line date -->
+        <xpath expr="//div[@id='informations']/div[@t-if='o.date_planned']" position="replace" />
+
+        <!-- TO CONFIRM with the client (Nathalia, 30/10): exact wording of the note -->
+        <xpath expr="//div[@id='total']" position="before">
+            <p class="small text-muted mb-1 o_zitron_price_note">
+                Preço unitário com ICMS, PIS e Cofins inclusos; IPI destacado.
+            </p>
+        </xpath>
+    </template>
+</odoo>

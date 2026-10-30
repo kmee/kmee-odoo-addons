@@ -3,6 +3,7 @@
 
 {
     "name": "Purchase Report Zitron",
+    "summary": "Zitron purchase order PDF layout",
     "version": "18.0.1.0.0",
     "category": "Purchases",
     "license": "AGPL-3",
@@ -15,7 +16,11 @@
         "purchase_order_line_sequence",
     ],
     "data": [
+        "data/report_paperformat.xml",
+        "reports/purchase_order_primeira_pagina.xml",
         "reports/purchase_order_cabecalho.xml",
+        "reports/purchase_order_enderecos.xml",
+        "reports/purchase_order_linhas.xml",
     ],
     "installable": True,
 }
