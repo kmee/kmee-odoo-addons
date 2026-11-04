@@ -23,6 +23,8 @@
         "reports/purchase_order_primeira_pagina.xml",
         "reports/purchase_order_enderecos.xml",
         "reports/purchase_order_linhas.xml",
+        "reports/purchase_order_retrato.xml",
+        "views/res_company_views.xml",
     ],
     "installable": True,
 }

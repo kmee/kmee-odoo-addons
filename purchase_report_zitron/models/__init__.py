@@ -1,1 +1,2 @@
-from . import purchase_order_line_cost_center
+from . import purchase_order_line
+from . import res_company

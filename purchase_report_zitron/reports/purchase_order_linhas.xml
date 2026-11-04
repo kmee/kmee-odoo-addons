@@ -2,11 +2,14 @@
 <odoo>
     <!--
         Purchase Order PDF, line table (group "linhas"):
-        - cost center per line and taxes in columns (IPI, ICMS, PIS, COFINS: % over value in one cell, to fit landscape A4);
-        - delivery date per line in place of the Discount column;
-        - quantity without decimals when integer;
-        - table font 9pt;
-        - note about tax inclusion in the unit price.
+        - taxes in columns (IPI, ICMS, PIS, COFINS: % over value in one cell, to fit A4);
+        - quantity (numeric only, no decimals when integer) and unit in separate columns;
+        - delivery date per line in place of the Discount column (under the
+          description in portrait);
+        - only the NCM below the description (no CFOP / operation text);
+        - 8pt table (6.8pt in portrait), light separators, right-aligned numbers;
+        - note about tax inclusion in the unit price;
+        - fixed note of the company at the end of the last page.
         The line number column comes from purchase_order_line_sequence
         (td_line_number / th_line_number) and is not touched here.
     -->
@@ -15,72 +18,148 @@
         inherit_id="purchase.report_purchaseorder_document"
         priority="99"
     >
-        <!-- Font size of the table (9pt) -->
         <xpath expr="//table[hasclass('o_main_table')]" position="attributes">
             <attribute name="class" add="o_zitron_lines" separator=" " />
         </xpath>
         <xpath expr="//table[hasclass('o_main_table')]" position="before">
             <style>
-                table.o_zitron_lines { font-size: 9pt; }
+                table.o_zitron_lines { margin-bottom: 4px; }
                 table.o_zitron_lines th,
-                table.o_zitron_lines td { padding: 2px 4px; }
+                table.o_zitron_lines td { font-size: 8pt; }
+                table.o_zitron_lines .small { font-size: 7pt; }
+                table.o_zitron_lines > thead > tr > th {
+                    padding: 3px 5px;
+                    white-space: nowrap;
+                    vertical-align: bottom;
+                    border-top: 1px solid #6c757d;
+                    border-bottom: 1px solid #6c757d;
+                }
+                table.o_zitron_lines > tbody > tr > td {
+                    padding: 3px 5px;
+                    vertical-align: top;
+                    border-bottom: 1px solid #dee2e6;
+                }
+                table.o_zitron_lines > thead > tr > th + th,
+                table.o_zitron_lines > tbody > tr > td + td {
+                    border-left: 1px solid #e9ecef;
+                }
                 table.o_zitron_lines td.o_zitron_num { white-space: nowrap; }
-                #total table.o_total_table { font-size: 8pt; margin-bottom: 0; }
+                table.o_zitron_lines td.o_zitron_price { font-weight: bold; }
+                table.o_zitron_lines tr { page-break-inside: avoid; }
+                .o_zitron_date_inline { display: none; }
+                #total { page-break-inside: avoid; }
+                #total table.o_total_table { margin-bottom: 0; }
+                #total table.o_total_table th,
+                #total table.o_total_table td { font-size: 8pt; }
                 #total table.o_total_table td { padding: 1px 4px; }
+                .o_zitron_footer_note {
+                    margin-top: 12px;
+                    padding-top: 4px;
+                    border-top: 1px solid #adb5bd;
+                    font-size: 7.5pt;
+                    page-break-inside: avoid;
+                }
+                .o_zitron_footer_note p { margin-bottom: 3px; }
+                .o_zitron_portrait table.o_zitron_lines th,
+                .o_zitron_portrait table.o_zitron_lines td { font-size: 6.8pt; }
+                .o_zitron_portrait table.o_zitron_lines .small { font-size: 6pt; }
+                .o_zitron_portrait table.o_zitron_lines > thead > tr > th,
+                .o_zitron_portrait table.o_zitron_lines > tbody > tr > td { padding: 2px 3px; }
+                .o_zitron_portrait .o_zitron_col_date { display: none; }
+                .o_zitron_portrait .o_zitron_date_inline { display: block; }
+                .o_zitron_portrait td.o_zitron_tax div + div { font-size: 6.2pt; }
+                .o_zitron_portrait #total table.o_total_table th,
+                .o_zitron_portrait #total table.o_total_table td { font-size: 7.5pt; }
             </style>
         </xpath>
 
-        <!-- Header: Discount becomes delivery date; Taxes becomes cost center + 4 tax columns (percent over amount) -->
+        <!-- Header: Qty gets a Unit column; Discount becomes delivery date; Taxes becomes 4 tax columns (percent over amount) -->
+        <xpath expr="//th[@name='th_quantity']" position="after">
+            <th name="th_uom" class="text-center">
+                <strong>UoM</strong>
+            </th>
+        </xpath>
         <xpath expr="//th[@name='th_discount']" position="replace">
-            <th name="th_date_planned" class="text-center">
+            <th name="th_date_planned" class="text-center o_zitron_col_date">
                 <strong>Delivery</strong>
             </th>
         </xpath>
         <xpath expr="//th[@name='th_taxes']" position="replace">
-            <th name="th_cost_center"><strong>Cost Center</strong></th>
-            <th name="th_ipi" class="text-end"><strong>IPI</strong></th>
-            <th name="th_icms" class="text-end"><strong>ICMS</strong></th>
-            <th name="th_pis" class="text-end"><strong>PIS</strong></th>
-            <th name="th_cofins" class="text-end"><strong>COFINS</strong></th>
+            <th name="th_ipi" class="text-end">
+                <strong>IPI</strong>
+            </th>
+            <th name="th_icms" class="text-end">
+                <strong>ICMS</strong>
+            </th>
+            <th name="th_pis" class="text-end">
+                <strong>PIS</strong>
+            </th>
+            <th name="th_cofins" class="text-end">
+                <strong>COFINS</strong>
+            </th>
         </xpath>
 
-        <!-- Quantity: no decimals when the value is an integer -->
+        <!-- Description: NCM only (CFOP and operation text dropped; to bring
+             them back, delete this xpath), delivery date under it in portrait -->
         <xpath
-            expr="//td[span[@t-field='line.product_qty']]/span[@t-field='line.product_qty']"
+            expr="//td[@id='product']/t[@t-call='l10n_br_fiscal.report_line_fiscal_details']"
             position="replace"
         >
-            <span
-                t-if="abs(line.product_qty - round(line.product_qty)) &lt; 0.000001"
-                t-field="line.product_qty"
-                t-options="{'precision': 0}"
+            <t
+                t-set="zitron_ncm"
+                t-value="line.company_id.country_id.code == 'BR' and line.company_id.report_line_classification and not line.service_type_id and (line.ncm_id.code_unmasked or '').strip('0') and line.ncm_id.code"
             />
-            <span
-                t-else=""
-                t-field="line.product_qty"
-                t-options="{'min_precision': 1}"
-            />
-        </xpath>
-        <xpath
-            expr="//td[span[@t-field='line.product_qty']]"
-            position="attributes"
-        >
-            <attribute name="class">text-end o_zitron_num</attribute>
+            <div t-if="zitron_ncm" class="text-muted small">NCM <t
+                t-out="zitron_ncm"
+            /></div>
+            <div class="o_zitron_date_inline text-muted small">Delivery: <span
+                t-field="line.date_planned"
+                t-options="{'date_only': 'true'}"
+            /></div>
         </xpath>
 
-        <!-- Body: Discount cell becomes delivery date per line -->
-        <xpath
-            expr="//td[span/span[@t-field='line.discount']]"
-            position="replace"
-        >
-            <td name="td_date_planned" class="text-center o_zitron_num">
+        <!-- Quantity (numeric only, no decimals when the value is an integer)
+             and Unit in separate cells; packaging stays with the unit -->
+        <xpath expr="//td[span[@t-field='line.product_qty']]" position="replace">
+            <td name="td_quantity" class="text-end o_zitron_num">
                 <span
-                    t-field="line.date_planned"
-                    t-options="{'date_only': 'true'}"
+                    t-if="abs(line.product_qty - round(line.product_qty)) &lt; 0.000001"
+                    t-field="line.product_qty"
+                    t-options="{'precision': 0}"
                 />
+                <span
+                    t-else=""
+                    t-field="line.product_qty"
+                    t-options="{'min_precision': 1}"
+                />
+            </td>
+            <td name="td_uom" class="text-center o_zitron_num">
+                <span t-out="line._zitron_report_uom_label()" groups="uom.group_uom" />
+                <div t-if="line.product_packaging_id" class="small text-muted">
+                    (<span
+                    t-field="line.product_packaging_qty"
+                    t-options="{'widget': 'integer'}"
+                /> <span t-field="line.product_packaging_id" />)
+                </div>
             </td>
         </xpath>
 
-        <!-- Body: Taxes cell becomes cost center + 4 cells (fields of l10n_br_fiscal.document.line.mixin).
+        <!-- Unit price: right-aligned and bold -->
+        <xpath expr="//td[span[@t-field='line.price_unit']]" position="attributes">
+            <attribute name="class">text-end o_zitron_num o_zitron_price</attribute>
+        </xpath>
+
+        <!-- Body: Discount cell becomes delivery date per line -->
+        <xpath expr="//td[span/span[@t-field='line.discount']]" position="replace">
+            <td
+                name="td_date_planned"
+                class="text-center o_zitron_num o_zitron_col_date"
+            >
+                <span t-field="line.date_planned" t-options="{'date_only': 'true'}" />
+            </td>
+        </xpath>
+
+        <!-- Body: Taxes cell becomes 4 cells (fields of l10n_br_fiscal.document.line.mixin).
              Currency of the fiscal amounts: the mixin declares currency_id as
              the company currency, but on purchase.order.line the core field
              (related to the order currency) wins, and the fiscal engine
@@ -88,15 +167,12 @@
              stored amounts are in the order currency (checked on a EUR order:
              ICMS is derived from the EUR price) and line.currency_id, the
              currency_field of these Monetary fields, is the right label. -->
-        <xpath
-            expr="//td[span[contains(@t-out, 'line.taxes_id')]]"
-            position="replace"
-        >
-            <td name="td_cost_center">
-                <span t-out="line._zitron_report_cost_center()" />
-            </td>
-            <td name="td_ipi" class="text-end o_zitron_num">
-                <div><span t-field="line.ipi_percent" t-options="{'precision': 2}" />%</div>
+        <xpath expr="//td[span[contains(@t-out, 'line.taxes_id')]]" position="replace">
+            <td name="td_ipi" class="text-end o_zitron_num o_zitron_tax">
+                <div><span
+                    t-field="line.ipi_percent"
+                    t-options="{'precision': 2}"
+                />%</div>
                 <div>
                     <span
                         t-field="line.ipi_value"
@@ -104,8 +180,11 @@
                     />
                 </div>
             </td>
-            <td name="td_icms" class="text-end o_zitron_num">
-                <div><span t-field="line.icms_percent" t-options="{'precision': 2}" />%</div>
+            <td name="td_icms" class="text-end o_zitron_num o_zitron_tax">
+                <div><span
+                    t-field="line.icms_percent"
+                    t-options="{'precision': 2}"
+                />%</div>
                 <div>
                     <span
                         t-field="line.icms_value"
@@ -113,8 +192,11 @@
                     />
                 </div>
             </td>
-            <td name="td_pis" class="text-end o_zitron_num">
-                <div><span t-field="line.pis_percent" t-options="{'precision': 2}" />%</div>
+            <td name="td_pis" class="text-end o_zitron_num o_zitron_tax">
+                <div><span
+                    t-field="line.pis_percent"
+                    t-options="{'precision': 2}"
+                />%</div>
                 <div>
                     <span
                         t-field="line.pis_value"
@@ -122,8 +204,11 @@
                     />
                 </div>
             </td>
-            <td name="td_cofins" class="text-end o_zitron_num">
-                <div><span t-field="line.cofins_percent" t-options="{'precision': 2}" />%</div>
+            <td name="td_cofins" class="text-end o_zitron_num o_zitron_tax">
+                <div><span
+                    t-field="line.cofins_percent"
+                    t-options="{'precision': 2}"
+                />%</div>
                 <div>
                     <span
                         t-field="line.cofins_value"
@@ -134,13 +219,35 @@
         </xpath>
 
         <!-- Expected Arrival (order level, earliest line date) is replaced by the per-line date -->
-        <xpath expr="//div[@id='informations']/div[@t-if='o.date_planned']" position="replace" />
+        <xpath
+            expr="//div[@id='informations']/div[@t-if='o.date_planned']"
+            position="replace"
+        />
 
         <!-- TO CONFIRM with the client (Nathalia, 30/10): exact wording of the note -->
         <xpath expr="//div[@id='total']" position="before">
             <p class="small text-muted mb-1 o_zitron_price_note">
                 Unit price includes ICMS, PIS and COFINS; IPI is shown separately.
             </p>
+        </xpath>
+
+        <!-- Fixed company note, at the end of the document (so, of the last
+             page), followed by the order and project references -->
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <div class="o_zitron_footer_note" name="zitron_footer_note">
+                <div
+                    t-if="company.purchase_report_footer_note"
+                    t-out="company.purchase_report_footer_note"
+                />
+                <div name="zitron_footer_refs">
+                    <strong>Order:</strong>
+                    <span t-field="o.name" />
+                    <span t-if="o.project_id" class="ms-4">
+                        <strong>Project:</strong>
+                        <span t-field="o.project_id" />
+                    </span>
+                </div>
+            </div>
         </xpath>
     </template>
 </odoo>
