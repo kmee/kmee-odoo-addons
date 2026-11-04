@@ -39,8 +39,52 @@ msgstr "Preço unitário com ICMS, PIS e COFINS inclusos; IPI destacado."
 
 #. module: purchase_report_zitron
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_linhas
-msgid "<strong>Cost Center</strong>"
-msgstr "<strong>Centro de custo</strong>"
+msgid "<strong>UoM</strong>"
+msgstr "<strong>Un.</strong>"
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_zitron_cabecalho
+msgid "<strong>Issue Date</strong>"
+msgstr "<strong>Data de emissão</strong>"
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_linhas
+msgid "Delivery:"
+msgstr "Entrega:"
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_linhas
+msgid "<strong>Order:</strong>"
+msgstr "<strong>Pedido:</strong>"
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_linhas
+msgid "<strong>Project:</strong>"
+msgstr "<strong>Projeto:</strong>"
+
+#. module: purchase_report_zitron
+#: model:ir.actions.report,name:purchase_report_zitron.action_report_purchase_order_portrait
+msgid "Purchase Order (Portrait)"
+msgstr "Pedido de compra (retrato)"
+
+#. module: purchase_report_zitron
+#: model:ir.model.fields,field_description:purchase_report_zitron.field_res_company__purchase_report_footer_note
+msgid "Purchase Order PDF Note"
+msgstr "Nota do PDF do pedido de compra"
+
+#. module: purchase_report_zitron
+#: model:ir.model.fields,help:purchase_report_zitron.field_res_company__purchase_report_footer_note
+msgid ""
+"Fixed text printed at the end of the last page of the purchase order PDF, "
+"followed by the order and project references."
+msgstr ""
+"Texto fixo impresso no fim da última página do PDF do pedido de compra, "
+"seguido das referências de pedido e projeto."
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.view_company_form_purchase_report_zitron
+msgid "Purchase Report"
+msgstr "Relatório de compras"
 
 #. module: purchase_report_zitron
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.external_layout_purchase_first_page
