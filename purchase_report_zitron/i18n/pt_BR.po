@@ -41,3 +41,13 @@ msgstr "Preço unitário com ICMS, PIS e COFINS inclusos; IPI destacado."
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_linhas
 msgid "<strong>Cost Center</strong>"
 msgstr "<strong>Centro de custo</strong>"
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.external_layout_purchase_first_page
+msgid "<span>Tax framework:</span>"
+msgstr "<span>Regime tributário:</span>"
+
+#. module: purchase_report_zitron
+#: model_terms:ir.ui.view,arch_db:purchase_report_zitron.external_layout_purchase_first_page
+msgid "- <span>Profit</span>"
+msgstr "- <span>Lucro</span>"

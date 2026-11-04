@@ -43,14 +43,18 @@
                     >
                         <div class="mt-3"><strong>Billing Address:</strong></div>
                         <ul class="list-unstyled mb-0" name="company_first_page_list">
-                            <li t-if="company.is_company_details_empty">
+                            <!-- Legal name printed once: the company details
+                                 block starts with the short name and the fiscal
+                                 data repeats the legal name, so both are
+                                 replaced by the lines below. -->
+                            <li name="company_legal_name">
+                                <span t-out="company.legal_name or company.name" />
+                            </li>
+                            <li name="company_address">
                                 <span
                                     t-field="company.partner_id"
-                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'
                                 />
-                            </li>
-                            <li t-else="">
-                                <span t-field="company.company_details" />
                             </li>
                             <li
                                 t-if="company.vat and not company._get_report_option('report_company_fiscal_data')"
@@ -58,7 +62,41 @@
                                 <t t-out="company.country_id.vat_label or 'Tax ID'" />:
                                 <span t-out="company.vat" />
                             </li>
-                            <t t-call="l10n_br_fiscal.report_company_fiscal_data" />
+                            <li
+                                t-if="company._get_report_option('report_company_fiscal_data')"
+                                name="l10n_br_company_fiscal_data"
+                                class="small mt-1"
+                            >
+                                <t
+                                    t-foreach="company.partner_id._get_report_fiscal_data()"
+                                    t-as="data"
+                                >
+                                    <t t-if="data != company.legal_name">
+                                        <span t-out="data" />
+                                        <br />
+                                    </t>
+                                </t>
+                                <t
+                                    t-set="regime_fields"
+                                    t-value="company.fields_get(['tax_framework', 'profit_calculation'])"
+                                />
+                                <t
+                                    t-if="company.report_tax_framework and company.tax_framework"
+                                >
+                                    <span>Tax framework:</span>
+                                    <t
+                                        t-out="dict(regime_fields['tax_framework']['selection'])[company.tax_framework].split(' - ', 1)[-1]"
+                                    />
+                                    <t
+                                        t-if="company.tax_framework == '3' and company.profit_calculation"
+                                    >
+                                        - <span>Profit</span>
+                                        <t
+                                        t-out="dict(regime_fields['profit_calculation']['selection'])[company.profit_calculation]"
+                                    />
+                                    </t>
+                                </t>
+                            </li>
                         </ul>
                     </div>
                 </div>

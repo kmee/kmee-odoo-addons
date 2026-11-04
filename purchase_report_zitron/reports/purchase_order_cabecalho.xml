@@ -16,6 +16,15 @@
             <attribute name="class" add="fw-bold" separator=" " />
         </xpath>
 
+        <!-- Hide the "Payment Terms:" label (and its block) when there is no
+             payment term; the span above stays as the anchor -->
+        <xpath
+            expr="//span[@t-field='o.payment_term_id']/preceding-sibling::strong[1]"
+            position="attributes"
+        >
+            <attribute name="t-if">o.payment_term_id</attribute>
+        </xpath>
+
         <!-- Buyer: name, e-mail and phone -->
         <xpath
             expr="//div[@id='informations']/div[@t-if='o.user_id']/div[@t-field='o.user_id']"
