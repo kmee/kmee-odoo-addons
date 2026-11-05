@@ -52,6 +52,9 @@
                 #total table.o_total_table th,
                 #total table.o_total_table td { font-size: 8pt; }
                 #total table.o_total_table td { padding: 1px 4px; }
+                #total table.o_total_table tr.small th,
+                #total table.o_total_table tr.small td { font-size: 7.5pt; }
+                .o_zitron_price_note { font-size: 7.5pt; }
                 .o_zitron_footer_note {
                     margin-top: 12px;
                     padding-top: 4px;
@@ -70,6 +73,9 @@
                 .o_zitron_portrait td.o_zitron_tax div + div { font-size: 6.2pt; }
                 .o_zitron_portrait #total table.o_total_table th,
                 .o_zitron_portrait #total table.o_total_table td { font-size: 7.5pt; }
+                .o_zitron_portrait #total table.o_total_table tr.small th,
+                .o_zitron_portrait #total table.o_total_table tr.small td { font-size: 6.5pt; }
+                .o_zitron_portrait .o_zitron_price_note { font-size: 6.5pt; }
             </style>
         </xpath>
 

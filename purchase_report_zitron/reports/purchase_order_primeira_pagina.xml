@@ -93,6 +93,14 @@
                 })();
             </script>
         </xpath>
+        <!-- Smaller footer line (phone, e-mail, site, tax ID, page number);
+             only in this private layout, the other documents keep theirs.
+             zitron_portrait is set by the portrait wrappers -->
+        <xpath expr="//div[hasclass('o_footer_content')]" position="attributes">
+            <attribute
+                name="t-attf-style"
+            >font-size: {{'6.5pt' if zitron_portrait else '7.5pt'}};</attribute>
+        </xpath>
         <!-- Billing address (address only) beside the shipping address, in the
              left half of the address row. It lives in the layout body, so it
              is printed once, on the first page only. -->
