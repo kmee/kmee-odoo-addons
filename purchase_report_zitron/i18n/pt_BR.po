@@ -68,6 +68,11 @@ msgid "Purchase Order (Portrait)"
 msgstr "Pedido de compra (retrato)"
 
 #. module: purchase_report_zitron
+#: model:ir.actions.report,name:purchase_report_zitron.action_report_purchase_quotation_portrait
+msgid "Request for Quotation (Portrait)"
+msgstr "Solicitação de cotação (retrato)"
+
+#. module: purchase_report_zitron
 #: model:ir.model.fields,field_description:purchase_report_zitron.field_res_company__purchase_report_footer_note
 msgid "Purchase Order PDF Note"
 msgstr "Nota do PDF do pedido de compra"

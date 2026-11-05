@@ -30,7 +30,7 @@
         <field name="dpi">90</field>
     </record>
 
-    <!-- Only the Purchase Order action; the RFQ action stays portrait -->
+    <!-- Purchase Order action (the RFQ actions are in purchase_order_retrato.xml) -->
     <record id="purchase.action_report_purchase_order" model="ir.actions.report">
         <field
             name="paperformat_id"

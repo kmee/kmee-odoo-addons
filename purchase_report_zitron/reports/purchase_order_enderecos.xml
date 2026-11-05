@@ -10,6 +10,19 @@
         id="report_purchaseorder_document_enderecos"
         inherit_id="purchase.report_purchaseorder_document"
     >
+        <!-- Delivery address: the contact's own name (no parent company
+             prefix of the display name) followed by its address and phone -->
+        <xpath expr="//div[@name='purchase_shipping_address']" position="replace">
+            <div name="purchase_shipping_address">
+                <div
+                    t-out="o.dest_address_id.name or o.dest_address_id.parent_id.name"
+                />
+                <div
+                    t-field="o.dest_address_id"
+                    t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'
+                />
+            </div>
+        </xpath>
         <xpath
             expr="//div[hasclass('page')]/div[hasclass('oe_structure')]"
             position="after"
