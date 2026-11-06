@@ -18,6 +18,7 @@
     <template
         id="external_layout_purchase_first_page"
         inherit_id="web.external_layout_folder"
+        priority="99"
         primary="True"
     >
         <!-- the shape is shorter than the 174 px of the original layout; keep
