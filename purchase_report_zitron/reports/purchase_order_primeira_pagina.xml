@@ -94,8 +94,15 @@
                 })();
             </script>
         </xpath>
-        <!-- Smaller footer line (phone, e-mail, site, tax ID, page number);
-             only in this private layout, the other documents keep theirs.
+        <!-- Footer: the company contact text (company.report_footer: phone,
+             e-mail, site, tax ID) is dropped; the footer line and the page
+             number stay. Only in this private layout, the other documents
+             keep theirs. -->
+        <xpath
+            expr="//div[hasclass('o_footer_content')]/div[@t-field='company.report_footer']"
+            position="replace"
+        />
+        <!-- Smaller footer line.
              zitron_portrait is set by the portrait wrappers -->
         <xpath expr="//div[hasclass('o_footer_content')]" position="attributes">
             <attribute
