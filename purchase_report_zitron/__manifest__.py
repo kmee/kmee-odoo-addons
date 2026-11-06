@@ -8,7 +8,7 @@
     "category": "Purchases",
     "license": "AGPL-3",
     "author": "KMEE",
-    "website": "https://github.com/kmee/kmee-odoo-addons",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
     "depends": [
         "purchase",
         "purchase_stock",
