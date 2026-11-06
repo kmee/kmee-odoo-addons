@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+        Header of the purchase order PDF (report 551): buyer contact, linked
+        project, issue date, bold payment term and the base (smaller) font. Inherits the core template, which
+        l10n_br_purchase and purchase_stock also extend.
+        The core span of o.payment_term_id is kept in place (only a class is
+        added): it is the anchor of purchase_comment_template.
+    -->
+    <template
+        id="report_purchaseorder_document_zitron_cabecalho"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="99"
+    >
+        <!-- Payment term in bold (printed by the core after the lines) -->
+        <xpath expr="//span[@t-field='o.payment_term_id']" position="attributes">
+            <attribute name="class" add="fw-bold" separator=" " />
+        </xpath>
+
+        <!-- Hide the "Payment Terms:" label (and its block) when there is no
+             payment term; the span above stays as the anchor -->
+        <xpath
+            expr="//span[@t-field='o.payment_term_id']/preceding-sibling::strong[1]"
+            position="attributes"
+        >
+            <attribute name="t-if">o.payment_term_id</attribute>
+        </xpath>
+
+        <!-- Buyer: name, e-mail and phone -->
+        <xpath
+            expr="//div[@id='informations']/div[@t-if='o.user_id']/div[@t-field='o.user_id']"
+            position="replace"
+        >
+            <div
+                t-field="o.user_id.partner_id"
+                t-options='{"widget": "contact", "fields": ["name", "email", "phone"], "no_marker": True}'
+            />
+        </xpath>
+
+        <!-- Project, right after the buyer -->
+        <xpath expr="//div[@id='informations']/div[@t-if='o.user_id']" position="after">
+            <div t-if="o.project_id" class="col" name="zitron_project">
+                <strong>Project</strong>
+                <div t-field="o.project_id" />
+            </div>
+        </xpath>
+        <!-- Smaller fonts: more of the page goes to the items -->
+        <xpath expr="//div[@id='informations']" position="before">
+            <style>
+                .o_report_layout_folder { font-size: 8pt; }
+                .o_report_layout_folder h3 { font-size: 11pt; }
+                #informations { font-size: 7.5pt; margin-bottom: 6px !important; }
+                #informations strong { font-size: 7pt; }
+                #informations p, #informations .col > div { margin-bottom: 0; }
+                .o_zitron_band_company { font-size: 7.5pt; line-height: 1.25; padding: 4px 10px 0 12px; }
+                .o_zitron_band_name { font-size: 9pt; font-weight: bold; }
+                .o_zitron_portrait { font-size: 7.5pt; }
+            </style>
+        </xpath>
+
+        <!-- Issue date: approval date when confirmed, else the order date
+             (replaces the core "Order Date" / "Order Deadline" blocks) -->
+        <xpath
+            expr="//div[@id='informations']/div[contains(@t-if, 'o.date_approve')]"
+            position="replace"
+        >
+            <div class="col" name="zitron_issue_date">
+                <strong>Issue Date</strong>
+                <div>
+                    <span
+                        t-if="o.state in ('purchase', 'done') and o.date_approve"
+                        t-field="o.date_approve"
+                        t-options="{'date_only': 'true'}"
+                    />
+                    <span
+                        t-else=""
+                        t-field="o.date_order"
+                        t-options="{'date_only': 'true'}"
+                    />
+                </div>
+            </div>
+        </xpath>
+        <xpath
+            expr="//div[@id='informations']/div[contains(@t-elif, 'o.date_order')]"
+            position="replace"
+        />
+
+        <!-- Page class used by the portrait CSS (see purchase_order_retrato.xml) -->
+        <xpath expr="//div[hasclass('page')]" position="attributes">
+            <attribute
+                name="t-attf-class"
+            >{{'o_zitron_portrait' if zitron_portrait else ''}}</attribute>
+        </xpath>
+    </template>
+</odoo>

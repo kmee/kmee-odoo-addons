@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Billing address: with the folder layout it is printed beside the
+         shipping address by the private layout of
+         purchase_order_primeira_pagina.xml (company identity block). Companies
+         using another layout get the company address here, below the
+         header. Delivery address is printed by the core "Shipping address"
+         block (purchase / purchase_stock). -->
+    <template
+        id="report_purchaseorder_document_enderecos"
+        inherit_id="purchase.report_purchaseorder_document"
+        priority="99"
+    >
+        <!-- Delivery address: the contact's own name (no parent company
+             prefix of the display name) followed by its address and phone -->
+        <xpath expr="//div[@name='purchase_shipping_address']" position="replace">
+            <div name="purchase_shipping_address">
+                <div
+                    t-out="o.dest_address_id.name or o.dest_address_id.parent_id.name"
+                />
+                <div
+                    t-field="o.dest_address_id"
+                    t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}'
+                />
+            </div>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('page')]/div[hasclass('oe_structure')]"
+            position="after"
+        >
+            <div
+                t-if="o.company_id.external_report_layout_id.sudo().key != 'web.external_layout_folder'"
+                class="row mb-2"
+                name="billing_address_block"
+            >
+                <div class="col-6">
+                    <strong>Billing Address:</strong>
+                    <div
+                        t-field="o.company_id.partner_id"
+                        t-options='{"widget": "contact", "fields": ["name", "address", "phone"], "no_marker": True, "phone_icons": True}'
+                    />
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

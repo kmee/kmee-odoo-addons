@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Company and fiscal data only on the first page of the purchase order.
+
+         wkhtmltopdf prints the header of the external layout on every page, so
+         a private copy (primary view) of web.external_layout_folder is used:
+         1. the header keeps the logo and the title shape and gets the company
+            block (legal name, CNPJ/IE/IM, tax regime) in the top band, beside
+            the logo. A small script hides it on pages 2+ (wkhtmltopdf passes
+            the page number in the query string of the header document);
+         2. the billing address (address only) is printed once, beside the
+            shipping address, in the body of the first page;
+         3. only the purchase order document calls that private layout. The
+            shared web.external_layout_folder is not modified, so invoices,
+            sale orders and other reports are not affected. -->
+    <template
+        id="external_layout_purchase_first_page"
+        inherit_id="web.external_layout_folder"
+        priority="99"
+        primary="True"
+    >
+        <!-- the shape is shorter than the 174 px of the original layout; keep
+             it in sync with the top margin of the paperformats
+             (data/report_paperformat.xml) -->
+        <xpath expr="//t[@t-set='header_shape_height']" position="attributes">
+            <attribute name="t-value">'96'</attribute>
+        </xpath>
+        <xpath expr="//div[@name='company_address']" position="replace" />
+        <!-- logo keeps its size; the company block takes the rest of the band -->
+        <xpath
+            expr="//div[hasclass('o_folder_company_info')]/div[hasclass('w-50')]"
+            position="attributes"
+        >
+            <attribute name="class">flex-shrink-0</attribute>
+        </xpath>
+        <xpath
+            expr="//div[hasclass('o_folder_company_info')]/div[hasclass('flex-shrink-0')]"
+            position="after"
+        >
+            <div
+                class="o_zitron_band_company flex-grow-1"
+                name="company_first_page"
+                t-if="o and o._name == 'purchase.order'"
+            >
+                <!-- Legal name printed once: the fiscal data repeats it, so
+                     it is skipped below -->
+                <div class="o_zitron_band_name" name="company_legal_name">
+                    <t t-out="company.legal_name or company.name" />
+                </div>
+                <div
+                    t-if="company.vat and not company._get_report_option('report_company_fiscal_data')"
+                >
+                    <t t-out="company.country_id.vat_label or 'Tax ID'" />:
+                    <span t-out="company.vat" />
+                </div>
+                <t t-if="company._get_report_option('report_company_fiscal_data')">
+                    <t
+                        t-foreach="company.partner_id._get_report_fiscal_data()"
+                        t-as="data"
+                    >
+                        <div t-if="data != company.legal_name">
+                            <span t-out="data" />
+                        </div>
+                    </t>
+                    <t
+                        t-set="regime_fields"
+                        t-value="company.fields_get(['tax_framework', 'profit_calculation'])"
+                    />
+                    <div t-if="company.report_tax_framework and company.tax_framework">
+                        <span>Tax framework:</span>
+                        <t
+                            t-out="dict(regime_fields['tax_framework']['selection'])[company.tax_framework].split(' - ', 1)[-1]"
+                        />
+                        <t
+                            t-if="company.tax_framework == '3' and company.profit_calculation"
+                        >
+                            - <span>Profit</span>
+                            <t
+                            t-out="dict(regime_fields['profit_calculation']['selection'])[company.profit_calculation]"
+                        />
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <script>
+                (function () {
+                    var m = /[?&amp;]page=(\d+)/.exec(document.location.search);
+                    if (m &amp;&amp; m[1] !== "1") {
+                        var e = document.querySelector(".o_zitron_band_company");
+                        if (e) { e.style.visibility = "hidden"; }
+                    }
+                })();
+            </script>
+        </xpath>
+        <!-- Footer: the company contact text (company.report_footer: phone,
+             e-mail, site, tax ID) is dropped; the footer line and the page
+             number stay. Only in this private layout, the other documents
+             keep theirs. -->
+        <xpath
+            expr="//div[hasclass('o_footer_content')]/div[@t-field='company.report_footer']"
+            position="replace"
+        />
+        <!-- Smaller footer line.
+             zitron_portrait is set by the portrait wrappers -->
+        <xpath expr="//div[hasclass('o_footer_content')]" position="attributes">
+            <attribute
+                name="t-attf-style"
+            >font-size: {{'6.5pt' if zitron_portrait else '7.5pt'}};</attribute>
+        </xpath>
+        <!-- Billing address (address only) beside the shipping address, in the
+             left half of the address row. It lives in the layout body, so it
+             is printed once, on the first page only. -->
+        <xpath expr="//t[@t-call='web.address_layout']" position="before">
+            <t t-set="information_block">
+                <div class="row">
+                    <div class="col-6" name="shipping_block">
+                        <t t-out="information_block" />
+                    </div>
+                    <div
+                        class="col-6"
+                        name="billing_first_page"
+                        t-if="o and o._name == 'purchase.order'"
+                    >
+                        <div class="mt-3">
+                            <strong>Billing Address:</strong>
+                        </div>
+                        <span
+                            t-field="company.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'
+                        />
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </template>
+
+    <template
+        id="report_purchaseorder_document_first_page"
+        inherit_id="purchase.report_purchaseorder_document"
+    >
+        <!-- the primary layout is not reached through web.external_layout, so
+             set the company it expects; keep the company layout choice for
+             layouts other than the folder -->
+        <xpath expr="//t[@t-call='web.external_layout']" position="attributes">
+            <attribute
+                name="t-call"
+            >{{'purchase_report_zitron.external_layout_purchase_first_page' if o.company_id.sudo().external_report_layout_id.key == 'web.external_layout_folder' else 'web.external_layout'}}</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='o']" position="after">
+            <t t-set="company" t-value="o.company_id.sudo()" />
+        </xpath>
+    </template>
+</odoo>

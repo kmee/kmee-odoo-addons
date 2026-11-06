@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_payment_term_purchase_payment_term_manager,account.payment.term payment term manager,account.model_account_payment_term,purchase_payment_term_menu.group_purchase_payment_term_manager,1,1,1,0
+access_account_payment_term_line_purchase_payment_term_manager,account.payment.term.line payment term manager,account.model_account_payment_term_line,purchase_payment_term_menu.group_purchase_payment_term_manager,1,1,1,0
