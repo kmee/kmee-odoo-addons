@@ -4,7 +4,8 @@
         Purchase Order PDF, line table (group "linhas"):
         - taxes in columns (IPI, ICMS, PIS, COFINS: % over value in one cell, to fit A4);
         - quantity (numeric only, no decimals when integer) and unit in separate columns;
-        - delivery date per line in place of the Discount column (under the
+        - delivery date per line (blank when not informed, see
+          purchase.order.line._zitron_delivery_informed) in place of the Discount column (under the
           description in portrait);
         - only the NCM below the description (no CFOP / operation text);
         - 8pt table (6.8pt in portrait), light separators, right-aligned numbers;
@@ -118,7 +119,10 @@
             <div t-if="zitron_ncm" class="text-muted small">NCM <t
                 t-out="zitron_ncm"
             /></div>
-            <div class="o_zitron_date_inline text-muted small">Delivery: <span
+            <div
+                t-if="line._zitron_delivery_informed()"
+                class="o_zitron_date_inline text-muted small"
+            >Delivery: <span
                 t-field="line.date_planned"
                 t-options="{'date_only': 'true'}"
             /></div>
@@ -161,7 +165,11 @@
                 name="td_date_planned"
                 class="text-center o_zitron_num o_zitron_col_date"
             >
-                <span t-field="line.date_planned" t-options="{'date_only': 'true'}" />
+                <span
+                    t-if="line._zitron_delivery_informed()"
+                    t-field="line.date_planned"
+                    t-options="{'date_only': 'true'}"
+                />
             </td>
         </xpath>
 
@@ -250,7 +258,9 @@
                     <span t-field="o.name" />
                     <span t-if="o.project_id" class="ms-4">
                         <strong>Project:</strong>
-                        <span t-out="o.project_id.zitron_project_number or o.project_id.display_name" />
+                        <span
+                            t-out="o.project_id.zitron_project_number or o.project_id.display_name"
+                        />
                     </span>
                 </div>
             </div>
