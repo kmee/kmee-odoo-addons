@@ -40,7 +40,7 @@
         <xpath expr="//div[@id='informations']/div[@t-if='o.user_id']" position="after">
             <div t-if="o.project_id" class="col" name="zitron_project">
                 <strong>Project</strong>
-                <div t-field="o.project_id" />
+                <div t-out="o.project_id.zitron_project_number or o.project_id.display_name" />
             </div>
         </xpath>
         <!-- Smaller fonts: more of the page goes to the items -->

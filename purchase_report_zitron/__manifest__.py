@@ -4,7 +4,7 @@
 {
     "name": "Purchase Report Zitron",
     "summary": "Zitron purchase order PDF layout",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "category": "Purchases",
     "license": "AGPL-3",
     "author": "KMEE",
@@ -25,6 +25,7 @@
         "reports/purchase_order_linhas.xml",
         "reports/purchase_order_retrato.xml",
         "views/res_company_views.xml",
+        "views/project_project_views.xml",
     ],
     "installable": True,
 }

@@ -250,7 +250,7 @@
                     <span t-field="o.name" />
                     <span t-if="o.project_id" class="ms-4">
                         <strong>Project:</strong>
-                        <span t-field="o.project_id" />
+                        <span t-out="o.project_id.zitron_project_number or o.project_id.display_name" />
                     </span>
                 </div>
             </div>
