@@ -83,7 +83,7 @@
         <!-- Header: Qty gets a Unit column; Discount becomes delivery date; Taxes becomes 4 tax columns (percent over amount) -->
         <xpath expr="//th[@name='th_quantity']" position="after">
             <th name="th_uom" class="text-center">
-                <strong>UoM</strong>
+                <strong>Unid.</strong>
             </th>
         </xpath>
         <xpath expr="//th[@name='th_discount']" position="replace">

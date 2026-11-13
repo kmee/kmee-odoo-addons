@@ -39,8 +39,8 @@ msgstr "Preço unitário com ICMS, PIS e COFINS inclusos; IPI destacado."
 
 #. module: purchase_report_zitron
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_linhas
-msgid "<strong>UoM</strong>"
-msgstr "<strong>Un.</strong>"
+msgid "<strong>Unid.</strong>"
+msgstr "<strong>Unid.</strong>"
 
 #. module: purchase_report_zitron
 #: model_terms:ir.ui.view,arch_db:purchase_report_zitron.report_purchaseorder_document_zitron_cabecalho

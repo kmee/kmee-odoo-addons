@@ -115,3 +115,14 @@ class TestDeliveryDate(TransactionCase):
         self.assertIn("2026", cells[1])
         self.assertIn("2026", cells[2])
         self.assertIn("25", cells[2])
+
+    def test_pdf_uom_header_is_unid(self):
+        html = self.env["ir.actions.report"]._render_qweb_html(
+            "purchase.report_purchaseorder", self.po.ids
+        )[0]
+        root = lxml.html.fromstring(html)
+        headers = [
+            "".join(th.itertext()).strip() for th in root.xpath("//th[@name='th_uom']")
+        ]
+        self.assertTrue(headers)
+        self.assertEqual(set(headers), {"Unid."})
