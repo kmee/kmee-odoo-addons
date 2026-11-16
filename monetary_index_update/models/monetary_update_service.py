@@ -165,6 +165,14 @@ class MonetaryUpdateService(models.AbstractModel):
         :param kwargs: Additional arguments for the strategy
         :return: Computed factor
         """
+        if "monetary.update.strategy" not in self.env:
+            raise UserError(
+                _(
+                    "No strategy registry installed: install a module that provides "
+                    "'monetary.update.strategy' to use strategy '%s'."
+                )
+                % strategy_code
+            )
         strategy_registry = self.env["monetary.update.strategy"]
         strategy = strategy_registry.get_strategy(strategy_code)
 
