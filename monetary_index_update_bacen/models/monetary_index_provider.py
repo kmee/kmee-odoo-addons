@@ -55,13 +55,13 @@ class MonetaryIndexProvider(models.AbstractModel):
             _logger.exception("Failed to fetch SGS series %s from BCB.", sgs_code)
             raise UserError(
                 _(
-                    "Falha ao consultar a série %(code)s na API do Banco Central. "
-                    "Tente novamente mais tarde."
+                    "Failed to fetch series %(code)s from the Banco Central API. "
+                    "Try again later."
                 )
                 % {"code": sgs_code}
             ) from exc
         if not isinstance(payload, list):
-            raise UserError(_("Resposta inesperada da API do Banco Central."))
+            raise UserError(_("Unexpected response from the Banco Central API."))
         return payload
 
     @api.model
@@ -91,8 +91,7 @@ class MonetaryIndexProvider(models.AbstractModel):
         index.ensure_one()
         if not index.bcb_sgs_code:
             raise UserError(
-                _("O índice %(name)s não tem código de série do SGS.")
-                % {"name": index.name}
+                _("Index %(name)s has no SGS series code.") % {"name": index.name}
             )
         payload = self._fetch_bcb_series(date_from, date_to, index.bcb_sgs_code)
         rates = self._parse_bcb_payload(payload)

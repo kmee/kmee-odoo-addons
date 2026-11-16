@@ -8,7 +8,7 @@
         <field name="bcb_sgs_code">4390</field>
         <field
             name="description"
-        >Taxa SELIC acumulada no mês - Banco Central do Brasil</field>
+        >SELIC rate accumulated in the month (%). SGS series 4390.</field>
     </record>
     <record id="monetary_index_ipca" model="monetary.index">
         <field name="name">IPCA</field>
@@ -18,7 +18,7 @@
         <field name="bcb_sgs_code">433</field>
         <field
             name="description"
-        >Índice Nacional de Preços ao Consumidor Amplo, variação mensal (%). Série 433 do SGS.</field>
+        >Broad National Consumer Price Index (IPCA), monthly variation (%). SGS series 433.</field>
     </record>
     <record id="monetary_index_inpc" model="monetary.index">
         <field name="name">INPC</field>
@@ -28,7 +28,7 @@
         <field name="bcb_sgs_code">188</field>
         <field
             name="description"
-        >Índice Nacional de Preços ao Consumidor, variação mensal (%). Série 188 do SGS.</field>
+        >National Consumer Price Index (INPC), monthly variation (%). SGS series 188.</field>
     </record>
     <record id="monetary_index_igpm" model="monetary.index">
         <field name="name">IGP-M</field>
@@ -38,6 +38,6 @@
         <field name="bcb_sgs_code">189</field>
         <field
             name="description"
-        >Índice Geral de Preços do Mercado, variação mensal (%). Série 189 do SGS.</field>
+        >General Market Price Index (IGP-M), monthly variation (%). SGS series 189.</field>
     </record>
 </odoo>

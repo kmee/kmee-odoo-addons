@@ -20,22 +20,20 @@ class MonetaryIndexBacenUpdateWizard(models.TransientModel):
 
     index_id = fields.Many2one(
         comodel_name="monetary.index",
-        string="Índice",
+        string="Index",
         required=True,
         default=_default_index_id,
         domain=[("bcb_sgs_code", "!=", False)],
     )
-    date_from = fields.Date(
-        string="Data Inicial", required=True, default=_default_date_from
-    )
-    date_to = fields.Date(string="Data Final", required=True, default=fields.Date.today)
-    force = fields.Boolean(string="Forçar reimportação")
+    date_from = fields.Date(required=True, default=_default_date_from)
+    date_to = fields.Date(required=True, default=fields.Date.today)
+    force = fields.Boolean(string="Force Reimport")
 
     def action_update(self):
         self.ensure_one()
         if self.date_from and self.date_to and self.date_from > self.date_to:
             raise UserError(
-                _("A data inicial deve ser anterior ou igual à data final.")
+                _("The start date must be before or equal to the end date.")
             )
 
         result = self.env["monetary.index.provider"].update_rates(
@@ -47,8 +45,8 @@ class MonetaryIndexBacenUpdateWizard(models.TransientModel):
         result["name"] = self.index_id.name
         message = (
             _(
-                "%(name)s atualizado. Criados: %(created)d, "
-                "Atualizados: %(updated)d, Ignorados: %(skipped)d."
+                "%(name)s updated. Created: %(created)d, "
+                "Updated: %(updated)d, Skipped: %(skipped)d."
             )
             % result
         )
@@ -57,7 +55,7 @@ class MonetaryIndexBacenUpdateWizard(models.TransientModel):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Atualização pelo Banco Central"),
+                "title": _("Banco Central Update"),
                 "message": message,
                 "type": "success",
                 "sticky": False,

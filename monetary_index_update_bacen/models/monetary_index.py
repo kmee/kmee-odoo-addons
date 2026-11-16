@@ -5,8 +5,9 @@ class MonetaryIndex(models.Model):
     _inherit = "monetary.index"
 
     bcb_sgs_code = fields.Char(
-        string="Série SGS (BCB)",
-        help="Código da série no Sistema Gerenciador de Séries Temporais do "
-        "Banco Central (ex.: 433 IPCA, 188 INPC, 189 IGP-M, 4390 SELIC). "
-        "Com o código preenchido, as taxas são buscadas na API do Banco Central.",
+        string="SGS Series (BCB)",
+        help="Series code in the Time Series Management System (SGS) of the "
+        "Banco Central do Brasil (e.g. 433 IPCA, 188 INPC, 189 IGP-M, "
+        "4390 SELIC). With the code set, the rates are fetched from the "
+        "Banco Central API.",
     )

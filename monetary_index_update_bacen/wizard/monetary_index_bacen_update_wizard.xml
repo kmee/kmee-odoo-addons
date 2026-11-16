@@ -4,7 +4,7 @@
         <field name="name">monetary.index.bacen.update.wizard.form</field>
         <field name="model">monetary.index.bacen.update.wizard</field>
         <field name="arch" type="xml">
-            <form string="Atualizar pelo Banco Central">
+            <form string="Update from Banco Central">
                 <group>
                     <field name="index_id" />
                     <field name="date_from" />
@@ -15,10 +15,10 @@
                     <button
                         name="action_update"
                         type="object"
-                        string="Atualizar"
+                        string="Update"
                         class="btn-primary"
                     />
-                    <button string="Cancelar" special="cancel" class="btn-secondary" />
+                    <button string="Cancel" special="cancel" class="btn-secondary" />
                 </footer>
             </form>
         </field>
@@ -28,7 +28,7 @@
         id="action_monetary_index_bacen_update_wizard"
         model="ir.actions.act_window"
     >
-        <field name="name">Atualizar pelo Banco Central</field>
+        <field name="name">Update from Banco Central</field>
         <field name="res_model">monetary.index.bacen.update.wizard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_monetary_index_bacen_update_wizard_form" />

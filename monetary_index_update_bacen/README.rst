@@ -22,27 +22,41 @@ Monetary Index Update - Banco Central do Brasil
 
 |badge1| |badge2| |badge3|
 
-Este módulo estende o *Monetary Index Update* para buscar e atualizar
-automaticamente os índices brasileiros publicados no Sistema Gerenciador
-de Séries Temporais (SGS) do Banco Central do Brasil (BCB).
+This module fetches Brazilian monetary indexes from the Time Series
+Management System (SGS) of the Banco Central do Brasil (BCB) into
+*Monetary Index Update*.
 
-Já vem com SELIC (série 4390), IPCA (433), INPC (188) e IGP-M (189).
-Qualquer outro índice passa a ser atualizado ao preencher o código da
-série do SGS no cadastro do índice.
+It comes with SELIC (SGS series 4390), IPCA (433), INPC (188) and IGP-M
+(189). Any other SGS series is fetched by setting its code on the index.
 
-Inclui o provedor que consome a API do BCB, um assistente para carga
-manual de um período e um cron diário que busca de novo os últimos três
-meses de cada índice (as séries mensais saem por volta do dia 10 do mês
-seguinte e podem ser revistas).
-
-Substitui o módulo *monetary_index_update_selic*. Em banco que tinha o
-módulo antigo instalado, atualizar o *monetary_index_update* renomeia o
-módulo e mantém os registros.
+It replaces *monetary_index_update_selic*: in a database that has the
+old module installed, updating *monetary_index_update* renames it and
+keeps its records.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Usage
+=====
+
+A daily scheduled action fetches again the last three months of every
+index with an SGS series code (monthly series are published around the
+10th of the following month and may be revised).
+
+To load a period by hand, for example the history before using an index,
+open the index and click **Update from Banco Central**.
+
+|IPCA index with its SGS series and rates|
+
+|Update from Banco Central wizard|
+
+To add another index, create it in *Monetary Indexes* and fill in the
+**SGS Series (BCB)** code.
+
+.. |IPCA index with its SGS series and rates| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/18.0/monetary_index_update_bacen/static/description/index_ipca.png
+.. |Update from Banco Central wizard| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/18.0/monetary_index_update_bacen/static/description/index_update_wizard.png
 
 Bug Tracker
 ===========
@@ -61,6 +75,13 @@ Authors
 -------
 
 * KMEE
+
+Contributors
+------------
+
+- `KMEE <https://www.kmee.com.br>`__:
+
+  - Luis Felipe Mileo
 
 Maintainers
 -----------

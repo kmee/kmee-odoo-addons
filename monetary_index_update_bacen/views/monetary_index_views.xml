@@ -9,7 +9,7 @@
                 <button
                     name="%(action_monetary_index_bacen_update_wizard)d"
                     type="action"
-                    string="Atualizar pelo Banco Central"
+                    string="Update from Banco Central"
                     class="oe_stat_button"
                     icon="fa-refresh"
                     invisible="not bcb_sgs_code"
