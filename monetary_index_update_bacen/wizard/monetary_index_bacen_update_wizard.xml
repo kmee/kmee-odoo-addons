@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_monetary_index_selic_update_wizard_form" model="ir.ui.view">
-        <field name="name">monetary.index.selic.update.wizard.form</field>
-        <field name="model">monetary.index.selic.update.wizard</field>
+    <record id="view_monetary_index_bacen_update_wizard_form" model="ir.ui.view">
+        <field name="name">monetary.index.bacen.update.wizard.form</field>
+        <field name="model">monetary.index.bacen.update.wizard</field>
         <field name="arch" type="xml">
-            <form string="Atualizar SELIC">
+            <form string="Atualizar pelo Banco Central">
                 <group>
+                    <field name="index_id" />
                     <field name="date_from" />
                     <field name="date_to" />
                     <field name="force" />
@@ -24,13 +25,13 @@
     </record>
 
     <record
-        id="action_monetary_index_selic_update_wizard"
+        id="action_monetary_index_bacen_update_wizard"
         model="ir.actions.act_window"
     >
-        <field name="name">Atualizar SELIC</field>
-        <field name="res_model">monetary.index.selic.update.wizard</field>
+        <field name="name">Atualizar pelo Banco Central</field>
+        <field name="res_model">monetary.index.bacen.update.wizard</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_monetary_index_selic_update_wizard_form" />
+        <field name="view_id" ref="view_monetary_index_bacen_update_wizard_form" />
         <field name="target">new</field>
     </record>
 </odoo>

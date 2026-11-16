@@ -16,7 +16,7 @@ class MonetaryIndexProvider(models.AbstractModel):
     _name = "monetary.index.provider"
     _description = "Monetary Index Provider"
 
-    BCB_SELIC_URL = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.4390/dados"
+    BCB_SGS_URL = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.{code}/dados"
 
     @api.model
     def _get_selic_index(self):
@@ -40,21 +40,25 @@ class MonetaryIndexProvider(models.AbstractModel):
 
     @api.model
     def _fetch_bcb_series(
-        self, date_from: Optional[fields.Date], date_to: Optional[fields.Date]
+        self,
+        date_from: Optional[fields.Date],
+        date_to: Optional[fields.Date],
+        sgs_code: str = "4390",
     ) -> List[Dict[str, str]]:
         params = self._build_bcb_params(date_from, date_to)
+        url = self.BCB_SGS_URL.format(code=sgs_code)
         try:
-            response = requests.get(self.BCB_SELIC_URL, params=params, timeout=10)
+            response = requests.get(url, params=params, timeout=10)
             response.raise_for_status()
             payload = response.json()
         except (requests.RequestException, ValueError) as exc:
-            _logger.exception("Failed to fetch SELIC series from BCB.")
+            _logger.exception("Failed to fetch SGS series %s from BCB.", sgs_code)
             raise UserError(
                 _(
-                    "Falha ao consultar a API do Banco Central. "
-                    "Tente novamente mais tarde. Caso persista, "
-                    "considere usar a API interna do Grupo AG Capital."
+                    "Falha ao consultar a série %(code)s na API do Banco Central. "
+                    "Tente novamente mais tarde."
                 )
+                % {"code": sgs_code}
             ) from exc
         if not isinstance(payload, list):
             raise UserError(_("Resposta inesperada da API do Banco Central."))
@@ -70,20 +74,27 @@ class MonetaryIndexProvider(models.AbstractModel):
                 rate_date = datetime.strptime(item.get("data"), "%d/%m/%Y").date()
                 value = float(item.get("valor", "").replace(",", "."))
             except (TypeError, ValueError, AttributeError):
-                _logger.warning("Skipping invalid SELIC entry: %s", item)
+                _logger.warning("Skipping invalid BCB entry: %s", item)
                 continue
             rates.append((rate_date, value))
         return rates
 
     @api.model
-    def update_selic_rates(
+    def update_rates(
         self,
+        index,
         date_from: Optional[fields.Date] = None,
         date_to: Optional[fields.Date] = None,
         force: bool = False,
     ) -> Dict[str, int]:
-        index = self._get_selic_index()
-        payload = self._fetch_bcb_series(date_from, date_to)
+        """Fetch the SGS series of the index from the BCB and store its rates."""
+        index.ensure_one()
+        if not index.bcb_sgs_code:
+            raise UserError(
+                _("O índice %(name)s não tem código de série do SGS.")
+                % {"name": index.name}
+            )
+        payload = self._fetch_bcb_series(date_from, date_to, index.bcb_sgs_code)
         rates = self._parse_bcb_payload(payload)
 
         created = updated = skipped = 0
@@ -118,7 +129,39 @@ class MonetaryIndexProvider(models.AbstractModel):
         }
 
     @api.model
+    def update_selic_rates(
+        self,
+        date_from: Optional[fields.Date] = None,
+        date_to: Optional[fields.Date] = None,
+        force: bool = False,
+    ) -> Dict[str, int]:
+        return self.update_rates(
+            self._get_selic_index(), date_from=date_from, date_to=date_to, force=force
+        )
+
+    @api.model
+    def cron_update_rates(self) -> Dict[str, Dict[str, int]]:
+        """Update every active index with an SGS code, from three months ago.
+
+        Monthly series (IPCA, INPC, IGP-M) are published around the 10th of the
+        following month and may be revised, so the last three months are fetched
+        again on every run.
+        """
+        today = fields.Date.today()
+        date_from = (today - relativedelta(months=3)).replace(day=1)
+        result = {}
+        for index in self.env["monetary.index"].search([("bcb_sgs_code", "!=", False)]):
+            try:
+                result[index.code] = self.update_rates(
+                    index, date_from=date_from, date_to=today
+                )
+            except UserError as exc:
+                _logger.warning("Index %s not updated: %s", index.code, exc)
+        return result
+
+    @api.model
     def cron_update_selic_rates(self) -> Dict[str, int]:
+        """Kept for databases whose cron still calls the SELIC-only method."""
         today = fields.Date.today()
         date_from = (today - relativedelta(months=1)).replace(day=1)
         return self.update_selic_rates(date_from=date_from, date_to=today)

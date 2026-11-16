@@ -1,6 +1,6 @@
-=============================
-Monetary Index Update - SELIC
-=============================
+===============================================
+Monetary Index Update - Banco Central do Brasil
+===============================================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -17,17 +17,27 @@ Monetary Index Update - SELIC
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-KMEE%2Fkmee--odoo--addons-lightgray.png?logo=github
-    :target: https://github.com/KMEE/kmee-odoo-addons/tree/18.0/monetary_index_update_selic
+    :target: https://github.com/KMEE/kmee-odoo-addons/tree/18.0/monetary_index_update_bacen
     :alt: KMEE/kmee-odoo-addons
 
 |badge1| |badge2| |badge3|
 
 Este módulo estende o *Monetary Index Update* para buscar e atualizar
-automaticamente as taxas SELIC junto ao Banco Central do Brasil (BCB).
+automaticamente os índices brasileiros publicados no Sistema Gerenciador
+de Séries Temporais (SGS) do Banco Central do Brasil (BCB).
 
-Inclui o índice monetário SELIC, um provedor que consome a API do BCB,
-um assistente para atualização manual das taxas e um cron para
-atualização periódica.
+Já vem com SELIC (série 4390), IPCA (433), INPC (188) e IGP-M (189).
+Qualquer outro índice passa a ser atualizado ao preencher o código da
+série do SGS no cadastro do índice.
+
+Inclui o provedor que consome a API do BCB, um assistente para carga
+manual de um período e um cron diário que busca de novo os últimos três
+meses de cada índice (as séries mensais saem por volta do dia 10 do mês
+seguinte e podem ser revistas).
+
+Substitui o módulo *monetary_index_update_selic*. Em banco que tinha o
+módulo antigo instalado, atualizar o *monetary_index_update* renomeia o
+módulo e mantém os registros.
 
 **Table of contents**
 
@@ -40,7 +50,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/KMEE/kmee-odoo-addons/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20monetary_index_update_selic%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/KMEE/kmee-odoo-addons/issues/new?body=module:%20monetary_index_update_bacen%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -55,6 +65,6 @@ Authors
 Maintainers
 -----------
 
-This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/18.0/monetary_index_update_selic>`_ project on GitHub.
+This module is part of the `KMEE/kmee-odoo-addons <https://github.com/KMEE/kmee-odoo-addons/tree/18.0/monetary_index_update_bacen>`_ project on GitHub.
 
 You are welcome to contribute.
