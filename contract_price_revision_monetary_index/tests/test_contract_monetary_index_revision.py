@@ -151,6 +151,19 @@ class TestContractMonetaryIndexRevision(TestContractBase):
         self.assertEqual(len(self.contract.activity_ids), 1)
         self.assertFalse(self._new_line())
 
+    def test_cron_activity_user(self):
+        self._prepare_cron(days_ahead=3)
+        self.contract.user_id = False
+        self.env["contract.contract"]._cron_monetary_index_revision()
+        self.assertEqual(self.contract.activity_ids.user_id, self.contract.create_uid)
+
+    def test_cron_activity_responsible(self):
+        self._prepare_cron(days_ahead=3)
+        user = self.env["res.users"].create({"name": "Approver", "login": "approver"})
+        self.contract.user_id = user
+        self.env["contract.contract"]._cron_monetary_index_revision()
+        self.assertEqual(self.contract.activity_ids.user_id, user)
+
     def test_cron_waits_for_the_index(self):
         self._prepare_cron(days_ahead=3)
         self.index.rate_ids[:1].unlink()

@@ -18,7 +18,7 @@ class ContractPriceRevisionWizard(models.TransientModel):
 
     @api.model
     def _get_variation_type(self):
-        return super()._get_variation_type() + [("index", "Monetary Index")]
+        return super()._get_variation_type() + [("index", _("Monetary Index"))]
 
     def _get_index_contracts(self):
         contracts = self.env["contract.contract"].browse(

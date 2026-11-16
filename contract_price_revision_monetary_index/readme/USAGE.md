@@ -1,11 +1,30 @@
-- Uma rotina diária procura os contratos com reajuste nos próximos 5 dias
-  e com o índice do período publicado. No modo aprovação, agenda uma
-  atividade para o responsável do contrato com o cálculo; no modo
-  automático, aplica na data do reajuste.
-- Para aplicar, use o botão **Reajustar pelo índice** no contrato (ou a
-  ação **Criar revisão das linhas do contrato** com o tipo *Índice
-  monetário*). O assistente mostra índice, período, fator e percentual
-  de cada contrato antes de aplicar.
-- Depois do reajuste, a data-base passa a ser a data aplicada, o cálculo
-  fica no histórico do contrato e na linha nova (índice, período, fator
-  e percentual), e a atividade é concluída.
+A daily scheduled action looks for contracts whose next revision is within
+five days and whose index has every rate of the period published.
+
+**Approval mode (default).** The action schedules one *Contract revision by
+index* activity for the contract responsible (or, without a responsible, for
+the user who created the contract), due on the revision date, with the
+index, period, accumulated factor and percentage.
+
+![Activity with the revision](../static/description/contract_activity.png)
+
+To approve, click **Revise by Index** on the contract. The wizard of
+*Contract Price Revision* opens with the *Monetary Index* variation type and
+a preview of each selected contract. Click **Apply**.
+
+![Revision wizard with the index preview](../static/description/revision_wizard.png)
+
+The current line ends on the day before the revision date and a new line
+starts with the revised price. The new line keeps the index, the period,
+the factor and the percentage applied; the calculation is also posted in
+the contract chatter, the base date moves to the revision date and the
+activity is marked as done.
+
+![Contract lines after the revision](../static/description/contract_after_revision.png)
+
+**Automatic mode.** On the revision date the scheduled action applies the
+revision without the wizard, with the same result.
+
+The revision can also be run by hand at any time, for one contract with
+**Revise by Index** or for several contracts with the action **Create
+revision of contract lines** and the *Monetary Index* variation type.

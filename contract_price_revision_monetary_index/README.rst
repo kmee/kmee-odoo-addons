@@ -22,17 +22,24 @@ Contract Price Revision by Monetary Index
 
 |badge1| |badge2| |badge3|
 
-Revisa os preços do contrato recorrente no aniversário por um índice
-monetário (IPCA, INPC, IGP-M ou qualquer índice do *Monetary Index
-Update*), sem digitar o percentual.
+This module revises the prices of recurring contracts on their
+anniversary by a monetary index (a consumer price index such as IPCA,
+INPC or IGP-M, or any index of *Monetary Index Update*), without typing
+the percentage.
 
-O reajuste usa o mecanismo do *Contract Price Revision*: a linha antiga
-termina na véspera da data do reajuste e uma linha nova começa com o
-preço reajustado, guardando o histórico. Faturas já emitidas não mudam.
+The revision uses the mechanism of *Contract Price Revision*: the
+current line ends on the day before the revision date and a successor
+line starts with the revised price, so the price history stays in the
+contract and invoices already issued do not change.
 
-Cálculo: variação composta das taxas mensais do índice nos meses do
-período (por padrão os 12 meses que terminam no mês anterior ao do
-reajuste). Sem todas as taxas do período publicadas, o reajuste espera.
+The variation is the compound variation of the monthly rates of the
+index over the months of the period (by default the twelve months that
+end in the month before the revision). While any month of the period is
+not published, the revision waits.
+
+Each contract chooses how the revision is applied: an activity for the
+responsible to review and approve (default), or automatically on the
+revision date. It works for customer and supplier contracts.
 
 **Table of contents**
 
@@ -42,34 +49,80 @@ reajuste). Sem todas as taxas do período publicadas, o reajuste espera.
 Configuration
 =============
 
-Na aba **Reajuste de preço** do contrato:
+The rates of the index must be in *Monetary Index Update*: typed by hand
+or fetched by a provider module (for Brazil,
+*monetary_index_update_bacen* fetches IPCA, INPC, IGP-M and SELIC from
+the Banco Central do Brasil).
 
-1. **Índice de reajuste**: por exemplo IPCA (com o
-   *monetary_index_update_bacen* instalado, as taxas são buscadas no
-   Banco Central).
-2. **Intervalo**: meses entre dois reajustes, padrão 12.
-3. **Defasagem**: meses entre o fim do período acumulado e o mês do
-   reajuste, padrão 1 (reajuste em dezembro usa até novembro).
-4. **Data-base**: data do último preço; o próximo reajuste é a data-base
-   mais o intervalo.
-5. **Variação negativa**: não reduzir (padrão) ou aplicar.
-6. **Teto**: percentual máximo por reajuste; zero é sem teto.
-7. **Modo**: atividade para aprovação (padrão) ou aplicação automática.
+On the contract, open the **Price Revision** tab and set:
+
+- **Revision Index**: the index used to revise the prices.
+- **Revision Interval (months)**: months between two revisions, 12 by
+  default. It is also the number of monthly rates accumulated.
+- **Index Lag (months)**: months between the end of the accumulated
+  period and the month of the revision. With 1, a revision in December
+  uses the rates up to November; with 2, up to October. Consumer price
+  indexes are usually published around the 10th of the following month,
+  so a lag of 2 lets the revision be prepared before its date.
+- **Revision Base Date**: date of the current price (the contract start
+  by default). The **Next Revision** is the base date plus the interval.
+- **Negative Variation**: do not reduce prices (default) or apply the
+  negative variation.
+- **Revision Cap (%)**: maximum variation of one revision; zero means no
+  cap.
+- **Revision Mode**: schedule an activity for approval (default) or
+  apply automatically.
+
+|Price Revision tab|
+
+.. |Price Revision tab| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/18.0/contract_price_revision_monetary_index/static/description/contract_revision_tab.png
 
 Usage
 =====
 
-- Uma rotina diária procura os contratos com reajuste nos próximos 5
-  dias e com o índice do período publicado. No modo aprovação, agenda
-  uma atividade para o responsável do contrato com o cálculo; no modo
-  automático, aplica na data do reajuste.
-- Para aplicar, use o botão **Reajustar pelo índice** no contrato (ou a
-  ação **Criar revisão das linhas do contrato** com o tipo *Índice
-  monetário*). O assistente mostra índice, período, fator e percentual
-  de cada contrato antes de aplicar.
-- Depois do reajuste, a data-base passa a ser a data aplicada, o cálculo
-  fica no histórico do contrato e na linha nova (índice, período, fator
-  e percentual), e a atividade é concluída.
+A daily scheduled action looks for contracts whose next revision is
+within five days and whose index has every rate of the period published.
+
+**Approval mode (default).** The action schedules one *Contract revision
+by index* activity for the contract responsible (or, without a
+responsible, for the user who created the contract), due on the revision
+date, with the index, period, accumulated factor and percentage.
+
+|Activity with the revision|
+
+To approve, click **Revise by Index** on the contract. The wizard of
+*Contract Price Revision* opens with the *Monetary Index* variation type
+and a preview of each selected contract. Click **Apply**.
+
+|Revision wizard with the index preview|
+
+The current line ends on the day before the revision date and a new line
+starts with the revised price. The new line keeps the index, the period,
+the factor and the percentage applied; the calculation is also posted in
+the contract chatter, the base date moves to the revision date and the
+activity is marked as done.
+
+|Contract lines after the revision|
+
+**Automatic mode.** On the revision date the scheduled action applies
+the revision without the wizard, with the same result.
+
+The revision can also be run by hand at any time, for one contract with
+**Revise by Index** or for several contracts with the action **Create
+revision of contract lines** and the *Monetary Index* variation type.
+
+.. |Activity with the revision| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/18.0/contract_price_revision_monetary_index/static/description/contract_activity.png
+.. |Revision wizard with the index preview| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/18.0/contract_price_revision_monetary_index/static/description/revision_wizard.png
+.. |Contract lines after the revision| image:: https://raw.githubusercontent.com/KMEE/kmee-odoo-addons/18.0/contract_price_revision_monetary_index/static/description/contract_after_revision.png
+
+Known issues / Roadmap
+======================
+
+- An invoice generated before the revision is approved keeps the old
+  price; the difference of that period has to be settled by hand.
+- The accumulated period expects one rate per month (monthly indexes).
+- The revision settings could also live on contract templates, so new
+  contracts start with them.
 
 Bug Tracker
 ===========
@@ -88,6 +141,13 @@ Authors
 -------
 
 * KMEE
+
+Contributors
+------------
+
+- `KMEE <https://www.kmee.com.br>`__:
+
+  - Luis Felipe Mileo
 
 Maintainers
 -----------

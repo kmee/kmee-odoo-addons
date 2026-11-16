@@ -6,7 +6,7 @@ from markupsafe import Markup, escape
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_round
+from odoo.tools import float_round, format_date
 
 
 class ContractContract(models.Model):
@@ -175,9 +175,15 @@ class ContractContract(models.Model):
             _("Accumulated factor: %.6f") % info["factor"],
             _("Index variation: %.4f%%") % info["percent_index"],
             _("Variation applied: %.4f%%") % info["percent"],
-            _("New prices from %s") % info["revision_date"].strftime("%d/%m/%Y"),
+            _("New prices from %s") % format_date(self.env, info["revision_date"]),
         ]
         return Markup("<br/>").join(escape(line) for line in lines)
+
+    def _monetary_index_revision_summary(self, info):
+        return _("Revision by %(index)s: %(percent).4f%%") % {
+            "index": info["index"].name,
+            "percent": info["percent"],
+        }
 
     def action_monetary_index_revision(self):
         """Open the price revision wizard with the index already chosen."""
@@ -227,6 +233,11 @@ class ContractContract(models.Model):
                 lambda a: a.activity_type_id == activity_type
             ).action_feedback(feedback=_("Revision applied."))
 
+    def _get_monetary_index_revision_user(self):
+        """Who approves the revision: the contract responsible, else its creator."""
+        self.ensure_one()
+        return self.user_id or self.create_uid or self.env.user
+
     @api.model
     def _cron_monetary_index_revision(self, days_ahead=5):
         today = fields.Date.context_today(self)
@@ -253,14 +264,16 @@ class ContractContract(models.Model):
                 lambda a, t=activity_type: a.activity_type_id == t
             ):
                 continue
+            user = contract._get_monetary_index_revision_user()
+            # the activity text is written in the language of who approves it
+            contract_lang = contract.with_context(lang=user.lang)
             contract.activity_schedule(
                 act_type_xmlid=(
                     "contract_price_revision_monetary_index."
                     "mail_activity_contract_revision"
                 ),
                 date_deadline=contract.revision_next_date,
-                summary=_("Revision by %(index)s: %(percent).4f%%")
-                % {"index": info["index"].name, "percent": info["percent"]},
-                note=contract._monetary_index_revision_html(info),
-                user_id=(contract.user_id or self.env.user).id,
+                summary=contract_lang._monetary_index_revision_summary(info),
+                note=contract_lang._monetary_index_revision_html(info),
+                user_id=user.id,
             )
