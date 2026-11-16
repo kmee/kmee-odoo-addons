@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 21:00+0000\n"
+"PO-Revision-Date: 2026-11-16 21:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -311,6 +313,14 @@ msgstr ""
 msgid ""
 "No rates found for index '%(index_code)s' between %(start_date)s and "
 "%(end_date)s!"
+msgstr ""
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid ""
+"No strategy registry installed: install a module that provides "
+"'monetary.update.strategy' to use strategy '%s'."
 msgstr ""
 
 #. module: monetary_index_update

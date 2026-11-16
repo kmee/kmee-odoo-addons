@@ -1,0 +1,430 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* monetary_index_update
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 21:00+0000\n"
+"PO-Revision-Date: 2026-11-16 21:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_update_field_by_index_wizard
+msgid ""
+"<span>Select the index and the date range to calculate the accumulated "
+"factor to update the fields.</span>"
+msgstr "<span>Selecione o índice e o período para calcular o fator acumulado e atualizar os campos.</span>"
+
+#. module: monetary_index_update
+#: model:ir.model.fields.selection,name:monetary_index_update.selection__monetary_index_rate__source__api
+msgid "API"
+msgstr "API"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__active
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Active"
+msgstr "Ativo"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/wizard/monetary_update_by_index_wizard.py:0
+msgid "Amount for field '%s' is not set!"
+msgstr "O valor do campo '%s' não está preenchido!"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_form
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Archived"
+msgstr "Arquivado"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index_rate__index_id
+msgid "Associated monetary index"
+msgstr "Índice monetário associado"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__authority
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Authority"
+msgstr "Órgão"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_update_field_by_index_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__code
+msgid "Code"
+msgstr "Código"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_index.py:0
+msgid "Code cannot be empty!"
+msgstr "O código não pode ficar vazio!"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__company_id
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__company_id
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Company"
+msgstr "Empresa"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__company_id
+msgid "Company owning this index"
+msgstr "Empresa dona deste índice"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index_rate__company_id
+msgid "Company owning this rate"
+msgstr "Empresa dona desta taxa"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index_rate__date
+msgid "Competence date (use 1st day of month for monthly series)"
+msgstr "Data de competência (use o dia 1 do mês nas séries mensais)"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__country_id
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Country"
+msgstr "País"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__country_id
+msgid "Country associated with this index"
+msgstr "País associado a este índice"
+
+#. module: monetary_index_update
+#: model_terms:ir.actions.act_window,help:monetary_index_update.action_monetary_index
+msgid "Create a new Monetary Index"
+msgstr "Criar um índice monetário"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__create_uid
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__create_uid
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__create_date
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__create_date
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__date
+msgid "Date"
+msgstr "Data"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__description
+msgid "Description"
+msgstr "Descrição"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__display_name
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__display_name
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__name
+msgid "Display name of the monetary index"
+msgstr "Nome do índice monetário"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__end_date
+msgid "End Date"
+msgstr "Data final"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_form
+msgid "Enter a detailed description of the index..."
+msgstr "Descreva o índice em detalhes"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__rate_ids
+msgid "Historical rates for this index"
+msgstr "Histórico de taxas deste índice"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__id
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__id
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__active
+msgid "If unchecked, the index is archived"
+msgstr "Desmarcado, o índice fica arquivado"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__index_id
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__index_id
+msgid "Index"
+msgstr "Índice"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid "Index with code '%s' not found!"
+msgstr "Índice com o código '%s' não encontrado!"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid ""
+"Invalid missing policy: %s. Use 'error', 'use_last_available', or 'skip'."
+msgstr "Política para taxa faltante inválida: %s. Use 'error', 'use_last_available' ou 'skip'."
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid "Invalid mode: %s. Use 'compound' or 'simple'."
+msgstr "Modo inválido: %s. Use 'compound' ou 'simple'."
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__authority
+msgid "Issuing authority or provider (e.g., BACEN, IBGE, OECD)"
+msgstr "Órgão emissor ou fornecedor (por exemplo, BACEN, IBGE, OCDE)"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_service__last_monetary_update_date
+msgid "Last Monetary Update Date"
+msgstr "Data da última atualização monetária"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__write_uid
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__write_uid
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__write_date
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__write_date
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: monetary_index_update
+#: model:ir.module.category,description:monetary_index_update.module_category_monetary_update
+msgid "Manage monetary update indexes and rates"
+msgstr "Gerenciar os índices e as taxas de atualização monetária"
+
+#. module: monetary_index_update
+#: model:res.groups,name:monetary_index_update.group_monetary_update_manager
+msgid "Manager"
+msgstr "Gerente"
+
+#. module: monetary_index_update
+#: model:res.groups,comment:monetary_index_update.group_monetary_update_manager
+msgid "Manager can create, edit and delete monetary indexes and rates"
+msgstr "O gerente pode criar, editar e excluir índices e taxas monetárias"
+
+#. module: monetary_index_update
+#: model:ir.model.fields.selection,name:monetary_index_update.selection__monetary_index_rate__source__manual
+msgid "Manual"
+msgstr "Manual"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__model_id
+msgid "Model"
+msgstr "Modelo"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid "Model '%s' not found!"
+msgstr "Modelo '%s' não encontrado!"
+
+#. module: monetary_index_update
+#: model:ir.model,name:monetary_index_update.model_monetary_index
+msgid "Monetary Index"
+msgstr "Índice monetário"
+
+#. module: monetary_index_update
+#: model:ir.model,name:monetary_index_update.model_monetary_index_rate
+msgid "Monetary Index Rate"
+msgstr "Taxa do índice monetário"
+
+#. module: monetary_index_update
+#: model:ir.module.category,name:monetary_index_update.module_category_monetary_update
+msgid "Monetary Index Update"
+msgstr "Atualização por índice monetário"
+
+#. module: monetary_index_update
+#: model:ir.actions.act_window,name:monetary_index_update.action_monetary_index
+#: model:ir.ui.menu,name:monetary_index_update.menu_monetary_update_root
+msgid "Monetary Indexes"
+msgstr "Índices monetários"
+
+#. module: monetary_index_update
+#: model:ir.model,name:monetary_index_update.model_monetary_update_service
+msgid "Monetary Update Service"
+msgstr "Serviço de atualização monetária"
+
+#. module: monetary_index_update
+#: model:ir.model,name:monetary_index_update.model_monetary_update_by_index_wizard
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_update_field_by_index_wizard
+msgid "Monetary Update by Index Wizard"
+msgstr "Assistente de atualização monetária por índice"
+
+#. module: monetary_index_update
+#: model_terms:ir.actions.act_window,help:monetary_index_update.action_monetary_index
+msgid ""
+"Monetary indexes are used to track and apply monetary corrections based on "
+"official indexes like SELIC, IPCA, INPC, etc."
+msgstr "Os índices monetários acompanham e aplicam correções monetárias por índices oficiais, como SELIC, IPCA e INPC."
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_search
+msgid "Name or Code"
+msgstr "Nome ou código"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid ""
+"No rates found for index '%(index_code)s' between %(start_date)s and "
+"%(end_date)s!"
+msgstr "Nenhuma taxa encontrada para o índice '%(index_code)s' entre %(start_date)s e %(end_date)s!"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid ""
+"No strategy registry installed: install a module that provides "
+"'monetary.update.strategy' to use strategy '%s'."
+msgstr "Nenhum registro de estratégias instalado: instale um módulo que forneça 'monetary.update.strategy' para usar a estratégia '%s'."
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__note
+msgid "Note"
+msgstr "Observação"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index_rate__note
+msgid "Optional note or comment"
+msgstr "Observação ou comentário opcional"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index_rate__source
+msgid "Origin of the rate data"
+msgstr "Origem do dado da taxa"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index_rate__value
+msgid "Rate value as percentage for the period"
+msgstr "Valor da taxa em percentual no período"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_index_rate.py:0
+msgid "Rate value cannot be less than -100%!"
+msgstr "O valor da taxa não pode ser menor que -100%!"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index__rate_ids
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_monetary_index_form
+msgid "Rates"
+msgstr "Taxas"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+#: code:addons/monetary_index_update/wizard/monetary_update_by_index_wizard.py:0
+msgid "Record '%s' not found!"
+msgstr "Registro '%s' não encontrado!"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__res_id
+msgid "Res"
+msgstr "Registro"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__result_preview
+msgid "Result Preview"
+msgstr "Prévia do resultado"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__source
+msgid "Source"
+msgstr "Origem"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_update_by_index_wizard__start_date
+msgid "Start Date"
+msgstr "Data inicial"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_update_service.py:0
+msgid "Strategy '%s' not found!"
+msgstr "Estratégia '%s' não encontrada!"
+
+#. module: monetary_index_update
+#. odoo-python
+#: code:addons/monetary_index_update/models/monetary_index.py:0
+msgid "The code '%(code)s' must be unique per company (case-insensitive)!"
+msgstr "O código '%(code)s' precisa ser único por empresa (sem diferenciar maiúsculas)!"
+
+#. module: monetary_index_update
+#: model:ir.model.constraint,message:monetary_index_update.constraint_monetary_index_code_company_unique
+msgid "The code must be unique per company!"
+msgstr "O código precisa ser único por empresa!"
+
+#. module: monetary_index_update
+#: model:ir.model.constraint,message:monetary_index_update.constraint_monetary_index_rate_index_date_unique
+msgid "There can only be one rate per index and date!"
+msgstr "Só pode haver uma taxa por índice e data!"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,help:monetary_index_update.field_monetary_index__code
+msgid "Unique code for the index (e.g., selic, ipca, inpc, hicp, cpi)"
+msgstr "Código único do índice (por exemplo, selic, ipca, inpc, hicp, cpi)"
+
+#. module: monetary_index_update
+#: model_terms:ir.ui.view,arch_db:monetary_index_update.view_update_field_by_index_wizard
+msgid "Update Fields"
+msgstr "Atualizar os campos"
+
+#. module: monetary_index_update
+#: model:res.groups,name:monetary_index_update.group_monetary_update_user
+msgid "User"
+msgstr "Usuário"
+
+#. module: monetary_index_update
+#: model:res.groups,comment:monetary_index_update.group_monetary_update_user
+msgid "User can view and use monetary update indexes"
+msgstr "O usuário pode ver e usar os índices de atualização monetária"
+
+#. module: monetary_index_update
+#: model:ir.model.fields,field_description:monetary_index_update.field_monetary_index_rate__value
+msgid "Value (%)"
+msgstr "Valor (%)"
