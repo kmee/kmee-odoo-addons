@@ -3,7 +3,7 @@
     "version": "19.0.1.0.0",
     "summary": "Shows the duration each ticket spent in each stage",
     "category": "helpdesk",
-    "author": "Ananias, KMEE",
+    "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": ["helpdesk_mgmt"],
