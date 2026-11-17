@@ -3,7 +3,7 @@
     "version": "19.0.1.0.0",
     "category": "Helpdesk",
     "summary": "Add date range support to helpdesk tickets",
-    "author": "Akretion",
+    "author": "KMEE",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
     "license": "AGPL-3",
     "depends": [
