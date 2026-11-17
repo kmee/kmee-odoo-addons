@@ -54,12 +54,27 @@ class TestMaturityEdit(TransactionCase):
             move.action_post()
         return move
 
+    def _ui_write(self, line, date, user=None):
+        """Write as a user edit (guard opted in) with a non-superuser."""
+        user = user or self.manager
+        return line.with_user(user).with_context(maturity_edit_check=True).write(
+            {"date_maturity": date}
+        )
+
     def _line(self, move, account):
         return move.line_ids.filtered(lambda line: line.account_id == account)
 
     def test_action_context_has_no_view_no_maturity(self):
         action = self.env.ref("account.action_move_journal_line")
         self.assertNotIn("view_no_maturity", action.context)
+        self.assertEqual(
+            self.env["account.journal"]
+            .browse(self.journal.id)
+            .with_context(default_journal_id=self.journal.id)
+            ._get_move_action_context()
+            .get("view_no_maturity"),
+            None,
+        )
         self.assertIn("search_default_posted", action.context)
         self.assertIn("default_move_type", action.context)
 
@@ -82,7 +97,7 @@ class TestMaturityEdit(TransactionCase):
         move = self._move()
         self.assertEqual(move.state, "posted")
         line = self._line(move, self.payable)
-        line.write({"date_maturity": "2026-12-05"})
+        self._ui_write(line, "2026-12-05")
         self.assertEqual(line.date_maturity, fields.Date.to_date("2026-12-05"))
 
     def test_posted_with_hash_and_lock_date(self):
@@ -97,13 +112,13 @@ class TestMaturityEdit(TransactionCase):
         self.env.company.invalidate_recordset()
         self.assertTrue(self.env.company.fiscalyear_lock_date)
         line = self._line(move, self.payable)
-        line.write({"date_maturity": "2026-12-06"})
+        self._ui_write(line, "2026-12-06")
         self.assertEqual(line.date_maturity, fields.Date.to_date("2026-12-06"))
 
     def test_posted_non_payable_blocked(self):
         move = self._move()
         with self.assertRaises(UserError):
-            self._line(move, self.expense).write({"date_maturity": "2026-12-05"})
+            self._ui_write(self._line(move, self.expense), "2026-12-05")
 
     def test_posted_reconciled_blocked(self):
         move = self._move()
@@ -121,7 +136,7 @@ class TestMaturityEdit(TransactionCase):
         (line | self._line(pay, self.payable)).reconcile()
         self.assertTrue(line.reconciled)
         with self.assertRaises(UserError):
-            line.write({"date_maturity": "2026-12-05"})
+            self._ui_write(line, "2026-12-05")
 
     def test_posted_requires_group(self):
         move = self._move()
@@ -129,8 +144,8 @@ class TestMaturityEdit(TransactionCase):
         self.assertFalse(self.accountant.has_group(GROUP))
         self.assertTrue(self.manager.has_group(GROUP))
         with self.assertRaises(UserError):
-            line.with_user(self.accountant).write({"date_maturity": "2026-12-05"})
-        line.with_user(self.manager).write({"date_maturity": "2026-12-07"})
+            self._ui_write(line, "2026-12-05", self.accountant)
+        self._ui_write(line, "2026-12-07", self.manager)
         self.assertEqual(line.date_maturity, fields.Date.to_date("2026-12-07"))
 
     def test_draft_without_group_allowed(self):
@@ -160,7 +175,43 @@ class TestMaturityEdit(TransactionCase):
             }
         )
         with self.assertRaises(UserError):
-            line.write({"date_maturity": "2026-12-05"})
+            self._ui_write(line, "2026-12-05")
+        # Internal flows (e.g. CNAB change-due-date instruction) write without
+        # the opt-in key and must keep working.
+        line.with_user(self.manager).write({"date_maturity": "2026-12-09"})
+        self.assertEqual(line.date_maturity, fields.Date.to_date("2026-12-09"))
         order.action_cancel()
-        line.write({"date_maturity": "2026-12-05"})
+        self._ui_write(line, "2026-12-05")
         self.assertEqual(line.date_maturity, fields.Date.to_date("2026-12-05"))
+
+    def test_web_save_is_guarded(self):
+        move = self._move()
+        line = self._line(move, self.expense)
+        with self.assertRaises(UserError):
+            line.with_user(self.manager).web_save(
+                {"date_maturity": "2026-12-05"}, {"id": {}}
+            )
+        ap = self._line(move, self.payable)
+        with self.assertRaises(UserError):
+            ap.with_user(self.accountant).web_save(
+                {"date_maturity": "2026-12-05"}, {"id": {}}
+            )
+        ap.with_user(self.manager).web_save({"date_maturity": "2026-12-05"}, {"id": {}})
+        self.assertEqual(ap.date_maturity, fields.Date.to_date("2026-12-05"))
+
+    def test_internal_write_without_key_unguarded(self):
+        move = self._move()
+        self._line(move, self.expense).with_user(self.accountant).write(
+            {"date_maturity": "2026-12-05"}
+        )
+
+    def test_can_edit_flag_and_view(self):
+        line = self._line(self._move(), self.payable)
+        self.assertTrue(line.with_user(self.manager).can_edit_posted_maturity)
+        self.assertFalse(line.with_user(self.accountant).can_edit_posted_maturity)
+        arch = (
+            self.env["account.move.line"]
+            .with_user(self.accountant)
+            .get_view(self.env.ref("account.view_move_line_tree").id)["arch"]
+        )
+        self.assertIn("can_edit_posted_maturity", arch)

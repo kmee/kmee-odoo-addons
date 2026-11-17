@@ -8,9 +8,8 @@
     "author": "KMEE, Odoo Community Association (OCA)",
     "website": "https://github.com/kmee/kmee-odoo-addons",
     # Hard dependency on account_payment_order (OCA bank-payment): it is part
-    # of the Zitron image, and a hard dependency lets the guard against lines
-    # already sent to a payment order be a plain, always-on check instead of
-    # a conditional lookup that could silently disable itself.
+    # of the Zitron image, so the payment-order guard needs no conditional
+    # lookup that could silently disable itself.
     "depends": ["account", "account_payment_order"],
     "data": [
         "security/security.xml",
