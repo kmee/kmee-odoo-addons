@@ -22,7 +22,7 @@ class MonetaryUpdateByIndexWizard(models.TransientModel):
         for field in self.env.context.get("field_names"):
             amount = getattr(record, field)
             if not amount:
-                raise UserError(_("Amount for field '%s' is not set!") % field.name)
+                raise UserError(_("Amount for field '%s' is not set!") % field)
 
             updated_amount = self.env["monetary.update.service"].compute_updated_amount(
                 index_code=self.index_id.code,

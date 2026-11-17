@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="monetary_index_selic" model="monetary.index">
+        <field name="name">SELIC</field>
+        <field name="code">SELIC</field>
+        <field name="authority">BCB</field>
+        <field name="country_id" ref="base.br" />
+        <field name="bcb_sgs_code">4390</field>
+        <field
+            name="description"
+        >SELIC rate accumulated in the month (%). SGS series 4390.</field>
+    </record>
+    <record id="monetary_index_ipca" model="monetary.index">
+        <field name="name">IPCA</field>
+        <field name="code">IPCA</field>
+        <field name="authority">IBGE</field>
+        <field name="country_id" ref="base.br" />
+        <field name="bcb_sgs_code">433</field>
+        <field
+            name="description"
+        >Broad National Consumer Price Index (IPCA), monthly variation (%). SGS series 433.</field>
+    </record>
+    <record id="monetary_index_inpc" model="monetary.index">
+        <field name="name">INPC</field>
+        <field name="code">INPC</field>
+        <field name="authority">IBGE</field>
+        <field name="country_id" ref="base.br" />
+        <field name="bcb_sgs_code">188</field>
+        <field
+            name="description"
+        >National Consumer Price Index (INPC), monthly variation (%). SGS series 188.</field>
+    </record>
+    <record id="monetary_index_igpm" model="monetary.index">
+        <field name="name">IGP-M</field>
+        <field name="code">IGPM</field>
+        <field name="authority">FGV</field>
+        <field name="country_id" ref="base.br" />
+        <field name="bcb_sgs_code">189</field>
+        <field
+            name="description"
+        >General Market Price Index (IGP-M), monthly variation (%). SGS series 189.</field>
+    </record>
+</odoo>

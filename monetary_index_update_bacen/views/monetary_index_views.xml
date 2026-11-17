@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_monetary_index_form_selic" model="ir.ui.view">
+        <field name="name">monetary.index.form.bacen</field>
+        <field name="model">monetary.index</field>
+        <field name="inherit_id" ref="monetary_index_update.view_monetary_index_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="%(action_monetary_index_bacen_update_wizard)d"
+                    type="action"
+                    string="Update from Banco Central"
+                    class="oe_stat_button"
+                    icon="fa-refresh"
+                    invisible="not bcb_sgs_code"
+                />
+            </xpath>
+            <field name="authority" position="after">
+                <field name="bcb_sgs_code" />
+            </field>
+        </field>
+    </record>
+</odoo>

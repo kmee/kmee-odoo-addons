@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="contract_line_duplicate_wizard_view" model="ir.ui.view">
+        <field name="model">contract.price.revision.wizard</field>
+        <field
+            name="inherit_id"
+            ref="contract_price_revision.contract_line_duplicate_wizard_view"
+        />
+        <field name="arch" type="xml">
+            <group name="fixed" position="after">
+                <group name="index" invisible="variation_type != 'index'">
+                    <field name="index_preview" nolabel="1" colspan="2" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

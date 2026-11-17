@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="contract_contract_form_view" model="ir.ui.view">
+        <field name="name">contract.contract.form.monetary.index.revision</field>
+        <field name="model">contract.contract</field>
+        <field name="inherit_id" ref="contract.contract_contract_form_view" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button
+                    name="action_monetary_index_revision"
+                    type="object"
+                    string="Revise by Index"
+                    invisible="not revision_index_id"
+                />
+            </header>
+            <page name="invoicing" position="after">
+                <page name="monetary_index_revision" string="Price Revision">
+                    <group>
+                        <group>
+                            <field name="revision_index_id" />
+                            <field name="revision_interval" />
+                            <field name="revision_index_lag" />
+                            <field name="revision_date_base" />
+                            <field name="revision_next_date" />
+                        </group>
+                        <group>
+                            <field name="revision_negative_policy" />
+                            <field name="revision_cap" />
+                            <field name="revision_mode" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

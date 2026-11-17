@@ -1,0 +1,267 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* contract_price_revision_monetary_index
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 21:01+0000\n"
+"PO-Revision-Date: 2026-11-16 21:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Accumulated factor: %.6f"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields.selection,name:contract_price_revision_monetary_index.selection__contract_contract__revision_mode__auto
+msgid "Apply automatically"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields.selection,name:contract_price_revision_monetary_index.selection__contract_contract__revision_negative_policy__apply
+msgid "Apply negative variation"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model,name:contract_price_revision_monetary_index.model_contract_contract
+msgid "Contract"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Contract %(name)s has no revision date."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Contract %(name)s has no revision index."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model,name:contract_price_revision_monetary_index.model_contract_line
+msgid "Contract Line"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:mail.activity.type,name:contract_price_revision_monetary_index.mail_activity_contract_revision
+msgid "Contract revision by index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.actions.server,name:contract_price_revision_monetary_index.ir_cron_contract_monetary_index_revision_ir_actions_server
+msgid "Contracts: revision by monetary index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,help:contract_price_revision_monetary_index.field_contract_contract__revision_date_base
+msgid ""
+"Date of the last price setting (the contract start by default). The next "
+"revision is this date plus the revision interval."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields.selection,name:contract_price_revision_monetary_index.selection__contract_contract__revision_negative_policy__ignore
+msgid "Do not reduce prices"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid ""
+"Index %(index)s has no rate for %(months)s: the revision of contract "
+"%(name)s waits for the publication."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_line__revision_factor
+msgid "Index Factor"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_index_lag
+msgid "Index Lag (months)"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_line__revision_period_end
+msgid "Index Period End"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_line__revision_period_start
+msgid "Index Period Start"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_line__revision_percent
+msgid "Index Variation Applied (%)"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Index variation: %.4f%%"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Index: %s"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,help:contract_price_revision_monetary_index.field_contract_contract__revision_cap
+msgid "Maximum variation applied in one revision. Zero means no cap."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,help:contract_price_revision_monetary_index.field_contract_contract__revision_index_id
+msgid ""
+"Monetary index (e.g. IPCA) used to revise the prices of this contract on "
+"every anniversary."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/wizards/contract_price_revision.py:0
+msgid "Monetary Index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,help:contract_price_revision_monetary_index.field_contract_contract__revision_interval
+msgid ""
+"Months between two revisions; also the number of monthly rates accumulated "
+"in each revision."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_negative_policy
+msgid "Negative Variation"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "New prices from %s"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_next_date
+msgid "Next Revision"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/wizards/contract_price_revision.py:0
+msgid "None of the selected contracts has a revision index."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Period: %(from)s to %(to)s"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model_terms:ir.ui.view,arch_db:contract_price_revision_monetary_index.contract_contract_form_view
+msgid "Price Revision"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Prices revised by the index."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model_terms:ir.ui.view,arch_db:contract_price_revision_monetary_index.contract_contract_form_view
+msgid "Revise by Index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_line__revision_index_id
+msgid "Revised by Index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_date_base
+msgid "Revision Base Date"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_cap
+msgid "Revision Cap (%)"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_index_id
+msgid "Revision Index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_interval
+msgid "Revision Interval (months)"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_contract__revision_mode
+msgid "Revision Mode"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Revision applied."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Revision by %(index)s: %(percent).4f%%"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,field_description:contract_price_revision_monetary_index.field_contract_price_revision_wizard__index_preview
+msgid "Revision by Index"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields.selection,name:contract_price_revision_monetary_index.selection__contract_contract__revision_mode__approval
+msgid "Schedule an activity for approval"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model.fields,help:contract_price_revision_monetary_index.field_contract_contract__revision_index_lag
+msgid ""
+"The accumulated period ends this many months before the month of the "
+"revision. With 1, a revision in December uses the twelve months up to "
+"November."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "The revision interval must be positive."
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#. odoo-python
+#: code:addons/contract_price_revision_monetary_index/models/contract_contract.py:0
+msgid "Variation applied: %.4f%%"
+msgstr ""
+
+#. module: contract_price_revision_monetary_index
+#: model:ir.model,name:contract_price_revision_monetary_index.model_contract_price_revision_wizard
+msgid "Wizard to update price based on percentage variation"
+msgstr ""

@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* monetary_index_update_bacen
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-16 21:01+0000\n"
+"PO-Revision-Date: 2026-11-16 21:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/wizard/monetary_index_bacen_update_wizard.py:0
+msgid ""
+"%(name)s updated. Created: %(created)d, Updated: %(updated)d, Skipped: "
+"%(skipped)d."
+msgstr "%(name)s atualizado. Criados: %(created)d, atualizados: %(updated)d, ignorados: %(skipped)d."
+
+#. module: monetary_index_update_bacen
+#: model:ir.model,name:monetary_index_update_bacen.model_monetary_index_bacen_update_wizard
+msgid "Banco Central (SGS) Index Update Wizard"
+msgstr "Assistente de atualização de índices do Banco Central (SGS)"
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/wizard/monetary_index_bacen_update_wizard.py:0
+msgid "Banco Central Update"
+msgstr "Atualização pelo Banco Central"
+
+#. module: monetary_index_update_bacen
+#: model_terms:ir.ui.view,arch_db:monetary_index_update_bacen.view_monetary_index_bacen_update_wizard_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__date_from
+msgid "Date From"
+msgstr "Data inicial"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__date_to
+msgid "Date To"
+msgstr "Data final"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/models/monetary_index_provider.py:0
+msgid ""
+"Failed to fetch series %(code)s from the Banco Central API. Try again later."
+msgstr "Falha ao consultar a série %(code)s na API do Banco Central. Tente novamente mais tarde."
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__force
+msgid "Force Reimport"
+msgstr "Forçar reimportação"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__index_id
+msgid "Index"
+msgstr "Índice"
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/models/monetary_index_provider.py:0
+msgid "Index %(name)s has no SGS series code."
+msgstr "O índice %(name)s não tem código de série do SGS."
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index_bacen_update_wizard__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model,name:monetary_index_update_bacen.model_monetary_index
+msgid "Monetary Index"
+msgstr "Índice monetário"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model,name:monetary_index_update_bacen.model_monetary_index_provider
+msgid "Monetary Index Provider"
+msgstr "Provedor de índice monetário"
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/models/monetary_index_provider.py:0
+msgid "Monetary index 'SELIC' not found."
+msgstr "Índice monetário 'SELIC' não encontrado."
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,field_description:monetary_index_update_bacen.field_monetary_index__bcb_sgs_code
+msgid "SGS Series (BCB)"
+msgstr "Série SGS (BCB)"
+
+#. module: monetary_index_update_bacen
+#: model:ir.model.fields,help:monetary_index_update_bacen.field_monetary_index__bcb_sgs_code
+msgid ""
+"Series code in the Time Series Management System (SGS) of the Banco Central "
+"do Brasil (e.g. 433 IPCA, 188 INPC, 189 IGP-M, 4390 SELIC). With the code "
+"set, the rates are fetched from the Banco Central API."
+msgstr "Código da série no Sistema Gerenciador de Séries Temporais (SGS) do Banco Central do Brasil (por exemplo, 433 IPCA, 188 INPC, 189 IGP-M, 4390 SELIC). Com o código preenchido, as taxas são buscadas na API do Banco Central."
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/wizard/monetary_index_bacen_update_wizard.py:0
+msgid "The start date must be before or equal to the end date."
+msgstr "A data inicial deve ser anterior ou igual à data final."
+
+#. module: monetary_index_update_bacen
+#. odoo-python
+#: code:addons/monetary_index_update_bacen/models/monetary_index_provider.py:0
+msgid "Unexpected response from the Banco Central API."
+msgstr "Resposta inesperada da API do Banco Central."
+
+#. module: monetary_index_update_bacen
+#: model_terms:ir.ui.view,arch_db:monetary_index_update_bacen.view_monetary_index_bacen_update_wizard_form
+msgid "Update"
+msgstr "Atualizar"
+
+#. module: monetary_index_update_bacen
+#: model:ir.actions.server,name:monetary_index_update_bacen.ir_cron_update_selic_rates_ir_actions_server
+msgid "Update Banco Central (SGS) indexes"
+msgstr "Atualizar os índices do Banco Central (SGS)"
+
+#. module: monetary_index_update_bacen
+#: model:ir.actions.act_window,name:monetary_index_update_bacen.action_monetary_index_bacen_update_wizard
+#: model_terms:ir.ui.view,arch_db:monetary_index_update_bacen.view_monetary_index_bacen_update_wizard_form
+#: model_terms:ir.ui.view,arch_db:monetary_index_update_bacen.view_monetary_index_form_selic
+msgid "Update from Banco Central"
+msgstr "Atualizar pelo Banco Central"

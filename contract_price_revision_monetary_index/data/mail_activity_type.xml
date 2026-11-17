@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="mail_activity_contract_revision" model="mail.activity.type">
+        <field name="name">Contract revision by index</field>
+        <field name="res_model">contract.contract</field>
+        <field name="icon">fa-line-chart</field>
+        <field name="delay_count">0</field>
+    </record>
+</odoo>
