@@ -2,7 +2,7 @@
     "name": "HR Overtime Report Action PDF",
     "version": "17.0.1.0.0",
     "summary": "Exporta PDF via menu Ações na list view hr.attendance.overtime",
-    "author": "Seu Nome",
+    "author": "KMEE",
     "category": "Human Resources",
     "license": "AGPL-3",
     "website": "https://github.com/KMEE/kmee-odoo-addons",
