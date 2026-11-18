@@ -163,7 +163,6 @@ Credits
 Authors
 -------
 
-* Ananias
 * KMEE
 
 Maintainers
