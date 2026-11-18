@@ -42,7 +42,7 @@ class SaleOrderLine(models.Model):
                 line.original_bo_qty = 0.0
                 line.available_bo_qty = 0.0
 
-    @api.onchange("product_id", "order_id.blanket_order_id")
+    @api.onchange("product_id")
     def _onchange_product_blanket_order(self):
         if self.order_id.blanket_order_id and self.product_id:
             bo_line = self.order_id.blanket_order_id.line_ids.filtered(

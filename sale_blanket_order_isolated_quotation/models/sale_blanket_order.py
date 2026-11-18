@@ -40,7 +40,11 @@ class SaleBlanketOrder(models.Model):
         return wizard.create_sale_order()
 
     def _prepare_lines_to_sale_order_line(self, line, matched_line):
+        # Keep quantity selected in the quotation
         line.qty = matched_line.product_uom_qty
+        # Propagate discount from the quotation line to wizard line (and then SO)
+        if hasattr(line, "discount") and hasattr(matched_line, "discount"):
+            line.discount = matched_line.discount
 
     def _prepare_common_blanket_order_fields(self, override_vals=None):
         self.ensure_one()

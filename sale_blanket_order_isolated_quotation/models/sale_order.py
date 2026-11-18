@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
     )
     blanket_order_referenced_id = fields.Many2one(
         comodel_name="sale.blanket.order",
-        string="Related Blanket Order",
+        string="Referenced Blanket Order",
         states={"draft": [("readonly", False)]},
         copy=False,
     )
@@ -137,6 +137,7 @@ class SaleOrder(models.Model):
             "product_id": bo_line.product_id.id,
             "product_uom": bo_line.product_uom.id,
             "price_unit": bo_line.price_unit,
+            "discount": getattr(bo_line, "discount", 0.0),
             "original_bo_qty": bo_line.original_uom_qty,
             "product_uom_qty": 0.0,  # Default to 0
             "blanket_order_line_id": bo_line.id,
