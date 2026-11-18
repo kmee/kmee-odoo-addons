@@ -33,7 +33,36 @@ class AccountMoveLine(models.Model):
             and not self.env.su
         ):
             self._check_date_maturity_edit(vals["date_maturity"])
+            changes = self._maturity_changes(vals["date_maturity"])
+            res = super().write(vals)
+            self._maturity_post_changes(changes)
+            return res
         return super().write(vals)
+
+    def _maturity_changes(self, new_value):
+        """Posted lines whose due date will change: (line, old, new)."""
+        new_date = fields.Date.to_date(new_value)
+        return [
+            (line, line.date_maturity, new_date)
+            for line in self
+            if line.parent_state == "posted" and line.date_maturity != new_date
+        ]
+
+    def _maturity_post_changes(self, changes):
+        # Audit trail: leave the old and new due date in the move chatter.
+        for line, old, new in changes:
+            user = self.env.user
+            line.move_id.sudo().message_post(
+                author_id=user.partner_id.id,
+                email_from=user.email_formatted or user.login,
+                body=_(
+                    "Due date of journal item %(item)s changed from %(old)s "
+                    "to %(new)s.",
+                    item=line.name or line.account_id.display_name,
+                    old=old or _("(empty)"),
+                    new=new or _("(empty)"),
+                )
+            )
 
     def _check_date_maturity_edit(self, new_value):
         new_date = fields.Date.to_date(new_value)

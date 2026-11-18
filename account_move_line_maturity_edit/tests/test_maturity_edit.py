@@ -199,6 +199,30 @@ class TestMaturityEdit(TransactionCase):
         ap.with_user(self.manager).web_save({"date_maturity": "2026-12-05"}, {"id": {}})
         self.assertEqual(ap.date_maturity, fields.Date.to_date("2026-12-05"))
 
+    def _logs(self, move):
+        return self.env["mail.message"].search(
+            [
+                ("model", "=", "account.move"),
+                ("res_id", "=", move.id),
+                ("body", "ilike", "Due date of journal item"),
+            ]
+        )
+
+    def test_posted_change_is_logged_in_chatter(self):
+        move = self._move()
+        ap = self._line(move, self.payable)
+        self.assertFalse(self._logs(move))
+        ap.with_user(self.manager).web_save({"date_maturity": "2026-12-05"}, {"id": {}})
+        log = self._logs(move)
+        self.assertEqual(len(log), 1)
+        self.assertIn("2026-11-20", log.body)
+        self.assertIn("2026-12-05", log.body)
+
+    def test_internal_write_is_not_logged(self):
+        move = self._move()
+        self._line(move, self.payable).write({"date_maturity": "2026-12-05"})
+        self.assertFalse(self._logs(move))
+
     def test_internal_write_without_key_unguarded(self):
         move = self._move()
         self._line(move, self.expense).with_user(self.accountant).write(
