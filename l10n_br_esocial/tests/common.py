@@ -246,12 +246,12 @@ class ESocialCicloCommon(TransactionCase):
         cls.employee = cls.env["hr.employee"].create(
             {
                 "name": "Trabalhador Ciclo eSocial",
-                "cnpj_cpf": "076.166.929-41",
+                "vat": "076.166.929-90",
                 "l10n_br_esocial_matricula": "MAT001",
                 "l10n_br_esocial_categoria_id": cls.cat_101.id,
             }
         )
-        cls.cpf_employee = "07616692941"
+        cls.cpf_employee = "07616692990"
         cls.contract = cls.env["hr.contract"].create(
             {
                 "name": "Contrato Ciclo eSocial",

@@ -65,13 +65,13 @@
     <!-- Renata Alves Machado - CLT acima do teto do INSS -->
     <record id="demo_employee_renata" model="hr.employee">
         <field name="name">Renata Alves Machado</field>
+        <field name="vat">98765432290</field>
         <field name="gender">female</field>
         <field name="birthday">1979-04-08</field>
         <field name="marital">married</field>
         <field name="country_id" ref="base.br" />
         <field name="department_id" ref="l10n_br_hr.demo_department_ti" />
         <field name="job_id" ref="l10n_br_hr.demo_job_analista_sistemas" />
-        <field name="cnpj_cpf">987.654.321-00</field>
         <field name="pis_pasep">11223344554</field>
         <field name="ctps">78901</field>
         <field name="ctps_series">0007</field>
@@ -90,13 +90,13 @@
     <!-- Josefa Ribeiro Campos - CLT salário mínimo, 2 filhos (sal. família) -->
     <record id="demo_employee_josefa" model="hr.employee">
         <field name="name">Josefa Ribeiro Campos</field>
+        <field name="vat">45678912364</field>
         <field name="gender">female</field>
         <field name="birthday">1994-12-02</field>
         <field name="marital">single</field>
         <field name="country_id" ref="base.br" />
         <field name="department_id" ref="l10n_br_hr.demo_department_operacional" />
         <field name="job_id" ref="l10n_br_hr.demo_job_operador_industrial" />
-        <field name="cnpj_cpf">456.789.123-64</field>
         <field name="pis_pasep">99887766551</field>
         <field name="ctps">89012</field>
         <field name="ctps_series">0008</field>

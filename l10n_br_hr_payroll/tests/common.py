@@ -48,7 +48,7 @@ class PayrollCommon(TransactionCase):
             {
                 "name": name,
                 "l10n_br_tipo_contrato": tipo_contrato,
-                "cnpj_cpf": self._proximo_cpf(),
+                "vat": self._proximo_cpf(),
                 "company_id": self.env.company.id,
             }
         )
