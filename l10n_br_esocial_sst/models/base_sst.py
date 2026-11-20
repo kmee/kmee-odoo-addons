@@ -39,7 +39,7 @@ class ESocialBaseSst(models.AbstractModel):
 
     def _get_cpf_trabalhador(self):
         self.ensure_one()
-        cpf = self.employee_id.cnpj_cpf
+        cpf = self.employee_id.vat
         if not cpf:
             raise UserError(
                 _("Trabalhador '%(name)s' não possui CPF configurado.")

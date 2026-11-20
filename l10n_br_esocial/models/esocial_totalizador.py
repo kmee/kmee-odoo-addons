@@ -198,10 +198,10 @@ class ESocialTotalizador(models.Model):
         if not cpf:
             return employees
         candidatos = employees.search(
-            [("company_id", "in", (company.id, False)), ("cnpj_cpf", "!=", False)]
+            [("company_id", "in", (company.id, False)), ("vat", "!=", False)]
         )
         for employee in candidatos:
-            digitos = "".join(c for c in employee.cnpj_cpf if c.isdigit())
+            digitos = "".join(c for c in employee.vat if c.isdigit())
             if digitos == cpf:
                 return employee
         return employees
