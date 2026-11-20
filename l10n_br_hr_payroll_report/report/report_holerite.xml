@@ -63,11 +63,13 @@
                                 </td>
                                 <td>
                                     <strong>CPF:</strong>
-                                    <span t-field="o.employee_id.cnpj_cpf" />
+                                    <span
+                                        t-out="o.employee_id.work_contact_id.vat_formatted_cnpj or o.employee_id.vat"
+                                    />
                                 </td>
                                 <td colspan="2">
                                     <strong>PIS/PASEP:</strong>
-                                    <span t-field="o.employee_id.pis_pasep" />
+                                    <span t-field="o.employee_id.pis_pasep_formatted" />
                                 </td>
                             </tr>
                             <tr>
