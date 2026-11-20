@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_rfq_round_import_user,purchase.rfq.round.import user,model_purchase_rfq_round_import,purchase.group_purchase_user,1,1,1,1
+access_purchase_rfq_round_import_column_user,purchase.rfq.round.import.column user,model_purchase_rfq_round_import_column,purchase.group_purchase_user,1,1,1,1
