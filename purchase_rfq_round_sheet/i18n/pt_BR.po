@@ -1,0 +1,341 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:25+0000\n"
+"PO-Revision-Date: 2026-11-20 02:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "%(count)s items imported from %(file)s."
+msgstr "%(count)s itens importados de %(file)s."
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "... and %s more rows ignored."
+msgstr "... e mais %s linhas ignoradas."
+
+#. module: purchase_rfq_round_sheet
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_sheet.purchase_rfq_round_import_view_form
+msgid "Analyze"
+msgstr "Analisar"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+msgid "Answer deadline"
+msgstr "Prazo de resposta"
+
+#. module: purchase_rfq_round_sheet
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_sheet.purchase_rfq_round_import_view_form
+msgid "Close"
+msgstr "Fechar"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Code"
+msgstr "Código"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__column
+msgid "Column"
+msgstr "Coluna"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__column_ids
+msgid "Columns"
+msgstr "Colunas"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Could not read the spreadsheet: %s"
+msgstr "Não foi possível ler a planilha: %s"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__create_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__create_date
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+msgid "Delivery Lead Time (days)"
+msgstr "Prazo de entrega (dias)"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__display_name
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__file
+msgid "File"
+msgstr "Arquivo"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__file_name
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_response__file_name
+msgid "File Name"
+msgstr "Nome do arquivo"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__header_row
+msgid "Header Row"
+msgstr "Linha do cabeçalho"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__id
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__id
+msgid "ID"
+msgstr "ID"
+
+#. module: purchase_rfq_round_sheet
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_sheet.purchase_rfq_round_import_view_form
+msgid "Import"
+msgstr "Importar"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model,name:purchase_rfq_round_sheet.model_purchase_rfq_round_import
+msgid "Import Quotation Round Responses"
+msgstr "Importar respostas da rodada de cotação"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_sheet.purchase_rfq_round_import_view_form
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_sheet.purchase_rfq_round_view_form
+msgid "Import Responses"
+msgstr "Importar respostas"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Invalid column: %s"
+msgstr "Coluna inválida: %s"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__key
+msgid "Key"
+msgstr "Chave"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__label
+msgid "Label"
+msgstr "Rótulo"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__write_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__write_date
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Lead Time (days)"
+msgstr "Prazo (dias)"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,help:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__column
+msgid "Letra da coluna na planilha (A, B, C...)."
+msgstr "Letra da coluna na planilha (A, B, C...)."
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,help:purchase_rfq_round_sheet.field_purchase_rfq_round_import__header_row
+msgid "Linha do cabeçalho na planilha (1 = primeira)."
+msgstr "Linha do cabeçalho na planilha (1 = primeira)."
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Map the ID, code or product column."
+msgstr "Mapeie a coluna de ID, código ou produto."
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Map the unit price column."
+msgstr "Mapeie a coluna de preço unitário."
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields.selection,name:purchase_rfq_round_sheet.selection__purchase_rfq_round_import__state__mapping
+msgid "Mapping"
+msgstr "Mapeamento"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Notes"
+msgstr "Observações"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,help:purchase_rfq_round_sheet.field_purchase_rfq_round_import__order_id
+msgid ""
+"Obrigatório quando a planilha não tem a coluna ID (planilha própria do "
+"fornecedor): os itens são localizados pelo código ou nome."
+msgstr ""
+"Obrigatório quando a planilha não tem a coluna ID (planilha própria do "
+"fornecedor): os itens são localizados pelo código ou nome."
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Product"
+msgstr "Produto"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+msgid "Quantity"
+msgstr "Quantidade"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__order_id
+msgid "Quotation"
+msgstr "Cotação"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model,name:purchase_rfq_round_sheet.model_purchase_rfq_round
+msgid "Quotation Round"
+msgstr "Rodada de cotação"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model,name:purchase_rfq_round_sheet.model_purchase_rfq_round_import_column
+msgid "Quotation Round Import Column Mapping"
+msgstr "Mapeamento de colunas da importação da rodada"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model,name:purchase_rfq_round_sheet.model_purchase_rfq_round_response
+msgid "Quotation Round Vendor Response"
+msgstr "Resposta do fornecedor na rodada de cotação"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+msgid "Quotation round"
+msgstr "Rodada de cotação"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_response__raw_values
+msgid "Raw Values"
+msgstr "Valores originais"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__result
+msgid "Result"
+msgstr "Resultado"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__round_id
+msgid "Round"
+msgstr "Rodada"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_response__source
+msgid "Source"
+msgstr "Origem"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields.selection,name:purchase_rfq_round_sheet.selection__purchase_rfq_round_response__source__import
+msgid "Spreadsheet"
+msgstr "Planilha"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import__state
+msgid "State"
+msgstr "Situação"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Unit Price"
+msgstr "Preço unitário"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+msgid "UoM"
+msgstr "UdM"
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields.selection,name:purchase_rfq_round_sheet.selection__purchase_rfq_round_import__state__upload
+msgid "Upload"
+msgstr "Envio"
+
+#. module: purchase_rfq_round_sheet
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_sheet.purchase_rfq_round_import_view_form
+msgid ""
+"Use the spreadsheet sent with the quotation (with the ID column), or the\n"
+"                    vendor's own spreadsheet: in that case choose the quotation and check the\n"
+"                    detected columns."
+msgstr ""
+"Use a planilha enviada com a cotação (com a coluna ID) ou a planilha do\n"
+"                    próprio fornecedor: nesse caso, escolha a cotação e confira as\n"
+"                    colunas detectadas."
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,help:purchase_rfq_round_sheet.field_purchase_rfq_round_response__raw_values
+msgid "Valores da linha como vieram na planilha."
+msgstr "Valores da linha como vieram na planilha."
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/models/purchase_rfq_round.py:0
+msgid "Vendor"
+msgstr "Fornecedor"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "Without the ID column, choose the quotation of this vendor."
+msgstr "Sem a coluna ID, escolha a cotação deste fornecedor."
+
+#. module: purchase_rfq_round_sheet
+#: model:ir.model.fields,field_description:purchase_rfq_round_sheet.field_purchase_rfq_round_import_column__wizard_id
+msgid "Wizard"
+msgstr "Assistente"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "row %s: item not found in the round"
+msgstr "linha %s: item não encontrado na rodada"
+
+#. module: purchase_rfq_round_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_round_sheet/wizards/purchase_rfq_round_import.py:0
+msgid "row %s: no valid price"
+msgstr "linha %s: sem preço válido"
