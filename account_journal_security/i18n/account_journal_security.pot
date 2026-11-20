@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_journal_security
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 00:09+0000\n"
+"PO-Revision-Date: 2026-11-20 00:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_journal_security
+#: model_terms:ir.ui.view,arch_db:account_journal_security.view_account_journal_form
+msgid "Access by Group"
+msgstr ""
+
+#. module: account_journal_security
+#: model:ir.model.fields,field_description:account_journal_security.field_account_journal__allowed_group_ids
+msgid "Allowed Groups"
+msgstr ""
+
+#. module: account_journal_security
+#: model:ir.model,name:account_journal_security.model_account_journal
+#: model:ir.model.fields,field_description:account_journal_security.field_account_bank_statement_line__journal_id
+#: model:ir.model.fields,field_description:account_journal_security.field_account_move__journal_id
+#: model:ir.model.fields,field_description:account_journal_security.field_account_payment__journal_id
+msgid "Journal"
+msgstr ""
+
+#. module: account_journal_security
+#: model:ir.model,name:account_journal_security.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_journal_security
+#: model_terms:ir.ui.view,arch_db:account_journal_security.view_account_journal_form
+msgid "Keep empty to allow every user"
+msgstr ""
+
+#. module: account_journal_security
+#. odoo-python
+#: code:addons/account_journal_security/models/account_journal.py:0
+msgid ""
+"None of your groups is allowed to use a journal of these types in company "
+"%(company_name)s: %(journal_types)s. Ask an accounting administrator to add "
+"one of your groups to the Allowed Groups of a journal."
+msgstr ""
+
+#. module: account_journal_security
+#: model:ir.model.fields,help:account_journal_security.field_account_journal__allowed_group_ids
+msgid ""
+"Only the users of these groups see this journal and its entries, journal "
+"items, payments and bank statement lines. Leave empty to allow every user."
+msgstr ""
+
+#. module: account_journal_security
+#: model:ir.model,name:account_journal_security.model_account_payment
+msgid "Payments"
+msgstr ""
