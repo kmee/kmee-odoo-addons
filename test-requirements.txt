@@ -6,3 +6,4 @@ odoo==18.0.*
 # cryptography 3.4.8, and a newer cryptography breaks its pyOpenSSL (the addons
 # path can no longer be probed). Same pin as OCA/l10n-brazil.
 requests_pkcs12<1.23
+odoo-test-helper
