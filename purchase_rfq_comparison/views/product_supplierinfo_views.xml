@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_supplierinfo_form_view" model="ir.ui.view">
+        <field name="name">product.supplierinfo.form - purchase_rfq_comparison</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="rfq_approved" />
+                <field name="rfq_approval_date" invisible="not rfq_approved" />
+                <field name="rfq_approval_note" invisible="not rfq_approved" />
+            </field>
+        </field>
+    </record>
+
+    <record id="product_supplierinfo_tree_view" model="ir.ui.view">
+        <field name="name">product.supplierinfo.list - purchase_rfq_comparison</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="rfq_approved" optional="show" widget="boolean_toggle" />
+            </field>
+        </field>
+    </record>
+</odoo>
