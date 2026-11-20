@@ -1,0 +1,82 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 00:51+0000\n"
+"PO-Revision-Date: 2026-11-20 00:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: ddmrp_purchase_request
+#: model_terms:ir.ui.view,arch_db:ddmrp_purchase_request.stock_buffer_view_form
+msgid "<span class=\"o_stat_text\">Requested</span>"
+msgstr "<span class=\"o_stat_text\">Requisitado</span>"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,field_description:ddmrp_purchase_request.field_purchase_request_line__buffer_id
+msgid "Buffer"
+msgstr "Buffer"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,help:ddmrp_purchase_request.field_purchase_request_line__buffer_id
+msgid "Buffer DDMRP que gerou esta linha de requisição."
+msgstr "Buffer DDMRP que gerou esta linha de requisição."
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,field_description:ddmrp_purchase_request.field_purchase_request_line__buffer_pending_qty
+msgid "Pending for Buffer"
+msgstr "Pendente para o buffer"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model,name:ddmrp_purchase_request.model_purchase_request_line
+msgid "Purchase Request Line"
+msgstr "Linha de requisição de compra"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,field_description:ddmrp_purchase_request.field_stock_buffer__purchase_request_line_ids
+msgid "Purchase Request Lines"
+msgstr "Linhas de requisição de compra"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,field_description:ddmrp_purchase_request.field_stock_buffer__purchase_request_count
+msgid "Purchase Requests"
+msgstr "Requisições de compra"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,help:ddmrp_purchase_request.field_purchase_request_line__buffer_pending_qty
+msgid ""
+"Quantidade da linha, na unidade do buffer, que ainda não virou linha de "
+"cotação ou pedido de compra."
+msgstr ""
+"Quantidade da linha, na unidade do buffer, que ainda não virou linha de "
+"cotação ou pedido de compra."
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,help:ddmrp_purchase_request.field_stock_buffer__purchase_request_pending_qty
+msgid ""
+"Quantidade em requisições de compra abertas que ainda não virou cotação nem "
+"pedido. É descontada da recomendação de reposição."
+msgstr ""
+"Quantidade em requisições de compra abertas que ainda não virou cotação nem "
+"pedido. É descontada da recomendação de reposição."
+
+#. module: ddmrp_purchase_request
+#: model:ir.model.fields,field_description:ddmrp_purchase_request.field_stock_buffer__purchase_request_pending_qty
+msgid "Requested (pending)"
+msgstr "Requisitado (pendente)"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model,name:ddmrp_purchase_request.model_stock_buffer
+msgid "Stock Buffer"
+msgstr "Buffer de estoque"
+
+#. module: ddmrp_purchase_request
+#: model:ir.model,name:ddmrp_purchase_request.model_stock_rule
+msgid "Stock Rule"
+msgstr "Regra de estoque"
