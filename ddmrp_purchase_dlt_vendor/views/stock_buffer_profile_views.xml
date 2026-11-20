@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_buffer_profile_form" model="ir.ui.view">
+        <field name="name">stock.buffer.profile.form - ddmrp_purchase_dlt_vendor</field>
+        <field name="model">stock.buffer.profile</field>
+        <field name="inherit_id" ref="ddmrp.view_stock_buffer_profile_form" />
+        <field name="arch" type="xml">
+            <field name="item_type" position="after">
+                <field name="dlt_vendor_policy" invisible="item_type != 'purchased'" />
+            </field>
+        </field>
+    </record>
+</odoo>
