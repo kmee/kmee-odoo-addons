@@ -251,7 +251,12 @@ class TestBpmnProcess(TransactionCase):
         self.assertTrue(as_user.post_comment("A question"))
         panel = as_user.get_panel_data()
         self.assertTrue(panel["messages"])
-        self.assertEqual(panel["odoo_label"], quote.model_id.name)
+        # With the contacts app installed the menu wins over the model name.
+        link = quote.sudo()
+        self.assertEqual(
+            panel["odoo_label"],
+            link.action_id.name or link.menu_id.complete_name or link.model_id.name,
+        )
         self.assertIn("res.partner", quote.process_id.with_user(self.user).export_xml())
         with self.assertRaises(AccessError):
             as_user.write({"status": "open"})
@@ -329,7 +334,10 @@ class TestBpmnProcess(TransactionCase):
         )
         self.assertEqual(quote_info["status"], "open")
         self.assertEqual(quote_info["requirements"], "SAL-09")
-        self.assertEqual(quote_info["odoo"], "res.partner")
+        expected = "res.partner"
+        if quote.sudo().menu_id:
+            expected += " / %s" % quote.sudo().menu_id.name
+        self.assertEqual(quote_info["odoo"], expected)
         self.assertFalse(bx.validate(exported))
         self.assertEqual(
             self.env["bpmn.process"].export_by_code("sample")["version"], 2
