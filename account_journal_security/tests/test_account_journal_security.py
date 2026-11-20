@@ -10,6 +10,8 @@ from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 @tagged("post_install", "-at_install")
 class TestAccountJournalSecurity(AccountTestInvoicingCommon):
+    chart_template = "generic_coa"
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
