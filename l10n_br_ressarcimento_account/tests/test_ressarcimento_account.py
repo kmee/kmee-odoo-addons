@@ -90,17 +90,6 @@ class TestRessarcimentoAccount(PayrollCommon):
             product_vals["sale_line_warn"] = "no-message"
         cls.product_expense = cls.env["product.product"].create(product_vals)
 
-    def _create_employee(self, name="Funcionário Teste", tipo_contrato="clt"):
-        """Override: add CPF required by l10n_br_hr_validacao_folha."""
-        return self.env["hr.employee"].create(
-            {
-                "name": name,
-                "l10n_br_tipo_contrato": tipo_contrato,
-                "company_id": self.env.company.id,
-                "cnpj_cpf": "529.982.247-25",
-            }
-        )
-
     def _create_expense_sheet(self, employee, amount=500.0):
         """Helper: create approved expense sheet for payslip reimbursement."""
         expense = self.env["hr.expense"].create(

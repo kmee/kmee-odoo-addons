@@ -16,7 +16,9 @@
                                 <span t-field="employee.name" />
                                 <br />
                                 <strong>CPF:</strong>
-                                <span t-field="employee.cnpj_cpf" />
+                                <span
+                                    t-out="employee.work_contact_id.vat_formatted_cnpj or employee.vat"
+                                />
                                 <br />
                                 <strong>Função:</strong>
                                 <span t-field="employee.job_id.name" />

@@ -78,7 +78,7 @@ class SstCommon(TransactionCase):
         cls.employee = cls.env["hr.employee"].create(
             {
                 "name": "Trabalhador SST",
-                "cnpj_cpf": "076.166.929-41",
+                "vat": "076.166.929-90",
                 "job_id": cls.job.id,
             }
         )

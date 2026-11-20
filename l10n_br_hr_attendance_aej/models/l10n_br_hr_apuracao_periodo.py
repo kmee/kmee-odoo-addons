@@ -284,9 +284,7 @@ class L10nBrHrApuracaoPeriodo(models.Model):
                     {
                         "tipoReg": "03",
                         "idtVinculoAej": identificador,
-                        "cpf": punctuation_rm(
-                            employee.sudo().cpf or employee.sudo().cnpj_cpf or ""
-                        ),
+                        "cpf": punctuation_rm(employee.sudo().vat or ""),
                         "nomeEmp": (employee.name or "")[:150],
                     },
                 )
