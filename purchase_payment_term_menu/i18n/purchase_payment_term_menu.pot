@@ -13,7 +13,6 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-
 #. module: purchase_payment_term_menu
 #: model:res.groups,name:purchase_payment_term_menu.group_purchase_payment_term_manager
 msgid "Manage Payment Terms from Purchase"
