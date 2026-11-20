@@ -1,0 +1,241 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:26+0000\n"
+"PO-Revision-Date: 2026-11-20 02:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_payment_term_id
+msgid "Answered Payment Terms"
+msgstr "Condição de pagamento respondida"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_product_supplierinfo__rfq_approval_date
+msgid "Approval Date"
+msgstr "Data da homologação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_product_supplierinfo__rfq_approval_note
+msgid "Approval Note"
+msgstr "Observação da homologação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_product_supplierinfo__rfq_approved
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_vendor_approved
+msgid "Approved Vendor"
+msgstr "Fornecedor homologado"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_rfq_round__require_approved
+msgid "Approved Vendors Only"
+msgstr "Só fornecedores homologados"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_payment_days
+msgid "Avg. Payment Days"
+msgstr "Prazo médio de pagamento (dias)"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model,name:purchase_rfq_comparison.model_purchase_rfq_round_award
+msgid "Award Quotation Round"
+msgstr "Adjudicar rodada de cotação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_rfq_round__price_basis
+msgid ""
+"Base do preço na pontuação. O valor presente traz o total com impostos para "
+"hoje pela condição de pagamento respondida, à taxa mensal da rodada: prazo "
+"maior pesa a favor do fornecedor."
+msgstr ""
+"Base do preço na pontuação. O valor presente traz o total com impostos para "
+"hoje pela condição de pagamento respondida, à taxa mensal da rodada: prazo "
+"maior pesa a favor do fornecedor."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields.selection,name:purchase_rfq_comparison.selection__purchase_rfq_round_award__criterion__score
+msgid "Best score"
+msgstr "Melhor pontuação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_order_line__rfq_payment_term_id
+msgid ""
+"Condição de pagamento respondida pelo fornecedor para o item. Padrão: a "
+"condição do pedido."
+msgstr ""
+"Condição de pagamento respondida pelo fornecedor para o item. Padrão: a "
+"condição do pedido."
+
+#. module: purchase_rfq_comparison
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_comparison.purchase_rfq_round_view_form
+msgid "Criteria"
+msgstr "Critérios"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_rfq_round_award__criterion
+msgid "Criterion"
+msgstr "Critério"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_eligible
+msgid "Eligible"
+msgstr "Elegível"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_product_supplierinfo__rfq_approved
+msgid ""
+"Fornecedor homologado para este produto (especificação técnica aprovada). "
+"Rodadas que exigem homologação só pontuam fornecedores homologados."
+msgstr ""
+"Fornecedor homologado para este produto (especificação técnica aprovada). "
+"Rodadas que exigem homologação só pontuam fornecedores homologados."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_lead_days
+msgid "Lead Time (days)"
+msgstr "Prazo (dias)"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_rfq_round__weight_delay
+msgid "Lead Time Weight"
+msgstr "Peso do prazo"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_min_qty_ok
+msgid "Min. Qty OK"
+msgstr "Lote mínimo OK"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_rfq_round__pv_monthly_rate
+msgid "Monthly Rate (%)"
+msgstr "Taxa mensal (%)"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_order_line__rfq_spec_approved
+msgid ""
+"O item ofertado atende à especificação técnica. Padrão: o fornecedor é "
+"homologado para o produto."
+msgstr ""
+"O item ofertado atende à especificação técnica. Padrão: o fornecedor é "
+"homologado para o produto."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_order_line__rfq_score
+msgid "Pontuação de 0 a 100 da resposta dentro do item da rodada."
+msgstr "Pontuação de 0 a 100 da resposta dentro do item da rodada."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_present_value
+msgid "Present Value"
+msgstr "Valor presente"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields.selection,name:purchase_rfq_comparison.selection__purchase_rfq_round__price_basis__present_value
+msgid "Present value of total"
+msgstr "Valor presente do total"
+
+#. module: purchase_rfq_comparison
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_comparison.purchase_rfq_round_view_form
+msgid "Price"
+msgstr "Preço"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_rfq_round__price_basis
+msgid "Price Basis"
+msgstr "Base do preço"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_rfq_round__weight_price
+msgid "Price Weight"
+msgstr "Peso do preço"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model,name:purchase_rfq_comparison.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linha do pedido de compra"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model,name:purchase_rfq_comparison.model_purchase_rfq_round
+msgid "Quotation Round"
+msgstr "Rodada de cotação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model,name:purchase_rfq_comparison.model_purchase_rfq_round_line
+msgid "Quotation Round Item"
+msgstr "Item da rodada de cotação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_validity_date
+msgid "Quote Valid Until"
+msgstr "Proposta válida até"
+
+#. module: purchase_rfq_comparison
+#: model:ir.actions.server,name:purchase_rfq_comparison.action_server_rfq_round_compute_scores
+msgid "Recompute Scores"
+msgstr "Recalcular pontuação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_score
+msgid "Score"
+msgstr "Pontuação"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_spec_approved
+msgid "Specification OK"
+msgstr "Especificação OK"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields.selection,name:purchase_rfq_comparison.selection__purchase_rfq_round__price_basis__subtotal
+msgid "Subtotal (without taxes)"
+msgstr "Subtotal (sem impostos)"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model,name:purchase_rfq_comparison.model_product_supplierinfo
+msgid "Supplier Pricelist"
+msgstr "Tabela de preços do fornecedor"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_rfq_round__require_approved
+msgid ""
+"Só pontua respostas de fornecedor homologado para o produto e com "
+"especificação atendida."
+msgstr ""
+"Só pontua respostas de fornecedor homologado para o produto e com "
+"especificação atendida."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_rfq_round__pv_monthly_rate
+msgid "Taxa mensal usada para trazer os pagamentos a valor presente."
+msgstr "Taxa mensal usada para trazer os pagamentos a valor presente."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields.selection,name:purchase_rfq_comparison.selection__purchase_rfq_round__price_basis__total
+msgid "Total (with taxes)"
+msgstr "Total (com impostos)"
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,help:purchase_rfq_comparison.field_purchase_order_line__rfq_present_value
+msgid ""
+"Total com impostos trazido a valor presente pela condição de pagamento "
+"respondida e pela taxa mensal da rodada."
+msgstr ""
+"Total com impostos trazido a valor presente pela condição de pagamento "
+"respondida e pela taxa mensal da rodada."
+
+#. module: purchase_rfq_comparison
+#: model:ir.model.fields,field_description:purchase_rfq_comparison.field_purchase_order_line__rfq_min_qty
+msgid "Vendor Minimum Qty"
+msgstr "Lote mínimo do fornecedor"
+
+#. module: purchase_rfq_comparison
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_comparison.purchase_rfq_round_view_form
+msgid "Weights"
+msgstr "Pesos"
