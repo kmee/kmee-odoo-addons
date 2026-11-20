@@ -9,28 +9,21 @@ from odoo import api, models
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    # Fontes de CPF no cadastro, em ordem de precedência. No l10n_br_hr o
-    # ``cpf`` é related ao ``vat`` do contato de trabalho, e nem todo cadastro
-    # tem esse partner; o ``cnpj_cpf`` fica no próprio funcionário. Conciliar
-    # por uma fonte só deixaria marcação pendente por detalhe de cadastro.
-    _L10N_BR_CAMPOS_CPF = ("cpf", "cnpj_cpf")
-
     @api.model
     def _l10n_br_indice_documentos(self):
         """Índice {documento sem pontuação: funcionário} para conciliação.
 
-        CPF e PIS/PASEP têm ``groups="hr.group_hr_user"`` no ``l10n_br_hr``; a
-        leitura vai por ``sudo`` porque a importação de AFD roda em contexto de
-        integração, não de RH.
+        CPF (``vat``, related ao contato de trabalho) e PIS/PASEP têm
+        ``groups="hr.group_hr_user"`` no ``l10n_br_hr``; a leitura vai por
+        ``sudo`` porque a importação de AFD roda em contexto de integração,
+        não de RH.
         """
         indice = {"cpf": {}, "pis": {}}
-        campos = list(self._L10N_BR_CAMPOS_CPF) + ["pis_pasep"]
         for employee in self.sudo().search([]):
-            dados = employee.read(campos)[0]
-            for campo in self._L10N_BR_CAMPOS_CPF:
-                cpf = self._l10n_br_normaliza_documento(dados.get(campo))
-                if cpf:
-                    indice["cpf"].setdefault(cpf, employee)
+            dados = employee.read(["vat", "pis_pasep"])[0]
+            cpf = self._l10n_br_normaliza_documento(dados.get("vat"))
+            if cpf:
+                indice["cpf"].setdefault(cpf, employee)
             pis = self._l10n_br_normaliza_documento(dados.get("pis_pasep"))
             if pis:
                 indice["pis"].setdefault(pis, employee)
