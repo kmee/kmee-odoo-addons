@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_rfq_comparison_sheet
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:26+0000\n"
+"PO-Revision-Date: 2026-11-20 02:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_rfq_comparison_sheet
+#: model:ir.model,name:purchase_rfq_comparison_sheet.model_purchase_rfq_round_import
+msgid "Import Quotation Round Responses"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_sheet/wizards/purchase_rfq_round_import.py:0
+#: model:ir.model.fields,field_description:purchase_rfq_comparison_sheet.field_purchase_rfq_round_response__spec_approved
+msgid "Meets Specification"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_sheet/models/purchase_rfq_round.py:0
+msgid "Meets Specification (Y/N)"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_comparison_sheet/wizards/purchase_rfq_round_import.py:0
+#: model:ir.model.fields,field_description:purchase_rfq_comparison_sheet.field_purchase_rfq_round_response__min_qty
+msgid "Minimum Qty"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_comparison_sheet/wizards/purchase_rfq_round_import.py:0
+#: model:ir.model.fields,field_description:purchase_rfq_comparison_sheet.field_purchase_rfq_round_response__payment_term_id
+msgid "Payment Terms"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#: model:ir.model,name:purchase_rfq_comparison_sheet.model_purchase_rfq_round
+msgid "Quotation Round"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#: model:ir.model,name:purchase_rfq_comparison_sheet.model_purchase_rfq_round_response
+msgid "Quotation Round Vendor Response"
+msgstr ""
+
+#. module: purchase_rfq_comparison_sheet
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_sheet/models/purchase_rfq_round.py:0
+#: code:addons/purchase_rfq_comparison_sheet/wizards/purchase_rfq_round_import.py:0
+#: model:ir.model.fields,field_description:purchase_rfq_comparison_sheet.field_purchase_rfq_round_response__validity_date
+msgid "Valid Until"
+msgstr ""
