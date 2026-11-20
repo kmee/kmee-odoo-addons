@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_request_line_tree" model="ir.ui.view">
+        <field name="name">purchase.request.line.list - ddmrp_purchase_request</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_tree" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="buffer_id" optional="show" />
+                <field name="buffer_pending_qty" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_request_line_form" model="ir.ui.view">
+        <field name="name">purchase.request.line.form - ddmrp_purchase_request</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_form" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="buffer_id" invisible="not buffer_id" />
+                <field name="buffer_pending_qty" invisible="not buffer_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_request_line_search" model="ir.ui.view">
+        <field name="name">purchase.request.line.search - ddmrp_purchase_request</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request.purchase_request_line_search" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="buffer_id" />
+            </field>
+        </field>
+    </record>
+</odoo>
