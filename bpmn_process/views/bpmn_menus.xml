@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <menuitem
+        id="bpmn_menu_root"
+        name="Processes"
+        web_icon="bpmn_process,static/description/icon.png"
+        groups="bpmn_process.group_bpmn_user"
+        sequence="80"
+    />
+    <menuitem
+        id="bpmn_process_menu"
+        parent="bpmn_menu_root"
+        action="bpmn_process_action"
+        sequence="10"
+    />
+    <menuitem
+        id="bpmn_element_menu"
+        parent="bpmn_menu_root"
+        action="bpmn_element_action"
+        sequence="20"
+    />
+    <menuitem
+        id="bpmn_import_wizard_menu"
+        parent="bpmn_menu_root"
+        action="bpmn_import_wizard_action"
+        groups="bpmn_process.group_bpmn_manager"
+        sequence="15"
+    />
+    <menuitem
+        id="bpmn_history_menu"
+        name="History"
+        parent="bpmn_menu_root"
+        sequence="30"
+    />
+    <menuitem
+        id="bpmn_process_version_menu"
+        parent="bpmn_history_menu"
+        action="bpmn_process_version_action"
+        sequence="10"
+    />
+    <menuitem
+        id="bpmn_element_test_menu"
+        parent="bpmn_history_menu"
+        action="bpmn_element_test_action"
+        sequence="20"
+    />
+</odoo>
