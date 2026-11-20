@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <!-- Acima deste número de linhas (itens x fornecedores), as cotações da
+         rodada são criadas em fila (queue_job), uma tarefa por fornecedor. -->
+    <record id="param_job_threshold" model="ir.config_parameter">
+        <field name="key">purchase_rfq_round.job_threshold</field>
+        <field name="value">2000</field>
+    </record>
+</odoo>

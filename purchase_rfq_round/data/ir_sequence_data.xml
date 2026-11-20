@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="seq_purchase_rfq_round" model="ir.sequence">
+        <field name="name">Quotation Round</field>
+        <field name="code">purchase.rfq.round</field>
+        <field name="prefix">RC/%(year)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>
