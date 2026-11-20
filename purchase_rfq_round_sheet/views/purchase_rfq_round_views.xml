@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_rfq_round_view_form" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.form - purchase_rfq_round_sheet</field>
+        <field name="model">purchase.rfq.round</field>
+        <field name="inherit_id" ref="purchase_rfq_round.purchase_rfq_round_view_form" />
+        <field name="arch" type="xml">
+            <button name="action_send_rfqs" position="after">
+                <button
+                    name="action_import_responses"
+                    type="object"
+                    string="Import Responses"
+                    invisible="state != 'quoting'"
+                />
+            </button>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_response_view_list" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.response.list - purchase_rfq_round_sheet</field>
+        <field name="model">purchase.rfq.round.response</field>
+        <field name="inherit_id" ref="purchase_rfq_round.purchase_rfq_round_response_view_list" />
+        <field name="arch" type="xml">
+            <field name="source" position="after">
+                <field name="file_name" optional="show" />
+            </field>
+        </field>
+    </record>
+</odoo>
