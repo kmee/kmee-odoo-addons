@@ -7,7 +7,6 @@ from datetime import timedelta
 
 import openpyxl
 
-from odoo import fields
 from odoo.tests import tagged
 
 from odoo.addons.purchase_rfq_round_sheet.tests.common import RfqRoundSheetCommon
