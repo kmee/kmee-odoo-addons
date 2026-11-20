@@ -1,0 +1,1353 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bpmn_process
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:34+0000\n"
+"PO-Revision-Date: 2026-11-20 02:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "%(process)s is being edited by %(user)s."
+msgstr "%(process)s está sendo editado por %(user)s."
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "%s connections or structure items"
+msgstr "%s conexões ou itens de estrutura"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid ""
+",\n"
+"                    removed"
+msgstr ",\n                    removidos"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process_version.py:0
+msgid "A diagram version cannot be changed. Restore it instead."
+msgstr "Uma versão do diagrama não pode ser alterada. Restaure-a em vez disso."
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process_version.py:0
+msgid "A diagram version cannot be deleted."
+msgstr "Uma versão do diagrama não pode ser excluída."
+
+#. module: bpmn_process
+#: model:ir.model.constraint,message:bpmn_process.constraint_bpmn_lane_bpmn_id_process_uniq
+msgid "A lane id must be unique within the process."
+msgstr "O id da raia precisa ser único no processo."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "A new version is created with this diagram. Continue?"
+msgstr "Uma nova versão será criada com este diagrama. Continuar?"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "A process with versions keeps its history: archive it instead."
+msgstr "Um processo com versões guarda o histórico: arquive-o em vez de excluir."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_needaction
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_needaction
+msgid "Action Needed"
+msgstr "Ação necessária"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__active
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__active
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__active
+msgid "Active"
+msgstr "Ativo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__version_in_id
+msgid "Added in"
+msgstr "Incluído em"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Added: %s"
+msgstr "Incluídos: %s"
+
+#. module: bpmn_process
+#: model:ir.model.constraint,message:bpmn_process.constraint_bpmn_element_bpmn_id_process_uniq
+msgid "An element id must be unique within the process."
+msgstr "O id do elemento precisa ser único no processo."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_search
+msgid "Archived"
+msgstr "Arquivado"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_attachment_count
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_attachment_count
+msgid "Attachment Count"
+msgstr "Quantidade de anexos"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_element
+msgid "BPMN Element"
+msgstr "Elemento BPMN"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_element_test
+msgid "BPMN Element Test Result"
+msgstr "Resultado de teste do elemento BPMN"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__bpmn_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__bpmn_id
+msgid "BPMN Id"
+msgstr "Id BPMN"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_lane
+msgid "BPMN Lane"
+msgstr "Raia BPMN"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_import_wizard_line
+msgid "BPMN Merge Conflict"
+msgstr "Conflito de mesclagem BPMN"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_process
+msgid "BPMN Process"
+msgstr "Processo BPMN"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_process_version
+msgid "BPMN Process Version"
+msgstr "Versão do processo BPMN"
+
+#. module: bpmn_process
+#: model:ir.module.category,name:bpmn_process.module_category_bpmn_process
+msgid "BPMN Processes"
+msgstr "Processos BPMN"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__xml
+msgid "BPMN XML"
+msgstr "XML BPMN"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__file
+msgid "BPMN file"
+msgstr "Arquivo BPMN"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__base_version
+msgid "Base Version"
+msgstr "Versão base"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__parent_id
+msgid "Based on"
+msgstr "Baseada em"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__base_value
+msgid "Before"
+msgstr "Antes"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_search
+msgid "Being edited"
+msgstr "Em edição"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Being edited by"
+msgstr "Em edição por"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "Being edited by %s."
+msgstr "Em edição por %s."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Break edit lock"
+msgstr "Quebrar trava de edição"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_list
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_search
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "By"
+msgstr "Por"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_import_wizard_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Changed %(element)s: %(props)s"
+msgstr "Alterado %(element)s: %(props)s"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__diff_summary
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "Changes"
+msgstr "Mudanças"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Changes from v"
+msgstr "Mudanças da v"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__checksum
+msgid "Checksum"
+msgstr "Checksum"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__choice
+msgid "Choice"
+msgstr "Escolha"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Close"
+msgstr "Fechar"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Close comparison"
+msgstr "Fechar comparação"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__code
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__code
+msgid "Code"
+msgstr "Código"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Comment on this task..."
+msgstr "Comente esta tarefa..."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Comments"
+msgstr "Comentários"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__company_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__company_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__company_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__company_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Compare with"
+msgstr "Comparar com"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "Compare with current"
+msgstr "Comparar com a atual"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Compare with..."
+msgstr "Comparar com..."
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard__state__conflict
+msgid "Conflicts"
+msgstr "Conflitos"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Conflicts resolved: %s"
+msgstr "Conflitos resolvidos: %s"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__create_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__create_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__create_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__create_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__create_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__create_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__create_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__create_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__create_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__create_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__create_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__create_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__current_version_id
+msgid "Current version"
+msgstr "Versão atual"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__date
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_list
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Date"
+msgstr "Data"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__decided_count
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element__status__decided
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+msgid "Decided"
+msgstr "Decidido"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__description
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Description"
+msgstr "Descrição"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__sdd_ref
+msgid "Design reference"
+msgstr "Referência no desenho"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Details"
+msgstr "Detalhes"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__diff_json
+msgid "Diff Json"
+msgstr "Diferença (JSON)"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Discard"
+msgstr "Descartar"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__display_name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__display_name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__display_name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__display_name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__display_name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__display_name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "Download"
+msgstr "Baixar"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Download .bpmn"
+msgstr "Baixar .bpmn"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard__state__draft
+msgid "Draft"
+msgstr "Rascunho"
+
+#. module: bpmn_process
+#: model_terms:ir.actions.act_window,help:bpmn_process.bpmn_process_action
+msgid ""
+"Each import of the same code becomes a new version, with the\n"
+"                changes listed and the comments of every task kept."
+msgstr "Cada importação do mesmo código vira uma nova versão, com as\n                mudanças listadas e os comentários de cada tarefa preservados."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Edit"
+msgstr "Editar"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_process_version__origin__edit
+msgid "Edit in Odoo"
+msgstr "Edição no Odoo"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Edit lock of %s broken."
+msgstr "Trava de edição de %s quebrada."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__lock_user_id
+msgid "Edited by"
+msgstr "Em edição por"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_process__source__odoo
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_search
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_search
+msgid "Edited in Odoo"
+msgstr "Editado no Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__element_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__element
+msgid "Element"
+msgstr "Elemento"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__element_count
+msgid "Element Count"
+msgstr "Quantidade de elementos"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__element_ids
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__element_ids
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_list
+msgid "Elements"
+msgstr "Elementos"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__environment
+msgid "Environment"
+msgstr "Ambiente"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__evidence_url
+msgid "Evidence"
+msgstr "Evidência"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Export .bpmn"
+msgstr "Exportar .bpmn"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element__test_state__failed
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element_test__result__failed
+msgid "Failed"
+msgstr "Falhou"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard__di_prefer__theirs
+msgid "File"
+msgstr "Arquivo"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "File as received, merged in the next version."
+msgstr "Arquivo como recebido, mesclado na versão seguinte."
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_process__source__file
+msgid "File generated outside Odoo"
+msgstr "Arquivo gerado fora do Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__filename
+msgid "Filename"
+msgstr "Nome do arquivo"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "First version: %(elements)s elements in %(lanes)s lanes."
+msgstr "Primeira versão: %(elements)s elementos em %(lanes)s raias."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Fit to screen"
+msgstr "Ajustar à tela"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_follower_ids
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_partner_ids
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (parceiros)"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process_version__merge_parent_id
+msgid "For a merge: the incoming file merged into the version it is based on."
+msgstr "Na mesclagem: o arquivo recebido que foi mesclado à versão de base."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__group_ids
+msgid "Groups"
+msgstr "Grupos"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__has_message
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__has_message
+msgid "Has Message"
+msgstr "Tem mensagem"
+
+#. module: bpmn_process
+#: model:ir.ui.menu,name:bpmn_process.bpmn_history_menu
+msgid "History"
+msgstr "Histórico"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__id
+msgid "ID"
+msgstr "ID"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__message_needaction
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se marcado, há mensagens novas pedindo sua atenção."
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__message_has_error
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se marcado, algumas mensagens têm erro de entrega."
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_process_version__origin__import
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_import_wizard_view_form
+msgid "Import"
+msgstr "Importar"
+
+#. module: bpmn_process
+#: model:ir.model,name:bpmn_process.model_bpmn_import_wizard
+msgid "Import BPMN Diagram"
+msgstr "Importar diagrama BPMN"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/wizards/bpmn_import_wizard.py:0
+#: model:ir.actions.act_window,name:bpmn_process.bpmn_import_wizard_action
+#: model:ir.ui.menu,name:bpmn_process.bpmn_import_wizard_menu
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_import_wizard_view_form
+msgid "Import BPMN diagram"
+msgstr "Importar diagrama BPMN"
+
+#. module: bpmn_process
+#: model_terms:ir.actions.act_window,help:bpmn_process.bpmn_process_action
+msgid "Import a BPMN 2.0 diagram"
+msgstr "Importe um diagrama BPMN 2.0"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Import new version"
+msgstr "Importar nova versão"
+
+#. module: bpmn_process
+#: model:res.groups,comment:bpmn_process.group_bpmn_manager
+msgid ""
+"Imports and edits diagrams, changes status and links, restores versions."
+msgstr "Importa e edita diagramas, muda status e vínculos, restaura versões."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__odoo_value
+msgid "In Odoo"
+msgstr "No Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__file_value
+msgid "In the file"
+msgstr "No arquivo"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard__state__invalid
+msgid "Invalid"
+msgstr "Inválido"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Invalid BPMN file: %s"
+msgstr "Arquivo BPMN inválido: %s"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__is_current
+msgid "Is Current"
+msgstr "É a atual"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_is_follower
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_is_follower
+msgid "Is Follower"
+msgstr "É seguidor"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__is_mine
+msgid "Is Mine"
+msgstr "É minha"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard_line__choice__ours
+msgid "Keep Odoo"
+msgstr "Manter o Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__key
+msgid "Key"
+msgstr "Chave"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__lane_id
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+msgid "Lane"
+msgstr "Raia"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__lane_ids
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Lanes"
+msgstr "Raias"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__write_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__write_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__write_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__write_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__write_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__write_uid
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__write_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__write_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__write_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__write_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__write_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__write_date
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__line_ids
+msgid "Line"
+msgstr "Linha"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_form
+msgid "Link with Odoo"
+msgstr "Vínculo com o Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__lock_date
+msgid "Lock Date"
+msgstr "Data da trava"
+
+#. module: bpmn_process
+#: model:res.groups,name:bpmn_process.group_bpmn_manager
+msgid "Manager"
+msgstr "Gestor"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__manual_link
+msgid "Manual Link"
+msgstr "Vínculo manual"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_process_version__origin__merge
+msgid "Merge"
+msgstr "Mesclagem"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__merge_parent_id
+msgid "Merged with"
+msgstr "Mesclada com"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_search
+msgid "Merges"
+msgstr "Mesclagens"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_has_error
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_has_error
+msgid "Message Delivery error"
+msgstr "Erro de entrega de mensagem"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_ids
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_ids
+msgid "Messages"
+msgstr "Mensagens"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Moved: %s"
+msgstr "Movidos: %s"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "My tasks"
+msgstr "Minhas tarefas"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__name
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "No change in the diagram."
+msgstr "Nenhuma mudança no diagrama."
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "No process with code %s."
+msgstr "Nenhum processo com o código %s."
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element__test_state__none
+msgid "No test"
+msgstr "Sem teste"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__note
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__note
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__note
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "Note"
+msgstr "Nota"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__notes
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_form
+msgid "Notes"
+msgstr "Notas"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__number
+msgid "Number"
+msgstr "Número"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_needaction_counter
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de ações"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__message_has_error_counter
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de erros"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__message_needaction_counter
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensagens pedindo ação"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__message_has_error_counter
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensagens com erro de entrega"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard__di_prefer__ours
+msgid "Odoo"
+msgstr "Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__action_id
+msgid "Odoo action"
+msgstr "Ação do Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__menu_id
+msgid "Odoo menu"
+msgstr "Menu do Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__model_id
+msgid "Odoo model"
+msgstr "Modelo do Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__odoo_ref
+msgid "Odoo reference"
+msgstr "Referência no Odoo"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Only process managers can change diagrams."
+msgstr "Só gestores de processos podem alterar diagramas."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__open_count
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element__status__open
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+msgid "Open"
+msgstr "Em aberto"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Open diagram"
+msgstr "Abrir diagrama"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_form
+msgid "Open in Odoo"
+msgstr "Abrir no Odoo"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "Open the diagram from a process."
+msgstr "Abra o diagrama a partir de um processo."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__origin
+msgid "Origin"
+msgstr "Origem"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "Original colors"
+msgstr "Cores originais"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__outside_system
+msgid "Outside System"
+msgstr "Fora do sistema"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element__test_state__passed
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element_test__result__passed
+msgid "Passed"
+msgstr "Passou"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__di_prefer
+msgid "Position when moved on both sides"
+msgstr "Posição quando movido nos dois lados"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Post"
+msgstr "Publicar"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__problems
+msgid "Problems"
+msgstr "Problemas"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__process_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__process_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__process_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__process_id
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process_version__process_id
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_search
+msgid "Process"
+msgstr "Processo"
+
+#. module: bpmn_process
+#: model:ir.actions.act_window,name:bpmn_process.bpmn_element_action
+#: model:ir.ui.menu,name:bpmn_process.bpmn_element_menu
+msgid "Process elements"
+msgstr "Elementos de processo"
+
+#. module: bpmn_process
+#: model:ir.actions.act_window,name:bpmn_process.bpmn_process_action
+#: model:ir.ui.menu,name:bpmn_process.bpmn_menu_root
+#: model:ir.ui.menu,name:bpmn_process.bpmn_process_menu
+msgid "Processes"
+msgstr "Processos"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__prop
+msgid "Property"
+msgstr "Propriedade"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element__status__proposal
+msgid "Proposal"
+msgstr "Proposta"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__proposal_count
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+msgid "Proposals"
+msgstr "Propostas"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_form
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+msgid "Removed"
+msgstr "Removido"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__version_out_id
+msgid "Removed in"
+msgstr "Removido em"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Removed since v"
+msgstr "Removidos desde a v"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Removed: %s"
+msgstr "Removidos: %s"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__requirement_refs
+msgid "Requirements"
+msgstr "Requisitos"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_process_version__origin__restore
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "Restore"
+msgstr "Restaurar"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process_version.py:0
+msgid "Restored from version %s."
+msgstr "Restaurada da versão %s."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__result
+msgid "Result"
+msgstr "Resultado"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Save version"
+msgstr "Salvar versão"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "Saved as version %s."
+msgstr "Salvo como versão %s."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element_test__scenario
+msgid "Scenario"
+msgstr "Cenário"
+
+#. module: bpmn_process
+#: model:res.groups,comment:bpmn_process.group_bpmn_user
+msgid "Sees diagrams and versions, and comments on tasks."
+msgstr "Vê diagramas e versões e comenta nas tarefas."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__sequence
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_lane__sequence
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_form
+msgid "Show in diagram"
+msgstr "Mostrar no diagrama"
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_element_test__result__skipped
+msgid "Skipped"
+msgstr "Não executado"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__source
+msgid "Source"
+msgstr "Origem do diagrama"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process__code
+msgid ""
+"Stable key of the process, usually the file name without the extension. "
+"Imports with the same code create new versions."
+msgstr "Chave estável do processo, em geral o nome do arquivo sem a extensão. Importações com o mesmo código criam novas versões."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard__state
+msgid "State"
+msgstr "Situação"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__status
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Status"
+msgstr "Status"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid ""
+"Status kept in Odoo for %(element)s: file says %(file)s, Odoo says %(odoo)s"
+msgstr "Status mantido no Odoo para %(element)s: o arquivo diz %(file)s, o Odoo diz %(odoo)s"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Take the edit lock before saving."
+msgstr "Pegue a trava de edição antes de salvar."
+
+#. module: bpmn_process
+#: model:ir.model.fields.selection,name:bpmn_process.selection__bpmn_import_wizard_line__choice__theirs
+msgid "Take the file"
+msgstr "Usar o arquivo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__test_state
+msgid "Test State"
+msgstr "Situação dos testes"
+
+#. module: bpmn_process
+#: model:ir.actions.act_window,name:bpmn_process.bpmn_element_test_action
+#: model:ir.ui.menu,name:bpmn_process.bpmn_element_test_menu
+msgid "Test results"
+msgstr "Resultados de testes"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__test_ids
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_form
+msgid "Tests"
+msgstr "Testes"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__odoo_ref
+msgid "The 'odoo:' line of the BPMN documentation, as imported."
+msgstr "A linha 'odoo:' da documentação BPMN, como foi importada."
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__manual_link
+msgid "The Odoo model, menu or action was set by hand: imports keep it."
+msgstr "O modelo, menu ou ação do Odoo foi definido à mão: as importações o mantêm."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_import_wizard_view_form
+msgid ""
+"The diagram changed in Odoo and in the file. Choose, for each\n"
+"                    conflict, which side stays, then import again."
+msgstr "O diagrama mudou no Odoo e no arquivo. Escolha, para cada\n                    conflito, qual lado fica e importe de novo."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "The diagram could not be drawn: %s"
+msgstr "Não foi possível desenhar o diagrama: %s"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/wizards/bpmn_import_wizard.py:0
+msgid "The diagram is being edited by %s. Try again later."
+msgstr "O diagrama está sendo editado por %s. Tente mais tarde."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "The person editing loses the unsaved drawing. Continue?"
+msgstr "Quem está editando perde o desenho não salvo. Continuar?"
+
+#. module: bpmn_process
+#: model:ir.model.constraint,message:bpmn_process.constraint_bpmn_process_code_company_uniq
+msgid "The process code must be unique per company."
+msgstr "O código do processo precisa ser único por empresa."
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_element__outside_system
+msgid "The task is done outside Odoo (the 'odoo:' line says so)."
+msgstr "A tarefa é feita fora do Odoo (a linha 'odoo:' diz isso)."
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "The version does not belong to this process."
+msgstr "A versão não pertence a este processo."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.esm.js:0
+msgid "This process has no diagram yet: import a BPMN file."
+msgstr "Este processo ainda não tem diagrama: importe um arquivo BPMN."
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process_version.py:0
+msgid "This version is the same as the current one."
+msgstr "Esta versão é igual à atual."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_element__element_type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: bpmn_process
+#: model:res.groups,name:bpmn_process.group_bpmn_user
+msgid "User"
+msgstr "Usuário"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_lane__group_ids
+msgid ""
+"Users of these groups see the tasks of this lane highlighted in the 'My "
+"tasks' layer of the diagram (training map by role)."
+msgstr "Usuários destes grupos veem as tarefas desta raia destacadas na camada 'Minhas tarefas' do diagrama (mapa de treinamento por papel)."
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__current_version_number
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_list
+msgid "Version"
+msgstr "Versão"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Version %(number)s (%(origin)s)%(note)s"
+msgstr "Versão %(number)s (%(origin)s)%(note)s"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "Version %s does not exist."
+msgstr "A versão %s não existe."
+
+#. module: bpmn_process
+#: model:ir.model.constraint,message:bpmn_process.constraint_bpmn_process_version_number_process_uniq
+msgid "Version numbers are unique within the process."
+msgstr "Os números de versão são únicos no processo."
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "Version shown"
+msgstr "Versão exibida"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_import_wizard__base_version
+msgid "Version the file was based on. Empty: the last imported file."
+msgstr "Versão em que o arquivo se baseou. Vazio: o último arquivo importado."
+
+#. module: bpmn_process
+#: model:ir.actions.act_window,name:bpmn_process.bpmn_process_version_action
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__version_ids
+#: model:ir.ui.menu,name:bpmn_process.bpmn_process_version_menu
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_view_form
+msgid "Versions"
+msgstr "Versões"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_process__version_count
+msgid "Versions #"
+msgstr "Nº de versões"
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_process_version_view_form
+msgid "View diagram"
+msgstr "Ver diagrama"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "What changed?"
+msgstr "O que mudou?"
+
+#. module: bpmn_process
+#: model:ir.model.fields,help:bpmn_process.field_bpmn_process__source
+msgid ""
+"Where the diagram is maintained. It becomes 'Edited in Odoo' on the first "
+"save in the editor; imports are then merged."
+msgstr "Onde o diagrama é mantido. Vira 'Editado no Odoo' no primeiro salvamento no editor; daí em diante as importações são mescladas."
+
+#. module: bpmn_process
+#: model_terms:ir.ui.view,arch_db:bpmn_process.bpmn_element_view_search
+msgid "Without Odoo link"
+msgstr "Sem vínculo com o Odoo"
+
+#. module: bpmn_process
+#: model:ir.model.fields,field_description:bpmn_process.field_bpmn_import_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "Assistente"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "added"
+msgstr "incluídos"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "attributes"
+msgstr "atributos"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "changed"
+msgstr "alterados"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "container"
+msgstr "contêiner"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "content"
+msgstr "conteúdo"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "documentation"
+msgstr "documentação"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "element"
+msgstr "elemento"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "lane"
+msgstr "raia"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "moved"
+msgstr "movidos"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_element.py:0
+msgid "outside the system"
+msgstr "fora do sistema"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "to v"
+msgstr "para a v"
+
+#. module: bpmn_process
+#. odoo-python
+#: code:addons/bpmn_process/models/bpmn_process.py:0
+msgid "type"
+msgstr "tipo"
+
+#. module: bpmn_process
+#. odoo-javascript
+#: code:addons/bpmn_process/static/src/viewer/bpmn_viewer.xml:0
+msgid "v"
+msgstr "v"

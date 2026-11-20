@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="bpmn_element_view_list" model="ir.ui.view">
+        <field name="model">bpmn.element</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-success="status == 'decided'"
+                decoration-warning="status == 'proposal'"
+                decoration-danger="status == 'open'"
+            >
+                <field name="process_id" />
+                <field name="name" />
+                <field name="element_type" optional="show" />
+                <field name="lane_id" />
+                <field name="status" />
+                <field name="sdd_ref" optional="show" />
+                <field name="requirement_refs" optional="hide" />
+                <field name="model_id" optional="show" />
+                <field name="test_state" optional="show" />
+                <field name="bpmn_id" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="bpmn_element_view_form" model="ir.ui.view">
+        <field name="model">bpmn.element</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_show_in_diagram"
+                        type="object"
+                        string="Show in diagram"
+                        class="btn-primary"
+                    />
+                    <button
+                        name="action_open_odoo"
+                        type="object"
+                        string="Open in Odoo"
+                        invisible="not action_id and not model_id"
+                    />
+                    <field
+                        name="status"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                        statusbar_visible="open,proposal,decided"
+                    />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Removed"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="process_id" readonly="1" />
+                            <field name="element_type" />
+                            <field name="lane_id" readonly="1" />
+                            <field name="bpmn_id" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field name="sdd_ref" />
+                            <field name="requirement_refs" />
+                            <field name="test_state" />
+                            <field name="version_in_id" />
+                            <field name="version_out_id" invisible="active" />
+                        </group>
+                    </group>
+                    <group string="Link with Odoo" name="odoo_link">
+                        <group>
+                            <field name="odoo_ref" readonly="1" />
+                            <field name="outside_system" />
+                            <field name="manual_link" readonly="1" />
+                        </group>
+                        <group invisible="outside_system">
+                            <field name="model_id" />
+                            <field name="menu_id" />
+                            <field name="action_id" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tests" name="tests">
+                            <field name="test_ids" readonly="1">
+                                <list
+                                    decoration-success="result == 'passed'"
+                                    decoration-danger="result == 'failed'"
+                                >
+                                    <field name="date" />
+                                    <field name="scenario" />
+                                    <field name="environment" />
+                                    <field name="result" />
+                                    <field name="evidence_url" widget="url" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="bpmn_element_view_search" model="ir.ui.view">
+        <field name="model">bpmn.element</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="process_id" />
+                <field name="lane_id" />
+                <field name="bpmn_id" />
+                <field name="sdd_ref" />
+                <field name="requirement_refs" />
+                <filter
+                    name="status_open"
+                    string="Open"
+                    domain="[('status', '=', 'open')]"
+                />
+                <filter
+                    name="status_proposal"
+                    string="Proposals"
+                    domain="[('status', '=', 'proposal')]"
+                />
+                <filter
+                    name="status_decided"
+                    string="Decided"
+                    domain="[('status', '=', 'decided')]"
+                />
+                <separator />
+                <filter
+                    name="no_link"
+                    string="Without Odoo link"
+                    domain="[('model_id', '=', False), ('action_id', '=', False), ('outside_system', '=', False)]"
+                />
+                <filter
+                    name="inactive"
+                    string="Removed"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_process"
+                        string="Process"
+                        context="{'group_by': 'process_id'}"
+                    />
+                    <filter
+                        name="group_status"
+                        string="Status"
+                        context="{'group_by': 'status'}"
+                    />
+                    <filter
+                        name="group_lane"
+                        string="Lane"
+                        context="{'group_by': 'lane_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="bpmn_element_action" model="ir.actions.act_window">
+        <field name="name">Process elements</field>
+        <field name="res_model">bpmn.element</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="bpmn_element_test_view_list" model="ir.ui.view">
+        <field name="model">bpmn.element.test</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-success="result == 'passed'"
+                decoration-danger="result == 'failed'"
+            >
+                <field name="date" />
+                <field name="process_id" />
+                <field name="element_id" />
+                <field name="scenario" />
+                <field name="environment" />
+                <field name="result" />
+                <field name="evidence_url" widget="url" optional="show" />
+            </list>
+        </field>
+    </record>
+
+    <record id="bpmn_element_test_action" model="ir.actions.act_window">
+        <field name="name">Test results</field>
+        <field name="res_model">bpmn.element.test</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>
