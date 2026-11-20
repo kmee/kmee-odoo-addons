@@ -1,0 +1,57 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 00:52+0000\n"
+"PO-Revision-Date: 2026-11-20 00:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model.fields,help:ddmrp_purchase_dlt_vendor.field_stock_buffer_profile__dlt_vendor_policy
+msgid ""
+"De qual fornecedor sai o prazo (DLT) de item comprado.\n"
+"Primeiro da lista: padrão do ddmrp (sequência, quantidade mínima, preço).\n"
+"Pior prazo entre homologados: protege o buffer quando a rodada de cotação pode escolher qualquer fornecedor homologado; sem homologado, usa todos.\n"
+"Pior prazo entre todos: o mais conservador."
+msgstr ""
+"De qual fornecedor sai o prazo (DLT) de item comprado.\n"
+"Primeiro da lista: padrão do ddmrp (sequência, quantidade mínima, preço).\n"
+"Pior prazo entre homologados: protege o buffer quando a rodada de cotação pode escolher qualquer fornecedor homologado; sem homologado, usa todos.\n"
+"Pior prazo entre todos: o mais conservador."
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model.fields.selection,name:ddmrp_purchase_dlt_vendor.selection__stock_buffer_profile__dlt_vendor_policy__first
+msgid "First vendor of the list"
+msgstr "Primeiro fornecedor da lista"
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model.fields.selection,name:ddmrp_purchase_dlt_vendor.selection__stock_buffer_profile__dlt_vendor_policy__worst
+msgid "Longest lead time among all vendors"
+msgstr "Pior prazo entre todos os fornecedores"
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model.fields.selection,name:ddmrp_purchase_dlt_vendor.selection__stock_buffer_profile__dlt_vendor_policy__worst_approved
+msgid "Longest lead time among approved vendors"
+msgstr "Pior prazo entre os fornecedores homologados"
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model,name:ddmrp_purchase_dlt_vendor.model_stock_buffer
+msgid "Stock Buffer"
+msgstr "Buffer de estoque"
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model,name:ddmrp_purchase_dlt_vendor.model_stock_buffer_profile
+msgid "Stock Buffer Profile"
+msgstr "Perfil de buffer"
+
+#. module: ddmrp_purchase_dlt_vendor
+#: model:ir.model.fields,field_description:ddmrp_purchase_dlt_vendor.field_stock_buffer_profile__dlt_vendor_policy
+msgid "Vendor for DLT"
+msgstr "Fornecedor para o DLT"
