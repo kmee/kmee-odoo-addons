@@ -35,7 +35,7 @@ class TestValidacaoFolha(PayrollCommon):
         # A fixture cria o empregado com CPF, que é o caso normal; aqui o CPF
         # é apagado de propósito, porque é justamente a ausência dele que este
         # teste exercita.
-        emp.cnpj_cpf = False
+        emp.vat = False
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self.env["hr.payslip"].create(
             self._create_payslip_vals(emp, contract)
@@ -47,7 +47,7 @@ class TestValidacaoFolha(PayrollCommon):
     def test_cpf_valid_passes_confirm(self):
         """Empregado com CPF válido confirma normalmente."""
         emp = self._create_employee()
-        emp.cnpj_cpf = "123.456.789-09"
+        emp.vat = "123.456.789-09"
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self.env["hr.payslip"].create(
             self._create_payslip_vals(emp, contract)
@@ -123,7 +123,9 @@ class TestValidacaoFolha(PayrollCommon):
     def test_cpf_invalid_digits_rejected(self):
         """Empregado com CPF de dígitos inválidos não confirma holerite."""
         emp = self._create_employee()
-        emp.cnpj_cpf = "123.456.789-00"  # dígitos verificadores incorretos
+        # CPF legado com dígitos verificadores incorretos, gravado com a
+        # validação do cadastro desligada.
+        emp.with_context(disable_cpf_cnpj_validation=True).vat = "12345678900"
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self.env["hr.payslip"].create(
             self._create_payslip_vals(emp, contract)
@@ -189,7 +191,7 @@ class TestValidacaoFolha(PayrollCommon):
     def test_confirm_without_lines_rejected(self):
         """Confirmar holerite sem linhas é rejeitado."""
         emp = self._create_employee()
-        emp.cnpj_cpf = "123.456.789-09"
+        emp.vat = "123.456.789-09"
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self.env["hr.payslip"].create(
             self._create_payslip_vals(emp, contract)
@@ -200,7 +202,7 @@ class TestValidacaoFolha(PayrollCommon):
     def test_confirm_with_lines_passes(self):
         """Confirmar holerite com linhas computadas funciona."""
         emp = self._create_employee()
-        emp.cnpj_cpf = "123.456.789-09"
+        emp.vat = "123.456.789-09"
         contract = self._create_contract(emp, wage=3000.00)
         payslip = self.env["hr.payslip"].create(
             self._create_payslip_vals(emp, contract)

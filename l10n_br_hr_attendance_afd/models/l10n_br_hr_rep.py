@@ -52,7 +52,7 @@ class L10nBrHrRep(models.Model):
                 "datetime_marcacao": marcacao.datetime_marcacao,
                 "datetime_gravacao": marcacao.datetime_gravacao,
                 "cpf": punctuation_rm(
-                    marcacao.cpf or marcacao.employee_id.sudo().cpf or ""
+                    marcacao.cpf or marcacao.employee_id.sudo().vat or ""
                 ),
                 "coletor": marcacao.coletor,
                 "offline": marcacao.offline,

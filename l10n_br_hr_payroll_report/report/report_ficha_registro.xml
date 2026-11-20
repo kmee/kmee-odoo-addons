@@ -80,7 +80,9 @@
                             <tr>
                                 <td>
                                     <strong>CPF:</strong>
-                                    <span t-field="o.cnpj_cpf" />
+                                    <span
+                                        t-out="o.work_contact_id.vat_formatted_cnpj or o.vat"
+                                    />
                                 </td>
                                 <td>
                                     <strong>Documento:</strong>
@@ -90,7 +92,7 @@
                                 </td>
                                 <td>
                                     <strong>PIS/PASEP:</strong>
-                                    <span t-field="o.pis_pasep" />
+                                    <span t-field="o.pis_pasep_formatted" />
                                 </td>
                                 <td>
                                     <strong>Estado Civil:</strong>
