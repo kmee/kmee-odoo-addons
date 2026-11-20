@@ -120,7 +120,7 @@ class ESocialS3000(models.Model):
         origem = self.env[evento.origem_model].browse(evento.origem_id).exists()
         if not origem or "employee_id" not in origem._fields:
             return False
-        cpf = origem.employee_id.cnpj_cpf
+        cpf = origem.employee_id.vat
         return self._so_digitos(cpf) if cpf else False
 
     def _get_event_type(self):

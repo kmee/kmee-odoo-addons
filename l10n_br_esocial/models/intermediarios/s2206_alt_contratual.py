@@ -39,7 +39,7 @@ class ESocialS2206(models.Model):
         employee = self.employee_id
         contract = self.contract_id
 
-        cpf = employee.cnpj_cpf
+        cpf = employee.vat
         if not cpf:
             raise UserError(
                 _("Empregado '%(name)s' não possui CPF configurado.")
