@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Chamada na página da cotação no portal -->
+    <template
+        id="purchase_order_portal_content"
+        inherit_id="purchase.purchase_order_portal_content"
+        name="Quotation Round Answer"
+    >
+        <xpath expr="//div[@id='introduction']" position="after">
+            <div
+                t-if="order.rfq_round_id and order.sudo()._rfq_portal_can_answer()"
+                class="alert alert-info d-flex align-items-center justify-content-between mt-3"
+                role="alert"
+            >
+                <span>
+                    This request for quotation is part of the quotation round
+                    <strong t-out="order.rfq_round_id.name" />.
+                    <t t-if="order.rfq_round_id.date_deadline">
+                        Answer until <strong
+                    t-out="order.rfq_round_id.date_deadline"
+                    t-options="{'widget': 'date'}"
+                />.
+                    </t>
+                </span>
+                <a
+                    class="btn btn-primary"
+                    t-att-href="'/my/purchase/%s/rfq_response%s' % (order.id, '?access_token=%s' % order.access_token if order.access_token else '')"
+                >Answer the quotation</a>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Página de resposta -->
+    <template id="portal_rfq_round_response" name="Quotation Round Answer">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" t-value="False" />
+            <div class="container py-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <h2 class="mb-1">
+                            Request for Quotation <span t-out="order.name" />
+                        </h2>
+                        <div class="text-muted">
+                            Quotation round <strong t-out="rfq_round.name" />
+                            <t t-if="rfq_round.date_deadline">
+                                · answer until <strong
+                            t-out="rfq_round.date_deadline"
+                            t-options="{'widget': 'date'}"
+                        />
+                            </t>
+                        </div>
+                    </div>
+                    <a
+                        class="btn btn-secondary"
+                        t-att-href="order.get_portal_url()"
+                    >Back to the quotation</a>
+                </div>
+
+                <div t-if="submitted" class="alert alert-success" role="status">
+                    Thank you. Your answer was recorded and the buyer was notified.
+                    You can change it until the answer deadline.
+                </div>
+                <div
+                    t-if="errors.get('_global')"
+                    class="alert alert-danger"
+                    role="alert"
+                >
+                    <t t-out="errors['_global']" />
+                </div>
+                <div
+                    t-if="errors and not errors.get('_global')"
+                    class="alert alert-danger"
+                    role="alert"
+                >
+                    Check the highlighted fields.
+                </div>
+                <div t-if="not rfq_can_answer" class="alert alert-warning" role="alert">
+                    This quotation can no longer be answered (round closed or answer
+                    deadline passed). The values below are read only.
+                </div>
+
+                <form method="post" t-att-action="request.httprequest.path">
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        t-att-value="request.csrf_token()"
+                    />
+                    <input
+                        t-if="access_token"
+                        type="hidden"
+                        name="access_token"
+                        t-att-value="access_token"
+                    />
+                    <p class="text-muted small">
+                        Fill in the items you quote. Leave the price empty for items you do
+                        not supply.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle o_rfq_round_response">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th class="text-end">Quantity</th>
+                                    <th>UoM</th>
+                                    <t t-foreach="line_fields" t-as="field">
+                                        <th>
+                                            <t t-out="field['label']" />
+                                            <span
+                                                t-if="field['required']"
+                                                class="text-danger"
+                                            >*</span>
+                                        </th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="lines" t-as="pol">
+                                    <td>
+                                        <span t-out="pol.product_id.display_name" />
+                                    </td>
+                                    <td class="text-end">
+                                        <span t-field="pol.product_qty" />
+                                    </td>
+                                    <td>
+                                        <span t-out="pol.product_uom.name" />
+                                    </td>
+                                    <t t-foreach="line_fields" t-as="field">
+                                        <t
+                                            t-set="fname"
+                                            t-value="'%s_%s' % (field['key'], pol.id)"
+                                        />
+                                        <t
+                                            t-set="fvalue"
+                                            t-value="post.get(fname, field['get'](pol))"
+                                        />
+                                        <t t-set="ferror" t-value="errors.get(fname)" />
+                                        <td>
+                                            <select
+                                                t-if="field['type'] == 'selection'"
+                                                t-att-name="fname"
+                                                t-att-disabled="not rfq_can_answer"
+                                                t-attf-class="form-select form-select-sm #{ferror and 'is-invalid' or ''}"
+                                            >
+                                                <option value="" />
+                                                <t
+                                                    t-foreach="field.get('options', [])"
+                                                    t-as="opt"
+                                                >
+                                                    <option
+                                                        t-att-value="opt[0]"
+                                                        t-att-selected="str(opt[0]) == str(fvalue)"
+                                                        t-out="opt[1]"
+                                                    />
+                                                </t>
+                                            </select>
+                                            <input
+                                                t-elif="field['type'] == 'bool'"
+                                                type="checkbox"
+                                                class="form-check-input"
+                                                value="1"
+                                                t-att-name="fname"
+                                                t-att-checked="fvalue"
+                                                t-att-disabled="not rfq_can_answer"
+                                            />
+                                            <input
+                                                t-else=""
+                                                t-att-type="'date' if field['type'] == 'date' else 'text'"
+                                                t-att-name="fname"
+                                                t-att-value="fvalue"
+                                                t-att-disabled="not rfq_can_answer"
+                                                t-att-inputmode="'decimal' if field['type'] in ('float', 'int') else None"
+                                                t-attf-class="form-control form-control-sm #{ferror and 'is-invalid' or ''}"
+                                            />
+                                            <div
+                                                t-if="ferror"
+                                                class="invalid-feedback"
+                                                t-out="ferror"
+                                            />
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button t-if="rfq_can_answer" type="submit" class="btn btn-primary">
+                        Send answer
+                    </button>
+                </form>
+            </div>
+        </t>
+    </template>
+</odoo>

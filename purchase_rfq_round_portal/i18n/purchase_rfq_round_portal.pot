@@ -1,0 +1,189 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_rfq_round_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:25+0000\n"
+"PO-Revision-Date: 2026-11-20 02:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "%(vendor)s answered %(count)s items through the portal."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "%(vendor)s answered %(order)s through the portal."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.purchase_order_portal_content
+msgid "Answer the quotation"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.purchase_order_portal_content
+msgid "Answer until"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Back to the quotation"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Check the highlighted fields."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Fill in at least one price."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid ""
+"Fill in the items you quote. Leave the price empty for items you do\n"
+"                        not supply."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Invalid lead time."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Invalid price."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Lead Time (days)"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Notes"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model:ir.model.fields.selection,name:purchase_rfq_round_portal.selection__purchase_rfq_round_response__source__portal
+msgid "Portal"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Product"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model:ir.model,name:purchase_rfq_round_portal.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Quantity"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model:ir.model,name:purchase_rfq_round_portal.model_purchase_rfq_round_response
+msgid "Quotation Round Vendor Response"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Quotation round"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Request for Quotation"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Required."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "Send answer"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model:ir.model.fields,field_description:purchase_rfq_round_portal.field_purchase_rfq_round_response__source
+msgid "Source"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid ""
+"Thank you. Your answer was recorded and the buyer was notified.\n"
+"                    You can change it until the answer deadline."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "The lead time cannot be negative."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "The price cannot be negative."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid ""
+"This quotation can no longer be answered (round closed or answer\n"
+"                    deadline passed). The values below are read only."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "This quotation can no longer be answered."
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.purchase_order_portal_content
+msgid "This request for quotation is part of the quotation round"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#. odoo-python
+#: code:addons/purchase_rfq_round_portal/models/purchase_order.py:0
+msgid "Unit Price"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "UoM"
+msgstr ""
+
+#. module: purchase_rfq_round_portal
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round_portal.portal_rfq_round_response
+msgid "· answer until"
+msgstr ""
