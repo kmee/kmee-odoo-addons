@@ -41,11 +41,11 @@ jobs:
             name: test with OCB
             makepot: "true"
             coa: "true"
-            exclude: "mrp_multi_level_product_area_creator"
+            exclude: "mrp_multi_level_product_area_creator,ddmrp_purchase_request,ddmrp_purchase_rfq_round"
           - container: ghcr.io/oca/oca-ci/py3.10-ocb18.0:latest
             name: test mrp modules
             coa: "false"
-            include: "mrp_multi_level_product_area_creator"
+            include: "mrp_multi_level_product_area_creator,ddmrp_purchase_request,ddmrp_purchase_rfq_round"
     services:
       postgres:
         image: postgres:12.0
