@@ -44,19 +44,26 @@ class TestPurchaseRfqRound(RfqRoundCommon):
             self.assertFalse(any(order.order_line.mapped("price_unit")))
         self.assertEqual(len(rfq_round.line_ids.quote_line_ids), 6)
 
-    def test_04_send_attaches_sheet(self):
+    def test_04_send_without_sheet(self):
         rfq_round = self._make_round()
         rfq_round.action_create_rfqs()
         rfq_round.action_send_rfqs()
         self.assertEqual(set(rfq_round.order_ids.mapped("state")), {"sent"})
-        attachments = self.env["ir.attachment"].search(
-            [
-                ("res_model", "=", "purchase.order"),
-                ("res_id", "in", rfq_round.order_ids.ids),
-                ("name", "=like", "%.xlsx"),
-            ]
-        )
-        self.assertEqual(len(attachments), 3)
+        # Fornecedor sem e-mail: aviso no chatter da cotação.
+        order_3 = rfq_round.order_ids.filtered(lambda o: o.partner_id == self.vendor_3)
+        self.assertIn("another channel", order_3.message_ids[0].body)
+
+    def test_04b_snapshot_responses(self):
+        rfq_round = self._make_round()
+        rfq_round.action_create_rfqs()
+        self._answer(rfq_round)
+        rfq_round.action_award_best_price()
+        rfq_round.action_close()
+        # 5 respostas com preço (vendor_3 não respondeu o item A).
+        self.assertEqual(len(rfq_round.response_ids), 5)
+        self.assertEqual(set(rfq_round.response_ids.mapped("source")), {"manual"})
+        rfq_round.action_close()
+        self.assertEqual(len(rfq_round.response_ids), 5)
 
     def _answer(self, rfq_round):
         prices = {
@@ -198,3 +205,30 @@ class TestPurchaseRfqRound(RfqRoundCommon):
         action = rfq_round.action_compare()
         lines = self.env["purchase.order.line"].search(action["domain"])
         self.assertEqual(len(lines), 6)
+
+    def test_13_award_wizard(self):
+        rfq_round = self._make_round()
+        rfq_round.action_create_rfqs()
+        self.assertTrue(rfq_round.has_unsent_orders)
+        rfq_round.action_send_rfqs()
+        self.assertFalse(rfq_round.has_unsent_orders)
+        self._answer(rfq_round)
+        # Escolha manual do item A fica; o item B vai pelo critério.
+        manual = self._quote(rfq_round, self.vendor_2, self.product_a)
+        manual.action_rfq_round_award()
+        action = rfq_round.action_open_award()
+        wizard = (
+            self.env[action["res_model"]]
+            .with_context(**action["context"])
+            .create({"criterion": "price"})
+        )
+        self.assertTrue(wizard.only_unawarded)
+        wizard.action_apply()
+        line_a = rfq_round.line_ids.filtered(lambda r: r.product_id == self.product_a)
+        line_b = rfq_round.line_ids.filtered(lambda r: r.product_id == self.product_b)
+        self.assertEqual(line_a.awarded_po_line_id, manual)
+        self.assertEqual(line_b.awarded_partner_id, self.vendor_2)
+        # Sem manter as escolhas, o item A vai para o melhor preço.
+        wizard.write({"only_unawarded": False})
+        wizard.action_apply()
+        self.assertEqual(line_a.awarded_partner_id, self.vendor_1)

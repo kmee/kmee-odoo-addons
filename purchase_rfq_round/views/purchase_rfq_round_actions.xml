@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<!-- Ações raras da rodada: no menu de engrenagem (Ação), fora do cabeçalho. -->
+<odoo>
+    <record id="action_server_rfq_round_new_round" model="ir.actions.server">
+        <field name="name">New Round</field>
+        <field name="model_id" ref="model_purchase_rfq_round" />
+        <field name="binding_model_id" ref="model_purchase_rfq_round" />
+        <field name="binding_view_types">form</field>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]" />
+        <field name="state">code</field>
+        <field name="code">action = record.action_new_round()</field>
+    </record>
+
+    <record id="action_server_rfq_round_cancel" model="ir.actions.server">
+        <field name="name">Cancel Round</field>
+        <field name="model_id" ref="model_purchase_rfq_round" />
+        <field name="binding_model_id" ref="model_purchase_rfq_round" />
+        <field name="binding_view_types">form,list</field>
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]" />
+        <field name="state">code</field>
+        <field name="code">records.action_cancel()</field>
+    </record>
+</odoo>

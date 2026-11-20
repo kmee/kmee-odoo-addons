@@ -6,20 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 00:51+0000\n"
-"PO-Revision-Date: 2026-11-20 00:51+0000\n"
+"POT-Creation-Date: 2026-11-20 02:25+0000\n"
+"PO-Revision-Date: 2026-11-20 02:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "%(count)s items imported from %(file)s."
-msgstr ""
 
 #. module: purchase_rfq_round
 #. odoo-python
@@ -34,9 +28,8 @@ msgid "%(round)s: quotation for %(vendor)s"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "... and %s more rows ignored."
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "<span class=\"o_stat_text\">Compare</span>"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -87,6 +80,13 @@ msgid "Add to Round"
 msgstr ""
 
 #. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_award__only_unawarded
+msgid ""
+"Adjudica só os itens ainda sem vencedor; as escolhas já feitas, inclusive à "
+"mão na comparação, ficam."
+msgstr ""
+
+#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__amount_awarded
 msgid "Amount Awarded"
 msgstr ""
@@ -97,20 +97,9 @@ msgid "Amount Reference"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_import_view_form
-msgid "Analyze"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__date_deadline
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__date_deadline
 msgid "Answer Deadline"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-msgid "Answer deadline"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -124,18 +113,17 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_quote_view_list
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
 msgid "Award"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
-msgid "Award Best Date"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
-msgid "Award Best Price"
+#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round_award
+msgid "Award Quotation Round"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -152,6 +140,7 @@ msgstr ""
 
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__awarded_line_count
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__awarded_line_count
 msgid "Awarded Line Count"
 msgstr ""
 
@@ -181,6 +170,16 @@ msgid "Best Price"
 msgstr ""
 
 #. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_award__criterion__date
+msgid "Best lead time"
+msgstr ""
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_award__criterion__price
+msgid "Best price"
+msgstr ""
+
+#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__user_id
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
 msgid "Buyer"
@@ -188,8 +187,13 @@ msgstr ""
 
 #. module: purchase_rfq_round
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_request_line_make_rfq_round_view_form
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
 msgid "Cancel"
+msgstr ""
+
+#. module: purchase_rfq_round
+#: model:ir.actions.server,name:purchase_rfq_round.action_server_rfq_round_cancel
+msgid "Cancel Round"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -215,8 +219,10 @@ msgid "Choose the vendors to invite."
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_import_view_form
-msgid "Close"
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid ""
+"Chooses the winner of each item by the criterion below. To choose an\n"
+"                    item by hand, use Compare and the trophy on the vendor line."
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -231,32 +237,10 @@ msgid "Closed"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Code"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__column
-msgid "Column"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__column_ids
-msgid "Columns"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__company_id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__company_id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__company_id
 msgid "Company"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
-msgid "Compare"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -268,12 +252,6 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model:ir.actions.act_window,name:purchase_rfq_round.purchase_rfq_round_quote_action
 msgid "Compare Quotations"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Could not read the spreadsheet: %s"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -311,8 +289,7 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__create_uid
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__create_uid
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__create_uid
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__create_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__create_uid
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__create_uid
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__create_uid
 msgid "Created by"
@@ -321,11 +298,15 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__create_date
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__create_date
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__create_date
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__create_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__create_date
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__create_date
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__criterion
+msgid "Criterion"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -351,16 +332,9 @@ msgid "Deixe vazio para sugerir os fornecedores cadastrados nos produtos."
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-msgid "Delivery Lead Time (days)"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__display_name
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__display_name
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__display_name
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__display_name
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__display_name
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__display_name
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__display_name
 msgid "Display Name"
@@ -369,17 +343,6 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round__state__draft
 msgid "Draft"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__file
-msgid "File"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__file_name
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__file_name
-msgid "File Name"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -408,15 +371,19 @@ msgid "Has Message"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__header_row
-msgid "Header Row"
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__has_unsent_orders
+msgid "Has Unsent Orders"
+msgstr ""
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__has_unsent_orders
+msgid "Há cotação da rodada ainda não enviada ao fornecedor."
 msgstr ""
 
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__id
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__id
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__id
 msgid "ID"
@@ -444,35 +411,6 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_import_view_form
-msgid "Import"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round_import
-msgid "Import Quotation Round Responses"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_import_view_form
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
-msgid "Import Responses"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_response_view_list
-msgid "Imported on"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Invalid column: %s"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_is_follower
 msgid "Is Follower"
 msgstr ""
@@ -485,26 +423,30 @@ msgid "Items"
 msgstr ""
 
 #. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid "Items already awarded"
+msgstr ""
+
+#. module: purchase_rfq_round
 #. odoo-python
 #: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
 msgid "Items can only be added to a draft round."
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__key
-msgid "Key"
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid "Items in the round"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__label
-msgid "Label"
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__only_unawarded
+msgid "Keep current choices"
 msgstr ""
 
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__write_uid
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__write_uid
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__write_uid
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__write_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__write_uid
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__write_uid
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__write_uid
 msgid "Last Updated by"
@@ -513,8 +455,7 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__write_date
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__write_date
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__write_date
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__write_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__write_date
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__write_date
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__write_date
 msgid "Last Updated on"
@@ -526,48 +467,20 @@ msgid "Last purchase"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__delay
 msgid "Lead Time (days)"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_import_column__column
-msgid "Letra da coluna na planilha (A, B, C...)."
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__line_count
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__line_count
 msgid "Line Count"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_import__header_row
-msgid "Linha do cabeçalho na planilha (1 = primeira)."
 msgstr ""
 
 #. module: purchase_rfq_round
 #: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_line__reference_source__manual
 #: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_response__source__manual
 msgid "Manual"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Map the ID, code or product column."
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Map the unit price column."
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_import__state__mapping
-msgid "Mapping"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -602,7 +515,7 @@ msgid "New"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+#: model:ir.actions.server,name:purchase_rfq_round.action_server_rfq_round_new_round
 msgid "New Round"
 msgstr ""
 
@@ -628,9 +541,6 @@ msgid "Note"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
 msgid "Notes"
 msgstr ""
@@ -653,13 +563,6 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_import__order_id
-msgid ""
-"Obrigatório quando a planilha não tem a coluna ID (planilha própria do "
-"fornecedor): os itens são localizados pelo código ou nome."
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -723,9 +626,6 @@ msgid "Price Unit"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__product_id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__product_id
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
@@ -753,17 +653,8 @@ msgid "Purchase Request Lines"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__product_qty
 msgid "Quantity"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__order_id
-msgid "Quotation"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -771,11 +662,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_order__rfq_round_id
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
 msgid "Quotation Round"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round_import_column
-msgid "Quotation Round Import Column Mapping"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -801,12 +687,6 @@ msgid "Quotation Rounds"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-msgid "Quotation round"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__order_ids
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
 msgid "Quotations"
@@ -828,8 +708,8 @@ msgid "Quoting"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__raw_values
-msgid "Raw Values"
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_response_view_list
+msgid "Recorded on"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -879,11 +759,6 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__result
-msgid "Result"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,help:purchase_rfq_round.field_purchase_request_line__rfq_round_id
 msgid ""
 "Rodada de cotação em aberto (rascunho ou em cotação) que contém esta linha."
@@ -891,7 +766,7 @@ msgstr ""
 
 #. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__round_number
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__round_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__round_id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__round_id
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__round_id
 msgid "Round"
@@ -961,13 +836,7 @@ msgid "Source"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_response__source__import
-msgid "Spreadsheet"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__state
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import__state
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__round_state
 msgid "State"
 msgstr ""
@@ -989,13 +858,6 @@ msgstr ""
 #. module: purchase_rfq_round
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
 msgid "Suggest Vendors"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
-msgid ""
-"The quotations of this round will be cancelled and a new round opened with "
-"the best prices as reference. Continue?"
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -1023,45 +885,16 @@ msgstr ""
 
 #. module: purchase_rfq_round
 #. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Unit Price"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
 #: code:addons/purchase_rfq_round/models/purchase_rfq_round_line.py:0
 msgid "Unknown award criterion: %s"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__product_uom_id
 msgid "UoM"
 msgstr ""
 
 #. module: purchase_rfq_round
-#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_import__state__upload
-msgid "Upload"
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_import_view_form
-msgid ""
-"Use the spreadsheet sent with the quotation (with the ID column), or the\n"
-"                    vendor's own spreadsheet: in that case choose the quotation and check the\n"
-"                    detected columns."
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_response__raw_values
-msgid "Valores da linha como vieram na planilha."
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
 #: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__partner_id
 #: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_quote_view_list
 msgid "Vendor"
@@ -1080,8 +913,7 @@ msgstr ""
 #. module: purchase_rfq_round
 #. odoo-python
 #: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
-msgid ""
-"Vendor without e-mail: send the attached spreadsheet by another channel."
+msgid "Vendor without e-mail: send the quotation by another channel."
 msgstr ""
 
 #. module: purchase_rfq_round
@@ -1107,29 +939,6 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "Without the ID column, choose the quotation of this vendor."
-msgstr ""
-
-#. module: purchase_rfq_round
-#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_import_column__wizard_id
-msgid "Wizard"
-msgstr ""
-
-#. module: purchase_rfq_round
 #: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_line__awarded_partner_id
 msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "row %s: item not found in the round"
-msgstr ""
-
-#. module: purchase_rfq_round
-#. odoo-python
-#: code:addons/purchase_rfq_round/wizards/purchase_rfq_round_import.py:0
-msgid "row %s: no valid price"
 msgstr ""

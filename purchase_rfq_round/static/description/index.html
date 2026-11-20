@@ -381,17 +381,24 @@ sobra um pedido. Este módulo acrescenta a rodada por cima das Alternativas:</p>
 produto, e sugere os fornecedores cadastrados nos produtos;</li>
 <li>cria uma cotação por fornecedor, todas no mesmo grupo de Alternativas (em
 fila, com <tt class="docutils literal">queue_job</tt>, acima de um número de linhas configurável);</li>
-<li>envia cada cotação por e-mail com uma planilha padrão de resposta;</li>
-<li>importa a resposta: a planilha padrão ou a planilha do próprio fornecedor,
-com reconhecimento de colunas por sinônimo e mapeamento manual; guarda a
-resposta original de cada fornecedor;</li>
+<li>envia cada cotação pelo e-mail padrão de cotação; o fornecedor responde e o
+comprador lança os preços na cotação;</li>
 <li>compara as respostas por item (lista agrupada e matriz fornecedor x item) e
 adjudica por melhor preço, por melhor prazo ou manualmente, item a item;</li>
 <li>abre uma nova rodada com o melhor preço da anterior como referência;</li>
 <li>fecha a rodada: cancela as cotações sem item vencedor, tira das vencedoras os
 itens perdidos, liga as requisições só às linhas vencedoras e registra o
 saving sobre o preço de referência (último preço de compra ou da rodada
-anterior). As vencedoras seguem a aprovação normal do pedido.</li>
+anterior). As vencedoras seguem a aprovação normal do pedido;</li>
+<li>guarda as respostas de cada fornecedor ao fechar a rodada ou abrir a seguinte.</li>
+</ul>
+<p>Módulos opcionais por cima deste:</p>
+<ul class="simple">
+<li><tt class="docutils literal">purchase_rfq_round_sheet</tt>: planilha padrão de resposta no e-mail e
+importação da resposta (planilha padrão ou do fornecedor);</li>
+<li><tt class="docutils literal">purchase_rfq_comparison</tt>: comparação multicritério e pontuação;</li>
+<li><tt class="docutils literal">ddmrp_purchase_request</tt> e <tt class="docutils literal">ddmrp_purchase_rfq_round</tt>: integração com
+buffers DDMRP.</li>
 </ul>
 <p>A comparação usa campos gravados (preço sem impostos na moeda da empresa e data
 prevista), e não o <tt class="docutils literal">get_tender_best_lines</tt> do core, que recalcula todas as
@@ -437,10 +444,9 @@ de fila configurado. O limite de linhas para usar a fila fica no parâmetro
 <li>Em Compras &gt; Requisições &gt; Linhas, selecione as linhas aprovadas e use
 “Criar rodada de cotação” (menu Ação).</li>
 <li>Na rodada, confira os itens e os fornecedores e clique em “Criar cotações”.</li>
-<li>“Enviar por e-mail” manda cada cotação com a planilha de resposta anexa.</li>
-<li>Com as respostas, use “Importar respostas”: a planilha padrão é reconhecida
-pela coluna ID; para a planilha do fornecedor, escolha a cotação dele e
-confira as colunas detectadas.</li>
+<li>“Enviar por e-mail” manda cada cotação pelo e-mail padrão de cotação.</li>
+<li>Lance os preços e prazos respondidos em cada cotação (ou importe a planilha,
+com <tt class="docutils literal">purchase_rfq_round_sheet</tt>).</li>
 <li>“Comparar” abre as respostas por item, com a vencedora em destaque, e a
 matriz fornecedor x item. Adjudique por item, ou use “Adjudicar melhor
 preço” ou “Adjudicar melhor prazo”.</li>

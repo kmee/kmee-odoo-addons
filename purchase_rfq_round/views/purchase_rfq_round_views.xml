@@ -17,62 +17,38 @@
                         invisible="state != 'draft'"
                     />
                     <button
-                        name="action_send_rfqs"
-                        type="object"
-                        string="Send by E-mail"
-                        class="btn-primary"
-                        invisible="state != 'quoting'"
-                    />
-                    <button
-                        name="action_import_responses"
-                        type="object"
-                        string="Import Responses"
-                        invisible="state != 'quoting'"
-                    />
-                    <button
-                        name="action_compare"
-                        type="object"
-                        string="Compare"
-                        invisible="state not in ('quoting', 'done')"
-                    />
-                    <button
-                        name="action_award_best_price"
-                        type="object"
-                        string="Award Best Price"
-                        invisible="state != 'quoting'"
-                    />
-                    <button
-                        name="action_award_best_date"
-                        type="object"
-                        string="Award Best Date"
-                        invisible="state != 'quoting'"
-                    />
-                    <button
-                        name="action_new_round"
-                        type="object"
-                        string="New Round"
-                        invisible="state != 'quoting'"
-                        confirm="The quotations of this round will be cancelled and a new round opened with the best prices as reference. Continue?"
-                    />
-                    <button
-                        name="action_close"
-                        type="object"
-                        string="Close Round"
-                        class="btn-primary"
-                        invisible="state != 'quoting'"
-                        confirm="Quotations without awarded items will be cancelled. Continue?"
-                    />
-                    <button
                         name="action_suggest_vendors"
                         type="object"
                         string="Suggest Vendors"
                         invisible="state != 'draft'"
                     />
                     <button
-                        name="action_cancel"
+                        name="action_send_rfqs"
                         type="object"
-                        string="Cancel"
-                        invisible="state not in ('draft', 'quoting')"
+                        string="Send by E-mail"
+                        class="btn-primary"
+                        invisible="state != 'quoting' or not has_unsent_orders"
+                    />
+                    <button
+                        name="action_open_award"
+                        type="object"
+                        string="Award"
+                        class="btn-primary"
+                        invisible="state != 'quoting' or has_unsent_orders or awarded_line_count"
+                    />
+                    <button
+                        name="action_open_award"
+                        type="object"
+                        string="Award"
+                        invisible="state != 'quoting' or (not has_unsent_orders and not awarded_line_count)"
+                    />
+                    <button
+                        name="action_close"
+                        type="object"
+                        string="Close Round"
+                        class="btn-primary"
+                        invisible="state != 'quoting' or not awarded_line_count"
+                        confirm="Quotations without awarded items will be cancelled. Continue?"
                     />
                     <button
                         name="action_draft"
@@ -80,6 +56,7 @@
                         string="Reset to Draft"
                         invisible="state != 'cancel'"
                     />
+                    <field name="has_unsent_orders" invisible="1" />
                     <field
                         name="state"
                         widget="statusbar"
@@ -113,6 +90,17 @@
                                 widget="statinfo"
                                 string="Responses"
                             />
+                        </button>
+                        <button
+                            name="action_compare"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-balance-scale"
+                            invisible="state not in ('quoting', 'done')"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Compare</span>
+                            </div>
                         </button>
                     </div>
                     <div class="oe_title">
@@ -280,8 +268,7 @@
                 <field name="delay" />
                 <field name="note" />
                 <field name="source" />
-                <field name="file_name" optional="show" />
-                <field name="create_date" string="Imported on" optional="show" />
+                <field name="create_date" string="Recorded on" optional="show" />
             </list>
         </field>
     </record>

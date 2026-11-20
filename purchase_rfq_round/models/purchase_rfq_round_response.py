@@ -7,9 +7,10 @@ from odoo import fields, models
 class PurchaseRfqRoundResponse(models.Model):
     """Resposta original do fornecedor, como veio, antes de qualquer ajuste.
 
-    A cotação (RFQ) guarda o valor vigente; esta tabela guarda o histórico:
-    cada importação ou digitação gera uma linha, e a rodada seguinte não apaga
-    as respostas da anterior.
+    A cotação (RFQ) guarda o valor vigente; esta tabela guarda o histórico.
+    No núcleo, as respostas digitadas na cotação são registradas ao fechar a
+    rodada ou abrir a seguinte; a importação de planilha
+    (``purchase_rfq_round_sheet``) registra cada linha importada.
     """
 
     _name = "purchase.rfq.round.response"
@@ -32,9 +33,7 @@ class PurchaseRfqRoundResponse(models.Model):
     delay = fields.Integer(string="Lead Time (days)")
     note = fields.Char()
     source = fields.Selection(
-        [("import", "Spreadsheet"), ("manual", "Manual")],
-        default="import",
+        [("manual", "Manual")],
+        default="manual",
         required=True,
     )
-    file_name = fields.Char()
-    raw_values = fields.Json(help="Valores da linha como vieram na planilha.")

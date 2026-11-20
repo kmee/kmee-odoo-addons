@@ -1,10 +1,9 @@
 #. Em Compras > Requisições > Linhas, selecione as linhas aprovadas e use
    "Criar rodada de cotação" (menu Ação).
 #. Na rodada, confira os itens e os fornecedores e clique em "Criar cotações".
-#. "Enviar por e-mail" manda cada cotação com a planilha de resposta anexa.
-#. Com as respostas, use "Importar respostas": a planilha padrão é reconhecida
-   pela coluna ID; para a planilha do fornecedor, escolha a cotação dele e
-   confira as colunas detectadas.
+#. "Enviar por e-mail" manda cada cotação pelo e-mail padrão de cotação.
+#. Lance os preços e prazos respondidos em cada cotação (ou importe a planilha,
+   com ``purchase_rfq_round_sheet``).
 #. "Comparar" abre as respostas por item, com a vencedora em destaque, e a
    matriz fornecedor x item. Adjudique por item, ou use "Adjudicar melhor
    preço" ou "Adjudicar melhor prazo".

@@ -1,19 +1,8 @@
 # Copyright 2026 KMEE
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import base64
-import io
-import logging
-
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
-
-_logger = logging.getLogger(__name__)
-
-try:
-    import xlsxwriter
-except ImportError:  # pragma: no cover
-    _logger.debug("xlsxwriter not available")
 
 
 class PurchaseRfqRound(models.Model):
@@ -95,6 +84,10 @@ class PurchaseRfqRound(models.Model):
     amount_saving = fields.Monetary(compute="_compute_amounts", string="Saving")
     saving_percent = fields.Float(compute="_compute_amounts", string="Saving (%)")
     awarded_line_count = fields.Integer(compute="_compute_amounts")
+    has_unsent_orders = fields.Boolean(
+        compute="_compute_has_unsent_orders",
+        help="Há cotação da rodada ainda não enviada ao fornecedor.",
+    )
     line_count = fields.Integer(compute="_compute_amounts")
 
     @api.model_create_multi
@@ -109,6 +102,13 @@ class PurchaseRfqRound(models.Model):
     def _compute_order_count(self):
         for rec in self:
             rec.order_count = len(rec.order_ids)
+
+    @api.depends("order_ids.state")
+    def _compute_has_unsent_orders(self):
+        for rec in self:
+            rec.has_unsent_orders = rec.state == "quoting" and any(
+                order.state == "draft" for order in rec.order_ids
+            )
 
     def _compute_response_count(self):
         for rec in self:
@@ -251,128 +251,19 @@ class PurchaseRfqRound(models.Model):
         return order
 
     # ------------------------------------------------------------------
-    # Planilha de resposta
+    # Envio
     # ------------------------------------------------------------------
 
-    def _get_sheet_columns(self):
-        """Colunas da planilha de resposta.
+    def _get_rfq_mail_attachments(self, order):
+        """Anexos do e-mail de cada cotação.
 
-        Cada coluna: chave, título, largura, se o fornecedor preenche e uma
-        função que devolve o valor inicial a partir da linha da cotação.
-        Módulos podem acrescentar colunas (por exemplo, condição de pagamento).
+        Ponto de extensão: ``purchase_rfq_round_sheet`` anexa a planilha
+        padrão de resposta.
         """
-        return [
-            {
-                "key": "line_id",
-                "label": "ID",
-                "width": 8,
-                "input": False,
-                "value": lambda pol: pol.id,
-            },
-            {
-                "key": "default_code",
-                "label": _("Code"),
-                "width": 14,
-                "input": False,
-                "value": lambda pol: pol.product_id.default_code or "",
-            },
-            {
-                "key": "product",
-                "label": _("Product"),
-                "width": 40,
-                "input": False,
-                "value": lambda pol: pol.product_id.display_name,
-            },
-            {
-                "key": "uom",
-                "label": _("UoM"),
-                "width": 8,
-                "input": False,
-                "value": lambda pol: pol.product_uom.name,
-            },
-            {
-                "key": "quantity",
-                "label": _("Quantity"),
-                "width": 10,
-                "input": False,
-                "value": lambda pol: pol.product_qty,
-            },
-            {
-                "key": "price_unit",
-                "label": _("Unit Price"),
-                "width": 12,
-                "input": True,
-                "value": lambda pol: pol.price_unit or None,
-            },
-            {
-                "key": "delay",
-                "label": _("Delivery Lead Time (days)"),
-                "width": 12,
-                "input": True,
-                "value": lambda pol: None,
-            },
-            {
-                "key": "note",
-                "label": _("Notes"),
-                "width": 30,
-                "input": True,
-                "value": lambda pol: None,
-            },
-        ]
-
-    def _generate_response_sheet(self, order):
-        """Gera a planilha padrão de resposta de uma cotação da rodada."""
-        self.ensure_one()
-        output = io.BytesIO()
-        book = xlsxwriter.Workbook(output, {"in_memory": True})
-        sheet = book.add_worksheet(_("Quotation"))
-        bold = book.add_format({"bold": True})
-        head = book.add_format({"bold": True, "bg_color": "#D9E1F2", "border": 1})
-        locked = book.add_format({"locked": True, "bg_color": "#F2F2F2"})
-        unlocked = book.add_format({"locked": False, "bg_color": "#FFF2CC"})
-        sheet.write(0, 0, _("Quotation round"), bold)
-        sheet.write(0, 1, self.name)
-        sheet.write(1, 0, _("Quotation"), bold)
-        sheet.write(1, 1, order.name)
-        sheet.write(2, 0, _("Vendor"), bold)
-        sheet.write(2, 1, order.partner_id.display_name)
-        sheet.write(3, 0, _("Answer deadline"), bold)
-        sheet.write(3, 1, fields.Date.to_string(self.date_deadline) or "")
-        columns = self._get_sheet_columns()
-        header_row = 5
-        for col, column in enumerate(columns):
-            sheet.write(header_row, col, column["label"], head)
-            sheet.set_column(col, col, column["width"])
-        for row, pol in enumerate(order.order_line.filtered("product_id"), 1):
-            for col, column in enumerate(columns):
-                value = column["value"](pol)
-                fmt = unlocked if column["input"] else locked
-                if value is None:
-                    sheet.write_blank(header_row + row, col, None, fmt)
-                else:
-                    sheet.write(header_row + row, col, value, fmt)
-        sheet.protect("", {"format_columns": True})
-        book.close()
-        return output.getvalue()
-
-    def _attach_response_sheet(self, order):
-        self.ensure_one()
-        content = self._generate_response_sheet(order)
-        return self.env["ir.attachment"].create(
-            {
-                "name": f"{order.name.replace('/', '-')}.xlsx",
-                "datas": base64.b64encode(content),
-                "res_model": "purchase.order",
-                "res_id": order.id,
-                "mimetype": (
-                    "application/vnd.openxmlformats-officedocument."
-                    "spreadsheetml.sheet"
-                ),
-            }
-        )
+        return self.env["ir.attachment"]
 
     def action_send_rfqs(self):
-        """Envia por e-mail cada cotação com a planilha de resposta anexa."""
+        """Envia por e-mail cada cotação em rascunho da rodada."""
         template = self.env.ref(
             "purchase.email_template_edi_purchase", raise_if_not_found=False
         )
@@ -380,33 +271,68 @@ class PurchaseRfqRound(models.Model):
             if rec.state != "quoting":
                 raise UserError(_("Create the quotations before sending them."))
             for order in rec.order_ids.filtered(lambda o: o.state == "draft"):
-                attachment = rec._attach_response_sheet(order)
+                attachments = rec._get_rfq_mail_attachments(order)
                 if order.partner_id.email and template:
-                    template.send_mail(
-                        order.id,
-                        email_values={"attachment_ids": [Command.link(attachment.id)]},
+                    # Mesmo layout do envio manual do core: o fornecedor
+                    # recebe o botão de acesso à cotação no portal.
+                    order.message_post_with_source(
+                        template,
+                        email_layout_xmlid=(
+                            "mail.mail_notification_layout_with_responsible_signature"
+                        ),
+                        subtype_xmlid="mail.mt_comment",
+                        partner_ids=order.partner_id.ids,
+                        attachment_ids=attachments.ids,
                     )
                 else:
                     order.message_post(
                         body=_(
-                            "Vendor without e-mail: send the attached "
-                            "spreadsheet by another channel."
+                            "Vendor without e-mail: send the quotation by "
+                            "another channel."
                         ),
-                        attachment_ids=attachment.ids,
+                        attachment_ids=attachments.ids,
                     )
                 order.write({"state": "sent"})
         return True
 
-    def action_import_responses(self):
-        self.ensure_one()
+    # ------------------------------------------------------------------
+    # Respostas
+    # ------------------------------------------------------------------
+
+    def _prepare_response_snapshot(self, po_line):
+        order = po_line.order_id
+        delay = 0
+        if po_line.date_planned and order.date_order:
+            delay = max((po_line.date_planned - order.date_order).days, 0)
         return {
-            "type": "ir.actions.act_window",
-            "name": _("Import Responses"),
-            "res_model": "purchase.rfq.round.import",
-            "view_mode": "form",
-            "target": "new",
-            "context": {"default_round_id": self.id},
+            "round_id": self.id,
+            "round_line_id": po_line.rfq_round_line_id.id,
+            "order_id": order.id,
+            "order_line_id": po_line.id,
+            "partner_id": order.partner_id.id,
+            "product_id": po_line.product_id.id,
+            "price_unit": po_line.price_unit,
+            "delay": delay,
+            "source": "manual",
         }
+
+    def _snapshot_responses(self):
+        """Guarda as respostas digitadas na cotação que ainda não têm registro.
+
+        Chamado ao fechar a rodada e ao abrir a seguinte, para que o
+        histórico de respostas exista mesmo sem importação de planilha.
+        """
+        vals_list = []
+        for rec in self:
+            recorded = rec.response_ids.order_line_id
+            for po_line in rec.line_ids.quote_line_ids:
+                if (
+                    po_line.price_unit > 0.0
+                    and po_line.order_id.state != "cancel"
+                    and po_line not in recorded
+                ):
+                    vals_list.append(rec._prepare_response_snapshot(po_line))
+        self.env["purchase.rfq.round.response"].create(vals_list)
 
     # ------------------------------------------------------------------
     # Adjudicação
@@ -416,6 +342,26 @@ class PurchaseRfqRound(models.Model):
         for rec in self:
             if rec.state != "quoting":
                 raise UserError(_("Only rounds in quotation can be awarded."))
+
+    def action_open_award(self):
+        self.ensure_one()
+        self._check_can_award()
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Award"),
+            "res_model": "purchase.rfq.round.award",
+            "view_mode": "form",
+            "target": "new",
+            "context": {"default_round_id": self.id},
+        }
+
+    def _award_lines(self, criterion, only_unawarded=False):
+        self._check_can_award()
+        lines = self.line_ids
+        if only_unawarded:
+            lines = lines.filtered(lambda line: not line.awarded_po_line_id)
+        for line in lines:
+            line._award(line._get_best_quote(criterion))
 
     def action_award_best_price(self):
         self._check_can_award()
@@ -441,6 +387,7 @@ class PurchaseRfqRound(models.Model):
             awarded = rec.line_ids.awarded_po_line_id
             if not awarded:
                 raise UserError(_("Award at least one item before closing."))
+            rec._snapshot_responses()
             for order in rec.order_ids.filtered(lambda o: o.state != "cancel"):
                 winners = order.order_line & awarded
                 if not winners:
@@ -469,6 +416,7 @@ class PurchaseRfqRound(models.Model):
         self.ensure_one()
         if self.state != "quoting":
             raise UserError(_("Only a round in quotation can be followed."))
+        self._snapshot_responses()
         new_lines = []
         for line in self.line_ids:
             best = line._get_best_quote("price")
