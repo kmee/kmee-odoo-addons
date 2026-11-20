@@ -128,7 +128,7 @@ class TestS2210(EsocialSstCommon):
         self.assertEqual(dados["ind_cat_obito"], "N")
         self.assertEqual(dados["houve_afast"], "S")
         self.assertEqual(dados["nm_emit"], "Dr. Plantonista")
-        self.assertEqual(dados["cpf_trab"], "07616692941")
+        self.assertEqual(dados["cpf_trab"], "07616692990")
 
     def test_obito_leva_data_do_obito(self):
         self.acidente.write({"houve_obito": True, "date_obito": date(2026, 6, 11)})

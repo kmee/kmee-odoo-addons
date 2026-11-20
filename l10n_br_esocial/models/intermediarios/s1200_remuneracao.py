@@ -109,7 +109,7 @@ class ESocialS1200(models.Model):
         self.ensure_one()
         employee = self.employee_id
 
-        cpf = employee.cnpj_cpf
+        cpf = employee.vat
         if not cpf:
             raise UserError(
                 _("Empregado '%(name)s' não possui CPF configurado.")

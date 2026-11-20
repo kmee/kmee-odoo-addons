@@ -64,7 +64,7 @@ class TestApuracao(TransactionCase):
                 "name": "Ana Apuração",
                 "tz": "America/Sao_Paulo",
                 "resource_calendar_id": cls.calendario.id,
-                "cnpj_cpf": "434.612.928-50",
+                "vat": "434.612.928-50",
             }
         )
         cls.contract = cls.env["hr.contract"].create(
@@ -303,7 +303,7 @@ class TestApuracao(TransactionCase):
                     "rep_id": self.rep.id,
                     "company_id": self.company.id,
                     "datetime_marcacao": datetime(2026, 3, 2, 11, 0),
-                    "cpf": "11122233396",
+                    "cpf": "11122233477",
                     "origem": "rep_c",
                 }
             ]

@@ -207,7 +207,7 @@ class L10nBrHrCaged(models.Model):
         # Registro C - Movimentações
         for contract in contracts:
             employee = contract.employee_id
-            cpf = (employee.cnpj_cpf or "").replace(".", "").replace("-", "")
+            cpf = (employee.vat or "").replace(".", "").replace("-", "")
             pis = (employee.pis_pasep or "").replace(".", "").replace("-", "")
 
             # Tipo: 10=admissão, 20=desligamento
