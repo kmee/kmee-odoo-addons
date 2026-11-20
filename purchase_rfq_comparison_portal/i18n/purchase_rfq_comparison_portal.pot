@@ -1,0 +1,75 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* purchase_rfq_comparison_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:26+0000\n"
+"PO-Revision-Date: 2026-11-20 02:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Invalid date."
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Invalid payment terms."
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Invalid quantity."
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Meets Specification"
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Minimum Qty"
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Payment Terms"
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#: model:ir.model,name:purchase_rfq_comparison_portal.model_purchase_order
+msgid "Purchase Order"
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "The quantity cannot be negative."
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "The validity cannot be in the past."
+msgstr ""
+
+#. module: purchase_rfq_comparison_portal
+#. odoo-python
+#: code:addons/purchase_rfq_comparison_portal/models/purchase_order.py:0
+msgid "Valid Until"
+msgstr ""
