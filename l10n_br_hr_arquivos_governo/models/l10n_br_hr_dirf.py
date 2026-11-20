@@ -194,7 +194,7 @@ class HrDirf(models.Model):
         if not payslips:
             return lines
 
-        cpf = (employee.cnpj_cpf or "").replace(".", "").replace("-", "")
+        cpf = (employee.vat or "").replace(".", "").replace("-", "")
 
         # IDREC - código de receita (0561 = empregado CLT)
         lines.append("IDREC|0561|")

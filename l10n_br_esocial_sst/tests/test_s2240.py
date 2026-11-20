@@ -154,7 +154,7 @@ class TestS2240(EsocialSstCommon):
         self.assertEqual(root.find(".//e:epcEpi/e:epi/e:docAval", ns).text, "31000")
         self.assertEqual(root.find(".//e:infoAmb/e:dscSetor", ns).text, "PRODUCAO")
         self.assertEqual(root.find(".//e:respReg/e:cpfResp", ns).text, "07616692941")
-        self.assertEqual(root.find(".//e:ideVinculo/e:cpfTrab", ns).text, "07616692941")
+        self.assertEqual(root.find(".//e:ideVinculo/e:cpfTrab", ns).text, "07616692990")
 
     @unittest.skipUnless(HAS_ESOCIALLIB, "esociallib não instalada")
     @mute_logger("odoo.addons.l10n_br_esocial.models.intermediarios.base_intermediario")
