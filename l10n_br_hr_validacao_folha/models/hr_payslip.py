@@ -68,7 +68,7 @@ class HrPayslip(models.Model):
         """Validate payslip consistency before confirming."""
         for rec in self:
             # CPF obrigatório
-            cpf = rec.employee_id.cnpj_cpf if rec.employee_id else False
+            cpf = rec.employee_id.vat if rec.employee_id else False
             if rec.employee_id and not cpf:
                 raise ValidationError(
                     _(
