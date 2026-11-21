@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_rfq_round_user,purchase.rfq.round user,model_purchase_rfq_round,purchase.group_purchase_user,1,1,1,0
+access_purchase_rfq_round_manager,purchase.rfq.round manager,model_purchase_rfq_round,purchase.group_purchase_manager,1,1,1,1
+access_purchase_rfq_round_line_user,purchase.rfq.round.line user,model_purchase_rfq_round_line,purchase.group_purchase_user,1,1,1,1
+access_purchase_rfq_round_response_user,purchase.rfq.round.response user,model_purchase_rfq_round_response,purchase.group_purchase_user,1,0,1,0
+access_purchase_rfq_round_response_manager,purchase.rfq.round.response manager,model_purchase_rfq_round_response,purchase.group_purchase_manager,1,1,1,1
+access_purchase_request_line_make_rfq_round_user,purchase.request.line.make.rfq.round user,model_purchase_request_line_make_rfq_round,purchase.group_purchase_user,1,1,1,1
+access_purchase_rfq_round_award_user,purchase.rfq.round.award user,model_purchase_rfq_round_award,purchase.group_purchase_user,1,1,1,1

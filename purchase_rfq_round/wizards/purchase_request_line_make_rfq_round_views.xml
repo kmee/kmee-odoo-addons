@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_request_line_make_rfq_round_view_form" model="ir.ui.view">
+        <field name="name">purchase.request.line.make.rfq.round.form</field>
+        <field name="model">purchase.request.line.make.rfq.round</field>
+        <field name="arch" type="xml">
+            <form string="Create Quotation Round">
+                <group>
+                    <field name="round_id" />
+                    <field name="date_deadline" invisible="round_id" />
+                    <field name="vendor_ids" widget="many2many_tags" />
+                </group>
+                <field name="request_line_ids">
+                    <list>
+                        <field name="request_id" />
+                        <field name="product_id" />
+                        <field name="product_qty" />
+                        <field name="product_uom_id" />
+                        <field name="date_required" />
+                    </list>
+                </field>
+                <footer>
+                    <button
+                        name="action_create"
+                        type="object"
+                        string="Create Round"
+                        class="btn-primary"
+                    />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record
+        id="purchase_request_line_make_rfq_round_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Create Quotation Round</field>
+        <field name="res_model">purchase.request.line.make.rfq.round</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field
+            name="binding_model_id"
+            ref="purchase_request.model_purchase_request_line"
+        />
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

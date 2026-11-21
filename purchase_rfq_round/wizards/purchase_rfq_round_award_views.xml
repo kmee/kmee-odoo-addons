@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_rfq_round_award_view_form" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.award.form</field>
+        <field name="model">purchase.rfq.round.award</field>
+        <field name="arch" type="xml">
+            <form string="Award">
+                <field name="round_id" invisible="1" />
+                <p class="text-muted">
+                    Chooses the winner of each item by the criterion below. To choose an
+                    item by hand, use Compare and the trophy on the vendor line.
+                </p>
+                <group>
+                    <field name="criterion" widget="radio" />
+                    <field name="only_unawarded" />
+                    <field name="awarded_line_count" string="Items already awarded" />
+                    <field name="line_count" string="Items in the round" />
+                </group>
+                <footer>
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Award"
+                        class="btn-primary"
+                    />
+                    <button special="cancel" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
