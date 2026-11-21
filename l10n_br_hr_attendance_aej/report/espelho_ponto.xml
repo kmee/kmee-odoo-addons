@@ -58,7 +58,7 @@
                                     </td>
                                     <td>
                                         <span
-                                            t-out="employee.sudo().work_contact_id.vat_formatted_cnpj or employee.sudo().vat or ''"
+                                            t-out="periodo._espelho_cpf_formatado(employee)"
                                         />
                                     </td>
                                 </tr>
