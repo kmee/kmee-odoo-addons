@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mis_purchase_commitment_due_purchase,mis.purchase.commitment.due purchase,model_mis_purchase_commitment_due,purchase.group_purchase_user,1,0,0,0
+access_mis_purchase_commitment_due_account,mis.purchase.commitment.due account,model_mis_purchase_commitment_due,account.group_account_readonly,1,0,0,0
+access_mis_purchase_commitment_due_manager,mis.purchase.commitment.due manager,model_mis_purchase_commitment_due,account.group_account_manager,1,1,1,1
