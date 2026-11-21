@@ -5,6 +5,7 @@ import base64
 import logging
 
 import pytz
+from erpbrasil.base.fiscal import cnpj_cpf
 from erpbrasil.base.misc import punctuation_rm
 
 from odoo import _, fields, models
@@ -408,3 +409,13 @@ class L10nBrHrApuracaoPeriodo(models.Model):
         return self.env.ref(
             "l10n_br_hr_attendance_aej.action_report_espelho_ponto"
         ).report_action(self)
+
+    def _espelho_cpf_formatado(self, employee):
+        """CPF do trabalhador com máscara, para o espelho de ponto.
+
+        O l10n_br_hr grava o CPF só com dígitos; a forma formatada do contato
+        de trabalho (vat_formatted_cnpj) só existe quando o contato é do
+        Brasil, por isso o espelho formata aqui.
+        """
+        cpf = punctuation_rm(employee.sudo().vat or "")
+        return cnpj_cpf.formata(cpf) if cpf else ""
