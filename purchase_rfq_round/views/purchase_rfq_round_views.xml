@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Rodada -->
+    <record id="purchase_rfq_round_view_form" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.form</field>
+        <field name="model">purchase.rfq.round</field>
+        <field name="arch" type="xml">
+            <form string="Quotation Round">
+                <header>
+                    <button
+                        name="action_create_rfqs"
+                        type="object"
+                        string="Create Quotations"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_suggest_vendors"
+                        type="object"
+                        string="Suggest Vendors"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_send_rfqs"
+                        type="object"
+                        string="Send by E-mail"
+                        class="btn-primary"
+                        invisible="state != 'quoting' or not has_unsent_orders"
+                    />
+                    <button
+                        name="action_open_award"
+                        type="object"
+                        string="Award"
+                        class="btn-primary"
+                        invisible="state != 'quoting' or has_unsent_orders or awarded_line_count"
+                    />
+                    <button
+                        name="action_open_award"
+                        type="object"
+                        string="Award"
+                        invisible="state != 'quoting' or (not has_unsent_orders and not awarded_line_count)"
+                    />
+                    <button
+                        name="action_close"
+                        type="object"
+                        string="Close Round"
+                        class="btn-primary"
+                        invisible="state != 'quoting' or not awarded_line_count"
+                        confirm="Quotations without awarded items will be cancelled. Continue?"
+                    />
+                    <button
+                        name="action_draft"
+                        type="object"
+                        string="Reset to Draft"
+                        invisible="state != 'cancel'"
+                    />
+                    <field name="has_unsent_orders" invisible="1" />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,quoting,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_orders"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-file-text-o"
+                            invisible="order_count == 0"
+                        >
+                            <field
+                                name="order_count"
+                                widget="statinfo"
+                                string="Quotations"
+                            />
+                        </button>
+                        <button
+                            name="action_view_responses"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-inbox"
+                            invisible="response_count == 0"
+                        >
+                            <field
+                                name="response_count"
+                                widget="statinfo"
+                                string="Responses"
+                            />
+                        </button>
+                        <button
+                            name="action_compare"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-balance-scale"
+                            invisible="state not in ('quoting', 'done')"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Compare</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_id" />
+                            <field name="date_deadline" />
+                            <field name="round_number" />
+                            <field name="parent_id" invisible="not parent_id" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="currency_id" invisible="1" />
+                            <field name="awarded_line_count" string="Awarded items" />
+                            <field name="amount_reference" />
+                            <field name="amount_awarded" />
+                            <field name="amount_saving" />
+                            <field name="saving_percent" widget="percentage" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Items" name="items">
+                            <field name="line_ids" readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="product_id" />
+                                    <field name="product_qty" />
+                                    <field name="product_uom_id" />
+                                    <field name="reference_price" />
+                                    <field name="reference_source" optional="show" />
+                                    <field name="quote_count" />
+                                    <field name="best_price_unit" />
+                                    <field name="awarded_partner_id" />
+                                    <field name="awarded_price_unit" />
+                                    <field name="currency_id" column_invisible="1" />
+                                    <field name="amount_saving" sum="Saving" />
+                                    <field
+                                        name="request_line_ids"
+                                        widget="many2many_tags"
+                                        optional="hide"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Vendors" name="vendors">
+                            <field
+                                name="vendor_ids"
+                                readonly="state != 'draft'"
+                                widget="many2many"
+                            >
+                                <list>
+                                    <field name="display_name" />
+                                    <field name="email" />
+                                    <field name="phone" />
+                                    <field name="state_id" optional="show" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="note" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_view_list" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.list</field>
+        <field name="model">purchase.rfq.round</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="round_number" />
+                <field name="user_id" />
+                <field name="date_deadline" />
+                <field name="line_count" string="Items" />
+                <field name="order_count" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="amount_saving" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'quoting'"
+                    decoration-success="state == 'done'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_view_search" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.search</field>
+        <field name="model">purchase.rfq.round</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="vendor_ids" />
+                <field
+                    name="line_ids"
+                    string="Product"
+                    filter_domain="[('line_ids.product_id', 'ilike', self)]"
+                />
+                <filter
+                    name="open"
+                    string="Open"
+                    domain="[('state', 'in', ('draft', 'quoting'))]"
+                />
+                <filter name="done" string="Closed" domain="[('state', '=', 'done')]" />
+                <filter name="my" string="My Rounds" domain="[('user_id', '=', uid)]" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_user"
+                        string="Buyer"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_action" model="ir.actions.act_window">
+        <field name="name">Quotation Rounds</field>
+        <field name="res_model">purchase.rfq.round</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a quotation round</p>
+            <p>
+                Select approved purchase request lines and use "Create Quotation Round",
+                or create a round and add the items by hand.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_purchase_rfq_round"
+        action="purchase_rfq_round_action"
+        parent="purchase.menu_procurement_management"
+        sequence="5"
+    />
+
+    <!-- Respostas -->
+    <record id="purchase_rfq_round_response_view_list" model="ir.ui.view">
+        <field name="name">purchase.rfq.round.response.list</field>
+        <field name="model">purchase.rfq.round.response</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0">
+                <field name="round_id" />
+                <field name="partner_id" />
+                <field name="product_id" />
+                <field name="price_unit" />
+                <field name="delay" />
+                <field name="note" />
+                <field name="source" />
+                <field name="create_date" string="Recorded on" optional="show" />
+            </list>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_response_action" model="ir.actions.act_window">
+        <field name="name">Vendor Responses</field>
+        <field name="res_model">purchase.rfq.round.response</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- Matriz de comparação: linhas de cotação da rodada -->
+    <record id="purchase_rfq_round_quote_view_list" model="ir.ui.view">
+        <field name="name">purchase.order.line.rfq.round.quote.list</field>
+        <field name="model">purchase.order.line</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <list
+                create="0"
+                delete="0"
+                default_group_by="rfq_round_line_id"
+                decoration-success="rfq_round_awarded"
+                decoration-muted="price_unit == 0"
+                editable="bottom"
+            >
+                <field name="rfq_round_line_id" column_invisible="1" />
+                <field name="product_id" readonly="1" optional="hide" />
+                <field name="partner_id" string="Vendor" readonly="1" />
+                <field name="order_id" readonly="1" optional="hide" />
+                <field name="product_qty" readonly="1" optional="hide" />
+                <field name="price_unit" />
+                <field name="price_subtotal" readonly="1" />
+                <field name="price_total" readonly="1" optional="show" />
+                <field name="date_planned" optional="show" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="rfq_round_awarded" readonly="1" />
+                <button
+                    name="action_rfq_round_award"
+                    type="object"
+                    string="Award"
+                    icon="fa-trophy"
+                    invisible="rfq_round_awarded or price_unit == 0"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_quote_view_pivot" model="ir.ui.view">
+        <field name="name">purchase.order.line.rfq.round.quote.pivot</field>
+        <field name="model">purchase.order.line</field>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <pivot string="Vendor x Item" disable_linking="1">
+                <field name="product_id" type="row" />
+                <field name="partner_id" type="col" />
+                <field name="price_unit" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <record id="purchase_rfq_round_quote_action" model="ir.actions.act_window">
+        <field name="name">Compare Quotations</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_mode">list,pivot</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+                   (0, 0, {'view_mode': 'list', 'view_id': ref('purchase_rfq_round_quote_view_list')}),
+                   (0, 0, {'view_mode': 'pivot', 'view_id': ref('purchase_rfq_round_quote_view_pivot')})]"
+        />
+    </record>
+</odoo>

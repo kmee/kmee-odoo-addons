@@ -1,0 +1,959 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-20 02:25+0000\n"
+"PO-Revision-Date: 2026-11-20 02:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "%(count)s quotations queued for creation (%(size)s lines)."
+msgstr "%(count)s cotações enviadas para a fila de criação (%(size)s linhas)."
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "%(round)s: quotation for %(vendor)s"
+msgstr "%(round)s: cotação para %(vendor)s"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "<span class=\"o_stat_text\">Compare</span>"
+msgstr "<span class=\"o_stat_text\">Comparar</span>"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "A closed round cannot be cancelled."
+msgstr "Uma rodada fechada não pode ser cancelada."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_needaction
+msgid "Action Needed"
+msgstr "Ação necessária"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line__rfq_round_id
+msgid "Active Quotation Round"
+msgstr "Rodada de cotação ativa"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_ids
+msgid "Activities"
+msgstr "Atividades"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoração de atividade excepcional"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_state
+msgid "Activity State"
+msgstr "Status da atividade"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ícone do tipo de atividade"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Add the items to quote first."
+msgstr "Inclua primeiro os itens a cotar."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__round_id
+msgid "Add to Round"
+msgstr "Incluir na rodada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_award__only_unawarded
+msgid ""
+"Adjudica só os itens ainda sem vencedor; as escolhas já feitas, inclusive à "
+"mão na comparação, ficam."
+msgstr ""
+"Adjudica só os itens ainda sem vencedor; as escolhas já feitas, inclusive à "
+"mão na comparação, ficam."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__amount_awarded
+msgid "Amount Awarded"
+msgstr "Valor adjudicado"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__amount_reference
+msgid "Amount Reference"
+msgstr "Valor de referência"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__date_deadline
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__date_deadline
+msgid "Answer Deadline"
+msgstr "Prazo de resposta"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__quote_count
+msgid "Answers"
+msgstr "Respostas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_attachment_count
+msgid "Attachment Count"
+msgstr "Contagem de anexos"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_quote_view_list
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Award"
+msgstr "Adjudicar"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round_award
+msgid "Award Quotation Round"
+msgstr "Adjudicar rodada de cotação"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Award at least one item before closing."
+msgstr "Adjudique ao menos um item antes de fechar."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_order_line__rfq_round_awarded
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__amount_awarded
+msgid "Awarded"
+msgstr "Vencedora"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__awarded_line_count
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__awarded_line_count
+msgid "Awarded Line Count"
+msgstr "Itens adjudicados"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__awarded_price_unit
+msgid "Awarded Price"
+msgstr "Preço vencedor"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__awarded_po_line_id
+msgid "Awarded Quote"
+msgstr "Cotação vencedora"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__awarded_partner_id
+msgid "Awarded Vendor"
+msgstr "Fornecedor vencedor"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Awarded items"
+msgstr "Itens adjudicados"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__best_price_unit
+msgid "Best Price"
+msgstr "Melhor preço"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_award__criterion__date
+msgid "Best lead time"
+msgstr "Melhor prazo"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_award__criterion__price
+msgid "Best price"
+msgstr "Melhor preço"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__user_id
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "Buyer"
+msgstr "Comprador"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_request_line_make_rfq_round_view_form
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: purchase_rfq_round
+#: model:ir.actions.server,name:purchase_rfq_round.action_server_rfq_round_cancel
+msgid "Cancel Round"
+msgstr "Cancelar rodada"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Cancel the quotations of the round first."
+msgstr "Cancele primeiro as cotações da rodada."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round__state__cancel
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__child_ids
+msgid "Child"
+msgstr "Rodadas seguintes"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Choose the vendors to invite."
+msgstr "Escolha os fornecedores convidados."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid ""
+"Chooses the winner of each item by the criterion below. To choose an\n"
+"                    item by hand, use Compare and the trophy on the vendor line."
+msgstr ""
+"Escolhe o vencedor de cada item pelo critério abaixo. Para escolher um\n"
+"                    item à mão, use Comparar e o troféu na linha do fornecedor."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Close Round"
+msgstr "Fechar rodada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round__state__done
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "Closed"
+msgstr "Fechada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__company_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__company_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Compare %s"
+msgstr "Comparar %s"
+
+#. module: purchase_rfq_round
+#: model:ir.actions.act_window,name:purchase_rfq_round.purchase_rfq_round_quote_action
+msgid "Compare Quotations"
+msgstr "Comparar cotações"
+
+#. module: purchase_rfq_round
+#: model:ir.actions.act_window,name:purchase_rfq_round.purchase_request_line_make_rfq_round_action
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_request_line_make_rfq_round_view_form
+msgid "Create Quotation Round"
+msgstr "Criar rodada de cotação"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_request_line_make_rfq_round
+msgid "Create Quotation Round from Purchase Request Lines"
+msgstr "Criar rodada de cotação a partir de linhas de requisição"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Create Quotations"
+msgstr "Criar cotações"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_request_line_make_rfq_round_view_form
+msgid "Create Round"
+msgstr "Criar rodada"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.actions.act_window,help:purchase_rfq_round.purchase_rfq_round_action
+msgid "Create a quotation round"
+msgstr "Crie uma rodada de cotação"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Create the quotations before sending them."
+msgstr "Crie as cotações antes de enviá-las."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__create_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__create_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__create_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__create_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__create_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__create_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__create_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__create_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__criterion
+msgid "Criterion"
+msgstr "Critério"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__currency_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__currency_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__currency_id
+msgid "Currency"
+msgstr "Moeda"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__date_deadline
+msgid "Data limite para os fornecedores responderem."
+msgstr "Data limite para os fornecedores responderem."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_request_line_make_rfq_round__round_id
+msgid "Deixe vazio para criar uma rodada nova."
+msgstr "Deixe vazio para criar uma rodada nova."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_request_line_make_rfq_round__vendor_ids
+msgid "Deixe vazio para sugerir os fornecedores cadastrados nos produtos."
+msgstr "Deixe vazio para sugerir os fornecedores cadastrados nos produtos."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__display_name
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__display_name
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__display_name
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__display_name
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__display_name
+msgid "Display Name"
+msgstr "Nome exibido"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round__state__draft
+msgid "Draft"
+msgstr "Rascunho"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (parceiros)"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Ícone do Font Awesome, ex.: fa-tasks"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__has_message
+msgid "Has Message"
+msgstr "Tem mensagem"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__has_unsent_orders
+msgid "Has Unsent Orders"
+msgstr "Há cotações não enviadas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__has_unsent_orders
+msgid "Há cotação da rodada ainda não enviada ao fornecedor."
+msgstr "Há cotação da rodada ainda não enviada ao fornecedor."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__id
+msgid "ID"
+msgstr "ID"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_exception_icon
+msgid "Icon"
+msgstr "Ícone"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Ícone para indicar uma atividade excepcional."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se marcado, novas mensagens precisam da sua atenção."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__message_has_error
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se marcado, algumas mensagens têm erro de entrega."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_is_follower
+msgid "Is Follower"
+msgstr "É seguidor"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__line_ids
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_list
+msgid "Items"
+msgstr "Itens"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid "Items already awarded"
+msgstr "Itens já adjudicados"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Items can only be added to a draft round."
+msgstr "Só é possível incluir itens em rodada em rascunho."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_award_view_form
+msgid "Items in the round"
+msgstr "Itens da rodada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__only_unawarded
+msgid "Keep current choices"
+msgstr "Manter as escolhas atuais"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__write_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__write_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__write_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__write_uid
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__write_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__write_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__write_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__write_date
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_line__reference_source__last_purchase
+msgid "Last purchase"
+msgstr "Última compra"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__delay
+msgid "Lead Time (days)"
+msgstr "Prazo (dias)"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__line_count
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__line_count
+msgid "Line Count"
+msgstr "Quantidade de itens"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_line__reference_source__manual
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_response__source__manual
+msgid "Manual"
+msgstr "Manual"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_has_error
+msgid "Message Delivery error"
+msgstr "Erro na entrega da mensagem"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_ids
+msgid "Messages"
+msgstr "Mensagens"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Prazo da minha atividade"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "My Rounds"
+msgstr "Minhas rodadas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "New"
+msgstr "Novo"
+
+#. module: purchase_rfq_round
+#: model:ir.actions.server,name:purchase_rfq_round.action_server_rfq_round_new_round
+msgid "New Round"
+msgstr "Nova rodada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Prazo da próxima atividade"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumo da próxima atividade"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo da próxima atividade"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__note
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__note
+msgid "Note"
+msgstr "Observação"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Notes"
+msgstr "Observações"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de ações"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de erros"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensagens que exigem ação"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensagens com erro de entrega"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Only a round in quotation can be followed."
+msgstr "Só uma rodada em cotação pode ter rodada seguinte."
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/wizards/purchase_request_line_make_rfq_round.py:0
+msgid "Only approved requests can be quoted: %s"
+msgstr "Só requisições aprovadas podem ser cotadas: %s"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Only rounds in quotation can be awarded."
+msgstr "Só rodadas em cotação podem ser adjudicadas."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "Open"
+msgstr "Abertas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__order_id
+msgid "Order"
+msgstr "Pedido"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__order_count
+msgid "Order Count"
+msgstr "Cotações"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__order_line_id
+msgid "Order Line"
+msgstr "Linha do pedido"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__parent_id
+msgid "Previous Round"
+msgstr "Rodada anterior"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_line__reference_source__previous_round
+msgid "Previous round"
+msgstr "Rodada anterior"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_line__reference_price
+msgid ""
+"Preço de referência para o saving: último preço de compra do produto, ou o "
+"melhor preço da rodada anterior."
+msgstr ""
+"Preço de referência para o saving: último preço de compra do produto, ou o "
+"melhor preço da rodada anterior."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__price_unit
+msgid "Price Unit"
+msgstr "Preço unitário"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__product_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__product_id
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "Product"
+msgstr "Produto"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linha do pedido de compra"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_request_line
+msgid "Purchase Request Line"
+msgstr "Linha de requisição de compra"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__request_line_ids
+msgid "Purchase Request Lines"
+msgstr "Linhas de requisição de compra"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__product_qty
+msgid "Quantity"
+msgstr "Quantidade"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_order__rfq_round_id
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Quotation Round"
+msgstr "Rodada de cotação"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round_line
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_order_line__rfq_round_line_id
+msgid "Quotation Round Item"
+msgstr "Item da rodada de cotação"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line__rfq_round_line_ids
+msgid "Quotation Round Items"
+msgstr "Itens da rodada de cotação"
+
+#. module: purchase_rfq_round
+#: model:ir.model,name:purchase_rfq_round.model_purchase_rfq_round_response
+msgid "Quotation Round Vendor Response"
+msgstr "Resposta do fornecedor na rodada de cotação"
+
+#. module: purchase_rfq_round
+#: model:ir.actions.act_window,name:purchase_rfq_round.purchase_rfq_round_action
+#: model:ir.ui.menu,name:purchase_rfq_round.menu_purchase_rfq_round
+msgid "Quotation Rounds"
+msgstr "Rodadas de cotação"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__order_ids
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Quotations"
+msgstr "Cotações"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Quotations without awarded items will be cancelled. Continue?"
+msgstr "As cotações sem item vencedor serão canceladas. Continuar?"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__quote_line_ids
+msgid "Quotes"
+msgstr "Respostas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round__state__quoting
+msgid "Quoting"
+msgstr "Em cotação"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_response_view_list
+msgid "Recorded on"
+msgstr "Registrada em"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__amount_reference
+msgid "Reference Amount"
+msgstr "Valor de referência"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__reference_price
+msgid "Reference Price"
+msgstr "Preço de referência"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__reference_source
+msgid "Reference Source"
+msgstr "Origem da referência"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round__state__replaced
+msgid "Replaced by next round"
+msgstr "Substituída pela rodada seguinte"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__request_line_ids
+msgid "Request Line"
+msgstr "Linha de requisição"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Reset to Draft"
+msgstr "Voltar para rascunho"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__response_count
+msgid "Response Count"
+msgstr "Respostas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__response_ids
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Responses"
+msgstr "Respostas"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__activity_user_id
+msgid "Responsible User"
+msgstr "Usuário responsável"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_request_line__rfq_round_id
+msgid ""
+"Rodada de cotação em aberto (rascunho ou em cotação) que contém esta linha."
+msgstr ""
+"Rodada de cotação em aberto (rascunho ou em cotação) que contém esta linha."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__round_number
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_award__round_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__round_id
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__round_id
+msgid "Round"
+msgstr "Rodada"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__round_line_id
+msgid "Round Line"
+msgstr "Item da rodada"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid ""
+"Round closed: %(awarded)s of %(total)s items awarded, saving %(saving)s."
+msgstr ""
+"Rodada fechada: %(awarded)s de %(total)s itens adjudicados, saving de "
+"%(saving)s."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erro na entrega do SMS"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__amount_saving
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__amount_saving
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Saving"
+msgstr "Saving"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__saving_percent
+msgid "Saving (%)"
+msgstr "Saving (%)"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.actions.act_window,help:purchase_rfq_round.purchase_rfq_round_action
+msgid ""
+"Select approved purchase request lines and use \"Create Quotation Round\",\n"
+"                or create a round and add the items by hand."
+msgstr ""
+"Selecione linhas de requisição aprovadas e use \"Criar rodada de cotação\",\n"
+"                ou crie uma rodada e inclua os itens à mão."
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/wizards/purchase_request_line_make_rfq_round.py:0
+msgid "Select the purchase request lines to quote."
+msgstr "Selecione as linhas de requisição a cotar."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Send by E-mail"
+msgstr "Enviar por e-mail"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__sequence
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/wizards/purchase_request_line_make_rfq_round.py:0
+msgid "Some lines are already in an open quotation round: %s"
+msgstr "Algumas linhas já estão em uma rodada de cotação aberta: %s"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__source
+msgid "Source"
+msgstr "Origem"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__state
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__round_state
+msgid "State"
+msgstr "Situação"
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_search
+msgid "Status"
+msgstr "Situação"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Situação pelas atividades\n"
+"Atrasada: o prazo já passou\n"
+"Hoje: a atividade é hoje\n"
+"Planejada: atividades futuras."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Suggest Vendors"
+msgstr "Sugerir fornecedores"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "The quotations were already created."
+msgstr "As cotações já foram criadas."
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round_line.py:0
+msgid "The vendor did not answer a price for this item."
+msgstr "O fornecedor não respondeu preço para este item."
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round_line.py:0
+msgid "This quote does not belong to the round item."
+msgstr "Esta resposta não pertence ao item da rodada."
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo da atividade excepcional no registro."
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round_line.py:0
+msgid "Unknown award criterion: %s"
+msgstr "Critério de adjudicação desconhecido: %s"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_line__product_uom_id
+msgid "UoM"
+msgstr "UdM"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round_response__partner_id
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_quote_view_list
+msgid "Vendor"
+msgstr "Fornecedor"
+
+#. module: purchase_rfq_round
+#: model:ir.actions.act_window,name:purchase_rfq_round.purchase_rfq_round_response_action
+msgid "Vendor Responses"
+msgstr "Respostas dos fornecedores"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields.selection,name:purchase_rfq_round.selection__purchase_rfq_round_line__reference_source__vendor_price
+msgid "Vendor price list"
+msgstr "Tabela do fornecedor"
+
+#. module: purchase_rfq_round
+#. odoo-python
+#: code:addons/purchase_rfq_round/models/purchase_rfq_round.py:0
+msgid "Vendor without e-mail: send the quotation by another channel."
+msgstr "Fornecedor sem e-mail: envie a cotação por outro canal."
+
+#. module: purchase_rfq_round
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_quote_view_pivot
+msgid "Vendor x Item"
+msgstr "Fornecedor x item"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_request_line_make_rfq_round__vendor_ids
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__vendor_ids
+#: model_terms:ir.ui.view,arch_db:purchase_rfq_round.purchase_rfq_round_view_form
+msgid "Vendors"
+msgstr "Fornecedores"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,field_description:purchase_rfq_round.field_purchase_rfq_round__website_message_ids
+msgid "Website Messages"
+msgstr "Mensagens do site"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round__website_message_ids
+msgid "Website communication history"
+msgstr "Histórico de comunicação do site"
+
+#. module: purchase_rfq_round
+#: model:ir.model.fields,help:purchase_rfq_round.field_purchase_rfq_round_line__awarded_partner_id
+msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
+msgstr ""
+"Você pode buscar um fornecedor pelo nome, CNPJ, e-mail ou referência "
+"interna."
