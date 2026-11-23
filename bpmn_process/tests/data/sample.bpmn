@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_Sample" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_Sample">
+    <bpmn:participant id="Participant_Sample_Company" name="Company" processRef="Process_Sample" />
+    <bpmn:participant id="Participant_Sample_Customer" name="Customer" />
+    <bpmn:messageFlow id="MsgFlow_Sample_Order" sourceRef="Participant_Sample_Customer" targetRef="Start_Sample_Order" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_Sample" name="Sample sales" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_Sample">
+      <bpmn:lane id="Lane_Sample_Sales" name="Sales">
+        <bpmn:flowNodeRef>Start_Sample_Order</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Sample_Quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Sample_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Sample_Lost</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sample_Billing" name="Billing">
+        <bpmn:flowNodeRef>Task_Sample_Invoice</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Sample_Done</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Sample_Order" name="Order received">
+      <bpmn:outgoing>Flow_Sample_Order_Quote</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_Sample_Order" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_Sample_Quote" name="Send quotation">
+      <bpmn:documentation>odoo: res.partner / Contacts
+sdd: 2.1 Quotation
+requisitos: SAL-01, SAL-02
+status: decidido</bpmn:documentation>
+      <bpmn:incoming>Flow_Sample_Order_Quote</bpmn:incoming>
+      <bpmn:outgoing>Flow_Sample_Quote_Approved</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_Sample_Approved" name="Approved?">
+      <bpmn:incoming>Flow_Sample_Quote_Approved</bpmn:incoming>
+      <bpmn:outgoing>Flow_Sample_Approved_Invoice</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Sample_Approved_Lost</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Task_Sample_Invoice" name="Issue invoice">
+      <bpmn:documentation>Status: proposta da KMEE. SDD: 3.4 Invoicing</bpmn:documentation>
+      <bpmn:incoming>Flow_Sample_Approved_Invoice</bpmn:incoming>
+      <bpmn:outgoing>Flow_Sample_Invoice_Done</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_Sample_Done" name="Invoiced">
+      <bpmn:incoming>Flow_Sample_Invoice_Done</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_Sample_Lost" name="Lost">
+      <bpmn:incoming>Flow_Sample_Approved_Lost</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_Sample_Order_Quote" sourceRef="Start_Sample_Order" targetRef="Task_Sample_Quote" />
+    <bpmn:sequenceFlow id="Flow_Sample_Quote_Approved" sourceRef="Task_Sample_Quote" targetRef="Gateway_Sample_Approved" />
+    <bpmn:sequenceFlow id="Flow_Sample_Approved_Invoice" name="yes" sourceRef="Gateway_Sample_Approved" targetRef="Task_Sample_Invoice" />
+    <bpmn:sequenceFlow id="Flow_Sample_Approved_Lost" name="no" sourceRef="Gateway_Sample_Approved" targetRef="End_Sample_Lost" />
+    <bpmn:sequenceFlow id="Flow_Sample_Invoice_Done" sourceRef="Task_Sample_Invoice" targetRef="End_Sample_Done" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Sample">
+    <bpmndi:BPMNPlane id="BPMNPlane_Sample" bpmnElement="Collaboration_Sample">
+      <bpmndi:BPMNShape id="Participant_Sample_Company_di" bpmnElement="Participant_Sample_Company" isHorizontal="true">
+        <dc:Bounds x="100" y="160" width="760" height="300" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sample_Sales_di" bpmnElement="Lane_Sample_Sales" isHorizontal="true">
+        <dc:Bounds x="130" y="160" width="730" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sample_Billing_di" bpmnElement="Lane_Sample_Billing" isHorizontal="true">
+        <dc:Bounds x="130" y="310" width="730" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_Sample_Customer_di" bpmnElement="Participant_Sample_Customer" isHorizontal="true">
+        <dc:Bounds x="100" y="40" width="760" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Sample_Order_di" bpmnElement="Start_Sample_Order">
+        <dc:Bounds x="182" y="217" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Sample_Quote_di" bpmnElement="Task_Sample_Quote" color:background-color="#e8f5e9" color:border-color="#2e7d32">
+        <dc:Bounds x="270" y="195" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Sample_Approved_di" bpmnElement="Gateway_Sample_Approved" isMarkerVisible="true">
+        <dc:Bounds x="445" y="210" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Sample_Invoice_di" bpmnElement="Task_Sample_Invoice" color:background-color="#fff8e1" color:border-color="#b7791f">
+        <dc:Bounds x="560" y="345" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Sample_Done_di" bpmnElement="End_Sample_Done">
+        <dc:Bounds x="752" y="367" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Sample_Lost_di" bpmnElement="End_Sample_Lost">
+        <dc:Bounds x="752" y="217" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_Sample_Order_Quote_di" bpmnElement="Flow_Sample_Order_Quote">
+        <di:waypoint x="218" y="235" />
+        <di:waypoint x="270" y="235" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Sample_Quote_Approved_di" bpmnElement="Flow_Sample_Quote_Approved">
+        <di:waypoint x="390" y="235" />
+        <di:waypoint x="445" y="235" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Sample_Approved_Invoice_di" bpmnElement="Flow_Sample_Approved_Invoice">
+        <di:waypoint x="470" y="260" />
+        <di:waypoint x="470" y="385" />
+        <di:waypoint x="560" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Sample_Approved_Lost_di" bpmnElement="Flow_Sample_Approved_Lost">
+        <di:waypoint x="495" y="235" />
+        <di:waypoint x="752" y="235" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Sample_Invoice_Done_di" bpmnElement="Flow_Sample_Invoice_Done">
+        <di:waypoint x="680" y="385" />
+        <di:waypoint x="752" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MsgFlow_Sample_Order_di" bpmnElement="MsgFlow_Sample_Order">
+        <di:waypoint x="200" y="120" />
+        <di:waypoint x="200" y="217" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="module_category_bpmn_process" model="ir.module.category">
+        <field name="name">BPMN Processes</field>
+        <field name="sequence">60</field>
+    </record>
+
+    <record id="group_bpmn_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_bpmn_process" />
+        <field name="comment">Sees diagrams and versions, and comments on tasks.</field>
+    </record>
+
+    <record id="group_bpmn_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_bpmn_process" />
+        <field name="implied_ids" eval="[(4, ref('group_bpmn_user'))]" />
+        <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+        <field
+            name="comment"
+        >Imports and edits diagrams, changes status and links, restores versions.</field>
+    </record>
+
+    <record id="rule_bpmn_process_company" model="ir.rule">
+        <field name="name">BPMN process: multi-company</field>
+        <field name="model_id" ref="model_bpmn_process" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_bpmn_process_version_company" model="ir.rule">
+        <field name="name">BPMN version: multi-company</field>
+        <field name="model_id" ref="model_bpmn_process_version" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_bpmn_element_company" model="ir.rule">
+        <field name="name">BPMN element: multi-company</field>
+        <field name="model_id" ref="model_bpmn_element" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_bpmn_lane_company" model="ir.rule">
+        <field name="name">BPMN lane: multi-company</field>
+        <field name="model_id" ref="model_bpmn_lane" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="rule_bpmn_element_test_company" model="ir.rule">
+        <field name="name">BPMN test result: multi-company</field>
+        <field name="model_id" ref="model_bpmn_element_test" />
+        <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

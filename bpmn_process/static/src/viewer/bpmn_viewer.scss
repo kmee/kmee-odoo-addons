@@ -1,0 +1,121 @@
+// Copyright 2026 KMEE
+// License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
+$bpmn-colors: (
+    "st_decided": (
+        #e8f5e9,
+        #2e7d32,
+    ),
+    "st_proposal": (
+        #fff8e1,
+        #b7791f,
+    ),
+    "st_open": (
+        #ffebee,
+        #c62828,
+    ),
+    "test_passed": (
+        #e8f5e9,
+        #2e7d32,
+    ),
+    "test_failed": (
+        #ffebee,
+        #c62828,
+    ),
+    "mine": (
+        #e3f2fd,
+        #1565c0,
+    ),
+    "diff_added": (
+        #e3f2fd,
+        #1565c0,
+    ),
+    "diff_changed": (
+        #fff3e0,
+        #e65100,
+    ),
+);
+
+.o_bpmn_viewer {
+    background-color: $o-view-background-color;
+
+    .o_bpmn_canvas {
+        min-height: 400px;
+        background-color: #fff;
+    }
+
+    .o_bpmn_panel {
+        width: 360px;
+        flex: 0 0 360px;
+        background-color: $o-view-background-color;
+    }
+
+    @each $name, $pair in $bpmn-colors {
+        .o_bpmn_#{$name}:not(.djs-connection) .djs-visual > :nth-child(1) {
+            fill: nth($pair, 1) !important;
+            stroke: nth($pair, 2) !important;
+        }
+    }
+
+    .o_bpmn_diff_moved:not(.djs-connection) .djs-visual > :nth-child(1) {
+        stroke: #6a1b9a !important;
+        stroke-dasharray: 6 3;
+    }
+
+    .o_bpmn_diff_changed.djs-connection .djs-visual > path {
+        stroke: #e65100 !important;
+    }
+
+    .o_bpmn_diff_added.djs-connection .djs-visual > path {
+        stroke: #1565c0 !important;
+    }
+
+    .o_bpmn_dim .djs-visual {
+        opacity: 0.3;
+    }
+
+    .o_bpmn_selected:not(.djs-connection) .djs-visual > :nth-child(1) {
+        stroke-width: 4px !important;
+    }
+
+    .o_bpmn_badge {
+        min-width: 20px;
+        height: 20px;
+        padding: 0 5px;
+        border-radius: 10px;
+        background-color: #1565c0;
+        color: #fff;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .o_bpmn_legend {
+        padding: 0 4px;
+        border-radius: 3px;
+    }
+    .o_bpmn_legend_added {
+        background-color: #e3f2fd;
+    }
+    .o_bpmn_legend_changed {
+        background-color: #fff3e0;
+    }
+    .o_bpmn_legend_moved {
+        border: 1px dashed #6a1b9a;
+    }
+
+    .o_bpmn_status_decided {
+        color: #2e7d32;
+    }
+    .o_bpmn_status_proposal {
+        color: #b7791f;
+    }
+    .o_bpmn_status_open {
+        color: #c62828;
+    }
+
+    .o_bpmn_message_body p {
+        margin-bottom: 0;
+    }
+}

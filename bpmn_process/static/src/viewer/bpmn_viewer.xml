@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<templates xml:space="preserve">
+    <t t-name="bpmn_process.Viewer">
+        <div class="o_bpmn_viewer d-flex flex-column h-100">
+            <div
+                class="o_bpmn_toolbar d-flex flex-wrap align-items-center gap-2 px-3 py-2 border-bottom"
+            >
+                <ol class="breadcrumb m-0 me-2" t-if="breadcrumbs.length">
+                    <t t-foreach="breadcrumbs" t-as="crumb" t-key="crumb_index">
+                        <li class="breadcrumb-item" t-if="!crumb_last">
+                            <a
+                                href="#"
+                                t-on-click.prevent="() => crumb.onSelected()"
+                                t-esc="crumb.name"
+                            />
+                        </li>
+                    </t>
+                </ol>
+                <t t-if="state.data">
+                    <strong class="me-2">
+                        <t t-esc="state.data.process.code" /> - <t
+                        t-esc="state.data.process.name"
+                    />
+                    </strong>
+                    <t t-if="!state.editing">
+                        <select
+                            class="form-select form-select-sm w-auto o_bpmn_version"
+                            t-on-change="onVersionChange"
+                            title="Version shown"
+                        >
+                            <t t-foreach="versionOptions" t-as="v" t-key="v.id">
+                                <option
+                                    t-att-value="v.id"
+                                    t-att-selected="state.data.version and v.id === state.data.version.id"
+                                >
+                                    v<t t-esc="v.number" /> <t t-esc="v.origin" /> (<t
+                                    t-esc="v.user"
+                                />)<t t-if="v.current"> *</t>
+                                </option>
+                            </t>
+                        </select>
+                        <select
+                            class="form-select form-select-sm w-auto o_bpmn_compare"
+                            t-on-change="onCompareChange"
+                            title="Compare with"
+                        >
+                            <option value="">Compare with...</option>
+                            <t t-foreach="versionOptions" t-as="v" t-key="v.id">
+                                <option
+                                    t-if="!state.data.version or v.id !== state.data.version.id"
+                                    t-att-value="v.id"
+                                    t-att-selected="v.id === state.compareId"
+                                >
+                                    v<t t-esc="v.number" />
+                                </option>
+                            </t>
+                        </select>
+                        <div class="btn-group btn-group-sm" role="group" t-if="!diff">
+                            <button
+                                t-foreach="layers"
+                                t-as="layer"
+                                t-key="layer[0]"
+                                t-attf-class="btn o_bpmn_layer {{ state.layer === layer[0] ? 'btn-primary' : 'btn-outline-secondary' }}"
+                                t-att-data-layer="layer[0]"
+                                t-on-click="() => this.setLayer(layer[0])"
+                            >
+                                <t t-esc="layer[1]" />
+                            </button>
+                        </div>
+                        <span
+                            class="badge text-bg-success"
+                            t-if="!diff"
+                            title="Decided"
+                        >
+                            <t t-esc="counts.decided" />
+                        </span>
+                        <span
+                            class="badge text-bg-warning"
+                            t-if="!diff"
+                            title="Proposals"
+                        >
+                            <t t-esc="counts.proposal" />
+                        </span>
+                        <span class="badge text-bg-danger" t-if="!diff" title="Open">
+                            <t t-esc="counts.open" />
+                        </span>
+                    </t>
+                    <div class="ms-auto d-flex align-items-center gap-2">
+                        <span
+                            class="text-warning o_bpmn_lock"
+                            t-if="state.data.lock.user and !state.data.lock.mine and !state.editing"
+                        >
+                            <i class="fa fa-lock me-1" />Being edited by <t
+                            t-esc="state.data.lock.user"
+                        />
+                        </span>
+                        <button
+                            class="btn btn-sm btn-secondary"
+                            t-on-click="fit"
+                            title="Fit to screen"
+                        >
+                            <i class="fa fa-arrows-alt" />
+                        </button>
+                        <t t-if="!state.editing">
+                            <button
+                                class="btn btn-sm btn-secondary"
+                                t-on-click="download"
+                                title="Download .bpmn"
+                            >
+                                <i class="fa fa-download" />
+                            </button>
+                            <button
+                                class="btn btn-sm btn-primary o_bpmn_edit"
+                                t-if="state.data.can_manage and (!state.data.lock.user or state.data.lock.mine)"
+                                t-on-click="startEdit"
+                            >
+                                <i class="fa fa-pencil me-1" />Edit
+                            </button>
+                        </t>
+                        <t t-else="">
+                            <input
+                                class="form-control form-control-sm w-auto"
+                                placeholder="What changed?"
+                                t-model="state.note"
+                            />
+                            <button
+                                class="btn btn-sm btn-primary o_bpmn_save"
+                                t-att-disabled="state.saving"
+                                t-on-click="saveEdit"
+                            >Save version</button>
+                            <button
+                                class="btn btn-sm btn-secondary o_bpmn_cancel"
+                                t-on-click="cancelEdit"
+                            >Discard</button>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <div
+                class="alert alert-info m-2 mb-0 py-2 d-flex align-items-center"
+                t-if="diff"
+            >
+                <span>
+                    Changes from v<t t-esc="diff.from" /> to v<t t-esc="diff.to" />:
+                    <span class="o_bpmn_legend o_bpmn_legend_added">added <t
+                    t-esc="diff.added.length"
+                /></span>,
+                    <span class="o_bpmn_legend o_bpmn_legend_changed">changed <t
+                    t-esc="Object.keys(diff.changed).length"
+                /></span>,
+                    <span class="o_bpmn_legend o_bpmn_legend_moved">moved <t
+                    t-esc="diff.moved.length"
+                /></span>,
+                    removed <t t-esc="diff.removed.length" />
+                </span>
+                <button
+                    class="btn btn-sm btn-link ms-auto"
+                    t-on-click="clearCompare"
+                >Close comparison</button>
+            </div>
+            <div
+                class="alert alert-danger m-2"
+                t-if="state.error"
+                t-esc="state.error"
+            />
+            <div class="d-flex flex-grow-1 overflow-hidden">
+                <div
+                    class="o_bpmn_canvas flex-grow-1 position-relative"
+                    t-ref="canvas"
+                />
+                <aside
+                    class="o_bpmn_panel border-start overflow-auto p-3"
+                    t-if="!state.editing and (state.panel or (diff and diff.removed.length))"
+                >
+                    <t t-if="diff and diff.removed.length">
+                        <h5>Removed since v<t t-esc="diff.from" /></h5>
+                        <ul class="o_bpmn_removed">
+                            <li t-foreach="diff.removed" t-as="rid" t-key="rid">
+                                <t t-esc="diffName(rid)" />
+                            </li>
+                        </ul>
+                    </t>
+                    <t t-if="state.panel">
+                        <div class="d-flex align-items-start">
+                            <h4 class="flex-grow-1" t-esc="state.panel.name" />
+                            <button
+                                class="btn btn-sm btn-link"
+                                t-on-click="closePanel"
+                                title="Close"
+                            >
+                                <i class="fa fa-times" />
+                            </button>
+                        </div>
+                        <div class="text-muted small mb-2">
+                            <t t-esc="state.panel.element_type" />
+                            <t t-if="state.panel.lane"> - <t
+                                t-esc="state.panel.lane"
+                            /></t>
+                            <div>
+                                <code t-esc="state.panel.bpmn_id" />
+                            </div>
+                        </div>
+                        <t t-if="state.panel.id">
+                            <div class="mb-2">
+                                <label class="form-label small mb-0">Status</label>
+                                <select
+                                    t-if="state.data.can_manage"
+                                    class="form-select form-select-sm o_bpmn_status"
+                                    t-on-change="setStatus"
+                                >
+                                    <option
+                                        value=""
+                                        t-att-selected="!state.panel.status"
+                                    >-</option>
+                                    <option
+                                        value="decided"
+                                        t-att-selected="state.panel.status === 'decided'"
+                                    >Decided</option>
+                                    <option
+                                        value="proposal"
+                                        t-att-selected="state.panel.status === 'proposal'"
+                                    >Proposal</option>
+                                    <option
+                                        value="open"
+                                        t-att-selected="state.panel.status === 'open'"
+                                    >Open</option>
+                                </select>
+                                <div
+                                    t-else=""
+                                    t-attf-class="o_bpmn_status_label o_bpmn_status_{{ state.panel.status }}"
+                                    t-esc="state.panel.status_label or '-'"
+                                />
+                            </div>
+                            <dl class="small mb-2">
+                                <t t-if="state.panel.sdd_ref">
+                                    <dt>Design reference</dt>
+                                    <dd t-esc="state.panel.sdd_ref" />
+                                </t>
+                                <t t-if="state.panel.requirement_refs">
+                                    <dt>Requirements</dt>
+                                    <dd t-esc="state.panel.requirement_refs" />
+                                </t>
+                                <t t-if="state.panel.odoo_ref">
+                                    <dt>Odoo</dt>
+                                    <dd
+                                        t-esc="state.panel.odoo_label or state.panel.odoo_ref"
+                                    />
+                                </t>
+                                <t t-if="state.panel.notes">
+                                    <dt>Notes</dt>
+                                    <dd
+                                        class="text-pre-wrap"
+                                        t-esc="state.panel.notes"
+                                    />
+                                </t>
+                            </dl>
+                            <div class="d-flex gap-2 mb-3">
+                                <button
+                                    class="btn btn-sm btn-primary o_bpmn_open_odoo"
+                                    t-if="state.panel.open_action"
+                                    t-on-click="openInOdoo"
+                                >
+                                    <i class="fa fa-external-link me-1" />Open in Odoo
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-secondary"
+                                    t-on-click="openRecord"
+                                >Details</button>
+                            </div>
+                            <t t-if="state.panel.tests.length">
+                                <h6>Tests</h6>
+                                <ul class="list-unstyled small o_bpmn_tests">
+                                    <li
+                                        t-foreach="state.panel.tests"
+                                        t-as="test"
+                                        t-key="test_index"
+                                    >
+                                        <span
+                                            t-attf-class="badge {{ test.result === 'passed' ? 'text-bg-success' : test.result === 'failed' ? 'text-bg-danger' : 'text-bg-secondary' }}"
+                                            t-esc="test.result_label"
+                                        />
+                                        <t t-esc="test.scenario" />
+                                        <span
+                                            class="text-muted"
+                                            t-if="test.environment"
+                                        > (<t t-esc="test.environment" />)</span>
+                                        <a
+                                            t-if="test.evidence_url"
+                                            t-att-href="test.evidence_url"
+                                            target="_blank"
+                                            class="ms-1"
+                                        >
+                                            <i class="fa fa-link" />
+                                        </a>
+                                    </li>
+                                </ul>
+                            </t>
+                            <h6>Comments</h6>
+                            <textarea
+                                class="form-control form-control-sm mb-1"
+                                rows="3"
+                                placeholder="Comment on this task..."
+                                t-model="state.comment"
+                            />
+                            <button
+                                class="btn btn-sm btn-primary mb-3 o_bpmn_post"
+                                t-att-disabled="!state.comment.trim()"
+                                t-on-click="postComment"
+                            >Post</button>
+                            <div
+                                class="o_bpmn_message border-top py-2 small"
+                                t-foreach="state.panel.messages"
+                                t-as="message"
+                                t-key="message.id"
+                            >
+                                <div class="text-muted"><strong
+                                    t-esc="message.author"
+                                /> - <t t-esc="message.date" /></div>
+                                <div
+                                    class="o_bpmn_message_body"
+                                    t-out="messageBody(message)"
+                                />
+                                <div
+                                    t-foreach="message.tracking"
+                                    t-as="track"
+                                    t-key="track_index"
+                                    class="text-muted"
+                                >
+                                    <t t-esc="track.field" />: <t
+                                    t-esc="track.old"
+                                /> -&gt; <t t-esc="track.new" />
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </aside>
+            </div>
+        </div>
+    </t>
+</templates>

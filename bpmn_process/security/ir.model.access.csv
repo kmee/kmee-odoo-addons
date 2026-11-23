@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bpmn_process_user,bpmn.process user,model_bpmn_process,group_bpmn_user,1,0,0,0
+access_bpmn_process_manager,bpmn.process manager,model_bpmn_process,group_bpmn_manager,1,1,1,1
+access_bpmn_process_version_user,bpmn.process.version user,model_bpmn_process_version,group_bpmn_user,1,0,0,0
+access_bpmn_process_version_manager,bpmn.process.version manager,model_bpmn_process_version,group_bpmn_manager,1,0,1,0
+access_bpmn_element_user,bpmn.element user,model_bpmn_element,group_bpmn_user,1,0,0,0
+access_bpmn_element_manager,bpmn.element manager,model_bpmn_element,group_bpmn_manager,1,1,1,0
+access_bpmn_lane_user,bpmn.lane user,model_bpmn_lane,group_bpmn_user,1,0,0,0
+access_bpmn_lane_manager,bpmn.lane manager,model_bpmn_lane,group_bpmn_manager,1,1,1,0
+access_bpmn_element_test_user,bpmn.element.test user,model_bpmn_element_test,group_bpmn_user,1,0,0,0
+access_bpmn_element_test_manager,bpmn.element.test manager,model_bpmn_element_test,group_bpmn_manager,1,1,1,1
+access_bpmn_import_wizard_manager,bpmn.import.wizard manager,model_bpmn_import_wizard,group_bpmn_manager,1,1,1,1
+access_bpmn_import_wizard_line_manager,bpmn.import.wizard.line manager,model_bpmn_import_wizard_line,group_bpmn_manager,1,1,1,1

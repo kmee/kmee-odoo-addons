@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="bpmn_process_view_list" model="ir.ui.view">
+        <field name="model">bpmn.process</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="code" />
+                <field name="name" />
+                <field name="current_version_number" string="Version" />
+                <field name="element_count" string="Elements" />
+                <field name="decided_count" />
+                <field name="proposal_count" />
+                <field name="open_count" />
+                <field name="source" />
+                <field name="lock_user_id" optional="hide" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="show"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="bpmn_process_view_form" model="ir.ui.view">
+        <field name="model">bpmn.process</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_open_viewer"
+                        type="object"
+                        string="Open diagram"
+                        class="btn-primary"
+                        invisible="not current_version_id"
+                    />
+                    <button
+                        name="action_open_import_wizard"
+                        type="object"
+                        string="Import new version"
+                        groups="bpmn_process.group_bpmn_manager"
+                    />
+                    <button
+                        name="action_export"
+                        type="object"
+                        string="Export .bpmn"
+                        invisible="not current_version_id"
+                    />
+                    <button
+                        name="action_break_lock"
+                        type="object"
+                        string="Break edit lock"
+                        groups="bpmn_process.group_bpmn_manager"
+                        invisible="not lock_user_id"
+                        confirm="The person editing loses the unsaved drawing. Continue?"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="%(bpmn_element_action)d"
+                            type="action"
+                            class="oe_stat_button"
+                            icon="fa-sitemap"
+                            context="{'search_default_process_id': id}"
+                        >
+                            <field
+                                name="element_count"
+                                widget="statinfo"
+                                string="Elements"
+                            />
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" />
+                            <field name="current_version_id" />
+                            <field name="source" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="lock_user_id" invisible="not lock_user_id" />
+                            <field name="lock_date" invisible="not lock_user_id" />
+                        </group>
+                    </group>
+                    <group string="Status" name="status">
+                        <group>
+                            <field name="decided_count" />
+                            <field name="proposal_count" />
+                        </group>
+                        <group>
+                            <field name="open_count" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Elements" name="elements">
+                            <field
+                                name="element_ids"
+                                readonly="1"
+                                context="{'active_test': False}"
+                            >
+                                <list
+                                    decoration-muted="not active"
+                                    decoration-success="status == 'decided'"
+                                    decoration-warning="status == 'proposal'"
+                                    decoration-danger="status == 'open'"
+                                >
+                                    <field name="sequence" column_invisible="1" />
+                                    <field name="active" column_invisible="1" />
+                                    <field name="name" />
+                                    <field name="element_type" />
+                                    <field name="lane_id" />
+                                    <field name="status" />
+                                    <field name="sdd_ref" optional="show" />
+                                    <field name="requirement_refs" optional="hide" />
+                                    <field name="model_id" optional="show" />
+                                    <field name="test_state" optional="show" />
+                                    <field name="bpmn_id" optional="hide" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Lanes" name="lanes">
+                            <field name="lane_ids">
+                                <list editable="bottom" create="0" delete="0">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="name" />
+                                    <field name="group_ids" widget="many2many_tags" />
+                                    <field name="bpmn_id" optional="hide" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Versions" name="versions">
+                            <field name="version_ids" readonly="1">
+                                <list>
+                                    <field name="number" />
+                                    <field name="origin" />
+                                    <field name="create_uid" string="By" />
+                                    <field name="create_date" string="Date" />
+                                    <field name="note" />
+                                    <field name="diff_summary" optional="hide" />
+                                    <field name="is_current" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Description" name="description">
+                            <field name="description" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="bpmn_process_view_search" model="ir.ui.view">
+        <field name="model">bpmn.process</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="code" />
+                <field name="name" />
+                <filter
+                    name="edited_in_odoo"
+                    string="Edited in Odoo"
+                    domain="[('source', '=', 'odoo')]"
+                />
+                <filter
+                    name="locked"
+                    string="Being edited"
+                    domain="[('lock_user_id', '!=', False)]"
+                />
+                <separator />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="bpmn_process_action" model="ir.actions.act_window">
+        <field name="name">Processes</field>
+        <field name="res_model">bpmn.process</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Import a BPMN 2.0 diagram</p>
+            <p>
+                Each import of the same code becomes a new version, with the
+                changes listed and the comments of every task kept.
+            </p>
+        </field>
+    </record>
+</odoo>

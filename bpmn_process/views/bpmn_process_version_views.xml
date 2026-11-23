@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="bpmn_process_version_view_list" model="ir.ui.view">
+        <field name="model">bpmn.process.version</field>
+        <field name="arch" type="xml">
+            <list create="0" delete="0">
+                <field name="process_id" />
+                <field name="number" />
+                <field name="origin" />
+                <field name="create_uid" string="By" />
+                <field name="create_date" string="Date" />
+                <field name="note" />
+                <field name="is_current" />
+            </list>
+        </field>
+    </record>
+
+    <record id="bpmn_process_version_view_form" model="ir.ui.view">
+        <field name="model">bpmn.process.version</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0" edit="0">
+                <header>
+                    <button
+                        name="action_view_diagram"
+                        type="object"
+                        string="View diagram"
+                        class="btn-primary"
+                    />
+                    <button
+                        name="action_compare_current"
+                        type="object"
+                        string="Compare with current"
+                        invisible="is_current"
+                    />
+                    <button
+                        name="action_restore"
+                        type="object"
+                        string="Restore"
+                        groups="bpmn_process.group_bpmn_manager"
+                        invisible="is_current"
+                        confirm="A new version is created with this diagram. Continue?"
+                    />
+                    <button name="action_download" type="object" string="Download" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="process_id" />
+                            <field name="number" />
+                            <field name="origin" />
+                            <field name="is_current" />
+                        </group>
+                        <group>
+                            <field name="create_uid" string="By" />
+                            <field name="create_date" string="Date" />
+                            <field name="parent_id" />
+                            <field
+                                name="merge_parent_id"
+                                invisible="not merge_parent_id"
+                            />
+                            <field name="checksum" />
+                        </group>
+                    </group>
+                    <group string="Note" invisible="not note">
+                        <field name="note" nolabel="1" colspan="2" />
+                    </group>
+                    <group string="Changes">
+                        <field name="diff_summary" nolabel="1" colspan="2" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="bpmn_process_version_view_search" model="ir.ui.view">
+        <field name="model">bpmn.process.version</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="process_id" />
+                <field name="create_uid" string="By" />
+                <filter
+                    name="origin_edit"
+                    string="Edited in Odoo"
+                    domain="[('origin', '=', 'edit')]"
+                />
+                <filter
+                    name="origin_merge"
+                    string="Merges"
+                    domain="[('origin', '=', 'merge')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_process"
+                        string="Process"
+                        context="{'group_by': 'process_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="bpmn_process_version_action" model="ir.actions.act_window">
+        <field name="name">Versions</field>
+        <field name="res_model">bpmn.process.version</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
