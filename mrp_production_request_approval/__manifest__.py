@@ -1,0 +1,15 @@
+{
+    "name": "MRP Production Request Approval",
+    "summary": "Approvers, approval date and restricted reopening of production requests",
+    "version": "18.0.1.0.0",
+    "category": "Manufacturing/Manufacturing",
+    "author": "KMEE, Odoo Community Association (OCA)",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "license": "AGPL-3",
+    "maintainers": ["mileo"],
+    "development_status": "Beta",
+    "depends": ["mrp_production_request"],
+    "data": ["views/mrp_production_request_views.xml"],
+    "demo": ["demo/mrp_production_request_demo.xml"],
+    "installable": True,
+}
