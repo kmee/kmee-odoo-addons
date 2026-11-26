@@ -1,0 +1,15 @@
+{
+    "name": "MRP BoM Line Reference",
+    "summary": "Reference designators and manufacturer data on bill of materials lines",
+    "version": "18.0.1.0.0",
+    "category": "Manufacturing/Manufacturing",
+    "author": "KMEE, Odoo Community Association (OCA)",
+    "website": "https://github.com/KMEE/kmee-odoo-addons",
+    "license": "AGPL-3",
+    "maintainers": ["mileo"],
+    "development_status": "Beta",
+    "depends": ["mrp", "product_manufacturer"],
+    "data": ["views/mrp_bom_views.xml"],
+    "demo": ["demo/mrp_bom_demo.xml"],
+    "installable": True,
+}

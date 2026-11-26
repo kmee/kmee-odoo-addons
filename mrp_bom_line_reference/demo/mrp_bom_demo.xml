@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="partner_manufacturer_eletronica" model="res.partner">
+        <field name="name">Componentes Eletrônicos Paulista Ltda</field>
+        <field name="is_company" eval="True" />
+    </record>
+    <record id="partner_manufacturer_semicondutores" model="res.partner">
+        <field name="name">Semicondutores do Sul S.A.</field>
+        <field name="is_company" eval="True" />
+    </record>
+    <record id="product_assembled_board" model="product.template">
+        <field name="name">Controller board 12V</field>
+        <field name="type">consu</field>
+    </record>
+    <record id="product_resistor" model="product.product">
+        <field name="name">Resistor 10k 1/4W</field>
+        <field name="type">consu</field>
+        <field name="manufacturer_id" ref="partner_manufacturer_eletronica" />
+        <field name="manufacturer_pname">Carbon film resistor 10k</field>
+        <field name="manufacturer_pref">CF14-10K</field>
+    </record>
+    <record id="product_capacitor" model="product.product">
+        <field name="name">Ceramic capacitor 100nF</field>
+        <field name="type">consu</field>
+        <field name="manufacturer_id" ref="partner_manufacturer_eletronica" />
+        <field name="manufacturer_pname">Ceramic capacitor 100nF 50V</field>
+        <field name="manufacturer_pref">CC50-104</field>
+    </record>
+    <record id="product_regulator" model="product.product">
+        <field name="name">Voltage regulator 5V</field>
+        <field name="type">consu</field>
+        <field name="manufacturer_id" ref="partner_manufacturer_semicondutores" />
+        <field name="manufacturer_pname">Linear regulator 5V 1A</field>
+        <field name="manufacturer_pref">LR7805</field>
+    </record>
+    <record id="product_diode" model="product.product">
+        <field name="name">Rectifier diode 1A</field>
+        <field name="type">consu</field>
+        <field name="manufacturer_id" ref="partner_manufacturer_semicondutores" />
+        <field name="manufacturer_pname">Rectifier diode 1A 1000V</field>
+        <field name="manufacturer_pref">RD4007</field>
+    </record>
+    <record id="mrp_bom_board" model="mrp.bom">
+        <field name="product_tmpl_id" ref="product_assembled_board" />
+        <field name="product_qty">1</field>
+    </record>
+    <record id="mrp_bom_line_resistor" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_board" />
+        <field name="product_id" ref="product_resistor" />
+        <field name="product_qty">4</field>
+        <field name="reference">R1, R2, R3, R4</field>
+    </record>
+    <record id="mrp_bom_line_capacitor" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_board" />
+        <field name="product_id" ref="product_capacitor" />
+        <field name="product_qty">2</field>
+        <field name="reference">C1, C2</field>
+    </record>
+    <record id="mrp_bom_line_regulator" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_board" />
+        <field name="product_id" ref="product_regulator" />
+        <field name="product_qty">1</field>
+        <field name="reference">U1</field>
+    </record>
+    <record id="mrp_bom_line_diode" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_board" />
+        <field name="product_id" ref="product_diode" />
+        <field name="product_qty">1</field>
+        <field name="reference">D1</field>
+    </record>
+</odoo>
