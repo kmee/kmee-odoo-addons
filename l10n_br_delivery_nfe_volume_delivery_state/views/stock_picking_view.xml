@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form_volume_delivery_state" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.picking.form (in l10n_br_delivery_nfe_volume_delivery_state)</field>
+        <field name="model">stock.picking</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_delivery_nfe_lot_volume.view_picking_form_lot_volume"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vol_ids']/list" position="inside">
+                <field name="delivery_state" />
+                <field name="delivery_date" />
+                <button
+                    name="button_change_delivery_state"
+                    type="object"
+                    icon="fa-check"
+                    string="Change Delivery State"
+                />
+            </xpath>
+            <field name="volume_ids" position="attributes">
+                <attribute name="options">{'color_field': 'color'}</attribute>
+            </field>
+            <field name="volume_ids" position="before">
+                <field
+                    name="qty_marked_delivered"
+                    column_invisible="parent.picking_type_code != 'outgoing'"
+                />
+                <field
+                    name="delivery_state"
+                    column_invisible="parent.picking_type_code != 'outgoing'"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
