@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_product_parafuso" model="product.product">
+        <field name="name">Parafuso sextavado M10</field>
+        <field name="is_storable" eval="True" />
+        <field name="list_price">1.80</field>
+    </record>
+    <record id="demo_partner_picking" model="res.partner">
+        <field name="name">Comercial Horizonte de Parafusos Ltda</field>
+        <field name="is_company" eval="True" />
+    </record>
+    <record id="demo_picking" model="stock.picking">
+        <field name="partner_id" ref="demo_partner_picking" />
+        <field name="picking_type_id" ref="stock.picking_type_out" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="origin">Pedido de demonstração</field>
+        <field name="pulled_from_stock" eval="True" />
+        <field name="display_pulled_from_stock_button" eval="True" />
+    </record>
+    <record id="demo_picking_move" model="stock.move">
+        <field name="name">Parafuso sextavado M10</field>
+        <field name="picking_id" ref="demo_picking" />
+        <field name="product_id" ref="demo_product_parafuso" />
+        <field name="product_uom_qty">100</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="pulled_from_stock" eval="True" />
+    </record>
+</odoo>

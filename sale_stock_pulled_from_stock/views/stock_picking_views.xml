@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">stock.picking.list (in sale_stock_pulled_from_stock)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="picking_type_code" column_invisible="1" />
+                <field name="display_pulled_from_stock_button" column_invisible="1" />
+                <button
+                    name="open_remove_mark"
+                    string="Pulled From Stock"
+                    help="Pulled From Stock"
+                    type="object"
+                    icon="fa-asterisk"
+                    invisible="picking_type_code != 'outgoing' or not display_pulled_from_stock_button"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form (in sale_stock_pulled_from_stock)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="picking_type_code" invisible="1" />
+                <field name="display_pulled_from_stock_button" invisible="1" />
+                <label
+                    for="pulled_from_stock"
+                    invisible="picking_type_code != 'outgoing'"
+                />
+                <div class="o_row" invisible="picking_type_code != 'outgoing'">
+                    <field name="pulled_from_stock" />
+                    <button
+                        name="open_remove_mark"
+                        class="oe_read_only pt-0"
+                        string="Remove Mark"
+                        type="object"
+                        invisible="not display_pulled_from_stock_button"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.picking.search (in sale_stock_pulled_from_stock)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='late']" position="after">
+                <separator />
+                <filter
+                    name="pulled_from_stock"
+                    string="Pulled From Stock"
+                    domain="[('pulled_from_stock', '=', True), ('state', 'in', ('assigned', 'waiting', 'confirmed'))]"
+                    help="Transfers that automatically took items from stock"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
