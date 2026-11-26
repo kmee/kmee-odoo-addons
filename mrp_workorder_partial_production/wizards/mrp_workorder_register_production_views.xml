@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_workorder_register_production_form" model="ir.ui.view">
+        <field name="name">mrp.workorder.register.production.form</field>
+        <field name="model">mrp.workorder.register.production</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="workorder_id" invisible="1" />
+                    <field name="available_production_qty" />
+                    <field name="qty_producing" />
+                </group>
+                <footer>
+                    <button
+                        name="action_record_production"
+                        type="object"
+                        string="Record"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button string="Cancel" special="cancel" data-hotkey="x" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_workorder_set_qty_produced_form" model="ir.ui.view">
+        <field name="name">mrp.workorder.set.qty.produced.form</field>
+        <field name="model">mrp.workorder.set.qty.produced</field>
+        <field name="arch" type="xml">
+            <form>
+                <div class="alert alert-warning" role="alert">
+                    Use this to fix a wrong entry. The quantity can only be lowered,
+                    cannot exceed the previous work order nor be lower than the next one.
+                </div>
+                <group>
+                    <field name="workorder_id" invisible="1" />
+                    <field name="qty_produced" />
+                </group>
+                <footer>
+                    <button
+                        name="action_set_qty_produced"
+                        type="object"
+                        string="Correct"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button string="Cancel" special="cancel" data-hotkey="x" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
