@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="demo_employee_marcelo" model="hr.employee">
+        <field name="name">Marcelo Vieira Cardoso</field>
+    </record>
+    <record id="demo_employee_viviane" model="hr.employee">
+        <field name="name">Viviane Araújo Castro</field>
+    </record>
+
+    <record id="demo_health_plan_marcelo_health" model="hr.employee.health.plan">
+        <field name="employee_id" ref="demo_employee_marcelo" />
+        <field name="plan_type">health</field>
+        <field name="operator">Unimed Vale Verde</field>
+        <field name="date_start">2023-04-01</field>
+        <field name="amount">412.50</field>
+        <field name="description">Apartamento, coparticipação</field>
+    </record>
+    <record id="demo_health_plan_marcelo_dental" model="hr.employee.health.plan">
+        <field name="employee_id" ref="demo_employee_marcelo" />
+        <field name="plan_type">dental</field>
+        <field name="operator">Odonto Sorriso Saúde</field>
+        <field name="date_start">2023-04-01</field>
+        <field name="amount">38.90</field>
+    </record>
+    <record id="demo_health_plan_viviane_health" model="hr.employee.health.plan">
+        <field name="employee_id" ref="demo_employee_viviane" />
+        <field name="plan_type">health</field>
+        <field name="operator">Bem Viver Saúde</field>
+        <field name="date_start">2022-01-10</field>
+        <field name="date_end">2025-06-30</field>
+        <field name="amount">365.00</field>
+        <field name="description">Enfermaria</field>
+    </record>
+    <record id="demo_health_plan_viviane_health_new" model="hr.employee.health.plan">
+        <field name="employee_id" ref="demo_employee_viviane" />
+        <field name="plan_type">health</field>
+        <field name="operator">Unimed Vale Verde</field>
+        <field name="date_start">2025-07-01</field>
+        <field name="amount">398.00</field>
+        <field name="description">Enfermaria</field>
+    </record>
+</odoo>
