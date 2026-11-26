@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_vacation_schedule_wizard_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.vacation.schedule.wizard.form</field>
+        <field name="model">hr.employee.vacation.schedule.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="department_ids" widget="many2many_tags" />
+                    <field name="employee_ids" widget="many2many_tags" />
+                    <field name="only_with_balance" />
+                </group>
+                <footer>
+                    <button
+                        name="action_print"
+                        type="object"
+                        string="Print"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="x"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record
+        id="hr_employee_vacation_schedule_wizard_action"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Vacation Schedule</field>
+        <field name="res_model">hr.employee.vacation.schedule.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem
+        id="hr_employee_vacation_schedule_menu"
+        name="Vacation Schedule"
+        parent="hr.hr_menu_hr_reports"
+        action="hr_employee_vacation_schedule_wizard_action"
+        sequence="30"
+    />
+</odoo>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="demo_department_operations" model="hr.department">
+        <field name="name">Operações</field>
+    </record>
+
+    <record id="demo_employee_fernanda" model="hr.employee">
+        <field name="name">Fernanda Lima Rocha</field>
+        <field name="department_id" ref="demo_department_operations" />
+    </record>
+    <record id="demo_employee_roberto" model="hr.employee">
+        <field name="name">Roberto Carvalho Mendes</field>
+        <field name="department_id" ref="demo_department_operations" />
+    </record>
+    <record id="demo_employee_juliana" model="hr.employee">
+        <field name="name">Juliana Pires Teixeira</field>
+        <field name="department_id" ref="demo_department_operations" />
+    </record>
+
+    <!-- Fernanda: first period fully taken, second period still open -->
+    <record id="demo_period_fernanda_1" model="hr.employee.vacation.period">
+        <field name="employee_id" ref="demo_employee_fernanda" />
+        <field name="date_from">2024-03-04</field>
+    </record>
+    <record id="demo_period_fernanda_2" model="hr.employee.vacation.period">
+        <field name="employee_id" ref="demo_employee_fernanda" />
+        <field name="date_from">2025-03-04</field>
+    </record>
+    <record id="demo_vacation_fernanda_1" model="hr.employee.vacation">
+        <field name="employee_id" ref="demo_employee_fernanda" />
+        <field name="period_id" ref="demo_period_fernanda_1" />
+        <field name="date_from">2025-07-07</field>
+        <field name="date_to">2025-07-26</field>
+        <field name="thirteenth_advance" eval="True" />
+        <field name="note">Primeira parcela</field>
+    </record>
+    <record id="demo_vacation_fernanda_2" model="hr.employee.vacation">
+        <field name="employee_id" ref="demo_employee_fernanda" />
+        <field name="period_id" ref="demo_period_fernanda_1" />
+        <field name="date_from">2025-12-15</field>
+        <field name="date_to">2025-12-24</field>
+        <field name="note">Segunda parcela</field>
+    </record>
+
+    <!-- Roberto: 30 days taken in one stretch with cash bonus -->
+    <record id="demo_period_roberto_1" model="hr.employee.vacation.period">
+        <field name="employee_id" ref="demo_employee_roberto" />
+        <field name="date_from">2025-01-13</field>
+    </record>
+    <record id="demo_vacation_roberto_1" model="hr.employee.vacation">
+        <field name="employee_id" ref="demo_employee_roberto" />
+        <field name="period_id" ref="demo_period_roberto_1" />
+        <field name="date_from">2026-02-02</field>
+        <field name="date_to">2026-02-21</field>
+        <field name="cash_bonus" eval="True" />
+        <field name="note">20 dias e 10 dias de abono</field>
+    </record>
+
+    <!-- Juliana: period still without vacations -->
+    <record id="demo_period_juliana_1" model="hr.employee.vacation.period">
+        <field name="employee_id" ref="demo_employee_juliana" />
+        <field name="date_from">2025-09-01</field>
+    </record>
+</odoo>

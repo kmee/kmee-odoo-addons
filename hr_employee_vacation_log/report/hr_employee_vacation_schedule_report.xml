@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="paperformat_vacation_schedule" model="report.paperformat">
+        <field name="name">Vacation Schedule</field>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_spacing">25</field>
+    </record>
+    <record id="action_report_vacation_schedule" model="ir.actions.report">
+        <field name="name">Vacation Schedule</field>
+        <field name="model">hr.employee.vacation.period</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >hr_employee_vacation_log.report_vacation_schedule</field>
+        <field
+            name="report_file"
+        >hr_employee_vacation_log.report_vacation_schedule</field>
+        <field name="paperformat_id" ref="paperformat_vacation_schedule" />
+    </record>
+    <template id="report_vacation_schedule">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Vacation Schedule</h2>
+                    <table class="table table-sm table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Department</th>
+                                <th>Accrual Period</th>
+                                <th>Limit to Start</th>
+                                <th class="text-end">Entitled</th>
+                                <th class="text-end">Taken</th>
+                                <th class="text-end">Remaining</th>
+                                <th>Planned Start</th>
+                                <th>Cash Bonus</th>
+                                <th>13th Advance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="period">
+                                <td>
+                                    <span t-field="period.employee_id" />
+                                </td>
+                                <td>
+                                    <span t-field="period.department_id" />
+                                </td>
+                                <td>
+                                    <span t-field="period.date_from" /> -
+                                    <span t-field="period.date_to" />
+                                </td>
+                                <td>
+                                    <span t-field="period.deadline" />
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="period.entitled_days" />
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="period.taken_days" />
+                                </td>
+                                <td class="text-end">
+                                    <span t-field="period.remaining_days" />
+                                </td>
+                                <td>___/___/______</td>
+                                <td>Y [ ] N [ ]</td>
+                                <td>Y [ ] N [ ]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.form.vacation.log</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page name="vacation_log" string="Vacations" groups="hr.group_hr_user">
+                    <separator string="Accrual Periods" />
+                    <field name="vacation_period_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="deadline" />
+                            <field name="entitled_days" />
+                            <field name="taken_days" />
+                            <field name="remaining_days" />
+                        </list>
+                    </field>
+                    <separator string="Vacations Taken" />
+                    <field name="vacation_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field
+                                name="period_id"
+                                domain="[('employee_id', '=', parent.id)]"
+                                options="{'no_create': True}"
+                            />
+                            <field name="date_from" />
+                            <field name="date_to" />
+                            <field name="days" />
+                            <field name="cash_bonus" />
+                            <field name="thirteenth_advance" />
+                            <field name="note" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
