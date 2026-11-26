@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_requisition_delegate_user,purchase.requisition.delegate.user,model_purchase_requisition_delegate,purchase.group_purchase_user,1,1,1,1
+access_grouped_purchase_requisition_user,grouped.purchase.requisition.user,model_grouped_purchase_requisition,purchase.group_purchase_user,1,1,1,1
+access_grouped_requisition_line_user,grouped.requisition.line.user,model_grouped_requisition_line,purchase.group_purchase_user,1,1,1,1

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="purchase_requisition_delegate_form_view">
+        <field name="name">purchase.requisition.delegate.form</field>
+        <field name="model">purchase.requisition.delegate</field>
+        <field name="arch" type="xml">
+            <form string="Move line to">
+                <group>
+                    <field name="purchase_requisition_id" invisible="1" />
+                    <field name="purchase_requisition_line_id" invisible="1" />
+                    <field
+                        name="to_purchase_requisition_id"
+                        domain="[('id', '!=', purchase_requisition_id), ('state', 'in', ['draft', 'confirmed'])]"
+                    />
+                </group>
+                <footer>
+                    <button
+                        name="doit"
+                        string="Move"
+                        class="btn-primary"
+                        type="object"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="purchase_requisition_delegate_act_window">
+        <field name="name">Move Line</field>
+        <field name="res_model">purchase.requisition.delegate</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

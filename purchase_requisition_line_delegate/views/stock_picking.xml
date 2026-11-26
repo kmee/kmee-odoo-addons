@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="vpicktree" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.picking.list (in purchase_requisition_line_delegate)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="origin" position="before">
+                <field name="requisition_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>
