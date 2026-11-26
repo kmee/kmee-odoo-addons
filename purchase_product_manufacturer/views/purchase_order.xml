@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (C) 2026 KMEE Informatica LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.form.manufacturer</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='name']"
+                position="after"
+            >
+                <field name="manufacturer" optional="hide" />
+                <field name="manufacturer_pref" optional="hide" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_id']"
+                position="after"
+            >
+                <field name="manufacturer" invisible="not manufacturer" />
+                <field name="manufacturer_pname" invisible="not manufacturer_pname" />
+                <field name="manufacturer_pref" invisible="not manufacturer_pref" />
+                <field
+                    name="manufacturer_purl"
+                    widget="url"
+                    invisible="not manufacturer_purl"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

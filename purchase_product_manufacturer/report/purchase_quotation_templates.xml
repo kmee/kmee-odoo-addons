@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (C) 2026 KMEE Informatica LTDA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+        id="report_purchasequotation_document"
+        inherit_id="purchase.report_purchasequotation_document"
+    >
+        <th name="th_description" position="after">
+            <th name="th_manufacturer">
+                <strong>Manufacturer/PartNumber</strong>
+            </th>
+        </th>
+        <td id="product" position="after">
+            <td id="manufacturer">
+                <span t-field="order_line.manufacturer" />
+                <br t-if="order_line.manufacturer and order_line.manufacturer_pref" />
+                <span t-field="order_line.manufacturer_pref" />
+            </td>
+        </td>
+    </template>
+</odoo>

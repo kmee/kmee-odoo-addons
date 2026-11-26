@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright (C) 2026 KMEE Informatica LTDA
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+-->
+<odoo noupdate="1">
+    <record id="partner_fabricante_serra_azul" model="res.partner">
+        <field name="name">Metalúrgica Serra Azul</field>
+        <field name="is_company" eval="True" />
+        <field name="website">https://www.serraazul.example.com.br</field>
+        <field name="city">Caxias do Sul</field>
+    </record>
+    <record id="partner_fabricante_itapema" model="res.partner">
+        <field name="name">Componentes Eletrônicos Itapema</field>
+        <field name="is_company" eval="True" />
+        <field name="website">https://www.itapema-componentes.example.com.br</field>
+        <field name="city">Campinas</field>
+    </record>
+    <record id="partner_fornecedor_distribuidora" model="res.partner">
+        <field name="name">Distribuidora Planalto de Peças</field>
+        <field name="is_company" eval="True" />
+        <field name="city">Goiânia</field>
+    </record>
+
+    <record id="product_parafuso_flangeado" model="product.product">
+        <field name="name">Parafuso flangeado M8x30</field>
+        <field name="type">consu</field>
+        <field name="purchase_ok" eval="True" />
+        <field name="standard_price">0.85</field>
+        <field name="manufacturer_id" ref="partner_fabricante_serra_azul" />
+        <field
+            name="manufacturer_pname"
+        >Parafuso sextavado flangeado M8x30 zincado</field>
+        <field name="manufacturer_pref">MSA-4410-B</field>
+        <field
+            name="manufacturer_purl"
+        >https://www.serraazul.example.com.br/produtos/msa-4410-b</field>
+    </record>
+    <record id="product_capacitor_eletrolitico" model="product.product">
+        <field name="name">Capacitor eletrolítico 470 uF 25 V</field>
+        <field name="type">consu</field>
+        <field name="purchase_ok" eval="True" />
+        <field name="standard_price">0.42</field>
+        <field name="manufacturer_id" ref="partner_fabricante_itapema" />
+        <field name="manufacturer_pname">Capacitor eletrolítico radial 470 uF</field>
+        <field name="manufacturer_pref">CEI-470U25-R</field>
+    </record>
+    <record id="product_sem_fabricante" model="product.product">
+        <field name="name">Etiqueta adesiva 50x30 mm</field>
+        <field name="type">consu</field>
+        <field name="purchase_ok" eval="True" />
+        <field name="standard_price">0.05</field>
+    </record>
+
+    <record id="purchase_order_pecas" model="purchase.order">
+        <field name="partner_id" ref="partner_fornecedor_distribuidora" />
+    </record>
+    <record id="purchase_order_line_parafuso" model="purchase.order.line">
+        <field name="order_id" ref="purchase_order_pecas" />
+        <field name="product_id" ref="product_parafuso_flangeado" />
+        <field name="product_qty">500</field>
+        <field name="price_unit">0.85</field>
+    </record>
+    <record id="purchase_order_line_capacitor" model="purchase.order.line">
+        <field name="order_id" ref="purchase_order_pecas" />
+        <field name="product_id" ref="product_capacitor_eletrolitico" />
+        <field name="product_qty">200</field>
+        <field name="price_unit">0.42</field>
+    </record>
+    <record id="purchase_order_line_etiqueta" model="purchase.order.line">
+        <field name="order_id" ref="purchase_order_pecas" />
+        <field name="product_id" ref="product_sem_fabricante" />
+        <field name="product_qty">1000</field>
+        <field name="price_unit">0.05</field>
+    </record>
+</odoo>
