@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_supplier" model="res.partner">
+        <field name="name">Metalúrgica Santa Clara Ltda</field>
+        <field name="is_company" eval="True" />
+        <field name="city">Joinville</field>
+    </record>
+
+    <record id="demo_customer" model="res.partner">
+        <field name="name">Comercial Bandeirantes de Ferragens Ltda</field>
+        <field name="is_company" eval="True" />
+        <field name="city">Campinas</field>
+    </record>
+
+    <record id="demo_product" model="product.product">
+        <field name="name">Parafuso sextavado M8 (caixa com 100)</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="tracking">lot</field>
+        <field name="list_price">42.0</field>
+        <field name="standard_price">28.0</field>
+    </record>
+
+    <!-- Compra recebida com o lote: o lote nasce com a compra de origem -->
+    <record id="demo_purchase" model="purchase.order">
+        <field name="partner_id" ref="demo_supplier" />
+        <field
+            name="order_line"
+            eval="[(0, 0, {
+                'product_id': ref('demo_product'),
+                'product_qty': 200,
+                'price_unit': 28.0,
+            })]"
+        />
+    </record>
+    <function model="purchase.order" name="button_confirm">
+        <value eval="[ref('demo_purchase')]" />
+    </function>
+    <function model="stock.move.line" name="write">
+        <value
+            model="stock.move.line"
+            search="[('picking_id.purchase_id', '=', ref('demo_purchase'))]"
+        />
+        <value eval="{'lot_name': 'LT-2026-0421'}" />
+    </function>
+    <function model="stock.picking" name="button_validate">
+        <value
+            model="stock.picking"
+            search="[('purchase_id', '=', ref('demo_purchase'))]"
+        />
+    </function>
+
+    <!-- Venda do lote: a origem do lote continua sendo a compra -->
+    <record id="demo_sale" model="sale.order">
+        <field name="partner_id" ref="demo_customer" />
+        <field
+            name="order_line"
+            eval="[(0, 0, {
+                'product_id': ref('demo_product'),
+                'product_uom_qty': 50,
+            })]"
+        />
+    </record>
+    <function model="sale.order" name="action_confirm">
+        <value eval="[ref('demo_sale')]" />
+    </function>
+    <function model="stock.picking" name="button_validate">
+        <value model="stock.picking" search="[('sale_id', '=', ref('demo_sale'))]" />
+    </function>
+</odoo>
