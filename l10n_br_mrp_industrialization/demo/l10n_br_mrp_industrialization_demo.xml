@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Diário de venda das operações de serviço de industrialização -->
+    <record
+        id="l10n_br_stock_industrialization.fo_servico_industrializacao"
+        model="l10n_br_fiscal.operation"
+    >
+        <field
+            name="journal_id"
+            ref="l10n_br_stock_account.simples_remessa_journal_main_company"
+        />
+    </record>
+
+    <!-- Nota fiscal de entrada do cliente com o material enviado -->
+    <record id="nfe_cliente_entrada" model="l10n_br_fiscal.document">
+        <field name="company_id" ref="base.main_company" />
+        <field name="document_type_id" ref="l10n_br_fiscal.document_55" />
+        <field name="document_serie">1</field>
+        <field name="document_number">000873</field>
+        <field name="issuer">partner</field>
+        <field name="partner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_fiscal.fo_entrada_industrializacao"
+        />
+        <field name="fiscal_operation_type">in</field>
+    </record>
+
+    <record id="nfe_cliente_entrada_line" model="l10n_br_fiscal.document.line">
+        <field name="document_id" ref="nfe_cliente_entrada" />
+        <field name="name">Perfil de Alumínio 6063 (barra 6 m)</field>
+        <field
+            name="product_id"
+            ref="l10n_br_stock_industrialization.product_perfil_aluminio"
+        />
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="quantity">40</field>
+        <field name="price_unit">118.4</field>
+        <field name="fiscal_operation_type">in</field>
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_fiscal.fo_entrada_industrializacao"
+        />
+    </record>
+
+    <record id="lot_perfil_aluminio" model="stock.lot">
+        <field name="name">LT-ALU-873</field>
+        <field
+            name="product_id"
+            ref="l10n_br_stock_industrialization.product_perfil_aluminio"
+        />
+        <field name="company_id" ref="base.main_company" />
+        <field name="origin_nfe_id" ref="nfe_cliente_entrada" />
+        <field name="origin_nfe_line_id" ref="nfe_cliente_entrada_line" />
+        <field name="numero_nota">000873</field>
+    </record>
+
+    <!-- Produto industrializado e material aplicado pela empresa -->
+    <record id="product_suporte_usinado" model="product.product">
+        <field name="name">Suporte de Perfil Usinado e Furado</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+
+    <record id="product_parafuso_m8" model="product.product">
+        <field name="name">Parafuso Sextavado M8 x 30 (peça)</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="standard_price">1.9</field>
+    </record>
+
+    <!-- Estoque: perfil do cliente (dono = cliente) e parafusos da empresa -->
+    <record id="quant_perfil_aluminio" model="stock.quant">
+        <field
+            name="product_id"
+            ref="l10n_br_stock_industrialization.product_perfil_aluminio"
+        />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="lot_id" ref="lot_perfil_aluminio" />
+        <field name="owner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="inventory_quantity">40</field>
+    </record>
+
+    <record id="quant_parafuso_m8" model="stock.quant">
+        <field name="product_id" ref="product_parafuso_m8" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="inventory_quantity">500</field>
+    </record>
+
+    <function
+        model="stock.quant"
+        name="action_apply_inventory"
+        eval="[[ref('quant_perfil_aluminio'), ref('quant_parafuso_m8')]]"
+    />
+
+    <!-- Ordem de produção: 10 suportes consomem 20 perfis do cliente e 60 parafusos -->
+    <record id="production_suporte" model="mrp.production">
+        <field name="product_id" ref="product_suporte_usinado" />
+        <field name="product_qty">10</field>
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="location_src_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+    </record>
+
+    <record id="production_suporte_raw_perfil" model="stock.move">
+        <field name="name">Perfil de Alumínio 6063 (barra 6 m)</field>
+        <field name="raw_material_production_id" ref="production_suporte" />
+        <field
+            name="product_id"
+            ref="l10n_br_stock_industrialization.product_perfil_aluminio"
+        />
+        <field name="product_uom_qty">20</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field
+            name="location_dest_id"
+            search="[('usage', '=', 'production'), ('company_id', '=', ref('base.main_company'))]"
+        />
+    </record>
+
+    <record id="production_suporte_raw_parafuso" model="stock.move">
+        <field name="name">Parafuso Sextavado M8 x 30 (peça)</field>
+        <field name="raw_material_production_id" ref="production_suporte" />
+        <field name="product_id" ref="product_parafuso_m8" />
+        <field name="product_uom_qty">60</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field
+            name="location_dest_id"
+            search="[('usage', '=', 'production'), ('company_id', '=', ref('base.main_company'))]"
+        />
+    </record>
+
+    <function
+        model="mrp.production"
+        name="action_confirm"
+        eval="[[ref('production_suporte')]]"
+    />
+
+    <!-- Consumo apontado: o perfil sai do lote e do dono do cliente -->
+    <record id="production_suporte_line_perfil" model="stock.move.line">
+        <field name="move_id" ref="production_suporte_raw_perfil" />
+        <field
+            name="product_id"
+            ref="l10n_br_stock_industrialization.product_perfil_aluminio"
+        />
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field
+            name="location_dest_id"
+            search="[('usage', '=', 'production'), ('company_id', '=', ref('base.main_company'))]"
+        />
+        <field name="lot_id" ref="lot_perfil_aluminio" />
+        <field name="owner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="quantity">20</field>
+        <field name="picked" eval="True" />
+    </record>
+
+    <record id="production_suporte_line_parafuso" model="stock.move.line">
+        <field name="move_id" ref="production_suporte_raw_parafuso" />
+        <field name="product_id" ref="product_parafuso_m8" />
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field
+            name="location_dest_id"
+            search="[('usage', '=', 'production'), ('company_id', '=', ref('base.main_company'))]"
+        />
+        <field name="quantity">60</field>
+        <field name="picked" eval="True" />
+    </record>
+
+    <function
+        model="mrp.production"
+        name="write"
+        eval="[[ref('production_suporte')], {'qty_producing': 10}]"
+    />
+    <function
+        model="mrp.production"
+        name="button_mark_done"
+        eval="[[ref('production_suporte')]]"
+        context="{'skip_consumption': True, 'skip_backorder': True}"
+    />
+
+    <!-- Pedido de industrialização: parafusos aplicados cobrados na rota Apenas cobrança -->
+    <record id="sale_order_industrialization_mo" model="sale.order">
+        <field name="partner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="partner_invoice_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="partner_shipping_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_stock_industrialization.fo_servico_industrializacao"
+        />
+        <field name="client_order_ref">OS-2026-0152</field>
+    </record>
+
+    <record id="sale_order_industrialization_mo_line" model="sale.order.line">
+        <field name="order_id" ref="sale_order_industrialization_mo" />
+        <field name="product_id" ref="product_parafuso_m8" />
+        <field name="product_uom_qty">60</field>
+        <field name="price_unit">4.6</field>
+        <field
+            name="route_id"
+            ref="l10n_br_stock_industrialization.route_apenas_cobranca"
+        />
+    </record>
+
+    <!-- Entrega dos suportes, concluída e pronta para faturar -->
+    <record id="picking_industrialization_mo_out" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_out" />
+        <field name="partner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_stock_industrialization.fo_servico_industrializacao"
+        />
+        <field name="sale_id" ref="sale_order_industrialization_mo" />
+        <field name="invoice_state">2binvoiced</field>
+    </record>
+
+    <record id="picking_industrialization_mo_out_move" model="stock.move">
+        <field name="name">Suporte de Perfil Usinado e Furado</field>
+        <field name="picking_id" ref="picking_industrialization_mo_out" />
+        <field name="product_id" ref="product_suporte_usinado" />
+        <field name="product_uom_qty">10</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="invoice_state">2binvoiced</field>
+        <field
+            name="move_orig_ids"
+            search="[('production_id', '=', ref('production_suporte'))]"
+        />
+    </record>
+
+    <function
+        model="stock.picking"
+        name="action_confirm"
+        eval="[[ref('picking_industrialization_mo_out')]]"
+    />
+    <function
+        model="stock.picking"
+        name="action_assign"
+        eval="[[ref('picking_industrialization_mo_out')]]"
+    />
+    <function
+        model="stock.picking"
+        name="button_validate"
+        eval="[[ref('picking_industrialization_mo_out')]]"
+    />
+</odoo>
