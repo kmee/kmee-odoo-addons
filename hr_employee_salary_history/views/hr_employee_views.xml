@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.form.salary.history</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='personal_information']" position="after">
+                <page name="salary_history" string="Salary" groups="hr.group_hr_user">
+                    <group>
+                        <group>
+                            <field name="currency_id" invisible="1" />
+                            <field name="current_salary" readonly="1" />
+                            <button
+                                name="action_adjust_salary"
+                                type="object"
+                                string="Adjust Salary"
+                                class="btn-primary"
+                                invisible="not id"
+                            />
+                        </group>
+                    </group>
+                    <field name="salary_history_ids" nolabel="1" readonly="1">
+                        <list>
+                            <field name="date" />
+                            <field name="reason" />
+                            <field name="currency_id" column_invisible="1" />
+                            <field name="previous_salary" />
+                            <field name="salary" />
+                            <field name="increase_percentage" string="Increase (%)" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

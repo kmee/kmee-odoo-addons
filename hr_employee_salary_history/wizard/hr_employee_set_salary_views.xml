@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_set_salary_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.set.salary.form</field>
+        <field name="model">hr.employee.set.salary</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="employee_id" invisible="1" />
+                        <field name="currency_id" invisible="1" />
+                        <field name="current_salary" />
+                        <field name="salary" />
+                    </group>
+                    <group>
+                        <field name="date" />
+                        <field name="reason" />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_confirm"
+                        type="object"
+                        string="Adjust Salary"
+                        class="btn-primary"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="x"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

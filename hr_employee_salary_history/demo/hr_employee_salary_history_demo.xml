@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="demo_employee_thiago" model="hr.employee">
+        <field name="name">Thiago Augusto Ribeiro</field>
+        <field name="current_salary">3850.00</field>
+    </record>
+    <record id="demo_employee_aline" model="hr.employee">
+        <field name="name">Aline Cristina Moreira</field>
+        <field name="current_salary">5200.00</field>
+    </record>
+
+    <record id="demo_salary_history_thiago_1" model="hr.employee.salary.history">
+        <field name="employee_id" ref="demo_employee_thiago" />
+        <field name="date">2023-02-01</field>
+        <field name="reason">Admissão</field>
+        <field name="salary">3200.00</field>
+    </record>
+    <record id="demo_salary_history_thiago_2" model="hr.employee.salary.history">
+        <field name="employee_id" ref="demo_employee_thiago" />
+        <field name="date">2024-05-01</field>
+        <field name="reason">Dissídio coletivo</field>
+        <field name="previous_salary">3200.00</field>
+        <field name="salary">3472.00</field>
+    </record>
+    <record id="demo_salary_history_thiago_3" model="hr.employee.salary.history">
+        <field name="employee_id" ref="demo_employee_thiago" />
+        <field name="date">2025-05-01</field>
+        <field name="reason">Dissídio coletivo e mérito</field>
+        <field name="previous_salary">3472.00</field>
+        <field name="salary">3850.00</field>
+    </record>
+    <record id="demo_salary_history_aline_1" model="hr.employee.salary.history">
+        <field name="employee_id" ref="demo_employee_aline" />
+        <field name="date">2022-08-15</field>
+        <field name="reason">Admissão</field>
+        <field name="salary">4300.00</field>
+    </record>
+    <record id="demo_salary_history_aline_2" model="hr.employee.salary.history">
+        <field name="employee_id" ref="demo_employee_aline" />
+        <field name="date">2025-01-01</field>
+        <field name="reason">Promoção para analista sênior</field>
+        <field name="previous_salary">4300.00</field>
+        <field name="salary">5200.00</field>
+    </record>
+</odoo>

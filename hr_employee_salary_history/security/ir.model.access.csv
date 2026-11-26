@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_salary_history_user,hr.employee.salary.history user,model_hr_employee_salary_history,hr.group_hr_user,1,0,1,0
+access_hr_employee_salary_history_manager,hr.employee.salary.history manager,model_hr_employee_salary_history,hr.group_hr_manager,1,1,1,1
+access_hr_employee_set_salary_user,hr.employee.set.salary user,model_hr_employee_set_salary,hr.group_hr_user,1,1,1,1
