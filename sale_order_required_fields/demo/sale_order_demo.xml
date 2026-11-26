@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_product_parafuso" model="product.product">
+        <field name="name">Parafuso sextavado M8</field>
+        <field name="type">consu</field>
+        <field name="list_price">1.50</field>
+    </record>
+    <record id="demo_product_arruela" model="product.product">
+        <field name="name">Arruela lisa M8</field>
+        <field name="type">consu</field>
+        <field name="list_price">0.40</field>
+    </record>
+    <record id="demo_partner_required" model="res.partner">
+        <field name="name">Distribuidora Santa Luzia de Ferragens Ltda</field>
+        <field name="is_company" eval="True" />
+    </record>
+    <record id="demo_order_required" model="sale.order">
+        <field name="partner_id" ref="demo_partner_required" />
+        <field
+            name="payment_mode_id"
+            ref="account_payment_mode.payment_mode_inbound_ct1"
+        />
+        <field name="payment_term_id" ref="account.account_payment_term_30days" />
+    </record>
+    <record id="demo_order_required_line1" model="sale.order.line">
+        <field name="order_id" ref="demo_order_required" />
+        <field name="product_id" ref="demo_product_parafuso" />
+        <field name="product_uom_qty">500</field>
+        <field
+            name="commitment_date"
+            eval="DateTime.today() + relativedelta(days=15)"
+        />
+    </record>
+    <record id="demo_order_required_line2" model="sale.order.line">
+        <field name="order_id" ref="demo_order_required" />
+        <field name="product_id" ref="demo_product_arruela" />
+        <field name="product_uom_qty">1000</field>
+        <field
+            name="commitment_date"
+            eval="DateTime.today() + relativedelta(days=15)"
+        />
+    </record>
+</odoo>
