@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_warehouse_inherit_component_return" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.component.return</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="mrp.view_warehouse_inherit_mrp" />
+        <field name="arch" type="xml">
+            <field name="manufacture_steps" position="after">
+                <field
+                    name="component_return_enabled"
+                    invisible="not manufacture_to_resupply or manufacture_steps == 'mrp_one_step'"
+                    groups="stock.group_adv_location"
+                />
+                <field
+                    name="component_return_type_id"
+                    readonly="True"
+                    invisible="not component_return_enabled"
+                    groups="stock.group_adv_location"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

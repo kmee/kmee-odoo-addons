@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Two-step warehouse with component return enabled -->
+    <record id="warehouse_component_return" model="stock.warehouse">
+        <field name="name">Fábrica Serra Azul</field>
+        <field name="code">FSA</field>
+        <field name="manufacture_to_resupply" eval="True" />
+        <field name="manufacture_steps">pbm</field>
+        <field name="component_return_enabled" eval="True" />
+    </record>
+
+    <record id="product_dining_table" model="product.product">
+        <field name="name">Mesa de Jantar Carvalho 160 cm</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="list_price">2890.0</field>
+    </record>
+    <record id="product_table_top" model="product.product">
+        <field name="name">Tampo de Carvalho 160x90</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+    <record id="product_table_leg" model="product.product">
+        <field name="name">Pé Torneado de Carvalho</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+    <record id="product_fixing_kit" model="product.product">
+        <field name="name">Kit de Parafusos e Buchas M8</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+
+    <record id="bom_dining_table" model="mrp.bom">
+        <field
+            name="product_tmpl_id"
+            model="product.product"
+            eval="obj().env['product.product'].browse(ref('product_dining_table')).product_tmpl_id.id"
+        />
+        <field name="product_id" ref="product_dining_table" />
+        <field name="product_qty">1.0</field>
+        <field name="type">normal</field>
+    </record>
+    <record id="bom_dining_table_top" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_dining_table" />
+        <field name="product_id" ref="product_table_top" />
+        <field name="product_qty">1.0</field>
+    </record>
+    <record id="bom_dining_table_leg" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_dining_table" />
+        <field name="product_id" ref="product_table_leg" />
+        <field name="product_qty">4.0</field>
+    </record>
+    <record id="bom_dining_table_kit" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_dining_table" />
+        <field name="product_id" ref="product_fixing_kit" />
+        <field name="product_qty">1.0</field>
+    </record>
+
+    <record id="stock_table_top" model="stock.quant">
+        <field name="product_id" ref="product_table_top" />
+        <field name="inventory_quantity">10.0</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env['stock.warehouse'].browse(ref('warehouse_component_return')).lot_stock_id.id"
+        />
+    </record>
+    <record id="stock_table_leg" model="stock.quant">
+        <field name="product_id" ref="product_table_leg" />
+        <field name="inventory_quantity">40.0</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env['stock.warehouse'].browse(ref('warehouse_component_return')).lot_stock_id.id"
+        />
+    </record>
+    <record id="stock_fixing_kit" model="stock.quant">
+        <field name="product_id" ref="product_fixing_kit" />
+        <field name="inventory_quantity">20.0</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env['stock.warehouse'].browse(ref('warehouse_component_return')).lot_stock_id.id"
+        />
+    </record>
+    <function model="stock.quant" name="action_apply_inventory">
+        <function
+            model="stock.quant"
+            name="search"
+            eval="[[('id', 'in', (ref('stock_table_top'), ref('stock_table_leg'), ref('stock_fixing_kit')))]]"
+        />
+    </function>
+
+    <!-- Order for 2 tables: components are picked, only the table tops are consumed -->
+    <record id="mrp_production_dining_table" model="mrp.production">
+        <field name="product_id" ref="product_dining_table" />
+        <field name="bom_id" ref="bom_dining_table" />
+        <field name="product_qty">2.0</field>
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field
+            name="picking_type_id"
+            model="stock.picking.type"
+            eval="obj().env['stock.warehouse'].browse(ref('warehouse_component_return')).manu_type_id.id"
+        />
+    </record>
+    <function
+        model="mrp.production"
+        name="action_confirm"
+        eval="[[ref('mrp_production_dining_table')]]"
+    />
+    <function
+        model="stock.picking"
+        name="action_assign"
+        eval="[obj().env['mrp.production'].browse(ref('mrp_production_dining_table')).move_raw_ids.move_orig_ids.picking_id.ids]"
+    />
+    <function
+        model="stock.move"
+        name="write"
+        eval="[obj().env['mrp.production'].browse(ref('mrp_production_dining_table')).move_raw_ids.move_orig_ids.ids, {'picked': True}]"
+    />
+    <function
+        model="stock.picking"
+        name="button_validate"
+        eval="[obj().env['mrp.production'].browse(ref('mrp_production_dining_table')).move_raw_ids.move_orig_ids.picking_id.ids]"
+    />
+    <function
+        model="stock.move"
+        name="write"
+        eval="[obj().env['mrp.production'].browse(ref('mrp_production_dining_table')).move_raw_ids.filtered_domain([('product_id', '=', ref('product_table_top'))]).ids, {'picked': True}]"
+    />
+</odoo>
