@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_cabo_aco" model="product.product">
+        <field name="name">Cabo de Aço 6mm (rolo)</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="tracking">lot</field>
+    </record>
+
+    <record id="nfe_entrada_demo" model="l10n_br_fiscal.document">
+        <field name="company_id" ref="l10n_br_base.empresa_lucro_presumido" />
+        <field name="document_type_id" ref="l10n_br_fiscal.document_55" />
+        <field name="document_serie">1</field>
+        <field name="document_number">004321</field>
+        <field name="issuer">partner</field>
+        <field name="partner_id" ref="l10n_br_base.res_partner_amd" />
+        <field name="fiscal_operation_id" ref="l10n_br_fiscal.fo_compras" />
+        <field name="fiscal_operation_type">in</field>
+    </record>
+
+    <record id="nfe_entrada_demo_line_1" model="l10n_br_fiscal.document.line">
+        <field name="document_id" ref="nfe_entrada_demo" />
+        <field name="name">Cabo de Aço 6mm (rolo)</field>
+        <field name="product_id" ref="product_cabo_aco" />
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="quantity">10</field>
+        <field name="price_unit">85</field>
+        <field name="fiscal_operation_type">in</field>
+        <field name="fiscal_operation_id" ref="l10n_br_fiscal.fo_compras" />
+    </record>
+
+    <record id="picking_recebimento_demo" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_in" />
+        <field name="partner_id" ref="l10n_br_base.res_partner_amd" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+        <field name="origin">Recebimento NF-e 004321</field>
+    </record>
+
+    <record id="picking_recebimento_demo_move" model="stock.move">
+        <field name="name">Cabo de Aço 6mm (rolo)</field>
+        <field name="picking_id" ref="picking_recebimento_demo" />
+        <field name="product_id" ref="product_cabo_aco" />
+        <field name="product_uom_qty">10</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+    </record>
+</odoo>
