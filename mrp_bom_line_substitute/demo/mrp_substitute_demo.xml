@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="product_desk_oak" model="product.product">
+        <field name="name">Escrivaninha Carvalho 120 cm</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="list_price">890.00</field>
+    </record>
+    <record id="product_screw_zinc" model="product.product">
+        <field name="name">Parafuso Philips 4x40 Zincado</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="standard_price">0.12</field>
+    </record>
+    <record id="product_screw_black" model="product.product">
+        <field name="name">Parafuso Philips 4x40 Oxidado Preto</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="standard_price">0.15</field>
+    </record>
+    <record id="product_screw_steel" model="product.product">
+        <field name="name">Parafuso Philips 4x40 Inox</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="standard_price">0.30</field>
+    </record>
+    <record id="product_board_oak" model="product.product">
+        <field name="name">Tampo MDF Carvalho 120x60</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="standard_price">180.00</field>
+    </record>
+    <record id="product_board_oak_alt" model="product.product">
+        <field name="name">Tampo MDP Carvalho Claro 120x60</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="standard_price">165.00</field>
+    </record>
+
+    <record id="mrp_bom_desk_oak" model="mrp.bom">
+        <field
+            name="product_tmpl_id"
+            model="product.template"
+            search="[('product_variant_ids', 'in', [ref('product_desk_oak')])]"
+        />
+        <field name="product_qty">1</field>
+    </record>
+    <record id="mrp_bom_desk_oak_line_board" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_desk_oak" />
+        <field name="product_id" ref="product_board_oak" />
+        <field name="product_qty">1</field>
+        <field
+            name="substitute_product_ids"
+            eval="[(6, 0, [ref('product_board_oak_alt')])]"
+        />
+    </record>
+    <record id="mrp_bom_desk_oak_line_screw" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_desk_oak" />
+        <field name="product_id" ref="product_screw_zinc" />
+        <field name="product_qty">24</field>
+        <field
+            name="substitute_product_ids"
+            eval="[(6, 0, [ref('product_screw_black'), ref('product_screw_steel')])]"
+        />
+    </record>
+
+    <record
+        id="quant_screw_zinc"
+        model="stock.quant"
+        context="{'inventory_mode': True}"
+    >
+        <field name="product_id" ref="product_screw_zinc" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="inventory_quantity">100</field>
+    </record>
+    <record
+        id="quant_board_oak_alt"
+        model="stock.quant"
+        context="{'inventory_mode': True}"
+    >
+        <field name="product_id" ref="product_board_oak_alt" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="inventory_quantity">20</field>
+    </record>
+    <record
+        id="quant_screw_black"
+        model="stock.quant"
+        context="{'inventory_mode': True}"
+    >
+        <field name="product_id" ref="product_screw_black" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="inventory_quantity">500</field>
+    </record>
+    <record
+        id="quant_screw_steel"
+        model="stock.quant"
+        context="{'inventory_mode': True}"
+    >
+        <field name="product_id" ref="product_screw_steel" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="inventory_quantity">200</field>
+    </record>
+    <function model="stock.quant" name="action_apply_inventory">
+        <function
+            eval="[[('id', 'in', [ref('quant_screw_zinc'), ref('quant_board_oak_alt'), ref('quant_screw_black'), ref('quant_screw_steel')])]]"
+            model="stock.quant"
+            name="search"
+        />
+    </function>
+</odoo>
