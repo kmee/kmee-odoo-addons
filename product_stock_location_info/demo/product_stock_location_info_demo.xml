@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_product" model="product.template">
+        <field name="name">Registro de esfera 3/4"</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="list_price">36.0</field>
+        <field name="standard_price">21.0</field>
+        <field name="stock">Almoxarifado central</field>
+        <field name="posx">B</field>
+        <field name="posy">12</field>
+        <field name="posz">3</field>
+        <field name="box">04</field>
+        <field name="caixa">A</field>
+        <field name="nivel">2</field>
+        <field name="second_stock">Depósito anexo</field>
+        <field name="second_posx">D</field>
+        <field name="second_posy">5</field>
+        <field name="second_posz">1</field>
+        <field name="second_box">17</field>
+        <field name="second_caixa">C</field>
+        <field name="second_nivel">1</field>
+    </record>
+</odoo>
