@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Serviço de industrialização - operação -->
+    <record id="fo_servico_industrializacao" model="l10n_br_fiscal.operation">
+        <field name="code">Serviço de Industrialização</field>
+        <field name="name">Serviço de Industrialização</field>
+        <field name="fiscal_operation_type">out</field>
+        <field name="fiscal_type">other</field>
+        <field name="default_price_unit">sale_price</field>
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fol_servico_industrializacao_prod_acabado"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field name="fiscal_operation_id" ref="fo_servico_industrializacao" />
+        <field name="name">Serviço de Industrialização - Produto Acabado</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5124" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6124" />
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fol_servico_industrializacao_mat_prima"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field name="fiscal_operation_id" ref="fo_servico_industrializacao" />
+        <field name="name">Serviço de Industrialização - Matéria-Prima</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5124" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6124" />
+        <field name="product_type">01</field>
+        <field name="state">approved</field>
+    </record>
+
+    <!-- DEFINIÇÃO DAS TRIBUTAÇÕES -->
+    <!-- ICMS - Serviço de industrialização - produto acabado -->
+    <record
+        id="tax_icms_definition_servico_industrializacao_prod_acabado"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_icms_outras" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_icms" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_servico_industrializacao_prod_acabado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- IPI - Serviço de industrialização - produto acabado -->
+    <record
+        id="tax_ipi_definition_servico_industrializacao_prod_acabado"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_ipi_nt" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_ipi" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_servico_industrializacao_prod_acabado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- Retorno de industrialização - operação -->
+    <record id="fo_retorno_industrializacao" model="l10n_br_fiscal.operation">
+        <field name="code">Retorno - Industrialização</field>
+        <field name="name">Retorno Industrialização</field>
+        <field name="fiscal_operation_type">out</field>
+        <field name="fiscal_type">return_out</field>
+        <field name="default_price_unit">cost_price</field>
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fo_retorno_industrializacao_retorno_utilizado"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field name="fiscal_operation_id" ref="fo_retorno_industrializacao" />
+        <field name="name">Retorno Material Utilizado</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5902" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6902" />
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fo_retorno_industrializacao_retorno_nao_utilizado"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field name="fiscal_operation_id" ref="fo_retorno_industrializacao" />
+        <field name="name">Retorno Material não Utilizado</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5903" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6903" />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- DEFINIÇÃO DAS TRIBUTAÇÕES -->
+    <!-- ICMS - Retorno de Industrialização -->
+    <record
+        id="tax_icms_definition_retorno_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_icms_suspensao" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_icms" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- IPI - Retorno de Industrialização -->
+    <record
+        id="tax_ipi_definition_retorno_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_ipi_nt" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_ipi" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- PIS - Retorno de Industrialização -->
+    <record
+        id="tax_pis_definition_retorno_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_pis_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_pis" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- COFINS - Retorno de Industrialização -->
+    <record
+        id="tax_cofins_definition_retorno_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_cofins_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_cofins" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- ICMS - Retorno de Industrialização -->
+    <record
+        id="tax_icms_definition_retorno_nao_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_icms_suspensao" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_icms" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- IPI - Retorno de Industrialização -->
+    <record
+        id="tax_ipi_definition_retorno_nao_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_ipi_nt" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_ipi" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- PIS - Retorno de Industrialização -->
+    <record
+        id="tax_pis_definition_retorno_nao_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_pis_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_pis" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- COFINS - Retorno de Industrialização -->
+    <record
+        id="tax_cofins_definition_retorno_nao_utilizado_industrializacao"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_cofins_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_cofins" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fo_retorno_industrializacao_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!--  -->
+    <!-- SERVIÇO DE INDUSTRIALIZAÇÃO POR CONTA E ORDEM -->
+    <!--  -->
+
+    <!-- Serviço de industrialização por conta e ordem - operação -->
+    <record
+        id="fo_servico_industrializacao_conta_ordem"
+        model="l10n_br_fiscal.operation"
+    >
+        <field name="code">Industrialização por Conta e Ordem</field>
+        <field name="name">Serviço de Industrialização por Conta e Ordem</field>
+        <field name="fiscal_operation_type">out</field>
+        <field name="fiscal_type">other</field>
+        <field name="default_price_unit">sale_price</field>
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fol_servico_ind_conta_ordem_prod_acabado"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field
+            name="fiscal_operation_id"
+            ref="fo_servico_industrializacao_conta_ordem"
+        />
+        <field name="name">Industrialização por conta e ordem - Produto Acabado</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5125" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6125" />
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fol_servico_ind_conta_ordem_mat_prima"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field
+            name="fiscal_operation_id"
+            ref="fo_servico_industrializacao_conta_ordem"
+        />
+        <field
+            name="name"
+        >Industrialização por conta e ordem - Matéria-Prima aplicada</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5125" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6125" />
+        <field name="product_type">01</field>
+        <field name="state">approved</field>
+    </record>
+
+    <!-- DEFINIÇÃO DAS TRIBUTAÇÕES -->
+    <!-- ICMS - Serviço de industrialização por conta e ordem - produto acabado -->
+    <record
+        id="tax_icms_definition_servico_ind_conta_ordem_prod_acabado"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_icms_outras" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_icms" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_servico_ind_conta_ordem_prod_acabado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- IPI - Serviço de industrialização por conta e ordem - produto acabado -->
+    <record
+        id="tax_ipi_definition_servico_ind_conta_ordem_prod_acabado"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_ipi_nt" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_ipi" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_servico_ind_conta_ordem_prod_acabado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- Retorno de industrialização por conta e ordem - operação -->
+    <record id="fo_retorno_ind_conta_ordem" model="l10n_br_fiscal.operation">
+        <field name="code">Retorno - Industrialização por Conta e Ordem</field>
+        <field name="name">Retorno Industrialização por Conta e Ordem</field>
+        <field name="fiscal_operation_type">out</field>
+        <field name="fiscal_type">return_out</field>
+        <field name="default_price_unit">cost_price</field>
+        <field name="state">approved</field>
+    </record>
+
+    <record
+        id="fol_retorno_ind_conta_ordem_retorno_utilizado"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field name="fiscal_operation_id" ref="fo_retorno_ind_conta_ordem" />
+        <field name="name">Retorno Material Utilizado</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5925" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6925" />
+        <field name="state">approved</field>
+        <field name="add_to_amount" eval="False" />
+    </record>
+
+    <record
+        id="fol_retorno_ind_conta_ordem_retorno_nao_utilizado"
+        model="l10n_br_fiscal.operation.line"
+    >
+        <field name="fiscal_operation_id" ref="fo_retorno_ind_conta_ordem" />
+        <field name="name">Retorno Material não Utilizado</field>
+        <field name="cfop_internal_id" ref="l10n_br_fiscal.cfop_5903" />
+        <field name="cfop_external_id" ref="l10n_br_fiscal.cfop_6903" />
+        <field name="state">approved</field>
+        <field name="add_to_amount" eval="False" />
+    </record>
+
+    <!-- DEFINIÇÃO DAS TRIBUTAÇÕES -->
+    <!-- ICMS - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_icms_definition_retorno_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_icms_suspensao" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_icms" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- IPI - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_ipi_definition_retorno_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_ipi_nt" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_ipi" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- PIS - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_pis_definition_retorno_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_pis_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_pis" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- COFINS - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_cofins_definition_retorno_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_cofins_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_cofins" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- ICMS - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_icms_definition_retorno_nao_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_icms_suspensao" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_icms" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- IPI - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_ipi_definition_retorno_nao_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_ipi_nt" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_ipi" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- PIS - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_pis_definition_retorno_nao_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_pis_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_pis" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+
+    <!-- COFINS - Retorno de Industrialização por conta e ordem -->
+    <record
+        id="tax_cofins_definition_retorno_nao_utilizado_ind_conta_ordem"
+        model="l10n_br_fiscal.tax.definition"
+    >
+        <field name="is_taxed" eval="1" />
+        <field name="is_debit_credit" eval="True" />
+        <field name="custom_tax" eval="True" />
+        <field name="tax_id" ref="l10n_br_fiscal.tax_cofins_seminc" />
+        <field name="tax_group_id" ref="l10n_br_fiscal.tax_group_cofins" />
+        <field
+            name="fiscal_operation_line_id"
+            ref="fol_retorno_ind_conta_ordem_retorno_nao_utilizado"
+        />
+        <field name="state">approved</field>
+    </record>
+</odoo>

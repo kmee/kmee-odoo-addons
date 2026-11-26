@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.picking.form (in l10n_br_stock_industrialization)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']" position="after">
+                <field name="is_industrialization" invisible="1" />
+                <button
+                    name="action_set_sale"
+                    class="oe_highlight"
+                    string="Atribuir a venda"
+                    type="object"
+                    invisible="sale_id or not is_industrialization"
+                />
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="display_consignment_page" invisible="1" />
+                <field name="merge_moves" groups="base.group_no_one" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="consignment"
+                    string="Material do cliente"
+                    invisible="not display_consignment_page"
+                >
+                    <field name="consignment_line_ids" readonly="1">
+                        <list>
+                            <field name="product_id" />
+                            <field name="location_id" />
+                            <field name="lot_id" />
+                            <field name="available_quantity" class="oe_bold" />
+                            <field name="product_uom_id" />
+                            <button
+                                name="button_add_to_consignment_return"
+                                context="{'default_picking_id': parent.id}"
+                                type="object"
+                                icon="fa-reply"
+                                string="Devolver"
+                                invisible="parent.state in ('done', 'cancel')"
+                            />
+                        </list>
+                    </field>
+                    <separator string="Lotes para devolução" />
+                    <field
+                        name="to_return_consignment_line_ids"
+                        invisible="state in ('done', 'cancel')"
+                    >
+                        <list editable="bottom" create="false" delete="false">
+                            <field name="product_id" readonly="1" />
+                            <field name="location_id" readonly="1" />
+                            <field name="lot_id" readonly="1" />
+                            <field
+                                name="available_quantity"
+                                class="oe_bold"
+                                readonly="1"
+                            />
+                            <field name="return_quantity" />
+                            <field name="product_uom_id" readonly="1" />
+                            <button
+                                name="button_remove_from_consignment_return"
+                                type="object"
+                                icon="fa-close"
+                                string="Remover"
+                            />
+                        </list>
+                    </field>
+                    <button
+                        name="action_create_consignment_return"
+                        string="Criar devolução"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state in ('done', 'cancel') or not to_return_consignment_line_ids"
+                    />
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_industrialization_picking" model="ir.actions.act_window">
+        <field name="name">Recebimentos para industrialização</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">list,kanban,form,calendar</field>
+        <field name="domain">[('is_industrialization', '=', True)]</field>
+        <field
+            name="context"
+            eval="{'default_picking_type_id': ref('l10n_br_stock_industrialization.picking_type_industrialization_in'), 'default_is_industrialization': True}"
+        />
+        <field name="search_view_id" ref="stock.view_picking_internal_search" />
+    </record>
+
+    <menuitem
+        id="menu_industrialization"
+        name="Industrialização"
+        parent="sale.sale_order_menu"
+        sequence="90"
+        groups="sales_team.group_sale_salesman"
+    />
+    <menuitem
+        id="menu_industrialization_picking"
+        action="action_industrialization_picking"
+        parent="menu_industrialization"
+        sequence="1"
+        groups="sales_team.group_sale_salesman"
+    />
+</odoo>

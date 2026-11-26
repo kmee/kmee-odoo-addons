@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_industrialization_create_form" model="ir.ui.view">
+        <field name="name">stock.industrialization.create.form</field>
+        <field name="model">stock.industrialization.create</field>
+        <field name="arch" type="xml">
+            <form string="Receber insumos do cliente">
+                <group>
+                    <field name="sale_id" />
+                </group>
+                <field name="line_ids">
+                    <list editable="bottom">
+                        <field name="product_id" />
+                        <field name="quantity" />
+                        <field name="uom_id" />
+                    </list>
+                </field>
+                <footer>
+                    <button
+                        name="action_create"
+                        type="object"
+                        string="Criar recebimento"
+                        class="btn-primary"
+                    />
+                    <button string="Cancelar" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_industrialization_create_action" model="ir.actions.act_window">
+        <field name="name">Receber insumos do cliente</field>
+        <field name="res_model">stock.industrialization.create</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

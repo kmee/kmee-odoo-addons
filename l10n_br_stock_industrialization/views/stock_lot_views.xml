@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_lot_view_form" model="ir.ui.view">
+        <field name="name">stock.lot.form (in l10n_br_stock_industrialization)</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ref']" position="after">
+                <field name="lot_for_industrialization" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_type_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.picking.type.form (in l10n_br_stock_industrialization)</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="is_industrialization" invisible="code != 'incoming'" />
+            </field>
+        </field>
+    </record>
+</odoo>

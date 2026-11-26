@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Insumos que o cliente envia para industrialização -->
+    <record id="product_perfil_aluminio" model="product.product">
+        <field name="name">Perfil de Alumínio 6063 (barra 6 m)</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="tracking">lot</field>
+    </record>
+
+    <record id="product_chapa_inox" model="product.product">
+        <field name="name">Chapa de Aço Inox 304 2 mm (peça)</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="tracking">lot</field>
+    </record>
+
+    <!-- Serviço cobrado pela industrialização -->
+    <record id="product_servico_usinagem" model="product.product">
+        <field name="name">Serviço de usinagem e corte sob encomenda</field>
+        <field name="type">service</field>
+        <field name="list_price">1850</field>
+    </record>
+
+    <!-- Pedido de serviço de industrialização do cliente -->
+    <record id="sale_order_industrialization" model="sale.order">
+        <field name="partner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="partner_invoice_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="partner_shipping_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_stock_industrialization.fo_servico_industrializacao"
+        />
+        <field name="client_order_ref">OS-2026-0147</field>
+    </record>
+
+    <record id="sale_order_line_industrialization" model="sale.order.line">
+        <field name="order_id" ref="sale_order_industrialization" />
+        <field name="product_id" ref="product_servico_usinagem" />
+        <field name="product_uom_qty">1</field>
+        <field name="price_unit">1850</field>
+    </record>
+
+    <!-- Recebimento dos insumos ainda sem o pedido: use "Atribuir a venda" -->
+    <record id="picking_industrialization_in" model="stock.picking">
+        <field
+            name="picking_type_id"
+            ref="l10n_br_stock_industrialization.picking_type_industrialization_in"
+        />
+        <field name="partner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="owner_id" ref="l10n_br_base.res_partner_cliente1_sp" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_fiscal.fo_entrada_industrializacao"
+        />
+        <field name="origin">NF-e 000873 do cliente</field>
+    </record>
+
+    <record id="picking_industrialization_in_move_1" model="stock.move">
+        <field name="name">Perfil de Alumínio 6063 (barra 6 m)</field>
+        <field name="picking_id" ref="picking_industrialization_in" />
+        <field name="product_id" ref="product_perfil_aluminio" />
+        <field name="product_uom_qty">40</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+    </record>
+
+    <record id="picking_industrialization_in_move_2" model="stock.move">
+        <field name="name">Chapa de Aço Inox 304 2 mm (peça)</field>
+        <field name="picking_id" ref="picking_industrialization_in" />
+        <field name="product_id" ref="product_chapa_inox" />
+        <field name="product_uom_qty">25</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+    </record>
+</odoo>
