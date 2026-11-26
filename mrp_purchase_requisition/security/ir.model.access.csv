@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_production_purchase_requisition_user,mrp.production.purchase.requisition.user,model_mrp_production_purchase_requisition,purchase.group_purchase_user,1,1,1,1
+access_mrp_production_purchase_requisition_line_user,mrp.production.purchase.requisition.line.user,model_mrp_production_purchase_requisition_line,purchase.group_purchase_user,1,1,1,1

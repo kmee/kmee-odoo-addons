@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="product_chicote" model="product.product">
+        <field name="name">Chicote Elétrico 12 Vias</field>
+        <field name="default_code">CHI-012</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="purchase_ok" eval="True" />
+        <field name="manufacturer_pref">CH-12V-0457</field>
+    </record>
+    <record id="product_conector" model="product.product">
+        <field name="name">Conector Estanque 4 Pinos</field>
+        <field name="default_code">CON-004</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="purchase_ok" eval="True" />
+        <field name="manufacturer_pref">CE-4P-3318</field>
+    </record>
+    <record id="product_painel" model="product.product">
+        <field name="name">Painel de Comando Compacto</field>
+        <field name="default_code">PAI-100</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+    <record id="mrp_bom_painel" model="mrp.bom">
+        <field
+            name="product_tmpl_id"
+            search="[('product_variant_ids', '=', ref('mrp_purchase_requisition.product_painel'))]"
+        />
+        <field name="product_qty">1</field>
+        <field name="type">normal</field>
+    </record>
+    <record id="mrp_bom_line_painel_chicote" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_painel" />
+        <field name="product_id" ref="product_chicote" />
+        <field name="product_qty">2</field>
+    </record>
+    <record id="mrp_bom_line_painel_conector" model="mrp.bom.line">
+        <field name="bom_id" ref="mrp_bom_painel" />
+        <field name="product_id" ref="product_conector" />
+        <field name="product_qty">8</field>
+    </record>
+    <record id="mrp_production_painel" model="mrp.production">
+        <field name="product_id" ref="product_painel" />
+        <field name="bom_id" ref="mrp_bom_painel" />
+        <field name="product_qty">10</field>
+    </record>
+    <function model="mrp.production" name="action_confirm">
+        <value eval="[ref('mrp_production_painel')]" />
+    </function>
+</odoo>

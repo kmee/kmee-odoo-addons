@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_purchase_requisition_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.purchase.requisition.form</field>
+        <field name="model">mrp.production.purchase.requisition</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="production_id" invisible="1" />
+                <field name="is_first_requisition" invisible="1" />
+                <group>
+                    <field name="schedule_date" />
+                    <field
+                        name="justificativa"
+                        invisible="is_first_requisition"
+                        required="not is_first_requisition"
+                    />
+                </group>
+                <field name="line_ids" nolabel="1">
+                    <list
+                        create="false"
+                        delete="true"
+                        editable="bottom"
+                        decoration-warning="below_missing"
+                    >
+                        <field name="below_missing" column_invisible="1" />
+                        <field name="product_id" force_save="1" />
+                        <field
+                            name="product_uom_id"
+                            groups="uom.group_uom"
+                            force_save="1"
+                        />
+                        <field name="missing_qty" force_save="1" />
+                        <field name="product_qty" />
+                    </list>
+                </field>
+                <footer>
+                    <button
+                        name="create_purchase_requisition"
+                        string="Create"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record
+        id="mrp_production_purchase_requisition_act_window"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Create Purchase Agreement</field>
+        <field name="res_model">mrp.production.purchase.requisition</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

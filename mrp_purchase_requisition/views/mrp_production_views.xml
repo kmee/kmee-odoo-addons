@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_form_view" model="ir.ui.view">
+        <field name="name">mrp.production.form.purchase.requisition</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_cancel']" position="after">
+                <button
+                    name="button_create_purchase_requisition"
+                    string="Purchase Agreement"
+                    type="object"
+                    invisible="state not in ('confirmed', 'progress', 'to_close')"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="object"
+                    name="action_view_requisition_lines"
+                    class="oe_stat_button"
+                    icon="fa-list"
+                    invisible="requisition_line_count == 0"
+                >
+                    <field
+                        name="requisition_line_count"
+                        widget="statinfo"
+                        string="Demands"
+                    />
+                </button>
+                <button
+                    type="object"
+                    name="action_view_requisitions"
+                    class="oe_stat_button"
+                    icon="fa-handshake-o"
+                    invisible="requisition_count == 0"
+                >
+                    <field
+                        name="requisition_count"
+                        widget="statinfo"
+                        string="Agreements"
+                    />
+                </button>
+                <button
+                    type="object"
+                    name="action_view_purchase_orders"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    invisible="purchase_count == 0"
+                >
+                    <field name="purchase_count" widget="statinfo" string="Purchases" />
+                </button>
+                <button
+                    type="object"
+                    name="action_view_purchase_moves"
+                    class="oe_stat_button"
+                    icon="fa-truck"
+                    invisible="purchase_move_count == 0"
+                >
+                    <field
+                        name="purchase_move_count"
+                        widget="statinfo"
+                        string="Receipts"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
