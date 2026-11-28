@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.mrp.production.request.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='name']"
+                position="after"
+            >
+                <field name="product_template_id" invisible="1" />
+                <field
+                    name="explicit_bom_id"
+                    options="{'no_create': True}"
+                    invisible="not product_id"
+                />
+                <field name="production_notes" invisible="not product_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
