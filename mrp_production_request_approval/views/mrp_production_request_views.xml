@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_mrp_production_request_form" model="ir.ui.view">
+        <field name="name">mrp.production.request.form.approval</field>
+        <field name="model">mrp.production.request</field>
+        <field
+            name="inherit_id"
+            ref="mrp_production_request.view_mrp_production_request_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_done']" position="after">
+                <button
+                    name="button_reopen"
+                    string="Reopen"
+                    type="object"
+                    groups="mrp_production_request.group_mrp_production_request_manager"
+                    invisible="state != 'done'"
+                    confirm="Reopen the request to produce the remaining quantity?"
+                />
+            </xpath>
+            <xpath expr="//field[@name='assigned_to']" position="after">
+                <field name="assigned_to_ids" widget="many2many_tags" />
+                <field name="approved_by" />
+                <field name="approved_datetime" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

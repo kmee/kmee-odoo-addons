@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record
+        id="user_aprovador_producao"
+        model="res.users"
+        context="{'no_reset_password': True}"
+    >
+        <field name="name">Rafael Menezes Tavares</field>
+        <field name="login">rafael.tavares.producao</field>
+        <field name="email">rafael.tavares@example.com</field>
+        <field
+            name="groups_id"
+            eval="[(6, 0, [ref('base.group_user'), ref('mrp_production_request.group_mrp_production_request_manager')])]"
+        />
+    </record>
+    <record id="mrp_production_request_demo_approval" model="mrp.production.request">
+        <field name="product_id" ref="mrp_production_request.product_mesa_jantar" />
+        <field name="product_uom_id" ref="uom.product_uom_unit" />
+        <field name="bom_id" ref="mrp_production_request.mrp_bom_mesa_jantar" />
+        <field name="product_qty">6</field>
+        <field name="origin">Lote especial de aniversário</field>
+        <field
+            name="assigned_to_ids"
+            eval="[(6, 0, [ref('user_aprovador_producao')])]"
+        />
+        <field name="state">to_approve</field>
+    </record>
+</odoo>
