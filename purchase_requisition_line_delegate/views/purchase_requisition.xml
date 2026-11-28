@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_purchase_requisition_form" model="ir.ui.view">
+        <field
+            name="name"
+        >purchase.requisition.form (in purchase_requisition_line_delegate)</field>
+        <field name="model">purchase.requisition</field>
+        <field
+            name="inherit_id"
+            ref="purchase_requisition.view_purchase_requisition_form"
+        />
+        <field name="arch" type="xml">
+            <field name="reference" position="after">
+                <field name="ordering_date" />
+            </field>
+            <xpath expr="//field[@name='line_ids']" position="before">
+                <button
+                    name="button_display_total_qties"
+                    string="Totals"
+                    type="object"
+                    class="btn-primary"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='line_ids']/list/field[@name='price_unit']"
+                position="after"
+            >
+                <field name="schedule_date" optional="show" />
+                <field name="justificativa" optional="hide" />
+                <field name="can_move" column_invisible="1" />
+                <field name="has_justificativa" column_invisible="1" />
+                <field name="has_quotation_line" column_invisible="1" />
+                <button
+                    name="button_move_lines_to_different_requisition"
+                    title="Move to another agreement"
+                    type="object"
+                    icon="fa-share"
+                    invisible="not can_move"
+                />
+                <button
+                    name="action_show_justificativa"
+                    title="Has justification"
+                    type="object"
+                    icon="fa-warning"
+                    class="text-warning"
+                    invisible="not has_justificativa"
+                />
+                <button
+                    name="action_view_quotations"
+                    title="Has quantities in quotations and/or orders"
+                    type="object"
+                    icon="fa-shopping-cart"
+                    class="text-info"
+                    invisible="not has_quotation_line"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

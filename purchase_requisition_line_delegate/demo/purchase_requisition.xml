@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="demo_vendor_embalagens" model="res.partner">
+        <field name="name">Embalagens Vale do Sol Ltda</field>
+        <field name="is_company" eval="True" />
+        <field name="supplier_rank">1</field>
+    </record>
+
+    <record id="demo_product_caixa" model="product.product">
+        <field name="name">Caixa de papelao 40x30x20</field>
+        <field name="type">consu</field>
+        <field name="purchase_ok" eval="True" />
+    </record>
+
+    <record id="demo_product_fita" model="product.product">
+        <field name="name">Fita adesiva 48mm</field>
+        <field name="type">consu</field>
+        <field name="purchase_ok" eval="True" />
+    </record>
+
+    <record id="demo_requisition_maio" model="purchase.requisition">
+        <field name="requisition_type">purchase_template</field>
+        <field
+            name="ordering_date"
+            eval="(DateTime.today() + relativedelta(days=10)).strftime('%Y-%m-%d')"
+        />
+    </record>
+
+    <record id="demo_requisition_maio_line_caixa" model="purchase.requisition.line">
+        <field name="requisition_id" ref="demo_requisition_maio" />
+        <field name="product_id" ref="demo_product_caixa" />
+        <field name="product_qty">200</field>
+        <field
+            name="schedule_date"
+            eval="(DateTime.today() + relativedelta(days=15)).strftime('%Y-%m-%d')"
+        />
+    </record>
+
+    <record id="demo_requisition_maio_line_fita" model="purchase.requisition.line">
+        <field name="requisition_id" ref="demo_requisition_maio" />
+        <field name="product_id" ref="demo_product_fita" />
+        <field name="product_qty">50</field>
+        <field
+            name="schedule_date"
+            eval="(DateTime.today() + relativedelta(days=7)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="justificativa"
+        >Consumo acima da media por causa da campanha de fim de ano.</field>
+    </record>
+
+    <record id="demo_requisition_junho" model="purchase.requisition">
+        <field name="requisition_type">purchase_template</field>
+        <field
+            name="ordering_date"
+            eval="(DateTime.today() + relativedelta(days=40)).strftime('%Y-%m-%d')"
+        />
+    </record>
+
+    <record id="demo_requisition_junho_line_caixa" model="purchase.requisition.line">
+        <field name="requisition_id" ref="demo_requisition_junho" />
+        <field name="product_id" ref="demo_product_caixa" />
+        <field name="product_qty">100</field>
+        <field
+            name="schedule_date"
+            eval="(DateTime.today() + relativedelta(days=45)).strftime('%Y-%m-%d')"
+        />
+    </record>
+</odoo>

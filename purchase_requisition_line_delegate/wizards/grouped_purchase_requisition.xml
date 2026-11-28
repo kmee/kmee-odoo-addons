@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 KMEE
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="grouped_purchase_requisition_form_view">
+        <field name="name">grouped.purchase.requisition.form</field>
+        <field name="model">grouped.purchase.requisition</field>
+        <field name="arch" type="xml">
+            <form string="Totals by Product">
+                <field name="requisition_id" invisible="1" />
+                <field name="grouped_line_ids" nolabel="1" readonly="1">
+                    <list
+                        create="0"
+                        delete="0"
+                        decoration-danger="qty_ordered &lt; product_qty"
+                        decoration-success="qty_ordered &gt; product_qty"
+                    >
+                        <field name="product_id" />
+                        <field name="product_qty" />
+                        <field name="qty_ordered" />
+                        <field name="product_uom_id" groups="uom.group_uom" />
+                        <field name="schedule_date" />
+                    </list>
+                </field>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_display_total_qties" model="ir.actions.act_window">
+        <field name="name">Totals</field>
+        <field name="res_model">grouped.purchase.requisition</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
