@@ -117,3 +117,96 @@ class TestBomLineSubstitute(TransactionCase):
         )
         for model in ("stock.move.substitute",):
             self.env[model].with_user(user).check_access("create")
+
+    def test_alternative_with_other_uom_category(self):
+        weight = self.env.ref("uom.product_uom_kgm")
+        heavy = self.env["product.product"].create(
+            {
+                "name": "Weighed alternative",
+                "type": "consu",
+                "is_storable": True,
+                "uom_id": weight.id,
+                "uom_po_id": weight.id,
+            }
+        )
+        with self.assertRaises(ValidationError):
+            self.bom.bom_line_ids.substitute_product_ids = heavy
+
+    def test_substitute_move_has_no_alternatives(self):
+        production, picking, move = self._create_production()
+        new_pick = move._substitute_component(self.alternative, 6)
+        self.assertTrue(new_pick.is_substitute)
+        new_pick._compute_substitute_product_ids()
+        self.assertFalse(new_pick.substitute_product_ids)
+
+    def test_open_substitute_wizard_action(self):
+        production, picking, move = self._create_production()
+        action = move.action_open_substitute_wizard()
+        self.assertEqual(action["res_model"], "stock.move.substitute")
+        self.assertEqual(action["target"], "new")
+        self.assertEqual(action["context"], {"default_move_id": move.id})
+
+    def test_substitute_requires_move_supplying_an_order(self):
+        production, picking, move = self._create_production()
+        raw = production.move_raw_ids
+        # o movimento do componente na ordem não abastece outra ordem
+        with self.assertRaises(UserError):
+            raw._substitute_component(self.alternative, 1)
+        # o movimento da separação sem destino também não
+        move.move_dest_ids = False
+        with self.assertRaises(UserError):
+            move._substitute_component(self.alternative, 1)
+
+    def test_substitute_only_confirmed_moves(self):
+        production, picking, move = self._create_production()
+        move.state = "draft"
+        with self.assertRaisesRegex(UserError, "Only confirmed moves"):
+            move._substitute_component(self.alternative, 1)
+
+    def test_substitute_quantity_out_of_range(self):
+        production, picking, move = self._create_production()
+        with self.assertRaisesRegex(UserError, "between zero"):
+            move._substitute_component(self.alternative, 0)
+        with self.assertRaisesRegex(UserError, "between zero"):
+            move._substitute_component(self.alternative, 11)
+
+    def test_substitute_more_than_order_needs(self):
+        production, picking, move = self._create_production()
+        production.move_raw_ids.with_context(no_procurement=True).product_uom_qty = 5
+        with self.assertRaisesRegex(UserError, "needs less than that"):
+            move._substitute_component(self.alternative, 6)
+
+    def test_substitute_unreserves_when_demand_falls_below_reserved(self):
+        production, picking, move = self._create_production()
+        self.assertEqual(move.quantity, 4)
+        move._substitute_component(self.alternative, 8)
+        self.assertEqual(move.product_uom_qty, 2)
+        self.assertEqual(move.quantity, 2)
+
+    def test_substitute_wizard(self):
+        production, picking, move = self._create_production()
+        wizard_form = Form(
+            self.env["stock.move.substitute"].with_context(default_move_id=move.id)
+        )
+        wizard_form.product_id = self.alternative
+        wizard = wizard_form.save()
+        # sugere o que falta reservar do componente (10 de demanda, 4 reservados)
+        self.assertEqual(wizard.product_uom_qty, 6)
+        self.assertEqual(wizard.available_qty, 20)
+        self.assertEqual(wizard.substitute_product_ids, self.alternative)
+        result = wizard.action_confirm()
+        self.assertEqual(result["type"], "ir.actions.act_window_close")
+        self.assertTrue(move.has_been_replaced)
+        self.assertEqual(move.product_uom_qty, 4)
+
+    def test_substitute_wizard_suggests_full_demand_when_reserved(self):
+        self.env["stock.quant"]._update_available_quantity(
+            self.component, self.warehouse.lot_stock_id, 10
+        )
+        production, picking, move = self._create_production()
+        self.assertEqual(move.quantity, 10)
+        wizard_form = Form(
+            self.env["stock.move.substitute"].with_context(default_move_id=move.id)
+        )
+        wizard_form.product_id = self.alternative
+        self.assertEqual(wizard_form.product_uom_qty, 10)
