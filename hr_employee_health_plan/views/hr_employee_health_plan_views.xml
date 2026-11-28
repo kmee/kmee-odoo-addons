@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_health_plan_view_list" model="ir.ui.view">
+        <field name="name">hr.employee.health.plan.list</field>
+        <field name="model">hr.employee.health.plan</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="employee_id" />
+                <field name="plan_type" />
+                <field name="operator" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="amount" sum="Total" />
+                <field name="description" />
+            </list>
+        </field>
+    </record>
+    <record id="hr_employee_health_plan_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.health.plan.search</field>
+        <field name="model">hr.employee.health.plan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" />
+                <field name="operator" />
+                <filter
+                    name="health"
+                    string="Health"
+                    domain="[('plan_type', '=', 'health')]"
+                />
+                <filter
+                    name="dental"
+                    string="Dental"
+                    domain="[('plan_type', '=', 'dental')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_employee"
+                        string="Employee"
+                        context="{'group_by': 'employee_id'}"
+                    />
+                    <filter
+                        name="group_operator"
+                        string="Operator"
+                        context="{'group_by': 'operator'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="hr_employee_health_plan_action" model="ir.actions.act_window">
+        <field name="name">Health and Dental Plans</field>
+        <field name="res_model">hr.employee.health.plan</field>
+        <field name="view_mode">list</field>
+    </record>
+    <menuitem
+        id="hr_employee_health_plan_menu"
+        name="Health and Dental Plans"
+        parent="hr.menu_hr_employee_payroll"
+        action="hr_employee_health_plan_action"
+        groups="hr.group_hr_user"
+        sequence="40"
+    />
+</odoo>
