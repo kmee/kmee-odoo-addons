@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mrp_production_workorder_form_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.form.partial.production</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="is_last_wo" invisible="1" />
+                <field name="qty_to_launch" invisible="1" />
+                <button
+                    name="open_record_production"
+                    type="object"
+                    string="Record production"
+                    class="btn-primary"
+                    invisible="state not in ('ready', 'progress') or available_production_qty &lt;= 0"
+                />
+                <button
+                    name="launch_production"
+                    type="object"
+                    string="Post to MO"
+                    class="btn-primary"
+                    invisible="state in ('done', 'cancel') or not is_last_wo or qty_to_launch &lt;= 0"
+                />
+                <button
+                    name="open_set_qty_produced"
+                    type="object"
+                    string="Correct quantity"
+                    invisible="state in ('done', 'cancel') or qty_produced &lt;= 0"
+                />
+            </xpath>
+            <xpath expr="//field[@name='qty_remaining']" position="after">
+                <field name="qty_produced" string="Recorded quantity" />
+                <field name="available_production_qty" />
+                <field
+                    name="previous_wo_produced_qty"
+                    invisible="not blocked_by_workorder_ids"
+                />
+                <field name="qty_to_launch" invisible="not is_last_wo" />
+                <field name="blocked_by_workorder_ids" invisible="1" />
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Consumption" name="consumption">
+                    <field name="line_ids" nolabel="1" readonly="1">
+                        <list>
+                            <field name="product_id" />
+                            <field name="qty_done" />
+                            <field name="product_uom_id" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_workorder_tree_view_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.list.partial.production</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='qty_remaining']" position="before">
+                <field name="qty_produced" string="Recorded quantity" />
+                <field name="available_production_qty" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

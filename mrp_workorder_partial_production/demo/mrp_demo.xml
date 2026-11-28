@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Work centers -->
+    <record id="workcenter_cutting" model="mrp.workcenter">
+        <field name="name">Corte e Dobra</field>
+    </record>
+    <record id="workcenter_assembly" model="mrp.workcenter">
+        <field name="name">Bancada de Montagem</field>
+    </record>
+    <record id="workcenter_packing" model="mrp.workcenter">
+        <field name="name">Linha de Embalagem</field>
+    </record>
+
+    <!-- Products -->
+    <record id="product_lamp" model="product.product">
+        <field name="name">Luminária de Mesa Articulada</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+        <field name="list_price">189.90</field>
+    </record>
+    <record id="product_base" model="product.product">
+        <field name="name">Base de Aço Pintada</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+    <record id="product_arm" model="product.product">
+        <field name="name">Braço Articulado</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+    <record id="product_bulb" model="product.product">
+        <field name="name">Lâmpada LED 9W</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+    <record id="product_box" model="product.product">
+        <field name="name">Caixa de Papelão 40x30</field>
+        <field name="type">consu</field>
+        <field name="is_storable" eval="True" />
+    </record>
+
+    <!-- Bill of materials with three sequential operations -->
+    <record id="bom_lamp" model="mrp.bom">
+        <field
+            name="product_tmpl_id"
+            model="product.template"
+            search="[('name', '=', 'Luminária de Mesa Articulada')]"
+        />
+        <field name="product_qty">1</field>
+    </record>
+    <record id="operation_cutting" model="mrp.routing.workcenter">
+        <field name="name">Corte e dobra da base</field>
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="workcenter_id" ref="workcenter_cutting" />
+        <field name="sequence">1</field>
+        <field name="time_cycle_manual">10</field>
+    </record>
+    <record id="operation_assembly" model="mrp.routing.workcenter">
+        <field name="name">Montagem da luminária</field>
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="workcenter_id" ref="workcenter_assembly" />
+        <field name="sequence">2</field>
+        <field name="time_cycle_manual">15</field>
+    </record>
+    <record id="operation_packing" model="mrp.routing.workcenter">
+        <field name="name">Embalagem</field>
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="workcenter_id" ref="workcenter_packing" />
+        <field name="sequence">3</field>
+        <field name="time_cycle_manual">5</field>
+    </record>
+    <record id="bom_line_base" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="product_id" ref="product_base" />
+        <field name="product_qty">1</field>
+        <field name="operation_id" ref="operation_cutting" />
+    </record>
+    <record id="bom_line_arm" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="product_id" ref="product_arm" />
+        <field name="product_qty">1</field>
+        <field name="operation_id" ref="operation_assembly" />
+    </record>
+    <record id="bom_line_bulb" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="product_id" ref="product_bulb" />
+        <field name="product_qty">1</field>
+        <field name="operation_id" ref="operation_assembly" />
+    </record>
+    <record id="bom_line_box" model="mrp.bom.line">
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="product_id" ref="product_box" />
+        <field name="product_qty">1</field>
+        <field name="operation_id" ref="operation_packing" />
+    </record>
+
+    <!-- Stock for the components -->
+    <record id="quant_base" model="stock.quant">
+        <field name="product_id" ref="product_base" />
+        <field name="inventory_quantity">50</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_arm" model="stock.quant">
+        <field name="product_id" ref="product_arm" />
+        <field name="inventory_quantity">50</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_bulb" model="stock.quant">
+        <field name="product_id" ref="product_bulb" />
+        <field name="inventory_quantity">50</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <record id="quant_box" model="stock.quant">
+        <field name="product_id" ref="product_box" />
+        <field name="inventory_quantity">50</field>
+        <field
+            name="location_id"
+            model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"
+        />
+    </record>
+    <function model="stock.quant" name="action_apply_inventory">
+        <function
+            eval="[[('id', 'in', [ref('quant_base'), ref('quant_arm'), ref('quant_bulb'), ref('quant_box')])]]"
+            model="stock.quant"
+            name="search"
+        />
+    </function>
+
+    <!-- Confirmed manufacturing order with its work orders -->
+    <record id="production_lamp" model="mrp.production">
+        <field name="product_id" ref="product_lamp" />
+        <field name="bom_id" ref="bom_lamp" />
+        <field name="product_qty">20</field>
+    </record>
+    <function
+        model="mrp.production"
+        name="action_confirm"
+        eval="[[ref('production_lamp')]]"
+    />
+    <function
+        model="mrp.production"
+        name="action_assign"
+        eval="[[ref('production_lamp')]]"
+    />
+</odoo>

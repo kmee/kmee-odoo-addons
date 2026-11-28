@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mrp_workorder_line_user,mrp.workorder.line user,model_mrp_workorder_line,mrp.group_mrp_user,1,1,1,1
+access_mrp_workorder_register_production_user,mrp.workorder.register.production user,model_mrp_workorder_register_production,mrp.group_mrp_user,1,1,1,1
+access_mrp_workorder_set_qty_produced_user,mrp.workorder.set.qty.produced user,model_mrp_workorder_set_qty_produced,mrp.group_mrp_user,1,1,1,1
