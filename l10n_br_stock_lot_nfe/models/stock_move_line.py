@@ -1,15 +1,9 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
-    origin = fields.Char(
-        string="Compra de origem",
-        compute="_compute_default_origin",
-    )
-
-    @api.depends("picking_id")
-    def _compute_default_origin(self):
-        for record in self:
-            record.origin = record.picking_id.origin or False
+    # O núcleo já traz a origem do movimento (related="move_id.origin"), que no recebimento de compra é o número
+    # do pedido; aqui só o rótulo muda.
+    origin = fields.Char(string="Compra de origem")

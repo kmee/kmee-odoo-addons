@@ -69,6 +69,9 @@ class TestStockLotNfe(TransactionCase):
         lot = move.move_line_ids.lot_id
         self.assertEqual(lot.origin_nfe_id, self.document)
         self.assertEqual(lot.numero_nota, self.document.document_number)
+        # a linha com o lote proposto fica no recebimento (aparece na aba de operações)
+        self.assertEqual(move.move_line_ids.picking_id, self.picking)
+        self.assertIn(move.move_line_ids, self.picking.move_line_ids)
 
     def test_document_display_name_for_lot_creation(self):
         document = self.document.with_context(show_name_for_lot_creation=True)

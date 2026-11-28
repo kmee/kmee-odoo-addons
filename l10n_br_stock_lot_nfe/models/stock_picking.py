@@ -75,6 +75,7 @@ class StockPicking(models.Model):
                     Command.create(
                         {
                             "product_id": move.product_id.id,
+                            "picking_id": move.picking_id.id,
                             "lot_id": lot.id,
                             "quantity": move.product_uom_qty,
                             "product_uom_id": move.product_uom.id,
