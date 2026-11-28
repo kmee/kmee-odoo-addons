@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_form_view_procurement_button" model="ir.ui.view">
+        <field
+            name="name"
+        >product.product.form (in stock_available_stock_location)</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_product_forecast_report']"
+                position="after"
+            >
+                <button
+                    class="oe_stat_button"
+                    name="action_open_stock_quants"
+                    icon="fa-archive"
+                    type="object"
+                    invisible="not is_storable"
+                    groups="stock.group_stock_user"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field
+                                name="qty_available_stock"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="oe_inline"
+                            />
+                            <field name="uom_name" class="oe_inline" />
+                        </span>
+                        <span class="o_stat_text">In Stock</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

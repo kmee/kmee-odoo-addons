@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_template_form_view_procurement_button" model="ir.ui.view">
+        <field
+            name="name"
+        >product.template.form (in stock_available_stock_location)</field>
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="stock.product_template_form_view_procurement_button"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_product_tmpl_forecast_report']"
+                position="before"
+            >
+                <button
+                    type="object"
+                    name="action_open_stock_quants"
+                    class="oe_stat_button"
+                    icon="fa-archive"
+                    invisible="not is_storable"
+                    groups="stock.group_stock_user"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field
+                                name="qty_available_stock"
+                                widget="statinfo"
+                                nolabel="1"
+                                class="oe_inline"
+                            />
+                            <field name="uom_name" class="oe_inline" />
+                        </span>
+                        <span class="o_stat_text">In Stock</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_product_template_tree" model="ir.ui.view">
+        <field
+            name="name"
+        >product.template.list (in stock_available_stock_location)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree" />
+        <field name="arch" type="xml">
+            <field name="qty_available" position="after">
+                <field
+                    name="qty_available_stock"
+                    invisible="not show_on_hand_qty_status_button"
+                    optional="hide"
+                    groups="stock.group_stock_user"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
