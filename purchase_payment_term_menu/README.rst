@@ -82,9 +82,9 @@ Authors
 Contributors
 ------------
 
--  `KMEE <https://kmee.com.br>`__:
+- `KMEE <https://kmee.com.br>`__:
 
-   -  Daniel Sadamo
+  - Daniel Sadamo
 
 Maintainers
 -----------

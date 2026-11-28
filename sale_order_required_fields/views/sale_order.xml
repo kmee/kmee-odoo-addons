@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.required.fields</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="sale_require_payment_mode" invisible="1" />
+                <field name="sale_require_payment_term" invisible="1" />
+                <field name="sale_require_line_date" invisible="1" />
+            </xpath>
+            <field name="payment_mode_id" position="attributes">
+                <attribute name="required">sale_require_payment_mode</attribute>
+            </field>
+            <field name="payment_term_id" position="attributes">
+                <attribute name="required">sale_require_payment_term</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='commitment_date']"
+                position="attributes"
+            >
+                <attribute
+                    name="required"
+                >parent.sale_require_line_date and not display_type</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='commitment_date']"
+                position="attributes"
+            >
+                <attribute
+                    name="required"
+                >parent.sale_require_line_date and not display_type</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
