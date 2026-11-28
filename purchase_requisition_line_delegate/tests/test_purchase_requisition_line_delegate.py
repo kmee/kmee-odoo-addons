@@ -104,6 +104,87 @@ class TestPurchaseRequisitionLineDelegate(TransactionCase):
         line.justificativa = "Urgent"
         self.assertTrue(line.has_justificativa)
 
+    def _create_order(self, requisition, product, state=None):
+        order = self.env["purchase.order"].create(
+            {
+                "partner_id": self.vendor.id,
+                "requisition_id": requisition.id,
+                "order_line": [(0, 0, {"product_id": product.id, "product_qty": 1})],
+            }
+        )
+        if state == "cancel":
+            order.button_cancel()
+        return order
+
+    def test_can_move_follows_requisition_state(self):
+        line = self.req_a.line_ids[0]
+        self.assertTrue(line.can_move)
+        self.req_a.action_confirm()
+        self.assertTrue(line.can_move)
+        self.req_a.action_done()
+        self.assertFalse(line.can_move)
+
+    def test_move_blocked_when_requisition_is_not_open(self):
+        self.req_a.action_cancel()
+        line = self.req_a.line_ids[0]
+        self.assertFalse(line.can_move)
+        with self.assertRaisesRegex(UserError, "draft or confirmed"):
+            line.button_move_lines_to_different_requisition()
+
+    def test_move_action_carries_line_and_requisition(self):
+        line = self.req_a.line_ids[0]
+        action = line.button_move_lines_to_different_requisition()
+        self.assertEqual(action["res_model"], "purchase.requisition.delegate")
+        self.assertEqual(
+            action["context"],
+            {
+                "default_purchase_requisition_id": self.req_a.id,
+                "default_purchase_requisition_line_id": line.id,
+            },
+        )
+
+    def test_show_justificativa_notification(self):
+        line = self.req_a.line_ids[0]
+        line.justificativa = "Urgent"
+        action = line.action_show_justificativa()
+        self.assertEqual(action["tag"], "display_notification")
+        self.assertEqual(action["params"]["message"], "Urgent")
+        line.justificativa = False
+        self.assertEqual(line.action_show_justificativa()["params"]["message"], "")
+
+    def test_requisition_line_quotations(self):
+        line = self.req_a.line_ids.filtered(
+            lambda ln: ln.product_id == self.other_product
+        )
+        self.assertFalse(line.has_quotation_line)
+        cancelled = self._create_order(self.req_a, self.other_product, "cancel")
+        self.assertFalse(line.has_quotation_line)
+        order = self._create_order(self.req_a, self.other_product)
+        self.assertTrue(line.has_quotation_line)
+        action = line.action_view_quotations()
+        self.assertEqual(action["res_model"], "purchase.order")
+        self.assertEqual(action["domain"], [("id", "in", order.ids)])
+        self.assertNotIn(cancelled.id, action["domain"][0][2])
+
+    def test_order_line_sees_quotations_of_siblings(self):
+        order = self._create_order(self.req_a, self.product)
+        line = order.order_line
+        self.assertFalse(line.has_quotation_line)
+        self.assertFalse(order._get_sibling_orders())
+        sibling = self._create_order(self.req_a, self.product)
+        self._create_order(self.req_a, self.other_product, "cancel")
+        self.assertEqual(order._get_sibling_orders(), sibling)
+        # o valor é recalculado na próxima leitura (a tela relê o registro)
+        line.invalidate_recordset(["has_quotation_line"])
+        self.assertTrue(line.has_quotation_line)
+        action = line.action_view_quotations()
+        self.assertEqual(action["domain"], [("id", "in", sibling.ids)])
+
+    def test_display_total_quantities_action(self):
+        action = self.req_a.button_display_total_qties()
+        self.assertEqual(action["context"], {"default_requisition_id": self.req_a.id})
+        self.assertEqual(action["res_model"], "grouped.purchase.requisition")
+
     def test_wizards_open_for_regular_user(self):
         user = self.env["res.users"].create(
             {
