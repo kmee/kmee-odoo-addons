@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_move_substitute_form" model="ir.ui.view">
+        <field name="name">stock.move.substitute.form</field>
+        <field name="model">stock.move.substitute</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="move_id" invisible="1" />
+                    <field name="substitute_product_ids" invisible="1" />
+                    <field name="product_uom_id" invisible="1" />
+                    <field name="original_product_id" />
+                    <field name="product_id" options="{'no_create': True}" />
+                    <field name="available_qty" />
+                    <label for="product_uom_qty" />
+                    <div class="o_row">
+                        <field name="product_uom_qty" />
+                        <field name="product_uom_id" />
+                    </div>
+                </group>
+                <footer>
+                    <button
+                        name="action_confirm"
+                        string="Replace"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
