@@ -36,3 +36,44 @@ class TestVolumeDeliveryState(TransactionCase):
         self.volume_1.button_change_delivery_state()
         self.assertEqual(self.volume_1.delivery_state, "waiting")
         self.assertFalse(self.volume_1.delivery_date)
+
+    def test_volume_color_follows_delivery_state(self):
+        self.assertEqual(self.volume_1.delivery_state, "waiting")
+        self.assertEqual(self.volume_1.color, 3)
+        self.assertEqual(self.volume_2.delivery_state, "delivered")
+        self.assertEqual(self.volume_2.color, 10)
+        self.volume_1.button_change_delivery_state()
+        self.assertEqual(self.volume_1.color, 10)
+
+    def _new_move(self, location_dest):
+        return self.env["stock.move"].create(
+            {
+                "name": "Movimento sem reserva",
+                "product_id": self.move.product_id.id,
+                "product_uom": self.move.product_uom.id,
+                "product_uom_qty": 4,
+                "location_id": self.move.location_id.id,
+                "location_dest_id": location_dest.id,
+            }
+        )
+
+    def test_move_not_to_customer_does_not_apply(self):
+        internal = self.env["stock.location"].search(
+            [("usage", "=", "internal")], limit=1
+        )
+        move = self._new_move(internal)
+        self.assertEqual(move.delivery_state, "does_not_apply")
+        self.assertEqual(move.qty_marked_delivered, 0)
+
+    def test_move_without_reservation_is_waiting(self):
+        move = self._new_move(self.move.location_dest_id)
+        self.assertFalse(move.quantity)
+        self.assertEqual(move.delivery_state, "waiting")
+
+    def test_done_move_partially_delivered(self):
+        # concluído, só 3 de 8 marcados como entregues
+        self.move.state = "done"
+        self.assertEqual(self.move.qty_marked_delivered, 3)
+        self.assertEqual(self.move.delivery_state, "partially_delivered")
+        self.volume_1.button_change_delivery_state()
+        self.assertEqual(self.move.delivery_state, "delivered")
