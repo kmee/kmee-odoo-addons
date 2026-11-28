@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="volume_remessa_prateleiras_2" model="stock.picking.vol">
+        <field
+            name="picking_id"
+            ref="l10n_br_delivery_nfe_lot_volume.picking_remessa_prateleiras"
+        />
+        <field name="nfe40_qVol">3</field>
+        <field name="nfe40_esp">Caixa</field>
+        <field name="nfe40_marca">Aço Forte</field>
+        <field name="nfe40_nVol">2</field>
+        <field name="nfe40_pesoL">37.5</field>
+        <field name="nfe40_pesoB">41</field>
+        <field name="delivery_state">delivered</field>
+        <field name="delivery_date">2026-11-20</field>
+        <field
+            name="move_line_ids"
+            eval="[(6, 0, [ref('l10n_br_delivery_nfe_lot_volume.move_line_remessa_prateleiras_2')])]"
+        />
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_picking_vol_form_delivery_state" model="ir.ui.view">
+        <field
+            name="name"
+        >stock.picking.vol.form (in l10n_br_delivery_nfe_volume_delivery_state)</field>
+        <field name="model">stock.picking.vol</field>
+        <field
+            name="inherit_id"
+            ref="l10n_br_delivery_nfe.view_stock_picking_vol_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//form/group" position="before">
+                <header>
+                    <field name="delivery_state" widget="statusbar" />
+                    <button
+                        name="button_change_delivery_state"
+                        type="object"
+                        string="Change Delivery State"
+                    />
+                </header>
+            </xpath>
+            <xpath expr="//form/group" position="after">
+                <group>
+                    <field name="delivery_date" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
