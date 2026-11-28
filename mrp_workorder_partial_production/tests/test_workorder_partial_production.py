@@ -127,6 +127,84 @@ class TestWorkorderPartialProduction(TransactionCase):
             last.line_ids.filtered(lambda ln: ln.product_id == self.comp_b).qty_done, 1
         )
 
+    def test_open_wizard_actions(self):
+        _mo, first, _last = self._mo()
+        action = first.open_record_production()
+        self.assertEqual(action["res_model"], "mrp.workorder.register.production")
+        self.assertEqual(action["context"], {"default_workorder_id": first.id})
+        action = first.open_set_qty_produced()
+        self.assertEqual(action["res_model"], "mrp.workorder.set.qty.produced")
+        self.assertEqual(action["context"], {"default_workorder_id": first.id})
+
+    def test_register_wizard_proposes_available_quantity(self):
+        _mo, first, _last = self._mo()
+        wizard = self.env["mrp.workorder.register.production"].create(
+            {"workorder_id": first.id}
+        )
+        self.assertEqual(wizard.qty_producing, 10)
+        self.assertEqual(wizard.available_production_qty, 10)
+        result = wizard.action_record_production()
+        self.assertEqual(result["type"], "ir.actions.act_window_close")
+        self.assertEqual(first.qty_produced, 10)
+
+    def test_record_quantity_must_be_positive(self):
+        _mo, first, _last = self._mo()
+        with self.assertRaisesRegex(UserError, "greater than zero"):
+            first.record_production(0)
+        with self.assertRaisesRegex(UserError, "greater than zero"):
+            first.record_production(-1)
+
+    def test_record_twice_accumulates_consumption(self):
+        _mo, first, _last = self._mo()
+        self._record(first, 3)
+        self._record(first, 2)
+        self.assertEqual(first.qty_produced, 5)
+        self.assertEqual(len(first.line_ids), 1)
+        self.assertEqual(first.line_ids.qty_done, 10)
+
+    def test_set_qty_wizard(self):
+        _mo, first, _last = self._mo()
+        self._record(first, 6)
+        wizard = self.env["mrp.workorder.set.qty.produced"].create(
+            {"workorder_id": first.id}
+        )
+        self.assertEqual(wizard.qty_produced, 6)
+        wizard.qty_produced = 2
+        result = wizard.action_set_qty_produced()
+        self.assertEqual(result["type"], "ir.actions.act_window_close")
+        self.assertEqual(first.qty_produced, 2)
+        self.assertEqual(first.line_ids.qty_done, 4)
+
+    def test_correct_quantity_of_finished_or_cancelled_order(self):
+        _mo, first, _last = self._mo()
+        self._record(first, 6)
+        for state in ("done", "cancel"):
+            first.state = state
+            with self.assertRaisesRegex(UserError, "cannot be corrected"):
+                first.set_qty_produced(2)
+
+    def test_correct_quantity_cannot_be_negative(self):
+        _mo, first, _last = self._mo()
+        self._record(first, 6)
+        with self.assertRaisesRegex(UserError, "cannot be negative"):
+            first.set_qty_produced(-1)
+
+    def test_correct_quantity_cannot_exceed_previous_work_order(self):
+        _mo, first, last = self._mo()
+        self._record(first, 6)
+        self._record(last, 6)
+        # a ordem anterior perde quantidade fora do fluxo de correção
+        first.qty_produced = 3
+        self.assertEqual(last.previous_wo_produced_qty, 3)
+        with self.assertRaisesRegex(UserError, "previous work order"):
+            last.set_qty_produced(5)
+
+    def test_post_without_recorded_quantity(self):
+        _mo, _first, last = self._mo()
+        self.assertEqual(last.qty_to_launch, 0)
+        with self.assertRaisesRegex(UserError, "no quantity to post"):
+            last.launch_production()
+
     def _tracked_mo(self, qty=10):
         self.product.tracking = "lot"
         self.comp_a.tracking = "lot"
