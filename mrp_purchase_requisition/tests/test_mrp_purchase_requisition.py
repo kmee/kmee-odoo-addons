@@ -77,6 +77,68 @@ class TestMrpPurchaseRequisition(TransactionCase):
         req_line.invalidate_recordset()
         self.assertEqual(req_line.qty_ordered, req_line.product_qty)
 
+    def test_button_opens_wizard_for_production(self):
+        action = self.production.button_create_purchase_requisition()
+        self.assertEqual(action["res_model"], "mrp.production.purchase.requisition")
+        self.assertEqual(
+            action["context"], {"default_production_id": self.production.id}
+        )
+
+    def test_nothing_to_request(self):
+        wizard = self._wizard()
+        wizard.line_ids.product_qty = 0
+        with self.assertRaisesRegex(UserError, "no quantity"):
+            wizard.create_purchase_requisition()
+
+    def test_line_below_missing_quantity(self):
+        wizard = self._wizard()
+        line = wizard.line_ids[0]
+        self.assertFalse(line.below_missing)
+        line.product_qty = line.missing_qty - 1
+        self.assertTrue(line.below_missing)
+        line.product_qty = line.missing_qty + 1
+        self.assertFalse(line.below_missing)
+
+    def test_smart_buttons_list_requisition_records(self):
+        self.assertFalse(self.production.action_view_requisitions()["domain"][0][2])
+        action = self._wizard().create_purchase_requisition()
+        requisition = self.env["purchase.requisition"].browse(action["res_id"])
+        self.production.invalidate_recordset()
+        self.assertEqual(
+            self.production.action_view_requisition_lines()["domain"],
+            [("id", "in", requisition.line_ids.ids)],
+        )
+        self.assertEqual(
+            self.production.action_view_requisitions()["domain"],
+            [("id", "in", requisition.ids)],
+        )
+        self.assertEqual(self.production.action_view_requisitions()["context"], {})
+        # sem pedido confirmado, ainda não há pedidos nem recebimentos
+        self.assertFalse(self.production.purchase_count)
+        self.assertFalse(self.production.purchase_move_count)
+
+    def test_smart_buttons_list_purchase_orders_and_moves(self):
+        action = self._wizard().create_purchase_requisition()
+        requisition = self.env["purchase.requisition"].browse(action["res_id"])
+        requisition.action_confirm()
+        order_form = Form(self.env["purchase.order"])
+        order_form.partner_id = self.env.ref("base.res_partner_12")
+        order = order_form.save()
+        order.requisition_id = requisition
+        order._onchange_requisition_id()
+        order.button_confirm()
+        self.production.invalidate_recordset()
+        self.assertEqual(self.production.purchase_ids, order)
+        self.assertEqual(self.production.purchase_count, 1)
+        moves = order.picking_ids.move_ids.filtered(
+            lambda move: move.product_id in self.production.move_raw_ids.product_id
+        )
+        self.assertTrue(moves)
+        self.assertEqual(self.production.purchase_move_ids, moves)
+        self.assertEqual(self.production.purchase_move_count, len(moves))
+        moves_action = self.production.action_view_purchase_moves()
+        self.assertEqual(moves_action["domain"], [("id", "in", moves.ids)])
+
     def test_wizards_open_for_regular_user(self):
         user = self.env["res.users"].create(
             {
