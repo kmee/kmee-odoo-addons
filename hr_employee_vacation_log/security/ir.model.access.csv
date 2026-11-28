@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_vacation_period_user,hr.employee.vacation.period user,model_hr_employee_vacation_period,hr.group_hr_user,1,1,1,1
+access_hr_employee_vacation_user,hr.employee.vacation user,model_hr_employee_vacation,hr.group_hr_user,1,1,1,1
+access_hr_employee_vacation_schedule_wizard_user,hr.employee.vacation.schedule.wizard user,model_hr_employee_vacation_schedule_wizard,hr.group_hr_user,1,1,1,1

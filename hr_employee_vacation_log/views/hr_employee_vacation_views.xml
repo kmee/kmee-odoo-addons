@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="hr_employee_vacation_view_list" model="ir.ui.view">
+        <field name="name">hr.employee.vacation.list</field>
+        <field name="model">hr.employee.vacation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id" />
+                <field name="period_id" />
+                <field name="date_from" />
+                <field name="date_to" />
+                <field name="days" />
+                <field name="cash_bonus" />
+                <field name="thirteenth_advance" />
+                <field name="note" />
+            </list>
+        </field>
+    </record>
+    <record id="hr_employee_vacation_view_search" model="ir.ui.view">
+        <field name="name">hr.employee.vacation.search</field>
+        <field name="model">hr.employee.vacation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id" />
+                <filter
+                    name="cash_bonus"
+                    string="Cash Bonus"
+                    domain="[('cash_bonus', '=', True)]"
+                />
+                <filter
+                    name="thirteenth_advance"
+                    string="13th Salary Advance"
+                    domain="[('thirteenth_advance', '=', True)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_employee"
+                        string="Employee"
+                        context="{'group_by': 'employee_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="hr_employee_vacation_action" model="ir.actions.act_window">
+        <field name="name">Vacations</field>
+        <field name="res_model">hr.employee.vacation</field>
+        <field name="view_mode">list</field>
+    </record>
+    <menuitem
+        id="hr_employee_vacation_menu"
+        name="Vacations Taken"
+        parent="hr.menu_hr_employee_payroll"
+        action="hr_employee_vacation_action"
+        sequence="21"
+    />
+</odoo>
