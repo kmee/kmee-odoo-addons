@@ -42,7 +42,7 @@
                 </button>
                 <button
                     type="object"
-                    name="action_view_purchase_orders"
+                    name="action_view_requisition_purchase_orders"
                     class="oe_stat_button"
                     icon="fa-shopping-cart"
                     invisible="purchase_count == 0"

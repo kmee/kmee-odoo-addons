@@ -73,7 +73,8 @@ class MrpProduction(models.Model):
             "purchase_requisition.action_purchase_requisition", self.requisition_ids
         )
 
-    def action_view_purchase_orders(self):
+    def action_view_requisition_purchase_orders(self):
+        # nome próprio: o purchase_mrp (auto_install) já tem action_view_purchase_orders e o dele prevaleceria
         return self._action_view_records(
             "purchase.purchase_form_action", self.purchase_ids
         )

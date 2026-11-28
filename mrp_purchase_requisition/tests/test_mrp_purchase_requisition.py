@@ -130,6 +130,8 @@ class TestMrpPurchaseRequisition(TransactionCase):
         self.production.invalidate_recordset()
         self.assertEqual(self.production.purchase_ids, order)
         self.assertEqual(self.production.purchase_count, 1)
+        orders_action = self.production.action_view_requisition_purchase_orders()
+        self.assertEqual(orders_action["domain"], [("id", "in", order.ids)])
         moves = order.picking_ids.move_ids.filtered(
             lambda move: move.product_id in self.production.move_raw_ids.product_id
         )
