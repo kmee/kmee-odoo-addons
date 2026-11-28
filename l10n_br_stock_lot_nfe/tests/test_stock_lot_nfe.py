@@ -69,3 +69,69 @@ class TestStockLotNfe(TransactionCase):
         lot = move.move_line_ids.lot_id
         self.assertEqual(lot.origin_nfe_id, self.document)
         self.assertEqual(lot.numero_nota, self.document.document_number)
+
+    def test_document_display_name_for_lot_creation(self):
+        document = self.document.with_context(show_name_for_lot_creation=True)
+        self.assertEqual(
+            document.display_name,
+            f"{self.document.partner_id.name} Nota:{self.document.document_number}",
+        )
+
+    def test_document_line_display_name_for_lot_creation(self):
+        line = self.document.fiscal_line_ids.with_context(
+            show_name_for_lot_creation=True
+        )
+        self.assertEqual(
+            line.display_name,
+            f"{line.name} Qtd:{line.quantity} Unitário:{line.price_unit}",
+        )
+
+    def test_onchange_name_adds_origin(self):
+        lot = self.env["stock.lot"].new(
+            {"name": "L010", "product_id": self.product.id, "origin": "PO0007"}
+        )
+        lot._onchange_name_add_origin()
+        self.assertEqual(lot.name, "L010 [PO0007]")
+        # idempotente: nome que já tem origem não é alterado
+        lot._onchange_name_add_origin()
+        self.assertEqual(lot.name, "L010 [PO0007]")
+
+    def test_lot_without_matching_move_keeps_nfe_empty(self):
+        self.assertFalse(self.picking.move_ids.origin_nfe_id)
+        lot = (
+            self.env["stock.lot"]
+            .with_context(default_origin_picking_id=self.picking.id)
+            .create({"name": "L003", "product_id": self.product.id})
+        )
+        self.assertFalse(lot.origin_nfe_id)
+        self.assertFalse(lot.numero_nota)
+
+    def test_fill_is_idempotent_for_linked_lines(self):
+        self.picking._fill_from_nfe(self.document)
+        moves = self.picking.move_ids
+        self.picking._fill_from_nfe(self.document)
+        self.assertEqual(self.picking.move_ids, moves)
+        self.assertEqual(len(moves.move_line_ids), 1)
+
+    def test_fill_creates_move_when_product_is_missing(self):
+        self.picking.move_ids.unlink()
+        self.picking._fill_from_nfe(self.document)
+        move = self.picking.move_ids
+        self.assertEqual(len(move), 1)
+        self.assertEqual(move.product_id, self.product)
+        self.assertEqual(move.origin_nfe_id, self.document)
+        self.assertEqual(move.origin_nfe_line_id, self.document.fiscal_line_ids)
+        self.assertEqual(move.location_id, self.picking.location_id)
+        self.assertEqual(move.location_dest_id, self.picking.location_dest_id)
+
+    def test_fill_wizard(self):
+        action = self.picking.action_fill_from_nfe()
+        self.assertEqual(action["res_model"], "stock.picking.fill.nfe")
+        self.assertEqual(action["target"], "new")
+        self.assertEqual(action["context"]["default_picking_id"], self.picking.id)
+        wizard = self.env["stock.picking.fill.nfe"].create(
+            {"picking_id": self.picking.id, "document_id": self.document.id}
+        )
+        result = wizard.action_confirm()
+        self.assertEqual(result["type"], "ir.actions.act_window_close")
+        self.assertEqual(self.picking.move_ids.origin_nfe_id, self.document)
