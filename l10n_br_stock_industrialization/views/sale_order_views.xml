@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form (in l10n_br_stock_industrialization)</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="priority">300</field>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="after">
+                <button
+                    name="action_create_industrialization"
+                    type="object"
+                    string="Receber insumos do cliente"
+                    invisible="state != 'sale'"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="object"
+                    name="action_view_industrialization"
+                    class="oe_stat_button"
+                    icon="fa-truck"
+                    invisible="industrialization_count == 0"
+                >
+                    <field
+                        name="industrialization_count"
+                        widget="statinfo"
+                        string="Insumos recebidos"
+                    />
+                </button>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='product_template_id']"
+                position="before"
+            >
+                <field
+                    name="applied_product_id"
+                    invisible="route_id != %(l10n_br_stock_industrialization.route_apenas_cobranca)d"
+                    required="route_id == %(l10n_br_stock_industrialization.route_apenas_cobranca)d"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='product_template_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >route_id == %(l10n_br_stock_industrialization.route_apenas_cobranca)d</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='route_id']"
+                position="attributes"
+            >
+                <attribute name="optional">show</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_id']"
+                position="before"
+            >
+                <field
+                    name="applied_product_id"
+                    invisible="route_id != %(l10n_br_stock_industrialization.route_apenas_cobranca)d"
+                    required="route_id == %(l10n_br_stock_industrialization.route_apenas_cobranca)d"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

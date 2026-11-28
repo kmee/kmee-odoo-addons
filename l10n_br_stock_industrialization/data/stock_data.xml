@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="picking_type_industrialization_in" model="stock.picking.type">
+        <field name="name">Recebimento para industrialização</field>
+        <field name="code">incoming</field>
+        <field name="sequence_code">IND</field>
+        <field name="warehouse_id" ref="stock.warehouse0" />
+        <field name="default_location_src_id" ref="stock.stock_location_suppliers" />
+        <field name="default_location_dest_id" ref="stock.stock_location_stock" />
+        <field name="use_create_lots" eval="True" />
+        <field name="use_existing_lots" eval="True" />
+        <field name="is_industrialization" eval="True" />
+        <field
+            name="fiscal_operation_id"
+            ref="l10n_br_fiscal.fo_entrada_industrializacao"
+        />
+    </record>
+
+    <record id="route_apenas_cobranca" model="stock.route">
+        <field name="name">Apenas cobrança</field>
+        <field name="sequence">6</field>
+        <field name="product_selectable" eval="True" />
+        <field name="warehouse_selectable" eval="False" />
+        <field name="product_categ_selectable" eval="False" />
+        <field name="sale_selectable" eval="True" />
+    </record>
+</odoo>
